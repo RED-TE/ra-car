@@ -1,0 +1,723 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>관리자 대시보드</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css">
+    
+    <style>
+        /* ----------------------- */
+        /* 💡 밝은 테마 CSS 설정 (Light Theme) */
+        /* ----------------------- */
+        :root {
+            --primary-color: #1a5099; /* RE:CAR 포인트 색상 */
+            --primary-hover: #14417a;
+            --bg-color: #f4f6f9; /* 밝은 회색 배경 */
+            --surface-color: #ffffff; /* 카드 및 테이블 배경 */
+            --text-color: #333333;
+            --border-color: #e0e0e0;
+            --shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+            --radius: 10px;
+        }
+
+        * {
+            box-sizing: border-box;
+            font-family: 'Pretendard', sans-serif;
+        }
+
+        body {
+            background: var(--bg-color);
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            line-height: 1.6;
+        }
+
+        .header {
+            background: var(--surface-color);
+            padding: 15px 40px;
+            border-bottom: 1px solid var(--border-color);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: var(--shadow);
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .header h1 {
+            margin: 0;
+            font-size: 1.5rem;
+            color: var(--primary-color);
+        }
+
+        .container {
+            padding: 40px;
+            max-width: 1600px;
+            margin: 0 auto;
+            display: flex; /* 메인 컨텐츠와 오른쪽 메모 분리 */
+            gap: 20px;
+        }
+        
+        /* ----------------------- */
+        /* 로그인 폼 스타일 */
+        /* ----------------------- */
+        #login-container {
+            max-width: 400px;
+            margin: 100px auto;
+            padding: 40px;
+            background: var(--surface-color);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            text-align: center;
+        }
+        
+        #login-container input {
+            width: 100%;
+            padding: 12px;
+            margin-bottom: 15px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+        }
+        
+        /* ----------------------- */
+        /* 검색 및 버튼 스타일 */
+        /* ----------------------- */
+        .controls {
+            background: var(--surface-color);
+            padding: 20px;
+            border-radius: var(--radius);
+            margin-bottom: 20px;
+            box-shadow: var(--shadow);
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            align-items: center;
+        }
+        
+        .controls input, .controls select {
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+        }
+
+        .controls input[type="text"] {
+            flex-grow: 1; 
+            max-width: 300px;
+        }
+        
+        .button {
+            padding: 10px 18px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background-color 0.2s;
+            font-weight: 500;
+        }
+        
+        .primary-btn {
+            background: var(--primary-color);
+            color: white;
+        }
+        
+        .primary-btn:hover {
+            background: var(--primary-hover);
+        }
+        
+        .status-btn {
+            background: #6c757d;
+            color: white;
+            margin-left: 10px;
+        }
+        .status-btn:hover {
+            background: #5a6268;
+        }
+        
+        /* ----------------------- */
+        /* 문의 테이블 스타일 */
+        /* ----------------------- */
+        #inquiry-list {
+            flex-grow: 1; /* 메인 컨텐츠가 공간을 대부분 차지 */
+        }
+
+        .table-wrapper {
+            overflow-x: auto;
+            background: var(--surface-color);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+        }
+
+        .inquiry-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+            min-width: 1000px; 
+        }
+
+        .inquiry-table th, .inquiry-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid var(--border-color);
+            text-align: left;
+        }
+
+        .inquiry-table th {
+            background: #e9ecef;
+            font-weight: 600;
+            color: var(--text-color);
+            position: sticky;
+            top: 0;
+            z-index: 5;
+        }
+
+        .inquiry-table tbody tr:hover {
+            background: #f7f9fc;
+            cursor: pointer;
+        }
+        
+        /* ----------------------- */
+        /* 💡 수정된 상태 배지 색상 */
+        /* ----------------------- */
+        .status-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 15px;
+            font-weight: 600;
+            font-size: 0.85rem;
+        }
+
+        .status-New { background: #e0f2fe; color: #0284c7; }          /* 신규 (Light Blue) */
+        .status-Manage { background: #dcfce7; color: #16a34a; }        /* 관리 (Light Green) */
+        .status-Potential { background: #fef9c3; color: #ca8a04; }     /* 가망 (Light Yellow) */
+        .status-Absent { background: #fee2e2; color: #dc2626; }        /* 부재 (Light Red) */
+        .status-Rejected { background: #f3e8ff; color: #7e22ce; }      /* 부결 (Light Purple - NEW) */
+        .status-Contract { background: #e0f7fa; color: #00bcd4; }      /* 계약 (Light Cyan) */
+
+        /* ----------------------- */
+        /* 모달 (상세/수정 팝업) 스타일 */
+        /* ----------------------- */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 100;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(3px);
+            padding-top: 50px;
+        }
+
+        .modal-content {
+            background-color: var(--surface-color);
+            margin: 5% auto;
+            padding: 30px;
+            border-radius: var(--radius);
+            width: 90%;
+            max-width: 800px;
+            box-shadow: var(--shadow);
+            position: relative;
+        }
+
+        .close-btn {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .close-btn:hover,
+        .close-btn:focus {
+            color: var(--primary-color);
+            text-decoration: none;
+        }
+        
+        .modal-content h3 {
+            border-bottom: 2px solid var(--border-color);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+
+        .detail-info p {
+            margin-bottom: 10px;
+            padding: 8px 0;
+            border-bottom: 1px dotted #f0f0f0;
+        }
+        
+        .detail-info strong {
+            display: inline-block;
+            width: 100px;
+            font-weight: 600;
+            color: #666;
+        }
+
+        .modal-content textarea, .modal-content select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            margin-top: 10px;
+            resize: vertical;
+        }
+        
+        #detail-memo {
+            height: 200px; /* 상세 메모 칸 */
+        }
+        
+        /* ----------------------- */
+        /* 💡 오른쪽 고정 메모장 스타일 (제목 변경) */
+        /* ----------------------- */
+        .small-memo-card {
+            width: 300px;
+            background: var(--surface-color);
+            padding: 20px;
+            border-radius: var(--radius);
+            box-shadow: var(--shadow);
+            position: sticky; 
+            top: 90px; /* 헤더 아래에 고정 */
+            height: fit-content;
+            align-self: flex-start; /* 상단 정렬 */
+        }
+        
+        .small-memo-card h4 {
+            margin-top: 0;
+            color: #666;
+            border-bottom: 1px solid var(--border-color);
+            padding-bottom: 10px;
+            margin-bottom: 10px;
+        }
+        
+        #quick-memo {
+            width: 100%;
+            height: 300px; 
+            padding: 10px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            resize: none;
+        }
+        
+        /* 기타 유틸리티 */
+        .hidden { display: none; }
+
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1></i> 관리자 대시보드</h1>
+        <div id="auth-controls" class="hidden">
+            <span id="user-email" style="margin-right: 15px; font-weight: 500;"></span>
+            <button id="logout-btn" class="button status-btn">
+                <i class="fas fa-sign-out-alt"></i> 로그아웃
+            </button>
+        </div>
+    </div>
+
+    <div id="login-container">
+        <h2>관리자 로그인</h2>
+        <input type="email" id="login-email" placeholder="이메일 주소" required>
+        <input type="password" id="login-password" placeholder="비밀번호" required>
+        <button id="login-btn" class="button primary-btn" style="width: 100%;">로그인</button>
+        <p id="login-error" style="color: red; margin-top: 10px;" class="hidden"></p>
+    </div>
+
+    <div id="dashboard-container" class="container hidden">
+        
+        <div id="inquiry-list">
+            
+            <div class="controls">
+                <input type="text" id="search-input" placeholder="차종, 이름, 연락처, 브랜드 검색">
+                
+                <select id="status-filter">
+                    <option value="">- 상태 전체 보기 -</option>
+                    <option value="New">신규</option>
+                    <option value="Manage">관리</option>
+                    <option value="Potential">가망</option>
+                    <option value="Absent">부재</option>
+                    <option value="Rejected">부결</option>
+                    <option value="Contract">계약</option>
+                </select>
+                
+                <button class="button status-btn" onclick="applyFilter()">
+                    <i class="fas fa-search"></i> 필터 적용
+                </button>
+                <button class="button status-btn" onclick="clearFilter()">
+                    <i class="fas fa-redo"></i> 초기화
+                </button>
+            </div>
+
+            <div class="table-wrapper">
+                <table class="inquiry-table">
+                    <thead>
+                        <tr>
+                            <th>접수일</th>
+                            <th>상태</th>
+                            <th>브랜드</th>
+                            <th>차종</th>
+                            <th>고객명</th>
+                            <th>연락처</th>
+                            <th>기간</th>
+                            <th>초기비용</th>
+                            <th>메모</th>
+                            <th>ID</th>
+                        </tr>
+                    </thead>
+                    <tbody id="inquiries-tbody">
+                        <tr><td colspan="10" style="text-align: center;">로딩 중...</td></tr>
+                    </tbody>
+                </table>
+            </div>
+
+        </div>
+
+        <div class="small-memo-card">
+            <h4><i class="fas fa-list-check"></i> 오늘 할일</h4> 
+            <textarea id="quick-memo" placeholder="여기에 관리자 개인 메모를 기록하세요. (이 내용은 브라우저에 자동 저장됩니다.)"></textarea>
+            <p style="font-size: 0.8rem; color: #999; margin-top: 5px;">* 이 메모는 개인 브라우저에만 저장되며 문의 기록과 별개입니다.</p>
+        </div>
+
+    </div>
+
+    <div id="detailModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()">&times;</span>
+            <h3>문의 상세 정보 및 수정</h3>
+            
+            <div id="modal-doc-id" data-id=""></div> 
+            
+            <div class="detail-info">
+                <p><strong>접수일</strong><span id="detail-timestamp"></span></p>
+                <p><strong>고객명</strong><span id="detail-name"></span></p>
+                <p><strong>연락처</strong><span id="detail-phone"></span></p>
+                <p><strong>브랜드/차종</strong><span id="detail-car-info"></span></p>
+                <p><strong>기간/주행</strong><span id="detail-period-mileage"></span></p>
+                <p><strong>초기납입</strong><span id="detail-deposit"></span></p>
+            </div>
+            
+            <hr style="margin: 20px 0; border: none; border-top: 1px solid var(--border-color);">
+            
+            <label for="detail-status" style="display: block; font-weight: 600; margin-bottom: 5px;">
+                <i class="fas fa-tasks"></i> 문의 상태 변경
+            </label>
+            <select id="detail-status" style="margin-bottom: 20px;">
+                <option value="New">신규</option>
+                <option value="Manage">관리</option>
+                <option value="Potential">가망</option>
+                <option value="Absent">부재</option>
+                <option value="Rejected">부결</option>
+                <option value="Contract">계약</option>
+            </select>
+            
+            <label for="detail-memo" style="display: block; font-weight: 600; margin-bottom: 5px;">
+                <i class="fas fa-pencil-alt"></i> 상세 관리 메모 (상담 내용 기록)
+            </label>
+            <textarea id="detail-memo" placeholder="상담 내용을 자세히 기록하세요."></textarea>
+            
+            <button class="button primary-btn" style="width: 100%; margin-top: 25px; padding: 15px;" 
+                    onclick="updateInquiry()">
+                <i class="fas fa-save"></i> 상태 및 메모 저장
+            </button>
+        </div>
+    </div>
+
+
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-firestore.js"></script>
+
+    <script>
+        // 🚨 1. YOUR FIREBASE CONFIGURATION (index.html에서 사용한 설정과 동일해야 합니다!)
+        const firebaseConfig = {
+            apiKey: "AIzaSyCgWeeRm81zCKW583ixehm5Mnoeb-OWUj8",
+            authDomain: "recar-e1755.firebaseapp.com",
+            projectId: "recar-e1755",
+            storageBucket: "recar-e1755.firebasestorage.app",
+            messagingSenderId: "240375029918",
+            appId: "1:240375029918:web:0d1078a31fd2dbf5971b8f",
+            measurementId: "G-6K8GLNMBGS"
+        };
+
+        // Firebase 초기화
+        firebase.initializeApp(firebaseConfig);
+        const auth = firebase.auth();
+        const db = firebase.firestore();
+
+        // ----------------------------------
+        // 변수 선언
+        // ----------------------------------
+        const loginContainer = document.getElementById('login-container');
+        const dashboardContainer = document.getElementById('dashboard-container');
+        const authControls = document.getElementById('auth-controls');
+        const inquiriesTbody = document.getElementById('inquiries-tbody');
+        const detailModal = document.getElementById('detailModal');
+        const quickMemoEl = document.getElementById('quick-memo');
+        
+        let allInquiries = []; // 모든 문의 데이터를 저장할 배열
+
+        // ----------------------------------
+        // 💡 헬퍼 함수: 상태 슬러그를 한국어 이름으로 변환
+        // ----------------------------------
+        function getStatusDisplayName(status) {
+            switch(status) {
+                case 'New': return '신규';
+                case 'Manage': return '관리';
+                case 'Potential': return '가망';
+                case 'Absent': return '부재';
+                case 'Rejected': return '부결'; // 새로 추가됨
+                case 'Contract': return '계약';
+                default: return status;
+            }
+        }
+
+
+        // ----------------------------------
+        // 2. 인증 (로그인/로그아웃)
+        // ----------------------------------
+        
+        // 로그인 버튼 이벤트 리스너
+        document.getElementById('login-btn').addEventListener('click', () => {
+            const email = document.getElementById('login-email').value;
+            const password = document.getElementById('login-password').value;
+            const errorEl = document.getElementById('login-error');
+            
+            errorEl.classList.add('hidden'); // 에러 메시지 숨기기
+
+            auth.signInWithEmailAndPassword(email, password)
+                .catch((error) => {
+                    // 로그인 실패 시 에러 메시지 표시
+                    let errorMessage = "로그인 실패: 알 수 없는 오류";
+                    if (error.code === 'auth/wrong-password' || error.code === 'auth/user-not-found') {
+                        errorMessage = "이메일 또는 비밀번호가 잘못되었습니다.";
+                    } else if (error.code === 'auth/invalid-email') {
+                        errorMessage = "유효하지 않은 이메일 형식입니다.";
+                    }
+                    errorEl.textContent = errorMessage;
+                    errorEl.classList.remove('hidden');
+                });
+        });
+
+        // 로그아웃 버튼 이벤트 리스너
+        document.getElementById('logout-btn').addEventListener('click', () => {
+            auth.signOut();
+        });
+
+        // 인증 상태 변경 감지
+        auth.onAuthStateChanged((user) => {
+            if (user) {
+                // 로그인 성공: 대시보드 표시
+                loginContainer.classList.add('hidden');
+                dashboardContainer.classList.remove('hidden');
+                authControls.classList.remove('hidden');
+                document.getElementById('user-email').textContent = `환영합니다, ${user.email}님`;
+                
+                // 데이터 로드 및 퀵 메모 로드
+                loadQuickMemo();
+                fetchInquiries();
+            } else {
+                // 로그아웃 또는 미인증: 로그인 폼 표시
+                loginContainer.classList.remove('hidden');
+                dashboardContainer.classList.add('hidden');
+                authControls.classList.add('hidden');
+                inquiriesTbody.innerHTML = `<tr><td colspan="10" style="text-align: center;">로그인이 필요합니다.</td></tr>`;
+            }
+        });
+
+        // ----------------------------------
+        // 3. 문의 데이터 로드 및 표시
+        // ----------------------------------
+        function fetchInquiries() {
+            // Firestore의 'inquiries' 컬렉션을 실시간으로 감시 (최신순 정렬)
+            db.collection("inquiries").orderBy("timestamp", "desc")
+                .onSnapshot((snapshot) => {
+                    allInquiries = []; // 데이터 배열 초기화
+                    snapshot.forEach((doc) => {
+                        // 문서 ID를 포함하여 데이터 저장
+                        allInquiries.push({
+                            id: doc.id,
+                            ...doc.data()
+                        });
+                    });
+                    
+                    // 필터 없이 전체 데이터 표시
+                    renderInquiries(allInquiries);
+                }, (error) => {
+                    console.error("Firestore 데이터 로드 오류: ", error);
+                    alert("데이터를 불러오는 데 실패했습니다. (권한 문제일 수 있습니다.)");
+                });
+        }
+        
+        // 문의 데이터를 HTML 테이블에 렌더링
+        function renderInquiries(inquiries) {
+            inquiriesTbody.innerHTML = ''; // 기존 목록 초기화
+            
+            if (inquiries.length === 0) {
+                inquiriesTbody.innerHTML = `<tr><td colspan="10" style="text-align: center;">검색 결과가 없습니다.</td></tr>`;
+                return;
+            }
+
+            inquiries.forEach((inquiry) => {
+                const tr = document.createElement('tr');
+                tr.onclick = () => openModal(inquiry); // 클릭 시 상세 모달 열기
+                
+                // 타임스탬프 포맷팅 (서버 타임스탬프가 아직 도착하지 않았다면 '접수 중' 표시)
+                const date = inquiry.timestamp ? new Date(inquiry.timestamp.toDate()).toLocaleString('ko-KR', { 
+                    year: '2-digit', month: '2-digit', day: '2-digit', 
+                    hour: '2-digit', minute: '2-digit' 
+                }) : '접수 중';
+                
+                // 상태 이름 (기본값 'New')
+                const status = inquiry.status || 'New'; 
+                const statusDisplayName = getStatusDisplayName(status); // 💡 한국어 이름 가져오기
+                
+                // 메모 미리보기 (최대 20자)
+                const memoSnippet = inquiry.memo ? inquiry.memo.substring(0, 20) + (inquiry.memo.length > 20 ? '...' : '') : '-';
+
+                tr.innerHTML = `
+                    <td>${date}</td>
+                    <td><span class="status-badge status-${status}">${statusDisplayName}</span></td>
+                    <td>${inquiry.brand || '-'}</td>
+                    <td>${inquiry.carModel || '-'}</td>
+                    <td>${inquiry.name || '-'}</td>
+                    <td>${inquiry.phone || '-'}</td>
+                    <td>${inquiry.period || '-'}</td>
+                    <td>${inquiry.deposit || '-'}</td>
+                    <td>${memoSnippet}</td>
+                    <td style="font-size: 0.75rem; color: #aaa;">${inquiry.id.substring(0, 8)}...</td>
+                `;
+                inquiriesTbody.appendChild(tr);
+            });
+        }
+
+        // ----------------------------------
+        // 4. 검색 및 필터링 기능
+        // ----------------------------------
+        function applyFilter() {
+            const searchInput = document.getElementById('search-input').value.toLowerCase().trim();
+            const statusFilter = document.getElementById('status-filter').value;
+
+            const filteredInquiries = allInquiries.filter(inquiry => {
+                
+                // 상태 필터 적용
+                if (statusFilter && inquiry.status !== statusFilter) {
+                    return false;
+                }
+                
+                // 검색어 필터 적용 (이름, 연락처, 차종, 브랜드)
+                if (searchInput) {
+                    const searchableText = [
+                        inquiry.name,
+                        inquiry.phone,
+                        inquiry.carModel,
+                        inquiry.brand
+                    ].join(' ').toLowerCase();
+
+                    return searchableText.includes(searchInput);
+                }
+                
+                return true; // 필터 및 검색 조건이 없거나 모두 충족하면 표시
+            });
+
+            renderInquiries(filteredInquiries);
+        }
+        
+        // 필터 초기화
+        function clearFilter() {
+            document.getElementById('search-input').value = '';
+            document.getElementById('status-filter').value = '';
+            renderInquiries(allInquiries); // 전체 목록 다시 렌더링
+        }
+
+
+        // ----------------------------------
+        // 5. 모달 (상세 보기/수정) 기능
+        // ----------------------------------
+        
+        // 모달 열기 (문의 데이터 표시)
+        function openModal(inquiry) {
+            
+            // 문서 ID 저장
+            document.getElementById('modal-doc-id').dataset.id = inquiry.id; 
+            
+            // 데이터 표시
+            document.getElementById('detail-timestamp').textContent = inquiry.timestamp ? new Date(inquiry.timestamp.toDate()).toLocaleString('ko-KR') : 'N/A';
+            document.getElementById('detail-name').textContent = inquiry.name || 'N/A';
+            document.getElementById('detail-phone').textContent = inquiry.phone || 'N/A';
+            document.getElementById('detail-car-info').textContent = `${inquiry.brand || 'N/A'} / ${inquiry.carModel || 'N/A'}`;
+            document.getElementById('detail-period-mileage').textContent = `${inquiry.period || 'N/A'} / ${inquiry.mileage || 'N/A'}`;
+            document.getElementById('detail-deposit').textContent = inquiry.deposit || 'N/A';
+            
+            // 상태 드롭다운 기본값 설정
+            document.getElementById('detail-status').value = inquiry.status || 'New';
+            
+            // 메모 (기존에 저장된 내용)
+            document.getElementById('detail-memo').value = inquiry.memo || ''; 
+
+            detailModal.style.display = 'block';
+        }
+
+        // 모달 닫기
+        function closeModal() {
+            detailModal.style.display = 'none';
+        }
+
+        // 모달 외부 클릭 시 닫기
+        window.onclick = function(event) {
+            if (event.target == detailModal) {
+                closeModal();
+            }
+        }
+        
+        // ----------------------------------
+        // 6. 문의 상태/메모 저장 기능
+        // ----------------------------------
+        async function updateInquiry() {
+            const docId = document.getElementById('modal-doc-id').dataset.id;
+            const newStatus = document.getElementById('detail-status').value;
+            const newMemo = document.getElementById('detail-memo').value;
+            
+            if (!docId) return;
+
+            try {
+                // Firestore 업데이트
+                await db.collection("inquiries").doc(docId).update({
+                    status: newStatus,
+                    memo: newMemo,
+                    updatedAt: firebase.firestore.FieldValue.serverTimestamp() // 업데이트 시간 기록
+                });
+
+                alert("성공적으로 저장되었습니다.");
+                closeModal();
+            } catch (error) {
+                console.error("문의 업데이트 오류:", error);
+                alert("업데이트에 실패했습니다. 네트워크 또는 권한을 확인하세요.");
+            }
+        }
+        
+        // ----------------------------------
+        // 7. 오른쪽 Quick 메모 (로컬 스토리지)
+        // ----------------------------------
+        
+        // 메모 로드 (페이지 로드시)
+        function loadQuickMemo() {
+            const memoContent = localStorage.getItem('adminQuickMemo');
+            if (memoContent) {
+                quickMemoEl.value = memoContent;
+            }
+        }
+
+        // 메모 자동 저장 (입력 시)
+        quickMemoEl.addEventListener('input', () => {
+            localStorage.setItem('adminQuickMemo', quickMemoEl.value);
+        });
+
+    </script>
+</body>
+</html>

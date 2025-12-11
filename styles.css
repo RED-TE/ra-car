@@ -1,0 +1,604 @@
+/* ========== Reset ========== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+.logo img {
+  height: 180px;   /* 원하는 크기로 변경 */
+  width: auto;     /* 자동 비율 유지 */
+}
+
+body {
+  font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  background: #0a0a0a;
+  color: #fff;
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+}
+
+.wrap {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+/* ========== Header ========== */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 70px;
+  z-index: 100;
+
+  /* 처음에는 완전 투명 (배경 · blur 없음) */
+  background: transparent;
+}
+
+/* blur + 어두운 배경 전용 레이어 */
+.header::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(10, 10, 10, 0.85);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+
+  /* 처음에는 꺼져 있음 */
+  opacity: 0;
+  transition: opacity .35s ease;
+}
+
+/* 스크롤 후 .header--visible 붙었을 때만 바가 보이게 */
+.header.header--visible::before {
+  opacity: 1;
+}
+
+/* 안쪽 내용(로고, 햄버거)은 항상 그대로 보이게 */
+.h-inner {
+  position: relative;
+  z-index: 1;  /* ::before 위로 올라오게 */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 70px;
+}
+
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 22px;
+  font-weight: 800;
+  letter-spacing: -0.5px;
+}
+
+.bolt::before {
+  content: '⚡';
+  font-size: 24px;
+}
+
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  width: 30px;
+  height: 30px;
+  justify-content: center;
+}
+
+.hamburger span {
+  display: block;
+  width: 100%;
+  height: 2px;
+  background: #fff;
+  transition: 0.3s;
+}
+
+/* ========== Hero ========== */
+.hero {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.hero-video {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: 1;
+}
+
+.hero-dim {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.6) 100%);
+  z-index: 2;
+}
+
+.hero-center {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  padding: 0 24px;
+}
+
+.hero-center h1 {
+  font-size: clamp(36px, 7vw, 72px);
+  font-weight: 900;
+  letter-spacing: -2px;
+  margin-bottom: 16px;
+}
+
+.hero-center p {
+  font-size: clamp(18px, 3vw, 28px);
+  font-weight: 300;
+  opacity: 0.9;
+}
+
+.hero-cta {
+  position: absolute;
+  right: 40px;
+  bottom: 80px;          /* 첫 화면 오른쪽 하단 쪽으로 */
+  z-index: 20;
+  background: #2563eb;
+  color: #fff;
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-size: 15px;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  transition: all 0.3s;
+}
+
+.hero-cta:hover {
+  background: #1d4ed8;
+  transform: translateY(-2px);
+  box-shadow: 0 10px 30px rgba(37, 99, 235, 0.4);
+}
+
+.dl {
+  font-size: 18px;
+}
+
+/* ========== Sections ========== */
+.section {
+  padding: 100px 0;
+  position: relative;
+}
+
+/* ========== Spotlight ========== */
+.spotlight {
+  background: #0a0a0a;
+}
+
+.spot-head {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.spot-head h2 {
+  font-size: clamp(28px, 5vw, 48px);
+  font-weight: 800;
+  line-height: 1.3;
+  letter-spacing: -1px;
+}
+
+.spot-card {
+  position: relative;
+  max-width: 900px;
+  margin: 0 auto;
+  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+  border-radius: 24px;
+  overflow: hidden;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+}
+
+/* 화살표 기본 상태: 숨김 */
+.spot-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 50px;
+  height: 50px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 32px;
+  color: #fff;
+  cursor: pointer;
+  z-index: 10;
+  transition: all 0.3s ease;
+  
+  /* 기본 상태에서 숨김 */
+  opacity: 0;
+  pointer-events: none;
+}
+
+/* 카드에 마우스 호버 시 화살표 표시 */
+.spot-card:hover .spot-arrow {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.spot-arrow.left {
+  left: 20px;
+}
+
+.spot-arrow.right {
+  right: 20px;
+}
+
+/* 화살표 자체에 호버 시 스타일 */
+.spot-arrow:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateY(-50%) scale(1.1);
+}
+
+.spot-slide {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  padding: 60px 80px;
+}
+
+.spot-img {
+  flex-shrink: 0;
+  width: 140px;
+  height: 140px;
+  background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(59, 130, 246, 0.3);
+}
+
+.spot-copy h3 {
+  font-size: 32px;
+  font-weight: 800;
+  margin-bottom: 12px;
+  letter-spacing: -0.5px;
+}
+
+.spot-copy p {
+  font-size: 16px;
+  line-height: 1.7;
+  opacity: 0.85;
+}
+
+/* ========== Services ========== */
+.services {
+  background: #0f0f0f;
+  position: relative;
+}
+
+.sec-title {
+  text-align: center;
+  margin-bottom: 80px;
+}
+
+.sec-title h2 {
+  font-size: clamp(28px, 5vw, 48px);
+  font-weight: 800;
+  line-height: 1.3;
+  letter-spacing: -1px;
+}
+
+.svc-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 24px;
+  margin-bottom: 80px;
+}
+
+.svc-card {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  cursor: pointer;
+  transition: transform 0.3s;
+  aspect-ratio: 1;
+}
+
+.svc-card.big {
+  aspect-ratio: 16/9;
+}
+
+.svc-card:hover {
+  transform: translateY(-8px);
+}
+
+.svc-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.5s;
+}
+
+.svc-card:hover .svc-bg {
+  transform: scale(1.05);
+}
+
+.bg1 {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.bg2 {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.bg3 {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+.bg4 {
+  background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);
+}
+
+.svc-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 0%, rgba(0,0,0,0.7) 100%);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 32px;
+  z-index: 2;
+}
+
+.svc-overlay h3 {
+  font-size: 28px;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.svc-overlay p {
+  font-size: 15px;
+  line-height: 1.6;
+  opacity: 0.9;
+}
+
+.svc-next {
+  position: absolute;
+  bottom: 32px;
+  right: 32px;
+  width: 48px;
+  height: 48px;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 24px;
+  z-index: 3;
+  transition: all 0.3s;
+}
+
+.svc-card:hover .svc-next {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateX(4px);
+}
+
+.ipad-float {
+  position: absolute;
+  right: 5%;
+  bottom: -100px;
+  width: 300px;
+  height: 400px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 20px;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.5);
+  opacity: 0.3;
+  pointer-events: none;
+}
+
+/* ========== Download ========== */
+.download {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  padding: 80px 0;
+}
+
+.dl-inner {
+  text-align: center;
+}
+
+.dl-inner h2 {
+  font-size: clamp(32px, 5vw, 52px);
+  font-weight: 800;
+  margin-bottom: 12px;
+}
+
+.dl-inner p {
+  font-size: 20px;
+  opacity: 0.9;
+  margin-bottom: 40px;
+}
+
+.stores {
+  display: flex;
+  gap: 20px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.store {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  padding: 16px 32px;
+  border-radius: 50px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  transition: all 0.3s;
+}
+
+.store:hover {
+  background: rgba(255, 255, 255, 0.25);
+  transform: translateY(-2px);
+}
+
+.store .ic {
+  font-size: 28px;
+}
+
+.store small {
+  display: block;
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+.store strong {
+  display: block;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+/* ========== Footer ========== */
+.footer {
+  background: #000;
+  padding: 60px 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.f-inner {
+  text-align: center;
+}
+
+.foot-logo {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 24px;
+  font-weight: 800;
+  margin-bottom: 16px;
+}
+
+.muted {
+  opacity: 0.5;
+  font-size: 14px;
+}
+
+/* ========== Mobile Menu ========== */
+.m-menu {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  display: none;
+}
+
+.m-menu[aria-hidden="false"] {
+  display: block;
+}
+
+.m-sheet {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  width: 300px;
+  background: #0a0a0a;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
+}
+
+.m-close {
+  align-self: flex-end;
+  color: #fff;
+  font-size: 16px;
+  padding: 8px 16px;
+}
+
+.m-sheet a {
+  font-size: 20px;
+  font-weight: 600;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* ========== Responsive ========== */
+@media (max-width: 768px) {
+  .spot-slide {
+    flex-direction: column;
+    text-align: center;
+    padding: 40px 32px;
+  }
+
+  .spot-img {
+    width: 100px;
+    height: 100px;
+  }
+
+  .spot-copy h3 {
+    font-size: 24px;
+  }
+
+  .spot-arrow {
+    width: 40px;
+    height: 40px;
+    font-size: 24px;
+  }
+
+  .spot-arrow.left {
+    left: 10px;
+  }
+
+  .spot-arrow.right {
+    right: 10px;
+  }
+
+  .svc-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .hero-cta {
+    position: relative;
+    top: auto;
+    right: auto;
+    margin-top: 32px;
+  }
+  /* === Top header appears only after scrolling to spotlight === */
+.header{
+  opacity: 0;
+  transform: translateY(-100%);
+  pointer-events: none;
+  transition: opacity .3s ease, transform .3s ease;
+}
+.header.header--visible{
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+}
+}

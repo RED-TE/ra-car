@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>RE:CAR 장기렌트 문의</title>
+    <style>
+        @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+
+        :root {
+            --bg-color: #000000; 
+            --primary-color: #1a5099; 
+            --text-color: #ffffff;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Pretendard', sans-serif;
+        }
+
+        body {
+            background: var(--bg-color);
+            color: var(--text-color);
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            perspective: 1000px;
+            position: relative;
+        }
+        
+        /* ---------------------------------- */
+        /* 💡 추가: 배경 이미지 위에 강제로 덮는 오버레이 */
+        /* ---------------------------------- */
+        .dark-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            /* 검은색을 70% 투명도로 덮어 이미지의 밝기를 강제로 낮춥니다. */
+            background: rgba(0, 0, 0, 0.7); 
+            z-index: -1; 
+            pointer-events: none;
+        }
+
+        /* ---------------------------------- */
+        /* 헤더 및 로고 스타일 수정 */
+        /* ---------------------------------- */
+        .app-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+            padding: 40px 20px; 
+        }
+
+        .logo-area {
+            position: absolute;
+            left: 80px; 
+            transform: none; 
+            width: auto; 
+            max-width: none;
+            text-align: left; 
+            padding: 0; 
+        }
+        
+        .logo-area img {
+            height: 180px; 
+            cursor: pointer;
+            filter: drop-shadow(0 0 15px rgba(26, 80, 153, 0.8)); 
+            transition: transform 0.2s;
+        }
+        
+        .logo-area img:hover {
+            transform: scale(1.05);
+        }
+
+        /* 배경에 은은한 속도감 라인 효과 (워프 개선) */
+        .speed-lines {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            width: 300vw; 
+            height: 300vw;
+            background: radial-gradient(circle, transparent 0%, transparent 20%, rgba(26, 80, 153, 0.2) 80%, var(--primary-color) 100%);
+            transform: translate(-50%, -50%) rotate(0deg); 
+            z-index: -1;
+            opacity: 0;
+            transition: opacity 0.5s, transform 0.8s cubic-bezier(0.8, 0.1, 0.1, 0.8);
+            pointer-events: none;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 600px;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+            transition: transform 0.8s cubic-bezier(0.8, 0.1, 0.1, 0.8), opacity 0.5s ease-in;
+        }
+
+        /* 빨려 들어가는 애니메이션 클래스 (워프 효과 개선) */
+        .zoom-out {
+            transform: scale(30) translateZ(1000px) rotateX(10deg) rotateY(-10deg); 
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        /* 다음 화면이 나타날 때 */
+        .fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: scale(0.8); }
+            to { opacity: 1; transform: scale(1); }
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 40px;
+            font-weight: 700;
+            line-height: 1.3;
+            text-shadow: 0 0 20px rgba(26, 80, 153, 0.5);
+        }
+
+        .subtitle {
+            font-size: 1.1rem;
+            color: #888;
+            margin-bottom: 20px;
+            display: block;
+        }
+        
+        /* 단계별 옵션 버튼 (STEP 3, 4, 5) 스타일 */
+        .options-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+        }
+
+        .option-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            backdrop-filter: blur(5px);
+        }
+
+        .option-btn:hover {
+            background: var(--primary-color);
+            border-color: var(--primary-color);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(26, 80, 153, 0.4);
+        }
+
+        /* STEP 2, 6 (입력 필드) 스타일 */
+        .input-area {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .text-input {
+            width: 100%;
+            padding: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-color);
+            font-size: 1.1rem;
+            outline: none;
+            transition: border-color 0.3s, background-color 0.3s;
+        }
+
+        .text-input:focus {
+            border-color: var(--primary-color);
+            background: rgba(26, 80, 153, 0.1);
+        }
+
+        /* Placeholder color adjustment for dark theme */
+        .text-input::placeholder {
+            color: #777;
+        }
+
+        /* 단계별 화면 제어 */
+        .step {
+            display: none;
+        }
+        
+        .step.active {
+            display: block;
+        }
+
+        /* 마지막 완료 화면 */
+        .completion-message {
+            font-size: 3rem;
+            background: linear-gradient(to right, #fff, #1a5099);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        
+        /* ---------------------------------- */
+        /* 모달 (브랜드 리스트 팝업) 스타일 */
+        /* ---------------------------------- */
+        .modal {
+            display: none; 
+            position: fixed;
+            z-index: 100; 
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            overflow: auto;
+            background-color: rgba(0, 0, 0, 0.9); 
+            animation: modalFadeIn 0.3s forwards;
+            backdrop-filter: blur(5px);
+        }
+
+        .modal-content {
+            background-color: var(--bg-color);
+            margin: 5% auto; 
+            padding: 30px;
+            border: 1px solid #333;
+            width: 90%;
+            max-width: 900px; 
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+            animation: modalSlideIn 0.5s forwards;
+        }
+
+        .close-btn {
+            color: #aaa;
+            float: right;
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+
+        .close-btn:hover,
+        .close-btn:focus {
+            color: #fff;
+        }
+        
+        /* 브랜드 카테고리 헤더 */
+        .brand-category {
+            text-align: left;
+            color: var(--primary-color);
+            margin-top: 30px;
+            margin-bottom: 15px;
+            font-size: 1.3rem;
+            border-bottom: 2px solid rgba(26, 80, 153, 0.5);
+            padding-bottom: 5px;
+        }
+
+        /* 브랜드 리스트 레이아웃 */
+        .brand-list {
+            margin-top: 20px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 15px;
+        }
+
+        .brand-item {
+            padding: 20px 10px; 
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+            font-size: 1.1rem;
+            color: #ccc;
+            display: flex; 
+            justify-content: center;
+            align-items: center;
+        }
+
+        .brand-item:hover {
+            border-color: var(--primary-color);
+            background-color: rgba(26, 80, 153, 0.1);
+            transform: scale(1.05);
+        }
+        
+        /* 모달 애니메이션 */
+        @keyframes modalFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes modalSlideIn {
+            from { transform: translateY(-50px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
+        }
+    </style>
+</head>
+<body>
+    <img id="bgVideo" autoplay muted loop playsinline
+        style="position: fixed; top:0; left:0; width:100%; height:100%; object-fit:cover; z-index:-2;"
+        src="background.jpg" alt="Background Image">
+    
+    <div class="dark-overlay"></div>
+    
+    <div class="app-header">
+        <div class="logo-area">
+             <img src="logo12.png" 
+                 alt="RE:CAR Logo" 
+                                  onclick="location.href='index.html'">
+        </div>
+    </div>
+    
+    <div class="speed-lines" id="bgEffect"></div>
+
+    <div class="container" id="mainContainer">
+        
+        <div class="step active" id="step1">
+            <span class="subtitle">01. BRAND</span>
+            <h1>어떤 브랜드를<br>경험하시겠습니까?</h1>
+            
+            <button class="option-btn" style="width: 100%; padding: 30px; margin-top: 20px;" 
+                    onclick="openBrandModal()">
+                <span id="selectedBrandName">브랜드 선택하기</span> (클릭)
+            </button>
+            
+            <p style="margin-top: 20px; color: #888; font-size: 0.9rem;">
+                인기 상위 34개 브랜드 중 선택 가능합니다.
+            </p>
+        </div>
+
+        <div class="step" id="step2">
+            <span class="subtitle">02. MODEL</span>
+            <h1>원하시는 차종을<br>입력해주세요</h1>
+            
+            <div class="input-area">
+                <input type="text" id="carModel" placeholder="예) G80, E-Class, Model Y 등" required class="text-input">
+            </div>
+            
+            <button class="option-btn" style="width: 100%; padding: 30px; margin-top: 30px;" 
+                    onclick="validateStep2()">
+                다음 단계로 이동
+            </button>
+            
+            <p style="margin-top: 20px; color: #888; font-size: 0.9rem;">
+                * 정확한 견적을 위해 차종(모델명)을 기입해주세요.
+            </p>
+        </div>
+
+        <div class="step" id="step3">
+            <span class="subtitle">03. PERIOD</span>
+            <h1>원하시는<br>이용 기간을 선택하세요</h1>
+            <div class="options-grid">
+                <button class="option-btn" onclick="nextStep('24개월')">24개월</button>
+                <button class="option-btn" onclick="nextStep('36개월')">36개월</button>
+                <button class="option-btn" onclick="nextStep('48개월')">48개월</button>
+                <button class="option-btn" onclick="nextStep('60개월')">60개월</button>
+            </div>
+        </div>
+
+        <div class="step" id="step4">
+            <span class="subtitle">04. MILEAGE</span>
+            <h1>연간 주행거리는<br>어느 정도입니까?</h1>
+            <div class="options-grid">
+                <button class="option-btn" onclick="nextStep('1만 km')">1만 km</button>
+                <button class="option-btn" onclick="nextStep('2만 km')">2만 km</button>
+                <button class="option-btn" onclick="nextStep('3만 km')">3만 km</button>
+                <button class="option-btn" onclick="nextStep('무제한')">무제한</button>
+            </div>
+        </div>
+
+        <div class="step" id="step5">
+            <span class="subtitle">05. DEPOSIT</span>
+            <h1>초기 납입금<br>설정하기</h1>
+            <div class="options-grid">
+                <button class="option-btn" onclick="nextStep('0% (무보증)')">0% (무보증)</button>
+                <button class="option-btn" onclick="nextStep('보증금 30%')">보증금 30%</button>
+                <button class="option-btn" onclick="nextStep('선납금 30%')">선납금 30%</button>
+                <button class="option-btn" onclick="nextStep('기타 상담')">상담 후 결정</button>
+            </div>
+        </div>
+        
+        <div class="step" id="step6">
+            <span class="subtitle">06. CONTACT</span>
+            <h1>고객님의 정보와<br>연락처를 기입해주세요</h1>
+            
+            <div class="input-area">
+                <input type="text" id="userName" placeholder="성함 (이름)" required class="text-input">
+                <input type="tel" id="userPhone" placeholder="연락처 ('-' 없이 입력, 10~11자리)" required class="text-input" pattern="[0-9]{10,11}">
+            </div>
+
+            <div style="margin-top: 20px; text-align: left; font-size: 0.95rem; color: #ccc;">
+                <input type="checkbox" id="privacyConsent" style="margin-right: 8px; transform: scale(1.3);">
+                <label for="privacyConsent">
+                    개인정보 수집 및 이용 동의 (필수)
+                    <a href="privacyPolicy.html" target="_blank" style="color: #22c55e; text-decoration: underline; margin-left: 5px;">[내용 보기]</a>
+                </label>
+            </div>
+            
+            <button class="option-btn" style="width: 100%; padding: 30px; margin-top: 30px;" 
+                    onclick="validateStep6()">
+                문의 접수 및 견적 요청 완료
+            </button>
+            
+            <p style="margin-top: 20px; color: #888; font-size: 0.9rem;">
+                * 입력해주신 정보는 견적 및 상담 목적으로만 사용되며 안전하게 보호됩니다.
+            </p>
+        </div>
+
+        <div class="step" id="step7">
+            <h1 class="completion-message">문의 접수 완료</h1>
+            <p style="color:#aaa; line-height: 1.6;">
+                고객님이 선택하신 조건으로<br>
+                전문 컨설턴트가 곧 연락드리겠습니다.
+            </p>
+            <br>
+            <div style="font-size: 0.9rem; color: #1a5099; letter-spacing: 2px;">RE:CAR</div>
+        </div>
+
+    </div>
+    
+    <div id="brandModal" class="modal">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeBrandModal()">&times;</span>
+            <h2 style="color:white; margin-bottom: 30px;">제조사/브랜드 선택</h2>
+            
+            <div class="brand-selection-area">
+                
+                <h3 class="brand-category">🇰🇷 한국</h3>
+                <div class="brand-list">
+                    <div class="brand-item" onclick="selectBrandAndNext('현대')">현대</div>
+                    <div class="brand-item" onclick="selectBrandAndNext('기아')">기아</div>
+                    <div class="brand-item" onclick="selectBrandAndNext('제네시스')">제네시스</div>
+                    <div class="brand-item" onclick="selectBrandAndNext('KGM')">KGM (구 쌍용)</div>
+                </div>
+                
+                <h3 class="brand-category">🇪🇺 유럽</h3>
+                <div class="brand-list">
+                    <div class="brand-item" onclick="selectBrandAndNext('벤츠')">벤츠</div>
+                    <div class="brand-item" onclick="selectBrandAndNext('BMW')">BMW</div>
+                    <div class="brand-item" onclick="selectBrandAndNext('아우디')">아우디</div>
+                    <div class="brand-item" onclick="selectBrandAndNext('폭스바겐')">폭스바겐</div>
+                    <div class="brand-item" onclick="selectBrandAndNext('포르쉐')">포르쉐</div>
+                    <div class="brand-item" onclick="selectBrandAndNext('볼보')">볼보</div>
+                    <div class="brand-item" onclick="selectBrandAndNext('랜드로버')">랜드로버</div>
+                    <div class="brand-item" onclick="selectBrandAndNext('재규어')">재규어</div>
+                    <div class="brand-item" onclick="selectBrandAndNext('푸조')">푸조</div>
+                    <div class="brand-item" onclick="selectBrandAndNext('시트로엥')">시트로엥</div>
+                    <div class="brand-item" onclick="selectBrandAndNext('미니')">미니</div>
+                </div>
+
+                <h3 class="brand-category">🇬🇧 럭셔리/슈퍼카</h3>
+                <div class="brand-list">
+                    <div class="brand-item" onclick="selectBrandAndNext('페라리')">페라리</div>
+                    <div class="brand-item" onclick="selectBrandAndNext('람보르기니')">람보르기니</div>
+                    <div class="brand-item" onclick="selectBrandAndNext('마세라티')">마세라티</div>
+                    <div class="brand-item" onclick="selectBrandAndNext('벤틀리')">벤틀리</div>
+                    <div class="brand-item" onclick="selectBrandAndNext('롤스로이스')">롤스로이스</div>
+                    <div class="brand-item" onclick="selectBrandAndNext('맥라렌')">맥라렌</div>
+                    <div class="brand-item" onclick="selectBrandAndNext('마이바흐')">마이바흐</div>
+                </div>
+                
+                <h3 class="brand-category">🇺🇸 미국/🇯🇵 일본</h3>
+                <div class="brand-list">
+                    <div class="brand-item" onclick="selectBrandAndNext('테슬라')">테슬라</div>
+                    <div class="brand-item" onclick="selectBrandAndNext('포드')">포드</div>
+                    <div class="brand-item" onclick="selectBrandAndNext('쉐보레')">쉐보레</div>
+                    <div class="brand-item" onclick="selectBrandAndNext('지프')">지프</div>
+                    <div class="brand-item" onclick="selectBrandAndNext('캐딜락')">캐딜락</div>
+                    <div class="brand-item" onclick="selectBrandAndNext('토요타')">토요타</div>
+                    <div class="brand-item" onclick="selectBrandAndNext('렉서스')">렉서스</div>
+                    <div class="brand-item" onclick="selectBrandAndNext('혼다')">혼다</div>
+                </div>
+            </div>
+            
+            <p style="margin-top: 40px; color: #555; font-size: 0.8rem;">
+                * 34개 이상의 인기 브랜드가 국가별로 분류되어 있습니다.
+            </p>
+        </div>
+    </div>
+
+
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-firestore.js"></script>
+    
+    <script>
+        // 🚨 1. YOUR FIREBASE CONFIGURATION (본인의 설정 값으로 변경하세요!)
+ const firebaseConfig = {
+  apiKey: "AIzaSyCgWeeRm81zCKW583ixehm5Mnoeb-OWUj8",
+  authDomain: "recar-e1755.firebaseapp.com",
+  projectId: "recar-e1755",
+  storageBucket: "recar-e1755.firebasestorage.app",
+  messagingSenderId: "240375029918",
+  appId: "1:240375029918:web:0d1078a31fd2dbf5971b8f",
+  measurementId: "G-6K8GLNMBGS"
+};
+
+        // Firebase 초기화
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        let currentStep = 1;
+        const totalSteps = 7; 
+        const container = document.getElementById('mainContainer');
+        const bgEffect = document.getElementById('bgEffect');
+        const brandModal = document.getElementById('brandModal');
+        const selectedBrandName = document.getElementById('selectedBrandName');
+        
+        // 사용자가 선택한 데이터를 저장할 객체
+        const userSelection = {};
+
+        // ----------------------------------
+        // STEP 1 관련 함수 (모달 제어)
+        // ----------------------------------
+        function openBrandModal() {
+            brandModal.style.display = 'block';
+        }
+
+        function closeBrandModal() {
+            brandModal.style.display = 'none';
+        }
+
+        // 브랜드 선택 후 다음 단계(Step 2: 차종 입력)로 이동
+        function selectBrandAndNext(brandValue) {
+            userSelection.brand = brandValue;
+            selectedBrandName.textContent = brandValue; 
+            closeBrandModal(); 
+            
+            setTimeout(() => {
+                nextStep(); 
+            }, 100); 
+        }
+        
+        // ----------------------------------
+        // NEW STEP 2 관련 함수 (차종 입력 유효성 검사)
+        // ----------------------------------
+        function validateStep2() {
+            const carModel = document.getElementById('carModel').value.trim();
+            
+            if (carModel.length < 2) {
+                alert("차종(모델명)을 2자 이상 입력해주세요.");
+                return;
+            }
+            
+            userSelection.carModel = carModel;
+            nextStep(); // Step 2 -> Step 3 (이용 기간)
+        }
+        
+        // ----------------------------------------------------
+        // 💡 3. Firestore 데이터 저장 함수 (새로 추가된 핵심 로직)
+        // ----------------------------------------------------
+        function saveInquiryToFirebase() {
+            // Firestore에 저장할 데이터 객체
+            const inquiryData = {
+                brand: userSelection.brand,
+                carModel: userSelection.carModel,
+                period: userSelection.period,
+                mileage: userSelection.mileage,
+                deposit: userSelection.deposit,
+                name: userSelection.name,
+                phone: userSelection.phone,
+                timestamp: firebase.firestore.FieldValue.serverTimestamp(), // 서버 시간으로 접수 시간 기록
+                status: 'New' // 신규 문의 상태
+            };
+
+            // 'inquiries' 컬렉션에 데이터 추가 (이 데이터가 admin.html에 표시됩니다.)
+            return db.collection("inquiries").add(inquiryData)
+                .then((docRef) => {
+                    console.log("문의 데이터 Firebase에 성공적으로 저장됨. ID: ", docRef.id);
+                })
+                .catch((error) => {
+                    console.error("Firebase 데이터 저장 중 오류 발생: ", error);
+                    alert("데이터 저장 중 오류가 발생했습니다. 다시 시도해주세요.");
+                    throw error; 
+                });
+        }
+
+
+        // ----------------------------------
+        // 💡 4. STEP 6 관련 함수 수정 (저장 함수 호출)
+        // ----------------------------------
+        function validateStep6() {
+            const userName = document.getElementById('userName').value.trim();
+            const userPhone = document.getElementById('userPhone').value.trim().replace(/[^0-9]/g, ''); 
+            const consentChecked = document.getElementById('privacyConsent').checked; 
+
+            // 1. 이름 유효성 검사
+            if (userName.length < 2) {
+                alert("성함을 2자 이상 입력해주세요.");
+                return;
+            }
+
+            // 2. 연락처 유효성 검사
+            if (userPhone.length < 10 || userPhone.length > 11) {
+                alert("유효한 연락처를 10~11자리 숫자로 입력해주세요. (예: 01012345678)");
+                return;
+            }
+            
+            // 3. 개인정보 동의 체크 검사 (필수)
+            if (!consentChecked) {
+                alert("개인정보 수집 및 이용에 동의하셔야 견적 요청이 완료됩니다.");
+                return;
+            }
+            
+            // 모든 검사를 통과했을 때만 데이터 저장 및 다음 단계로 이동
+            userSelection.name = userName;
+            userSelection.phone = userPhone;
+            
+            // 💡 Firebase에 데이터를 저장하고 성공하면 nextStep() 호출
+            saveInquiryToFirebase()
+                .then(() => {
+                    nextStep(); // Step 6 -> Step 7 (최종 완료)로 이동
+                })
+                .catch(() => {
+                    // 저장 실패 시 다음 단계로 넘어가지 않음
+                });
+        }
+
+        // ----------------------------------
+        // 로고 클릭 시 첫 단계(Step 1)로 이동
+        // ----------------------------------
+        function goToInitialStep() {
+            if (currentStep !== 1) {
+                document.getElementById(`step${currentStep}`).classList.remove('active');
+                currentStep = 1;
+                document.getElementById(`step${currentStep}`).classList.add('active');
+                container.classList.remove('zoom-out', 'fade-in');
+                bgEffect.style.opacity = '0';
+                bgEffect.style.transform = `translate(-50%, -50%) rotate(0deg)`;
+                selectedBrandName.textContent = '브랜드 선택하기';
+                console.log("앱이 첫 단계로 초기화되었습니다.");
+            }
+        }
+
+
+        // ----------------------------------
+        // 전체 단계 이동 함수 (워프 애니메이션)
+        // ----------------------------------
+        function nextStep(value) { 
+            
+            if(currentStep === 3) userSelection.period = value; 
+            else if(currentStep === 4) userSelection.mileage = value; 
+            else if(currentStep === 5) userSelection.deposit = value; 
+            
+            container.classList.add('zoom-out');
+            bgEffect.style.opacity = '1';
+            
+            const rotation = currentStep % 2 === 0 ? 30 : -30;
+            bgEffect.style.transform = `translate(-50%, -50%) rotate(${rotation}deg)`;
+            
+            setTimeout(() => {
+                document.getElementById(`step${currentStep}`).classList.remove('active');
+                currentStep++;
+                
+                if (currentStep <= totalSteps) {
+                    const nextElement = document.getElementById(`step${currentStep}`);
+                    nextElement.classList.add('active');
+                    
+                    container.classList.remove('zoom-out');
+                    container.classList.add('fade-in');
+                    
+                    bgEffect.style.opacity = '0';
+                    bgEffect.style.transform = `translate(-50%, -50%) rotate(0deg)`; 
+
+                    setTimeout(() => {
+                        container.classList.remove('fade-in');
+                    }, 800);
+                }
+                
+                if(currentStep === totalSteps) { 
+                    console.log("최종 문의 완료 데이터:", userSelection);
+                }
+
+            }, 800); 
+        }
+        
+        // 모달 외부 클릭 시 닫기
+        window.onclick = function(event) {
+            if (event.target == brandModal) {
+                closeBrandModal();
+            }
+        }
+    </script>
+</body>
+</html>

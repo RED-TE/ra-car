@@ -1,0 +1,288 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>개인정보처리방침 | 리카</title>
+<meta name="description" content="리카 개인정보처리방침">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --text:#0f172a; --muted:#475569; --line:rgba(15,23,42,.12);
+  --brand:#16a34a; --brand-2:#22c55e; --bg:#ffffff; --surface:#f8fafc;
+  --radius:16px; --container:980px;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{font:15.5px/1.75 "Noto Sans KR",system-ui,-apple-system,Segoe UI,Roboto,Apple SD Gothic Neo,Arial,sans-serif;color:var(--text);background:var(--bg)}
+a{color:inherit}
+.container{width:min(var(--container),92%);margin:0 auto;padding:26px 0 56px}
+
+.header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin:6px 0 16px}
+.brand{font-weight:900;letter-spacing:.2px}
+.brand small{display:block;color:var(--muted);font-weight:500;font-size:13px}
+.tools{display:flex;gap:8px;align-items:center}
+.tools button,.tools a{
+  display:inline-flex;align-items:center;gap:.5rem;
+  padding:.55rem .85rem;border-radius:10px;border:1px solid var(--line);
+  background:#fff; cursor:pointer; text-decoration:none; color:#111827;
+}
+.tools button:hover,.tools a:hover{background:#f3f4f6}
+.date{
+  display:inline-flex;align-items:center;gap:.5rem;
+  padding:.5rem .75rem;border:1px solid var(--line);border-radius:10px;background:#fff;color:#111827
+}
+
+.hero{
+  background:linear-gradient(180deg,#ffffff,#f8fafc);
+  border:1px solid var(--line);border-radius:18px;padding:18px;
+}
+.hero h1{margin:0 0 6px;font-size:28px;line-height:1.2;font-weight:900}
+.hero p{margin:0;color:var(--muted)}
+
+.toc{margin:20px 0 8px;padding:14px;border:1px dashed var(--line);border-radius:12px;background:#fcfdfc}
+.toc b{display:block;margin-bottom:6px}
+.toc a{display:inline-block;margin:.15rem 1rem .15rem 0;color:#065f46;text-decoration:underline}
+
+h2{margin:26px 0 10px;font-size:20px}
+section{margin-top:18px}
+.card{background:#fff;border:1px solid var(--line);border-radius:14px;padding:16px}
+
+.table{width:100%;border-collapse:collapse;margin:6px 0 0}
+.table th,.table td{border:1px solid var(--line);padding:12px;vertical-align:top}
+.table th{background:#f6faf4;font-weight:900;text-align:left}
+.badge{display:inline-block;padding:.18rem .5rem;border:1px solid var(--line);border-radius:999px;font-size:12px;color:#065f46;background:#e7f7ea;margin-left:.35rem}
+
+.note{padding:12px;border:1px dashed var(--line);border-radius:12px;background:#fbfefb;color:#065f46}
+
+footer{margin-top:36px;padding-top:16px;color:var(--muted);border-top:1px solid var(--line);font-size:13px}
+@media print{
+  .tools,.toc{display:none}
+  .container{width:100%;padding:0}
+  .card{border:none}
+  a{text-decoration:none;color:#000}
+}
+</style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div class="brand">
+        <div>개인정보처리방침</div>
+        <small>리카</small>
+      </div>
+      <div class="tools">
+        <span class="date" id="effective">시행일: <b>2025년 8월 28일</b></span>
+        <button type="button" onclick="window.print()">🖨️ 인쇄/저장</button>
+        <a href="../" aria-label="메인으로">↩︎ 메인으로</a>
+      </div>
+    </div>
+
+    <div class="hero card">
+    <h1>개인정보처리방침</h1>
+    <p>리카(이하 "회사")는 정보주체의 자유와 권리 보호를 위해 「개인정보 보호법」 및 관계 법령이 정한 바를 준수하여 적법하게 개인정보를 처리하고 안전하게 관리합니다. 본 방침은 개인정보의 처리와 보호에 관한 절차 및 기준을 안내하고, 고충을 신속하고 원활하게 처리할 수 있도록 하기 위하여 수립·공개합니다.</p>
+  </div>
+
+    <div class="toc">
+    <b>목차</b>
+    <a href="#p1">1. 기본 원칙</a>
+    <a href="#p2">2. 수집 목적·항목·보유기간</a>
+    <a href="#p3">3. 제3자 제공</a>
+    <a href="#p4">4. 처리의 위탁</a>
+    <a href="#p5">5. 이용자의 권리 행사</a>
+    <a href="#p6">6. 파기 절차 및 방법</a>
+    <a href="#p7">7. 안전성 확보조치</a>
+    <a href="#p8">8. 쿠키 등 자동수집</a>
+    <a href="#p9">9. 권익침해 구제방법</a>
+    <a href="#p10">10. 고지·변경 및 부칙</a>
+  </div>
+
+  <section id="p1" class="card">
+    <h2>1. 기본 원칙</h2>
+    <p>회사는 정보통신망 이용촉진 및 정보보호 등에 관한 법률, 통신비밀보호법, 전기통신사업법, 개인정보 보호법 등 관련 법령상의 개인정보보호 규정을 준수하며, 수집한 개인정보를 동의 범위 및 법령 허용 범위 내에서만 처리합니다.</p>
+  </section>
+
+  <section id="p2" class="card">
+    <h2>2. 개인정보의 수집 목적·수집항목·보유 및 이용기간</h2>
+    <p>회사는 서비스 제공을 위하여 다음과 같은 개인정보를 수집·이용합니다.</p>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>수집 목적</th>
+          <th>수집 항목</th>
+          <th>보유기간</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>장기렌터카, 리스, 할부 등 견적 상담</td>
+          <td>성명, 희망차종, 연락처, 지역</td>
+          <td>최종 상담일로부터 1년 또는 동의 철회 시까지</td>
+        </tr>
+        <tr>
+          <td>렌터카 및 리스·할부 계약 진행 및 체결</td>
+          <td>성명, 성별, 연락처, 생년월일, 주소, 운전면허번호, 이메일주소</td>
+          <td>계약완료일로부터 5년 또는 동의 철회 시까지(단, 관련 법령에 따른 보존 의무가 있는 경우 해당 기간 동안 보관)</td>
+        </tr>
+        <tr>
+          <td>광고·이벤트 및 프로모션</td>
+          <td>성명, 연락처</td>
+          <td>최종 상담일로부터 3개월 또는 동의 철회 시까지</td>
+        </tr>
+        <tr>
+          <td>고충처리 및 컴플레인 관리</td>
+          <td>성명, 생년월일, 연락처, 계약체결내역</td>
+          <td>이용 목적 달성 시까지</td>
+        </tr>
+      </tbody>
+    </table>
+    <p class="note" style="margin-top:10px">또한, 서비스 이용과정에서 자동적으로 생성·수집될 수 있는 정보: IP주소, 쿠키, 기기식별번호, 서비스 이용·방문 기록, 접속 로그, 불량 이용 기록 등</p>
+
+    <h3 style="margin-top:18px">관련 법령에 따른 보관(분리 보관)</h3>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>법령</th>
+          <th>항목</th>
+          <th>기간</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td>상법</td><td>상업장부와 영업에 관한 중요서류에 포함된 개인정보</td><td>10년</td></tr>
+        <tr><td>상법</td><td>전표 또는 이와 유사한 서류에 포함된 개인정보</td><td>5년</td></tr>
+        <tr><td>국세기본법</td><td>세법이 규정하는 모든 거래에 관한 장부 및 증빙서류</td><td>5년</td></tr>
+        <tr><td>전자상거래법</td><td>계약 또는 청약철회 등에 관한 기록</td><td>5년</td></tr>
+        <tr><td>전자상거래법</td><td>대금결제 및 재화 등의 공급에 관한 기록</td><td>5년</td></tr>
+        <tr><td>전자상거래법</td><td>소비자의 불만 또는 분쟁처리에 관한 기록</td><td>3년</td></tr>
+        <tr><td>전자상거래법</td><td>표시/광고에 관한 기록</td><td>6개월</td></tr>
+        <tr><td>신용정보법</td><td>신용정보의 수집/처리 및 이용 등에 관한 기록</td><td>3년</td></tr>
+        <tr><td>통신비밀보호법</td><td>통신사실확인자료 제공에 필요한 정보 등</td><td>12개월(시내·시외전화 역무 관련 자료 6개월)</td></tr>
+        <tr><td>통신비밀보호법</td><td>서비스 방문기록(위치추적자료, 로그자료 등)</td><td>3개월</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section id="p3" class="card">
+    <h2>3. 개인정보 제3자 제공</h2>
+    <p>회사는 원칙적으로 정보주체의 동의 없이 개인정보를 제3자에게 제공하지 않으며, 「개인정보 보호법」 제17조 및 제18조에 해당하는 경우에만 제공합니다.</p>
+    <p>다음의 경우 정보주체의 동의를 얻어 필요한 최소 범위로만 제공합니다.</p>
+    <table class="table">
+      <thead>
+        <tr><th>제공받는 자</th><th>제공 목적</th><th>제공 항목</th><th>제공 기간</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>신차 장기렌트 리카</td><td>이벤트, 신규서비스 및 마케팅 알림</td><td>성명, 연락처</td><td>제3자 제공 동의 철회 시 또는 제휴 계약 종료 시까지</td></tr>
+        <tr><td>㈜카카오</td><td>본인확인 인증</td><td>성명, 생년월일, 휴대폰번호, 성별</td><td>본인확인 후 즉시 파기</td></tr>
+      </tbody>
+    </table>
+  </section>
+
+  <section id="p4" class="card">
+    <h2>4. 개인정보 처리의 위탁</h2>
+    <p>회사는 원활한 서비스 제공을 위해 개인정보 처리업무를 위탁할 수 있으며, 「개인정보 보호법」 제26조에 따라 위탁업무 수행 목적 외 처리금지, 기술적·관리적 보호조치, 재위탁 제한, 관리·감독, 손해배상 등 사항을 계약서 등에 명시하고 수탁자를 감독합니다.</p>
+    <table class="table">
+      <thead>
+        <tr><th>위탁 업무 내용</th><th>수탁업체</th><th>보유 및 이용기간</th></tr>
+      </thead>
+      <tbody>
+        <tr><td>SMS 발송 업무</td><td>㈜엘지유플러스, 에스케이텔레콤㈜, ㈜케이티, ㈜한국케이블텔레콤, 세종텔레콤㈜, 솔라피㈜</td><td>회원탈퇴 시 혹은 위탁계약 종료 시까지</td></tr>
+      </tbody>
+    </table>
+    <p class="muted">수탁자 또는 위탁업무가 변경될 경우 본 방침을 통해 지체 없이 공개합니다. 재위탁은 회사의 사전 동의를 받아 진행합니다.</p>
+  </section>
+
+  <section id="p5" class="card">
+    <h2>5. 이용자의 권리, 의무 및 행사 방법</h2>
+    <ol>
+      <li>정보주체는 회사에 대해 언제든지 개인정보 열람·정정·삭제·처리정지 및 철회 요구, 자동화된 결정에 대한 거부 또는 설명 요구 등의 권리를 행사할 수 있습니다.</li>
+      <li>권리 행사는 「개인정보 보호법 시행령」 제41조 제1항에 따라 서면, 전자우편, 모사전송(FAX) 등으로 하실 수 있으며, 회사는 지체 없이 조치합니다.</li>
+      <li>법정대리인이나 위임을 받은 자 등 대리인을 통하여 행사할 수 있으며, 이 경우 “개인정보 처리 방법에 관한 고시” 별지 제11호 서식에 따른 위임장을 제출해야 합니다.</li>
+      <li>열람 및 처리정지 요구는 「개인정보 보호법」 제35조 제4항 및 제37조 제2항에 의하여 제한될 수 있습니다.</li>
+      <li>다른 법령에서 수집 대상으로 명시된 경우에는 삭제 요구가 제한될 수 있습니다.</li>
+      <li>자동화된 결정에 대한 거부는 동의 또는 계약 등으로 미리 고지된 경우 등 법령상 예외에 해당하면 거부권이 제한될 수 있습니다.</li>
+    </ol>
+    <p class="note">권리 행사는 아래 부서로 신청하실 수 있습니다. 회사는 신속한 처리를 위해 노력합니다.<br>
+    ▶ 개인정보 열람 등 청구 접수·처리 부서: 디지털마케팅사업부문 / 연락처: 010-6573-1038 / 주소: 인천광역시 남동구 구월동 1491-1, 2층</p>
+  </section>
+
+  <section id="p6" class="card">
+    <h2>6. 개인정보의 파기 절차 및 방법</h2>
+    <ol>
+      <li><b>파기 사유 발생 시:</b> 보유기간 경과, 처리 목적 달성 등 불필요해진 경우 지체 없이 파기합니다.</li>
+      <li><b>분리 보관:</b> 법령에 따라 계속 보존해야 하는 경우 별도의 DB로 옮기거나 보관장소를 달리하여 보관합니다.</li>
+      <li><b>파기 절차:</b> 목적 달성 후 별도 DB로 이전되어 내부 방침 및 법령에 따라 일정 기간 저장된 후 또는 즉시 파기하며, 법률에 의한 경우 외 다른 목적으로 이용하지 않습니다.</li>
+      <li><b>파기 기한:</b> 보유기간 종료일부터 5일 이내, 또는 처리 불필요 인정일부터 5일 이내 파기합니다.</li>
+      <li><b>파기 방법:</b> 종이는 분쇄 또는 소각, 전자적 파일은 복구 불가능한 방법으로 영구 삭제합니다.</li>
+    </ol>
+  </section>
+
+  <section id="p7" class="card">
+    <h2>7. 개인정보의 안전성 확보조치</h2>
+    <ul>
+      <li>개인정보 취급 직원의 최소화 및 교육, 별도 비밀번호 부여·정기 갱신</li>
+      <li>정기 자체 감사(분기 1회) 및 내부관리계획 수립·시행</li>
+      <li>암호화 등 기술적 보호조치(전송·저장 시 암호화, 파일잠금 등)</li>
+      <li>해킹·바이러스 대비 보안프로그램 설치 및 주기적 점검, 접근통제 구역 운영</li>
+      <li>접근권한 부여·변경·말소 관리, 침입차단시스템 운영</li>
+      <li>접속기록 6개월 이상 보관 및 위·변조 방지</li>
+      <li>문서·매체 잠금장치 보관, 물리적 출입통제</li>
+    </ul>
+  </section>
+
+  <section id="p8" class="card">
+    <h2>8. 개인정보 자동 수집 장치(쿠키)의 설치·운영 및 거부</h2>
+    <ol>
+      <li>맞춤 서비스 제공을 위하여 쿠키를 사용할 수 있습니다.</li>
+      <li>쿠키는 이용자의 브라우저에 저장되는 소량의 정보입니다. 거부 시 맞춤형 서비스 이용에 제한이 있을 수 있습니다.</li>
+      <li><b>브라우저 쿠키 관리</b><br>
+        - 크롬: 설정 → 개인정보 및 보안 → 인터넷 사용 기록 삭제<br>
+        - 엣지: 설정 → 쿠키 및 사이트 권한 → 쿠키 및 사이트 데이터 관리 및 삭제<br>
+        - 사파리(iOS): 설정 → Safari → 고급 → 모든 쿠키 차단<br>
+        - 삼성 인터넷: 설정 → 인터넷 사용 기록 → 인터넷 사용 기록 삭제
+      </li>
+    </ol>
+  </section>
+
+  
+
+  <section id="p9" class="card">
+    <h2>9. 권익침해 구제방법</h2>
+    <p>개인정보침해로 인한 구제를 위하여 아래 기관에 분쟁해결이나 상담을 신청할 수 있습니다.</p>
+    <ul>
+      <li>개인정보 분쟁조정위원회: (국번없이) 1833-6972, <a href="https://www.kopico.go.kr" target="_blank" rel="noopener">www.kopico.go.kr</a></li>
+      <li>개인정보침해신고센터: (국번없이) 118, <a href="https://privacy.kisa.or.kr" target="_blank" rel="noopener">privacy.kisa.or.kr</a></li>
+      <li>대검찰청: (국번없이) 1301, <a href="https://www.spo.go.kr" target="_blank" rel="noopener">www.spo.go.kr</a></li>
+      <li>경찰청: (국번없이) 182, <a href="https://ecrm.cyber.go.kr" target="_blank" rel="noopener">ecrm.cyber.go.kr</a></li>
+    </ul>
+  </section>
+
+  <section id="p10" class="card">
+    <h2>10. 개인정보 처리방침의 고지 및 변경 / 부칙</h2>
+    <p>현행 방침에 대한 내용 추가·삭제·수정이 있을 경우 개정 최소 7일 전에 플랫폼을 통해 변경 이유 및 내용을 고지합니다. 개인정보 수집·이용 등 이용자 권리의 중요한 변경이 있을 경우 최소 30일 전에 고지합니다.</p>
+    <p><b>시행일:</b> <span id="effectiveText">2025년 8월 28일</span></p>
+    <p class="muted">이전 개인정보 처리방침은 최상단에서 버전 선택 후 확인하실 수 있습니다.</p>
+  </section>
+
+    <footer>
+      © <span id="y"></span> 리카 · All rights reserved.
+    </footer>
+  </div>
+
+<script>
+(function(){
+  const p=new URLSearchParams(location.search);
+  const d=p.get('d');
+  const el=document.querySelector('#effective b');
+  const fmt=(date)=>date.toLocaleDateString('ko-KR',{year:'numeric',month:'long',day:'numeric'});
+  if(d){
+    const t=d.match(/^(\d{4})-(\d{2})-(\d{2})$/);
+    if(t){ el.textContent = `${t[1]}년 ${parseInt(t[2],10)}월 ${parseInt(t[3],10)}일`; }
+    else{ el.textContent = fmt(new Date()); }
+  }
+  document.getElementById('y').textContent = new Date().getFullYear();
+})();
+</script>
+</body>
+</html>
