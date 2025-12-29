@@ -28,12 +28,12 @@ function updateSlide(idx) {
     // 인덱스 순환 계산
     currentIdx = (idx + slides.length) % slides.length;
     
-    // 슬라이드 텍스트 표시/숨김
+    // 슬라이드 표시/숨김 처리
     slides.forEach((slide, i) => {
         slide.style.display = i === currentIdx ? 'flex' : 'none';
     });
     
-    // [핵심 복구] 배경 이미지 교체 코드 (사진 연결)
+    // [중요] 배경 이미지 교체 로직 (Photo Connection 복구)
     const bg = slides[currentIdx].dataset.bg;
     if(bg && spotCard) {
         spotCard.style.backgroundImage = `url('${bg}')`;
@@ -45,7 +45,7 @@ if (leftBtn && rightBtn) {
     rightBtn.addEventListener('click', () => updateSlide(currentIdx + 1));
 }
 
-// 초기 로드 시 실행 (첫 번째 사진 로드)
+// 초기 로드 시 첫 번째 슬라이드 및 배경 실행
 window.addEventListener('load', () => updateSlide(0));
 
 
