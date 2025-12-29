@@ -53,23 +53,22 @@
         /* 헤더 스타일 */
         .app-header {
             position: fixed; top: 0; left: 0; width: 100%; 
-            /* 로고 크기에 맞춰 패딩 조정 */
             padding: 10px 20px; 
             z-index: 100;
             display: flex; align-items: center;
             background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
         }
 
-        /* [수정 완료] 로고 크기 원본(180px) 기준으로 복구 */
+        /* 로고 스타일 (PC 180px 유지) */
         .logo-area img {
-            height: 180px; /* PC 기준 원본 크기 유지 */
+            height: 180px; 
             width: auto; 
             cursor: pointer;
             filter: drop-shadow(0 4px 6px rgba(0,0,0,0.5));
             transition: height 0.3s ease;
         }
         
-        /* 모바일에서는 화면을 가리지 않도록 비율에 맞춰 최적화 (여전히 큼직하게 유지) */
+        /* 모바일 반응형 로고 */
         @media (max-width: 768px) { 
             .logo-area img { height: 110px; } 
         }
@@ -80,7 +79,7 @@
         /* 메인 컨테이너 */
         .container {
             width: 90%; max-width: 500px; text-align: center; position: relative; z-index: 10;
-            padding-top: 140px; /* 로고가 커졌으므로 여백 확보 */
+            padding-top: 140px; 
             padding-bottom: 40px;
         }
 
@@ -284,10 +283,15 @@
                 <input type="text" id="userName" placeholder="성함" class="text-input" autocomplete="name">
                 <input type="tel" id="userPhone" placeholder="전화번호 (- 없이 입력)" class="text-input" pattern="[0-9]*" inputmode="numeric" autocomplete="tel">
             </div>
-            <div style="margin-top: 20px; text-align: left; font-size: 0.85rem; color: #ccc; display: flex; align-items: center; background: rgba(255,255,255,0.05); padding: 10px; border-radius: 8px;">
-                <input type="checkbox" id="privacyConsent" style="width: 20px; height: 20px; margin-right: 10px; accent-color: var(--primary-color);">
-                <label for="privacyConsent" style="font-size: 0.9rem;">개인정보 수집 및 이용 동의 (필수)</label>
+            
+            <div style="margin-top: 20px; text-align: left; font-size: 0.85rem; color: #ccc; display: flex; align-items: center; justify-content: space-between; background: rgba(255,255,255,0.05); padding: 12px; border-radius: 8px;">
+                <div style="display:flex; align-items:center;">
+                    <input type="checkbox" id="privacyConsent" style="width: 20px; height: 20px; margin-right: 10px; accent-color: var(--primary-color); cursor: pointer;">
+                    <label for="privacyConsent" style="font-size: 0.9rem; cursor: pointer;">개인정보 수집 동의 (필수)</label>
+                </div>
+                <a href="privacyPolicy.html" target="_blank" style="color: #888; text-decoration: underline; font-size: 0.85rem; margin-left: 10px; white-space: nowrap;">[내용보기]</a>
             </div>
+
             <button class="option-btn" style="width: 100%; margin-top: 20px; background: var(--primary-color); font-weight:bold; box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);" onclick="validateStep6()">견적 요청하기</button>
         </div>
 
