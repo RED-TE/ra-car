@@ -11,7 +11,6 @@ closeBtn?.addEventListener('click', () => {
   menu.setAttribute('aria-hidden', 'true');
 });
 
-// Close menu when clicking outside
 menu?.addEventListener('click', (e) => {
   if (e.target === menu) {
     menu.setAttribute('aria-hidden', 'true');
@@ -20,39 +19,35 @@ menu?.addEventListener('click', (e) => {
 
 // Spotlight carousel
 const spotCard = document.querySelector('.spot-card');
-const arrows = document.querySelectorAll('.spot-arrow');
+const slides = Array.from(document.querySelectorAll('.spot-slide'));
+const leftBtn = document.querySelector('.spot-arrow.left');
+const rightBtn = document.querySelector('.spot-arrow.right');
+let currentIdx = 0;
 
-let currentSlide = 0;
-const slides = [
-  {
-    title: '1 : 1 맞춤 어드바이저',
-    desc: '나의 상황에 딱 맞춰주는 최고의 전문가<br/>상품추천, 맞춤견적, 계약 검토까지'
-  },
-  {
-    title: '합리적인 가격',
-    desc: '투명한 견적과 최저가 보장<br/>숨은 비용 없이 명확하게'
-  },
-  {
-    title: '빠른 배송',
-    desc: '전국 어디든 빠른 차량 배송<br/>원하는 시간, 원하는 장소로'
-  }
-];
-
-arrows.forEach(arrow => {
-  arrow.addEventListener('click', () => {
-    const dir = parseInt(arrow.dataset.dir);
-    currentSlide = (currentSlide + dir + slides.length) % slides.length;
-    updateSlide();
-  });
-});
-
-function updateSlide() {
-  const slide = slides[currentSlide];
-  const copy = spotCard.querySelector('.spot-copy');
-  
-  copy.querySelector('h3').textContent = slide.title;
-  copy.querySelector('p').innerHTML = slide.desc;
+function updateSlide(idx) {
+    // 인덱스 순환 계산
+    currentIdx = (idx + slides.length) % slides.length;
+    
+    // 슬라이드 텍스트 표시/숨김
+    slides.forEach((slide, i) => {
+        slide.style.display = i === currentIdx ? 'flex' : 'none';
+    });
+    
+    // [핵심 복구] 배경 이미지 교체 코드 (사진 연결)
+    const bg = slides[currentIdx].dataset.bg;
+    if(bg && spotCard) {
+        spotCard.style.backgroundImage = `url('${bg}')`;
+    }
 }
+
+if (leftBtn && rightBtn) {
+    leftBtn.addEventListener('click', () => updateSlide(currentIdx - 1));
+    rightBtn.addEventListener('click', () => updateSlide(currentIdx + 1));
+}
+
+// 초기 로드 시 실행 (첫 번째 사진 로드)
+window.addEventListener('load', () => updateSlide(0));
+
 
 // Smooth scroll
 document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -64,7 +59,6 @@ document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         behavior: 'smooth',
         block: 'start'
       });
-      // Close mobile menu if open
       menu?.setAttribute('aria-hidden', 'true');
     }
   });
