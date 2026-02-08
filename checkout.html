@@ -396,8 +396,10 @@
                 PayApp.setParam('recvphone', phone);
                 PayApp.setParam('smsuse', 'y');
                 PayApp.setParam('openpaytype', '');
-                PayApp.setParam('redirectpay', 'y'); // 🚀 팝업 대신 전체 페이지 리다이렉트 사용 (더 안정적)
-                PayApp.setParam('skip_screen', 'y'); // 결제 요청 후 불필요한 대기 화면 생략
+                PayApp.setParam('var1', currentUser.uid); // 🚀 Webhook에서 사용자 구분을 위해 UID 전달
+                PayApp.setParam('redirectpay', '1'); // 🚀 매뉴얼 권장: '1' 사용 (전체 페이지 리다이렉트)
+                PayApp.setParam('redirect', 'self');  // 부모창이 아닌 현재창에서 리다이렉트
+                PayApp.setParam('skip_screen', 'y'); // 결제 요청 후 바로 결제창으로 이동
 
                 // GitHub Pages 등 하위 경로 배포 시에도 결제 완료 후 올바른 success 페이지로 이동
                 var baseReturnUrl = (PAYAPP_CONFIG.returnUrl && PAYAPP_CONFIG.returnUrl.trim()) ? PAYAPP_CONFIG.returnUrl.trim() : (new URL('checkout_success.html', window.location.href).href);
