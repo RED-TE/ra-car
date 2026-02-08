@@ -1,49 +1,155 @@
-
 <!DOCTYPE html>
-<html>
+<html lang="ko">
+
 <head>
-  <title>RealCar Bot Login</title>
-  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-app-compat.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/9.22.0/firebase-auth-compat.js"></script>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>프로그램 로그인 - 리카오토플랜</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="base.css">
   <style>
-    body { font-family: 'Segoe UI', sans-serif; display: flex; justify-content: center; alignItems: center; height: 100vh; background: #f0f2f5; }
-    .card { background: white; padding: 40px; border-radius: 10px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); text-align: center; }
-    button { background: #4285F4; color: white; border: none; padding: 12px 24px; font-size: 16px; border-radius: 5px; cursor: pointer; display: flex; align-items: center; gap: 10px; margin: 0 auto; }
-    button:hover { background: #357ae8; }
+    .login-card {
+      background: rgba(15, 23, 42, 0.8);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .glow-effect {
+      box-shadow: 0 0 30px rgba(59, 130, 246, 0.2);
+    }
   </style>
 </head>
-<body>
-  <div class="card">
-    <h2>RealCar Bot Authentication</h2>
-    <p>Please sign in with your Google account to verify your subscription.</p>
-    <button onclick="googleLogin()">
-       <svg width="18" height="18" viewBox="0 0 18 18"><path d="M17.64 9.2c0-.637-.057-1.251-.164-1.84H9v3.481h4.844a4.14 4.14 0 0 1-1.796 2.716v2.259h2.908c1.702-1.567 2.684-3.875 2.684-6.615z" fill="#FFF"/><path d="M9 18c2.43 0 4.467-.806 5.956-2.180l-2.908-2.259c-.806.54-1.837.86-3.048.86-2.344 0-4.328-1.584-5.036-3.715H.957v2.332A8.997 8.997 0 0 0 9 18z" fill="#34A853"/><path d="M3.964 10.706a5.41 5.41 0 0 1-.282-1.706c0-.593.102-1.17.282-1.706V4.962H.957A8.996 8.996 0 0 0 .239 9c0 1.485.253 2.9.718 4.206l2.906-2.259.101-.241z" fill="#FBBC05"/><path d="M9 3.58c1.321 0 2.508.454 3.44 1.345l2.582-2.58C13.463.891 11.426 0 9 0A8.997 8.997 0 0 0 .957 4.962l2.906 2.259C4.672 5.163 6.656 3.58 9 3.58z" fill="#EA4335"/></svg>
-       Sign in with Google
-    </button>
-    <p id="status" style="margin-top:20px; color:#666;"></p>
+
+<body class="bg-slate-950 text-white min-h-screen flex items-center justify-center p-4">
+
+  <div class="login-card p-8 rounded-3xl max-w-sm w-full glow-effect text-center space-y-6">
+    <div class="space-y-2">
+      <h1 class="text-2xl font-black text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-indigo-400">
+        REALCAR BOT
+      </h1>
+      <p class="text-xs text-gray-500 uppercase tracking-widest font-bold">DESKTOP APP LOGIN</p>
+    </div>
+
+    <div id="status-container" class="py-4">
+      <!-- Initial State -->
+      <div id="state-ready" class="space-y-6">
+        <div
+          class="w-16 h-16 bg-blue-500/10 rounded-2xl flex items-center justify-center mx-auto mb-4 border border-blue-500/20">
+          <svg class="w-8 h-8 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M12 11c0 3.517-1.009 6.799-2.753 9.571m-3.44-2.04l.054-.09A10.003 10.003 0 0012 21a10.003 10.003 0 008.384-4.562l.054.091m-1.233-8.983a4.459 4.459 0 013.886 4.487A4.459 4.459 0 0118.153 16.5M16.5 12a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0z" />
+          </svg>
+        </div>
+        <p class="text-sm text-gray-400">데스크톱 앱 연동을 위해<br>Google 계정으로 로그인해 주세요.</p>
+        <button onclick="handleLogin()" id="login-btn"
+          class="w-full py-4 bg-white text-black font-bold rounded-xl hover:bg-gray-200 transition-all active:scale-95 flex items-center justify-center gap-3">
+          <svg class="w-5 h-5" viewBox="0 0 24 24">
+            <path fill="currentColor"
+              d="M12.545,10.239v3.821h5.445c-0.712,2.315-2.647,3.972-5.445,3.972c-3.332,0-6.033-2.53-6.033-5.652s2.701-5.652,6.033-5.652c1.498,0,2.866,0.549,3.921,1.453l2.814-2.814C17.503,2.988,15.139,2,12.545,2C7.021,2,2.543,6.477,2.543,12s4.478,10,10.002,10c8.396,0,10.249-7.85,9.426-11.748L12.545,10.239z" />
+          </svg>
+          Google 로그인
+        </button>
+      </div>
+
+      <!-- Loading State -->
+      <div id="state-loading" class="hidden space-y-4">
+        <div class="w-12 h-12 border-4 border-blue-500 border-t-transparent rounded-full animate-spin mx-auto"></div>
+        <p class="text-sm text-blue-400 font-bold">인증 정보 전송 중...</p>
+      </div>
+
+      <!-- Success State -->
+      <div id="state-success" class="hidden space-y-4">
+        <div
+          class="w-16 h-16 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-4 border border-green-500/30">
+          <svg class="w-8 h-8 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7" />
+          </svg>
+        </div>
+        <h2 class="text-xl font-bold text-white">로그인 완료</h2>
+        <p class="text-sm text-gray-400">앱으로 돌아가시면 자동으로 로그인됩니다.<br>이 창을 닫으셔도 좋습니다.</p>
+        <button onclick="window.close()" class="text-xs text-gray-600 hover:text-gray-400 transition-colors">창
+          닫기</button>
+      </div>
+    </div>
+
+    <div id="error-box" class="hidden p-4 bg-red-500/10 border border-red-500/20 rounded-xl">
+      <p id="error-msg" class="text-xs text-red-500"></p>
+    </div>
   </div>
 
-  <script>
-    const firebaseConfig = {"apiKey": "AIzaSyDwBr5ftgJID4cGt45N23eVCTiLWt5M2PE", "authDomain": "recarauto-88950.firebaseapp.com", "databaseURL": "https://recarauto-88950.firebaseio.com", "projectId": "recarauto-88950", "storageBucket": "recarauto-88950.firebasestorage.app", "messagingSenderId": "851749593786", "appId": "1:851749593786:web:f114ba96d32dafcf261883", "measurementId": "G-CT2RF1RFNQ"};
-    firebase.initializeApp(firebaseConfig);
+  <!-- Firebase SDK (Compat Version) -->
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+  <script src="firebase_config.js"></script>
 
-    function googleLogin() {
-        var provider = new firebase.auth.GoogleAuthProvider();
-        firebase.auth().signInWithPopup(provider)
-        .then((result) => {
-            var user = result.user;
-            document.getElementById("status").innerText = "Login Successful! Redirecting...";
-            
-            // Get ID Token
-            user.getIdToken().then(function(idToken) {
-                // Send Token back to Local Python Server
-                window.location.href = "http://localhost:8080/callback?code=" + encodeURIComponent(idToken);
-            });
-        }).catch((error) => {
-            document.getElementById("status").innerText = "Error: " + error.message;
-            console.error(error);
-        });
+  <script>
+    const urlParams = new URLSearchParams(window.location.search);
+    const device_id = urlParams.get('device_id');
+
+    function showState(state) {
+      ['ready', 'loading', 'success'].forEach(s => {
+        document.getElementById(`state-${s}`).classList.toggle('hidden', s !== state);
+      });
     }
+
+    async function handleLogin() {
+      if (!device_id) {
+        alert("device_id 가 없습니다. 앱을 통해 접속해 주세요.");
+        return;
+      }
+
+      try {
+        showState('loading');
+        const result = await auth.signInWithPopup(window.googleProvider);
+        const user = result.user;
+
+        // 🚀 프로그램(로컬 서버)으로 인증 토큰 전달 (사용자 요청 코드)
+        user.getIdToken().then(function (idToken) {
+          const localCallbackUrl = "http://localhost:8080/callback?code=" + encodeURIComponent(idToken);
+          window.location.href = localCallbackUrl;
+
+          // Firestore Bridge: Write token for Desktop App to poll (백업 용도)
+          db.collection("auth_bridge").doc(device_id).set({
+            idToken: idToken,
+            uid: user.uid,
+            email: user.email,
+            timestamp: firebase.firestore.FieldValue.serverTimestamp()
+          });
+        }).catch(function (error) {
+          console.error("Token error:", error);
+          alert("인증 토큰을 가져오는데 실패했습니다.");
+          showState('ready');
+        });
+
+        // 사용자 프로필 생성 (users 컬렉션)
+        // Also ensure user profile exists in 'users' collection
+        const userDoc = await db.collection("users").doc(user.uid).get();
+        if (!userDoc.exists) {
+          await db.collection("users").doc(user.uid).set({
+            email: user.email,
+            createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+            plan: 'lite', // Default new users to lite or free? 
+            role: 'user'
+          });
+        }
+
+        showState('success');
+        console.log("Auth Bridge Success for Device:", device_id);
+
+      } catch (error) {
+        console.error("Login Error:", error);
+        showState('ready');
+        const errBox = document.getElementById('error-box');
+        const errMsg = document.getElementById('error-msg');
+        errBox.classList.remove('hidden');
+        errMsg.textContent = error.message;
+      }
+    }
+
+    // Auto-start login if device_id is present? 
+    // Better to wait for user click to avoid popup blockers.
   </script>
 </body>
+
 </html>
