@@ -19,5 +19,5 @@ const PAYAPP_CONFIG = {
      * 서버 페이지에서 'SUCCESS'를 응답해야 결제가 진행됩니다.
      * 정적 사이트만 있는 경우 비워두고, 나중에 백엔드 구축 후 설정하세요.
      */
-    feedbackurl: ''
+    feedbackurl: 'https://us-central1-recarauto-88950.cloudfunctions.net/payappFeedback'
 };

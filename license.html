@@ -13,7 +13,7 @@
 <body class="flex flex-col min-h-screen bg-slate-950">
     <div class="flex-grow flex items-center justify-center p-4">
         <div class="max-w-lg w-full relative">
-            <a href="index.html" class="absolute top-6 right-6 text-gray-500 hover:text-white">✕</a>
+            <a href="/" class="absolute top-6 right-6 text-gray-500 hover:text-white">✕</a>
 
             <div class="text-center mb-10">
                 <h1 class="text-3xl font-black text-white mb-3">내 구독 정보</h1>
@@ -22,7 +22,7 @@
 
             <div id="no-license" class="hidden text-center py-10 bg-slate-900/50 rounded-2xl border border-slate-800">
                 <p class="text-gray-400 mb-6 text-lg">이용 중인 유료 플랜이 없습니다.</p>
-                <button onclick="location.href='checkout.html'" class="btn-primary px-8 py-3 text-lg">구매하러 가기</button>
+                <button onclick="location.href='/checkout'" class="btn-primary px-8 py-3 text-lg">구매하러 가기</button>
             </div>
 
             <div id="license-info" class="hidden space-y-6">
@@ -66,7 +66,7 @@
                 </div>
 
                 <!-- Actions -->
-                <button onclick="location.href='index.html'"
+                <button onclick="location.href='/'"
                     class="w-full py-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-gray-300 font-bold transition-all border border-slate-700 hover:border-slate-600 shadow-lg">
                     메인으로 돌아가기
                 </button>
@@ -86,7 +86,7 @@
             auth.onAuthStateChanged(async (user) => {
                 if (!user) {
                     alert('로그인이 필요한 서비스입니다.');
-                    window.location.href = 'login.html';
+                    window.location.href = '/login';
                     return;
                 }
 

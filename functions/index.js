@@ -6,47 +6,48 @@ const db = admin.firestore();
 
 // 🚀 PayApp Webhook (Feedback URL) Handler
 exports.payappFeedback = functions.https.onRequest(async (req, res) => {
-    if (req.method !== "POST") {
-        return res.status(405).send("Method Not Allowed");
-    }
-
     // PayApp sends data in POST body (form-encoded)
-    const data = req.body;
-    console.log("PayApp Signal Received:", JSON.stringify(data));
+    const data = req.body || {};
+    console.log("PayApp Signal Received (Raw Data):", JSON.stringify(data));
+    console.log("Headers:", JSON.stringify(req.headers));
 
     const PAYAPP_LINK_KEY = "u0VjDSiQHsUamv/vBQMVS+1DPJnCCRVaOgT+oqg6zaM=";
     const PAYAPP_LINK_VAL = "u0VjDSiQHsUamv/vBQMVS1bQIoBpTecR5Ye3Ew9bJaU=";
 
+    // Support both linkkey (official) and link_key (variations)
+    const receivedKey = data.linkkey || data.link_key;
+    const receivedVal = data.linkval || data.link_val;
+
     // 1. Security Verification
-    if (data.linkkey !== PAYAPP_LINK_KEY || data.linkval !== PAYAPP_LINK_VAL) {
-        console.error("Security mismatch! Denying request.");
+    if (receivedKey !== PAYAPP_LINK_KEY || receivedVal !== PAYAPP_LINK_VAL) {
+        console.error(`Security mismatch! 
+            Expected Key: ${PAYAPP_LINK_KEY}, Received: ${receivedKey}
+            Expected Val: ${PAYAPP_LINK_VAL}, Received: ${receivedVal}`);
         return res.status(403).send("Forbidden");
     }
 
-    // 2. Identify Event (4 = Payment Success)
-    if (data.pay_state === "4") {
-        const uid = data.var1; // We passed user UID here in checkout.html
+    // 2. Identify Event (4 = Payment Success) 
+    // pay_state might be a number or a string
+    if (String(data.pay_state) === "4") {
+        const uid = data.var1;
         const planName = data.goodname || "LITE PLAN";
-        const amount = data.price;
+        const amount = String(data.price || "0");
         const orderId = data.mul_no;
 
+        console.log(`Processing Success Signal: UID=${uid}, Plan=${planName}, Order=${orderId}`);
+
         if (!uid) {
-            console.error("Missing UID in var1. Cannot update user.");
-            return res.send("SUCCESS"); // Still return SUCCESS to PayApp but log error
+            console.error("Missing UID in var1. Cannot update user status.");
+            return res.send("SUCCESS");
         }
 
         try {
             const now = admin.firestore.Timestamp.now();
             const expiryDate = new Date();
-            expiryDate.setDate(expiryDate.getDate() + 30); // 30 days subscription
+            expiryDate.setDate(expiryDate.getDate() + 30);
 
             // Determine Internal Plan ID
             const planId = planName.toLowerCase().includes("lite") ? "lite" : "pro";
-
-            // Generate a new license key on the fly if needed
-            const generateKey = () => {
-                return "RA" + Math.random().toString(36).substring(2, 10).toUpperCase();
-            };
 
             // 3. Update User Activation Status
             await db.collection("users").doc(uid).set({
@@ -54,20 +55,21 @@ exports.payappFeedback = functions.https.onRequest(async (req, res) => {
                 planName: planName,
                 paymentDate: now,
                 expiryDate: admin.firestore.Timestamp.fromDate(expiryDate),
-                licenseKey: generateKey(),
                 lastOrderId: orderId,
-                lastPaymentAmount: parseInt(amount),
-                updatedAt: now
+                lastPaymentAmount: parseInt(amount.replace(/[^0-9]/g, "")),
+                updatedAt: now,
+                licenseKey: "RA" + Math.random().toString(36).substring(2, 10).toUpperCase()
             }, { merge: true });
 
-            console.log(`Successfully upgraded user ${uid} to ${planId}`);
+            console.log(`✅ Successfully upgraded user ${uid} to ${planId}`);
 
         } catch (error) {
-            console.error("Firestore Update Failed:", error);
-            // We don't want to tell PayApp it failed if it's our DB issue (they might retry but it's risky)
+            console.error("❌ Firestore Update Failed:", error);
         }
+    } else {
+        console.log(`Signal received but pay_state is ${data.pay_state} (not 4). Skipping update.`);
     }
 
-    // Always return 'SUCCESS' to PayApp to stop them from retrying
+    // Always return 'SUCCESS' to PayApp
     res.send("SUCCESS");
 });

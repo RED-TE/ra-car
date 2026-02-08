@@ -96,7 +96,7 @@
                 </div>
                 <div id="nav-auth-section" class="flex items-center space-x-4">
                     <!-- Auth content will be injected by JS -->
-                    <a href="guide.html"
+                    <a href="/guide"
                         class="hidden md:block text-green-400 hover:text-green-300 font-bold transition-colors">📖 사용
                         가이드</a>
                     <a href="login.html" class="text-gray-300 hover:text-green-400 transition-colors">로그인</a>
@@ -178,9 +178,9 @@
                 } else {
                     // No user is signed in.
                     navSection.innerHTML = `
-                        <a href="login.html" class="text-gray-300 hover:text-green-400 transition-colors">로그인</a>
-                        <a href="signup.html" class="text-gray-300 hover:text-green-400 transition-colors text-sm">회원가입</a>
-                        <button onclick="location.href='checkout.html'"
+                        <a href="/login" class="text-gray-300 hover:text-green-400 transition-colors">로그인</a>
+                        <a href="/signup" class="text-gray-300 hover:text-green-400 transition-colors text-sm">회원가입</a>
+                        <button onclick="location.href='/checkout'"
                             class="bg-green-400 hover:bg-green-500 text-slate-950 font-bold px-6 py-2 rounded-lg neon-glow transition-all hover:scale-105">
                             구매하기
                         </button>
