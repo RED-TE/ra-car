@@ -66,8 +66,25 @@ exports.payappFeedback = functions.https.onRequest(async (req, res) => {
         } catch (error) {
             console.error("❌ Firestore Update Failed:", error);
         }
+    } else if (String(data.pay_state) === "8") {
+        // Handle Cancellation/Refund
+        const uid = data.var1;
+        console.log(`Processing Cancellation Signal: UID=${uid}`);
+
+        if (uid) {
+            try {
+                await db.collection("users").doc(uid).update({
+                    plan: "free",
+                    updatedAt: admin.firestore.Timestamp.now(),
+                    cancelDate: admin.firestore.Timestamp.now()
+                });
+                console.log(`✅ Successfully revoked license for user ${uid} due to cancellation.`);
+            } catch (error) {
+                console.error("❌ Firestore Update Failed (Cancel):", error);
+            }
+        }
     } else {
-        console.log(`Signal received but pay_state is ${data.pay_state} (not 4). Skipping update.`);
+        console.log(`Signal received but pay_state is ${data.pay_state} (not 4 or 8). Skipping update.`);
     }
 
     // Always return 'SUCCESS' to PayApp
