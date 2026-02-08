@@ -67,27 +67,45 @@
         // Wait for auth state
         if (typeof auth !== 'undefined') {
             auth.onAuthStateChanged(async (user) => {
-                const order = Utils.getStorage(STORAGE_KEYS.ORDER);
+                // 1. Try to get order from storage
+                let order = Utils.getStorage(STORAGE_KEYS.ORDER);
+
+                // 2. Fallback: Try to parse from URL (PayApp return parameters)
+                const urlParams = new URLSearchParams(window.location.search);
+                if (!order && urlParams.get('goodname')) {
+                    console.log('Order missing in storage, parsing from URL params');
+                    order = {
+                        orderId: urlParams.get('ordno') || 'unknown',
+                        planName: urlParams.get('goodname'),
+                        amount: urlParams.get('price'),
+                        date: new Date().toISOString(),
+                        // Map goodname to planId (infer from name)
+                        planId: urlParams.get('goodname').toLowerCase().includes('lite') ? 'lite' : 'pro'
+                    };
+                }
 
                 if (!order) {
-                    console.warn('No order data found in localStorage');
+                    console.warn('No order data found in localStorage or URL');
+                    // Hide summary if no data
+                    document.querySelector('.bg-slate-950/50').classList.add('hidden');
                 } else {
                     // Render UI
-                    document.getElementById('oid').textContent = order.orderId;
-                    document.getElementById('pname').textContent = order.planName;
-                    document.getElementById('amt').textContent = Utils.formatCurrency(order.amount);
-                    document.getElementById('date').textContent = Utils.formatDate(order.date);
-                    document.getElementById('email').textContent = user ? user.email : order.email;
+                    if (document.getElementById('oid')) document.getElementById('oid').textContent = order.orderId;
+                    if (document.getElementById('pname')) document.getElementById('pname').textContent = order.planName;
+                    if (document.getElementById('amt')) document.getElementById('amt').textContent = Utils.formatCurrency(parseInt(order.amount) || 0);
+                    if (document.getElementById('date')) document.getElementById('date').textContent = Utils.formatDate(order.date);
+                    if (document.getElementById('email')) document.getElementById('email').textContent = user ? user.email : (order.email || '연동 중...');
                 }
 
-                if (!user) {
-                    return;
-                }
+                if (!user) return;
 
                 // Update Database
                 try {
-                    // Check if already updated to prevent double deduction if refreshed?
-                    // For now, simple update.
+                    // If we have order data, use it. Otherwise, we can't safely update the plan.
+                    if (!order) {
+                        console.error('User logged in but no order data available to update plan.');
+                        return;
+                    }
 
                     const now = new Date();
                     const expiry = new Date();
@@ -96,25 +114,26 @@
                     const newLicenseKey = Utils.generateLicenseKey();
 
                     // Determine Plan from Order
-                    // Default to 'pro' if missing, but should be 'lite' or 'master' based on order.planId
-                    // Lowercase the planId for consistency (lite, pro, master)
                     const finalPlan = (order.planId || 'PRO').toLowerCase();
                     const finalPlanName = order.planName || 'PRO Plan';
 
                     await db.collection("users").doc(user.uid).update({
-                        plan: finalPlan, // 'lite', 'pro', 'master'
+                        plan: finalPlan,
                         planName: finalPlanName,
                         paymentDate: now,
                         expiryDate: expiry,
                         licenseKey: newLicenseKey,
-                        lastOrderId: order ? order.orderId : 'unknown'
+                        lastOrderId: order.orderId
                     });
 
                     console.log("User Upgraded to: " + finalPlan);
+                    // Clear the draft to prevent re-processing on refresh
+                    localStorage.removeItem(STORAGE_KEYS.ORDER);
 
                 } catch (e) {
                     console.error("DB Update Failed", e);
-                    alert("계정 정보 업데이트 중 오류가 발생했습니다. 고객센터로 문의해주세요.");
+                    // If it's just a permission error or something, maybe let them know
+                    alert("계정 정보 업데이트 중 오류가 발생했습니다. 잠시 후 다시 시도하거나 고객센터로 문의해주세요.");
                 }
             });
         }

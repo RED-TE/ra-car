@@ -111,7 +111,18 @@
                     document.getElementById('license-info').classList.remove('hidden');
 
                     // Display Plan Info
-                    document.getElementById('plan-name').textContent = (userData.planName || 'PRO Plan').toUpperCase();
+                    let displayPlan = userData.planName || (userData.plan ? userData.plan.toUpperCase() + ' PLAN' : 'PRO PLAN');
+
+                    // 만약 planName이 'PRO Plan' 등으로 잘못 저장되어 있어도 plan 필드가 'lite'면 강제로 수정하여 표시
+                    if (userData.plan === 'lite') {
+                        displayPlan = 'LITE PLAN';
+                    } else if (userData.plan === 'pro') {
+                        displayPlan = 'PRO PLAN';
+                    } else if (userData.plan === 'master') {
+                        displayPlan = 'MASTER PLAN';
+                    }
+
+                    document.getElementById('plan-name').textContent = displayPlan.toUpperCase();
                     document.getElementById('user-email').textContent = user.email;
 
                     // Display Expiry Date
