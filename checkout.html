@@ -400,7 +400,7 @@
                 PayApp.setParam('goodname', plan.name);
                 PayApp.setParam('price', plan.price.toString());
                 PayApp.setParam('recvphone', phone);
-                PayApp.setParam('smsuse', 'y');
+                PayApp.setParam('smsuse', 'n');
                 PayApp.setParam('openpaytype', '');
                 PayApp.setParam('var1', currentUser.uid); // 🚀 Webhook에서 사용자 구분을 위해 UID 전달
                 PayApp.setParam('redirectpay', '1'); // 🚀 매뉴얼 권장: '1' 사용 (전체 페이지 리다이렉트)
