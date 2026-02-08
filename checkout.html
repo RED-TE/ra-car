@@ -396,9 +396,12 @@
                 PayApp.setParam('recvphone', phone);
                 PayApp.setParam('smsuse', 'y');
                 PayApp.setParam('openpaytype', '');
+                PayApp.setParam('redirectpay', 'y'); // 🚀 팝업 대신 전체 페이지 리다이렉트 사용 (더 안정적)
+                PayApp.setParam('skip_screen', 'y'); // 결제 요청 후 불필요한 대기 화면 생략
+
                 // GitHub Pages 등 하위 경로 배포 시에도 결제 완료 후 올바른 success 페이지로 이동
-var baseReturnUrl = (PAYAPP_CONFIG.returnUrl && PAYAPP_CONFIG.returnUrl.trim()) ? PAYAPP_CONFIG.returnUrl.trim() : (new URL('checkout_success.html', window.location.href).href);
-PayApp.setParam('returnurl', baseReturnUrl);
+                var baseReturnUrl = (PAYAPP_CONFIG.returnUrl && PAYAPP_CONFIG.returnUrl.trim()) ? PAYAPP_CONFIG.returnUrl.trim() : (new URL('checkout_success.html', window.location.href).href);
+                PayApp.setParam('returnurl', baseReturnUrl);
                 if (PAYAPP_CONFIG.feedbackurl && PAYAPP_CONFIG.feedbackurl.trim()) {
                     PayApp.setParam('feedbackurl', PAYAPP_CONFIG.feedbackurl.trim());
                 }
