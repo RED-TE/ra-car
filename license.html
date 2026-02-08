@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>라이선스 확인 - 리카오토플랜</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="base.css" rel="stylesheet">
+    <script src="common.js"></script>
+</head>
+
+<body class="flex flex-col min-h-screen bg-slate-950">
+    <div class="flex-grow flex items-center justify-center p-4">
+        <div class="max-w-lg w-full relative">
+            <a href="index.html" class="absolute top-6 right-6 text-gray-500 hover:text-white">✕</a>
+
+            <div class="text-center mb-10">
+                <h1 class="text-3xl font-black text-white mb-3">내 구독 정보</h1>
+                <p class="text-gray-400">현재 이용 중인 플랜과 계정 상태입니다.</p>
+            </div>
+
+            <div id="no-license" class="hidden text-center py-10 bg-slate-900/50 rounded-2xl border border-slate-800">
+                <p class="text-gray-400 mb-6 text-lg">이용 중인 유료 플랜이 없습니다.</p>
+                <button onclick="location.href='checkout.html'" class="btn-primary px-8 py-3 text-lg">구매하러 가기</button>
+            </div>
+
+            <div id="license-info" class="hidden space-y-6">
+
+                <!-- Plan Status Card -->
+                <div
+                    class="bg-gradient-to-b from-slate-800/80 to-slate-900/80 border border-slate-700 rounded-3xl p-8 text-center relative overflow-hidden shadow-2xl backdrop-blur-sm">
+                    <!-- Top Glow -->
+                    <div class="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-blue-500 via-green-400 to-blue-500">
+                    </div>
+                    <div class="absolute inset-x-0 top-0 h-20 bg-green-500/10 blur-xl"></div>
+
+                    <h3 class="text-blue-400 text-xs font-bold tracking-[0.2em] mb-4 uppercase">Current Plan</h3>
+                    <div class="text-4xl font-black text-white mb-3 tracking-tight drop-shadow-lg" id="plan-name">...
+                    </div>
+
+                    <div
+                        class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-bold bg-green-500/10 text-green-400 border border-green-500/20 shadow-[0_0_10px_rgba(74,222,128,0.2)]">
+                        <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
+                        ACTIVE (사용 가능)
+                    </div>
+
+                    <p class="mt-4 text-xs text-gray-400">
+                        이용 만료일: <span id="expiry-display" class="font-bold text-gray-200">로딩 중...</span>
+                    </p>
+
+                    <div class="mt-8 pt-6 border-t border-white/10">
+                        <p class="text-gray-300 text-sm mb-3 font-bold">💡 이용 방법</p>
+                        <p class="text-sm text-gray-400 leading-relaxed font-light">
+                            프로그램을 실행하신 뒤,<br>
+                            아래 표시된 <strong class="text-white font-medium">계정 이메일로 로그인</strong>하시면 됩니다.
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Account Info -->
+                <div
+                    class="bg-slate-900/80 rounded-2xl p-5 border border-slate-800 flex justify-between items-center shadow-lg">
+                    <span class="text-gray-500 text-sm font-medium">로그인 계정</span>
+                    <span class="text-white font-bold text-base" id="user-email">...</span>
+                </div>
+
+                <!-- Actions -->
+                <button onclick="location.href='index.html'"
+                    class="w-full py-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-gray-300 font-bold transition-all border border-slate-700 hover:border-slate-600 shadow-lg">
+                    메인으로 돌아가기
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Firebase SDK (Compat Version) -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+    <script src="firebase_config.js"></script>
+
+    <script>
+        // Wait for auth
+        if (typeof auth !== 'undefined') {
+            auth.onAuthStateChanged(async (user) => {
+                if (!user) {
+                    alert('로그인이 필요한 서비스입니다.');
+                    window.location.href = 'login.html';
+                    return;
+                }
+
+                try {
+                    // Fetch User Data (Compat)
+                    const userDoc = await db.collection("users").doc(user.uid).get();
+
+                    if (!userDoc.exists) {
+                        alert('계정 정보가 올바르지 않습니다.');
+                        return;
+                    }
+
+                    const userData = userDoc.data();
+
+                    // Check Plan Status
+                    if (userData.plan === 'free' || !userData.plan) {
+                        document.getElementById('no-license').classList.remove('hidden');
+                        return;
+                    }
+
+                    // Valid Paid User
+                    document.getElementById('license-info').classList.remove('hidden');
+
+                    // Display Plan Info
+                    document.getElementById('plan-name').textContent = (userData.planName || 'PRO Plan').toUpperCase();
+                    document.getElementById('user-email').textContent = user.email;
+
+                    // Display Expiry Date
+                    if (userData.expiryDate) {
+                        try {
+                            const expDate = userData.expiryDate.toDate(); // Firestore Timestamp to JS Date
+                            // Formatter: YYYY.MM.DD
+                            const expStr = expDate.getFullYear() + '.' +
+                                String(expDate.getMonth() + 1).padStart(2, '0') + '.' +
+                                String(expDate.getDate()).padStart(2, '0');
+
+                            document.getElementById('expiry-display').textContent = expStr + " 까지";
+
+                            // Check for Expiration
+                            const now = new Date();
+                            if (expDate < now) {
+                                const badge = document.querySelector('#license-info .bg-green-500\\/10');
+                                badge.className = 'inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-bold bg-red-500/10 text-red-400 border border-red-500/20';
+                                badge.innerHTML = '<span class="w-2 h-2 rounded-full bg-red-500"></span> 만료됨 (재결제 필요)';
+                                document.getElementById('expiry-display').classList.add('text-red-400');
+                            }
+
+                        } catch (e) { console.error("Date Parse Error", e); }
+                    } else {
+                        document.getElementById('expiry-display').textContent = "무제한 / 정보 없음";
+                    }
+
+                    // Expiry Check (Optional)
+                    /*
+                    if (userData.expiryDate && userData.expiryDate.toDate() < new Date()) {
+                         document.getElementById('status-badge').className = '... bg-red-500 ...';
+                         document.getElementById('status-badge').textContent = 'EXPIRED (만료됨)';
+                    }
+                    */
+
+                } catch (error) {
+                    console.error("Error loading info:", error);
+                    alert("정보를 불러오는 중 문제가 발생했습니다.");
+                }
+            });
+        }
+    </script>
+    </div>
+    </div>
+    <!-- FOOTER -->
+    <footer class="mt-auto border-t border-slate-800 bg-slate-900 py-8 text-center text-xs text-gray-500 w-full"
+        style="position: relative; z-index: 10;">
+        <div class="container-custom space-y-2">
+            <p><span class="font-bold text-gray-400">리카오토플랜</span> | 대표자: 조홍철 | 사업자등록번호: 325-60-00844</p>
+            <p>주소: 경기도 부천시 원미구 신흥로 40, 709호(심곡동, 디오스빌) | 통신판매업신고: 준비중</p>
+            <p>고객센터: <a href="mailto:jhxox666@naver.com" class="text-blue-400 hover:underline">jhxox666@naver.com</a>
+            </p>
+            <p class="mt-4 copyright">© 2026 Ricar Auto Plan. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+
+</html>

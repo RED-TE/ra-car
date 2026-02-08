@@ -1,0 +1,695 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>사용 가이드 - 리카오토플랜</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap"
+        rel="stylesheet">
+    <link href="base.css" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Noto Sans KR', sans-serif;
+            word-break: keep-all;
+        }
+
+        .guide-card {
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+        }
+
+        /* Accordion Styles */
+        .accordion-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, padding 0.3s ease;
+        }
+
+        .accordion-content.active {
+            max-height: 2000px;
+            /* Large enough to fit content */
+            transition: max-height 0.5s ease-in, padding 0.3s ease;
+        }
+
+        .accordion-header svg {
+            transition: transform 0.3s ease;
+        }
+
+        .accordion-header.active svg {
+            transform: rotate(180deg);
+        }
+    </style>
+</head>
+
+<body class="bg-slate-950 text-gray-100 min-h-screen">
+
+    <!-- Header -->
+    <header class="border-b border-slate-800 bg-slate-900/50 backdrop-blur sticky top-0 z-30">
+        <div class="container mx-auto max-w-4xl py-4 px-6 flex justify-between items-center">
+            <div class="flex items-center space-x-2">
+                <div
+                    class="w-8 h-8 bg-gradient-to-br from-green-400 to-cyan-400 rounded flex items-center justify-center">
+                    <span class="text-slate-950 font-black text-sm">AI</span>
+                </div>
+                <span class="text-lg font-black">사용 가이드</span>
+            </div>
+            <a href="index.html" class="text-sm text-gray-400 hover:text-white transition-colors">✕ 닫기</a>
+        </div>
+    </header>
+
+    <main class="container mx-auto max-w-3xl py-12 px-6">
+
+        <!-- Page Title -->
+        <h1 class="text-3xl md:text-4xl font-black mb-8 text-center">
+            <span class="text-green-400">필독</span> 사항 및 이용 안내
+        </h1>
+
+        <!-- Guide Category: Gemini API -->
+        <section id="gemini-guide" class="mb-12">
+            <h2 class="text-2xl font-black mb-8 flex items-center">
+                <span class="bg-green-500 w-2 h-8 mr-3 rounded-full"></span>
+                제미나이(Gemini) API 키 설정
+            </h2>
+
+            <div class="guide-card rounded-2xl overflow-hidden border border-green-400/20 shadow-lg">
+                <button onclick="toggleAccordion(this)"
+                    class="accordion-header w-full text-left p-6 flex justify-between items-center hover:bg-slate-800/50 transition-colors">
+                    <div class="flex items-center">
+                        <div
+                            class="w-10 h-10 bg-green-400/10 text-green-400 rounded-full flex items-center justify-center mr-4">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M13 10V3L4 14h7v7l9-11h-7z"></path>
+                            </svg>
+                        </div>
+                        <div>
+                            <h3 class="text-xl font-bold">API 키 발급 상세 가이드 (3분 소요)</h3>
+                            <p class="text-xs text-gray-500">AI의 두뇌를 깨우는 필수 설정 단계</p>
+                        </div>
+                    </div>
+                    <svg class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path>
+                    </svg>
+                </button>
+                <div class="accordion-content">
+                    <div class="p-8 pt-0 border-t border-slate-800/50 mt-4 pt-8">
+                        <p class="text-gray-400 mb-8 leading-relaxed">
+                            안녕하세요! RealCar Bot의 두뇌 역할을 하는 <strong>AI(제미나이)</strong>를 깨우기 위해 '비밀번호'를 받는 과정입니다. 천천히 따라오세요!
+                        </p>
+
+                        <div class="space-y-12">
+                            <!-- Steps 1-6 -->
+                            <div class="relative pl-10 border-l-2 border-slate-800 pb-2">
+                                <div
+                                    class="absolute -left-[11px] top-0 w-5 h-5 bg-green-400 rounded-full border-4 border-slate-950">
+                                </div>
+                                <h3 class="text-lg font-bold mb-3">1. '구글 AI 스튜디오' 접속하기</h3>
+                                <p class="text-gray-400 text-sm mb-4">인터넷 주소창에 아래 주소를 입력하거나 클릭하세요.</p>
+                                <a href="https://aistudio.google.com" target="_blank"
+                                    class="inline-block bg-slate-800 hover:bg-slate-700 text-green-400 font-bold px-6 py-3 rounded-lg border border-green-400/30 transition-all text-sm">👉
+                                    aistudio.google.com</a>
+                            </div>
+
+                            <div class="relative pl-10 border-l-2 border-slate-800 pb-2">
+                                <div
+                                    class="absolute -left-[11px] top-0 w-5 h-5 bg-slate-700 rounded-full border-4 border-slate-950">
+                                </div>
+                                <h3 class="text-lg font-bold mb-3">2. 구글 계정으로 로그인하기</h3>
+                                <p class="text-gray-400 text-sm">화면 중앙이나 오른쪽 위의 <span class="text-white font-bold">[Sign
+                                        in]</span> 버튼을 눌러 로그인하세요.</p>
+                            </div>
+
+                            <div class="relative pl-10 border-l-2 border-slate-800 pb-2">
+                                <div
+                                    class="absolute -left-[11px] top-0 w-5 h-5 bg-slate-700 rounded-full border-4 border-slate-950">
+                                </div>
+                                <h3 class="text-lg font-bold mb-3">3. 약관 동의 및 API 키 생성</h3>
+                                <p class="text-gray-400 text-sm">약관 동의 후 왼쪽 메뉴의 <span class="text-white font-bold">[Get
+                                        API key]</span> → <span class="text-white font-bold">[Create API key in new
+                                        project]</span>를 클릭하세요.</p>
+                            </div>
+
+                            <div class="relative pl-10 border-l-2 border-slate-800 pb-2">
+                                <div
+                                    class="absolute -left-[11px] top-0 w-5 h-5 bg-slate-700 rounded-full border-4 border-slate-950">
+                                </div>
+                                <h3 class="text-lg font-bold mb-3">4. 복사하여 프로그램에 붙여넣기</h3>
+                                <p class="text-gray-400 text-sm mb-4">생성된 키를 <span
+                                        class="text-white font-bold">[Copy]</span> 하여 프로그램 설정 창의 API 키 입력란에 붙여넣으면 끝입니다!
+                                </p>
+                            </div>
+                        </div>
+
+                        <!-- Caution -->
+                        <div class="mt-12 bg-red-400/5 border border-red-400/20 rounded-xl p-6">
+                            <h4 class="text-red-400 font-bold mb-4 flex items-center text-sm">
+                                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z">
+                                    </path>
+                                </svg>
+                                주의사항
+                            </h4>
+                            <ul class="space-y-3 text-xs text-gray-400">
+                                <li><strong>비밀번호 보안</strong>: 이 키는 아이디와 같으므로 타인에게 절대 공유하지 마세요.</li>
+                                <li><strong>무료 사용량</strong>: 무료 버전은 하루 생성량이 제한되어 있습니다.</li>
+                                <li><strong>무제한 사용</strong>: 더 많은 발행이 필요하면 구글에 결제 수단 등록 후 유료(사용한 만큼 지불)로 전환 가능합니다.</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Guide Category: Operation Strategy -->
+        <section id="operation-strategy" class="mb-12">
+            <h2 class="text-2xl font-black mb-8 flex items-center">
+                <span class="bg-blue-500 w-2 h-8 mr-3 rounded-full"></span>
+                실전 블로그 운영 가이드
+            </h2>
+
+            <div class="space-y-4">
+                <!-- 1. 운영 원칙 5가지 -->
+                <div class="guide-card rounded-2xl overflow-hidden border border-blue-400/20 shadow-lg">
+                    <button onclick="toggleAccordion(this)"
+                        class="accordion-header w-full text-left p-6 flex justify-between items-center hover:bg-slate-800/50 transition-colors">
+                        <div class="flex items-center">
+                            <span class="text-2xl mr-3">💡</span>
+                            <h3 class="font-bold text-lg">1) 운영 원칙 5가지</h3>
+                        </div>
+                        <svg class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
+                            </path>
+                        </svg>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="p-6 pt-0 border-t border-slate-800/50 mt-4 pt-6">
+                            <ul class="space-y-4 text-sm text-gray-300">
+                                <li class="bg-slate-900/50 p-4 rounded-xl border border-slate-800">
+                                    <strong class="text-white block mb-1">계정마다 목적이 달라야 함</strong>
+                                    같은 내용/같은 구조를 여러 계정에 반복하면 품질 신호가 나빠집니다. 계정별 역할을 분리하세요.
+                                </li>
+                                <li class="bg-slate-900/50 p-4 rounded-xl border border-slate-800">
+                                    <strong class="text-white block mb-1">콘텐츠는 “사람이 읽을 가치”가 기준</strong>
+                                    노출은 결과고, 기준은 독자 만족(체류, 저장, 공유, 재방문)입니다.
+                                </li>
+                                <li class="bg-slate-900/50 p-4 rounded-xl border border-slate-800">
+                                    <strong class="text-white block mb-1">같은 소재라도 ‘관점’이 달라야 함</strong>
+                                    제품 소개 / 비교 / 사용기 / FAQ / 구매가이드 / 유지비 등으로 분해.
+                                </li>
+                                <li class="bg-slate-900/50 p-4 rounded-xl border border-slate-800">
+                                    <strong class="text-white block mb-1">정책 리스크는 운영으로 낮춘다</strong>
+                                    대량 반복, 과장/기만, 저작권 위반, 자동화 남용이 가장 큰 리스크입니다.
+                                </li>
+                                <li class="bg-slate-900/50 p-4 rounded-xl border border-slate-800">
+                                    <strong class="text-white block mb-1">데이터로 결정한다</strong>
+                                    조회수만 보지 말고 “유입 키워드, 체류, 이탈, 문의 전환”까지 봅니다.
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. 다계정 구조 설계 -->
+                <div class="guide-card rounded-2xl overflow-hidden border border-cyan-400/20 shadow-lg">
+                    <button onclick="toggleAccordion(this)"
+                        class="accordion-header w-full text-left p-6 flex justify-between items-center hover:bg-slate-800/50 transition-colors">
+                        <div class="flex items-center">
+                            <span class="text-2xl mr-3">🏗️</span>
+                            <h3 class="font-bold text-lg">2) 다계정 구조 설계 (추천 템플릿)</h3>
+                        </div>
+                        <svg class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
+                            </path>
+                        </svg>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="p-6 pt-0 border-t border-slate-800/50 mt-4 pt-6 space-y-4 text-sm text-gray-300">
+                            <div class="bg-slate-900/50 p-4 rounded-xl border border-slate-800">
+                                <h4 class="text-white font-bold mb-2">A. 계정 역할 3종 세트</h4>
+                                <ul class="space-y-2">
+                                    <li>• <span class="text-blue-400 font-bold">메인(브랜드/신뢰 계정)</span>: 회사 소개, 상담 프로세스, 후기
+                                        모음</li>
+                                    <li>• <span class="text-green-400 font-bold">정보형(노출 계정)</span>: 비교/가이드/FAQ/트렌드 (유입
+                                        목적)</li>
+                                    <li>• <span class="text-purple-400 font-bold">후기형(경험 계정)</span>: 실제 사용/상황 중심 (체류 목적)
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="bg-slate-900/50 p-4 rounded-xl border border-slate-800">
+                                <h4 class="text-white font-bold mb-2">B. 계정별 ‘콘텐츠 금지’ 규칙</h4>
+                                <ul class="space-y-1">
+                                    <li>• <strong>정보형</strong>: 과한 CTA, 가격 유도 문구 최소화</li>
+                                    <li>• <strong>후기형</strong>: 광고성 문장, 직접 판매 문구 지양</li>
+                                    <li>• <strong>메인</strong>: 낚시성 제목 지양, 안내/신뢰 중심</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. 운영 워크플로우 -->
+                <div class="guide-card rounded-2xl overflow-hidden border border-green-400/20 shadow-lg">
+                    <button onclick="toggleAccordion(this)"
+                        class="accordion-header w-full text-left p-6 flex justify-between items-center hover:bg-slate-800/50 transition-colors">
+                        <div class="flex items-center">
+                            <span class="text-2xl mr-3">🔄</span>
+                            <h3 class="font-bold text-lg">3) 운영 워크플로우</h3>
+                        </div>
+                        <svg class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
+                            </path>
+                        </svg>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="p-6 pt-0 border-t border-slate-800/50 mt-4 pt-6 space-y-4">
+                            <div class="grid md:grid-cols-2 gap-4">
+                                <div class="bg-slate-950/50 p-4 rounded-xl border border-slate-800">
+                                    <h4 class="text-white font-bold mb-2 text-sm">📅 주간 루틴</h4>
+                                    <ul class="space-y-3 text-xs text-gray-400">
+                                        <li><span class="text-green-400 font-bold">월요일</span>: 키워드 선정</li>
+                                        <li><span class="text-cyan-400 font-bold">화~목</span>: 제작 및 사진 정리</li>
+                                        <li><span class="text-purple-400 font-bold">금요일</span>: 발행 및 성과 분석</li>
+                                    </ul>
+                                </div>
+                                <div class="bg-slate-950/50 p-4 rounded-xl border border-slate-800">
+                                    <h4 class="text-white font-bold mb-2 text-sm">📄 권장 게시글 구성</h4>
+                                    <ul class="space-y-1 text-xs text-gray-400">
+                                        <li>• 도입(문제제기) → 요약(3줄) → 본문(근거/경험) → FAQ → 내부링크</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. 콘텐츠 품질 관리 -->
+                <div class="guide-card rounded-2xl overflow-hidden border border-yellow-400/20 shadow-lg">
+                    <button onclick="toggleAccordion(this)"
+                        class="accordion-header w-full text-left p-6 flex justify-between items-center hover:bg-slate-800/50 transition-colors">
+                        <div class="flex items-center">
+                            <span class="text-2xl mr-3">📝</span>
+                            <h3 class="font-bold text-lg">4) 콘텐츠 품질 및 제목 규칙</h3>
+                        </div>
+                        <svg class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
+                            </path>
+                        </svg>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="p-6 pt-0 border-t border-slate-800/50 mt-4 pt-6 space-y-4">
+                            <div class="bg-slate-900/50 p-4 rounded-xl border border-slate-800 text-sm">
+                                <h4 class="text-white font-bold mb-2">중복 회피 "4분해"</h4>
+                                <p class="text-gray-400 text-xs">상황 / 비교 / 비용 / 의사결정 기준으로 쪼개서 발행</p>
+                            </div>
+                            <div class="bg-slate-900/50 p-4 rounded-xl border border-slate-800 text-sm">
+                                <h4 class="text-white font-bold mb-2">클릭을 부르는 제목 규칙</h4>
+                                <ul class="space-y-1 text-gray-400 text-xs font-mono">
+                                    <li>• [차종] + [핵심 키워드] + [상황]</li>
+                                    <li>• [차종] + [비교대상] + [결론]</li>
+                                    <li>• [차종] + [유지비/옵션] + [연도]</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5, 6. 보안/규정 (묶음) -->
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="guide-card rounded-2xl overflow-hidden border border-red-400/20 shadow-lg">
+                        <button onclick="toggleAccordion(this)"
+                            class="accordion-header w-full text-left p-6 flex justify-between items-center hover:bg-slate-800/50 transition-colors">
+                            <div class="flex items-center">
+                                <span class="text-lg mr-2">⚖️</span>
+                                <h3 class="font-bold text-sm">5) 저작권/표시광고</h3>
+                            </div>
+                            <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="p-6 pt-0 border-t border-slate-800/50 mt-2 text-xs text-gray-400 space-y-2">
+                                <p>• 공식 자료 및 본인 촬영 소스 활용</p>
+                                <p>• 대가성 표시 의무 준수</p>
+                                <p>• 과장/기만적 단정 표현 지양</p>
+                                <p>• 개인정보 마스킹 처리 필수</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="guide-card rounded-2xl overflow-hidden border border-purple-400/20 shadow-lg">
+                        <button onclick="toggleAccordion(this)"
+                            class="accordion-header w-full text-left p-6 flex justify-between items-center hover:bg-slate-800/50 transition-colors">
+                            <div class="flex items-center">
+                                <span class="text-lg mr-2">🔒</span>
+                                <h3 class="font-bold text-sm">6) 계정 보안 관리</h3>
+                            </div>
+                            <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="p-6 pt-0 border-t border-slate-800/50 mt-2 text-xs text-gray-400 space-y-2">
+                                <p>• 계정별 비밀번호 별도 설정</p>
+                                <p>• 2단계 인증 및 공용 PC 금지</p>
+                                <p>• 작성/검수/발행 권한 분리</p>
+                                <p>• 상세 운영 기록 유지</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 7, 8. 실패패턴/지표 (묶음) -->
+                <div class="grid md:grid-cols-2 gap-4">
+                    <div class="guide-card rounded-2xl overflow-hidden border border-slate-400/20 shadow-lg">
+                        <button onclick="toggleAccordion(this)"
+                            class="accordion-header w-full text-left p-6 flex justify-between items-center hover:bg-slate-800/50 transition-colors">
+                            <div class="flex items-center">
+                                <span class="text-lg mr-2">❌</span>
+                                <h3 class="font-bold text-sm text-red-300">7) 흔한 실패 패턴</h3>
+                            </div>
+                            <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div class="accordion-content">
+                            <div class="p-6 pt-0 border-t border-slate-800/50 mt-2 text-xs text-gray-500 space-y-2">
+                                <p>• 단순 문장 치환 반복 발행</p>
+                                <p>• 정보 없이 문의 유도만 반복</p>
+                                <p>• 소통 없는 기계적 포스팅</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="guide-card rounded-2xl overflow-hidden border border-cyan-400/20 shadow-lg">
+                        <button onclick="toggleAccordion(this)"
+                            class="accordion-header w-full text-left p-6 flex justify-between items-center hover:bg-slate-800/50 transition-colors">
+                            <div class="flex items-center">
+                                <span class="text-lg mr-2">📈</span>
+                                <h3 class="font-bold text-sm">8) 성과 측정 지표</h3>
+                            </div>
+                            <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M19 9l-7 7-7-7"></path>
+                            </svg>
+                        </button>
+                        <div class="accordion-content">
+                            <div
+                                class="p-6 pt-0 border-t border-slate-800/50 mt-2 text-xs text-gray-400 space-y-2 font-mono">
+                                <p>• 유입 키워드 TOP 20</p>
+                                <p>• 체류 및 반송률 분석</p>
+                                <p>• 문의 전환 데이터 분석</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 9. 운영 FAQ -->
+                <div class="guide-card rounded-2xl overflow-hidden border border-slate-700 shadow-lg">
+                    <button onclick="toggleAccordion(this)"
+                        class="accordion-header w-full text-left p-6 flex justify-between items-center hover:bg-slate-800/50 transition-colors">
+                        <div class="flex items-center">
+                            <span class="text-2xl mr-3">❓</span>
+                            <h3 class="font-bold text-lg">9) 운영 FAQ</h3>
+                        </div>
+                        <svg class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
+                            </path>
+                        </svg>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="p-6 pt-0 border-t border-slate-800/50 mt-4 pt-6 space-y-4">
+                            <div class="bg-slate-900/30 p-4 rounded-xl border border-slate-800 text-xs">
+                                <p class="text-white font-bold mb-1">Q. 다계정 운영이 무조건 불리한가요?</p>
+                                <p class="text-gray-400">A. 역할 분리만 확실하면 가능합니다. 다만 기계적 중복은 위험합니다.</p>
+                            </div>
+                            <div class="bg-slate-900/30 p-4 rounded-xl border border-slate-800 text-xs">
+                                <p class="text-white font-bold mb-1">Q. 하루 발행량은 얼마가 적당한가요?</p>
+                                <p class="text-gray-400">A. 품질 관리가 가능한 선이 정답입니다. 양보다 질입니다.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 10. 안전 수칙 -->
+                <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-6 text-center">
+                    <h3 class="text-sm font-bold text-gray-400 mb-4 inline-block border-b border-gray-700 pb-1">🛑 10)
+                        이용 안전 수칙 및 면책</h3>
+                    <div class="text-[11px] text-gray-500 space-y-2 leading-relaxed text-center mx-auto max-w-md">
+                        <p>본 가이드는 일반적인 정보이며 결과는 시장 상황에 따라 다를 수 있습니다. 타인의 권리 침해 금지 및 관련 법령 준수는 사용자의 의무입니다.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Guide Category: Initial Survival -->
+        <section id="initial-survival" class="mb-12">
+            <h2 class="text-2xl font-black mb-8 flex items-center">
+                <span class="bg-orange-500 w-2 h-8 mr-3 rounded-full"></span>
+                초기 생존 및 성장 가이드 (조회수 정체 해결)
+            </h2>
+
+            <div class="space-y-4">
+                <!-- 1. 초반 조회수가 낮은 이유 -->
+                <div class="guide-card rounded-2xl overflow-hidden border border-orange-400/20">
+                    <button onclick="toggleAccordion(this)"
+                        class="accordion-header w-full text-left p-6 flex justify-between items-center hover:bg-slate-800/50 transition-colors">
+                        <div class="flex items-center">
+                            <span class="text-2xl mr-3">📉</span>
+                            <div>
+                                <h3 class="font-bold text-lg">초반 조회수 낮아도 정상인 이유</h3>
+                                <p class="text-xs text-gray-500">네이버 검색 엔진의 학습 및 테스트 단계 이해</p>
+                            </div>
+                        </div>
+                        <svg class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
+                            </path>
+                        </svg>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="p-6 pt-0 text-sm text-gray-300 space-y-4 border-t border-slate-800/50 mt-4 pt-6">
+                            <div class="bg-slate-900/50 p-4 rounded-xl">
+                                <p class="mb-4 text-orange-400 font-bold">"처음 시작하면 조회수 10 이하 / 50 이하 찍히는 게 대부분 정상입니다."
+                                </p>
+                                <p class="leading-relaxed">네이버는 새 글을 올렸다고 바로 크게 밀어주지 않고, <strong>“이 글이 쓸만한지”</strong>를
+                                    먼저 테스트합니다.</p>
+                            </div>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 font-mono text-xs">
+                                <div class="p-3 bg-slate-950/50 rounded-lg border border-slate-800">
+                                    <span class="text-white block mb-1">📅 초반 1~2주</span>
+                                    노출 테스트 단계라 “조회수 바닥”이 흔합니다.
+                                </div>
+                                <div class="p-3 bg-slate-950/50 rounded-lg border border-slate-800">
+                                    <span class="text-white block mb-1">📅 2~6주</span>
+                                    유입이 조금씩 생기고, “꼬리 유입”이 시작됩니다.
+                                </div>
+                                <div class="p-3 bg-slate-950/50 rounded-lg border border-slate-800">
+                                    <span class="text-white block mb-1">📅 6~12주</span>
+                                    글이 쌓이면서 꾸준히 들어오는 글이 생깁니다.
+                                </div>
+                                <div class="p-3 bg-slate-950/50 rounded-lg border border-slate-800">
+                                    <span class="text-white block mb-1">📅 3~6개월</span>
+                                    운영 안정화 및 “상시 유입 글(에버그린)” 탄생.
+                                </div>
+                            </div>
+                            <p class="text-xs text-gray-500 italic">※ 최소 8주, 현실적으로는 3개월을 “기반 만드는 기간”으로 잡는 것이 맞습니다.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. 고객 착각 포인트 5개 -->
+                <div class="guide-card rounded-2xl overflow-hidden border border-red-400/20">
+                    <button onclick="toggleAccordion(this)"
+                        class="accordion-header w-full text-left p-6 flex justify-between items-center hover:bg-slate-800/50 transition-colors">
+                        <div class="flex items-center">
+                            <span class="text-2xl mr-3">🚫</span>
+                            <div>
+                                <h3 class="font-bold text-lg text-red-400">초반에 고객이 착각하는 포인트 5개</h3>
+                                <p class="text-xs text-gray-500">실패로 오해하기 쉬운 지표들</p>
+                            </div>
+                        </div>
+                        <svg class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
+                            </path>
+                        </svg>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="p-6 pt-0 text-sm border-t border-slate-800/50 mt-4 pt-6">
+                            <ul class="space-y-3 font-medium">
+                                <li class="flex items-start bg-red-950/10 p-3 rounded-lg border border-red-900/20">
+                                    <span class="text-red-400 mr-2 font-bold">1.</span>
+                                    <div>
+                                        <span class="text-white">“조회수 낮다 = 실패”가 아님</span>
+                                        <p class="text-xs text-gray-500 mt-1">초반은 학습/테스트 단계라 당연히 낮습니다.</p>
+                                    </div>
+                                </li>
+                                <li class="flex items-start bg-red-950/10 p-3 rounded-lg border border-red-900/20">
+                                    <span class="text-red-400 mr-2 font-bold">2.</span>
+                                    <div>
+                                        <span class="text-white">발행 직후 24시간만 보고 판단하면 안 됨</span>
+                                        <p class="text-xs text-gray-500 mt-1">검색 유입은 보통 48~72시간 이후부터 붙습니다.</p>
+                                    </div>
+                                </li>
+                                <li class="flex items-start bg-red-950/10 p-3 rounded-lg border border-red-900/20">
+                                    <span class="text-red-400 mr-2 font-bold">3.</span>
+                                    <div>
+                                        <span class="text-white">“핵심 키워드”만 쓰면 더 안 나올 수 있음</span>
+                                        <p class="text-xs text-gray-500 mt-1">경쟁이 센 핵심 키워드보다 롱테일 키워드가 현실적입니다.</p>
+                                    </div>
+                                </li>
+                                <li class="flex items-start bg-red-950/10 p-3 rounded-lg border border-red-900/20">
+                                    <span class="text-red-400 mr-2 font-bold">4.</span>
+                                    <div>
+                                        <span class="text-white">“연재 구조”가 없으면 성장이 느림</span>
+                                        <p class="text-xs text-gray-500 mt-1">한 편 한 편이 따로 놀면 누적 효과가 약합니다.</p>
+                                    </div>
+                                </li>
+                                <li class="flex items-start bg-red-950/10 p-3 rounded-lg border border-red-900/20">
+                                    <span class="text-red-400 mr-2 font-bold">5.</span>
+                                    <div>
+                                        <span class="text-white">“양”보다 “낄만한 자리”가 중요</span>
+                                        <p class="text-xs text-gray-500 mt-1">초반은 키워드 난이도 선정이 핵심입니다.</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. 8주 성장 가이드 -->
+                <div class="guide-card rounded-2xl overflow-hidden border border-green-400/20">
+                    <button onclick="toggleAccordion(this)"
+                        class="accordion-header w-full text-left p-6 flex justify-between items-center hover:bg-slate-800/50 transition-colors">
+                        <div class="flex items-center">
+                            <span class="text-2xl mr-3">🚀</span>
+                            <div>
+                                <h3 class="font-bold text-lg text-green-400">초반 성장을 설계하는 “8주 가이드”</h3>
+                                <p class="text-xs text-gray-500">목표: 유입 글 3~5개 확보 및 주제 신뢰도 심기</p>
+                            </div>
+                        </div>
+                        <svg class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
+                            </path>
+                        </svg>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="p-6 pt-0 text-sm border-t border-slate-800/50 mt-4 pt-6 space-y-6">
+                            <!-- 1-2주 -->
+                            <div class="relative pl-6 border-l border-green-500/30">
+                                <div class="absolute -left-[5px] top-0 w-[10px] h-[10px] bg-green-500 rounded-full">
+                                </div>
+                                <h4 class="font-bold text-green-400 mb-2">1~2주차: 기반 세팅 (첫 승리 만들기)</h4>
+                                <ul class="text-xs text-gray-400 space-y-1">
+                                    <li>• 주 3~5개 발행 (주제 1~2개 고정)</li>
+                                    <li>• 롱테일 키워드 전략: (~ 리스 장단점, ~ 유지비 등 쉬운 것부터)</li>
+                                    <li>• 체크: 제목에 연도/상황 포함, 본문 FAQ 5개 포함</li>
+                                </ul>
+                            </div>
+                            <!-- 3-4주 -->
+                            <div class="relative pl-6 border-l border-blue-500/30">
+                                <div class="absolute -left-[5px] top-0 w-[10px] h-[10px] bg-blue-500 rounded-full">
+                                </div>
+                                <h4 class="font-bold text-blue-400 mb-2">3~4주차: ‘연재 구조’ 구축 (체류 시간 증대)</h4>
+                                <ul class="text-xs text-gray-400 space-y-1">
+                                    <li>• 글을 “시리즈”로 묶기 (총정리 → 보험/유지비 → 비교 → 승계 → 옵션)</li>
+                                    <li>• 체크: 글 끝에 내부 링크 2개, 표/비교 리스트 포함</li>
+                                </ul>
+                            </div>
+                            <!-- 5-6주 -->
+                            <div class="relative pl-6 border-l border-yellow-500/30">
+                                <div class="absolute -left-[5px] top-0 w-[10px] h-[10px] bg-yellow-500 rounded-full">
+                                </div>
+                                <h4 class="font-bold text-yellow-500 mb-2">5~6주차: 우회형 상위 키워드 도전</h4>
+                                <ul class="text-xs text-gray-400 space-y-1">
+                                    <li>• 성과 글 업데이트: 도입부 보강, 비교표/FAQ 추가</li>
+                                    <li>• 우회 제목: "~ 가격" 대신 "~ 월 납입금 손해 보는 이유" 등</li>
+                                </ul>
+                            </div>
+                            <!-- 7-8주 -->
+                            <div class="relative pl-6 border-l border-purple-500/30">
+                                <div class="absolute -left-[5px] top-0 w-[10px] h-[10px] bg-purple-500 rounded-full">
+                                </div>
+                                <h4 class="font-bold text-purple-400 mb-2">7~8주차: 전환 설계 (문의 유도)</h4>
+                                <ul class="text-xs text-gray-400 space-y-1">
+                                    <li>• 정보성 80 : 문의 20 비중 유지</li>
+                                    <li>• 강요보다 '선택지 제공' (비교 기준 잡아드리기 등)</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. 고객 안심 멘트 -->
+                <div class="guide-card rounded-2xl overflow-hidden border border-blue-400/20">
+                    <button onclick="toggleAccordion(this)"
+                        class="accordion-header w-full text-left p-6 flex justify-between items-center hover:bg-slate-800/50 transition-colors">
+                        <div class="flex items-center">
+                            <span class="text-2xl mr-3">💬</span>
+                            <div>
+                                <h3 class="font-bold text-lg text-blue-400">고객이 불안해할 때 쓰는 “안심 멘트”</h3>
+                                <p class="text-xs text-gray-500">복사해서 사용 가능한 대응 예시</p>
+                            </div>
+                        </div>
+                        <svg class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
+                            </path>
+                        </svg>
+                    </button>
+                    <div class="accordion-content">
+                        <div class="p-6 pt-0 text-sm border-t border-slate-800/50 mt-4 pt-6 space-y-3">
+                            <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl group relative">
+                                <p class="text-gray-300 italic">“초반 2~4주는 원래 조회수가 낮아요. 네이버가 글을 테스트하는 기간이라, 이때는 수치보다 ‘틀을
+                                    제대로 잡는 게’ 더 중요합니다.”</p>
+                                <button
+                                    class="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity text-[10px] bg-slate-800 px-2 py-1 rounded">Copy</button>
+                            </div>
+                            <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl group relative">
+                                <p class="text-gray-300 italic">“8주만 운영하면 검색 유입 글이 3~5개는 반드시 생깁니다. 그때부터는 글이 쌓일수록 누적이
+                                    붙어요.”</p>
+                                <button
+                                    class="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity text-[10px] bg-slate-800 px-2 py-1 rounded">Copy</button>
+                            </div>
+                            <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl group relative">
+                                <p class="text-gray-300 italic">“지금 조회수 10~50은 실패가 아니라 ‘시작 단계’예요. 이 구간에서 포기하는 사람이 많아서,
+                                    오히려 여기만 버티면 이깁니다.”</p>
+                                <button
+                                    class="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity text-[10px] bg-slate-800 px-2 py-1 rounded">Copy</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- More Guides Placeholder -->
+        <section class="text-center py-12 border-t border-slate-800">
+            <p class="text-gray-500 text-sm mb-4 italic">기능 업데이트에 따라 다양한 매뉴얼이 추가될 예정입니다.</p>
+        </section>
+
+    </main>
+
+    <footer class="py-12 border-t border-slate-900 text-center text-xs text-gray-600">
+        <p>© 2026 Ricar Auto Plan. All rights reserved.</p>
+    </footer>
+
+    <script>
+        function toggleAccordion(header) {
+            const content = header.nextElementSibling;
+
+            // Toggle active class on header
+            header.classList.toggle('active');
+
+            // Toggle active class on content
+            content.classList.toggle('active');
+        }
+    </script>
+
+</body>
+
+</html>

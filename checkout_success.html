@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>결제 성공 - 리카오토플랜</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="base.css" rel="stylesheet">
+    <script src="common.js"></script>
+</head>
+
+<body class="flex items-center justify-center min-h-screen p-4">
+    <div class="card max-w-md w-full text-center relative overflow-hidden">
+        <!-- Decoration -->
+        <div class="absolute -top-10 -right-10 w-32 h-32 bg-green-500/10 rounded-full blur-3xl"></div>
+        <a href="index.html" class="absolute top-4 right-4 text-gray-500 hover:text-white transition-colors z-10">
+            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
+            </svg>
+        </a>
+
+        <div class="w-20 h-20 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
+            <svg class="w-10 h-10 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
+            </svg>
+        </div>
+
+        <h1 class="text-2xl font-black text-white mb-2">결제 완료!</h1>
+        <p class="text-gray-400 mb-8 text-sm">주문이 성공적으로 처리되었습니다.</p>
+
+        <!-- Summary -->
+        <div class="bg-slate-950/50 rounded-xl p-6 mb-8 text-left border border-slate-800 space-y-3 text-sm">
+            <div class="flex justify-between"><span class="text-gray-500">주문번호</span> <span class="font-mono text-white"
+                    id="oid">...</span></div>
+            <div class="flex justify-between"><span class="text-gray-500">상품명</span> <span class="font-bold text-white"
+                    id="pname">...</span></div>
+            <div class="flex justify-between"><span class="text-gray-500">결제금액</span> <span
+                    class="font-bold text-blue-400" id="amt">...</span></div>
+            <div class="flex justify-between"><span class="text-gray-500">결제일시</span> <span class="text-gray-300"
+                    id="date">...</span></div>
+            <div class="flex justify-between"><span class="text-gray-500">이메일</span> <span
+                    class="text-gray-300 truncate max-w-[150px]" id="email">...</span></div>
+        </div>
+
+        <div class="space-y-3">
+            <button onclick="alert('프로그램 준비 중입니다. 라이선스 키를 먼저 확인해주세요.')" class="btn-secondary">
+                프로그램 다운로드
+            </button>
+            <button onclick="location.href='license.html'" class="btn-primary">
+                내 구독 정보 확인하기 →
+            </button>
+        </div>
+
+        <p class="mt-6 text-xs text-gray-600">
+            * 30일 이용권(단건) 결제입니다. 정기결제는 적용되지 않습니다.
+        </p>
+    </div>
+
+    <!-- Firebase SDK (Compat Version) -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+    <script src="firebase_config.js"></script>
+
+    <script>
+        // Wait for auth state
+        if (typeof auth !== 'undefined') {
+            auth.onAuthStateChanged(async (user) => {
+                const order = Utils.getStorage(STORAGE_KEYS.ORDER);
+
+                if (!order) {
+                    console.warn('No order data found in localStorage');
+                } else {
+                    // Render UI
+                    document.getElementById('oid').textContent = order.orderId;
+                    document.getElementById('pname').textContent = order.planName;
+                    document.getElementById('amt').textContent = Utils.formatCurrency(order.amount);
+                    document.getElementById('date').textContent = Utils.formatDate(order.date);
+                    document.getElementById('email').textContent = user ? user.email : order.email;
+                }
+
+                if (!user) {
+                    return;
+                }
+
+                // Update Database
+                try {
+                    // Check if already updated to prevent double deduction if refreshed?
+                    // For now, simple update.
+
+                    const now = new Date();
+                    const expiry = new Date();
+                    expiry.setDate(now.getDate() + 30); // 30 days
+
+                    const newLicenseKey = Utils.generateLicenseKey();
+
+                    // Determine Plan from Order
+                    // Default to 'pro' if missing, but should be 'lite' or 'master' based on order.planId
+                    // Lowercase the planId for consistency (lite, pro, master)
+                    const finalPlan = (order.planId || 'PRO').toLowerCase();
+                    const finalPlanName = order.planName || 'PRO Plan';
+
+                    await db.collection("users").doc(user.uid).update({
+                        plan: finalPlan, // 'lite', 'pro', 'master'
+                        planName: finalPlanName,
+                        paymentDate: now,
+                        expiryDate: expiry,
+                        licenseKey: newLicenseKey,
+                        lastOrderId: order ? order.orderId : 'unknown'
+                    });
+
+                    console.log("User Upgraded to: " + finalPlan);
+
+                } catch (e) {
+                    console.error("DB Update Failed", e);
+                    alert("계정 정보 업데이트 중 오류가 발생했습니다. 고객센터로 문의해주세요.");
+                }
+            });
+        }
+    </script>
+    <!-- FOOTER -->
+    <footer
+        class="absolute bottom-0 w-full border-t border-slate-800 bg-slate-900 py-8 text-center text-xs text-gray-500">
+        <div class="container-custom space-y-2">
+            <p><span class="font-bold text-gray-400">리카오토플랜</span> | 대표자: 조홍철 | 사업자등록번호: 325-60-00844</p>
+            <p>주소: 경기도 부천시 원미구 신흥로 40, 709호(심곡동, 디오스빌) </p>
+            <p>고객센터: <a href="mailto:jhxox666@naver.com" class="text-blue-400 hover:underline">jhxox666@naver.com</a>
+            </p>
+            <p class="mt-4 copyright">© 2026 Ricar Auto Plan. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+
+</html>
