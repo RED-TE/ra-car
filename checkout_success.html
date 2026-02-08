@@ -43,6 +43,19 @@
                     class="text-gray-300 truncate max-w-[150px]" id="email">...</span></div>
         </div>
 
+        <!-- DB Update Status -->
+        <div id="sync-status" class="mb-8 p-4 rounded-xl bg-slate-900 border border-slate-800 text-sm">
+            <div class="flex items-center justify-center gap-2 text-gray-400" id="sync-msg">
+                <svg class="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor"
+                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+                    </path>
+                </svg>
+                계정 정보를 업데이트하는 중...
+            </div>
+        </div>
+
         <div class="space-y-3">
             <button onclick="alert('프로그램 준비 중입니다. 라이선스 키를 먼저 확인해주세요.')" class="btn-secondary">
                 프로그램 다운로드
@@ -67,6 +80,9 @@
         // Wait for auth state
         if (typeof auth !== 'undefined') {
             auth.onAuthStateChanged(async (user) => {
+                const syncMsg = document.getElementById('sync-msg');
+                const syncStatus = document.getElementById('sync-status');
+
                 // 1. Try to get order from storage
                 let order = Utils.getStorage(STORAGE_KEYS.ORDER);
 
@@ -79,17 +95,16 @@
                         planName: urlParams.get('goodname'),
                         amount: urlParams.get('price'),
                         date: new Date().toISOString(),
-                        // Map goodname to planId (infer from name)
                         planId: urlParams.get('goodname').toLowerCase().includes('lite') ? 'lite' : 'pro'
                     };
                 }
 
                 if (!order) {
-                    console.warn('No order data found in localStorage or URL');
-                    // Hide summary if no data
+                    console.warn('No order data found');
                     document.querySelector('.bg-slate-950/50').classList.add('hidden');
+                    syncMsg.innerHTML = '<span class="text-yellow-500">⚠ 결제 정보를 찾을 수 없습니다. 결제는 완료되었으나 자동 반영이 안 될 경우 고객센터로 문의해주세요.</span>';
                 } else {
-                    // Render UI
+                    // Render UI Summary
                     if (document.getElementById('oid')) document.getElementById('oid').textContent = order.orderId;
                     if (document.getElementById('pname')) document.getElementById('pname').textContent = order.planName;
                     if (document.getElementById('amt')) document.getElementById('amt').textContent = Utils.formatCurrency(parseInt(order.amount) || 0);
@@ -97,43 +112,51 @@
                     if (document.getElementById('email')) document.getElementById('email').textContent = user ? user.email : (order.email || '연동 중...');
                 }
 
-                if (!user) return;
+                if (!user) {
+                    if (order) {
+                        syncMsg.innerHTML = '<span class="text-blue-400">👋 로그인을 대기하고 있습니다...</span>';
+                    }
+                    return;
+                }
 
                 // Update Database
                 try {
-                    // If we have order data, use it. Otherwise, we can't safely update the plan.
-                    if (!order) {
-                        console.error('User logged in but no order data available to update plan.');
-                        return;
-                    }
+                    if (!order) return;
+
+                    syncMsg.innerHTML = '<svg class="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> 라이선스 활성화 중...';
 
                     const now = new Date();
                     const expiry = new Date();
-                    expiry.setDate(now.getDate() + 30); // 30 days
+                    expiry.setDate(now.getDate() + 30);
 
                     const newLicenseKey = Utils.generateLicenseKey();
-
-                    // Determine Plan from Order
                     const finalPlan = (order.planId || 'PRO').toLowerCase();
                     const finalPlanName = order.planName || 'PRO Plan';
 
-                    await db.collection("users").doc(user.uid).update({
+                    // Use set with merge: true to ensure it works even if doc doesn't exist
+                    await db.collection("users").doc(user.uid).set({
                         plan: finalPlan,
                         planName: finalPlanName,
                         paymentDate: now,
                         expiryDate: expiry,
                         licenseKey: newLicenseKey,
-                        lastOrderId: order.orderId
-                    });
+                        lastOrderId: order.orderId,
+                        updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+                    }, { merge: true });
 
                     console.log("User Upgraded to: " + finalPlan);
-                    // Clear the draft to prevent re-processing on refresh
+
+                    // Success UI
+                    syncStatus.classList.remove('bg-slate-900', 'border-slate-800');
+                    syncStatus.classList.add('bg-green-500/20', 'border-green-500/50');
+                    syncMsg.innerHTML = '<span class="text-green-400 font-bold">✅ 라이선스가 성공적으로 활성화되었습니다!</span>';
+
                     localStorage.removeItem(STORAGE_KEYS.ORDER);
 
                 } catch (e) {
                     console.error("DB Update Failed", e);
-                    // If it's just a permission error or something, maybe let them know
-                    alert("계정 정보 업데이트 중 오류가 발생했습니다. 잠시 후 다시 시도하거나 고객센터로 문의해주세요.");
+                    syncStatus.classList.add('bg-red-500/10', 'border-red-500/30');
+                    syncMsg.innerHTML = '<span class="text-red-400">❌ 업데이트 실패: ' + e.message + '</span>';
                 }
             });
         }
