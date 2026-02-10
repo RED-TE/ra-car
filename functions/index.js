@@ -78,9 +78,34 @@ exports.payappFeedback = functions.https.onRequest(async (req, res) => {
                     updatedAt: admin.firestore.Timestamp.now(),
                     cancelDate: admin.firestore.Timestamp.now()
                 });
-                console.log(`✅ Successfully revoked license for user ${uid} due to cancellation.`);
+                console.log(`✅ Successfully revoked license for user ${uid} due to cancellation (UID provided).`);
             } catch (error) {
-                console.error("❌ Firestore Update Failed (Cancel):", error);
+                console.error("❌ Firestore Update Failed (Cancel by UID):", error);
+            }
+        } else {
+            // Fallback: Try to find user by Order ID (mul_no)
+            const orderId = data.mul_no;
+            console.log(`⚠️ UID missing in cancellation. Trying to find user by Order ID: ${orderId}`);
+
+            if (orderId) {
+                try {
+                    const snapshot = await db.collection("users").where("lastOrderId", "==", orderId).limit(1).get();
+                    if (!snapshot.empty) {
+                        const userDoc = snapshot.docs[0];
+                        await userDoc.ref.update({
+                            plan: "free",
+                            updatedAt: admin.firestore.Timestamp.now(),
+                            cancelDate: admin.firestore.Timestamp.now()
+                        });
+                        console.log(`✅ Successfully revoked license for user ${userDoc.id} found by Order ID ${orderId}.`);
+                    } else {
+                        console.error(`❌ No user found with lastOrderId: ${orderId}. Cancellation failed.`);
+                    }
+                } catch (error) {
+                    console.error("❌ Firestore Query Failed (Cancel by OrderID):", error);
+                }
+            } else {
+                console.error("❌ Both UID and mul_no are missing. Cannot process cancellation.");
             }
         }
     } else {

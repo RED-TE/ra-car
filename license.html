@@ -139,10 +139,33 @@
                             // Check for Expiration
                             const now = new Date();
                             if (expDate < now) {
+                                // 🚀 Immediate Expiration Enforcement
+                                console.log("⚠️ Plan Expired. Enforcing 'free' status in UI.");
+
+                                // visual update
                                 const badge = document.querySelector('#license-info .bg-green-500\\/10');
-                                badge.className = 'inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-bold bg-red-500/10 text-red-400 border border-red-500/20';
-                                badge.innerHTML = '<span class="w-2 h-2 rounded-full bg-red-500"></span> 만료됨 (재결제 필요)';
-                                document.getElementById('expiry-display').classList.add('text-red-400');
+                                if (badge) {
+                                    badge.className = 'inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-bold bg-red-500/10 text-red-400 border border-red-500/20';
+                                    badge.innerHTML = '<span class="w-2 h-2 rounded-full bg-red-500"></span> EXPIRED (만료됨)';
+                                }
+                                const expDisplay = document.getElementById('expiry-display');
+                                if (expDisplay) {
+                                    expDisplay.textContent = "기간 만료 (재결제 필요)";
+                                    expDisplay.classList.add('text-red-400');
+                                }
+
+                                // 🚀 Optional: Attempt to update DB from client (Best Effort)
+                                // If security rules allow, this sets it for real. If not, at least UI is blocked.
+                                // NOTE: Usually backend handles this, but this is a double-check.
+                                /*
+                                userDoc.ref.update({ plan: 'free' }).catch(e => console.log("Auto-downgrade blocked by rule (expected)", e));
+                                */
+
+                                // Force "Free" UI state (Hide license info if we want to be strict, or just show expired badge)
+                                // Let's show the "No License" screen to force re-purchase
+                                document.getElementById('license-info').classList.add('hidden');
+                                document.getElementById('no-license').classList.remove('hidden');
+                                return;
                             }
 
                         } catch (e) { console.error("Date Parse Error", e); }
