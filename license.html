@@ -81,23 +81,17 @@
     <script src="firebase_config.js"></script>
 
     <script>
-        // Wait for auth
         if (typeof auth !== 'undefined') {
-            auth.onAuthStateChanged(async (user) => {
+            auth.onAuthStateChanged((user) => {
                 if (!user) {
                     alert('로그인이 필요한 서비스입니다.');
                     window.location.href = '/login';
                     return;
                 }
 
-                try {
-                    // Fetch User Data (Compat)
-                    const userDoc = await db.collection("users").doc(user.uid).get();
-
-                    if (!userDoc.exists) {
-                        alert('계정 정보가 올바르지 않습니다.');
-                        return;
-                    }
+                // Real-time Plan Listener
+                db.collection("users").doc(user.uid).onSnapshot((userDoc) => {
+                    if (!userDoc.exists) return;
 
                     const userData = userDoc.data();
 
@@ -110,17 +104,18 @@
 
                     // Check Plan Status
                     if (userData.plan === 'free' || !userData.plan) {
+                        document.getElementById('license-info').classList.add('hidden');
                         document.getElementById('no-license').classList.remove('hidden');
                         return;
                     }
 
                     // Valid Paid User
+                    document.getElementById('no-license').classList.add('hidden');
                     document.getElementById('license-info').classList.remove('hidden');
 
                     // Display Plan Info
                     let displayPlan = userData.planName || (userData.plan ? userData.plan.toUpperCase() + ' PLAN' : 'PRO PLAN');
 
-                    // 만약 planName이 'PRO Plan' 등으로 잘못 저장되어 있어도 plan 필드가 'lite'면 강제로 수정하여 표시
                     if (userData.plan === 'lite') {
                         displayPlan = 'LITE PLAN';
                     } else if (userData.plan === 'pro') {
@@ -135,63 +130,32 @@
                     // Display Expiry Date
                     if (userData.expiryDate) {
                         try {
-                            const expDate = userData.expiryDate.toDate(); // Firestore Timestamp to JS Date
-                            // Formatter: YYYY.MM.DD
+                            const expDate = userData.expiryDate.toDate();
                             const expStr = expDate.getFullYear() + '.' +
                                 String(expDate.getMonth() + 1).padStart(2, '0') + '.' +
                                 String(expDate.getDate()).padStart(2, '0');
 
                             document.getElementById('expiry-display').textContent = expStr + " 까지";
 
-                            // Check for Expiration
                             const now = new Date();
                             if (expDate < now) {
-                                // 🚀 Immediate Expiration Enforcement
-                                console.log("⚠️ Plan Expired. Enforcing 'free' status in UI.");
-
-                                // visual update
-                                const badge = document.querySelector('#license-info .bg-green-500\\/10');
-                                if (badge) {
-                                    badge.className = 'inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-bold bg-red-500/10 text-red-400 border border-red-500/20';
-                                    badge.innerHTML = '<span class="w-2 h-2 rounded-full bg-red-500"></span> EXPIRED (만료됨)';
-                                }
-                                const expDisplay = document.getElementById('expiry-display');
-                                if (expDisplay) {
-                                    expDisplay.textContent = "기간 만료 (재결제 필요)";
-                                    expDisplay.classList.add('text-red-400');
-                                }
-
-                                // 🚀 Optional: Attempt to update DB from client (Best Effort)
-                                // If security rules allow, this sets it for real. If not, at least UI is blocked.
-                                // NOTE: Usually backend handles this, but this is a double-check.
-                                /*
-                                userDoc.ref.update({ plan: 'free' }).catch(e => console.log("Auto-downgrade blocked by rule (expected)", e));
-                                */
-
-                                // Force "Free" UI state (Hide license info if we want to be strict, or just show expired badge)
-                                // Let's show the "No License" screen to force re-purchase
                                 document.getElementById('license-info').classList.add('hidden');
                                 document.getElementById('no-license').classList.remove('hidden');
-                                return;
+                            } else {
+                                // Reset visual badge
+                                const badge = document.querySelector('#license-info .bg-green-500\\/10, #license-info .bg-red-500\\/10');
+                                if (badge) {
+                                    badge.className = 'inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-bold bg-green-500/10 text-green-400 border border-green-500/20 shadow-[0_0_10px_rgba(74,222,128,0.2)]';
+                                    badge.innerHTML = '<span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span> ACTIVE (사용 가능)';
+                                }
                             }
-
                         } catch (e) { console.error("Date Parse Error", e); }
                     } else {
                         document.getElementById('expiry-display').textContent = "무제한 / 정보 없음";
                     }
-
-                    // Expiry Check (Optional)
-                    /*
-                    if (userData.expiryDate && userData.expiryDate.toDate() < new Date()) {
-                         document.getElementById('status-badge').className = '... bg-red-500 ...';
-                         document.getElementById('status-badge').textContent = 'EXPIRED (만료됨)';
-                    }
-                    */
-
-                } catch (error) {
-                    console.error("Error loading info:", error);
-                    alert("정보를 불러오는 중 문제가 발생했습니다.");
-                }
+                }, (error) => {
+                    console.error("License listener error:", error);
+                });
             });
         }
     </script>

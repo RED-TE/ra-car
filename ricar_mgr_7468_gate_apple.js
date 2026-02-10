@@ -526,13 +526,32 @@ document.getElementById('modalSaveBtn').addEventListener('click', async () => {
             updatedAt: firebase.firestore.Timestamp.now()
         };
 
+        // Plan Name Mapping
+        if (plan === 'free') {
+            updateData.planName = "FREE";
+        } else {
+            updateData.planName = plan.toUpperCase() + " PLAN";
+        }
+
+        // Expiry Date Logic
         if (extendDays > 0) {
+            // If explicit extension is selected
             const expDate = new Date();
             expDate.setDate(expDate.getDate() + extendDays);
             updateData.expiryDate = firebase.firestore.Timestamp.fromDate(expDate);
-            updateData.planName = plan.toUpperCase() + " PLAN";
-        } else if (plan === 'free') {
-            updateData.planName = "FREE";
+        } else if (plan !== 'free') {
+            // If it's a paid plan but no extension was selected
+            const user = allUsers.find(u => u.id === currentTargetId);
+            const now = new Date();
+            let currentExpiry = user.expiryDate ? user.expiryDate.toDate() : null;
+
+            // If no current expiry OR already expired, default to +30 days
+            if (!currentExpiry || currentExpiry < now) {
+                const defaultExp = new Date();
+                defaultExp.setDate(defaultExp.getDate() + 30);
+                updateData.expiryDate = firebase.firestore.Timestamp.fromDate(defaultExp);
+                console.log("Setting default 30-day expiry for new/expired paid plan.");
+            }
         }
 
         await db.collection("users").doc(currentTargetId).update(updateData);

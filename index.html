@@ -141,10 +141,11 @@
                         </div>`;
 
                     try {
-                        // Fetch Plan Info
+                        // Real-time Plan & Status Listener
                         if (typeof db !== 'undefined') {
-                            const doc = await db.collection('users').doc(user.uid).get();
-                            if (doc.exists) {
+                            db.collection('users').doc(user.uid).onSnapshot((doc) => {
+                                if (!doc.exists) return;
+
                                 const data = doc.data();
 
                                 // 🛡️ Ban Enforcement
@@ -154,12 +155,12 @@
                                     return;
                                 }
 
-                                // 📱 Device Sync (HWID Tracking)
+                                // 📱 Device Sync (HWID Tracking) - Only run once or conditionally
+                                // (Keeping sync logic as is, but it will rerun on snapshot)
                                 const deviceInfo = Utils.getStorage(STORAGE_KEYS.DEVICE);
                                 if (deviceInfo && deviceInfo.id) {
                                     const currentDeviceIds = data.deviceIds || [];
                                     if (!currentDeviceIds.includes(deviceInfo.id)) {
-                                        console.log("Syncing new device ID...", deviceInfo.id);
                                         db.collection('users').doc(user.uid).update({
                                             deviceIds: firebase.firestore.FieldValue.arrayUnion(deviceInfo.id),
                                             updatedAt: firebase.firestore.Timestamp.now()
@@ -167,13 +168,36 @@
                                     }
                                 }
 
+                                // Plan UI Update Logic
+                                let currentActionBtn = `
+                                    <div class="flex items-center gap-2">
+                                         <button onclick="location.href='https://drive.google.com/file/d/18d3CgGKfU7qA6McN1sFksksnzhgZLn_m/view?usp=sharing'" 
+                                            class="hidden md:flex items-center gap-1.5 bg-blue-600 hover:bg-blue-500 text-white font-bold px-4 py-2 rounded-lg transition-all border border-blue-500/50">
+                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
+                                            </svg>
+                                            다운로드
+                                        </button>
+                                        <button onclick="location.href='checkout.html'"
+                                            class="bg-green-400 hover:bg-green-500 text-slate-950 font-bold px-6 py-2 rounded-lg neon-glow transition-all hover:scale-105">
+                                            구매하기
+                                        </button>
+                                    </div>`;
+
                                 if (data.plan && data.plan !== 'free') {
                                     const planName = (data.planName || data.plan).toUpperCase();
-                                    planBadge = `<span class="bg-blue-500/20 text-blue-400 border border-blue-500/50 text-xs font-bold px-2 py-1 rounded ml-2">${planName}</span>`;
+                                    const badge = `<span class="bg-blue-500/20 text-blue-400 border border-blue-500/50 text-xs font-bold px-2 py-1 rounded ml-2">${planName}</span>`;
 
-                                    // Change button if already subscribed
-                                    actionBtn = `
-                                        <div class="flex items-center gap-2">
+                                    // Update Badge (Find the parent and update text)
+                                    const badgeContainer = document.querySelector('#nav-auth-section .text-gray-300');
+                                    if (badgeContainer) {
+                                        badgeContainer.innerHTML = `${user.email} ${badge}`;
+                                    }
+
+                                    // Update Buttons
+                                    const btnContainer = document.querySelector('#nav-auth-section .flex.items-center.gap-2');
+                                    if (btnContainer) {
+                                        btnContainer.innerHTML = `
                                             <button onclick="location.href='https://drive.google.com/file/d/18d3CgGKfU7qA6McN1sFksksnzhgZLn_m/view?usp=sharing'" 
                                                 class="hidden md:flex items-center gap-1.5 bg-blue-600 hover:bg-blue-500 text-white font-bold px-4 py-2 rounded-lg transition-all border border-blue-500/50">
                                                 <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -184,13 +208,15 @@
                                             <button onclick="location.href='license.html'"
                                                 class="bg-slate-800 hover:bg-slate-700 text-white font-bold px-4 py-2 rounded-lg border border-slate-700 transition-all">
                                                 내 정보
-                                            </button>
-                                        </div>`;
+                                            </button>`;
+                                    }
                                 }
-                            }
+                            }, (error) => {
+                                console.error("Plan listener error:", error);
+                            });
                         }
                     } catch (e) {
-                        console.error("Error fetching plan:", e);
+                        console.error("Error setting up plan listener:", e);
                     }
 
                     navSection.innerHTML = `
