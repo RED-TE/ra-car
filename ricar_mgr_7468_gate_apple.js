@@ -1,6 +1,6 @@
 /**
- * Ricar Admin Dashboard - Apple Style
- * 완전한 사용자 추적 및 이상 사용 감지 시스템
+ * Ricar Admin Dashboard - Apple Style (Bug Fixed)
+ * 에러 수정: hwid undefined 처리
  */
 
 const ADMIN_EMAIL = "jhxox666@gmail.com";
@@ -32,56 +32,47 @@ if (typeof auth !== 'undefined') {
 }
 
 /**
- * 모든 데이터 로드 (가입만 한 사용자 포함)
+ * 모든 데이터 로드
  */
 async function loadAllData() {
     console.log("📊 모든 사용자 데이터 로드 시작");
     try {
-        // 조건 없이 모든 사용자 가져오기
         const snapshot = await db.collection("users").get();
-        
+
         allUsers = snapshot.docs.map(doc => {
             const data = doc.data();
             return {
                 id: doc.id,
                 email: data.email || '알 수 없음',
-                hwid: data.hwid || data.id,
+                hwid: data.hwid || data.id || 'N/A',  // ← 안전한 기본값
                 plan: data.plan || 'free',
                 planName: data.planName || 'FREE',
                 expiryDate: data.expiryDate,
                 isBanned: data.isBanned || false,
-                
-                // 사용량
+
                 totalExecutions: data.totalExecutions || 0,
                 freeTrialCount: data.freeTrialCount || 0,
-                
-                // 기기
+
                 deviceIds: data.deviceIds || [],
                 platform: data.platform || '-',
                 language: data.language || '-',
-                
-                // 로그
+
                 executionLogs: data.executionLogs || [],
                 lastExecutionLog: data.lastExecutionLog || null,
-                
-                // 타임스탬프
+
                 createdAt: data.createdAt,
                 updatedAt: data.updatedAt,
                 lastOrderId: data.lastOrderId || ''
             };
         });
 
-        // 최신순 정렬
         allUsers.sort((a, b) => {
             const dateA = a.updatedAt ? a.updatedAt.toDate() : (a.createdAt ? a.createdAt.toDate() : 0);
             const dateB = b.updatedAt ? b.updatedAt.toDate() : (b.createdAt ? b.createdAt.toDate() : 0);
             return dateB - dateA;
         });
 
-        // 이상 사용 분석
         analyzeSuspiciousActivity();
-
-        // 렌더링
         renderAllUsers();
         renderSuspiciousUsers();
         renderFreeUsers();
@@ -99,33 +90,24 @@ async function loadAllData() {
  */
 function analyzeSuspiciousActivity() {
     suspiciousUsers = allUsers.filter(user => {
-        // 조건 1: 무료 사용자가 2회 이상 실행
         if ((user.plan === 'free' || !user.plan) && user.freeTrialCount >= 2) {
             return true;
         }
-
-        // 조건 2: 기기 3대 이상 사용 (계정 공유 의심)
         if (user.deviceIds.length >= 3) {
             return true;
         }
-
-        // 조건 3: 총 실행 10회 이상 (과도한 사용)
         if (user.totalExecutions >= 10) {
             return true;
         }
-
-        // 조건 4: 만료 후 실행 시도
         if (user.plan !== 'free' && user.expiryDate) {
             const expiry = user.expiryDate.toDate();
             if (expiry < new Date() && user.totalExecutions > 0) {
                 return true;
             }
         }
-
         return false;
     });
 
-    // Firestore에 의심 플래그 업데이트
     suspiciousUsers.forEach(async (user) => {
         try {
             await db.collection("users").doc(user.id).update({
@@ -140,36 +122,28 @@ function analyzeSuspiciousActivity() {
     console.log(`🚨 이상 사용 의심: ${suspiciousUsers.length}명`);
 }
 
-/**
- * 의심 사유 생성
- */
 function getSuspiciousReason(user) {
     const reasons = [];
-    
     if ((user.plan === 'free' || !user.plan) && user.freeTrialCount >= 2) {
         reasons.push(`무료 ${user.freeTrialCount}회 실행`);
     }
-    
     if (user.deviceIds.length >= 3) {
         reasons.push(`${user.deviceIds.length}대 기기`);
     }
-    
     if (user.totalExecutions >= 10) {
         reasons.push(`총 ${user.totalExecutions}회 실행`);
     }
-    
     if (user.plan !== 'free' && user.expiryDate) {
         const expiry = user.expiryDate.toDate();
         if (expiry < new Date() && user.totalExecutions > 0) {
             reasons.push("만료 후 실행");
         }
     }
-    
     return reasons.join(', ');
 }
 
 /**
- * 전체 사용자 렌더링
+ * 전체 사용자 렌더링 (수정됨)
  */
 function renderAllUsers() {
     const tbody = document.getElementById('userTableBody');
@@ -186,7 +160,6 @@ function renderAllUsers() {
         const tr = document.createElement('tr');
         tr.className = "hover:bg-white/5 transition-all";
 
-        // 상태 계산
         let statusClass = "badge-free";
         let statusText = "FREE";
         let expiryText = "-";
@@ -198,7 +171,7 @@ function renderAllUsers() {
         } else if (user.expiryDate) {
             const expiry = user.expiryDate.toDate();
             const diff = Math.ceil((expiry - now) / (1000 * 60 * 60 * 24));
-            
+
             if (user.plan !== 'free') {
                 if (diff > 0) {
                     statusClass = "badge-active";
@@ -210,12 +183,13 @@ function renderAllUsers() {
                     daysLeft = "만료됨";
                 }
             }
-            
             expiryText = formatDate(expiry);
         }
 
-        // 의심 여부
         const isSuspicious = suspiciousUsers.some(s => s.id === user.id);
+
+        // ✅ 안전한 hwid 처리
+        const safeHwid = user.hwid && user.hwid !== 'N/A' ? user.hwid.substring(0, 16) : 'HWID 없음';
 
         tr.innerHTML = `
             <td class="px-6 py-4">
@@ -225,7 +199,7 @@ function renderAllUsers() {
                     </div>
                     <div>
                         <div class="font-medium text-white">${user.email}</div>
-                        <div class="text-xs text-white/30 font-mono">${user.hwid.substring(0, 16)}...</div>
+                        <div class="text-xs text-white/30 font-mono">${safeHwid}...</div>
                         <div class="text-[10px] text-white/20">${user.platform} • ${user.language}</div>
                     </div>
                 </div>
@@ -283,7 +257,7 @@ function renderSuspiciousUsers() {
 
     suspiciousUsers.forEach(user => {
         const reason = getSuspiciousReason(user);
-        
+
         const card = document.createElement('div');
         card.className = "bg-white/5 rounded-2xl p-6 border border-orange-500/30";
         card.innerHTML = `
@@ -339,7 +313,7 @@ function renderSuspiciousUsers() {
 }
 
 /**
- * 무료 이용자 렌더링
+ * 무료 이용자 렌더링 (수정됨)
  */
 function renderFreeUsers() {
     const tbody = document.getElementById('freeTableBody');
@@ -355,15 +329,18 @@ function renderFreeUsers() {
     freeUsers.forEach(user => {
         const tr = document.createElement('tr');
         tr.className = "hover:bg-white/5 transition-all";
-        
-        const lastExec = user.lastExecutionLog 
+
+        const lastExec = user.lastExecutionLog
             ? formatDate(user.lastExecutionLog.timestamp.toDate())
             : '-';
+
+        // ✅ 안전한 hwid 처리
+        const safeHwid = user.hwid && user.hwid !== 'N/A' ? user.hwid.substring(0, 16) : 'HWID 없음';
 
         tr.innerHTML = `
             <td class="px-6 py-4">
                 <div class="font-medium text-white">${user.email}</div>
-                <div class="text-xs text-white/30 font-mono mt-0.5">${user.hwid.substring(0, 16)}...</div>
+                <div class="text-xs text-white/30 font-mono mt-0.5">${safeHwid}...</div>
             </td>
             <td class="px-6 py-4 text-center">
                 <div class="inline-flex items-center justify-center w-12 h-12 rounded-xl ${user.freeTrialCount >= 2 ? 'bg-red-500/15 text-red-400 border-2 border-red-500/30' : 'bg-purple-500/10 text-purple-400 border border-purple-500/20'} font-semibold text-lg">
@@ -376,9 +353,9 @@ function renderFreeUsers() {
             </td>
             <td class="px-6 py-4">
                 <div class="text-sm text-white">${lastExec}</div>
-                ${user.lastExecutionLog && user.lastExecutionLog.lastStep ? 
-                    `<div class="text-xs text-white/30">마지막: ${user.lastExecutionLog.lastStep}</div>` : 
-                    ''}
+                ${user.lastExecutionLog && user.lastExecutionLog.lastStep ?
+                `<div class="text-xs text-white/30">마지막: ${user.lastExecutionLog.lastStep}</div>` :
+                ''}
             </td>
             <td class="px-6 py-4 text-right">
                 ${user.executionLogs.length > 0 ? `
@@ -398,11 +375,11 @@ function renderFreeUsers() {
  */
 function updateStats() {
     const now = new Date();
-    
+
     const total = allUsers.length;
-    const active = allUsers.filter(u => 
-        u.plan !== 'free' && 
-        u.expiryDate && 
+    const active = allUsers.filter(u =>
+        u.plan !== 'free' &&
+        u.expiryDate &&
         u.expiryDate.toDate() > now
     ).length;
     const free = allUsers.filter(u => u.plan === 'free' || !u.plan).length;
@@ -422,14 +399,14 @@ function updateStats() {
 /**
  * 로그 뷰어
  */
-window.viewLogs = async function(userId) {
+window.viewLogs = async function (userId) {
     const user = allUsers.find(u => u.id === userId);
     if (!user) return;
 
     document.getElementById('logModal').classList.remove('hidden');
-    
+
     const logContent = document.getElementById('logContent');
-    
+
     if (!user.executionLogs || user.executionLogs.length === 0) {
         logContent.innerHTML = '<p class="text-white/30">실행 로그가 없습니다.</p>';
         return;
@@ -439,7 +416,10 @@ window.viewLogs = async function(userId) {
     user.executionLogs.slice(-20).reverse().forEach((log, index) => {
         const timestamp = log.timestamp ? formatDate(log.timestamp.toDate()) : '-';
         const statusColor = log.status === 'success' ? 'text-green-400' : 'text-red-400';
-        
+
+        // ✅ 안전한 hwid 처리
+        const logHwid = log.hwid ? log.hwid.substring(0, 16) + '...' : 'N/A';
+
         html += `
             <div class="mb-4 pb-4 border-b border-white/10">
                 <div class="flex items-center justify-between mb-2">
@@ -448,7 +428,7 @@ window.viewLogs = async function(userId) {
                 </div>
                 <div class="text-white/70 ml-4 space-y-1">
                     <div>• 단계: ${log.lastStep || 'N/A'}</div>
-                    <div>• 기기: ${log.hwid ? log.hwid.substring(0, 16) + '...' : 'N/A'}</div>
+                    <div>• 기기: ${logHwid}</div>
                     <div>• 소요시간: ${log.duration ? log.duration.toFixed(2) + '초' : 'N/A'}</div>
                     ${log.error ? `<div class="text-red-400">• 에러: ${log.error}</div>` : ''}
                 </div>
@@ -470,9 +450,9 @@ document.querySelectorAll('.tab-button').forEach(btn => {
     btn.addEventListener('click', () => {
         document.querySelectorAll('.tab-button').forEach(b => b.classList.remove('active'));
         btn.classList.add('active');
-        
+
         document.querySelectorAll('.tab-content').forEach(t => t.classList.add('hidden'));
-        
+
         const tabName = btn.dataset.tab;
         document.getElementById(`${tabName}-tab`).classList.remove('hidden');
     });
@@ -487,8 +467,8 @@ function handleFilter() {
 
     const filtered = allUsers.filter(user => {
         const matchesTerm = user.email.toLowerCase().includes(term) ||
-            user.hwid.toLowerCase().includes(term);
-        const matchesPlan = planFilter === 'all' || 
+            (user.hwid && user.hwid.toLowerCase().includes(term));
+        const matchesPlan = planFilter === 'all' ||
             (planFilter === 'free' ? (!user.plan || user.plan === 'free') : user.plan === planFilter);
         return matchesTerm && matchesPlan;
     });
@@ -509,7 +489,7 @@ document.getElementById('logoutBtn').addEventListener('click', () => auth.signOu
  */
 let currentTargetId = null;
 
-window.openEditModal = function(id, email) {
+window.openEditModal = function (id, email) {
     currentTargetId = id;
     const user = allUsers.find(u => u.id === id);
     document.getElementById('modalUserEmail').textContent = email;
@@ -568,12 +548,12 @@ document.getElementById('modalSaveBtn').addEventListener('click', async () => {
 function formatDate(date) {
     if (!date) return '-';
     if (typeof date === 'string') date = new Date(date);
-    
+
     const year = date.getFullYear();
     const month = String(date.getMonth() + 1).padStart(2, '0');
     const day = String(date.getDate()).padStart(2, '0');
     const hours = String(date.getHours()).padStart(2, '0');
     const minutes = String(date.getMinutes()).padStart(2, '0');
-    
+
     return `${year}-${month}-${day} ${hours}:${minutes}`;
 }
