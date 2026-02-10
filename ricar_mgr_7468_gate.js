@@ -10,7 +10,8 @@ if (typeof auth !== 'undefined') {
     auth.onAuthStateChanged(async (user) => {
         if (!user) {
             alert("로그인이 필요합니다.");
-            window.location.href = '/login';
+            const currentPath = window.location.pathname.split('/').pop();
+            window.location.href = `/login?redirect=${currentPath}`;
             return;
         }
 
