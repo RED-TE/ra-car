@@ -90,10 +90,12 @@
 
                 const urlParams = new URLSearchParams(window.location.search);
                 const redirect = urlParams.get('redirect');
+                console.log("Login success. Redirecting to:", redirect || 'index.html');
                 if (redirect) {
-                    window.location.href = '/' + redirect;
+                    // Ensure we don't double slash or miss it
+                    window.location.href = redirect.startsWith('/') ? redirect : './' + redirect;
                 } else {
-                    window.location.href = '/';
+                    window.location.href = 'index.html';
                 }
             } catch (error) {
                 console.error("Google Login Error:", error);

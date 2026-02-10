@@ -8,20 +8,27 @@ let allUsers = [];
 // Initialize Firebase Auth Listener
 if (typeof auth !== 'undefined') {
     auth.onAuthStateChanged(async (user) => {
+        console.log("Auth State Changed. User:", user ? user.email : "Not Logged In");
+
         if (!user) {
-            alert("로그인이 필요합니다.");
-            const currentPath = window.location.pathname.split('/').pop();
-            window.location.href = `/login?redirect=${currentPath}`;
+            alert("관리자 로그인이 필요합니다.");
+            const currentPath = window.location.pathname.split('/').pop() || 'ricar_mgr_7468_gate.html';
+            // Ensure .html is present for the redirect parameter
+            const redirectPath = currentPath.endsWith('.html') ? currentPath : currentPath + '.html';
+            console.log("Redirecting to login with:", redirectPath);
+            window.location.href = `login.html?redirect=${redirectPath}`;
             return;
         }
 
         // 🛡️ Security Check: Verify Admin Status
-        if (user.email !== ADMIN_EMAIL) {
-            alert("접근 권한이 없습니다. (관리자 전용)");
-            window.location.href = '/';
+        console.log("Checking Admin Email match:", user.email, "vs", ADMIN_EMAIL);
+        if (user.email.toLowerCase().trim() !== ADMIN_EMAIL.toLowerCase().trim()) {
+            alert(`접근 권한이 없습니다.\n현재 계정: ${user.email}\n관리자 계정: ${ADMIN_EMAIL}`);
+            window.location.href = 'index.html';
             return;
         }
 
+        console.log("✅ Admin Access Granted!");
         document.getElementById('admin-email').textContent = user.email;
         loadAllUsers();
     });
