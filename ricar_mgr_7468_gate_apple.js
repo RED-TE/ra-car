@@ -1,6 +1,6 @@
 /**
- * Ricar Admin Dashboard - Apple Style (Bug Fixed)
- * 에러 수정: hwid undefined 처리
+ * Ricar Admin Dashboard - Apple Style
+ * 완전 수정 버전 - hwid undefined 에러 해결
  */
 
 const ADMIN_EMAIL = "jhxox666@gmail.com";
@@ -44,7 +44,7 @@ async function loadAllData() {
             return {
                 id: doc.id,
                 email: data.email || '알 수 없음',
-                hwid: data.hwid || data.id || 'N/A',  // ← 안전한 기본값
+                hwid: data.hwid || data.id || `UNKNOWN_${doc.id.substring(0, 8)}`, // ✅ 안전한 기본값
                 plan: data.plan || 'free',
                 planName: data.planName || 'FREE',
                 expiryDate: data.expiryDate,
@@ -143,7 +143,7 @@ function getSuspiciousReason(user) {
 }
 
 /**
- * 전체 사용자 렌더링 (수정됨)
+ * 전체 사용자 렌더링
  */
 function renderAllUsers() {
     const tbody = document.getElementById('userTableBody');
@@ -189,7 +189,9 @@ function renderAllUsers() {
         const isSuspicious = suspiciousUsers.some(s => s.id === user.id);
 
         // ✅ 안전한 hwid 처리
-        const safeHwid = user.hwid && user.hwid !== 'N/A' ? user.hwid.substring(0, 16) : 'HWID 없음';
+        const displayHwid = user.hwid && user.hwid.length >= 16
+            ? user.hwid.substring(0, 16)
+            : (user.hwid || 'HWID없음');
 
         tr.innerHTML = `
             <td class="px-6 py-4">
@@ -199,7 +201,7 @@ function renderAllUsers() {
                     </div>
                     <div>
                         <div class="font-medium text-white">${user.email}</div>
-                        <div class="text-xs text-white/30 font-mono">${safeHwid}...</div>
+                        <div class="text-xs text-white/30 font-mono">${displayHwid}...</div>
                         <div class="text-[10px] text-white/20">${user.platform} • ${user.language}</div>
                     </div>
                 </div>
@@ -313,7 +315,7 @@ function renderSuspiciousUsers() {
 }
 
 /**
- * 무료 이용자 렌더링 (수정됨)
+ * 무료 이용자 렌더링
  */
 function renderFreeUsers() {
     const tbody = document.getElementById('freeTableBody');
@@ -335,12 +337,14 @@ function renderFreeUsers() {
             : '-';
 
         // ✅ 안전한 hwid 처리
-        const safeHwid = user.hwid && user.hwid !== 'N/A' ? user.hwid.substring(0, 16) : 'HWID 없음';
+        const displayHwid = user.hwid && user.hwid.length >= 16
+            ? user.hwid.substring(0, 16)
+            : (user.hwid || 'HWID없음');
 
         tr.innerHTML = `
             <td class="px-6 py-4">
                 <div class="font-medium text-white">${user.email}</div>
-                <div class="text-xs text-white/30 font-mono mt-0.5">${safeHwid}...</div>
+                <div class="text-xs text-white/30 font-mono mt-0.5">${displayHwid}...</div>
             </td>
             <td class="px-6 py-4 text-center">
                 <div class="inline-flex items-center justify-center w-12 h-12 rounded-xl ${user.freeTrialCount >= 2 ? 'bg-red-500/15 text-red-400 border-2 border-red-500/30' : 'bg-purple-500/10 text-purple-400 border border-purple-500/20'} font-semibold text-lg">
@@ -418,7 +422,9 @@ window.viewLogs = async function (userId) {
         const statusColor = log.status === 'success' ? 'text-green-400' : 'text-red-400';
 
         // ✅ 안전한 hwid 처리
-        const logHwid = log.hwid ? log.hwid.substring(0, 16) + '...' : 'N/A';
+        const logHwid = log.hwid && log.hwid.length >= 16
+            ? log.hwid.substring(0, 16) + '...'
+            : (log.hwid || 'N/A');
 
         html += `
             <div class="mb-4 pb-4 border-b border-white/10">
