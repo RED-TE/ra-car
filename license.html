@@ -101,6 +101,13 @@
 
                     const userData = userDoc.data();
 
+                    // 🛡️ Ban Enforcement
+                    if (userData.isBanned) {
+                        alert("해당 계정은 이용이 정지되었습니다.");
+                        auth.signOut().then(() => window.location.href = '/');
+                        return;
+                    }
+
                     // Check Plan Status
                     if (userData.plan === 'free' || !userData.plan) {
                         document.getElementById('no-license').classList.remove('hidden');

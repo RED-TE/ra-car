@@ -146,6 +146,14 @@
                             const doc = await db.collection('users').doc(user.uid).get();
                             if (doc.exists) {
                                 const data = doc.data();
+
+                                // 🛡️ Ban Enforcement
+                                if (data.isBanned) {
+                                    alert("해당 계정은 이용이 정지되었습니다. 관리자에게 문의하세요.");
+                                    auth.signOut().then(() => window.location.reload());
+                                    return;
+                                }
+
                                 if (data.plan && data.plan !== 'free') {
                                     const planName = (data.planName || data.plan).toUpperCase();
                                     planBadge = `<span class="bg-blue-500/20 text-blue-400 border border-blue-500/50 text-xs font-bold px-2 py-1 rounded ml-2">${planName}</span>`;

@@ -90,7 +90,10 @@
             const deviceInfo = {
                 id: Utils.generateDeviceId(),
                 name: deviceName,
-                regDate: new Date().toISOString()
+                regDate: new Date().toISOString(),
+                userAgent: navigator.userAgent,
+                platform: navigator.platform,
+                language: navigator.language
             };
 
             if (confirm(`'${deviceName}' 기기를 등록하시겠습니까?`)) {
