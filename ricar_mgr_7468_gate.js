@@ -2,7 +2,7 @@
  * Admin Dashboard Logic for Ricar Auto Plan (Obfuscated)
  */
 
-const ADMIN_EMAIL = "jhxox666@naver.com"; // 🛡️ Primary Admin Email
+const ADMIN_EMAIL = "jhxox666@gmail.com"; // 🛡️ Primary Admin Email (Gmail for Google Auth)
 let allUsers = [];
 
 // Initialize Firebase Auth Listener
