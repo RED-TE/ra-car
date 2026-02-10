@@ -103,7 +103,7 @@
 
                     // 🛡️ Ban Enforcement
                     if (userData.isBanned) {
-                        alert("해당 계정은 이용이 정지되었습니다.");
+                        alert("비정상 접속 정황이 포착되었습니다. 관리자에게 문의하세요.");
                         auth.signOut().then(() => window.location.href = '/');
                         return;
                     }

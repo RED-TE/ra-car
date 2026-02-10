@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Management Console - Ricar Auto Plan</title>
+    <title>관리자 콘솔 - Ricar Auto Plan</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="base.css" rel="stylesheet">
     <style>
@@ -55,15 +55,14 @@
             <div class="flex items-center gap-3">
                 <div class="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center font-bold text-white">M
                 </div>
-                <h1 class="text-xl font-black text-white tracking-tight">Management <span
-                        class="text-blue-500">Console</span>
+                <h1 class="text-xl font-black text-white tracking-tight">관리자 <span class="text-blue-500">콘솔</span>
                 </h1>
             </div>
             <div class="flex items-center gap-4">
                 <span id="admin-email" class="text-sm text-slate-400">...</span>
                 <button onclick="location.href='/'"
-                    class="text-sm text-slate-400 hover:text-white underline">Home</button>
-                <button id="logoutBtn" class="text-sm text-red-500 hover:text-red-400">Logout</button>
+                    class="text-sm text-slate-400 hover:text-white underline">홈으로</button>
+                <button id="logoutBtn" class="text-sm text-red-500 hover:text-red-400">로그아웃</button>
             </div>
         </div>
     </nav>
@@ -72,19 +71,19 @@
         <!-- Stats Row -->
         <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
             <div class="admin-card p-6 rounded-2xl">
-                <p class="text-slate-400 text-sm mb-1">Total Users</p>
+                <p class="text-slate-400 text-sm mb-1">전체 사용자</p>
                 <h2 id="stat-total-users" class="text-3xl font-black text-white">0</h2>
             </div>
             <div class="admin-card p-6 rounded-2xl underline decoration-blue-500/50">
-                <p class="text-slate-400 text-sm mb-1">Active Plans</p>
+                <p class="text-slate-400 text-sm mb-1">활성 플랜 (결제됨)</p>
                 <h2 id="stat-active-plans" class="text-3xl font-black text-blue-400">0</h2>
             </div>
             <div class="admin-card p-6 rounded-2xl">
-                <p class="text-slate-400 text-sm mb-1">Free Trial Used</p>
+                <p class="text-slate-400 text-sm mb-1">무료 체험 이용자</p>
                 <h2 id="stat-free-trial" class="text-3xl font-black text-green-400">0</h2>
             </div>
             <div class="admin-card p-6 rounded-2xl">
-                <p class="text-slate-400 text-sm mb-1">Expired Today</p>
+                <p class="text-slate-400 text-sm mb-1">오늘 만료</p>
                 <h2 id="stat-expired-today" class="text-3xl font-black text-red-400">0</h2>
             </div>
         </div>
@@ -92,20 +91,20 @@
         <!-- Filter Bar -->
         <div class="admin-card p-4 rounded-xl mb-6 flex flex-col md:flex-row gap-4 items-center justify-between">
             <div class="relative w-full md:w-96">
-                <input type="text" id="searchInput" placeholder="Search by email or HWID..."
+                <input type="text" id="searchInput" placeholder="이메일 또는 HWID로 검색..."
                     class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-sm focus:outline-none focus:border-blue-500">
             </div>
             <div class="flex gap-2 w-full md:w-auto">
                 <select id="filterPlan"
                     class="bg-slate-900 border border-slate-700 rounded-lg px-3 py-2 text-sm focus:outline-none">
-                    <option value="all">All Plans</option>
+                    <option value="all">모든 플랜</option>
                     <option value="lite">LITE</option>
                     <option value="pro">PRO</option>
-                    <option value="free">FREE</option>
+                    <option value="free">FREE (무료)</option>
                 </select>
                 <button id="refreshBtn"
-                    class="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-lg text-sm font-bold transition-all">Refresh
-                    Data</button>
+                    class="bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded-lg text-sm font-bold transition-all">데이터
+                    새로고침</button>
             </div>
         </div>
 
@@ -114,17 +113,18 @@
             <table class="w-full text-left border-collapse">
                 <thead>
                     <tr class="bg-slate-800/50 text-slate-400 text-xs uppercase tracking-wider">
-                        <th class="px-6 py-4 font-bold border-b border-slate-800">User / HWID</th>
-                        <th class="px-6 py-4 font-bold border-b border-slate-800">Plan Status</th>
-                        <th class="px-6 py-4 font-bold border-b border-slate-800">Usage</th>
-                        <th class="px-6 py-4 font-bold border-b border-slate-800">Expiration</th>
-                        <th class="px-6 py-4 font-bold border-b border-slate-800 text-right">Actions</th>
+                        <th class="px-6 py-4 font-bold border-b border-slate-800">사용자 / HWID</th>
+                        <th class="px-6 py-4 font-bold border-b border-slate-800">플랜 상태</th>
+                        <th class="px-6 py-4 font-bold border-b border-slate-800 text-center">기기 수</th>
+                        <th class="px-6 py-4 font-bold border-b border-slate-800">사용량</th>
+                        <th class="px-6 py-4 font-bold border-b border-slate-800">만료일</th>
+                        <th class="px-6 py-4 font-bold border-b border-slate-800 text-right">관리</th>
                     </tr>
                 </thead>
                 <tbody id="userTableBody" class="divide-y divide-slate-800/50">
                     <!-- Loaded dynamically -->
                     <tr>
-                        <td colspan="5" class="px-6 py-20 text-center text-slate-500">Loading customer data...</td>
+                        <td colspan="5" class="px-6 py-20 text-center text-slate-500">고객 데이터를 불러오는 중...</td>
                     </tr>
                 </tbody>
             </table>
@@ -135,46 +135,45 @@
     <div id="editModal"
         class="fixed inset-0 bg-slate-950/80 backdrop-blur-sm z-[100] hidden flex items-center justify-center p-4">
         <div class="admin-card max-w-md w-full rounded-2xl p-8 shadow-2xl">
-            <h3 class="text-xl font-bold text-white mb-6">Edit User Subscription</h3>
+            <h3 class="text-xl font-bold text-white mb-6">사용자 구독 정보 수정</h3>
             <div class="space-y-4">
                 <div>
-                    <label class="text-xs text-slate-400 block mb-1">Target User</label>
+                    <label class="text-xs text-slate-400 block mb-1">대상 사용자</label>
                     <p id="modalUserEmail" class="text-white font-bold"></p>
                 </div>
                 <div>
-                    <label class="text-xs text-slate-400 block mb-1">Set Plan</label>
+                    <label class="text-xs text-slate-400 block mb-1">플랜 설정</label>
                     <select id="modalPlanSelect"
                         class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-white">
-                        <option value="free">FREE (Basic)</option>
+                        <option value="free">FREE (기본 무료)</option>
                         <option value="lite">LITE PLAN</option>
                         <option value="pro">PRO PLAN</option>
                     </select>
                 </div>
                 <div>
-                    <label class="text-xs text-slate-400 block mb-1">Expiration Extension</label>
+                    <label class="text-xs text-slate-400 block mb-1">만료일 연장</label>
                     <select id="modalExtendSelect"
                         class="w-full bg-slate-900 border border-slate-700 rounded-lg px-4 py-2 text-white">
-                        <option value="0">Current Date (No Change)</option>
-                        <option value="7">Extend +7 Days</option>
-                        <option value="30">Extend +30 Days</option>
-                        <option value="365">Extend +1 Year</option>
+                        <option value="0">변경 없음 (현재 유지)</option>
+                        <option value="7">7일 연장</option>
+                        <option value="30">30일 연장 (1개월)</option>
+                        <option value="365">1년 연장</option>
                     </select>
                 </div>
                 <div>
-                    <label class="text-xs text-slate-400 block mb-1">Access Control</label>
+                    <label class="text-xs text-slate-400 block mb-1">접근 제어</label>
                     <div class="flex items-center gap-2">
                         <input type="checkbox" id="modalBanCheck"
                             class="w-4 h-4 bg-slate-900 border-slate-700 rounded transition-all transition-all">
-                        <label for="modalBanCheck" class="text-sm text-red-500 font-bold">BAN USER (Block
-                            Access)</label>
+                        <label for="modalBanCheck" class="text-sm text-red-500 font-bold">사용자 차단 (접근 금지)</label>
                     </div>
                 </div>
                 <div class="flex gap-3 pt-4">
                     <button id="modalCloseBtn"
-                        class="flex-1 px-4 py-3 rounded-xl bg-slate-800 text-slate-300 font-bold">Cancel</button>
+                        class="flex-1 px-4 py-3 rounded-xl bg-slate-800 text-slate-300 font-bold">취소</button>
                     <button id="modalSaveBtn"
-                        class="flex-1 px-4 py-3 rounded-xl bg-blue-600 text-white font-bold hover:bg-blue-500 shadow-lg shadow-blue-500/20">Apply
-                        Changes</button>
+                        class="flex-1 px-4 py-3 rounded-xl bg-blue-600 text-white font-bold hover:bg-blue-500 shadow-lg shadow-blue-500/20">설정
+                        적용하기</button>
                 </div>
             </div>
         </div>

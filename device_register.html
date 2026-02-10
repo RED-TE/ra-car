@@ -98,8 +98,24 @@
 
             if (confirm(`'${deviceName}' 기기를 등록하시겠습니까?`)) {
                 Utils.setStorage(STORAGE_KEYS.DEVICE, deviceInfo);
-                alert('기기 등록이 완료되었습니다.\n라이선스가 활성화되었습니다.');
-                checkStatus();
+
+                // 📱 Firestore Sync
+                if (typeof auth !== 'undefined' && auth.currentUser) {
+                    db.collection('users').doc(auth.currentUser.uid).update({
+                        deviceIds: firebase.firestore.FieldValue.arrayUnion(deviceInfo.id),
+                        updatedAt: firebase.firestore.Timestamp.now()
+                    }).then(() => {
+                        alert('기기 등록이 완료되었습니다.\n서버와 동기화되었습니다.');
+                        checkStatus();
+                    }).catch(e => {
+                        console.error("Firestore sync failed:", e);
+                        alert('로컬에 저장되었으나 서버 동기화에 실패했습니다.');
+                        checkStatus();
+                    });
+                } else {
+                    alert('기기 등록이 완료되었습니다.\n(서버 동기화는 로그인 후 자동으로 수행됩니다.)');
+                    checkStatus();
+                }
             }
         }
 

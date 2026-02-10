@@ -149,9 +149,22 @@
 
                                 // 🛡️ Ban Enforcement
                                 if (data.isBanned) {
-                                    alert("해당 계정은 이용이 정지되었습니다. 관리자에게 문의하세요.");
+                                    alert("비정상 접속 정황이 포착되었습니다. 관리자에게 문의하세요.");
                                     auth.signOut().then(() => window.location.reload());
                                     return;
+                                }
+
+                                // 📱 Device Sync (HWID Tracking)
+                                const deviceInfo = Utils.getStorage(STORAGE_KEYS.DEVICE);
+                                if (deviceInfo && deviceInfo.id) {
+                                    const currentDeviceIds = data.deviceIds || [];
+                                    if (!currentDeviceIds.includes(deviceInfo.id)) {
+                                        console.log("Syncing new device ID...", deviceInfo.id);
+                                        db.collection('users').doc(user.uid).update({
+                                            deviceIds: firebase.firestore.FieldValue.arrayUnion(deviceInfo.id),
+                                            updatedAt: firebase.firestore.Timestamp.now()
+                                        }).catch(e => console.error("Device sync failed:", e));
+                                    }
                                 }
 
                                 if (data.plan && data.plan !== 'free') {
