@@ -77,6 +77,7 @@ async function loadAllData() {
         renderSuspiciousUsers();
         renderFreeUsers();
         updateStats();
+        await loadReviews();
 
         console.log(`✅ 총 ${allUsers.length}명 로드 완료`);
     } catch (error) {
@@ -398,6 +399,86 @@ function updateStats() {
     document.getElementById('stat-free').textContent = free;
     document.getElementById('stat-expired').textContent = expiredToday;
     document.getElementById('stat-suspicious').textContent = suspiciousUsers.length;
+}
+
+// Reviews Logic
+let allReviews = [];
+
+async function loadReviews() {
+    console.log("📝 후기 데이터 로드 시작");
+    try {
+        const snapshot = await db.collection("reviews").orderBy("createdAt", "desc").get();
+        allReviews = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        renderReviews();
+        console.log(`✅ 후기 ${allReviews.length}개 로드 완료`);
+    } catch (error) {
+        console.error("❌ 후기 로드 실패:", error);
+    }
+}
+
+function renderReviews() {
+    const tbody = document.getElementById('reviewsTableBody');
+    if (!tbody) return;
+    tbody.innerHTML = "";
+
+    if (allReviews.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="4" class="px-6 py-20 text-center text-white/30">작성된 후기가 없습니다.</td></tr>`;
+        return;
+    }
+
+    allReviews.forEach(review => {
+        const tr = document.createElement('tr');
+        tr.className = "hover:bg-white/5 transition-all text-sm";
+
+        const date = review.createdAt ? formatDate(review.createdAt.toDate()) : '-';
+        const stars = '★'.repeat(review.rating || 5) + '☆'.repeat(5 - (review.rating || 5));
+
+        tr.innerHTML = `
+            <td class="px-6 py-4">
+                <div class="font-medium text-white">${review.authorName || '익명'}</div>
+                <div class="text-xs text-white/30 font-mono mt-0.5">${date}</div>
+                <div class="text-[10px] text-white/20">${review.planName || '-'}</div>
+            </td>
+            <td class="px-6 py-4 text-center">
+                <span class="text-yellow-400 tracking-widest">${stars}</span>
+                <div class="text-xs text-white/30 mt-1">${review.rating}점</div>
+            </td>
+            <td class="px-6 py-4">
+                <div class="font-bold text-white mb-1">${escapeHtml(review.title)}</div>
+                <div class="text-white/60 leading-relaxed line-clamp-2">${escapeHtml(review.content)}</div>
+            </td>
+            <td class="px-6 py-4 text-right">
+                <button onclick="deleteReview('${review.id}')" 
+                        class="px-3 py-1.5 rounded-lg bg-red-500/10 hover:bg-red-500/20 text-xs text-red-400 border border-red-500/20 transition-all whitespace-nowrap">
+                    삭제
+                </button>
+            </td>
+        `;
+        tbody.appendChild(tr);
+    });
+}
+
+window.deleteReview = async function (id) {
+    if (!confirm("정말로 이 후기를 삭제하시겠습니까? (복구 불가)")) return;
+
+    try {
+        await db.collection("reviews").doc(id).delete();
+        alert("후기가 삭제되었습니다.");
+        loadReviews(); // Reload
+    } catch (e) {
+        console.error(e);
+        alert("삭제 실패: " + e.message);
+    }
+};
+
+function escapeHtml(text) {
+    if (!text) return "";
+    return text
+        .replace(/&/g, "&amp;")
+        .replace(/</g, "&lt;")
+        .replace(/>/g, "&gt;")
+        .replace(/"/g, "&quot;")
+        .replace(/'/g, "&#039;");
 }
 
 /**
