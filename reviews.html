@@ -126,7 +126,7 @@
             </button>
 
             <!-- [UPDATED] Modal Title Color -->
-            <h3 class="text-2xl font-bold mb-6 text-blue-400">후기 작성하기</h3>
+            <h3 id="modal-title" class="text-2xl font-bold mb-6 text-blue-400">후기 작성하기</h3>
 
             <div class="space-y-4">
                 <div>
@@ -240,76 +240,84 @@
             // [UPDATED] Static Featured Reviews (Sales Boost)
             const FEATURED_REVIEWS = [
                 {
-                    authorName: "박*호",
+                    authorName: "C***C",
                     planName: "PRO",
                     rating: 5,
-                    title: "영업직 필수템입니다 ㄹㅇ",
-                    content: "다른 프로그램 쓰다가 넘어왔는데 신세계네요. 키워드만 넣으면 끝나니까 영업 뛰면서도 블로그 관리가 됩니다. 이번 달 DB 벌써 30개 넘었네요.",
-                    createdAt: new Date(Date.now() - 1000 * 60 * 60 * 2)
+                    title: "굿",
+                    content: "좋아요 편함",
+                    createdAt: new Date(2026, 1, 11, 14, 30) // Today
                 },
                 {
-                    authorName: "조*커플",
-                    planName: "PRO",
+                    authorName: "P***O",
+                    planName: "LITE",
                     rating: 5,
+                    title: "쿠팡 파트너스로 부업중 ㅋㅋㅋㅋ",
+                    content: "단톡방에 홍보하길래 무료해보고 괜찮아서 결제하고 혹시나해서 차량명에 쿠팡 물품 적고 했더니 쿠팡파트너스 글써주네욬ㅋㅋㅋㅋㅋ",
+                    createdAt: new Date(2026, 1, 11, 14, 30) // Today
+                },
+                {
+                    authorName: "O*****E",
+                    planName: "PRO",
+                    rating: 4,
                     title: "이미지 자동이 진짜 편해요",
-                    content: "솔직히 반신반의했는데 진짜 편합니다. 이미지 넣는 게 제일 귀찮았는데 그것도 자동이고... PRO 쓰니까 다계정 돌리기 딱 좋아요.",
-                    createdAt: new Date(Date.now() - 1000 * 60 * 60 * 5)
+                    content: "계정은 하나인데 출고사진 워터마크 때문에 프로결제함 귀찮은거 덜어줌 사용중이라 아직 결과는 모름",
+                    createdAt: new Date(2026, 1, 11, 11, 15) // Today
                 },
                 {
-                    authorName: "조*철",
+                    authorName: "J***Z",
                     planName: "PRO",
                     rating: 5,
                     title: "돈값 톡톡히 합니다",
-                    content: "광고 대행사에 월 200씩 주던 거 끊었습니다. 프로그램 비용 뽑고도 남네요. 진작 알았으면 좋았을 텐데 ㅠㅠ",
-                    createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24)
+                    content: "테스터 기간부터 사용 할 수 있어서 4개월 정도 먼저 사용했습니다. 계정 5개정도 운영중이고 월 평균 50~60개 들어오는 듯 합니다. 만족합니다 오류 한 번씩 뜨긴하는데 껏다키면 다시 잘되네요",
+                    createdAt: new Date(2026, 1, 11, 9, 45) // Today
                 },
                 {
-                    authorName: "Z*2006",
+                    authorName: "Z****6",
                     planName: "PRO",
                     rating: 5,
-                    title: "상위노출 잘 되네요",
-                    content: "영업맨 필수템 인정합니다. 글 퀄리티가 생각보다 너무 좋아서 놀랐어요. 네이버 로직도 잘 맞는 것 같고 상위노출 잘 뜹니다.",
-                    createdAt: new Date(Date.now() - 1000 * 60 * 60 * 48)
+                    title: "테스터인데",
+                    content: "글 퀄리티가 생각보다 너무 좋아서 놀랐어요. 네이버 로직도 잘 맞는 것 같고 상위노출 잘 뜹니다.",
+                    createdAt: new Date(2026, 1, 10, 21, 20) // Yesterday
                 },
                 {
-                    authorName: "G*현",
+                    authorName: "G****9",
                     planName: "PRO",
                     rating: 5,
                     title: "문의 퀄리티가 다릅니다",
-                    content: "디비디비딥에서 사는것보다 효율 훨씬 좋아요. 내가 원하는 차종으로 글 쓰니까 문의 퀄리티가 다릅니다. 강추!!",
-                    createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 3)
+                    content: "테스터라 미리 써본 후기 : 초반 노출 낮았음 근데 점점 올라오니 일평균 200~300 조회수 / 디비 한달에 30개이상은 들어오는데 대행사 디비랑 퀄이 다름",
+                    createdAt: new Date(2026, 1, 10, 18, 50)
                 },
                 {
-                    authorName: "P*0139",
+                    authorName: "P****9",
                     planName: "PRO",
                     rating: 5,
                     title: "가이드대로 하니 쉬워요",
                     content: "초보자도 쓰기 쉽게 되어있어서 좋네요. 가이드대로만 하니까 하루에 10분도 안 걸립니다. 리카봇 파이팅!",
-                    createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 5)
+                    createdAt: new Date(2026, 1, 10, 14, 10)
                 },
                 {
-                    authorName: "따*쥐",
+                    authorName: "T****E",
                     planName: "PRO",
                     rating: 5,
-                    title: "시간 절약 대박입니다",
-                    content: "확실히 유입이 늘었어요. 예전에는 글 하나 쓰는데 1시간 걸렸는데 이젠 1분 컷.. ㅋㅋㅋ 시간 아껴서 미팅 하나 더 갑니다.",
-                    createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 7)
+                    title: "대행사 ㅈ같았는데",
+                    content: "요즘 대행사 여러업체에 팔아서 사실 타사 3~4곳 기본이였는데 타사 없어서 좋은듯함",
+                    createdAt: new Date(2026, 1, 10, 10, 5)
                 },
                 {
-                    authorName: "A*saf",
+                    authorName: "A****F",
                     planName: "LITE",
                     rating: 5,
-                    title: "가성비 최고네요",
-                    content: "라이트로 먼저 써보고 있는데 가성비 최고네요. 조만간 프로로 넘어갈 예정입니다.",
-                    createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 8)
+                    title: "가성비ㅎ최고네ㅎ",
+                    content: "라이트로 먼저 써보고 있는데 가성비 최고 조만간 프로로 넘어갈 예정",
+                    createdAt: new Date(2026, 1, 9, 19, 30) // Minimum Date
                 },
                 {
-                    authorName: "J*666",
+                    authorName: "J****6",
                     planName: "PRO",
                     rating: 5,
                     title: "지인 추천했습니다",
-                    content: "주변 딜러들한테 추천하고 다니는 중입니다. 우리 지점 사람들 다 이거 써요 ㅋㅋ 사장님 번창하세요!",
-                    createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 10)
+                    content: "주변 딜러들한테 추천하고 다니는 중입니다.팀원들끼리 돈모아서 써요 ㅋㅋ 번창하세요!",
+                    createdAt: new Date(2026, 1, 9, 15, 45)
                 },
                 {
                     authorName: "P*1039",
@@ -317,21 +325,33 @@
                     rating: 5,
                     title: "믿고 씁니다",
                     content: "업데이트도 꾸준하고 피드백도 빠르고 믿고 씁니다. 이런 프로그램 만들어주셔서 감사합니다.",
-                    createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 12)
+                    createdAt: new Date(2026, 1, 9, 11, 20)
                 }
             ];
 
             const list = document.getElementById('review-list');
 
             // Render featured reviews first
-            function renderReview(data) {
+            function renderReview(data, id = null) {
                 const date = data.createdAt instanceof Date ? data.createdAt.toLocaleDateString() : (data.createdAt ? new Date(data.createdAt.toDate()).toLocaleDateString() : '날짜 없음');
                 const stars = '★'.repeat(data.rating || 5) + '☆'.repeat(5 - (data.rating || 5));
                 const planBadge = data.planName ? `[${data.planName.replace(/[\[\]]/g, '')}]` : '[PRO]';
                 const planColor = planBadge.includes('LITE') ? 'text-green-400 border-green-500/30' : 'text-blue-400 border-blue-500/30';
 
+                // Edit/Delete buttons if owner
+                let ownBtns = '';
+                if (currentUser && data.uid === currentUser.uid && id) {
+                    ownBtns = `
+                        <div class="flex gap-2 text-xs">
+                             <button onclick="editReview('${id}', '${escapeHtml(data.title)}', '${escapeHtml(data.content)}', ${data.rating})" class="text-blue-400 hover:text-blue-300">수정</button>
+                             <span class="text-gray-600">|</span>
+                             <button onclick="deleteReview('${id}')" class="text-red-400 hover:text-red-300">삭제</button>
+                        </div>
+                    `;
+                }
+
                 return `
-                    <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 hover:border-blue-500/30 transition-all">
+                    <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 hover:border-blue-500/30 transition-all group">
                         <div class="flex justify-between items-start mb-4">
                             <div>
                                 <div class="flex items-center gap-2 mb-1">
@@ -340,7 +360,10 @@
                                 </div>
                                 <span class="text-yellow-400 text-sm tracking-widest">${stars}</span>
                             </div>
-                            <span class="text-gray-500 text-sm">${date}</span>
+                            <div class="text-right">
+                                <span class="text-gray-500 text-sm block">${date}</span>
+                                ${ownBtns}
+                            </div>
                         </div>
                         <h4 class="font-bold text-gray-200 mb-2">${escapeHtml(data.title)}</h4>
                         <p class="text-gray-400 text-sm leading-relaxed max-h-24 overflow-hidden overflow-ellipsis line-clamp-3">
@@ -357,7 +380,7 @@
                 return;
             }
 
-            db.collection('reviews').orderBy('createdAt', 'desc').limit(20).onSnapshot((snapshot) => {
+            db.collection('reviews').orderBy('createdAt', 'desc').limit(50).onSnapshot((snapshot) => {
                 list.innerHTML = '';
 
                 // 1. Add Featured Reviews
@@ -369,18 +392,52 @@
                 if (!snapshot.empty) {
                     snapshot.forEach(doc => {
                         const data = doc.data();
-                        list.innerHTML += renderReview(data);
+                        list.innerHTML += renderReview(data, doc.id);
                     });
                 }
             });
         }
 
+        let isEditing = false;
+        let editDocId = null;
+
         function openWriteModal() {
+            if (!currentUser || !userPlan || (userPlan.plan === 'free')) {
+                alert("이용 후기는 유료 플랜(LITE, PRO) 사용자만 작성할 수 있습니다.");
+                return;
+            }
+            isEditing = false;
+            editDocId = null;
+            document.getElementById('modal-title').innerText = "후기 작성하기";
+            document.getElementById('review-title').value = '';
+            document.getElementById('review-content').value = '';
+            setRating(5);
+            document.getElementById('write-modal').classList.remove('hidden');
+        }
+
+        function editReview(id, title, content, rating) {
+            isEditing = true;
+            editDocId = id;
+            document.getElementById('modal-title').innerText = "후기 수정하기";
+            document.getElementById('review-title').value = title;
+            document.getElementById('review-content').value = content;
+            setRating(rating);
             document.getElementById('write-modal').classList.remove('hidden');
         }
 
         function closeWriteModal() {
             document.getElementById('write-modal').classList.add('hidden');
+        }
+
+        async function deleteReview(id) {
+            if (confirm("정말로 삭제하시겠습니까?")) {
+                try {
+                    await db.collection('reviews').doc(id).delete();
+                    alert("삭제되었습니다.");
+                } catch (e) {
+                    alert("삭제 실패: " + e.message);
+                }
+            }
         }
 
         function setRating(rating) {
@@ -397,8 +454,24 @@
             }
         }
 
+        function getMaskedName(email) {
+            // email: user@exmaple.com
+            let id = email.split('@')[0]; // user
+            if (id.length <= 1) return id + "*";
+
+            let first = id[0];
+            let last = id[id.length - 1];
+            // Random asterisks count between 3 and 6
+            let starCount = Math.floor(Math.random() * 4) + 3;
+            return first + '*'.repeat(starCount) + last;
+        }
+
         async function submitReview() {
             if (!currentUser) return alert("로그인이 필요합니다.");
+            // Double check plan
+            if (!userPlan || userPlan.plan === 'free') {
+                return alert("이용 후기는 유료 플랜 사용자만 작성 가능합니다.");
+            }
 
             const title = document.getElementById('review-title').value.trim();
             const content = document.getElementById('review-content').value.trim();
@@ -406,35 +479,41 @@
             if (title.length < 2) return alert("제목을 입력해주세요.");
             if (content.length < 10) return alert("내용을 10자 이상 작성해주세요.");
 
-            // Mask Name Logic (e.g., 홍길동 -> 홍*동, Kim -> K*m)
-            let authorName = currentUser.displayName || currentUser.email.split('@')[0];
-            if (authorName.length > 2) {
-                authorName = authorName[0] + '*'.repeat(authorName.length - 2) + authorName[authorName.length - 1];
-            } else if (authorName.length === 2) {
-                authorName = authorName[0] + '*';
-            }
-
             const planName = userPlan && userPlan.planName ? `[${userPlan.planName}]` : '[PRO]';
 
             try {
-                await db.collection('reviews').add({
-                    uid: currentUser.uid,
-                    authorName: authorName,
-                    planName: planName, // Store at creation time
-                    title: title,
-                    content: content,
-                    rating: currentRating,
-                    createdAt: firebase.firestore.FieldValue.serverTimestamp()
-                });
+                if (isEditing && editDocId) {
+                    // Update
+                    await db.collection('reviews').doc(editDocId).update({
+                        title: title,
+                        content: content,
+                        rating: currentRating,
+                        updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+                    });
+                    alert("후기가 수정되었습니다!");
+                } else {
+                    // Create
+                    let authorName = getMaskedName(currentUser.email);
 
-                alert("후기가 등록되었습니다!\n(+7일 연장이 곧 적용됩니다)");
+                    await db.collection('reviews').add({
+                        uid: currentUser.uid,
+                        authorName: authorName,
+                        planName: planName,
+                        title: title,
+                        content: content,
+                        rating: currentRating,
+                        createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                    });
+                    alert("후기가 등록되었습니다!\n(+7일 연장이 곧 적용됩니다)");
+                }
+
                 closeWriteModal();
                 document.getElementById('review-title').value = '';
                 document.getElementById('review-content').value = '';
 
             } catch (e) {
                 console.error(e);
-                alert("후기 등록 실패: " + e.message);
+                alert("처리 실패: " + e.message);
             }
         }
 
@@ -448,6 +527,3 @@
                 .replace(/'/g, "&#039;");
         }
     </script>
-</body>
-
-</html>
