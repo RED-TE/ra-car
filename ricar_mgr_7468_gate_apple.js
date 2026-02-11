@@ -433,19 +433,23 @@ function renderReviews() {
         const date = review.createdAt ? formatDate(review.createdAt.toDate()) : '-';
         const stars = '★'.repeat(review.rating || 5) + '☆'.repeat(5 - (review.rating || 5));
 
+        // Find real user
+        const realUser = allUsers.find(u => u.id === review.uid);
+        const realEmail = realUser ? realUser.email : '(탈퇴/알수없음)';
+
         tr.innerHTML = `
             <td class="px-6 py-4">
-                <div class="font-medium text-white">${review.authorName || '익명'}</div>
-                <div class="text-xs text-white/30 font-mono mt-0.5">${date}</div>
-                <div class="text-[10px] text-white/20">${review.planName || '-'}</div>
+                <div class="font-bold text-blue-400 mb-0.5">${realEmail}</div>
+                <div class="font-medium text-white/70">${review.authorName || '익명'}</div>
+                <div class="text-[10px] text-white/30 font-mono mt-0.5">${date}</div>
             </td>
             <td class="px-6 py-4 text-center">
-                <span class="text-yellow-400 tracking-widest">${stars}</span>
+                <span class="text-yellow-400 tracking-widest text-lg">${stars}</span>
                 <div class="text-xs text-white/30 mt-1">${review.rating}점</div>
             </td>
             <td class="px-6 py-4">
                 <div class="font-bold text-white mb-1">${escapeHtml(review.title)}</div>
-                <div class="text-white/60 leading-relaxed line-clamp-2">${escapeHtml(review.content)}</div>
+                <div class="text-white/80 leading-relaxed whitespace-pre-wrap">${escapeHtml(review.content)}</div>
             </td>
             <td class="px-6 py-4 text-right">
                 <button onclick="deleteReview('${review.id}')" 
