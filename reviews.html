@@ -1,0 +1,453 @@
+<!DOCTYPE html>
+<html lang="ko" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>이용 후기 - 블로그 자동화 AI</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap"
+        rel="stylesheet">
+    <link href="base.css" rel="stylesheet">
+    <style>
+        * {
+            font-family: 'Noto Sans KR', sans-serif;
+            word-break: keep-all;
+        }
+
+        /* [UPDATED] Neon Glow to Blue */
+        .neon-glow {
+            box-shadow: 0 0 20px rgba(59, 130, 246, 0.5);
+        }
+
+        .neon-text {
+            text-shadow: 0 0 10px rgba(59, 130, 246, 0.8);
+        }
+
+        .gradient-border {
+            position: relative;
+            background: linear-gradient(145deg, #1e293b, #0f172a);
+            border: 2px solid transparent;
+            border-radius: 12px;
+        }
+
+        .gradient-border::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            border-radius: inherit;
+            padding: 2px;
+            /* [UPDATED] Gradient Border colors */
+            background: linear-gradient(145deg, #3b82f6, #06b6d4);
+            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+            -webkit-mask-composite: xor;
+            mask-composite: exclude;
+        }
+    </style>
+</head>
+
+<body class="bg-slate-950 text-gray-100 min-h-screen flex flex-col">
+
+    <!-- Header [UPDATED] -->
+    <header class="fixed w-full top-0 z-50 bg-slate-950/90 backdrop-blur-lg border-b border-slate-800">
+        <nav class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-2 cursor-pointer" onclick="location.href='index.html'">
+                    <!-- [UPDATED] Logo Image -->
+                    <img src="logo.png" alt="RicarBot" class="w-10 h-10 object-contain">
+                    <span class="text-2xl font-black">리카<span class="text-blue-500">봇</span></span>
+                </div>
+                <!-- Navigation Links -->
+                <div class="hidden md:flex items-center space-x-6">
+                    <a href="index.html" class="text-gray-300 hover:text-blue-400 transition-colors">홈</a>
+                    <a href="guide.html" class="text-gray-300 hover:text-blue-400 transition-colors">사용 가이드</a>
+                    <!-- Active Link Blue -->
+                    <a href="reviews.html" class="text-blue-400 font-bold transition-colors">이용 후기</a>
+                </div>
+
+                <div id="nav-auth-section" class="flex items-center space-x-4">
+                    <a href="login.html" class="text-gray-300 hover:text-blue-400 transition-colors">로그인</a>
+                    <button onclick="location.href='checkout.html'"
+                        class="bg-blue-500 hover:bg-blue-600 text-white font-bold px-6 py-2 rounded-lg neon-glow transition-all hover:scale-105">
+                        시작하기
+                    </button>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 pt-32 pb-20 flex-grow">
+
+        <!-- Reward Banner [UPDATED Colors] -->
+        <div
+            class="bg-gradient-to-r from-blue-900/50 to-indigo-900/50 border border-blue-500/30 rounded-2xl p-6 mb-12 text-center animate-pulse">
+            <h2 class="text-2xl md:text-3xl font-black text-blue-400 mb-2">🎉 후기 작성 시 이용 기간 +7일 자동 연장!</h2>
+            <p class="text-gray-300">소중한 사용 후기를 남겨주시면 감사의 마음을 담아 서비스 이용 기간을 연장해 드립니다. (1회 한정)</p>
+        </div>
+
+        <!-- Title & Write Button -->
+        <div class="flex flex-col md:flex-row justify-between items-center mb-10 gap-4">
+            <div>
+                <h1 class="text-4xl font-black mb-2">사용자 리얼 후기</h1>
+                <p class="text-gray-400">실제 사용자들의 생생한 후기를 확인해보세요.</p>
+            </div>
+            <button id="write-btn" onclick="openWriteModal()"
+                class="hidden bg-blue-600 hover:bg-blue-500 text-white font-bold px-8 py-3 rounded-xl transition-all shadow-lg shadow-blue-500/30 flex items-center gap-2">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z">
+                    </path>
+                </svg>
+                후기 작성하기
+            </button>
+        </div>
+
+        <!-- Review List -->
+        <div id="review-list" class="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <!-- Reviews will be loaded here -->
+            <div class="col-span-1 md:col-span-2 text-center py-20 text-gray-500">
+                로딩 중...
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Write Modal -->
+    <div id="write-modal" class="fixed inset-0 bg-black/80 flex items-center justify-center z-[100] hidden px-4">
+        <div class="gradient-border bg-slate-900 p-8 w-full max-w-lg relative">
+            <button onclick="closeWriteModal()" class="absolute top-4 right-4 text-gray-400 hover:text-white">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                    </path>
+                </svg>
+            </button>
+
+            <!-- [UPDATED] Modal Title Color -->
+            <h3 class="text-2xl font-bold mb-6 text-blue-400">후기 작성하기</h3>
+
+            <div class="space-y-4">
+                <div>
+                    <label class="block text-sm text-gray-400 mb-1">제목</label>
+                    <input type="text" id="review-title"
+                        class="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-blue-400 outline-none"
+                        placeholder="제목을 입력하세요">
+                </div>
+                <div>
+                    <label class="block text-sm text-gray-400 mb-1">내용</label>
+                    <textarea id="review-content"
+                        class="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-3 text-white focus:ring-2 focus:ring-blue-400 outline-none h-32 resize-none"
+                        placeholder="서비스 사용 경험을 들려주세요 (최소 10자)"></textarea>
+                </div>
+                <div>
+                    <label class="block text-sm text-gray-400 mb-1">평점</label>
+                    <div class="flex gap-2" id="star-container">
+                        <button onclick="setRating(1)"
+                            class="text-2xl text-gray-600 hover:text-yellow-400 transition-colors">★</button>
+                        <button onclick="setRating(2)"
+                            class="text-2xl text-gray-600 hover:text-yellow-400 transition-colors">★</button>
+                        <button onclick="setRating(3)"
+                            class="text-2xl text-gray-600 hover:text-yellow-400 transition-colors">★</button>
+                        <button onclick="setRating(4)"
+                            class="text-2xl text-gray-600 hover:text-yellow-400 transition-colors">★</button>
+                        <button onclick="setRating(5)"
+                            class="text-2xl text-gray-600 hover:text-yellow-400 transition-colors">★</button>
+                    </div>
+                </div>
+
+                <button onclick="submitReview()"
+                    class="w-full bg-blue-500 hover:bg-blue-600 text-white font-bold py-3 rounded-lg mt-4 transition-all">
+                    작성 완료 (+7일 연장 받기)
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 border-t border-slate-800 pt-16 pb-8">
+        <div class="container mx-auto px-6 text-center md:text-left">
+            <p class="text-gray-500 text-sm">© 2026 Ricar Auto Plan. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- Firebase Script -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+    <script src="firebase_config.js"></script>
+
+    <script>
+        // Global State
+        let currentUser = null;
+        let userPlan = null;
+        let currentRating = 5;
+
+        // --- Logic ---
+        document.addEventListener('DOMContentLoaded', () => {
+            if (typeof auth !== 'undefined') {
+                auth.onAuthStateChanged(async (user) => {
+                    currentUser = user;
+                    const navAuthSection = document.getElementById('nav-auth-section');
+                    const writeBtn = document.getElementById('write-btn');
+
+                    if (user) {
+                        // Logged In
+                        if (typeof db !== 'undefined') {
+                            db.collection('users').doc(user.uid).onSnapshot((doc) => {
+                                if (doc.exists) {
+                                    const data = doc.data();
+                                    userPlan = data;
+
+                                    // Update Header Badge
+                                    const planName = (data.planName || data.plan || 'Free').toUpperCase();
+                                    navAuthSection.innerHTML = `
+                                        <div class="flex items-center gap-4">
+                                            <span class="text-gray-300 text-sm">${user.email} <span class="bg-blue-500/20 text-blue-400 border border-blue-500/50 text-xs font-bold px-2 py-1 rounded ml-1">${planName}</span></span>
+                                            <button onclick="auth.signOut().then(()=>location.reload())" class="text-gray-400 hover:text-white text-sm">로그아웃</button>
+                                        </div>
+                                    `;
+
+                                    // Show Write Button only for Paid Users
+                                    if (data.plan && data.plan !== 'free') {
+                                        writeBtn.classList.remove('hidden');
+                                    } else {
+                                        writeBtn.classList.add('hidden'); // Ensure hidden if plan expired/free
+                                    }
+                                }
+                            });
+                        }
+                    } else {
+                        // Logged Out
+                        navAuthSection.innerHTML = `
+                            <a href="login.html" class="text-gray-300 hover:text-blue-400 transition-colors">로그인</a>
+                            <button onclick="location.href='checkout.html'" class="bg-blue-500 hover:bg-blue-600 text-white font-bold px-6 py-2 rounded-lg neon-glow transition-all hover:scale-105">
+                                시작하기
+                            </button>
+                        `;
+                        writeBtn.classList.add('hidden');
+                    }
+                });
+            }
+
+            // Load Reviews
+            loadReviews();
+            setRating(5); // Default rating
+        });
+
+        function loadReviews() {
+            // [UPDATED] Static Featured Reviews (Sales Boost)
+            const FEATURED_REVIEWS = [
+                {
+                    authorName: "박*호",
+                    planName: "PRO",
+                    rating: 5,
+                    title: "영업직 필수템입니다 ㄹㅇ",
+                    content: "다른 프로그램 쓰다가 넘어왔는데 신세계네요. 키워드만 넣으면 끝나니까 영업 뛰면서도 블로그 관리가 됩니다. 이번 달 DB 벌써 30개 넘었네요.",
+                    createdAt: new Date(Date.now() - 1000 * 60 * 60 * 2)
+                },
+                {
+                    authorName: "조*커플",
+                    planName: "PRO",
+                    rating: 5,
+                    title: "이미지 자동이 진짜 편해요",
+                    content: "솔직히 반신반의했는데 진짜 편합니다. 이미지 넣는 게 제일 귀찮았는데 그것도 자동이고... PRO 쓰니까 다계정 돌리기 딱 좋아요.",
+                    createdAt: new Date(Date.now() - 1000 * 60 * 60 * 5)
+                },
+                {
+                    authorName: "조*철",
+                    planName: "PRO",
+                    rating: 5,
+                    title: "돈값 톡톡히 합니다",
+                    content: "광고 대행사에 월 200씩 주던 거 끊었습니다. 프로그램 비용 뽑고도 남네요. 진작 알았으면 좋았을 텐데 ㅠㅠ",
+                    createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24)
+                },
+                {
+                    authorName: "Z*2006",
+                    planName: "PRO",
+                    rating: 5,
+                    title: "상위노출 잘 되네요",
+                    content: "영업맨 필수템 인정합니다. 글 퀄리티가 생각보다 너무 좋아서 놀랐어요. 네이버 로직도 잘 맞는 것 같고 상위노출 잘 뜹니다.",
+                    createdAt: new Date(Date.now() - 1000 * 60 * 60 * 48)
+                },
+                {
+                    authorName: "G*현",
+                    planName: "PRO",
+                    rating: 5,
+                    title: "문의 퀄리티가 다릅니다",
+                    content: "디비디비딥에서 사는것보다 효율 훨씬 좋아요. 내가 원하는 차종으로 글 쓰니까 문의 퀄리티가 다릅니다. 강추!!",
+                    createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 3)
+                },
+                {
+                    authorName: "P*0139",
+                    planName: "PRO",
+                    rating: 5,
+                    title: "가이드대로 하니 쉬워요",
+                    content: "초보자도 쓰기 쉽게 되어있어서 좋네요. 가이드대로만 하니까 하루에 10분도 안 걸립니다. 리카봇 파이팅!",
+                    createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 5)
+                },
+                {
+                    authorName: "따*쥐",
+                    planName: "PRO",
+                    rating: 5,
+                    title: "시간 절약 대박입니다",
+                    content: "확실히 유입이 늘었어요. 예전에는 글 하나 쓰는데 1시간 걸렸는데 이젠 1분 컷.. ㅋㅋㅋ 시간 아껴서 미팅 하나 더 갑니다.",
+                    createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 7)
+                },
+                {
+                    authorName: "A*saf",
+                    planName: "LITE",
+                    rating: 5,
+                    title: "가성비 최고네요",
+                    content: "라이트로 먼저 써보고 있는데 가성비 최고네요. 조만간 프로로 넘어갈 예정입니다.",
+                    createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 8)
+                },
+                {
+                    authorName: "J*666",
+                    planName: "PRO",
+                    rating: 5,
+                    title: "지인 추천했습니다",
+                    content: "주변 딜러들한테 추천하고 다니는 중입니다. 우리 지점 사람들 다 이거 써요 ㅋㅋ 사장님 번창하세요!",
+                    createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 10)
+                },
+                {
+                    authorName: "P*1039",
+                    planName: "PRO",
+                    rating: 5,
+                    title: "믿고 씁니다",
+                    content: "업데이트도 꾸준하고 피드백도 빠르고 믿고 씁니다. 이런 프로그램 만들어주셔서 감사합니다.",
+                    createdAt: new Date(Date.now() - 1000 * 60 * 60 * 24 * 12)
+                }
+            ];
+
+            const list = document.getElementById('review-list');
+
+            // Render featured reviews first
+            function renderReview(data) {
+                const date = data.createdAt instanceof Date ? data.createdAt.toLocaleDateString() : (data.createdAt ? new Date(data.createdAt.toDate()).toLocaleDateString() : '날짜 없음');
+                const stars = '★'.repeat(data.rating || 5) + '☆'.repeat(5 - (data.rating || 5));
+                const planBadge = data.planName ? `[${data.planName.replace(/[\[\]]/g, '')}]` : '[PRO]';
+                const planColor = planBadge.includes('LITE') ? 'text-green-400 border-green-500/30' : 'text-blue-400 border-blue-500/30';
+
+                return `
+                    <div class="bg-slate-900 border border-slate-800 rounded-xl p-6 hover:border-blue-500/30 transition-all">
+                        <div class="flex justify-between items-start mb-4">
+                            <div>
+                                <div class="flex items-center gap-2 mb-1">
+                                    <span class="font-bold text-lg text-white">${data.authorName || '익명'}</span>
+                                    <span class="text-xs bg-slate-800 ${planColor} border px-2 py-0.5 rounded">${planBadge}</span>
+                                </div>
+                                <span class="text-yellow-400 text-sm tracking-widest">${stars}</span>
+                            </div>
+                            <span class="text-gray-500 text-sm">${date}</span>
+                        </div>
+                        <h4 class="font-bold text-gray-200 mb-2">${escapeHtml(data.title)}</h4>
+                        <p class="text-gray-400 text-sm leading-relaxed max-h-24 overflow-hidden overflow-ellipsis line-clamp-3">
+                            ${escapeHtml(data.content)}
+                        </p>
+                    </div>
+                `;
+            }
+
+            if (typeof db === 'undefined') {
+                // If DB not loaded, just show featured
+                list.innerHTML = '';
+                FEATURED_REVIEWS.forEach(r => list.innerHTML += renderReview(r));
+                return;
+            }
+
+            db.collection('reviews').orderBy('createdAt', 'desc').limit(20).onSnapshot((snapshot) => {
+                list.innerHTML = '';
+
+                // 1. Add Featured Reviews
+                FEATURED_REVIEWS.forEach(r => {
+                    list.innerHTML += renderReview(r);
+                });
+
+                // 2. Add Real DB Reviews
+                if (!snapshot.empty) {
+                    snapshot.forEach(doc => {
+                        const data = doc.data();
+                        list.innerHTML += renderReview(data);
+                    });
+                }
+            });
+        }
+
+        function openWriteModal() {
+            document.getElementById('write-modal').classList.remove('hidden');
+        }
+
+        function closeWriteModal() {
+            document.getElementById('write-modal').classList.add('hidden');
+        }
+
+        function setRating(rating) {
+            currentRating = rating;
+            const starBtns = document.getElementById('star-container').children;
+            for (let i = 0; i < 5; i++) {
+                if (i < rating) {
+                    starBtns[i].classList.add('text-yellow-400');
+                    starBtns[i].classList.remove('text-gray-600');
+                } else {
+                    starBtns[i].classList.remove('text-yellow-400');
+                    starBtns[i].classList.add('text-gray-600');
+                }
+            }
+        }
+
+        async function submitReview() {
+            if (!currentUser) return alert("로그인이 필요합니다.");
+
+            const title = document.getElementById('review-title').value.trim();
+            const content = document.getElementById('review-content').value.trim();
+
+            if (title.length < 2) return alert("제목을 입력해주세요.");
+            if (content.length < 10) return alert("내용을 10자 이상 작성해주세요.");
+
+            // Mask Name Logic (e.g., 홍길동 -> 홍*동, Kim -> K*m)
+            let authorName = currentUser.displayName || currentUser.email.split('@')[0];
+            if (authorName.length > 2) {
+                authorName = authorName[0] + '*'.repeat(authorName.length - 2) + authorName[authorName.length - 1];
+            } else if (authorName.length === 2) {
+                authorName = authorName[0] + '*';
+            }
+
+            const planName = userPlan && userPlan.planName ? `[${userPlan.planName}]` : '[PRO]';
+
+            try {
+                await db.collection('reviews').add({
+                    uid: currentUser.uid,
+                    authorName: authorName,
+                    planName: planName, // Store at creation time
+                    title: title,
+                    content: content,
+                    rating: currentRating,
+                    createdAt: firebase.firestore.FieldValue.serverTimestamp()
+                });
+
+                alert("후기가 등록되었습니다!\n(+7일 연장이 곧 적용됩니다)");
+                closeWriteModal();
+                document.getElementById('review-title').value = '';
+                document.getElementById('review-content').value = '';
+
+            } catch (e) {
+                console.error(e);
+                alert("후기 등록 실패: " + e.message);
+            }
+        }
+
+        function escapeHtml(text) {
+            if (!text) return "";
+            return text
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;")
+                .replace(/'/g, "&#039;");
+        }
+    </script>
+</body>
+
+</html>

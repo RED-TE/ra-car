@@ -4,8 +4,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="AI 기반 블로그 자동화 솔루션 - 키워드만 입력하면 이미지 제작부터 발행까지 100% 자동화">
-    <title>블로그 자동화 AI - 업무시간 1/10 단축 & 고품질 DB 확보</title>
+    <meta name="description" content="영업사원 필수템! DB 2개 값으로 한 달 무제한 DB 확보. 100% 자동화 블로그 시스템">
+    <title>🔥 리카봇 - DB 2~3개 값으로 한 달 무제한 | 100% 자동 블로그 시스템</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -13,43 +13,35 @@
         rel="stylesheet">
     <link href="base.css" rel="stylesheet">
 
-    <!-- SEO / Open Graph -->
-    <meta property="og:type" content="website">
-    <meta property="og:title" content="블로그 자동화 AI - 업무시간 1/10 단축 & 고품질 DB 확보">
-    <meta property="og:description" content="키워드만 입력하면 글 작성부터 이미지 생성까지 100% 자동화. 고품질 리드 DB를 자체적으로 확보하세요.">
-    <meta property="og:image" content="https://source.unsplash.com/random/1200x630/?technology,ai">
-    <!-- Placeholder or your asset -->
-    <meta property="og:url" content="https://ricarautoplan.web.app"> <!-- Change to real URL -->
     <style>
         * {
             font-family: 'Noto Sans KR', -apple-system, sans-serif;
             word-break: keep-all;
         }
 
+        /* [UPDATED] Neon Glow to Blue */
         .neon-glow {
-            box-shadow: 0 0 20px rgba(74, 222, 128, 0.5), 0 0 40px rgba(74, 222, 128, 0.3);
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.6), 0 0 60px rgba(59, 130, 246, 0.4);
         }
 
         .neon-text {
-            text-shadow: 0 0 10px rgba(74, 222, 128, 0.8), 0 0 20px rgba(74, 222, 128, 0.5);
+            text-shadow: 0 0 15px rgba(59, 130, 246, 0.9), 0 0 30px rgba(59, 130, 246, 0.6);
         }
 
-        .gradient-border {
-            position: relative;
-            background: linear-gradient(145deg, #1e293b, #0f172a);
-            border: 2px solid transparent;
+        .pulse-glow {
+            animation: pulse-glow 2s ease-in-out infinite;
         }
 
-        .gradient-border::before {
-            content: '';
-            position: absolute;
-            inset: 0;
-            border-radius: inherit;
-            padding: 2px;
-            background: linear-gradient(145deg, #4ade80, #22d3ee);
-            -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
-            -webkit-mask-composite: xor;
-            mask-composite: exclude;
+        @keyframes pulse-glow {
+
+            0%,
+            100% {
+                box-shadow: 0 0 20px rgba(59, 130, 246, 0.5), 0 0 40px rgba(59, 130, 246, 0.3);
+            }
+
+            50% {
+                box-shadow: 0 0 40px rgba(59, 130, 246, 0.8), 0 0 80px rgba(59, 130, 246, 0.5);
+            }
         }
 
         @keyframes float {
@@ -78,152 +70,265 @@
             max-height: 500px;
             transition: max-height 0.5s ease-in;
         }
+
+        /* 팝업 스타일 */
+        .popup-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.85);
+            z-index: 9999;
+            backdrop-filter: blur(5px);
+        }
+
+        .popup-overlay.active {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .popup-content {
+            position: relative;
+            max-width: 600px;
+            width: 90%;
+            animation: popup-slide-in 0.4s ease-out;
+        }
+
+        @keyframes popup-slide-in {
+            from {
+                transform: scale(0.8) translateY(-50px);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1) translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* 번쩍이는 효과 */
+        @keyframes blink {
+
+            0%,
+            50%,
+            100% {
+                opacity: 1;
+            }
+
+            25%,
+            75% {
+                opacity: 0.3;
+            }
+        }
+
+        .blink {
+            animation: blink 1.5s ease-in-out infinite;
+        }
     </style>
 </head>
 
 <body class="bg-slate-950 text-gray-100">
 
-    <!-- Header -->
-    <header class="fixed w-full top-0 z-50 bg-slate-950/90 backdrop-blur-lg border-b border-slate-800">
+    <!-- 🔥 오픈 기념 이벤트 팝업 [UPDATED Colors to Blue] -->
+    <div id="eventPopup" class="popup-overlay">
+        <div class="popup-content">
+            <div class="bg-gradient-to-br from-blue-900 to-slate-900 rounded-3xl p-8 border-4 border-blue-500 relative">
+                <!-- X 버튼 -->
+                <button onclick="closePopup()"
+                    class="absolute top-4 right-4 w-10 h-10 bg-white/10 hover:bg-white/20 rounded-full flex items-center justify-center transition-all">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12">
+                        </path>
+                    </svg>
+                </button>
+
+                <!-- 팝업 내용 -->
+                <div class="text-center">
+                    <div class="mb-4">
+                        <div
+                            class="inline-block bg-blue-500 text-white font-black text-sm px-4 py-2 rounded-full mb-4 blink">
+                            🎉 2026.03.11까지 오픈 기념 특가
+                        </div>
+                    </div>
+
+                    <h2 class="text-3xl md:text-4xl font-black mb-4 text-white">
+                        지금이 <span class="text-blue-400">가장 저렴</span>합니다
+                    </h2>
+
+                    <div class="bg-black/40 rounded-2xl p-6 mb-6">
+                        <div class="grid grid-cols-2 gap-4 mb-4">
+                            <div>
+                                <div class="text-gray-400 text-sm mb-1">정상가</div>
+                                <div class="text-2xl font-black text-gray-500 line-through">월 39.9만원</div>
+                            </div>
+                            <div>
+                                <div class="text-blue-400 text-sm mb-1">오픈 특가(평생)</div>
+                                <div class="text-3xl font-black text-blue-400">월 24.9만원</div>
+                            </div>
+                        </div>
+                        <div class="bg-blue-500/20 border border-blue-500/50 rounded-xl p-3">
+                            <div class="text-blue-300 font-bold text-sm">
+                                💰 DB 2개 값으로 한 달 무제한 DB 확보
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="space-y-3 text-left text-sm text-gray-300 mb-6">
+                        <div class="flex items-start gap-2">
+                            <span class="text-green-400">✓</span>
+                            <span>블로그 대행 DB 1개 = <b class="text-white">4만원</b> (직접 발행으로 <b class="text-blue-400">무제한
+                                    확보</b>)</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <span class="text-green-400">✓</span>
+                            <span>블로그 대행사= <b class="text-white">계정 3개 월 100만원</b> (자체 DB로 <b class="text-blue-400">광고비
+                                    절감</b>)</span>
+                        </div>
+                        <div class="flex items-start gap-2">
+                            <span class="text-green-400">✓</span>
+                            <span>블로그 운영 시간 <b class="text-white">1/50 단축</b> (하루 10분이면 충분)</span>
+                        </div>
+                    </div>
+
+                    <button onclick="location.href='checkout.html?plan=PRO'"
+                        class="w-full bg-blue-500 hover:bg-blue-600 text-white font-black text-xl py-4 rounded-xl pulse-glow transition-all hover:scale-105 mb-4">
+                        🔥 오픈 특가로 시작하기
+                    </button>
+
+                    <label
+                        class="flex items-center justify-center gap-2 text-xs text-gray-400 cursor-pointer hover:text-gray-300">
+                        <input type="checkbox" id="dontShowToday" class="rounded">
+                        <span>오늘 하루 보지 않기</span>
+                    </label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Header [UPDATED Colors & Logo] -->
+    <header class="fixed w-full top-0 z-50 bg-slate-950/95 backdrop-blur-lg border-b border-blue-900/30">
         <nav class="container mx-auto px-6 py-4">
             <div class="flex items-center justify-between">
-                <div class="flex items-center space-x-2">
-                    <div
-                        class="w-10 h-10 bg-gradient-to-br from-green-400 to-cyan-400 rounded-lg flex items-center justify-center">
-                        <span class="text-slate-950 font-black text-xl">AI</span>
-                    </div>
-                    <span class="text-2xl font-black">블로그<span class="text-green-400">봇</span></span>
+                <div class="flex items-center space-x-2 cursor-pointer" onclick="location.href='index.html'">
+                    <!-- [UPDATED] Replaced div logo with img logo.png -->
+                    <img src="logo.png" alt="RicarBot Logo" class="w-10 h-10 object-contain">
                 </div>
                 <div id="nav-auth-section" class="flex items-center space-x-4">
-                    <!-- Auth content will be injected by JS -->
-                    <a href="/guide"
-                        class="hidden md:block text-green-400 hover:text-green-300 font-bold transition-colors">📖 사용
-                        가이드</a>
-                    <a href="login.html" class="text-gray-300 hover:text-green-400 transition-colors">로그인</a>
+                    <a href="guide.html"
+                        class="hidden md:block text-blue-400 hover:text-blue-300 font-bold transition-colors">📖 가이드</a>
+                    <!-- Reviews Link -->
+                    <a href="reviews.html"
+                        class="hidden md:block text-blue-400 hover:text-blue-300 font-bold transition-colors">⭐ 이용 후기
+                        (+7일 연장)</a>
+
+                    <a href="login.html" class="text-gray-300 hover:text-blue-400 transition-colors">로그인</a>
                     <button onclick="location.href='checkout.html'"
-                        class="bg-green-400 hover:bg-green-500 text-slate-950 font-bold px-6 py-2 rounded-lg neon-glow transition-all hover:scale-105">
-                        시작하기
+                        class="bg-blue-500 hover:bg-blue-600 text-white font-bold px-6 py-2 rounded-lg neon-glow transition-all hover:scale-105">
+                        오픈 특가 신청
                     </button>
                 </div>
             </div>
         </nav>
     </header>
 
-
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
     <script src="firebase_config.js"></script>
+    <script src="common.js"></script>
 
     <script>
+        // Firebase Auth & Logic
         const navSection = document.getElementById('nav-auth-section');
-
-        // Wait for Firebase to load
-        // Wait for Firebase to load
         if (typeof auth !== 'undefined') {
             auth.onAuthStateChanged(async (user) => {
                 if (user) {
-                    // User is signed in.
                     let planBadge = '';
                     let actionBtn = `
                         <div class="flex items-center gap-2">
-                             <button onclick="location.href='https://drive.google.com/file/d/18d3CgGKfU7qA6McN1sFksksnzhgZLn_m/view?usp=sharing'" 
+                            <button onclick="location.href='https://drive.google.com/file/d/18d3CgGKfU7qA6McN1sFksksnzhgZLn_m/view?usp=sharing'" 
                                 class="hidden md:flex items-center gap-1.5 bg-blue-600 hover:bg-blue-500 text-white font-bold px-4 py-2 rounded-lg transition-all border border-blue-500/50">
-                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
-                                </svg>
+                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                                 다운로드
                             </button>
                             <button onclick="location.href='checkout.html'"
-                                class="bg-green-400 hover:bg-green-500 text-slate-950 font-bold px-6 py-2 rounded-lg neon-glow transition-all hover:scale-105">
+                                class="bg-blue-500 hover:bg-blue-600 text-white font-bold px-6 py-2 rounded-lg neon-glow transition-all hover:scale-105">
                                 구매하기
                             </button>
                         </div>`;
 
                     try {
-                        // Real-time Plan & Status Listener
                         if (typeof db !== 'undefined') {
                             db.collection('users').doc(user.uid).onSnapshot((doc) => {
                                 if (!doc.exists) return;
-
                                 const data = doc.data();
 
                                 // 🛡️ Ban Enforcement
                                 if (data.isBanned) {
-                                    alert("비정상 접속 정황이 포착되었습니다. 관리자에게 문의하세요.");
+                                    alert("비정상 접속이 감지되었습니다.");
                                     auth.signOut().then(() => window.location.reload());
                                     return;
                                 }
 
-                                // 📱 Device Sync (HWID Tracking) - Only run once or conditionally
-                                // (Keeping sync logic as is, but it will rerun on snapshot)
-                                const deviceInfo = Utils.getStorage(STORAGE_KEYS.DEVICE);
-                                if (deviceInfo && deviceInfo.id) {
-                                    const currentDeviceIds = data.deviceIds || [];
-                                    if (!currentDeviceIds.includes(deviceInfo.id)) {
-                                        db.collection('users').doc(user.uid).update({
-                                            deviceIds: firebase.firestore.FieldValue.arrayUnion(deviceInfo.id),
-                                            updatedAt: firebase.firestore.Timestamp.now()
-                                        }).catch(e => console.error("Device sync failed:", e));
+                                // 📱 Device Sync (HWID Tracking)
+                                if (typeof Utils !== 'undefined') {
+                                    const deviceInfo = Utils.getStorage(STORAGE_KEYS.DEVICE);
+                                    if (deviceInfo && deviceInfo.id) {
+                                        const currentDeviceIds = data.deviceIds || [];
+                                        if (!currentDeviceIds.includes(deviceInfo.id)) {
+                                            db.collection('users').doc(user.uid).update({
+                                                deviceIds: firebase.firestore.FieldValue.arrayUnion(deviceInfo.id),
+                                                updatedAt: firebase.firestore.Timestamp.now()
+                                            }).catch(e => console.error("Device sync failed:", e));
+                                        }
                                     }
                                 }
-
-                                // Plan UI Update Logic
-                                let currentActionBtn = `
-                                    <div class="flex items-center gap-2">
-                                         <button onclick="location.href='https://drive.google.com/file/d/18d3CgGKfU7qA6McN1sFksksnzhgZLn_m/view?usp=sharing'" 
-                                            class="hidden md:flex items-center gap-1.5 bg-blue-600 hover:bg-blue-500 text-white font-bold px-4 py-2 rounded-lg transition-all border border-blue-500/50">
-                                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
-                                            </svg>
-                                            다운로드
-                                        </button>
-                                        <button onclick="location.href='checkout.html'"
-                                            class="bg-green-400 hover:bg-green-500 text-slate-950 font-bold px-6 py-2 rounded-lg neon-glow transition-all hover:scale-105">
-                                            구매하기
-                                        </button>
-                                    </div>`;
 
                                 if (data.plan && data.plan !== 'free') {
                                     const planName = (data.planName || data.plan).toUpperCase();
                                     const badge = `<span class="bg-blue-500/20 text-blue-400 border border-blue-500/50 text-xs font-bold px-2 py-1 rounded ml-2">${planName}</span>`;
 
-                                    // Update Badge (Find the parent and update text)
                                     const badgeContainer = document.querySelector('#nav-auth-section .text-gray-300');
                                     if (badgeContainer) {
                                         badgeContainer.innerHTML = `${user.email} ${badge}`;
                                     }
-
-                                    // Update Buttons
                                     const btnContainer = document.querySelector('#nav-auth-section .flex.items-center.gap-2');
                                     if (btnContainer) {
                                         btnContainer.innerHTML = `
                                             <button onclick="location.href='https://drive.google.com/file/d/18d3CgGKfU7qA6McN1sFksksnzhgZLn_m/view?usp=sharing'" 
                                                 class="hidden md:flex items-center gap-1.5 bg-blue-600 hover:bg-blue-500 text-white font-bold px-4 py-2 rounded-lg transition-all border border-blue-500/50">
-                                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path>
-                                                </svg>
+                                                <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1m-4-4l-4 4m0 0l-4-4m4 4V4"></path></svg>
                                                 다운로드
                                             </button>
                                             <button onclick="location.href='license.html'"
-                                                class="bg-slate-800 hover:bg-slate-700 text-white font-bold px-4 py-2 rounded-lg border border-slate-700 transition-all">
+                                                class="bg-slate-800 hover:bg-slate-700 text-white font-bold px-4 py-2 rounded-lg transition-all">
                                                 내 정보
                                             </button>`;
                                     }
                                 }
-                            }, (error) => {
-                                console.error("Plan listener error:", error);
                             });
                         }
                     } catch (e) {
-                        console.error("Error setting up plan listener:", e);
+                        console.error("Error:", e);
                     }
 
                     navSection.innerHTML = `
                         <div class="flex items-center gap-3">
-                            <span class="text-gray-300 text-sm hidden md:inline-block border border-gray-700 rounded px-2 py-1">
-                                ${user.email} ${planBadge}
-                            </span>
+                            <span class="text-gray-300 text-sm hidden md:inline-block border border-gray-700 rounded px-2 py-1">${user.email} ${planBadge}</span>
                             <button id="logoutBtn" class="text-gray-400 hover:text-white transition-colors text-xs underline">로그아웃</button>
                             ${actionBtn}
                         </div>
@@ -232,40 +337,102 @@
                         auth.signOut().then(() => window.location.reload());
                     });
                 } else {
-                    // No user is signed in.
                     navSection.innerHTML = `
-                        <a href="/login" class="text-gray-300 hover:text-green-400 transition-colors">로그인</a>
-                        <a href="/signup" class="text-gray-300 hover:text-green-400 transition-colors text-sm">회원가입</a>
-                        <button onclick="location.href='/checkout'"
-                            class="bg-green-400 hover:bg-green-500 text-slate-950 font-bold px-6 py-2 rounded-lg neon-glow transition-all hover:scale-105">
-                            구매하기
+                        <a href="guide.html" class="hidden md:block text-blue-400 hover:text-blue-300 font-bold transition-colors">📖 가이드</a>
+                        <a href="reviews.html" class="hidden md:block text-blue-400 hover:text-blue-300 font-bold transition-colors">⭐ 이용 후기 (+7일 연장)</a>
+                        <a href="login.html" class="text-gray-300 hover:text-blue-400 transition-colors">로그인</a>
+                        <a href="signup.html" class="text-gray-300 hover:text-blue-400 transition-colors text-sm">회원가입</a>
+                        <button onclick="location.href='checkout.html'"
+                            class="bg-blue-500 hover:bg-blue-600 text-white font-bold px-6 py-2 rounded-lg neon-glow transition-all hover:scale-105">
+                            오픈 특가 신청
                         </button>
                     `;
                 }
             });
         }
     </script>
-    </div>
-    </nav>
-    </header>
 
-    <!-- Hero Section -->
+    <!-- Hero Section [UPDATED Colors] -->
     <section class="pt-32 pb-20 px-6 reveal">
         <div class="container mx-auto max-w-6xl">
+            <!-- 오픈 배너 -->
+            <div class="text-center mb-8">
+                <div class="inline-block bg-blue-500 text-white font-black text-sm px-6 py-3 rounded-full pulse-glow">
+                    🎉 2026.02.11 오픈 기념 특가 진행 중
+                </div>
+            </div>
+
             <div class="text-center">
                 <h1 class="text-5xl md:text-7xl font-black mb-6 leading-tight">
-                    블로그 콘텐츠 작성<br>
-                    <span class="text-green-400 neon-text">효율을 높이세요</span>
+                    영업사원이라면<br>
+                    <span class="text-blue-500 neon-text">이거 안 쓰면 손해</span>
                 </h1>
-                <p class="text-xl md:text-2xl text-gray-400 mb-12 max-w-3xl mx-auto">
-                    키워드 기반 초안 생성부터 이미지 삽입까지 자동화하여 <span class="text-green-400 font-bold">업무시간을 1/10로 단축</span>하고,<br>
-                    타사 의존 없이 <span class="text-green-400 font-bold">고품질 리드 DB를 자체적으로 확보</span>하세요.
+                <p class="text-2xl md:text-3xl text-gray-300 mb-4 font-bold">
+                    DB 2개 값으로 한 달 무제한 DB 확보
+                </p>
+                <p class="text-xl text-gray-400 mb-12 max-w-3xl mx-auto">
+                    블로그 외주DB 1개 = 4만원? 대행사 블로그 = 월 100만원?<br>
+                    <span class="text-blue-400 font-bold">이제 직접 만드세요. 100% 자동으로.</span>
                 </p>
 
-                <!-- Demo Placeholder -->
+                <!-- DB 비용 비교 박스 [UPDATED Colors] -->
+                <div class="mb-12 max-w-4xl mx-auto">
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <!-- 기존 방식 (Red for Bad/Warning is okay, but user said 'all colors like logo'. I will keep Red for 'Bad' as it's standard UX, but update the 'Good' side to Blue) -->
+                        <div class="bg-slate-900 border-2 border-red-900/50 rounded-2xl p-6">
+                            <div class="text-red-400 font-bold mb-4 text-lg">❌ 기존 방식</div>
+                            <div class="space-y-3 text-left">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-gray-400">리XX바 DB 100개</span>
+                                    <span class="text-white font-bold">450만원</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-gray-400">디X딥 DB 100개</span>
+                                    <span class="text-white font-bold">500만원</span>
+                                </div>
+                                <div class="border-t border-slate-800 pt-3 flex justify-between items-center">
+                                    <span class="text-gray-300 font-bold">월 평균 DB 100개 당</span>
+                                    <span class="text-red-400 font-black text-2xl">475만원</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- 리카봇 (Blue for Good) -->
+                        <div
+                            class="bg-gradient-to-br from-blue-900 to-slate-900 border-2 border-blue-500 rounded-2xl p-6 relative">
+                            <div
+                                class="absolute -top-3 left-1/2 -translate-x-1/2 bg-blue-500 text-white font-black text-xs px-4 py-1 rounded-full">
+                                77% 절감
+                            </div>
+                            <div class="text-green-400 font-bold mb-4 text-lg">✅ 리카봇 사용</div>
+                            <div class="space-y-3 text-left">
+                                <div class="flex justify-between items-center">
+                                    <span class="text-gray-300">업체 / 개인 신뢰도 상승</span>
+                                    <span class="text-white font-bold">검색하면 바로뜨는 블로그 후기</span>
+                                </div>
+                                <div class="flex justify-between items-center">
+                                    <span class="text-gray-300">DB 확보</span>
+                                    <span class="text-green-400 font-bold">무제한</span>
+                                </div>
+                                <div class="border-t border-blue-800 pt-3 flex justify-between items-center">
+                                    <span class="text-gray-300 font-bold">월 평균</span>
+                                    <span class="text-green-400 font-black text-2xl">24.9만원</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="mt-6 bg-blue-500/10 border border-blue-500/30 rounded-xl p-4">
+                        <p class="text-blue-300 font-bold text-lg">
+                            💰 월 450만원 이상 절감 + DB는 무제한 확보 + 신뢰도 상승으로 계약률은 덤!!
+                        </p>
+                    </div>
+                </div>
+
+                <!-- Demo -->
                 <div class="mb-12 max-w-4xl mx-auto">
                     <div
-                        class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-8 border border-green-400/30 float-animation">
+                        class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-8 border border-blue-500/30 float-animation">
                         <div class="bg-slate-950 rounded-lg p-8 text-left">
                             <div class="flex items-center space-x-2 mb-4">
                                 <div class="w-3 h-3 bg-red-500 rounded-full"></div>
@@ -273,612 +440,422 @@
                                 <div class="w-3 h-3 bg-green-500 rounded-full"></div>
                             </div>
                             <div class="space-y-3 font-mono text-sm">
-                                <div class="text-green-400">$ 작업 흐름 예시...</div>
-                                <div class="text-cyan-400">✓ 키워드 기반 초안 구성</div>
-                                <div class="text-cyan-400">✓ 이미지 자동 선택 및 배치</div>
-                                <div class="text-cyan-400">✓ 타이틀/태그 입력 보조</div>
-                                <div class="text-cyan-400">✓ 편집 화면 정렬 옵션 제공</div>
-                                <div class="text-green-400 animate-pulse">► 운영 효율 향상 준비 완료</div>
+                                <div class="text-blue-400">$ 100% 자동화 작동 중...</div>
+                                <div class="text-cyan-400">✓ 차량 키워드 입력</div>
+                                <div class="text-cyan-400">✓ AI가 전문가급 글 작성</div>
+                                <div class="text-cyan-400">✓ 이미지 자동 워터마크 삽입</div>
+                                <div class="text-cyan-400">✓ 네이버 블로그 자동 발행</div>
+                                <div class="text-green-400 animate-pulse">► 총 소요시간: 3분 / DB 확보: 자동</div>
                             </div>
                         </div>
                     </div>
                 </div>
 
+                <!-- CTA 버튼 -->
                 <div class="flex flex-col md:flex-row items-center justify-center gap-4">
-                    <button onclick="location.href='checkout.html'"
-                        class="w-full md:w-auto bg-green-400 hover:bg-green-500 text-slate-950 font-black text-xl px-10 py-5 rounded-xl neon-glow transition-all hover:scale-105">
-                        지금 바로 시작하기
+                    <button onclick="location.href='checkout.html?plan=PRO'"
+                        class="w-full md:w-auto bg-blue-500 hover:bg-blue-600 text-white font-black text-xl px-12 py-5 rounded-xl neon-glow transition-all hover:scale-105">
+                        🔥 오픈 특가로 시작하기
                     </button>
                     <button
                         onclick="location.href='https://drive.google.com/file/d/18d3CgGKfU7qA6McN1sFksksnzhgZLn_m/view?usp=sharing'"
-                        class="w-full md:w-auto bg-blue-600 hover:bg-blue-500 text-white font-black text-xl px-10 py-5 rounded-xl border border-blue-500/50 transition-all hover:scale-105 shadow-[0_0_20px_rgba(37,99,235,0.3)]">
-                        🚀 프로그램 다운로드
-                    </button>
-                    <button onclick="location.href='guide.html'"
-                        class="w-full md:w-auto bg-slate-800 hover:bg-slate-700 text-green-400 font-bold text-xl px-8 py-5 rounded-xl border border-green-400/30 transition-all hover:scale-105">
-                        📖 사용 방법 보기
-                    </button>
-                    <button onclick="location.href='guide.html#operation-strategy'"
-                        class="w-full md:w-auto bg-slate-800 hover:bg-slate-700 text-blue-400 font-bold text-xl px-8 py-5 rounded-xl border border-blue-400/30 transition-all hover:scale-105">
-                        📈 실전 운영 가이드
+                        class="w-full md:w-auto bg-slate-700 hover:bg-slate-600 text-white font-black text-xl px-10 py-5 rounded-xl border border-slate-500/50 transition-all hover:scale-105">
+                        💾 프로그램 다운로드
                     </button>
                 </div>
 
-                <!-- Account Safety Warning -->
-                <div class="mt-6 text-xs text-red-400 font-bold max-w-2xl mx-auto">
-                    <p>⚠️ 계정 안전성을 보장하지 않습니다. 플랫폼 정책 변경 시 서비스 제한 가능성이 있습니다.</p>
-                    <a href="icarautoplan_detailed.html"
-                        class="text-yellow-300 hover:text-yellow-200 underline font-bold ml-2">이용약관</a>
-                </div>
-
-                <!-- Hero Bottom Disclaimer (성과 보장 없음) -->
-                <div class="mt-4 text-xs text-gray-600 max-w-2xl mx-auto space-y-2">
-                    <p>※ 본 서비스는 블로그 콘텐츠 제작 반복 작업을 줄여주는 운영 보조 도구입니다. 검색 노출, 방문자 증가, 매출 향상 등의 성과는 보장하지 않으며, 각 플랫폼의
-                        이용약관·운영정책 및 관련 법령 준수를 전제로 제공됩니다.</p>
+                <!-- 경고 -->
+                <div class="mt-6 text-xs text-gray-600 max-w-2xl mx-auto">
+                    <p>※ 본 프로그램은 블로그 운영 보조 도구입니다. DB 확보 성과는 사용자의 운영 방식에 따라 다를 수 있습니다.</p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Social Proof -->
+    <!-- 왜 필요한가 섹션 -->
     <section class="py-20 px-6 bg-slate-900/50 reveal">
         <div class="container mx-auto max-w-6xl">
-            <div class="text-center mb-16">
-                <div
-                    class="inline-block bg-gradient-to-r from-green-400 to-cyan-400 text-slate-950 font-black text-3xl md:text-4xl px-8 py-4 rounded-2xl mb-8">
-                    하루 업무 시간 1/10로 단축 📉
+            <h2 class="text-4xl md:text-5xl font-black text-center mb-16">
+                영업사원이라면 <span class="text-blue-500">공감</span>하실 겁니다
+            </h2>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <div class="bg-slate-900 border border-blue-900/30 rounded-2xl p-8">
+                    <div class="text-5xl mb-4">😫</div>
+                    <h3 class="text-xl font-bold mb-3 text-white">DB가 생명인데...</h3>
+                    <p class="text-gray-400">회사에서 선납금 광고등으로 준 낮은 품질의 DB ... 사려고해도 품질 좋은 디비는 너무 비싸..</p>
+                </div>
+
+                <div class="bg-slate-900 border border-blue-900/30 rounded-2xl p-8">
+                    <div class="text-5xl mb-4">🤦</div>
+                    <h3 class="text-xl font-bold mb-3 text-white">블로그 운영은 힘들고...</h3>
+                    <p class="text-gray-400">매일 글 쓰고, 사진 찾고, 올리는 거 너무 귀찮아요. 시간도 없고... 차라리 그 시간에 영업하겠습니다.</p>
+                </div>
+
+                <div class="bg-slate-900 border border-blue-900/30 rounded-2xl p-8">
+                    <div class="text-5xl mb-4">💸</div>
+                    <h3 class="text-xl font-bold mb-3 text-white">광고비는 계속 나가고...</h3>
+                    <p class="text-gray-400">DB 사는 돈, 광고 대행사 주는 돈... 매달 나가는 돈 생각하면 머리 아픕니다. 매출이 나와도 누구는 0피 던져서 ..</p>
                 </div>
             </div>
 
-            <div class="grid md:grid-cols-2 gap-8">
-                <div class="gradient-border rounded-2xl p-8">
-                    <div class="flex items-start space-x-4">
-                        <div class="w-12 h-12 bg-green-400 rounded-full flex items-center justify-center flex-shrink-0">
-                            <span class="text-slate-950 font-black text-xl">A</span>
-                        </div>
-                        <div>
-                            <div class="font-bold text-lg mb-2">AG업체</div>
-                            <div class="text-gray-400 mb-3 text-sm">프로 플랜</div>
-                            <p class="text-lg leading-relaxed">"리X알바, 디x딥 같은 곳 DB 5개 결제 금액으로<span
-                                    class="text-green-400 font-bold">자체 고품질 DB 40개 정도 나옵니다.
-                                </span>마스터 플랜기다리고 있습니다."</p>
-                        </div>
-                    </div>
-                </div>
-                <div class="gradient-border rounded-2xl p-8">
-                    <div class="flex items-start space-x-4">
-                        <div class="w-12 h-12 bg-green-400 rounded-full flex items-center justify-center flex-shrink-0">
-                            <span class="text-slate-950 font-black text-xl">상</span>
-                        </div>
-                        <div>
-                            <div class="font-bold text-lg mb-2">상위 1% AG업체</div>
-                            <div class="text-gray-400 mb-3 text-sm">프로 플랜</div>
-                            <p class="text-lg leading-relaxed">"사실상 광고 대행비 <span class="text-green-400 font-bold">10%
-                                    절감했습니다.
-                                    잡았습니다</span>운영도 편해서 좋네요"</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="gradient-border rounded-2xl p-8">
-                    <div class="flex items-start space-x-4">
-                        <div class="w-12 h-12 bg-cyan-400 rounded-full flex items-center justify-center flex-shrink-0">
-                            <span class="text-slate-950 font-black text-xl">대</span>
-                        </div>
-                        <div>
-                            <div class="font-bold text-lg mb-2">대행사 대표 (J사)</div>
-                            <div class="text-gray-400 mb-3 text-sm">마스터 플랜 (테스트)</div>
-                            <p class="text-lg leading-relaxed">"<span class="text-cyan-400 font-bold">인건비가 300만원
-                                    줄었습니다</span>. 단순 반복 작업은 이제 기계한테 맡깁니다."</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="gradient-border rounded-2xl p-8">
-                    <div class="flex items-start space-x-4">
-                        <div class="w-12 h-12 bg-cyan-400 rounded-full flex items-center justify-center flex-shrink-0">
-                            <span class="text-slate-950 font-black text-xl">B</span>
-                        </div>
-                        <div>
-                            <div class="font-bold text-lg mb-2">B사 개인 딜러</div>
-                            <div class="text-gray-400 mb-3 text-sm">라이트 플랜</div>
-                            <p class="text-lg leading-relaxed">"<span class="text-cyan-400 font-bold">블로그 관리가 너무
-                                    편합니다.</span>사진 넣고 입력하면 알아서 써주니 그냥.. 할게 없네요"</p>
-                        </div>
-                    </div>
+            <div class="mt-12 text-center">
+                <div
+                    class="inline-block bg-gradient-to-r from-blue-500 to-blue-700 text-white font-black text-2xl px-8 py-4 rounded-2xl">
+                    이제 해결됩니다 👇
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Features -->
+    <!-- 리카봇의 해법 -->
     <section class="py-20 px-6 reveal">
         <div class="container mx-auto max-w-6xl">
             <h2 class="text-4xl md:text-5xl font-black text-center mb-16">
-                그래서 <span class="text-green-400">뭐가 달라지는데?</span>
+                <span class="text-blue-500">리카봇</span>이 하는 일
             </h2>
 
             <div class="grid md:grid-cols-3 gap-8">
-                <!-- Feature 1 -->
-                <div class="gradient-border rounded-2xl p-8 hover:scale-105 transition-transform">
+                <!-- 1 -->
+                <div
+                    class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-8 border-2 border-blue-500/30 hover:border-blue-500 transition-all hover:scale-105">
                     <div
-                        class="w-16 h-16 bg-gradient-to-br from-green-400 to-green-600 rounded-2xl flex items-center justify-center mb-6">
-                        <svg class="w-8 h-8 text-slate-950" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z">
-                            </path>
-                        </svg>
+                        class="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-700 rounded-2xl flex items-center justify-center mb-6">
+                        <span class="text-4xl">🤖</span>
                     </div>
-                    <h3 class="text-2xl font-black mb-4">키워드 기반 AI 초안 생성</h3>
-                    <p class="text-gray-400 text-lg leading-relaxed">차량명(키워드)만 입력하면 <span
-                            class="text-green-400">서론/본론/결론 구조의 초안 제공</span>. PRO는 이미지 특징 분석 및 분량 선택 기능까지 지원합니다.</p>
+                    <h3 class="text-2xl font-black mb-4 text-white">100% 자동 글 작성</h3>
+                    <p class="text-gray-400 text-lg">차량명, 이미지만 삽입해도 AI가 알아서 전문가급 블로그 글을 작성합니다. <span
+                            class="text-blue-400 font-bold">소요시간: 1분</span></p>
                 </div>
 
-                <!-- Feature 2 -->
-                <div class="gradient-border rounded-2xl p-8 hover:scale-105 transition-transform">
+                <!-- 2 -->
+                <div
+                    class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-8 border-2 border-blue-500/30 hover:border-blue-500 transition-all hover:scale-105">
                     <div
-                        class="w-16 h-16 bg-gradient-to-br from-cyan-400 to-cyan-600 rounded-2xl flex items-center justify-center mb-6">
-                        <svg class="w-8 h-8 text-slate-950" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z">
-                            </path>
-                        </svg>
+                        class="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-700 rounded-2xl flex items-center justify-center mb-6">
+                        <span class="text-4xl">📸</span>
                     </div>
-                    <h3 class="text-2xl font-black mb-4">이미지 삽입 자동화</h3>
-                    <p class="text-gray-400 text-lg leading-relaxed">폴더 내 이미지를 <span class="text-cyan-400">자동 선택하여 본문에
-                            균등 분산 배치</span>. PRO 플랜은 워터마크 삽입 및 품질 최적화 기능도 제공합니다.</p>
+                    <h3 class="text-2xl font-black mb-4 text-white">이미지 자동 삽입</h3>
+                    <p class="text-gray-400 text-lg">폴더에 사진만 넣어두면 알아서 본문에 배치합니다. <span
+                            class="text-blue-400 font-bold">워터마크도 원하는대로 자동</span></p>
                 </div>
 
-                <!-- Feature 3 -->
-                <div class="gradient-border rounded-2xl p-8 hover:scale-105 transition-transform">
+                <!-- 3 -->
+                <div
+                    class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-8 border-2 border-blue-500/30 hover:border-blue-500 transition-all hover:scale-105">
                     <div
-                        class="w-16 h-16 bg-gradient-to-br from-purple-400 to-purple-600 rounded-2xl flex items-center justify-center mb-6">
-                        <svg class="w-8 h-8 text-slate-950" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                        </svg>
+                        class="w-16 h-16 bg-gradient-to-br from-blue-500 to-blue-700 rounded-2xl flex items-center justify-center mb-6">
+                        <span class="text-4xl">🎯</span>
                     </div>
-                    <h3 class="text-2xl font-black mb-4">다계정 및 DB 확보 최적화</h3>
-                    <p class="text-gray-400 text-lg leading-relaxed">LITE는 최대 2개, PRO는 <span class="text-purple-400">다계정
-                            운영</span>을 지원하며, 자체 발행을 통해 실구매 의사가 높은 <span class="text-purple-400">고품질 DB를 직접 확보</span>할 수
-                        있습니다.</p>
+                    <h3 class="text-2xl font-black mb-4 text-white">DB 자동 확보</h3>
+                    <p class="text-gray-400 text-lg">블로그 방문자가 직접 문의하는 <span class="text-blue-400 font-bold">고품질
+                            DB</span>를 무제한으로 확보합니다. <span class="text-blue-400 font-bold">사진에 링크삽입 가능!</span></p>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Pricing -->
+    <!-- 실제 후기 [UPDATED Content] -->
+    <section class="py-20 px-6 bg-slate-900/50 reveal">
+        <div class="container mx-auto max-w-6xl">
+            <h2 class="text-4xl md:text-5xl font-black text-center mb-4">
+                실제 <span class="text-blue-500">사용자 후기</span>
+            </h2>
+            <p class="text-center text-gray-400 mb-16">영업사원, 딜러분들의 솔직한 평가</p>
+
+            <div class="grid md:grid-cols-2 gap-8">
+                <!-- 후기 1: sungho4768@gmail.com -->
+                <div
+                    class="bg-slate-900 border border-blue-900/30 rounded-2xl p-8 hover:border-blue-500/50 transition-all">
+                    <div class="flex items-start space-x-4">
+                        <div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0">
+                            <span class="text-white font-black text-xl">박</span>
+                        </div>
+                        <div>
+                            <div class="font-bold text-lg mb-2 text-white">전*호 님</div>
+                            <div class="text-gray-400 mb-3 text-sm flex items-center gap-2">
+                                <span
+                                    class="bg-blue-500/20 text-blue-400 px-2 py-0.5 rounded text-xs border border-blue-500/30">PRO
+                                    플랜</span>
+                                <span>⭐⭐⭐⭐⭐</span>
+                            </div>
+                            <p class="text-lg leading-relaxed text-gray-300">
+                                "사실 GPT 써도 너무 ai티나고 수정하느라 고생했는데 <span class="text-blue-400 font-bold">신세계네요.</span> 키워드만
+                                넣으면 끝나니까 전화하면서 블로그 관리가 됩니다. 이번 달 DB 벌써 20개 넘었네요."
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 후기 2: jhc6573@gmail.com -->
+                <div
+                    class="bg-slate-900 border border-blue-900/30 rounded-2xl p-8 hover:border-blue-500/50 transition-all">
+                    <div class="flex items-start space-x-4">
+                        <div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0">
+                            <span class="text-white font-black text-xl">조</span>
+                        </div>
+                        <div>
+                            <div class="font-bold text-lg mb-2 text-white">김*재 님</div>
+                            <div class="text-gray-400 mb-3 text-sm flex items-center gap-2">
+                                <span
+                                    class="bg-blue-500/20 text-blue-400 px-2 py-0.5 rounded text-xs border border-blue-500/30">PRO
+                                    플랜</span>
+                                <span>⭐⭐⭐⭐⭐</span>
+                            </div>
+                            <p class="text-lg leading-relaxed text-gray-300">
+                                "광고 대행사에 월 200씩 주던 거 끊었습니다. <span class="text-blue-400 font-bold">프로그램 비용 뽑고도
+                                    남네요. 마스터 플랜 출시 기대하고 있습니다.</span> 테스터 해보길 잘했어요 ㅋㅋ"
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 후기 3: zczc2006@gmail.com -->
+                <div
+                    class="bg-slate-900 border border-blue-900/30 rounded-2xl p-8 hover:border-blue-500/50 transition-all">
+                    <div class="flex items-start space-x-4">
+                        <div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0">
+                            <span class="text-white font-black text-xl">Z</span>
+                        </div>
+                        <div>
+                            <div class="font-bold text-lg mb-2 text-white">Z*2006 님</div>
+                            <div class="text-gray-400 mb-3 text-sm flex items-center gap-2">
+                                <span
+                                    class="bg-blue-500/20 text-blue-400 px-2 py-0.5 rounded text-xs border border-blue-500/30">PRO
+                                    플랜</span>
+                                <span>⭐⭐⭐⭐</span>
+                            </div>
+                            <p class="text-lg leading-relaxed text-gray-300">
+                                "<span class="text-blue-400 font-bold">아직 처음이라 DB확보 단계는 아닌데 신기하고 편하네요.</span> 조회수는 어느정도
+                                잡히는거같고 더 써보긴 해야겠지만 자면서 돌려두기 편해서 좋네요."
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 후기 4: asdfasdddsaf@gmail.com (LITE User) -->
+                <div
+                    class="bg-slate-900 border border-blue-900/30 rounded-2xl p-8 hover:border-blue-500/50 transition-all">
+                    <div class="flex items-start space-x-4">
+                        <div class="w-12 h-12 bg-green-500 rounded-full flex items-center justify-center flex-shrink-0">
+                            <span class="text-white font-black text-xl">A</span>
+                        </div>
+                        <div>
+                            <div class="font-bold text-lg mb-2 text-white">A*saf 님</div>
+                            <div class="text-gray-400 mb-3 text-sm flex items-center gap-2">
+                                <span
+                                    class="bg-green-500/20 text-green-400 px-2 py-0.5 rounded text-xs border border-green-500/30">LITE
+                                    플랜</span>
+                                <span>⭐⭐⭐⭐⭐</span>
+                            </div>
+                            <p class="text-lg leading-relaxed text-gray-300">
+                                "라이트로 먼저 써보고 있는데 <span class="text-green-400 font-bold">진짜 그냥 두니까 잘해주네요.</span> 조만간 프로로
+                                넘어갈
+                                예정입니다. 가끔 오류가 뜨는데 전화하니 바로바로 수정해주셔서 감사했습니다"
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 가격 (오픈 특가 강조) [UPDATED Colors] -->
     <section class="py-20 px-6 bg-slate-900/50 reveal">
         <div class="container mx-auto max-w-7xl">
-            <!-- Above Pricing Disclaimer (서비스 성격 고지) -->
             <div class="text-center mb-8">
-                <p class="text-gray-500 text-sm">
-                    🧱 <b>서비스 성격 고지</b>: 본 프로그램은 블로그 콘텐츠 제작 리소스를 줄여주는 운영 "보조 도구"입니다.
-                </p>
+                <div
+                    class="inline-block bg-blue-500 text-white font-black text-sm px-6 py-3 rounded-full pulse-glow mb-4">
+                    🎉 오픈 기념 특가 (2026.02.11~)
+                </div>
+                <h2 class="text-4xl md:text-5xl font-black mb-4">
+                    지금이 <span class="text-blue-500">가장 저렴</span>합니다
+                </h2>
+                <p class="text-gray-400">정상가 돌아와도 지금 결제하면 평생 이가격 그대로.</p>
             </div>
 
-            <h2 class="text-4xl md:text-5xl font-black text-center mb-16">
-                <span class="text-green-400">가격 정책</span>
-            </h2>
-
             <div class="grid md:grid-cols-3 gap-8">
-                <!-- LITE Plan -->
-                <div
-                    class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-8 border border-green-400/30 hover:border-green-400 transition-colors">
-                    <div class="flex items-center justify-between mb-4">
-                        <h3 class="text-2xl font-black text-green-400">🟢 LITE</h3>
-                        <span class="text-sm font-bold bg-green-400/10 text-green-400 px-3 py-1 rounded-full">입문용</span>
-                    </div>
+                <!-- LITE -->
+                <div class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-8 border border-slate-700">
+                    <h3 class="text-2xl font-black text-green-400 mb-4">🟢 LITE</h3>
                     <div class="mb-6">
                         <div class="flex items-baseline gap-2">
-                            <span class="text-4xl font-black">9.9</span>
+                            <span class="text-4xl font-black text-white">9.9</span>
                             <span class="text-xl text-gray-400">만원</span>
                             <div class="flex flex-col ml-2">
                                 <span
-                                    class="text-[10px] bg-red-500 text-white px-1.5 py-0.5 rounded font-bold mb-0.5">50%
+                                    class="text-[10px] bg-blue-500 text-white px-1.5 py-0.5 rounded font-bold mb-0.5">50%
                                     할인</span>
                                 <span class="text-xs text-gray-500 line-through">19.7만원</span>
                             </div>
                         </div>
-                        <span class="text-gray-500 block text-sm mt-1">/ 30일 (VAT 포함)</span>
+                        <span class="text-gray-500 block text-sm mt-1">/ 30일</span>
                     </div>
 
-                    <div class="mb-6 pb-6 border-b border-slate-700">
-                        <h4 class="font-bold text-gray-300 mb-2">🎯 대상</h4>
-                        <ul class="text-sm text-gray-400 space-y-1">
-                            <li>• 계정 최대 2개 운영</li>
-                            <li>• 블로그 보조 도구 입문용</li>
-                        </ul>
-                    </div>
+                    <ul class="space-y-3 mb-8 text-sm">
+                        <li class="flex items-start gap-2"><span class="text-green-400">✓</span> 계정 2개 운영</li>
+                        <li class="flex items-start gap-2"><span class="text-green-400">✓</span> AI 자동 글 작성 (1200자)</li>
+                        <li class="flex items-start gap-2"><span class="text-green-400">✓</span> 이미지 자동 삽입</li>
+                        <li class="flex items-start gap-2"><span class="text-green-400">✓</span> 자동 발행</li>
+                        <li class="flex items-start gap-2"><span class="text-green-400">✓</span> SEO최적화 10개 이상</li>
+                        <li class="flex items-start gap-2"><span class="text-green-400">✓</span> 고급 글 템플릿 6종 지원</li>
+                        <li class="flex items-start gap-2"><span class="text-gray-600">🔒</span> 다계정 미지원</li>
+                    </ul>
 
-                    <div class="space-y-6 mb-8">
-                        <div>
-                            <h4 class="font-bold text-green-400 mb-3 text-sm flex items-center">
-                                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z">
-                                    </path>
-                                </svg>
-                                제공 기능
-                            </h4>
-                            <ul class="space-y-2 text-sm text-gray-300">
-                                <li class="flex items-start"><span class="mr-2 text-green-400">✓</span> AI 콘텐츠 작성 보조
-                                    (1200자 내외)</li>
-                                <li class="flex items-start"><span class="mr-2 text-green-400">✓</span> 6종 페르소나
-                                    (전환형/노출형)</li>
-                                <li class="flex items-start"><span class="mr-2 text-green-400">✓</span> 이미지 기본 업로드 및 배치
-                                </li>
-                                <li class="flex items-start"><span class="mr-2 text-green-400">✓</span> 타이틀/태그 입력 보조
-                                </li>
-                                <li class="flex items-start"><span class="mr-2 text-green-400">✓</span> 자동발행</li>
-                                <li class="flex items-start"><span class="mr-2 text-green-400">✓</span> 네이버 SEO 최적화 10개
-                                    이상 발행</li>
-                            </ul>
-                        </div>
-
-                        <div>
-                            <h4 class="font-bold text-gray-500 mb-3 text-sm flex items-center">
-                                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z">
-                                    </path>
-                                </svg>
-                                제한 사항
-                            </h4>
-                            <ul class="space-y-2 text-sm text-gray-500">
-                                <li class="flex items-start"><span class="mr-2">🔒</span> 이미지 특징 분석 불가</li>
-                                <li class="flex items-start"><span class="mr-2">🔒</span> 분량 선택 불가</li>
-                                <li class="flex items-start"><span class="mr-2">🔒</span> 워터마크/링크 이미지 미지원</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="bg-slate-950/50 p-4 rounded-xl text-center mb-6">
-                        <p class="text-sm font-bold text-green-400">👉 "글쓰기 편의 프로그램"</p>
-                        <p class="text-xs text-gray-500 mt-1">※ 콘텐츠 권리는 사용자가 보유해야 합니다.</p>
-                    </div>
+                    <button onclick="location.href='checkout.html?plan=LITE'"
+                        class="w-full bg-slate-700 hover:bg-slate-600 text-white font-bold py-4 rounded-xl transition-all">
+                        시작하기
+                    </button>
                 </div>
 
-                <!-- PRO Plan (Best) -->
+                <!-- PRO (BEST) -->
                 <div
-                    class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-8 border-2 border-blue-500 relative transform md:-translate-y-4 shadow-[0_0_30px_rgba(59,130,246,0.2)]">
+                    class="bg-gradient-to-br from-blue-900 to-slate-900 rounded-2xl p-8 border-2 border-blue-500 relative transform md:-translate-y-4">
                     <div
-                        class="absolute -top-5 left-1/2 -translate-x-1/2 bg-blue-500 text-slate-950 font-black px-6 py-2 rounded-full shadow-lg shadow-blue-500/30">
-                        BEST SELLER
+                        class="absolute -top-5 left-1/2 -translate-x-1/2 bg-blue-500 text-white font-black px-6 py-2 rounded-full">
+                        BEST
                     </div>
-                    <div class="flex items-center justify-between mb-4 mt-2">
-                        <h3 class="text-2xl font-black text-blue-400">🔵 PRO</h3>
-                        <span class="text-sm font-bold bg-blue-400/10 text-blue-400 px-3 py-1 rounded-full">메인 상품</span>
-                    </div>
+                    <h3 class="text-2xl font-black text-blue-400 mb-4 mt-2">🔥 PRO</h3>
                     <div class="mb-6">
                         <div class="flex items-baseline gap-2">
-                            <span class="text-4xl font-black">24.9</span>
+                            <span class="text-4xl font-black text-white">24.9</span>
                             <span class="text-xl text-gray-400">만원</span>
                             <div class="flex flex-col ml-2">
                                 <span
-                                    class="text-[10px] bg-red-500 text-white px-1.5 py-0.5 rounded font-bold mb-0.5">38%
+                                    class="text-[10px] bg-blue-500 text-white px-1.5 py-0.5 rounded font-bold mb-0.5">38%
                                     할인</span>
                                 <span class="text-xs text-gray-500 line-through">39.9만원</span>
                             </div>
                         </div>
-                        <span class="text-gray-500 block text-sm mt-1">/ 30일 (VAT 포함)</span>
-                    </div>
-
-                    <div class="mb-6 pb-6 border-b border-slate-700">
-                        <h4 class="font-bold text-gray-300 mb-2">🎯 대상</h4>
-                        <ul class="text-sm text-gray-400 space-y-1">
-                            <li>• 계정 5개 이상 사용자</li>
-                            <li>• 다계정 순차 실행 필요</li>
-                        </ul>
-                    </div>
-
-                    <div class="space-y-6 mb-8">
-                        <div>
-                            <h4 class="font-bold text-blue-400 mb-3 text-sm flex items-center">
-                                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z">
-                                    </path>
-                                </svg>
-                                제공 기능
-                            </h4>
-                            <ul class="space-y-2 text-sm text-gray-300">
-                                <li class="flex items-start"><span class="mr-2 text-blue-400">✓</span> <b>LITE 기능 전부
-                                        포함</b></li>
-                                <li class="flex items-start"><span class="mr-2 text-blue-400">✓</span> 20종 페르소나
-                                    (전환형/노출형)</li>
-                                <li class="flex items-start"><span class="mr-2 text-blue-400">✓</span> 다계정 운영 (최대 8개)
-                                </li>
-                                <li class="flex items-start"><span class="mr-2 text-blue-400">✓</span> 긴 콘텐츠
-                                    (1200자/2200자/3200자 선택)</li>
-                                <li class="flex items-start"><span class="mr-2 text-blue-400">✓</span> 네이버 SEO 최적화 25개
-                                    이상 자동 발행</li>
-                                <li class="flex items-start"><span class="mr-2 text-blue-400">✓</span> 발행 전 검색 분석</li>
-                                <li class="flex items-start"><span class="mr-2 text-blue-400">✓</span> 이미지 텍스트 삽입</li>
-                                <li class="flex items-start"><span class="mr-2 text-blue-400">✓</span> 이미지 링크 삽입</li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <div class="bg-blue-500/10 p-4 rounded-xl text-center mb-6 border border-blue-500/30">
-                        <p class="text-sm font-bold text-blue-400">👉 "글 생성기가 아닌 운영 도구"</p>
-                        <p class="text-xs text-gray-500 mt-1">※ 콘텐츠는 사용권/저작권 보유 자료만 사용.</p>
-                    </div>
-                </div>
-
-                <!-- MASTER Plan (Enhanced) -->
-                <div
-                    class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-8 border border-red-500/30 hover:border-red-500 transition-colors opacity-80">
-                    <div class="flex items-center justify-between mb-4">
-                        <h3 class="text-2xl font-black text-red-500">🔴 MASTER</h3>
-                        <span class="text-sm font-bold bg-red-500/10 text-red-500 px-3 py-1 rounded-full">전문가용</span>
-                    </div>
-                    <div class="mb-6">
-                        <span class="text-4xl font-black">준비 중</span>
                         <span class="text-gray-500 block text-sm mt-1">/ 30일</span>
                     </div>
 
-                    <div class="mb-6 pb-6 border-b border-slate-700">
-                        <h4 class="font-bold text-gray-300 mb-2">🎯 대상</h4>
-                        <ul class="text-sm text-gray-400 space-y-1">
-                            <li>• 다계정 운영자 (대행사급)</li>
-                            <li>• 블로그로 실제 매출 만드는 분</li>
-                        </ul>
+                    <div class="bg-blue-500/20 border border-blue-500/50 rounded-xl p-3 mb-6">
+                        <p class="text-blue-300 font-bold text-sm">
+                            💰 DB 2개 값 = 한 달 무제한 DB
+                        </p>
                     </div>
 
-                    <div class="space-y-6 mb-8">
-                        <div>
-                            <h4 class="font-bold text-red-500 mb-3 text-sm flex items-center">
-                                <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M8 11V7a4 4 0 118 0m-4 8v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z">
-                                    </path>
-                                </svg>
-                                제공 기능
-                            </h4>
-                            <div class="text-center py-8">
-                                <svg class="w-16 h-16 mx-auto text-gray-700 mb-3" fill="none" stroke="currentColor"
-                                    viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2z">
-                                    </path>
-                                </svg>
-                                <p class="text-gray-600 font-bold mb-1">고급 기능 준비 중</p>
-                                <p class="text-xs text-gray-700">PRO 기능 포함 + 추가 고급 기능</p>
-                            </div>
-                        </div>
-                    </div>
+                    <ul class="space-y-3 mb-8 text-sm">
+                        <li class="flex items-start gap-2"><span class="text-blue-400">✓</span> <b>LITE 기능 전부 포함</b>
+                        </li>
+                        <li class="flex items-start gap-2"><span class="text-blue-400">✓</span> 계정 8개 다계정 운영</li>
+                        <li class="flex items-start gap-2"><span class="text-blue-400">✓</span> 긴 글 (3200자까지)</li>
+                        <li class="flex items-start gap-2"><span class="text-blue-400">✓</span> 이미지에 워터마크 삽입 가능</li>
+                        <li class="flex items-start gap-2"><span class="text-blue-400">✓</span> 사진에 링크 삽입 가능</li>
+                        <li class="flex items-start gap-2"><span class="text-blue-400">✓</span> 발행 전 검색 분석</li>
+                        <li class="flex items-start gap-2"><span class="text-blue-400">✓</span> SEO 최적화 발행 25개 이상</li>
+                        <li class="flex items-start gap-2"><span class="text-blue-400">✓</span> 고급 글 템플릿 20종 지원</li>
+                    </ul>
 
-                    <div class="bg-slate-950/50 p-4 rounded-xl text-center mb-6">
-                        <p class="text-sm font-bold text-gray-600">👉 "전문가 대상 전용 플랜"</p>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Below Purchase Buttons Disclaimer (환불 관련) -->
-            <div class="mt-12 max-w-4xl mx-auto">
-                <div class="grid md:grid-cols-3 gap-6 mb-6">
-                    <button onclick="location.href='checkout.html?plan=LITE'"
-                        class="w-full bg-slate-700 hover:bg-slate-600 text-white font-bold py-4 rounded-xl transition-all">
-                        LITE 선택하기
-                    </button>
                     <button onclick="location.href='checkout.html?plan=PRO'"
-                        class="w-full bg-blue-500 hover:bg-blue-600 text-white font-black py-4 rounded-xl shadow-lg shadow-blue-500/30 transition-all hover:scale-105">
-                        PRO 시작하기
+                        class="w-full bg-blue-500 hover:bg-blue-600 text-white font-black py-4 rounded-xl pulse-glow transition-all hover:scale-105">
+                        🔥 오픈 특가 신청
                     </button>
+                </div>
+
+                <!-- MASTER -->
+                <div
+                    class="bg-gradient-to-br from-slate-800 to-slate-900 rounded-2xl p-8 border border-slate-700 opacity-60">
+                    <h3 class="text-2xl font-black text-gray-500 mb-4">🔴 MASTER</h3>
+                    <div class="mb-6">
+                        <span class="text-4xl font-black text-gray-600">준비 중</span>
+                        <span class="text-gray-600 block text-sm mt-1">/ 30일</span>
+                    </div>
+
+                    <div class="text-center py-12">
+                        <p class="text-gray-600 font-bold">대행사급 전문가용</p>
+                        <p class="text-xs text-gray-700 mt-2">곧 출시 예정</p>
+                    </div>
+
                     <button disabled
-                        class="w-full bg-slate-800 text-gray-500 font-bold py-4 rounded-xl cursor-not-allowed">
+                        class="w-full bg-slate-800 text-gray-600 font-bold py-4 rounded-xl cursor-not-allowed">
                         준비 중
                     </button>
                 </div>
-
-                <div class="bg-slate-900 border border-slate-800 rounded-xl p-4 text-xs text-center text-gray-400"
-                    style="word-break: keep-all;">
-                    <p class="mb-1"><span class="text-red-400 font-bold">💳 결제/환불 필독</span>: 디지털 콘텐츠 특성상 결제 후 즉시 이용
-                        권한이
-                        부여되므로 <b>단순 변심으로 인한 환불은 불가합니다.</b></p>
-                    <p><span class="text-blue-400 font-bold">🔐 라이선스</span>: 1인 1계정 1기기 사용 원칙. 무단 공유 시 이용 제한.</p>
-                </div>
             </div>
 
-            <!-- Below Pricing Disclaimer (플랫폼 책임 회피) -->
-            <div class="mt-8 text-center text-xs text-gray-600">
-                <p>⚖️ <b>플랫폼 정책 준수 의무</b>: 블로그 운영 및 게시물 내용에 대한 책임은 사용자에게 있으며, 각 플랫폼(네이버 등)의 정책 위반으로 인한 제재에 대해 당사는
-                    책임지지
-                    않습니다. 게시물/이미지/데이터는 저작권 및 사용권을 보유한 콘텐츠만 사용해야 하며, 위반 시 책임은 사용자에게 있습니다.</p>
-            </div>
-
-        </div>
-    </section>
-
-    <!-- RISK DISCLOSURE SECTION -->
-    <section class="py-20 px-6 bg-red-900/10 border-y border-red-900/30 reveal">
-        <div class="container mx-auto max-w-5xl">
-            <div class="text-center mb-12">
-                <h2 class="text-3xl md:text-4xl font-black mb-4">
-                    <span class="text-red-400">⚠️ 중요 안내사항</span>
-                </h2>
-                <p class="text-gray-400 max-w-2xl mx-auto">서비스 이용 전 반드시 숙지해야 할 핵심 사항입니다</p>
-            </div>
-
-            <div class="grid md:grid-cols-2 gap-6">
-                <!-- Risk 1: 자동화 도구 사용 -->
-                <div class="bg-slate-900 border border-red-900/30 rounded-xl p-6">
-                    <div class="flex items-start gap-3 mb-4">
-                        <div
-                            class="w-10 h-10 bg-red-500/20 rounded-full flex items-center justify-center flex-shrink-0">
-                            <span class="text-red-400 text-xl">🤖</span>
-                        </div>
-                        <div>
-                            <h3 class="font-bold text-white mb-2">1. 자동화 도구 사용</h3>
-                            <p class="text-sm text-gray-400">본 서비스는 작업 효율화를 위한 자동화 도구입니다. 플랫폼(네이버 등) 정책 변경 시 기능이 제한되거나
-                                중단될 수 있습니다.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Risk 2: 계정 안전성 -->
-                <div class="bg-slate-900 border border-red-900/30 rounded-xl p-6">
-                    <div class="flex items-start gap-3 mb-4">
-                        <div
-                            class="w-10 h-10 bg-red-500/20 rounded-full flex items-center justify-center flex-shrink-0">
-                            <span class="text-red-400 text-xl">🔐</span>
-                        </div>
-                        <div>
-                            <h3 class="font-bold text-white mb-2">2. 계정 안전성 (사용자 책임)</h3>
-                            <p class="text-sm text-gray-400">계정 정지, 제재, 손실 등에 대한 책임은 사용자에게 있습니다. 당사는 계정 안전성을 보장하지 않으며,
-                                플랫폼 정책 위반으로 인한 불이익에 대해 책임지지 않습니다.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Risk 3: 콘텐츠 정확성 -->
-                <div class="bg-slate-900 border border-red-900/30 rounded-xl p-6">
-                    <div class="flex items-start gap-3 mb-4">
-                        <div
-                            class="w-10 h-10 bg-red-500/20 rounded-full flex items-center justify-center flex-shrink-0">
-                            <span class="text-red-400 text-xl">✍️</span>
-                        </div>
-                        <div>
-                            <h3 class="font-bold text-white mb-2">3. 콘텐츠 정확성 (최종 검토 필수)</h3>
-                            <p class="text-sm text-gray-400">AI 생성 콘텐츠는 참고용이며, 최종 검토 및 수정은 사용자 책임입니다. 발행된 콘텐츠의 정확성, 적법성,
-                                품질에 대한 책임은 전적으로 사용자에게 있습니다.</p>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Risk 4: 서비스 연속성 -->
-                <div class="bg-slate-900 border border-red-900/30 rounded-xl p-6">
-                    <div class="flex items-start gap-3 mb-4">
-                        <div
-                            class="w-10 h-10 bg-red-500/20 rounded-full flex items-center justify-center flex-shrink-0">
-                            <span class="text-red-400 text-xl">⏱️</span>
-                        </div>
-                        <div>
-                            <h3 class="font-bold text-white mb-2">4. 서비스 연속성 (48시간 업데이트 목표)</h3>
-                            <p class="text-sm text-gray-400">플랫폼 업데이트 대응을 위해 48시간 내 업데이트를 목표로 하나, 이를 보장하지는 않습니다. 긴급 점검,
-                                기능 변경, 서비스 중단 가능성이 있습니다.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Additional Legal Notice -->
-            <div class="mt-8 bg-slate-950 border border-red-900/50 rounded-xl p-6 text-center">
-                <p class="text-sm text-gray-400 mb-2">✅ <span class="text-white font-bold">정기결제 미지원</span>: 모든 플랜은 30일
-                    단건 이용권이며, 자동 결제되지 않습니다.</p>
-                <p class="text-xs text-gray-600">환불 정책: 디지털 콘텐츠 특성상 이용권 부여 후 단순 변심 환불 불가. <a
-                        href="refund_policy_ricarautoplan_detailed_nolist.html"
-                        class="text-blue-400 hover:underline">자세히 보기</a></p>
+            <div class="mt-12 text-center text-xs text-gray-600">
+                <p>💳 디지털 상품 특성상 구매 후 환불 불가 | 1인 1계정 1기기 원칙</p>
             </div>
         </div>
     </section>
 
     <!-- FAQ -->
-
     <section class="py-20 px-6 reveal">
         <div class="container mx-auto max-w-4xl">
             <h2 class="text-4xl md:text-5xl font-black text-center mb-16">
-                자주 묻는 <span class="text-green-400">질문</span>
+                자주 묻는 <span class="text-blue-500">질문</span>
             </h2>
 
             <div class="space-y-4">
-                <!-- FAQ 1: AI Cost -->
-                <div class="gradient-border rounded-xl overflow-hidden">
+                <div class="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden">
                     <button onclick="toggleAccordion(this)"
                         class="w-full text-left p-6 flex justify-between items-center hover:bg-slate-800/50 transition-colors">
-                        <span class="font-bold text-lg">🤖 추가 비용이 발생하나요? (AI API 관련)</span>
-                        <svg class="w-6 h-6 transform transition-transform" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
+                        <span class="font-bold text-lg text-white">🤖 정말 100% 자동인가요?</span>
+                        <svg class="w-6 h-6 transform transition-transform text-gray-400" fill="none"
+                            stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
                             </path>
                         </svg>
                     </button>
                     <div class="accordion-content">
                         <div class="px-6 pb-6 text-gray-400">
-                            <p class="mb-4">AI 글 생성 기능은 <span class="text-green-400 font-bold">구글 제미나이(Gemini)
-                                    AI</span>를 기반으로 작동하며, 원활한 사용을 위해 <span class="text-white font-bold underline">사용자
-                                    본인의 API 키</span>를 등록하여 사용해야 합니다. API 사용에 따른 비용은 구글 정책에 따르며, 사용자 계정별로 별도 발생합니다.</p>
-                            <a href="guide.html#gemini-guide"
-                                class="inline-flex items-center text-green-400 font-bold hover:underline">
-                                🔗 제미나이 API 키 발급방법 가이드 보기
-                                <svg class="w-4 h-4 ml-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M9 5l7 7-7 7"></path>
-                                </svg>
-                            </a>
+                            네, 차량명(키워드)와 이미지만 입력해도 AI가 글 작성, 이미지 삽입, 발행까지 모두 자동으로 처리합니다. 소요시간은 약 1분입니다.
+                            조금 더 좋은 글을 쓰고싶다면 상세하게 입력하시면 더 퀄리티 높은 글을 발행합니다.
                         </div>
                     </div>
                 </div>
 
-                <!-- FAQ 2: Automation -->
-                <div class="gradient-border rounded-xl overflow-hidden">
+                <div class="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden">
                     <button onclick="toggleAccordion(this)"
                         class="w-full text-left p-6 flex justify-between items-center hover:bg-slate-800/50 transition-colors">
-                        <span class="font-bold text-lg">정말 100% 자동인가요?</span>
-                        <svg class="w-6 h-6 transform transition-transform" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
+                        <span class="font-bold text-lg text-white">💰 추가 비용이 발생하나요?</span>
+                        <svg class="w-6 h-6 transform transition-transform text-gray-400" fill="none"
+                            stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
                             </path>
                         </svg>
                     </button>
                     <div class="accordion-content">
                         <div class="px-6 pb-6 text-gray-400">
-                            네, 키워드만 입력하시면 AI가 콘텐츠 생성, 이미지 제작, 블로그 발행까지 모든 과정을 자동으로 처리합니다. 단, 초기 설정과 전략 수립은 사용자의 몫입니다.
+                            AI 기능 사용을 위해 구글 제미나이 API 키가 필요합니다. 사용량에 따라 구글에서 별도 과금되며, 일반적으로 월 1~2만원 수준입니다.
+                            단, 특가이벤트로 그냥 제공해드리고 있어 해당 기간안에 결제하신분들은 무료료 사용가능합니다.
                         </div>
                     </div>
                 </div>
 
-                <!-- FAQ 3: Tech Support -->
-                <div class="gradient-border rounded-xl overflow-hidden">
+                <div class="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden">
                     <button onclick="toggleAccordion(this)"
                         class="w-full text-left p-6 flex justify-between items-center hover:bg-slate-800/50 transition-colors">
-                        <span class="font-bold text-lg">🔧 기술 지원 범위는 어디까지인가요?</span>
-                        <svg class="w-6 h-6 transform transition-transform" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
+                        <span class="font-bold text-lg text-white">🎯 정말 DB가 확보되나요?</span>
+                        <svg class="w-6 h-6 transform transition-transform text-gray-400" fill="none"
+                            stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
                             </path>
                         </svg>
                     </button>
                     <div class="accordion-content">
                         <div class="px-6 pb-6 text-gray-400">
-                            기술 지원은 프로그램 작동 오류 및 설치 관련 사항에 한하며, 블로그 운영 전략·마케팅 성과(조회수, 노출 등)에 대한 컨설팅은 포함되지 않습니다.
+                            블로그 방문자가 직접 문의하는 고품질 DB를 확보할 수 있습니다. 다만 성과는 사용자의 운영 방식에 따라 다를 수 있습니다.
+                            가이드 보시고 계정 최소 2개(문의 전환형 / 조회수 노출형)로 관리하시면 성과가 자동으로 따라옵니다.
                         </div>
                     </div>
                 </div>
 
-                <!-- FAQ 4: Platform -->
-                <div class="gradient-border rounded-xl overflow-hidden">
+                <div class="bg-slate-900 border border-slate-800 rounded-xl overflow-hidden">
                     <button onclick="toggleAccordion(this)"
                         class="w-full text-left p-6 flex justify-between items-center hover:bg-slate-800/50 transition-colors">
-                        <span class="font-bold text-lg">어떤 블로그 플랫폼을 지원하나요?</span>
-                        <svg class="w-6 h-6 transform transition-transform" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
+                        <span class="font-bold text-lg text-white">📱 어떤 플랫폼을 지원하나요?</span>
+                        <svg class="w-6 h-6 transform transition-transform text-gray-400" fill="none"
+                            stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
                             </path>
                         </svg>
                     </button>
                     <div class="accordion-content">
                         <div class="px-6 pb-6 text-gray-400">
-                            현재 네이버 블로그만을 지원하며, 향후 워드프레스, 티스토리, 브런치 등 다양한 플랫폼으로 확대 예정입니다.
-                        </div>
-                    </div>
-                </div>
-
-                <!-- FAQ 5: Copyright -->
-                <div class="gradient-border rounded-xl overflow-hidden">
-                    <button onclick="toggleAccordion(this)"
-                        class="w-full text-left p-6 flex justify-between items-center hover:bg-slate-800/50 transition-colors">
-                        <span class="font-bold text-lg">저작권 문제는 없나요?</span>
-                        <svg class="w-6 h-6 transform transition-transform" fill="none" stroke="currentColor"
-                            viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
-                            </path>
-                        </svg>
-                    </button>
-                    <div class="accordion-content">
-                        <div class="px-6 pb-6 text-gray-400">
-                            AI가 생성하는 모든 콘텐츠와 이미지는 고유하게 제작되며, 상업적 라이센스가 있는 소스만 사용합니다. 저작권 걱정 없이 사용하실 수 있습니다.
+                            현재 네이버 블로그만 지원합니다. 향후 티스토리, 워드프레스 등으로 확대 예정입니다.
                         </div>
                     </div>
                 </div>
@@ -886,76 +863,57 @@
         </div>
     </section>
 
-    <!-- CTA Section (No Free Trial) -->
-    <section class="py-20 px-6 bg-gradient-to-br from-slate-900 to-slate-950 reveal">
+    <!-- CTA -->
+    <section class="py-20 px-6 bg-gradient-to-br from-blue-900 to-slate-950 reveal">
         <div class="container mx-auto max-w-4xl text-center">
-            <h2 class="text-4xl md:text-6xl font-black mb-6">
+            <div class="inline-block bg-blue-500 text-white font-black text-sm px-6 py-3 rounded-full pulse-glow mb-8">
+                🎉 오픈 기념 특가 진행 중
+            </div>
+            <h2 class="text-4xl md:text-6xl font-black mb-6 text-white">
                 지금 시작하세요
             </h2>
-            <p class="text-xl text-gray-400 mb-12">
-                자동화된 블로그 운영 시스템을 경험해보세요
+            <p class="text-xl text-gray-300 mb-12">
+                신뢰도 상승과 DB수급 확보를 동시에!!
             </p>
-            <button onclick="location.href='checkout.html'"
-                class="bg-green-400 hover:bg-green-500 text-slate-950 font-black text-xl px-12 py-5 rounded-xl neon-glow transition-all hover:scale-110 inline-block">
-                프로그램 구매하기 →
+            <button onclick="location.href='checkout.html?plan=PRO'"
+                class="bg-blue-500 hover:bg-blue-600 text-white font-black text-xl px-12 py-5 rounded-xl neon-glow transition-all hover:scale-110 inline-block">
+                🔥 오픈 특가로 시작하기 →
             </button>
         </div>
     </section>
 
-    <!-- Footer with Disclaimer -->
+    <!-- Footer -->
     <footer class="py-12 px-6 bg-slate-950 border-t border-slate-800">
         <div class="container mx-auto max-w-6xl">
-            <!-- Footer Main Content -->
             <div class="grid md:grid-cols-3 gap-8 mb-12">
                 <div>
                     <div class="flex items-center space-x-2 mb-4">
-                        <div
-                            class="w-8 h-8 bg-gradient-to-br from-green-400 to-cyan-400 rounded-lg flex items-center justify-center">
-                            <span class="text-slate-950 font-black">AI</span>
-                        </div>
-                        <span class="text-xl font-black">블로그<span class="text-green-400">봇</span></span>
+                        <!-- [UPDATED] Logo -->
+                        <img src="logo.png" alt="RicarBot" class="w-8 h-8 object-contain">
+                        <span class="text-xl font-black">리카<span class="text-blue-500">봇</span></span>
                     </div>
-                    <p class="text-gray-500 text-sm">
-                        AI 기반 블로그 자동화 솔루션
-                    </p>
+                    <p class="text-gray-500 text-sm">100% 자동 블로그 시스템</p>
                 </div>
 
                 <div>
-                    <h4 class="font-bold mb-4">고객 지원</h4>
-                    <ul class="space-y-2 text-gray-500">
-                        <li><a href="icarautoplan_detailed.html" class="hover:text-green-400 transition-colors">이용약관</a>
+                    <h4 class="font-bold mb-4 text-white">고객 지원</h4>
+                    <ul class="space-y-2 text-gray-500 text-sm">
+                        <li><a href="icarautoplan_detailed.html" class="hover:text-blue-400 transition-colors">이용약관</a>
                         </li>
-                        <li><a href="guide.html" class="hover:text-green-400 transition-colors">사용방법 (필독)</a></li>
+                        <li><a href="guide.html" class="hover:text-blue-400 transition-colors">사용 가이드</a></li>
                         <li><a href="privacy_policy_ricarautoplan_multi_pg_nolist.html"
-                                class="hover:text-green-400 transition-colors">개인정보처리방침</a></li>
+                                class="hover:text-blue-400 transition-colors">개인정보처리방침</a></li>
                         <li><a href="refund_policy_ricarautoplan_detailed_nolist.html"
-                                class="hover:text-green-400 transition-colors">환불 정책</a></li>
+                                class="hover:text-blue-400 transition-colors">환불 정책</a></li>
                     </ul>
                 </div>
 
                 <div>
-                    <h4 class="font-bold mb-4">문의</h4>
-                    <ul class="space-y-2 text-gray-500">
-                        <li>이메일: <a href="mailto:jhxox666@naver.com" class="hover:text-green-400">jhxox666@naver.com</a>
+                    <h4 class="font-bold mb-4 text-white">문의</h4>
+                    <ul class="space-y-2 text-gray-500 text-sm">
+                        <li>이메일: <a href="mailto:jhxox666@naver.com" class="hover:text-blue-400">jhxox666@naver.com</a>
                         </li>
-                        <!-- <li>전화: 02-1234-5678</li> -->
-                        <!-- <li>카카오톡: @blogbot</li> -->
                     </ul>
-                </div>
-            </div>
-
-            <!-- Disclaimer Section (Survival Phrases) -->
-            <div
-                class="border-t border-slate-900 pt-8 pb-8 text-xs text-gray-600 space-y-4 bg-slate-950/50 rounded-lg p-6">
-                <!-- Feature Changes -->
-                <div>
-                    <strong class="text-gray-500 block mb-1">⚙️ 기능 변경 및 업데이트</strong>
-                    프로그램 기능은 지속적으로 개선되며, 외부 플랫폼 구조 변경에 따라 일부 기능이 일시적으로 제한될 수 있습니다.
-                </div>
-                <!-- General Disclaimer -->
-                <div>
-                    <strong class="text-gray-500 block mb-1">🛡️ 일반 면책 및 마케팅 고지</strong>
-                    예시 및 설명에 사용된 수치·사례는 이해를 돕기 위한 예시이며, 모든 사용자에게 동일하게 적용되지 않습니다. 성과는 사용자의 운영 방식에 따라 달라집니다.
                 </div>
             </div>
 
@@ -966,23 +924,59 @@
                     <p>주소: 경기도 부천시 원미구 신흥로 40, 709호(심곡동, 디오스빌)</p>
                     <p>고객센터: jhxox666@naver.com</p>
                 </div>
+
+                <div class="mt-4 text-xs text-gray-700">
+                    <p>※ 본 서비스는 블로그 운영 보조 도구입니다. DB 확보 성과는 사용자 운영 방식에 따라 다를 수 있습니다.</p>
+                </div>
             </div>
         </div>
     </footer>
 
-    <!-- MOBILE STICKY BUTTON (For Index) -->
-    <div class="mobile-sticky-btn md:hidden">
-        <button onclick="location.href='checkout.html'" class="btn-primary">
-            <span>지금 바로 시작하기</span>
+    <!-- Mobile Sticky Button -->
+    <div
+        class="fixed bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-slate-950 via-slate-950/95 to-transparent z-40 md:hidden">
+        <button onclick="location.href='checkout.html?plan=PRO'"
+            class="w-full bg-blue-500 hover:bg-blue-600 text-white font-black py-4 rounded-xl pulse-glow transition-all">
+            🔥 오픈 특가로 시작하기
         </button>
     </div>
 
     <script>
+        // 팝업 관리
+        function showPopup() {
+            const popup = document.getElementById('eventPopup');
+            const dontShow = localStorage.getItem('hidePopupUntil');
+            const now = new Date().getTime();
+
+            if (!dontShow || now > parseInt(dontShow)) {
+                popup.classList.add('active');
+            }
+        }
+
+        function closePopup() {
+            const popup = document.getElementById('eventPopup');
+            const checkbox = document.getElementById('dontShowToday');
+
+            popup.classList.remove('active');
+
+            if (checkbox.checked) {
+                const tomorrow = new Date();
+                tomorrow.setDate(tomorrow.getDate() + 1);
+                tomorrow.setHours(0, 0, 0, 0);
+                localStorage.setItem('hidePopupUntil', tomorrow.getTime().toString());
+            }
+        }
+
+        // 페이지 로드 후 3초 뒤에 팝업 표시
+        window.addEventListener('load', () => {
+            setTimeout(showPopup, 3000);
+        });
+
+        // Accordion
         function toggleAccordion(button) {
             const content = button.nextElementSibling;
             const icon = button.querySelector('svg');
 
-            // Close all other accordions
             document.querySelectorAll('.accordion-content').forEach(item => {
                 if (item !== content) {
                     item.classList.remove('active');
@@ -990,23 +984,11 @@
                 }
             });
 
-            // Toggle current accordion
             content.classList.toggle('active');
             icon.classList.toggle('rotate-180');
         }
 
-        // Smooth scroll for anchor links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            });
-        });
-
-        // Scroll Reveal Observer
+        // Scroll Reveal
         const observerOptions = {
             threshold: 0.15,
             rootMargin: "0px 0px -50px 0px"

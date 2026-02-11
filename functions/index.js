@@ -115,3 +115,61 @@ exports.payappFeedback = functions.https.onRequest(async (req, res) => {
     // Always return 'SUCCESS' to PayApp
     res.send("SUCCESS");
 });
+
+// 🎁 Review Reward Handler (+7 Days Extension)
+exports.onReviewCreate = functions.firestore.document('reviews/{reviewId}').onCreate(async (snap, context) => {
+    const reviewData = snap.data();
+    const uid = reviewData.uid;
+
+    if (!uid) {
+        console.error("Review created without UID. Cannot give reward.");
+        return;
+    }
+
+    const userRef = db.collection("users").doc(uid);
+
+    try {
+        await db.runTransaction(async (t) => {
+            const userDoc = await t.get(userRef);
+            if (!userDoc.exists) {
+                throw new Error("User does not exist!");
+            }
+
+            const userData = userDoc.data();
+
+            // 1. Check if reward already given
+            if (userData.reviewRewardGiven) {
+                console.log(`User ${uid} already received review reward. Skipping.`);
+                return;
+            }
+
+            // 2. Calculate New Expiry Date
+            let currentExpiry = userData.expiryDate;
+            let newExpiry;
+
+            // Handle Firestore Timestamp or Date object
+            if (currentExpiry && typeof currentExpiry.toDate === 'function') {
+                newExpiry = currentExpiry.toDate();
+            } else if (currentExpiry) {
+                newExpiry = new Date(currentExpiry); // String or other format
+            } else {
+                newExpiry = new Date(); // If no expiry, start from now
+            }
+
+            // Add 7 Days
+            newExpiry.setDate(newExpiry.getDate() + 7);
+
+            // 3. Update User Doc
+            t.update(userRef, {
+                expiryDate: admin.firestore.Timestamp.fromDate(newExpiry),
+                reviewRewardGiven: true,
+                updatedAt: admin.firestore.Timestamp.now()
+            });
+
+            console.log(`🎁 Reward Given! User ${uid} extended by 7 days. New Expiry: ${newExpiry.toISOString()}`);
+        });
+
+    } catch (error) {
+        console.error("❌ Review Reward Transaction Failed:", error);
+    }
+});
