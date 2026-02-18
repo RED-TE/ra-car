@@ -315,8 +315,41 @@
         <p class="text-gray-600 text-sm">© 2026 RicarBot for Car Sales. All rights reserved.</p>
     </footer>
 
+    <!-- Firebase SDK (Compat Version) -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+    <script src="firebase_config.js"></script>
+
     <script>
         let currentBilling = 'single';
+        let currentUser = null;
+
+        // --- Auth State ---
+        if (typeof auth !== 'undefined') {
+            auth.onAuthStateChanged(user => {
+                currentUser = user;
+                const navAuthSection = document.getElementById('nav-auth-section');
+                if (user) {
+                    navAuthSection.innerHTML = `
+                        <div class="flex items-center space-x-4">
+                             <a href="guide.html" class="hidden md:block text-blue-400 hover:text-blue-300 font-bold transition-colors">📖 가이드</a>
+                            <span class="text-gray-300 text-xs truncate max-w-[100px]">${user.email}</span>
+                            <button onclick="auth.signOut().then(()=>location.reload())" class="text-gray-400 hover:text-white text-xs">로그아웃</button>
+                        </div>
+                    `;
+                } else {
+                    navAuthSection.innerHTML = `
+                        <a href="guide.html" class="hidden md:block text-blue-400 hover:text-blue-300 font-bold transition-colors">📖 가이드</a>
+                        <a href="login.html" class="text-gray-300 hover:text-blue-400 transition-colors">로그인</a>
+                        <button onclick="location.href='signup.html'"
+                            class="bg-blue-500 hover:bg-blue-600 text-white font-bold px-6 py-2 rounded-lg neon-glow transition-all hover:scale-105">
+                            회원가입
+                        </button>
+                    `;
+                }
+            });
+        }
 
         function switchBilling(type) {
             currentBilling = type;
@@ -340,6 +373,13 @@
         }
 
         function goToCheckout(planBase) {
+            if (!currentUser) {
+                if (confirm('결제를 진행하려면 로그인이 필요합니다. 로그인 페이지로 이동할까요?')) {
+                    const currentUrl = encodeURIComponent(window.location.href);
+                    location.href = `login.html?redirect=${currentUrl}`;
+                }
+                return;
+            }
             let finalPlan = planBase;
             let recurringParam = currentBilling === 'subscription' ? 'true' : 'false';
             if (currentBilling === 'yearly') finalPlan = planBase + "_YEARLY";

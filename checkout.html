@@ -439,6 +439,40 @@
             checkAll.addEventListener('change', e => checkboxes.forEach(cb => cb.checked = e.target.checked));
         }
 
+        // --- Render Plans ---
+        const planContainer = document.getElementById('plan-container');
+
+        function renderPlans() {
+            planContainer.innerHTML = '';
+            Object.keys(PRICING_CONFIG.plans).forEach(id => {
+                const plan = PRICING_CONFIG.plans[id];
+                // Filter based on recurring state (simplified logic)
+                // If recurring is true, show only 1 month plans? Or handled by UI toggle?
+                // For now, let's just show all relevant plans or handle visual logic in CSS
+
+                const isChecked = selectedPlanId === id ? 'checked' : '';
+
+                const div = document.createElement('div');
+                div.innerHTML = `
+            <label class="relative block cursor-pointer group">
+                <input type="radio" name="plan" class="peer sr-only radio-plan" value="${id}" ${isChecked} onchange="updateSelection('${id}')">
+                    <div class="p-5 rounded-xl border border-slate-700 bg-slate-800/50 hover:bg-slate-800 transition-all peer-checked:border-blue-500 peer-checked:bg-blue-500/10 peer-checked:shadow-lg peer-checked:shadow-blue-500/10">
+                        <div class="flex justify-between items-center mb-2">
+                            <h3 class="font-bold text-lg">${plan.name}</h3>
+                            <span class="text-blue-400 font-bold">${Utils.formatCurrency(plan.price)}</span>
+                        </div>
+                        <p class="text-sm text-gray-400">${plan.desc}</p>
+                        <div class="absolute top-0 right-0 p-3 check-icon text-blue-500">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
+                        </div>
+                    </div>
+            </label>
+                `;
+                planContainer.appendChild(div);
+            });
+        }
+        renderPlans();
+
         window.processPayment = function () {
             try {
                 if (!currentUser) return alert('로그인이 필요합니다.');
@@ -465,6 +499,9 @@
                 PayApp.setParam('smsuse', 'n');
                 PayApp.setParam('openpaytype', '');
                 PayApp.setParam('var1', currentUser.uid); // 🚀 Webhook에서 사용자 구분을 위해 UID 전달
+
+                // 🚀 이메일 정보 전달 (결제 성공 페이지에서 표기용)
+                PayApp.setParam('var_email', currentUser.email);
 
                 // 🚀 정기구독(Billkey 요청) 처리
                 if (isRecurring) {

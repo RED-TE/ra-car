@@ -28,21 +28,79 @@
             <p class="text-gray-400 text-sm">Google 계정으로 간편하게 가입하세요.</p>
         </div>
 
-        <div class="space-y-6">
+        <div class="space-y-4">
+            <div id="email-signup-section" class="space-y-4">
+                <div>
+                    <label class="block text-sm text-gray-400 mb-1">이메일</label>
+                    <input type="email" id="email"
+                        class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-blue-500 outline-none"
+                        placeholder="example@email.com">
+                </div>
+                <div>
+                    <label class="block text-sm text-gray-400 mb-1">비밀번호</label>
+                    <input type="password" id="password"
+                        class="w-full bg-slate-800 border border-slate-700 rounded-xl px-4 py-3 text-white focus:ring-2 focus:ring-blue-500 outline-none"
+                        placeholder="6자리 이상 입력">
+                </div>
+                <button type="button" id="emailSignupBtn"
+                    class="w-full bg-blue-600 hover:bg-blue-500 text-white font-bold py-4 rounded-xl transition-all shadow-lg shadow-blue-500/30">
+                    회원가입 완료
+                </button>
+            </div>
+
+            <!-- Legal Consent -->
+            <div class="space-y-3 bg-slate-800/50 p-4 rounded-xl border border-slate-800 text-sm">
+                <label class="flex items-center space-x-2 cursor-pointer border-b border-slate-700 pb-2 mb-2">
+                    <input type="checkbox" id="check-all"
+                        class="rounded border-gray-600 text-blue-500 focus:ring-blue-500 bg-slate-700">
+                    <span class="font-bold text-white">약관 전체 동의</span>
+                </label>
+                <label class="flex items-center space-x-2 cursor-pointer">
+                    <input type="checkbox" id="check-age"
+                        class="consent-check required-check rounded border-gray-600 text-blue-500 focus:ring-blue-500 bg-slate-700">
+                    <span class="text-gray-400">[필수] 만 14세 이상입니다</span>
+                </label>
+                <label class="flex items-center space-x-2 cursor-pointer">
+                    <input type="checkbox" id="check-terms"
+                        class="consent-check required-check rounded border-gray-600 text-blue-500 focus:ring-blue-500 bg-slate-700">
+                    <span class="text-gray-400">[필수] <a href="license.html" target="_blank"
+                            class="underline hover:text-white">서비스 이용약관</a> 동의</span>
+                </label>
+                <label class="flex items-center space-x-2 cursor-pointer">
+                    <input type="checkbox" id="check-privacy"
+                        class="consent-check required-check rounded border-gray-600 text-blue-500 focus:ring-blue-500 bg-slate-700">
+                    <span class="text-gray-400">[필수] <a href="privacy_policy_ricarautoplan_multi_pg_nolist.html"
+                            target="_blank" class="underline hover:text-white">개인정보 수집 및 이용</a> 동의</span>
+                </label>
+                <label class="flex items-center space-x-2 cursor-pointer">
+                    <input type="checkbox" id="check-marketing"
+                        class="consent-check rounded border-gray-600 text-blue-500 focus:ring-blue-500 bg-slate-700">
+                    <span class="text-gray-400">[선택] 마케팅 정보 수신 동의</span>
+                </label>
+            </div>
+
+            <div class="relative py-2">
+                <div class="absolute inset-0 flex items-center">
+                    <div class="w-full border-t border-slate-800"></div>
+                </div>
+                <div class="relative flex justify-center text-xs uppercase"><span
+                        class="bg-slate-900 px-2 text-gray-500">또는</span></div>
+            </div>
+
             <button type="button" id="googleSignupBtn"
-                class="w-full bg-slate-800 hover:bg-slate-700 text-white font-bold py-4 rounded-xl border border-slate-700 transition-all flex items-center justify-center gap-3 text-lg hover:scale-[1.02] shadow-xl">
-                <svg class="w-6 h-6" viewBox="0 0 24 24">
+                class="w-full bg-slate-800 hover:bg-slate-700 text-white font-bold py-3 rounded-xl border border-slate-700 transition-all flex items-center justify-center gap-3 text-sm hover:scale-[1.01]">
+                <svg class="w-5 h-5" viewBox="0 0 24 24">
                     <path fill="currentColor"
                         d="M12.545,10.239v3.821h5.445c-0.712,2.315-2.647,3.972-5.445,3.972c-3.332,0-6.033-2.53-6.033-5.652s2.701-5.652,6.033-5.652c1.498,0,2.866,0.549,3.921,1.453l2.814-2.814C17.503,2.988,15.139,2,12.545,2C7.021,2,2.543,6.477,2.543,12s4.478,10,10.002,10c8.396,0,10.249-7.85,9.426-11.748L12.545,10.239z" />
                 </svg>
                 Google 계정으로 시작하기
             </button>
             <p class="text-center text-xs text-gray-500">
-                이미 계정이 있으신가요? <a href="/login" class="text-green-400 hover:text-green-300 font-medium">로그인</a>
+                이미 계정이 있으신가요? <a href="login.html" class="text-blue-400 hover:text-blue-300 font-bold">로그인</a>
             </p>
         </div>
 
-        <div id="errorMessage" class="text-red-500 text-sm hidden mt-4 text-center"></div>
+        <div id="errorMessage" class="text-red-500 text-xs hidden mt-4 text-center"></div>
     </div>
 
     <!-- Firebase SDK (Compat Version for file:// support) -->
@@ -54,22 +112,83 @@
     <script>
         const errorMessage = document.getElementById('errorMessage');
 
+        // Check All Logic
+        const checkAll = document.getElementById('check-all');
+        const checkboxes = document.querySelectorAll('.consent-check');
+        checkAll.addEventListener('change', (e) => {
+            checkboxes.forEach(cb => cb.checked = e.target.checked);
+        });
+        checkboxes.forEach(cb => {
+            cb.addEventListener('change', () => {
+                checkAll.checked = Array.from(checkboxes).every(c => c.checked);
+            });
+        });
+
+        // Email Signup Handler
+        document.getElementById('emailSignupBtn').addEventListener('click', async () => {
+            const email = document.getElementById('email').value.trim();
+            const password = document.getElementById('password').value.trim();
+
+            // Legal Checks
+            const requiredChecks = document.querySelectorAll('.required-check');
+            let allChecked = true;
+            requiredChecks.forEach(cb => { if (!cb.checked) allChecked = false; });
+
+            if (!allChecked) {
+                showError('필수 약관 및 연령 확인에 모두 동의해주세요.');
+                return;
+            }
+
+            if (!email || !password) {
+                showError('이메일과 비밀번호를 모두 입력해주세요.');
+                return;
+            }
+            if (password.length < 6) {
+                showError('비밀번호는 최소 6자리 이상이어야 합니다.');
+                return;
+            }
+
+            try {
+                const result = await auth.createUserWithEmailAndPassword(email, password);
+                const user = result.user;
+                const marketingConsent = document.getElementById('check-marketing').checked;
+
+                // Create User Doc
+                if (typeof db !== 'undefined') {
+                    await db.collection("users").doc(user.uid).set({
+                        email: user.email,
+                        createdAt: new Date(),
+                        plan: 'free',
+                        role: 'user',
+                        authProvider: 'email',
+                        termsAgreed: true,
+                        marketingConsent: marketingConsent,
+                        agreedAt: firebase.firestore.FieldValue.serverTimestamp()
+                    });
+                }
+
+                alert('회원가입이 완료되었습니다! 반갑습니다.');
+                window.location.href = 'index.html';
+            } catch (error) {
+                console.error("Email Signup Error:", error);
+                let msg = `회원가입 실패: ${error.message}`;
+                if (error.code === 'auth/email-already-in-use') msg = '이미 사용 중인 이메일입니다.';
+                if (error.code === 'auth/invalid-email') msg = '유효하지 않은 이메일 형식입니다.';
+                showError(msg);
+            }
+        });
+
         // Google Signup Handler
         document.getElementById('googleSignupBtn').addEventListener('click', async () => {
             try {
-                if (!window.googleProvider) {
-                    throw new Error("Google Provider not initialized");
-                }
+                if (!window.googleProvider) throw new Error("Google Provider not initialized");
                 const result = await auth.signInWithPopup(window.googleProvider);
                 const user = result.user;
 
-                // Create User Doc if not exists
                 if (typeof db !== 'undefined') {
-                    const docRef = db.collection("users").doc(user.uid);
-                    const docSnap = await docRef.get();
-
+                    const docSnap = await db.collection("users").doc(user.uid).get();
                     if (!docSnap.exists) {
-                        await docRef.set({
+                        await db.collection("users").doc(user.uid).set({
                             email: user.email,
                             createdAt: new Date(),
                             plan: 'free',
@@ -80,18 +199,10 @@
                 }
 
                 alert('환영합니다! 구글 계정으로 로그인되었습니다.');
-                window.location.href = '/';
+                window.location.href = 'index.html';
             } catch (error) {
                 console.error("Google Signup Error:", error);
-                let msg = `Google 회원가입 실패\n[${error.code}]\n${error.message}`;
-
-                if (error.code === 'auth/popup-closed-by-user') {
-                    msg = '로그인 창이 닫혔습니다.';
-                } else if (error.code === 'auth/unauthorized-domain') {
-                    msg = '도메인 승인이 필요합니다. (127.0.0.1)\nFirebase 콘솔에서 승인해주세요.';
-                }
-
-                showError(msg);
+                showError(`Google 회원가입 실패: ${error.message}`);
             }
         });
 

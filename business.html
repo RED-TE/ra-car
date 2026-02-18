@@ -121,7 +121,9 @@
                 </div>
                 <div id="nav-auth-section" class="flex items-center space-x-4">
                     <a href="guide.html"
-                        class="hidden md:block text-blue-400 hover:text-blue-300 font-bold transition-colors">📖 가이드</a>
+                        class="hidden md:block text-gray-300 hover:text-blue-400 transition-colors">가이드</a>
+                    <a href="#download"
+                        class="hidden md:block text-gray-300 hover:text-blue-400 transition-colors">다운로드</a>
                     <a href="login.html" class="text-gray-300 hover:text-blue-400 transition-colors">로그인</a>
                     <button onclick="location.href='checkout.html'"
                         class="bg-blue-500 hover:bg-blue-600 text-white font-bold px-6 py-2 rounded-lg neon-glow transition-all hover:scale-105">
@@ -322,16 +324,75 @@
         </div>
     </section>
 
-    <!-- Footer -->
-    <footer class="py-12 px-6 bg-slate-950 border-t border-slate-800">
-        <div class="container mx-auto text-center text-gray-600 text-sm">
-            <p>© 2026 Ricar Bot for SME. All rights reserved.</p>
+    <!-- Download Section -->
+    <section id="download" class="py-20 px-6 reveal">
+        <div class="container mx-auto max-w-4xl">
+            <div
+                class="bg-gradient-to-br from-indigo-900/40 to-slate-900 border border-indigo-500/30 rounded-3xl p-10 text-center">
+                <div class="w-20 h-20 bg-indigo-500/20 rounded-2xl flex items-center justify-center mx-auto mb-6">
+                    <svg class="w-10 h-10 text-indigo-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                            d="M4 16v1a2 2 0 002 2h12a2 2 0 002-2v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                    </svg>
+                </div>
+                <h2 class="text-3xl font-black mb-4">프로그램 다운로드</h2>
+                <p class="text-gray-400 mb-8 max-w-lg mx-auto">
+                    사장님의 블로그 마케팅을 책임질 리카봇 SME 에디션.<br>
+                    지금 바로 다운로드하여 자동화의 위력을 경험하세요.
+                </p>
+                <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                    <button
+                        onclick="location.href='https://drive.google.com/file/d/18d3CgGKfU7qA6McN1sFksksnzhgZLn_m/view?usp=sharing'"
+                        class="w-full sm:w-auto bg-indigo-600 hover:bg-indigo-500 text-white font-bold px-10 py-4 rounded-xl shadow-lg shadow-indigo-500/20 transition-all hover:scale-105">
+                        Windows용 다운로드
+                    </button>
+                    <a href="guide.html" class="text-gray-400 hover:text-white transition-colors">설치 가이드 보기 →</a>
+                </div>
+            </div>
         </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-6 bg-slate-950 border-t border-slate-800 text-center">
+        <p class="text-gray-600 text-sm">© 2026 RicarBot for Business. All rights reserved.</p>
     </footer>
+
+    <!-- Firebase SDK (Compat Version) -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+    <script src="firebase_config.js"></script>
 
     <script>
         // 요금제 전환 및 유틸리티 스크립트 (common.js/index.html 참고)
         let currentBilling = 'single';
+        let currentUser = null;
+
+        // --- Auth State ---
+        if (typeof auth !== 'undefined') {
+            auth.onAuthStateChanged(user => {
+                currentUser = user;
+                const navAuthSection = document.getElementById('nav-auth-section');
+                if (user) {
+                    navAuthSection.innerHTML = `
+                        <div class="flex items-center space-x-4">
+                             <a href="guide.html" class="hidden md:block text-blue-400 hover:text-blue-300 font-bold transition-colors">📖 가이드</a>
+                            <span class="text-gray-300 text-xs truncate max-w-[100px]">${user.email}</span>
+                            <button onclick="auth.signOut().then(()=>location.reload())" class="text-gray-400 hover:text-white text-xs">로그아웃</button>
+                        </div>
+                    `;
+                } else {
+                    navAuthSection.innerHTML = `
+                        <a href="guide.html" class="hidden md:block text-blue-400 hover:text-blue-300 font-bold transition-colors">📖 가이드</a>
+                        <a href="login.html" class="text-gray-300 hover:text-blue-400 transition-colors">로그인</a>
+                        <button onclick="location.href='signup.html'"
+                            class="bg-blue-500 hover:bg-blue-600 text-white font-bold px-6 py-2 rounded-lg neon-glow transition-all hover:scale-105">
+                            회원가입
+                        </button>
+                    `;
+                }
+            });
+        }
 
         function switchBilling(type) {
             currentBilling = type;
@@ -369,6 +430,13 @@
         }
 
         function goToCheckout(planBase) {
+            if (!currentUser) {
+                if (confirm('결제를 진행하려면 로그인이 필요합니다. 로그인 페이지로 이동할까요?')) {
+                    const currentUrl = encodeURIComponent(window.location.href);
+                    location.href = `login.html?redirect=${currentUrl}`;
+                }
+                return;
+            }
             let finalPlan = planBase;
             let recurringParam = currentBilling === 'subscription' ? 'true' : 'false';
             if (currentBilling === 'yearly') finalPlan = planBase + "_YEARLY";
