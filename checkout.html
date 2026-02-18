@@ -450,23 +450,43 @@
                 // If recurring is true, show only 1 month plans? Or handled by UI toggle?
                 // For now, let's just show all relevant plans or handle visual logic in CSS
 
-                const isChecked = selectedPlanId === id ? 'checked' : '';
+                // Discount Calculation
+                let priceHtml = '';
+                if (plan.originalPrice && plan.originalPrice > plan.price) {
+                    const discountRate = Math.round((1 - plan.price / plan.originalPrice) * 100);
+                    priceHtml = `
+                        <div class="text-right">
+                            <div class="text-xs text-gray-400 line-through">${Utils.formatCurrency(plan.originalPrice)}</div>
+                            <div class="flex items-center justify-end gap-2">
+                                <span class="bg-red-500/20 text-red-400 text-xs font-bold px-1.5 py-0.5 rounded">${discountRate}% OFF</span>
+                                <span class="text-blue-400 font-bold text-lg">${Utils.formatCurrency(plan.price)}</span>
+                            </div>
+                        </div>
+                    `;
+                } else {
+                    priceHtml = `<span class="text-blue-400 font-bold text-lg">${Utils.formatCurrency(plan.price)}</span>`;
+                }
 
                 const div = document.createElement('div');
                 div.innerHTML = `
-            <label class="relative block cursor-pointer group">
-                <input type="radio" name="plan" class="peer sr-only radio-plan" value="${id}" ${isChecked} onchange="updateSelection('${id}')">
-                    <div class="p-5 rounded-xl border border-slate-700 bg-slate-800/50 hover:bg-slate-800 transition-all peer-checked:border-blue-500 peer-checked:bg-blue-500/10 peer-checked:shadow-lg peer-checked:shadow-blue-500/10">
-                        <div class="flex justify-between items-center mb-2">
-                            <h3 class="font-bold text-lg">${plan.name}</h3>
-                            <span class="text-blue-400 font-bold">${Utils.formatCurrency(plan.price)}</span>
+                <label class="relative block cursor-pointer group">
+                    <input type="radio" name="plan" class="peer sr-only radio-plan" value="${id}" ${isChecked} onchange="updateSelection('${id}')">
+                    <div class="p-5 rounded-xl border border-slate-700 bg-slate-800/50 hover:bg-slate-800 transition-all peer-checked:border-blue-500 peer-checked:bg-blue-500/10 peer-checked:shadow-lg peer-checked:shadow-blue-500/10 h-full">
+                        <div class="flex justify-between items-start mb-2">
+                            <div>
+                                <h3 class="font-bold text-lg flex items-center gap-2">
+                                    ${plan.name}
+                                    ${plan.badge ? `<span class="bg-blue-600 text-white text-[10px] px-2 py-0.5 rounded-full">${plan.badge}</span>` : ''}
+                                </h3>
+                                <p class="text-sm text-gray-400 mt-1">${plan.desc}</p>
+                            </div>
+                            ${priceHtml}
                         </div>
-                        <p class="text-sm text-gray-400">${plan.desc}</p>
                         <div class="absolute top-0 right-0 p-3 check-icon text-blue-500">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
                         </div>
                     </div>
-            </label>
+                </label>
                 `;
                 planContainer.appendChild(div);
             });

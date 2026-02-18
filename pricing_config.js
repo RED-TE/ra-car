@@ -14,6 +14,7 @@ const PRICING_CONFIG = {
             originalPrice: 197000,
             duration: 30, // 30일
             allowSubscription: true,
+            desc: 'AI 블로그 자동화 입문자를 위한 실속형 플랜',
             features: [
                 'AI 콘텐츠 작성 보조 (1500자 내외)',
                 '최대 2개 계정 운영 지원',
@@ -32,6 +33,7 @@ const PRICING_CONFIG = {
             duration: 365, // 365일
             allowSubscription: false, // 1년권은 보통 단건
             badge: '역대급 할인',
+            desc: '1년 동안 끊김 없이 자동화, 최대 할인 혜택',
             features: [
                 'LITE 모든 기능 1년 제공',
                 '월 82,500원 꼴 (약 17% 할인)',
@@ -46,6 +48,7 @@ const PRICING_CONFIG = {
             duration: 30,
             allowSubscription: true,
             badge: 'BEST',
+            desc: '전문적인 다계정 운영을 위한 강력한 기능',
             features: [
                 '계정 5개 이상 사용자 대상',
                 'LITE 기능 전부 포함',
@@ -66,6 +69,7 @@ const PRICING_CONFIG = {
             duration: 365,
             allowSubscription: false,
             badge: '전문가 추천',
+            desc: '비즈니스 확장을 위한 최고의 선택, 압도적 가성비',
             features: [
                 'PRO 모든 기능 1년 제공',
                 '월 224,000원 꼴',
@@ -79,6 +83,7 @@ const PRICING_CONFIG = {
             duration: 30,
             comingSoon: true,
             allowSubscription: false,
+            desc: '대행사 및 전문 마케터를 위한 엔터프라이즈 플랜',
             features: ['PRO 기능 포함', '추가 기능 준비 중']
         }
     },
