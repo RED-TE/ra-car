@@ -50,9 +50,23 @@
             <div class="space-y-8">
                 <!-- 1. Plan Selection -->
                 <section>
-                    <h2 class="text-xl font-bold mb-4">1. 플랜 선택 (30일 이용권)</h2>
+                    <div class="flex justify-between items-center mb-4">
+                        <h2 class="text-xl font-bold">1. 플랜 선택</h2>
+                        <!-- 🚀 Subscription Toggle -->
+                        <div class="flex items-center bg-slate-800 p-1 rounded-lg">
+                            <button type="button" id="toggle-single" onclick="setRecurring(false)"
+                                class="px-3 py-1.5 rounded-md text-xs font-bold transition-all bg-blue-600 text-white shadow-lg">
+                                30일권
+                            </button>
+                            <button type="button" id="toggle-recurring" onclick="setRecurring(true)"
+                                class="px-3 py-1.5 rounded-md text-xs font-bold transition-all text-gray-400 hover:text-white">
+                                정기구독
+                            </button>
+                        </div>
+                    </div>
                     <div class="space-y-3" id="plan-container">
                         <!-- Plans Injected by JS -->
+                    </div>
                 </section>
 
                 <!-- 2. Purchaser Info -->
@@ -303,7 +317,16 @@
     <script src="firebase_config.js"></script>
 
     <script>
-        let selectedPlanId = PRICING_CONFIG.defaultPlan;
+        // URL 파라미터로 선택된 플랜 및 정기구독 여부 가져오기
+        const urlParams = new URLSearchParams(window.location.search);
+        let selectedPlanId = urlParams.get('plan') || PRICING_CONFIG.defaultPlan;
+        let isRecurring = urlParams.get('recurring') === 'true';
+
+        // 유효하지 않은 플랜인 경우 기본값으로
+        if (!PRICING_CONFIG.plans[selectedPlanId]) {
+            selectedPlanId = PRICING_CONFIG.defaultPlan;
+        }
+
         let currentUser = null;
 
         if (typeof auth !== 'undefined') {
@@ -313,13 +336,10 @@
                     if (document.getElementById('email')) document.getElementById('email').value = user.email;
                 } else {
                     alert('로그인이 필요합니다.');
-                    window.location.href = 'login.html';
+                    window.location.href = `login.html?redirect=checkout.html&plan=${selectedPlanId}&recurring=${isRecurring}`;
                 }
             });
         }
-
-        const urlParams = new URLSearchParams(window.location.search);
-        if (urlParams.get('plan')) selectedPlanId = urlParams.get('plan');
 
         const container = document.getElementById('plan-container');
         Object.values(PRICING_CONFIG.plans).forEach(plan => {
@@ -368,11 +388,50 @@
             document.getElementById('summary-name').textContent = plan.name;
             document.getElementById('summary-price').textContent = price;
 
-            const txt = `${price} 결제하기`;
+            // Updated Display
+            const durationText = plan.duration === 365 ? '1년(365일)' : '30일';
+            document.getElementById('plan-type-display').textContent = isRecurring
+                ? `${durationText} 이용 및 정기 구독 (자동결제)`
+                : `${durationText} 이용권 (단건)`;
+
+            const txt = `${price} ${isRecurring ? '구독 시작' : '결제하기'}`;
             if (document.getElementById('pay-btn-desktop')) document.getElementById('pay-btn-desktop').querySelector('span').textContent = txt;
             if (document.getElementById('pay-btn-mobile')) document.getElementById('pay-btn-mobile').querySelector('span').textContent = txt;
+
+            // 만약 1년권이 선택되었다면 정기구독 토글 비활성화 고려 (사용자 요청에 따라)
+            const subToggle = document.getElementById('toggle-recurring').parentElement;
+            if (plan.duration === 365) {
+                // 연간 결제는 현재 단건만 지원 (사용자 요청 시 추후 확장)
+                setRecurring(false);
+                subToggle.style.opacity = "0.5";
+                subToggle.style.pointerEvents = "none";
+            } else {
+                subToggle.style.opacity = "1";
+                subToggle.style.pointerEvents = "auto";
+            }
         }
+
+        window.setRecurring = val => {
+            isRecurring = val;
+
+            // UI Toggle
+            const btnSingle = document.getElementById('toggle-single');
+            const btnRecurring = document.getElementById('toggle-recurring');
+
+            if (isRecurring) {
+                btnSingle.className = "px-3 py-1.5 rounded-md text-xs font-bold transition-all text-gray-400 hover:text-white";
+                btnRecurring.className = "px-3 py-1.5 rounded-md text-xs font-bold transition-all bg-blue-600 text-white shadow-lg";
+            } else {
+                btnSingle.className = "px-3 py-1.5 rounded-md text-xs font-bold transition-all bg-blue-600 text-white shadow-lg";
+                btnRecurring.className = "px-3 py-1.5 rounded-md text-xs font-bold transition-all text-gray-400 hover:text-white";
+            }
+
+            updateSummary();
+        };
+
+        // Initialize UI with external state
         updateSummary();
+        setRecurring(isRecurring);
 
         const checkAll = document.getElementById('check-all');
         const checkboxes = document.querySelectorAll('.consent-check');
@@ -406,6 +465,13 @@
                 PayApp.setParam('smsuse', 'n');
                 PayApp.setParam('openpaytype', '');
                 PayApp.setParam('var1', currentUser.uid); // 🚀 Webhook에서 사용자 구분을 위해 UID 전달
+
+                // 🚀 정기구독(Billkey 요청) 처리
+                if (isRecurring) {
+                    PayApp.setParam('rebill', 'y'); // 페이앱 정기결제 빌키 등록 요청 파라미터
+                    PayApp.setParam('var2', 'subscription'); // Webhook에서 구분용 추가 데이터
+                }
+
                 PayApp.setParam('redirectpay', '1'); // 🚀 매뉴얼 권장: '1' 사용 (전체 페이지 리다이렉트)
                 PayApp.setParam('redirect', 'self');  // 부모창이 아닌 현재창에서 리다이렉트
                 PayApp.setParam('skip_screen', 'y'); // 결제 요청 후 바로 결제창으로 이동

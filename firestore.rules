@@ -1,0 +1,31 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+  
+    // Admin access: jhxox666@gmail.com has full access
+    match /{document=**} {
+      allow read, write: if request.auth != null && request.auth.token.email == 'jhxox666@gmail.com';
+    }
+
+    // [TEMPORARY TEST] Allow anyone to read users to diagnose visibility issue
+    match /users/{userId} {
+      allow read: if true; 
+      allow write: if request.auth != null && request.auth.uid == userId;
+    }
+    
+    match /reviews/{reviewId} {
+      allow read: if true;
+      allow create: if request.auth != null;
+      allow update, delete: if request.auth != null && (request.auth.uid == resource.data.uid);
+    }
+
+    match /trial_logs/{hwid} {
+      allow read, write: if true;
+    }
+    
+    match /activeSessions/{sessionId} {
+      allow read, write: if true;
+    }
+  }
+}

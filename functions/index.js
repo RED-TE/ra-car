@@ -43,14 +43,17 @@ exports.payappFeedback = functions.https.onRequest(async (req, res) => {
 
         try {
             const now = admin.firestore.Timestamp.now();
-            const expiryDate = new Date();
-            expiryDate.setDate(expiryDate.getDate() + 30);
 
-            // Determine Internal Plan ID
+            // Determine Plan Info from Name (Pricing Config matching)
             const planId = planName.toLowerCase().includes("lite") ? "lite" : "pro";
+            const isYearly = planName.toLowerCase().includes("1년") || planName.toLowerCase().includes("yearly");
+            const durationDays = isYearly ? 365 : 30;
 
-            // 3. Update User Activation Status
-            await db.collection("users").doc(uid).set({
+            const expiryDate = new Date();
+            expiryDate.setDate(expiryDate.getDate() + durationDays);
+
+            // 🚀 Recurring Payment Logic
+            const updateData = {
                 plan: planId,
                 planName: planName,
                 paymentDate: now,
@@ -58,10 +61,28 @@ exports.payappFeedback = functions.https.onRequest(async (req, res) => {
                 lastOrderId: orderId,
                 lastPaymentAmount: parseInt(amount.replace(/[^0-9]/g, "")),
                 updatedAt: now,
-                licenseKey: "RA" + Math.random().toString(36).substring(2, 10).toUpperCase()
-            }, { merge: true });
+                licenseKey: "RA" + Math.random().toString(36).substring(2, 10).toUpperCase(),
+                phone: data.recvphone || "" // 🚀 자동결제를 위해 번호 저장
+            };
 
-            console.log(`✅ Successfully upgraded user ${uid} to ${planId}`);
+            // 만약 빌키(rebill_key)가 넘어왔다면 저장 (정기결제 등록)
+            if (data.rebill_key) {
+                console.log(`💳 Billkey Received for UID=${uid}: ${data.rebill_key}`);
+                updateData.billKey = data.rebill_key;
+                updateData.isSubscriptionActive = true;
+                updateData.subscriptionStartDate = now;
+            }
+
+            // 기존에 구독 중이거나 방금 등록했다면 다음 결제일 갱신
+            // (var2='subscription'은 결제 창에서 보낸 구분값)
+            if (data.rebill_key || data.var2 === 'subscription') {
+                updateData.nextBillingDate = admin.firestore.Timestamp.fromDate(expiryDate);
+            }
+
+            // 3. Update User Activation Status
+            await db.collection("users").doc(uid).set(updateData, { merge: true });
+
+            console.log(`✅ Successfully upgraded user ${uid} to ${planId}${data.rebill_key ? ' (Subscription Active)' : ''}`);
 
         } catch (error) {
             console.error("❌ Firestore Update Failed:", error);
@@ -114,6 +135,119 @@ exports.payappFeedback = functions.https.onRequest(async (req, res) => {
 
     // Always return 'SUCCESS' to PayApp
     res.send("SUCCESS");
+});
+
+// 🚀 Scheduled Rebill Function (Runs daily at Midnight)
+exports.payappRebillScheduled = functions.pubsub.schedule('0 0 * * *').timeZone('Asia/Seoul').onRun(async (context) => {
+    const now = admin.firestore.Timestamp.now();
+    console.log("⏰ Starting Scheduled Rebill Check...");
+
+    try {
+        // Find active subscriptions due for billing
+        const snapshot = await db.collection("users")
+            .where("isSubscriptionActive", "==", true)
+            .where("nextBillingDate", "<=", now)
+            .get();
+
+        if (snapshot.empty) {
+            console.log("No subscriptions due for billing today.");
+            return null;
+        }
+
+        console.log(`Found ${snapshot.size} subscriptions to process.`);
+
+        for (const doc of snapshot.docs) {
+            const user = doc.data();
+            const uid = doc.id;
+
+            if (!user.billKey) {
+                console.error(`Missing billKey for UID=${uid}. Skipping.`);
+                continue;
+            }
+
+            try {
+                await processRebill(uid, user);
+            } catch (err) {
+                console.error(`Rebill failed for UID=${uid}:`, err);
+            }
+        }
+    } catch (error) {
+        console.error("Scheduled Rebill Error:", error);
+    }
+    return null;
+});
+
+/**
+ * 💳 PayApp 리빌(정기결제) API 호출 핵심 로직
+ */
+async function processRebill(uid, user) {
+    const https = require('https');
+    const querystring = require('querystring');
+
+    const PAYAPP_USERID = "jhxox0707";
+    const PAYAPP_LINK_KEY = "u0VjDSiQHsUamv/vBQMVS+1DPJnCCRVaOgT+oqg6zaM=";
+
+    const postData = querystring.stringify({
+        cmd: 'rebill',
+        userid: PAYAPP_USERID,
+        linkkey: PAYAPP_LINK_KEY,
+        rebill_key: user.billKey,
+        goodname: user.planName || (user.plan === 'lite' ? 'LITE (입문용)' : 'PRO (메인 상품)'),
+        price: user.lastPaymentAmount || (user.plan === 'lite' ? 99000 : 249000),
+        recvphone: user.phone || '01000000000', // 핸드폰 번호 저장 필드가 필요함
+        var1: uid
+    });
+
+    return new Promise((resolve, reject) => {
+        const req = https.request({
+            hostname: 'api.payapp.kr',
+            path: '/oapi/api.html',
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Content-Length': postData.length
+            }
+        }, (res) => {
+            let body = '';
+            res.on('data', d => body += d);
+            res.on('end', async () => {
+                const response = querystring.parse(body);
+                console.log(`PayApp Rebill Response (UID=${uid}):`, JSON.stringify(response));
+
+                if (response.state === '1') {
+                    // Success! Update expiry in feedback will happen if payapp triggers feedback
+                    // BUT for insurance, we can update nextBillingDate here if feedback isn't triggered for rebills
+                    console.log(`✅ Rebill Request Success for UID=${uid}`);
+                    resolve(response);
+                } else {
+                    console.error(`❌ Rebill Request Failed: ${response.errorMessage || 'Unknown Error'}`);
+                    // 만약 실패 사유가 한도초과나 카드오류면 구독 중단 처리 검토
+                    reject(new Error(response.errorMessage));
+                }
+            });
+        });
+
+        req.on('error', reject);
+        req.write(postData);
+        req.end();
+    });
+}
+
+// 🚫 구독 취소 핸들러
+exports.cancelSubscription = functions.https.onCall(async (data, context) => {
+    if (!context.auth) throw new functions.https.HttpsError('unauthenticated', '로그인이 필요합니다.');
+    const uid = context.auth.uid;
+
+    try {
+        await db.collection("users").doc(uid).update({
+            isSubscriptionActive: false,
+            subscriptionCanceled: true,
+            updatedAt: admin.firestore.Timestamp.now()
+        });
+        return { success: true, message: "구독이 정상적으로 취소되었습니다. 정기 결제가 중단됩니다." };
+    } catch (error) {
+        throw new functions.https.HttpsError('internal', error.message);
+    }
 });
 
 // 🎁 Review Reward Handler (+7 Days Extension)

@@ -85,6 +85,12 @@
             animation: pulse 2s infinite;
         }
 
+        .badge-recurring {
+            background: rgba(139, 92, 246, 0.15);
+            color: #a78bfa;
+            border: 1px solid rgba(139, 92, 246, 0.3);
+        }
+
         @keyframes pulse {
 
             0%,
@@ -364,7 +370,11 @@
             <div class="space-y-5">
                 <div>
                     <label class="text-xs text-slate-500 font-medium block mb-2">사용자</label>
-                    <p id="modalUserEmail" class="text-base font-medium"></p>
+                    <div class="flex items-center justify-between">
+                        <p id="modalUserEmail" class="text-base font-medium"></p>
+                        <span id="modalSubscriptionStatus"
+                            class="text-[10px] font-bold px-2 py-0.5 rounded-full hidden"></span>
+                    </div>
                 </div>
                 <div>
                     <label class="text-xs text-slate-500 font-medium block mb-2">플랜</label>
@@ -428,7 +438,7 @@
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
     <script src="firebase_config.js"></script>
     <script src="common.js"></script>
-    <script src="ricar_mgr_7468_gate_apple.js"></script>
+    <script src="ricar_mgr_diag_v2.js"></script>
 </body>
 
 </html>

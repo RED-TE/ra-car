@@ -7,6 +7,20 @@ const ADMIN_EMAIL = "jhxox666@gmail.com";
 let allUsers = [];
 let suspiciousUsers = [];
 
+/**
+ * 안전한 날짜 변환 헬퍼
+ */
+function safeToDate(val) {
+    if (!val) return null;
+    if (typeof val.toDate === 'function') return val.toDate();
+    if (val instanceof Date) return val;
+    if (typeof val === 'string' || typeof val === 'number') {
+        const d = new Date(val);
+        return isNaN(d.getTime()) ? null : d;
+    }
+    return null;
+}
+
 // 인증 체크
 if (typeof auth !== 'undefined') {
     auth.onAuthStateChanged(async (user) => {
@@ -38,6 +52,13 @@ async function loadAllData() {
     console.log("📊 모든 사용자 데이터 로드 시작");
     try {
         const snapshot = await db.collection("users").get();
+        console.log(`📡 Firestore에서 ${snapshot.size}개의 문서를 찾았습니다.`);
+        console.log("🆔 모든 문서 ID 목록:", snapshot.docs.map(doc => doc.id));
+        console.log("📧 모든 문서 이메일 목록:", snapshot.docs.map(doc => doc.data().email || 'No Email'));
+
+        if (snapshot.empty) {
+            console.warn("⚠️ 'users' 컬렉션이 비어있습니다.");
+        }
 
         allUsers = snapshot.docs.map(doc => {
             const data = doc.data();
@@ -67,17 +88,17 @@ async function loadAllData() {
         });
 
         allUsers.sort((a, b) => {
-            const dateA = a.updatedAt ? a.updatedAt.toDate() : (a.createdAt ? a.createdAt.toDate() : 0);
-            const dateB = b.updatedAt ? b.updatedAt.toDate() : (b.createdAt ? b.createdAt.toDate() : 0);
+            const dateA = safeToDate(a.updatedAt) || safeToDate(a.createdAt) || 0;
+            const dateB = safeToDate(b.updatedAt) || safeToDate(b.createdAt) || 0;
             return dateB - dateA;
         });
 
-        analyzeSuspiciousActivity();
+        try { analyzeSuspiciousActivity(); } catch (e) { console.error("Suspicious Activity Error:", e); }
         renderAllUsers();
-        renderSuspiciousUsers();
-        renderFreeUsers();
-        updateStats();
-        await loadReviews();
+        try { renderSuspiciousUsers(); } catch (e) { console.error("Render Suspicious Error:", e); }
+        try { renderFreeUsers(); } catch (e) { console.error("Render Free Error:", e); }
+        try { updateStats(); } catch (e) { console.error("Update Stats Error:", e); }
+        try { await loadReviews(); } catch (e) { console.error("Load Reviews Error:", e); }
 
         console.log(`✅ 총 ${allUsers.length}명 로드 완료`);
     } catch (error) {
@@ -135,8 +156,8 @@ function getSuspiciousReason(user) {
         reasons.push(`총 ${user.totalExecutions}회 실행`);
     }
     if (user.plan !== 'free' && user.expiryDate) {
-        const expiry = user.expiryDate.toDate();
-        if (expiry < new Date() && user.totalExecutions > 0) {
+        const expiry = safeToDate(user.expiryDate);
+        if (expiry && expiry < new Date() && user.totalExecutions > 0) {
             reasons.push("만료 후 실행");
         }
     }
@@ -170,21 +191,23 @@ function renderAllUsers() {
             statusClass = "badge-expired";
             statusText = "차단됨";
         } else if (user.expiryDate) {
-            const expiry = user.expiryDate.toDate();
-            const diff = Math.ceil((expiry - now) / (1000 * 60 * 60 * 24));
+            const expiry = safeToDate(user.expiryDate);
+            if (expiry) {
+                const diff = Math.ceil((expiry - now) / (1000 * 60 * 60 * 24));
 
-            if (user.plan !== 'free') {
-                if (diff > 0) {
-                    statusClass = "badge-active";
-                    statusText = user.plan.toUpperCase();
-                    daysLeft = `${diff}일 남음`;
-                } else {
-                    statusClass = "badge-expired";
-                    statusText = "만료됨";
-                    daysLeft = "만료됨";
+                if (user.plan !== 'free') {
+                    if (diff > 0) {
+                        statusClass = "badge-active";
+                        statusText = user.plan.toUpperCase();
+                        daysLeft = `${diff}일 남음`;
+                    } else {
+                        statusClass = "badge-expired";
+                        statusText = "만료됨";
+                        daysLeft = "만료됨";
+                    }
                 }
+                expiryText = formatDate(expiry);
             }
-            expiryText = formatDate(expiry);
         }
 
         const isSuspicious = suspiciousUsers.some(s => s.id === user.id);
@@ -211,6 +234,7 @@ function renderAllUsers() {
                 <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium ${statusClass}">
                     ${statusText}
                 </span>
+                ${user.isSubscriptionActive ? '<span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] font-bold badge-recurring ml-2">정기</span>' : (user.plan !== 'free' ? '<span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] font-medium bg-white/5 text-white/40 border border-white/10 ml-2">단건</span>' : '')}
                 ${isSuspicious ? '<span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium badge-suspicious ml-2">의심</span>' : ''}
                 ${user.lastOrderId ? `<div class="text-[10px] text-white/20 mt-1">${user.lastOrderId}</div>` : ''}
             </td>
@@ -225,7 +249,7 @@ function renderAllUsers() {
             </td>
             <td class="px-6 py-4">
                 <div class="text-sm text-white">${expiryText}</div>
-                <div class="text-xs text-white/30">${daysLeft}</div>
+                <div class="text-xs text-white/30">${user.isSubscriptionActive ? '다음 결제 예정' : daysLeft}</div>
             </td>
             <td class="px-6 py-4 text-right">
                 <div class="flex items-center justify-end gap-2">
@@ -291,7 +315,7 @@ function renderSuspiciousUsers() {
                 </div>
                 <div>
                     <p class="text-xs text-white/30 mb-1">마지막 실행</p>
-                    <p class="text-sm font-medium text-white">${user.lastExecutionLog ? formatDate(user.lastExecutionLog.timestamp.toDate()) : '-'}</p>
+                    <p class="text-sm font-medium text-white">${user.lastExecutionLog ? formatDate(safeToDate(user.lastExecutionLog.timestamp)) : '-'}</p>
                 </div>
             </div>
             <div class="bg-orange-500/10 rounded-xl p-4 border border-orange-500/20">
@@ -334,7 +358,7 @@ function renderFreeUsers() {
         tr.className = "hover:bg-white/5 transition-all";
 
         const lastExec = user.lastExecutionLog
-            ? formatDate(user.lastExecutionLog.timestamp.toDate())
+            ? formatDate(safeToDate(user.lastExecutionLog.timestamp))
             : '-';
 
         // ✅ 안전한 hwid 처리
@@ -389,8 +413,8 @@ function updateStats() {
     ).length;
     const free = allUsers.filter(u => u.plan === 'free' || !u.plan).length;
     const expiredToday = allUsers.filter(u => {
-        if (!u.expiryDate) return false;
-        const d = u.expiryDate.toDate();
+        const d = safeToDate(u.expiryDate);
+        if (!d) return false;
         return d < now && (now - d) < (24 * 60 * 60 * 1000);
     }).length;
 
@@ -430,7 +454,7 @@ function renderReviews() {
         const tr = document.createElement('tr');
         tr.className = "hover:bg-white/5 transition-all text-sm";
 
-        const date = review.createdAt ? formatDate(review.createdAt.toDate()) : '-';
+        const date = review.createdAt ? formatDate(safeToDate(review.createdAt)) : '-';
         const stars = '★'.repeat(review.rating || 5) + '☆'.repeat(5 - (review.rating || 5));
 
         // Find real user
@@ -503,7 +527,7 @@ window.viewLogs = async function (userId) {
 
     let html = '';
     user.executionLogs.slice(-20).reverse().forEach((log, index) => {
-        const timestamp = log.timestamp ? formatDate(log.timestamp.toDate()) : '-';
+        const timestamp = log.timestamp ? formatDate(safeToDate(log.timestamp)) : '-';
         const statusColor = log.status === 'success' ? 'text-green-400' : 'text-red-400';
 
         // ✅ 안전한 hwid 처리
@@ -586,6 +610,21 @@ window.openEditModal = function (id, email) {
     document.getElementById('modalUserEmail').textContent = email;
     document.getElementById('modalPlanSelect').value = user.plan || 'free';
     document.getElementById('modalBanCheck').checked = user.isBanned || false;
+
+    // 🚀 구독 상태 표시
+    const subStatus = document.getElementById('modalSubscriptionStatus');
+    if (user.isSubscriptionActive) {
+        subStatus.textContent = "정기구독 중";
+        subStatus.className = "text-[10px] font-bold px-2 py-0.5 rounded-full badge-recurring";
+        subStatus.classList.remove('hidden');
+    } else if (user.plan !== 'free') {
+        subStatus.textContent = "단건결제";
+        subStatus.className = "text-[10px] font-medium px-2 py-0.5 rounded-full bg-slate-100 text-slate-500 border border-slate-200";
+        subStatus.classList.remove('hidden');
+    } else {
+        subStatus.classList.add('hidden');
+    }
+
     document.getElementById('editModal').classList.remove('hidden');
 };
 
