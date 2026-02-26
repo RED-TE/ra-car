@@ -2,327 +2,302 @@
 <html lang="ko">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>결제하기 - 리카오토플랜</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="base.css" rel="stylesheet">
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>결제하기 | RicarBot</title>
+    <!-- Tailwind CSS CDN with plugins -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <!-- Google Fonts: Inter & Noto Sans KR -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Noto+Sans+KR:wght@400;500;700&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: {
+                            900: '#0f1729',
+                            800: '#1e293b',
+                            700: '#334155',
+                        },
+                        slate: {
+                            50: '#f8fafc',
+                            100: '#f1f5f9',
+                            200: '#e2e8f0',
+                            300: '#cbd5e1',
+                            400: '#94a3b8',
+                            500: '#64748b',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'Noto Sans KR', 'sans-serif'],
+                    },
+                    borderRadius: {
+                        'custom': '8px',
+                    }
+                }
+            }
+        }
+    </script>
+    <style data-purpose="custom-typography">
+        body {
+            background-color: #f8fafc;
+            color: #0f1729;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .font-heading {
+            letter-spacing: -0.02em;
+        }
+    </style>
+    <style data-purpose="ui-elements">
+        /* Subtle shadows and focus states */
+        .card-shadow {
+            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px -1px rgba(0, 0, 0, 0.1);
+        }
+
+        input:focus,
+        select:focus {
+            border-color: #0f1729 !important;
+            ring-color: #0f1729 !important;
+            outline: none;
+        }
+
+        /* Custom radio/checkbox colors */
+        input[type="checkbox"]:checked,
+        input[type="radio"]:checked {
+            background-color: #0f1729;
+            border-color: #0f1729;
+        }
+    </style>
     <script src="pricing_config.js"></script>
     <script src="common.js"></script>
     <script src="payapp_config.js"></script>
     <script src="https://lite.payapp.kr/public/api/v2/payapp-lite.js"></script>
-    <style>
-        /* Radio card selection state */
-        .radio-plan:checked+div {
-            border-color: #3b82f6;
-            background-color: rgba(59, 130, 246, 0.1);
-            box-shadow: 0 0 15px rgba(59, 130, 246, 0.3);
-        }
-
-        .radio-plan:checked+div .check-icon {
-            display: block;
-        }
-
-        .check-icon {
-            display: none;
-        }
-    </style>
 </head>
 
-<body class="pb-safe">
-
-    <!-- HEADER -->
-    <header class="border-b border-slate-800 bg-slate-900/50 backdrop-blur sticky top-0 z-30">
-        <div class="container-custom py-4 flex justify-between items-center">
-            <div class="flex items-center space-x-2 cursor-pointer" onclick="location.href='index.html'">
-                <img src="logo.png" alt="RicarBot" class="w-8 h-8 object-contain">
-                <span class="text-xl font-black">Ricar Auto Plan</span>
+<body class="min-h-screen">
+    <!-- BEGIN: MainHeader -->
+    <header class="bg-white border-b border-slate-200 py-4" data-purpose="global-header">
+        <div class="max-w-6xl mx-auto px-4 flex justify-between items-center">
+            <div class="flex items-center gap-2 cursor-pointer" onclick="location.href='index.html'">
+                <!-- Logo Placeholder -->
+                <div class="w-8 h-8 bg-navy-900 rounded flex items-center justify-center">
+                    <span class="material-symbols-outlined text-white text-sm">smart_toy</span>
+                </div>
+                <span class="text-xl font-bold text-navy-900 tracking-tight">RicarBot</span>
             </div>
-            <button onclick="location.href='/'" class="text-gray-400 hover:text-white transition-colors">
-                ✕ 닫기</button>
+            <div class="text-slate-500 text-sm flex items-center gap-2">
+                <svg class="h-4 w-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"
+                    xmlns="http://www.w3.org/2000/svg">
+                    <path
+                        d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"
+                        stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                </svg>
+                안전한 결제 환경
+            </div>
         </div>
     </header>
-
-    <main class="container-custom py-8 pb-32 md:pb-8">
-        <div class="grid md:grid-cols-2 gap-8 relative">
-
-            <!-- LEFT: Inputs -->
-            <div class="space-y-8">
-                <!-- 1. Plan Selection -->
-                <section>
-                    <div class="flex justify-between items-center mb-4">
-                        <h2 class="text-xl font-bold">1. 플랜 선택</h2>
-                        <!-- 🚀 Subscription Toggle -->
-                        <div class="flex items-center bg-slate-800 p-1 rounded-lg">
-                            <button type="button" id="toggle-single" onclick="setRecurring(false)"
-                                class="px-3 py-1.5 rounded-md text-xs font-bold transition-all bg-blue-600 text-white shadow-lg">
-                                30일권
-                            </button>
-                            <button type="button" id="toggle-recurring" onclick="setRecurring(true)"
-                                class="px-3 py-1.5 rounded-md text-xs font-bold transition-all text-gray-400 hover:text-white">
-                                정기구독
-                            </button>
+    <!-- END: MainHeader -->
+    <main class="max-w-6xl mx-auto px-4 py-8 md:py-12">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+            <!-- BEGIN: LeftColumn (Checkout Form) -->
+            <div class="lg:col-span-8 space-y-8">
+                <!-- BEGIN: Plan Selection Section -->
+                <section class="bg-white p-6 md:p-8 rounded-custom border border-slate-200 card-shadow"
+                    id="plan-selection">
+                    <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-6">
+                        <h2 class="text-xl font-bold text-navy-900">플랜 선택</h2>
+                        <!-- Plan Toggle Buttons -->
+                        <div class="inline-flex p-1 bg-slate-100 rounded-lg">
+                            <button
+                                class="px-4 py-1.5 text-sm font-medium rounded-md bg-white text-navy-900 shadow-sm border border-slate-200 transition-all"
+                                id="toggle-recurring" onclick="setRecurring(true)">정기 결제</button>
+                            <button
+                                class="px-4 py-1.5 text-sm font-medium text-slate-500 hover:text-navy-900 transition-all"
+                                id="toggle-single" onclick="setRecurring(false)">1회 결제</button>
                         </div>
                     </div>
-                    <div class="space-y-3" id="plan-container">
-                        <!-- Plans Injected by JS -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4" id="plan-container">
+                        <!-- Plans injected by JS -->
                     </div>
                 </section>
-
-                <!-- 2. Purchaser Info -->
-                <section>
-                    <h2 class="text-xl font-bold mb-4">2. 구매자 정보</h2>
+                <!-- END: Plan Selection Section -->
+                <!-- BEGIN: Purchaser Info Section -->
+                <section class="bg-white p-6 md:p-8 rounded-custom border border-slate-200 card-shadow"
+                    id="purchaser-info">
+                    <h2 class="text-xl font-bold text-navy-900 mb-6">구매자 정보</h2>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <div class="space-y-2">
+                            <label class="block text-sm font-semibold text-slate-700" for="user-name">이름</label>
+                            <input class="w-full border-slate-200 rounded-custom py-2.5 text-sm" id="user-name"
+                                placeholder="성함을 입력해주세요" type="text" />
+                        </div>
+                        <div class="space-y-2">
+                            <label class="block text-sm font-semibold text-slate-700" for="user-email">이메일</label>
+                            <input
+                                class="w-full border-slate-200 rounded-custom py-2.5 text-sm bg-slate-50 text-slate-400"
+                                id="user-email" placeholder="name@company.com" type="email" readonly />
+                        </div>
+                        <div class="space-y-2 md:col-span-2">
+                            <label class="block text-sm font-semibold text-slate-700" for="user-phone">연락처</label>
+                            <input class="w-full border-slate-200 rounded-custom py-2.5 text-sm" id="user-phone"
+                                placeholder="01000000000 (숫자만 입력)" type="tel" />
+                        </div>
+                    </div>
+                </section>
+                <!-- END: Purchaser Info Section -->
+                <!-- BEGIN: Legal Consent Section -->
+                <section class="bg-white p-6 md:p-8 rounded-custom border border-slate-200 card-shadow"
+                    id="legal-consent">
+                    <h2 class="text-xl font-bold text-navy-900 mb-6">약관 동의</h2>
                     <div class="space-y-4">
-                        <div>
-                            <label class="block text-sm text-gray-400 mb-1">이메일 (ID) <span
-                                    class="text-red-500">*</span></label>
-                            <input type="email" id="email"
-                                class="input-field bg-slate-800 text-gray-500 cursor-not-allowed" readonly
-                                placeholder="로그인 시 자동 입력">
-                            <p class="text-xs text-gray-500 mt-1">※ 로그인된 계정 이메일입니다.</p>
-                        </div>
-                        <div>
-                            <label class="block text-sm text-gray-400 mb-1">휴대폰 번호 <span
-                                    class="text-red-500">*</span></label>
-                            <input type="tel" id="phone" class="input-field" placeholder="01012345678 (숫자만 입력)"
-                                required>
-                        </div>
-                        <div>
-                            <label class="block text-sm text-gray-400 mb-1">이름/닉네임</label>
-                            <input type="text" id="name" class="input-field" placeholder="구매자명">
-                        </div>
-
+                        <label class="flex items-start gap-3 cursor-pointer group">
+                            <input class="mt-1 h-4 w-4 text-navy-900 border-slate-300 rounded focus:ring-navy-900"
+                                id="check-all" type="checkbox" />
+                            <span class="text-sm text-slate-600 leading-relaxed font-bold">
+                                모든 결제 및 서비스 이용약관에 동의합니다.
+                            </span>
+                        </label>
+                        <hr class="border-slate-100" />
+                        <label class="flex items-start gap-3 cursor-pointer group">
+                            <input
+                                class="consent-check mt-1 h-4 w-4 text-navy-900 border-slate-300 rounded focus:ring-navy-900"
+                                id="check-refund" type="checkbox" />
+                            <span class="text-sm text-slate-600 leading-relaxed">
+                                (필수) 환불정책 및 청약철회 규정에 동의합니다.
+                                <a class="text-navy-900 underline underline-offset-4 ml-1" href="license_old.html"
+                                    target="_blank">상세보기</a>
+                            </span>
+                        </label>
+                        <label class="flex items-start gap-3 cursor-pointer group">
+                            <input
+                                class="consent-check mt-1 h-4 w-4 text-navy-900 border-slate-300 rounded focus:ring-navy-900"
+                                id="check-minor" type="checkbox" />
+                            <span class="text-sm text-slate-600 leading-relaxed">
+                                (필수) 미성년자 결제 제한 및 이용약관에 동의합니다.
+                            </span>
+                        </label>
+                        <label class="flex items-start gap-3 cursor-pointer group">
+                            <input
+                                class="consent-check mt-1 h-4 w-4 text-navy-900 border-slate-300 rounded focus:ring-navy-900"
+                                id="check-ai-api" type="checkbox" />
+                            <span class="text-sm text-orange-600 leading-relaxed font-semibold">
+                                (필수) AI API 키 직접 등록 및 키 미발급 시 환불 불가에 동의합니다.
+                            </span>
+                        </label>
                     </div>
                 </section>
+                <!-- END: Legal Consent Section -->
             </div>
-
-            <!-- RIGHT: Summary (Sticky on Desktop) -->
-            <div class="hidden md:block md:col-span-1">
-                <div class="sticky top-24 card shadow-2xl">
-                    <h3 class="text-lg font-bold mb-4 text-gray-300">결제 요약</h3>
-                    <div class="flex justify-between items-end mb-6 pb-6 border-b border-slate-800">
-                        <div>
-                            <h4 id="summary-name" class="font-bold text-xl text-white">PRO Plan</h4>
-                            <p class="text-sm text-gray-500 mt-1" id="plan-type-display">30일 이용권 (단건)</p>
+            <!-- END: LeftColumn -->
+            <!-- BEGIN: RightColumn (Order Summary) -->
+            <aside class="lg:col-span-4 sticky top-8">
+                <div class="bg-white rounded-custom border border-slate-200 card-shadow overflow-hidden">
+                    <div class="p-6 bg-slate-50 border-b border-slate-200">
+                        <h3 class="text-lg font-bold text-navy-900">주문 요약</h3>
+                    </div>
+                    <div class="p-6 space-y-4">
+                        <div class="flex justify-between items-center text-sm">
+                            <span class="text-slate-500">선택 플랜</span>
+                            <span class="font-semibold text-navy-900" id="summary-name">-</span>
                         </div>
-                        <div class="text-right">
-                            <div class="text-2xl font-black text-blue-400" id="summary-price">299,000원</div>
-                            <div class="text-xs text-gray-500 mt-1">VAT 포함</div>
+                        <div class="flex justify-between items-center text-sm">
+                            <span class="text-slate-500">결제 방식</span>
+                            <span class="font-medium text-navy-900" id="summary-type">-</span>
+                        </div>
+                        <hr class="border-slate-100" />
+                        <div class="flex justify-between items-center pt-2">
+                            <span class="text-lg font-bold text-navy-900">최종 결제 금액</span>
+                            <span class="text-2xl font-bold text-navy-900" id="summary-price">- 원</span>
                         </div>
                     </div>
-
-                    <!-- Legal Checkboxes -->
-                    <div class="space-y-4 mb-6">
-                        <div class="flex items-center pb-4 border-b border-slate-800">
-                            <input type="checkbox" id="check-all"
-                                class="w-5 h-5 accent-blue-500 rounded cursor-pointer mr-3">
-                            <label for="check-all" class="text-sm font-bold text-white cursor-pointer">전체 동의</label>
-                        </div>
-
-                        <!-- 1. Refund Policy -->
-                        <div class="space-y-2">
-                            <div class="flex items-start">
-                                <input type="checkbox" id="check-refund"
-                                    class="consent-check mt-0.5 mr-3 w-5 h-5 accent-blue-500 rounded min-w-[20px]">
-                                <div class="flex-grow">
-                                    <div class="flex justify-between items-center">
-                                        <label for="check-refund"
-                                            class="text-xs text-gray-400 leading-snug cursor-pointer">
-                                            <span class="text-blue-400 font-bold">[필수]</span> 환불정책 및 청약철회(주문취소) 제한 사유를
-                                            확인했습니다.
-                                        </label>
-                                        <button type="button" onclick="toggleLegal(this)"
-                                            class="text-[10px] text-gray-600 underline ml-2 whitespace-nowrap">보기</button>
-                                    </div>
-                                    <div
-                                        class="legal-detail hidden mt-2 p-3 bg-slate-900 rounded-lg text-[11px] text-gray-500 leading-relaxed border border-slate-800">
-                                        <p class="font-bold text-gray-400 mb-1">① 청약철회(주문취소) 가능 기간</p>
-                                        <p class="mb-2">본 서비스는 원칙적으로 계약내용 서면을 받은 날부터 7일 이내 청약철회가 가능합니다. 공급이 늦어진 경우 공급이
-                                            시작된 날부터 7일 이내 가능합니다.</p>
-                                        <p class="font-bold text-gray-400 mb-1">② 청약철회가 제한되는 경우 (서비스 개시 기준)</p>
-                                        <p class="mb-2">본 서비스의 <span class="text-blue-400 font-bold">"제공 개시" 시점은 "라이선스
-                                                정보(시리얼키) 발급 또는 프로그램 로그인 권한 부여 시"</span>를 의미합니다. 디지털콘텐츠의 특성상 제공이 개시된 이후에는
-                                            청약철회가 제한됩니다.</p>
-                                        <p class="font-bold text-gray-400 mb-1">③ 하자 및 표시광고 상이 시</p>
-                                        <p class="mb-2">제공 내용이 표시·광고와 다르거나 계약과 다르게 이행된 경우, 공급받은 날부터 3개월 이내 또는 그 사실을 안
-                                            날부터 30일 이내에 청약철회가 가능합니다.</p>
-                                        <p class="font-bold text-gray-400 mb-1">④ 환불 처리</p>
-                                        <p>접수 후 영업일 기준 3~5일 내 검토 처리되며, 결제수단별 정책에 따라 시점이 다를 수 있습니다.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- 2. Minor -->
-                        <div class="space-y-2">
-                            <div class="flex items-start">
-                                <input type="checkbox" id="check-minor"
-                                    class="consent-check mt-0.5 mr-3 w-5 h-5 accent-blue-500 rounded min-w-[20px]">
-                                <div class="flex-grow">
-                                    <div class="flex justify-between items-center">
-                                        <label for="check-minor"
-                                            class="text-xs text-gray-400 leading-snug cursor-pointer">
-                                            <span class="text-blue-400 font-bold">[필수]</span> 미성년자 결제 제한 규정 확인
-                                        </label>
-                                        <button type="button" onclick="toggleLegal(this)"
-                                            class="text-[10px] text-gray-600 underline ml-2 whitespace-nowrap">보기</button>
-                                    </div>
-                                    <div
-                                        class="legal-detail hidden mt-2 p-3 bg-slate-900 rounded-lg text-[11px] text-gray-500 leading-relaxed border border-slate-800">
-                                        <p class="mb-2">미성년자가 법정대리인 동의 없이 체결한 계약은 취소될 수 있음을 고지하며, 미성년자 결제 시 법정대리인의 동의가
-                                            있는 것으로 간주되거나 확인을 요청할 수 있습니다.</p>
-                                        <p>- 결제자는 만 19세 이상이거나,<br>- 미성년자인 경우 법정대리인의 사전 동의를 받은 경우에만 결제 가능<br>- 확인 불가 시 결제
-                                            취소 처리가 진행될 수 있으며, 명의 도용 시 책임은 이용자에게 있습니다.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- 3. Terms & Privacy -->
-                        <div class="space-y-2">
-                            <div class="flex items-start">
-                                <input type="checkbox" id="check-privacy"
-                                    class="consent-check mt-0.5 mr-3 w-5 h-5 accent-blue-500 rounded min-w-[20px]">
-                                <div class="flex-grow">
-                                    <div class="flex justify-between items-center">
-                                        <label for="check-privacy"
-                                            class="text-xs text-gray-400 leading-snug cursor-pointer">
-                                            <span class="text-blue-400 font-bold">[필수]</span> 이용약관 및 개인정보처리방침 동의
-                                        </label>
-                                        <button type="button" onclick="toggleLegal(this)"
-                                            class="text-[10px] text-gray-600 underline ml-2 whitespace-nowrap">보기</button>
-                                    </div>
-                                    <div
-                                        class="legal-detail hidden mt-2 p-3 bg-slate-900 rounded-lg text-[11px] text-gray-500 leading-relaxed border border-slate-800">
-                                        <p class="font-bold text-gray-400 mb-1">① 이용약관 동의</p>
-                                        <p class="mb-2">서비스 이용조건, 결제/환불, 이용 제한, 분쟁 처리 기준 등 약관 내용을 확인하고 동의합니다.</p>
-                                        <p class="font-bold text-gray-400 mb-1">② 개인정보 수집·이용 동의</p>
-                                        <p>- 항목: 이름, 연락처, 이메일, 결제정보, 서비스 이용기록<br>- 목적: 결제 처리, 서비스 제공, 고객 문의 대응, 환불
-                                            처리<br>- 보유기간: 목적 달성 시 및 관련 법령(전자상거래 증빙 등)에 따른 보관 기간까지</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- 4. Third Party -->
-                        <div class="space-y-2">
-                            <div class="flex items-start">
-                                <input type="checkbox" id="check-thirdparty"
-                                    class="consent-check mt-0.5 mr-3 w-5 h-5 accent-blue-500 rounded min-w-[20px]">
-                                <div class="flex-grow">
-                                    <div class="flex justify-between items-center">
-                                        <label for="check-thirdparty"
-                                            class="text-xs text-gray-400 leading-snug cursor-pointer">
-                                            <span class="text-blue-400 font-bold">[필수]</span> 제3자 정보 제공 동의
-                                        </label>
-                                        <button type="button" onclick="toggleLegal(this)"
-                                            class="text-[10px] text-gray-600 underline ml-2 whitespace-nowrap">보기</button>
-                                    </div>
-                                    <div
-                                        class="legal-detail hidden mt-2 p-3 bg-slate-900 rounded-lg text-[11px] text-gray-500 leading-relaxed border border-slate-800">
-                                        <p>- 제공받는 자: 주식회사 유디아이디(페이앱)<br>- 제공 목적: 결제 승인/정산, 현금영수증 처리, 환불 처리, 부정거래 방지<br>-
-                                            제공 항목: 구매자 식별정보(이름/번호/이메일), 결제 데이터(주문번호, 승인정보, 금액), 과세 증빙 정보<br>- 보유 기간: 제공
-                                            목적 달성 완료 시 또는 관련 법령에 따른 보관 기간(최대 5년)까지<br>* 동의 거부 시 결제 진행이 불가능합니다.</p>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- 5. AI API Patch (Safety Recommended) -->
-                        <div class="flex items-start">
-                            <input type="checkbox" id="check-ai-api"
-                                class="consent-check mt-0.5 mr-3 w-5 h-5 accent-blue-500 rounded min-w-[20px]">
-                            <div class="flex-grow">
-                                <div class="flex justify-between items-center">
-                                    <label for="check-ai-api" class="text-xs text-gray-400 leading-snug cursor-pointer">
-                                        <span class="text-blue-400 font-bold">[필수]</span> 구글 제미나이 AI API 키 사전 준비 및 제공
-                                        개시/환불 기준 동의
-                                    </label>
-                                    <button type="button" onclick="toggleLegal(this)"
-                                        class="text-[10px] text-gray-600 underline ml-2 whitespace-nowrap">보기</button>
-                                </div>
-                                <div
-                                    class="legal-detail hidden mt-2 p-3 bg-slate-900 rounded-lg text-[11px] text-gray-500 leading-relaxed border border-slate-800">
-                                    <p class="mb-2">본 서비스는 이용자가 직접 발급한 구글 제미나이 API 키를 등록해야 정상 이용 가능합니다. 결제 전 API 키 보유 및
-                                        등록 가능 환경을 스스로 확인해야 합니다.</p>
-                                    <p class="mb-1 font-bold text-gray-400">기준 사항:</p>
-                                    <p class="mb-2">- API 키 미보유/등록 실패로 인한 이용 불가 시 이는 이용자 사유에 해당할 수 있습니다.<br>- <span
-                                            class="text-blue-400">서비스 제공 개시 전</span>(라이선스키 발급/권한 부여 전)에는 7일 이내 청약철회가
-                                        가능합니다.<br>- <span class="text-red-400">서비스 제공 개시 후</span>(라이선스키 발급/권한 부여 후)에는
-                                        디지털콘텐츠 특성상 청약철회가 제한됩니다.</p>
-                                </div>
+                    <div class="p-6 pt-0 hidden lg:block">
+                        <button
+                            class="w-full bg-navy-900 hover:bg-slate-800 text-white font-bold py-4 rounded-custom transition-all flex items-center justify-center gap-2"
+                            id="processPayment" onclick="processPayment()">
+                            <svg class="h-5 w-5" fill="currentColor" viewbox="0 0 20 20"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path clip-rule="evenodd"
+                                    d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z"
+                                    fill-rule_evenodd=""></path>
+                            </svg>
+                            안전하게 결제하기
+                        </button>
+                        <div class="mt-4 flex flex-col items-center gap-2">
+                            <div class="flex items-center gap-2 text-[11px] text-slate-400">
+                                <span class="px-1.5 py-0.5 border border-slate-200 rounded">PG</span>
+                                <span>PG사 보안 결제 시스템 적용 중</span>
                             </div>
                         </div>
                     </div>
-                    <div class="mb-4 p-3 bg-blue-500/5 rounded-lg border border-blue-500/20 text-center">
-                        <p class="text-xs text-gray-400 mb-1">결제 오류 시 문의</p>
-                        <p class="text-sm font-bold text-white">010-6573-1038</p>
-                        <p class="text-[11px] text-gray-500">jhxox666@naver.com (오전 9시 ~ 18시)</p>
+                </div>
+                <!-- Trust Signal Below Summary -->
+                <div class="mt-6 p-4 rounded-custom border border-slate-200 bg-white flex items-center gap-4">
+                    <div class="bg-slate-100 p-2 rounded-full">
+                        <svg class="h-6 w-6 text-slate-600" fill="none" stroke="currentColor" viewbox="0 0 24 24"
+                            xmlns="http://www.w3.org/2000/svg">
+                            <path
+                                d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+                                stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
+                        </svg>
                     </div>
-
-                    <button onclick="processPayment()" class="btn-primary mb-4" id="pay-btn-desktop">
-                        <span>결제하기</span>
-                    </button>
+                    <div>
+                        <p class="text-xs font-bold text-navy-900">결제 보안 보증</p>
+                        <p class="text-[11px] text-slate-500">모든 결제 정보는 암호화되어 안전하게 처리됩니다.</p>
+                    </div>
+                </div>
+            </aside>
+            <!-- END: RightColumn -->
+        </div>
+    </main>
+    <!-- BEGIN: Mobile Sticky Bottom CTA -->
+    <div class="lg:hidden fixed bottom-0 left-0 right-0 bg-white border-t border-slate-200 p-4 z-50 card-shadow">
+        <div class="max-w-6xl mx-auto flex items-center justify-between gap-4">
+            <div>
+                <p class="text-[10px] text-slate-500 uppercase font-bold tracking-tighter">최종 결제 금액</p>
+                <p class="text-lg font-bold text-navy-900" id="summary-price-mobile">- 원</p>
+            </div>
+            <button class="flex-1 bg-navy-900 text-white font-bold py-3.5 rounded-custom text-sm"
+                onclick="document.getElementById('processPayment').click()">
+                결제하기
+            </button>
+        </div>
+    </div>
+    <!-- END: Mobile Sticky Bottom CTA -->
+    <!-- BEGIN: Footer -->
+    <footer class="max-w-6xl mx-auto px-4 py-12 text-slate-400 text-xs border-t border-slate-200 mt-12 pb-24 lg:pb-12">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div>
+                <p class="font-bold mb-2 text-slate-500">주식회사 리카오토플랜</p>
+                <p>대표자: 조홍철 | 사업자등록번호: 325-60-00844</p>
+                <p>경기도 부천시 원미구 신흥로 40, 709호(심곡동, 디오스빌)</p>
+            </div>
+            <div class="md:text-right">
+                <p class="mb-2">고객센터: 1544-0000 (평일 09:00~18:00)</p>
+                <p>이메일: jhxox666@naver.com</p>
+                <div class="mt-4 flex gap-4 md:justify-end">
+                    <a class="hover:text-navy-900 transition-colors" href="license_old.html">이용약관</a>
+                    <a class="hover:text-navy-900 transition-colors font-bold"
+                        href="privacy_policy_ricarautoplan_multi_pg_nolist.html">개인정보처리방침</a>
                 </div>
             </div>
         </div>
-
-    </main>
-
-    <!-- FOOTER -->
-    <footer class="border-t border-slate-800 bg-slate-950 py-12 px-6">
-        <div class="container-custom text-center text-gray-600 text-sm">
-            <p>© 2026 Ricar Auto Plan. All rights reserved.</p>
-            <div class="mt-4 text-xs space-y-1 text-gray-500">
-                <p><span class="font-bold">리카오토플랜</span> | 대표자: 조홍철 | 사업자등록번호: 325-60-00844</p>
-                <p>주소: 경기도 부천시 원미구 신흥로 40, 709호(심곡동, 디오스빌)</p>
-                <p>고객센터: jhxox666@naver.com</p>
-            </div>
-        </div>
     </footer>
-
-    <!-- MOBILE STICKY -->
-    <div class="mobile-sticky-btn md:hidden">
-        <div class="mb-2">
-            <label class="flex items-start cursor-pointer">
-                <input type="checkbox" id="check-finance-mobile" class="mt-0.5 mr-2 w-4 h-4 accent-blue-500 rounded">
-                <span class="text-xs text-gray-400 leading-tight">
-                    <span class="text-red-400 font-bold">[필수]</span> 환불정책 및 청약철회 규정 동의
-                </span>
-            </label>
-        </div>
-        <div class="mb-3">
-            <label class="flex items-start cursor-pointer">
-                <input type="checkbox" id="check-legal-mobile" class="mt-0.5 mr-2 w-4 h-4 accent-blue-500 rounded">
-                <span class="text-xs text-gray-400 leading-tight">
-                    <span class="text-red-400 font-bold">[필수]</span> 이용약관, 개인정보, 제3자제공 동의
-                </span>
-            </label>
-        </div>
-        <div class="mb-3 p-2 bg-red-400/10 rounded-lg">
-            <label class="flex items-start cursor-pointer">
-                <input type="checkbox" id="check-ai-mobile" class="mt-0.5 mr-2 w-4 h-4 accent-red-500 rounded">
-                <span class="text-xs text-red-400 leading-tight font-bold">
-                    [필수] 구글 AI API 키 직접 등록 및 환불불가 동의
-                </span>
-            </label>
-        </div>
-        <button onclick="processPayment()" class="btn-primary" id="pay-btn-mobile">
-            <span>결제하기</span>
-        </button>
-    </div>
+    <!-- END: Footer -->
 
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
     <script src="firebase_config.js"></script>
 
     <script>
-        // URL 파라미터로 선택된 플랜 및 정기구독 여부 가져오기
         const urlParams = new URLSearchParams(window.location.search);
         let selectedPlanId = urlParams.get('plan') || PRICING_CONFIG.defaultPlan;
         let isRecurring = urlParams.get('recurring') === 'true';
 
-        // 유효하지 않은 플랜인 경우 기본값으로
         if (!PRICING_CONFIG.plans[selectedPlanId]) {
             selectedPlanId = PRICING_CONFIG.defaultPlan;
         }
@@ -333,7 +308,7 @@
             auth.onAuthStateChanged(user => {
                 if (user) {
                     currentUser = user;
-                    if (document.getElementById('email')) document.getElementById('email').value = user.email;
+                    if (document.getElementById('user-email')) document.getElementById('user-email').value = user.email;
                 } else {
                     alert('로그인이 필요합니다.');
                     window.location.href = `login.html?redirect=checkout.html&plan=${selectedPlanId}&recurring=${isRecurring}`;
@@ -341,207 +316,129 @@
             });
         }
 
-        const container = document.getElementById('plan-container');
-        Object.values(PRICING_CONFIG.plans).forEach(plan => {
-            if (plan.comingSoon) return; // Skip "Coming Soon" plans in checkout
-            const checked = plan.id === selectedPlanId ? 'checked' : '';
-            const html = `
-                <label class="block relative cursor-pointer">
-                    <input type="radio" name="plan" value="${plan.id}" class="radio-plan sr-only" ${checked} onchange="updateSelection('${plan.id}')">
-                    <div class="bg-slate-900 border border-slate-800 rounded-xl p-5 flex justify-between items-center">
-                        <h3 class="font-bold text-white">${plan.name}</h3>
-                        <div class="text-blue-400 font-bold">${Utils.formatCurrency(plan.price)}</div>
-                    </div>
-                </label>
-            `;
-            container.insertAdjacentHTML('beforeend', html);
-        });
-
-        window.toggleLegal = btn => {
-            const detail = btn.parentElement.nextElementSibling;
-            detail.classList.toggle('hidden');
-            btn.textContent = detail.classList.contains('hidden') ? '보기' : '닫기';
-        };
-
-        const mobFinance = document.getElementById('check-finance-mobile');
-        const mobLegal = document.getElementById('check-legal-mobile');
-        const mobAI = document.getElementById('check-ai-mobile');
-
-        if (mobFinance) mobFinance.addEventListener('change', e => {
-            document.getElementById('check-refund').checked = e.target.checked;
-        });
-        if (mobLegal) mobLegal.addEventListener('change', e => {
-            document.getElementById('check-minor').checked = e.target.checked;
-            document.getElementById('check-privacy').checked = e.target.checked;
-            document.getElementById('check-thirdparty').checked = e.target.checked;
-        });
-        if (mobAI) mobAI.addEventListener('change', e => {
-            const el = document.getElementById('check-ai-api');
-            if (el) el.checked = e.target.checked;
-        });
-
-        window.updateSelection = id => { selectedPlanId = id; updateSummary(); };
-
-        function updateSummary() {
-            const plan = PRICING_CONFIG.plans[selectedPlanId];
-            const price = Utils.formatCurrency(plan.price);
-            document.getElementById('summary-name').textContent = plan.name;
-            document.getElementById('summary-price').textContent = price;
-
-            // Updated Display
-            const durationText = plan.duration === 365 ? '1년(365일)' : '30일';
-            document.getElementById('plan-type-display').textContent = isRecurring
-                ? `${durationText} 이용 및 정기 구독 (자동결제)`
-                : `${durationText} 이용권 (단건)`;
-
-            const txt = `${price} ${isRecurring ? '구독 시작' : '결제하기'}`;
-            if (document.getElementById('pay-btn-desktop')) document.getElementById('pay-btn-desktop').querySelector('span').textContent = txt;
-            if (document.getElementById('pay-btn-mobile')) document.getElementById('pay-btn-mobile').querySelector('span').textContent = txt;
-
-            // 만약 1년권이 선택되었다면 정기구독 토글 비활성화 고려 (사용자 요청에 따라)
-            const subToggle = document.getElementById('toggle-recurring').parentElement;
-            if (plan.duration === 365) {
-                // 연간 결제는 현재 단건만 지원 (사용자 요청 시 추후 확장)
-                setRecurring(false);
-                subToggle.style.opacity = "0.5";
-                subToggle.style.pointerEvents = "none";
-            } else {
-                subToggle.style.opacity = "1";
-                subToggle.style.pointerEvents = "auto";
-            }
-        }
-
-        window.setRecurring = val => {
-            isRecurring = val;
-
-            // UI Toggle
-            const btnSingle = document.getElementById('toggle-single');
-            const btnRecurring = document.getElementById('toggle-recurring');
-
-            if (isRecurring) {
-                btnSingle.className = "px-3 py-1.5 rounded-md text-xs font-bold transition-all text-gray-400 hover:text-white";
-                btnRecurring.className = "px-3 py-1.5 rounded-md text-xs font-bold transition-all bg-blue-600 text-white shadow-lg";
-            } else {
-                btnSingle.className = "px-3 py-1.5 rounded-md text-xs font-bold transition-all bg-blue-600 text-white shadow-lg";
-                btnRecurring.className = "px-3 py-1.5 rounded-md text-xs font-bold transition-all text-gray-400 hover:text-white";
-            }
-
-            updateSummary();
-        };
-
-        // Initialize UI with external state
-        updateSummary();
-        setRecurring(isRecurring);
-
-        const checkAll = document.getElementById('check-all');
-        const checkboxes = document.querySelectorAll('.consent-check');
-        if (checkAll) {
-            checkAll.addEventListener('change', e => checkboxes.forEach(cb => cb.checked = e.target.checked));
-        }
-
-        // --- Render Plans ---
         const planContainer = document.getElementById('plan-container');
 
         function renderPlans() {
             planContainer.innerHTML = '';
-            Object.keys(PRICING_CONFIG.plans).forEach(id => {
-                const plan = PRICING_CONFIG.plans[id];
-                // Filter based on recurring state (simplified logic)
-                // If recurring is true, show only 1 month plans? Or handled by UI toggle?
-                // For now, let's just show all relevant plans or handle visual logic in CSS
+            Object.values(PRICING_CONFIG.plans).forEach(plan => {
+                if (plan.comingSoon) return;
+                const activeClass = plan.id === selectedPlanId ? 'border-navy-900 bg-slate-50' : 'border-slate-200 hover:border-slate-300';
+                const checked = plan.id === selectedPlanId ? 'checked' : '';
 
-                // Discount Calculation
-                let priceHtml = '';
-                if (plan.originalPrice && plan.originalPrice > plan.price) {
-                    const discountRate = Math.round((1 - plan.price / plan.originalPrice) * 100);
-                    priceHtml = `
-                        <div class="text-right">
-                            <div class="text-xs text-gray-400 line-through">${Utils.formatCurrency(plan.originalPrice)}</div>
-                            <div class="flex items-center justify-end gap-2">
-                                <span class="bg-red-500/20 text-red-400 text-xs font-bold px-1.5 py-0.5 rounded">${discountRate}% OFF</span>
-                                <span class="text-blue-400 font-bold text-lg">${Utils.formatCurrency(plan.price)}</span>
-                            </div>
-                        </div>
-                    `;
-                } else {
-                    priceHtml = `<span class="text-blue-400 font-bold text-lg">${Utils.formatCurrency(plan.price)}</span>`;
-                }
+                let priceDisplay = Utils.formatCurrency(plan.price);
+                const period = plan.duration === 365 ? '/년' : '/월';
 
-                const div = document.createElement('div');
-                div.innerHTML = `
-                <label class="relative block cursor-pointer group">
-                    <input type="radio" name="plan" class="peer sr-only radio-plan" value="${id}" ${isChecked} onchange="updateSelection('${id}')">
-                    <div class="p-5 rounded-xl border border-slate-700 bg-slate-800/50 hover:bg-slate-800 transition-all peer-checked:border-blue-500 peer-checked:bg-blue-500/10 peer-checked:shadow-lg peer-checked:shadow-blue-500/10 h-full">
-                        <div class="flex justify-between items-start mb-2">
-                            <div>
-                                <h3 class="font-bold text-lg flex items-center gap-2">
-                                    ${plan.name}
-                                    ${plan.badge ? `<span class="bg-blue-600 text-white text-[10px] px-2 py-0.5 rounded-full">${plan.badge}</span>` : ''}
-                                </h3>
-                                <p class="text-sm text-gray-400 mt-1">${plan.desc}</p>
-                            </div>
-                            ${priceHtml}
-                        </div>
-                        <div class="absolute top-0 right-0 p-3 check-icon text-blue-500">
-                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
-                        </div>
+                const html = `
+                <label class="relative flex flex-col p-4 border-2 ${activeClass} rounded-custom cursor-pointer transition-all">
+                    <input type="radio" name="plan" value="${plan.id}" class="sr-only" ${checked} onchange="updateSelection('${plan.id}')">
+                    <div class="flex justify-between items-start mb-2">
+                        <span class="font-bold text-lg">${plan.name}</span>
+                        ${plan.badge ? `<span class="bg-navy-900 text-white text-[10px] px-2 py-0.5 rounded-full uppercase tracking-wider">${plan.badge}</span>` : ''}
+                    </div>
+                    <p class="text-slate-500 text-sm mb-4">${plan.desc}</p>
+                    <div class="mt-auto">
+                        <span class="text-2xl font-bold">${priceDisplay}</span>
+                        <span class="text-slate-500 text-sm">${period}</span>
                     </div>
                 </label>
                 `;
-                planContainer.appendChild(div);
+                planContainer.insertAdjacentHTML('beforeend', html);
             });
         }
-        renderPlans();
+
+        window.updateSelection = id => {
+            selectedPlanId = id;
+            renderPlans();
+            updateSummary();
+        };
+
+        window.setRecurring = val => {
+            isRecurring = val;
+            const btnSingle = document.getElementById('toggle-single');
+            const btnRecurring = document.getElementById('toggle-recurring');
+
+            if (isRecurring) {
+                btnRecurring.className = "px-4 py-1.5 text-sm font-medium rounded-md bg-white text-navy-900 shadow-sm border border-slate-200 transition-all";
+                btnSingle.className = "px-4 py-1.5 text-sm font-medium text-slate-500 hover:text-navy-900 transition-all";
+            } else {
+                btnSingle.className = "px-4 py-1.5 text-sm font-medium rounded-md bg-white text-navy-900 shadow-sm border border-slate-200 transition-all";
+                btnRecurring.className = "px-4 py-1.5 text-sm font-medium text-slate-500 hover:text-navy-900 transition-all";
+            }
+            updateSummary();
+        };
+
+        function updateSummary() {
+            const plan = PRICING_CONFIG.plans[selectedPlanId];
+            document.getElementById('summary-name').textContent = plan.name;
+            document.getElementById('summary-price').textContent = Utils.formatCurrency(plan.price) + " 원";
+            document.getElementById('summary-price-mobile').textContent = Utils.formatCurrency(plan.price) + " 원";
+
+            const durationText = plan.duration === 365 ? '1년' : '30일';
+            document.getElementById('summary-type').textContent = isRecurring ? `${durationText} 정기구독` : `${durationText} 1회결제`;
+
+            // Yearly plans are single-billing only for now
+            const subToggleContainer = document.getElementById('toggle-recurring').parentElement;
+            if (plan.duration === 365) {
+                setRecurring(false);
+                subToggleContainer.style.opacity = "0.5";
+                subToggleContainer.style.pointerEvents = "none";
+            } else {
+                subToggleContainer.style.opacity = "1";
+                subToggleContainer.style.pointerEvents = "auto";
+            }
+        }
+
+        const checkAll = document.getElementById('check-all');
+        const checkboxes = document.querySelectorAll('.consent-check');
+        checkAll.addEventListener('change', e => checkboxes.forEach(cb => cb.checked = e.target.checked));
+        checkboxes.forEach(cb => cb.addEventListener('change', () => {
+            checkAll.checked = Array.from(checkboxes).every(c => c.checked);
+        }));
 
         window.processPayment = function () {
             try {
                 if (!currentUser) return alert('로그인이 필요합니다.');
-                const phone = document.getElementById('phone').value.trim();
+                const phone = document.getElementById('user-phone').value.trim();
+                const name = document.getElementById('user-name').value.trim();
                 const plan = PRICING_CONFIG.plans[selectedPlanId];
 
-                const required = ['check-refund', 'check-minor', 'check-privacy', 'check-thirdparty', 'check-ai-api'];
+                const required = ['check-refund', 'check-minor', 'check-ai-api'];
                 for (const id of required) { if (!document.getElementById(id).checked) return alert('필수 약관에 동의해주세요.'); }
 
-                if (phone.length < 10) return alert('연락처를 입력해주세요.');
+                if (!name) return alert('성함을 입력해주세요.');
+                if (phone.length < 10) return alert('연락처를 정확히 입력해주세요.');
 
-                if (typeof PAYAPP_CONFIG === 'undefined') throw new Error('페이앱 설정(payapp_config.js)을 불러올 수 없습니다.');
-                if (!PAYAPP_CONFIG.userid || !PAYAPP_CONFIG.userid.trim()) {
-                    alert('페이앱 가맹점 ID가 설정되지 않았습니다.\n\npayapp_config.js에서 userid에 페이앱 판매자관리사이트(설정 → 연동정보)의 판매자 회원아이디를 입력해주세요.');
-                    return;
-                }
+                if (typeof PayApp === 'undefined') throw new Error('결제 모듈 로딩 실패');
 
-                if (typeof PayApp === 'undefined') throw new Error('PayApp 로딩 실패');
                 PayApp.setDefault('userid', PAYAPP_CONFIG.userid.trim());
                 PayApp.setDefault('shopname', (PAYAPP_CONFIG.shopname || '리카오토플랜').trim());
                 PayApp.setParam('goodname', plan.name);
                 PayApp.setParam('price', plan.price.toString());
                 PayApp.setParam('recvphone', phone);
+                PayApp.setParam('memo', name);
                 PayApp.setParam('smsuse', 'n');
-                PayApp.setParam('openpaytype', '');
-                PayApp.setParam('var1', currentUser.uid); // 🚀 Webhook에서 사용자 구분을 위해 UID 전달
-
-                // 🚀 이메일 정보 전달 (결제 성공 페이지에서 표기용)
+                PayApp.setParam('var1', currentUser.uid);
                 PayApp.setParam('var_email', currentUser.email);
 
-                // 🚀 정기구독(Billkey 요청) 처리
                 if (isRecurring) {
-                    PayApp.setParam('rebill', 'y'); // 페이앱 정기결제 빌키 등록 요청 파라미터
-                    PayApp.setParam('var2', 'subscription'); // Webhook에서 구분용 추가 데이터
+                    PayApp.setParam('rebill', 'y');
+                    PayApp.setParam('var2', 'subscription');
                 }
 
-                PayApp.setParam('redirectpay', '1'); // 🚀 매뉴얼 권장: '1' 사용 (전체 페이지 리다이렉트)
-                PayApp.setParam('redirect', 'self');  // 부모창이 아닌 현재창에서 리다이렉트
-                PayApp.setParam('skip_screen', 'y'); // 결제 요청 후 바로 결제창으로 이동
+                PayApp.setParam('redirectpay', '1');
+                PayApp.setParam('redirect', 'self');
+                PayApp.setParam('skip_screen', 'y');
 
-                // GitHub Pages 등 하위 경로 배포 시에도 결제 완료 후 올바른 success 페이지로 이동
-                var baseReturnUrl = (PAYAPP_CONFIG.returnUrl && PAYAPP_CONFIG.returnUrl.trim()) ? PAYAPP_CONFIG.returnUrl.trim() : (new URL('checkout_success.html', window.location.href).href);
+                const baseReturnUrl = new URL('checkout_success.html', window.location.href).href;
                 PayApp.setParam('returnurl', baseReturnUrl);
-                if (PAYAPP_CONFIG.feedbackurl && PAYAPP_CONFIG.feedbackurl.trim()) {
-                    PayApp.setParam('feedbackurl', PAYAPP_CONFIG.feedbackurl.trim());
-                }
+                if (PAYAPP_CONFIG.feedbackurl) PayApp.setParam('feedbackurl', PAYAPP_CONFIG.feedbackurl.trim());
+
                 PayApp.payrequest();
             } catch (e) { alert(e.message); }
         };
+
+        renderPlans();
+        setRecurring(isRecurring);
     </script>
 </body>
 

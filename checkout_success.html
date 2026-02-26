@@ -2,96 +2,187 @@
 <html lang="ko">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>결제 성공 - 리카오토플랜</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="base.css" rel="stylesheet">
-    <script src="common.js"></script>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>결제 완료 - RicarBot</title>
+    <!-- Tailwind CSS CDN with plugins -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;family=Noto+Sans+KR:wght@400;500;700&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: {
+                            900: '#0f1729',
+                            800: '#1e293b',
+                            700: '#334155',
+                        },
+                        slate: {
+                            50: '#f8fafc',
+                            100: '#f1f5f9',
+                            200: '#e2e8f0',
+                            300: '#cbd5e1',
+                            400: '#94a3b8',
+                            500: '#64748b',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'Noto Sans KR', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', 'Noto Sans KR', sans-serif;
+            background-color: #f8fafc;
+        }
+
+        @keyframes checkmark {
+            0% {
+                transform: scale(0);
+                opacity: 0;
+            }
+
+            50% {
+                transform: scale(1.2);
+            }
+
+            100% {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .animate-success {
+            animation: checkmark 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
+        }
+    </style>
 </head>
 
-<body class="flex items-center justify-center min-h-screen p-4">
-    <div class="card max-w-md w-full text-center relative overflow-hidden">
-        <!-- Decoration -->
-        <div class="absolute -top-10 -right-10 w-32 h-32 bg-green-500/10 rounded-full blur-3xl"></div>
-        <a href="/" class="absolute top-4 right-4 text-gray-500 hover:text-white transition-colors z-10">
-            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-            </svg>
-        </a>
-
-        <div class="w-20 h-20 bg-green-500/20 rounded-full flex items-center justify-center mx-auto mb-6">
-            <svg class="w-10 h-10 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="3" d="M5 13l4 4L19 7"></path>
-            </svg>
-        </div>
-
-        <h1 class="text-2xl font-black text-white mb-2">결제 완료!</h1>
-        <p class="text-gray-400 mb-8 text-sm">주문이 성공적으로 처리되었습니다.</p>
-
-        <!-- Summary -->
-        <div class="bg-slate-950/50 rounded-xl p-6 mb-8 text-left border border-slate-800 space-y-3 text-sm">
-            <div class="flex justify-between"><span class="text-gray-500">주문번호</span> <span class="font-mono text-white"
-                    id="oid">...</span></div>
-            <div class="flex justify-between"><span class="text-gray-500">상품명</span> <span class="font-bold text-white"
-                    id="pname">...</span></div>
-            <div class="flex justify-between"><span class="text-gray-500">결제금액</span> <span
-                    class="font-bold text-blue-400" id="amt">...</span></div>
-            <div class="flex justify-between"><span class="text-gray-500">결제일시</span> <span class="text-gray-300"
-                    id="date">...</span></div>
-            <div class="flex justify-between"><span class="text-gray-500">이메일</span> <span
-                    class="text-gray-300 truncate max-w-[150px]" id="email">...</span></div>
-        </div>
-
-        <!-- DB Update Status -->
-        <div id="sync-status" class="mb-8 p-4 rounded-xl bg-slate-900 border border-slate-800 text-sm">
-            <div class="flex items-center justify-center gap-2 text-gray-400" id="sync-msg">
-                <svg class="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24">
-                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
-                    <path class="opacity-75" fill="currentColor"
-                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
-                    </path>
-                </svg>
-                계정 정보를 업데이트하는 중...
+<body class="bg-slate-50 text-slate-900 antialiased min-h-screen flex flex-col">
+    <header class="bg-white border-b border-slate-200 py-4">
+        <div class="max-w-6xl mx-auto px-4 flex justify-between items-center">
+            <div class="flex items-center gap-2 cursor-pointer" onclick="location.href='index.html'">
+                <div class="w-8 h-8 bg-navy-900 rounded flex items-center justify-center">
+                    <span class="material-symbols-outlined text-white text-sm">smart_toy</span>
+                </div>
+                <span class="text-xl font-bold text-navy-900 tracking-tight">RicarBot</span>
             </div>
+            <a href="index.html" class="text-slate-500 hover:text-navy-900 transition-colors">
+                <span class="material-symbols-outlined">close</span>
+            </a>
         </div>
+    </header>
 
-        <div class="space-y-3">
-            <button
-                onclick="location.href='https://drive.google.com/file/d/18d3CgGKfU7qA6McN1sFksksnzhgZLn_m/view?usp=sharing'"
-                class="btn-secondary">
-                프로그램 다운로드
-            </button>
-            <button onclick="location.href='/license'" class="btn-primary">
-                내 구독 정보 확인하기 →
-            </button>
+    <main class="flex-grow flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8">
+        <div class="max-w-xl w-full space-y-8">
+            <div class="text-center">
+                <div
+                    class="mx-auto flex items-center justify-center h-24 w-24 rounded-full bg-blue-50 mb-6 animate-success">
+                    <span class="material-symbols-outlined text-5xl text-blue-600">check_circle</span>
+                </div>
+                <h1 class="text-3xl font-bold tracking-tight text-slate-900 sm:text-4xl">결제가 완료되었습니다.</h1>
+                <p class="mt-3 text-lg text-slate-600">RicarBot을 이용해 주셔서 감사합니다.</p>
+            </div>
+
+            <section class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+                <div class="px-6 py-5 border-b border-slate-100 flex justify-between items-center">
+                    <h2 class="text-lg font-semibold text-slate-800">주문 요약</h2>
+                    <span
+                        class="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
+                        결제성공
+                    </span>
+                </div>
+                <div class="px-6 py-6 space-y-4 text-sm">
+                    <div class="flex justify-between">
+                        <span class="text-slate-500">결제 상품</span>
+                        <span class="font-medium text-slate-900" id="pname">연동 중...</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-slate-500">결제 금액</span>
+                        <span class="font-bold text-blue-600 text-lg" id="amt">...</span>
+                    </div>
+                    <div class="flex justify-between border-t border-slate-50 pt-4">
+                        <span class="text-slate-500">결제 일시</span>
+                        <span class="text-slate-900" id="date">...</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-slate-500">주문 번호</span>
+                        <span class="text-slate-900 font-mono" id="oid">...</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span class="text-slate-500">이메일 계정</span>
+                        <span class="text-slate-900 truncate max-w-[200px]" id="email">연동 중...</span>
+                    </div>
+                </div>
+
+                <div class="bg-slate-50 px-6 py-4 border-t border-slate-100" id="sync-status">
+                    <div class="flex items-center justify-between">
+                        <div class="flex items-center space-x-2">
+                            <span class="text-sm font-semibold text-slate-700">라이선스 활성화 상태</span>
+                        </div>
+                        <div class="flex items-center space-x-2" id="sync-msg">
+                            <svg class="w-4 h-4 animate-spin text-slate-400" fill="none" viewBox="0 0 24 24">
+                                <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor"
+                                    stroke-width="4"></circle>
+                                <path class="opacity-75" fill="currentColor"
+                                    d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+                                </path>
+                            </svg>
+                            <span class="text-sm font-medium text-slate-500">Processing...</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <div class="flex flex-col space-y-3 sm:flex-row sm:space-y-0 sm:space-x-4">
+                <button
+                    onclick="location.href='https://drive.google.com/file/d/18d3CgGKfU7qA6McN1sFksksnzhgZLn_m/view?usp=sharing'"
+                    class="flex-1 inline-flex justify-center items-center px-6 py-3.5 border border-transparent text-base font-semibold rounded-xl text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors shadow-lg shadow-blue-100">
+                    프로그램 다운로드
+                </button>
+                <button onclick="location.href='license.html'"
+                    class="flex-1 inline-flex justify-center items-center px-6 py-3.5 border border-slate-300 text-base font-semibold rounded-xl text-slate-700 bg-white hover:bg-slate-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-slate-500 transition-colors">
+                    구독 정보 확인하기
+                </button>
+            </div>
+
+            <footer class="pt-8 text-center">
+                <p class="text-sm text-slate-400">
+                    결제 관련 문의는 고객센터(<a href="mailto:jhxox666@naver.com" class="underline">jhxox666@naver.com</a>)로 연락 주시기
+                    바랍니다.
+                </p>
+                <div class="mt-8 flex justify-center space-x-6 opacity-30 grayscale items-center">
+                    <img alt="PG Security" class="h-6"
+                        src="https://lh3.googleusercontent.com/aida-public/AB6AXuDEecSUSWhkD0NVBIoTGETvRrgz976JAyrP06OXMTDFhZm-cNI3B5AzCieVPL8cHJacNffp7Owow4jAwciBaOPDV4299Sc0_XB1dzQJ_y9qdDKZyzlijJ8uouZ88BwrkJ-a6lVc38wLrSa4uwSwB3caFlC0kRD4Kal7ruN884CXwwboRiFKNpQzEv2PvTiToKAhMTzOMBvUrEeNRuWje_Gat0JiPEumvo0bfgP5kaLKfCW_gQWStEEbbS7qoLsluP_ba107bTjyteKb" />
+                </div>
+            </footer>
         </div>
+    </main>
 
-        <p class="mt-6 text-xs text-gray-600">
-            * 30일 이용권(단건) 결제입니다. 정기결제는 적용되지 않습니다.
-        </p>
-    </div>
-
-    <!-- Firebase SDK (Compat Version) -->
+    <script src="common.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
     <script src="firebase_config.js"></script>
 
     <script>
-        // Wait for auth state
         if (typeof auth !== 'undefined') {
             auth.onAuthStateChanged(async (user) => {
                 const syncMsg = document.getElementById('sync-msg');
                 const syncStatus = document.getElementById('sync-status');
 
-                // 1. Try to get order from storage
                 let order = Utils.getStorage(STORAGE_KEYS.ORDER);
-
-                // 2. Fallback: Try to parse from URL (PayApp return parameters)
                 const urlParams = new URLSearchParams(window.location.search);
+
                 if (!order && urlParams.get('goodname')) {
-                    console.log('Order missing in storage, parsing from URL params');
                     order = {
                         orderId: urlParams.get('ordno') || 'unknown',
                         planName: urlParams.get('goodname'),
@@ -102,78 +193,55 @@
                 }
 
                 if (!order) {
-                    console.warn('No order data found');
-                    document.querySelector('.bg-slate-950/50').classList.add('hidden');
-                    syncMsg.innerHTML = '<span class="text-yellow-500">⚠ 결제 정보를 찾을 수 없습니다. 결제는 완료되었으나 자동 반영이 안 될 경우 고객센터로 문의해주세요.</span>';
-                } else {
-                    // Render UI Summary
-                    if (document.getElementById('oid')) document.getElementById('oid').textContent = order.orderId;
-                    if (document.getElementById('pname')) document.getElementById('pname').textContent = order.planName;
-                    if (document.getElementById('amt')) document.getElementById('amt').textContent = Utils.formatCurrency(parseInt(order.amount) || 0);
-                    if (document.getElementById('date')) document.getElementById('date').textContent = Utils.formatDate(order.date);
-                    if (document.getElementById('email')) document.getElementById('email').textContent = user ? user.email : (order.email || '연동 중...');
+                    syncMsg.innerHTML = '<span class="text-xs text-amber-600 font-bold uppercase">Not Found</span>';
+                    return;
                 }
 
+                // Render UI Summary
+                if (document.getElementById('oid')) document.getElementById('oid').textContent = order.orderId;
+                if (document.getElementById('pname')) document.getElementById('pname').textContent = order.planName;
+                if (document.getElementById('amt')) document.getElementById('amt').textContent = Utils.formatCurrency(parseInt(order.amount) || 0) + " 원";
+                if (document.getElementById('date')) document.getElementById('date').textContent = Utils.formatDate(order.date);
+                if (document.getElementById('email')) document.getElementById('email').textContent = user ? user.email : (order.email || '연동 대기...');
+
                 if (!user) {
-                    if (order) {
-                        syncMsg.innerHTML = '<span class="text-blue-400">👋 로그인을 대기하고 있습니다...</span>';
-                    }
+                    syncMsg.innerHTML = '<span class="text-xs text-blue-500 font-bold uppercase">Waiting for Login</span>';
                     return;
                 }
 
                 // Update Database
                 try {
-                    if (!order) return;
-
-                    syncMsg.innerHTML = '<svg class="w-4 h-4 animate-spin" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> 라이선스 활성화 중...';
-
                     const now = new Date();
                     const expiry = new Date();
                     expiry.setDate(now.getDate() + 30);
 
-                    const newLicenseKey = Utils.generateLicenseKey();
-                    const finalPlan = (order.planId || 'PRO').toLowerCase();
-                    const finalPlanName = order.planName || 'PRO Plan';
+                    const finalPlan = (order.planId || 'pro').toLowerCase();
+                    const finalPlanName = order.planName || 'Pro Plan';
 
-                    // Use set with merge: true to ensure it works even if doc doesn't exist
                     await db.collection("users").doc(user.uid).set({
                         plan: finalPlan,
                         planName: finalPlanName,
                         paymentDate: now,
                         expiryDate: expiry,
-                        licenseKey: newLicenseKey,
+                        licenseKey: Utils.generateLicenseKey(),
                         lastOrderId: order.orderId,
                         updatedAt: firebase.firestore.FieldValue.serverTimestamp()
                     }, { merge: true });
 
-                    console.log("User Upgraded to: " + finalPlan);
-
-                    // Success UI
-                    syncStatus.classList.remove('bg-slate-900', 'border-slate-800');
-                    syncStatus.classList.add('bg-green-500/20', 'border-green-500/50');
-                    syncMsg.innerHTML = '<span class="text-green-400 font-bold">✅ 라이선스가 성공적으로 활성화되었습니다!</span>';
-
+                    syncMsg.innerHTML = `
+                        <span class="flex h-2 w-2 rounded-full bg-green-500 mr-2"></span>
+                        <span class="text-sm font-bold text-green-700 uppercase">Activated</span>
+                    `;
+                    syncStatus.classList.replace('bg-slate-50', 'bg-green-50');
                     localStorage.removeItem(STORAGE_KEYS.ORDER);
 
                 } catch (e) {
                     console.error("DB Update Failed", e);
-                    syncStatus.classList.add('bg-red-500/10', 'border-red-500/30');
-                    syncMsg.innerHTML = '<span class="text-red-400">❌ 업데이트 실패: ' + e.message + '</span>';
+                    syncMsg.innerHTML = '<span class="text-xs text-red-600 font-bold uppercase">Update Failed</span>';
                 }
             });
         }
     </script>
-    <!-- FOOTER -->
-    <footer
-        class="absolute bottom-0 w-full border-t border-slate-800 bg-slate-900 py-8 text-center text-xs text-gray-500">
-        <div class="container-custom space-y-2">
-            <p><span class="font-bold text-gray-400">리카오토플랜</span> | 대표자: 조홍철 | 사업자등록번호: 325-60-00844</p>
-            <p>주소: 경기도 부천시 원미구 신흥로 40, 709호(심곡동, 디오스빌) </p>
-            <p>고객센터: <a href="mailto:jhxox666@naver.com" class="text-blue-400 hover:underline">jhxox666@naver.com</a>
-            </p>
-            <p class="mt-4 copyright">© 2026 Ricar Auto Plan. All rights reserved.</p>
-        </div>
-    </footer>
 </body>
 
 </html>

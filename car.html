@@ -2,61 +2,38 @@
 <html lang="ko" class="scroll-smooth">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="자동차 영업 사원 필수 블로그 마케팅 자동화. 조회수와 문의 전환을 한 번에.">
-    <title>리카봇 - 자동차 영업 사원 필수 블로그 마케팅 자동화</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap"
-        rel="stylesheet">
-    <link href="base.css" rel="stylesheet">
-
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>RicarBot - 자동차 딜러를 위한 AI 블로그 마케팅</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0f1729",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#14171e",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "Noto Sans KR", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
     <style>
-        * {
-            font-family: 'Noto Sans KR', -apple-system, sans-serif;
-            word-break: keep-all;
-        }
-
-        .neon-glow {
-            box-shadow: 0 0 30px rgba(59, 130, 246, 0.6), 0 0 60px rgba(59, 130, 246, 0.4);
-        }
-
-        .neon-text {
-            text-shadow: 0 0 15px rgba(59, 130, 246, 0.9), 0 0 30px rgba(59, 130, 246, 0.6);
-        }
-
-        .pulse-glow {
-            animation: pulse-glow 2s ease-in-out infinite;
-        }
-
-        @keyframes pulse-glow {
-
-            0%,
-            100% {
-                box-shadow: 0 0 20px rgba(59, 130, 246, 0.5), 0 0 40px rgba(59, 130, 246, 0.3);
-            }
-
-            50% {
-                box-shadow: 0 0 40px rgba(59, 130, 246, 0.8), 0 0 80px rgba(59, 130, 246, 0.5);
-            }
-        }
-
-        @keyframes float {
-
-            0%,
-            100% {
-                transform: translateY(0px);
-            }
-
-            50% {
-                transform: translateY(-20px);
-            }
-        }
-
-        .float-animation {
-            animation: float 3s ease-in-out infinite;
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
 
         .reveal {
@@ -69,258 +46,370 @@
             opacity: 1;
             transform: translateY(0);
         }
+
+        .pulse-glow {
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-glow {
+
+            0%,
+            100% {
+                box-shadow: 0 0 20px rgba(15, 23, 41, 0.1);
+            }
+
+            50% {
+                box-shadow: 0 0 40px rgba(15, 23, 41, 0.2);
+            }
+        }
     </style>
 </head>
 
-<body class="bg-slate-950 text-gray-100">
-
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased">
     <!-- Header -->
-    <header class="fixed w-full top-0 z-50 bg-slate-950/95 backdrop-blur-lg border-b border-blue-900/30">
-        <nav class="container mx-auto px-6 py-4">
-            <div class="flex items-center justify-between">
-                <div class="flex items-center space-x-6">
-                    <div class="flex items-center space-x-2 cursor-pointer" onclick="location.href='index.html'">
-                        <img src="logo.png" alt="RicarBot Logo" class="w-10 h-10 object-contain">
+    <header
+        class="sticky top-0 z-50 w-full border-b border-slate-200/80 dark:border-slate-800/80 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex h-16 items-center justify-between">
+                <div class="flex items-center gap-2 cursor-pointer" onclick="location.href='index.html'">
+                    <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-white">
+                        <span class="material-symbols-outlined text-xl">smart_toy</span>
                     </div>
-                    <!-- Mode Switch -->
-                    <div class="hidden md:flex bg-slate-900 rounded-full p-1 border border-slate-800">
-                        <button
-                            class="px-4 py-1.5 rounded-full text-xs font-bold bg-blue-600 text-white shadow-lg">자동차</button>
-                        <button onclick="location.href='business.html'"
-                            class="px-4 py-1.5 rounded-full text-xs font-bold text-gray-500 hover:text-white transition-all">자영업/SME</button>
-                    </div>
+                    <span class="text-xl font-bold tracking-tight text-primary dark:text-white">RicarBot</span>
                 </div>
-                <div id="nav-auth-section" class="flex items-center space-x-4">
-                    <a href="guide.html"
-                        class="hidden md:block text-blue-400 hover:text-blue-300 font-bold transition-colors">📖 가이드</a>
-                    <a href="login.html" class="text-gray-300 hover:text-blue-400 transition-colors">로그인</a>
-                    <button onclick="location.href='checkout.html'"
-                        class="bg-blue-500 hover:bg-blue-600 text-white font-bold px-6 py-2 rounded-lg neon-glow transition-all hover:scale-105">
-                        오픈 특가 신청
-                    </button>
+
+                <!-- 업종 전환 스위치 -->
+                <div
+                    class="hidden md:flex bg-slate-100 dark:bg-slate-800/50 rounded-full p-1 border border-slate-200 dark:border-slate-700 ml-6">
+                    <button
+                        class="px-4 py-1.5 rounded-full text-xs font-bold bg-primary text-white shadow-lg">자동차</button>
+                    <button onclick="location.href='business.html'"
+                        class="px-4 py-1.5 rounded-full text-xs font-bold text-slate-500 dark:text-slate-400 hover:text-primary dark:hover:text-white transition-all">자영업/SME</button>
+                </div>
+
+                <nav class="hidden md:flex items-center gap-8 ml-auto mr-8">
+                    <a class="text-sm font-medium text-slate-600 hover:text-primary dark:text-slate-300 dark:hover:text-white transition-colors"
+                        href="guide.html">가이드</a>
+                    <a class="text-sm font-medium text-slate-600 hover:text-primary dark:text-slate-300 dark:hover:text-white transition-colors"
+                        href="#features">기능</a>
+                    <a class="text-sm font-medium text-slate-600 hover:text-primary dark:text-slate-300 dark:hover:text-white transition-colors"
+                        href="#pricing">가격안내</a>
+                </nav>
+
+                <div class="flex items-center gap-3" id="nav-auth-section">
+                    <button onclick="location.href='login.html'"
+                        class="hidden sm:block px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-all">로그인</button>
+                    <button onclick="location.href='checkout.html?plan=PRO'"
+                        class="px-5 py-2 text-sm font-bold text-white bg-primary hover:bg-slate-800 rounded-lg shadow-sm transition-all">시작하기</button>
                 </div>
             </div>
-        </nav>
+        </div>
     </header>
 
-    <!-- Hero Section -->
-    <section class="pt-32 pb-20 px-6 reveal">
-        <div class="container mx-auto max-w-6xl">
-            <div class="text-center mb-8">
-                <div class="inline-block bg-blue-500 text-white font-black text-sm px-6 py-3 rounded-full pulse-glow">
-                    🚀 자동차 영업 사원을 위한 1호 영업 비서 리카봇
-                </div>
-            </div>
-
-            <div class="text-center">
-                <h1 class="text-5xl md:text-7xl font-black mb-6 leading-tight">
-                    영업사원이라면 공감하실 겁니다.<br>
-                    <span class="text-blue-500 neon-text">블로그, 안 할 수도 할 시간도 없죠.</span>
-                </h1>
-                <p class="text-2xl md:text-3xl text-gray-300 mb-4 font-bold">
-                    리카봇이 당신의 1호 영업 사원이 되겠습니다.
-                </p>
-                <p class="text-xl text-gray-400 mb-12 max-w-3xl mx-auto">
-                    단순 포스팅을 넘어 가망 고객의 DB를 확보하는<br>
-                    <span class="text-blue-400 font-bold">진짜 '영업용' 마케팅 자동화를 경험하세요.</span>
-                </p>
-
-                <div class="flex flex-col md:flex-row items-center justify-center gap-4">
-                    <button onclick="location.href='checkout.html?plan=PRO'"
-                        class="w-full md:w-auto bg-blue-500 hover:bg-blue-600 text-white font-black text-xl px-12 py-5 rounded-xl neon-glow transition-all hover:scale-105">
-                        🔥 오픈 특가로 시작하기
-                    </button>
-                    <button onclick="location.href='guide.html'"
-                        class="w-full md:w-auto bg-slate-700 hover:bg-slate-600 text-white font-black text-xl px-10 py-5 rounded-xl border border-slate-500/50 transition-all hover:scale-105">
-                        📖 사용 가이드 보기
-                    </button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Features -->
-    <section class="py-20 px-6 bg-slate-900/50 reveal">
-        <div class="container mx-auto max-w-6xl">
-            <h2 class="text-4xl md:text-5xl font-black text-center mb-16">
-                자동차 영업 <span class="text-blue-500">핵심 기능</span>
-            </h2>
-
-            <div class="grid md:grid-cols-3 gap-8">
-                <div class="bg-slate-900 border border-blue-900/30 rounded-2xl p-8">
-                    <div class="text-5xl mb-4">📈</div>
-                    <h3 class="text-xl font-bold mb-3 text-white">조회수 vs 문의 전환 전략</h3>
-                    <p class="text-gray-400 text-sm">정보성 포스팅으로 조회수를 잡고, 후킹성 포스팅으로 실시간 상담 문의를 유도하는 투트랙 전략을 구사합니다.</p>
-                </div>
-
-                <div class="bg-slate-900 border border-blue-900/30 rounded-2xl p-8">
-                    <div class="text-5xl mb-4">🤖</div>
-                    <h3 class="text-xl font-bold mb-3 text-white">휴먼 시뮬레이션 예열</h3>
-                    <p class="text-gray-400 text-sm">기계적인 포스팅이 아닌, 실제 사람이 활동하는 것 같은 패턴으로 블로그 지수를 안전하게 관리합니다.</p>
-                </div>
-
-                <div class="bg-slate-900 border border-blue-900/30 rounded-2xl p-8">
-                    <div class="text-5xl mb-4">📸</div>
-                    <h3 class="text-xl font-bold mb-3 text-white">이미지 텍스트 자동 합성</h3>
-                    <p class="text-gray-400 text-sm">매물 사진 위에 연락처나 홍보 문구를 AI가 자연스럽게 합성하여 가독성과 홍보 효과를 극대화합니다.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Pricing -->
-    <section class="py-20 px-6 reveal">
-        <div class="container mx-auto max-w-7xl">
-            <h2 id="pricing" class="text-4xl md:text-6xl font-black text-center mb-16">
-                영업 효율을 높이는 <span class="text-blue-500">가격 플랜</span>
-            </h2>
-
-            <div class="flex justify-center mb-12">
-                <div class="bg-slate-900 p-1.5 rounded-2xl border border-slate-800 flex items-center shadow-2xl">
-                    <button onclick="switchBilling('single')" id="btn-single"
-                        class="px-5 py-2.5 rounded-xl text-sm font-bold transition-all bg-blue-500 text-white">단건
-                        결제</button>
-                    <button onclick="switchBilling('subscription')" id="btn-subscription"
-                        class="px-5 py-2.5 rounded-xl text-sm font-bold transition-all text-gray-400 hover:text-white">정기
-                        구독</button>
-                    <button onclick="switchBilling('yearly')" id="btn-yearly"
-                        class="px-5 py-2.5 rounded-xl text-sm font-bold transition-all text-gray-400 hover:text-white">연간
-                        할인 <span
-                            class="ml-1 text-[10px] bg-green-500/20 text-green-400 px-1.5 py-0.5 rounded">SAVE</span></button>
-                </div>
-            </div>
-
-            <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto items-start">
-                <!-- LITE -->
-                <div class="bg-slate-900/50 rounded-2xl p-8 border border-slate-800 relative group">
-                    <h3 class="text-2xl font-black text-gray-400 mb-4">LITE</h3>
-                    <div class="mb-6">
-                        <div class="flex items-baseline gap-2">
-                            <span id="lite-price" class="text-4xl font-black text-white">9.9</span>
-                            <span class="text-xl text-gray-400">만원</span>
-                            <div class="flex flex-col ml-2">
-                                <span id="lite-discount"
-                                    class="text-[10px] bg-blue-500 text-white px-1.5 py-0.5 rounded font-bold mb-0.5">50%
-                                    할인</span>
-                                <span id="lite-original" class="text-xs text-gray-500 line-through">19.7만원</span>
-                            </div>
+    <main>
+        <!-- Hero Section -->
+        <section class="relative overflow-hidden pt-16 pb-24 lg:pt-32 lg:pb-40 reveal">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <div class="text-left">
+                        <div
+                            class="inline-flex items-center rounded-full px-4 py-1.5 text-xs font-bold leading-5 text-primary bg-primary/10 mb-6 pulse-glow">
+                            🚀 자동차 영업 사원을 위한 1호 영업 비서
                         </div>
-                        <span id="lite-period" class="text-gray-500 block text-sm mt-1">/ 30일</span>
-                    </div>
-
-                    <ul class="space-y-3 mb-8 text-sm">
-                        <li class="flex items-start gap-2"><span class="text-green-400">✓</span> 계정 2개 운영</li>
-                        <li class="flex items-start gap-2"><span class="text-green-400">✓</span> AI 믹스형 전략 자동 글 작성</li>
-                        <li class="flex items-start gap-2"><span class="text-green-400">✓</span> 이미지 자동 삽입 (리사이즈)</li>
-                        <li class="flex items-start gap-2"><span class="text-green-400">✓</span> 기계적 즉시 발행</li>
-                        <li class="flex items-start gap-2"><span class="text-green-400">✓</span> SEO최적화 10개 이상</li>
-                        <li class="flex items-start gap-2"><span class="text-gray-500">❌ 전략 정밀 분리 불가</span></li>
-                        <li class="flex items-start gap-2"><span class="text-gray-500">❌ 예열 시스템 미지원</span></li>
-                    </ul>
-
-                    <button id="lite-buy-btn" onclick="goToCheckout('LITE')"
-                        class="w-full bg-slate-700 hover:bg-slate-600 text-white font-bold py-4 rounded-xl transition-all">
-                        시작하기
-                    </button>
-                </div>
-
-                <!-- PRO (BEST) -->
-                <div
-                    class="bg-gradient-to-br from-blue-900 to-slate-900 rounded-2xl p-8 border-2 border-blue-500 relative transform md:-translate-y-4">
-                    <div id="pro-badge"
-                        class="absolute -top-5 left-1/2 -translate-x-1/2 bg-blue-500 text-white font-black px-6 py-2 rounded-full">
-                        BEST
-                    </div>
-                    <h3 class="text-2xl font-black text-blue-400 mb-4 mt-2">🔥 PRO</h3>
-                    <div class="mb-6">
-                        <div class="flex items-baseline gap-2">
-                            <span id="pro-price" class="text-4xl font-black text-white">24.9</span>
-                            <span class="text-xl text-gray-400">만원</span>
-                            <div class="flex flex-col ml-2">
-                                <span id="pro-discount"
-                                    class="text-[10px] bg-blue-500 text-white px-1.5 py-0.5 rounded font-bold mb-0.5">38%
-                                    할인</span>
-                                <span id="pro-original" class="text-xs text-gray-500 line-through">39.9만원</span>
-                            </div>
-                        </div>
-                        <span id="pro-period" class="text-gray-500 block text-sm mt-1">/ 30일</span>
-                    </div>
-
-                    <div class="bg-blue-500/20 border border-blue-500/50 rounded-xl p-3 mb-6">
-                        <p class="text-blue-300 font-bold text-sm">
-                            조회수 vs 문의 전환 정밀 전략 분리 모드 지원
+                        <h1
+                            class="text-5xl lg:text-7xl font-black text-slate-900 dark:text-white leading-[1.1] tracking-tight mb-6">
+                            자동차 영업의 정점, <span class="text-primary/80 dark:text-slate-400">리카봇</span>
+                        </h1>
+                        <p class="text-lg lg:text-xl text-slate-600 dark:text-slate-400 leading-relaxed mb-10 max-w-xl">
+                            AI 블로그 마케팅으로 딜러님의 성과를 극대화하세요. 지능적인 키워드 추출부터 자동 포스팅까지 한 번에 해결합니다.
                         </p>
-                    </div>
-
-                    <ul class="space-y-3 mb-8 text-sm">
-                        <li class="flex items-start gap-2"><span class="text-blue-400">✓</span> <b>조회수/문의 전환 정밀 전략
-                                탑재</b></li>
-                        <li class="flex items-start gap-2"><span class="text-blue-400">✓</span> <b>휴먼 시뮬레이션 예열 시스템</b>
-                        </li>
-                        <li class="flex items-start gap-2"><span class="text-blue-400">✓</span> 이미지 텍스트 합성 & 고급 링크</li>
-                        <li class="flex items-start gap-2"><span class="text-blue-400">✓</span> 계정 8개 다계정 운영</li>
-                        <li class="flex items-start gap-2"><span class="text-blue-400">✓</span> 긴 글 (3200자까지)</li>
-                        <li class="flex items-start gap-2"><span class="text-blue-400">✓</span> 발행 전 검색 분석</li>
-                        <li class="flex items-start gap-2"><span class="text-blue-400">✓</span> <b>LITE 기능 전부 포함</b>
-                        </li>
-                    </ul>
-
-                    <button id="pro-buy-btn" onclick="goToCheckout('PRO')"
-                        class="w-full bg-blue-500 hover:bg-blue-600 text-white font-black py-4 rounded-xl pulse-glow transition-all hover:scale-105">
-                        🔥 전문가용 시작하기
-                    </button>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Testimonials -->
-    <section class="py-20 px-6 bg-slate-900/50 reveal">
-        <div class="container mx-auto max-w-6xl">
-            <h2 class="text-4xl md:text-5xl font-black text-center mb-16">
-                실제 <span class="text-blue-500">영업 현장</span>의 목소리
-            </h2>
-
-            <div class="grid md:grid-cols-2 gap-8">
-                <div class="bg-slate-900 border border-blue-900/30 rounded-2xl p-8">
-                    <div class="flex items-start space-x-4">
-                        <div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0">
-                            <span class="text-white font-black text-xl">임</span>
-                        </div>
-                        <div>
-                            <div class="font-bold text-lg mb-2 text-white">임*아 님</div>
-                            <p class="text-gray-300">"사실 GPT 써도 너무 ai티나고 수정하느라 고생했는데 신세계네요. 키워드만 넣으면 끝나니까 전화하면서 블로그 관리가
-                                됩니다."</p>
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <button onclick="location.href='checkout.html?plan=PRO'"
+                                class="px-8 py-4 bg-primary text-white font-bold rounded-xl text-lg shadow-xl shadow-primary/20 hover:scale-[1.02] transition-transform">지금
+                                무료로 시작하기</button>
+                            <button onclick="location.href='guide.html'"
+                                class="px-8 py-4 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 font-bold rounded-xl text-lg hover:bg-slate-50 transition-colors">사용
+                                가이드</button>
                         </div>
                     </div>
-                </div>
-                <div class="bg-slate-900 border border-blue-900/30 rounded-2xl p-8">
-                    <div class="flex items-start space-x-4">
-                        <div class="w-12 h-12 bg-blue-500 rounded-full flex items-center justify-center flex-shrink-0">
-                            <span class="text-white font-black text-xl">김</span>
-                        </div>
-                        <div>
-                            <div class="font-bold text-lg mb-2 text-white">김*재 님</div>
-                            <p class="text-gray-300">"광고 대행사에 월 200씩 주던 거 끊었습니다. 프로그램 비용 뽑고도 남네요. 마스터 플랜 출시 기대하고 있습니다."
-                            </p>
+                    <div class="relative">
+                        <div
+                            class="aspect-square rounded-3xl bg-gradient-to-br from-primary/5 to-primary/20 flex items-center justify-center overflow-hidden border border-slate-200/50 dark:border-slate-700/50 shadow-2xl">
+                            <img class="w-full h-full object-cover mix-blend-overlay opacity-80"
+                                alt="High-tech dashboard showing car sales analytics"
+                                src="https://lh3.googleusercontent.com/aida-public/AB6AXuBPqXYMIJjdNrMcnJwqO0JgggneKN01t7dTUT6Bp_OfW2peru68eJh82yOWEZLbjuv_iiwG9DaKbOVDUCAI4tUBGXmFHwcIb1XuH30NrHlliQydesJLV3FVy8zDTUfdrTslZQHZSC_fWoHR0BSBQsmUmULRARJvoIk99k98QVJC4AAFKD6K_mNayVs5My0pV2qriVWtY1BGHgbSrPseC8MN2qhGu7J3o95Gx-aWCw_7RFl85X4N3eaGPB0-y1LkMp-RulWZ4c_fQ72s" />
+                            <div
+                                class="absolute inset-0 bg-gradient-to-t from-background-light dark:from-background-dark via-transparent to-transparent">
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
+
+        <!-- Features Section -->
+        <section class="py-24 bg-white dark:bg-background-dark/50 reveal" id="features">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-base font-bold text-primary dark:text-slate-400 tracking-wide uppercase mb-3">Core
+                        Features</h2>
+                    <p class="text-3xl lg:text-4xl font-black text-slate-900 dark:text-white tracking-tight">데이터로 증명하는
+                        압도적 효율</p>
+                    <p class="mt-4 text-lg text-slate-600 dark:text-slate-400">영업에만 집중하세요. 마케팅은 리카봇이 책임집니다.</p>
+                </div>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- Feature 1 -->
+                    <div
+                        class="group p-8 bg-background-light dark:bg-slate-800/50 rounded-2xl border border-slate-200/50 dark:border-slate-700/50 hover:shadow-xl hover:-translate-y-1 transition-all">
+                        <div
+                            class="w-12 h-12 bg-primary text-white rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                            <span class="material-symbols-outlined">auto_awesome</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">AI 키워드 추출</h3>
+                        <p class="text-slate-600 dark:text-slate-400 leading-relaxed text-sm">최적의 노출을 위한 실시간 인기 키워드를
+                            자동으로 선정하고 분석하여 매칭합니다.</p>
+                    </div>
+                    <!-- Feature 2 -->
+                    <div
+                        class="group p-8 bg-background-light dark:bg-slate-800/50 rounded-2xl border border-slate-200/50 dark:border-slate-700/50 hover:shadow-xl hover:-translate-y-1 transition-all">
+                        <div
+                            class="w-12 h-12 bg-primary text-white rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                            <span class="material-symbols-outlined">publish</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">자동 포스팅</h3>
+                        <p class="text-slate-600 dark:text-slate-400 leading-relaxed text-sm">정해진 시간에 맞춰 자연스러운 블로그 포스팅을
+                            AI가 직접 생성하고 예약 등록합니다.</p>
+                    </div>
+                    <!-- Feature 3 -->
+                    <div
+                        class="group p-8 bg-background-light dark:bg-slate-800/50 rounded-2xl border border-slate-200/50 dark:border-slate-700/50 hover:shadow-xl hover:-translate-y-1 transition-all">
+                        <div
+                            class="w-12 h-12 bg-primary text-white rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                            <span class="material-symbols-outlined">query_stats</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">실시간 성과 분석</h3>
+                        <p class="text-slate-600 dark:text-slate-400 leading-relaxed text-sm">포스팅 노출 현황과 유입 성과를 전용
+                            대시보드에서 즉시 확인하고 전략을 수정하세요.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Testimonials -->
+        <section class="py-24 overflow-hidden reveal" id="testimonials">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl font-black text-slate-900 dark:text-white tracking-tight">파트너 후기</h2>
+                </div>
+                <div class="grid md:grid-cols-2 gap-8">
+                    <div
+                        class="bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700">
+                        <div class="flex items-center gap-1 text-yellow-400 mb-4">
+                            <span class="material-symbols-outlined">star</span>
+                            <span class="material-symbols-outlined">star</span>
+                            <span class="material-symbols-outlined">star</span>
+                            <span class="material-symbols-outlined">star</span>
+                            <span class="material-symbols-outlined">star</span>
+                        </div>
+                        <p class="text-slate-700 dark:text-slate-300 italic mb-6">"리카봇 도입 이후 블로그 관리에 들이는 시간이 90% 줄었습니다.
+                            그런데도 문의 전화는 3배 이상 늘어났어요. 자동차 딜러라면 필수라고 생각합니다."</p>
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-full overflow-hidden bg-slate-200">
+                                <span
+                                    class="bg-primary text-white w-full h-full flex items-center justify-center font-bold">김</span>
+                            </div>
+                            <div>
+                                <p class="font-bold text-slate-900 dark:text-white">김현우 팀장</p>
+                                <p class="text-sm text-slate-500">수입차 공식 딜러</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div
+                        class="bg-white dark:bg-slate-800 p-8 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700">
+                        <div class="flex items-center gap-1 text-yellow-400 mb-4">
+                            <span class="material-symbols-outlined">star</span>
+                            <span class="material-symbols-outlined">star</span>
+                            <span class="material-symbols-outlined">star</span>
+                            <span class="material-symbols-outlined">star</span>
+                            <span class="material-symbols-outlined">star</span>
+                        </div>
+                        <p class="text-slate-700 dark:text-slate-300 italic mb-6">"AI가 쓴 글이라고는 믿기지 않을 정도로 퀄리티가 높습니다. 키워드
+                            선점이 정말 중요한데 리카봇이 그 부분을 완벽하게 긁어주네요. 매우 만족합니다."</p>
+                        <div class="flex items-center gap-4">
+                            <div class="w-12 h-12 rounded-full overflow-hidden bg-slate-200">
+                                <span
+                                    class="bg-primary text-white w-full h-full flex items-center justify-center font-bold">박</span>
+                            </div>
+                            <div>
+                                <p class="font-bold text-slate-900 dark:text-white">박지성 대표</p>
+                                <p class="text-sm text-slate-500">중고차 전문 상사</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing Section -->
+        <section class="py-24 bg-background-light dark:bg-background-dark reveal" id="pricing">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl lg:text-4xl font-black text-slate-900 dark:text-white tracking-tight mb-8">합리적인
+                        플랜으로 시작하세요</h2>
+                    <!-- Billing Toggle -->
+                    <div
+                        class="flex justify-center p-1.5 bg-slate-200 dark:bg-slate-800 rounded-2xl w-fit mx-auto mb-8 shadow-inner">
+                        <button
+                            class="px-6 py-2.5 text-sm font-bold rounded-xl transition-all bg-primary text-white shadow-md"
+                            id="btn-single" onclick="switchBilling('single')">단건</button>
+                        <button
+                            class="px-6 py-2.5 text-sm font-bold rounded-xl transition-all text-slate-600 dark:text-slate-400"
+                            id="btn-subscription" onclick="switchBilling('subscription')">월간</button>
+                        <button
+                            class="px-6 py-2.5 text-sm font-bold rounded-xl transition-all text-slate-600 dark:text-slate-400 flex items-center gap-1"
+                            id="btn-yearly" onclick="switchBilling('yearly')">
+                            연간 <span class="text-[10px] px-1.5 py-0.5 bg-green-500 text-white rounded-full">Save</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                    <!-- LITE Plan -->
+                    <div
+                        class="bg-white dark:bg-slate-800/50 p-10 rounded-3xl border border-slate-200 dark:border-slate-700 shadow-sm flex flex-col hover:shadow-xl transition-all">
+                        <div class="mb-8">
+                            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">LITE 플랜</h3>
+                            <p class="text-slate-500 dark:text-slate-400 text-sm">개인 딜러를 위한 입문용 패키지</p>
+                        </div>
+                        <div class="mb-8">
+                            <div class="flex items-baseline gap-2">
+                                <span class="text-4xl font-black text-slate-900 dark:text-white"
+                                    id="lite-price">9.9</span>
+                                <span class="text-xl text-slate-500 dark:text-gray-400" id="lite-period">만원</span>
+                            </div>
+                            <div class="mt-2 flex items-center gap-2">
+                                <span class="text-sm text-slate-400 line-through" id="lite-original">19.7만원</span>
+                                <span class="text-sm font-bold text-primary dark:text-blue-400" id="lite-discount">50%
+                                    할인</span>
+                            </div>
+                        </div>
+                        <ul class="space-y-4 mb-10 flex-grow">
+                            <li class="flex items-center gap-3 text-slate-600 dark:text-slate-300">
+                                <span class="material-symbols-outlined text-green-500 text-lg">check_circle</span>
+                                <span class="text-sm font-medium">계정 2개 운영</span>
+                            </li>
+                            <li class="flex items-center gap-3 text-slate-600 dark:text-slate-300">
+                                <span class="material-symbols-outlined text-green-500 text-lg">check_circle</span>
+                                <span class="text-sm font-medium">AI 믹스형 전략 자동 글 작성</span>
+                            </li>
+                            <li class="flex items-center gap-3 text-slate-600 dark:text-slate-300">
+                                <span class="material-symbols-outlined text-green-500 text-lg">check_circle</span>
+                                <span class="text-sm font-medium">이미지 자동 삽입 (리사이즈)</span>
+                            </li>
+                        </ul>
+                        <button
+                            class="w-full py-4 bg-slate-100 dark:bg-slate-700 text-slate-900 dark:text-white font-bold rounded-xl hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors"
+                            onclick="goToCheckout('LITE')">플랜 선택하기</button>
+                    </div>
+                    <!-- PRO Plan -->
+                    <div
+                        class="bg-primary dark:bg-gradient-to-br dark:from-blue-900 dark:to-slate-900 p-10 rounded-3xl border border-primary dark:border-blue-500 shadow-2xl relative overflow-hidden flex flex-col hover:scale-[1.01] transition-all">
+                        <div class="absolute top-6 right-6 bg-white/20 backdrop-blur-md text-white px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider"
+                            id="pro-badge">Most Popular</div>
+                        <div class="mb-8 relative z-10">
+                            <h3 class="text-xl font-bold text-white mb-2">PRO 플랜</h3>
+                            <p class="text-slate-400 text-sm">팀 단위 성장이 필요한 딜러용</p>
+                        </div>
+                        <div class="mb-8 relative z-10">
+                            <div class="flex items-baseline gap-2">
+                                <span class="text-4xl font-black text-white" id="pro-price">24.9</span>
+                                <span class="text-xl text-slate-400 font-medium" id="pro-period">만원</span>
+                            </div>
+                            <div class="mt-2 flex items-center gap-2">
+                                <span class="text-sm text-slate-500 line-through" id="pro-original">39.9만원</span>
+                                <span class="text-sm font-bold text-white" id="pro-discount">38% 할인</span>
+                            </div>
+                        </div>
+                        <ul class="space-y-4 mb-10 flex-grow relative z-10">
+                            <li class="flex items-center gap-3 text-slate-300">
+                                <span class="material-symbols-outlined text-slate-300 text-lg">check_circle</span>
+                                <span class="text-sm font-bold">조회수/문의 전환 정밀 전략</span>
+                            </li>
+                            <li class="flex items-center gap-3 text-slate-300">
+                                <span class="material-symbols-outlined text-slate-300 text-lg">check_circle</span>
+                                <span class="text-sm font-medium">휴먼 시뮬레이션 예열 시스템</span>
+                            </li>
+                            <li class="flex items-center gap-3 text-slate-300">
+                                <span class="material-symbols-outlined text-slate-300 text-lg">check_circle</span>
+                                <span class="text-sm font-medium">계정 8개 다계정 운영 지원</span>
+                            </li>
+                        </ul>
+                        <button
+                            class="w-full py-4 bg-white dark:bg-blue-500 text-primary dark:text-white font-black rounded-xl shadow-lg hover:bg-slate-100 dark:hover:bg-blue-600 transition-all relative z-10"
+                            onclick="goToCheckout('PRO')">지금 시작하기</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
 
     <!-- Footer -->
-    <footer class="py-12 px-6 bg-slate-950 border-t border-slate-800 text-center">
-        <p class="text-gray-600 text-sm">© 2026 RicarBot for Car Sales. All rights reserved.</p>
+    <footer class="bg-white dark:bg-background-dark border-t border-slate-200 dark:border-slate-800 py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+                <div class="col-span-1 md:col-span-1">
+                    <div class="flex items-center gap-2 mb-6">
+                        <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-white">
+                            <span class="material-symbols-outlined text-xl">smart_toy</span>
+                        </div>
+                        <span class="text-xl font-bold tracking-tight text-primary dark:text-white">RicarBot</span>
+                    </div>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 max-w-sm mb-6 leading-relaxed">
+                        자동차 딜러들의 성공적인 영업을 위해<br>최첨단 AI 마케팅 솔루션을 제공합니다.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-sm font-bold text-slate-900 dark:text-white mb-6">서비스</h4>
+                    <ul class="space-y-3 text-xs text-slate-600 dark:text-slate-400">
+                        <li><a class="hover:text-primary transition-colors" href="guide.html">기능 소개 가이드</a></li>
+                        <li><a class="hover:text-primary transition-colors" href="reviews.html">성공 사례 및 후기</a></li>
+                        <li><a class="hover:text-primary transition-colors" href="#pricing">요금제</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-sm font-bold text-slate-900 dark:text-white mb-6">고객지원</h4>
+                    <ul class="space-y-3 text-xs text-slate-600 dark:text-slate-400">
+                        <li><a class="hover:text-primary transition-colors" href="guide.html">자주 묻는 질문 FAQ</a></li>
+                        <li><a class="hover:text-primary transition-colors" href="mailto:jhxox666@naver.com">1:1 온라인
+                                문의</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-sm font-bold text-slate-900 dark:text-white mb-6">회사정보</h4>
+                    <p class="text-xs text-slate-600 dark:text-slate-400 leading-5">
+                        상호명: 리카오토플랜 | 대표자: 조홍철<br>
+                        주소: 경기도 부천시 원미구 신흥로 40, 709호<br>
+                        사업자등록번호: 325-60-00844
+                    </p>
+                </div>
+            </div>
+            <div
+                class="pt-8 border-t border-slate-100 dark:border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-[10px] text-slate-400 uppercase tracking-widest">© 2026 Ricar Auto Plan. All rights
+                    reserved.</p>
+                <div class="flex gap-6 text-[11px] text-slate-500 dark:text-slate-400">
+                    <a class="hover:text-slate-900 dark:hover:text-white transition-colors" href="license.html">이용약관</a>
+                    <a class="hover:text-slate-900 dark:hover:text-white transition-colors font-bold"
+                        href="privacy.html">개인정보처리방침</a>
+                </div>
+            </div>
+        </div>
     </footer>
 
-    <!-- Firebase SDK (Compat Version) -->
+    <!-- Scripts (Integrated) -->
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
     <script src="firebase_config.js"></script>
-
     <script>
         let currentBilling = 'single';
         let currentUser = null;
@@ -332,20 +421,14 @@
                 const navAuthSection = document.getElementById('nav-auth-section');
                 if (user) {
                     navAuthSection.innerHTML = `
-                        <div class="flex items-center space-x-4">
-                             <a href="guide.html" class="hidden md:block text-blue-400 hover:text-blue-300 font-bold transition-colors">📖 가이드</a>
-                            <span class="text-gray-300 text-xs truncate max-w-[100px]">${user.email}</span>
-                            <button onclick="auth.signOut().then(()=>location.reload())" class="text-gray-400 hover:text-white text-xs">로그아웃</button>
-                        </div>
+                        <span class="hidden lg:block text-sm font-semibold text-slate-900 dark:text-slate-100 truncate max-w-[150px] mr-2">${user.email}</span>
+                        <button onclick="auth.signOut().then(()=>location.reload())" class="text-sm font-semibold text-slate-500 hover:text-primary dark:text-slate-400 dark:hover:text-white px-3 py-2 transition-all">로그아웃</button>
+                        <button onclick="location.href='license.html'" class="rounded-lg bg-primary px-4 py-2 text-sm font-bold text-white shadow-sm hover:bg-slate-800 transition-all">내 구독</button>
                     `;
                 } else {
                     navAuthSection.innerHTML = `
-                        <a href="guide.html" class="hidden md:block text-blue-400 hover:text-blue-300 font-bold transition-colors">📖 가이드</a>
-                        <a href="login.html" class="text-gray-300 hover:text-blue-400 transition-colors">로그인</a>
-                        <button onclick="location.href='signup.html'"
-                            class="bg-blue-500 hover:bg-blue-600 text-white font-bold px-6 py-2 rounded-lg neon-glow transition-all hover:scale-105">
-                            회원가입
-                        </button>
+                        <button onclick="location.href='login.html'" class="hidden sm:block px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-all">로그인</button>
+                        <button onclick="location.href='checkout.html?plan=PRO'" class="px-5 py-2 text-sm font-bold text-white bg-primary hover:bg-slate-800 rounded-lg shadow-sm transition-all">시작하기</button>
                     `;
                 }
             });
@@ -357,18 +440,37 @@
             const btnSub = document.getElementById('btn-subscription');
             const btnYearly = document.getElementById('btn-yearly');
 
-            [btnSingle, btnSub, btnYearly].forEach(b => {
-                b.className = "px-5 py-2.5 rounded-xl text-sm font-bold transition-all text-gray-400 hover:text-white";
+            [btnSingle, btnSub, btnYearly].forEach(btn => {
+                btn.classList.remove('bg-white', 'bg-primary', 'text-white', 'shadow-md', 'shadow-sm');
+                btn.classList.add('text-slate-600', 'dark:text-slate-400');
             });
 
-            document.getElementById(`btn-${type}`).className = "px-5 py-2.5 rounded-xl text-sm font-bold transition-all bg-blue-500 text-white shadow-lg shadow-blue-500/20";
+            const selected = document.getElementById('btn-' + type);
+            selected.classList.add('bg-primary', 'text-white', 'shadow-md');
+            selected.classList.remove('text-slate-600', 'dark:text-slate-400');
+            if (type === 'single') selected.classList.add('bg-primary');
 
-            if (type === 'single' || type === 'subscription') {
-                document.getElementById('lite-price').textContent = "9.9";
-                document.getElementById('pro-price').textContent = "24.9";
+            // Handle price values & periods
+            const litePrice = document.getElementById('lite-price');
+            const proPrice = document.getElementById('pro-price');
+            const litePeriod = document.getElementById('lite-period');
+            const proPeriod = document.getElementById('pro-period');
+
+            if (type === 'yearly') {
+                litePrice.innerText = '99';
+                proPrice.innerText = '268.8';
+                litePeriod.innerText = '만원 / 년';
+                proPeriod.innerText = '만원 / 년';
+            } else if (type === 'subscription') {
+                litePrice.innerText = '9.9';
+                proPrice.innerText = '24.9';
+                litePeriod.innerText = '만원 / 월';
+                proPeriod.innerText = '만원 / 월';
             } else {
-                document.getElementById('lite-price').textContent = "99";
-                document.getElementById('pro-price').textContent = "268.8";
+                litePrice.innerText = '9.9';
+                proPrice.innerText = '24.9';
+                litePeriod.innerText = '만원 / 건';
+                proPeriod.innerText = '만원 / 건';
             }
         }
 
@@ -386,9 +488,15 @@
             location.href = `checkout.html?plan=${finalPlan}&recurring=${recurringParam}&category=car`;
         }
 
+        // --- Animations ---
         const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
-        });
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     </script>
 </body>

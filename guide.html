@@ -1,1124 +1,253 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" class="h-full bg-slate-50 scroll-smooth">
 
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>사용 가이드 - 리카오토플랜</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap"
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>이용 가이드 - RicarBot</title>
+    <!-- BEGIN: Scripts and Fonts -->
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap"
         rel="stylesheet" />
-    <link href="base.css" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0f1729",
+                        "background-light": "#f8fafc",
+                        "slate": {
+                            50: "#f8fafc",
+                            100: "#f1f5f9",
+                            200: "#e2e8f0",
+                            300: "#cbd5e1",
+                            400: "#94a3b8",
+                            500: "#64748b",
+                            600: "#475569",
+                            700: "#334155",
+                            800: "#1e293b",
+                            900: "#0f172a",
+                        }
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "sans-serif"]
+                    }
+                }
+            }
+        }
+    </script>
     <style>
-        * {
-            font-family: 'Noto Sans KR', sans-serif;
-            word-break: keep-all;
+        body {
+            font-family: 'Inter', sans-serif;
         }
 
-        .guide-card {
-            background: rgba(30, 41, 59, 0.5);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            backdrop-filter: blur(10px);
-        }
-
-        /* Accordion Styles */
         .accordion-content {
             max-height: 0;
             overflow: hidden;
-            transition: max-height 0.3s ease-out, padding 0.3s ease;
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            opacity: 0;
         }
 
         .accordion-content.active {
-            max-height: 4000px;
-            transition: max-height 0.6s ease-in, padding 0.3s ease;
+            max-height: 5000px;
+            opacity: 1;
+            padding-bottom: 2rem;
         }
 
-        .accordion-header svg {
+        .accordion-header .arrow {
             transition: transform 0.3s ease;
         }
 
-        .accordion-header.active svg {
+        .accordion-header.active .arrow {
             transform: rotate(180deg);
-        }
-
-        .kbd {
-            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
-            font-size: 12px;
-            padding: 2px 6px;
-            border: 1px solid rgba(148, 163, 184, 0.35);
-            border-bottom-width: 2px;
-            border-radius: 8px;
-            background: rgba(2, 6, 23, 0.55);
-            color: rgba(226, 232, 240, 0.9);
-        }
-
-        .mono {
-            font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
         }
     </style>
 </head>
 
-<body class="bg-slate-950 text-gray-100 min-h-screen">
-
-    <!-- Header -->
-    <header class="border-b border-slate-800 bg-slate-900/50 backdrop-blur sticky top-0 z-30">
-        <div class="container mx-auto max-w-4xl py-4 px-6 flex justify-between items-center">
-            <div class="flex items-center space-x-2">
-                <div
-                    class="w-8 h-8 bg-gradient-to-br from-green-400 to-cyan-400 rounded flex items-center justify-center">
-                    <span class="text-slate-950 font-black text-sm">AI</span>
+<body class="bg-background-light font-display text-slate-900 pt-16">
+    <!-- Top Navigation Bar -->
+    <header class="sticky top-0 z-50 w-full bg-white/80 backdrop-blur-md border-b border-slate-200">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center gap-8">
+                    <a class="flex items-center gap-2.5" href="index.html">
+                        <div class="bg-primary p-1.5 rounded-lg">
+                            <span class="material-symbols-outlined text-white text-sm">smart_toy</span>
+                        </div>
+                        <span class="text-xl font-bold tracking-tight text-slate-900">RicarBot</span>
+                    </a>
+                    <nav class="hidden md:flex items-center gap-6">
+                        <a class="text-sm font-medium text-slate-600 hover:text-primary transition-colors"
+                            href="index.html">홈</a>
+                        <a class="text-sm font-bold text-primary border-b-2 border-primary pb-0.5"
+                            href="guide.html">가이드</a>
+                        <a class="text-sm font-medium text-slate-600 hover:text-primary transition-colors"
+                            href="reviews.html">이용 후기</a>
+                    </nav>
                 </div>
-                <span class="text-lg font-black">사용 가이드</span>
+                <div class="flex items-center gap-4">
+                    <div class="hidden sm:flex relative">
+                        <span
+                            class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-slate-400 text-xl">search</span>
+                        <input
+                            class="pl-10 pr-4 py-2 bg-slate-100 border-none rounded-lg text-sm focus:ring-2 focus:ring-primary/20 w-64 transition-all"
+                            placeholder="Search guide..." type="text" />
+                    </div>
+                </div>
             </div>
-            <a href="/" class="text-sm text-gray-400 hover:text-white transition-colors">✕ 닫기</a>
         </div>
     </header>
 
-    <main class="container mx-auto max-w-3xl py-12 px-6">
+    <main class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <!-- Hero Section -->
+        <div class="text-center mb-16">
+            <h1 class="text-4xl md:text-5xl font-black text-slate-900 mb-6 tracking-tight">
+                필독 운영 전략 <span class="text-blue-600">&amp;</span> 심화 가이드
+            </h1>
+            <p class="max-w-2xl mx-auto text-slate-500 text-lg font-medium leading-relaxed italic opacity-80">
+                리카봇을 통해 최고의 효율을 뽑아내는 실전 전략만을 담았습니다.
+            </p>
+        </div>
 
-        <!-- Page Title -->
-        <h1 class="text-3xl md:text-4xl font-black mb-4 text-center">
-            <span class="text-green-400">필독</span> 운영 방식 & 입력 예시
-        </h1>
-        <p class="text-center text-sm text-gray-500 mb-10">
-            이 가이드는 “프로그램으로 글을 만든다”가 아니라, <span class="text-gray-200 font-bold">네이버가 좋아하는 운영 패턴</span>에 맞게
-            <span class="text-gray-200 font-bold">프로그램 기능을 어떻게 쓰면 안전/효율이 나오는지</span>만 정리합니다.
-        </p>
-
-        <!-- Guide Category: Quick Start -->
-        <section id="quick-start" class="mb-12">
-            <h2 class="text-2xl font-black mb-8 flex items-center">
-                <span class="bg-green-500 w-2 h-8 mr-3 rounded-full"></span>
-                프로그램 기반 “실전 세팅” (10분 완성)
-            </h2>
-
-            <div class="space-y-4">
-
-                <!-- 0. 핵심 요약 -->
-                <div class="guide-card rounded-2xl overflow-hidden border border-green-400/20 shadow-lg">
-                    <button onclick="toggleAccordion(this)"
-                        class="accordion-header w-full text-left p-6 flex justify-between items-center hover:bg-slate-800/50 transition-colors">
-                        <div class="flex items-center">
-                            <span class="text-2xl mr-3">✅</span>
-                            <div>
-                                <h3 class="font-bold text-lg">0) 한 줄 결론 (이렇게만 운영하면 됨)</h3>
-                                <p class="text-xs text-gray-500">계정 역할 분리 + 글 구조 다양화 + 과한 자동화 티 제거</p>
-                            </div>
+        <!-- Accordions -->
+        <div class="space-y-6">
+            <!-- Conclusion -->
+            <div class="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden">
+                <button onclick="toggleAccordion(this)"
+                    class="accordion-header w-full text-left p-6 md:p-8 flex justify-between items-center hover:bg-slate-50 transition-all group">
+                    <div class="flex items-center gap-4">
+                        <div
+                            class="w-12 h-12 flex items-center justify-center rounded-2xl bg-blue-50 text-blue-600 group-hover:scale-110 transition-transform">
+                            <span class="material-symbols-outlined text-3xl font-bold">verified</span>
                         </div>
-                        <svg class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
-                            </path>
-                        </svg>
-                    </button>
-                    <div class="accordion-content">
-                        <div class="p-6 pt-0 border-t border-slate-800/50 mt-4 pt-6 space-y-4 text-sm text-gray-300">
-                            <div class="bg-slate-900/50 p-4 rounded-xl border border-slate-800">
-                                <p class="text-gray-200 font-bold mb-2">운영 3원칙</p>
-                                <ul class="space-y-2 text-sm text-gray-300">
-                                    <li>• <span class="text-green-400 font-bold">1계정 1역할</span> (브랜드/정보/후기)로 분리</li>
-                                    <li>• <span class="text-green-400 font-bold">같은 주제라도 구조를 바꾸기</span>
-                                        (비교/FAQ/유지비/승계/상황)</li>
-                                    <li>• <span class="text-green-400 font-bold">발행은 “사람 운영처럼”</span> (사전 활동 + 댓글/이웃/수정
-                                        루틴)</li>
-                                </ul>
-                            </div>
-
-                            <div class="grid md:grid-cols-2 gap-4">
-                                <div class="bg-slate-950/50 p-4 rounded-xl border border-slate-800">
-                                    <p class="text-white font-bold mb-2 text-sm">네이버에서 특히 민감한 것</p>
-                                    <ul class="space-y-2 text-xs text-gray-400">
-                                        <li>• 내용/이미지/제목의 반복 패턴</li>
-                                        <li>• 과한 CTA(문의/상담/가격)만 있는 글</li>
-                                        <li>• 발행만 하고 소통이 없는 계정</li>
-                                    </ul>
-                                </div>
-                                <div class="bg-slate-950/50 p-4 rounded-xl border border-slate-800">
-                                    <p class="text-white font-bold mb-2 text-sm">프로그램으로 해결되는 부분</p>
-                                    <ul class="space-y-2 text-xs text-gray-400">
-                                        <li>• 페르소나/톤 분리</li>
-                                        <li>• 글자수/구성 다양화</li>
-                                        <li>• 사전 활동(검색/스크롤)로 자연스러운 세션</li>
-                                        <li>• 이미지 처리(워터마크/유사성 회피)로 중복 리스크 완화</li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <div class="bg-yellow-400/5 border border-yellow-400/20 rounded-xl p-5">
-                                <p class="text-yellow-300 font-bold text-sm mb-2">중요</p>
-                                <p class="text-xs text-gray-400 leading-relaxed">
-                                    프로그램은 “속도”를 올려주지만, <span class="text-gray-200 font-bold">운영 규칙을 잘못 잡으면 속도만큼 리스크도 같이
-                                        올라갑니다.</span>
-                                    그래서 아래처럼 <span class="text-gray-200 font-bold">계정 역할/글 포맷/발행 루틴</span>을 먼저 고정하는 게
-                                    핵심입니다.
-                                </p>
-                            </div>
+                        <div>
+                            <h3 class="font-bold text-xl text-slate-900">0) 한 줄 결론 <span
+                                    class="text-slate-400 font-medium text-sm ml-2">(필수 확인)</span></h3>
+                            <p class="text-sm text-slate-500 mt-1">계정 역할 분리 + 글 구조 다양화 + 과한 자동화 티 제거</p>
                         </div>
                     </div>
-                </div>
-
-                <!-- 1. 계정 역할 설계 -->
-                <div class="guide-card rounded-2xl overflow-hidden border border-cyan-400/20 shadow-lg">
-                    <button onclick="toggleAccordion(this)"
-                        class="accordion-header w-full text-left p-6 flex justify-between items-center hover:bg-slate-800/50 transition-colors">
-                        <div class="flex items-center">
-                            <span class="text-2xl mr-3">🏗️</span>
-                            <div>
-                                <h3 class="font-bold text-lg">1) 계정 역할 3종 세트 (추천 고정 구조)</h3>
-                                <p class="text-xs text-gray-500">역할이 섞이면 “광고 계정 느낌”이 커짐</p>
-                            </div>
-                        </div>
-                        <svg class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
-                            </path>
-                        </svg>
-                    </button>
-
-                    <div class="accordion-content">
-                        <div class="p-6 pt-0 border-t border-slate-800/50 mt-4 pt-6 space-y-5 text-sm text-gray-300">
-                            <div class="bg-slate-900/50 p-4 rounded-xl border border-slate-800">
-                                <p class="text-white font-bold mb-2">A. 역할 정의</p>
-                                <ul class="space-y-2 text-sm">
-                                    <li>• <span class="text-cyan-300 font-bold">메인(브랜드/신뢰)</span>: 회사/프로세스/후기/상담 흐름/공지
-                                    </li>
-                                    <li>• <span class="text-green-300 font-bold">정보형(노출/유입)</span>: 비교/가이드/FAQ/유지비/승계/제도
-                                    </li>
-                                    <li>• <span class="text-purple-300 font-bold">후기형(체류/경험)</span>: “상황” 기반
-                                        사례(가족/출퇴근/사업자/초보)</li>
-                                </ul>
-                            </div>
-
-                            <div class="bg-slate-900/50 p-4 rounded-xl border border-slate-800">
-                                <p class="text-white font-bold mb-2">B. 계정별 금지 룰 (진짜 중요)</p>
-                                <ul class="space-y-2 text-xs text-gray-400">
-                                    <li>• <span class="text-green-300 font-bold">정보형</span>: 가격/상담 CTA 과다 금지 (본문 80%는
-                                        정보)</li>
-                                    <li>• <span class="text-purple-300 font-bold">후기형</span>: “판매글”처럼 보이는 문장 금지 (광고성
-                                        단정/과장 금지)</li>
-                                    <li>• <span class="text-cyan-300 font-bold">메인</span>: 낚시성 제목/과장 금지 (안내/신뢰 위주)</li>
-                                </ul>
-                            </div>
-
-                            <div class="grid md:grid-cols-2 gap-4">
-                                <div class="bg-slate-950/50 p-4 rounded-xl border border-slate-800">
-                                    <p class="text-white font-bold mb-2 text-sm">권장 발행 비율</p>
-                                    <ul class="space-y-2 text-xs text-gray-400">
-                                        <li>• 정보형 60~70%</li>
-                                        <li>• 후기형 20~30%</li>
-                                        <li>• 메인 10%</li>
-                                    </ul>
-                                </div>
-                                <div class="bg-slate-950/50 p-4 rounded-xl border border-slate-800">
-                                    <p class="text-white font-bold mb-2 text-sm">내부 링크 운영</p>
-                                    <ul class="space-y-2 text-xs text-gray-400">
-                                        <li>• 글 끝에 “같이 보면 좋은 글” 2개</li>
-                                        <li>• 시리즈/연재로 묶어서 체류 시간 확보</li>
-                                    </ul>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 2. 프로그램 기능별 “어떻게 쓰면 안전한가” -->
-                <div class="guide-card rounded-2xl overflow-hidden border border-blue-400/20 shadow-lg">
-                    <button onclick="toggleAccordion(this)"
-                        class="accordion-header w-full text-left p-6 flex justify-between items-center hover:bg-slate-800/50 transition-colors">
-                        <div class="flex items-center">
-                            <span class="text-2xl mr-3">🧩</span>
-                            <div>
-                                <h3 class="font-bold text-lg">2) 기능을 “네이버 운영 패턴”에 맞춰 쓰는 법</h3>
-                                <p class="text-xs text-gray-500">기능은 켜는 게 아니라, 역할에 맞게 조합하는 것</p>
-                            </div>
-                        </div>
-                        <svg class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
-                            </path>
-                        </svg>
-                    </button>
-
-                    <div class="accordion-content">
-                        <div class="p-6 pt-0 border-t border-slate-800/50 mt-4 pt-6 space-y-6 text-sm text-gray-300">
-
-                            <div class="bg-slate-900/50 p-4 rounded-xl border border-slate-800">
-                                <p class="text-white font-bold mb-2">A. 페르소나 (가장 큰 중복 방지 장치)</p>
-                                <p class="text-xs text-gray-400 mb-3">
-                                    같은 주제라도 “말투/관점/구성”이 바뀌면 중복 신호가 크게 줄어듭니다.
-                                </p>
-                                <div class="grid md:grid-cols-2 gap-4 text-xs">
-                                    <div class="bg-slate-950/50 p-4 rounded-xl border border-slate-800">
-                                        <p class="text-gray-200 font-bold mb-2">정보형 계정 추천 페르소나</p>
-                                        <ul class="space-y-1 text-gray-400">
-                                            <li>• 비교 분석형</li>
-                                            <li>• 유지비/세무 실무형</li>
-                                            <li>• 초보자 FAQ형</li>
-                                        </ul>
-                                    </div>
-                                    <div class="bg-slate-950/50 p-4 rounded-xl border border-slate-800">
-                                        <p class="text-gray-200 font-bold mb-2">후기형 계정 추천 페르소나</p>
-                                        <ul class="space-y-1 text-gray-400">
-                                            <li>• 가족/육아 상황형</li>
-                                            <li>• 출퇴근 실사용형</li>
-                                            <li>• 1년 타본 후기형(가정 시나리오)</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="bg-slate-900/50 p-4 rounded-xl border border-slate-800">
-                                <p class="text-white font-bold mb-2">B. 글자수 선택 (짧게 여러 개 vs 길게 한 개)</p>
-                                <ul class="space-y-2 text-xs text-gray-400">
-                                    <li>• <span class="text-gray-200 font-bold">800자</span>: “질문 하나”에 답하는 FAQ/요약형 (초반에
-                                        유리)</li>
-                                    <li>• <span class="text-gray-200 font-bold">1500~2000자</span>: 비교/리스트/유지비 (안정적)</li>
-                                    <li>• <span class="text-gray-200 font-bold">2300~2800자+</span>: 시리즈 핵심 글(총정리/완전정리)
-                                        (누적용)</li>
-                                </ul>
-                                <div class="mt-3 bg-blue-400/5 border border-blue-400/20 rounded-xl p-4">
-                                    <p class="text-xs text-gray-400">
-                                        초반(1~4주)은 “긴 글로 한 방”보다 <span class="text-gray-200 font-bold">짧은 글로 주제
-                                            신뢰도</span>를 먼저 쌓고,
-                                        5~8주차에 긴 글을 섞는 게 현실적으로 안정적입니다.
-                                    </p>
-                                </div>
-                            </div>
-
-                            <div class="bg-slate-900/50 p-4 rounded-xl border border-slate-800">
-                                <p class="text-white font-bold mb-2">C. 본문 구성 옵션 (표/FAQ/인용구/하이라이트)</p>
-                                <ul class="space-y-2 text-xs text-gray-400">
-                                    <li>• <span class="text-gray-200 font-bold">FAQ 5~8개</span>: 검색 유입에 특히 강함 (문장 반복 금지,
-                                        질문을 바꿔라)</li>
-                                    <li>• <span class="text-gray-200 font-bold">비교표 1개</span>: 체류시간/저장에 도움</li>
-                                    <li>• <span class="text-gray-200 font-bold">인용구/하이라이트</span>: 스크롤 리듬 만들기 (남발 금지)
-                                    </li>
-                                </ul>
-                            </div>
-
-                            <div class="bg-slate-900/50 p-4 rounded-xl border border-slate-800">
-                                <p class="text-white font-bold mb-2">D. 이미지 처리 (워터마크/유사성 회피) — “중복 리스크 완화”용</p>
-                                <ul class="space-y-2 text-xs text-gray-400">
-                                    <li>• 같은 차량/같은 자료를 여러 계정에서 쓰면 이미지 중복이 가장 먼저 티 납니다.</li>
-                                    <li>• 워터마크/유사성 회피는 “도움”은 되지만, <span class="text-gray-200 font-bold">핵심은 ‘사진 소스 다양화 +
-                                            글 구조 다양화’</span>입니다.</li>
-                                    <li>• 권장: 계정별로 이미지 묶음을 나눠서 사용(세트 A/B/C) + 글마다 1~2장은 직접 캡처/편집 추가</li>
-                                </ul>
-                            </div>
-
-                            <div class="bg-slate-900/50 p-4 rounded-xl border border-slate-800">
-                                <p class="text-white font-bold mb-2">E. 사전 활동(검색/스크롤) + 발행 방식(임시저장/자동발행)</p>
-                                <div class="grid md:grid-cols-2 gap-4 text-xs">
-                                    <div class="bg-slate-950/50 p-4 rounded-xl border border-slate-800">
-                                        <p class="text-gray-200 font-bold mb-2">임시저장 추천 상황</p>
-                                        <ul class="space-y-1 text-gray-400">
-                                            <li>• 초반 2~4주(계정 학습기)</li>
-                                            <li>• 제목/서론만 사람 손으로 한번 더 만지고 싶을 때</li>
-                                            <li>• 광고 느낌을 마지막에 빼고 싶을 때</li>
-                                        </ul>
-                                    </div>
-                                    <div class="bg-slate-950/50 p-4 rounded-xl border border-slate-800">
-                                        <p class="text-gray-200 font-bold mb-2">자동발행 추천 상황</p>
-                                        <ul class="space-y-1 text-gray-400">
-                                            <li>• 운영이 안정된 계정(8주+)</li>
-                                            <li>• 정보형 FAQ/가이드처럼 구조가 검증된 포맷</li>
-                                            <li>• 발행 후 “수정/댓글/이웃” 루틴까지 함께 돌릴 때</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                                <div class="mt-3 bg-slate-950/50 p-4 rounded-xl border border-slate-800">
-                                    <p class="text-xs text-gray-400">
-                                        사전 활동은 “무조건 많이”가 아니라, <span class="text-gray-200 font-bold">매번 패턴이 조금씩
-                                            달라야</span> 의미가 있습니다.
-                                        (검색어/체류시간/스크롤 깊이를 랜덤하게 섞는 느낌)
-                                    </p>
-                                </div>
-                            </div>
-
-                            <div class="bg-slate-900/50 p-4 rounded-xl border border-slate-800">
-                                <p class="text-white font-bold mb-2">F. 로그 뷰어(운영 기록) — “성과 개선”용</p>
-                                <ul class="space-y-2 text-xs text-gray-400">
-                                    <li>• 잘 나온 글은 “제목/서론/키워드/구성”을 템플릿으로 저장</li>
-                                    <li>• 안 나온 글은 “키워드 난이도/서론 후킹/FAQ 질문 품질”부터 수정</li>
-                                    <li>• 조회수만 보지 말고: 유입 키워드, 체류, 이탈, 문의 전환까지 같이 봐야 방향이 잡힙니다</li>
-                                </ul>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 3. 입력 예시 (복붙용) -->
-                <div class="guide-card rounded-2xl overflow-hidden border border-purple-400/20 shadow-lg">
-                    <button onclick="toggleAccordion(this)"
-                        class="accordion-header w-full text-left p-6 flex justify-between items-center hover:bg-slate-800/50 transition-colors">
-                        <div class="flex items-center">
-                            <span class="text-2xl mr-3">📋</span>
-                            <div>
-                                <h3 class="font-bold text-lg">3) 입력 예시 모음 (그대로 복붙해서 시작)</h3>
-                                <p class="text-xs text-gray-500">“키워드만 넣고 돌리면” 중복/광고 느낌이 커짐 → 아래처럼 ‘상황+대상+결론’을 넣어야 함</p>
-                            </div>
-                        </div>
-                        <svg class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
-                            </path>
-                        </svg>
-                    </button>
-
-                    <div class="accordion-content">
-                        <div class="p-6 pt-0 border-t border-slate-800/50 mt-4 pt-6 space-y-6">
-
-                            <!-- 예시 1: 정보형 -->
-                            <div class="bg-slate-900/50 p-5 rounded-2xl border border-slate-800">
-                                <div class="flex items-start justify-between gap-4">
-                                    <div>
-                                        <p class="text-white font-bold mb-1">예시 A) 정보형(노출) — 비교/의사결정</p>
-                                        <p class="text-xs text-gray-500">목표: 유입 키워드 확보 + 체류시간</p>
-                                    </div>
-                                    <span
-                                        class="text-xs px-3 py-1 rounded-full bg-purple-400/10 text-purple-300 border border-purple-400/20">추천</span>
-                                </div>
-
-                                <div class="mt-4 grid md:grid-cols-2 gap-4 text-xs">
-                                    <div class="bg-slate-950/50 p-4 rounded-xl border border-slate-800">
-                                        <p class="text-gray-200 font-bold mb-2">입력(키워드/주제)</p>
-                                        <div class="mono text-gray-300 leading-relaxed">
-                                            • 주제: “장기렌트 vs 할부”<br />
-                                            • 대상: “사회초년생 / 월 예산 60~80”<br />
-                                            • 상황: “첫 차, 보험료 부담, 목돈 없음”<br />
-                                            • 결론: “3가지 기준으로 고르면 끝”
-                                        </div>
-                                    </div>
-                                    <div class="bg-slate-950/50 p-4 rounded-xl border border-slate-800">
-                                        <p class="text-gray-200 font-bold mb-2">설정(기능 조합)</p>
-                                        <div class="mono text-gray-300 leading-relaxed">
-                                            • 페르소나: 비교 분석형<br />
-                                            • 글자수: 1500~2000<br />
-                                            • 구성: 요약3줄 + 비교표1 + FAQ6<br />
-                                            • CTA: 약하게(마지막 2줄만)
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="mt-4 bg-slate-950/40 p-4 rounded-xl border border-slate-800">
-                                    <p class="text-gray-200 font-bold text-xs mb-2">권장 제목 패턴(복붙)</p>
-                                    <p class="mono text-xs text-gray-300 leading-relaxed">
-                                        1) “장기렌트 vs 할부, 사회초년생이면 이 3가지만 보세요”<br />
-                                        2) “월 70 예산이면 할부가 손해인 경우가 생깁니다 (기준 3개)”<br />
-                                        3) “첫 차: ‘보험+세금+유지비’까지 보면 결론이 바뀝니다”
-                                    </p>
-                                </div>
-                            </div>
-
-                            <!-- 예시 2: 후기형 -->
-                            <div class="bg-slate-900/50 p-5 rounded-2xl border border-slate-800">
-                                <div class="flex items-start justify-between gap-4">
-                                    <div>
-                                        <p class="text-white font-bold mb-1">예시 B) 후기형(체류) — 상황 스토리</p>
-                                        <p class="text-xs text-gray-500">목표: “사람 글 느낌” + 공유/저장</p>
-                                    </div>
-                                    <span
-                                        class="text-xs px-3 py-1 rounded-full bg-blue-400/10 text-blue-300 border border-blue-400/20">체류용</span>
-                                </div>
-
-                                <div class="mt-4 grid md:grid-cols-2 gap-4 text-xs">
-                                    <div class="bg-slate-950/50 p-4 rounded-xl border border-slate-800">
-                                        <p class="text-gray-200 font-bold mb-2">입력(상황 중심)</p>
-                                        <div class="mono text-gray-300 leading-relaxed">
-                                            • 차종: “카니발 HEV 9인승”<br />
-                                            • 상황: “아이 둘 + 주말 장거리”<br />
-                                            • 문제: “출고대기/목돈/감가가 고민”<br />
-                                            • 전개: “중고리스 알아보다가 체크포인트 찾음”
-                                        </div>
-                                    </div>
-                                    <div class="bg-slate-950/50 p-4 rounded-xl border border-slate-800">
-                                        <p class="text-gray-200 font-bold mb-2">설정(기능 조합)</p>
-                                        <div class="mono text-gray-300 leading-relaxed">
-                                            • 페르소나: 가족/육아 상황형<br />
-                                            • 글자수: 2300~2800+<br />
-                                            • 구성: 사연 → 체크리스트 → FAQ5<br />
-                                            • CTA: 거의 없음(내부링크 2개)
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="mt-4 bg-slate-950/40 p-4 rounded-xl border border-slate-800">
-                                    <p class="text-gray-200 font-bold text-xs mb-2">본문 체크리스트(복붙)</p>
-                                    <p class="mono text-xs text-gray-300 leading-relaxed">
-                                        • “월납만 보지 말고 총비용(보증금/인수금/보험)을 같이 보기”<br />
-                                        • “만기 선택지(반납/인수/승계) 조건을 계약 전에 고정하기”<br />
-                                        • “차량 상태 고지(사고/교환/정비)를 문서로 남기기”
-                                    </p>
-                                </div>
-                            </div>
-
-                            <!-- 예시 3: 메인(브랜드/신뢰) -->
-                            <div class="bg-slate-900/50 p-5 rounded-2xl border border-slate-800">
-                                <div class="flex items-start justify-between gap-4">
-                                    <div>
-                                        <p class="text-white font-bold mb-1">예시 C) 메인(브랜드/신뢰) — 상담 프로세스 안내</p>
-                                        <p class="text-xs text-gray-500">목표: “문의 전환”이 아니라 “신뢰”를 먼저 확보</p>
-                                    </div>
-                                    <span
-                                        class="text-xs px-3 py-1 rounded-full bg-green-400/10 text-green-300 border border-green-400/20">신뢰</span>
-                                </div>
-
-                                <div class="mt-4 grid md:grid-cols-2 gap-4 text-xs">
-                                    <div class="bg-slate-950/50 p-4 rounded-xl border border-slate-800">
-                                        <p class="text-gray-200 font-bold mb-2">입력(안내 중심)</p>
-                                        <div class="mono text-gray-300 leading-relaxed">
-                                            • 주제: “상담 진행 순서”<br />
-                                            • 핵심: “조건 확인 → 견적 비교 → 심사 → 출고/승계”<br />
-                                            • 톤: “정중/간결/과장 금지”
-                                        </div>
-                                    </div>
-                                    <div class="bg-slate-950/50 p-4 rounded-xl border border-slate-800">
-                                        <p class="text-gray-200 font-bold mb-2">설정(기능 조합)</p>
-                                        <div class="mono text-gray-300 leading-relaxed">
-                                            • 페르소나: 실무 안내형<br />
-                                            • 글자수: 1200~1800<br />
-                                            • 구성: 단계표 + FAQ6<br />
-                                            • CTA: 상담 유도 대신 “준비물/기준” 제공
-                                        </div>
-                                    </div>
-                                </div>
-
-                                <div class="mt-4 bg-slate-950/40 p-4 rounded-xl border border-slate-800">
-                                    <p class="text-gray-200 font-bold text-xs mb-2">FAQ 질문 예시(복붙)</p>
-                                    <p class="mono text-xs text-gray-300 leading-relaxed">
-                                        1) “개인/법인에 따라 필요한 서류가 달라요?”<br />
-                                        2) “보증금이랑 선수금은 뭐가 달라요?”<br />
-                                        3) “심사 통과 후 조건이 바뀌는 경우가 있어요?”<br />
-                                        4) “승계는 언제가 유리해요?”<br />
-                                        5) “보험 연령/범위는 어떻게 잡아요?”<br />
-                                        6) “주행거리 초과 비용은 어떻게 계산해요?”
-                                    </p>
-                                </div>
-                            </div>
-
-                            <!-- 이미지/본문 마커 예시 -->
-                            <div class="bg-slate-900/50 p-5 rounded-2xl border border-slate-800">
-                                <p class="text-white font-bold mb-2">예시 D) 이미지/본문 배치 — “마커 방식” (안정적인 운영용)</p>
-                                <p class="text-xs text-gray-500 mb-3">
-                                    본문에 이미지가 들어갈 위치를 미리 찍어두면, 글 구조가 깔끔해지고 운영이 단단해집니다.
-                                </p>
-                                <div class="bg-slate-950/60 p-4 rounded-xl border border-slate-800">
-                                    <p class="text-xs text-gray-200 font-bold mb-2">본문 예시(복붙)</p>
-                                    <pre class="mono text-xs text-gray-300 whitespace-pre-wrap leading-relaxed">
-[도입] 오늘은 “장기렌트 vs 할부”에서 사람들이 제일 헷갈리는 포인트만 정리합니다.
-[[IMG]]
-[요약 3줄] 결론은 3가지 기준입니다. 보험/세금/만기 선택지.
-[[IMG]]
-[비교표] 월납만 보지 말고 총비용을 같이 봐야 합니다.
-[[IMG]]
-[FAQ] 질문 6개로 마무리합니다.</pre>
-                                </div>
-                                <p class="text-[11px] text-gray-500 mt-3">
-                                    ※ 이미지 파일은 계정/주제별로 “세트(A/B/C)”로 나눠서 돌리면 반복 티가 훨씬 덜 납니다.
-                                </p>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 4. 네이버 운영 루틴 (실행 체크리스트) -->
-                <div class="guide-card rounded-2xl overflow-hidden border border-yellow-400/20 shadow-lg">
-                    <button onclick="toggleAccordion(this)"
-                        class="accordion-header w-full text-left p-6 flex justify-between items-center hover:bg-slate-800/50 transition-colors">
-                        <div class="flex items-center">
-                            <span class="text-2xl mr-3">🔄</span>
-                            <div>
-                                <h3 class="font-bold text-lg">4) 발행 “루틴”이 성과를 만듦 (체크리스트)</h3>
-                                <p class="text-xs text-gray-500">네이버는 글 1개보다 “계정 운영”을 같이 봅니다</p>
-                            </div>
-                        </div>
-                        <svg class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
-                            </path>
-                        </svg>
-                    </button>
-
-                    <div class="accordion-content">
-                        <div class="p-6 pt-0 border-t border-slate-800/50 mt-4 pt-6 space-y-5 text-sm text-gray-300">
-
-                            <div class="grid md:grid-cols-2 gap-4">
-                                <div class="bg-slate-950/50 p-4 rounded-xl border border-slate-800">
-                                    <p class="text-white font-bold mb-2 text-sm">발행 전(5분)</p>
-                                    <ul class="space-y-2 text-xs text-gray-400">
-                                        <li>• 사전 활동: 검색/스크롤 (매번 패턴 다르게)</li>
-                                        <li>• 제목: 연도/상황/대상 최소 1개 포함</li>
-                                        <li>• 이미지: 3~7장(직접 캡처 1장 섞으면 좋음)</li>
-                                    </ul>
-                                </div>
-                                <div class="bg-slate-950/50 p-4 rounded-xl border border-slate-800">
-                                    <p class="text-white font-bold mb-2 text-sm">발행 후(10분)</p>
-                                    <ul class="space-y-2 text-xs text-gray-400">
-                                        <li>• 오탈자 1~2개만 수정 (사람 운영 느낌)</li>
-                                        <li>• 내부 링크 2개 연결</li>
-                                        <li>• 관련 글 1~2개 공감/댓글(과하지 않게)</li>
-                                    </ul>
-                                </div>
-                            </div>
-
-                            <div class="bg-slate-900/50 p-4 rounded-xl border border-slate-800">
-                                <p class="text-white font-bold mb-2">발행량(현실 권장)</p>
-                                <div class="grid md:grid-cols-3 gap-3 text-xs">
-                                    <div class="bg-slate-950/60 p-4 rounded-xl border border-slate-800">
-                                        <p class="text-gray-200 font-bold mb-1">초반 1~2주</p>
-                                        <p class="text-gray-400">주 3~5개 / 계정당 하루 1개 이하</p>
-                                    </div>
-                                    <div class="bg-slate-950/60 p-4 rounded-xl border border-slate-800">
-                                        <p class="text-gray-200 font-bold mb-1">3~8주</p>
-                                        <p class="text-gray-400">주 4~7개 / 글 포맷 3종 이상 섞기</p>
-                                    </div>
-                                    <div class="bg-slate-950/60 p-4 rounded-xl border border-slate-800">
-                                        <p class="text-gray-200 font-bold mb-1">8주 이후</p>
-                                        <p class="text-gray-400">자동발행 비중 확대(단, 운영 루틴 유지)</p>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="bg-red-400/5 border border-red-400/20 rounded-xl p-5">
-                                <p class="text-red-300 font-bold text-sm mb-2">하면 바로 티 나는 패턴(피해야 함)</p>
-                                <ul class="space-y-2 text-xs text-gray-400">
-                                    <li>• 같은 제목 구조를 계정 여러 개에 그대로 반복</li>
-                                    <li>• 본문 첫 문단부터 “문의/상담/가격”만 강조</li>
-                                    <li>• 이미지/표/FAQ가 매번 같은 위치, 같은 문장</li>
-                                </ul>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
-            </div>
-        </section>
-
-        <!-- Guide Category: Operation Strategy (기존 섹션은 유지하되, 프로그램 기준으로 보강) -->
-        <section id="operation-strategy" class="mb-12">
-            <h2 class="text-2xl font-black mb-8 flex items-center">
-                <span class="bg-blue-500 w-2 h-8 mr-3 rounded-full"></span>
-                실전 블로그 운영 가이드 (프로그램 맞춤 보강)
-            </h2>
-
-            <div class="space-y-4">
-
-                <!-- 1. 운영 원칙 5가지 (보강) -->
-                <div class="guide-card rounded-2xl overflow-hidden border border-blue-400/20 shadow-lg">
-                    <button onclick="toggleAccordion(this)"
-                        class="accordion-header w-full text-left p-6 flex justify-between items-center hover:bg-slate-800/50 transition-colors">
-                        <div class="flex items-center">
-                            <span class="text-2xl mr-3">💡</span>
-                            <h3 class="font-bold text-lg">1) 운영 원칙 5가지 (프로그램 쓰는 사람 기준)</h3>
-                        </div>
-                        <svg class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
-                            </path>
-                        </svg>
-                    </button>
-                    <div class="accordion-content">
-                        <div class="p-6 pt-0 border-t border-slate-800/50 mt-4 pt-6">
-                            <ul class="space-y-4 text-sm text-gray-300">
-                                <li class="bg-slate-900/50 p-4 rounded-xl border border-slate-800">
-                                    <strong class="text-white block mb-1">1) 계정마다 목적이 달라야 함</strong>
-                                    같은 소재라도 계정별로 “페르소나/구성/CTA”를 다르게 설정하세요. (프로그램이 제일 잘하는 영역)
-                                </li>
-                                <li class="bg-slate-900/50 p-4 rounded-xl border border-slate-800">
-                                    <strong class="text-white block mb-1">2) 콘텐츠 기준은 ‘사람이 읽을 가치’</strong>
-                                    AI 느낌 제거는 “문장 바꾸기”가 아니라, <span class="text-gray-200 font-bold">체크리스트/표/FAQ</span>처럼
-                                    독자에게 바로 도움이 되는 구조로 해결합니다.
-                                </li>
-                                <li class="bg-slate-900/50 p-4 rounded-xl border border-slate-800">
-                                    <strong class="text-white block mb-1">3) 같은 소재라도 관점을 최소 4개로 분해</strong>
-                                    비교 / 비용 / 상황 / 의사결정 기준으로 쪼개서 “연재”로 묶으면, 누적이 붙습니다.
-                                </li>
-                                <li class="bg-slate-900/50 p-4 rounded-xl border border-slate-800">
-                                    <strong class="text-white block mb-1">4) 정책/리스크는 ‘운영’으로 낮춘다</strong>
-                                    자동발행 비중이 높을수록, 발행 전후 루틴(사전 활동/수정/내부링크/소통)을 같이 돌려야 안전합니다.
-                                </li>
-                                <li class="bg-slate-900/50 p-4 rounded-xl border border-slate-800">
-                                    <strong class="text-white block mb-1">5) 데이터로 결정한다</strong>
-                                    조회수만 보지 말고, “유입 키워드/체류/이탈/문의 전환”을 같이 보고,
-                                    잘 된 글의 포맷을 로그로 남겨 템플릿화하세요.
-                                </li>
+                    <span class="material-symbols-outlined arrow text-slate-400 transition-colors">expand_more</span>
+                </button>
+                <div class="accordion-content px-6 md:px-8">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 pt-4">
+                        <div class="col-span-full bg-primary rounded-2xl p-6 text-white shadow-lg">
+                            <h4 class="font-black text-lg mb-4 flex items-center gap-2"><span
+                                    class="material-symbols-outlined text-blue-400">rule</span>운영 3원칙</h4>
+                            <ul class="space-y-3 text-sm">
+                                <li>• <span class="text-blue-400 font-bold">1계정 1역할</span> (브랜드/정보/후기)로 철저히 분리</li>
+                                <li>• <span class="text-blue-400 font-bold">글 구조 다양화</span> (비교/FAQ/유지비/인증형 등)</li>
+                                <li>• <span class="text-blue-400 font-bold">사람의 패턴</span> (스크롤/소통/이웃) 모방</li>
                             </ul>
                         </div>
                     </div>
                 </div>
-
-                <!-- 2. 다계정 구조 설계 (기존 유지) -->
-                <div class="guide-card rounded-2xl overflow-hidden border border-cyan-400/20 shadow-lg">
-                    <button onclick="toggleAccordion(this)"
-                        class="accordion-header w-full text-left p-6 flex justify-between items-center hover:bg-slate-800/50 transition-colors">
-                        <div class="flex items-center">
-                            <span class="text-2xl mr-3">🏗️</span>
-                            <h3 class="font-bold text-lg">2) 다계정 구조 설계 (추천 템플릿)</h3>
-                        </div>
-                        <svg class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
-                            </path>
-                        </svg>
-                    </button>
-                    <div class="accordion-content">
-                        <div class="p-6 pt-0 border-t border-slate-800/50 mt-4 pt-6 space-y-4 text-sm text-gray-300">
-                            <div class="bg-slate-900/50 p-4 rounded-xl border border-slate-800">
-                                <h4 class="text-white font-bold mb-2">A. 계정 역할 3종 세트</h4>
-                                <ul class="space-y-2">
-                                    <li>• <span class="text-blue-400 font-bold">메인(브랜드/신뢰 계정)</span>: 회사 소개, 상담 프로세스, 후기
-                                        모음</li>
-                                    <li>• <span class="text-green-400 font-bold">정보형(노출 계정)</span>: 비교/가이드/FAQ/트렌드 (유입
-                                        목적)</li>
-                                    <li>• <span class="text-purple-400 font-bold">후기형(경험 계정)</span>: 실제 사용/상황 중심 (체류 목적)
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="bg-slate-900/50 p-4 rounded-xl border border-slate-800">
-                                <h4 class="text-white font-bold mb-2">B. 계정별 ‘콘텐츠 금지’ 규칙</h4>
-                                <ul class="space-y-1">
-                                    <li>• <strong>정보형</strong>: 과한 CTA, 가격 유도 문구 최소화</li>
-                                    <li>• <strong>후기형</strong>: 광고성 문장, 직접 판매 문구 지양</li>
-                                    <li>• <strong>메인</strong>: 낚시성 제목 지양, 안내/신뢰 중심</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 3. 운영 워크플로우 (기존 유지 + 보강 한 줄) -->
-                <div class="guide-card rounded-2xl overflow-hidden border border-green-400/20 shadow-lg">
-                    <button onclick="toggleAccordion(this)"
-                        class="accordion-header w-full text-left p-6 flex justify-between items-center hover:bg-slate-800/50 transition-colors">
-                        <div class="flex items-center">
-                            <span class="text-2xl mr-3">🔄</span>
-                            <h3 class="font-bold text-lg">3) 운영 워크플로우</h3>
-                        </div>
-                        <svg class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
-                            </path>
-                        </svg>
-                    </button>
-                    <div class="accordion-content">
-                        <div class="p-6 pt-0 border-t border-slate-800/50 mt-4 pt-6 space-y-4">
-                            <div class="grid md:grid-cols-2 gap-4">
-                                <div class="bg-slate-950/50 p-4 rounded-xl border border-slate-800">
-                                    <h4 class="text-white font-bold mb-2 text-sm">📅 주간 루틴</h4>
-                                    <ul class="space-y-3 text-xs text-gray-400">
-                                        <li><span class="text-green-400 font-bold">월요일</span>: 키워드 선정</li>
-                                        <li><span class="text-cyan-400 font-bold">화~목</span>: 제작 및 사진 정리</li>
-                                        <li><span class="text-purple-400 font-bold">금요일</span>: 발행 및 성과 분석</li>
-                                    </ul>
-                                </div>
-                                <div class="bg-slate-950/50 p-4 rounded-xl border border-slate-800">
-                                    <h4 class="text-white font-bold mb-2 text-sm">📄 권장 게시글 구성</h4>
-                                    <ul class="space-y-1 text-xs text-gray-400">
-                                        <li>• 도입(문제제기) → 요약(3줄) → 본문(근거/경험) → FAQ → 내부링크</li>
-                                    </ul>
-                                </div>
-                            </div>
-                            <div class="bg-slate-900/50 p-4 rounded-xl border border-slate-800 text-xs text-gray-400">
-                                프로그램을 쓰면 제작은 빨라집니다. 대신 <span class="text-gray-200 font-bold">키워드 난이도 선정 + 연재 구조</span>가
-                                성패를 가릅니다.
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 4. 콘텐츠 품질 관리 (기존 유지) -->
-                <div class="guide-card rounded-2xl overflow-hidden border border-yellow-400/20 shadow-lg">
-                    <button onclick="toggleAccordion(this)"
-                        class="accordion-header w-full text-left p-6 flex justify-between items-center hover:bg-slate-800/50 transition-colors">
-                        <div class="flex items-center">
-                            <span class="text-2xl mr-3">📝</span>
-                            <h3 class="font-bold text-lg">4) 콘텐츠 품질 및 제목 규칙</h3>
-                        </div>
-                        <svg class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
-                            </path>
-                        </svg>
-                    </button>
-                    <div class="accordion-content">
-                        <div class="p-6 pt-0 border-t border-slate-800/50 mt-4 pt-6 space-y-4">
-                            <div class="bg-slate-900/50 p-4 rounded-xl border border-slate-800 text-sm">
-                                <h4 class="text-white font-bold mb-2">중복 회피 "4분해"</h4>
-                                <p class="text-gray-400 text-xs">상황 / 비교 / 비용 / 의사결정 기준으로 쪼개서 발행</p>
-                            </div>
-                            <div class="bg-slate-900/50 p-4 rounded-xl border border-slate-800 text-sm">
-                                <h4 class="text-white font-bold mb-2">클릭을 부르는 제목 규칙</h4>
-                                <ul class="space-y-1 text-gray-400 text-xs font-mono">
-                                    <li>• [차종] + [핵심 키워드] + [상황]</li>
-                                    <li>• [차종] + [비교대상] + [결론]</li>
-                                    <li>• [차종] + [유지비/옵션] + [연도]</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 5, 6. 보안/규정 -->
-                <div class="grid md:grid-cols-2 gap-4">
-                    <div class="guide-card rounded-2xl overflow-hidden border border-red-400/20 shadow-lg">
-                        <button onclick="toggleAccordion(this)"
-                            class="accordion-header w-full text-left p-6 flex justify-between items-center hover:bg-slate-800/50 transition-colors">
-                            <div class="flex items-center">
-                                <span class="text-lg mr-2">⚖️</span>
-                                <h3 class="font-bold text-sm">5) 저작권/표시광고</h3>
-                            </div>
-                            <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M19 9l-7 7-7-7"></path>
-                            </svg>
-                        </button>
-                        <div class="accordion-content">
-                            <div class="p-6 pt-0 border-t border-slate-800/50 mt-2 text-xs text-gray-400 space-y-2">
-                                <p>• 공식 자료 및 본인 촬영 소스 활용</p>
-                                <p>• 대가성 표시 의무 준수</p>
-                                <p>• 과장/기만적 단정 표현 지양</p>
-                                <p>• 개인정보 마스킹 처리 필수</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="guide-card rounded-2xl overflow-hidden border border-purple-400/20 shadow-lg">
-                        <button onclick="toggleAccordion(this)"
-                            class="accordion-header w-full text-left p-6 flex justify-between items-center hover:bg-slate-800/50 transition-colors">
-                            <div class="flex items-center">
-                                <span class="text-lg mr-2">🔒</span>
-                                <h3 class="font-bold text-sm">6) 계정 보안 관리</h3>
-                            </div>
-                            <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M19 9l-7 7-7-7"></path>
-                            </svg>
-                        </button>
-                        <div class="accordion-content">
-                            <div class="p-6 pt-0 border-t border-slate-800/50 mt-2 text-xs text-gray-400 space-y-2">
-                                <p>• 계정별 비밀번호 별도 설정</p>
-                                <p>• 2단계 인증 및 공용 PC 금지</p>
-                                <p>• 작성/검수/발행 권한 분리</p>
-                                <p>• 상세 운영 기록 유지</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 7, 8. 실패패턴/지표 -->
-                <div class="grid md:grid-cols-2 gap-4">
-                    <div class="guide-card rounded-2xl overflow-hidden border border-slate-400/20 shadow-lg">
-                        <button onclick="toggleAccordion(this)"
-                            class="accordion-header w-full text-left p-6 flex justify-between items-center hover:bg-slate-800/50 transition-colors">
-                            <div class="flex items-center">
-                                <span class="text-lg mr-2">❌</span>
-                                <h3 class="font-bold text-sm text-red-300">7) 흔한 실패 패턴</h3>
-                            </div>
-                            <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M19 9l-7 7-7-7"></path>
-                            </svg>
-                        </button>
-                        <div class="accordion-content">
-                            <div class="p-6 pt-0 border-t border-slate-800/50 mt-2 text-xs text-gray-500 space-y-2">
-                                <p>• 단순 문장 치환 반복 발행</p>
-                                <p>• 정보 없이 문의 유도만 반복</p>
-                                <p>• 소통 없는 기계적 포스팅</p>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="guide-card rounded-2xl overflow-hidden border border-cyan-400/20 shadow-lg">
-                        <button onclick="toggleAccordion(this)"
-                            class="accordion-header w-full text-left p-6 flex justify-between items-center hover:bg-slate-800/50 transition-colors">
-                            <div class="flex items-center">
-                                <span class="text-lg mr-2">📈</span>
-                                <h3 class="font-bold text-sm">8) 성과 측정 지표</h3>
-                            </div>
-                            <svg class="w-4 h-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                    d="M19 9l-7 7-7-7"></path>
-                            </svg>
-                        </button>
-                        <div class="accordion-content">
-                            <div
-                                class="p-6 pt-0 border-t border-slate-800/50 mt-2 text-xs text-gray-400 space-y-2 font-mono">
-                                <p>• 유입 키워드 TOP 20</p>
-                                <p>• 체류 및 반송률 분석</p>
-                                <p>• 문의 전환 데이터 분석</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 9. 운영 FAQ -->
-                <div class="guide-card rounded-2xl overflow-hidden border border-slate-700 shadow-lg">
-                    <button onclick="toggleAccordion(this)"
-                        class="accordion-header w-full text-left p-6 flex justify-between items-center hover:bg-slate-800/50 transition-colors">
-                        <div class="flex items-center">
-                            <span class="text-2xl mr-3">❓</span>
-                            <h3 class="font-bold text-lg">9) 운영 FAQ</h3>
-                        </div>
-                        <svg class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
-                            </path>
-                        </svg>
-                    </button>
-                    <div class="accordion-content">
-                        <div class="p-6 pt-0 border-t border-slate-800/50 mt-4 pt-6 space-y-4">
-                            <div class="bg-slate-900/30 p-4 rounded-xl border border-slate-800 text-xs">
-                                <p class="text-white font-bold mb-1">Q. 다계정 운영이 무조건 불리한가요?</p>
-                                <p class="text-gray-400">A. 역할 분리/포맷 분리/이미지 세트 분리만 지키면 가능합니다. “기계적 중복”이 문제입니다.</p>
-                            </div>
-                            <div class="bg-slate-900/30 p-4 rounded-xl border border-slate-800 text-xs">
-                                <p class="text-white font-bold mb-1">Q. 하루 발행량은 얼마가 적당한가요?</p>
-                                <p class="text-gray-400">A. 계정당 하루 1개 이하부터 시작해서, 8주 이후에 늘리는 게 안정적입니다.</p>
-                            </div>
-                            <div class="bg-slate-900/30 p-4 rounded-xl border border-slate-800 text-xs">
-                                <p class="text-white font-bold mb-1">Q. 정보형 글에도 CTA를 넣어야 하나요?</p>
-                                <p class="text-gray-400">A. 넣되 “약하게”. 정보 80% + CTA 20%를 넘기면 광고 느낌이 커집니다.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 10. 안전 수칙 -->
-                <div class="bg-slate-900/80 border border-slate-800 rounded-2xl p-6 text-center">
-                    <h3 class="text-sm font-bold text-gray-400 mb-4 inline-block border-b border-gray-700 pb-1">🛑 10)
-                        이용 안전 수칙 및 면책</h3>
-                    <div class="text-[11px] text-gray-500 space-y-2 leading-relaxed text-center mx-auto max-w-md">
-                        <p>본 가이드는 일반적인 운영 가이드입니다. 타인의 권리 침해 금지 및 관련 법령 준수는 사용자의 의무입니다.</p>
-                        <p>자동화 기능을 사용하더라도, 최종 게시물/이미지/표시광고/저작권 책임은 사용자에게 있습니다.</p>
-                    </div>
-                </div>
-
             </div>
-        </section>
 
-        <!-- Guide Category: Initial Survival (기존 유지) -->
-        <section id="initial-survival" class="mb-12">
-            <h2 class="text-2xl font-black mb-8 flex items-center">
-                <span class="bg-orange-500 w-2 h-8 mr-3 rounded-full"></span>
-                초기 생존 및 성장 가이드 (조회수 정체 해결)
-            </h2>
-
-            <div class="space-y-4">
-
-                <!-- 1. 초반 조회수가 낮은 이유 -->
-                <div class="guide-card rounded-2xl overflow-hidden border border-orange-400/20">
-                    <button onclick="toggleAccordion(this)"
-                        class="accordion-header w-full text-left p-6 flex justify-between items-center hover:bg-slate-800/50 transition-colors">
-                        <div class="flex items-center">
-                            <span class="text-2xl mr-3">📉</span>
-                            <div>
-                                <h3 class="font-bold text-lg">초반 조회수 낮아도 정상인 이유</h3>
-                                <p class="text-xs text-gray-500">네이버 검색 엔진의 학습 및 테스트 단계 이해</p>
-                            </div>
+            <!-- Role Design -->
+            <div class="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden">
+                <button onclick="toggleAccordion(this)"
+                    class="accordion-header w-full text-left p-6 md:p-8 flex justify-between items-center hover:bg-slate-50 transition-all group">
+                    <div class="flex items-center gap-4">
+                        <div
+                            class="w-12 h-12 flex items-center justify-center rounded-2xl bg-cyan-50 text-cyan-600 group-hover:scale-110 transition-transform">
+                            <span class="material-symbols-outlined text-3xl font-bold">architecture</span>
                         </div>
-                        <svg class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
-                            </path>
-                        </svg>
-                    </button>
-                    <div class="accordion-content">
-                        <div class="p-6 pt-0 text-sm text-gray-300 space-y-4 border-t border-slate-800/50 mt-4 pt-6">
-                            <div class="bg-slate-900/50 p-4 rounded-xl">
-                                <p class="mb-4 text-orange-400 font-bold">"처음 시작하면 조회수 10 이하 / 50 이하 찍히는 게 대부분 정상입니다."
-                                </p>
-                                <p class="leading-relaxed">네이버는 새 글을 올렸다고 바로 크게 밀어주지 않고, <strong>“이 글이 쓸만한지”</strong>를
-                                    먼저 테스트합니다.</p>
-                            </div>
-                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 font-mono text-xs">
-                                <div class="p-3 bg-slate-950/50 rounded-lg border border-slate-800">
-                                    <span class="text-white block mb-1">📅 초반 1~2주</span>
-                                    노출 테스트 단계라 “조회수 바닥”이 흔합니다.
-                                </div>
-                                <div class="p-3 bg-slate-950/50 rounded-lg border border-slate-800">
-                                    <span class="text-white block mb-1">📅 2~6주</span>
-                                    유입이 조금씩 생기고, “꼬리 유입”이 시작됩니다.
-                                </div>
-                                <div class="p-3ावरण bg-slate-950/50 rounded-lg border border-slate-800">
-                                    <span class="text-white block mb-1">📅 6~12주</span>
-                                    글이 쌓이면서 꾸준히 들어오는 글이 생깁니다.
-                                </div>
-                                <div class="p-3 bg-slate-950/50 rounded-lg border border-slate-800">
-                                    <span class="text-white block mb-1">📅 3~6개월</span>
-                                    운영 안정화 및 “상시 유입 글(에버그린)” 탄생.
-                                </div>
-                            </div>
-                            <p class="text-xs text-gray-500 italic">※ 최소 8주, 현실적으로는 3개월을 “기반 만드는 기간”으로 잡는 것이 맞습니다.</p>
+                        <div>
+                            <h3 class="font-bold text-xl text-slate-900">1) 계정 역할 3종 세트 <span
+                                    class="text-slate-400 font-medium text-sm ml-2">(추천 구조)</span></h3>
+                            <p class="text-sm text-slate-500 mt-1">역할이 섞이면 광고 계정 느낌이 커집니다</p>
+                        </div>
+                    </div>
+                    <span class="material-symbols-outlined arrow text-slate-400 transition-colors">expand_more</span>
+                </button>
+                <div class="accordion-content px-6 md:px-8">
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4">
+                        <div class="p-4 rounded-xl border border-blue-100 bg-blue-50/50">
+                            <p class="text-xs font-black text-blue-600 uppercase mb-1">Brand</p>
+                            <p class="text-sm font-bold">메인 (신뢰)</p>
+                            <p class="text-xs text-slate-500 mt-2">회사소개, 프로세스, 공식 후기 등</p>
+                        </div>
+                        <div class="p-4 rounded-xl border border-green-100 bg-green-50/50">
+                            <p class="text-xs font-black text-green-600 uppercase mb-1">Inflow</p>
+                            <p class="text-sm font-bold">정보형 (노출)</p>
+                            <p class="text-xs text-slate-500 mt-2">비교 분석, 가이드, FAQ 등</p>
+                        </div>
+                        <div class="p-4 rounded-xl border border-purple-100 bg-purple-50/50">
+                            <p class="text-xs font-black text-purple-600 uppercase mb-1">Retention</p>
+                            <p class="text-sm font-bold">후기형 (체류)</p>
+                            <p class="text-xs text-slate-500 mt-2">상황별 사례, 실사 중심 후기 등</p>
                         </div>
                     </div>
                 </div>
-
-                <!-- 2. 고객 착각 포인트 5개 -->
-                <div class="guide-card rounded-2xl overflow-hidden border border-red-400/20">
-                    <button onclick="toggleAccordion(this)"
-                        class="accordion-header w-full text-left p-6 flex justify-between items-center hover:bg-slate-800/50 transition-colors">
-                        <div class="flex items-center">
-                            <span class="text-2xl mr-3">🚫</span>
-                            <div>
-                                <h3 class="font-bold text-lg text-red-400">초반에 고객이 착각하는 포인트 5개</h3>
-                                <p class="text-xs text-gray-500">실패로 오해하기 쉬운 지표들</p>
-                            </div>
-                        </div>
-                        <svg class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
-                            </path>
-                        </svg>
-                    </button>
-                    <div class="accordion-content">
-                        <div class="p-6 pt-0 text-sm border-t border-slate-800/50 mt-4 pt-6">
-                            <ul class="space-y-3 font-medium">
-                                <li class="flex items-start bg-red-950/10 p-3 rounded-lg border border-red-900/20">
-                                    <span class="text-red-400 mr-2 font-bold">1.</span>
-                                    <div>
-                                        <span class="text-white">“조회수 낮다 = 실패”가 아님</span>
-                                        <p class="text-xs text-gray-500 mt-1">초반은 학습/테스트 단계라 당연히 낮습니다.</p>
-                                    </div>
-                                </li>
-                                <li class="flex items-start bg-red-950/10 p-3 rounded-lg border border-red-900/20">
-                                    <span class="text-red-400 mr-2 font-bold">2.</span>
-                                    <div>
-                                        <span class="text-white">발행 직후 24시간만 보고 판단하면 안 됨</span>
-                                        <p class="text-xs text-gray-500 mt-1">검색 유입은 보통 48~72시간 이후부터 붙습니다.</p>
-                                    </div>
-                                </li>
-                                <li class="flex items-start bg-red-950/10 p-3 rounded-lg border border-red-900/20">
-                                    <span class="text-red-400 mr-2 font-bold">3.</span>
-                                    <div>
-                                        <span class="text-white">“핵심 키워드”만 쓰면 더 안 나올 수 있음</span>
-                                        <p class="text-xs text-gray-500 mt-1">경쟁이 센 핵심 키워드보다 롱테일 키워드가 현실적입니다.</p>
-                                    </div>
-                                </li>
-                                <li class="flex items-start bg-red-950/10 p-3 rounded-lg border border-red-900/20">
-                                    <span class="text-red-400 mr-2 font-bold">4.</span>
-                                    <div>
-                                        <span class="text-white">“연재 구조”가 없으면 성장이 느림</span>
-                                        <p class="text-xs text-gray-500 mt-1">한 편 한 편이 따로 놀면 누적 효과가 약합니다.</p>
-                                    </div>
-                                </li>
-                                <li class="flex items-start bg-red-950/10 p-3 rounded-lg border border-red-900/20">
-                                    <span class="text-red-400 mr-2 font-bold">5.</span>
-                                    <div>
-                                        <span class="text-white">“양”보다 “낄만한 자리”가 중요</span>
-                                        <p class="text-xs text-gray-500 mt-1">초반은 키워드 난이도 선정이 핵심입니다.</p>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 3. 8주 성장 가이드 -->
-                <div class="guide-card rounded-2xl overflow-hidden border border-green-400/20">
-                    <button onclick="toggleAccordion(this)"
-                        class="accordion-header w-full text-left p-6 flex justify-between items-center hover:bg-slate-800/50 transition-colors">
-                        <div class="flex items-center">
-                            <span class="text-2xl mr-3">🚀</span>
-                            <div>
-                                <h3 class="font-bold text-lg text-green-400">초반 성장을 설계하는 “8주 가이드”</h3>
-                                <p class="text-xs text-gray-500">목표: 유입 글 3~5개 확보 및 주제 신뢰도 심기</p>
-                            </div>
-                        </div>
-                        <svg class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
-                            </path>
-                        </svg>
-                    </button>
-                    <div class="accordion-content">
-                        <div class="p-6 pt-0 text-sm border-t border-slate-800/50 mt-4 pt-6 space-y-6">
-                            <div class="relative pl-6 border-l border-green-500/30">
-                                <div class="absolute -left-[5px] top-0 w-[10px] h-[10px] bg-green-500 rounded-full">
-                                </div>
-                                <h4 class="font-bold text-green-400 mb-2">1~2주차: 기반 세팅 (첫 승리 만들기)</h4>
-                                <ul class="text-xs text-gray-400 space-y-1">
-                                    <li>• 주 3~5개 발행 (주제 1~2개 고정)</li>
-                                    <li>• 롱테일 키워드 전략: (~ 리스 장단점, ~ 유지비 등 쉬운 것부터)</li>
-                                    <li>• 체크: 제목에 연도/상황 포함, 본문 FAQ 5개 포함</li>
-                                </ul>
-                            </div>
-                            <div class="relative pl-6 border-l border-blue-500/30">
-                                <div class="absolute -left-[5px] top-0 w-[10px] h-[10px] bg-blue-500 rounded-full">
-                                </div>
-                                <h4 class="font-bold text-blue-400 mb-2">3~4주차: ‘연재 구조’ 구축 (체류 시간 증대)</h4>
-                                <ul class="text-xs text-gray-400 space-y-1">
-                                    <li>• 글을 “시리즈”로 묶기 (총정리 → 보험/유지비 → 비교 → 승계 → 옵션)</li>
-                                    <li>• 체크: 글 끝에 내부 링크 2개, 표/비교 리스트 포함</li>
-                                </ul>
-                            </div>
-                            <div class="relative pl-6 border-l border-yellow-500/30">
-                                <div class="absolute -left-[5px] top-0 w-[10px] h-[10px] bg-yellow-500 rounded-full">
-                                </div>
-                                <h4 class="font-bold text-yellow-500 mb-2">5~6주차: 우회형 상위 키워드 도전</h4>
-                                <ul class="text-xs text-gray-400 space-y-1">
-                                    <li>• 성과 글 업데이트: 도입부 보강, 비교표/FAQ 추가</li>
-                                    <li>• 우회 제목: "~ 가격" 대신 "~ 월 납입금 손해 보는 이유" 등</li>
-                                </ul>
-                            </div>
-                            <div class="relative pl-6 border-l border-purple-500/30">
-                                <div class="absolute -left-[5px] top-0 w-[10px] h-[10px] bg-purple-500 rounded-full">
-                                </div>
-                                <h4 class="font-bold text-purple-400 mb-2">7~8주차: 전환 설계 (문의 유도)</h4>
-                                <ul class="text-xs text-gray-400 space-y-1">
-                                    <li>• 정보성 80 : 문의 20 비중 유지</li>
-                                    <li>• 강요보다 '선택지 제공' (비교 기준 잡아드리기 등)</li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- 4. 고객 안심 멘트 -->
-                <div class="guide-card rounded-2xl overflow-hidden border border-blue-400/20">
-                    <button onclick="toggleAccordion(this)"
-                        class="accordion-header w-full text-left p-6 flex justify-between items-center hover:bg-slate-800/50 transition-colors">
-                        <div class="flex items-center">
-                            <span class="text-2xl mr-3">💬</span>
-                            <div>
-                                <h3 class="font-bold text-lg text-blue-400">고객이 불안해할 때 쓰는 “안심 멘트”</h3>
-                                <p class="text-xs text-gray-500">복사해서 사용 가능한 대응 예시</p>
-                            </div>
-                        </div>
-                        <svg class="w-6 h-6 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7">
-                            </path>
-                        </svg>
-                    </button>
-                    <div class="accordion-content">
-                        <div class="p-6 pt-0 text-sm border-t border-slate-800/50 mt-4 pt-6 space-y-3">
-                            <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl group relative">
-                                <p class="text-gray-300 italic">“초반 2~4주는 원래 조회수가 낮아요. 네이버가 글을 테스트하는 기간이라, 이때는 수치보다 ‘틀을
-                                    제대로 잡는 게’ 더 중요합니다.”</p>
-                            </div>
-                            <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl group relative">
-                                <p class="text-gray-300 italic">“8주만 운영하면 검색 유입 글이 3~5개는 생깁니다. 그때부터는 글이 쌓일수록 누적이 붙어요.”
-                                </p>
-                            </div>
-                            <div class="bg-slate-900 border border-slate-800 p-4 rounded-xl group relative">
-                                <p class="text-gray-300 italic">“지금 조회수 10~50은 실패가 아니라 ‘시작 단계’예요. 이 구간에서 포기하는 사람이 많아서,
-                                    오히려 여기만 버티면 이깁니다.”</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
             </div>
-        </section>
 
-        <!-- More Guides Placeholder -->
-        <section class="text-center py-12 border-t border-slate-800">
-            <p class="text-gray-500 text-sm mb-4 italic">기능 업데이트에 따라 다양한 매뉴얼이 추가될 예정입니다.</p>
-        </section>
+            <!-- Features -->
+            <div class="bg-white rounded-3xl border border-slate-200 shadow-sm overflow-hidden">
+                <button onclick="toggleAccordion(this)"
+                    class="accordion-header w-full text-left p-6 md:p-8 flex justify-between items-center hover:bg-slate-50 transition-all group">
+                    <div class="flex items-center gap-4">
+                        <div
+                            class="w-12 h-12 flex items-center justify-center rounded-2xl bg-indigo-50 text-indigo-600 group-hover:scale-110 transition-transform">
+                            <span class="material-symbols-outlined text-3xl font-bold">extension</span>
+                        </div>
+                        <div>
+                            <h3 class="font-bold text-xl text-slate-900">2) 기능을 실전 운영 패턴에 맞추기</h3>
+                            <p class="text-sm text-slate-500 mt-1">페르소나와 글자수 최적화 전략</p>
+                        </div>
+                    </div>
+                    <span class="material-symbols-outlined arrow text-slate-400 transition-colors">expand_more</span>
+                </button>
+                <div class="accordion-content px-6 md:px-8">
+                    <div class="space-y-6 pt-4">
+                        <div class="p-6 bg-slate-50 rounded-2xl border border-slate-100">
+                            <h4 class="font-bold mb-4 flex items-center gap-2"><span
+                                    class="material-symbols-outlined text-blue-500">face</span>페르소나 설정</h4>
+                            <p class="text-sm text-slate-600 leading-relaxed italic">"직장인 아빠", "세무 전문가", "사회초년생 멘토" 등
+                                명확한 페르소나를 설정하여 계정만의 색깔을 입히세요.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
 
+        <!-- Additional Content or FAQ link -->
+        <div class="mt-20 p-8 bg-slate-900 rounded-3xl text-white text-center">
+            <h4 class="text-xl font-bold mb-4">도움이 더 필요하신가요?</h4>
+            <p class="text-slate-400 mb-6">문제 해결이 어렵다면 고객센터로 언제든 문의주시기 바랍니다.</p>
+            <button onclick="location.href='mailto:jhxox666@naver.com'"
+                class="bg-white text-primary px-8 py-3 rounded-xl font-bold hover:bg-slate-100 transition-colors">
+                1:1 문의하기
+            </button>
+        </div>
     </main>
 
-    <footer class="py-12 border-t border-slate-900 text-center text-xs text-gray-600">
-        <p>© 2026 Ricar Auto Plan. All rights reserved.</p>
+    <footer class="bg-white border-t border-slate-200 py-12 mt-20">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-slate-500 text-sm">
+            <p>© 2026 RicarBot Inc. All rights reserved.</p>
+        </div>
     </footer>
 
     <script>
         function toggleAccordion(header) {
             const content = header.nextElementSibling;
-            header.classList.toggle('active');
-            content.classList.toggle('active');
+            const allHeaders = document.querySelectorAll('.accordion-header');
+            const allContents = document.querySelectorAll('.accordion-content');
+
+            // Toggle current
+            const isActive = content.classList.contains('active');
+
+            allHeaders.forEach(h => h.classList.remove('active'));
+            allContents.forEach(c => c.classList.remove('active'));
+
+            if (!isActive) {
+                header.classList.add('active');
+                content.classList.add('active');
+            }
         }
     </script>
-
 </body>
 
 </html>

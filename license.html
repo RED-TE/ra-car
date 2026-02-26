@@ -2,75 +2,257 @@
 <html lang="ko">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>라이선스 확인 - 리카오토플랜</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="base.css" rel="stylesheet">
-    <script src="common.js"></script>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>리카봇 (RicarBot) - 라이선스 관리</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0f1729",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#14171e",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "Noto Sans KR", "sans-serif"]
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                },
+            },
+        }
+    </script>
+    <style>
+        body {
+            font-family: 'Inter', 'Noto Sans KR', sans-serif;
+        }
+    </style>
 </head>
 
-<body class="flex flex-col min-h-screen bg-slate-950">
-    <div class="flex-grow flex items-center justify-center p-4">
-        <div class="max-w-lg w-full relative">
-            <a href="/" class="absolute top-6 right-6 text-gray-500 hover:text-white">✕</a>
-
-            <div class="text-center mb-10">
-                <h1 class="text-3xl font-black text-white mb-3">내 구독 정보</h1>
-                <p class="text-gray-400">현재 이용 중인 플랜과 계정 상태입니다.</p>
+<body class="bg-background-light dark:bg-background-dark text-slate-900 dark:text-slate-100 font-display">
+    <div class="relative flex min-h-screen flex-col">
+        <!-- Header -->
+        <header class="sticky top-0 z-50 w-full border-b border-slate-200 bg-white/80 backdrop-blur-md">
+            <div class="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6 lg:px-8">
+                <div class="flex items-center gap-8">
+                    <a class="flex items-center gap-2 group cursor-pointer" href="index.html">
+                        <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-white">
+                            <span class="material-symbols-outlined text-xl">smart_toy</span>
+                        </div>
+                        <span class="text-xl font-bold tracking-tight text-primary">리카봇 <span
+                                class="text-slate-500 font-medium">RicarBot</span></span>
+                    </a>
+                    <nav class="hidden md:flex items-center gap-6">
+                        <a class="text-sm font-semibold text-slate-600 hover:text-primary transition-colors"
+                            href="index.html">홈으로</a>
+                        <a class="text-sm font-semibold text-slate-600 hover:text-primary transition-colors"
+                            href="guide.html">사용법</a>
+                        <a class="text-sm font-semibold text-primary border-b-2 border-primary py-5" href="#">구독 관리</a>
+                    </nav>
+                </div>
+                <div class="flex items-center gap-4" id="nav-auth-section">
+                    <div class="flex items-center gap-3 pr-4 border-r border-slate-200">
+                        <div class="hidden lg:block text-right">
+                            <p class="text-xs font-medium text-slate-500">사용자 계정</p>
+                            <p class="text-sm font-semibold text-slate-900" id="user-email-nav">...</p>
+                        </div>
+                        <div
+                            class="h-9 w-9 rounded-full bg-slate-200 flex items-center justify-center overflow-hidden border border-slate-300">
+                            <span class="material-symbols-outlined text-slate-500">person</span>
+                        </div>
+                    </div>
+                    <button onclick="signOutAndRedirect()"
+                        class="flex h-9 items-center justify-center rounded-lg px-4 text-sm font-bold text-slate-600 hover:bg-slate-100 transition-colors">
+                        로그아웃
+                    </button>
+                </div>
             </div>
+        </header>
 
-            <div id="no-license" class="hidden text-center py-10 bg-slate-900/50 rounded-2xl border border-slate-800">
-                <p class="text-gray-400 mb-6 text-lg">이용 중인 유료 플랜이 없습니다.</p>
-                <button onclick="location.href='/checkout'" class="btn-primary px-8 py-3 text-lg">구매하러 가기</button>
-            </div>
+        <main class="flex-1">
+            <div class="mx-auto max-w-4xl px-4 py-12 sm:px-6 lg:px-8">
+                <!-- Page Title -->
+                <div class="mb-10">
+                    <h1 class="text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">구독 및 라이선스</h1>
+                    <p class="mt-3 text-lg text-slate-600">귀하의 리카봇 엔터프라이즈 플랜을 관리하고 사용량을 확인하세요.</p>
+                </div>
 
-            <div id="license-info" class="hidden space-y-6">
-
-                <!-- Plan Status Card -->
-                <div
-                    class="bg-gradient-to-b from-slate-800/80 to-slate-900/80 border border-slate-700 rounded-3xl p-8 text-center relative overflow-hidden shadow-2xl backdrop-blur-sm">
-                    <!-- Top Glow -->
-                    <div class="absolute inset-x-0 top-0 h-1 bg-gradient-to-r from-blue-500 via-green-400 to-blue-500">
+                <!-- No License State -->
+                <div class="hidden rounded-xl border-2 border-dashed border-slate-300 bg-white p-12 text-center shadow-sm"
+                    id="no-license">
+                    <div class="mx-auto flex h-16 w-16 items-center justify-center rounded-full bg-slate-50">
+                        <span class="material-symbols-outlined text-3xl text-slate-400">payments</span>
                     </div>
-                    <div class="absolute inset-x-0 top-0 h-20 bg-green-500/10 blur-xl"></div>
-
-                    <h3 class="text-blue-400 text-xs font-bold tracking-[0.2em] mb-4 uppercase">Current Plan</h3>
-                    <div class="text-4xl font-black text-white mb-3 tracking-tight drop-shadow-lg" id="plan-name">...
-                    </div>
-
-                    <div
-                        class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-bold bg-green-500/10 text-green-400 border border-green-500/20 shadow-[0_0_10px_rgba(74,222,128,0.2)]">
-                        <span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span>
-                        ACTIVE (사용 가능)
-                    </div>
-
-                    <p class="mt-4 text-xs text-gray-400">
-                        이용 만료일: <span id="expiry-display" class="font-bold text-gray-200">로딩 중...</span>
+                    <h2 class="mt-6 text-xl font-bold text-slate-900">활성화된 라이선스가 없습니다</h2>
+                    <p class="mt-2 text-slate-600 max-w-md mx-auto">
+                        현재 구독 중인 플랜이 없습니다. 리카봇의 지능형 AI 마케팅 기능을 시작하려면 적합한 플랜을 선택해 주세요.
                     </p>
+                    <div class="mt-8">
+                        <a class="inline-flex items-center justify-center rounded-lg bg-primary px-6 py-3 text-sm font-bold text-white shadow-sm hover:bg-slate-800 transition-all"
+                            href="index.html#pricing">
+                            플랜 둘러보기
+                        </a>
+                    </div>
+                </div>
 
-                    <div class="mt-8 pt-6 border-t border-white/10">
-                        <p class="text-gray-300 text-sm mb-3 font-bold">💡 이용 방법</p>
-                        <p class="text-sm text-gray-400 leading-relaxed font-light">
-                            프로그램을 실행하신 뒤,<br>
-                            아래 표시된 <strong class="text-white font-medium">계정 이메일로 로그인</strong>하시면 됩니다.
+                <!-- License Info State -->
+                <div class="space-y-6 hidden" id="license-info">
+                    <!-- Main Card -->
+                    <div class="overflow-hidden rounded-xl border border-slate-200 bg-white shadow-sm">
+                        <div
+                            class="border-b border-slate-100 bg-slate-50/50 px-6 py-4 flex items-center justify-between">
+                            <h3 class="text-sm font-bold uppercase tracking-wider text-slate-500">현재 구독 정보</h3>
+                            <span
+                                class="inline-flex items-center rounded-full bg-emerald-100 px-2.5 py-0.5 text-xs font-bold text-emerald-700"
+                                id="status-badge">
+                                <span class="mr-1 h-1.5 w-1.5 rounded-full bg-emerald-500"></span>
+                                활성 (Active)
+                            </span>
+                        </div>
+                        <div class="p-6">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                                <div class="space-y-6">
+                                    <div>
+                                        <label class="text-xs font-semibold text-slate-400 uppercase tracking-wide">구독
+                                            플랜</label>
+                                        <div class="mt-1 flex items-center gap-2">
+                                            <p class="text-2xl font-extrabold text-primary" id="plan-name">...</p>
+                                        </div>
+                                    </div>
+                                    <div>
+                                        <label class="text-xs font-semibold text-slate-400 uppercase tracking-wide">계정
+                                            이메일</label>
+                                        <p class="mt-1 text-base font-medium text-slate-900" id="user-email">...</p>
+                                    </div>
+                                </div>
+                                <div class="space-y-6">
+                                    <div>
+                                        <label class="text-xs font-semibold text-slate-400 uppercase tracking-wide">다음
+                                            결제일 (만료일)</label>
+                                        <div class="mt-1 flex items-center gap-2">
+                                            <span
+                                                class="material-symbols-outlined text-slate-400 text-sm">calendar_today</span>
+                                            <p class="text-base font-medium text-slate-900" id="expiry-display">...</p>
+                                        </div>
+                                    </div>
+                                    <div class="pt-4 border-t border-slate-100 flex gap-3">
+                                        <button onclick="location.href='index.html#pricing'"
+                                            class="flex-1 inline-flex items-center justify-center rounded-lg bg-primary px-4 py-2.5 text-sm font-bold text-white shadow-sm hover:bg-slate-800 transition-all">
+                                            구독 변경
+                                        </button>
+                                        <button onclick="location.href='checkout.html'"
+                                            class="flex-1 inline-flex items-center justify-center rounded-lg border border-slate-200 bg-white px-4 py-2.5 text-sm font-bold text-slate-600 hover:bg-slate-50 transition-all">
+                                            연장 하기
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Usage Stats Section -->
+                    <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+                        <div class="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+                            <p class="text-xs font-semibold text-slate-500">프로그램 실행</p>
+                            <p class="mt-2 text-xl font-bold text-primary">무제한 <span
+                                    class="text-xs font-normal text-slate-400">/ 활성</span></p>
+                            <div class="mt-3 h-1.5 w-full rounded-full bg-slate-100">
+                                <div class="h-1.5 rounded-full bg-primary" style="width: 100%"></div>
+                            </div>
+                        </div>
+                        <div class="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+                            <p class="text-xs font-semibold text-slate-500">계정 연동</p>
+                            <p class="mt-2 text-xl font-bold text-primary">실시간 <span
+                                    class="text-xs font-normal text-slate-400">/ 동기화</span></p>
+                            <div class="mt-3 h-1.5 w-full rounded-full bg-slate-100">
+                                <div class="h-1.5 rounded-full bg-primary" style="width: 100%"></div>
+                            </div>
+                        </div>
+                        <div class="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
+                            <p class="text-xs font-semibold text-slate-500">데이터 보안</p>
+                            <p class="mt-2 text-xl font-bold text-primary">암호화 <span
+                                    class="text-xs font-normal text-slate-400">/ 보호됨</span></p>
+                            <div class="mt-3 h-1.5 w-full rounded-full bg-slate-100">
+                                <div class="h-1.5 rounded-full bg-primary" style="width: 100%"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+        <!-- Footer -->
+        <footer class="border-t border-slate-200 bg-white py-12">
+            <div class="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-12">
+                    <div class="col-span-1 md:col-span-1">
+                        <div class="flex items-center gap-2">
+                            <div class="flex h-6 w-6 items-center justify-center rounded bg-primary text-white">
+                                <span class="material-symbols-outlined text-xs">smart_toy</span>
+                            </div>
+                            <span class="text-lg font-bold tracking-tight text-primary">리카봇</span>
+                        </div>
+                        <p class="mt-4 text-sm text-slate-500 leading-relaxed">
+                            기업을 위한 차세대 AI 마케팅 자동화 솔루션. 데이터 기반의 인사이트로 비즈니스 성장을 가속화합니다.
                         </p>
                     </div>
+                    <div>
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-900">제품</h4>
+                        <ul class="mt-4 space-y-2">
+                            <li><a class="text-sm text-slate-500 hover:text-primary transition-colors"
+                                    href="guide.html">기능 안내</a></li>
+                            <li><a class="text-sm text-slate-500 hover:text-primary transition-colors"
+                                    href="reviews.html">후기</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-900">고객 지원</h4>
+                        <ul class="mt-4 space-y-2">
+                            <li><a class="text-sm text-slate-500 hover:text-primary transition-colors"
+                                    href="guide.html">도움말 센터</a></li>
+                            <li><a class="text-sm text-slate-500 hover:text-primary transition-colors"
+                                    href="mailto:jhxox666@naver.com">1:1 문의</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4 class="text-xs font-bold uppercase tracking-wider text-slate-900">법적 고지</h4>
+                        <ul class="mt-4 space-y-2">
+                            <li><a class="text-sm text-slate-500 hover:text-primary transition-colors"
+                                    href="license_old.html">이용약관</a></li>
+                            <li><a class="text-sm text-slate-500 hover:text-primary transition-colors"
+                                    href="privacy.html">개인정보처리방침</a></li>
+                        </ul>
+                    </div>
                 </div>
-
-                <!-- Account Info -->
                 <div
-                    class="bg-slate-900/80 rounded-2xl p-5 border border-slate-800 flex justify-between items-center shadow-lg">
-                    <span class="text-gray-500 text-sm font-medium">로그인 계정</span>
-                    <span class="text-white font-bold text-base" id="user-email">...</span>
+                    class="mt-12 border-t border-slate-100 pt-8 flex flex-col md:flex-row items-center justify-between gap-4">
+                    <p class="text-xs text-slate-400">© 2026 (주)리카오토플랜. All rights reserved.</p>
+                    <div class="flex items-center gap-6 text-[10px] text-slate-400">
+                        <span>대표번호: 1544-0000</span>
+                        <span>사업자등록번호: 325-60-00844</span>
+                    </div>
                 </div>
-
-                <!-- Actions -->
-                <button onclick="location.href='/'"
-                    class="w-full py-4 rounded-xl bg-slate-800 hover:bg-slate-700 text-gray-300 font-bold transition-all border border-slate-700 hover:border-slate-600 shadow-lg">
-                    메인으로 돌아가기
-                </button>
             </div>
+        </footer>
+    </div>
+    <!-- Background Decoration -->
+    <div class="fixed inset-0 -z-10 pointer-events-none overflow-hidden">
+        <div class="absolute -top-[10%] -left-[10%] h-[40%] w-[40%] rounded-full bg-slate-100 blur-[120px] opacity-50">
+        </div>
+        <div
+            class="absolute -bottom-[10%] -right-[10%] h-[40%] w-[40%] rounded-full bg-slate-50 blur-[120px] opacity-50">
         </div>
     </div>
 
@@ -79,79 +261,88 @@
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
     <script src="firebase_config.js"></script>
-
     <script>
+        function signOutAndRedirect() {
+            auth.signOut().then(() => {
+                window.location.href = 'index.html';
+            });
+        }
+
         if (typeof auth !== 'undefined') {
             auth.onAuthStateChanged((user) => {
+                const noLicense = document.getElementById('no-license');
+                const licenseInfo = document.getElementById('license-info');
+                const userEmailNav = document.getElementById('user-email-nav');
+                const userEmail = document.getElementById('user-email');
+                const planName = document.getElementById('plan-name');
+                const expiryDisplay = document.getElementById('expiry-display');
+                const statusBadge = document.getElementById('status-badge');
+
                 if (!user) {
-                    alert('로그인이 필요한 서비스입니다.');
-                    window.location.href = '/login';
+                    window.location.href = 'login.html';
                     return;
                 }
 
+                userEmailNav.textContent = user.email;
+                userEmail.textContent = user.email;
+
                 // Real-time Plan Listener
                 db.collection("users").doc(user.uid).onSnapshot((userDoc) => {
-                    if (!userDoc.exists) return;
+                    if (!userDoc.exists) {
+                        licenseInfo.classList.add('hidden');
+                        noLicense.classList.remove('hidden');
+                        return;
+                    }
 
                     const userData = userDoc.data();
 
                     // 🛡️ Ban Enforcement
                     if (userData.isBanned) {
                         alert("비정상 접속 정황이 포착되었습니다. 관리자에게 문의하세요.");
-                        auth.signOut().then(() => window.location.href = '/');
+                        auth.signOut().then(() => window.location.href = 'index.html');
                         return;
                     }
 
                     // Check Plan Status
                     if (userData.plan === 'free' || !userData.plan) {
-                        document.getElementById('license-info').classList.add('hidden');
-                        document.getElementById('no-license').classList.remove('hidden');
+                        licenseInfo.classList.add('hidden');
+                        noLicense.classList.remove('hidden');
                         return;
                     }
 
                     // Valid Paid User
-                    document.getElementById('no-license').classList.add('hidden');
-                    document.getElementById('license-info').classList.remove('hidden');
+                    noLicense.classList.add('hidden');
+                    licenseInfo.classList.remove('hidden');
 
                     // Display Plan Info
                     let displayPlan = userData.planName || (userData.plan ? userData.plan.toUpperCase() + ' PLAN' : 'PRO PLAN');
+                    if (userData.plan === 'lite') displayPlan = 'LITE PLAN';
+                    else if (userData.plan === 'pro') displayPlan = 'PRO PLAN';
+                    else if (userData.plan === 'master') displayPlan = 'MASTER PLAN';
 
-                    if (userData.plan === 'lite') {
-                        displayPlan = 'LITE PLAN';
-                    } else if (userData.plan === 'pro') {
-                        displayPlan = 'PRO PLAN';
-                    } else if (userData.plan === 'master') {
-                        displayPlan = 'MASTER PLAN';
-                    }
-
-                    document.getElementById('plan-name').textContent = displayPlan.toUpperCase();
-                    document.getElementById('user-email').textContent = user.email;
+                    planName.textContent = displayPlan.toUpperCase();
 
                     // Display Expiry Date
                     if (userData.expiryDate) {
                         try {
                             const expDate = userData.expiryDate.toDate();
-                            const expStr = expDate.getFullYear() + '.' +
-                                String(expDate.getMonth() + 1).padStart(2, '0') + '.' +
-                                String(expDate.getDate()).padStart(2, '0');
+                            const expStr = expDate.getFullYear() + '년 ' +
+                                (expDate.getMonth() + 1) + '월 ' +
+                                expDate.getDate() + '일';
 
-                            document.getElementById('expiry-display').textContent = expStr + " 까지";
+                            expiryDisplay.textContent = expStr;
 
                             const now = new Date();
                             if (expDate < now) {
-                                document.getElementById('license-info').classList.add('hidden');
-                                document.getElementById('no-license').classList.remove('hidden');
+                                licenseInfo.classList.add('hidden');
+                                noLicense.classList.remove('hidden');
                             } else {
-                                // Reset visual badge
-                                const badge = document.querySelector('#license-info .bg-green-500\\/10, #license-info .bg-red-500\\/10');
-                                if (badge) {
-                                    badge.className = 'inline-flex items-center gap-2 px-4 py-1.5 rounded-full text-sm font-bold bg-green-500/10 text-green-400 border border-green-500/20 shadow-[0_0_10px_rgba(74,222,128,0.2)]';
-                                    badge.innerHTML = '<span class="w-2 h-2 rounded-full bg-green-500 animate-pulse"></span> ACTIVE (사용 가능)';
-                                }
+                                statusBadge.innerHTML = '<span class="mr-1 h-1.5 w-1.5 rounded-full bg-emerald-500"></span> 활성 (Active)';
+                                statusBadge.className = 'inline-flex items-center rounded-full bg-emerald-100 px-2.5 py-0.5 text-xs font-bold text-emerald-700';
                             }
                         } catch (e) { console.error("Date Parse Error", e); }
                     } else {
-                        document.getElementById('expiry-display').textContent = "무제한 / 정보 없음";
+                        expiryDisplay.textContent = "무제한 / 정보 없음";
                     }
                 }, (error) => {
                     console.error("License listener error:", error);
@@ -159,19 +350,6 @@
             });
         }
     </script>
-    </div>
-    </div>
-    <!-- FOOTER -->
-    <footer class="mt-auto border-t border-slate-800 bg-slate-900 py-8 text-center text-xs text-gray-500 w-full"
-        style="position: relative; z-index: 10;">
-        <div class="container-custom space-y-2">
-            <p><span class="font-bold text-gray-400">리카오토플랜</span> | 대표자: 조홍철 | 사업자등록번호: 325-60-00844</p>
-            <p>주소: 경기도 부천시 원미구 신흥로 40, 709호(심곡동, 디오스빌)</p>
-            <p>고객센터: <a href="mailto:jhxox666@naver.com" class="text-blue-400 hover:underline">jhxox666@naver.com</a>
-            </p>
-            <p class="mt-4 copyright">© 2026 Ricar Auto Plan. All rights reserved.</p>
-        </div>
-    </footer>
 </body>
 
 </html>
