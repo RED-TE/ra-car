@@ -157,14 +157,18 @@
                                             <p class="text-base font-medium text-slate-900" id="expiry-display">...</p>
                                         </div>
                                     </div>
-                                    <div class="pt-4 border-t border-slate-100 flex gap-3">
+                                    <div class="pt-4 border-t border-slate-100 flex flex-wrap gap-3">
                                         <button onclick="location.href='index.html#pricing'"
-                                            class="flex-1 inline-flex items-center justify-center rounded-lg bg-primary px-4 py-2.5 text-sm font-bold text-white shadow-sm hover:bg-slate-800 transition-all">
+                                            class="flex-1 min-w-[120px] inline-flex items-center justify-center rounded-lg bg-primary px-4 py-2.5 text-sm font-bold text-white shadow-sm hover:bg-slate-800 transition-all">
                                             구독 변경
                                         </button>
                                         <button onclick="location.href='checkout.html'"
-                                            class="flex-1 inline-flex items-center justify-center rounded-lg border border-slate-200 bg-white px-4 py-2.5 text-sm font-bold text-slate-600 hover:bg-slate-50 transition-all">
+                                            class="flex-1 min-w-[120px] inline-flex items-center justify-center rounded-lg border border-slate-200 bg-white px-4 py-2.5 text-sm font-bold text-slate-600 hover:bg-slate-50 transition-all">
                                             연장 하기
+                                        </button>
+                                        <button id="cancel-sub-btn" onclick="cancelSubscriptionUI()"
+                                            class="hidden w-full sm:w-auto inline-flex items-center justify-center rounded-lg border border-red-200 bg-red-50 px-4 py-2.5 text-sm font-bold text-red-600 hover:bg-red-100 transition-all">
+                                            구독 해지
                                         </button>
                                     </div>
                                 </div>
@@ -268,6 +272,7 @@
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-functions-compat.js"></script>
     <script src="firebase_config.js"></script>
     <script>
         function signOutAndRedirect() {
@@ -332,10 +337,19 @@
 
                     // Display Billing Type
                     const billingTypeDisplay = document.getElementById('billing-type-display');
+                    const cancelBtn = document.getElementById('cancel-sub-btn');
+
                     if (userData.isSubscriptionActive) {
-                        billingTypeDisplay.innerHTML = '<span class="text-indigo-600">정기결제 (구독 중)</span>';
+                        billingTypeDisplay.innerHTML = '<span class="text-indigo-600 font-black">정기결제 (구독 중)</span>';
+                        cancelBtn.classList.remove('hidden');
+                    } else if (userData.subscriptionCanceled) {
+                        billingTypeDisplay.innerHTML = '<span class="text-red-500 font-bold">정기결제 해지됨 (만료 예정)</span>';
+                        cancelBtn.classList.add('hidden');
+                        statusBadge.innerHTML = '<span class="mr-1 h-1.5 w-1.5 rounded-full bg-amber-500"></span> 해지 대기 중';
+                        statusBadge.className = 'inline-flex items-center rounded-full bg-amber-100 px-2.5 py-0.5 text-xs font-bold text-amber-700';
                     } else {
                         billingTypeDisplay.textContent = '1회성 결제';
+                        cancelBtn.classList.add('hidden');
                     }
 
                     // Display Expiry Date
@@ -352,7 +366,7 @@
                             if (expDate < now) {
                                 licenseInfo.classList.add('hidden');
                                 noLicense.classList.remove('hidden');
-                            } else {
+                            } else if (!userData.subscriptionCanceled) {
                                 statusBadge.innerHTML = '<span class="mr-1 h-1.5 w-1.5 rounded-full bg-emerald-500"></span> 활성 (Active)';
                                 statusBadge.className = 'inline-flex items-center rounded-full bg-emerald-100 px-2.5 py-0.5 text-xs font-bold text-emerald-700';
                             }
@@ -364,6 +378,34 @@
                     console.error("License listener error:", error);
                 });
             });
+        }
+
+        async function cancelSubscriptionUI() {
+            if (!confirm("정말 정기구독을 해지하시겠습니까?\n해지 시 다음 결제일부터 자동 결제가 중단되며, 현재 남은 기간 동안은 계속 이용 가능합니다.")) {
+                return;
+            }
+
+            try {
+                const cancelBtn = document.getElementById('cancel-sub-btn');
+                cancelBtn.disabled = true;
+                cancelBtn.textContent = "처리 중...";
+
+                const cancelFn = firebase.functions().httpsCallable('cancelSubscription');
+                const result = await cancelFn();
+
+                if (result.data.success) {
+                    alert(result.data.message);
+                } else {
+                    alert("해지 처리에 실패했습니다: " + result.data.message);
+                }
+            } catch (error) {
+                console.error("Cancellation Error:", error);
+                alert("오류가 발생했습니다: " + error.message);
+            } finally {
+                const cancelBtn = document.getElementById('cancel-sub-btn');
+                cancelBtn.disabled = false;
+                cancelBtn.textContent = "구독 해지";
+            }
         }
     </script>
 </body>

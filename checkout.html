@@ -340,6 +340,21 @@
                                     <span class="text-sm text-slate-800 leading-snug font-medium">(필수) 프로그램 사용으로 인한
                                         <strong>모든 법적 책임은 이용자 본인</strong>에게 있음을 이해했습니다.</span>
                                 </label>
+
+                                <!-- Recurring Consent -->
+                                <label
+                                    class="flex items-start gap-3 cursor-pointer p-4 bg-indigo-50 border border-indigo-100 rounded-xl"
+                                    id="sub-consent-box" style="display: none;">
+                                    <input
+                                        class="consent-check mt-0.5 h-5 w-5 text-indigo-600 border-indigo-300 rounded focus:ring-indigo-600 required-chk"
+                                        id="check-subscription" type="checkbox" />
+                                    <span class="text-sm text-indigo-900 leading-snug font-black">
+                                        (필수) 본 상품은 매월 자동으로 결제되는 <span
+                                            class="underline decoration-indigo-300">정기구독</span> 서비스임에 동의합니다.
+                                        <br /><span class="text-[11px] font-bold text-indigo-500 opacity-80">* 유효기간 만료
+                                            1일 전 자동 결제됩니다.</span>
+                                    </span>
+                                </label>
                             </div>
                         </div>
 
@@ -563,6 +578,14 @@
                 subToggleContainer.style.opacity = "1";
                 subToggleContainer.style.pointerEvents = "auto";
             }
+
+            // Toggle Subscription Consent Box
+            const subConsentBox = document.getElementById('sub-consent-box');
+            if (isRecurring) {
+                subConsentBox.style.display = 'flex';
+            } else {
+                subConsentBox.style.display = 'none';
+            }
         }
 
         const checkAll = document.getElementById('check-all');
@@ -581,6 +604,10 @@
 
                 const required = ['check-terms', 'check-privacy', 'check-refund', 'check-disc-1', 'check-disc-2', 'check-disc-3', 'check-disc-4', 'check-disc-5', 'check-disc-6'];
                 for (const id of required) { if (!document.getElementById(id).checked) return alert('결제 전 필수 면책 사항 및 약관에 모두 동의해 주세요.'); }
+
+                if (isRecurring && !document.getElementById('check-subscription').checked) {
+                    return alert('정기구독 자동 결제에 동의해 주세요.');
+                }
 
                 if (!name) return alert('성함을 입력해주세요.');
                 if (phone.length < 10) return alert('연락처를 정확히 입력해주세요.');
@@ -603,7 +630,11 @@
 
                 PayApp.setDefault('userid', PAYAPP_CONFIG.userid.trim());
                 PayApp.setDefault('shopname', (PAYAPP_CONFIG.shopname || '리카오토플랜').trim());
-                PayApp.setParam('goodname', plan.name);
+
+                let productName = plan.name;
+                if (isRecurring) productName = '[정기구독] ' + productName;
+
+                PayApp.setParam('goodname', productName);
                 PayApp.setParam('price', plan.price.toString());
                 PayApp.setParam('recvphone', phone);
                 PayApp.setParam('memo', name + businessMemo);
@@ -613,6 +644,7 @@
 
                 if (isRecurring) {
                     PayApp.setParam('rebill', 'y');
+                    PayApp.setParam('rebill_y_n', 'y'); // 🚀 보험용 (Lite API 버전에 따라 다름)
                     PayApp.setParam('var2', 'subscription');
                 }
 
