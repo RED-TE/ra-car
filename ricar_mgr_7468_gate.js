@@ -2,8 +2,10 @@
  * Admin Dashboard Logic for Ricar Auto Plan (Obfuscated) - KOREAN VERSION
  */
 
-const ADMIN_EMAIL = "jhxox666@gmail.com"; // 🛡️ 주 관리자 이메일
-let allUsers = [];
+const ADMIN_EMAIL = "jhxox666@gmail.com";
+const TEST_ADMIN_EMAILS = ["jhxox666@test.com", "sungho4768@gmail.com"];
+
+// ... [rest of the variables]
 
 // Firebase 인증 리스너 초기화
 if (typeof auth !== 'undefined') {
@@ -19,8 +21,12 @@ if (typeof auth !== 'undefined') {
         }
 
         // 🛡️ 보안 관리자 권한 확인
-        if (user.email.toLowerCase().trim() !== ADMIN_EMAIL.toLowerCase().trim()) {
-            alert(`접근 권한이 없습니다.\n현재 계정: ${user.email}\n관리자 계정: ${ADMIN_EMAIL}`);
+        const userEmail = user.email.toLowerCase().trim();
+        const isAuthorized = userEmail === ADMIN_EMAIL.toLowerCase().trim() ||
+            TEST_ADMIN_EMAILS.some(e => e.toLowerCase().trim() === userEmail);
+
+        if (!isAuthorized) {
+            alert(`접근 권한이 없습니다.\n현재 계정: ${user.email}\n허용된 관리자 목록을 확인해주세요.`);
             window.location.href = 'index.html';
             return;
         }

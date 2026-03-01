@@ -103,6 +103,13 @@
                         class="form-input w-full px-4 py-3 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:ring-2 focus:ring-primary/20 outline-none transition-all"
                         id="password" placeholder="6자 이상 입력해주세요" type="password" />
                 </div>
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2"
+                        for="passwordConfirm">비밀번호 재확인</label>
+                    <input
+                        class="form-input w-full px-4 py-3 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:ring-2 focus:ring-primary/20 outline-none transition-all"
+                        id="passwordConfirm" placeholder="비밀번호를 한번 더 입력해주세요" type="password" />
+                </div>
 
                 <div class="pt-4 border-t border-slate-100 dark:border-slate-800">
                     <div class="flex items-center mb-4">
@@ -209,6 +216,7 @@
         document.getElementById('emailSignupBtn').addEventListener('click', async () => {
             const email = document.getElementById('email').value.trim();
             const password = document.getElementById('password').value.trim();
+            const passwordConfirm = document.getElementById('passwordConfirm').value.trim();
 
             const requiredChecks = document.querySelectorAll('.required-check');
             let allChecked = true;
@@ -219,16 +227,24 @@
                 return;
             }
 
-            if (!email || !password) {
-                showError('이메일과 비밀번호를 모두 입력해주세요.');
+            if (!email || !password || !passwordConfirm) {
+                showError('모든 필드(이메일, 비밀번호, 비밀번호 재확인)를 입력해주세요.');
                 return;
             }
+
             if (password.length < 6) {
                 showError('비밀번호는 최소 6자리 이상이어야 합니다.');
                 return;
             }
 
+            if (password !== passwordConfirm) {
+                showError('비밀번호가 서로 일치하지 않습니다.');
+                return;
+            }
+
             try {
+                // 이메일 중복 체크는 createUserWithEmailAndPassword가 내부적으로 수행하며
+                // 이미 사용 중인 경우 'auth/email-already-in-use' 에러를 던집니다.
                 const result = await auth.createUserWithEmailAndPassword(email, password);
                 const user = result.user;
                 const marketingConsent = document.getElementById('check-marketing').checked;
@@ -253,6 +269,7 @@
                 let msg = `회원가입 실패: ${error.message}`;
                 if (error.code === 'auth/email-already-in-use') msg = '이미 사용 중인 이메일입니다.';
                 if (error.code === 'auth/invalid-email') msg = '유효하지 않은 이메일 형식입니다.';
+                if (error.code === 'auth/weak-password') msg = '비밀번호가 너무 취약합니다.';
                 showError(msg);
             }
         });

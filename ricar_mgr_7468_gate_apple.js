@@ -4,8 +4,19 @@
  */
 
 const ADMIN_EMAIL = "jhxox666@gmail.com";
+const TEST_ADMIN_EMAILS = ["jhxox666@test.com", "sungho4768@gmail.com"];
+
 let allUsers = [];
 let suspiciousUsers = [];
+let freeUsers = [];
+let stats = {
+    total: 0,
+    active: 0,
+    trial: 0,
+    expiredToday: 0
+};
+
+// ... [rest of the variables if any]
 
 /**
  * 안전한 날짜 변환 헬퍼
@@ -21,6 +32,20 @@ function safeToDate(val) {
     return null;
 }
 
+/**
+ * 날짜 포맷팅 (YYYY.MM.DD)
+ */
+function formatDate(date) {
+    if (!date) return '-';
+    const d = safeToDate(date);
+    if (!d) return '-';
+    return d.toLocaleDateString('ko-KR', {
+        year: 'numeric',
+        month: '2-digit',
+        day: '2-digit'
+    }).replace(/\. /g, '.').replace(/\.$/, '');
+}
+
 // 인증 체크
 if (typeof auth !== 'undefined') {
     auth.onAuthStateChanged(async (user) => {
@@ -33,8 +58,13 @@ if (typeof auth !== 'undefined') {
             return;
         }
 
-        if (user.email.toLowerCase().trim() !== ADMIN_EMAIL.toLowerCase().trim()) {
-            alert(`접근 권한이 없습니다.\n현재: ${user.email}\n관리자: ${ADMIN_EMAIL}`);
+        const userEmail = user.email.toLowerCase().trim();
+        const isAuthorized = userEmail === ADMIN_EMAIL.toLowerCase().trim() ||
+            TEST_ADMIN_EMAILS.some(e => e.toLowerCase().trim() === userEmail);
+
+        if (!isAuthorized) {
+            console.error("❌ 권한 없는 사용자 접근:", userEmail);
+            alert(`접근 권한이 없습니다.\n현재 계정: ${user.email}\n허용된 관리자 목록을 확인해주세요.`);
             window.location.href = 'index.html';
             return;
         }
@@ -44,6 +74,7 @@ if (typeof auth !== 'undefined') {
         await loadAllData();
     });
 }
+
 
 /**
  * 모든 데이터 로드
@@ -162,6 +193,7 @@ function getSuspiciousReason(user) {
  */
 function renderAllUsers() {
     const tbody = document.getElementById('userTableBody');
+    if (!tbody) return;
     tbody.innerHTML = "";
 
     if (allUsers.length === 0) {
@@ -173,7 +205,7 @@ function renderAllUsers() {
 
     allUsers.forEach(user => {
         const tr = document.createElement('tr');
-        tr.className = "hover:bg-white/5 transition-all";
+        tr.className = "hover:bg-white/5 transition-all outline-none border-b border-slate-100 dark:border-white/5";
 
         let statusClass = "badge-free";
         let statusText = "FREE";
@@ -207,19 +239,11 @@ function renderAllUsers() {
 
         // ✅ 안전한 hwid 처리
         const displayHwid = user.hwid && user.hwid.length >= 16
-            ? user.hwid.substring(0, 16)
+            ? user.hwid.substring(0, 16) + "..."
             : (user.hwid || 'HWID없음');
 
         tr.innerHTML = `
             <td class="px-6 py-5">
-                <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-xl bg-primary text-white flex items-center justify-center font-black text-sm shadow-sm">
-                        ${user.email.charAt(0).toUpperCase()}
-                    </div>
-                    <div>
-                        <div class="font-black text-slate-800 dark:text-white leading-tight">${user.email}</div>
-                        <div class="flex items-center gap-2 mt-1">
-                            <span class="text-[10px] font-bold text-slate-400 font-mono tracking-tighter">${displayHwid}</span>
                 <div class="flex items-center gap-4">
                     <div class="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center font-black text-slate-500 text-sm">
                         ${user.email.charAt(0).toUpperCase()}
@@ -254,7 +278,7 @@ function renderAllUsers() {
             </td>
             <td class="px-6 py-5 text-right">
                 <div class="flex items-center justify-end gap-2">
-                    ${user.executionLogs.length > 0 ? `
+                    ${user.executionLogs && user.executionLogs.length > 0 ? `
                         <button onclick="viewLogs('${user.id}')"
                                 class="w-8 h-8 flex items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-400 hover:text-primary transition-all">
                             <span class="material-symbols-outlined text-lg">terminal</span>
@@ -410,16 +434,17 @@ function updateStats() {
     const now = new Date();
 
     const total = allUsers.length;
-    const active = allUsers.filter(u =>
-        u.plan !== 'free' &&
-        u.expiryDate &&
-        u.expiryDate.toDate() > now
-    ).length;
+    const active = allUsers.filter(u => {
+        const exp = safeToDate(u.expiryDate);
+        return u.plan !== 'free' && exp && exp > now;
+    }).length;
     const free = allUsers.filter(u => u.plan === 'free' || !u.plan).length;
     const expiredToday = allUsers.filter(u => {
         const d = safeToDate(u.expiryDate);
         if (!d) return false;
-        return d < now && (now - d) < (24 * 60 * 60 * 1000);
+        const nowTime = now.getTime();
+        const dTime = d.getTime();
+        return dTime < nowTime && (nowTime - dTime) < (24 * 60 * 60 * 1000);
     }).length;
 
     document.getElementById('stat-total').textContent = total;
@@ -614,10 +639,110 @@ function handleFilter() {
         return matchesTerm && matchesPlan;
     });
 
-    const tempAllUsers = allUsers;
-    allUsers = filtered;
-    renderAllUsers();
-    allUsers = tempAllUsers;
+    renderFilteredUsers(filtered);
+}
+
+function renderFilteredUsers(users) {
+    const tbody = document.getElementById('userTableBody');
+    if (!tbody) return;
+    tbody.innerHTML = "";
+
+    if (users.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="6" class="px-6 py-20 text-center text-white/30">조건에 맞는 사용자가 없습니다.</td></tr>`;
+        return;
+    }
+
+    const now = new Date();
+
+    users.forEach(user => {
+        const tr = document.createElement('tr');
+        tr.className = "hover:bg-white/5 transition-all outline-none border-b border-slate-100 dark:border-white/5";
+
+        let statusClass = "badge-free";
+        let statusText = "FREE";
+        let expiryText = "-";
+        let daysLeft = "-";
+
+        if (user.isBanned) {
+            statusClass = "badge-expired";
+            statusText = "차단됨";
+        } else if (user.expiryDate) {
+            const expiry = safeToDate(user.expiryDate);
+            if (expiry) {
+                const diff = Math.ceil((expiry - now) / (1000 * 60 * 60 * 24));
+
+                if (user.plan !== 'free') {
+                    if (diff > 0) {
+                        statusClass = "badge-active";
+                        statusText = user.plan.toUpperCase();
+                        daysLeft = `${diff}일 남음`;
+                    } else {
+                        statusClass = "badge-expired";
+                        statusText = "만료됨";
+                        daysLeft = "만료됨";
+                    }
+                }
+                expiryText = formatDate(expiry);
+            }
+        }
+
+        const isSuspicious = suspiciousUsers.some(s => s.id === user.id);
+
+        const displayHwid = user.hwid && user.hwid.length >= 16
+            ? user.hwid.substring(0, 16) + "..."
+            : (user.hwid || 'HWID없음');
+
+        tr.innerHTML = `
+            <td class="px-6 py-5">
+                <div class="flex items-center gap-4">
+                    <div class="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center font-black text-slate-500 text-sm">
+                        ${user.email.charAt(0).toUpperCase()}
+                    </div>
+                    <div>
+                        <div class="font-black text-slate-800 dark:text-white text-sm">${user.email}</div>
+                        <div class="text-[10px] font-bold text-slate-400 font-mono tracking-tighter mt-1">${displayHwid} • ${user.platform}</div>
+                    </div>
+                </div>
+            </td>
+            <td class="px-6 py-5">
+                <div class="flex items-center gap-2">
+                    <span class="badge ${statusClass} px-3 py-1 text-[10px] uppercase font-black tracking-widest">${statusText}</span>
+                    ${user.isSubscriptionActive ? '<span class="badge badge-recurring px-2 py-1 text-[9px] font-black">정기구독</span>' : '<span class="badge bg-slate-100 text-slate-500 dark:bg-slate-800 dark:text-slate-400 px-2 py-1 text-[9px] font-black">단건결제</span>'}
+                    ${isSuspicious ? '<span class="badge badge-suspicious px-2 py-1 text-[9px] font-black">의심</span>' : ''}
+                </div>
+            </td>
+            <td class="px-6 py-5 text-center">
+                <div class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-slate-50 dark:bg-slate-800/50 text-slate-600 dark:text-slate-300 font-black text-xs border border-slate-100 dark:border-slate-700">
+                    ${user.deviceIds ? user.deviceIds.length : 0}
+                </div>
+            </td>
+            <td class="px-6 py-5">
+                <div class="flex flex-col">
+                    <div class="text-xs font-black text-slate-800 dark:text-white">총 ${user.totalExecutions}회</div>
+                    <div class="text-[10px] font-bold ${user.freeTrialCount >= 2 ? 'text-red-500' : 'text-slate-400'} opacity-80 mt-1 uppercase">무료 ${user.freeTrialCount}회</div>
+                </div>
+            </td>
+            <td class="px-6 py-5">
+                <div class="text-xs font-black text-slate-800 dark:text-white">${expiryText}</div>
+                <div class="text-[10px] font-bold text-slate-400 mt-1 uppercase tracking-tighter">${daysLeft}</div>
+            </td>
+            <td class="px-6 py-5 text-right">
+                <div class="flex items-center justify-end gap-2">
+                    ${user.executionLogs && user.executionLogs.length > 0 ? `
+                        <button onclick="viewLogs('${user.id}')"
+                                class="w-8 h-8 flex items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-400 hover:text-primary transition-all">
+                            <span class="material-symbols-outlined text-lg">terminal</span>
+                        </button>
+                    ` : ''}
+                    <button onclick="openEditModal('${user.id}', '${user.email}')"
+                            class="px-4 py-2 rounded-xl bg-slate-900 text-white dark:bg-white dark:text-slate-900 font-black text-[11px] hover:opacity-90 transition-all shadow-sm">
+                        관리
+                    </button>
+                </div>
+            </td>
+        `;
+        tbody.appendChild(tr);
+    });
 }
 
 document.getElementById('searchInput').addEventListener('input', handleFilter);
@@ -644,7 +769,6 @@ window.openEditModal = function (id, email) {
         subStatus.classList.remove('hidden');
     } else if (user.plan !== 'free') {
         subStatus.innerHTML = `<span class="badge bg-slate-100 text-slate-500 dark:bg-slate-800 dark:text-slate-400 px-3 py-1 text-xs">단건결제 (${user.planName})</span>`;
-        subStatus.classList.remove('hidden');
     } else {
         subStatus.innerHTML = `<span class="badge badge-free px-3 py-1 text-xs">무료 이용</span>`;
     }
