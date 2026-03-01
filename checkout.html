@@ -62,7 +62,7 @@
         input:focus,
         select:focus {
             border-color: #0f1729 !important;
-            ring-color: #0f1729 !important;
+            box-shadow: 0 0 0 2px rgba(15, 23, 41, 0.1) !important;
             outline: none;
         }
 
@@ -84,9 +84,9 @@
     <header class="bg-white border-b border-slate-200 py-4" data-purpose="global-header">
         <div class="max-w-6xl mx-auto px-4 flex justify-between items-center">
             <div class="flex items-center gap-2 cursor-pointer" onclick="location.href='index.html'">
-                <!-- Logo Placeholder -->
+                <!-- Logo Fixed -->
                 <div class="w-8 h-8 bg-navy-900 rounded flex items-center justify-center">
-                    <span class="material-symbols-outlined text-white text-sm">smart_toy</span>
+                    <span class="material-symbols-outlined text-white text-xl leading-none">smart_toy</span>
                 </div>
                 <span class="text-xl font-bold text-navy-900 tracking-tight">BloBot</span>
             </div>
@@ -150,6 +150,65 @@
                     </div>
                 </section>
                 <!-- END: Purchaser Info Section -->
+
+                <!-- BEGIN: Business Info Section -->
+                <section class="bg-white p-6 md:p-8 rounded-custom border border-slate-200 card-shadow"
+                    id="business-info">
+                    <h2 class="text-xl font-bold text-navy-900 mb-6 flex items-center gap-2">
+                        <span class="material-symbols-outlined text-blue-600">receipt_long</span>
+                        증빙 서류 발급 안내
+                    </h2>
+
+                    <div class="space-y-6">
+                        <div class="flex flex-wrap gap-6">
+                            <label class="flex items-center gap-2.5 cursor-pointer group">
+                                <input type="radio" name="evidence-type" value="personal" checked
+                                    onclick="toggleBusinessFields(false)"
+                                    class="h-5 w-5 text-navy-900 border-slate-300 focus:ring-navy-900">
+                                <span
+                                    class="text-sm font-bold text-slate-700 group-hover:text-navy-900 transition-colors">개인
+                                    (지출증빙 미필요)</span>
+                            </label>
+                            <label class="flex items-center gap-2.5 cursor-pointer group">
+                                <input type="radio" name="evidence-type" value="business"
+                                    onclick="toggleBusinessFields(true)"
+                                    class="h-5 w-5 text-navy-900 border-slate-300 focus:ring-navy-900">
+                                <span
+                                    class="text-sm font-bold text-slate-700 group-hover:text-navy-900 transition-colors">사업자
+                                    (세금계산서/현금영수증)</span>
+                            </label>
+                        </div>
+
+                        <div id="business-fields"
+                            class="hidden grid grid-cols-1 md:grid-cols-2 gap-5 p-6 bg-slate-50 rounded-2xl border border-slate-100 ring-1 ring-slate-200/50">
+                            <div class="space-y-2">
+                                <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider ml-1">사업자
+                                    등록 번호</label>
+                                <input type="text" id="biz-number" placeholder="000-00-00000"
+                                    class="w-full border-slate-200 rounded-custom py-3 text-sm focus:ring-2 focus:ring-navy-900/10 transition-all">
+                            </div>
+                            <div class="space-y-2">
+                                <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider ml-1">상호명
+                                    (법인명)</label>
+                                <input type="text" id="biz-name" placeholder="주식회사 OOO"
+                                    class="w-full border-slate-200 rounded-custom py-3 text-sm focus:ring-2 focus:ring-navy-900/10 transition-all">
+                            </div>
+                            <div class="space-y-2 md:col-span-2">
+                                <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider ml-1">대표자
+                                    성함</label>
+                                <input type="text" id="biz-ceo" placeholder="대표자명을 입력해주세요"
+                                    class="w-full border-slate-200 rounded-custom py-3 text-sm focus:ring-2 focus:ring-navy-900/10 transition-all">
+                            </div>
+                            <div class="md:col-span-2 flex items-start gap-2 pt-1">
+                                <span class="material-symbols-outlined text-slate-400 text-sm">info</span>
+                                <p class="text-[11px] text-slate-500 leading-relaxed font-medium">
+                                    입력하신 정보는 결제 완료 후 세금계산서 또는 현금영수증 발행을 위한 증빙 자료로만 사용됩니다.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- END: Business Info Section -->
                 <!-- BEGIN: Legal Consent Section -->
                 <section class="bg-white p-6 md:p-8 rounded-custom border border-slate-200 card-shadow"
                     id="legal-consent">
@@ -419,6 +478,17 @@
             });
         }
 
+        window.toggleBusinessFields = function (show) {
+            const fields = document.getElementById('business-fields');
+            if (show) {
+                fields.classList.remove('hidden');
+                fields.classList.add('grid');
+            } else {
+                fields.classList.remove('grid');
+                fields.classList.add('hidden');
+            }
+        };
+
         const planContainer = document.getElementById('plan-container');
 
         function renderPlans() {
@@ -513,12 +583,26 @@
 
                 if (typeof PayApp === 'undefined') throw new Error('결제 모듈 로딩 실패');
 
+                // Business Info Collection
+                const evidenceType = document.querySelector('input[name="evidence-type"]:checked').value;
+                let businessMemo = "";
+                if (evidenceType === 'business') {
+                    const bizNum = document.getElementById('biz-number').value.trim();
+                    const bizName = document.getElementById('biz-name').value.trim();
+                    const bizCeo = document.getElementById('biz-ceo').value.trim();
+
+                    if (!bizNum || !bizName || !bizCeo) {
+                        return alert('사업자 증빙을 위해 모든 사업자 정보(번호, 상호, 대표자)를 입력해주세요.');
+                    }
+                    businessMemo = ` [사업자:${bizName}/${bizNum}/${bizCeo}]`;
+                }
+
                 PayApp.setDefault('userid', PAYAPP_CONFIG.userid.trim());
                 PayApp.setDefault('shopname', (PAYAPP_CONFIG.shopname || '리카오토플랜').trim());
                 PayApp.setParam('goodname', plan.name);
                 PayApp.setParam('price', plan.price.toString());
                 PayApp.setParam('recvphone', phone);
-                PayApp.setParam('memo', name);
+                PayApp.setParam('memo', name + businessMemo);
                 PayApp.setParam('smsuse', 'n');
                 PayApp.setParam('var1', currentUser.uid);
                 PayApp.setParam('var_email', currentUser.email);

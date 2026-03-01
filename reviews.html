@@ -735,12 +735,12 @@
                     </div>
                 </div>
 
-                <!-- Email -->
-                <div>
-                    <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">이메일 주소</label>
-                    <input type="email" required id="reviewer-email" placeholder="example@gmail.com"
-                        class="w-full px-4 py-3 rounded-xl border-slate-200 dark:border-slate-700 dark:bg-slate-900/50 focus:ring-blue-500 focus:border-blue-500 text-sm transition-all">
-                    <p class="text-[10px] text-slate-400 mt-1.5 ml-1">이메일은 마스킹 처리되어 안전하게 표시됩니다. (예: g***9@gmail.com)</p>
+                <!-- Email (Auto-populated, Hidden Input) -->
+                <div id="reviewer-info-display"
+                    class="hidden text-sm font-medium text-slate-500 bg-slate-50 dark:bg-slate-900/30 p-3 rounded-xl border border-slate-100 dark:border-slate-800">
+                    작성자: <span id="display-email" class="text-slate-900 dark:text-white"></span>
+                    <span id="display-plan"
+                        class="ml-2 px-2 py-0.5 text-[10px] font-semibold rounded-full bg-blue-100 text-blue-600"></span>
                 </div>
 
                 <!-- Review Content -->
@@ -759,6 +759,12 @@
             </form>
         </div>
     </div>
+
+    <!-- Firebase SDK (Compat Version) -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+    <script src="firebase_config.js"></script>
 
     <script>
         const REVIEWS_PER_PAGE = 9;
@@ -844,7 +850,54 @@
             pagination.innerHTML = html;
         }
 
-        function openReviewModal() {
+        let currentUserData = null;
+
+        if (typeof auth !== 'undefined') {
+            auth.onAuthStateChanged(async (user) => {
+                if (user && typeof db !== 'undefined') {
+                    try {
+                        const userDoc = await db.collection('users').doc(user.uid).get();
+                        if (userDoc.exists) {
+                            currentUserData = userDoc.data();
+                        }
+                    } catch (e) {
+                        console.error("Error fetching user data:", e);
+                    }
+                }
+            });
+        }
+
+        async function openReviewModal() {
+            if (!auth || !auth.currentUser) {
+                if (confirm('후기 작성을 위해 로그인이 필요합니다. 로그인 페이지로 이동하시겠습니까?')) {
+                    window.location.href = 'login.html?redirect=reviews.html';
+                }
+                return;
+            }
+
+            if (!currentUserData) {
+                // Try fetching one more time if not loaded
+                try {
+                    const userDoc = await db.collection('users').doc(auth.currentUser.uid).get();
+                    if (userDoc.exists) currentUserData = userDoc.data();
+                } catch (e) { }
+            }
+
+            const plan = currentUserData?.plan || 'free';
+            const expiry = currentUserData?.expiryDate ? new Date(currentUserData.expiryDate) : new Date(0);
+            const isExpired = expiry < new Date();
+
+            if (plan === 'free' || isExpired) {
+                alert('후기 작성 이벤트는 유료 플랜(PRO/LITE) 이용 고객님만 참여 가능합니다.\n플랜 구독 후 다시 시도해주세요!');
+                return;
+            }
+
+            // Pre-fill info
+            document.getElementById('display-email').textContent = auth.currentUser.email;
+            const planBadge = document.getElementById('display-plan');
+            planBadge.textContent = plan.toUpperCase() + " 플랜";
+            document.getElementById('reviewer-info-display').classList.remove('hidden');
+
             document.getElementById('review-modal').classList.add('active');
             document.body.style.overflow = 'hidden';
         }
@@ -870,7 +923,10 @@
         function submitReview(e) {
             e.preventDefault();
 
-            const email = document.getElementById('reviewer-email').value;
+            if (!auth.currentUser || !currentUserData) return;
+
+            const email = auth.currentUser.email;
+            const plan = currentUserData.plan || 'PRO';
             const content = document.getElementById('review-content').value;
             const rating = parseInt(document.getElementById('rating-value').value);
 
@@ -905,7 +961,7 @@
                 <p class="text-slate-700 dark:text-slate-300 text-sm leading-relaxed mb-4">${content}</p>
                 <div>
                     <p class="text-xs font-bold text-slate-900 dark:text-white">${maskedEmail}</p>
-                    <span class="inline-block mt-1 px-2 py-0.5 text-[10px] font-semibold rounded-full badge-pro">PRO 플랜</span>
+                    <span class="inline-block mt-1 px-2 py-0.5 text-[10px] font-semibold rounded-full ${plan.toLowerCase() === 'lite' ? 'badge-lite' : 'badge-pro'}">${plan.toUpperCase()} 플랜</span>
                 </div>
             `;
 
