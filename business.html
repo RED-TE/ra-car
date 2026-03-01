@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>RicarBot SME - 자영업 사장님을 위한 AI 블로그 마케팅</title>
+    <title>BloBot SME - 자영업 사장님을 위한 AI 블로그 마케팅</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap"
         rel="stylesheet" />
@@ -91,7 +91,7 @@
                     <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-white">
                         <span class="material-symbols-outlined text-xl">smart_toy</span>
                     </div>
-                    <span class="text-xl font-bold tracking-tight text-primary dark:text-white">RicarBot <span
+                    <span class="text-xl font-bold tracking-tight text-primary dark:text-white">BloBot <span
                             class="text-slate-400 font-medium">SME</span></span>
                 </div>
 
@@ -118,8 +118,9 @@
                 <div class="flex items-center gap-3" id="nav-auth-section">
                     <button onclick="location.href='login.html'"
                         class="hidden sm:block px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-all">로그인</button>
-                    <button onclick="location.href='checkout.html?plan=PRO'"
-                        class="px-5 py-2 text-sm font-bold text-white bg-primary hover:bg-slate-800 rounded-lg shadow-sm transition-all">시작하기</button>
+                    <button onclick="location.href='download.html'"
+                        class="px-5 py-2 text-sm font-bold text-white bg-primary hover:bg-slate-800 rounded-lg shadow-sm transition-all">1회
+                        무료 체험</button>
                 </div>
             </div>
         </div>
@@ -178,9 +179,9 @@
                 </div>
 
                 <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <button onclick="location.href='checkout.html?plan=PRO'"
+                    <button onclick="location.href='download.html'"
                         class="px-10 py-5 bg-primary text-white font-black rounded-2xl text-xl shadow-xl shadow-primary/20 hover:scale-[1.02] transition-transform">지금
-                        무료로 시작하기</button>
+                        바로 1회 무료 체험 해보기</button>
                     <button onclick="location.href='#download'"
                         class="px-10 py-5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 font-black rounded-2xl text-xl hover:bg-slate-50 transition-colors">프로그램
                         다운로드</button>
@@ -318,7 +319,7 @@
                         </ul>
                         <button
                             class="w-full py-4 bg-white text-primary font-black rounded-xl shadow-lg hover:bg-slate-100 transition-all relative z-10"
-                            onclick="goToCheckout('PRO')">지금 시작하기</button>
+                            onclick="location.href='download.html'">지금 바로 체험하기</button>
                     </div>
                 </div>
             </div>
@@ -335,7 +336,7 @@
                     </div>
                     <h2 class="text-3xl font-black mb-4 text-slate-900 dark:text-white">프로그램 다운로드</h2>
                     <p class="text-slate-600 dark:text-slate-400 mb-10 max-w-lg mx-auto">
-                        사장님의 블로그 마케팅을 책임질 리카봇 SME 에디션.<br>지금 바로 다운로드하여 자동화의 위력을 경험하세요.
+                        사장님의 블로그 마케팅을 책임질 블봇 SME 에디션.<br>지금 바로 다운로드하여 자동화의 위력을 경험하세요.
                     </p>
                     <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
                         <button
@@ -361,7 +362,7 @@
                         <div
                             class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-white text-xs font-bold">
                             AI</div>
-                        <span class="text-xl font-bold tracking-tight text-primary dark:text-white">RicarBot</span>
+                        <span class="text-xl font-bold tracking-tight text-primary dark:text-white">BloBot</span>
                     </div>
                     <p class="text-[11px] text-slate-500 dark:text-slate-400 max-w-sm mb-6 leading-relaxed">
                         자영업 사장님들의 마케팅 부담을 덜어드리는<br>최첨단 AI 블로그 마케팅 솔루션입니다.
@@ -434,7 +435,7 @@
                 } else {
                     navAuthSection.innerHTML = `
                         <button onclick="location.href='login.html'" class="text-xs font-bold text-slate-700 dark:text-slate-200 px-4 py-2 rounded-lg hover:bg-slate-100 transition-all">로그인</button>
-                        <button onclick="location.href='signup.html'" class="rounded-lg bg-primary px-5 py-2.5 text-xs font-bold text-white shadow-sm hover:bg-slate-800">시작하기</button>
+                        <button onclick="location.href='download.html'" class="rounded-lg bg-primary px-5 py-2.5 text-xs font-bold text-white shadow-sm hover:bg-slate-800">1회 무료 체험</button>
                     `;
                 }
             });

@@ -52,10 +52,6 @@ async function loadAllData() {
     console.log("📊 모든 사용자 데이터 로드 시작");
     try {
         const snapshot = await db.collection("users").get();
-        console.log(`📡 Firestore에서 ${snapshot.size}개의 문서를 찾았습니다.`);
-        console.log("🆔 모든 문서 ID 목록:", snapshot.docs.map(doc => doc.id));
-        console.log("📧 모든 문서 이메일 목록:", snapshot.docs.map(doc => doc.data().email || 'No Email'));
-
         if (snapshot.empty) {
             console.warn("⚠️ 'users' 컬렉션이 비어있습니다.");
         }
@@ -65,25 +61,22 @@ async function loadAllData() {
             return {
                 id: doc.id,
                 email: data.email || '알 수 없음',
-                hwid: data.hwid || data.id || `UNKNOWN_${doc.id.substring(0, 8)}`, // ✅ 안전한 기본값
+                hwid: data.hwid || data.id || `UNKNOWN_${doc.id.substring(0, 8)}`,
                 plan: data.plan || 'free',
                 planName: data.planName || 'FREE',
                 expiryDate: data.expiryDate,
                 isBanned: data.isBanned || false,
-
                 totalExecutions: data.totalExecutions || 0,
                 freeTrialCount: data.freeTrialCount || 0,
-
                 deviceIds: data.deviceIds || [],
                 platform: data.platform || '-',
                 language: data.language || '-',
-
                 executionLogs: data.executionLogs || [],
                 lastExecutionLog: data.lastExecutionLog || null,
-
                 createdAt: data.createdAt,
                 updatedAt: data.updatedAt,
-                lastOrderId: data.lastOrderId || ''
+                lastOrderId: data.lastOrderId || '',
+                isSubscriptionActive: data.isSubscriptionActive || false
             };
         });
 
@@ -93,12 +86,12 @@ async function loadAllData() {
             return dateB - dateA;
         });
 
-        try { analyzeSuspiciousActivity(); } catch (e) { console.error("Suspicious Activity Error:", e); }
+        try { analyzeSuspiciousActivity(); } catch (e) { console.error(e); }
         renderAllUsers();
-        try { renderSuspiciousUsers(); } catch (e) { console.error("Render Suspicious Error:", e); }
-        try { renderFreeUsers(); } catch (e) { console.error("Render Free Error:", e); }
-        try { updateStats(); } catch (e) { console.error("Update Stats Error:", e); }
-        try { await loadReviews(); } catch (e) { console.error("Load Reviews Error:", e); }
+        try { renderSuspiciousUsers(); } catch (e) { console.error(e); }
+        try { renderFreeUsers(); } catch (e) { console.error(e); }
+        try { updateStats(); } catch (e) { console.error(e); }
+        try { await loadReviews(); } catch (e) { console.error(e); }
 
         console.log(`✅ 총 ${allUsers.length}명 로드 완료`);
     } catch (error) {
@@ -218,49 +211,57 @@ function renderAllUsers() {
             : (user.hwid || 'HWID없음');
 
         tr.innerHTML = `
-            <td class="px-6 py-4">
+            <td class="px-6 py-5">
                 <div class="flex items-center gap-3">
-                    <div class="w-10 h-10 rounded-full bg-gradient-to-br from-blue-500 to-purple-500 flex items-center justify-center text-white font-semibold text-sm">
+                    <div class="w-10 h-10 rounded-xl bg-primary text-white flex items-center justify-center font-black text-sm shadow-sm">
                         ${user.email.charAt(0).toUpperCase()}
                     </div>
                     <div>
-                        <div class="font-medium text-white">${user.email}</div>
-                        <div class="text-xs text-white/30 font-mono">${displayHwid}...</div>
-                        <div class="text-[10px] text-white/20">${user.platform} • ${user.language}</div>
+                        <div class="font-black text-slate-800 dark:text-white leading-tight">${user.email}</div>
+                        <div class="flex items-center gap-2 mt-1">
+                            <span class="text-[10px] font-bold text-slate-400 font-mono tracking-tighter">${displayHwid}</span>
+                <div class="flex items-center gap-4">
+                    <div class="w-10 h-10 rounded-xl bg-slate-100 dark:bg-slate-800 flex items-center justify-center font-black text-slate-500 text-sm">
+                        ${user.email.charAt(0).toUpperCase()}
+                    </div>
+                    <div>
+                        <div class="font-black text-slate-800 dark:text-white text-sm">${user.email}</div>
+                        <div class="text-[10px] font-bold text-slate-400 font-mono tracking-tighter mt-1">${displayHwid} • ${user.platform}</div>
                     </div>
                 </div>
             </td>
-            <td class="px-6 py-4">
-                <span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium ${statusClass}">
-                    ${statusText}
-                </span>
-                ${user.isSubscriptionActive ? '<span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] font-bold badge-recurring ml-2">정기</span>' : (user.plan !== 'free' ? '<span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[10px] font-medium bg-white/5 text-white/40 border border-white/10 ml-2">단건</span>' : '')}
-                ${isSuspicious ? '<span class="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-xs font-medium badge-suspicious ml-2">의심</span>' : ''}
-                ${user.lastOrderId ? `<div class="text-[10px] text-white/20 mt-1">${user.lastOrderId}</div>` : ''}
-            </td>
-            <td class="px-6 py-4 text-center">
-                <div class="inline-flex items-center justify-center w-10 h-10 rounded-xl ${user.deviceIds.length >= 3 ? 'bg-red-500/10 text-red-400 border border-red-500/20' : 'bg-blue-500/10 text-blue-400 border border-blue-500/20'} font-semibold">
-                    ${user.deviceIds.length}
+            <td class="px-6 py-5">
+                <div class="flex items-center gap-2">
+                    <span class="badge ${statusClass} px-3 py-1 text-[10px] uppercase font-black tracking-widest">${statusText}</span>
+                    ${user.isSubscriptionActive ? '<span class="badge badge-recurring px-2 py-1 text-[9px] font-black">정기구독</span>' : '<span class="badge bg-slate-100 text-slate-500 dark:bg-slate-800 dark:text-slate-400 px-2 py-1 text-[9px] font-black">단건결제</span>'}
+                    ${isSuspicious ? '<span class="badge badge-suspicious px-2 py-1 text-[9px] font-black">의심</span>' : ''}
                 </div>
             </td>
-            <td class="px-6 py-4">
-                <div class="text-sm text-white">총 ${user.totalExecutions}회</div>
-                <div class="text-xs ${user.freeTrialCount >= 2 ? 'text-red-400 font-medium' : 'text-white/30'}">무료 ${user.freeTrialCount}회</div>
+            <td class="px-6 py-5 text-center">
+                <div class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-slate-50 dark:bg-slate-800/50 text-slate-600 dark:text-slate-300 font-black text-xs border border-slate-100 dark:border-slate-700">
+                    ${user.deviceIds ? user.deviceIds.length : 0}
+                </div>
             </td>
-            <td class="px-6 py-4">
-                <div class="text-sm text-white">${expiryText}</div>
-                <div class="text-xs text-white/30">${user.isSubscriptionActive ? '다음 결제 예정' : daysLeft}</div>
+            <td class="px-6 py-5">
+                <div class="flex flex-col">
+                    <div class="text-xs font-black text-slate-800 dark:text-white">총 ${user.totalExecutions}회</div>
+                    <div class="text-[10px] font-bold ${user.freeTrialCount >= 2 ? 'text-red-500' : 'text-slate-400'} opacity-80 mt-1 uppercase">무료 ${user.freeTrialCount}회</div>
+                </div>
             </td>
-            <td class="px-6 py-4 text-right">
+            <td class="px-6 py-5">
+                <div class="text-xs font-black text-slate-800 dark:text-white">${expiryText}</div>
+                <div class="text-[10px] font-bold text-slate-400 mt-1 uppercase tracking-tighter">${daysLeft}</div>
+            </td>
+            <td class="px-6 py-5 text-right">
                 <div class="flex items-center justify-end gap-2">
                     ${user.executionLogs.length > 0 ? `
-                        <button onclick="viewLogs('${user.id}')" 
-                                class="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-xs text-white/70 border border-white/10 transition-all">
-                            로그
+                        <button onclick="viewLogs('${user.id}')"
+                                class="w-8 h-8 flex items-center justify-center rounded-lg bg-slate-100 dark:bg-slate-800 text-slate-400 hover:text-primary transition-all">
+                            <span class="material-symbols-outlined text-lg">terminal</span>
                         </button>
                     ` : ''}
-                    <button onclick="openEditModal('${user.id}', '${user.email}')" 
-                            class="px-3 py-1.5 rounded-lg bg-blue-500/10 hover:bg-blue-500/20 text-xs text-blue-400 border border-blue-500/20 transition-all">
+                    <button onclick="openEditModal('${user.id}', '${user.email}')"
+                            class="px-4 py-2 rounded-xl bg-slate-900 text-white dark:bg-white dark:text-slate-900 font-black text-[11px] hover:opacity-90 transition-all shadow-sm">
                         관리
                     </button>
                 </div>
@@ -286,52 +287,55 @@ function renderSuspiciousUsers() {
         const reason = getSuspiciousReason(user);
 
         const card = document.createElement('div');
-        card.className = "bg-white/5 rounded-2xl p-6 border border-orange-500/30";
+        card.className = "glass rounded-2xl p-6 border-2 border-orange-500/20 bg-orange-500/5 reveal active";
         card.innerHTML = `
-            <div class="flex items-start justify-between mb-4">
-                <div class="flex items-center gap-3">
-                    <div class="w-12 h-12 rounded-full bg-gradient-to-br from-orange-500 to-red-500 flex items-center justify-center text-white font-semibold">
+            <div class="flex items-center justify-between mb-6">
+                <div class="flex items-center gap-4">
+                    <div class="w-12 h-12 rounded-2xl bg-orange-500 text-white flex items-center justify-center font-black text-xl shadow-lg shadow-orange-500/20">
                         ${user.email.charAt(0).toUpperCase()}
                     </div>
                     <div>
-                        <div class="font-medium text-white">${user.email}</div>
-                        <div class="text-sm text-white/30">${user.plan.toUpperCase()} • ${user.deviceIds.length}대 기기</div>
+                        <div class="text-lg font-black text-slate-800 dark:text-white leading-tight">${user.email}</div>
+                        <div class="text-[10px] font-bold text-orange-600 dark:text-orange-400 uppercase tracking-widest mt-1">${user.plan.toUpperCase()} • ${user.deviceIds.length}대 기기 사용 중</div>
                     </div>
                 </div>
-                <span class="badge-suspicious px-3 py-1.5 rounded-full text-xs font-medium">의심</span>
+                <span class="badge badge-suspicious px-4 py-2 text-[10px]">의심스러운 활동 감지</span>
             </div>
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-4">
-                <div>
-                    <p class="text-xs text-white/30 mb-1">총 실행</p>
-                    <p class="text-lg font-semibold text-white">${user.totalExecutions}회</p>
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-6 mb-6">
+                <div class="bg-white/40 dark:bg-black/20 p-4 rounded-xl border border-slate-100 dark:border-slate-800">
+                    <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">총 실행 횟수</p>
+                    <p class="text-xl font-black text-slate-900 dark:text-white">${user.totalExecutions}회</p>
                 </div>
-                <div>
-                    <p class="text-xs text-white/30 mb-1">무료 실행</p>
-                    <p class="text-lg font-semibold text-orange-400">${user.freeTrialCount}회</p>
+                <div class="bg-white/40 dark:bg-black/20 p-4 rounded-xl border border-slate-100 dark:border-slate-800">
+                    <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">무료 실행권</p>
+                    <p class="text-xl font-black text-orange-600 dark:text-orange-400">${user.freeTrialCount}회 사용</p>
                 </div>
-                <div>
-                    <p class="text-xs text-white/30 mb-1">기기 수</p>
-                    <p class="text-lg font-semibold text-white">${user.deviceIds.length}대</p>
+                <div class="bg-white/40 dark:bg-black/20 p-4 rounded-xl border border-slate-100 dark:border-slate-800">
+                    <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">연동 기기수</p>
+                    <p class="text-xl font-black text-slate-900 dark:text-white">${user.deviceIds.length}대</p>
                 </div>
-                <div>
-                    <p class="text-xs text-white/30 mb-1">마지막 실행</p>
-                    <p class="text-sm font-medium text-white">${user.lastExecutionLog ? formatDate(safeToDate(user.lastExecutionLog.timestamp)) : '-'}</p>
+                <div class="bg-white/40 dark:bg-black/20 p-4 rounded-xl border border-slate-100 dark:border-slate-800">
+                    <p class="text-[10px] font-black text-slate-400 uppercase tracking-widest mb-1">최근 실행일</p>
+                    <p class="text-sm font-black text-slate-800 dark:text-white mt-1">${user.lastExecutionLog ? formatDate(safeToDate(user.lastExecutionLog.timestamp)) : '-'}</p>
                 </div>
             </div>
-            <div class="bg-orange-500/10 rounded-xl p-4 border border-orange-500/20">
-                <p class="text-xs text-orange-400 font-medium mb-1">의심 사유</p>
-                <p class="text-sm text-white">${reason}</p>
+            <div class="bg-white/60 dark:bg-black/40 rounded-2xl p-5 border border-orange-500/20 mb-6">
+                <div class="flex items-center gap-2 mb-2">
+                    <span class="material-symbols-outlined text-orange-500 text-sm font-variation-settings-'FILL' 1">report_problem</span>
+                    <p class="text-[10px] font-black text-orange-600 dark:text-orange-400 uppercase tracking-widest">탐지된 사유</p>
+                </div>
+                <p class="text-sm font-black text-slate-800 dark:text-slate-200">${reason}</p>
             </div>
-            <div class="flex gap-2 mt-4">
+            <div class="flex gap-3">
                 ${user.executionLogs.length > 0 ? `
-                    <button onclick="viewLogs('${user.id}')" 
-                            class="flex-1 px-4 py-2 rounded-xl bg-white/5 hover:bg-white/10 text-sm text-white transition-all">
-                        실행 로그
+                    <button onclick="viewLogs('${user.id}')"
+                            class="flex-1 px-4 py-4 rounded-2xl bg-white dark:bg-slate-800 text-slate-600 dark:text-slate-300 font-black text-sm hover:bg-slate-50 transition-all border border-slate-200 dark:border-slate-700">
+                        자세한 실행 로그 보기
                     </button>
                 ` : ''}
-                <button onclick="openEditModal('${user.id}', '${user.email}')" 
-                        class="flex-1 px-4 py-2 rounded-xl bg-red-500/20 hover:bg-red-500/30 text-sm text-red-400 transition-all">
-                    차단 조치
+                <button onclick="openEditModal('${user.id}', '${user.email}')"
+                        class="flex-1 px-4 py-4 rounded-2xl bg-red-600 text-white font-black text-sm hover:bg-red-700 transition-all shadow-lg shadow-red-500/20">
+                    즉시 차단 및 조치하기
                 </button>
             </div>
         `;
@@ -367,30 +371,30 @@ function renderFreeUsers() {
             : (user.hwid || 'HWID없음');
 
         tr.innerHTML = `
-            <td class="px-6 py-4">
-                <div class="font-medium text-white">${user.email}</div>
-                <div class="text-xs text-white/30 font-mono mt-0.5">${displayHwid}...</div>
+            <td class="px-6 py-5">
+                <div class="font-black text-slate-800 dark:text-white text-sm">${user.email}</div>
+                <div class="text-[10px] font-bold text-slate-400 font-mono tracking-tighter mt-1">${displayHwid}</div>
             </td>
-            <td class="px-6 py-4 text-center">
-                <div class="inline-flex items-center justify-center w-12 h-12 rounded-xl ${user.freeTrialCount >= 2 ? 'bg-red-500/15 text-red-400 border-2 border-red-500/30' : 'bg-purple-500/10 text-purple-400 border border-purple-500/20'} font-semibold text-lg">
+            <td class="px-6 py-5 text-center">
+                <div class="inline-flex items-center justify-center w-10 h-10 rounded-xl ${user.freeTrialCount >= 2 ? 'bg-red-500/10 text-red-500 border-2 border-red-200' : 'bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300'} font-black text-lg">
                     ${user.freeTrialCount}
                 </div>
             </td>
-            <td class="px-6 py-4">
-                <div class="text-sm text-white">${user.platform}</div>
-                <div class="text-xs text-white/30">${user.deviceIds.length}대 기기</div>
+            <td class="px-6 py-5">
+                <div class="text-xs font-black text-slate-800 dark:text-white">${user.platform}</div>
+                <div class="text-[10px] font-bold text-slate-400 mt-0.5">${user.deviceIds.length}대 기기 사용</div>
             </td>
-            <td class="px-6 py-4">
-                <div class="text-sm text-white">${lastExec}</div>
+            <td class="px-6 py-5">
+                <div class="text-xs font-black text-slate-800 dark:text-white">${lastExec}</div>
                 ${user.lastExecutionLog && user.lastExecutionLog.lastStep ?
-                `<div class="text-xs text-white/30">마지막: ${user.lastExecutionLog.lastStep}</div>` :
+                `<div class="text-[10px] font-bold text-primary opacity-70 mt-0.5">${user.lastExecutionLog.lastStep}</div>` :
                 ''}
             </td>
-            <td class="px-6 py-4 text-right">
+            <td class="px-6 py-5 text-right">
                 ${user.executionLogs.length > 0 ? `
-                    <button onclick="viewLogs('${user.id}')" 
-                            class="px-3 py-1.5 rounded-lg bg-white/5 hover:bg-white/10 text-xs text-white/70 border border-white/10 transition-all">
-                        로그
+                    <button onclick="viewLogs('${user.id}')"
+                            class="w-10 h-10 inline-flex items-center justify-center rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-400 hover:text-primary transition-all">
+                        <span class="material-symbols-outlined">terminal</span>
                     </button>
                 ` : ''}
             </td>
@@ -452,7 +456,7 @@ function renderReviews() {
 
     allReviews.forEach(review => {
         const tr = document.createElement('tr');
-        tr.className = "hover:bg-white/5 transition-all text-sm";
+        tr.className = "hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-all text-sm group";
 
         const date = review.createdAt ? formatDate(safeToDate(review.createdAt)) : '-';
         const stars = '★'.repeat(review.rating || 5) + '☆'.repeat(5 - (review.rating || 5));
@@ -462,23 +466,28 @@ function renderReviews() {
         const realEmail = realUser ? realUser.email : '(탈퇴/알수없음)';
 
         tr.innerHTML = `
-            <td class="px-6 py-4">
-                <div class="font-bold text-blue-400 mb-0.5">${realEmail}</div>
-                <div class="font-medium text-white/70">${review.authorName || '익명'}</div>
-                <div class="text-[10px] text-white/30 font-mono mt-0.5">${date}</div>
+            <td class="px-6 py-6">
+                <div class="font-black text-primary dark:text-white mb-1 group-hover:text-blue-600 transition-colors">${realEmail}</div>
+                <div class="flex items-center gap-2">
+                    <span class="text-xs font-bold text-slate-500 tracking-tight">${review.authorName || '익명'}</span>
+                    <span class="w-1 h-1 bg-slate-300 rounded-full"></span>
+                    <span class="text-[10px] font-bold text-slate-400 font-mono tracking-tighter">${date}</span>
+                </div>
             </td>
-            <td class="px-6 py-4 text-center">
-                <span class="text-yellow-400 tracking-widest text-lg">${stars}</span>
-                <div class="text-xs text-white/30 mt-1">${review.rating}점</div>
+            <td class="px-6 py-6 text-center">
+                <div class="flex flex-col items-center">
+                    <span class="text-yellow-400 font-black tracking-widest text-lg leading-none mb-2">${stars}</span>
+                    <span class="badge bg-yellow-50 text-yellow-700 dark:bg-yellow-500/10 dark:text-yellow-500">${review.rating}점</span>
+                </div>
             </td>
-            <td class="px-6 py-4">
-                <div class="font-bold text-white mb-1">${escapeHtml(review.title)}</div>
-                <div class="text-white/80 leading-relaxed whitespace-pre-wrap">${escapeHtml(review.content)}</div>
+            <td class="px-6 py-6">
+                <div class="font-black text-slate-800 dark:text-white mb-2 text-base tracking-tight">${escapeHtml(review.title)}</div>
+                <div class="text-slate-600 dark:text-slate-400 leading-relaxed text-sm font-medium line-clamp-2 hover:line-clamp-none transition-all cursor-pointer">${escapeHtml(review.content)}</div>
             </td>
-            <td class="px-6 py-4 text-right">
-                <button onclick="deleteReview('${review.id}')" 
-                        class="px-3 py-1.5 rounded-lg bg-red-500/10 hover:bg-red-500/20 text-xs text-red-400 border border-red-500/20 transition-all whitespace-nowrap">
-                    삭제
+            <td class="px-6 py-6 text-right">
+                <button onclick="deleteReview('${review.id}')"
+                        class="px-4 py-2 rounded-lg bg-red-50 text-red-600 dark:bg-red-500/10 dark:text-red-500 text-xs font-black hover:bg-red-100 transition-all opacity-0 group-hover:opacity-100">
+                    리뷰 삭제
                 </button>
             </td>
         `;
@@ -528,7 +537,8 @@ window.viewLogs = async function (userId) {
     let html = '';
     user.executionLogs.slice(-20).reverse().forEach((log, index) => {
         const timestamp = log.timestamp ? formatDate(safeToDate(log.timestamp)) : '-';
-        const statusColor = log.status === 'success' ? 'text-green-400' : 'text-red-400';
+        const statusColor = log.status === 'success' ? 'text-green-500 dark:text-green-400' : 'text-red-500 dark:text-red-400';
+        const statusBg = log.status === 'success' ? 'bg-green-500/10' : 'bg-red-500/10';
 
         // ✅ 안전한 hwid 처리
         const logHwid = log.hwid && log.hwid.length >= 16
@@ -536,17 +546,33 @@ window.viewLogs = async function (userId) {
             : (log.hwid || 'N/A');
 
         html += `
-            <div class="mb-4 pb-4 border-b border-white/10">
-                <div class="flex items-center justify-between mb-2">
-                    <span class="text-blue-400">[${index + 1}] ${timestamp}</span>
-                    <span class="${statusColor}">${log.status || 'Unknown'}</span>
+            <div class="mb-4 pb-4 border-b border-slate-100 dark:border-slate-800 last:border-0">
+                <div class="flex items-center justify-between mb-3">
+                    <div class="flex items-center gap-3">
+                        <span class="w-6 h-6 rounded bg-slate-200 dark:bg-slate-700 flex items-center justify-center text-[10px] font-black text-slate-600 dark:text-slate-400">${index + 1}</span>
+                        <span class="text-xs font-black text-slate-800 dark:text-white">${timestamp}</span>
+                    </div>
+                    <span class="badge ${statusBg} ${statusColor}">${log.status ? log.status.toUpperCase() : 'UNKNOWN'}</span>
                 </div>
-                <div class="text-white/70 ml-4 space-y-1">
-                    <div>• 단계: ${log.lastStep || 'N/A'}</div>
-                    <div>• 기기: ${logHwid}</div>
-                    <div>• 소요시간: ${log.duration ? log.duration.toFixed(2) + '초' : 'N/A'}</div>
-                    ${log.error ? `<div class="text-red-400">• 에러: ${log.error}</div>` : ''}
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 bg-white dark:bg-slate-800/40 p-3 rounded-xl border border-slate-100 dark:border-slate-800">
+                    <div>
+                        <p class="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1">진행 단계</p>
+                        <p class="text-xs font-black text-primary dark:text-white">${log.lastStep || 'N/A'}</p>
+                    </div>
+                    <div>
+                        <p class="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1">기기 ID</p>
+                        <p class="text-xs font-bold text-slate-600 dark:text-slate-400 font-mono">${logHwid}</p>
+                    </div>
+                    <div>
+                        <p class="text-[9px] font-black text-slate-400 uppercase tracking-widest mb-1">소요 시간</p>
+                        <p class="text-xs font-black text-slate-800 dark:text-white">${log.duration ? log.duration.toFixed(2) + '초' : 'N/A'}</p>
+                    </div>
                 </div>
+                ${log.error ? `
+                <div class="mt-3 p-3 bg-red-50 dark:bg-red-500/5 rounded-lg border border-red-100 dark:border-red-500/10">
+                    <p class="text-[9px] font-black text-red-500 uppercase tracking-widest mb-1">에러 발생</p>
+                    <p class="text-xs font-bold text-red-600 dark:text-red-400">${log.error}</p>
+                </div>` : ''}
             </div>
         `;
     });
@@ -614,15 +640,13 @@ window.openEditModal = function (id, email) {
     // 🚀 구독 상태 표시
     const subStatus = document.getElementById('modalSubscriptionStatus');
     if (user.isSubscriptionActive) {
-        subStatus.textContent = "정기구독 중";
-        subStatus.className = "text-[10px] font-bold px-2 py-0.5 rounded-full badge-recurring";
+        subStatus.innerHTML = `<span class="badge badge-recurring px-3 py-1 text-xs">정기구독 활성</span>`;
         subStatus.classList.remove('hidden');
     } else if (user.plan !== 'free') {
-        subStatus.textContent = "단건결제";
-        subStatus.className = "text-[10px] font-medium px-2 py-0.5 rounded-full bg-slate-100 text-slate-500 border border-slate-200";
+        subStatus.innerHTML = `<span class="badge bg-slate-100 text-slate-500 dark:bg-slate-800 dark:text-slate-400 px-3 py-1 text-xs">단건결제 (${user.planName})</span>`;
         subStatus.classList.remove('hidden');
     } else {
-        subStatus.classList.add('hidden');
+        subStatus.innerHTML = `<span class="badge badge-free px-3 py-1 text-xs">무료 이용</span>`;
     }
 
     document.getElementById('editModal').classList.remove('hidden');
@@ -681,7 +705,16 @@ document.getElementById('modalSaveBtn').addEventListener('click', async () => {
         await db.collection("users").doc(currentTargetId).update(updateData);
         alert("✅ 성공적으로 저장되었습니다.");
         document.getElementById('editModal').classList.add('hidden');
-        await loadAllData();
+        try {
+            await analyzeSuspiciousActivity();
+            renderAllUsers();
+            renderSuspiciousUsers();
+            renderFreeUsers();
+            updateStats();
+            await loadReviews();
+        } catch (e) {
+            console.error("Rendering flow error:", e);
+        }
     } catch (error) {
         console.error("수정 실패:", error);
         alert("❌ 저장 실패: " + error.message);

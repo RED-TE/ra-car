@@ -1,94 +1,130 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="ko" class="scroll-smooth">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Ricar Admin • Dashboard</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>BloBot Admin • Dashboard</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0f1729",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#14171e",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "Noto Sans KR", "sans-serif"]
+                    },
+                },
+            },
+        }
+    </script>
     <style>
-        * {
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Segoe UI', sans-serif;
-            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+        .reveal {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.6s ease-out;
         }
 
-        .apple-card {
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(40px);
-            border: 0.5px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
         }
 
-        .stat-card {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.05) 0%, rgba(255, 255, 255, 0.02) 100%);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        .glass {
+            background: rgba(255, 255, 255, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
         }
 
-        .stat-card:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
-            border-color: rgba(255, 255, 255, 0.15);
+        .dark .glass {
+            background: rgba(15, 23, 41, 0.7);
+            border: 1px solid rgba(255, 255, 255, 0.05);
         }
 
         .tab-button {
             position: relative;
-            color: rgba(255, 255, 255, 0.5);
-            font-weight: 500;
+            color: rgba(100, 116, 139, 0.6);
+            font-weight: 600;
             transition: all 0.3s ease;
-            padding: 12px 20px;
+            padding: 12px 16px;
+        }
+
+        .dark .tab-button {
+            color: rgba(255, 255, 255, 0.4);
         }
 
         .tab-button.active {
+            color: #0f1729;
+        }
+
+        .dark .tab-button.active {
             color: #fff;
         }
 
         .tab-button.active::after {
             content: '';
             position: absolute;
-            bottom: 0;
+            bottom: -1px;
             left: 0;
             right: 0;
             height: 2px;
-            background: #3b82f6;
+            background: #0f1729;
             border-radius: 2px;
         }
 
+        .dark .tab-button.active::after {
+            background: #fff;
+        }
+
+        .badge {
+            display: inline-flex;
+            align-items: center;
+            padding: 2px 8px;
+            border-radius: 9999px;
+            font-size: 10px;
+            font-weight: 700;
+        }
+
         .badge-active {
-            background: rgba(34, 197, 94, 0.15);
-            color: #22c55e;
-            border: 1px solid rgba(34, 197, 94, 0.3);
+            background: #dcfce7;
+            color: #166534;
         }
 
         .badge-expired {
-            background: rgba(239, 68, 68, 0.15);
-            color: #ef4444;
-            border: 1px solid rgba(239, 68, 68, 0.3);
+            background: #fee2e2;
+            color: #991b1b;
         }
 
         .badge-free {
-            background: rgba(148, 163, 184, 0.15);
-            color: #94a3b8;
-            border: 1px solid rgba(148, 163, 184, 0.3);
+            background: #f1f5f9;
+            color: #475569;
         }
 
         .badge-suspicious {
-            background: rgba(251, 146, 60, 0.15);
-            color: #fb923c;
-            border: 1px solid rgba(251, 146, 60, 0.3);
+            background: #fef3c7;
+            color: #92400e;
             animation: pulse 2s infinite;
         }
 
         .badge-recurring {
-            background: rgba(139, 92, 246, 0.15);
-            color: #a78bfa;
-            border: 1px solid rgba(139, 92, 246, 0.3);
+            background: #ede9fe;
+            color: #5b21b6;
         }
 
         @keyframes pulse {
@@ -104,203 +140,155 @@
         }
 
         .log-entry {
-            font-family: 'SF Mono', 'Consolas', monospace;
+            font-family: 'Inter', 'Noto Sans KR', sans-serif;
             font-size: 11px;
-            line-height: 1.8;
-        }
-
-        input:focus,
-        select:focus {
-            outline: none;
-            border-color: #3b82f6;
-            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
-        }
-
-        .apple-button {
-            background: #3b82f6;
-            color: white;
-            font-weight: 500;
-            transition: all 0.2s ease;
-        }
-
-        .apple-button:hover {
-            background: #2563eb;
-            transform: scale(1.02);
-        }
-
-        .apple-button:active {
-            transform: scale(0.98);
-        }
-
-        ::-webkit-scrollbar {
-            width: 8px;
-            height: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: rgba(255, 255, 255, 0.03);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.15);
-            border-radius: 4px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: rgba(255, 255, 255, 0.25);
         }
     </style>
 </head>
 
-<body class="text-white min-h-screen">
-    <!-- Navigation -->
-    <nav class="sticky top-0 z-50 backdrop-blur-2xl bg-slate-900/60 border-b border-white/5">
-        <div class="max-w-7xl mx-auto px-8 py-4">
-            <div class="flex items-center justify-between">
-                <div class="flex items-center gap-4">
-                    <div
-                        class="w-10 h-10 rounded-2xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center">
-                        <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                        </svg>
+<body
+    class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased min-h-screen">
+    <!-- Header -->
+    <header
+        class="sticky top-0 z-50 w-full border-b border-slate-200/80 dark:border-slate-800/80 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex h-16 items-center justify-between">
+                <div class="flex items-center gap-2 cursor-pointer" onclick="location.href='index.html'">
+                    <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-white">
+                        <span class="material-symbols-outlined text-xl">admin_panel_settings</span>
                     </div>
-                    <div>
-                        <h1 class="text-xl font-semibold tracking-tight">Ricar Admin</h1>
-                        <p class="text-xs text-white/40">Dashboard & Analytics</p>
-                    </div>
+                    <span class="text-xl font-bold tracking-tight text-primary dark:text-white">BloBot Admin</span>
                 </div>
                 <div class="flex items-center gap-6">
-                    <span id="admin-email" class="text-sm text-white/50">...</span>
-                    <button onclick="location.href='/'"
-                        class="text-sm text-white/50 hover:text-white transition-colors">홈</button>
+                    <span id="admin-email" class="text-xs font-bold text-slate-500 uppercase tracking-wider">...</span>
                     <button id="logoutBtn"
-                        class="text-sm text-red-400 hover:text-red-300 transition-colors">로그아웃</button>
+                        class="text-sm font-bold text-red-500 hover:text-red-600 transition-colors">로그아웃</button>
+                    <button onclick="location.href='index.html'"
+                        class="px-4 py-1.5 bg-primary text-white text-xs font-bold rounded-lg hover:bg-slate-800 transition-all">홈으로</button>
                 </div>
             </div>
         </div>
-    </nav>
+    </header>
 
-    <main class="max-w-7xl mx-auto px-8 py-8">
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <!-- Stats Grid -->
-        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-6 mb-8">
-            <div class="stat-card rounded-3xl p-6">
-                <div class="flex items-center justify-between mb-3">
-                    <div class="w-12 h-12 rounded-2xl bg-blue-500/15 flex items-center justify-center">
-                        <svg class="w-6 h-6 text-blue-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z" />
-                        </svg>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4 mb-8 reveal">
+            <!-- Stat Card 1 -->
+            <div class="glass rounded-2xl p-6 border border-slate-200/50 dark:border-slate-700/50">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-10 h-10 bg-blue-500/10 text-blue-500 rounded-xl flex items-center justify-center">
+                        <span class="material-symbols-outlined font-variation-settings-'FILL' 1">group</span>
                     </div>
+                    <p class="text-[10px] font-bold text-slate-500 uppercase tracking-widest leading-none">전체 가입자</p>
                 </div>
-                <p class="text-white/40 text-xs font-medium mb-1">전체 가입자</p>
-                <h2 id="stat-total" class="text-3xl font-semibold">0</h2>
+                <h2 id="stat-total" class="text-3xl font-black text-slate-900 dark:text-white">0</h2>
             </div>
-
-            <div class="stat-card rounded-3xl p-6">
-                <div class="flex items-center justify-between mb-3">
-                    <div class="w-12 h-12 rounded-2xl bg-green-500/15 flex items-center justify-center">
-                        <svg class="w-6 h-6 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
+            <!-- Stat Card 2 -->
+            <div class="glass rounded-2xl p-6 border border-slate-200/50 dark:border-slate-700/50">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-10 h-10 bg-green-500/10 text-green-500 rounded-xl flex items-center justify-center">
+                        <span class="material-symbols-outlined font-variation-settings-'FILL' 1">verified_user</span>
                     </div>
+                    <p class="text-[10px] font-bold text-slate-500 uppercase tracking-widest leading-none">활성 플랜</p>
                 </div>
-                <p class="text-white/40 text-xs font-medium mb-1">활성 플랜</p>
-                <h2 id="stat-active" class="text-3xl font-semibold text-green-400">0</h2>
+                <h2 id="stat-active" class="text-3xl font-black text-green-600 dark:text-green-400">0</h2>
             </div>
-
-            <div class="stat-card rounded-3xl p-6">
-                <div class="flex items-center justify-between mb-3">
-                    <div class="w-12 h-12 rounded-2xl bg-purple-500/15 flex items-center justify-center">
-                        <svg class="w-6 h-6 text-purple-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
-                        </svg>
+            <!-- Stat Card 3 -->
+            <div class="glass rounded-2xl p-6 border border-slate-200/50 dark:border-slate-700/50">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-10 h-10 bg-purple-500/10 text-purple-500 rounded-xl flex items-center justify-center">
+                        <span
+                            class="material-symbols-outlined font-variation-settings-'FILL' 1">featured_play_list</span>
                     </div>
+                    <p class="text-[10px] font-bold text-slate-500 uppercase tracking-widest leading-none">무료 이용자</p>
                 </div>
-                <p class="text-white/40 text-xs font-medium mb-1">무료 이용자</p>
-                <h2 id="stat-free" class="text-3xl font-semibold text-purple-400">0</h2>
+                <h2 id="stat-free" class="text-3xl font-black text-purple-600 dark:text-purple-400">0</h2>
             </div>
-
-            <div class="stat-card rounded-3xl p-6">
-                <div class="flex items-center justify-between mb-3">
-                    <div class="w-12 h-12 rounded-2xl bg-red-500/15 flex items-center justify-center">
-                        <svg class="w-6 h-6 text-red-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                        </svg>
+            <!-- Stat Card 4 -->
+            <div class="glass rounded-2xl p-6 border border-slate-200/50 dark:border-slate-700/50">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-10 h-10 bg-red-500/10 text-red-500 rounded-xl flex items-center justify-center">
+                        <span class="material-symbols-outlined font-variation-settings-'FILL' 1">event_busy</span>
                     </div>
+                    <p class="text-[10px] font-bold text-slate-500 uppercase tracking-widest leading-none">오늘 만료</p>
                 </div>
-                <p class="text-white/40 text-xs font-medium mb-1">오늘 만료</p>
-                <h2 id="stat-expired" class="text-3xl font-semibold text-red-400">0</h2>
+                <h2 id="stat-expired" class="text-3xl font-black text-red-600 dark:text-red-500">0</h2>
             </div>
-
-            <div class="stat-card rounded-3xl p-6 border-2 border-orange-500/30">
-                <div class="flex items-center justify-between mb-3">
-                    <div class="w-12 h-12 rounded-2xl bg-orange-500/15 flex items-center justify-center">
-                        <svg class="w-6 h-6 text-orange-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9" />
-                        </svg>
+            <!-- Stat Card 5 -->
+            <div class="glass rounded-2xl p-6 border-2 border-orange-500/20 bg-orange-500/5">
+                <div class="flex items-center gap-3 mb-4">
+                    <div class="w-10 h-10 bg-orange-500/10 text-orange-500 rounded-xl flex items-center justify-center">
+                        <span class="material-symbols-outlined font-variation-settings-'FILL' 1">warning</span>
                     </div>
+                    <p
+                        class="text-[10px] font-bold text-orange-600 dark:text-orange-400 uppercase tracking-widest leading-none">
+                        이상 사용 의심</p>
                 </div>
-                <p class="text-white/40 text-xs font-medium mb-1">이상 사용 의심</p>
-                <h2 id="stat-suspicious" class="text-3xl font-semibold text-orange-400">0</h2>
+                <h2 id="stat-suspicious" class="text-3xl font-black text-orange-600 dark:text-orange-500">0</h2>
             </div>
         </div>
 
-        <!-- Tabs -->
-        <div class="flex gap-8 mb-6 border-b border-white/5">
+        <!-- Filter & Control Bar -->
+        <div class="glass rounded-2xl p-4 mb-6 border border-slate-200/50 dark:border-slate-700/50 reveal">
+            <div class="flex flex-col md:flex-row gap-4">
+                <div class="relative flex-1">
+                    <span
+                        class="material-symbols-outlined absolute left-4 top-1/2 -translate-y-1/2 text-slate-400">search</span>
+                    <input type="text" id="searchInput" placeholder="이메일 또는 HWID로 검색..."
+                        class="w-full pl-12 pr-4 py-3 bg-white dark:bg-slate-800 border-none rounded-xl text-sm focus:ring-2 focus:ring-primary transition-all">
+                </div>
+                <div class="flex gap-4">
+                    <select id="filterPlan"
+                        class="bg-white dark:bg-slate-800 border-none rounded-xl px-6 py-3 text-sm focus:ring-2 focus:ring-primary transition-all font-bold">
+                        <option value="all">모든 플랜</option>
+                        <option value="lite">LITE</option>
+                        <option value="pro">PRO</option>
+                        <option value="free">FREE</option>
+                    </select>
+                    <button id="refreshBtn"
+                        class="px-6 py-3 bg-primary text-white rounded-xl text-sm font-black hover:bg-slate-800 flex items-center gap-2 transition-all">
+                        <span class="material-symbols-outlined text-base">refresh</span>
+                        새로고침
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tabs Navigation -->
+        <div class="flex items-center gap-4 mb-4 border-b border-slate-200 dark:border-slate-800 reveal">
             <button class="tab-button active" data-tab="users">전체 사용자</button>
             <button class="tab-button" data-tab="suspicious">이상 사용 의심</button>
             <button class="tab-button" data-tab="free">무료 이용자</button>
             <button class="tab-button" data-tab="reviews">이용 후기</button>
         </div>
 
-        <!-- Filter Bar -->
-        <div class="apple-card rounded-2xl p-4 mb-6">
-            <div class="flex flex-col md:flex-row gap-4 items-center">
-                <div class="relative flex-1 w-full">
-                    <svg class="w-5 h-5 text-white/30 absolute left-4 top-1/2 -translate-y-1/2" fill="none"
-                        stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z" />
-                    </svg>
-                    <input type="text" id="searchInput" placeholder="이메일 또는 HWID 검색..."
-                        class="w-full bg-white/5 border border-white/10 rounded-xl pl-12 pr-4 py-3 text-sm focus:bg-white/10 transition-all">
-                </div>
-                <select id="filterPlan"
-                    class="bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm focus:bg-white/10 transition-all">
-                    <option value="all">모든 플랜</option>
-                    <option value="lite">LITE</option>
-                    <option value="pro">PRO</option>
-                    <option value="free">FREE</option>
-                </select>
-                <button id="refreshBtn" class="apple-button px-6 py-3 rounded-xl text-sm font-medium whitespace-nowrap">
-                    새로고침
-                </button>
-            </div>
-        </div>
-
-        <!-- User Table -->
-        <div id="users-tab" class="tab-content">
-            <div class="apple-card rounded-2xl overflow-hidden">
+        <!-- Tab Contents -->
+        <div id="users-tab" class="tab-content reveal">
+            <div class="glass rounded-2xl overflow-hidden border border-slate-200/50 dark:border-slate-700/50">
                 <div class="overflow-x-auto">
-                    <table class="w-full">
-                        <thead>
-                            <tr class="bg-white/5 text-white/50 text-xs font-medium uppercase tracking-wider">
-                                <th class="px-6 py-4 text-left">사용자</th>
-                                <th class="px-6 py-4 text-left">플랜 상태</th>
-                                <th class="px-6 py-4 text-center">기기</th>
-                                <th class="px-6 py-4 text-left">사용량</th>
-                                <th class="px-6 py-4 text-left">만료일</th>
-                                <th class="px-6 py-4 text-right">작업</th>
+                    <table class="w-full text-left text-sm">
+                        <thead class="bg-slate-50 dark:bg-slate-800/50 text-slate-500 dark:text-slate-400">
+                            <tr>
+                                <th class="px-6 py-4 font-black uppercase text-[10px] tracking-widest">사용자 정보</th>
+                                <th class="px-6 py-4 font-black uppercase text-[10px] tracking-widest">플랜 상태</th>
+                                <th class="px-6 py-4 font-black uppercase text-[10px] tracking-widest text-center">기기수
+                                </th>
+                                <th class="px-6 py-4 font-black uppercase text-[10px] tracking-widest">사용량</th>
+                                <th class="px-6 py-4 font-black uppercase text-[10px] tracking-widest">만료 정보</th>
+                                <th class="px-6 py-4 font-black uppercase text-[10px] tracking-widest text-right">관리
+                                </th>
                             </tr>
                         </thead>
-                        <tbody id="userTableBody" class="divide-y divide-white/5">
+                        <tbody id="userTableBody" class="divide-y divide-slate-100 dark:divide-slate-800">
                             <tr>
-                                <td colspan="6" class="px-6 py-20 text-center text-white/30">데이터를 불러오는 중...</td>
+                                <td colspan="6" class="px-6 py-20 text-center text-slate-400">
+                                    <div class="flex flex-col items-center gap-4">
+                                        <div
+                                            class="w-8 h-8 border-4 border-slate-200 border-t-primary rounded-full animate-spin">
+                                        </div>
+                                        <p class="font-bold">데이터를 불러오는 중입니다...</p>
+                                    </div>
+                                </td>
                             </tr>
                         </tbody>
                     </table>
@@ -308,106 +296,116 @@
             </div>
         </div>
 
-        <!-- Suspicious Tab -->
-        <div id="suspicious-tab" class="tab-content hidden">
-            <div class="apple-card rounded-2xl p-6">
-                <div class="space-y-4" id="suspiciousTableBody">
-                    <p class="text-center text-white/30 py-12">데이터를 불러오는 중...</p>
+        <div id="suspicious-tab" class="tab-content hidden reveal">
+            <div id="suspiciousTableBody" class="space-y-4">
+                <div
+                    class="glass rounded-2xl p-12 text-center text-slate-400 border border-slate-200/50 dark:border-slate-700/50">
+                    <p class="font-bold">의심 사례를 분석하는 중...</p>
                 </div>
             </div>
         </div>
 
-        <!-- Reviews Tab -->
-        <div id="reviews-tab" class="tab-content hidden">
-            <div class="apple-card rounded-2xl overflow-hidden p-6">
-                <table class="w-full">
-                    <thead>
-                        <tr
-                            class="bg-white/5 text-white/50 text-xs font-medium uppercase tracking-wider border-b border-white/5">
-                            <th class="px-6 py-4 text-left w-1/4">작성자 / 날짜</th>
-                            <th class="px-6 py-4 text-center w-24">평점</th>
-                            <th class="px-6 py-4 text-left">내용</th>
-                            <th class="px-6 py-4 text-right w-24">작업</th>
-                        </tr>
-                    </thead>
-                    <tbody id="reviewsTableBody" class="divide-y divide-white/5">
-                        <tr>
-                            <td colspan="4" class="px-6 py-20 text-center text-white/30">후기 데이터를 불러오는 중...</td>
-                        </tr>
-                    </tbody>
-                </table>
+        <div id="free-tab" class="tab-content hidden reveal">
+            <div
+                class="glass rounded-2xl overflow-hidden border border-slate-200/50 dark:border-slate-700/50 font-bold">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-sm">
+                        <thead class="bg-slate-50 dark:bg-slate-800/50 text-slate-500">
+                            <tr>
+                                <th class="px-6 py-4 font-black uppercase text-[10px] tracking-widest leading-none">사용자
+                                </th>
+                                <th
+                                    class="px-6 py-4 font-black uppercase text-[10px] tracking-widest leading-none text-center">
+                                    무료 실행</th>
+                                <th class="px-6 py-4 font-black uppercase text-[10px] tracking-widest leading-none">기기
+                                    정보</th>
+                                <th class="px-6 py-4 font-black uppercase text-[10px] tracking-widest leading-none">마지막
+                                    실행</th>
+                                <th class="px-6 py-4 font-black uppercase text-[10px] tracking-widest text-right">로그
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody id="freeTableBody" class="divide-y divide-slate-100 dark:divide-slate-800">
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
 
-        <!-- Free Users Tab -->
-        <div id="free-tab" class="tab-content hidden">
-            <div class="apple-card rounded-2xl overflow-hidden">
-                <table class="w-full">
-                    <thead>
-                        <tr class="bg-white/5 text-white/50 text-xs font-medium uppercase tracking-wider">
-                            <th class="px-6 py-4 text-left">사용자</th>
-                            <th class="px-6 py-4 text-center">무료 실행</th>
-                            <th class="px-6 py-4 text-left">기기 정보</th>
-                            <th class="px-6 py-4 text-left">마지막 실행</th>
-                            <th class="px-6 py-4 text-right">작업</th>
-                        </tr>
-                    </thead>
-                    <tbody id="freeTableBody" class="divide-y divide-white/5">
-                        <tr>
-                            <td colspan="5" class="px-6 py-20 text-center text-white/30">데이터를 불러오는 중...</td>
-                        </tr>
-                    </tbody>
-                </table>
+        <div id="reviews-tab" class="tab-content hidden reveal">
+            <div class="glass rounded-2xl overflow-hidden border border-slate-200/50 dark:border-slate-700/50">
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-sm">
+                        <thead class="bg-slate-50 dark:bg-slate-800/50 text-slate-500">
+                            <tr>
+                                <th class="px-6 py-4 font-black uppercase text-[10px] tracking-widest leading-none">
+                                    작성자/날짜</th>
+                                <th
+                                    class="px-6 py-4 font-black uppercase text-[10px] tracking-widest leading-none text-center">
+                                    평점</th>
+                                <th class="px-6 py-4 font-black uppercase text-[10px] tracking-widest leading-none">내용
+                                </th>
+                                <th class="px-6 py-4 font-black uppercase text-[10px] tracking-widest text-right">관리
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody id="reviewsTableBody" class="divide-y divide-slate-100 dark:divide-slate-800">
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
     </main>
 
-    <!-- Edit Modal -->
+    <!-- Modals Section -->
     <div id="editModal"
-        class="fixed inset-0 bg-black/60 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
-        <div class="bg-white max-w-md w-full rounded-3xl p-8 text-slate-900">
-            <h3 class="text-2xl font-semibold mb-6">사용자 관리</h3>
-            <div class="space-y-5">
+        class="fixed inset-0 bg-slate-900/60 backdrop-blur-sm z-[100] hidden flex items-center justify-center p-4">
+        <div
+            class="bg-white dark:bg-slate-900 max-w-md w-full rounded-3xl p-8 shadow-2xl reveal active border border-slate-200 dark:border-slate-800">
+            <h3 class="text-2xl font-black mb-1">사용자 관리</h3>
+            <p id="modalUserEmail" class="text-sm text-slate-500 mb-8 font-bold"></p>
+
+            <div class="space-y-6">
                 <div>
-                    <label class="text-xs text-slate-500 font-medium block mb-2">사용자</label>
-                    <div class="flex items-center justify-between">
-                        <p id="modalUserEmail" class="text-base font-medium"></p>
-                        <span id="modalSubscriptionStatus"
-                            class="text-[10px] font-bold px-2 py-0.5 rounded-full hidden"></span>
-                    </div>
+                    <label class="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2 block">현재
+                        상태</label>
+                    <div id="modalSubscriptionStatus" class="flex items-center gap-2"></div>
                 </div>
                 <div>
-                    <label class="text-xs text-slate-500 font-medium block mb-2">플랜</label>
+                    <label class="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2 block">플랜
+                        변경</label>
                     <select id="modalPlanSelect"
-                        class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm">
+                        class="w-full bg-slate-50 dark:bg-slate-800 border-none rounded-xl px-4 py-3 text-sm font-bold focus:ring-2 focus:ring-primary">
                         <option value="free">FREE</option>
                         <option value="lite">LITE</option>
                         <option value="pro">PRO</option>
                     </select>
                 </div>
                 <div>
-                    <label class="text-xs text-slate-500 font-medium block mb-2">만료일 연장</label>
+                    <label class="text-[10px] font-black uppercase tracking-widest text-slate-400 mb-2 block">이용 기간
+                        연장</label>
                     <select id="modalExtendSelect"
-                        class="w-full bg-slate-50 border border-slate-200 rounded-xl px-4 py-3 text-sm">
+                        class="w-full bg-slate-50 dark:bg-slate-800 border-none rounded-xl px-4 py-3 text-sm font-bold focus:ring-2 focus:ring-primary">
                         <option value="0">변경 없음</option>
                         <option value="7">7일</option>
                         <option value="30">30일</option>
                         <option value="365">1년</option>
                     </select>
                 </div>
-                <div class="flex items-center gap-3 pt-2">
-                    <input type="checkbox" id="modalBanCheck" class="w-5 h-5 rounded">
-                    <label for="modalBanCheck" class="text-sm text-red-600 font-medium">사용자 차단</label>
+                <div
+                    class="flex items-center gap-3 p-4 bg-red-50 dark:bg-red-500/10 rounded-xl border border-red-100 dark:border-red-500/20">
+                    <input type="checkbox" id="modalBanCheck"
+                        class="w-5 h-5 rounded text-red-500 focus:ring-red-500 border-red-300">
+                    <label for="modalBanCheck"
+                        class="text-sm text-red-600 dark:text-red-400 font-black uppercase tracking-tight">이 사용자 영구
+                        차단</label>
                 </div>
                 <div class="flex gap-3 pt-4">
                     <button id="modalCloseBtn"
-                        class="flex-1 px-4 py-3 rounded-xl bg-slate-100 text-slate-700 font-medium hover:bg-slate-200 transition-colors">
-                        취소
-                    </button>
+                        class="flex-1 px-4 py-4 rounded-xl bg-slate-100 dark:bg-slate-800 text-slate-600 dark:text-slate-300 font-black text-sm hover:bg-slate-200 transition-all">취소</button>
                     <button id="modalSaveBtn"
-                        class="flex-1 px-4 py-3 rounded-xl bg-blue-500 text-white font-medium hover:bg-blue-600 transition-colors">
-                        저장
-                    </button>
+                        class="flex-1 px-4 py-4 rounded-xl bg-primary text-white font-black text-sm hover:bg-slate-800 shadow-lg shadow-primary/20 transition-all">설정
+                        저장하기</button>
                 </div>
             </div>
         </div>
@@ -415,30 +413,36 @@
 
     <!-- Log Viewer Modal -->
     <div id="logModal"
-        class="fixed inset-0 bg-black/60 backdrop-blur-md z-50 hidden flex items-center justify-center p-4">
-        <div class="apple-card max-w-3xl w-full rounded-3xl p-8">
-            <div class="flex items-center justify-between mb-6">
-                <h3 class="text-2xl font-semibold">실행 로그</h3>
-                <button id="logModalClose" class="text-white/50 hover:text-white">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                            d="M6 18L18 6M6 6l12 12" />
-                    </svg>
+        class="fixed inset-0 bg-slate-900/60 backdrop-blur-md z-[100] hidden flex items-center justify-center p-4">
+        <div
+            class="bg-white dark:bg-slate-900 max-w-4xl w-full rounded-3xl p-8 border border-slate-200 dark:border-slate-800 shadow-2xl">
+            <div class="flex items-center justify-between mb-8">
+                <div>
+                    <h3 class="text-2xl font-black">실행 로그 뷰어</h3>
+                    <p class="text-xs text-slate-500 font-bold mt-1">최근 20개의 활동 내역입니다.</p>
+                </div>
+                <button id="logModalClose"
+                    class="w-10 h-10 flex items-center justify-center rounded-xl bg-slate-50 dark:bg-slate-800 text-slate-400 hover:text-slate-900 dark:hover:text-white transition-all">
+                    <span class="material-symbols-outlined">close</span>
                 </button>
             </div>
-            <div id="logContent" class="bg-black/40 rounded-2xl p-6 max-h-96 overflow-y-auto log-entry text-green-400">
-                <p class="text-white/30">로그를 불러오는 중...</p>
+            <div id="logContent"
+                class="bg-slate-50 dark:bg-black/20 rounded-2xl p-6 h-[500px] overflow-y-auto log-entry border border-slate-100 dark:border-slate-800">
             </div>
         </div>
     </div>
 
-    <!-- Firebase SDK -->
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
     <script src="firebase_config.js"></script>
-    <script src="common.js"></script>
-    <script src="ricar_mgr_diag_v2.js"></script>
+    <script src="ricar_mgr_7468_gate_apple.js"></script>
+    <script>
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
+        }, { threshold: 0.1 });
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    </script>
 </body>
 
 </html>
