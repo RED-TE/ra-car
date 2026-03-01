@@ -107,7 +107,8 @@ async function loadAllData() {
                 createdAt: data.createdAt,
                 updatedAt: data.updatedAt,
                 lastOrderId: data.lastOrderId || '',
-                isSubscriptionActive: data.isSubscriptionActive || false
+                isSubscriptionActive: data.isSubscriptionActive || false,
+                memo: data.memo || ''
             };
         });
 
@@ -260,6 +261,15 @@ function renderAllUsers() {
                     ${user.isSubscriptionActive ? '<span class="badge badge-recurring px-2 py-1 text-[9px] font-black">정기구독</span>' : '<span class="badge bg-slate-100 text-slate-500 dark:bg-slate-800 dark:text-slate-400 px-2 py-1 text-[9px] font-black">단건결제</span>'}
                     ${isSuspicious ? '<span class="badge badge-suspicious px-2 py-1 text-[9px] font-black">의심</span>' : ''}
                 </div>
+                ${user.memo ? `
+                    <div class="mt-2 p-2 bg-blue-50 dark:bg-blue-900/20 border border-blue-100 dark:border-blue-800/50 rounded-lg">
+                        <div class="flex items-center gap-1 text-blue-600 dark:text-blue-400 text-[10px] font-black mb-0.5">
+                            <span class="material-symbols-outlined text-xs">receipt_long</span>
+                            사업자 증빙 정보
+                        </div>
+                        <div class="text-[10px] text-blue-800 dark:text-blue-300 font-bold leading-tight break-all">${user.memo}</div>
+                    </div>
+                ` : ''}
             </td>
             <td class="px-6 py-5 text-center">
                 <div class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-slate-50 dark:bg-slate-800/50 text-slate-600 dark:text-slate-300 font-black text-xs border border-slate-100 dark:border-slate-700">

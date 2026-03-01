@@ -62,7 +62,8 @@ exports.payappFeedback = functions.https.onRequest(async (req, res) => {
                 lastPaymentAmount: parseInt(amount.replace(/[^0-9]/g, "")),
                 updatedAt: now,
                 licenseKey: "RA" + Math.random().toString(36).substring(2, 10).toUpperCase(),
-                phone: data.recvphone || "" // 🚀 자동결제를 위해 번호 저장
+                phone: data.recvphone || "", // 🚀 자동결제를 위해 번호 저장
+                memo: data.memo || ""       // 🚀 사업자 증빙 정보 등 저장
             };
 
             // 만약 빌키(rebill_key)가 넘어왔다면 저장 (정기결제 등록)
