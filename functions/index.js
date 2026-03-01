@@ -216,9 +216,38 @@ async function processRebill(uid, user) {
                 console.log(`PayApp Rebill Response (UID=${uid}):`, JSON.stringify(response));
 
                 if (response.state === '1') {
-                    // Success! Update expiry in feedback will happen if payapp triggers feedback
-                    // BUT for insurance, we can update nextBillingDate here if feedback isn't triggered for rebills
                     console.log(`✅ Rebill Request Success for UID=${uid}`);
+
+                    // 🚀 피드백을 기다리지 않고 즉시 다음 만료일 갱신 (보험용)
+                    try {
+                        const now = admin.firestore.Timestamp.now();
+                        const isYearly = (user.planName || "").toLowerCase().includes("1년") || (user.planName || "").toLowerCase().includes("yearly");
+                        const durationDays = isYearly ? 365 : 30;
+
+                        let currentExpiry = user.expiryDate;
+                        let newExpiry;
+                        if (currentExpiry && typeof currentExpiry.toDate === 'function') {
+                            newExpiry = currentExpiry.toDate();
+                        } else {
+                            newExpiry = new Date();
+                        }
+
+                        // 만약 만료일이 이미 지났다면 오늘 기준, 아니면 기존 만료일 기준 연장
+                        if (newExpiry < new Date()) newExpiry = new Date();
+                        newExpiry.setDate(newExpiry.getDate() + durationDays);
+
+                        await db.collection("users").doc(uid).update({
+                            expiryDate: admin.firestore.Timestamp.fromDate(newExpiry),
+                            nextBillingDate: admin.firestore.Timestamp.fromDate(newExpiry),
+                            updatedAt: now,
+                            lastPaymentAmount: user.lastPaymentAmount, // 금액 유지
+                            plan: user.plan
+                        });
+                        console.log(`📅 Successfully extended subscription for ${uid} until ${newExpiry.toISOString()}`);
+                    } catch (dbErr) {
+                        console.error("❌ Rebill post-process DB update failed:", dbErr);
+                    }
+
                     resolve(response);
                 } else {
                     console.error(`❌ Rebill Request Failed: ${response.errorMessage || 'Unknown Error'}`);

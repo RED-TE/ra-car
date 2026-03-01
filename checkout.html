@@ -462,7 +462,7 @@
     <script>
         const urlParams = new URLSearchParams(window.location.search);
         let selectedPlanId = urlParams.get('plan') || PRICING_CONFIG.defaultPlan;
-        let isRecurring = urlParams.get('recurring') === 'true';
+        let isRecurring = urlParams.get('recurring') !== 'false'; // Default to true unless explicitly 'false'
 
         if (!PRICING_CONFIG.plans[selectedPlanId]) {
             selectedPlanId = PRICING_CONFIG.defaultPlan;
@@ -535,7 +535,7 @@
             const btnRecurring = document.getElementById('toggle-recurring');
 
             if (isRecurring) {
-                btnRecurring.className = "px-4 py-1.5 text-sm font-medium rounded-md bg-white text-navy-900 shadow-sm border border-slate-200 transition-all";
+                btnRecurring.className = "px-4 py-1.5 text-sm font-medium rounded-md bg-navy-900 text-white shadow-sm transition-all";
                 btnSingle.className = "px-4 py-1.5 text-sm font-medium text-slate-500 hover:text-navy-900 transition-all";
             } else {
                 btnSingle.className = "px-4 py-1.5 text-sm font-medium rounded-md bg-white text-navy-900 shadow-sm border border-slate-200 transition-all";

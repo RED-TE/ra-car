@@ -1274,7 +1274,7 @@
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
     <script src="firebase_config.js"></script>
     <script>
-        let currentBilling = 'single';
+        let currentBilling = 'subscription';
         let currentUser = null;
 
         // --- Auth State ---
@@ -1336,6 +1336,11 @@
                 proPeriod.innerText = '만원 / 건';
             }
         }
+
+        // Default UI to subscription on load
+        window.addEventListener('DOMContentLoaded', () => {
+            switchBilling('subscription');
+        });
 
         function goToCheckout(planBase) {
             if (!currentUser) {

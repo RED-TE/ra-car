@@ -134,6 +134,14 @@
                                         </div>
                                     </div>
                                     <div>
+                                        <label class="text-xs font-semibold text-slate-400 uppercase tracking-wide">결제
+                                            방식</label>
+                                        <div class="mt-1 flex items-center gap-2">
+                                            <p class="text-base font-bold text-slate-900" id="billing-type-display">...
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div>
                                         <label class="text-xs font-semibold text-slate-400 uppercase tracking-wide">계정
                                             이메일</label>
                                         <p class="mt-1 text-base font-medium text-slate-900" id="user-email">...</p>
@@ -321,6 +329,14 @@
                     else if (userData.plan === 'master') displayPlan = 'MASTER PLAN';
 
                     planName.textContent = displayPlan.toUpperCase();
+
+                    // Display Billing Type
+                    const billingTypeDisplay = document.getElementById('billing-type-display');
+                    if (userData.isSubscriptionActive) {
+                        billingTypeDisplay.innerHTML = '<span class="text-indigo-600">정기결제 (구독 중)</span>';
+                    } else {
+                        billingTypeDisplay.textContent = '1회성 결제';
+                    }
 
                     // Display Expiry Date
                     if (userData.expiryDate) {
