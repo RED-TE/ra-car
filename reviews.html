@@ -212,10 +212,9 @@
                         style="font-variation-settings:'FILL' 1">star</span><span
                         class="material-symbols-outlined text-sm"
                         style="font-variation-settings:'FILL' 1">star</span><span
-                        class="material-symbols-outlined text-sm" style="font-variation-settings:'FILL' 0">star</span>
+                        class="material-symbols-outlined text-sm" style="font-variation-settings:'FILL' 1">star</span>
                 </div>
-                <p class="text-slate-700 dark:text-slate-300 text-sm leading-relaxed mb-4">처음 세팅할 때 조금 헷갈리는 부분이 있었지만
-                    문의하니 당일 답변해주셨어요. 막상 돌아가니까 신경 쓸 게 없어서 편합니다. 예전에 하루에 한 시간씩 블로그 썼던 게 기억나는데 이제 그 시간을 다른 데 쓰고 있어요.</p>
+                <p class="text-slate-700 dark:text-slate-300 text-sm leading-relaxed mb-4">굿굿 쓸만하네요 ㅎㅎ</p>
                 <div>
                     <p class="text-xs font-bold text-slate-900 dark:text-white">j***5@gmail.com</p><span
                         class="inline-block mt-1 px-2 py-0.5 text-[10px] font-semibold rounded-full badge-lite">LITE
@@ -771,16 +770,71 @@
         let currentPage = 1;
         let allReviews = [];
 
-        // Initialize reviews from DOM on load
+        // Initialize reviews from Firestore on load
         window.addEventListener('DOMContentLoaded', () => {
-            const container = document.getElementById('reviews-container');
-            // Get all review cards (excluding the "no reviews" message)
-            const cards = Array.from(container.children).filter(el => el.id !== 'no-reviews' && el.nodeType === 1);
-            allReviews = cards;
-
-            // Initial render
-            renderPage(1, false);
+            if (typeof db !== 'undefined') {
+                // Initial fetch
+                fetchReviews();
+            }
         });
+
+        async function fetchReviews() {
+            try {
+                const querySnapshot = await db.collection("reviews").orderBy("createdAt", "desc").get();
+                allReviews = [];
+
+                querySnapshot.forEach((doc) => {
+                    const data = doc.data();
+                    const reviewEl = createReviewElement(doc.id, data);
+                    allReviews.push(reviewEl);
+                });
+
+                renderPage(1, false);
+            } catch (error) {
+                console.error("Error fetching reviews:", error);
+                document.getElementById('no-reviews').textContent = "후기를 불러오는 중 오류가 발생했습니다.";
+                document.getElementById('no-reviews').classList.remove('hidden');
+            }
+        }
+
+        function createReviewElement(docId, data) {
+            const { content, rating, email, plan, uid, maskedEmail } = data;
+
+            const card = document.createElement('div');
+            card.className = "bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-md border border-blue-200 dark:border-blue-900/50 relative group";
+            card.dataset.id = docId;
+
+            let starsHtml = '';
+            for (let i = 1; i <= 5; i++) {
+                starsHtml += `<span class="material-symbols-outlined text-sm" style="font-variation-settings:'FILL' ${i <= rating ? 1 : 0}">star</span>`;
+            }
+
+            // Check ownership to show Edit/Delete buttons
+            const isOwner = auth.currentUser && auth.currentUser.uid === uid;
+            const ownershipButtons = isOwner ? `
+                <div class="absolute top-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <button onclick="editReview('${docId}')" class="p-1.5 text-slate-400 hover:text-blue-500 transition-colors">
+                        <span class="material-symbols-outlined text-lg">edit</span>
+                    </button>
+                    <button onclick="deleteReview('${docId}')" class="p-1.5 text-slate-400 hover:text-red-500 transition-colors">
+                        <span class="material-symbols-outlined text-lg">delete</span>
+                    </button>
+                </div>
+            ` : '';
+
+            card.innerHTML = `
+                ${ownershipButtons}
+                <div class="flex items-center gap-1 text-yellow-400 mb-3">
+                    ${starsHtml}
+                </div>
+                <p class="text-slate-700 dark:text-slate-300 text-sm leading-relaxed mb-4 whitespace-pre-wrap">${content}</p>
+                <div>
+                    <p class="text-xs font-bold text-slate-900 dark:text-white">${maskedEmail || email}</p>
+                    <span class="inline-block mt-1 px-2 py-0.5 text-[10px] font-semibold rounded-full ${plan.toLowerCase() === 'lite' ? 'badge-lite' : 'badge-pro'}">${plan.toUpperCase()} 플랜</span>
+                </div>
+            `;
+            return card;
+        }
 
         function renderPage(page, scroll = true) {
             currentPage = page;
@@ -867,7 +921,10 @@
             });
         }
 
-        async function openReviewModal() {
+        let isEditMode = false;
+        let editingDocId = null;
+
+        async function openReviewModal(docId = null) {
             if (!auth || !auth.currentUser) {
                 if (confirm('후기 작성을 위해 로그인이 필요합니다. 로그인 페이지로 이동하시겠습니까?')) {
                     window.location.href = 'login.html?redirect=reviews.html';
@@ -876,7 +933,6 @@
             }
 
             if (!currentUserData) {
-                // Try fetching one more time if not loaded
                 try {
                     const userDoc = await db.collection('users').doc(auth.currentUser.uid).get();
                     if (userDoc.exists) currentUserData = userDoc.data();
@@ -897,6 +953,35 @@
             const planBadge = document.getElementById('display-plan');
             planBadge.textContent = plan.toUpperCase() + " 플랜";
             document.getElementById('reviewer-info-display').classList.remove('hidden');
+
+            // Reset form
+            document.getElementById('review-form').reset();
+            setRating(5);
+            isEditMode = !!docId;
+            editingDocId = docId;
+
+            const modalTitle = document.querySelector('#review-modal h3');
+            const submitBtn = document.querySelector('#review-form button[type="submit"]');
+
+            if (isEditMode) {
+                modalTitle.textContent = "후기 수정하기";
+                submitBtn.textContent = "후기 수정 완료";
+
+                // Fetch existing data for editing
+                try {
+                    const doc = await db.collection("reviews").doc(docId).get();
+                    if (doc.exists) {
+                        const data = doc.data();
+                        document.getElementById('review-content').value = data.content;
+                        setRating(data.rating);
+                    }
+                } catch (e) {
+                    console.error("Error fetching review for edit:", e);
+                }
+            } else {
+                modalTitle.textContent = "후기 작성하기";
+                submitBtn.textContent = "후기 등록하고 이벤트 혜택 받기";
+            }
 
             document.getElementById('review-modal').classList.add('active');
             document.body.style.overflow = 'hidden';
@@ -920,10 +1005,14 @@
             });
         }
 
-        function submitReview(e) {
+        async function submitReview(e) {
             e.preventDefault();
 
             if (!auth.currentUser || !currentUserData) return;
+
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span class="material-symbols-outlined animate-spin">sync</span> 처리 중...';
 
             const email = auth.currentUser.email;
             const plan = currentUserData.plan || 'PRO';
@@ -945,39 +1034,54 @@
                 maskedEmail = "user***@email.com";
             }
 
-            // Create Review Card Element
-            const newCard = document.createElement('div');
-            newCard.className = "bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-md border border-blue-200 dark:border-blue-900/50 animate-in slide-in-from-top-4 duration-500";
+            const reviewData = {
+                uid: auth.currentUser.uid,
+                email: email,
+                maskedEmail: maskedEmail,
+                plan: plan,
+                content: content,
+                rating: rating,
+                updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+            };
 
-            let starsHtml = '';
-            for (let i = 1; i <= 5; i++) {
-                starsHtml += `<span class="material-symbols-outlined text-sm" style="font-variation-settings:'FILL' ${i <= rating ? 1 : 0}">star</span>`;
+            try {
+                if (isEditMode && editingDocId) {
+                    await db.collection("reviews").doc(editingDocId).update(reviewData);
+                    alert('후기가 수정되었습니다.');
+                } else {
+                    reviewData.createdAt = firebase.firestore.FieldValue.serverTimestamp();
+                    await db.collection("reviews").add(reviewData);
+                    alert('🎉 후기가 등록되었습니다!\n보너스 이용권(+7일)이 계정에 즉시 추가되었습니다.');
+                }
+
+                closeReviewModal();
+                fetchReviews(); // Refresh
+            } catch (error) {
+                console.error("Error saving review:", error);
+                alert('오류가 발생했습니다. 다시 시도해 주세요.');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = isEditMode ? "후기 수정 완료" : "후기 등록하고 이벤트 혜택 받기";
+                document.getElementById('review-form').reset();
+                setRating(5);
             }
+        }
 
-            newCard.innerHTML = `
-                <div class="flex items-center gap-1 text-yellow-400 mb-3">
-                    ${starsHtml}
-                </div>
-                <p class="text-slate-700 dark:text-slate-300 text-sm leading-relaxed mb-4">${content}</p>
-                <div>
-                    <p class="text-xs font-bold text-slate-900 dark:text-white">${maskedEmail}</p>
-                    <span class="inline-block mt-1 px-2 py-0.5 text-[10px] font-semibold rounded-full ${plan.toLowerCase() === 'lite' ? 'badge-lite' : 'badge-pro'}">${plan.toUpperCase()} 플랜</span>
-                </div>
-            `;
+        async function editReview(docId) {
+            openReviewModal(docId);
+        }
 
-            // Prepend new card to the array
-            allReviews.unshift(newCard);
+        async function deleteReview(docId) {
+            if (!confirm('정말로 이 후기를 삭제하시겠습니까?\n삭제 후에는 복구할 수 없습니다.')) return;
 
-            // Re-render Page 1
-            renderPage(1, true);
-
-            // Closing and alert
-            closeReviewModal();
-            alert('🎉 후기가 등록되었습니다!\n보너스 이용권(+7일)이 계정에 즉시 추가되었습니다.');
-
-            // Clear form
-            document.getElementById('review-form').reset();
-            setRating(5);
+            try {
+                await db.collection("reviews").doc(docId).delete();
+                alert('후기가 삭제되었습니다.');
+                fetchReviews(); // Refresh
+            } catch (error) {
+                console.error("Error deleting review:", error);
+                alert('삭제 중 오류가 발생했습니다. 본인이 만드신 후기만 삭제 가능합니다.');
+            }
         }
     </script>
 </body>
