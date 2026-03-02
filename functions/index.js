@@ -88,16 +88,22 @@ exports.payappFeedback = functions.https.onRequest(async (req, res) => {
                 const pricingRef = db.collection("settings").doc("pricing");
                 await db.runTransaction(async (transaction) => {
                     const pricingDoc = await transaction.get(pricingRef);
+                    const countField = planId === 'lite' ? 'liteCount' : 'proCount';
+                    const defaultCount = planId === 'lite' ? 53 : 38;
+
                     if (!pricingDoc.exists) {
-                        transaction.set(pricingRef, { remainingCount: 36 }); // Start from 37 (37-1)
+                        const initData = { proCount: 38, liteCount: 53 };
+                        initData[countField] = defaultCount - 1;
+                        transaction.set(pricingRef, initData);
                     } else {
-                        const currentCount = pricingDoc.data().remainingCount || 37;
+                        const data = pricingDoc.data();
+                        const currentCount = data[countField] !== undefined ? data[countField] : defaultCount;
                         if (currentCount > 0) {
-                            transaction.update(pricingRef, { remainingCount: currentCount - 1 });
+                            transaction.update(pricingRef, { [countField]: currentCount - 1 });
                         }
                     }
                 });
-                console.log("📉 Successfully decremented remainingCount");
+                console.log(`📉 Successfully decremented ${planId} count`);
             } catch (scarcityErr) {
                 console.error("❌ Scarcity Count Update Failed:", scarcityErr);
             }

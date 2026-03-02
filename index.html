@@ -924,13 +924,19 @@
                         </div>
                         <div
                             class="flex items-center gap-4 bg-white dark:bg-slate-800 px-6 py-3 rounded-xl shadow-inner border border-slate-100 dark:border-slate-700">
-                            <div class="text-center md:text-right">
-                                <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-0.5">실시간 잔여 인원
+                            <div class="text-center md:text-right border-r border-slate-100 dark:border-slate-700 pr-4">
+                                <p class="text-[10px] font-bold text-blue-400 uppercase tracking-widest mb-0.5">PRO 잔여
                                 </p>
-                                <p class="text-2xl font-black text-primary dark:text-blue-400"
-                                    id="remaining-count-display">37명</p>
+                                <p class="text-xl font-black text-primary dark:text-white" id="pro-count-display">38명
+                                </p>
                             </div>
-                            <div class="h-10 w-px bg-slate-200 dark:bg-slate-700 mx-2"></div>
+                            <div class="text-center md:text-right">
+                                <p class="text-[10px] font-bold text-green-400 uppercase tracking-widest mb-0.5">LITE 잔여
+                                </p>
+                                <p class="text-xl font-black text-primary dark:text-white" id="lite-count-display">53명
+                                </p>
+                            </div>
+                            <div class="h-10 w-px bg-slate-200 dark:bg-slate-700 mx-1"></div>
                             <div class="flex -space-x-2">
                                 <div
                                     class="w-8 h-8 rounded-full border-2 border-white dark:border-slate-800 bg-slate-200 overflow-hidden">
@@ -1383,12 +1389,23 @@
             if (typeof db !== 'undefined') {
                 db.collection("settings").doc("pricing").onSnapshot((doc) => {
                     if (doc.exists) {
-                        const count = doc.data().remainingCount;
-                        const display = document.getElementById('remaining-count-display');
-                        if (display) {
-                            display.classList.add('scale-110', 'text-blue-600');
-                            display.textContent = count + "명";
-                            setTimeout(() => display.classList.remove('scale-110', 'text-blue-600'), 500);
+                        const data = doc.data();
+                        const proDisplay = document.getElementById('pro-count-display');
+                        const liteDisplay = document.getElementById('lite-count-display');
+
+                        if (proDisplay && data.proCount !== undefined) {
+                            if (proDisplay.textContent !== data.proCount + "명") {
+                                proDisplay.classList.add('scale-110', 'text-blue-500');
+                                proDisplay.textContent = data.proCount + "명";
+                                setTimeout(() => proDisplay.classList.remove('scale-110', 'text-blue-500'), 500);
+                            }
+                        }
+                        if (liteDisplay && data.liteCount !== undefined) {
+                            if (liteDisplay.textContent !== data.liteCount + "명") {
+                                liteDisplay.classList.add('scale-110', 'text-green-500');
+                                liteDisplay.textContent = data.liteCount + "명";
+                                setTimeout(() => liteDisplay.classList.remove('scale-110', 'text-green-500'), 500);
+                            }
                         }
                     }
                 });
