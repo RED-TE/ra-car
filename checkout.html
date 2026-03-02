@@ -580,6 +580,28 @@
             updateSummary();
         };
 
+        window.toggleEvidenceFields = function (type) {
+            const personal = document.getElementById('personal-fields');
+            const business = document.getElementById('business-fields');
+            const notice = document.getElementById('evidence-notice');
+
+            personal.classList.add('hidden');
+            business.classList.add('hidden');
+            if (notice) notice.classList.add('hidden');
+
+            if (type === 'personal') {
+                personal.classList.remove('hidden');
+                if (notice) notice.classList.remove('hidden');
+            } else if (type === 'business') {
+                business.classList.remove('hidden');
+                if (notice) notice.classList.remove('hidden');
+            }
+        };
+
+        window.toggleBusinessFields = function (show) {
+            toggleEvidenceFields(show ? 'business' : 'none');
+        };
+
         function updateSummary() {
             const plan = PRICING_CONFIG.plans[selectedPlanId];
             document.getElementById('summary-name').textContent = plan.name;

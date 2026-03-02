@@ -96,13 +96,14 @@ exports.payappFeedback = functions.https.onRequest(async (req, res) => {
                 try {
                     const evidenceData = JSON.parse(data.var2);
                     if (evidenceData && evidenceData.type !== 'none') {
-                        console.log(`🧾 Issuing Cash Receipt for UID=${uid}, Type=${evidenceData.type}`);
-                        await issueCashReceipt({
+                        console.log(`🧾 Queuing Cash Receipt for UID=${uid}, Type=${evidenceData.type}`);
+                        // 🚀 'await' 하지 않고 비동기로 실행하여 PayApp 피드백 응답(SUCCESS) 지연 방지
+                        issueCashReceipt({
                             mul_no: orderId,
                             amount: parseInt(amount),
                             type: evidenceData.type,
                             id_info: evidenceData.id_info
-                        });
+                        }).catch(err => console.error("❌ Delayed Cash Receipt Issuance Failed:", err));
                     }
                 } catch (pe) {
                     console.log("var2 is not JSON or other format, skipping receipt checking.");
