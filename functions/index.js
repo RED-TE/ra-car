@@ -6,10 +6,20 @@ const db = admin.firestore();
 
 // 🚀 PayApp Webhook (Feedback URL) Handler
 exports.payappFeedback = functions.https.onRequest(async (req, res) => {
-    // PayApp sends data in POST body (form-encoded)
-    const data = req.body || {};
-    console.log("PayApp Signal Received (Raw Data):", JSON.stringify(data));
-    console.log("Headers:", JSON.stringify(req.headers));
+    // PayApp sends data in POST body (form-encoded), but sometimes it might be in query or rawBody
+    const data = { ...req.query, ...req.body };
+    console.log("PayApp Signal Received (Data):", JSON.stringify(data));
+
+    if (Object.keys(data).length === 0 && req.rawBody) {
+        try {
+            const querystring = require('querystring');
+            const parsed = querystring.parse(req.rawBody.toString());
+            Object.assign(data, parsed);
+            console.log("Parsed from rawBody:", JSON.stringify(parsed));
+        } catch (e) {
+            console.error("Failed to parse rawBody:", e.message);
+        }
+    }
 
     const PAYAPP_LINK_KEY = "u0VjDSiQHsUamv/vBQMVS+1DPJnCCRVaOgT+oqg6zaM=";
     const PAYAPP_LINK_VAL = "u0VjDSiQHsUamv/vBQMVS1bQIoBpTecR5Ye3Ew9bJaU=";
