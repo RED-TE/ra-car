@@ -769,28 +769,69 @@
 
         // Initialize reviews from Firestore on load
         window.addEventListener('DOMContentLoaded', () => {
+            // 1. First, capture static reviews currently in the DOM
+            const container = document.getElementById('reviews-container');
+            const staticCards = Array.from(container.querySelectorAll(':scope > div:not(#no-reviews)'));
+
+            // Map static cards to a standard format with a dummy past date for sorting
+            const staticReviewsData = staticCards.map((el, index) => {
+                // Give static reviews a dummy date (randomly within the last 30 days but older than now)
+                const dummyDate = new Date();
+                dummyDate.setDate(dummyDate.getDate() - (index + 5)); // Older ones lower down
+
+                return {
+                    id: `static-${index}`,
+                    element: el,
+                    createdAt: dummyDate
+                };
+            });
+
             if (typeof db !== 'undefined') {
-                // Initial fetch
-                fetchReviews();
+                // 2. Fetch from Firestore and combine
+                fetchReviews(staticReviewsData);
+            } else {
+                // Fallback if no Firebase
+                allReviews = staticReviewsData.map(r => r.element);
+                renderPage(1, false);
             }
         });
 
-        async function fetchReviews() {
+        async function fetchReviews(staticReviews = []) {
             try {
                 const querySnapshot = await db.collection("reviews").orderBy("createdAt", "desc").get();
-                allReviews = [];
+                const dynamicReviews = [];
 
                 querySnapshot.forEach((doc) => {
                     const data = doc.data();
                     const reviewEl = createReviewElement(doc.id, data);
-                    allReviews.push(reviewEl);
+                    const createdAt = data.createdAt ? data.createdAt.toDate() : new Date();
+
+                    dynamicReviews.push({
+                        id: doc.id,
+                        element: reviewEl,
+                        createdAt: createdAt
+                    });
                 });
+
+                // 3. Combine and Sort
+                const combined = [...dynamicReviews, ...staticReviews];
+
+                // Sort by date descending
+                combined.sort((a, b) => b.createdAt - a.createdAt);
+
+                allReviews = combined.map(r => r.element);
 
                 renderPage(1, false);
             } catch (error) {
                 console.error("Error fetching reviews:", error);
-                document.getElementById('no-reviews').textContent = "후기를 불러오는 중 오류가 발생했습니다.";
-                document.getElementById('no-reviews').classList.remove('hidden');
+                // Even if fetch fails, show static reviews
+                if (staticReviews.length > 0) {
+                    allReviews = staticReviews.map(r => r.element);
+                    renderPage(1, false);
+                } else {
+                    document.getElementById('no-reviews').textContent = "후기를 불러오는 중 오류가 발생했습니다.";
+                    document.getElementById('no-reviews').classList.remove('hidden');
+                }
             }
         }
 

@@ -876,7 +876,7 @@
 
                     <!-- 더보기 버튼 -->
                     <div class="text-center mt-4">
-                        <a href="reviews.html"
+                        <a href="reviews.html" id="all-reviews-btn"
                             class="inline-flex items-center gap-2 px-8 py-3.5 bg-primary text-white font-bold rounded-xl hover:bg-slate-800 transition-all shadow-lg shadow-primary/20 text-sm">
                             후기 전체 보기 (23개)
                             <span class="material-symbols-outlined text-base">arrow_forward</span>
@@ -1407,6 +1407,16 @@
                                 setTimeout(() => liteDisplay.classList.remove('scale-110', 'text-green-500'), 500);
                             }
                         }
+                    }
+                });
+
+                // 📝 Update Review Count (Static 23 + Firestore Dynamic)
+                db.collection("reviews").onSnapshot((snap) => {
+                    const dynamicCount = snap.size;
+                    const totalCount = 23 + dynamicCount;
+                    const btn = document.getElementById('all-reviews-btn');
+                    if (btn) {
+                        btn.innerHTML = `후기 전체 보기 (${totalCount}개) <span class="material-symbols-outlined text-base">arrow_forward</span>`;
                     }
                 });
             }
