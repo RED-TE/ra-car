@@ -162,23 +162,43 @@
                     <div class="space-y-6">
                         <div class="flex flex-wrap gap-6">
                             <label class="flex items-center gap-2.5 cursor-pointer group">
-                                <input type="radio" name="evidence-type" value="personal" checked
-                                    onclick="toggleBusinessFields(false)"
+                                <input type="radio" name="evidence-type" value="none" checked
+                                    onclick="toggleEvidenceFields('none')"
+                                    class="h-5 w-5 text-navy-900 border-slate-300 focus:ring-navy-900">
+                                <span
+                                    class="text-sm font-bold text-slate-700 group-hover:text-navy-900 transition-colors">발급
+                                    안 함</span>
+                            </label>
+                            <label class="flex items-center gap-2.5 cursor-pointer group">
+                                <input type="radio" name="evidence-type" value="personal"
+                                    onclick="toggleEvidenceFields('personal')"
                                     class="h-5 w-5 text-navy-900 border-slate-300 focus:ring-navy-900">
                                 <span
                                     class="text-sm font-bold text-slate-700 group-hover:text-navy-900 transition-colors">개인
-                                    (지출증빙 미필요)</span>
+                                    소득공제용</span>
                             </label>
                             <label class="flex items-center gap-2.5 cursor-pointer group">
                                 <input type="radio" name="evidence-type" value="business"
-                                    onclick="toggleBusinessFields(true)"
+                                    onclick="toggleEvidenceFields('business')"
                                     class="h-5 w-5 text-navy-900 border-slate-300 focus:ring-navy-900">
                                 <span
                                     class="text-sm font-bold text-slate-700 group-hover:text-navy-900 transition-colors">사업자
-                                    (세금계산서/현금영수증)</span>
+                                    지출증빙용</span>
                             </label>
                         </div>
 
+                        <!-- Personal Receipt Field -->
+                        <div id="personal-fields"
+                            class="hidden p-6 bg-slate-50 rounded-2xl border border-slate-100 ring-1 ring-slate-200/50">
+                            <div class="space-y-2">
+                                <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider ml-1">휴대폰
+                                    번호 (또는 현금영수증 카드번호)</label>
+                                <input type="text" id="evidence-phone" placeholder="010-0000-0000"
+                                    class="w-full border-slate-200 rounded-custom py-3 text-sm focus:ring-2 focus:ring-navy-900/10 transition-all">
+                            </div>
+                        </div>
+
+                        <!-- Business Receipt Fields -->
                         <div id="business-fields"
                             class="hidden grid grid-cols-1 md:grid-cols-2 gap-5 p-6 bg-slate-50 rounded-2xl border border-slate-100 ring-1 ring-slate-200/50">
                             <div class="space-y-2">
@@ -199,12 +219,13 @@
                                 <input type="text" id="biz-ceo" placeholder="대표자명을 입력해주세요"
                                     class="w-full border-slate-200 rounded-custom py-3 text-sm focus:ring-2 focus:ring-navy-900/10 transition-all">
                             </div>
-                            <div class="md:col-span-2 flex items-start gap-2 pt-1">
-                                <span class="material-symbols-outlined text-slate-400 text-sm">info</span>
-                                <p class="text-[11px] text-slate-500 leading-relaxed font-medium">
-                                    입력하신 정보는 결제 완료 후 세금계산서 또는 현금영수증 발행을 위한 증빙 자료로만 사용됩니다.
-                                </p>
-                            </div>
+                        </div>
+
+                        <div id="evidence-notice" class="hidden md:col-span-2 flex items-start gap-2 pt-1">
+                            <span class="material-symbols-outlined text-slate-400 text-sm">info</span>
+                            <p class="text-[11px] text-slate-500 leading-relaxed font-medium">
+                                입력하신 정보는 결제 완료 후 현금영수증 또는 세금계산서 발행을 위한 증빙 자료로 자동 사용됩니다.
+                            </p>
                         </div>
                     </div>
                 </section>
@@ -477,7 +498,7 @@
     <script>
         const urlParams = new URLSearchParams(window.location.search);
         let selectedPlanId = urlParams.get('plan') || PRICING_CONFIG.defaultPlan;
-        let isRecurring = urlParams.get('recurring') !== 'false'; // Default to true unless explicitly 'false'
+        let isRecurring = urlParams.get('recurring') === 'true'; // Default to false unless explicitly 'true'
 
         if (!PRICING_CONFIG.plans[selectedPlanId]) {
             selectedPlanId = PRICING_CONFIG.defaultPlan;
@@ -614,49 +635,58 @@
 
                 if (typeof PayApp === 'undefined') throw new Error('결제 모듈 로딩 실패');
 
-                // Business Info Collection
+                // 증빙 정보 수집
                 const evidenceType = document.querySelector('input[name="evidence-type"]:checked').value;
-                let businessMemo = "";
-                if (evidenceType === 'business') {
+                let evidenceData = { type: evidenceType };
+
+                if (evidenceType === 'personal') {
+                    const evPhone = document.getElementById('evidence-phone').value.trim();
+                    if (!evPhone) return alert('현금영수증 발행을 위한 휴대폰 번호를 입력해주세요.');
+                    evidenceData.id_info = evPhone;
+                } else if (evidenceType === 'business') {
                     const bizNum = document.getElementById('biz-number').value.trim();
                     const bizName = document.getElementById('biz-name').value.trim();
                     const bizCeo = document.getElementById('biz-ceo').value.trim();
-
-                    if (!bizNum || !bizName || !bizCeo) {
-                        return alert('사업자 증빙을 위해 모든 사업자 정보(번호, 상호, 대표자)를 입력해주세요.');
-                    }
-                    businessMemo = ` [사업자:${bizName}/${bizNum}/${bizCeo}]`;
+                    if (!bizNum || !bizName || !bizCeo) return alert('사업자 정보를 모두 입력해주세요.');
+                    evidenceData.id_info = bizNum;
+                    evidenceData.bizName = bizName;
+                    evidenceData.bizCeo = bizCeo;
                 }
 
                 PayApp.setDefault('userid', PAYAPP_CONFIG.userid.trim());
                 PayApp.setDefault('shopname', (PAYAPP_CONFIG.shopname || '리카오토플랜').trim());
 
                 let productName = plan.name;
-                if (isRecurring) productName = '[정기구독] ' + productName;
+                if (isRecurring) productName = '[정기결제] ' + productName;
 
                 PayApp.setParam('goodname', productName);
-                PayApp.setParam('price', plan.price.toString());
+                PayApp.setParam('goodprice', plan.price.toString()); // rebill()에서는 goodprice 사용 권장
                 PayApp.setParam('recvphone', phone);
-                PayApp.setParam('memo', name + businessMemo);
+                PayApp.setParam('memo', name + (evidenceType !== 'none' ? ` [증빙:${evidenceType}]` : ""));
                 PayApp.setParam('smsuse', 'n');
                 PayApp.setParam('var1', currentUser.uid);
                 PayApp.setParam('var_email', currentUser.email);
 
-                if (isRecurring) {
-                    PayApp.setParam('rebill', 'y');
-                    PayApp.setParam('rebill_y_n', 'y'); // 🚀 보험용 (Lite API 버전에 따라 다름)
-                    PayApp.setParam('var2', 'subscription');
-                }
-
-                PayApp.setParam('redirectpay', '1');
-                PayApp.setParam('redirect', 'self');
-                PayApp.setParam('skip_screen', 'y');
+                // var2에 증빙 데이터를 JSON으로 담아 전달 (Webhook에서 처리)
+                PayApp.setParam('var2', JSON.stringify(evidenceData));
 
                 const baseReturnUrl = new URL('checkout_success.html', window.location.href).href;
                 PayApp.setParam('returnurl', baseReturnUrl);
                 if (PAYAPP_CONFIG.feedbackurl) PayApp.setParam('feedbackurl', PAYAPP_CONFIG.feedbackurl.trim());
 
-                PayApp.payrequest();
+                PayApp.setTarget('_self'); // 현재 창 전환 권장 (결제 완료 후 returnurl 이동을 위해)
+
+                if (isRecurring) {
+                    // 🚀 정기결제 전용 API 호출
+                    PayApp.setParam('rebillCycleType', 'Month');
+                    PayApp.setParam('rebillCycleMonth', new Date().getDate().toString()); // 오늘 날짜를 결제일로 설정
+                    PayApp.setParam('rebillExpire', '2035-12-31'); // 충분히 먼 미래
+                    PayApp.rebill();
+                } else {
+                    // 단건 결제
+                    PayApp.setParam('price', plan.price.toString());
+                    PayApp.payrequest();
+                }
             } catch (e) { alert(e.message); }
         };
 

@@ -63,10 +63,11 @@ exports.payappFeedback = functions.https.onRequest(async (req, res) => {
                 updatedAt: now,
                 licenseKey: "RA" + Math.random().toString(36).substring(2, 10).toUpperCase(),
                 phone: data.recvphone || "", // 🚀 자동결제를 위해 번호 저장
-                memo: data.memo || ""       // 🚀 사업자 증빙 정보 등 저장
+                memo: data.memo || "",       // 🚀 사업자 증빙 정보 등 저장
+                rebillNo: data.rebill_no || null // 🚀 PayApp 구독 번호
             };
 
-            // 만약 빌키(rebill_key)가 넘어왔다면 저장 (정기결제 등록)
+            // 만약 빌키(rebill_key)가 넘어왔다면 저장 (정기결제 등록 - 수동/자동 공용)
             if (data.rebill_key) {
                 console.log(`💳 Billkey Received for UID=${uid}: ${data.rebill_key}`);
                 updateData.billKey = data.rebill_key;
@@ -74,16 +75,52 @@ exports.payappFeedback = functions.https.onRequest(async (req, res) => {
                 updateData.subscriptionStartDate = now;
             }
 
-            // 기존에 구독 중이거나 방금 등록했다면 다음 결제일 갱신
-            // (var2='subscription'은 결제 창에서 보낸 구분값)
-            if (data.rebill_key || data.var2 === 'subscription') {
+            // PayApp 구독 번호가 있다면 정기결제로 간주
+            if (data.rebill_no) {
+                console.log(`📅 Rebill No Received for UID=${uid}: ${data.rebill_no}`);
+                updateData.isSubscriptionActive = true;
+            }
+
+            // 기존에 구독 중이거나 방금 등록했다면 다음 결제일 갱신 (var2='subscription' 또는 rebill_no 존재)
+            if (data.rebill_key || data.rebill_no || data.var2 === 'subscription' || (data.var2 && data.var2.includes('subscription'))) {
                 updateData.nextBillingDate = admin.firestore.Timestamp.fromDate(expiryDate);
             }
 
             // 3. Update User Activation Status
             await db.collection("users").doc(uid).set(updateData, { merge: true });
 
-            console.log(`✅ Successfully upgraded user ${uid} to ${planId}${data.rebill_key ? ' (Subscription Active)' : ''}`);
+            console.log(`✅ Successfully upgraded user ${uid} to ${planId}`);
+
+            // 🚀 4. Automated Cash Receipt (현금영수증 발행)
+            if (data.var2) {
+                try {
+                    const evidenceData = JSON.parse(data.var2);
+                    if (evidenceData && evidenceData.type !== 'none') {
+                        console.log(`🧾 Issuing Cash Receipt for UID=${uid}, Type=${evidenceData.type}`);
+                        await issueCashReceipt({
+                            mul_no: orderId,
+                            amount: parseInt(amount),
+                            type: evidenceData.type,
+                            id_info: evidenceData.id_info
+                        });
+                    }
+                } catch (pe) {
+                    console.log("var2 is not JSON or other format, skipping receipt checking.");
+                }
+            }
+
+            // 🚀 4. Decrement Limited Offer Counter
+            const settingsRef = db.collection("settings").doc("pricing");
+            await db.runTransaction(async (transaction) => {
+                const sfDoc = await transaction.get(settingsRef);
+                if (!sfDoc.exists) {
+                    transaction.set(settingsRef, { limited_offer_count: 36 }); // Start from 37 - 1 = 36
+                } else {
+                    const newCount = Math.max(0, (sfDoc.data().limited_offer_count || 37) - 1);
+                    transaction.update(settingsRef, { limited_offer_count: newCount });
+                }
+            });
+            console.log("📉 Limited offer counter decremented.");
 
         } catch (error) {
             console.error("❌ Firestore Update Failed:", error);
@@ -269,16 +306,97 @@ exports.cancelSubscription = functions.https.onCall(async (data, context) => {
     const uid = context.auth.uid;
 
     try {
+        const userDoc = await db.collection("users").doc(uid).get();
+        const userData = userDoc.data();
+
+        // 1. PayApp 구독 해지 (rebill_no가 있는 경우)
+        if (userData && userData.rebillNo) {
+            console.log(`🚫 Calling PayApp rebillCancel for UID=${uid}, rebillNo=${userData.rebillNo}`);
+            try {
+                await payappApiCall({
+                    cmd: 'rebillCancel',
+                    rebill_no: userData.rebillNo,
+                    userid: "jhxox0707",
+                    linkkey: "u0VjDSiQHsUamv/vBQMVS+1DPJnCCRVaOgT+oqg6zaM="
+                });
+            } catch (apiErr) {
+                console.error("PayApp rebillCancel API Error:", apiErr);
+                // API 실패해도 로컬 상태는 해지 처리 시도
+            }
+        }
+
+        // 2. Local State Update
         await db.collection("users").doc(uid).update({
             isSubscriptionActive: false,
             subscriptionCanceled: true,
             updatedAt: admin.firestore.Timestamp.now()
         });
-        return { success: true, message: "구독이 정상적으로 취소되었습니다. 정기 결제가 중단됩니다." };
+        return { success: true, message: "구독이 정상적으로 취소되었습니다. 정기 결제가 중단되었습니다." };
     } catch (error) {
+        console.error("Cancel Subscription Error:", error);
         throw new functions.https.HttpsError('internal', error.message);
     }
 });
+
+/**
+ * 🧾 현금영수증 발행 API 호출
+ */
+async function issueCashReceipt({ mul_no, amount, type, id_info }) {
+    const amt_tot = amount;
+    const amt_sup = Math.round(amt_tot / 1.1);
+    const amt_tax = amt_tot - amt_sup;
+    const trad_time = new Date().toISOString().replace(/[-:T]/g, "").slice(0, 14);
+
+    const postData = {
+        cmd: 'cashStRegist',
+        userid: 'jhxox0707',
+        linkkey: 'u0VjDSiQHsUamv/vBQMVS+1DPJnCCRVaOgT+oqg6zaM=',
+        mul_no: mul_no,
+        id_info: id_info,
+        trad_time: trad_time,
+        tr_code: type === 'business' ? '1' : '0',
+        amt_tot: amt_tot,
+        amt_sup: amt_sup,
+        amt_tax: amt_tax,
+        corp_tax_type: '0' // 과세
+    };
+
+    return payappApiCall(postData);
+}
+
+/**
+ * 🌐 PayApp REST API 공용 호출 함수
+ */
+async function payappApiCall(params) {
+    const https = require('https');
+    const querystring = require('querystring');
+    const postData = querystring.stringify(params);
+
+    return new Promise((resolve, reject) => {
+        const req = https.request({
+            hostname: 'api.payapp.kr',
+            path: '/oapi/apiLoad.html',
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/x-www-form-urlencoded',
+                'Content-Length': postData.length
+            }
+        }, (res) => {
+            let body = '';
+            res.on('data', d => body += d);
+            res.on('end', () => {
+                const response = querystring.parse(body);
+                console.log(`PayApp API Response (${params.cmd}):`, JSON.stringify(response));
+                if (response.state === '1') resolve(response);
+                else reject(new Error(response.errorMessage || 'API Error'));
+            });
+        });
+
+        req.on('error', reject);
+        req.write(postData);
+        req.end();
+    });
+}
 
 // 🎁 Review Reward Handler (+7 Days Extension)
 exports.onReviewCreate = functions.firestore.document('reviews/{reviewId}').onCreate(async (snap, context) => {

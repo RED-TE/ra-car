@@ -893,6 +893,21 @@
                 <div class="text-center mb-12">
                     <h2 class="text-3xl lg:text-4xl font-black text-slate-900 dark:text-white tracking-tight mb-8">합리적인
                         플랜으로 시작하세요</h2>
+
+                    <!-- 🚀 Limited Offer Banner -->
+                    <div id="limited-offer-banner"
+                        class="inline-flex items-center gap-3 bg-red-50 dark:bg-red-900/20 border border-red-100 dark:border-red-900/30 px-6 py-3 rounded-2xl mb-8 animate-pulse mx-auto">
+                        <span class="flex h-3 w-3 relative">
+                            <span
+                                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
+                            <span class="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
+                        </span>
+                        <p class="text-red-600 dark:text-red-400 font-bold text-sm md:text-base">
+                            [선착순 특가] 현재 <span id="limited-count" class="text-lg md:text-xl font-black mx-1">37</span>명
+                            남았습니다!
+                        </p>
+                    </div>
+
                     <!-- Billing Toggle -->
                     <div
                         class="flex justify-center p-1.5 bg-slate-200 dark:bg-slate-800 rounded-2xl w-fit mx-auto mb-8 shadow-inner">
@@ -1274,7 +1289,7 @@
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
     <script src="firebase_config.js"></script>
     <script>
-        let currentBilling = 'subscription';
+        let currentBilling = 'single';
         let currentUser = null;
 
         // --- Auth State ---
@@ -1337,10 +1352,36 @@
             }
         }
 
-        // Default UI to subscription on load
+        // Default UI to single on load
         window.addEventListener('DOMContentLoaded', () => {
-            switchBilling('subscription');
+            switchBilling('single');
+            initLimitedOffer();
         });
+
+        async function initLimitedOffer() {
+            const countEl = document.getElementById('limited-count');
+            if (typeof db !== 'undefined') {
+                try {
+                    // Listen for real-time updates
+                    db.collection("settings").doc("pricing").onSnapshot((doc) => {
+                        if (doc.exists) {
+                            const count = doc.data().limited_offer_count;
+                            countEl.textContent = count;
+                            if (count <= 0) {
+                                document.getElementById('limited-offer-banner').innerHTML = `
+                                    <p class="text-slate-500 font-bold">특가 혜택이 모두 마감되었습니다.</p>
+                                `;
+                            }
+                        } else {
+                            // Initialize if not exists
+                            db.collection("settings").doc("pricing").set({ limited_offer_count: 37 });
+                        }
+                    });
+                } catch (e) {
+                    console.error("Error fetching limited offer count:", e);
+                }
+            }
+        }
 
         function goToCheckout(planBase) {
             if (!currentUser) {
