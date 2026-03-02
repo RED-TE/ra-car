@@ -893,21 +893,6 @@
                 <div class="text-center mb-12">
                     <h2 class="text-3xl lg:text-4xl font-black text-slate-900 dark:text-white tracking-tight mb-8">합리적인
                         플랜으로 시작하세요</h2>
-
-                    <!-- 🚀 Limited Offer Banner -->
-                    <div id="limited-offer-banner"
-                        class="inline-flex items-center gap-3 bg-red-50 dark:bg-red-900/20 border border-red-100 dark:border-red-900/30 px-6 py-3 rounded-2xl mb-8 animate-pulse mx-auto">
-                        <span class="flex h-3 w-3 relative">
-                            <span
-                                class="animate-ping absolute inline-flex h-full w-full rounded-full bg-red-400 opacity-75"></span>
-                            <span class="relative inline-flex rounded-full h-3 w-3 bg-red-500"></span>
-                        </span>
-                        <p class="text-red-600 dark:text-red-400 font-bold text-sm md:text-base">
-                            [선착순 특가] 현재 <span id="limited-count" class="text-lg md:text-xl font-black mx-1">37</span>명
-                            남았습니다!
-                        </p>
-                    </div>
-
                     <!-- Billing Toggle -->
                     <div
                         class="flex justify-center p-1.5 bg-slate-200 dark:bg-slate-800 rounded-2xl w-fit mx-auto mb-8 shadow-inner">
@@ -922,6 +907,44 @@
                             id="btn-yearly" onclick="switchBilling('yearly')">
                             연간 <span class="text-[10px] px-1.5 py-0.5 bg-green-500 text-white rounded-full">Save</span>
                         </button>
+                    </div>
+                </div>
+                <div class="max-w-5xl mx-auto mb-10">
+                    <div
+                        class="bg-blue-50 dark:bg-blue-900/20 border border-blue-100 dark:border-blue-800/50 rounded-2xl p-6 flex flex-col md:flex-row items-center justify-between gap-4 shadow-sm">
+                        <div class="flex items-center gap-3">
+                            <span
+                                class="flex h-10 w-10 items-center justify-center rounded-full bg-blue-100 dark:bg-blue-800 text-blue-600 dark:text-blue-400">
+                                <span class="material-symbols-outlined">local_fire_department</span>
+                            </span>
+                            <div>
+                                <h4 class="text-lg font-black text-slate-900 dark:text-white">지금 가격 한정 특가 혜택</h4>
+                                <p class="text-sm text-slate-500 dark:text-slate-400">오픈 기념 프로모션이 곧 종료됩니다.</p>
+                            </div>
+                        </div>
+                        <div
+                            class="flex items-center gap-4 bg-white dark:bg-slate-800 px-6 py-3 rounded-xl shadow-inner border border-slate-100 dark:border-slate-700">
+                            <div class="text-center md:text-right">
+                                <p class="text-xs font-bold text-slate-400 uppercase tracking-widest mb-0.5">실시간 잔여 인원
+                                </p>
+                                <p class="text-2xl font-black text-primary dark:text-blue-400"
+                                    id="remaining-count-display">37명</p>
+                            </div>
+                            <div class="h-10 w-px bg-slate-200 dark:bg-slate-700 mx-2"></div>
+                            <div class="flex -space-x-2">
+                                <div
+                                    class="w-8 h-8 rounded-full border-2 border-white dark:border-slate-800 bg-slate-200 overflow-hidden">
+                                    <img src="https://ui-avatars.com/api/?name=User1&background=random" alt="User">
+                                </div>
+                                <div
+                                    class="w-8 h-8 rounded-full border-2 border-white dark:border-slate-800 bg-slate-200 overflow-hidden">
+                                    <img src="https://ui-avatars.com/api/?name=User2&background=random" alt="User">
+                                </div>
+                                <div
+                                    class="w-8 h-8 rounded-full border-2 border-white dark:border-slate-800 bg-slate-200 overflow-hidden flex items-center justify-center text-[10px] font-bold text-slate-500">
+                                    +12</div>
+                            </div>
+                        </div>
                     </div>
                 </div>
                 <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
@@ -980,7 +1003,7 @@
                         </ul>
                         <button
                             class="w-full py-4 bg-slate-100 dark:bg-slate-700 text-slate-900 dark:text-white font-bold rounded-xl hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors"
-                            onclick="goToCheckout('LITE')">플랜 선택하기</button>
+                            onclick="goToCheckout('LITE')">구독하기</button>
                     </div>
                     <!-- PRO Plan -->
                     <div
@@ -1355,33 +1378,22 @@
         // Default UI to single on load
         window.addEventListener('DOMContentLoaded', () => {
             switchBilling('single');
-            initLimitedOffer();
-        });
 
-        async function initLimitedOffer() {
-            const countEl = document.getElementById('limited-count');
+            // 🚀 Scarcity Countdown Real-time Update
             if (typeof db !== 'undefined') {
-                try {
-                    // Listen for real-time updates
-                    db.collection("settings").doc("pricing").onSnapshot((doc) => {
-                        if (doc.exists) {
-                            const count = doc.data().limited_offer_count;
-                            countEl.textContent = count;
-                            if (count <= 0) {
-                                document.getElementById('limited-offer-banner').innerHTML = `
-                                    <p class="text-slate-500 font-bold">특가 혜택이 모두 마감되었습니다.</p>
-                                `;
-                            }
-                        } else {
-                            // Initialize if not exists
-                            db.collection("settings").doc("pricing").set({ limited_offer_count: 37 });
+                db.collection("settings").doc("pricing").onSnapshot((doc) => {
+                    if (doc.exists) {
+                        const count = doc.data().remainingCount;
+                        const display = document.getElementById('remaining-count-display');
+                        if (display) {
+                            display.classList.add('scale-110', 'text-blue-600');
+                            display.textContent = count + "명";
+                            setTimeout(() => display.classList.remove('scale-110', 'text-blue-600'), 500);
                         }
-                    });
-                } catch (e) {
-                    console.error("Error fetching limited offer count:", e);
-                }
+                    }
+                });
             }
-        }
+        });
 
         function goToCheckout(planBase) {
             if (!currentUser) {
