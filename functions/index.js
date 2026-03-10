@@ -62,7 +62,8 @@ exports.payappFeedback = functions.https.onRequest(async (req, res) => {
                 lastPaymentAmount: parseInt(amount.replace(/[^0-9]/g, "")),
                 updatedAt: now,
                 licenseKey: "RA" + Math.random().toString(36).substring(2, 10).toUpperCase(),
-                phone: data.recvphone || "" // 🚀 자동결제를 위해 번호 저장
+                phone: data.recvphone || "", // 🚀 자동결제를 위해 번호 저장
+                memo: data.memo || ""       // 🚀 사업자 증빙 정보 등 저장
             };
 
             // 만약 빌키(rebill_key)가 넘어왔다면 저장 (정기결제 등록)
@@ -81,6 +82,31 @@ exports.payappFeedback = functions.https.onRequest(async (req, res) => {
 
             // 3. Update User Activation Status
             await db.collection("users").doc(uid).set(updateData, { merge: true });
+
+            // 🚀 4. Update Scarcity Count (Price Limited Offer)
+            try {
+                const pricingRef = db.collection("settings").doc("pricing");
+                await db.runTransaction(async (transaction) => {
+                    const pricingDoc = await transaction.get(pricingRef);
+                    const countField = planId === 'lite' ? 'liteCount' : 'proCount';
+                    const defaultCount = planId === 'lite' ? 53 : 38;
+
+                    if (!pricingDoc.exists) {
+                        const initData = { proCount: 38, liteCount: 53 };
+                        initData[countField] = defaultCount - 1;
+                        transaction.set(pricingRef, initData);
+                    } else {
+                        const data = pricingDoc.data();
+                        const currentCount = data[countField] !== undefined ? data[countField] : defaultCount;
+                        if (currentCount > 0) {
+                            transaction.update(pricingRef, { [countField]: currentCount - 1 });
+                        }
+                    }
+                });
+                console.log(`📉 Successfully decremented ${planId} count`);
+            } catch (scarcityErr) {
+                console.error("❌ Scarcity Count Update Failed:", scarcityErr);
+            }
 
             console.log(`✅ Successfully upgraded user ${uid} to ${planId}${data.rebill_key ? ' (Subscription Active)' : ''}`);
 
@@ -215,9 +241,38 @@ async function processRebill(uid, user) {
                 console.log(`PayApp Rebill Response (UID=${uid}):`, JSON.stringify(response));
 
                 if (response.state === '1') {
-                    // Success! Update expiry in feedback will happen if payapp triggers feedback
-                    // BUT for insurance, we can update nextBillingDate here if feedback isn't triggered for rebills
                     console.log(`✅ Rebill Request Success for UID=${uid}`);
+
+                    // 🚀 피드백을 기다리지 않고 즉시 다음 만료일 갱신 (보험용)
+                    try {
+                        const now = admin.firestore.Timestamp.now();
+                        const isYearly = (user.planName || "").toLowerCase().includes("1년") || (user.planName || "").toLowerCase().includes("yearly");
+                        const durationDays = isYearly ? 365 : 30;
+
+                        let currentExpiry = user.expiryDate;
+                        let newExpiry;
+                        if (currentExpiry && typeof currentExpiry.toDate === 'function') {
+                            newExpiry = currentExpiry.toDate();
+                        } else {
+                            newExpiry = new Date();
+                        }
+
+                        // 만약 만료일이 이미 지났다면 오늘 기준, 아니면 기존 만료일 기준 연장
+                        if (newExpiry < new Date()) newExpiry = new Date();
+                        newExpiry.setDate(newExpiry.getDate() + durationDays);
+
+                        await db.collection("users").doc(uid).update({
+                            expiryDate: admin.firestore.Timestamp.fromDate(newExpiry),
+                            nextBillingDate: admin.firestore.Timestamp.fromDate(newExpiry),
+                            updatedAt: now,
+                            lastPaymentAmount: user.lastPaymentAmount, // 금액 유지
+                            plan: user.plan
+                        });
+                        console.log(`📅 Successfully extended subscription for ${uid} until ${newExpiry.toISOString()}`);
+                    } catch (dbErr) {
+                        console.error("❌ Rebill post-process DB update failed:", dbErr);
+                    }
+
                     resolve(response);
                 } else {
                     console.error(`❌ Rebill Request Failed: ${response.errorMessage || 'Unknown Error'}`);

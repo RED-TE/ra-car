@@ -3,9 +3,12 @@ rules_version = '2';
 service cloud.firestore {
   match /databases/{database}/documents {
   
-    // Admin access: jhxox666@gmail.com has full access
+    // Admin access: Multiple admins authorized
     match /{document=**} {
-      allow read, write: if request.auth != null && request.auth.token.email == 'jhxox666@gmail.com';
+      allow read, write: if request.auth != null && 
+        (request.auth.token.email == 'jhxox666@gmail.com' || 
+         request.auth.token.email == 'jhxox666@test.com' || 
+         request.auth.token.email == 'sungho4768@gmail.com');
     }
 
     // [TEMPORARY TEST] Allow anyone to read users to diagnose visibility issue

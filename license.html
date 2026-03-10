@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>리카봇 (RicarBot) - 라이선스 관리</title>
+    <title>블봇 (BloBot) - 라이선스 관리</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap"
         rel="stylesheet" />
@@ -53,8 +53,8 @@
                         <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-white">
                             <span class="material-symbols-outlined text-xl">smart_toy</span>
                         </div>
-                        <span class="text-xl font-bold tracking-tight text-primary">리카봇 <span
-                                class="text-slate-500 font-medium">RicarBot</span></span>
+                        <span class="text-xl font-bold tracking-tight text-primary">블봇 <span
+                                class="text-slate-500 font-medium">BloBot</span></span>
                     </a>
                     <nav class="hidden md:flex items-center gap-6">
                         <a class="text-sm font-semibold text-slate-600 hover:text-primary transition-colors"
@@ -88,7 +88,7 @@
                 <!-- Page Title -->
                 <div class="mb-10">
                     <h1 class="text-3xl font-extrabold tracking-tight text-slate-900 sm:text-4xl">구독 및 라이선스</h1>
-                    <p class="mt-3 text-lg text-slate-600">귀하의 리카봇 엔터프라이즈 플랜을 관리하고 사용량을 확인하세요.</p>
+                    <p class="mt-3 text-lg text-slate-600">귀하의 블봇 엔터프라이즈 플랜을 관리하고 사용량을 확인하세요.</p>
                 </div>
 
                 <!-- No License State -->
@@ -99,7 +99,7 @@
                     </div>
                     <h2 class="mt-6 text-xl font-bold text-slate-900">활성화된 라이선스가 없습니다</h2>
                     <p class="mt-2 text-slate-600 max-w-md mx-auto">
-                        현재 구독 중인 플랜이 없습니다. 리카봇의 지능형 AI 마케팅 기능을 시작하려면 적합한 플랜을 선택해 주세요.
+                        현재 구독 중인 플랜이 없습니다. 블봇의 지능형 AI 마케팅 기능을 시작하려면 적합한 플랜을 선택해 주세요.
                     </p>
                     <div class="mt-8">
                         <a class="inline-flex items-center justify-center rounded-lg bg-primary px-6 py-3 text-sm font-bold text-white shadow-sm hover:bg-slate-800 transition-all"
@@ -134,6 +134,14 @@
                                         </div>
                                     </div>
                                     <div>
+                                        <label class="text-xs font-semibold text-slate-400 uppercase tracking-wide">결제
+                                            방식</label>
+                                        <div class="mt-1 flex items-center gap-2">
+                                            <p class="text-base font-bold text-slate-900" id="billing-type-display">...
+                                            </p>
+                                        </div>
+                                    </div>
+                                    <div>
                                         <label class="text-xs font-semibold text-slate-400 uppercase tracking-wide">계정
                                             이메일</label>
                                         <p class="mt-1 text-base font-medium text-slate-900" id="user-email">...</p>
@@ -149,14 +157,18 @@
                                             <p class="text-base font-medium text-slate-900" id="expiry-display">...</p>
                                         </div>
                                     </div>
-                                    <div class="pt-4 border-t border-slate-100 flex gap-3">
+                                    <div class="pt-4 border-t border-slate-100 flex flex-wrap gap-3">
                                         <button onclick="location.href='index.html#pricing'"
-                                            class="flex-1 inline-flex items-center justify-center rounded-lg bg-primary px-4 py-2.5 text-sm font-bold text-white shadow-sm hover:bg-slate-800 transition-all">
+                                            class="flex-1 min-w-[120px] inline-flex items-center justify-center rounded-lg bg-primary px-4 py-2.5 text-sm font-bold text-white shadow-sm hover:bg-slate-800 transition-all">
                                             구독 변경
                                         </button>
                                         <button onclick="location.href='checkout.html'"
-                                            class="flex-1 inline-flex items-center justify-center rounded-lg border border-slate-200 bg-white px-4 py-2.5 text-sm font-bold text-slate-600 hover:bg-slate-50 transition-all">
+                                            class="flex-1 min-w-[120px] inline-flex items-center justify-center rounded-lg border border-slate-200 bg-white px-4 py-2.5 text-sm font-bold text-slate-600 hover:bg-slate-50 transition-all">
                                             연장 하기
+                                        </button>
+                                        <button id="cancel-sub-btn" onclick="cancelSubscriptionUI()"
+                                            class="hidden w-full sm:w-auto inline-flex items-center justify-center rounded-lg border border-red-200 bg-red-50 px-4 py-2.5 text-sm font-bold text-red-600 hover:bg-red-100 transition-all">
+                                            구독 해지
                                         </button>
                                     </div>
                                 </div>
@@ -202,7 +214,7 @@
                             <div class="flex h-6 w-6 items-center justify-center rounded bg-primary text-white">
                                 <span class="material-symbols-outlined text-xs">smart_toy</span>
                             </div>
-                            <span class="text-lg font-bold tracking-tight text-primary">리카봇</span>
+                            <span class="text-lg font-bold tracking-tight text-primary">블봇</span>
                         </div>
                         <p class="mt-4 text-sm text-slate-500 leading-relaxed">
                             기업을 위한 차세대 AI 마케팅 자동화 솔루션. 데이터 기반의 인사이트로 비즈니스 성장을 가속화합니다.
@@ -223,7 +235,7 @@
                             <li><a class="text-sm text-slate-500 hover:text-primary transition-colors"
                                     href="guide.html">도움말 센터</a></li>
                             <li><a class="text-sm text-slate-500 hover:text-primary transition-colors"
-                                    href="mailto:jhxox666@naver.com">1:1 문의</a></li>
+                                    href="https://open.kakao.com/o/sQtPY1ii">1:1 문의</a></li>
                         </ul>
                     </div>
                     <div>
@@ -260,6 +272,7 @@
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
     <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-functions-compat.js"></script>
     <script src="firebase_config.js"></script>
     <script>
         function signOutAndRedirect() {
@@ -322,6 +335,23 @@
 
                     planName.textContent = displayPlan.toUpperCase();
 
+                    // Display Billing Type
+                    const billingTypeDisplay = document.getElementById('billing-type-display');
+                    const cancelBtn = document.getElementById('cancel-sub-btn');
+
+                    if (userData.isSubscriptionActive) {
+                        billingTypeDisplay.innerHTML = '<span class="text-indigo-600 font-black">정기결제 (구독 중)</span>';
+                        cancelBtn.classList.remove('hidden');
+                    } else if (userData.subscriptionCanceled) {
+                        billingTypeDisplay.innerHTML = '<span class="text-red-500 font-bold">정기결제 해지됨 (만료 예정)</span>';
+                        cancelBtn.classList.add('hidden');
+                        statusBadge.innerHTML = '<span class="mr-1 h-1.5 w-1.5 rounded-full bg-amber-500"></span> 해지 대기 중';
+                        statusBadge.className = 'inline-flex items-center rounded-full bg-amber-100 px-2.5 py-0.5 text-xs font-bold text-amber-700';
+                    } else {
+                        billingTypeDisplay.textContent = '1회성 결제';
+                        cancelBtn.classList.add('hidden');
+                    }
+
                     // Display Expiry Date
                     if (userData.expiryDate) {
                         try {
@@ -336,7 +366,7 @@
                             if (expDate < now) {
                                 licenseInfo.classList.add('hidden');
                                 noLicense.classList.remove('hidden');
-                            } else {
+                            } else if (!userData.subscriptionCanceled) {
                                 statusBadge.innerHTML = '<span class="mr-1 h-1.5 w-1.5 rounded-full bg-emerald-500"></span> 활성 (Active)';
                                 statusBadge.className = 'inline-flex items-center rounded-full bg-emerald-100 px-2.5 py-0.5 text-xs font-bold text-emerald-700';
                             }
@@ -348,6 +378,34 @@
                     console.error("License listener error:", error);
                 });
             });
+        }
+
+        async function cancelSubscriptionUI() {
+            if (!confirm("정말 정기구독을 해지하시겠습니까?\n해지 시 다음 결제일부터 자동 결제가 중단되며, 현재 남은 기간 동안은 계속 이용 가능합니다.")) {
+                return;
+            }
+
+            try {
+                const cancelBtn = document.getElementById('cancel-sub-btn');
+                cancelBtn.disabled = true;
+                cancelBtn.textContent = "처리 중...";
+
+                const cancelFn = firebase.functions().httpsCallable('cancelSubscription');
+                const result = await cancelFn();
+
+                if (result.data.success) {
+                    alert(result.data.message);
+                } else {
+                    alert("해지 처리에 실패했습니다: " + result.data.message);
+                }
+            } catch (error) {
+                console.error("Cancellation Error:", error);
+                alert("오류가 발생했습니다: " + error.message);
+            } finally {
+                const cancelBtn = document.getElementById('cancel-sub-btn');
+                cancelBtn.disabled = false;
+                cancelBtn.textContent = "구독 해지";
+            }
         }
     </script>
 </body>

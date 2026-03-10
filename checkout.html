@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>결제하기 | RicarBot</title>
+    <title>결제하기 | BloBot</title>
     <!-- Tailwind CSS CDN with plugins -->
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <!-- Google Fonts: Inter & Noto Sans KR -->
@@ -62,7 +62,7 @@
         input:focus,
         select:focus {
             border-color: #0f1729 !important;
-            ring-color: #0f1729 !important;
+            box-shadow: 0 0 0 2px rgba(15, 23, 41, 0.1) !important;
             outline: none;
         }
 
@@ -84,11 +84,11 @@
     <header class="bg-white border-b border-slate-200 py-4" data-purpose="global-header">
         <div class="max-w-6xl mx-auto px-4 flex justify-between items-center">
             <div class="flex items-center gap-2 cursor-pointer" onclick="location.href='index.html'">
-                <!-- Logo Placeholder -->
+                <!-- Logo Fixed -->
                 <div class="w-8 h-8 bg-navy-900 rounded flex items-center justify-center">
-                    <span class="material-symbols-outlined text-white text-sm">smart_toy</span>
+                    <span class="material-symbols-outlined text-white text-xl leading-none">smart_toy</span>
                 </div>
-                <span class="text-xl font-bold text-navy-900 tracking-tight">RicarBot</span>
+                <span class="text-xl font-bold text-navy-900 tracking-tight">BloBot</span>
             </div>
             <div class="text-slate-500 text-sm flex items-center gap-2">
                 <svg class="h-4 w-4" fill="none" stroke="currentColor" viewbox="0 0 24 24"
@@ -150,6 +150,65 @@
                     </div>
                 </section>
                 <!-- END: Purchaser Info Section -->
+
+                <!-- BEGIN: Business Info Section -->
+                <section class="bg-white p-6 md:p-8 rounded-custom border border-slate-200 card-shadow"
+                    id="business-info">
+                    <h2 class="text-xl font-bold text-navy-900 mb-6 flex items-center gap-2">
+                        <span class="material-symbols-outlined text-blue-600">receipt_long</span>
+                        증빙 서류 발급 안내
+                    </h2>
+
+                    <div class="space-y-6">
+                        <div class="flex flex-wrap gap-6">
+                            <label class="flex items-center gap-2.5 cursor-pointer group">
+                                <input type="radio" name="evidence-type" value="personal" checked
+                                    onclick="toggleBusinessFields(false)"
+                                    class="h-5 w-5 text-navy-900 border-slate-300 focus:ring-navy-900">
+                                <span
+                                    class="text-sm font-bold text-slate-700 group-hover:text-navy-900 transition-colors">개인
+                                    (지출증빙 미필요)</span>
+                            </label>
+                            <label class="flex items-center gap-2.5 cursor-pointer group">
+                                <input type="radio" name="evidence-type" value="business"
+                                    onclick="toggleBusinessFields(true)"
+                                    class="h-5 w-5 text-navy-900 border-slate-300 focus:ring-navy-900">
+                                <span
+                                    class="text-sm font-bold text-slate-700 group-hover:text-navy-900 transition-colors">사업자
+                                    (세금계산서/현금영수증)</span>
+                            </label>
+                        </div>
+
+                        <div id="business-fields"
+                            class="hidden grid grid-cols-1 md:grid-cols-2 gap-5 p-6 bg-slate-50 rounded-2xl border border-slate-100 ring-1 ring-slate-200/50">
+                            <div class="space-y-2">
+                                <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider ml-1">사업자
+                                    등록 번호</label>
+                                <input type="text" id="biz-number" placeholder="000-00-00000"
+                                    class="w-full border-slate-200 rounded-custom py-3 text-sm focus:ring-2 focus:ring-navy-900/10 transition-all">
+                            </div>
+                            <div class="space-y-2">
+                                <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider ml-1">상호명
+                                    (법인명)</label>
+                                <input type="text" id="biz-name" placeholder="주식회사 OOO"
+                                    class="w-full border-slate-200 rounded-custom py-3 text-sm focus:ring-2 focus:ring-navy-900/10 transition-all">
+                            </div>
+                            <div class="space-y-2 md:col-span-2">
+                                <label class="block text-xs font-bold text-slate-500 uppercase tracking-wider ml-1">대표자
+                                    성함</label>
+                                <input type="text" id="biz-ceo" placeholder="대표자명을 입력해주세요"
+                                    class="w-full border-slate-200 rounded-custom py-3 text-sm focus:ring-2 focus:ring-navy-900/10 transition-all">
+                            </div>
+                            <div class="md:col-span-2 flex items-start gap-2 pt-1">
+                                <span class="material-symbols-outlined text-slate-400 text-sm">info</span>
+                                <p class="text-[11px] text-slate-500 leading-relaxed font-medium">
+                                    입력하신 정보는 결제 완료 후 세금계산서 또는 현금영수증 발행을 위한 증빙 자료로만 사용됩니다.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+                <!-- END: Business Info Section -->
                 <!-- BEGIN: Legal Consent Section -->
                 <section class="bg-white p-6 md:p-8 rounded-custom border border-slate-200 card-shadow"
                     id="legal-consent">
@@ -281,6 +340,21 @@
                                     <span class="text-sm text-slate-800 leading-snug font-medium">(필수) 프로그램 사용으로 인한
                                         <strong>모든 법적 책임은 이용자 본인</strong>에게 있음을 이해했습니다.</span>
                                 </label>
+
+                                <!-- Recurring Consent -->
+                                <label
+                                    class="flex items-start gap-3 cursor-pointer p-4 bg-indigo-50 border border-indigo-100 rounded-xl"
+                                    id="sub-consent-box" style="display: none;">
+                                    <input
+                                        class="consent-check mt-0.5 h-5 w-5 text-indigo-600 border-indigo-300 rounded focus:ring-indigo-600 required-chk"
+                                        id="check-subscription" type="checkbox" />
+                                    <span class="text-sm text-indigo-900 leading-snug font-black">
+                                        (필수) 본 상품은 매월 자동으로 결제되는 <span
+                                            class="underline decoration-indigo-300">정기구독</span> 서비스임에 동의합니다.
+                                        <br /><span class="text-[11px] font-bold text-indigo-500 opacity-80">* 유효기간 만료
+                                            1일 전 자동 결제됩니다.</span>
+                                    </span>
+                                </label>
                             </div>
                         </div>
 
@@ -330,7 +404,11 @@
                             </svg>
                             안전하게 결제하기
                         </button>
-                        <div class="mt-4 flex flex-col items-center gap-2">
+                        <div class="mt-4 flex flex-col items-center gap-3">
+                            <div class="w-full p-3 bg-red-50 border border-red-100 rounded-lg text-center">
+                                <p class="text-[11px] font-bold text-red-600 mb-1">결제 오류 시 아래로 연락주세요</p>
+                                <p class="text-sm font-black text-red-700">010-6573-1038</p>
+                            </div>
                             <div class="flex items-center gap-2 text-[11px] text-slate-400">
                                 <span class="px-1.5 py-0.5 border border-slate-200 rounded">PG</span>
                                 <span>PG사 보안 결제 시스템 적용 중</span>
@@ -399,7 +477,7 @@
     <script>
         const urlParams = new URLSearchParams(window.location.search);
         let selectedPlanId = urlParams.get('plan') || PRICING_CONFIG.defaultPlan;
-        let isRecurring = urlParams.get('recurring') === 'true';
+        let isRecurring = urlParams.get('recurring') === 'true'; // Default to false unless explicitly 'true'
 
         if (!PRICING_CONFIG.plans[selectedPlanId]) {
             selectedPlanId = PRICING_CONFIG.defaultPlan;
@@ -418,6 +496,17 @@
                 }
             });
         }
+
+        window.toggleBusinessFields = function (show) {
+            const fields = document.getElementById('business-fields');
+            if (show) {
+                fields.classList.remove('hidden');
+                fields.classList.add('grid');
+            } else {
+                fields.classList.remove('grid');
+                fields.classList.add('hidden');
+            }
+        };
 
         const planContainer = document.getElementById('plan-container');
 
@@ -461,7 +550,7 @@
             const btnRecurring = document.getElementById('toggle-recurring');
 
             if (isRecurring) {
-                btnRecurring.className = "px-4 py-1.5 text-sm font-medium rounded-md bg-white text-navy-900 shadow-sm border border-slate-200 transition-all";
+                btnRecurring.className = "px-4 py-1.5 text-sm font-medium rounded-md bg-navy-900 text-white shadow-sm transition-all";
                 btnSingle.className = "px-4 py-1.5 text-sm font-medium text-slate-500 hover:text-navy-900 transition-all";
             } else {
                 btnSingle.className = "px-4 py-1.5 text-sm font-medium rounded-md bg-white text-navy-900 shadow-sm border border-slate-200 transition-all";
@@ -489,6 +578,14 @@
                 subToggleContainer.style.opacity = "1";
                 subToggleContainer.style.pointerEvents = "auto";
             }
+
+            // Toggle Subscription Consent Box
+            const subConsentBox = document.getElementById('sub-consent-box');
+            if (isRecurring) {
+                subConsentBox.style.display = 'flex';
+            } else {
+                subConsentBox.style.display = 'none';
+            }
         }
 
         const checkAll = document.getElementById('check-all');
@@ -508,23 +605,46 @@
                 const required = ['check-terms', 'check-privacy', 'check-refund', 'check-disc-1', 'check-disc-2', 'check-disc-3', 'check-disc-4', 'check-disc-5', 'check-disc-6'];
                 for (const id of required) { if (!document.getElementById(id).checked) return alert('결제 전 필수 면책 사항 및 약관에 모두 동의해 주세요.'); }
 
+                if (isRecurring && !document.getElementById('check-subscription').checked) {
+                    return alert('정기구독 자동 결제에 동의해 주세요.');
+                }
+
                 if (!name) return alert('성함을 입력해주세요.');
                 if (phone.length < 10) return alert('연락처를 정확히 입력해주세요.');
 
                 if (typeof PayApp === 'undefined') throw new Error('결제 모듈 로딩 실패');
 
+                // Business Info Collection
+                const evidenceType = document.querySelector('input[name="evidence-type"]:checked').value;
+                let businessMemo = "";
+                if (evidenceType === 'business') {
+                    const bizNum = document.getElementById('biz-number').value.trim();
+                    const bizName = document.getElementById('biz-name').value.trim();
+                    const bizCeo = document.getElementById('biz-ceo').value.trim();
+
+                    if (!bizNum || !bizName || !bizCeo) {
+                        return alert('사업자 증빙을 위해 모든 사업자 정보(번호, 상호, 대표자)를 입력해주세요.');
+                    }
+                    businessMemo = ` [사업자:${bizName}/${bizNum}/${bizCeo}]`;
+                }
+
                 PayApp.setDefault('userid', PAYAPP_CONFIG.userid.trim());
                 PayApp.setDefault('shopname', (PAYAPP_CONFIG.shopname || '리카오토플랜').trim());
-                PayApp.setParam('goodname', plan.name);
+
+                let productName = plan.name;
+                if (isRecurring) productName = '[정기구독] ' + productName;
+
+                PayApp.setParam('goodname', productName);
                 PayApp.setParam('price', plan.price.toString());
                 PayApp.setParam('recvphone', phone);
-                PayApp.setParam('memo', name);
+                PayApp.setParam('memo', name + businessMemo);
                 PayApp.setParam('smsuse', 'n');
                 PayApp.setParam('var1', currentUser.uid);
                 PayApp.setParam('var_email', currentUser.email);
 
                 if (isRecurring) {
                     PayApp.setParam('rebill', 'y');
+                    PayApp.setParam('rebill_y_n', 'y'); // 🚀 보험용 (Lite API 버전에 따라 다름)
                     PayApp.setParam('var2', 'subscription');
                 }
 

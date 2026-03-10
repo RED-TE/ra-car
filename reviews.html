@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="ko">
 
@@ -1078,4 +1079,1132 @@
     </script>
 </body>
 
+=======
+<!DOCTYPE html>
+<html lang="ko" class="scroll-smooth">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>파트너 후기 - BloBot</title>
+    <meta name="description" content="블봇 실제 사용자들의 생생한 후기를 확인하세요. 평균 ★4.9, 23개 리뷰." />
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: { "primary": "#0f1729", "background-light": "#f6f7f8", "background-dark": "#14171e" },
+                    fontFamily: { "display": ["Inter", "sans-serif"] },
+                },
+            },
+        }
+    </script>
+    <style>
+        .star-filled {
+            font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+        }
+
+        .star-empty {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 20;
+        }
+
+        .badge-pro {
+            background: #e8f0fe;
+            color: #1a56db;
+        }
+
+        .badge-lite {
+            background: #f0fdf4;
+            color: #166534;
+        }
+
+        /* Modal Styles */
+        #review-modal {
+            display: none;
+        }
+
+        #review-modal.active {
+            display: flex;
+        }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased">
+
+    <!-- Header -->
+    <header
+        class="sticky top-0 z-50 w-full border-b border-slate-200/80 dark:border-slate-800/80 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex h-16 items-center justify-between">
+                <a href="index.html" class="flex items-center gap-2">
+                    <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-white">
+                        <span class="material-symbols-outlined text-xl">smart_toy</span>
+                    </div>
+                    <span class="text-xl font-bold tracking-tight text-primary dark:text-white">BloBot</span>
+                </a>
+                <a href="index.html"
+                    class="flex items-center gap-1 text-sm text-slate-500 hover:text-primary dark:hover:text-white transition-colors">
+                    <span class="material-symbols-outlined text-base">arrow_back</span>
+                    홈으로
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+
+        <!-- Page Title -->
+        <div class="text-center mb-12">
+            <h1 class="text-4xl font-black text-slate-900 dark:text-white tracking-tight mb-4">파트너 후기</h1>
+
+            <!-- Event Banner -->
+            <div
+                class="inline-flex items-center gap-2 bg-blue-500/10 border border-blue-500/20 text-blue-600 dark:text-blue-400 px-4 py-2 rounded-full mb-8 animate-pulse">
+                <span class="material-symbols-outlined text-base"
+                    style="font-variation-settings:'FILL' 1">card_giftcard</span>
+                <span class="text-xs font-bold">후기 작성 이벤트: +7일 이용권 즉시 증정!</span>
+            </div>
+
+            <p class="text-slate-500 dark:text-slate-400 mb-6 font-medium">실제 사용자들의 생생한 리뷰입니다.</p>
+            <div class="flex items-center justify-center gap-3">
+                <div class="flex text-yellow-400">
+                    <span class="material-symbols-outlined text-2xl"
+                        style="font-variation-settings:'FILL' 1">star</span>
+                    <span class="material-symbols-outlined text-2xl"
+                        style="font-variation-settings:'FILL' 1">star</span>
+                    <span class="material-symbols-outlined text-2xl"
+                        style="font-variation-settings:'FILL' 1">star</span>
+                    <span class="material-symbols-outlined text-2xl"
+                        style="font-variation-settings:'FILL' 1">star</span>
+                    <span class="material-symbols-outlined text-2xl"
+                        style="font-variation-settings:'FILL' 1">star</span>
+                </div>
+                <span class="text-3xl font-black text-slate-900 dark:text-white">4.9</span>
+                <span class="text-slate-400 text-sm">/ 5.0 &nbsp;·&nbsp; 23개 리뷰</span>
+            </div>
+            <div class="mt-5 flex justify-center gap-3 text-xs font-semibold">
+                <span class="px-3 py-1.5 rounded-full badge-pro">PRO 플랜 · 18명 (78%)</span>
+                <span class="px-3 py-1.5 rounded-full badge-lite">LITE 플랜 · 5명 (22%)</span>
+            </div>
+
+            <div class="mt-8">
+                <button onclick="openReviewModal()"
+                    class="inline-flex items-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 text-white font-bold rounded-xl transition-all shadow-lg shadow-blue-500/20">
+                    <span class="material-symbols-outlined text-xl">rate_review</span>
+                    후기 작성하기
+                </button>
+            </div>
+        </div>
+
+        <!-- Reviews Grid -->
+        <div id="reviews-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+            <div id="no-reviews" class="hidden col-span-full py-20 text-center text-slate-400">
+                작성된 후기가 없습니다.
+            </div>
+
+            <!-- Page 1 will be shown by default via JS -->
+            <!-- Existing reviews follow -->
+
+            <!-- 1 -->
+            <div
+                class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-md border border-blue-200 dark:border-blue-900/50">
+                <div class="flex items-center gap-1 text-yellow-400 mb-3">
+                    <span class="material-symbols-outlined text-sm"
+                        style="font-variation-settings:'FILL' 1">star</span><span
+                        class="material-symbols-outlined text-sm"
+                        style="font-variation-settings:'FILL' 1">star</span><span
+                        class="material-symbols-outlined text-sm"
+                        style="font-variation-settings:'FILL' 1">star</span><span
+                        class="material-symbols-outlined text-sm"
+                        style="font-variation-settings:'FILL' 1">star</span><span
+                        class="material-symbols-outlined text-sm" style="font-variation-settings:'FILL' 1">star</span>
+                </div>
+                <p class="text-slate-700 dark:text-slate-300 text-sm leading-relaxed mb-4">솔직히 반신반의하고 시작했는데 1달 지나고 나서
+                    블로그 유입이 늘었어요. 저만 그런지 모르곘는데 제가 직접 쓴 것보다 퀄리티가 더 좋은 것 같아서 좀 허탈하기도 했습니다 ㅋㅋ 계속 쓸 것 같아요.</p>
+                <div>
+                    <p class="text-xs font-bold text-slate-900 dark:text-white">k***3@gmail.com</p><span
+                        class="inline-block mt-1 px-2 py-0.5 text-[10px] font-semibold rounded-full badge-pro">PRO
+                        플랜</span>
+                </div>
+            </div>
+
+            <!-- 2 -->
+            <div
+                class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-md border border-blue-200 dark:border-blue-900/50">
+                <div class="flex items-center gap-1 text-yellow-400 mb-3">
+                    <span class="material-symbols-outlined text-sm"
+                        style="font-variation-settings:'FILL' 1">star</span><span
+                        class="material-symbols-outlined text-sm"
+                        style="font-variation-settings:'FILL' 1">star</span><span
+                        class="material-symbols-outlined text-sm"
+                        style="font-variation-settings:'FILL' 1">star</span><span
+                        class="material-symbols-outlined text-sm"
+                        style="font-variation-settings:'FILL' 1">star</span><span
+                        class="material-symbols-outlined text-sm" style="font-variation-settings:'FILL' 1">star</span>
+                </div>
+                <p class="text-slate-700 dark:text-slate-300 text-sm leading-relaxed mb-4">저품질 걱정 많이 했는데 지금까지 한 번도 안
+                    걸렸습니다. 처음에 조회수 10미만으로 나와서 문의했더니 원래 그런거라해서 걍 믿고 해봤는데 3개월째 쓰고 있고 지금은 계정을 8개로 늘렸어요. 문의도 전보다 확실히 많이 옵니다.
+                    다계정 운영 설명도 친절하게 해주셨고요.</p>
+                <div>
+                    <p class="text-xs font-bold text-slate-900 dark:text-white">p***7@gmail.com</p><span
+                        class="inline-block mt-1 px-2 py-0.5 text-[10px] font-semibold rounded-full badge-pro">PRO
+                        플랜</span>
+                </div>
+            </div>
+
+            <!-- 3 -->
+            <div
+                class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-md border border-blue-200 dark:border-blue-900/50">
+                <div class="flex items-center gap-1 text-yellow-400 mb-3">
+                    <span class="material-symbols-outlined text-sm"
+                        style="font-variation-settings:'FILL' 1">star</span><span
+                        class="material-symbols-outlined text-sm"
+                        style="font-variation-settings:'FILL' 1">star</span><span
+                        class="material-symbols-outlined text-sm"
+                        style="font-variation-settings:'FILL' 1">star</span><span
+                        class="material-symbols-outlined text-sm"
+                        style="font-variation-settings:'FILL' 1">star</span><span
+                        class="material-symbols-outlined text-sm" style="font-variation-settings:'FILL' 1">star</span>
+                </div>
+                <p class="text-slate-700 dark:text-slate-300 text-sm leading-relaxed mb-4">처음에 LITE로 시작해봤는데 효과가 있어서 PRO로
+                    업그레이드했어요. 확실히 PRO가 글이 다양하고 자연스럽습니다. 지역 키워드 노출이 잘 되는 편이에요. 매달 갱신하고 있습니다.</p>
+                <div>
+                    <p class="text-xs font-bold text-slate-900 dark:text-white">s***2@gmail.com</p><span
+                        class="inline-block mt-1 px-2 py-0.5 text-[10px] font-semibold rounded-full badge-pro">PRO
+                        플랜</span>
+                </div>
+            </div>
+
+            <!-- 4 -->
+            <div
+                class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-md border border-blue-200 dark:border-blue-900/50">
+                <div class="flex items-center gap-1 text-yellow-400 mb-3">
+                    <span class="material-symbols-outlined text-sm"
+                        style="font-variation-settings:'FILL' 1">star</span><span
+                        class="material-symbols-outlined text-sm"
+                        style="font-variation-settings:'FILL' 1">star</span><span
+                        class="material-symbols-outlined text-sm"
+                        style="font-variation-settings:'FILL' 1">star</span><span
+                        class="material-symbols-outlined text-sm"
+                        style="font-variation-settings:'FILL' 1">star</span><span
+                        class="material-symbols-outlined text-sm" style="font-variation-settings:'FILL' 1">star</span>
+                </div>
+                <p class="text-slate-700 dark:text-slate-300 text-sm leading-relaxed mb-4">굿굿 쓸만하네요 ㅎㅎ</p>
+                <div>
+                    <p class="text-xs font-bold text-slate-900 dark:text-white">j***5@gmail.com</p><span
+                        class="inline-block mt-1 px-2 py-0.5 text-[10px] font-semibold rounded-full badge-lite">LITE
+                        플랜</span>
+                </div>
+            </div>
+
+            <!-- 5 -->
+            <div
+                class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-md border border-blue-200 dark:border-blue-900/50">
+                <div class="flex items-center gap-1 text-yellow-400 mb-3">
+                    <span class="material-symbols-outlined text-sm"
+                        style="font-variation-settings:'FILL' 1">star</span><span
+                        class="material-symbols-outlined text-sm"
+                        style="font-variation-settings:'FILL' 1">star</span><span
+                        class="material-symbols-outlined text-sm"
+                        style="font-variation-settings:'FILL' 1">star</span><span
+                        class="material-symbols-outlined text-sm"
+                        style="font-variation-settings:'FILL' 1">star</span><span
+                        class="material-symbols-outlined text-sm" style="font-variation-settings:'FILL' 1">star</span>
+                </div>
+                <p class="text-slate-700 dark:text-slate-300 text-sm leading-relaxed mb-4">이런거 써본 적 없어서 처음엔 엄청 겁먹었는데 막상
+                    써보니 어렵지 않더라고요. 블로그가 꾸준히 올라가고 있으니까 고객들도 신뢰감을 갖는 것 같습니다. 얼마 전엔 블로그 보고 왔다는 손님도 있었어요.</p>
+                <div>
+                    <p class="text-xs font-bold text-slate-900 dark:text-white">h***1@gmail.com</p><span
+                        class="inline-block mt-1 px-2 py-0.5 text-[10px] font-semibold rounded-full badge-lite">LITE
+                        플랜</span>
+                </div>
+            </div>
+
+            <!-- 6 -->
+            <div
+                class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-md border border-blue-200 dark:border-blue-900/50">
+                <div class="flex items-center gap-1 text-yellow-400 mb-3">
+                    <span class="material-symbols-outlined text-sm"
+                        style="font-variation-settings:'FILL' 1">star</span><span
+                        class="material-symbols-outlined text-sm"
+                        style="font-variation-settings:'FILL' 1">star</span><span
+                        class="material-symbols-outlined text-sm"
+                        style="font-variation-settings:'FILL' 1">star</span><span
+                        class="material-symbols-outlined text-sm"
+                        style="font-variation-settings:'FILL' 1">star</span><span
+                        class="material-symbols-outlined text-sm" style="font-variation-settings:'FILL' 1">star</span>
+                </div>
+                <p class="text-slate-700 dark:text-slate-300 text-sm leading-relaxed mb-4">1달만에 우선 초반 10미만 잡히는꺼 사라지고
+                    100회 잘나오면 200회 못나오면 50정도 나오느듯 계속 써봤는데 아직까지 큰 문제 없고 포스팅 수가 쌓이니까 확실히 하나 둘 문의 옴</p>
+                <div>
+                    <p class="text-xs font-bold text-slate-900 dark:text-white">c***7@gmail.com</p><span
+                        class="inline-block mt-1 px-2 py-0.5 text-[10px] font-semibold rounded-full badge-pro">PRO
+                        플랜</span>
+                </div>
+            </div>
+
+            <!-- 7 -->
+            <div
+                class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-md border border-blue-200 dark:border-blue-900/50">
+                <div class="flex items-center gap-1 text-yellow-400 mb-3">
+                    <span class="material-symbols-outlined text-sm"
+                        style="font-variation-settings:'FILL' 1">star</span><span
+                        class="material-symbols-outlined text-sm"
+                        style="font-variation-settings:'FILL' 1">star</span><span
+                        class="material-symbols-outlined text-sm"
+                        style="font-variation-settings:'FILL' 1">star</span><span
+                        class="material-symbols-outlined text-sm"
+                        style="font-variation-settings:'FILL' 1">star</span><span
+                        class="material-symbols-outlined text-sm" style="font-variation-settings:'FILL' 1">star</span>
+                </div>
+                <p class="text-slate-700 dark:text-slate-300 text-sm leading-relaxed mb-4">처음엔 AI가 쓴 글이면 뻔할 것 같아서 별로 기대
+                    안 했는데 막상 올라온 거 보면 진짜 사람이 쓴 것처럼 자연스럽더라고요. 읽어봤는데 제가 직접 쓴 것보다 더 잘 쓴 것들도 있었습니다 ㅋㅋ</p>
+                <div>
+                    <p class="text-xs font-bold text-slate-900 dark:text-white">m***n@gmail.com</p><span
+                        class="inline-block mt-1 px-2 py-0.5 text-[10px] font-semibold rounded-full badge-pro">PRO
+                        플랜</span>
+                </div>
+            </div>
+
+            <!-- 8 -->
+            <div
+                class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-md border border-blue-200 dark:border-blue-900/50">
+                <div class="flex items-center gap-1 text-yellow-400 mb-3">
+                    <span class="material-symbols-outlined text-sm"
+                        style="font-variation-settings:'FILL' 1">star</span><span
+                        class="material-symbols-outlined text-sm"
+                        style="font-variation-settings:'FILL' 1">star</span><span
+                        class="material-symbols-outlined text-sm"
+                        style="font-variation-settings:'FILL' 1">star</span><span
+                        class="material-symbols-outlined text-sm"
+                        style="font-variation-settings:'FILL' 1">star</span><span
+                        class="material-symbols-outlined text-sm" style="font-variation-settings:'FILL' 1">star</span>
+                </div>
+                <p class="text-slate-700 dark:text-slate-300 text-sm leading-relaxed mb-4">광고비 따로 안 쓰고도 이 정도면 굉장히
+                    만족스럽습니다.</p>
+                <div>
+                    <p class="text-xs font-bold text-slate-900 dark:text-white">l***8@gmail.com</p><span
+                        class="inline-block mt-1 px-2 py-0.5 text-[10px] font-semibold rounded-full badge-pro">PRO
+                        플랜</span>
+                </div>
+            </div>
+
+            <!-- 9 -->
+            <div
+                class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-md border border-blue-200 dark:border-blue-900/50">
+                <div class="flex items-center gap-1 text-yellow-400 mb-3">
+                    <span class="material-symbols-outlined text-sm"
+                        style="font-variation-settings:'FILL' 1">star</span><span
+                        class="material-symbols-outlined text-sm"
+                        style="font-variation-settings:'FILL' 1">star</span><span
+                        class="material-symbols-outlined text-sm"
+                        style="font-variation-settings:'FILL' 1">star</span><span
+                        class="material-symbols-outlined text-sm"
+                        style="font-variation-settings:'FILL' 1">star</span><span
+                        class="material-symbols-outlined text-sm" style="font-variation-settings:'FILL' 1">star</span>
+                </div>
+                <p class="text-slate-700 dark:text-slate-300 text-sm leading-relaxed mb-4">우선 가격대비해서 진짜 좋긴함 다만 사람이
+                    직접쓰는정도는 당연 안될거라고 생각해서 직접쓰는거 1개 유지하고 서브로 돌려두니까
+                    직접쓰는거 + 서브 이렇게 들어와서 확실히 좋긴함 2배이상 더 문의들어온듯
+                </p>
+                <div>
+                    <p class="text-xs font-bold text-slate-900 dark:text-white">b***4@gmail.com</p><span
+                        class="inline-block mt-1 px-2 py-0.5 text-[10px] font-semibold rounded-full badge-pro">PRO
+                        플랜</span>
+                </div>
+            </div>
+
+            <!-- 10 -->
+            <div
+                class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-md border border-blue-200 dark:border-blue-900/50">
+                <div class="flex items-center gap-1 text-yellow-400 mb-3">
+                    <span class="material-symbols-outlined text-sm"
+                        style="font-variation-settings:'FILL' 1">star</span><span
+                        class="material-symbols-outlined text-sm"
+                        style="font-variation-settings:'FILL' 1">star</span><span
+                        class="material-symbols-outlined text-sm"
+                        style="font-variation-settings:'FILL' 1">star</span><span
+                        class="material-symbols-outlined text-sm"
+                        style="font-variation-settings:'FILL' 1">star</span><span
+                        class="material-symbols-outlined text-sm" style="font-variation-settings:'FILL' 1">star</span>
+                </div>
+                <p class="text-slate-700 dark:text-slate-300 text-sm leading-relaxed mb-4">혼자 회사 차리고 블로그 관리까지 하려니까 솔직히
+                    버거웠는데, 그냥 돌려놓고 영업만 집중하면 되니까 훨씬 스트레스가 줄었어요. 블로그 검색해보면 그래도 업체가 나오니까 좀 신뢰 가지고 하는거 같아서 좋네요. 테스트 끝나서 프로
+                    업그레이드 예정</p>
+                <div>
+                    <p class="text-xs font-bold text-slate-900 dark:text-white">y***6@gmail.com</p><span
+                        class="inline-block mt-1 px-2 py-0.5 text-[10px] font-semibold rounded-full badge-lite">LITE
+                        플랜</span>
+                </div>
+            </div>
+
+            <!-- 11 -->
+            <div
+                class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-md border border-blue-200 dark:border-blue-900/50">
+                <div class="flex items-center gap-1 text-yellow-400 mb-3">
+                    <span class="material-symbols-outlined text-sm"
+                        style="font-variation-settings:'FILL' 1">star</span><span
+                        class="material-symbols-outlined text-sm"
+                        style="font-variation-settings:'FILL' 1">star</span><span
+                        class="material-symbols-outlined text-sm"
+                        style="font-variation-settings:'FILL' 1">star</span><span
+                        class="material-symbols-outlined text-sm"
+                        style="font-variation-settings:'FILL' 1">star</span><span
+                        class="material-symbols-outlined text-sm" style="font-variation-settings:'FILL' 0">star</span>
+                </div>
+                <p class="text-slate-700 dark:text-slate-300 text-sm leading-relaxed mb-4">업데이트 주기가 좀 더 빨랐으면 하는 바람은 있는데
+                    전반적으로 만족합니다. 발행 안 되는 날 없이 꾸준히 올라가고 있고 세팅 한 번 해두면 알아서 돌아가니까 편한 건 맞아요.</p>
+                <div>
+                    <p class="text-xs font-bold text-slate-900 dark:text-white">o***2@gmail.com</p><span
+                        class="inline-block mt-1 px-2 py-0.5 text-[10px] font-semibold rounded-full badge-pro">PRO
+                        플랜</span>
+                </div>
+            </div>
+
+            <!-- 12 -->
+            <div
+                class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-md border border-blue-200 dark:border-blue-900/50">
+                <div class="flex items-center gap-1 text-yellow-400 mb-3">
+                    <span class="material-symbols-outlined text-sm"
+                        style="font-variation-settings:'FILL' 1">star</span><span
+                        class="material-symbols-outlined text-sm"
+                        style="font-variation-settings:'FILL' 1">star</span><span
+                        class="material-symbols-outlined text-sm"
+                        style="font-variation-settings:'FILL' 1">star</span><span
+                        class="material-symbols-outlined text-sm"
+                        style="font-variation-settings:'FILL' 1">star</span><span
+                        class="material-symbols-outlined text-sm" style="font-variation-settings:'FILL' 1">star</span>
+                </div>
+                <p class="text-slate-700 dark:text-slate-300 text-sm leading-relaxed mb-4">같은 팀 지인 소개로 쓰기 시작했는데 하나 구독해서
+                    계정 4개씩 그 분도 저도
+                    만족하고 있어요. 총 계정 8개 같이 운영 중인데 헷갈리지 않게 분리가 잘 되어 있어서 좋습니다. 확실히 효과 있는 것 같아요.</p>
+                <div>
+                    <p class="text-xs font-bold text-slate-900 dark:text-white">r***9@gmail.com</p><span
+                        class="inline-block mt-1 px-2 py-0.5 text-[10px] font-semibold rounded-full badge-pro">PRO
+                        플랜</span>
+                </div>
+            </div>
+
+            <!-- 13 -->
+            <div
+                class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-md border border-blue-200 dark:border-blue-900/50">
+                <div class="flex items-center gap-1 text-yellow-400 mb-3">
+                    <span class="material-symbols-outlined text-sm"
+                        style="font-variation-settings:'FILL' 1">star</span><span
+                        class="material-symbols-outlined text-sm"
+                        style="font-variation-settings:'FILL' 1">star</span><span
+                        class="material-symbols-outlined text-sm"
+                        style="font-variation-settings:'FILL' 1">star</span><span
+                        class="material-symbols-outlined text-sm"
+                        style="font-variation-settings:'FILL' 1">star</span><span
+                        class="material-symbols-outlined text-sm" style="font-variation-settings:'FILL' 1">star</span>
+                </div>
+                <p class="text-slate-700 dark:text-slate-300 text-sm leading-relaxed mb-4">직접 만든후기 쌓여서 그런가 계약이 좀 더 잘나오는
+                    느낌? 아니면 그냥 블로그 DB라 그런가 ㅋㅋ</p>
+                <div>
+                    <p class="text-xs font-bold text-slate-900 dark:text-white">n***3@gmail.com</p><span
+                        class="inline-block mt-1 px-2 py-0.5 text-[10px] font-semibold rounded-full badge-pro">PRO
+                        플랜</span>
+                </div>
+            </div>
+
+            <!-- 14 -->
+            <div
+                class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-md border border-blue-200 dark:border-blue-900/50">
+                <div class="flex items-center gap-1 text-yellow-400 mb-3">
+                    <span class="material-symbols-outlined text-sm"
+                        style="font-variation-settings:'FILL' 1">star</span><span
+                        class="material-symbols-outlined text-sm"
+                        style="font-variation-settings:'FILL' 1">star</span><span
+                        class="material-symbols-outlined text-sm"
+                        style="font-variation-settings:'FILL' 1">star</span><span
+                        class="material-symbols-outlined text-sm"
+                        style="font-variation-settings:'FILL' 1">star</span><span
+                        class="material-symbols-outlined text-sm" style="font-variation-settings:'FILL' 1">star</span>
+                </div>
+                <p class="text-slate-700 dark:text-slate-300 text-sm leading-relaxed mb-4">굿 ㅋㅋ 좋음</p>
+                <div>
+                    <p class="text-xs font-bold text-slate-900 dark:text-white">d***7@gmail.com</p><span
+                        class="inline-block mt-1 px-2 py-0.5 text-[10px] font-semibold rounded-full badge-pro">PRO
+                        플랜</span>
+                </div>
+            </div>
+
+            <!-- 15 -->
+            <div
+                class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-md border border-blue-200 dark:border-blue-900/50">
+                <div class="flex items-center gap-1 text-yellow-400 mb-3">
+                    <span class="material-symbols-outlined text-sm"
+                        style="font-variation-settings:'FILL' 1">star</span><span
+                        class="material-symbols-outlined text-sm"
+                        style="font-variation-settings:'FILL' 1">star</span><span
+                        class="material-symbols-outlined text-sm"
+                        style="font-variation-settings:'FILL' 1">star</span><span
+                        class="material-symbols-outlined text-sm"
+                        style="font-variation-settings:'FILL' 1">star</span><span
+                        class="material-symbols-outlined text-sm" style="font-variation-settings:'FILL' 1">star</span>
+                </div>
+                <p class="text-slate-700 dark:text-slate-300 text-sm leading-relaxed mb-4">굿굿 결제가 단걸이라 매번 갱신이 귀찮은거 제외 좋음
+                </p>
+                <div>
+                    <p class="text-xs font-bold text-slate-900 dark:text-white">f***1@gmail.com</p><span
+                        class="inline-block mt-1 px-2 py-0.5 text-[10px] font-semibold rounded-full badge-pro">PRO
+                        플랜</span>
+                </div>
+            </div>
+
+            <!-- 16 -->
+            <div
+                class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-md border border-blue-200 dark:border-blue-900/50">
+                <div class="flex items-center gap-1 text-yellow-400 mb-3">
+                    <span class="material-symbols-outlined text-sm"
+                        style="font-variation-settings:'FILL' 1">star</span><span
+                        class="material-symbols-outlined text-sm"
+                        style="font-variation-settings:'FILL' 1">star</span><span
+                        class="material-symbols-outlined text-sm"
+                        style="font-variation-settings:'FILL' 1">star</span><span
+                        class="material-symbols-outlined text-sm"
+                        style="font-variation-settings:'FILL' 1">star</span><span
+                        class="material-symbols-outlined text-sm" style="font-variation-settings:'FILL' 1">star</span>
+                </div>
+                <p class="text-slate-700 dark:text-slate-300 text-sm leading-relaxed mb-4">프로를 위해서 만든거 같음 좀 아쉽. 프로로
+                    넘어가야지 별수있나~</p>
+                <div>
+                    <p class="text-xs font-bold text-slate-900 dark:text-white">a***5@gmail.com</p><span
+                        class="inline-block mt-1 px-2 py-0.5 text-[10px] font-semibold rounded-full badge-lite">LITE
+                        플랜</span>
+                </div>
+            </div>
+
+            <!-- 17 -->
+            <div
+                class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-md border border-blue-200 dark:border-blue-900/50">
+                <div class="flex items-center gap-1 text-yellow-400 mb-3">
+                    <span class="material-symbols-outlined text-sm"
+                        style="font-variation-settings:'FILL' 1">star</span><span
+                        class="material-symbols-outlined text-sm"
+                        style="font-variation-settings:'FILL' 1">star</span><span
+                        class="material-symbols-outlined text-sm"
+                        style="font-variation-settings:'FILL' 1">star</span><span
+                        class="material-symbols-outlined text-sm"
+                        style="font-variation-settings:'FILL' 1">star</span><span
+                        class="material-symbols-outlined text-sm" style="font-variation-settings:'FILL' 1">star</span>
+                </div>
+                <p class="text-slate-700 dark:text-slate-300 text-sm leading-relaxed mb-4">중고차가 쏠쏠한듯</p>
+                <div>
+                    <p class="text-xs font-bold text-slate-900 dark:text-white">t***8@gmail.com</p><span
+                        class="inline-block mt-1 px-2 py-0.5 text-[10px] font-semibold rounded-full badge-pro">PRO
+                        플랜</span>
+                </div>
+            </div>
+
+            <!-- 18 -->
+            <div
+                class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-md border border-blue-200 dark:border-blue-900/50">
+                <div class="flex items-center gap-1 text-yellow-400 mb-3">
+                    <span class="material-symbols-outlined text-sm"
+                        style="font-variation-settings:'FILL' 1">star</span><span
+                        class="material-symbols-outlined text-sm"
+                        style="font-variation-settings:'FILL' 1">star</span><span
+                        class="material-symbols-outlined text-sm"
+                        style="font-variation-settings:'FILL' 1">star</span><span
+                        class="material-symbols-outlined text-sm"
+                        style="font-variation-settings:'FILL' 1">star</span><span
+                        class="material-symbols-outlined text-sm" style="font-variation-settings:'FILL' 1">star</span>
+                </div>
+                <p class="text-slate-700 dark:text-slate-300 text-sm leading-relaxed mb-4">우선 가격에 비해 효율은 좋음</p>
+                <div>
+                    <p class="text-xs font-bold text-slate-900 dark:text-white">e***4@gmail.com</p><span
+                        class="inline-block mt-1 px-2 py-0.5 text-[10px] font-semibold rounded-full badge-pro">PRO
+                        플랜</span>
+                </div>
+            </div>
+
+            <!-- 19 -->
+            <div
+                class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-md border border-blue-200 dark:border-blue-900/50">
+                <div class="flex items-center gap-1 text-yellow-400 mb-3">
+                    <span class="material-symbols-outlined text-sm"
+                        style="font-variation-settings:'FILL' 1">star</span><span
+                        class="material-symbols-outlined text-sm"
+                        style="font-variation-settings:'FILL' 1">star</span><span
+                        class="material-symbols-outlined text-sm"
+                        style="font-variation-settings:'FILL' 1">star</span><span
+                        class="material-symbols-outlined text-sm"
+                        style="font-variation-settings:'FILL' 1">star</span><span
+                        class="material-symbols-outlined text-sm" style="font-variation-settings:'FILL' 1">star</span>
+                </div>
+                <p class="text-slate-700 dark:text-slate-300 text-sm leading-relaxed mb-4">편해서 좋</p>
+                <div>
+                    <p class="text-xs font-bold text-slate-900 dark:text-white">w***6@gmail.com</p><span
+                        class="inline-block mt-1 px-2 py-0.5 text-[10px] font-semibold rounded-full badge-pro">PRO
+                        플랜</span>
+                </div>
+            </div>
+
+            <!-- 20 -->
+            <div
+                class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-md border border-blue-200 dark:border-blue-900/50">
+                <div class="flex items-center gap-1 text-yellow-400 mb-3">
+                    <span class="material-symbols-outlined text-sm"
+                        style="font-variation-settings:'FILL' 1">star</span><span
+                        class="material-symbols-outlined text-sm"
+                        style="font-variation-settings:'FILL' 1">star</span><span
+                        class="material-symbols-outlined text-sm"
+                        style="font-variation-settings:'FILL' 1">star</span><span
+                        class="material-symbols-outlined text-sm"
+                        style="font-variation-settings:'FILL' 1">star</span><span
+                        class="material-symbols-outlined text-sm" style="font-variation-settings:'FILL' 1">star</span>
+                </div>
+                <p class="text-slate-700 dark:text-slate-300 text-sm leading-relaxed mb-4">별로임 쓰지마셈 혼자쓰게 ㅋ</p>
+                <div>
+                    <p class="text-xs font-bold text-slate-900 dark:text-white">i***2@gmail.com</p><span
+                        class="inline-block mt-1 px-2 py-0.5 text-[10px] font-semibold rounded-full badge-pro">PRO
+                        플랜</span>
+                </div>
+            </div>
+
+            <!-- 21 -->
+            <div
+                class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-md border border-blue-200 dark:border-blue-900/50">
+                <div class="flex items-center gap-1 text-yellow-400 mb-3">
+                    <span class="material-symbols-outlined text-sm"
+                        style="font-variation-settings:'FILL' 1">star</span><span
+                        class="material-symbols-outlined text-sm"
+                        style="font-variation-settings:'FILL' 1">star</span><span
+                        class="material-symbols-outlined text-sm"
+                        style="font-variation-settings:'FILL' 1">star</span><span
+                        class="material-symbols-outlined text-sm"
+                        style="font-variation-settings:'FILL' 1">star</span><span
+                        class="material-symbols-outlined text-sm" style="font-variation-settings:'FILL' 1">star</span>
+                </div>
+                <p class="text-slate-700 dark:text-slate-300 text-sm leading-relaxed mb-4">신기하네 잘되나 궁금~</p>
+                <div>
+                    <p class="text-xs font-bold text-slate-900 dark:text-white">g***9@gmail.com</p><span
+                        class="inline-block mt-1 px-2 py-0.5 text-[10px] font-semibold rounded-full badge-pro">PRO
+                        플랜</span>
+                </div>
+            </div>
+
+            <!-- 22 -->
+            <div
+                class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-md border border-blue-200 dark:border-blue-900/50">
+                <div class="flex items-center gap-1 text-yellow-400 mb-3">
+                    <span class="material-symbols-outlined text-sm"
+                        style="font-variation-settings:'FILL' 1">star</span><span
+                        class="material-symbols-outlined text-sm"
+                        style="font-variation-settings:'FILL' 1">star</span><span
+                        class="material-symbols-outlined text-sm"
+                        style="font-variation-settings:'FILL' 1">star</span><span
+                        class="material-symbols-outlined text-sm"
+                        style="font-variation-settings:'FILL' 1">star</span><span
+                        class="material-symbols-outlined text-sm" style="font-variation-settings:'FILL' 1">star</span>
+                </div>
+                <p class="text-slate-700 dark:text-slate-300 text-sm leading-relaxed mb-4">믿고 구독해봅니다</p>
+                <div>
+                    <p class="text-xs font-bold text-slate-900 dark:text-white">q***3@gmail.com</p><span
+                        class="inline-block mt-1 px-2 py-0.5 text-[10px] font-semibold rounded-full badge-pro">PRO
+                        플랜</span>
+                </div>
+            </div>
+
+            <!-- 23 -->
+            <div
+                class="bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-md border border-blue-200 dark:border-blue-900/50">
+                <div class="flex items-center gap-1 text-yellow-400 mb-3">
+                    <span class="material-symbols-outlined text-sm"
+                        style="font-variation-settings:'FILL' 1">star</span><span
+                        class="material-symbols-outlined text-sm"
+                        style="font-variation-settings:'FILL' 1">star</span><span
+                        class="material-symbols-outlined text-sm"
+                        style="font-variation-settings:'FILL' 1">star</span><span
+                        class="material-symbols-outlined text-sm"
+                        style="font-variation-settings:'FILL' 1">star</span><span
+                        class="material-symbols-outlined text-sm" style="font-variation-settings:'FILL' 1">star</span>
+                </div>
+                <p class="text-slate-700 dark:text-slate-300 text-sm leading-relaxed mb-4">ㅎㅎ</p>
+                <div>
+                    <p class="text-xs font-bold text-slate-900 dark:text-white">u***7@gmail.com</p><span
+                        class="inline-block mt-1 px-2 py-0.5 text-[10px] font-semibold rounded-full badge-pro">PRO
+                        플랜</span>
+                </div>
+            </div>
+
+        </div><!-- end grid -->
+
+        <!-- Pagination -->
+        <div id="pagination-container" class="mt-12 flex justify-center items-center gap-2">
+            <!-- Pagination buttons will be generated by JS -->
+        </div>
+
+        <!-- CTA -->
+        <div class="mt-16 text-center">
+            <p class="text-slate-500 dark:text-slate-400 mb-6 text-sm">블봇이 마음에 드셨나요?</p>
+            <a href="index.html#pricing"
+                class="inline-flex items-center gap-2 px-10 py-4 bg-primary text-white font-black rounded-xl hover:bg-slate-800 transition-all shadow-xl shadow-primary/20 text-base">
+                프로 플랜 구독하기
+                <span class="material-symbols-outlined">arrow_forward</span>
+            </a>
+        </div>
+
+    </main>
+
+    <footer class="mt-24 border-t border-slate-200 dark:border-slate-800 py-8 text-center text-xs text-slate-400">
+        © 2026 Ricar Auto Plan. All rights reserved. &nbsp;|&nbsp;
+        <a href="index.html" class="hover:text-primary transition-colors">홈으로 돌아가기</a>
+    </footer>
+
+    <!-- Review Modal -->
+    <div id="review-modal"
+        class="fixed inset-0 z-[100] items-center justify-center p-4 bg-slate-900/60 backdrop-blur-sm">
+        <div
+            class="bg-white dark:bg-slate-800 w-full max-w-lg rounded-3xl overflow-hidden shadow-2xl animate-in fade-in zoom-in duration-300">
+            <div class="p-6 border-b border-slate-100 dark:border-slate-700 flex items-center justify-between">
+                <h3 class="text-xl font-bold text-slate-900 dark:text-white">후기 작성하기</h3>
+                <button onclick="closeReviewModal()" class="text-slate-400 hover:text-slate-600 transition-colors">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+
+            <form id="review-form" onsubmit="submitReview(event)" class="p-6 space-y-5">
+                <!-- Event info in modal -->
+                <div
+                    class="bg-blue-50 dark:bg-blue-900/20 p-4 rounded-xl border border-blue-100 dark:border-blue-800/50">
+                    <p class="text-blue-700 dark:text-blue-300 text-xs leading-relaxed">
+                        <b>🎁 후기 작성 혜택</b><br>
+                        후기를 남겨주시면 현재 이용 중인 플랜의 기간을 <b>7일간 즉시 연장</b>해 드립니다.
+                    </p>
+                </div>
+
+                <!-- Rating -->
+                <div>
+                    <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">평점</label>
+                    <div class="flex gap-1" id="star-rating">
+                        <input type="hidden" name="rating" id="rating-value" value="5">
+                        <!-- Using buttons for accessible star selection -->
+                        <button type="button" onclick="setRating(1)"
+                            class="star-btn text-yellow-400 focus:outline-none"><span
+                                class="material-symbols-outlined text-3xl"
+                                style="font-variation-settings:'FILL' 1">star</span></button>
+                        <button type="button" onclick="setRating(2)"
+                            class="star-btn text-yellow-400 focus:outline-none"><span
+                                class="material-symbols-outlined text-3xl"
+                                style="font-variation-settings:'FILL' 1">star</span></button>
+                        <button type="button" onclick="setRating(3)"
+                            class="star-btn text-yellow-400 focus:outline-none"><span
+                                class="material-symbols-outlined text-3xl"
+                                style="font-variation-settings:'FILL' 1">star</span></button>
+                        <button type="button" onclick="setRating(4)"
+                            class="star-btn text-yellow-400 focus:outline-none"><span
+                                class="material-symbols-outlined text-3xl"
+                                style="font-variation-settings:'FILL' 1">star</span></button>
+                        <button type="button" onclick="setRating(5)"
+                            class="star-btn text-yellow-400 focus:outline-none"><span
+                                class="material-symbols-outlined text-3xl"
+                                style="font-variation-settings:'FILL' 1">star</span></button>
+                    </div>
+                </div>
+
+                <!-- Email (Auto-populated, Hidden Input) -->
+                <div id="reviewer-info-display"
+                    class="hidden text-sm font-medium text-slate-500 bg-slate-50 dark:bg-slate-900/30 p-3 rounded-xl border border-slate-100 dark:border-slate-800">
+                    작성자: <span id="display-email" class="text-slate-900 dark:text-white"></span>
+                    <span id="display-plan"
+                        class="ml-2 px-2 py-0.5 text-[10px] font-semibold rounded-full bg-blue-100 text-blue-600"></span>
+                </div>
+
+                <!-- Review Content -->
+                <div>
+                    <label class="block text-sm font-bold text-slate-700 dark:text-slate-300 mb-2">후기 내용</label>
+                    <textarea required id="review-content" rows="4" placeholder="사용 후기를 솔직하게 남겨주세요."
+                        class="w-full px-4 py-3 rounded-xl border-slate-200 dark:border-slate-700 dark:bg-slate-900/50 focus:ring-blue-500 focus:border-blue-500 text-sm transition-all"></textarea>
+                </div>
+
+                <div class="pt-2">
+                    <button type="submit"
+                        class="w-full py-4 bg-blue-600 hover:bg-blue-700 text-white font-black rounded-2xl shadow-xl shadow-blue-500/20 transition-all">
+                        후기 등록하고 이벤트 혜택 받기
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- Firebase SDK (Compat Version) -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+    <script src="firebase_config.js"></script>
+
+    <script>
+        const REVIEWS_PER_PAGE = 9;
+        let currentPage = 1;
+        let allReviews = [];
+
+        // Initialize reviews from Firestore on load
+        window.addEventListener('DOMContentLoaded', () => {
+            // 1. First, capture static reviews currently in the DOM
+            const container = document.getElementById('reviews-container');
+            const staticCards = Array.from(container.querySelectorAll(':scope > div:not(#no-reviews)'));
+
+            // Map static cards to a standard format with a dummy past date for sorting
+            const staticReviewsData = staticCards.map((el, index) => {
+                // Give static reviews a dummy date (randomly within the last 30 days but older than now)
+                const dummyDate = new Date();
+                dummyDate.setDate(dummyDate.getDate() - (index + 5)); // Older ones lower down
+
+                return {
+                    id: `static-${index}`,
+                    element: el,
+                    createdAt: dummyDate
+                };
+            });
+
+            if (typeof db !== 'undefined') {
+                // 2. Fetch from Firestore and combine
+                fetchReviews(staticReviewsData);
+            } else {
+                // Fallback if no Firebase
+                allReviews = staticReviewsData.map(r => r.element);
+                renderPage(1, false);
+            }
+        });
+
+        async function fetchReviews(staticReviews = []) {
+            try {
+                const querySnapshot = await db.collection("reviews").orderBy("createdAt", "desc").get();
+                const dynamicReviews = [];
+
+                querySnapshot.forEach((doc) => {
+                    const data = doc.data();
+                    const reviewEl = createReviewElement(doc.id, data);
+                    const createdAt = data.createdAt ? data.createdAt.toDate() : new Date();
+
+                    dynamicReviews.push({
+                        id: doc.id,
+                        element: reviewEl,
+                        createdAt: createdAt
+                    });
+                });
+
+                // 3. Combine and Sort
+                const combined = [...dynamicReviews, ...staticReviews];
+
+                // Sort by date descending
+                combined.sort((a, b) => b.createdAt - a.createdAt);
+
+                allReviews = combined.map(r => r.element);
+
+                renderPage(1, false);
+            } catch (error) {
+                console.error("Error fetching reviews:", error);
+                // Even if fetch fails, show static reviews
+                if (staticReviews.length > 0) {
+                    allReviews = staticReviews.map(r => r.element);
+                    renderPage(1, false);
+                } else {
+                    document.getElementById('no-reviews').textContent = "후기를 불러오는 중 오류가 발생했습니다.";
+                    document.getElementById('no-reviews').classList.remove('hidden');
+                }
+            }
+        }
+
+        function createReviewElement(docId, data) {
+            const { content, rating, email, plan, uid, maskedEmail } = data;
+
+            const card = document.createElement('div');
+            card.className = "bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-md border border-blue-200 dark:border-blue-900/50 relative group";
+            card.dataset.id = docId;
+
+            let starsHtml = '';
+            for (let i = 1; i <= 5; i++) {
+                starsHtml += `<span class="material-symbols-outlined text-sm" style="font-variation-settings:'FILL' ${i <= rating ? 1 : 0}">star</span>`;
+            }
+
+            // Check ownership to show Edit/Delete buttons
+            const isOwner = auth.currentUser && auth.currentUser.uid === uid;
+            const ownershipButtons = isOwner ? `
+                <div class="absolute top-4 right-4 flex gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
+                    <button onclick="editReview('${docId}')" class="p-1.5 text-slate-400 hover:text-blue-500 transition-colors">
+                        <span class="material-symbols-outlined text-lg">edit</span>
+                    </button>
+                    <button onclick="deleteReview('${docId}')" class="p-1.5 text-slate-400 hover:text-red-500 transition-colors">
+                        <span class="material-symbols-outlined text-lg">delete</span>
+                    </button>
+                </div>
+            ` : '';
+
+            card.innerHTML = `
+                ${ownershipButtons}
+                <div class="flex items-center gap-1 text-yellow-400 mb-3">
+                    ${starsHtml}
+                </div>
+                <p class="text-slate-700 dark:text-slate-300 text-sm leading-relaxed mb-4 whitespace-pre-wrap">${content}</p>
+                <div>
+                    <p class="text-xs font-bold text-slate-900 dark:text-white">${maskedEmail || email}</p>
+                    <span class="inline-block mt-1 px-2 py-0.5 text-[10px] font-semibold rounded-full ${plan.toLowerCase() === 'lite' ? 'badge-lite' : 'badge-pro'}">${plan.toUpperCase()} 플랜</span>
+                </div>
+            `;
+            return card;
+        }
+
+        function renderPage(page, scroll = true) {
+            currentPage = page;
+            const container = document.getElementById('reviews-container');
+            const noReviews = document.getElementById('no-reviews');
+
+            if (allReviews.length === 0) {
+                noReviews.classList.remove('hidden');
+                return;
+            } else {
+                noReviews.classList.add('hidden');
+            }
+
+            // Clear current view
+            container.querySelectorAll(':scope > div:not(#no-reviews)').forEach(el => el.remove());
+
+            // Calculate start and end indices
+            const start = (page - 1) * REVIEWS_PER_PAGE;
+            const end = start + REVIEWS_PER_PAGE;
+            const pageReviews = allReviews.slice(start, end);
+
+            // Append page reviews
+            pageReviews.forEach(review => {
+                container.appendChild(review);
+            });
+
+            updatePaginationUI();
+            if (scroll) {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        function updatePaginationUI() {
+            const pagination = document.getElementById('pagination-container');
+            const totalPages = Math.ceil(allReviews.length / REVIEWS_PER_PAGE);
+
+            if (totalPages <= 1) {
+                pagination.innerHTML = '';
+                return;
+            }
+
+            let html = '';
+
+            // Prev button
+            html += `<button onclick="renderPage(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''} 
+                class="w-10 h-10 flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-700 text-slate-400 hover:text-primary disabled:opacity-30 disabled:cursor-not-allowed transition-all">
+                <span class="material-symbols-outlined">chevron_left</span>
+            </button>`;
+
+            // Page numbers
+            for (let i = 1; i <= totalPages; i++) {
+                html += `<button onclick="renderPage(${i})" 
+                    class="w-10 h-10 flex items-center justify-center rounded-lg font-bold text-sm transition-all
+                    ${currentPage === i
+                        ? 'bg-blue-600 text-white shadow-lg shadow-blue-500/20'
+                        : 'text-slate-500 hover:bg-slate-100 dark:hover:bg-slate-800'}">
+                    ${i}
+                </button>`;
+            }
+
+            // Next button
+            html += `<button onclick="renderPage(${currentPage + 1})" ${currentPage === totalPages ? 'disabled' : ''} 
+                class="w-10 h-10 flex items-center justify-center rounded-lg border border-slate-200 dark:border-slate-700 text-slate-400 hover:text-primary disabled:opacity-30 disabled:cursor-not-allowed transition-all">
+                <span class="material-symbols-outlined">chevron_right</span>
+            </button>`;
+
+            pagination.innerHTML = html;
+        }
+
+        let currentUserData = null;
+
+        if (typeof auth !== 'undefined') {
+            auth.onAuthStateChanged(async (user) => {
+                if (user && typeof db !== 'undefined') {
+                    try {
+                        const userDoc = await db.collection('users').doc(user.uid).get();
+                        if (userDoc.exists) {
+                            currentUserData = userDoc.data();
+                        }
+                    } catch (e) {
+                        console.error("Error fetching user data:", e);
+                    }
+                }
+            });
+        }
+
+        let isEditMode = false;
+        let editingDocId = null;
+
+        async function openReviewModal(docId = null) {
+            if (!auth || !auth.currentUser) {
+                if (confirm('후기 작성을 위해 로그인이 필요합니다. 로그인 페이지로 이동하시겠습니까?')) {
+                    window.location.href = 'login.html?redirect=reviews.html';
+                }
+                return;
+            }
+
+            if (!currentUserData) {
+                try {
+                    const userDoc = await db.collection('users').doc(auth.currentUser.uid).get();
+                    if (userDoc.exists) currentUserData = userDoc.data();
+                } catch (e) { }
+            }
+
+            const plan = currentUserData?.plan || 'free';
+            const expiry = currentUserData?.expiryDate ? new Date(currentUserData.expiryDate) : new Date(0);
+            const isExpired = expiry < new Date();
+
+            if (plan === 'free' || isExpired) {
+                alert('후기 작성 이벤트는 유료 플랜(PRO/LITE) 이용 고객님만 참여 가능합니다.\n플랜 구독 후 다시 시도해주세요!');
+                return;
+            }
+
+            // Pre-fill info
+            document.getElementById('display-email').textContent = auth.currentUser.email;
+            const planBadge = document.getElementById('display-plan');
+            planBadge.textContent = plan.toUpperCase() + " 플랜";
+            document.getElementById('reviewer-info-display').classList.remove('hidden');
+
+            // Reset form
+            document.getElementById('review-form').reset();
+            setRating(5);
+            isEditMode = !!docId;
+            editingDocId = docId;
+
+            const modalTitle = document.querySelector('#review-modal h3');
+            const submitBtn = document.querySelector('#review-form button[type="submit"]');
+
+            if (isEditMode) {
+                modalTitle.textContent = "후기 수정하기";
+                submitBtn.textContent = "후기 수정 완료";
+
+                // Fetch existing data for editing
+                try {
+                    const doc = await db.collection("reviews").doc(docId).get();
+                    if (doc.exists) {
+                        const data = doc.data();
+                        document.getElementById('review-content').value = data.content;
+                        setRating(data.rating);
+                    }
+                } catch (e) {
+                    console.error("Error fetching review for edit:", e);
+                }
+            } else {
+                modalTitle.textContent = "후기 작성하기";
+                submitBtn.textContent = "후기 등록하고 이벤트 혜택 받기";
+            }
+
+            document.getElementById('review-modal').classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeReviewModal() {
+            document.getElementById('review-modal').classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        function setRating(n) {
+            document.getElementById('rating-value').value = n;
+            const buttons = document.querySelectorAll('.star-btn');
+            buttons.forEach((btn, i) => {
+                const icon = btn.querySelector('.material-symbols-outlined');
+                if (i < n) {
+                    icon.style.fontVariationSettings = "'FILL' 1";
+                } else {
+                    icon.style.fontVariationSettings = "'FILL' 0";
+                }
+            });
+        }
+
+        async function submitReview(e) {
+            e.preventDefault();
+
+            if (!auth.currentUser || !currentUserData) return;
+
+            const submitBtn = e.target.querySelector('button[type="submit"]');
+            submitBtn.disabled = true;
+            submitBtn.innerHTML = '<span class="material-symbols-outlined animate-spin">sync</span> 처리 중...';
+
+            const email = auth.currentUser.email;
+            const plan = currentUserData.plan || 'PRO';
+            const content = document.getElementById('review-content').value;
+            const rating = parseInt(document.getElementById('rating-value').value);
+
+            // Email Masking: g***9@gmail.com
+            const parts = email.split('@');
+            let maskedEmail = '';
+            if (parts.length === 2) {
+                const namePart = parts[0];
+                const domainPart = parts[1];
+                if (namePart.length <= 2) {
+                    maskedEmail = namePart + "***" + "@" + domainPart;
+                } else {
+                    maskedEmail = namePart[0] + "***" + namePart[namePart.length - 1] + "@" + domainPart;
+                }
+            } else {
+                maskedEmail = "user***@email.com";
+            }
+
+            const reviewData = {
+                uid: auth.currentUser.uid,
+                email: email,
+                maskedEmail: maskedEmail,
+                plan: plan,
+                content: content,
+                rating: rating,
+                updatedAt: firebase.firestore.FieldValue.serverTimestamp()
+            };
+
+            try {
+                if (isEditMode && editingDocId) {
+                    await db.collection("reviews").doc(editingDocId).update(reviewData);
+                    alert('후기가 수정되었습니다.');
+                } else {
+                    reviewData.createdAt = firebase.firestore.FieldValue.serverTimestamp();
+                    await db.collection("reviews").add(reviewData);
+                    alert('🎉 후기가 등록되었습니다!\n보너스 이용권(+7일)이 계정에 즉시 추가되었습니다.');
+                }
+
+                closeReviewModal();
+                fetchReviews(); // Refresh
+            } catch (error) {
+                console.error("Error saving review:", error);
+                alert('오류가 발생했습니다. 다시 시도해 주세요.');
+            } finally {
+                submitBtn.disabled = false;
+                submitBtn.textContent = isEditMode ? "후기 수정 완료" : "후기 등록하고 이벤트 혜택 받기";
+                document.getElementById('review-form').reset();
+                setRating(5);
+            }
+        }
+
+        async function editReview(docId) {
+            openReviewModal(docId);
+        }
+
+        async function deleteReview(docId) {
+            if (!confirm('정말로 이 후기를 삭제하시겠습니까?\n삭제 후에는 복구할 수 없습니다.')) return;
+
+            try {
+                await db.collection("reviews").doc(docId).delete();
+                alert('후기가 삭제되었습니다.');
+                fetchReviews(); // Refresh
+            } catch (error) {
+                console.error("Error deleting review:", error);
+                alert('삭제 중 오류가 발생했습니다. 본인이 만드신 후기만 삭제 가능합니다.');
+            }
+        }
+    </script>
+</body>
+
+>>>>>>> 3ff004ecdbcee52a548b199536a31a309cabba4e
 </html>

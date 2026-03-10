@@ -4,7 +4,7 @@
 <head>
     <meta charset="utf-8" />
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>회원가입 - 리카봇 (RicarBot)</title>
+    <title>회원가입 - 블봇 (BloBot)</title>
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&amp;display=swap"
         rel="stylesheet" />
@@ -65,8 +65,8 @@
             <div class="bg-primary text-white p-1.5 rounded-lg flex items-center justify-center">
                 <span class="material-symbols-outlined text-2xl">rocket_launch</span>
             </div>
-            <h1 class="text-xl font-bold tracking-tight text-slate-900 dark:text-slate-100">리카봇 <span
-                    class="text-slate-500 font-medium">RicarBot</span></h1>
+            <h1 class="text-xl font-bold tracking-tight text-slate-900 dark:text-slate-100">블봇 <span
+                    class="text-slate-500 font-medium">BloBot</span></h1>
         </div>
         <div class="hidden sm:flex items-center gap-2 text-slate-500 text-sm">
             <span class="material-symbols-outlined text-sm">lock</span>
@@ -78,7 +78,7 @@
             class="w-full max-w-[480px] bg-white dark:bg-slate-900 rounded-xl shadow-xl shadow-slate-200/50 dark:shadow-none border border-slate-200 dark:border-slate-800 p-8 md:p-10">
             <div class="mb-8">
                 <h2 class="text-2xl font-bold text-slate-900 dark:text-slate-100">회원가입</h2>
-                <p class="text-slate-500 dark:text-slate-400 mt-2">리카봇과 함께 비즈니스를 혁신하세요.</p>
+                <p class="text-slate-500 dark:text-slate-400 mt-2">블봇과 함께 비즈니스를 혁신하세요.</p>
             </div>
 
             <!-- Error Message -->
@@ -102,6 +102,13 @@
                     <input
                         class="form-input w-full px-4 py-3 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:ring-2 focus:ring-primary/20 outline-none transition-all"
                         id="password" placeholder="6자 이상 입력해주세요" type="password" />
+                </div>
+                <div>
+                    <label class="block text-sm font-semibold text-slate-700 dark:text-slate-300 mb-2"
+                        for="passwordConfirm">비밀번호 재확인</label>
+                    <input
+                        class="form-input w-full px-4 py-3 rounded-lg border border-slate-200 dark:border-slate-700 bg-white dark:bg-slate-800 text-slate-900 dark:text-slate-100 focus:ring-2 focus:ring-primary/20 outline-none transition-all"
+                        id="passwordConfirm" placeholder="비밀번호를 한번 더 입력해주세요" type="password" />
                 </div>
 
                 <div class="pt-4 border-t border-slate-100 dark:border-slate-800">
@@ -179,7 +186,7 @@
             <a class="hover:text-slate-600 transition-colors" href="mailto:jhxox666@naver.com">고객센터</a>
         </div>
         <div class="text-slate-400">
-            © 2026 RicarBot Inc. All rights reserved.
+            © 2026 BloBot Inc. All rights reserved.
         </div>
     </footer>
 
@@ -209,6 +216,7 @@
         document.getElementById('emailSignupBtn').addEventListener('click', async () => {
             const email = document.getElementById('email').value.trim();
             const password = document.getElementById('password').value.trim();
+            const passwordConfirm = document.getElementById('passwordConfirm').value.trim();
 
             const requiredChecks = document.querySelectorAll('.required-check');
             let allChecked = true;
@@ -219,16 +227,24 @@
                 return;
             }
 
-            if (!email || !password) {
-                showError('이메일과 비밀번호를 모두 입력해주세요.');
+            if (!email || !password || !passwordConfirm) {
+                showError('모든 필드(이메일, 비밀번호, 비밀번호 재확인)를 입력해주세요.');
                 return;
             }
+
             if (password.length < 6) {
                 showError('비밀번호는 최소 6자리 이상이어야 합니다.');
                 return;
             }
 
+            if (password !== passwordConfirm) {
+                showError('비밀번호가 서로 일치하지 않습니다.');
+                return;
+            }
+
             try {
+                // 이메일 중복 체크는 createUserWithEmailAndPassword가 내부적으로 수행하며
+                // 이미 사용 중인 경우 'auth/email-already-in-use' 에러를 던집니다.
                 const result = await auth.createUserWithEmailAndPassword(email, password);
                 const user = result.user;
                 const marketingConsent = document.getElementById('check-marketing').checked;
@@ -253,6 +269,7 @@
                 let msg = `회원가입 실패: ${error.message}`;
                 if (error.code === 'auth/email-already-in-use') msg = '이미 사용 중인 이메일입니다.';
                 if (error.code === 'auth/invalid-email') msg = '유효하지 않은 이메일 형식입니다.';
+                if (error.code === 'auth/weak-password') msg = '비밀번호가 너무 취약합니다.';
                 showError(msg);
             }
         });
