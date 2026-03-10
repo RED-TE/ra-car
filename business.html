@@ -1,1018 +1,1047 @@
-<<<<<<< HEAD
-<!DOCTYPE html>
-<html lang="ko" class="scroll-smooth">
+<<<<<<< HEAD <!DOCTYPE html>
+    <html lang="ko" class="scroll-smooth">
 
-<head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>RicarBot SME - 자영업 사장님을 위한 AI 블로그 마케팅</title>
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap"
-        rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap"
-        rel="stylesheet" />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-        rel="stylesheet" />
-    <script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    colors: {
-                        "primary": "#0f1729",
-                        "background-light": "#f6f7f8",
-                        "background-dark": "#14171e",
+    <head>
+        <meta charset="utf-8" />
+        <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+        <title>RicarBot SME - 자영업 사장님을 위한 AI 블로그 마케팅</title>
+        <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap"
+            rel="stylesheet" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap"
+            rel="stylesheet" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+            rel="stylesheet" />
+        <script id="tailwind-config">
+            tailwind.config = {
+                darkMode: "class",
+                theme: {
+                    extend: {
+                        colors: {
+                            "primary": "#0f1729",
+                            "background-light": "#f6f7f8",
+                            "background-dark": "#14171e",
+                        },
+                        fontFamily: {
+                            "display": ["Inter", "Noto Sans KR", "sans-serif"]
+                        },
+                        borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
                     },
-                    fontFamily: {
-                        "display": ["Inter", "Noto Sans KR", "sans-serif"]
-                    },
-                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
                 },
-            },
-        }
-    </script>
-    <style>
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
-
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s ease-out;
-        }
-
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .pulse-glow {
-            animation: pulse-glow 2s ease-in-out infinite;
-        }
-
-        @keyframes pulse-glow {
-
-            0%,
-            100% {
-                box-shadow: 0 0 20px rgba(15, 23, 41, 0.1);
+            }
+        </script>
+        <style>
+            .material-symbols-outlined {
+                font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
             }
 
-            50% {
-                box-shadow: 0 0 40px rgba(15, 23, 41, 0.2);
-            }
-        }
-
-        @keyframes float {
-
-            0%,
-            100% {
-                transform: translateY(0px);
+            .reveal {
+                opacity: 0;
+                transform: translateY(30px);
+                transition: all 0.6s ease-out;
             }
 
-            50% {
-                transform: translateY(-15px);
+            .reveal.active {
+                opacity: 1;
+                transform: translateY(0);
             }
-        }
 
-        .float-animation {
-            animation: float 4s ease-in-out infinite;
-        }
-    </style>
-</head>
+            .pulse-glow {
+                animation: pulse-glow 2s ease-in-out infinite;
+            }
 
-<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased">
-    <!-- Header -->
-    <header
-        class="sticky top-0 z-50 w-full border-b border-slate-200/80 dark:border-slate-800/80 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex h-16 items-center justify-between">
-                <div class="flex items-center gap-2 cursor-pointer" onclick="location.href='index.html'">
-                    <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-white">
-                        <span class="material-symbols-outlined text-xl">smart_toy</span>
-                    </div>
-                    <span class="text-xl font-bold tracking-tight text-primary dark:text-white">RicarBot <span
-                            class="text-slate-400 font-medium">SME</span></span>
-                </div>
+            @keyframes pulse-glow {
 
-                <!-- 업종 전환 스위치 -->
-                <div
-                    class="hidden md:flex bg-slate-100 dark:bg-slate-800/50 rounded-full p-1 border border-slate-200 dark:border-slate-700 ml-6">
-                    <button onclick="location.href='index.html'"
-                        class="px-4 py-1.5 rounded-full text-xs font-bold text-slate-500 dark:text-slate-400 hover:text-primary dark:hover:text-white transition-all">자동차</button>
-                    <button
-                        class="px-4 py-1.5 rounded-full text-xs font-bold bg-primary text-white shadow-lg">자영업/SME</button>
-                </div>
+                0%,
+                100% {
+                    box-shadow: 0 0 20px rgba(15, 23, 41, 0.1);
+                }
 
-                <nav class="hidden md:flex items-center gap-8 ml-auto mr-8">
-                    <a class="text-sm font-medium text-slate-600 hover:text-primary dark:text-slate-300 dark:hover:text-white transition-colors"
-                        href="guide.html">가이드</a>
-                    <a class="text-sm font-medium text-slate-600 hover:text-primary dark:text-slate-300 dark:hover:text-white transition-colors"
-                        href="#features">핵심기능</a>
-                    <a class="text-sm font-medium text-slate-600 hover:text-primary dark:text-slate-300 dark:hover:text-white transition-colors"
-                        href="#download">다운로드</a>
-                    <a class="text-sm font-medium text-slate-600 hover:text-primary dark:text-slate-300 dark:hover:text-white transition-colors"
-                        href="#pricing">가격안내</a>
-                </nav>
+                50% {
+                    box-shadow: 0 0 40px rgba(15, 23, 41, 0.2);
+                }
+            }
 
-                <div class="flex items-center gap-3" id="nav-auth-section">
-                    <button onclick="location.href='login.html'"
-                        class="hidden sm:block px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-all">로그인</button>
-                    <button onclick="location.href='checkout.html?plan=PRO'"
-                        class="px-5 py-2 text-sm font-bold text-white bg-primary hover:bg-slate-800 rounded-lg shadow-sm transition-all">시작하기</button>
-                </div>
-            </div>
-        </div>
-    </header>
+            @keyframes float {
 
-    <main>
-        <!-- Hero Section -->
-        <section class="relative overflow-hidden pt-16 pb-24 lg:pt-32 lg:pb-40 reveal text-center">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                <div class="mb-8">
-                    <div
-                        class="inline-flex items-center rounded-full px-4 py-1.5 text-xs font-bold text-primary bg-primary/10 mb-6 pulse-glow">
-                        🏪 자영업 사장님을 위한 100% 자동 마케팅 출시
-                    </div>
-                </div>
-                <h1
-                    class="text-5xl lg:text-7xl font-black text-slate-900 dark:text-white leading-[1.1] tracking-tight mb-8">
-                    바쁜 사장님이라면,<br>
-                    <span class="text-primary/80 dark:text-slate-400">마케팅도 AI가 대신</span> 합니다
-                </h1>
-                <p
-                    class="text-lg lg:text-xl text-slate-600 dark:text-slate-400 leading-relaxed mb-12 max-w-3xl mx-auto">
-                    맛집, 미용실, 카페 사장님 필수템! '내돈내산 후기'부터 '사장님 직접 소개'까지<br>AI가 실제 방문한 것처럼 생생하게 100% 자동으로 홍보합니다.
-                </p>
+                0%,
+                100% {
+                    transform: translateY(0px);
+                }
 
-                <!-- Demo UI Component -->
-                <div class="max-w-3xl mx-auto mb-16 float-animation">
-                    <div
-                        class="bg-white dark:bg-slate-900/50 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 shadow-2xl text-left">
-                        <div class="flex items-center gap-2 mb-4 border-b border-slate-100 dark:border-slate-800 pb-4">
-                            <div class="w-2.5 h-2.5 rounded-full bg-slate-200 dark:bg-slate-700"></div>
-                            <div class="w-2.5 h-2.5 rounded-full bg-slate-200 dark:bg-slate-700"></div>
-                            <div class="w-2.5 h-2.5 rounded-full bg-slate-200 dark:bg-slate-700"></div>
-                            <span
-                                class="ml-2 text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest">AI
-                                Marketing Engine Running...</span>
-                        </div>
-                        <div class="space-y-3">
-                            <div class="flex items-center gap-3">
-                                <span class="material-symbols-outlined text-green-500 text-sm">check_circle</span>
-                                <p class="text-xs font-medium text-slate-600 dark:text-slate-400">사장님 매장(맛집/미용실 등) 정보 분석
-                                    완료</p>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <span class="material-symbols-outlined text-green-500 text-sm">check_circle</span>
-                                <p class="text-xs font-medium text-slate-600 dark:text-slate-400">전문 마케터톤으로 고출력 홍보글 생성
-                                    중...</p>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <span class="material-symbols-outlined text-blue-500 text-sm">trending_up</span>
-                                <p class="text-xs font-bold text-slate-900 dark:text-white">결과: 인근 지역 잠재 고객 노출 최적화 발행 대기
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                50% {
+                    transform: translateY(-15px);
+                }
+            }
 
-                <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <button onclick="location.href='checkout.html?plan=PRO'"
-                        class="px-10 py-5 bg-primary text-white font-black rounded-2xl text-xl shadow-xl shadow-primary/20 hover:scale-[1.02] transition-transform">지금
-                        무료로 시작하기</button>
-                    <button onclick="location.href='#download'"
-                        class="px-10 py-5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 font-black rounded-2xl text-xl hover:bg-slate-50 transition-colors">프로그램
-                        다운로드</button>
-                </div>
-            </div>
-        </section>
+            .float-animation {
+                animation: float 4s ease-in-out infinite;
+            }
+        </style>
+    </head>
 
-        <!-- Features Section -->
-        <section class="py-24 bg-white dark:bg-background-dark/50 reveal" id="features">
+    <body
+        class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased">
+        <!-- Header -->
+        <header
+            class="sticky top-0 z-50 w-full border-b border-slate-200/80 dark:border-slate-800/80 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center mb-16">
-                    <h2 class="text-base font-bold text-primary dark:text-slate-400 tracking-wide uppercase mb-3">Core
-                        Features</h2>
-                    <p class="text-3xl lg:text-4xl font-black text-slate-900 dark:text-white tracking-tight">사장님은 매장
-                        운영에만 집중하세요</p>
-                </div>
-                <div class="grid md:grid-cols-3 gap-8">
-                    <!-- Feature 1 -->
-                    <div
-                        class="group p-8 bg-background-light dark:bg-slate-800/50 rounded-2xl border border-slate-200/50 dark:border-slate-700/50 hover:shadow-xl transition-all">
-                        <div class="text-4xl mb-6 group-hover:scale-110 transition-transform">🥘</div>
-                        <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">메뉴/분위기 정밀 묘사</h3>
-                        <p class="text-slate-600 dark:text-slate-400 leading-relaxed text-sm">입력한 메뉴 구성과 매장 분위기를 바탕으로
-                            AI가 실제 방문한 것처럼 생생하게 묘사합니다.</p>
+                <div class="flex h-16 items-center justify-between">
+                    <div class="flex items-center gap-2 cursor-pointer" onclick="location.href='index.html'">
+                        <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-white">
+                            <span class="material-symbols-outlined text-xl">smart_toy</span>
+                        </div>
+                        <span class="text-xl font-bold tracking-tight text-primary dark:text-white">RicarBot <span
+                                class="text-slate-400 font-medium">SME</span></span>
                     </div>
-                    <!-- Feature 2 -->
+
+                    <!-- 업종 전환 스위치 -->
                     <div
-                        class="group p-8 bg-background-light dark:bg-slate-800/50 rounded-2xl border border-slate-200/50 dark:border-slate-700/50 hover:shadow-xl transition-all">
-                        <div class="text-4xl mb-6 group-hover:scale-110 transition-transform">✍️</div>
-                        <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">다양한 콘셉트 지원</h3>
-                        <p class="text-slate-600 dark:text-slate-400 leading-relaxed text-sm">'내돈내산 후기', '사장님 직접 소개',
-                            '솔직 리뷰' 등 업종에 맞는 다양한 말투를 지원합니다.</p>
+                        class="hidden md:flex bg-slate-100 dark:bg-slate-800/50 rounded-full p-1 border border-slate-200 dark:border-slate-700 ml-6">
+                        <button onclick="location.href='index.html'"
+                            class="px-4 py-1.5 rounded-full text-xs font-bold text-slate-500 dark:text-slate-400 hover:text-primary dark:hover:text-white transition-all">자동차</button>
+                        <button
+                            class="px-4 py-1.5 rounded-full text-xs font-bold bg-primary text-white shadow-lg">자영업/SME</button>
                     </div>
-                    <!-- Feature 3 -->
-                    <div
-                        class="group p-8 bg-background-light dark:bg-slate-800/50 rounded-2xl border border-slate-200/50 dark:border-slate-700/50 hover:shadow-xl transition-all">
-                        <div class="text-4xl mb-6 group-hover:scale-110 transition-transform">🔍</div>
-                        <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">AI 벤치마킹 시스템</h3>
-                        <p class="text-slate-600 dark:text-slate-400 leading-relaxed text-sm">업체명만 넣으면 AI가 경쟁사 포스팅을 분석하여
-                            상위 노출을 위한 제목과 키워드를 제안합니다.</p>
+
+                    <nav class="hidden md:flex items-center gap-8 ml-auto mr-8">
+                        <a class="text-sm font-medium text-slate-600 hover:text-primary dark:text-slate-300 dark:hover:text-white transition-colors"
+                            href="guide.html">가이드</a>
+                        <a class="text-sm font-medium text-slate-600 hover:text-primary dark:text-slate-300 dark:hover:text-white transition-colors"
+                            href="#features">핵심기능</a>
+                        <a class="text-sm font-medium text-slate-600 hover:text-primary dark:text-slate-300 dark:hover:text-white transition-colors"
+                            href="#download">다운로드</a>
+                        <a class="text-sm font-medium text-slate-600 hover:text-primary dark:text-slate-300 dark:hover:text-white transition-colors"
+                            href="#pricing">가격안내</a>
+                    </nav>
+
+                    <div class="flex items-center gap-3" id="nav-auth-section">
+                        <button onclick="location.href='login.html'"
+                            class="hidden sm:block px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-all">로그인</button>
+                        <button onclick="location.href='checkout.html?plan=PRO'"
+                            class="px-5 py-2 text-sm font-bold text-white bg-primary hover:bg-slate-800 rounded-lg shadow-sm transition-all">시작하기</button>
                     </div>
                 </div>
             </div>
-        </section>
+        </header>
 
-        <!-- Pricing Section -->
-        <section class="py-24 bg-background-light dark:bg-background-dark reveal" id="pricing">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center mb-12">
-                    <h2 class="text-3xl lg:text-4xl font-black text-slate-900 dark:text-white tracking-tight mb-8">자영업
-                        특화 가격 플랜</h2>
-                    <!-- Billing Toggle -->
-                    <div
-                        class="flex justify-center p-1.5 bg-slate-200 dark:bg-slate-800 rounded-2xl w-fit mx-auto mb-8 shadow-inner">
-                        <button
-                            class="px-6 py-2.5 text-sm font-bold rounded-xl transition-all bg-primary text-white shadow-md"
-                            id="btn-single" onclick="switchBilling('single')">단건</button>
-                        <button
-                            class="px-6 py-2.5 text-sm font-bold rounded-xl transition-all text-slate-600 dark:text-slate-400"
-                            id="btn-subscription" onclick="switchBilling('subscription')">월간</button>
-                        <button
-                            class="px-6 py-2.5 text-sm font-bold rounded-xl transition-all text-slate-600 dark:text-slate-400 flex items-center gap-1"
-                            id="btn-yearly" onclick="switchBilling('yearly')">
-                            연간 <span class="text-[10px] px-1.5 py-0.5 bg-green-500 text-white rounded-full">Save</span>
-                        </button>
-                    </div>
-                </div>
-                <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-                    <!-- LITE Plan -->
-                    <div
-                        class="bg-white dark:bg-slate-800/50 p-10 rounded-3xl border border-slate-200 dark:border-slate-700 shadow-sm flex flex-col hover:shadow-xl transition-all">
-                        <div class="mb-8">
-                            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">LITE 플랜</h3>
-                            <p class="text-slate-500 dark:text-slate-400 text-sm">입문용 실속 패키지</p>
-                        </div>
-                        <div class="mb-8">
-                            <div class="flex items-baseline gap-2">
-                                <span class="text-4xl font-black text-slate-900 dark:text-white"
-                                    id="lite-price">9.9</span>
-                                <span class="text-xl text-slate-500 dark:text-gray-400" id="lite-period">만원 / 30일
-                                    (단건)</span>
-                            </div>
-                            <div class="mt-2 flex items-center gap-2">
-                                <span class="text-sm text-slate-400 line-through" id="lite-original">19.7만원</span>
-                                <span class="text-sm font-bold text-primary dark:text-blue-400" id="lite-discount">50%
-                                    할인</span>
-                            </div>
-                        </div>
-                        <ul class="space-y-4 mb-10 flex-grow">
-                            <li class="flex items-center gap-3 text-slate-600 dark:text-slate-300">
-                                <span class="material-symbols-outlined text-green-500 text-lg">check_circle</span>
-                                <span class="text-sm">수동 입력 모드 기반 발행</span>
-                            </li>
-                            <li class="flex items-center gap-3 text-slate-600 dark:text-slate-300">
-                                <span class="material-symbols-outlined text-green-500 text-lg">check_circle</span>
-                                <span class="text-sm">약 1,700자 표준 홍보글 작성</span>
-                            </li>
-                        </ul>
-                        <button
-                            class="w-full py-4 bg-slate-100 dark:bg-slate-700 text-slate-900 dark:text-white font-bold rounded-xl hover:bg-slate-200 transition-colors"
-                            onclick="goToCheckout('LITE')">플랜 선택하기</button>
-                    </div>
-                    <!-- PRO Plan -->
-                    <div
-                        class="bg-primary p-10 rounded-3xl border border-primary dark:border-blue-500 shadow-2xl relative overflow-hidden flex flex-col hover:scale-[1.01] transition-all">
-                        <div class="absolute top-6 right-6 bg-white/20 backdrop-blur-md text-white px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider"
-                            id="pro-badge">Best Choice</div>
-                        <div class="mb-8 relative z-10">
-                            <h3 class="text-xl font-bold text-white mb-2">PRO 플랜</h3>
-                            <p class="text-slate-400 text-sm">고출력 마케팅을 위한 전문가용</p>
-                        </div>
-                        <div class="mb-8 relative z-10">
-                            <div class="flex items-baseline gap-2">
-                                <span class="text-4xl font-black text-white" id="pro-price">24.9</span>
-                                <span class="text-xl text-slate-400 font-medium" id="pro-period">만원 / 30일 (단건)</span>
-                            </div>
-                            <div class="mt-2 flex items-center gap-2">
-                                <span class="text-sm text-slate-500 line-through" id="pro-original">39.9만원</span>
-                                <span class="text-sm font-bold text-white" id="pro-discount">38% 할인</span>
-                            </div>
-                        </div>
-                        <ul class="space-y-4 mb-10 flex-grow relative z-10">
-                            <li class="flex items-center gap-3 text-slate-300">
-                                <span class="material-symbols-outlined text-slate-300 text-lg">check_circle</span>
-                                <span class="text-sm font-bold">AI 자동 벤치마킹 (업체 분석)</span>
-                            </li>
-                            <li class="flex items-center gap-3 text-slate-300">
-                                <span class="material-symbols-outlined text-slate-300 text-lg">check_circle</span>
-                                <span class="text-sm font-medium">최대 5,000자 고출력 포스팅</span>
-                            </li>
-                            <li class="flex items-center gap-3 text-slate-300">
-                                <span class="material-symbols-outlined text-slate-300 text-lg">check_circle</span>
-                                <span class="text-sm">이미지 합성 & 예약 발행 지원</span>
-                            </li>
-                        </ul>
-                        <button
-                            class="w-full py-4 bg-white text-primary font-black rounded-xl shadow-lg hover:bg-slate-100 transition-all relative z-10"
-                            onclick="goToCheckout('PRO')">지금 시작하기</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Download Section -->
-        <section id="download" class="py-24 px-6 reveal">
-            <div class="container mx-auto max-w-4xl">
-                <div
-                    class="bg-primary/5 dark:bg-slate-900 border border-primary/10 dark:border-slate-800 rounded-3xl p-12 text-center shadow-lg">
-                    <div
-                        class="w-16 h-16 bg-primary dark:bg-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-8 shadow-xl">
-                        <span class="material-symbols-outlined text-white text-3xl">download</span>
-                    </div>
-                    <h2 class="text-3xl font-black mb-4 text-slate-900 dark:text-white">프로그램 다운로드</h2>
-                    <p class="text-slate-600 dark:text-slate-400 mb-10 max-w-lg mx-auto">
-                        사장님의 블로그 마케팅을 책임질 리카봇 SME 에디션.<br>지금 바로 다운로드하여 자동화의 위력을 경험하세요.
-                    </p>
-                    <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-                        <button
-                            onclick="location.href='https://drive.google.com/file/d/1dBumK7QGS4ZaWPVYG3twXqO2ftAC0ynA/view?usp=drive_link'"
-                            class="w-full sm:w-auto bg-primary dark:bg-blue-600 hover:bg-slate-800 text-white font-bold px-12 py-5 rounded-2xl shadow-xl transition-all hover:scale-105">
-                            Windows용 다운로드
-                        </button>
-                        <a href="guide.html"
-                            class="text-slate-500 hover:text-primary dark:hover:text-white font-bold transition-colors">설치법
-                            확인하기 →</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer class="bg-white dark:bg-background-dark border-t border-slate-200 dark:border-slate-800 py-16">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
-                <div class="col-span-1 md:col-span-1">
-                    <div class="flex items-center gap-2 mb-6 cursor-pointer" onclick="location.href='index.html'">
+        <main>
+            <!-- Hero Section -->
+            <section class="relative overflow-hidden pt-16 pb-24 lg:pt-32 lg:pb-40 reveal text-center">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                    <div class="mb-8">
                         <div
-                            class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-white text-xs font-bold">
-                            AI</div>
-                        <span class="text-xl font-bold tracking-tight text-primary dark:text-white">RicarBot</span>
+                            class="inline-flex items-center rounded-full px-4 py-1.5 text-xs font-bold text-primary bg-primary/10 mb-6 pulse-glow">
+                            🏪 자영업 사장님을 위한 100% 자동 마케팅 출시
+                        </div>
                     </div>
-                    <p class="text-[11px] text-slate-500 dark:text-slate-400 max-w-sm mb-6 leading-relaxed">
-                        자영업 사장님들의 마케팅 부담을 덜어드리는<br>최첨단 AI 블로그 마케팅 솔루션입니다.
+                    <h1
+                        class="text-5xl lg:text-7xl font-black text-slate-900 dark:text-white leading-[1.1] tracking-tight mb-8">
+                        바쁜 사장님이라면,<br>
+                        <span class="text-primary/80 dark:text-slate-400">마케팅도 AI가 대신</span> 합니다
+                    </h1>
+                    <p
+                        class="text-lg lg:text-xl text-slate-600 dark:text-slate-400 leading-relaxed mb-12 max-w-3xl mx-auto">
+                        맛집, 미용실, 카페 사장님 필수템! '내돈내산 후기'부터 '사장님 직접 소개'까지<br>AI가 실제 방문한 것처럼 생생하게 100% 자동으로 홍보합니다.
                     </p>
+
+                    <!-- Demo UI Component -->
+                    <div class="max-w-3xl mx-auto mb-16 float-animation">
+                        <div
+                            class="bg-white dark:bg-slate-900/50 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 shadow-2xl text-left">
+                            <div
+                                class="flex items-center gap-2 mb-4 border-b border-slate-100 dark:border-slate-800 pb-4">
+                                <div class="w-2.5 h-2.5 rounded-full bg-slate-200 dark:bg-slate-700"></div>
+                                <div class="w-2.5 h-2.5 rounded-full bg-slate-200 dark:bg-slate-700"></div>
+                                <div class="w-2.5 h-2.5 rounded-full bg-slate-200 dark:bg-slate-700"></div>
+                                <span
+                                    class="ml-2 text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest">AI
+                                    Marketing Engine Running...</span>
+                            </div>
+                            <div class="space-y-3">
+                                <div class="flex items-center gap-3">
+                                    <span class="material-symbols-outlined text-green-500 text-sm">check_circle</span>
+                                    <p class="text-xs font-medium text-slate-600 dark:text-slate-400">사장님 매장(맛집/미용실 등)
+                                        정보 분석
+                                        완료</p>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <span class="material-symbols-outlined text-green-500 text-sm">check_circle</span>
+                                    <p class="text-xs font-medium text-slate-600 dark:text-slate-400">전문 마케터톤으로 고출력 홍보글
+                                        생성
+                                        중...</p>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <span class="material-symbols-outlined text-blue-500 text-sm">trending_up</span>
+                                    <p class="text-xs font-bold text-slate-900 dark:text-white">결과: 인근 지역 잠재 고객 노출 최적화
+                                        발행 대기
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <button onclick="location.href='checkout.html?plan=PRO'"
+                            class="px-10 py-5 bg-primary text-white font-black rounded-2xl text-xl shadow-xl shadow-primary/20 hover:scale-[1.02] transition-transform">지금
+                            무료로 시작하기</button>
+                        <button onclick="location.href='#download'"
+                            class="px-10 py-5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 font-black rounded-2xl text-xl hover:bg-slate-50 transition-colors">프로그램
+                            다운로드</button>
+                    </div>
                 </div>
-                <div>
-                    <h4
-                        class="text-xs font-black text-slate-900 dark:text-white mb-6 uppercase tracking-widest text-primary/50">
-                        Service</h4>
-                    <ul class="space-y-3 text-xs text-slate-600 dark:text-slate-400">
-                        <li><a class="hover:text-primary transition-colors" href="guide.html">기능 및 설치 가이드</a></li>
-                        <li><a class="hover:text-primary transition-colors" href="reviews.html">사용자 후기</a></li>
-                        <li><a class="hover:text-primary transition-colors" href="#pricing">요금 안내</a></li>
-                    </ul>
+            </section>
+
+            <!-- Features Section -->
+            <section class="py-24 bg-white dark:bg-background-dark/50 reveal" id="features">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-16">
+                        <h2 class="text-base font-bold text-primary dark:text-slate-400 tracking-wide uppercase mb-3">
+                            Core
+                            Features</h2>
+                        <p class="text-3xl lg:text-4xl font-black text-slate-900 dark:text-white tracking-tight">사장님은 매장
+                            운영에만 집중하세요</p>
+                    </div>
+                    <div class="grid md:grid-cols-3 gap-8">
+                        <!-- Feature 1 -->
+                        <div
+                            class="group p-8 bg-background-light dark:bg-slate-800/50 rounded-2xl border border-slate-200/50 dark:border-slate-700/50 hover:shadow-xl transition-all">
+                            <div class="text-4xl mb-6 group-hover:scale-110 transition-transform">🥘</div>
+                            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">메뉴/분위기 정밀 묘사</h3>
+                            <p class="text-slate-600 dark:text-slate-400 leading-relaxed text-sm">입력한 메뉴 구성과 매장 분위기를
+                                바탕으로
+                                AI가 실제 방문한 것처럼 생생하게 묘사합니다.</p>
+                        </div>
+                        <!-- Feature 2 -->
+                        <div
+                            class="group p-8 bg-background-light dark:bg-slate-800/50 rounded-2xl border border-slate-200/50 dark:border-slate-700/50 hover:shadow-xl transition-all">
+                            <div class="text-4xl mb-6 group-hover:scale-110 transition-transform">✍️</div>
+                            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">다양한 콘셉트 지원</h3>
+                            <p class="text-slate-600 dark:text-slate-400 leading-relaxed text-sm">'내돈내산 후기', '사장님 직접
+                                소개',
+                                '솔직 리뷰' 등 업종에 맞는 다양한 말투를 지원합니다.</p>
+                        </div>
+                        <!-- Feature 3 -->
+                        <div
+                            class="group p-8 bg-background-light dark:bg-slate-800/50 rounded-2xl border border-slate-200/50 dark:border-slate-700/50 hover:shadow-xl transition-all">
+                            <div class="text-4xl mb-6 group-hover:scale-110 transition-transform">🔍</div>
+                            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">AI 벤치마킹 시스템</h3>
+                            <p class="text-slate-600 dark:text-slate-400 leading-relaxed text-sm">업체명만 넣으면 AI가 경쟁사 포스팅을
+                                분석하여
+                                상위 노출을 위한 제목과 키워드를 제안합니다.</p>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <h4
-                        class="text-xs font-black text-slate-900 dark:text-white mb-6 uppercase tracking-widest text-primary/50">
-                        Support</h4>
-                    <ul class="space-y-3 text-xs text-slate-600 dark:text-slate-400">
-                        <li><a class="hover:text-primary transition-colors" href="mailto:jhxox666@naver.com">1:1 온라인
-                                문의</a></li>
-                        <li><a class="hover:text-primary transition-colors" href="guide.html">자주 묻는 질문 FAQ</a></li>
-                    </ul>
+            </section>
+
+            <!-- Pricing Section -->
+            <section class="py-24 bg-background-light dark:bg-background-dark reveal" id="pricing">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-12">
+                        <h2 class="text-3xl lg:text-4xl font-black text-slate-900 dark:text-white tracking-tight mb-8">
+                            자영업
+                            특화 가격 플랜</h2>
+                        <!-- Billing Toggle -->
+                        <div
+                            class="flex justify-center p-1.5 bg-slate-200 dark:bg-slate-800 rounded-2xl w-fit mx-auto mb-8 shadow-inner">
+                            <button
+                                class="px-6 py-2.5 text-sm font-bold rounded-xl transition-all bg-primary text-white shadow-md"
+                                id="btn-single" onclick="switchBilling('single')">단건</button>
+                            <button
+                                class="px-6 py-2.5 text-sm font-bold rounded-xl transition-all text-slate-600 dark:text-slate-400"
+                                id="btn-subscription" onclick="switchBilling('subscription')">월간</button>
+                            <button
+                                class="px-6 py-2.5 text-sm font-bold rounded-xl transition-all text-slate-600 dark:text-slate-400 flex items-center gap-1"
+                                id="btn-yearly" onclick="switchBilling('yearly')">
+                                연간 <span
+                                    class="text-[10px] px-1.5 py-0.5 bg-green-500 text-white rounded-full">Save</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                        <!-- LITE Plan -->
+                        <div
+                            class="bg-white dark:bg-slate-800/50 p-10 rounded-3xl border border-slate-200 dark:border-slate-700 shadow-sm flex flex-col hover:shadow-xl transition-all">
+                            <div class="mb-8">
+                                <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">LITE 플랜</h3>
+                                <p class="text-slate-500 dark:text-slate-400 text-sm">입문용 실속 패키지</p>
+                            </div>
+                            <div class="mb-8">
+                                <div class="flex items-baseline gap-2">
+                                    <span class="text-4xl font-black text-slate-900 dark:text-white"
+                                        id="lite-price">9.9</span>
+                                    <span class="text-xl text-slate-500 dark:text-gray-400" id="lite-period">만원 / 30일
+                                        (단건)</span>
+                                </div>
+                                <div class="mt-2 flex items-center gap-2">
+                                    <span class="text-sm text-slate-400 line-through" id="lite-original">19.7만원</span>
+                                    <span class="text-sm font-bold text-primary dark:text-blue-400"
+                                        id="lite-discount">50%
+                                        할인</span>
+                                </div>
+                            </div>
+                            <ul class="space-y-4 mb-10 flex-grow">
+                                <li class="flex items-center gap-3 text-slate-600 dark:text-slate-300">
+                                    <span class="material-symbols-outlined text-green-500 text-lg">check_circle</span>
+                                    <span class="text-sm">수동 입력 모드 기반 발행</span>
+                                </li>
+                                <li class="flex items-center gap-3 text-slate-600 dark:text-slate-300">
+                                    <span class="material-symbols-outlined text-green-500 text-lg">check_circle</span>
+                                    <span class="text-sm">약 1,700자 표준 홍보글 작성</span>
+                                </li>
+                            </ul>
+                            <button
+                                class="w-full py-4 bg-slate-100 dark:bg-slate-700 text-slate-900 dark:text-white font-bold rounded-xl hover:bg-slate-200 transition-colors"
+                                onclick="goToCheckout('LITE')">플랜 선택하기</button>
+                        </div>
+                        <!-- PRO Plan -->
+                        <div
+                            class="bg-primary p-10 rounded-3xl border border-primary dark:border-blue-500 shadow-2xl relative overflow-hidden flex flex-col hover:scale-[1.01] transition-all">
+                            <div class="absolute top-6 right-6 bg-white/20 backdrop-blur-md text-white px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider"
+                                id="pro-badge">Best Choice</div>
+                            <div class="mb-8 relative z-10">
+                                <h3 class="text-xl font-bold text-white mb-2">PRO 플랜</h3>
+                                <p class="text-slate-400 text-sm">고출력 마케팅을 위한 전문가용</p>
+                            </div>
+                            <div class="mb-8 relative z-10">
+                                <div class="flex items-baseline gap-2">
+                                    <span class="text-4xl font-black text-white" id="pro-price">24.9</span>
+                                    <span class="text-xl text-slate-400 font-medium" id="pro-period">만원 / 30일
+                                        (단건)</span>
+                                </div>
+                                <div class="mt-2 flex items-center gap-2">
+                                    <span class="text-sm text-slate-500 line-through" id="pro-original">39.9만원</span>
+                                    <span class="text-sm font-bold text-white" id="pro-discount">38% 할인</span>
+                                </div>
+                            </div>
+                            <ul class="space-y-4 mb-10 flex-grow relative z-10">
+                                <li class="flex items-center gap-3 text-slate-300">
+                                    <span class="material-symbols-outlined text-slate-300 text-lg">check_circle</span>
+                                    <span class="text-sm font-bold">AI 자동 벤치마킹 (업체 분석)</span>
+                                </li>
+                                <li class="flex items-center gap-3 text-slate-300">
+                                    <span class="material-symbols-outlined text-slate-300 text-lg">check_circle</span>
+                                    <span class="text-sm font-medium">최대 5,000자 고출력 포스팅</span>
+                                </li>
+                                <li class="flex items-center gap-3 text-slate-300">
+                                    <span class="material-symbols-outlined text-slate-300 text-lg">check_circle</span>
+                                    <span class="text-sm">이미지 합성 & 예약 발행 지원</span>
+                                </li>
+                            </ul>
+                            <button
+                                class="w-full py-4 bg-white text-primary font-black rounded-xl shadow-lg hover:bg-slate-100 transition-all relative z-10"
+                                onclick="goToCheckout('PRO')">지금 시작하기</button>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <h4
-                        class="text-xs font-black text-slate-900 dark:text-white mb-6 uppercase tracking-widest text-primary/50">
-                        Company</h4>
-                    <p class="text-[11px] text-slate-500 dark:text-slate-400 leading-5">
-                        상호명: 리카오토플랜 | 대표자: 조홍철<br>
-                        경기도 부천시 원미구 신흥로 40, 709호<br>
-                        사업자등록번호: 325-60-00844
-                    </p>
+            </section>
+
+            <!-- Download Section -->
+            <section id="download" class="py-24 px-6 reveal">
+                <div class="container mx-auto max-w-4xl">
+                    <div
+                        class="bg-primary/5 dark:bg-slate-900 border border-primary/10 dark:border-slate-800 rounded-3xl p-12 text-center shadow-lg">
+                        <div
+                            class="w-16 h-16 bg-primary dark:bg-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-8 shadow-xl">
+                            <span class="material-symbols-outlined text-white text-3xl">download</span>
+                        </div>
+                        <h2 class="text-3xl font-black mb-4 text-slate-900 dark:text-white">프로그램 다운로드</h2>
+                        <p class="text-slate-600 dark:text-slate-400 mb-10 max-w-lg mx-auto">
+                            사장님의 블로그 마케팅을 책임질 리카봇 SME 에디션.<br>지금 바로 다운로드하여 자동화의 위력을 경험하세요.
+                        </p>
+                        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                            <button
+                                onclick="location.href='https://drive.google.com/file/d/1dBumK7QGS4ZaWPVYG3twXqO2ftAC0ynA/view?usp=drive_link'"
+                                class="w-full sm:w-auto bg-primary dark:bg-blue-600 hover:bg-slate-800 text-white font-bold px-12 py-5 rounded-2xl shadow-xl transition-all hover:scale-105">
+                                Windows용 다운로드
+                            </button>
+                            <a href="guide.html"
+                                class="text-slate-500 hover:text-primary dark:hover:text-white font-bold transition-colors">설치법
+                                확인하기 →</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-white dark:bg-background-dark border-t border-slate-200 dark:border-slate-800 py-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+                    <div class="col-span-1 md:col-span-1">
+                        <div class="flex items-center gap-2 mb-6 cursor-pointer" onclick="location.href='index.html'">
+                            <div
+                                class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-white text-xs font-bold">
+                                AI</div>
+                            <span class="text-xl font-bold tracking-tight text-primary dark:text-white">RicarBot</span>
+                        </div>
+                        <p class="text-[11px] text-slate-500 dark:text-slate-400 max-w-sm mb-6 leading-relaxed">
+                            자영업 사장님들의 마케팅 부담을 덜어드리는<br>최첨단 AI 블로그 마케팅 솔루션입니다.
+                        </p>
+                    </div>
+                    <div>
+                        <h4
+                            class="text-xs font-black text-slate-900 dark:text-white mb-6 uppercase tracking-widest text-primary/50">
+                            Service</h4>
+                        <ul class="space-y-3 text-xs text-slate-600 dark:text-slate-400">
+                            <li><a class="hover:text-primary transition-colors" href="guide.html">기능 및 설치 가이드</a></li>
+                            <li><a class="hover:text-primary transition-colors" href="reviews.html">사용자 후기</a></li>
+                            <li><a class="hover:text-primary transition-colors" href="#pricing">요금 안내</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4
+                            class="text-xs font-black text-slate-900 dark:text-white mb-6 uppercase tracking-widest text-primary/50">
+                            Support</h4>
+                        <ul class="space-y-3 text-xs text-slate-600 dark:text-slate-400">
+                            <li><a class="hover:text-primary transition-colors" href="mailto:jhxox666@naver.com">1:1 온라인
+                                    문의</a></li>
+                            <li><a class="hover:text-primary transition-colors" href="guide.html">자주 묻는 질문 FAQ</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4
+                            class="text-xs font-black text-slate-900 dark:text-white mb-6 uppercase tracking-widest text-primary/50">
+                            Company</h4>
+                        <p class="text-[11px] text-slate-500 dark:text-slate-400 leading-5">
+                            상호명: 리카오토플랜 | 대표자: 조홍철<br>
+                            경기도 부천시 원미구 신흥로 40, 709호<br>
+                            사업자등록번호: 325-60-00844
+                        </p>
+                    </div>
+                </div>
+                <div
+                    class="pt-8 border-t border-slate-100 dark:border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4">
+                    <p class="text-[10px] text-slate-400 uppercase tracking-widest">© 2026 Ricar Auto Plan. All rights
+                        reserved.</p>
+                    <div class="flex gap-6 text-[10px] text-slate-500">
+                        <a class="hover:text-slate-900 transition-colors" href="license.html">이용약관</a>
+                        <a class="hover:text-slate-900 transition-colors font-bold" href="privacy.html">개인정보처리방침</a>
+                    </div>
                 </div>
             </div>
-            <div
-                class="pt-8 border-t border-slate-100 dark:border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4">
-                <p class="text-[10px] text-slate-400 uppercase tracking-widest">© 2026 Ricar Auto Plan. All rights
-                    reserved.</p>
-                <div class="flex gap-6 text-[10px] text-slate-500">
-                    <a class="hover:text-slate-900 transition-colors" href="license.html">이용약관</a>
-                    <a class="hover:text-slate-900 transition-colors font-bold" href="privacy.html">개인정보처리방침</a>
-                </div>
-            </div>
-        </div>
-    </footer>
+        </footer>
 
-    <!-- Scripts -->
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
-    <script src="firebase_config.js"></script>
-    <script>
-        let currentBilling = 'single';
-        let currentUser = null;
+        <!-- Scripts -->
+        <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+        <script src="firebase_config.js"></script>
+        <script>
+            let currentBilling = 'single';
+            let currentUser = null;
 
-        if (typeof auth !== 'undefined') {
-            auth.onAuthStateChanged(user => {
-                currentUser = user;
-                const navAuthSection = document.getElementById('nav-auth-section');
-                if (user) {
-                    navAuthSection.innerHTML = `
+            if (typeof auth !== 'undefined') {
+                auth.onAuthStateChanged(user => {
+                    currentUser = user;
+                    const navAuthSection = document.getElementById('nav-auth-section');
+                    if (user) {
+                        navAuthSection.innerHTML = `
                         <div class="flex items-center gap-3">
                             <span class="hidden lg:block text-xs font-bold text-slate-900 dark:text-white truncate max-w-[120px]">${user.email.split('@')[0]}님</span>
                             <button onclick="auth.signOut().then(()=>location.reload())" class="text-xs font-bold text-slate-500 hover:text-primary dark:hover:text-white px-3 py-2 transition-all">로그아웃</button>
                             <button onclick="location.href='license.html'" class="rounded-lg bg-primary px-4 py-2 text-xs font-bold text-white shadow-sm hover:bg-slate-800">관리</button>
                         </div>
                     `;
-                } else {
-                    navAuthSection.innerHTML = `
+                    } else {
+                        navAuthSection.innerHTML = `
                         <button onclick="location.href='login.html'" class="text-xs font-bold text-slate-700 dark:text-slate-200 px-4 py-2 rounded-lg hover:bg-slate-100 transition-all">로그인</button>
                         <button onclick="location.href='signup.html'" class="rounded-lg bg-primary px-5 py-2.5 text-xs font-bold text-white shadow-sm hover:bg-slate-800">시작하기</button>
                     `;
-                }
-            });
-        }
-
-        function switchBilling(type) {
-            currentBilling = type;
-            const btnSingle = document.getElementById('btn-single');
-            const btnSub = document.getElementById('btn-subscription');
-            const btnYearly = document.getElementById('btn-yearly');
-
-            [btnSingle, btnSub, btnYearly].forEach(btn => {
-                btn.classList.remove('bg-primary', 'text-white', 'shadow-md');
-                btn.classList.add('text-slate-600', 'dark:text-slate-400');
-            });
-
-            document.getElementById(`btn-${type}`).classList.add('bg-primary', 'text-white', 'shadow-md');
-            document.getElementById(`btn-${type}`).classList.remove('text-slate-600', 'dark:text-slate-400');
-
-            const litePrice = document.getElementById('lite-price');
-            const proPrice = document.getElementById('pro-price');
-            const litePeriod = document.getElementById('lite-period');
-            const proPeriod = document.getElementById('pro-period');
-
-            if (type === 'yearly') {
-                litePrice.innerText = "99";
-                proPrice.innerText = "268.8";
-                litePeriod.innerText = "만원 / 1년";
-                proPeriod.innerText = "만원 / 1년";
-            } else if (type === 'subscription') {
-                litePrice.innerText = "9.9";
-                proPrice.innerText = "24.9";
-                litePeriod.innerText = "만원 / 월";
-                proPeriod.innerText = "만원 / 월";
-            } else {
-                litePrice.innerText = "9.9";
-                proPrice.innerText = "24.9";
-                litePeriod.innerText = "만원 / 30일(단건)";
-                proPeriod.innerText = "만원 / 30일(단건)";
+                    }
+                });
             }
-        }
 
-        function goToCheckout(planBase) {
-            if (!currentUser) {
-                if (confirm('결제를 진행하려면 로그인이 필요합니다. 로그인 페이지로 이동할까요?')) {
-                    const currentUrl = encodeURIComponent(window.location.href);
-                    location.href = `login.html?redirect=${currentUrl}`;
+            function switchBilling(type) {
+                currentBilling = type;
+                const btnSingle = document.getElementById('btn-single');
+                const btnSub = document.getElementById('btn-subscription');
+                const btnYearly = document.getElementById('btn-yearly');
+
+                [btnSingle, btnSub, btnYearly].forEach(btn => {
+                    btn.classList.remove('bg-primary', 'text-white', 'shadow-md');
+                    btn.classList.add('text-slate-600', 'dark:text-slate-400');
+                });
+
+                document.getElementById(`btn-${type}`).classList.add('bg-primary', 'text-white', 'shadow-md');
+                document.getElementById(`btn-${type}`).classList.remove('text-slate-600', 'dark:text-slate-400');
+
+                const litePrice = document.getElementById('lite-price');
+                const proPrice = document.getElementById('pro-price');
+                const litePeriod = document.getElementById('lite-period');
+                const proPeriod = document.getElementById('pro-period');
+
+                if (type === 'yearly') {
+                    litePrice.innerText = "99";
+                    proPrice.innerText = "268.8";
+                    litePeriod.innerText = "만원 / 1년";
+                    proPeriod.innerText = "만원 / 1년";
+                } else if (type === 'subscription') {
+                    litePrice.innerText = "9.9";
+                    proPrice.innerText = "24.9";
+                    litePeriod.innerText = "만원 / 월";
+                    proPeriod.innerText = "만원 / 월";
+                } else {
+                    litePrice.innerText = "9.9";
+                    proPrice.innerText = "24.9";
+                    litePeriod.innerText = "만원 / 30일(단건)";
+                    proPeriod.innerText = "만원 / 30일(단건)";
                 }
-                return;
             }
-            let finalPlan = planBase;
-            let recurringParam = currentBilling === 'subscription' ? 'true' : 'false';
-            if (currentBilling === 'yearly') finalPlan = planBase + "_YEARLY";
-            location.href = `checkout.html?plan=${finalPlan}&recurring=${recurringParam}&category=sme`;
-        }
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
-        }, { threshold: 0.1 });
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-    </script>
-</body>
+            function goToCheckout(planBase) {
+                if (!currentUser) {
+                    if (confirm('결제를 진행하려면 로그인이 필요합니다. 로그인 페이지로 이동할까요?')) {
+                        const currentUrl = encodeURIComponent(window.location.href);
+                        location.href = `login.html?redirect=${currentUrl}`;
+                    }
+                    return;
+                }
+                let finalPlan = planBase;
+                let recurringParam = currentBilling === 'subscription' ? 'true' : 'false';
+                if (currentBilling === 'yearly') finalPlan = planBase + "_YEARLY";
+                location.href = `checkout.html?plan=${finalPlan}&recurring=${recurringParam}&category=sme`;
+            }
 
-=======
-<!DOCTYPE html>
-<html lang="ko" class="scroll-smooth">
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
+            }, { threshold: 0.1 });
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        </script>
+    </body>
 
-<head>
-    <meta charset="utf-8" />
-    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>BloBot SME - 자영업 사장님을 위한 AI 블로그 마케팅</title>
-    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap"
-        rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap"
-        rel="stylesheet" />
-    <link
-        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
-        rel="stylesheet" />
-    <script id="tailwind-config">
-        tailwind.config = {
-            darkMode: "class",
-            theme: {
-                extend: {
-                    colors: {
-                        "primary": "#0f1729",
-                        "background-light": "#f6f7f8",
-                        "background-dark": "#14171e",
+    =======
+    <!DOCTYPE html>
+    <html lang="ko" class="scroll-smooth">
+
+    <head>
+        <meta charset="utf-8" />
+        <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+        <title>BloBot SME - 자영업 사장님을 위한 AI 블로그 마케팅</title>
+        <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+        <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap"
+            rel="stylesheet" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap"
+            rel="stylesheet" />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+            rel="stylesheet" />
+        <script id="tailwind-config">
+            tailwind.config = {
+                darkMode: "class",
+                theme: {
+                    extend: {
+                        colors: {
+                            "primary": "#0f1729",
+                            "background-light": "#f6f7f8",
+                            "background-dark": "#14171e",
+                        },
+                        fontFamily: {
+                            "display": ["Inter", "Noto Sans KR", "sans-serif"]
+                        },
+                        borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
                     },
-                    fontFamily: {
-                        "display": ["Inter", "Noto Sans KR", "sans-serif"]
-                    },
-                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
                 },
-            },
-        }
-    </script>
-    <style>
-        .material-symbols-outlined {
-            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
-        }
-
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s ease-out;
-        }
-
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
-        }
-
-        .pulse-glow {
-            animation: pulse-glow 2s ease-in-out infinite;
-        }
-
-        @keyframes pulse-glow {
-
-            0%,
-            100% {
-                box-shadow: 0 0 20px rgba(15, 23, 41, 0.1);
+            }
+        </script>
+        <style>
+            .material-symbols-outlined {
+                font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
             }
 
-            50% {
-                box-shadow: 0 0 40px rgba(15, 23, 41, 0.2);
-            }
-        }
-
-        @keyframes float {
-
-            0%,
-            100% {
-                transform: translateY(0px);
+            .reveal {
+                opacity: 0;
+                transform: translateY(30px);
+                transition: all 0.6s ease-out;
             }
 
-            50% {
-                transform: translateY(-15px);
+            .reveal.active {
+                opacity: 1;
+                transform: translateY(0);
             }
-        }
 
-        .float-animation {
-            animation: float 4s ease-in-out infinite;
-        }
-    </style>
-</head>
+            .pulse-glow {
+                animation: pulse-glow 2s ease-in-out infinite;
+            }
 
-<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased">
-    <!-- Header -->
-    <header
-        class="sticky top-0 z-50 w-full border-b border-slate-200/80 dark:border-slate-800/80 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex h-16 items-center justify-between">
-                <div class="flex items-center gap-2 cursor-pointer" onclick="location.href='index.html'">
-                    <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-white">
-                        <span class="material-symbols-outlined text-xl">smart_toy</span>
-                    </div>
-                    <span class="text-xl font-bold tracking-tight text-primary dark:text-white">BloBot <span
-                            class="text-slate-400 font-medium">SME</span></span>
-                </div>
+            @keyframes pulse-glow {
 
-                <!-- 업종 전환 스위치 -->
-                <div
-                    class="hidden md:flex bg-slate-100 dark:bg-slate-800/50 rounded-full p-1 border border-slate-200 dark:border-slate-700 ml-6">
-                    <button onclick="location.href='index.html'"
-                        class="px-4 py-1.5 rounded-full text-xs font-bold text-slate-500 dark:text-slate-400 hover:text-primary dark:hover:text-white transition-all">자동차</button>
-                    <button
-                        class="px-4 py-1.5 rounded-full text-xs font-bold bg-primary text-white shadow-lg">자영업/SME</button>
-                </div>
+                0%,
+                100% {
+                    box-shadow: 0 0 20px rgba(15, 23, 41, 0.1);
+                }
 
-                <nav class="hidden md:flex items-center gap-8 ml-auto mr-8">
-                    <a class="text-sm font-medium text-slate-600 hover:text-primary dark:text-slate-300 dark:hover:text-white transition-colors"
-                        href="guide.html">가이드</a>
-                    <a class="text-sm font-medium text-slate-600 hover:text-primary dark:text-slate-300 dark:hover:text-white transition-colors"
-                        href="#features">핵심기능</a>
-                    <a class="text-sm font-medium text-slate-600 hover:text-primary dark:text-slate-300 dark:hover:text-white transition-colors"
-                        href="#download">다운로드</a>
-                    <a class="text-sm font-medium text-slate-600 hover:text-primary dark:text-slate-300 dark:hover:text-white transition-colors"
-                        href="#pricing">가격안내</a>
-                </nav>
+                50% {
+                    box-shadow: 0 0 40px rgba(15, 23, 41, 0.2);
+                }
+            }
 
-                <div class="flex items-center gap-3" id="nav-auth-section">
-                    <button onclick="location.href='login.html'"
-                        class="hidden sm:block px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-all">로그인</button>
-                    <button onclick="location.href='download.html'"
-                        class="px-5 py-2 text-sm font-bold text-white bg-primary hover:bg-slate-800 rounded-lg shadow-sm transition-all">1회
-                        무료 체험</button>
-                </div>
-            </div>
-        </div>
-    </header>
+            @keyframes float {
 
-    <main>
-        <!-- Hero Section -->
-        <section class="relative overflow-hidden pt-16 pb-24 lg:pt-32 lg:pb-40 reveal text-center">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-                <div class="mb-8">
-                    <div
-                        class="inline-flex items-center rounded-full px-4 py-1.5 text-xs font-bold text-primary bg-primary/10 mb-6 pulse-glow">
-                        🏪 자영업 사장님을 위한 100% 자동 마케팅 출시
-                    </div>
-                </div>
-                <h1
-                    class="text-5xl lg:text-7xl font-black text-slate-900 dark:text-white leading-[1.1] tracking-tight mb-8">
-                    바쁜 사장님이라면,<br>
-                    <span class="text-primary/80 dark:text-slate-400">마케팅도 AI가 대신</span> 합니다
-                </h1>
-                <p
-                    class="text-lg lg:text-xl text-slate-600 dark:text-slate-400 leading-relaxed mb-12 max-w-3xl mx-auto">
-                    맛집, 미용실, 카페 사장님 필수템! '내돈내산 후기'부터 '사장님 직접 소개'까지<br>AI가 실제 방문한 것처럼 생생하게 100% 자동으로 홍보합니다.
-                </p>
+                0%,
+                100% {
+                    transform: translateY(0px);
+                }
 
-                <!-- Demo UI Component -->
-                <div class="max-w-3xl mx-auto mb-16 float-animation">
-                    <div
-                        class="bg-white dark:bg-slate-900/50 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 shadow-2xl text-left">
-                        <div class="flex items-center gap-2 mb-4 border-b border-slate-100 dark:border-slate-800 pb-4">
-                            <div class="w-2.5 h-2.5 rounded-full bg-slate-200 dark:bg-slate-700"></div>
-                            <div class="w-2.5 h-2.5 rounded-full bg-slate-200 dark:bg-slate-700"></div>
-                            <div class="w-2.5 h-2.5 rounded-full bg-slate-200 dark:bg-slate-700"></div>
-                            <span
-                                class="ml-2 text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest">AI
-                                Marketing Engine Running...</span>
-                        </div>
-                        <div class="space-y-3">
-                            <div class="flex items-center gap-3">
-                                <span class="material-symbols-outlined text-green-500 text-sm">check_circle</span>
-                                <p class="text-xs font-medium text-slate-600 dark:text-slate-400">사장님 매장(맛집/미용실 등) 정보 분석
-                                    완료</p>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <span class="material-symbols-outlined text-green-500 text-sm">check_circle</span>
-                                <p class="text-xs font-medium text-slate-600 dark:text-slate-400">전문 마케터톤으로 고출력 홍보글 생성
-                                    중...</p>
-                            </div>
-                            <div class="flex items-center gap-3">
-                                <span class="material-symbols-outlined text-blue-500 text-sm">trending_up</span>
-                                <p class="text-xs font-bold text-slate-900 dark:text-white">결과: 인근 지역 잠재 고객 노출 최적화 발행 대기
-                                </p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+                50% {
+                    transform: translateY(-15px);
+                }
+            }
 
-                <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                    <button onclick="location.href='download.html'"
-                        class="px-10 py-5 bg-primary text-white font-black rounded-2xl text-xl shadow-xl shadow-primary/20 hover:scale-[1.02] transition-transform">지금
-                        바로 1회 무료 체험 해보기</button>
-                    <button onclick="location.href='#download'"
-                        class="px-10 py-5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 font-black rounded-2xl text-xl hover:bg-slate-50 transition-colors">프로그램
-                        다운로드</button>
-                </div>
-            </div>
-        </section>
+            .float-animation {
+                animation: float 4s ease-in-out infinite;
+            }
+        </style>
+    </head>
 
-        <!-- Features Section -->
-        <section class="py-24 bg-white dark:bg-background-dark/50 reveal" id="features">
+    <body
+        class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased">
+        <!-- Header -->
+        <header
+            class="sticky top-0 z-50 w-full border-b border-slate-200/80 dark:border-slate-800/80 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center mb-16">
-                    <h2 class="text-base font-bold text-primary dark:text-slate-400 tracking-wide uppercase mb-3">Core
-                        Features</h2>
-                    <p class="text-3xl lg:text-4xl font-black text-slate-900 dark:text-white tracking-tight">사장님은 매장
-                        운영에만 집중하세요</p>
-                </div>
-                <div class="grid md:grid-cols-3 gap-8">
-                    <!-- Feature 1 -->
-                    <div
-                        class="group p-8 bg-background-light dark:bg-slate-800/50 rounded-2xl border border-slate-200/50 dark:border-slate-700/50 hover:shadow-xl transition-all">
-                        <div class="text-4xl mb-6 group-hover:scale-110 transition-transform">🥘</div>
-                        <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">메뉴/분위기 정밀 묘사</h3>
-                        <p class="text-slate-600 dark:text-slate-400 leading-relaxed text-sm">입력한 메뉴 구성과 매장 분위기를 바탕으로
-                            AI가 실제 방문한 것처럼 생생하게 묘사합니다.</p>
+                <div class="flex h-16 items-center justify-between">
+                    <div class="flex items-center gap-2 cursor-pointer" onclick="location.href='index.html'">
+                        <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-white">
+                            <span class="material-symbols-outlined text-xl">smart_toy</span>
+                        </div>
+                        <span class="text-xl font-bold tracking-tight text-primary dark:text-white">BloBot <span
+                                class="text-slate-400 font-medium">SME</span></span>
                     </div>
-                    <!-- Feature 2 -->
+
+                    <!-- 업종 전환 스위치 -->
                     <div
-                        class="group p-8 bg-background-light dark:bg-slate-800/50 rounded-2xl border border-slate-200/50 dark:border-slate-700/50 hover:shadow-xl transition-all">
-                        <div class="text-4xl mb-6 group-hover:scale-110 transition-transform">✍️</div>
-                        <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">다양한 콘셉트 지원</h3>
-                        <p class="text-slate-600 dark:text-slate-400 leading-relaxed text-sm">'내돈내산 후기', '사장님 직접 소개',
-                            '솔직 리뷰' 등 업종에 맞는 다양한 말투를 지원합니다.</p>
+                        class="hidden md:flex bg-slate-100 dark:bg-slate-800/50 rounded-full p-1 border border-slate-200 dark:border-slate-700 ml-6">
+                        <button onclick="location.href='index.html'"
+                            class="px-4 py-1.5 rounded-full text-xs font-bold text-slate-500 dark:text-slate-400 hover:text-primary dark:hover:text-white transition-all">자동차</button>
+                        <button
+                            class="px-4 py-1.5 rounded-full text-xs font-bold bg-primary text-white shadow-lg">자영업/SME</button>
                     </div>
-                    <!-- Feature 3 -->
-                    <div
-                        class="group p-8 bg-background-light dark:bg-slate-800/50 rounded-2xl border border-slate-200/50 dark:border-slate-700/50 hover:shadow-xl transition-all">
-                        <div class="text-4xl mb-6 group-hover:scale-110 transition-transform">🔍</div>
-                        <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">AI 벤치마킹 시스템</h3>
-                        <p class="text-slate-600 dark:text-slate-400 leading-relaxed text-sm">업체명만 넣으면 AI가 경쟁사 포스팅을 분석하여
-                            상위 노출을 위한 제목과 키워드를 제안합니다.</p>
+
+                    <nav class="hidden md:flex items-center gap-8 ml-auto mr-8">
+                        <a class="text-sm font-medium text-slate-600 hover:text-primary dark:text-slate-300 dark:hover:text-white transition-colors"
+                            href="guide.html">가이드</a>
+                        <a class="text-sm font-medium text-slate-600 hover:text-primary dark:text-slate-300 dark:hover:text-white transition-colors"
+                            href="#features">핵심기능</a>
+                        <a class="text-sm font-medium text-slate-600 hover:text-primary dark:text-slate-300 dark:hover:text-white transition-colors"
+                            href="#download">다운로드</a>
+                        <a class="text-sm font-medium text-slate-600 hover:text-primary dark:text-slate-300 dark:hover:text-white transition-colors"
+                            href="#pricing">가격안내</a>
+                    </nav>
+
+                    <div class="flex items-center gap-3" id="nav-auth-section">
+                        <button onclick="location.href='login.html'"
+                            class="hidden sm:block px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-all">로그인</button>
+                        <button onclick="location.href='download.html'"
+                            class="px-5 py-2 text-sm font-bold text-white bg-primary hover:bg-slate-800 rounded-lg shadow-sm transition-all">1회
+                            무료 체험</button>
                     </div>
                 </div>
             </div>
-        </section>
+        </header>
 
-        <!-- Pricing Section -->
-        <section class="py-24 bg-background-light dark:bg-background-dark reveal" id="pricing">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center mb-12">
-                    <h2 class="text-3xl lg:text-4xl font-black text-slate-900 dark:text-white tracking-tight mb-8">자영업
-                        특화 가격 플랜</h2>
-                    <!-- Billing Toggle -->
-                    <div
-                        class="flex justify-center p-1.5 bg-slate-200 dark:bg-slate-800 rounded-2xl w-fit mx-auto mb-8 shadow-inner">
-                        <button
-                            class="px-6 py-2.5 text-sm font-bold rounded-xl transition-all bg-primary text-white shadow-md"
-                            id="btn-single" onclick="switchBilling('single')">단건</button>
-                        <button
-                            class="px-6 py-2.5 text-sm font-bold rounded-xl transition-all text-slate-600 dark:text-slate-400"
-                            id="btn-subscription" onclick="switchBilling('subscription')">월간</button>
-                        <button
-                            class="px-6 py-2.5 text-sm font-bold rounded-xl transition-all text-slate-600 dark:text-slate-400 flex items-center gap-1"
-                            id="btn-yearly" onclick="switchBilling('yearly')">
-                            연간 <span class="text-[10px] px-1.5 py-0.5 bg-green-500 text-white rounded-full">Save</span>
-                        </button>
-                    </div>
-                </div>
-                <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-                    <!-- LITE Plan -->
-                    <div
-                        class="bg-white dark:bg-slate-800/50 p-10 rounded-3xl border border-slate-200 dark:border-slate-700 shadow-sm flex flex-col hover:shadow-xl transition-all">
-                        <div class="mb-8">
-                            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">LITE 플랜</h3>
-                            <p class="text-slate-500 dark:text-slate-400 text-sm">입문용 실속 패키지</p>
-                        </div>
-                        <div class="mb-8">
-                            <div class="flex items-baseline gap-2">
-                                <span class="text-4xl font-black text-slate-900 dark:text-white"
-                                    id="lite-price">9.9</span>
-                                <span class="text-xl text-slate-500 dark:text-gray-400" id="lite-period">만원 / 30일
-                                    (단건)</span>
-                            </div>
-                            <div class="mt-2 flex items-center gap-2">
-                                <span class="text-sm text-slate-400 line-through" id="lite-original">19.7만원</span>
-                                <span class="text-sm font-bold text-primary dark:text-blue-400" id="lite-discount">50%
-                                    할인</span>
-                            </div>
-                        </div>
-                        <ul class="space-y-4 mb-10 flex-grow">
-                            <li class="flex items-center gap-3 text-slate-600 dark:text-slate-300">
-                                <span class="material-symbols-outlined text-green-500 text-lg">check_circle</span>
-                                <span class="text-sm">수동 입력 모드 기반 발행</span>
-                            </li>
-                            <li class="flex items-center gap-3 text-slate-600 dark:text-slate-300">
-                                <span class="material-symbols-outlined text-green-500 text-lg">check_circle</span>
-                                <span class="text-sm">약 1,700자 표준 홍보글 작성</span>
-                            </li>
-                            <li class="flex items-center gap-3 text-slate-600 dark:text-slate-300">
-                                <span class="material-symbols-outlined text-green-500 text-lg">check_circle</span>
-                                <span class="text-sm">벤치마킹 1개 지원</span>
-                            </li>
-                        </ul>
-                        <button
-                            class="w-full py-4 bg-slate-100 dark:bg-slate-700 text-slate-900 dark:text-white font-bold rounded-xl hover:bg-slate-200 transition-colors"
-                            onclick="goToCheckout('LITE')">플랜 선택하기</button>
-                    </div>
-                    <!-- PRO Plan -->
-                    <div
-                        class="bg-primary p-10 rounded-3xl border border-primary dark:border-blue-500 shadow-2xl relative overflow-hidden flex flex-col hover:scale-[1.01] transition-all">
-                        <div class="absolute top-6 right-6 bg-white/20 backdrop-blur-md text-white px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider"
-                            id="pro-badge">Best Choice</div>
-                        <div class="mb-8 relative z-10">
-                            <h3 class="text-xl font-bold text-white mb-2">PRO 플랜</h3>
-                            <p class="text-slate-400 text-sm">고출력 마케팅을 위한 전문가용</p>
-                        </div>
-                        <div class="mb-8 relative z-10">
-                            <div class="flex items-baseline gap-2">
-                                <span class="text-4xl font-black text-white" id="pro-price">24.9</span>
-                                <span class="text-xl text-slate-400 font-medium" id="pro-period">만원 / 30일 (단건)</span>
-                            </div>
-                            <div class="mt-2 flex items-center gap-2">
-                                <span class="text-sm text-slate-500 line-through" id="pro-original">39.9만원</span>
-                                <span class="text-sm font-bold text-white" id="pro-discount">38% 할인</span>
-                            </div>
-                        </div>
-                        <ul class="space-y-4 mb-10 flex-grow relative z-10">
-                            <li class="flex items-center gap-3 text-slate-300">
-                                <span class="material-symbols-outlined text-slate-300 text-lg">check_circle</span>
-                                <span class="text-sm font-bold">AI 자동 벤치마킹 (업체 분석)</span>
-                            </li>
-                            <li class="flex items-center gap-3 text-slate-300">
-                                <span class="material-symbols-outlined text-slate-300 text-lg">check_circle</span>
-                                <span class="text-sm font-medium">최대 5,000자 고출력 포스팅</span>
-                            </li>
-                            <li class="flex items-center gap-3 text-slate-300">
-                                <span class="material-symbols-outlined text-slate-300 text-lg">check_circle</span>
-                                <span class="text-sm">이미지 합성 & 예약 발행 지원</span>
-                            </li>
-                            <li class="flex items-center gap-3 text-slate-300">
-                                <span class="material-symbols-outlined text-slate-300 text-lg">check_circle</span>
-                                <span class="text-sm font-medium">1:1 맞춤 고객센터 블로그 컨설팅 지원</span>
-                            </li>
-                            <li class="flex items-center gap-3 text-slate-300">
-                                <span class="material-symbols-outlined text-slate-300 text-lg">check_circle</span>
-                                <span class="text-sm font-medium">벤치마킹 3개 가능</span>
-                            </li>
-                        </ul>
-                        <button
-                            class="w-full py-4 bg-white text-primary font-black rounded-xl shadow-lg hover:bg-slate-100 transition-all relative z-10"
-                            onclick="goToCheckout('PRO')">구독하기</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Download Section -->
-        <section id="download" class="py-24 px-6 reveal">
-            <div class="container mx-auto max-w-4xl">
-                <div
-                    class="bg-primary/5 dark:bg-slate-900 border border-primary/10 dark:border-slate-800 rounded-3xl p-12 text-center shadow-lg">
-                    <div
-                        class="w-16 h-16 bg-primary dark:bg-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-8 shadow-xl">
-                        <span class="material-symbols-outlined text-white text-3xl">download</span>
-                    </div>
-                    <h2 class="text-3xl font-black mb-4 text-slate-900 dark:text-white">프로그램 다운로드</h2>
-                    <p class="text-slate-600 dark:text-slate-400 mb-10 max-w-lg mx-auto">
-                        사장님의 블로그 마케팅을 책임질 블봇 SME 에디션.<br>지금 바로 다운로드하여 자동화의 위력을 경험하세요.
-                    </p>
-                    <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
-                        <button
-                            onclick="location.href='https://drive.google.com/file/d/18d3CgGKfU7qA6McN1sFksksnzhgZLn_m/view?usp=sharing'"
-                            class="w-full sm:w-auto bg-primary dark:bg-blue-600 hover:bg-slate-800 text-white font-bold px-12 py-5 rounded-2xl shadow-xl transition-all hover:scale-105">
-                            Windows용 다운로드
-                        </button>
-                        <a href="guide.html"
-                            class="text-slate-500 hover:text-primary dark:hover:text-white font-bold transition-colors">설치법
-                            확인하기 →</a>
-                    </div>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- Footer -->
-    <footer class="bg-white dark:bg-background-dark border-t border-slate-200 dark:border-slate-800 py-16">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
-                <div class="col-span-1 md:col-span-1">
-                    <div class="flex items-center gap-2 mb-6 cursor-pointer" onclick="location.href='index.html'">
+        <main>
+            <!-- Hero Section -->
+            <section class="relative overflow-hidden pt-16 pb-24 lg:pt-32 lg:pb-40 reveal text-center">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                    <div class="mb-8">
                         <div
-                            class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-white text-xs font-bold">
-                            AI</div>
-                        <span class="text-xl font-bold tracking-tight text-primary dark:text-white">BloBot</span>
+                            class="inline-flex items-center rounded-full px-4 py-1.5 text-xs font-bold text-primary bg-primary/10 mb-6 pulse-glow">
+                            🏪 자영업 사장님을 위한 100% 자동 마케팅 출시
+                        </div>
                     </div>
-                    <p class="text-[11px] text-slate-500 dark:text-slate-400 max-w-sm mb-6 leading-relaxed">
-                        자영업 사장님들의 마케팅 부담을 덜어드리는<br>최첨단 AI 블로그 마케팅 솔루션입니다.
+                    <h1
+                        class="text-5xl lg:text-7xl font-black text-slate-900 dark:text-white leading-[1.1] tracking-tight mb-8">
+                        바쁜 사장님이라면,<br>
+                        <span class="text-primary/80 dark:text-slate-400">마케팅도 AI가 대신</span> 합니다
+                    </h1>
+                    <p
+                        class="text-lg lg:text-xl text-slate-600 dark:text-slate-400 leading-relaxed mb-12 max-w-3xl mx-auto">
+                        맛집, 미용실, 카페 사장님 필수템! '내돈내산 후기'부터 '사장님 직접 소개'까지<br>AI가 실제 방문한 것처럼 생생하게 100% 자동으로 홍보합니다.
                     </p>
+
+                    <!-- Demo UI Component -->
+                    <div class="max-w-3xl mx-auto mb-16 float-animation">
+                        <div
+                            class="bg-white dark:bg-slate-900/50 rounded-2xl border border-slate-200 dark:border-slate-800 p-6 shadow-2xl text-left">
+                            <div
+                                class="flex items-center gap-2 mb-4 border-b border-slate-100 dark:border-slate-800 pb-4">
+                                <div class="w-2.5 h-2.5 rounded-full bg-slate-200 dark:bg-slate-700"></div>
+                                <div class="w-2.5 h-2.5 rounded-full bg-slate-200 dark:bg-slate-700"></div>
+                                <div class="w-2.5 h-2.5 rounded-full bg-slate-200 dark:bg-slate-700"></div>
+                                <span
+                                    class="ml-2 text-[10px] font-bold text-slate-400 dark:text-slate-500 uppercase tracking-widest">AI
+                                    Marketing Engine Running...</span>
+                            </div>
+                            <div class="space-y-3">
+                                <div class="flex items-center gap-3">
+                                    <span class="material-symbols-outlined text-green-500 text-sm">check_circle</span>
+                                    <p class="text-xs font-medium text-slate-600 dark:text-slate-400">사장님 매장(맛집/미용실 등)
+                                        정보 분석
+                                        완료</p>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <span class="material-symbols-outlined text-green-500 text-sm">check_circle</span>
+                                    <p class="text-xs font-medium text-slate-600 dark:text-slate-400">전문 마케터톤으로 고출력 홍보글
+                                        생성
+                                        중...</p>
+                                </div>
+                                <div class="flex items-center gap-3">
+                                    <span class="material-symbols-outlined text-blue-500 text-sm">trending_up</span>
+                                    <p class="text-xs font-bold text-slate-900 dark:text-white">결과: 인근 지역 잠재 고객 노출 최적화
+                                        발행 대기
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                        <button onclick="location.href='download.html'"
+                            class="px-10 py-5 bg-primary text-white font-black rounded-2xl text-xl shadow-xl shadow-primary/20 hover:scale-[1.02] transition-transform">지금
+                            바로 1회 무료 체험 해보기</button>
+                        <button onclick="location.href='#download'"
+                            class="px-10 py-5 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 font-black rounded-2xl text-xl hover:bg-slate-50 transition-colors">프로그램
+                            다운로드</button>
+                    </div>
                 </div>
-                <div>
-                    <h4
-                        class="text-xs font-black text-slate-900 dark:text-white mb-6 uppercase tracking-widest text-primary/50">
-                        Service</h4>
-                    <ul class="space-y-3 text-xs text-slate-600 dark:text-slate-400">
-                        <li><a class="hover:text-primary transition-colors" href="guide.html">기능 및 설치 가이드</a></li>
-                        <li><a class="hover:text-primary transition-colors" href="reviews.html">사용자 후기</a></li>
-                        <li><a class="hover:text-primary transition-colors" href="#pricing">요금 안내</a></li>
-                    </ul>
+            </section>
+
+            <!-- Features Section -->
+            <section class="py-24 bg-white dark:bg-background-dark/50 reveal" id="features">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-16">
+                        <h2 class="text-base font-bold text-primary dark:text-slate-400 tracking-wide uppercase mb-3">
+                            Core
+                            Features</h2>
+                        <p class="text-3xl lg:text-4xl font-black text-slate-900 dark:text-white tracking-tight">사장님은 매장
+                            운영에만 집중하세요</p>
+                    </div>
+                    <div class="grid md:grid-cols-3 gap-8">
+                        <!-- Feature 1 -->
+                        <div
+                            class="group p-8 bg-background-light dark:bg-slate-800/50 rounded-2xl border border-slate-200/50 dark:border-slate-700/50 hover:shadow-xl transition-all">
+                            <div class="text-4xl mb-6 group-hover:scale-110 transition-transform">🥘</div>
+                            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">메뉴/분위기 정밀 묘사</h3>
+                            <p class="text-slate-600 dark:text-slate-400 leading-relaxed text-sm">입력한 메뉴 구성과 매장 분위기를
+                                바탕으로
+                                AI가 실제 방문한 것처럼 생생하게 묘사합니다.</p>
+                        </div>
+                        <!-- Feature 2 -->
+                        <div
+                            class="group p-8 bg-background-light dark:bg-slate-800/50 rounded-2xl border border-slate-200/50 dark:border-slate-700/50 hover:shadow-xl transition-all">
+                            <div class="text-4xl mb-6 group-hover:scale-110 transition-transform">✍️</div>
+                            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">다양한 콘셉트 지원</h3>
+                            <p class="text-slate-600 dark:text-slate-400 leading-relaxed text-sm">'내돈내산 후기', '사장님 직접
+                                소개',
+                                '솔직 리뷰' 등 업종에 맞는 다양한 말투를 지원합니다.</p>
+                        </div>
+                        <!-- Feature 3 -->
+                        <div
+                            class="group p-8 bg-background-light dark:bg-slate-800/50 rounded-2xl border border-slate-200/50 dark:border-slate-700/50 hover:shadow-xl transition-all">
+                            <div class="text-4xl mb-6 group-hover:scale-110 transition-transform">🔍</div>
+                            <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">AI 벤치마킹 시스템</h3>
+                            <p class="text-slate-600 dark:text-slate-400 leading-relaxed text-sm">업체명만 넣으면 AI가 경쟁사 포스팅을
+                                분석하여
+                                상위 노출을 위한 제목과 키워드를 제안합니다.</p>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <h4
-                        class="text-xs font-black text-slate-900 dark:text-white mb-6 uppercase tracking-widest text-primary/50">
-                        Support</h4>
-                    <ul class="space-y-3 text-xs text-slate-600 dark:text-slate-400">
-                        <li><a class="hover:text-primary transition-colors" href="https://open.kakao.com/o/sQtPY1ii">1:1
-                                온라인
-                                문의</a></li>
-                        <li><a class="hover:text-primary transition-colors" href="guide.html">자주 묻는 질문 FAQ</a></li>
-                    </ul>
+            </section>
+
+            <!-- Pricing Section -->
+            <section class="py-24 bg-background-light dark:bg-background-dark reveal" id="pricing">
+                <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                    <div class="text-center mb-12">
+                        <h2 class="text-3xl lg:text-4xl font-black text-slate-900 dark:text-white tracking-tight mb-8">
+                            자영업
+                            특화 가격 플랜</h2>
+                        <!-- Billing Toggle -->
+                        <div
+                            class="flex justify-center p-1.5 bg-slate-200 dark:bg-slate-800 rounded-2xl w-fit mx-auto mb-8 shadow-inner">
+                            <button
+                                class="px-6 py-2.5 text-sm font-bold rounded-xl transition-all bg-primary text-white shadow-md"
+                                id="btn-single" onclick="switchBilling('single')">단건</button>
+                            <button
+                                class="px-6 py-2.5 text-sm font-bold rounded-xl transition-all text-slate-600 dark:text-slate-400"
+                                id="btn-subscription" onclick="switchBilling('subscription')">월간</button>
+                            <button
+                                class="px-6 py-2.5 text-sm font-bold rounded-xl transition-all text-slate-600 dark:text-slate-400 flex items-center gap-1"
+                                id="btn-yearly" onclick="switchBilling('yearly')">
+                                연간 <span
+                                    class="text-[10px] px-1.5 py-0.5 bg-green-500 text-white rounded-full">Save</span>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                        <!-- LITE Plan -->
+                        <div
+                            class="bg-white dark:bg-slate-800/50 p-10 rounded-3xl border border-slate-200 dark:border-slate-700 shadow-sm flex flex-col hover:shadow-xl transition-all">
+                            <div class="mb-8">
+                                <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-2">LITE 플랜</h3>
+                                <p class="text-slate-500 dark:text-slate-400 text-sm">입문용 실속 패키지</p>
+                            </div>
+                            <div class="mb-8">
+                                <div class="flex items-baseline gap-2">
+                                    <span class="text-4xl font-black text-slate-900 dark:text-white"
+                                        id="lite-price">9.9</span>
+                                    <span class="text-xl text-slate-500 dark:text-gray-400" id="lite-period">만원 / 30일
+                                        (단건)</span>
+                                </div>
+                                <div class="mt-2 flex items-center gap-2">
+                                    <span class="text-sm text-slate-400 line-through" id="lite-original">19.7만원</span>
+                                    <span class="text-sm font-bold text-primary dark:text-blue-400"
+                                        id="lite-discount">50%
+                                        할인</span>
+                                </div>
+                            </div>
+                            <ul class="space-y-4 mb-10 flex-grow">
+                                <li class="flex items-center gap-3 text-slate-600 dark:text-slate-300">
+                                    <span class="material-symbols-outlined text-green-500 text-lg">check_circle</span>
+                                    <span class="text-sm">수동 입력 모드 기반 발행</span>
+                                </li>
+                                <li class="flex items-center gap-3 text-slate-600 dark:text-slate-300">
+                                    <span class="material-symbols-outlined text-green-500 text-lg">check_circle</span>
+                                    <span class="text-sm">약 1,700자 표준 홍보글 작성</span>
+                                </li>
+                                <li class="flex items-center gap-3 text-slate-600 dark:text-slate-300">
+                                    <span class="material-symbols-outlined text-green-500 text-lg">check_circle</span>
+                                    <span class="text-sm">벤치마킹 1개 지원</span>
+                                </li>
+                            </ul>
+                            <button
+                                class="w-full py-4 bg-slate-100 dark:bg-slate-700 text-slate-900 dark:text-white font-bold rounded-xl hover:bg-slate-200 transition-colors"
+                                onclick="goToCheckout('LITE')">플랜 선택하기</button>
+                        </div>
+                        <!-- PRO Plan -->
+                        <div
+                            class="bg-primary p-10 rounded-3xl border border-primary dark:border-blue-500 shadow-2xl relative overflow-hidden flex flex-col hover:scale-[1.01] transition-all">
+                            <div class="absolute top-6 right-6 bg-white/20 backdrop-blur-md text-white px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider"
+                                id="pro-badge">Best Choice</div>
+                            <div class="mb-8 relative z-10">
+                                <h3 class="text-xl font-bold text-white mb-2">PRO 플랜</h3>
+                                <p class="text-slate-400 text-sm">고출력 마케팅을 위한 전문가용</p>
+                            </div>
+                            <div class="mb-8 relative z-10">
+                                <div class="flex items-baseline gap-2">
+                                    <span class="text-4xl font-black text-white" id="pro-price">24.9</span>
+                                    <span class="text-xl text-slate-400 font-medium" id="pro-period">만원 / 30일
+                                        (단건)</span>
+                                </div>
+                                <div class="mt-2 flex items-center gap-2">
+                                    <span class="text-sm text-slate-500 line-through" id="pro-original">39.9만원</span>
+                                    <span class="text-sm font-bold text-white" id="pro-discount">38% 할인</span>
+                                </div>
+                            </div>
+                            <ul class="space-y-4 mb-10 flex-grow relative z-10">
+                                <li class="flex items-center gap-3 text-slate-300">
+                                    <span class="material-symbols-outlined text-slate-300 text-lg">check_circle</span>
+                                    <span class="text-sm font-bold">AI 자동 벤치마킹 (업체 분석)</span>
+                                </li>
+                                <li class="flex items-center gap-3 text-slate-300">
+                                    <span class="material-symbols-outlined text-slate-300 text-lg">check_circle</span>
+                                    <span class="text-sm font-medium">최대 5,000자 고출력 포스팅</span>
+                                </li>
+                                <li class="flex items-center gap-3 text-slate-300">
+                                    <span class="material-symbols-outlined text-slate-300 text-lg">check_circle</span>
+                                    <span class="text-sm">이미지 합성 & 예약 발행 지원</span>
+                                </li>
+                                <li class="flex items-center gap-3 text-slate-300">
+                                    <span class="material-symbols-outlined text-slate-300 text-lg">check_circle</span>
+                                    <span class="text-sm font-medium">1:1 맞춤 고객센터 블로그 컨설팅 지원</span>
+                                </li>
+                                <li class="flex items-center gap-3 text-slate-300">
+                                    <span class="material-symbols-outlined text-slate-300 text-lg">check_circle</span>
+                                    <span class="text-sm font-medium">벤치마킹 3개 가능</span>
+                                </li>
+                            </ul>
+                            <button
+                                class="w-full py-4 bg-white text-primary font-black rounded-xl shadow-lg hover:bg-slate-100 transition-all relative z-10"
+                                onclick="goToCheckout('PRO')">구독하기</button>
+                        </div>
+                    </div>
                 </div>
-                <div>
-                    <h4
-                        class="text-xs font-black text-slate-900 dark:text-white mb-6 uppercase tracking-widest text-primary/50">
-                        Company</h4>
-                    <p class="text-[11px] text-slate-500 dark:text-slate-400 leading-5">
-                        상호명: 리카오토플랜 | 대표자: 조홍철<br>
-                        경기도 부천시 원미구 신흥로 40, 709호<br>
-                        사업자등록번호: 325-60-00844
-                    </p>
+            </section>
+
+            <!-- Download Section -->
+            <section id="download" class="py-24 px-6 reveal">
+                <div class="container mx-auto max-w-4xl">
+                    <div
+                        class="bg-primary/5 dark:bg-slate-900 border border-primary/10 dark:border-slate-800 rounded-3xl p-12 text-center shadow-lg">
+                        <div
+                            class="w-16 h-16 bg-primary dark:bg-blue-600 rounded-2xl flex items-center justify-center mx-auto mb-8 shadow-xl">
+                            <span class="material-symbols-outlined text-white text-3xl">download</span>
+                        </div>
+                        <h2 class="text-3xl font-black mb-4 text-slate-900 dark:text-white">프로그램 다운로드</h2>
+                        <p class="text-slate-600 dark:text-slate-400 mb-10 max-w-lg mx-auto">
+                            사장님의 블로그 마케팅을 책임질 블봇 SME 에디션.<br>지금 바로 다운로드하여 자동화의 위력을 경험하세요.
+                        </p>
+                        <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                            <button
+                                onclick="location.href='https://drive.google.com/file/d/1dBumK7QGS4ZaWPVYG3twXqO2ftAC0ynA/view?usp=drive_link'"
+                                class="w-full sm:w-auto bg-primary dark:bg-blue-600 hover:bg-slate-800 text-white font-bold px-12 py-5 rounded-2xl shadow-xl transition-all hover:scale-105">
+                                Windows용 다운로드
+                            </button>
+                            <a href="guide.html"
+                                class="text-slate-500 hover:text-primary dark:hover:text-white font-bold transition-colors">설치법
+                                확인하기 →</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="bg-white dark:bg-background-dark border-t border-slate-200 dark:border-slate-800 py-16">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+                    <div class="col-span-1 md:col-span-1">
+                        <div class="flex items-center gap-2 mb-6 cursor-pointer" onclick="location.href='index.html'">
+                            <div
+                                class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-white text-xs font-bold">
+                                AI</div>
+                            <span class="text-xl font-bold tracking-tight text-primary dark:text-white">BloBot</span>
+                        </div>
+                        <p class="text-[11px] text-slate-500 dark:text-slate-400 max-w-sm mb-6 leading-relaxed">
+                            자영업 사장님들의 마케팅 부담을 덜어드리는<br>최첨단 AI 블로그 마케팅 솔루션입니다.
+                        </p>
+                    </div>
+                    <div>
+                        <h4
+                            class="text-xs font-black text-slate-900 dark:text-white mb-6 uppercase tracking-widest text-primary/50">
+                            Service</h4>
+                        <ul class="space-y-3 text-xs text-slate-600 dark:text-slate-400">
+                            <li><a class="hover:text-primary transition-colors" href="guide.html">기능 및 설치 가이드</a></li>
+                            <li><a class="hover:text-primary transition-colors" href="reviews.html">사용자 후기</a></li>
+                            <li><a class="hover:text-primary transition-colors" href="#pricing">요금 안내</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4
+                            class="text-xs font-black text-slate-900 dark:text-white mb-6 uppercase tracking-widest text-primary/50">
+                            Support</h4>
+                        <ul class="space-y-3 text-xs text-slate-600 dark:text-slate-400">
+                            <li><a class="hover:text-primary transition-colors"
+                                    href="https://open.kakao.com/o/sQtPY1ii">1:1
+                                    온라인
+                                    문의</a></li>
+                            <li><a class="hover:text-primary transition-colors" href="guide.html">자주 묻는 질문 FAQ</a></li>
+                        </ul>
+                    </div>
+                    <div>
+                        <h4
+                            class="text-xs font-black text-slate-900 dark:text-white mb-6 uppercase tracking-widest text-primary/50">
+                            Company</h4>
+                        <p class="text-[11px] text-slate-500 dark:text-slate-400 leading-5">
+                            상호명: 리카오토플랜 | 대표자: 조홍철<br>
+                            경기도 부천시 원미구 신흥로 40, 709호<br>
+                            사업자등록번호: 325-60-00844
+                        </p>
+                    </div>
+                </div>
+                <div
+                    class="pt-8 border-t border-slate-100 dark:border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4">
+                    <p class="text-[10px] text-slate-400 uppercase tracking-widest">© 2026 Ricar Auto Plan. All rights
+                        reserved.</p>
+                    <div class="flex gap-6 text-[10px] text-slate-500">
+                        <a class="hover:text-slate-900 transition-colors" href="license.html">이용약관</a>
+                        <a class="hover:text-slate-900 transition-colors font-bold" href="privacy.html">개인정보처리방침</a>
+                    </div>
                 </div>
             </div>
-            <div
-                class="pt-8 border-t border-slate-100 dark:border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4">
-                <p class="text-[10px] text-slate-400 uppercase tracking-widest">© 2026 Ricar Auto Plan. All rights
-                    reserved.</p>
-                <div class="flex gap-6 text-[10px] text-slate-500">
-                    <a class="hover:text-slate-900 transition-colors" href="license.html">이용약관</a>
-                    <a class="hover:text-slate-900 transition-colors font-bold" href="privacy.html">개인정보처리방침</a>
-                </div>
-            </div>
-        </div>
-    </footer>
+        </footer>
 
-    <!-- Scripts -->
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
-    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
-    <script src="firebase_config.js"></script>
-    <script>
-        let currentBilling = 'single';
-        let currentUser = null;
+        <!-- Scripts -->
+        <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+        <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+        <script src="firebase_config.js"></script>
+        <script>
+            let currentBilling = 'single';
+            let currentUser = null;
 
-        if (typeof auth !== 'undefined') {
-            auth.onAuthStateChanged(user => {
-                currentUser = user;
-                const navAuthSection = document.getElementById('nav-auth-section');
-                if (user) {
-                    navAuthSection.innerHTML = `
+            if (typeof auth !== 'undefined') {
+                auth.onAuthStateChanged(user => {
+                    currentUser = user;
+                    const navAuthSection = document.getElementById('nav-auth-section');
+                    if (user) {
+                        navAuthSection.innerHTML = `
                         <div class="flex items-center gap-3">
                             <span class="hidden lg:block text-xs font-bold text-slate-900 dark:text-white truncate max-w-[120px]">${user.email.split('@')[0]}님</span>
                             <button onclick="auth.signOut().then(()=>location.reload())" class="text-xs font-bold text-slate-500 hover:text-primary dark:hover:text-white px-3 py-2 transition-all">로그아웃</button>
                             <button onclick="location.href='license.html'" class="rounded-lg bg-primary px-4 py-2 text-xs font-bold text-white shadow-sm hover:bg-slate-800">관리</button>
                         </div>
                     `;
-                } else {
-                    navAuthSection.innerHTML = `
+                    } else {
+                        navAuthSection.innerHTML = `
                         <button onclick="location.href='login.html'" class="text-xs font-bold text-slate-700 dark:text-slate-200 px-4 py-2 rounded-lg hover:bg-slate-100 transition-all">로그인</button>
                         <button onclick="location.href='download.html'" class="rounded-lg bg-primary px-5 py-2.5 text-xs font-bold text-white shadow-sm hover:bg-slate-800">1회 무료 체험</button>
                     `;
-                }
-            });
-        }
-
-        function switchBilling(type) {
-            currentBilling = type;
-            const btnSingle = document.getElementById('btn-single');
-            const btnSub = document.getElementById('btn-subscription');
-            const btnYearly = document.getElementById('btn-yearly');
-
-            [btnSingle, btnSub, btnYearly].forEach(btn => {
-                btn.classList.remove('bg-primary', 'text-white', 'shadow-md');
-                btn.classList.add('text-slate-600', 'dark:text-slate-400');
-            });
-
-            document.getElementById(`btn-${type}`).classList.add('bg-primary', 'text-white', 'shadow-md');
-            document.getElementById(`btn-${type}`).classList.remove('text-slate-600', 'dark:text-slate-400');
-
-            const litePrice = document.getElementById('lite-price');
-            const proPrice = document.getElementById('pro-price');
-            const litePeriod = document.getElementById('lite-period');
-            const proPeriod = document.getElementById('pro-period');
-
-            if (type === 'yearly') {
-                litePrice.innerText = "99";
-                proPrice.innerText = "268.8";
-                litePeriod.innerText = "만원 / 1년";
-                proPeriod.innerText = "만원 / 1년";
-            } else if (type === 'subscription') {
-                litePrice.innerText = "9.9";
-                proPrice.innerText = "24.9";
-                litePeriod.innerText = "만원 / 월";
-                proPeriod.innerText = "만원 / 월";
-            } else {
-                litePrice.innerText = "9.9";
-                proPrice.innerText = "24.9";
-                litePeriod.innerText = "만원 / 30일(단건)";
-                proPeriod.innerText = "만원 / 30일(단건)";
+                    }
+                });
             }
-        }
 
-        function goToCheckout(planBase) {
-            if (!currentUser) {
-                if (confirm('결제를 진행하려면 로그인이 필요합니다. 로그인 페이지로 이동할까요?')) {
-                    const currentUrl = encodeURIComponent(window.location.href);
-                    location.href = `login.html?redirect=${currentUrl}`;
+            function switchBilling(type) {
+                currentBilling = type;
+                const btnSingle = document.getElementById('btn-single');
+                const btnSub = document.getElementById('btn-subscription');
+                const btnYearly = document.getElementById('btn-yearly');
+
+                [btnSingle, btnSub, btnYearly].forEach(btn => {
+                    btn.classList.remove('bg-primary', 'text-white', 'shadow-md');
+                    btn.classList.add('text-slate-600', 'dark:text-slate-400');
+                });
+
+                document.getElementById(`btn-${type}`).classList.add('bg-primary', 'text-white', 'shadow-md');
+                document.getElementById(`btn-${type}`).classList.remove('text-slate-600', 'dark:text-slate-400');
+
+                const litePrice = document.getElementById('lite-price');
+                const proPrice = document.getElementById('pro-price');
+                const litePeriod = document.getElementById('lite-period');
+                const proPeriod = document.getElementById('pro-period');
+
+                if (type === 'yearly') {
+                    litePrice.innerText = "99";
+                    proPrice.innerText = "268.8";
+                    litePeriod.innerText = "만원 / 1년";
+                    proPeriod.innerText = "만원 / 1년";
+                } else if (type === 'subscription') {
+                    litePrice.innerText = "9.9";
+                    proPrice.innerText = "24.9";
+                    litePeriod.innerText = "만원 / 월";
+                    proPeriod.innerText = "만원 / 월";
+                } else {
+                    litePrice.innerText = "9.9";
+                    proPrice.innerText = "24.9";
+                    litePeriod.innerText = "만원 / 30일(단건)";
+                    proPeriod.innerText = "만원 / 30일(단건)";
                 }
-                return;
             }
-            let finalPlan = planBase;
-            let recurringParam = currentBilling === 'subscription' ? 'true' : 'false';
-            if (currentBilling === 'yearly') finalPlan = planBase + "_YEARLY";
-            location.href = `checkout.html?plan=${finalPlan}&recurring=${recurringParam}&category=sme`;
-        }
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
-        }, { threshold: 0.1 });
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-    </script>
-</body>
+            function goToCheckout(planBase) {
+                if (!currentUser) {
+                    if (confirm('결제를 진행하려면 로그인이 필요합니다. 로그인 페이지로 이동할까요?')) {
+                        const currentUrl = encodeURIComponent(window.location.href);
+                        location.href = `login.html?redirect=${currentUrl}`;
+                    }
+                    return;
+                }
+                let finalPlan = planBase;
+                let recurringParam = currentBilling === 'subscription' ? 'true' : 'false';
+                if (currentBilling === 'yearly') finalPlan = planBase + "_YEARLY";
+                location.href = `checkout.html?plan=${finalPlan}&recurring=${recurringParam}&category=sme`;
+            }
 
->>>>>>> 3ff004ecdbcee52a548b199536a31a309cabba4e
-</html>
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => { if (entry.isIntersecting) entry.target.classList.add('active'); });
+            }, { threshold: 0.1 });
+            document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        </script>
+    </body>
+
+    >>>>>>> 3ff004ecdbcee52a548b199536a31a309cabba4e
+
+    </html>
