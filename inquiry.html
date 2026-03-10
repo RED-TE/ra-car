@@ -1,0 +1,927 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>RE:CAR 장기렌트 · 리스 문의</title>
+    <style>
+        @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
+
+        :root {
+            --bg-color: #050505;
+            --primary-color: #2563eb;
+            --text-color: #ffffff;
+            --text-muted: #888888;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Pretendard', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+        }
+
+        body {
+            background: var(--bg-color);
+            color: var(--text-color);
+            min-height: 100vh;
+            min-height: 100dvh;
+            overflow-x: hidden;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+
+        /* 배경 */
+        #bgVideo {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            z-index: -2;
+            transform: translateZ(0);
+            will-change: transform;
+        }
+
+        .dark-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.8);
+            z-index: -1;
+            backdrop-filter: blur(3px);
+            -webkit-backdrop-filter: blur(3px);
+        }
+
+        /* 헤더 */
+        .app-header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            padding: 10px 20px;
+            z-index: 100;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: linear-gradient(to bottom, rgba(0, 0, 0, 0.9), transparent);
+        }
+
+        .logo-area img {
+            height: 90px;
+            width: auto;
+            cursor: pointer;
+            filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.5));
+            transition: height 0.3s ease;
+        }
+
+        @media (max-width: 768px) {
+            .logo-area img {
+                height: 70px;
+            }
+        }
+
+        /* 헤더 카카오 버튼 */
+        .header-kakao {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            background: #FEE500;
+            color: #000;
+            font-size: 0.78rem;
+            font-weight: 700;
+            padding: 8px 14px;
+            border-radius: 50px;
+            text-decoration: none;
+            white-space: nowrap;
+            transition: opacity 0.2s;
+        }
+
+        .header-kakao:active {
+            opacity: 0.75;
+        }
+
+        .header-kakao svg {
+            width: 16px;
+            height: 16px;
+            flex-shrink: 0;
+        }
+
+        /* 메인 컨테이너 */
+        .container {
+            width: 90%;
+            max-width: 500px;
+            text-align: center;
+            position: relative;
+            z-index: 10;
+            padding-top: 120px;
+            padding-bottom: 40px;
+        }
+
+        /* Progress bar */
+        .progress-wrap {
+            margin-bottom: 28px;
+        }
+
+        .progress-bar-bg {
+            width: 100%;
+            height: 3px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            overflow: hidden;
+            margin-bottom: 8px;
+        }
+
+        .progress-bar-fill {
+            height: 100%;
+            background: linear-gradient(to right, #2563eb, #60a5fa);
+            border-radius: 10px;
+            transition: width 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .progress-text {
+            font-size: 0.75rem;
+            color: rgba(255, 255, 255, 0.35);
+            text-align: right;
+        }
+
+        /* 뒤로가기 버튼 */
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.85rem;
+            color: rgba(255, 255, 255, 0.45);
+            cursor: pointer;
+            margin-bottom: 16px;
+            padding: 6px 0;
+            border: none;
+            background: none;
+            font-family: inherit;
+            transition: color 0.2s;
+        }
+
+        .back-btn:hover {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .back-btn.hidden {
+            visibility: hidden;
+            pointer-events: none;
+        }
+
+        /* 타이틀 */
+        h1 {
+            font-size: 2.2rem;
+            margin-bottom: 30px;
+            font-weight: 800;
+            line-height: 1.2;
+            letter-spacing: -0.5px;
+            background: linear-gradient(to right, #fff, #ccc);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        @media (max-width: 380px) {
+            h1 {
+                font-size: 1.8rem;
+            }
+        }
+
+        .subtitle {
+            font-size: 0.85rem;
+            color: var(--primary-color);
+            margin-bottom: 12px;
+            display: inline-block;
+            font-weight: 700;
+            letter-spacing: 2px;
+            border: 1px solid rgba(37, 99, 235, 0.3);
+            padding: 4px 10px;
+            border-radius: 20px;
+            background: rgba(37, 99, 235, 0.1);
+        }
+
+        /* 버튼 */
+        .option-btn {
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            color: white;
+            padding: 18px;
+            border-radius: 16px;
+            font-size: 1.05rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 60px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+
+        .option-btn:active {
+            background: var(--primary-color);
+            border-color: var(--primary-color);
+            transform: scale(0.97);
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        /* 서비스 선택 카드 (step0) */
+        .service-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 16px;
+        }
+
+        .service-card {
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 20px;
+            padding: 28px 16px;
+            cursor: pointer;
+            text-align: center;
+            background: rgba(255, 255, 255, 0.04);
+            transition: all 0.2s;
+        }
+
+        .service-card:active {
+            background: rgba(37, 99, 235, 0.25);
+            border-color: #2563eb;
+            transform: scale(0.97);
+        }
+
+        .service-card .s-emoji {
+            font-size: 2.2rem;
+            margin-bottom: 10px;
+        }
+
+        .service-card .s-name {
+            font-size: 1.2rem;
+            font-weight: 700;
+            margin-bottom: 6px;
+        }
+
+        .service-card .s-desc {
+            font-size: 0.8rem;
+            color: rgba(255, 255, 255, 0.5);
+            line-height: 1.5;
+        }
+
+        /* 입력창 */
+        .input-area {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-top: 10px;
+        }
+
+        .text-input {
+            width: 100%;
+            padding: 18px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 14px;
+            background: rgba(20, 20, 20, 0.8);
+            color: #fff;
+            font-size: 16px;
+            outline: none;
+            transition: 0.3s;
+        }
+
+        .text-input:focus {
+            border-color: var(--primary-color);
+            background: rgba(37, 99, 235, 0.1);
+        }
+
+        /* 모달 (브랜드 선택) */
+        .modal {
+            display: none;
+            position: fixed;
+            z-index: 9999;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .modal.show {
+            opacity: 1;
+        }
+
+        .modal-content {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 85vh;
+            background: #111;
+            border-top-left-radius: 24px;
+            border-top-right-radius: 24px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.5);
+            transform: translateY(100%);
+            transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .modal.show .modal-content {
+            transform: translateY(0);
+        }
+
+        .modal-header {
+            padding: 20px 24px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(17, 17, 17, 0.95);
+            border-top-left-radius: 24px;
+            border-top-right-radius: 24px;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .modal-title {
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .close-btn {
+            font-size: 24px;
+            color: #888;
+            cursor: pointer;
+            padding: 5px;
+        }
+
+        .modal-body {
+            flex: 1;
+            overflow-y: auto;
+            padding: 24px;
+            -webkit-overflow-scrolling: touch;
+        }
+
+        .brand-section-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--text-muted);
+            margin: 30px 0 15px 0;
+            position: sticky;
+            top: -1px;
+            background: #111;
+            padding: 10px 0;
+            z-index: 5;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .brand-section-title:first-child {
+            margin-top: 0;
+        }
+
+        .brand-grid {
+            display: grid;
+            gap: 10px;
+        }
+
+        .brand-grid.major {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .brand-grid.major .brand-item {
+            padding: 20px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            background: linear-gradient(145deg, #1e1e1e, #161616);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .brand-grid.normal {
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .brand-grid.normal .brand-item {
+            padding: 15px 5px;
+            font-size: 0.95rem;
+            font-weight: 500;
+            background: #161616;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .brand-item {
+            border-radius: 12px;
+            text-align: center;
+            color: #e0e0e0;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .brand-item:active {
+            background: var(--primary-color) !important;
+            border-color: var(--primary-color) !important;
+            color: white;
+            transform: scale(0.96);
+        }
+
+        /* step 전환 애니메이션 */
+        .step {
+            display: none;
+        }
+
+        .step.active {
+            display: block;
+            animation: fadeSlideUp 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes fadeSlideUp {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* 완료 화면 카카오 버튼 */
+        .kakao-cta-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            background: #FEE500;
+            color: #000;
+            font-weight: 700;
+            font-size: 1.05rem;
+            padding: 18px;
+            border-radius: 16px;
+            margin-top: 14px;
+            cursor: pointer;
+            text-decoration: none;
+            transition: opacity 0.2s, transform 0.2s;
+            border: none;
+            font-family: inherit;
+        }
+
+        .kakao-cta-btn:active {
+            opacity: 0.8;
+            transform: scale(0.97);
+        }
+
+        .kakao-cta-btn svg {
+            width: 22px;
+            height: 22px;
+            flex-shrink: 0;
+        }
+    </style>
+</head>
+
+<body>
+    <img id="bgVideo" src="background.jpg" alt="Background">
+    <div class="dark-overlay"></div>
+
+    <div class="app-header">
+        <div class="logo-area">
+            <img src="logo12.png" alt="RE:CAR Logo" onclick="location.href='landing.html'">
+        </div>
+        <a class="header-kakao" href="https://open.kakao.com/o/s7SanMki" target="_blank" rel="noopener">
+            <svg viewBox="0 0 24 24" fill="currentColor">
+                <path
+                    d="M12 3C6.477 3 2 6.477 2 10.5c0 2.544 1.522 4.776 3.81 6.198l-.972 3.63a.374.374 0 0 0 .554.41l4.198-2.795C10.484 18.01 11.234 18 12 18c5.523 0 10-3.477 10-7.5S17.523 3 12 3z" />
+            </svg>
+            카카오 상담
+        </a>
+    </div>
+
+    <div class="container" id="mainContainer">
+
+        <!-- Progress Bar -->
+        <div class="progress-wrap" id="progressWrap">
+            <div class="progress-bar-bg">
+                <div class="progress-bar-fill" id="progressFill" style="width: 0%"></div>
+            </div>
+            <div class="progress-text" id="progressText"></div>
+        </div>
+
+        <!-- 뒤로가기 -->
+        <div style="text-align:left; min-height: 32px;">
+            <button class="back-btn hidden" id="backBtn" onclick="goBack()">← 이전</button>
+        </div>
+
+        <!-- STEP 0: 서비스 유형 선택 -->
+        <div class="step active" id="step0">
+            <span class="subtitle">00. SERVICE</span>
+            <h1>어떤 서비스를<br>원하시나요?</h1>
+            <div class="service-grid">
+                <div class="service-card" onclick="selectService('장기렌트')">
+                    <div class="s-emoji">🚗</div>
+                    <div class="s-name">장기렌트</div>
+                    <div class="s-desc">보험·세금 포함<br>관리 편한 방식</div>
+                </div>
+                <div class="service-card" onclick="selectService('리스')">
+                    <div class="s-emoji">✨</div>
+                    <div class="s-name">리스</div>
+                    <div class="s-desc">수입차를 저렴하게<br>금융 활용</div>
+                </div>
+            </div>
+            <p style="margin-top: 16px; color: #555; font-size: 0.85rem;">모르겠다면 상담 후 결정해도 괜찮아요!</p>
+        </div>
+
+        <!-- STEP 1: 브랜드 -->
+        <div class="step" id="step1">
+            <span class="subtitle">01. BRAND</span>
+            <h1>어떤 브랜드를<br>경험하시겠습니까?</h1>
+
+            <button class="option-btn"
+                style="width: 100%; height: 80px; font-size: 1.2rem; font-weight: 700; background: rgba(37, 99, 235, 0.15); border: 1px solid var(--primary-color); box-shadow: 0 0 20px rgba(37, 99, 235, 0.2);"
+                onclick="openBrandModal()">
+                <span id="selectedBrandName">브랜드 선택하기</span>
+                <span style="margin-left: 10px; font-size: 1.2rem;">▾</span>
+            </button>
+            <p style="margin-top: 15px; color: #666; font-size: 0.9rem;">터치하여 전체 브랜드 목록을 확인하세요.</p>
+        </div>
+
+        <!-- STEP 2: 차종 -->
+        <div class="step" id="step2">
+            <span class="subtitle">02. MODEL</span>
+            <h1>원하시는 차종을<br>입력해주세요</h1>
+            <div class="input-area">
+                <input type="text" id="carModel" placeholder="예) 그랜저, E클래스, 카니발" class="text-input" autocomplete="off">
+            </div>
+            <button class="option-btn"
+                style="width: 100%; margin-top: 20px; background: var(--primary-color); font-weight:bold;"
+                onclick="validateStep2()">다음 단계</button>
+        </div>
+
+        <!-- STEP 3: 이용기간 -->
+        <div class="step" id="step3">
+            <span class="subtitle">03. PERIOD</span>
+            <h1>이용 기간 선택</h1>
+            <div class="options-grid">
+                <button class="option-btn" onclick="nextStep('36개월')">36개월</button>
+                <button class="option-btn" onclick="nextStep('48개월')">48개월</button>
+                <button class="option-btn" onclick="nextStep('60개월')">60개월</button>
+                <button class="option-btn" onclick="nextStep('상담필요')">상담 후 결정</button>
+            </div>
+        </div>
+
+        <!-- STEP 4: 주행거리 -->
+        <div class="step" id="step4">
+            <span class="subtitle">04. MILEAGE</span>
+            <h1>연간 주행거리</h1>
+            <div class="options-grid">
+                <button class="option-btn" onclick="nextStep('1만km')">1만km</button>
+                <button class="option-btn" onclick="nextStep('2만km')">2만km</button>
+                <button class="option-btn" onclick="nextStep('3만km')">3만km</button>
+                <button class="option-btn" onclick="nextStep('무제한')">무제한</button>
+            </div>
+        </div>
+
+        <!-- STEP 5: 초기 비용 -->
+        <div class="step" id="step5">
+            <span class="subtitle">05. DEPOSIT</span>
+            <h1>초기 비용 설정</h1>
+            <div class="options-grid">
+                <button class="option-btn" onclick="nextStep('0% (무보증)')">무보증 0%</button>
+                <button class="option-btn" onclick="nextStep('보증금 30%')">보증금 30%</button>
+                <button class="option-btn" onclick="nextStep('선납금 30%')">선납금 30%</button>
+                <button class="option-btn" onclick="nextStep('상담 후 결정')">상담 후 결정</button>
+            </div>
+        </div>
+
+        <!-- STEP 6: 월 예산 -->
+        <div class="step" id="step6">
+            <span class="subtitle">06. BUDGET</span>
+            <h1>월 납입금<br>예산은요?</h1>
+            <div class="options-grid">
+                <button class="option-btn" onclick="nextStep('40만원 이하')">40만원 이하</button>
+                <button class="option-btn" onclick="nextStep('40~60만원')">40~60만원</button>
+                <button class="option-btn" onclick="nextStep('60~80만원')">60~80만원</button>
+                <button class="option-btn" onclick="nextStep('80만원 이상')">80만원 이상</button>
+            </div>
+            <button class="option-btn" style="width:100%; margin-top:12px; font-size:0.9rem; color:#666;"
+                onclick="nextStep('무관')">상관없음</button>
+        </div>
+
+        <!-- STEP 7: 연락처 -->
+        <div class="step" id="step7">
+            <span class="subtitle">07. CONTACT</span>
+            <h1>견적 받으실 연락처</h1>
+            <div class="input-area">
+                <input type="text" id="userName" placeholder="성함" class="text-input" autocomplete="name">
+                <input type="tel" id="userPhone" placeholder="010-0000-0000" class="text-input" pattern="[0-9\-]*"
+                    inputmode="numeric" autocomplete="tel">
+            </div>
+            <div
+                style="margin-top: 20px; text-align: left; font-size: 0.85rem; color: #ccc; display: flex; align-items: center; background: rgba(255,255,255,0.05); padding: 10px; border-radius: 8px;">
+                <input type="checkbox" id="privacyConsent"
+                    style="width: 20px; height: 20px; margin-right: 10px; accent-color: var(--primary-color);">
+                <label for="privacyConsent" style="font-size: 0.9rem;"><a href="privacyPolicy.html"
+                        style="color:#60a5fa; text-decoration:underline;" target="_blank">개인정보 수집 및 이용</a> 동의
+                    (필수)</label>
+            </div>
+            <button class="option-btn"
+                style="width: 100%; margin-top: 20px; background: var(--primary-color); font-weight:bold; box-shadow: 0 4px 15px rgba(37, 99, 235, 0.4);"
+                onclick="validateFinalStep()">견적 요청하기</button>
+        </div>
+
+        <!-- STEP 8: 완료 -->
+        <div class="step" id="step8">
+            <div
+                style="width: 70px; height: 70px; background: linear-gradient(135deg, #2563eb, #60a5fa); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px auto; box-shadow: 0 0 30px rgba(37,99,235,0.4);">
+                <span style="font-size: 34px; color: white;">✓</span>
+            </div>
+            <h1 style="color:white; font-size: 2.2rem; background:none; -webkit-text-fill-color:white;">접수 완료</h1>
+            <p style="color:#aaa; font-size: 1.05rem; line-height: 1.7; margin-top:4px;">
+                고객님의 소중한 문의가 접수되었습니다.<br>
+                담당 플래너가 <strong style="color:#60a5fa;">24시간 내</strong> 연락드리겠습니다.
+            </p>
+
+            <a class="kakao-cta-btn" href="https://open.kakao.com/o/s7SanMki" target="_blank" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path
+                        d="M12 3C6.477 3 2 6.477 2 10.5c0 2.544 1.522 4.776 3.81 6.198l-.972 3.63a.374.374 0 0 0 .554.41l4.198-2.795C10.484 18.01 11.234 18 12 18c5.523 0 10-3.477 10-7.5S17.523 3 12 3z" />
+                </svg>
+                카카오로 빠르게 상담받기
+            </a>
+
+            <button class="option-btn"
+                style="width: 100%; margin-top: 12px; border: 1px solid #333; color:#777; font-size:0.9rem;"
+                onclick="location.href='landing.html'">홈으로 돌아가기</button>
+        </div>
+    </div>
+
+    <!-- 브랜드 모달 -->
+    <div id="brandModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <span class="modal-title">브랜드 선택</span>
+                <span class="close-btn" onclick="closeBrandModal()">&times;</span>
+            </div>
+
+            <div class="modal-body">
+                <div class="brand-section-title">🇰🇷 국산 프리미엄 / 인기</div>
+                <div class="brand-grid major">
+                    <div class="brand-item" onclick="selectBrand('제네시스')">GENESIS</div>
+                    <div class="brand-item" onclick="selectBrand('현대')">현대</div>
+                    <div class="brand-item" onclick="selectBrand('기아')">기아</div>
+                    <div class="brand-item" onclick="selectBrand('KGM')">KGM (쌍용)</div>
+                </div>
+
+                <div class="brand-section-title">🇩🇪 독일 3사 Luxury</div>
+                <div class="brand-grid normal">
+                    <div class="brand-item" onclick="selectBrand('벤츠')">벤츠</div>
+                    <div class="brand-item" onclick="selectBrand('BMW')">BMW</div>
+                    <div class="brand-item" onclick="selectBrand('아우디')">아우디</div>
+                </div>
+
+                <div class="brand-section-title">🌍 수입 / 기타 브랜드</div>
+                <div class="brand-grid normal">
+                    <div class="brand-item" onclick="selectBrand('포르쉐')">포르쉐</div>
+                    <div class="brand-item" onclick="selectBrand('볼보')">볼보</div>
+                    <div class="brand-item" onclick="selectBrand('랜드로버')">랜드로버</div>
+                    <div class="brand-item" onclick="selectBrand('렉서스')">렉서스</div>
+                    <div class="brand-item" onclick="selectBrand('토요타')">토요타</div>
+                    <div class="brand-item" onclick="selectBrand('미니')">미니</div>
+                    <div class="brand-item" onclick="selectBrand('폭스바겐')">폭스바겐</div>
+                    <div class="brand-item" onclick="selectBrand('지프')">지프</div>
+                    <div class="brand-item" onclick="selectBrand('포드')">포드</div>
+                    <div class="brand-item" onclick="selectBrand('링컨')">링컨</div>
+                    <div class="brand-item" onclick="selectBrand('쉐보레')">쉐보레</div>
+                    <div class="brand-item" onclick="selectBrand('르노')">르노</div>
+                    <div class="brand-item" onclick="selectBrand('혼다')">혼다</div>
+                    <div class="brand-item" onclick="selectBrand('캐딜락')">캐딜락</div>
+                    <div class="brand-item" onclick="selectBrand('푸조')">푸조</div>
+                    <div class="brand-item" onclick="selectBrand('기타')">기타문의</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-firestore.js"></script>
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyCgWeeRm81zCKW583ixehm5Mnoeb-OWUj8",
+            authDomain: "recar-e1755.firebaseapp.com",
+            projectId: "recar-e1755",
+            storageBucket: "recar-e1755.firebasestorage.app",
+            messagingSenderId: "240375029918",
+            appId: "1:240375029918:web:0d1078a31fd2dbf5971b8f",
+            measurementId: "G-6K8GLNMBGS"
+        };
+        firebase.initializeApp(firebaseConfig);
+        const db = firebase.firestore();
+
+        // ===== 상태 =====
+        // 스텝 순서: 0(서비스) → 1(브랜드) → 2(차종) → 3(기간) → 4(주행) → 5(초기비용) → 6(예산) → 7(연락처) → 8(완료)
+        const TOTAL_STEPS = 8; // 0~7까지 입력, 8은 완료
+        let currentStep = 0;
+        let stepHistory = [];
+        const userSelection = {};
+        const brandModal = document.getElementById('brandModal');
+
+        // URL 파라미터로 서비스 유형 미리 받기
+        const urlParams = new URLSearchParams(window.location.search);
+        const presetType = urlParams.get('type');
+        if (presetType) {
+            userSelection.serviceType = presetType;
+            // step0 건너뛰고 step1부터 시작
+            window.addEventListener('DOMContentLoaded', () => {
+                document.getElementById('step0').classList.remove('active');
+                currentStep = 1;
+                document.getElementById('step1').classList.add('active');
+                updateUI();
+            });
+        }
+
+        // ===== Progress & UI =====
+        function updateUI() {
+            const progressWrap = document.getElementById('progressWrap');
+            const fill = document.getElementById('progressFill');
+            const text = document.getElementById('progressText');
+            const backBtn = document.getElementById('backBtn');
+
+            if (currentStep === 0 || currentStep === 8) {
+                progressWrap.style.opacity = '0';
+                backBtn.classList.add('hidden');
+                return;
+            }
+
+            progressWrap.style.opacity = '1';
+            const pct = Math.round((currentStep / TOTAL_STEPS) * 100);
+            fill.style.width = pct + '%';
+            text.textContent = currentStep + ' / ' + TOTAL_STEPS;
+
+            if (stepHistory.length > 0) {
+                backBtn.classList.remove('hidden');
+            } else {
+                backBtn.classList.add('hidden');
+            }
+        }
+
+        // ===== 서비스 선택 =====
+        function selectService(type) {
+            userSelection.serviceType = type;
+            stepHistory.push(currentStep);
+            showStep(1);
+        }
+
+        // ===== 브랜드 모달 =====
+        function openBrandModal() {
+            brandModal.style.display = 'block';
+            setTimeout(() => { brandModal.classList.add('show'); }, 10);
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeBrandModal() {
+            brandModal.classList.remove('show');
+            setTimeout(() => {
+                brandModal.style.display = 'none';
+                document.body.style.overflow = '';
+            }, 300);
+        }
+
+        function selectBrand(brand) {
+            userSelection.brand = brand;
+            document.getElementById('selectedBrandName').textContent = brand;
+            closeBrandModal();
+            setTimeout(() => {
+                stepHistory.push(currentStep);
+                showStep(currentStep + 1);
+            }, 300);
+        }
+
+        // ===== step 2 검증 =====
+        function validateStep2() {
+            const val = document.getElementById('carModel').value.trim();
+            if (val.length < 1) return alert('차종을 입력해주세요.');
+            userSelection.carModel = val;
+            stepHistory.push(currentStep);
+            showStep(currentStep + 1);
+        }
+
+        // ===== 최종 step 검증 =====
+        function validateFinalStep() {
+            const name = document.getElementById('userName').value.trim();
+            const phone = document.getElementById('userPhone').value.replace(/\D/g, '');
+            const chk = document.getElementById('privacyConsent').checked;
+
+            if (name.length < 2) return alert('이름을 입력해주세요.');
+            if (phone.length < 10) return alert('전화번호를 입력해주세요.');
+            if (!chk) return alert('개인정보 동의가 필요합니다.');
+
+            userSelection.name = name;
+            userSelection.phone = document.getElementById('userPhone').value;
+
+            const btn = document.querySelector('#step7 .option-btn[onclick="validateFinalStep()"]');
+            btn.textContent = '접수 중...';
+            btn.style.opacity = '0.7';
+            btn.disabled = true;
+
+            db.collection("inquiries").add({
+                ...userSelection,
+                timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+                status: 'New'
+            }).then(() => {
+                showStep(8);
+            }).catch((err) => {
+                alert('오류가 발생했습니다. 다시 시도해주세요.');
+                btn.textContent = '견적 요청하기';
+                btn.style.opacity = '1';
+                btn.disabled = false;
+            });
+        }
+
+        // ===== nextStep (options-grid 버튼용) =====
+        function nextStep(val) {
+            if (val) {
+                if (currentStep === 3) userSelection.period = val;
+                if (currentStep === 4) userSelection.mileage = val;
+                if (currentStep === 5) userSelection.deposit = val;
+                if (currentStep === 6) userSelection.budget = val;
+            }
+            stepHistory.push(currentStep);
+            showStep(currentStep + 1);
+        }
+
+        // ===== showStep =====
+        function showStep(targetStep) {
+            const currentEl = document.getElementById('step' + currentStep);
+            const nextEl = document.getElementById('step' + targetStep);
+            if (nextEl) {
+                currentEl.classList.remove('active');
+                currentStep = targetStep;
+                nextEl.classList.add('active');
+                updateUI();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        // ===== 뒤로가기 =====
+        function goBack() {
+            if (stepHistory.length === 0) return;
+            const prev = stepHistory.pop();
+            const currentEl = document.getElementById('step' + currentStep);
+            const prevEl = document.getElementById('step' + prev);
+            if (prevEl) {
+                currentEl.classList.remove('active');
+                currentStep = prev;
+                prevEl.classList.add('active');
+                updateUI();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        // ===== 전화번호 자동 포맷팅 =====
+        document.getElementById('userPhone').addEventListener('input', function (e) {
+            let v = this.value.replace(/\D/g, '');
+            if (v.length <= 3) {
+                this.value = v;
+            } else if (v.length <= 7) {
+                this.value = v.slice(0, 3) + '-' + v.slice(3);
+            } else if (v.length <= 11) {
+                this.value = v.slice(0, 3) + '-' + v.slice(3, 7) + '-' + v.slice(7);
+            } else {
+                this.value = v.slice(0, 3) + '-' + v.slice(3, 7) + '-' + v.slice(7, 11);
+            }
+        });
+
+        // ===== 브랜드 모달 바깥 클릭 =====
+        window.onclick = function (event) {
+            if (event.target == brandModal) {
+                closeBrandModal();
+            }
+        }
+
+        // ===== 초기 UI =====
+        updateUI();
+    </script>
+</body>
+
+</html>
