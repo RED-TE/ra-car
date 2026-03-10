@@ -533,27 +533,8 @@
             <button class="back-btn hidden" id="backBtn" onclick="goBack()">← 이전</button>
         </div>
 
-        <!-- STEP 0: 서비스 유형 선택 -->
-        <div class="step active" id="step0">
-            <span class="subtitle">00. SERVICE</span>
-            <h1>어떤 서비스를<br>원하시나요?</h1>
-            <div class="service-grid">
-                <div class="service-card" onclick="selectService('장기렌트')">
-                    <div class="s-emoji">🚗</div>
-                    <div class="s-name">장기렌트</div>
-                    <div class="s-desc">보험·세금 포함<br>관리 편한 방식</div>
-                </div>
-                <div class="service-card" onclick="selectService('리스')">
-                    <div class="s-emoji">✨</div>
-                    <div class="s-name">리스</div>
-                    <div class="s-desc">수입차를 저렴하게<br>금융 활용</div>
-                </div>
-            </div>
-            <p style="margin-top: 16px; color: #555; font-size: 0.85rem;">모르겠다면 상담 후 결정해도 괜찮아요!</p>
-        </div>
-
         <!-- STEP 1: 브랜드 -->
-        <div class="step" id="step1">
+        <div class="step active" id="step1">
             <span class="subtitle">01. BRAND</span>
             <h1>어떤 브랜드를<br>경험하시겠습니까?</h1>
 
@@ -739,26 +720,17 @@
         const db = firebase.firestore();
 
         // ===== 상태 =====
-        // 스텝 순서: 0(서비스) → 1(브랜드) → 2(차종) → 3(기간) → 4(주행) → 5(초기비용) → 6(예산) → 7(연락처) → 8(완료)
-        const TOTAL_STEPS = 8; // 0~7까지 입력, 8은 완료
-        let currentStep = 0;
+        // 스텝 순서: 1(브랜드) → 2(차종) → 3(기간) → 4(주행) → 5(초기비용) → 6(예산) → 7(연락처) → 8(완료)
+        const TOTAL_STEPS = 7; // 1~7까지 입력, 8은 완료
+        let currentStep = 1;
         let stepHistory = [];
         const userSelection = {};
         const brandModal = document.getElementById('brandModal');
 
-        // URL 파라미터로 서비스 유형 미리 받기
+        // URL 파라미터로 서비스 유형 조용히 수신
         const urlParams = new URLSearchParams(window.location.search);
         const presetType = urlParams.get('type');
-        if (presetType) {
-            userSelection.serviceType = presetType;
-            // step0 건너뛰고 step1부터 시작
-            window.addEventListener('DOMContentLoaded', () => {
-                document.getElementById('step0').classList.remove('active');
-                currentStep = 1;
-                document.getElementById('step1').classList.add('active');
-                updateUI();
-            });
-        }
+        if (presetType) userSelection.serviceType = presetType;
 
         // ===== Progress & UI =====
         function updateUI() {
@@ -767,29 +739,22 @@
             const text = document.getElementById('progressText');
             const backBtn = document.getElementById('backBtn');
 
-            if (currentStep === 0 || currentStep === 8) {
+            if (currentStep === 8) {
                 progressWrap.style.opacity = '0';
                 backBtn.classList.add('hidden');
                 return;
             }
 
             progressWrap.style.opacity = '1';
-            const pct = Math.round((currentStep / TOTAL_STEPS) * 100);
+            const pct = Math.round(((currentStep - 1) / TOTAL_STEPS) * 100);
             fill.style.width = pct + '%';
-            text.textContent = currentStep + ' / ' + TOTAL_STEPS;
+            text.textContent = (currentStep - 1) + ' / ' + TOTAL_STEPS;
 
             if (stepHistory.length > 0) {
                 backBtn.classList.remove('hidden');
             } else {
                 backBtn.classList.add('hidden');
             }
-        }
-
-        // ===== 서비스 선택 =====
-        function selectService(type) {
-            userSelection.serviceType = type;
-            stepHistory.push(currentStep);
-            showStep(1);
         }
 
         // ===== 브랜드 모달 =====
