@@ -520,10 +520,17 @@ function renderInquiries() {
             </td>
             <td class="px-6 py-4">
                 <div class="grid grid-cols-2 gap-x-2 gap-y-1 text-[10px] font-bold">
-                    <div class="text-slate-500">기간: <span class="text-white">${inquiry.period || '-'}</span></div>
-                    <div class="text-slate-500">주행: <span class="text-white">${inquiry.mileage || '-'}</span></div>
-                    <div class="text-slate-500">초기: <span class="text-white">${inquiry.deposit || '-'}</span></div>
-                    <div class="text-slate-500">예산: <span class="text-white">${inquiry.budget || '-'}</span></div>
+                    <div class="text-slate-500 text-right pr-1">기간:</div>
+                    <div class="text-slate-900 dark:text-white">${inquiry.period || '-'}</div>
+                    
+                    <div class="text-slate-500 text-right pr-1">주행:</div>
+                    <div class="text-slate-900 dark:text-white">${inquiry.mileage || '-'}</div>
+                    
+                    <div class="text-slate-500 text-right pr-1">초기:</div>
+                    <div class="text-slate-900 dark:text-white">${inquiry.deposit || '-'}</div>
+                    
+                    <div class="text-slate-500 text-right pr-1">예산:</div>
+                    <div class="text-slate-900 dark:text-white">${inquiry.budget || '-'}</div>
                 </div>
             </td>
         `;
