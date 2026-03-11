@@ -9,6 +9,7 @@ const TEST_ADMIN_EMAILS = ["jhxox666@test.com", "sungho4768@gmail.com"];
 let allUsers = [];
 let suspiciousUsers = [];
 let freeUsers = [];
+let allInquiries = [];
 let stats = {
     total: 0,
     active: 0,
@@ -124,6 +125,7 @@ async function loadAllData() {
         try { renderFreeUsers(); } catch (e) { console.error(e); }
         try { updateStats(); } catch (e) { console.error(e); }
         try { await loadReviews(); } catch (e) { console.error(e); }
+        try { await loadInquiries(); } catch (e) { console.error(e); }
 
         console.log(`✅ 총 ${allUsers.length}명 로드 완료`);
     } catch (error) {
@@ -462,6 +464,71 @@ function updateStats() {
     document.getElementById('stat-free').textContent = free;
     document.getElementById('stat-expired').textContent = expiredToday;
     document.getElementById('stat-suspicious').textContent = suspiciousUsers.length;
+}
+
+// Inquiries Logic
+async function loadInquiries() {
+    console.log("📝 문의 데이터 로드 시작");
+    try {
+        const snapshot = await db.collection("inquiries").orderBy("timestamp", "desc").get();
+        allInquiries = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        renderInquiries();
+        console.log(`✅ 문의 ${allInquiries.length}개 로드 완료`);
+    } catch (error) {
+        console.error("❌ 문의 로드 실패:", error);
+    }
+}
+
+function renderInquiries() {
+    const tbody = document.getElementById('inquiriesTableBody');
+    if (!tbody) return;
+    tbody.innerHTML = "";
+
+    if (allInquiries.length === 0) {
+        tbody.innerHTML = `<tr><td colspan="4" class="px-6 py-20 text-center text-white/30">접수된 문의가 없습니다.</td></tr>`;
+        return;
+    }
+
+    allInquiries.forEach(inquiry => {
+        const tr = document.createElement('tr');
+        tr.className = "hover:bg-slate-50 dark:hover:bg-slate-800/50 transition-all text-sm group";
+
+        const date = inquiry.timestamp ? formatDate(safeToDate(inquiry.timestamp)) : '-';
+
+        // Set up formatted phone
+        let phoneStr = inquiry.phone || '-';
+        if (phoneStr.length === 11) {
+            phoneStr = phoneStr.replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3');
+        }
+
+        tr.innerHTML = `
+            <td class="px-6 py-4">
+                <span class="text-[10px] font-bold text-slate-400 font-mono tracking-tighter">${date}</span>
+            </td>
+            <td class="px-6 py-4 text-center">
+                <div class="font-black text-slate-800 dark:text-white">${inquiry.name || '알 수 없음'}</div>
+                <div class="text-[11px] text-blue-500 font-mono font-bold mt-1">${phoneStr}</div>
+            </td>
+            <td class="px-6 py-4">
+                <div class="flex items-center gap-2 mb-1">
+                    <span class="badge bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300 font-black">${inquiry.brand || '-'}</span>
+                    <span class="font-black text-slate-800 dark:text-white">${inquiry.carModel || '-'}</span>
+                </div>
+                <div class="text-[10px] font-bold text-slate-400 truncate max-w-[200px]">
+                    ${inquiry.serviceType ? ('유형: ' + inquiry.serviceType) : '유형: 미상'}
+                </div>
+            </td>
+            <td class="px-6 py-4">
+                <div class="grid grid-cols-2 gap-x-2 gap-y-1 text-[10px] font-bold">
+                    <div class="text-slate-500">기간: <span class="text-white">${inquiry.period || '-'}</span></div>
+                    <div class="text-slate-500">주행: <span class="text-white">${inquiry.mileage || '-'}</span></div>
+                    <div class="text-slate-500">초기: <span class="text-white">${inquiry.deposit || '-'}</span></div>
+                    <div class="text-slate-500">예산: <span class="text-white">${inquiry.budget || '-'}</span></div>
+                </div>
+            </td>
+        `;
+        tbody.appendChild(tr);
+    });
 }
 
 // Reviews Logic
@@ -846,6 +913,7 @@ document.getElementById('modalSaveBtn').addEventListener('click', async () => {
             renderFreeUsers();
             updateStats();
             await loadReviews();
+            await loadInquiries();
         } catch (e) {
             console.error("Rendering flow error:", e);
         }
