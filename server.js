@@ -19,9 +19,17 @@ const mimeTypes = {
 };
 
 const server = http.createServer((req, res) => {
-  let filePath = '.' + req.url;
-  if (filePath === './') {
-    filePath = './index.html';
+  const requestUrl = decodeURIComponent(req.url.split('?')[0]);
+  const safePath = path.normalize(requestUrl).replace(/^(\.\.[\/\\])+/, '');
+  let filePath = path.join(__dirname, safePath);
+
+  if (!filePath.startsWith(__dirname)) {
+    res.writeHead(403);
+    return res.end('403 Forbidden');
+  }
+
+  if (filePath === __dirname || filePath === __dirname + path.sep) {
+    filePath = path.join(__dirname, 'index.html');
   }
 
   const extname = String(path.extname(filePath)).toLowerCase();

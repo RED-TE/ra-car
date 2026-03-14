@@ -49,6 +49,19 @@ exports.payappFeedback = functions.https.onRequest(async (req, res) => {
             const isYearly = planName.toLowerCase().includes("1년") || planName.toLowerCase().includes("yearly");
             const durationDays = isYearly ? 365 : 30;
 
+            // 🚀 Price Manipulation Verification
+            const paidAmount = parseInt(amount.replace(/[^0-9]/g, "")) || 0;
+            let expectedPrice = 0;
+            if (planId === "lite") {
+                expectedPrice = isYearly ? 990000 : 99000;
+            } else {
+                expectedPrice = isYearly ? 2688000 : 249000;
+            }
+            if (paidAmount < expectedPrice) {
+                console.error(`❌ Security Alert: Price manipulation detected! UID=${uid}, Plan=${planName}, Expected=${expectedPrice}, Paid=${paidAmount}`);
+                return res.send("SUCCESS"); // Acknowledge webhook, but DO NOT grant license
+            }
+
             const expiryDate = new Date();
             expiryDate.setDate(expiryDate.getDate() + durationDays);
 

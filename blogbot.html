@@ -1,0 +1,1405 @@
+<!DOCTYPE html>
+<html lang="ko" class="scroll-smooth">
+
+<head>
+    <meta charset="utf-8" />
+    <meta content="width=device-width, initial-scale=1.0" name="viewport" />
+    <title>BloBot - 자동차 딜러를 위한 AI 블로그 마케팅</title>
+    <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&amp;display=swap"
+        rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap"
+        rel="stylesheet" />
+    <script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "primary": "#0f1729",
+                        "background-light": "#f6f7f8",
+                        "background-dark": "#14171e",
+                    },
+                    fontFamily: {
+                        "display": ["Inter", "Noto Sans KR", "sans-serif"]
+                    },
+                    borderRadius: { "DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px" },
+                },
+            },
+        }
+    </script>
+    <style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease-out;
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .pulse-glow {
+            animation: pulse-glow 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse-glow {
+
+            0%,
+            100% {
+                box-shadow: 0 0 20px rgba(15, 23, 41, 0.1);
+            }
+
+            50% {
+                box-shadow: 0 0 40px rgba(15, 23, 41, 0.2);
+            }
+        }
+    </style>
+</head>
+
+<body class="bg-background-light dark:bg-background-dark font-display text-slate-900 dark:text-slate-100 antialiased">
+    <!-- Header -->
+    <header
+        class="sticky top-0 z-50 w-full border-b border-slate-200/80 dark:border-slate-800/80 bg-white/80 dark:bg-background-dark/80 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex h-16 items-center justify-between">
+                <div class="flex items-center gap-2 cursor-pointer" onclick="location.href='index.html'">
+                    <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-white">
+                        <span class="material-symbols-outlined text-xl">smart_toy</span>
+                    </div>
+                    <span class="text-xl font-bold tracking-tight text-primary dark:text-white">BloBot</span>
+                </div>
+
+                <nav class="hidden md:flex items-center gap-8 ml-auto mr-8">
+                    <a class="text-sm font-medium text-slate-600 hover:text-primary dark:text-slate-300 dark:hover:text-white transition-colors"
+                        href="guide.html">가이드</a>
+                    <a class="text-sm font-medium text-slate-600 hover:text-primary dark:text-slate-300 dark:hover:text-white transition-colors"
+                        href="#features">기능</a>
+                    <a class="text-sm font-medium text-slate-600 hover:text-primary dark:text-slate-300 dark:hover:text-white transition-colors"
+                        href="#pricing">가격안내</a>
+                    <a class="text-sm font-medium text-slate-600 hover:text-primary dark:text-slate-300 dark:hover:text-white transition-colors"
+                        href="#faq">FAQ</a>
+                </nav>
+
+                <div class="flex items-center gap-3" id="nav-auth-section">
+                    <button onclick="location.href='login.html'"
+                        class="hidden sm:block px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-all">로그인</button>
+                    <button
+                        onclick="window.open('https://drive.google.com/file/d/1dBumK7QGS4ZaWPVYG3twXqO2ftAC0ynA/view?usp=drive_link', '_blank')"
+                        class="hidden sm:flex items-center gap-1 px-4 py-2 text-sm font-bold text-blue-600 dark:text-blue-400 border border-blue-200 dark:border-blue-800/50 hover:bg-blue-50 dark:hover:bg-blue-900/20 rounded-lg transition-all">
+                        <span class="material-symbols-outlined text-base">download</span>
+                        프로그램 다운로드
+                    </button>
+                    <button onclick="location.href='download.html'"
+                        class="px-5 py-2 text-sm font-bold text-white bg-primary hover:bg-slate-800 rounded-lg shadow-sm transition-all">1회
+                        무료 체험</button>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main>
+        <!-- Hero Section -->
+        <section class="relative overflow-hidden pt-16 pb-24 lg:pt-32 lg:pb-40 reveal">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
+                <div class="grid lg:grid-cols-2 gap-12 items-center">
+                    <div class="text-left">
+                        <div
+                            class="inline-flex items-center rounded-full px-4 py-1.5 text-xs font-bold leading-5 text-primary bg-primary/10 mb-6 pulse-glow">
+                            🚀 자동차 영업 사원을 위한 1호 영업 비서
+                        </div>
+                        <h1
+                            class="text-5xl lg:text-7xl font-black text-slate-900 dark:text-white leading-[1.1] tracking-tight mb-6">
+                            자동차 영업의 정점, <span class="text-primary/80 dark:text-slate-400">블봇</span>
+                        </h1>
+                        <p class="text-lg lg:text-xl text-slate-600 dark:text-slate-400 leading-relaxed mb-10 max-w-xl">
+                            AI 블로그 마케팅으로 딜러님의 성과를 극대화하세요. 지능적인 키워드 추출부터 자동 포스팅까지 한 번에 해결합니다.
+                        </p>
+                        <div class="flex flex-col sm:flex-row gap-4">
+                            <button onclick="location.href='download.html'"
+                                class="px-8 py-4 bg-primary text-white font-bold rounded-xl text-lg shadow-xl shadow-primary/20 hover:scale-[1.02] transition-transform">지금
+                                바로 1회 무료 체험 해보기</button>
+                            <button onclick="location.href='guide.html'"
+                                class="px-8 py-4 bg-white dark:bg-slate-800 border border-slate-200 dark:border-slate-700 text-slate-700 dark:text-slate-200 font-bold rounded-xl text-lg hover:bg-slate-50 transition-colors">사용
+                                가이드</button>
+                        </div>
+                    </div>
+                    <div class="relative w-full">
+                        <div
+                            class="aspect-video rounded-3xl bg-gradient-to-br from-primary/5 to-primary/20 flex items-center justify-center overflow-hidden border border-slate-200/50 dark:border-slate-700/50 shadow-2xl relative">
+                            <iframe class="w-full h-full opacity-90"
+                                src="https://www.youtube.com/embed/2wUTkP9o2GY?autoplay=1&mute=1&loop=1&playlist=2wUTkP9o2GY"
+                                title="YouTube video player" frameborder="0"
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                                referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Features Section -->
+        <section class="py-24 bg-white dark:bg-background-dark/50 reveal" id="features">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-base font-bold text-primary dark:text-slate-400 tracking-wide uppercase mb-3">
+                        Core
+                        Features</h2>
+                    <p class="text-3xl lg:text-4xl font-black text-slate-900 dark:text-white tracking-tight">데이터로
+                        증명하는
+                        압도적 효율</p>
+                    <p class="mt-4 text-lg text-slate-600 dark:text-slate-400">영업에만 집중하세요. 마케팅은 블봇이 책임집니다.</p>
+                </div>
+                <div class="grid md:grid-cols-3 gap-8">
+                    <!-- Feature 1 -->
+                    <div
+                        class="group p-8 bg-background-light dark:bg-slate-800/50 rounded-2xl border border-slate-200/50 dark:border-slate-700/50 hover:shadow-xl hover:-translate-y-1 transition-all">
+                        <div
+                            class="w-12 h-12 bg-primary text-white rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                            <span class="material-symbols-outlined">auto_awesome</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">AI 키워드 추출</h3>
+                        <p class="text-slate-600 dark:text-slate-400 leading-relaxed text-sm">차량명, 모델 옵션, 지역명 등 실검
+                            트렌드를
+                            실시간으로 분석해 노출 확률이 가장 높은 키워드를 자동 선정합니다. 수동 리서치 없이 항상 최적의 키워드로 포스팅됩니다.</p>
+                    </div>
+                    <!-- Feature 2 -->
+                    <div
+                        class="group p-8 bg-background-light dark:bg-slate-800/50 rounded-2xl border border-slate-200/50 dark:border-slate-700/50 hover:shadow-xl hover:-translate-y-1 transition-all">
+                        <div
+                            class="w-12 h-12 bg-primary text-white rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                            <span class="material-symbols-outlined">publish</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">완전 자동 포스팅</h3>
+                        <p class="text-slate-600 dark:text-slate-400 leading-relaxed text-sm">원고 작성부터 이미지 삽입, 태그 설정,
+                            예약
+                            발행까지 100% 자동으로 처리합니다. 딜러님은 영업에만 집중하세요. 블로그 관리에 단 1초도 쓸 필요가 없습니다.</p>
+                    </div>
+                    <!-- Feature 3 -->
+                    <div
+                        class="group p-8 bg-background-light dark:bg-slate-800/50 rounded-2xl border border-slate-200/50 dark:border-slate-700/50 hover:shadow-xl hover:-translate-y-1 transition-all">
+                        <div
+                            class="w-12 h-12 bg-primary text-white rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                            <span class="material-symbols-outlined">menu_book</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">블로그 운영 가이드 및 맞춤 컨설팅</h3>
+                        <p class="text-slate-600 dark:text-slate-400 leading-relaxed text-sm">단순 포스팅 대행을 넘어, 내 블로그를
+                            직접
+                            키울 수 있는 운영 노하우와 업종별 맞춤형 컨설팅을 제공합니다. 1:1 매칭을 통해 성공적인 마케팅 전략을 함께 수립하세요.</p>
+                    </div>
+                    <!-- Feature 4 -->
+                    <div
+                        class="group p-8 bg-background-light dark:bg-slate-800/50 rounded-2xl border border-slate-200/50 dark:border-slate-700/50 hover:shadow-xl hover:-translate-y-1 transition-all">
+                        <div
+                            class="w-12 h-12 bg-primary text-white rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                            <span class="material-symbols-outlined">diversity_3</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">다계정 최적화 운영</h3>
+                        <p class="text-slate-600 dark:text-slate-400 leading-relaxed text-sm">계정별 전략을 완전히 분리하고, 각
+                            계정의
+                            특성에 맞는 맞춤형 시나리오로 여러 블로그를 동시에 운영합니다. PRO 기준 최대 8개 계정을 안전하고 효율적으로 관리할 수 있습니다.</p>
+                    </div>
+                    <!-- Feature 5 -->
+                    <div
+                        class="group p-8 bg-background-light dark:bg-slate-800/50 rounded-2xl border border-slate-200/50 dark:border-slate-700/50 hover:shadow-xl hover:-translate-y-1 transition-all">
+                        <div
+                            class="w-12 h-12 bg-primary text-white rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                            <span class="material-symbols-outlined">support_agent</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">AI 전환형 페르소나</h3>
+                        <p class="text-slate-600 dark:text-slate-400 leading-relaxed text-sm">단순한 정보 나열을 넘어, 실제 고객의
+                            문의와
+                            구매로 즉각 이어질 수 있도록 60개 이상의 세일즈 특화 블로거 페르소나를 자동 적용합니다. 글마다 다른 화자로 자연스럽게 작성됩니다.</p>
+                    </div>
+                    <!-- Feature 6 -->
+                    <div
+                        class="group p-8 bg-background-light dark:bg-slate-800/50 rounded-2xl border border-slate-200/50 dark:border-slate-700/50 hover:shadow-xl hover:-translate-y-1 transition-all">
+                        <div
+                            class="w-12 h-12 bg-primary text-white rounded-xl flex items-center justify-center mb-6 group-hover:scale-110 transition-transform">
+                            <span class="material-symbols-outlined">security</span>
+                        </div>
+                        <h3 class="text-xl font-bold text-slate-900 dark:text-white mb-3">안전 최우선 리스크 필터</h3>
+                        <p class="text-slate-600 dark:text-slate-400 leading-relaxed text-sm">네이버 로직 변화를 실시간 감지하여 위험
+                            키워드
+                            및 자동화 패턴을 선제적으로 차단합니다. 사람처럼 보이는 '휴먼 시뮬레이션 시스템'으로 계정 정지나 저품질 없이 장기 운영이 가능합니다.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Middle Download CTA -->
+        <section class="py-16 bg-primary dark:bg-slate-900 reveal">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+                <div class="max-w-3xl mx-auto">
+                    <h2 class="text-3xl lg:text-4xl font-black text-white tracking-tight mb-6">
+                        지금 바로 블봇을 시작해보세요
+                    </h2>
+                    <p class="text-blue-200/80 text-lg mb-10">
+                        설치부터 세팅까지 5분이면 충분합니다.<br>
+                        강력한 AI 블로그 자동화의 위력을 직접 확인하세요.
+                    </p>
+                    <div class="flex flex-col sm:flex-row items-center justify-center gap-6">
+                        <button
+                            onclick="window.open('https://drive.google.com/file/d/1dBumK7QGS4ZaWPVYG3twXqO2ftAC0ynA/view?usp=drive_link', '_blank')"
+                            class="group flex items-center gap-3 px-10 py-5 bg-white text-primary font-black rounded-2xl shadow-2xl hover:bg-slate-100 transition-all text-xl">
+                            <span class="material-symbols-outlined text-2xl group-hover:bounce">download</span>
+                            프로그램 다운로드 하기
+                        </button>
+                        <p class="text-white/60 text-sm">
+                            <span class="text-blue-400 font-bold">●</span> Windows 10 이상 권장
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <!-- Testimonials -->
+        <section class="py-24 overflow-hidden reveal bg-background-light dark:bg-background-dark" id="testimonials">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-3xl font-black text-slate-900 dark:text-white tracking-tight">파트너 후기</h2>
+                    <p class="mt-3 text-slate-500 dark:text-slate-400 text-sm">실제 사용자들의 생생한 리뷰입니다.</p>
+                    <div class="mt-4 flex items-center justify-center gap-2">
+                        <div class="flex text-yellow-400">
+                            <span class="material-symbols-outlined text-2xl"
+                                style="font-variation-settings:'FILL' 1">star</span><span
+                                class="material-symbols-outlined text-2xl"
+                                style="font-variation-settings:'FILL' 1">star</span><span
+                                class="material-symbols-outlined text-2xl"
+                                style="font-variation-settings:'FILL' 1">star</span><span
+                                class="material-symbols-outlined text-2xl"
+                                style="font-variation-settings:'FILL' 1">star</span><span
+                                class="material-symbols-outlined text-2xl"
+                                style="font-variation-settings:'FILL' 1">star</span>
+                        </div>
+                        <span class="font-black text-2xl text-slate-900 dark:text-white">4.9</span>
+                        <span class="text-slate-500 dark:text-slate-400 text-sm">/ 5.0 &nbsp;(21개 리뷰)</span>
+                    </div>
+                </div>
+                <!-- Testimonials preview container with fade -->
+                <div class="relative" id="testimonials-preview">
+                    <div style="max-height: 460px; overflow: hidden;
+                    -webkit-mask-image: linear-gradient(to bottom, black 40%, rgba(0,0,0,0.3) 75%, transparent 100%);
+                    mask-image: linear-gradient(to bottom, black 40%, rgba(0,0,0,0.3) 75%, transparent 100%);"
+                        id="testimonials-grid-wrap">
+                        <div class="columns-1 md:columns-2 lg:columns-3 gap-6 space-y-6">
+
+                            <div
+                                class="break-inside-avoid bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700">
+                                <div class="flex items-center gap-1 text-yellow-400 mb-3">
+                                    <span class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span><span
+                                        class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span><span
+                                        class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span><span
+                                        class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span><span
+                                        class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span>
+                                </div>
+                                <p class="text-slate-700 dark:text-slate-300 text-sm leading-relaxed mb-4">솔직히 반신반의하고
+                                    시작했는데 2주 지나고 나서 블로그 유입이 눈에 띄게 늘었어요. 제가 직접 쓴 것보다 퀄리티가 더 좋은 것 같아서 좀 허탈하기도 했습니다 ㅋㅋ 계속 쓸
+                                    것 같아요.</p>
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <p class="text-xs font-bold text-slate-900 dark:text-white">k***3@gmail.com</p>
+                                        <p class="text-[10px] text-slate-400 mt-0.5">PRO 플랜</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div
+                                class="break-inside-avoid bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700">
+                                <div class="flex items-center gap-1 text-yellow-400 mb-3">
+                                    <span class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span><span
+                                        class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span><span
+                                        class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span><span
+                                        class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span><span
+                                        class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span>
+                                </div>
+                                <p class="text-slate-700 dark:text-slate-300 text-sm leading-relaxed mb-4">처음에 LITE로
+                                    시작해봤는데 효과가 있어서 PRO로 업그레이드했어요. 확실히 PRO가 글이 다양하고 자연스럽습니다. 지역 키워드 노출이 잘 되는 편이에요. 매달
+                                    갱신하고 있습니다.</p>
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <p class="text-xs font-bold text-slate-900 dark:text-white">s***2@naver.com</p>
+                                        <p class="text-[10px] text-slate-400 mt-0.5">PRO 플랜</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div
+                                class="break-inside-avoid bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700">
+                                <div class="flex items-center gap-1 text-yellow-400 mb-3">
+                                    <span class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span><span
+                                        class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span><span
+                                        class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span><span
+                                        class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span><span
+                                        class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span>
+                                </div>
+                                <p class="text-slate-700 dark:text-slate-300 text-sm leading-relaxed mb-4">이런거 써본 적 없어서
+                                    처음엔 엄청 겁먹었는데 막상 써보니 어렵지 않더라고요. 블로그가 꾸준히 올라가는게 보이니까 신기하네요.</p>
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <p class="text-xs font-bold text-slate-900 dark:text-white">d***9@daum.net</p>
+                                        <p class="text-[10px] text-slate-400 mt-0.5">LITE 플랜</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div
+                                class="break-inside-avoid bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700">
+                                <div class="flex items-center gap-1 text-yellow-400 mb-3">
+                                    <span class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span><span
+                                        class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span><span
+                                        class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span><span
+                                        class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span><span
+                                        class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span>
+                                </div>
+                                <p class="text-slate-700 dark:text-slate-300 text-sm leading-relaxed mb-4">저품질 걱정 많이 했는데
+                                    지금까지 한 번도 안 걸렸습니다. 이미 3개월째 쓰고 있고 지금은 계정을 4개로 늘렸어요. 문의도 전보다 확실히 많이 옵니다.</p>
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <p class="text-xs font-bold text-slate-900 dark:text-white">p***7@gmail.com</p>
+                                        <p class="text-[10px] text-slate-400 mt-0.5">PRO 플랜</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div
+                                class="break-inside-avoid bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700">
+                                <div class="flex items-center gap-1 text-yellow-400 mb-3">
+                                    <span class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span><span
+                                        class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span><span
+                                        class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span><span
+                                        class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span><span
+                                        class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 0">star</span>
+                                </div>
+                                <p class="text-slate-700 dark:text-slate-300 text-sm leading-relaxed mb-4">처음 세팅할 때 조금
+                                    헷갈리는 부분이 있었지만 문의하니 당일 답변해주셨어요. 막상 돌아가니까 신경 쓸 게 없어서 편합니다. 예전에 하루에 한 시간씩 블로그 썼던 게
+                                    기억나는데 이제 그 시간을 다른 데 쓰고 있어요.</p>
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <p class="text-xs font-bold text-slate-900 dark:text-white">j***5@naver.com</p>
+                                        <p class="text-[10px] text-slate-400 mt-0.5">LITE 플랜</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div
+                                class="break-inside-avoid bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700">
+                                <div class="flex items-center gap-1 text-yellow-400 mb-3">
+                                    <span class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span><span
+                                        class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span><span
+                                        class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span><span
+                                        class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span><span
+                                        class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span>
+                                </div>
+                                <p class="text-slate-700 dark:text-slate-300 text-sm leading-relaxed mb-4">포스팅 퀄리티가 웬만한
+                                    대행사보다 낫습니다. 제일 마음에 드는 건 알아서 사진 변환까지 다 해준다는 점이에요.</p>
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <p class="text-xs font-bold text-slate-900 dark:text-white">m***x@gmail.com</p>
+                                        <p class="text-[10px] text-slate-400 mt-0.5">PRO 플랜</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div
+                                class="break-inside-avoid bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700">
+                                <div class="flex items-center gap-1 text-yellow-400 mb-3">
+                                    <span class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span><span
+                                        class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span><span
+                                        class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span><span
+                                        class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span><span
+                                        class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 0">star</span>
+                                </div>
+                                <p class="text-slate-700 dark:text-slate-300 text-sm leading-relaxed mb-4">효과는 확실히 있는데,
+                                    아무래도 세팅 초기에 가이드를 좀 꼼꼼히 읽어봐야 하네요. 그래도 적응되니까 진짜 편합니다.</p>
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <p class="text-xs font-bold text-slate-900 dark:text-white">t***3@daum.net</p>
+                                        <p class="text-[10px] text-slate-400 mt-0.5">PRO 플랜</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div
+                                class="break-inside-avoid bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700">
+                                <div class="flex items-center gap-1 text-yellow-400 mb-3">
+                                    <span class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span><span
+                                        class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span><span
+                                        class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span><span
+                                        class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span><span
+                                        class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span>
+                                </div>
+                                <p class="text-slate-700 dark:text-slate-300 text-sm leading-relaxed mb-4">다계정 운영하기에 정말
+                                    최적화되어 있습니다. 기존에 쓰던 방식보다 훨씬 시간 절약이 많이 돼요.</p>
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <p class="text-xs font-bold text-slate-900 dark:text-white">a***1@naver.com</p>
+                                        <p class="text-[10px] text-slate-400 mt-0.5">PRO 플랜</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div
+                                class="break-inside-avoid bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700">
+                                <div class="flex items-center gap-1 text-yellow-400 mb-3">
+                                    <span class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span><span
+                                        class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span><span
+                                        class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span><span
+                                        class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span><span
+                                        class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span>
+                                </div>
+                                <p class="text-slate-700 dark:text-slate-300 text-sm leading-relaxed mb-4">입문용으로 라이트 써보고
+                                    있는데, 2계정만으로도 쏠쏠하게 콜 들어옵니다. 다음 달엔 꼭 프로로 넘어갈 예정입니다.</p>
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <p class="text-xs font-bold text-slate-900 dark:text-white">r***c@gmail.com</p>
+                                        <p class="text-[10px] text-slate-400 mt-0.5">LITE 플랜</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div
+                                class="break-inside-avoid bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700">
+                                <div class="flex items-center gap-1 text-yellow-400 mb-3">
+                                    <span class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span><span
+                                        class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span><span
+                                        class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span><span
+                                        class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span><span
+                                        class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 0">star</span>
+                                </div>
+                                <p class="text-slate-700 dark:text-slate-300 text-sm leading-relaxed mb-4">원고 생성 속도가 빠르고
+                                    키워드 캐치가 예술입니다. 다만 가끔 말투가 너무 똑같아질 때가 있어서 중간중간 제가 조금씩 손봐주고 있어요.</p>
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <p class="text-xs font-bold text-slate-900 dark:text-white">h***9@naver.com</p>
+                                        <p class="text-[10px] text-slate-400 mt-0.5">PRO 플랜</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div
+                                class="break-inside-avoid bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700">
+                                <div class="flex items-center gap-1 text-yellow-400 mb-3">
+                                    <span class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span><span
+                                        class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span><span
+                                        class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span><span
+                                        class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span><span
+                                        class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span>
+                                </div>
+                                <p class="text-slate-700 dark:text-slate-300 text-sm leading-relaxed mb-4">영업하느라 바빠서
+                                    블로그는 아예 포기상태였는데 블봇 덕분에 다시 살아났네요. 알아서 예약발행까지 다 해주니 든든합니다.</p>
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <p class="text-xs font-bold text-slate-900 dark:text-white">b***a@daum.net</p>
+                                        <p class="text-[10px] text-slate-400 mt-0.5">PRO 플랜</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div
+                                class="break-inside-avoid bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700">
+                                <div class="flex items-center gap-1 text-yellow-400 mb-3">
+                                    <span class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span><span
+                                        class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span><span
+                                        class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span><span
+                                        class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span><span
+                                        class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span>
+                                </div>
+                                <p class="text-slate-700 dark:text-slate-300 text-sm leading-relaxed mb-4">가격이 조금 부담스러울까
+                                    싶었는데, 전환율 생각하면 오히려 남는 장사입니다. 투자대비 효율 짱!</p>
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <p class="text-xs font-bold text-slate-900 dark:text-white">y***u@gmail.com</p>
+                                        <p class="text-[10px] text-slate-400 mt-0.5">PRO 플랜</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div
+                                class="break-inside-avoid bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700">
+                                <div class="flex items-center gap-1 text-yellow-400 mb-3">
+                                    <span class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span><span
+                                        class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span><span
+                                        class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span><span
+                                        class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span><span
+                                        class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span>
+                                </div>
+                                <p class="text-slate-700 dark:text-slate-300 text-sm leading-relaxed mb-4">완전 자동화라는게 처음엔
+                                    안 믿겼어요. 직접 써보니까 왜 다들 극찬하는지 알겠네요. 지인들에게도 추천 중입니다.</p>
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <p class="text-xs font-bold text-slate-900 dark:text-white">c***d@naver.com</p>
+                                        <p class="text-[10px] text-slate-400 mt-0.5">LITE 플랜</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div
+                                class="break-inside-avoid bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700">
+                                <div class="flex items-center gap-1 text-yellow-400 mb-3">
+                                    <span class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span><span
+                                        class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span><span
+                                        class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span><span
+                                        class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span><span
+                                        class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span>
+                                </div>
+                                <p class="text-slate-700 dark:text-slate-300 text-sm leading-relaxed mb-4">문의량이 전보다 1.5배
+                                    이상 늘었어요. AI가 트렌디한 차종이나 옵션 설명까지 기가 막히게 잡아줍니다.</p>
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <p class="text-xs font-bold text-slate-900 dark:text-white">g***3@nate.com</p>
+                                        <p class="text-[10px] text-slate-400 mt-0.5">PRO 플랜</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div
+                                class="break-inside-avoid bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700">
+                                <div class="flex items-center gap-1 text-yellow-400 mb-3">
+                                    <span class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span><span
+                                        class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span><span
+                                        class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span><span
+                                        class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span><span
+                                        class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span>
+                                </div>
+                                <p class="text-slate-700 dark:text-slate-300 text-sm leading-relaxed mb-4">5년 넘게 블로그
+                                    해봤는데 이렇게 꾸준히 유지된 적은 없었어요. 스스로 하면 어느 순간 게을러지는데 자동이니까 그런 게 없잖아요.</p>
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <p class="text-xs font-bold text-slate-900 dark:text-white">w***6@gmail.com</p>
+                                        <p class="text-[10px] text-slate-400 mt-0.5">PRO 플랜</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div
+                                class="break-inside-avoid bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700">
+                                <div class="flex items-center gap-1 text-yellow-400 mb-3">
+                                    <span class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span><span
+                                        class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span><span
+                                        class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span><span
+                                        class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span><span
+                                        class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span>
+                                </div>
+                                <p class="text-slate-700 dark:text-slate-300 text-sm leading-relaxed mb-4">부산 쪽에서 운영 중인데
+                                    지역 키워드로 유입이 생기기 시작했어요. 서울처럼 경쟁이 심하지 않아서인지 효과가 빨리 나타나는 것 같아요.</p>
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <p class="text-xs font-bold text-slate-900 dark:text-white">i***2@naver.com</p>
+                                        <p class="text-[10px] text-slate-400 mt-0.5">PRO 플랜</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div
+                                class="break-inside-avoid bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700">
+                                <div class="flex items-center gap-1 text-yellow-400 mb-3">
+                                    <span class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span><span
+                                        class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span><span
+                                        class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span><span
+                                        class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span><span
+                                        class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span>
+                                </div>
+                                <p class="text-slate-700 dark:text-slate-300 text-sm leading-relaxed mb-4">가성비 훌륭합니다!
+                                    라이트 플랜으로도 충분히 효과 보고 있어요. 나중에 여력 되면 계정 늘려보려고요.</p>
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <p class="text-xs font-bold text-slate-900 dark:text-white">z***8@gmail.com</p>
+                                        <p class="text-[10px] text-slate-400 mt-0.5">LITE 플랜</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div
+                                class="break-inside-avoid bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700">
+                                <div class="flex items-center gap-1 text-yellow-400 mb-3">
+                                    <span class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span><span
+                                        class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span><span
+                                        class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span><span
+                                        class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span><span
+                                        class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span>
+                                </div>
+                                <p class="text-slate-700 dark:text-slate-300 text-sm leading-relaxed mb-4">개인 딜러라 마케팅
+                                    예산이 넉넉하지 않아요. 그런데 이 가격에 이 정도 효과면 솔직히 생각보다 훨씬 가성비 좋습니다.</p>
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <p class="text-xs font-bold text-slate-900 dark:text-white">q***3@daum.net</p>
+                                        <p class="text-[10px] text-slate-400 mt-0.5">PRO 플랜</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div
+                                class="break-inside-avoid bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700">
+                                <div class="flex items-center gap-1 text-yellow-400 mb-3">
+                                    <span class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span><span
+                                        class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span><span
+                                        class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span><span
+                                        class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span><span
+                                        class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 0">star</span>
+                                </div>
+                                <p class="text-slate-700 dark:text-slate-300 text-sm leading-relaxed mb-4">가끔 사진 첨부 순서가
+                                    꼬이거나 할 때가 아주 가끔 있지만 문의하면 금방 고쳐주시네요 ㅎㅎ 만족합니다</p>
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <p class="text-xs font-bold text-slate-900 dark:text-white">v***n@naver.com</p>
+                                        <p class="text-[10px] text-slate-400 mt-0.5">PRO 플랜</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div
+                                class="break-inside-avoid bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700">
+                                <div class="flex items-center gap-1 text-yellow-400 mb-3">
+                                    <span class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span><span
+                                        class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span><span
+                                        class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span><span
+                                        class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span><span
+                                        class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span>
+                                </div>
+                                <p class="text-slate-700 dark:text-slate-300 text-sm leading-relaxed mb-4">초반 한 달은 변화가
+                                    별로 없었는데 2달째부터 포스팅 쌓이면서 상단에 많이 꽂히네요. 인내심 갖고 꾸준히 하길 잘했어요.</p>
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <p class="text-xs font-bold text-slate-900 dark:text-white">o***s@gmail.com</p>
+                                        <p class="text-[10px] text-slate-400 mt-0.5">PRO 플랜</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <div
+                                class="break-inside-avoid bg-white dark:bg-slate-800 p-6 rounded-2xl shadow-sm border border-slate-100 dark:border-slate-700">
+                                <div class="flex items-center gap-1 text-yellow-400 mb-3">
+                                    <span class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span><span
+                                        class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span><span
+                                        class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span><span
+                                        class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span><span
+                                        class="material-symbols-outlined text-sm"
+                                        style="font-variation-settings:'FILL' 1">star</span>
+                                </div>
+                                <p class="text-slate-700 dark:text-slate-300 text-sm leading-relaxed mb-4">솔직히 저만 알고 싶은
+                                    프로그램입니다 ㅋㅋㅋㅋ 경쟁자 늘어나는 건 싫지만 그래도 개발자님 번창하시라고 리뷰 남겨요</p>
+                                <div class="flex items-center justify-between">
+                                    <div>
+                                        <p class="text-xs font-bold text-slate-900 dark:text-white">e***t@naver.com</p>
+                                        <p class="text-[10px] text-slate-400 mt-0.5">LITE 플랜</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- 더보기 버튼 -->
+                    <div class="text-center mt-4">
+                        <a href="reviews.html" id="all-reviews-btn"
+                            class="inline-flex items-center gap-2 px-8 py-3.5 bg-primary text-white font-bold rounded-xl hover:bg-slate-800 transition-all shadow-lg shadow-primary/20 text-sm">
+                            후기 전체 보기 (21개)
+                            <span class="material-symbols-outlined text-base">arrow_forward</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Pricing Section -->
+        <section class="py-24 bg-background-light dark:bg-background-dark reveal" id="pricing">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-12">
+                    <h2 class="text-3xl lg:text-4xl font-black text-slate-900 dark:text-white tracking-tight mb-8">
+                        합리적인
+                        플랜으로 시작하세요</h2>
+                    <!-- Billing Toggle -->
+                    <div
+                        class="flex justify-center p-1.5 bg-slate-200 dark:bg-slate-800 rounded-2xl w-fit mx-auto mb-8 shadow-inner">
+                        <button
+                            class="px-6 py-2.5 text-sm font-bold rounded-xl transition-all bg-primary text-white shadow-md"
+                            id="btn-single" onclick="switchBilling('single')">단건</button>
+                        <button
+                            class="px-6 py-2.5 text-sm font-bold rounded-xl transition-all text-slate-600 dark:text-slate-400"
+                            id="btn-subscription" onclick="switchBilling('subscription')">월간</button>
+                        <button
+                            class="px-6 py-2.5 text-sm font-bold rounded-xl transition-all text-slate-600 dark:text-slate-400 flex items-center gap-1"
+                            id="btn-yearly" onclick="switchBilling('yearly')">
+                            연간 <span class="text-[10px] px-1.5 py-0.5 bg-green-500 text-white rounded-full">Save</span>
+                        </button>
+                    </div>
+                </div>
+                <div class="max-w-5xl mx-auto mb-10">
+                    <div
+                        class="bg-blue-50 dark:bg-blue-900/20 border border-blue-100 dark:border-blue-800/50 rounded-2xl p-6 flex flex-col md:flex-row items-center justify-between gap-4 shadow-sm">
+                        <div class="flex items-center gap-3">
+                            <span
+                                class="flex h-10 w-10 items-center justify-center rounded-full bg-blue-100 dark:bg-blue-800 text-blue-600 dark:text-blue-400">
+                                <span class="material-symbols-outlined">local_fire_department</span>
+                            </span>
+                            <div>
+                                <h4 class="text-lg font-black text-slate-900 dark:text-white">지금 가격 한정 특가 혜택</h4>
+                                <p class="text-sm text-slate-500 dark:text-slate-400">오픈 기념 프로모션이 곧 종료됩니다.</p>
+                            </div>
+                        </div>
+                        <div
+                            class="flex items-center gap-4 bg-white dark:bg-slate-800 px-6 py-3 rounded-xl shadow-inner border border-slate-100 dark:border-slate-700">
+                            <div class="text-center md:text-right border-r border-slate-100 dark:border-slate-700 pr-4">
+                                <p class="text-[10px] font-bold text-blue-400 uppercase tracking-widest mb-0.5">PRO
+                                    잔여
+                                </p>
+                                <p class="text-xl font-black text-primary dark:text-white" id="pro-count-display">
+                                    38명
+                                </p>
+                            </div>
+                            <div class="text-center md:text-right">
+                                <p class="text-[10px] font-bold text-green-400 uppercase tracking-widest mb-0.5">
+                                    LITE 잔여
+                                </p>
+                                <p class="text-xl font-black text-primary dark:text-white" id="lite-count-display">
+                                    53명
+                                </p>
+                            </div>
+                            <div class="h-10 w-px bg-slate-200 dark:bg-slate-700 mx-1"></div>
+                            <div class="flex -space-x-2">
+                                <div
+                                    class="w-8 h-8 rounded-full border-2 border-white dark:border-slate-800 bg-slate-200 overflow-hidden">
+                                    <img src="https://ui-avatars.com/api/?name=User1&background=random" alt="User">
+                                </div>
+                                <div
+                                    class="w-8 h-8 rounded-full border-2 border-white dark:border-slate-800 bg-slate-200 overflow-hidden">
+                                    <img src="https://ui-avatars.com/api/?name=User2&background=random" alt="User">
+                                </div>
+                                <div
+                                    class="w-8 h-8 rounded-full border-2 border-white dark:border-slate-800 bg-slate-200 overflow-hidden flex items-center justify-center text-[10px] font-bold text-slate-500">
+                                    +12</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+                    <!-- LITE Plan -->
+                    <div
+                        class="bg-white dark:bg-slate-800/50 p-10 rounded-3xl border border-slate-200 dark:border-slate-700 shadow-sm flex flex-col hover:shadow-xl transition-all">
+                        <div class="mb-8">
+                            <h3 class="text-2xl font-black text-green-400 mb-2">🟢 LITE</h3>
+                            <p class="text-slate-500 dark:text-slate-400 text-sm">개인 딜러를 위한 입문용 패키지</p>
+                        </div>
+                        <div class="mb-8">
+                            <div class="flex items-baseline gap-2">
+                                <span class="text-4xl font-black text-slate-900 dark:text-white"
+                                    id="lite-price">9.9</span>
+                                <span class="text-xl text-slate-500 dark:text-gray-400" id="lite-period">만원</span>
+                            </div>
+                            <div class="mt-2 flex items-center gap-2">
+                                <span class="text-sm text-slate-400 line-through" id="lite-original">19.7만원</span>
+                                <span class="text-[10px] bg-blue-500 text-white px-1.5 py-0.5 rounded font-bold"
+                                    id="lite-discount">50% 할인</span>
+                            </div>
+                        </div>
+                        <ul class="space-y-3 mb-10 flex-grow">
+                            <li class="flex items-start gap-2 text-slate-600 dark:text-slate-300">
+                                <span class="text-green-400 font-bold">✓</span>
+                                <span class="text-sm">계정 2개 운영</span>
+                            </li>
+                            <li class="flex items-start gap-2 text-slate-600 dark:text-slate-300">
+                                <span class="text-green-400 font-bold">✓</span>
+                                <span class="text-sm">AI 자동 글 작성 (1200자)</span>
+                            </li>
+                            <li class="flex items-start gap-2 text-slate-600 dark:text-slate-300">
+                                <span class="text-green-400 font-bold">✓</span>
+                                <span class="text-sm">이미지 자동 삽입</span>
+                            </li>
+                            <li class="flex items-start gap-2 text-slate-600 dark:text-slate-300">
+                                <span class="text-green-400 font-bold">✓</span>
+                                <span class="text-sm">자동 발행</span>
+                            </li>
+                            <li class="flex items-start gap-2 text-slate-600 dark:text-slate-300">
+                                <span class="text-green-400 font-bold">✓</span>
+                                <span class="text-sm">SEO최적화 10개 이상</span>
+                            </li>
+                            <li class="flex items-start gap-2 text-slate-600 dark:text-slate-300">
+                                <span class="text-green-400 font-bold">✓</span>
+                                <span class="text-sm">고급 글 템플릿 6종 지원</span>
+                            </li>
+                            <li class="flex items-start gap-2 text-slate-600 dark:text-slate-300">
+                                <span class="text-green-400 font-bold">✓</span>
+                                <span class="text-sm">벤치마킹 1개 지원</span>
+                            </li>
+                            <li class="flex items-start gap-2 text-slate-400 dark:text-slate-500">
+                                <span class="text-lg leading-none">🔒</span>
+                                <span class="text-sm">다계정 미지원</span>
+                            </li>
+                        </ul>
+                        <button
+                            class="w-full py-4 bg-slate-100 dark:bg-slate-700 text-slate-900 dark:text-white font-bold rounded-xl hover:bg-slate-200 dark:hover:bg-slate-600 transition-colors"
+                            onclick="goToCheckout('LITE')">구독하기</button>
+                    </div>
+                    <!-- PRO Plan -->
+                    <div
+                        class="bg-primary dark:bg-gradient-to-br dark:from-blue-900 dark:to-slate-900 p-10 rounded-3xl border border-primary dark:border-blue-500 shadow-2xl relative overflow-hidden flex flex-col hover:scale-[1.01] transition-all">
+                        <div class="absolute top-6 right-6 bg-white/20 backdrop-blur-md text-white px-3 py-1 rounded-full text-[10px] font-bold uppercase tracking-wider"
+                            id="pro-badge">Most Popular</div>
+                        <div class="mb-8 relative z-10">
+                            <h3 class="text-2xl font-black text-blue-400 mb-2">🔥 PRO</h3>
+                            <p class="text-slate-400 text-sm">팀 단위 성장이 필요한 딜러용</p>
+                        </div>
+                        <div class="mb-8 relative z-10">
+                            <div class="flex items-baseline gap-2">
+                                <span class="text-4xl font-black text-white" id="pro-price">24.9</span>
+                                <span class="text-xl text-slate-400 font-medium" id="pro-period">만원</span>
+                            </div>
+                            <div class="mt-2 flex items-center gap-2">
+                                <span class="text-sm text-slate-500 line-through" id="pro-original">39.9만원</span>
+                                <span class="text-[10px] bg-blue-500 text-white px-1.5 py-0.5 rounded font-bold"
+                                    id="pro-discount">38% 할인</span>
+                            </div>
+                        </div>
+
+                        <div class="bg-blue-500/20 border border-blue-500/50 rounded-xl p-3 mb-6 relative z-10">
+                            <p class="text-blue-300 font-bold text-sm">
+                                블로그에 검색되면 신뢰는 자연스레 UP
+                            </p>
+                        </div>
+
+                        <ul class="space-y-3 mb-10 flex-grow relative z-10">
+                            <li class="flex items-start gap-2 text-slate-300">
+                                <span class="text-blue-400 font-bold">✓</span>
+                                <span class="text-sm"><b>LITE 기능 전부 포함</b></span>
+                            </li>
+                            <li class="flex items-start gap-2 text-slate-300">
+                                <span class="text-blue-400 font-bold">✓</span>
+                                <span class="text-sm">계정 8개 다계정 운영</span>
+                            </li>
+                            <li class="flex items-start gap-2 text-slate-300">
+                                <span class="text-blue-400 font-bold">✓</span>
+                                <span class="text-sm">긴 글 (2500자까지)</span>
+                            </li>
+                            <li class="flex items-start gap-2 text-slate-300">
+                                <span class="text-blue-400 font-bold">✓</span>
+                                <span class="text-sm">이미지에 워터마크 삽입 가능</span>
+                            </li>
+                            <li class="flex items-start gap-2 text-slate-300">
+                                <span class="text-blue-400 font-bold">✓</span>
+                                <span class="text-sm">사진에 링크 삽입 가능</span>
+                            </li>
+                            <li class="flex items-start gap-2 text-slate-300">
+                                <span class="text-blue-400 font-bold">✓</span>
+                                <span class="text-sm">발행 전 검색 분석</span>
+                            </li>
+                            <li class="flex items-start gap-2 text-slate-300">
+                                <span class="text-blue-400 font-bold">✓</span>
+                                <span class="text-sm">SEO 최적화 발행 25개 이상</span>
+                            </li>
+                            <li class="flex items-start gap-2 text-slate-300">
+                                <span class="text-blue-400 font-bold">✓</span>
+                                <span class="text-sm">고급 글 템플릿 20종 지원</span>
+                            </li>
+                            <li class="flex items-start gap-2 text-slate-300">
+                                <span class="text-blue-400 font-bold">✓</span>
+                                <span class="text-sm">1:1 맞춤 고객센터 블로그 컨설팅 지원</span>
+                            </li>
+                            <li class="flex items-start gap-2 text-slate-300">
+                                <span class="text-blue-400 font-bold">✓</span>
+                                <span class="text-sm">벤치마킹 3개 가능</span>
+                            </li>
+                        </ul>
+                        <button
+                            class="w-full py-4 bg-white dark:bg-blue-500 text-primary dark:text-white font-black rounded-xl shadow-lg hover:bg-slate-100 dark:hover:bg-blue-600 transition-all relative z-10"
+                            onclick="goToCheckout('PRO')">구독하기</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- FAQ / QNA Section -->
+        <section class="py-24 bg-white dark:bg-background-dark/50 reveal" id="faq">
+            <div class="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div class="text-center mb-16">
+                    <h2 class="text-base font-bold text-primary dark:text-slate-400 tracking-wide uppercase mb-3">
+                        FAQ
+                    </h2>
+                    <p class="text-3xl lg:text-4xl font-black text-slate-900 dark:text-white tracking-tight">자주 묻는
+                        질문
+                    </p>
+                    <p class="mt-4 text-lg text-slate-600 dark:text-slate-400">궁금한 점이 있으시면 아래에서 확인해보세요.</p>
+                </div>
+                <div class="space-y-3" id="faq-list">
+
+                    <!-- Q1 -->
+                    <div class="faq-item border border-slate-200 dark:border-slate-700 rounded-2xl overflow-hidden">
+                        <button
+                            class="faq-toggle w-full flex items-center justify-between px-6 py-5 text-left bg-background-light dark:bg-slate-800/50 hover:bg-slate-100 dark:hover:bg-slate-700/50 transition-colors gap-4">
+                            <span class="font-semibold text-slate-900 dark:text-white text-sm leading-relaxed">Q. 계정
+                                정지나
+                                저품질 문제가 걱정되는데, 네이버 로직이 업데이트될 때마다 프로그램도 함께 업데이트되나요?</span>
+                            <span
+                                class="material-symbols-outlined flex-shrink-0 text-primary dark:text-slate-400 transition-transform duration-300 faq-icon">expand_more</span>
+                        </button>
+                        <div class="faq-body hidden px-6 pb-6 pt-2 bg-white dark:bg-slate-800/30">
+                            <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">A. 지금까지 계정 정지 사례는
+                                없었습니다. 저품질의 경우, 자동화 프로그램 자체만으로 걸릴 가능성은 매우 낮습니다. 대부분 키워드 셋팅 오류나 한 번에 과도하게 많은 글을 발행할
+                                경우
+                                저품질이 발생할 수 있습니다.</p>
+                        </div>
+                    </div>
+
+                    <!-- Q2 -->
+                    <div class="faq-item border border-slate-200 dark:border-slate-700 rounded-2xl overflow-hidden">
+                        <button
+                            class="faq-toggle w-full flex items-center justify-between px-6 py-5 text-left bg-background-light dark:bg-slate-800/50 hover:bg-slate-100 dark:hover:bg-slate-700/50 transition-colors gap-4">
+                            <span class="font-semibold text-slate-900 dark:text-white text-sm leading-relaxed">Q.
+                                혹은시라도
+                                프로그램이 막히면 사후 관리는 어떻게 해주시나요? 여러 계정 운영 시 IP 관리는 어떻게 되나요?</span>
+                            <span
+                                class="material-symbols-outlined flex-shrink-0 text-primary dark:text-slate-400 transition-transform duration-300 faq-icon">expand_more</span>
+                        </button>
+                        <div class="faq-body hidden px-6 pb-6 pt-2 bg-white dark:bg-slate-800/30">
+                            <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">A. 로직 변경으로 업데이트가
+                                필요하게
+                                되면, 사용하신 기간을 계산하여 환불해드리거나 기다리신 기간만큼 구독 기간을 연장해드립니다. IP 변경의 경우 수동 가이드를 제공하고 있으며, 자동
+                                IP 변경
+                                기능은 향후 업데이트를 통해 마스터플랜에 출시 예정입니다. 현재 PRO 플랜 기준 계정 8개 정도는 무리한 발행만 하지 않으면 문제없이 운영
+                                가능합니다.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Q3 -->
+                    <div class="faq-item border border-slate-200 dark:border-slate-700 rounded-2xl overflow-hidden">
+                        <button
+                            class="faq-toggle w-full flex items-center justify-between px-6 py-5 text-left bg-background-light dark:bg-slate-800/50 hover:bg-slate-100 dark:hover:bg-slate-700/50 transition-colors gap-4">
+                            <span class="font-semibold text-slate-900 dark:text-white text-sm leading-relaxed">Q. 한
+                                IP에서
+                                여러 계정을 운영하면 위험하다고 들었는데, 별도로 세팅해야 할 것이 있나요?</span>
+                            <span
+                                class="material-symbols-outlined flex-shrink-0 text-primary dark:text-slate-400 transition-transform duration-300 faq-icon">expand_more</span>
+                        </button>
+                        <div class="faq-body hidden px-6 pb-6 pt-2 bg-white dark:bg-slate-800/30">
+                            <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">A. 이용자분께만 별도로 상세히
+                                안내드리고 있습니다. 추가 세팅은 상황에 따라 다르지만, 일반적으로는 별도 세팅이 필요하지 않습니다.</p>
+                        </div>
+                    </div>
+
+                    <!-- Q4 -->
+                    <div class="faq-item border border-slate-200 dark:border-slate-700 rounded-2xl overflow-hidden">
+                        <button
+                            class="faq-toggle w-full flex items-center justify-between px-6 py-5 text-left bg-background-light dark:bg-slate-800/50 hover:bg-slate-100 dark:hover:bg-slate-700/50 transition-colors gap-4">
+                            <span class="font-semibold text-slate-900 dark:text-white text-sm leading-relaxed">Q.
+                                실제로 이
+                                프로그램으로 운영 중인 샘플 블로그를 하나만 볼 수 있을까요?</span>
+                            <span
+                                class="material-symbols-outlined flex-shrink-0 text-primary dark:text-slate-400 transition-transform duration-300 faq-icon">expand_more</span>
+                        </button>
+                        <div class="faq-body hidden px-6 pb-6 pt-2 bg-white dark:bg-slate-800/30">
+                            <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">A. 노출 및 문의량은 프로그램
+                                설계
+                                방식과 운영 방법에 따라 차이가 있습니다. 각 업체에 맞게 설계된 프로그램이기 때문에 블로그 주소 공유 시 내용 카피 등의 문제가 발생할 수 있어
+                                공개는
+                                어렵습니다. 양해 부탁드립니다.</p>
+                        </div>
+                    </div>
+
+                    <!-- Q5 -->
+                    <div class="faq-item border border-slate-200 dark:border-slate-700 rounded-2xl overflow-hidden">
+                        <button
+                            class="faq-toggle w-full flex items-center justify-between px-6 py-5 text-left bg-background-light dark:bg-slate-800/50 hover:bg-slate-100 dark:hover:bg-slate-700/50 transition-colors gap-4">
+                            <span class="font-semibold text-slate-900 dark:text-white text-sm leading-relaxed">Q. AI
+                                원고
+                                생성 비용이 따로 청구되나요? 이미지 중복 방지 기능도 포함되어 있나요?</span>
+                            <span
+                                class="material-symbols-outlined flex-shrink-0 text-primary dark:text-slate-400 transition-transform duration-300 faq-icon">expand_more</span>
+                        </button>
+                        <div class="faq-body hidden px-6 pb-6 pt-2 bg-white dark:bg-slate-800/30">
+                            <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">A. AI 원고 생성 비용은 제가
+                                직접
+                                납부하고 있어 사용자분께는 별도 청구되지 않습니다. 단, 월 1,000회 발행 제한이 있습니다. 이미지 세탁(픽셀 변화, 워터마크 삽입 등) 및 기타
+                                기술적
+                                중복 방지 기능도 지원합니다.</p>
+                        </div>
+                    </div>
+
+                    <!-- Q6 -->
+                    <div class="faq-item border border-slate-200 dark:border-slate-700 rounded-2xl overflow-hidden">
+                        <button
+                            class="faq-toggle w-full flex items-center justify-between px-6 py-5 text-left bg-background-light dark:bg-slate-800/50 hover:bg-slate-100 dark:hover:bg-slate-700/50 transition-colors gap-4">
+                            <span class="font-semibold text-slate-900 dark:text-white text-sm leading-relaxed">Q. 발행
+                                시간을
+                                직접 조절하거나 예약할 수 있나요? 요금제는 일시불인가요, 아니면 월 구독형인가요?</span>
+                            <span
+                                class="material-symbols-outlined flex-shrink-0 text-primary dark:text-slate-400 transition-transform duration-300 faq-icon">expand_more</span>
+                        </button>
+                        <div class="faq-body hidden px-6 pb-6 pt-2 bg-white dark:bg-slate-800/30">
+                            <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">A. 발행 시간은 직접 설정하거나
+                                랜덤
+                                예약 발행도 가능합니다. 요금제는 매달 납부하는 월 구독 방식입니다. 월 발행 제한 해제를 원하실 경우, 추가 요금을 납부하시면 해제해드립니다.</p>
+                        </div>
+                    </div>
+
+                    <!-- Q7 -->
+                    <div class="faq-item border border-slate-200 dark:border-slate-700 rounded-2xl overflow-hidden">
+                        <button
+                            class="faq-toggle w-full flex items-center justify-between px-6 py-5 text-left bg-background-light dark:bg-slate-800/50 hover:bg-slate-100 dark:hover:bg-slate-700/50 transition-colors gap-4">
+                            <span class="font-semibold text-slate-900 dark:text-white text-sm leading-relaxed">Q.
+                                네이버
+                                로직이 완전히 바뀌어 프로그램 사용이 불가능해지면 환불 처리는 어떻게 되나요?</span>
+                            <span
+                                class="material-symbols-outlined flex-shrink-0 text-primary dark:text-slate-400 transition-transform duration-300 faq-icon">expand_more</span>
+                        </button>
+                        <div class="faq-body hidden px-6 pb-6 pt-2 bg-white dark:bg-slate-800/30">
+                            <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">A. 복구가 완전히 불가능한
+                                수준이라면,
+                                마지막 구독 기간 중 막힌 시점까지의 기간을 계산하여 환불해드립니다.</p>
+                        </div>
+                    </div>
+
+                    <!-- Q8 -->
+                    <div class="faq-item border border-slate-200 dark:border-slate-700 rounded-2xl overflow-hidden">
+                        <button
+                            class="faq-toggle w-full flex items-center justify-between px-6 py-5 text-left bg-background-light dark:bg-slate-800/50 hover:bg-slate-100 dark:hover:bg-slate-700/50 transition-colors gap-4">
+                            <span class="font-semibold text-slate-900 dark:text-white text-sm leading-relaxed">Q.
+                                가이드대로
+                                세팅했는데 IP 문제나 패턴 탐지로 계정이 저품질에 걸리면 보상받을 수 있나요?</span>
+                            <span
+                                class="material-symbols-outlined flex-shrink-0 text-primary dark:text-slate-400 transition-transform duration-300 faq-icon">expand_more</span>
+                        </button>
+                        <div class="faq-body hidden px-6 pb-6 pt-2 bg-white dark:bg-slate-800/30">
+                            <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">A. IP 문제 또는 패턴 탐지로
+                                인한
+                                저품질 발생 시, 원인이 프로그램에 있는지 사용자 환경에 있는지 정확히 판단하기 어렵습니다. 이로 인해 별도의 보상은 제공되지 않는 점 양해
+                                부탁드립니다.
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Q9 -->
+                    <div class="faq-item border border-slate-200 dark:border-slate-700 rounded-2xl overflow-hidden">
+                        <button
+                            class="faq-toggle w-full flex items-center justify-between px-6 py-5 text-left bg-background-light dark:bg-slate-800/50 hover:bg-slate-100 dark:hover:bg-slate-700/50 transition-colors gap-4">
+                            <span class="font-semibold text-slate-900 dark:text-white text-sm leading-relaxed">Q. 월
+                                1,000회 발행 비용에 AI 원고 생성 비용이 정말 모두 포함된 건가요? 결제 후 PC에서 작동하지 않으면 전액 환불이 가능한가요?</span>
+                            <span
+                                class="material-symbols-outlined flex-shrink-0 text-primary dark:text-slate-400 transition-transform duration-300 faq-icon">expand_more</span>
+                        </button>
+                        <div class="faq-body hidden px-6 pb-6 pt-2 bg-white dark:bg-slate-800/30">
+                            <p class="text-slate-600 dark:text-slate-300 text-sm leading-relaxed">A. 필독 사항에 안내드리는
+                                내용으로,
+                                기존 계정 외에 별도 테스트 계정을 만들어 먼저 테스트해보시길 권장합니다. 노출 관련 사항은 블로그 운영 대행사도 책임을 지지 않는 영역입니다.
+                                프로그램 사용
+                                여부와 관계없이 다양한 원인으로 품질저하가 발생할 수 있어 이 부분에 대한 환불은 어렵습니다.</p>
+                        </div>
+                    </div>
+
+                </div>
+
+                <!-- Contact CTA -->
+                <div
+                    class="mt-12 text-center p-8 bg-primary/5 dark:bg-slate-800/50 rounded-2xl border border-primary/10 dark:border-slate-700">
+                    <p class="text-slate-700 dark:text-slate-300 font-semibold mb-2">더 궁금한 점이 있으신가요?</p>
+                    <p class="text-sm text-slate-500 dark:text-slate-400 mb-5">1:1 문의를 통해 빠르게 답변 드리겠습니다.</p>
+                    <a href="https://open.kakao.com/o/sQtPY1ii"
+                        class="inline-flex items-center gap-2 bg-white text-primary px-8 py-3 rounded-xl font-bold hover:bg-slate-100 transition-colors text-sm">
+                        <span class="material-symbols-outlined text-base">mail</span>
+                        1:1 문의하기
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-white dark:bg-background-dark border-t border-slate-200 dark:border-slate-800 py-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-16">
+                <div class="col-span-1 md:col-span-1">
+                    <div class="flex items-center gap-2 mb-6">
+                        <div class="flex h-8 w-8 items-center justify-center rounded-lg bg-primary text-white">
+                            <span class="material-symbols-outlined text-xl">smart_toy</span>
+                        </div>
+                        <span class="text-xl font-bold tracking-tight text-primary dark:text-white">BloBot</span>
+                    </div>
+                    <p class="text-xs text-slate-500 dark:text-slate-400 max-w-sm mb-6 leading-relaxed">
+                        자동차 딜러들의 성공적인 영업을 위해<br>최첨단 AI 마케팅 솔루션을 제공합니다.
+                    </p>
+                </div>
+                <div>
+                    <h4 class="text-sm font-bold text-slate-900 dark:text-white mb-6">서비스</h4>
+                    <ul class="space-y-3 text-xs text-slate-600 dark:text-slate-400">
+                        <li><a class="hover:text-primary transition-colors" href="guide.html">기능 소개 가이드</a></li>
+                        <li><a class="hover:text-primary transition-colors" href="reviews.html">성공 사례 및 후기</a></li>
+                        <li><a class="hover:text-primary transition-colors" href="#pricing">요금제</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-sm font-bold text-slate-900 dark:text-white mb-6">고객지원</h4>
+                    <ul class="space-y-3 text-xs text-slate-600 dark:text-slate-400">
+                        <li><a class="hover:text-primary transition-colors" href="guide.html">자주 묻는 질문 FAQ</a></li>
+                        <li><a class="hover:text-primary transition-colors" href="https://open.kakao.com/o/sQtPY1ii">1:1
+                                온라인
+                                문의</a></li>
+                    </ul>
+                </div>
+                <div>
+                    <h4 class="text-sm font-bold text-slate-900 dark:text-white mb-6">회사정보</h4>
+                    <p class="text-xs text-slate-600 dark:text-slate-400 leading-5">
+                        상호명: 리카오토플랜 | 대표자: 조홍철<br>
+                        주소: 경기도 부천시 원미구 신흥로 40, 709호<br>
+                        사업자등록번호: 325-60-00844
+                    </p>
+                </div>
+            </div>
+            <div
+                class="pt-8 border-t border-slate-100 dark:border-slate-800 flex flex-col md:flex-row justify-between items-center gap-4">
+                <p class="text-[10px] text-slate-400 uppercase tracking-widest">© 2026 Ricar Auto Plan. All rights
+                    reserved.</p>
+                <div class="flex gap-6 text-[11px] text-slate-500 dark:text-slate-400">
+                    <a class="hover:text-slate-900 dark:hover:text-white transition-colors" href="license.html">이용약관</a>
+                    <a class="hover:text-slate-900 dark:hover:text-white transition-colors font-bold"
+                        href="privacy_policy_ricarautoplan_multi_pg_nolist.html">개인정보처리방침</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts (Integrated) -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+    <script src="firebase_config.js"></script>
+    <script>
+        let currentBilling = 'single';
+        let currentUser = null;
+
+        // --- Auth State ---
+        if (typeof auth !== 'undefined') {
+            auth.onAuthStateChanged(user => {
+                currentUser = user;
+                const navAuthSection = document.getElementById('nav-auth-section');
+                if (user) {
+                    navAuthSection.innerHTML = `
+                        <span class="hidden lg:block text-sm font-semibold text-slate-900 dark:text-slate-100 truncate max-w-[150px] mr-2">${user.email}</span>
+                        <button onclick="auth.signOut().then(()=>location.reload())" class="text-sm font-semibold text-slate-500 hover:text-primary dark:text-slate-400 dark:hover:text-white px-3 py-2 transition-all">로그아웃</button>
+                        <button onclick="location.href='license.html'" class="rounded-lg bg-primary px-4 py-2 text-sm font-bold text-white shadow-sm hover:bg-slate-800 transition-all">내 구독</button>
+                    `;
+                } else {
+                    navAuthSection.innerHTML = `
+                        <button onclick="location.href='login.html'" class="hidden sm:block px-4 py-2 text-sm font-semibold text-slate-700 dark:text-slate-200 hover:bg-slate-100 dark:hover:bg-slate-800 rounded-lg transition-all">로그인</button>
+                        <button onclick="location.href='download.html'" class="px-5 py-2 text-sm font-bold text-white bg-primary hover:bg-slate-800 rounded-lg shadow-sm transition-all">1회 무료 체험</button>
+                    `;
+                }
+            });
+        }
+
+        function switchBilling(type) {
+            currentBilling = type;
+            const btnSingle = document.getElementById('btn-single');
+            const btnSub = document.getElementById('btn-subscription');
+            const btnYearly = document.getElementById('btn-yearly');
+
+            [btnSingle, btnSub, btnYearly].forEach(btn => {
+                btn.classList.remove('bg-white', 'bg-primary', 'text-white', 'shadow-md', 'shadow-sm');
+                btn.classList.add('text-slate-600', 'dark:text-slate-400');
+            });
+
+            const selected = document.getElementById('btn-' + type);
+            selected.classList.add('bg-primary', 'text-white', 'shadow-md');
+            selected.classList.remove('text-slate-600', 'dark:text-slate-400');
+            if (type === 'single') selected.classList.add('bg-primary');
+
+            // Handle price values & periods
+            const litePrice = document.getElementById('lite-price');
+            const proPrice = document.getElementById('pro-price');
+            const litePeriod = document.getElementById('lite-period');
+            const proPeriod = document.getElementById('pro-period');
+
+            if (type === 'yearly') {
+                litePrice.innerText = '99';
+                proPrice.innerText = '268.8';
+                litePeriod.innerText = '만원 / 년';
+                proPeriod.innerText = '만원 / 년';
+            } else if (type === 'subscription') {
+                litePrice.innerText = '9.9';
+                proPrice.innerText = '24.9';
+                litePeriod.innerText = '만원 / 월';
+                proPeriod.innerText = '만원 / 월';
+            } else {
+                litePrice.innerText = '9.9';
+                proPrice.innerText = '24.9';
+                litePeriod.innerText = '만원 / 건';
+                proPeriod.innerText = '만원 / 건';
+            }
+        }
+
+        // Default UI to single on load
+        window.addEventListener('DOMContentLoaded', () => {
+            switchBilling('single');
+
+            // 🚀 Scarcity Countdown Real-time Update
+            if (typeof db !== 'undefined') {
+                db.collection("settings").doc("pricing").onSnapshot((doc) => {
+                    if (doc.exists) {
+                        const data = doc.data();
+                        const proDisplay = document.getElementById('pro-count-display');
+                        const liteDisplay = document.getElementById('lite-count-display');
+
+                        if (proDisplay && data.proCount !== undefined) {
+                            if (proDisplay.textContent !== data.proCount + "명") {
+                                proDisplay.classList.add('scale-110', 'text-blue-500');
+                                proDisplay.textContent = data.proCount + "명";
+                                setTimeout(() => proDisplay.classList.remove('scale-110', 'text-blue-500'), 500);
+                            }
+                        }
+                        if (liteDisplay && data.liteCount !== undefined) {
+                            if (liteDisplay.textContent !== data.liteCount + "명") {
+                                liteDisplay.classList.add('scale-110', 'text-green-500');
+                                liteDisplay.textContent = data.liteCount + "명";
+                                setTimeout(() => liteDisplay.classList.remove('scale-110', 'text-green-500'), 500);
+                            }
+                        }
+                    }
+                });
+
+                // 📝 Update Review Count (Static 23 + Firestore Dynamic)
+                db.collection("reviews").onSnapshot((snap) => {
+                    const dynamicCount = snap.size;
+                    const totalCount = 23 + dynamicCount;
+                    const btn = document.getElementById('all-reviews-btn');
+                    if (btn) {
+                        btn.innerHTML = `후기 전체 보기 (${totalCount}개) <span class="material-symbols-outlined text-base">arrow_forward</span>`;
+                    }
+                });
+            }
+        });
+
+        function goToCheckout(planBase) {
+            if (!currentUser) {
+                if (confirm('결제를 진행하려면 로그인이 필요합니다. 로그인 페이지로 이동할까요?')) {
+                    const currentUrl = encodeURIComponent(window.location.href);
+                    location.href = `login.html?redirect=${currentUrl}`;
+                }
+                return;
+            }
+            let finalPlan = planBase;
+            let recurringParam = currentBilling === 'subscription' ? 'true' : 'false';
+            if (currentBilling === 'yearly') finalPlan = planBase + "_YEARLY";
+            location.href = `checkout.html?plan=${finalPlan}&recurring=${recurringParam}&category=car`;
+        }
+
+        // --- Animations ---
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                }
+            });
+        }, { threshold: 0.1 });
+
+        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+        // --- FAQ Accordion ---
+        document.querySelectorAll('.faq-toggle').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const body = btn.nextElementSibling;
+                const icon = btn.querySelector('.faq-icon');
+                const isOpen = !body.classList.contains('hidden');
+
+                // Close all
+                document.querySelectorAll('.faq-body').forEach(b => b.classList.add('hidden'));
+                document.querySelectorAll('.faq-icon').forEach(i => i.style.transform = 'rotate(0deg)');
+
+                if (!isOpen) {
+                    body.classList.remove('hidden');
+                    icon.style.transform = 'rotate(180deg)';
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
