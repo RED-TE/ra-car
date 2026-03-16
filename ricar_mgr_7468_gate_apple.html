@@ -260,7 +260,8 @@
             <button class="tab-button" data-tab="suspicious">이상 사용 의심</button>
             <button class="tab-button" data-tab="free">무료 이용자</button>
             <button class="tab-button" data-tab="reviews">이용 후기</button>
-            <button class="tab-button" data-tab="inquiries">고객 문의</button>
+            <button class="tab-button" data-tab="general-inquiries">일반 문의</button>
+            <button class="tab-button" data-tab="direct-inquiries">다이렉트카 문의</button>
         </div>
 
         <!-- Tab Contents -->
@@ -357,24 +358,44 @@
             </div>
         </div>
 
-        <div id="inquiries-tab" class="tab-content hidden reveal">
+        <div id="general-inquiries-tab" class="tab-content hidden reveal">
             <div class="glass rounded-2xl overflow-hidden border border-slate-200/50 dark:border-slate-700/50">
+                <div class="px-6 py-4 border-b border-slate-100 dark:border-slate-800">
+                    <h3 class="text-sm font-black text-slate-900 dark:text-white">일반 견적 문의 (inquiry.html)</h3>
+                </div>
                 <div class="overflow-x-auto">
                     <table class="w-full text-left text-sm">
                         <thead class="bg-slate-50 dark:bg-slate-800/50 text-slate-500">
                             <tr>
-                                <th class="px-6 py-4 font-black uppercase text-[10px] tracking-widest leading-none">
-                                    신청일시</th>
-                                <th
-                                    class="px-6 py-4 font-black uppercase text-[10px] tracking-widest leading-none text-center">
-                                    고객명/연락처</th>
-                                <th class="px-6 py-4 font-black uppercase text-[10px] tracking-widest leading-none">희망차종
-                                </th>
-                                <th class="px-6 py-4 font-black uppercase text-[10px] tracking-widest leading-none">상태
-                                </th>
+                                <th class="px-6 py-4 font-black uppercase text-[10px] tracking-widest leading-none">신청일시</th>
+                                <th class="px-6 py-4 font-black uppercase text-[10px] tracking-widest leading-none text-center">고객명/연락처</th>
+                                <th class="px-6 py-4 font-black uppercase text-[10px] tracking-widest leading-none">희망차종</th>
+                                <th class="px-6 py-4 font-black uppercase text-[10px] tracking-widest leading-none text-right">상태</th>
                             </tr>
                         </thead>
-                        <tbody id="inquiriesTableBody" class="divide-y divide-slate-100 dark:divide-slate-800">
+                        <tbody id="generalInquiriesTableBody" class="divide-y divide-slate-100 dark:divide-slate-800">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+        <div id="direct-inquiries-tab" class="tab-content hidden reveal">
+            <div class="glass rounded-2xl overflow-hidden border border-slate-200/50 dark:border-slate-700/50">
+                <div class="px-6 py-4 border-b border-slate-100 dark:border-slate-800">
+                    <h3 class="text-sm font-black text-slate-900 dark:text-white">다이렉트카 견적 문의 (direct-car.html)</h3>
+                </div>
+                <div class="overflow-x-auto">
+                    <table class="w-full text-left text-sm">
+                        <thead class="bg-slate-50 dark:bg-slate-800/50 text-slate-500">
+                            <tr>
+                                <th class="px-6 py-4 font-black uppercase text-[10px] tracking-widest leading-none">신청일시</th>
+                                <th class="px-6 py-4 font-black uppercase text-[10px] tracking-widest leading-none text-center">고객명/연락처</th>
+                                <th class="px-6 py-4 font-black uppercase text-[10px] tracking-widest leading-none">희망차종</th>
+                                <th class="px-6 py-4 font-black uppercase text-[10px] tracking-widest leading-none text-right">상태</th>
+                            </tr>
+                        </thead>
+                        <tbody id="directInquiriesTableBody" class="divide-y divide-slate-100 dark:divide-slate-800">
                         </tbody>
                     </table>
                 </div>

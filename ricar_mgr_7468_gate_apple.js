@@ -480,12 +480,17 @@ async function loadInquiries() {
 }
 
 function renderInquiries() {
-    const tbody = document.getElementById('inquiriesTableBody');
-    if (!tbody) return;
-    tbody.innerHTML = "";
+    const generalTbody = document.getElementById('generalInquiriesTableBody');
+    const directTbody = document.getElementById('directInquiriesTableBody');
+    if (!generalTbody || !directTbody) return;
+
+    generalTbody.innerHTML = "";
+    directTbody.innerHTML = "";
 
     if (allInquiries.length === 0) {
-        tbody.innerHTML = `<tr><td colspan="4" class="px-6 py-20 text-center text-white/30">접수된 문의가 없습니다.</td></tr>`;
+        const noData = `<tr><td colspan="4" class="px-6 py-20 text-center text-white/30 font-bold">접수된 문의가 없습니다.</td></tr>`;
+        generalTbody.innerHTML = noData;
+        directTbody.innerHTML = noData;
         return;
     }
 
@@ -495,7 +500,6 @@ function renderInquiries() {
 
         const date = inquiry.timestamp ? formatDate(safeToDate(inquiry.timestamp)) : '-';
 
-        // Set up formatted phone
         let phoneStr = inquiry.phone || '-';
         if (phoneStr.length === 11) {
             phoneStr = phoneStr.replace(/(\d{3})(\d{4})(\d{4})/, '$1-$2-$3');
@@ -514,12 +518,24 @@ function renderInquiries() {
                     <span class="font-black text-slate-800 dark:text-white">${inquiry.carModel || '-'}</span>
                 </div>
             </td>
-            <td class="px-6 py-4">
+            <td class="px-6 py-4 text-right">
                 <span class="badge ${inquiry.status === '완료' ? 'badge-active' : 'badge-free'} px-2 py-1 text-[10px] font-black">${inquiry.status || '대기중'}</span>
             </td>
         `;
-        tbody.appendChild(tr);
+
+        if (inquiry.source === 'direct-car') {
+            directTbody.appendChild(tr);
+        } else {
+            generalTbody.appendChild(tr);
+        }
     });
+
+    if (generalTbody.children.length === 0) {
+        generalTbody.innerHTML = `<tr><td colspan="4" class="px-6 py-10 text-center text-slate-400 font-bold">일반 문의가 없습니다.</td></tr>`;
+    }
+    if (directTbody.children.length === 0) {
+        directTbody.innerHTML = `<tr><td colspan="4" class="px-6 py-10 text-center text-slate-400 font-bold">다이렉트카 문의가 없습니다.</td></tr>`;
+    }
 }
 
 // Reviews Logic
@@ -688,7 +704,13 @@ document.querySelectorAll('.tab-button').forEach(btn => {
         document.querySelectorAll('.tab-content').forEach(t => t.classList.add('hidden'));
 
         const tabName = btn.dataset.tab;
-        document.getElementById(`${tabName}-tab`).classList.remove('hidden');
+        const targetTab = document.getElementById(`${tabName}-tab`);
+        if (targetTab) {
+            targetTab.classList.remove('hidden');
+        }
+
+        if (tabName === 'reviews') loadReviews();
+        if (tabName === 'general-inquiries' || tabName === 'direct-inquiries') loadInquiries();
     });
 });
 

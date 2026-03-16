@@ -612,7 +612,7 @@
         const TOTAL_STEPS = 2; // 1~2까지 입력, 3은 완료
         let currentStep = 1;
         let stepHistory = [];
-        const userSelection = {};
+        const userSelection = { source: 'general' };
 
         // URL 파라미터로 서비스 유형 조용히 수신
         const urlParams = new URLSearchParams(window.location.search);
