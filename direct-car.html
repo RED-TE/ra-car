@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>RE:CAR 장기렌트 · 리스 문의</title>
+    <title>다이렉트카 맞춤 견적 신청</title>
     <style>
         @import url('https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css');
 
@@ -535,8 +535,8 @@
 
         <!-- STEP 1: 차종 -->
         <div class="step active" id="step1">
-            <span class="subtitle">01. MODEL</span>
-            <h1>원하시는 차종을<br>입력해주세요</h1>
+            <span class="subtitle">다이렉트카 맞춤견적</span>
+            <h1>어떤 차를<br>찾으시나요?</h1>
             <div class="input-area">
                 <input type="text" id="carModel" placeholder="예) 그랜저, E클래스, 카니발" class="text-input" autocomplete="off">
             </div>
@@ -547,8 +547,8 @@
 
         <!-- STEP 2: 연락처 -->
         <div class="step" id="step2">
-            <span class="subtitle">02. CONTACT</span>
-            <h1>견적 받으실 연락처</h1>
+            <span class="subtitle">다이렉트카 맞춤견적</span>
+            <h1>견적을 받으실<br>연락처를 남겨주세요</h1>
             <div class="input-area">
                 <input type="text" id="userName" placeholder="성함" class="text-input" autocomplete="name">
                 <input type="tel" id="userPhone" placeholder="010-0000-0000" class="text-input" pattern="[0-9\-]*"
@@ -575,7 +575,7 @@
             </div>
             <h1 style="color:white; font-size: 2.2rem; background:none; -webkit-text-fill-color:white;">접수 완료</h1>
             <p style="color:#aaa; font-size: 1.05rem; line-height: 1.7; margin-top:4px;">
-                고객님의 소중한 문의가 접수되었습니다.<br>
+                다이렉트카 문의가 성공적으로 접수되었습니다.<br>
                 담당 플래너가 <strong style="color:#60a5fa;">24시간 내</strong> 연락드리겠습니다.
             </p>
 
@@ -612,7 +612,7 @@
         const TOTAL_STEPS = 2; // 1~2까지 입력, 3은 완료
         let currentStep = 1;
         let stepHistory = [];
-        const userSelection = {};
+        const userSelection = { source: 'direct-car' };
 
         // URL 파라미터로 서비스 유형 조용히 수신
         const urlParams = new URLSearchParams(window.location.search);

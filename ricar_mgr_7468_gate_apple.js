@@ -511,27 +511,11 @@ function renderInquiries() {
             </td>
             <td class="px-6 py-4">
                 <div class="flex items-center gap-2 mb-1">
-                    <span class="badge bg-slate-100 text-slate-600 dark:bg-slate-800 dark:text-slate-300 font-black">${inquiry.brand || '-'}</span>
                     <span class="font-black text-slate-800 dark:text-white">${inquiry.carModel || '-'}</span>
-                </div>
-                <div class="text-[10px] font-bold text-slate-400 truncate max-w-[200px]">
-                    ${inquiry.serviceType ? ('유형: ' + inquiry.serviceType) : '유형: 미상'}
                 </div>
             </td>
             <td class="px-6 py-4">
-                <div class="grid grid-cols-2 gap-x-2 gap-y-1 text-[10px] font-bold">
-                    <div class="text-slate-500 text-right pr-1">기간:</div>
-                    <div class="text-slate-900 dark:text-white">${inquiry.period || '-'}</div>
-                    
-                    <div class="text-slate-500 text-right pr-1">주행:</div>
-                    <div class="text-slate-900 dark:text-white">${inquiry.mileage || '-'}</div>
-                    
-                    <div class="text-slate-500 text-right pr-1">초기:</div>
-                    <div class="text-slate-900 dark:text-white">${inquiry.deposit || '-'}</div>
-                    
-                    <div class="text-slate-500 text-right pr-1">예산:</div>
-                    <div class="text-slate-900 dark:text-white">${inquiry.budget || '-'}</div>
-                </div>
+                <span class="badge ${inquiry.status === '완료' ? 'badge-active' : 'badge-free'} px-2 py-1 text-[10px] font-black">${inquiry.status || '대기중'}</span>
             </td>
         `;
         tbody.appendChild(tr);
