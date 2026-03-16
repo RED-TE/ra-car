@@ -272,6 +272,15 @@ function renderAllUsers() {
                         <div class="text-[10px] text-blue-800 dark:text-blue-300 font-bold leading-tight break-all">${user.memo}</div>
                     </div>
                 ` : ''}
+                ${user.adminMemo ? `
+                    <div class="mt-2 p-2 bg-amber-50 dark:bg-amber-900/20 border border-amber-100 dark:border-amber-800/50 rounded-lg">
+                        <div class="flex items-center gap-1 text-amber-600 dark:text-amber-400 text-[10px] font-black mb-0.5">
+                            <span class="material-symbols-outlined text-xs">edit_note</span>
+                            관리자 메모
+                        </div>
+                        <div class="text-[10px] text-amber-800 dark:text-amber-300 font-bold leading-tight break-all">${user.adminMemo}</div>
+                    </div>
+                ` : ''}
             </td>
             <td class="px-6 py-5 text-center">
                 <div class="inline-flex items-center justify-center w-8 h-8 rounded-lg bg-slate-50 dark:bg-slate-800/50 text-slate-600 dark:text-slate-300 font-black text-xs border border-slate-100 dark:border-slate-700">
@@ -851,6 +860,7 @@ window.openEditModal = function (id, email) {
     document.getElementById('modalUserEmail').textContent = email;
     document.getElementById('modalPlanSelect').value = user.plan || 'free';
     document.getElementById('modalBanCheck').checked = user.isBanned || false;
+    document.getElementById('modalAdminMemo').value = user.adminMemo || '';
 
     // 🚀 구독 상태 표시
     const subStatus = document.getElementById('modalSubscriptionStatus');
@@ -876,6 +886,7 @@ document.getElementById('modalSaveBtn').addEventListener('click', async () => {
     const plan = document.getElementById('modalPlanSelect').value;
     const extendDays = parseInt(document.getElementById('modalExtendSelect').value);
     const isBanned = document.getElementById('modalBanCheck').checked;
+    const adminMemo = document.getElementById('modalAdminMemo').value.trim();
 
     const saveBtn = document.getElementById('modalSaveBtn');
     saveBtn.disabled = true;
@@ -885,6 +896,7 @@ document.getElementById('modalSaveBtn').addEventListener('click', async () => {
         const updateData = {
             plan: plan,
             isBanned: isBanned,
+            adminMemo: adminMemo,
             updatedAt: firebase.firestore.Timestamp.now()
         };
 

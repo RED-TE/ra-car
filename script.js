@@ -27,6 +27,7 @@ let currentIdx = 0;
 window._spotIdx = 0;
 
 function updateSlide(idx) {
+    if (slides.length === 0) return;
     currentIdx = (idx + slides.length) % slides.length;
     window._spotIdx = currentIdx;
     window._lastIdx = currentIdx;
