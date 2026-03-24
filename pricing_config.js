@@ -1,8 +1,8 @@
 /**
  * Pricing Config
- * Updated: 2026.02.07
- * - LITE: 99,000원 (할인가, 원가 197,000원)
- * - PRO: 249,000원 (할인가, 원가 399,000원)
+ * Updated: 2026.03.24
+ * - LITE: 49,000원 (할인가, 원가 99,000원)
+ * - PRO: 99,000원 (할인가, 원가 197,000원)
  * - MASTER: 준비중
  */
 const PRICING_CONFIG = {
@@ -10,8 +10,8 @@ const PRICING_CONFIG = {
         LITE: {
             id: 'LITE',
             name: 'LITE (입문용)',
-            price: 99000,
-            originalPrice: 197000,
+            price: 49000,
+            originalPrice: 99000,
             duration: 30, // 30일
             allowSubscription: true,
             desc: 'AI 블로그 자동화 입문자를 위한 실속형 플랜',
@@ -29,23 +29,23 @@ const PRICING_CONFIG = {
         LITE_YEARLY: {
             id: 'LITE_YEARLY',
             name: 'LITE 1년권 (연간 할인)',
-            price: 990000,
-            originalPrice: 1188000,
+            price: 490000,
+            originalPrice: 588000,
             duration: 365, // 365일
             allowSubscription: false, // 1년권은 보통 단건
             badge: '역대급 할인',
             desc: '1년 동안 끊김 없이 자동화, 최대 할인 혜택',
             features: [
                 'LITE 모든 기능 1년 제공',
-                '월 82,500원 꼴 (약 17% 할인)',
-                '연 198,000원 추가 절약'
+                '월 40,833원 꼴 (약 17% 할인)',
+                '연 98,000원 추가 절약'
             ]
         },
         PRO: {
             id: 'PRO',
             name: 'PRO (메인 상품)',
-            price: 249000,
-            originalPrice: 399000,
+            price: 99000,
+            originalPrice: 197000,
             duration: 30,
             allowSubscription: true,
             badge: 'BEST',
@@ -66,16 +66,16 @@ const PRICING_CONFIG = {
         PRO_YEARLY: {
             id: 'PRO_YEARLY',
             name: 'PRO 1년권 (연간 할인)',
-            price: 2688000,
-            originalPrice: 2988000,
+            price: 990000,
+            originalPrice: 1188000,
             duration: 365,
             allowSubscription: false,
             badge: '전문가 추천',
             desc: '비즈니스 확장을 위한 최고의 선택, 압도적 가성비',
             features: [
                 'PRO 모든 기능 1년 제공',
-                '월 224,000원 꼴',
-                '연 300,000원 추가 절약'
+                '월 82,500원 꼴',
+                '연 198,000원 추가 절약'
             ]
         },
         MASTER: {
