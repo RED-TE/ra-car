@@ -1,0 +1,170 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>마케팅 정보 수신 동의 | Recar Marketing Consent</title>
+  <meta name="description" content="리카(Recar) 마케팅 정보 수신 동의 MVP 테스트용 초안" />
+  <style>
+    :root {
+      color-scheme: light;
+      --bg: #f6f8fc;
+      --card: #ffffff;
+      --text: #111827;
+      --muted: #6b7280;
+      --line: #e5e7eb;
+      --blue: #2563eb;
+      --soft-blue: #eff6ff;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", "Segoe UI", sans-serif;
+      line-height: 1.72;
+    }
+    main {
+      width: min(920px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 48px 0 72px;
+    }
+    .doc {
+      background: var(--card);
+      border: 1px solid var(--line);
+      border-radius: 28px;
+      box-shadow: 0 18px 48px rgba(15, 23, 42, 0.08);
+      overflow: hidden;
+    }
+    header {
+      padding: 36px 32px 28px;
+      border-bottom: 1px solid var(--line);
+      background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
+    }
+    .brand {
+      margin: 0 0 20px;
+      font-size: 18px;
+      font-weight: 800;
+      letter-spacing: 0.04em;
+    }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      padding: 7px 12px;
+      border-radius: 999px;
+      background: var(--soft-blue);
+      color: var(--blue);
+      font-size: 13px;
+      font-weight: 700;
+    }
+    h1 {
+      margin: 18px 0 10px;
+      font-size: clamp(30px, 5vw, 44px);
+      line-height: 1.2;
+      letter-spacing: -0.02em;
+    }
+    .sub {
+      margin: 0;
+      color: var(--muted);
+      font-size: 16px;
+    }
+    section {
+      padding: 0 32px;
+      margin: 32px 0;
+    }
+    h2 {
+      margin: 0 0 12px;
+      font-size: 22px;
+      letter-spacing: -0.01em;
+    }
+    p, li {
+      font-size: 16px;
+      word-break: keep-all;
+    }
+    ul, ol {
+      padding-left: 22px;
+      margin: 10px 0 0;
+    }
+    .notice {
+      margin: 28px 32px 0;
+      padding: 18px 20px;
+      border-radius: 18px;
+      background: #f9fafb;
+      border: 1px solid var(--line);
+      color: #374151;
+    }
+    footer {
+      padding: 28px 32px 34px;
+      border-top: 1px solid var(--line);
+      color: var(--muted);
+      font-size: 14px;
+    }
+    @media (max-width: 640px) {
+      main { width: min(100% - 20px, 920px); padding-top: 18px; }
+      header, section, footer { padding-left: 20px; padding-right: 20px; }
+      .notice { margin-left: 20px; margin-right: 20px; }
+      .doc { border-radius: 22px; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <article class="doc">
+      <header>
+        <p class="brand">RE:CAR</p>
+        <span class="badge">선택 동의항목</span>
+        <h1>마케팅 정보 수신 동의</h1>
+        <p class="sub">Consent to Receive Marketing Information · 시행일 2026.05.09</p>
+      </header>
+
+      <div class="notice">
+        마케팅 정보 수신 동의는 선택 사항입니다. 동의하지 않아도 Recar의 기본 견적 확인, 차량 탐색, 심사 진행 관리 서비스 이용에는 제한이 없습니다.
+      </div>
+
+      <section>
+        <h2>1. 수집 및 이용 항목</h2>
+        <ul>
+          <li>이름 또는 닉네임, 휴대폰 번호</li>
+          <li>선택 동의 시 이메일</li>
+          <li>마케팅 수신 동의 여부와 동의 일시</li>
+          <li>관심 차량, 견적 조건, 서비스 이용 기록 등 혜택 안내에 필요한 최소한의 이용 정보</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>2. 이용 목적</h2>
+        <ul>
+          <li>Recar 서비스 혜택, 이벤트, 프로모션 안내</li>
+          <li>관심 차량, 견적 조건, 출고 가능 차량 등 맞춤형 정보 안내</li>
+          <li>신규 기능, 서비스 변경, 고객 참여 프로그램 안내</li>
+        </ul>
+      </section>
+
+      <section>
+        <h2>3. 수신 방법</h2>
+        <p>마케팅 정보는 문자 메시지, 앱 푸시, 이메일, 앱 내 알림 등 이용자가 제공하거나 동의한 연락 수단으로 발송될 수 있습니다.</p>
+      </section>
+
+      <section>
+        <h2>4. 보유 및 이용 기간</h2>
+        <p>마케팅 수신 동의 정보는 동의 철회 또는 회원 탈퇴 시까지 보관 및 이용합니다. 관련 법령에 따라 보관이 필요한 기록은 해당 기간 동안 별도로 보관할 수 있습니다.</p>
+      </section>
+
+      <section>
+        <h2>5. 동의 철회</h2>
+        <p>이용자는 언제든지 앱 설정, 고객센터, 수신 거부 기능을 통해 마케팅 정보 수신 동의를 철회할 수 있습니다. 동의 철회 후에도 거래 관련 필수 안내나 서비스 운영상 필요한 고지는 발송될 수 있습니다.</p>
+      </section>
+
+      <section>
+        <h2>6. 선택 동의 거부</h2>
+        <p>이용자는 마케팅 정보 수신 동의를 거부할 수 있으며, 거부하더라도 Recar의 기본 서비스 이용에는 제한이 없습니다.</p>
+      </section>
+
+      <footer>
+        <strong>내부 참고:</strong> 본 문서는 MVP 테스트용 초안이며 정식 출시 전 법률 검토가 필요합니다.
+      </footer>
+    </article>
+  </main>
+  <!-- 본 문서는 MVP 테스트용 초안이며 정식 출시 전 법률 검토가 필요합니다. -->
+</body>
+</html>
