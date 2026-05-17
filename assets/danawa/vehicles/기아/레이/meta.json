@@ -1,0 +1,87 @@
+{
+  "brand": "기아",
+  "brand_id": "307",
+  "model_id": "4689",
+  "name": "레이",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4689",
+  "photo_code": "4689/53384",
+  "default_image_url": "https://autoimg.danawa.com/photo/4689/53384/color_16_360.png",
+  "default_image_path": "vehicles\\기아\\레이\\model_360.png",
+  "colors": [
+    {
+      "name": "클리어 화이트(UD)",
+      "code": "C11",
+      "swatch": "#ebecee",
+      "image_url": "https://autoimg.danawa.com/photo/4689/53384/color_11_360.png",
+      "path": "vehicles\\기아\\레이\\colors\\01_클리어 화이트(UD).png"
+    },
+    {
+      "name": "아스트로 그레이(M7G)",
+      "code": "C12",
+      "swatch": "#52534e",
+      "image_url": "https://autoimg.danawa.com/photo/4689/53384/color_12_360.png",
+      "path": "vehicles\\기아\\레이\\colors\\02_아스트로 그레이(M7G).png"
+    },
+    {
+      "name": "오로라 블랙 펄(ABP)",
+      "code": "C13",
+      "swatch": "#000000",
+      "image_url": "https://autoimg.danawa.com/photo/4689/53384/color_13_360.png",
+      "path": "vehicles\\기아\\레이\\colors\\03_오로라 블랙 펄(ABP).png"
+    },
+    {
+      "name": "밀키 베이지(M9Y)",
+      "code": "C14",
+      "swatch": "#c5c3bd",
+      "image_url": "https://autoimg.danawa.com/photo/4689/53384/color_14_360.png",
+      "path": "vehicles\\기아\\레이\\colors\\04_밀키 베이지(M9Y).png"
+    },
+    {
+      "name": "아쿠아 민트(AEQ)",
+      "code": "C15",
+      "swatch": "#a2c7c4",
+      "image_url": "https://autoimg.danawa.com/photo/4689/53384/color_15_360.png",
+      "path": "vehicles\\기아\\레이\\colors\\05_아쿠아 민트(AEQ).png"
+    },
+    {
+      "name": "스모크 블루(EU3)",
+      "code": "C16",
+      "swatch": "#282d47",
+      "image_url": "https://autoimg.danawa.com/photo/4689/53384/color_16_360.png",
+      "path": "vehicles\\기아\\레이\\colors\\06_스모크 블루(EU3).png"
+    },
+    {
+      "name": "어드벤쳐러스 그린(A2G)",
+      "code": "C17",
+      "swatch": "#4c5d55",
+      "image_url": "https://autoimg.danawa.com/photo/4689/53384/color_17_360.png",
+      "path": "vehicles\\기아\\레이\\colors\\07_어드벤쳐러스 그린(A2G).png"
+    }
+  ],
+  "gallery": [
+    {
+      "name": "2025 레이",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4689&Tab=image&No=129617",
+      "image_url": "https://autoimg.danawa.com/gallery/4689/20241002_4402 (1).jpg",
+      "path": "vehicles\\기아\\레이\\gallery\\01_2025 레이.jpg"
+    },
+    {
+      "name": "2025 레이",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4689&Tab=image&No=129618",
+      "image_url": "https://autoimg.danawa.com/gallery/4689/20241002_4402 (2).jpg",
+      "path": "vehicles\\기아\\레이\\gallery\\02_2025 레이.jpg"
+    },
+    {
+      "name": "2023 l 더 뉴 레이 그래비티",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4689&Tab=image&No=102188",
+      "image_url": "https://autoimg.danawa.com/gallery/4689/20221117_4402 (1).jpg",
+      "path": "vehicles\\기아\\레이\\gallery\\03_2023 l 더 뉴 레이 그래비티.jpg"
+    },
+    {
+      "name": "2023 l 더 뉴 레이 그래비티",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4689&Tab=image&No=102189",
+      "image_url": "https://autoimg.danawa.com/gallery/4689/20221117_4402 (2).jpg",
+      "path": "vehicles\\기아\\레이\\gallery\\04_2023 l 더 뉴 레이 그래비티.jpg"
+    }
+  ]
+}

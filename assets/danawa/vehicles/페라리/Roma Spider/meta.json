@@ -1,0 +1,37 @@
+{
+  "brand": "페라리",
+  "brand_id": "436",
+  "model_id": "4497",
+  "name": "Roma Spider",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4497",
+  "photo_code": "4497/50380",
+  "default_image_url": "https://autoimg.danawa.com/photo/4497/model_360.png",
+  "default_image_path": "vehicles\\페라리\\Roma Spider\\model_360.png",
+  "colors": [],
+  "gallery": [
+    {
+      "name": "2024 l 로마 스파이더",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4497&Tab=image&No=106332",
+      "image_url": "https://autoimg.danawa.com/gallery/4497/20230317_4497 (1).jpg",
+      "path": "vehicles\\페라리\\Roma Spider\\gallery\\01_2024 l 로마 스파이더.jpg"
+    },
+    {
+      "name": "2024 l 로마 스파이더",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4497&Tab=image&No=106333",
+      "image_url": "https://autoimg.danawa.com/gallery/4497/20230317_4497 (2).jpg",
+      "path": "vehicles\\페라리\\Roma Spider\\gallery\\02_2024 l 로마 스파이더.jpg"
+    },
+    {
+      "name": "2024 l 로마 스파이더",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4497&Tab=image&No=106334",
+      "image_url": "https://autoimg.danawa.com/gallery/4497/20230317_4497 (3).jpg",
+      "path": "vehicles\\페라리\\Roma Spider\\gallery\\03_2024 l 로마 스파이더.jpg"
+    },
+    {
+      "name": "2024 l 로마 스파이더",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4497&Tab=image&No=106335",
+      "image_url": "https://autoimg.danawa.com/gallery/4497/20230317_4497 (4).jpg",
+      "path": "vehicles\\페라리\\Roma Spider\\gallery\\04_2024 l 로마 스파이더.jpg"
+    }
+  ]
+}

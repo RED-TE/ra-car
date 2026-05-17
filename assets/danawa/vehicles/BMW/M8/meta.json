@@ -1,0 +1,37 @@
+{
+  "brand": "BMW",
+  "brand_id": "362",
+  "model_id": "4172",
+  "name": "M8",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4172",
+  "photo_code": "4172/52580",
+  "default_image_url": "https://autoimg.danawa.com/photo/4172/model_360.png",
+  "default_image_path": "vehicles\\BMW\\M8\\model_360.png",
+  "colors": [],
+  "gallery": [
+    {
+      "name": "2022 l M8 컴페티션 컨버터블",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4172&Tab=image&No=89561",
+      "image_url": "https://autoimg.danawa.com/gallery/4172/20220126_4172 (1).jpg",
+      "path": "vehicles\\BMW\\M8\\gallery\\01_2022 l M8 컴페티션 컨버터블.jpg"
+    },
+    {
+      "name": "2022 l M8 컴페티션 컨버터블",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4172&Tab=image&No=89562",
+      "image_url": "https://autoimg.danawa.com/gallery/4172/20220126_4172 (2).jpg",
+      "path": "vehicles\\BMW\\M8\\gallery\\02_2022 l M8 컴페티션 컨버터블.jpg"
+    },
+    {
+      "name": "2022 l M8 컴페티션 컨버터블",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4172&Tab=image&No=89563",
+      "image_url": "https://autoimg.danawa.com/gallery/4172/20220126_4172 (3).jpg",
+      "path": "vehicles\\BMW\\M8\\gallery\\03_2022 l M8 컴페티션 컨버터블.jpg"
+    },
+    {
+      "name": "2022 l M8 컴페티션 컨버터블",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4172&Tab=image&No=89564",
+      "image_url": "https://autoimg.danawa.com/gallery/4172/20220126_4172 (4).jpg",
+      "path": "vehicles\\BMW\\M8\\gallery\\04_2022 l M8 컴페티션 컨버터블.jpg"
+    }
+  ]
+}

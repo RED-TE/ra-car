@@ -1,0 +1,2493 @@
+{
+  "brand_id": "303",
+  "brand": "현대",
+  "source_url": "https://auto.danawa.com/auto/?Work=brand&Brand=303",
+  "logo_url": "https://autoimg.danawa.com/photo/brand/303_90.png",
+  "logo_path": "brands\\현대\\logo.png",
+  "models": [
+    {
+      "brand": "현대",
+      "brand_id": "303",
+      "model_id": "4671",
+      "name": "캐스퍼",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4671",
+      "photo_code": "4671/52329",
+      "default_image_url": "https://autoimg.danawa.com/photo/4671/model_360.png",
+      "default_image_path": "vehicles\\현대\\캐스퍼\\model_360.png",
+      "colors": [
+        {
+          "name": "비자림 카키 매트(TKM)",
+          "code": "C10",
+          "swatch": "#32362f",
+          "image_url": "https://autoimg.danawa.com/photo/4671/52329/color_10_360.png",
+          "path": "vehicles\\현대\\캐스퍼\\colors\\01_비자림 카키 매트(TKM).png"
+        },
+        {
+          "name": "아틀라스 화이트(SAW)",
+          "code": "C11",
+          "swatch": "#f0eeec",
+          "image_url": "https://autoimg.danawa.com/photo/4671/52329/color_11_360.png",
+          "path": "vehicles\\현대\\캐스퍼\\colors\\02_아틀라스 화이트(SAW).png"
+        },
+        {
+          "name": "톰보이 카키(TKS)",
+          "code": "C12",
+          "swatch": "#47493d",
+          "image_url": "https://autoimg.danawa.com/photo/4671/52329/color_12_360.png",
+          "path": "vehicles\\현대\\캐스퍼\\colors\\03_톰보이 카키(TKS).png"
+        },
+        {
+          "name": "시에나 오렌지 메탈릭(SRM)",
+          "code": "C13",
+          "swatch": "#793b19",
+          "image_url": "https://autoimg.danawa.com/photo/4671/52329/color_13_360.png",
+          "path": "vehicles\\현대\\캐스퍼\\colors\\04_시에나 오렌지 메탈릭(SRM).png"
+        },
+        {
+          "name": "언블리치드 아이보리(NES)",
+          "code": "C14",
+          "swatch": "#c0beb1",
+          "image_url": "https://autoimg.danawa.com/photo/4671/52329/color_14_360.png",
+          "path": "vehicles\\현대\\캐스퍼\\colors\\05_언블리치드 아이보리(NES).png"
+        },
+        {
+          "name": "어비스 블랙 펄(A2B)",
+          "code": "C15",
+          "swatch": "#0c0c0f",
+          "image_url": "https://autoimg.danawa.com/photo/4671/52329/color_15_360.png",
+          "path": "vehicles\\현대\\캐스퍼\\colors\\06_어비스 블랙 펄(A2B).png"
+        }
+      ],
+      "gallery": [
+        {
+          "name": "2026ㅣ더 뉴 캐스퍼",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4671&Tab=image&No=139064",
+          "image_url": "https://autoimg.danawa.com/gallery/4671/20250715_4671 (1).jpg",
+          "path": "vehicles\\현대\\캐스퍼\\gallery\\01_2026ㅣ더 뉴 캐스퍼.jpg"
+        },
+        {
+          "name": "2026ㅣ더 뉴 캐스퍼",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4671&Tab=image&No=139065",
+          "image_url": "https://autoimg.danawa.com/gallery/4671/20250715_4671 (2).jpg",
+          "path": "vehicles\\현대\\캐스퍼\\gallery\\02_2026ㅣ더 뉴 캐스퍼.jpg"
+        },
+        {
+          "name": "더 뉴 캐스퍼",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4671&Tab=image&No=127839",
+          "image_url": "https://autoimg.danawa.com/gallery/4671/20240821_4671 (1).jpg",
+          "path": "vehicles\\현대\\캐스퍼\\gallery\\03_더 뉴 캐스퍼.jpg"
+        },
+        {
+          "name": "더 뉴 캐스퍼",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4671&Tab=image&No=127840",
+          "image_url": "https://autoimg.danawa.com/gallery/4671/20240821_4671 (2).jpg",
+          "path": "vehicles\\현대\\캐스퍼\\gallery\\04_더 뉴 캐스퍼.jpg"
+        }
+      ]
+    },
+    {
+      "brand": "현대",
+      "brand_id": "303",
+      "model_id": "4653",
+      "name": "캐스퍼 일렉트릭",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4653",
+      "photo_code": "4653/53342",
+      "default_image_url": "https://autoimg.danawa.com/photo/4653/model_360.png",
+      "default_image_path": "vehicles\\현대\\캐스퍼 일렉트릭\\model_360.png",
+      "colors": [
+        {
+          "name": "아틀라스 화이트(SAW)",
+          "code": "C11",
+          "swatch": "#f4f2f0",
+          "image_url": "https://autoimg.danawa.com/photo/4653/53342/color_11_360.png",
+          "path": "vehicles\\현대\\캐스퍼 일렉트릭\\colors\\01_아틀라스 화이트(SAW).png"
+        },
+        {
+          "name": "톰보이 카키(TKS)",
+          "code": "C12",
+          "swatch": "#414337",
+          "image_url": "https://autoimg.danawa.com/photo/4653/53342/color_12_360.png",
+          "path": "vehicles\\현대\\캐스퍼 일렉트릭\\colors\\02_톰보이 카키(TKS).png"
+        },
+        {
+          "name": "시에나 오렌지 메탈릭(SRM)",
+          "code": "C13",
+          "swatch": "#7d4e2c",
+          "image_url": "https://autoimg.danawa.com/photo/4653/53342/color_13_360.png",
+          "path": "vehicles\\현대\\캐스퍼 일렉트릭\\colors\\03_시에나 오렌지 메탈릭(SRM).png"
+        },
+        {
+          "name": "버터크림 옐로우 펄(YLC)",
+          "code": "C14",
+          "swatch": "#c0bb9a",
+          "image_url": "https://autoimg.danawa.com/photo/4653/53342/color_14_360.png",
+          "path": "vehicles\\현대\\캐스퍼 일렉트릭\\colors\\04_버터크림 옐로우 펄(YLC).png"
+        },
+        {
+          "name": "언블리치드 아이보리(NES)",
+          "code": "C15",
+          "swatch": "#b4b0a4",
+          "image_url": "https://autoimg.danawa.com/photo/4653/53342/color_15_360.png",
+          "path": "vehicles\\현대\\캐스퍼 일렉트릭\\colors\\05_언블리치드 아이보리(NES).png"
+        },
+        {
+          "name": "어비스 블랙 펄(A2B)",
+          "code": "C16",
+          "swatch": "#0f0f11",
+          "image_url": "https://autoimg.danawa.com/photo/4653/53342/color_16_360.png",
+          "path": "vehicles\\현대\\캐스퍼 일렉트릭\\colors\\06_어비스 블랙 펄(A2B).png"
+        },
+        {
+          "name": "글로우 민트(TGW)-라운지 전용",
+          "code": "C17",
+          "swatch": "#a0baa8",
+          "image_url": "https://autoimg.danawa.com/photo/4653/53342/color_17_360.png",
+          "path": "vehicles\\현대\\캐스퍼 일렉트릭\\colors\\07_글로우 민트(TGW)-라운지 전용.png"
+        },
+        {
+          "name": "에어로 실버 매트(T4M)",
+          "code": "C10",
+          "swatch": "#a6a8a9",
+          "image_url": "https://autoimg.danawa.com/photo/4653/53342/color_10_360.png",
+          "path": "vehicles\\현대\\캐스퍼 일렉트릭\\colors\\08_에어로 실버 매트(T4M).png"
+        },
+        {
+          "name": "비자림 카키 매트(TKM)",
+          "code": "C09",
+          "swatch": "#44453f",
+          "image_url": "https://autoimg.danawa.com/photo/4653/53342/color_09_360.png",
+          "path": "vehicles\\현대\\캐스퍼 일렉트릭\\colors\\09_비자림 카키 매트(TKM).png"
+        },
+        {
+          "name": "더스크 블루 매트(UMA)",
+          "code": "C08",
+          "swatch": "#1a2129",
+          "image_url": "https://autoimg.danawa.com/photo/4653/53342/color_08_360.png",
+          "path": "vehicles\\현대\\캐스퍼 일렉트릭\\colors\\10_더스크 블루 매트(UMA).png"
+        },
+        {
+          "name": "아마조나스 그린 매트(ZRM)",
+          "code": "C07",
+          "swatch": "#3a3c20",
+          "image_url": "https://autoimg.danawa.com/photo/4653/53342/color_07_360.png",
+          "path": "vehicles\\현대\\캐스퍼 일렉트릭\\colors\\11_아마조나스 그린 매트(ZRM).png"
+        }
+      ],
+      "gallery": [
+        {
+          "name": "캐스퍼 일렉트릭 라운지",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4653&Tab=image&No=143716",
+          "image_url": "https://autoimg.danawa.com/gallery/4653/20260317_4653 (1).jpg",
+          "path": "vehicles\\현대\\캐스퍼 일렉트릭\\gallery\\01_캐스퍼 일렉트릭 라운지.jpg"
+        },
+        {
+          "name": "캐스퍼 일렉트릭 라운지 내장",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4653&Tab=image&No=143717",
+          "image_url": "https://autoimg.danawa.com/gallery/4653/20260317_4653 (2).jpg",
+          "path": "vehicles\\현대\\캐스퍼 일렉트릭\\gallery\\02_캐스퍼 일렉트릭 라운지 내장.jpg"
+        },
+        {
+          "name": "2026ㅣ캐스퍼 일렉트릭",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4653&Tab=image&No=139066",
+          "image_url": "https://autoimg.danawa.com/gallery/4653/20250715_4653 (1).jpg",
+          "path": "vehicles\\현대\\캐스퍼 일렉트릭\\gallery\\03_2026ㅣ캐스퍼 일렉트릭.jpg"
+        },
+        {
+          "name": "2026ㅣ캐스퍼 일렉트릭",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4653&Tab=image&No=139067",
+          "image_url": "https://autoimg.danawa.com/gallery/4653/20250715_4653 (2).jpg",
+          "path": "vehicles\\현대\\캐스퍼 일렉트릭\\gallery\\04_2026ㅣ캐스퍼 일렉트릭.jpg"
+        }
+      ]
+    },
+    {
+      "brand": "현대",
+      "brand_id": "303",
+      "model_id": "4455",
+      "name": "아반떼",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4455",
+      "photo_code": "4455/53228",
+      "default_image_url": "https://autoimg.danawa.com/photo/4455/model_360.png",
+      "default_image_path": "vehicles\\현대\\아반떼\\model_360.png",
+      "colors": [
+        {
+          "name": "아틀라스 화이트(SAW)",
+          "code": "C11",
+          "swatch": "#e8e7e7",
+          "image_url": "https://autoimg.danawa.com/photo/4455/53228/color_11_360.png",
+          "path": "vehicles\\현대\\아반떼\\colors\\01_아틀라스 화이트(SAW).png"
+        },
+        {
+          "name": "사이버 그레이 메탈릭(C5G)",
+          "code": "C12",
+          "swatch": "#797c85",
+          "image_url": "https://autoimg.danawa.com/photo/4455/53228/color_12_360.png",
+          "path": "vehicles\\현대\\아반떼\\colors\\02_사이버 그레이 메탈릭(C5G).png"
+        },
+        {
+          "name": "플루이드 그레이 메탈릭(M6T)",
+          "code": "C13",
+          "swatch": "#747379",
+          "image_url": "https://autoimg.danawa.com/photo/4455/53228/color_13_360.png",
+          "path": "vehicles\\현대\\아반떼\\colors\\03_플루이드 그레이 메탈릭(M6T).png"
+        },
+        {
+          "name": "에코트로닉 그레이 펄(PE2)",
+          "code": "C14",
+          "swatch": "#52555e",
+          "image_url": "https://autoimg.danawa.com/photo/4455/53228/color_14_360.png",
+          "path": "vehicles\\현대\\아반떼\\colors\\04_에코트로닉 그레이 펄(PE2).png"
+        },
+        {
+          "name": "아마존 그레이 메탈릭(A5G)",
+          "code": "C15",
+          "swatch": "#3f443e",
+          "image_url": "https://autoimg.danawa.com/photo/4455/53228/color_15_360.png",
+          "path": "vehicles\\현대\\아반떼\\colors\\05_아마존 그레이 메탈릭(A5G).png"
+        },
+        {
+          "name": "어비스 블랙 펄(A2B)",
+          "code": "C16",
+          "swatch": "#0e0f0f",
+          "image_url": "https://autoimg.danawa.com/photo/4455/53228/color_16_360.png",
+          "path": "vehicles\\현대\\아반떼\\colors\\06_어비스 블랙 펄(A2B).png"
+        },
+        {
+          "name": "메타 블루 펄((PM2)",
+          "code": "C17",
+          "swatch": "#636d88",
+          "image_url": "https://autoimg.danawa.com/photo/4455/53228/color_17_360.png",
+          "path": "vehicles\\현대\\아반떼\\colors\\07_메타 블루 펄((PM2).png"
+        },
+        {
+          "name": "미라지 그린(RRR)",
+          "code": "C20",
+          "swatch": "#667574",
+          "image_url": "https://autoimg.danawa.com/photo/4455/53228/color_20_360.png",
+          "path": "vehicles\\현대\\아반떼\\colors\\08_미라지 그린(RRR).png"
+        },
+        {
+          "name": "얼티메이트 레드 메탈릭((R2P)",
+          "code": "C19",
+          "swatch": "#9c252b",
+          "image_url": "https://autoimg.danawa.com/photo/4455/53228/color_19_360.png",
+          "path": "vehicles\\현대\\아반떼\\colors\\09_얼티메이트 레드 메탈릭((R2P).png"
+        }
+      ],
+      "gallery": [
+        {
+          "name": "2026ㅣ더 뉴 아반떼",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4455&Tab=image&No=137136",
+          "image_url": "https://autoimg.danawa.com/gallery/4455/20250415_4455 (1).jpg",
+          "path": "vehicles\\현대\\아반떼\\gallery\\01_2026ㅣ더 뉴 아반떼.jpg"
+        },
+        {
+          "name": "2026ㅣ더 뉴 아반떼 내장",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4455&Tab=image&No=137137",
+          "image_url": "https://autoimg.danawa.com/gallery/4455/20250415_4455 (2).jpg",
+          "path": "vehicles\\현대\\아반떼\\gallery\\02_2026ㅣ더 뉴 아반떼 내장.jpg"
+        },
+        {
+          "name": "2025ㅣ더 뉴 아반떼",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4455&Tab=image&No=125838",
+          "image_url": "https://autoimg.danawa.com/gallery/4455/20240620_4455 (1).jpg",
+          "path": "vehicles\\현대\\아반떼\\gallery\\03_2025ㅣ더 뉴 아반떼.jpg"
+        },
+        {
+          "name": "2025ㅣ더 뉴 아반떼",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4455&Tab=image&No=125839",
+          "image_url": "https://autoimg.danawa.com/gallery/4455/20240620_4455 (2).jpg",
+          "path": "vehicles\\현대\\아반떼\\gallery\\04_2025ㅣ더 뉴 아반떼.jpg"
+        }
+      ]
+    },
+    {
+      "brand": "현대",
+      "brand_id": "303",
+      "model_id": "4564",
+      "name": "아반떼 N",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4564",
+      "photo_code": "4564/53239",
+      "default_image_url": "https://autoimg.danawa.com/photo/4564/model_360.png",
+      "default_image_path": "vehicles\\현대\\아반떼 N\\model_360.png",
+      "colors": [
+        {
+          "name": "어비스 블랙 펄(A2B)",
+          "code": "C11",
+          "swatch": "#141414",
+          "image_url": "https://autoimg.danawa.com/photo/4564/53239/color_11_360.png",
+          "path": "vehicles\\현대\\아반떼 N\\colors\\01_어비스 블랙 펄(A2B).png"
+        },
+        {
+          "name": "아틀라스 화이트(SAW)",
+          "code": "C12",
+          "swatch": "#f0f0f0",
+          "image_url": "https://autoimg.danawa.com/photo/4564/53239/color_12_360.png",
+          "path": "vehicles\\현대\\아반떼 N\\colors\\02_아틀라스 화이트(SAW).png"
+        },
+        {
+          "name": "사이버 그레이 메탈릭(C5G)",
+          "code": "C13",
+          "swatch": "#7d7c82",
+          "image_url": "https://autoimg.danawa.com/photo/4564/53239/color_13_360.png",
+          "path": "vehicles\\현대\\아반떼 N\\colors\\03_사이버 그레이 메탈릭(C5G).png"
+        },
+        {
+          "name": "에코트로닉 그레이 펄(PE2)",
+          "code": "C14",
+          "swatch": "#535258",
+          "image_url": "https://autoimg.danawa.com/photo/4564/53239/color_14_360.png",
+          "path": "vehicles\\현대\\아반떼 N\\colors\\04_에코트로닉 그레이 펄(PE2).png"
+        },
+        {
+          "name": "메타 블루 펄(PM2)",
+          "code": "C15",
+          "swatch": "#575d75",
+          "image_url": "https://autoimg.danawa.com/photo/4564/53239/color_15_360.png",
+          "path": "vehicles\\현대\\아반떼 N\\colors\\05_메타 블루 펄(PM2).png"
+        },
+        {
+          "name": "얼티메이트 레드 메탈릭(R2P)",
+          "code": "C17",
+          "swatch": "#7d1d16",
+          "image_url": "https://autoimg.danawa.com/photo/4564/53239/color_17_360.png",
+          "path": "vehicles\\현대\\아반떼 N\\colors\\06_얼티메이트 레드 메탈릭(R2P).png"
+        },
+        {
+          "name": "퍼포먼스 블루(XFB)",
+          "code": "C18",
+          "swatch": "#688cbc",
+          "image_url": "https://autoimg.danawa.com/photo/4564/53239/color_18_360.png",
+          "path": "vehicles\\현대\\아반떼 N\\colors\\07_퍼포먼스 블루(XFB).png"
+        }
+      ],
+      "gallery": [
+        {
+          "name": "더 뉴 아반떼 N TCR",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4564&Tab=image&No=138634",
+          "image_url": "https://autoimg.danawa.com/gallery/4564/20250612_4564 (1).jpg",
+          "path": "vehicles\\현대\\아반떼 N\\gallery\\01_더 뉴 아반떼 N TCR.jpg"
+        },
+        {
+          "name": "2026ㅣ더 뉴 아반떼 N",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4564&Tab=image&No=137138",
+          "image_url": "https://autoimg.danawa.com/gallery/4564/20250415_4564 (1).jpg",
+          "path": "vehicles\\현대\\아반떼 N\\gallery\\02_2026ㅣ더 뉴 아반떼 N.jpg"
+        },
+        {
+          "name": "2026ㅣ더 뉴 아반떼 N 내장",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4564&Tab=image&No=137139",
+          "image_url": "https://autoimg.danawa.com/gallery/4564/20250415_4564 (2).jpg",
+          "path": "vehicles\\현대\\아반떼 N\\gallery\\03_2026ㅣ더 뉴 아반떼 N 내장.jpg"
+        },
+        {
+          "name": "더 뉴 아반떼 N TCR",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4564&Tab=image&No=132793",
+          "image_url": "https://autoimg.danawa.com/gallery/4564/20241202_4564 (1).jpg",
+          "path": "vehicles\\현대\\아반떼 N\\gallery\\04_더 뉴 아반떼 N TCR.jpg"
+        }
+      ]
+    },
+    {
+      "brand": "현대",
+      "brand_id": "303",
+      "model_id": "4466",
+      "name": "쏘나타 디 엣지",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4466",
+      "photo_code": "4466/53436",
+      "default_image_url": "https://autoimg.danawa.com/photo/4466/model_360.png",
+      "default_image_path": "vehicles\\현대\\쏘나타 디 엣지\\model_360.png",
+      "colors": [
+        {
+          "name": "에어로 실버 매트ㅣ무광컬러(T4M)-유료",
+          "code": "C08",
+          "swatch": "#aaadaf",
+          "image_url": "https://autoimg.danawa.com/photo/4466/53436/color_08_360.png",
+          "path": "vehicles\\현대\\쏘나타 디 엣지\\colors\\01_에어로 실버 매트ㅣ무광컬러(T4M)-유료.png"
+        },
+        {
+          "name": "녹턴 그레이 매트ㅣ무광컬러(T9M)-유료",
+          "code": "C09",
+          "swatch": "#383d41",
+          "image_url": "https://autoimg.danawa.com/photo/4466/53436/color_09_360.png",
+          "path": "vehicles\\현대\\쏘나타 디 엣지\\colors\\02_녹턴 그레이 매트ㅣ무광컬러(T9M)-유료.png"
+        },
+        {
+          "name": "세레니티 화이트 펄(W6H)-유료",
+          "code": "C10",
+          "swatch": "#eff0ef",
+          "image_url": "https://autoimg.danawa.com/photo/4466/53436/color_10_360.png",
+          "path": "vehicles\\현대\\쏘나타 디 엣지\\colors\\03_세레니티 화이트 펄(W6H)-유료.png"
+        },
+        {
+          "name": "트랜스 미션 블루 펄(NY9)",
+          "code": "C11",
+          "swatch": "#576067",
+          "image_url": "https://autoimg.danawa.com/photo/4466/53436/color_11_360.png",
+          "path": "vehicles\\현대\\쏘나타 디 엣지\\colors\\04_트랜스 미션 블루 펄(NY9).png"
+        },
+        {
+          "name": "바이오 필릭 블루 펄(XB9)",
+          "code": "C12",
+          "swatch": "#060e1b",
+          "image_url": "https://autoimg.danawa.com/photo/4466/53436/color_12_360.png",
+          "path": "vehicles\\현대\\쏘나타 디 엣지\\colors\\05_바이오 필릭 블루 펄(XB9).png"
+        },
+        {
+          "name": "어비스 블랙 펄(A2B)",
+          "code": "C13",
+          "swatch": "#131217",
+          "image_url": "https://autoimg.danawa.com/photo/4466/53436/color_13_360.png",
+          "path": "vehicles\\현대\\쏘나타 디 엣지\\colors\\06_어비스 블랙 펄(A2B).png"
+        },
+        {
+          "name": "얼티메이트 레드 메탈릭(R2P)",
+          "code": "C14",
+          "swatch": "#710212",
+          "image_url": "https://autoimg.danawa.com/photo/4466/53436/color_14_360.png",
+          "path": "vehicles\\현대\\쏘나타 디 엣지\\colors\\07_얼티메이트 레드 메탈릭(R2P).png"
+        },
+        {
+          "name": "녹턴 그레이 메탈릭(T2G)",
+          "code": "C15",
+          "swatch": "#45484d",
+          "image_url": "https://autoimg.danawa.com/photo/4466/53436/color_15_360.png",
+          "path": "vehicles\\현대\\쏘나타 디 엣지\\colors\\08_녹턴 그레이 메탈릭(T2G).png"
+        }
+      ],
+      "gallery": [
+        {
+          "name": "2026ㅣ쏘나타 디 엣지",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4466&Tab=image&No=140930",
+          "image_url": "https://autoimg.danawa.com/gallery/4466/20250929_4466 (1).jpg",
+          "path": "vehicles\\현대\\쏘나타 디 엣지\\gallery\\01_2026ㅣ쏘나타 디 엣지.jpg"
+        },
+        {
+          "name": "2026ㅣ쏘나타 디 엣지",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4466&Tab=image&No=140931",
+          "image_url": "https://autoimg.danawa.com/gallery/4466/20250929_4466 (2).jpg",
+          "path": "vehicles\\현대\\쏘나타 디 엣지\\gallery\\02_2026ㅣ쏘나타 디 엣지.jpg"
+        },
+        {
+          "name": "2026ㅣ쏘나타 디 엣지",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4466&Tab=image&No=140932",
+          "image_url": "https://autoimg.danawa.com/gallery/4466/20250929_4466 (3).jpg",
+          "path": "vehicles\\현대\\쏘나타 디 엣지\\gallery\\03_2026ㅣ쏘나타 디 엣지.jpg"
+        },
+        {
+          "name": "2025ㅣ쏘나타 디 엣지",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4466&Tab=image&No=130580",
+          "image_url": "https://autoimg.danawa.com/gallery/4466/20241025_4466 (2).jpg",
+          "path": "vehicles\\현대\\쏘나타 디 엣지\\gallery\\04_2025ㅣ쏘나타 디 엣지.jpg"
+        }
+      ]
+    },
+    {
+      "brand": "현대",
+      "brand_id": "303",
+      "model_id": "4746",
+      "name": "더 뉴 아이오닉 6",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4746",
+      "photo_code": "4746/53344",
+      "default_image_url": "https://autoimg.danawa.com/photo/4746/model_360.png",
+      "default_image_path": "vehicles\\현대\\더 뉴 아이오닉 6\\model_360.png",
+      "colors": [
+        {
+          "name": "세레니티 화이트 펄(W6H)",
+          "code": "C07",
+          "swatch": "#f5f7f2",
+          "image_url": "https://autoimg.danawa.com/photo/4746/53344/color_07_360.png",
+          "path": "vehicles\\현대\\더 뉴 아이오닉 6\\colors\\01_세레니티 화이트 펄(W6H).png"
+        },
+        {
+          "name": "그래비티 골드 매트(W3T)",
+          "code": "C08",
+          "swatch": "#afaba3",
+          "image_url": "https://autoimg.danawa.com/photo/4746/53344/color_08_360.png",
+          "path": "vehicles\\현대\\더 뉴 아이오닉 6\\colors\\02_그래비티 골드 매트(W3T).png"
+        },
+        {
+          "name": "트랜스미션 블루 매트(M7D)",
+          "code": "C09",
+          "swatch": "#575861",
+          "image_url": "https://autoimg.danawa.com/photo/4746/53344/color_09_360.png",
+          "path": "vehicles\\현대\\더 뉴 아이오닉 6\\colors\\03_트랜스미션 블루 매트(M7D).png"
+        },
+        {
+          "name": "녹턴 그레이 매트(T9M)",
+          "code": "C10",
+          "swatch": "#414245",
+          "image_url": "https://autoimg.danawa.com/photo/4746/53344/color_10_360.png",
+          "path": "vehicles\\현대\\더 뉴 아이오닉 6\\colors\\04_녹턴 그레이 매트(T9M).png"
+        },
+        {
+          "name": "트랜스미션 블루 펄(NY9)",
+          "code": "C11",
+          "swatch": "#5f636c",
+          "image_url": "https://autoimg.danawa.com/photo/4746/53344/color_11_360.png",
+          "path": "vehicles\\현대\\더 뉴 아이오닉 6\\colors\\05_트랜스미션 블루 펄(NY9).png"
+        },
+        {
+          "name": "녹턴 그레이 메탈릭(T2G)",
+          "code": "C12",
+          "swatch": "#43484b",
+          "image_url": "https://autoimg.danawa.com/photo/4746/53344/color_12_360.png",
+          "path": "vehicles\\현대\\더 뉴 아이오닉 6\\colors\\06_녹턴 그레이 메탈릭(T2G).png"
+        },
+        {
+          "name": "바이오 필릭 블루 펄(XB9)",
+          "code": "C13",
+          "swatch": "#161920",
+          "image_url": "https://autoimg.danawa.com/photo/4746/53344/color_13_360.png",
+          "path": "vehicles\\현대\\더 뉴 아이오닉 6\\colors\\07_바이오 필릭 블루 펄(XB9).png"
+        },
+        {
+          "name": "어비스 블랙 펄(A2B)",
+          "code": "C14",
+          "swatch": "#141414",
+          "image_url": "https://autoimg.danawa.com/photo/4746/53344/color_14_360.png",
+          "path": "vehicles\\현대\\더 뉴 아이오닉 6\\colors\\08_어비스 블랙 펄(A2B).png"
+        },
+        {
+          "name": "얼티메이트 레드 메탈릭(R2P)",
+          "code": "C15",
+          "swatch": "#6a1010",
+          "image_url": "https://autoimg.danawa.com/photo/4746/53344/color_15_360.png",
+          "path": "vehicles\\현대\\더 뉴 아이오닉 6\\colors\\09_얼티메이트 레드 메탈릭(R2P).png"
+        },
+        {
+          "name": "에어로 실버 메탈릭(T4A)",
+          "code": "C16",
+          "swatch": "#b2b2b2",
+          "image_url": "https://autoimg.danawa.com/photo/4746/53344/color_16_360.png",
+          "path": "vehicles\\현대\\더 뉴 아이오닉 6\\colors\\10_에어로 실버 메탈릭(T4A).png"
+        }
+      ],
+      "gallery": [
+        {
+          "name": "더 뉴 아이오닉 6",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4746&Tab=image&No=139887",
+          "image_url": "https://autoimg.danawa.com/gallery/4746/20250901_4746 (1).jpg",
+          "path": "vehicles\\현대\\더 뉴 아이오닉 6\\gallery\\01_더 뉴 아이오닉 6.jpg"
+        },
+        {
+          "name": "더 뉴 아이오닉 6",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4746&Tab=image&No=139888",
+          "image_url": "https://autoimg.danawa.com/gallery/4746/20250901_4746 (2).jpg",
+          "path": "vehicles\\현대\\더 뉴 아이오닉 6\\gallery\\02_더 뉴 아이오닉 6.jpg"
+        },
+        {
+          "name": "더 뉴 아이오닉 6",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4746&Tab=image&No=139889",
+          "image_url": "https://autoimg.danawa.com/gallery/4746/20250901_4746 (3).jpg",
+          "path": "vehicles\\현대\\더 뉴 아이오닉 6\\gallery\\03_더 뉴 아이오닉 6.jpg"
+        },
+        {
+          "name": "더 뉴 아이오닉 6",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4746&Tab=image&No=139890",
+          "image_url": "https://autoimg.danawa.com/gallery/4746/20250901_4746 (4).jpg",
+          "path": "vehicles\\현대\\더 뉴 아이오닉 6\\gallery\\04_더 뉴 아이오닉 6.jpg"
+        }
+      ]
+    },
+    {
+      "brand": "현대",
+      "brand_id": "303",
+      "model_id": "4742",
+      "name": "아이오닉 6 N",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4742",
+      "photo_code": "4742/53334",
+      "default_image_url": "https://autoimg.danawa.com/photo/4742/model_360.png",
+      "default_image_path": "vehicles\\현대\\아이오닉 6 N\\model_360.png",
+      "colors": [
+        {
+          "name": "녹턴 그레이 매트(T9M)",
+          "code": "C08",
+          "swatch": "#41474b",
+          "image_url": "https://autoimg.danawa.com/photo/4742/53334/color_08_360.png",
+          "path": "vehicles\\현대\\아이오닉 6 N\\colors\\01_녹턴 그레이 매트(T9M).png"
+        },
+        {
+          "name": "퍼포먼스 블루 펄(WFB)",
+          "code": "C09",
+          "swatch": "#5d778b",
+          "image_url": "https://autoimg.danawa.com/photo/4742/53334/color_09_360.png",
+          "path": "vehicles\\현대\\아이오닉 6 N\\colors\\02_퍼포먼스 블루 펄(WFB).png"
+        },
+        {
+          "name": "세레니티 화이트 펄(W6H)",
+          "code": "C10",
+          "swatch": "#f2f3ee",
+          "image_url": "https://autoimg.danawa.com/photo/4742/53334/color_10_360.png",
+          "path": "vehicles\\현대\\아이오닉 6 N\\colors\\03_세레니티 화이트 펄(W6H).png"
+        },
+        {
+          "name": "녹턴 그레이 메탈릭(T2G)",
+          "code": "C11",
+          "swatch": "#484d55",
+          "image_url": "https://autoimg.danawa.com/photo/4742/53334/color_11_360.png",
+          "path": "vehicles\\현대\\아이오닉 6 N\\colors\\04_녹턴 그레이 메탈릭(T2G).png"
+        },
+        {
+          "name": "어비스 블랙 펄(A2B)",
+          "code": "C12",
+          "swatch": "#222124",
+          "image_url": "https://autoimg.danawa.com/photo/4742/53334/color_12_360.png",
+          "path": "vehicles\\현대\\아이오닉 6 N\\colors\\05_어비스 블랙 펄(A2B).png"
+        }
+      ],
+      "gallery": [
+        {
+          "name": "아이오닉 6 N",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4742&Tab=image&No=141287",
+          "image_url": "https://autoimg.danawa.com/gallery/4742/20251028_4742 (1).jpg",
+          "path": "vehicles\\현대\\아이오닉 6 N\\gallery\\01_아이오닉 6 N.jpg"
+        },
+        {
+          "name": "아이오닉 6 N",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4742&Tab=image&No=141288",
+          "image_url": "https://autoimg.danawa.com/gallery/4742/20251028_4742 (2).jpg",
+          "path": "vehicles\\현대\\아이오닉 6 N\\gallery\\02_아이오닉 6 N.jpg"
+        },
+        {
+          "name": "아이오닉 6 N",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4742&Tab=image&No=141289",
+          "image_url": "https://autoimg.danawa.com/gallery/4742/20251028_4742 (3).jpg",
+          "path": "vehicles\\현대\\아이오닉 6 N\\gallery\\03_아이오닉 6 N.jpg"
+        },
+        {
+          "name": "아이오닉 6 N",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4742&Tab=image&No=141290",
+          "image_url": "https://autoimg.danawa.com/gallery/4742/20251028_4742 (4).jpg",
+          "path": "vehicles\\현대\\아이오닉 6 N\\gallery\\04_아이오닉 6 N.jpg"
+        }
+      ]
+    },
+    {
+      "brand": "현대",
+      "brand_id": "303",
+      "model_id": "4188",
+      "name": "그랜저",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4188",
+      "photo_code": "4188/53278",
+      "default_image_url": "https://autoimg.danawa.com/photo/4188/model_360.png",
+      "default_image_path": "vehicles\\현대\\그랜저\\model_360.png",
+      "colors": [
+        {
+          "name": "세레니티 화이트 펄(W6H)",
+          "code": "C08",
+          "swatch": "#f4f4ef",
+          "image_url": "https://autoimg.danawa.com/photo/4188/53278/color_08_360.png",
+          "path": "vehicles\\현대\\그랜저\\colors\\01_세레니티 화이트 펄(W6H).png"
+        },
+        {
+          "name": "유기 브론즈 매트(VAM)",
+          "code": "C09",
+          "swatch": "#8a8782",
+          "image_url": "https://autoimg.danawa.com/photo/4188/53278/color_09_360.png",
+          "path": "vehicles\\현대\\그랜저\\colors\\02_유기 브론즈 매트(VAM).png"
+        },
+        {
+          "name": "녹턴 그레이 매트(T9M)",
+          "code": "C10",
+          "swatch": "#2e3337",
+          "image_url": "https://autoimg.danawa.com/photo/4188/53278/color_10_360.png",
+          "path": "vehicles\\현대\\그랜저\\colors\\03_녹턴 그레이 매트(T9M).png"
+        },
+        {
+          "name": "어비스 블랙 펄(A2B)",
+          "code": "C11",
+          "swatch": "#18171c",
+          "image_url": "https://autoimg.danawa.com/photo/4188/53278/color_11_360.png",
+          "path": "vehicles\\현대\\그랜저\\colors\\04_어비스 블랙 펄(A2B).png"
+        },
+        {
+          "name": "에어로 실버 메탈릭(T4A)",
+          "code": "C12",
+          "swatch": "#96959b",
+          "image_url": "https://autoimg.danawa.com/photo/4188/53278/color_12_360.png",
+          "path": "vehicles\\현대\\그랜저\\colors\\05_에어로 실버 메탈릭(T4A).png"
+        },
+        {
+          "name": "트랜스미션 블루 펄(NY9)",
+          "code": "C13",
+          "swatch": "#646873",
+          "image_url": "https://autoimg.danawa.com/photo/4188/53278/color_13_360.png",
+          "path": "vehicles\\현대\\그랜저\\colors\\06_트랜스미션 블루 펄(NY9).png"
+        },
+        {
+          "name": "녹턴 그레이 메탈릭(T2G)",
+          "code": "C14",
+          "swatch": "#24292d",
+          "image_url": "https://autoimg.danawa.com/photo/4188/53278/color_14_360.png",
+          "path": "vehicles\\현대\\그랜저\\colors\\07_녹턴 그레이 메탈릭(T2G).png"
+        },
+        {
+          "name": "바이오필릭 블루 펄(XB9)",
+          "code": "C15",
+          "swatch": "#1b1e27",
+          "image_url": "https://autoimg.danawa.com/photo/4188/53278/color_15_360.png",
+          "path": "vehicles\\현대\\그랜저\\colors\\08_바이오필릭 블루 펄(XB9).png"
+        },
+        {
+          "name": "유기 브론즈 메탈릭(NGM)",
+          "code": "C17",
+          "swatch": "#746f6b",
+          "image_url": "https://autoimg.danawa.com/photo/4188/53278/color_17_360.png",
+          "path": "vehicles\\현대\\그랜저\\colors\\09_유기 브론즈 메탈릭(NGM).png"
+        }
+      ],
+      "gallery": [
+        {
+          "name": "2026ㅣ디 올 뉴 그랜저",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4188&Tab=image&No=138104",
+          "image_url": "https://autoimg.danawa.com/gallery/4188/20250521_4188 (1).jpg",
+          "path": "vehicles\\현대\\그랜저\\gallery\\01_2026ㅣ디 올 뉴 그랜저.jpg"
+        },
+        {
+          "name": "2026ㅣ디 올 뉴 그랜저",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4188&Tab=image&No=138105",
+          "image_url": "https://autoimg.danawa.com/gallery/4188/20250521_4188 (2).jpg",
+          "path": "vehicles\\현대\\그랜저\\gallery\\02_2026ㅣ디 올 뉴 그랜저.jpg"
+        },
+        {
+          "name": "2025ㅣ디 올 뉴 그랜저",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4188&Tab=image&No=124765",
+          "image_url": "https://autoimg.danawa.com/gallery/4188/20240605_4188 (1).jpg",
+          "path": "vehicles\\현대\\그랜저\\gallery\\03_2025ㅣ디 올 뉴 그랜저.jpg"
+        },
+        {
+          "name": "2025ㅣ디 올 뉴 그랜저",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4188&Tab=image&No=124766",
+          "image_url": "https://autoimg.danawa.com/gallery/4188/20240605_4188 (2).jpg",
+          "path": "vehicles\\현대\\그랜저\\gallery\\04_2025ㅣ디 올 뉴 그랜저.jpg"
+        }
+      ]
+    },
+    {
+      "brand": "현대",
+      "brand_id": "303",
+      "model_id": "4802",
+      "name": "더 뉴 그랜저",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4802",
+      "photo_code": "4802/",
+      "default_image_url": "https://autoimg.danawa.com/photo/4802/model_360.png",
+      "default_image_path": "vehicles\\현대\\더 뉴 그랜저\\model_360.png",
+      "colors": [],
+      "gallery": [
+        {
+          "name": "더 뉴 그랜저",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4802&Tab=image&No=144917",
+          "image_url": "https://autoimg.danawa.com/gallery/4802/20260428_4802 (1).jpg",
+          "path": "vehicles\\현대\\더 뉴 그랜저\\gallery\\01_더 뉴 그랜저.jpg"
+        },
+        {
+          "name": "더 뉴 그랜저",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4802&Tab=image&No=144918",
+          "image_url": "https://autoimg.danawa.com/gallery/4802/20260428_4802 (2).jpg",
+          "path": "vehicles\\현대\\더 뉴 그랜저\\gallery\\02_더 뉴 그랜저.jpg"
+        },
+        {
+          "name": "더 뉴 그랜저",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4802&Tab=image&No=144919",
+          "image_url": "https://autoimg.danawa.com/gallery/4802/20260428_4802 (3).jpg",
+          "path": "vehicles\\현대\\더 뉴 그랜저\\gallery\\03_더 뉴 그랜저.jpg"
+        },
+        {
+          "name": "더 뉴 그랜저",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4802&Tab=image&No=144920",
+          "image_url": "https://autoimg.danawa.com/gallery/4802/20260428_4802 (4).jpg",
+          "path": "vehicles\\현대\\더 뉴 그랜저\\gallery\\04_더 뉴 그랜저.jpg"
+        }
+      ]
+    },
+    {
+      "brand": "현대",
+      "brand_id": "303",
+      "model_id": "3654",
+      "name": "베뉴",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3654",
+      "photo_code": "3654/53151",
+      "default_image_url": "https://autoimg.danawa.com/photo/3654/53151/color_12_360.png",
+      "default_image_path": "vehicles\\현대\\베뉴\\model_360.png",
+      "colors": [
+        {
+          "name": "어비스 블랙 펄(A2B)",
+          "code": "C11",
+          "swatch": "#0e0d0d",
+          "image_url": "https://autoimg.danawa.com/photo/3654/53151/color_11_360.png",
+          "path": "vehicles\\현대\\베뉴\\colors\\01_어비스 블랙 펄(A2B).png"
+        },
+        {
+          "name": "데님 블루 펄(TN6)",
+          "code": "C12",
+          "swatch": "#01253b",
+          "image_url": "https://autoimg.danawa.com/photo/3654/53151/color_12_360.png",
+          "path": "vehicles\\현대\\베뉴\\colors\\02_데님 블루 펄(TN6).png"
+        },
+        {
+          "name": "인텐스 블루 펄(YP5)",
+          "code": "C13",
+          "swatch": "#102c62",
+          "image_url": "https://autoimg.danawa.com/photo/3654/53151/color_13_360.png",
+          "path": "vehicles\\현대\\베뉴\\colors\\03_인텐스 블루 펄(YP5).png"
+        },
+        {
+          "name": "얼티메이트 레드 메탈릭(R2P)",
+          "code": "C14",
+          "swatch": "#831b19",
+          "image_url": "https://autoimg.danawa.com/photo/3654/53151/color_14_360.png",
+          "path": "vehicles\\현대\\베뉴\\colors\\04_얼티메이트 레드 메탈릭(R2P).png"
+        },
+        {
+          "name": "에코트로닉 그레이 펄(PE2)",
+          "code": "C15",
+          "swatch": "#232a2e",
+          "image_url": "https://autoimg.danawa.com/photo/3654/53151/color_15_360.png",
+          "path": "vehicles\\현대\\베뉴\\colors\\05_에코트로닉 그레이 펄(PE2).png"
+        },
+        {
+          "name": "쉬머링 실버 메탈릭(R2T)",
+          "code": "C16",
+          "swatch": "#808690",
+          "image_url": "https://autoimg.danawa.com/photo/3654/53151/color_16_360.png",
+          "path": "vehicles\\현대\\베뉴\\colors\\06_쉬머링 실버 메탈릭(R2T).png"
+        },
+        {
+          "name": "아틀라스 화이트(SAW)",
+          "code": "C17",
+          "swatch": "#edeeed",
+          "image_url": "https://autoimg.danawa.com/photo/3654/53151/color_17_360.png",
+          "path": "vehicles\\현대\\베뉴\\colors\\07_아틀라스 화이트(SAW).png"
+        },
+        {
+          "name": "사이버 그레이 메탈릭(C5G)",
+          "code": "C18",
+          "swatch": "#999a95",
+          "image_url": "https://autoimg.danawa.com/photo/3654/53151/color_18_360.png",
+          "path": "vehicles\\현대\\베뉴\\colors\\08_사이버 그레이 메탈릭(C5G).png"
+        },
+        {
+          "name": "미라지 그린(RRR)",
+          "code": "C29",
+          "swatch": "#697b85",
+          "image_url": "https://autoimg.danawa.com/photo/3654/53151/color_29_360.png",
+          "path": "vehicles\\현대\\베뉴\\colors\\09_미라지 그린(RRR).png"
+        },
+        {
+          "name": "초크화이트 메탈릭 어비스 블랙 펄(A2B)",
+          "code": "C20",
+          "swatch": "#e9e9e9",
+          "image_url": "https://autoimg.danawa.com/photo/3654/53151/color_20_360.png",
+          "path": "vehicles\\현대\\베뉴\\colors\\10_초크화이트 메탈릭 어비스 블랙 펄(A2B).png"
+        },
+        {
+          "name": "초크화이트 메탈릭 데님 블루 펄(TN3)",
+          "code": "C21",
+          "swatch": "#e9e9e9",
+          "image_url": "https://autoimg.danawa.com/photo/3654/53151/color_21_360.png",
+          "path": "vehicles\\현대\\베뉴\\colors\\11_초크화이트 메탈릭 데님 블루 펄(TN3).png"
+        },
+        {
+          "name": "팬텀 블랙 펄 에코트로닉 그레이 펄(P51)",
+          "code": "C22",
+          "swatch": "#0e0d0d",
+          "image_url": "https://autoimg.danawa.com/photo/3654/53151/color_22_360.png",
+          "path": "vehicles\\현대\\베뉴\\colors\\12_팬텀 블랙 펄 에코트로닉 그레이 펄(P51).png"
+        },
+        {
+          "name": "팬텀 블랙 펄 아틀라스 화이트(SAW)",
+          "code": "C23",
+          "swatch": "#0e0d0d",
+          "image_url": "https://autoimg.danawa.com/photo/3654/53151/color_23_360.png",
+          "path": "vehicles\\현대\\베뉴\\colors\\13_팬텀 블랙 펄 아틀라스 화이트(SAW).png"
+        },
+        {
+          "name": "팬텀 블랙 펄 얼티메이트 레드 메탈릭(R20)",
+          "code": "C24",
+          "swatch": "#0e0d0d",
+          "image_url": "https://autoimg.danawa.com/photo/3654/53151/color_24_360.png",
+          "path": "vehicles\\현대\\베뉴\\colors\\14_팬텀 블랙 펄 얼티메이트 레드 메탈릭(R20).png"
+        },
+        {
+          "name": "팬텀 블랙 펄 인텐스 블루 펄(YP1)",
+          "code": "C25",
+          "swatch": "#0e0d0d",
+          "image_url": "https://autoimg.danawa.com/photo/3654/53151/color_25_360.png",
+          "path": "vehicles\\현대\\베뉴\\colors\\15_팬텀 블랙 펄 인텐스 블루 펄(YP1).png"
+        },
+        {
+          "name": "팬텀 블랙 펄 쉬머링 실버 메탈릭(R2T)",
+          "code": "C26",
+          "swatch": "#0e0d0d",
+          "image_url": "https://autoimg.danawa.com/photo/3654/53151/color_26_360.png",
+          "path": "vehicles\\현대\\베뉴\\colors\\16_팬텀 블랙 펄 쉬머링 실버 메탈릭(R2T).png"
+        },
+        {
+          "name": "팬텀 블랙 펄 사이버 그레이 메탈릭(CG1)",
+          "code": "C27",
+          "swatch": "#0e0d0d",
+          "image_url": "https://autoimg.danawa.com/photo/3654/53151/color_27_360.png",
+          "path": "vehicles\\현대\\베뉴\\colors\\17_팬텀 블랙 펄 사이버 그레이 메탈릭(CG1).png"
+        },
+        {
+          "name": "팬텀 블랙 펄 미라지 그린(PRO)",
+          "code": "C30",
+          "swatch": "#0e0d0d",
+          "image_url": "https://autoimg.danawa.com/photo/3654/53151/color_30_360.png",
+          "path": "vehicles\\현대\\베뉴\\colors\\18_팬텀 블랙 펄 미라지 그린(PRO).png"
+        }
+      ],
+      "gallery": [
+        {
+          "name": "2025ㅣ베뉴",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3654&Tab=image&No=136812",
+          "image_url": "https://autoimg.danawa.com/gallery/3654/20250402_3654 (1).jpg",
+          "path": "vehicles\\현대\\베뉴\\gallery\\01_2025ㅣ베뉴.jpg"
+        },
+        {
+          "name": "2025ㅣ베뉴",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3654&Tab=image&No=136813",
+          "image_url": "https://autoimg.danawa.com/gallery/3654/20250402_3654 (2).jpg",
+          "path": "vehicles\\현대\\베뉴\\gallery\\02_2025ㅣ베뉴.jpg"
+        },
+        {
+          "name": "2025ㅣ베뉴",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3654&Tab=image&No=136814",
+          "image_url": "https://autoimg.danawa.com/gallery/3654/20250402_3654 (3).jpg",
+          "path": "vehicles\\현대\\베뉴\\gallery\\03_2025ㅣ베뉴.jpg"
+        },
+        {
+          "name": "베뉴",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3654&Tab=image&No=121181",
+          "image_url": "https://autoimg.danawa.com/gallery/3654/20240426_3654 (1).jpg",
+          "path": "vehicles\\현대\\베뉴\\gallery\\04_베뉴.jpg"
+        }
+      ]
+    },
+    {
+      "brand": "현대",
+      "brand_id": "303",
+      "model_id": "4361",
+      "name": "코나",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4361",
+      "photo_code": "4361/53730",
+      "default_image_url": "https://autoimg.danawa.com/photo/4361/model_360.png",
+      "default_image_path": "vehicles\\현대\\코나\\model_360.png",
+      "colors": [
+        {
+          "name": "아틀라스 화이트(SAW)",
+          "code": "C11",
+          "swatch": "#e9ebeb",
+          "image_url": "https://autoimg.danawa.com/photo/4361/53730/color_11_360.png",
+          "path": "vehicles\\현대\\코나\\colors\\01_아틀라스 화이트(SAW).png"
+        },
+        {
+          "name": "사이버 그레이 메탈릭(C5G)",
+          "code": "C12",
+          "swatch": "#a7adae",
+          "image_url": "https://autoimg.danawa.com/photo/4361/53730/color_12_360.png",
+          "path": "vehicles\\현대\\코나\\colors\\02_사이버 그레이 메탈릭(C5G).png"
+        },
+        {
+          "name": "에코트로닉 그레이 펄(PE2)",
+          "code": "C13",
+          "swatch": "#444649",
+          "image_url": "https://autoimg.danawa.com/photo/4361/53730/color_13_360.png",
+          "path": "vehicles\\현대\\코나\\colors\\03_에코트로닉 그레이 펄(PE2).png"
+        },
+        {
+          "name": "네오테릭 옐로우(YYY)",
+          "code": "C14",
+          "swatch": "#b9ca32",
+          "image_url": "https://autoimg.danawa.com/photo/4361/53730/color_14_360.png",
+          "path": "vehicles\\현대\\코나\\colors\\04_네오테릭 옐로우(YYY).png"
+        },
+        {
+          "name": "미라지 그린(RRR)",
+          "code": "C15",
+          "swatch": "#6e848a",
+          "image_url": "https://autoimg.danawa.com/photo/4361/53730/color_15_360.png",
+          "path": "vehicles\\현대\\코나\\colors\\05_미라지 그린(RRR).png"
+        },
+        {
+          "name": "얼티메이트 레드 메탈릭(R2P)",
+          "code": "C16",
+          "swatch": "#962a27",
+          "image_url": "https://autoimg.danawa.com/photo/4361/53730/color_16_360.png",
+          "path": "vehicles\\현대\\코나\\colors\\06_얼티메이트 레드 메탈릭(R2P).png"
+        },
+        {
+          "name": "어비스 블랙 펄(A2B)",
+          "code": "C17",
+          "swatch": "#1c1d1b",
+          "image_url": "https://autoimg.danawa.com/photo/4361/53730/color_17_360.png",
+          "path": "vehicles\\현대\\코나\\colors\\07_어비스 블랙 펄(A2B).png"
+        },
+        {
+          "name": "아틀라스 화이트(SAW) 어비스 블랙 펄(A2B)",
+          "code": "C18",
+          "swatch": "#e9ebeb",
+          "image_url": "https://autoimg.danawa.com/photo/4361/53730/color_18_360.png",
+          "path": "vehicles\\현대\\코나\\colors\\08_아틀라스 화이트(SAW) 어비스 블랙 펄(A2B).png"
+        },
+        {
+          "name": "사이버 그레이 메탈릭(C5G) 어비스 블랙 펄(A2B)",
+          "code": "C19",
+          "swatch": "#a7adae",
+          "image_url": "https://autoimg.danawa.com/photo/4361/53730/color_19_360.png",
+          "path": "vehicles\\현대\\코나\\colors\\09_사이버 그레이 메탈릭(C5G) 어비스 블랙 펄(A2B).png"
+        },
+        {
+          "name": "에코트로닉 그레이 펄(PE2) 어비스 블랙 펄(A2B)",
+          "code": "C20",
+          "swatch": "#444649",
+          "image_url": "https://autoimg.danawa.com/photo/4361/53730/color_20_360.png",
+          "path": "vehicles\\현대\\코나\\colors\\10_에코트로닉 그레이 펄(PE2) 어비스 블랙 펄(A2B).png"
+        },
+        {
+          "name": "네오테릭 옐로우(YYY) 어비스 블랙 펄(A2B)",
+          "code": "C21",
+          "swatch": "#b9ca32",
+          "image_url": "https://autoimg.danawa.com/photo/4361/53730/color_21_360.png",
+          "path": "vehicles\\현대\\코나\\colors\\11_네오테릭 옐로우(YYY) 어비스 블랙 펄(A2B).png"
+        },
+        {
+          "name": "미라지 그린(RRR) 어비스 블랙 펄(A2B)",
+          "code": "C22",
+          "swatch": "#6e848a",
+          "image_url": "https://autoimg.danawa.com/photo/4361/53730/color_22_360.png",
+          "path": "vehicles\\현대\\코나\\colors\\12_미라지 그린(RRR) 어비스 블랙 펄(A2B).png"
+        },
+        {
+          "name": "얼티메이트 레드 메탈릭(R2P) 어비스 블랙 펄(A2B)",
+          "code": "C23",
+          "swatch": "#962a27",
+          "image_url": "https://autoimg.danawa.com/photo/4361/53730/color_23_360.png",
+          "path": "vehicles\\현대\\코나\\colors\\13_얼티메이트 레드 메탈릭(R2P) 어비스 블랙 펄(A2B).png"
+        }
+      ],
+      "gallery": [
+        {
+          "name": "2027ㅣ디 올 뉴 코나 블랙 익스테리어",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4361&Tab=image&No=144070",
+          "image_url": "https://autoimg.danawa.com/gallery/4361/20260407_4361 (1).jpg",
+          "path": "vehicles\\현대\\코나\\gallery\\01_2027ㅣ디 올 뉴 코나 블랙 익스테리어.jpg"
+        },
+        {
+          "name": "2025ㅣ디 올 뉴 코나 블랙 익스테리어",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4361&Tab=image&No=139603",
+          "image_url": "https://autoimg.danawa.com/gallery/4361/20250807_4361 (1).jpg",
+          "path": "vehicles\\현대\\코나\\gallery\\02_2025ㅣ디 올 뉴 코나 블랙 익스테리어.jpg"
+        },
+        {
+          "name": "2025ㅣ디 올 뉴 코나",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4361&Tab=image&No=137325",
+          "image_url": "https://autoimg.danawa.com/gallery/4361/20250423_4361 (1).jpg",
+          "path": "vehicles\\현대\\코나\\gallery\\03_2025ㅣ디 올 뉴 코나.jpg"
+        },
+        {
+          "name": "2025ㅣ디 올 뉴 코나 내장",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4361&Tab=image&No=137326",
+          "image_url": "https://autoimg.danawa.com/gallery/4361/20250423_4361 (2).jpg",
+          "path": "vehicles\\현대\\코나\\gallery\\04_2025ㅣ디 올 뉴 코나 내장.jpg"
+        }
+      ]
+    },
+    {
+      "brand": "현대",
+      "brand_id": "303",
+      "model_id": "4510",
+      "name": "코나 일렉트릭",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4510",
+      "photo_code": "4510/53270",
+      "default_image_url": "https://autoimg.danawa.com/photo/4510/model_360.png",
+      "default_image_path": "vehicles\\현대\\코나 일렉트릭\\model_360.png",
+      "colors": [
+        {
+          "name": "어비스 블랙 펄(A2B)",
+          "code": "C11",
+          "swatch": "#1c1d1b",
+          "image_url": "https://autoimg.danawa.com/photo/4510/53270/color_11_360.png",
+          "path": "vehicles\\현대\\코나 일렉트릭\\colors\\01_어비스 블랙 펄(A2B).png"
+        },
+        {
+          "name": "아틀라스 화이트(SAW)",
+          "code": "C12",
+          "swatch": "#e9ebeb",
+          "image_url": "https://autoimg.danawa.com/photo/4510/53270/color_12_360.png",
+          "path": "vehicles\\현대\\코나 일렉트릭\\colors\\02_아틀라스 화이트(SAW).png"
+        },
+        {
+          "name": "사이버 그레이 메탈릭(C5G)",
+          "code": "C13",
+          "swatch": "#a7adae",
+          "image_url": "https://autoimg.danawa.com/photo/4510/53270/color_13_360.png",
+          "path": "vehicles\\현대\\코나 일렉트릭\\colors\\03_사이버 그레이 메탈릭(C5G).png"
+        },
+        {
+          "name": "에코트로닉 그레이 펄(PE2)",
+          "code": "C14",
+          "swatch": "#444649",
+          "image_url": "https://autoimg.danawa.com/photo/4510/53270/color_14_360.png",
+          "path": "vehicles\\현대\\코나 일렉트릭\\colors\\04_에코트로닉 그레이 펄(PE2).png"
+        },
+        {
+          "name": "얼티메이트 레드 메탈릭(R2P)",
+          "code": "C15",
+          "swatch": "#962a27",
+          "image_url": "https://autoimg.danawa.com/photo/4510/53270/color_15_360.png",
+          "path": "vehicles\\현대\\코나 일렉트릭\\colors\\05_얼티메이트 레드 메탈릭(R2P).png"
+        },
+        {
+          "name": "네오테릭 옐로우(YYY)",
+          "code": "C16",
+          "swatch": "#b9ca32",
+          "image_url": "https://autoimg.danawa.com/photo/4510/53270/color_16_360.png",
+          "path": "vehicles\\현대\\코나 일렉트릭\\colors\\06_네오테릭 옐로우(YYY).png"
+        },
+        {
+          "name": "미라지 그린(RRR)",
+          "code": "C17",
+          "swatch": "#6e848a",
+          "image_url": "https://autoimg.danawa.com/photo/4510/53270/color_17_360.png",
+          "path": "vehicles\\현대\\코나 일렉트릭\\colors\\07_미라지 그린(RRR).png"
+        },
+        {
+          "name": "메타블루 펄(PM2)",
+          "code": "C18",
+          "swatch": "#6f89b7",
+          "image_url": "https://autoimg.danawa.com/photo/4510/53270/color_18_360.png",
+          "path": "vehicles\\현대\\코나 일렉트릭\\colors\\08_메타블루 펄(PM2).png"
+        }
+      ],
+      "gallery": [
+        {
+          "name": "2025ㅣ디 올 뉴 코나 일렉트릭",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4510&Tab=image&No=137869",
+          "image_url": "https://autoimg.danawa.com/gallery/4510/20250513_4510 (1).jpg",
+          "path": "vehicles\\현대\\코나 일렉트릭\\gallery\\01_2025ㅣ디 올 뉴 코나 일렉트릭.jpg"
+        },
+        {
+          "name": "2025ㅣ디 올 뉴 코나 일렉트릭",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4510&Tab=image&No=137870",
+          "image_url": "https://autoimg.danawa.com/gallery/4510/20250513_4510 (2).jpg",
+          "path": "vehicles\\현대\\코나 일렉트릭\\gallery\\02_2025ㅣ디 올 뉴 코나 일렉트릭.jpg"
+        },
+        {
+          "name": "디 올 뉴 코나 일렉트릭",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4510&Tab=image&No=122857",
+          "image_url": "https://autoimg.danawa.com/gallery/4510/20240510_4510 (1).jpg",
+          "path": "vehicles\\현대\\코나 일렉트릭\\gallery\\03_디 올 뉴 코나 일렉트릭.jpg"
+        },
+        {
+          "name": "디 올 뉴 코나 일렉트릭",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4510&Tab=image&No=122858",
+          "image_url": "https://autoimg.danawa.com/gallery/4510/20240510_4510 (2).jpg",
+          "path": "vehicles\\현대\\코나 일렉트릭\\gallery\\04_디 올 뉴 코나 일렉트릭.jpg"
+        }
+      ]
+    },
+    {
+      "brand": "현대",
+      "brand_id": "303",
+      "model_id": "4797",
+      "name": "아이오닉 3",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4797",
+      "photo_code": "4797/",
+      "default_image_url": "https://autoimg.danawa.com/photo/4797/model_360.png",
+      "default_image_path": "vehicles\\현대\\아이오닉 3\\model_360.png",
+      "colors": [],
+      "gallery": [
+        {
+          "name": "아이오닉 3 N라인",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4797&Tab=image&No=144575",
+          "image_url": "https://autoimg.danawa.com/gallery/4797/20260421_4797 (1).jpg",
+          "path": "vehicles\\현대\\아이오닉 3\\gallery\\01_아이오닉 3 N라인.jpg"
+        },
+        {
+          "name": "아이오닉 3 N라인",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4797&Tab=image&No=144576",
+          "image_url": "https://autoimg.danawa.com/gallery/4797/20260421_4797 (2).jpg",
+          "path": "vehicles\\현대\\아이오닉 3\\gallery\\02_아이오닉 3 N라인.jpg"
+        },
+        {
+          "name": "아이오닉 3 N라인",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4797&Tab=image&No=144577",
+          "image_url": "https://autoimg.danawa.com/gallery/4797/20260421_4797 (3).jpg",
+          "path": "vehicles\\현대\\아이오닉 3\\gallery\\03_아이오닉 3 N라인.jpg"
+        },
+        {
+          "name": "아이오닉 3 N라인",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4797&Tab=image&No=144578",
+          "image_url": "https://autoimg.danawa.com/gallery/4797/20260421_4797 (4).jpg",
+          "path": "vehicles\\현대\\아이오닉 3\\gallery\\04_아이오닉 3 N라인.jpg"
+        }
+      ]
+    },
+    {
+      "brand": "현대",
+      "brand_id": "303",
+      "model_id": "4592",
+      "name": "투싼",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4592",
+      "photo_code": "4592/53356",
+      "default_image_url": "https://autoimg.danawa.com/photo/4592/model_360.png",
+      "default_image_path": "vehicles\\현대\\투싼\\model_360.png",
+      "colors": [
+        {
+          "name": "팬텀 블랙 펄(TCM)",
+          "code": "C11",
+          "swatch": "#171718",
+          "image_url": "https://autoimg.danawa.com/photo/4592/53356/color_11_360.png",
+          "path": "vehicles\\현대\\투싼\\colors\\01_팬텀 블랙 펄(TCM).png"
+        },
+        {
+          "name": "크리미 화이트 펄(TW3)",
+          "code": "C12",
+          "swatch": "#f2f1ee",
+          "image_url": "https://autoimg.danawa.com/photo/4592/53356/color_12_360.png",
+          "path": "vehicles\\현대\\투싼\\colors\\02_크리미 화이트 펄(TW3).png"
+        },
+        {
+          "name": "쉬머링 실버 메탈릭(R2T)",
+          "code": "C13",
+          "swatch": "#a9a9a9",
+          "image_url": "https://autoimg.danawa.com/photo/4592/53356/color_13_360.png",
+          "path": "vehicles\\현대\\투싼\\colors\\03_쉬머링 실버 메탈릭(R2T).png"
+        },
+        {
+          "name": "에코트로닉 그레이 펄(PE2)",
+          "code": "C14",
+          "swatch": "#3c3c3a",
+          "image_url": "https://autoimg.danawa.com/photo/4592/53356/color_14_360.png",
+          "path": "vehicles\\현대\\투싼\\colors\\04_에코트로닉 그레이 펄(PE2).png"
+        },
+        {
+          "name": "얼티메이트 레드 메탈릭(R2P)",
+          "code": "C15",
+          "swatch": "#741e1d",
+          "image_url": "https://autoimg.danawa.com/photo/4592/53356/color_15_360.png",
+          "path": "vehicles\\현대\\투싼\\colors\\05_얼티메이트 레드 메탈릭(R2P).png"
+        },
+        {
+          "name": "오션 인디고 펄(PS8)",
+          "code": "C16",
+          "swatch": "#1d262d",
+          "image_url": "https://autoimg.danawa.com/photo/4592/53356/color_16_360.png",
+          "path": "vehicles\\현대\\투싼\\colors\\06_오션 인디고 펄(PS8).png"
+        },
+        {
+          "name": "아마존 그레이 메탈릭(A5G)",
+          "code": "C17",
+          "swatch": "#363934",
+          "image_url": "https://autoimg.danawa.com/photo/4592/53356/color_17_360.png",
+          "path": "vehicles\\현대\\투싼\\colors\\07_아마존 그레이 메탈릭(A5G).png"
+        },
+        {
+          "name": "파인 그린 매트(RB2)",
+          "code": "C09",
+          "swatch": "#313533",
+          "image_url": "https://autoimg.danawa.com/photo/4592/53356/color_09_360.png",
+          "path": "vehicles\\현대\\투싼\\colors\\08_파인 그린 매트(RB2).png"
+        }
+      ],
+      "gallery": [
+        {
+          "name": "2026ㅣ투싼 블랙 익스테리어",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4592&Tab=image&No=139602",
+          "image_url": "https://autoimg.danawa.com/gallery/4592/20250807_4592 (1).jpg",
+          "path": "vehicles\\현대\\투싼\\gallery\\01_2026ㅣ투싼 블랙 익스테리어.jpg"
+        },
+        {
+          "name": "더 뉴 투싼 XRT",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4592&Tab=image&No=132974",
+          "image_url": "https://autoimg.danawa.com/gallery/4592/20241211_4592 (1).jpg",
+          "path": "vehicles\\현대\\투싼\\gallery\\02_더 뉴 투싼 XRT.jpg"
+        },
+        {
+          "name": "더 뉴 투싼 XRT",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4592&Tab=image&No=132975",
+          "image_url": "https://autoimg.danawa.com/gallery/4592/20241211_4592 (2).jpg",
+          "path": "vehicles\\현대\\투싼\\gallery\\03_더 뉴 투싼 XRT.jpg"
+        },
+        {
+          "name": "더 뉴 투싼 XRT",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4592&Tab=image&No=132976",
+          "image_url": "https://autoimg.danawa.com/gallery/4592/20241211_4592 (3).jpg",
+          "path": "vehicles\\현대\\투싼\\gallery\\04_더 뉴 투싼 XRT.jpg"
+        }
+      ]
+    },
+    {
+      "brand": "현대",
+      "brand_id": "303",
+      "model_id": "4558",
+      "name": "아이오닉 5 N",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4558",
+      "photo_code": "4558/53432",
+      "default_image_url": "https://autoimg.danawa.com/photo/4558/model_360.png",
+      "default_image_path": "vehicles\\현대\\아이오닉 5 N\\model_360.png",
+      "colors": [
+        {
+          "name": "퍼포먼스 블루 매트(XGE)",
+          "code": "C09",
+          "swatch": "#5586af",
+          "image_url": "https://autoimg.danawa.com/photo/4558/53432/color_09_360.png",
+          "path": "vehicles\\현대\\아이오닉 5 N\\colors\\01_퍼포먼스 블루 매트(XGE).png"
+        },
+        {
+          "name": "그래비티 골드 매트(W3T)",
+          "code": "C10",
+          "swatch": "#9f9c97",
+          "image_url": "https://autoimg.danawa.com/photo/4558/53432/color_10_360.png",
+          "path": "vehicles\\현대\\아이오닉 5 N\\colors\\02_그래비티 골드 매트(W3T).png"
+        },
+        {
+          "name": "아틀라스 화이트(SAW)",
+          "code": "C11",
+          "swatch": "#e1e4ed",
+          "image_url": "https://autoimg.danawa.com/photo/4558/53432/color_11_360.png",
+          "path": "vehicles\\현대\\아이오닉 5 N\\colors\\03_아틀라스 화이트(SAW).png"
+        },
+        {
+          "name": "퍼포먼스 블루(SFB)",
+          "code": "C12",
+          "swatch": "#5586af",
+          "image_url": "https://autoimg.danawa.com/photo/4558/53432/color_12_360.png",
+          "path": "vehicles\\현대\\아이오닉 5 N\\colors\\04_퍼포먼스 블루(SFB).png"
+        },
+        {
+          "name": "에코트로닉 그레이 펄(PE2)",
+          "code": "C13",
+          "swatch": "#505457",
+          "image_url": "https://autoimg.danawa.com/photo/4558/53432/color_13_360.png",
+          "path": "vehicles\\현대\\아이오닉 5 N\\colors\\05_에코트로닉 그레이 펄(PE2).png"
+        },
+        {
+          "name": "사이버 그레이 메탈릭(C5G)",
+          "code": "C14",
+          "swatch": "#a4a09d",
+          "image_url": "https://autoimg.danawa.com/photo/4558/53432/color_14_360.png",
+          "path": "vehicles\\현대\\아이오닉 5 N\\colors\\06_사이버 그레이 메탈릭(C5G).png"
+        },
+        {
+          "name": "어비스 블랙 펄(A2B)",
+          "code": "C15",
+          "swatch": "#0a0d0d",
+          "image_url": "https://autoimg.danawa.com/photo/4558/53432/color_15_360.png",
+          "path": "vehicles\\현대\\아이오닉 5 N\\colors\\07_어비스 블랙 펄(A2B).png"
+        },
+        {
+          "name": "소울트로닉 오렌지 펄(SOP)",
+          "code": "C16",
+          "swatch": "#982c22",
+          "image_url": "https://autoimg.danawa.com/photo/4558/53432/color_16_360.png",
+          "path": "vehicles\\현대\\아이오닉 5 N\\colors\\08_소울트로닉 오렌지 펄(SOP).png"
+        }
+      ],
+      "gallery": [
+        {
+          "name": "2026ㅣ아이오닉 5 N",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4558&Tab=image&No=140207",
+          "image_url": "https://autoimg.danawa.com/gallery/4558/20250922_4558 (1).jpg",
+          "path": "vehicles\\현대\\아이오닉 5 N\\gallery\\01_2026ㅣ아이오닉 5 N.jpg"
+        },
+        {
+          "name": "2026ㅣ아이오닉 5 N",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4558&Tab=image&No=140208",
+          "image_url": "https://autoimg.danawa.com/gallery/4558/20250922_4558 (2).jpg",
+          "path": "vehicles\\현대\\아이오닉 5 N\\gallery\\02_2026ㅣ아이오닉 5 N.jpg"
+        },
+        {
+          "name": "2026ㅣ아이오닉 5 N",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4558&Tab=image&No=140209",
+          "image_url": "https://autoimg.danawa.com/gallery/4558/20250922_4558 (3).jpg",
+          "path": "vehicles\\현대\\아이오닉 5 N\\gallery\\03_2026ㅣ아이오닉 5 N.jpg"
+        },
+        {
+          "name": "2026ㅣ아이오닉 5 N",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4558&Tab=image&No=140210",
+          "image_url": "https://autoimg.danawa.com/gallery/4558/20250922_4558 (4).jpg",
+          "path": "vehicles\\현대\\아이오닉 5 N\\gallery\\04_2026ㅣ아이오닉 5 N.jpg"
+        }
+      ]
+    },
+    {
+      "brand": "현대",
+      "brand_id": "303",
+      "model_id": "4624",
+      "name": "아이오닉 5",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4624",
+      "photo_code": "4624/53765",
+      "default_image_url": "https://autoimg.danawa.com/photo/4624/53765/color_12_360.png",
+      "default_image_path": "vehicles\\현대\\아이오닉 5\\model_360.png",
+      "colors": [
+        {
+          "name": "무광-프로스티드 브라운 매트(RTE)",
+          "code": "C08",
+          "swatch": "#38342b",
+          "image_url": "https://autoimg.danawa.com/photo/4624/53765/color_08_360.png",
+          "path": "vehicles\\현대\\아이오닉 5\\colors\\01_무광-프로스티드 브라운 매트(RTE).png"
+        },
+        {
+          "name": "무광-셀라돈 그레이 매트(Y2T)",
+          "code": "C09",
+          "swatch": "#8d9698",
+          "image_url": "https://autoimg.danawa.com/photo/4624/53765/color_09_360.png",
+          "path": "vehicles\\현대\\아이오닉 5\\colors\\02_무광-셀라돈 그레이 매트(Y2T).png"
+        },
+        {
+          "name": "무광-그래비티 골드 매트(W3T)",
+          "code": "C10",
+          "swatch": "#d2ccc3",
+          "image_url": "https://autoimg.danawa.com/photo/4624/53765/color_10_360.png",
+          "path": "vehicles\\현대\\아이오닉 5\\colors\\03_무광-그래비티 골드 매트(W3T).png"
+        },
+        {
+          "name": "어비스 블랙 펄(A2B)",
+          "code": "C11",
+          "swatch": "#1c1c1c",
+          "image_url": "https://autoimg.danawa.com/photo/4624/53765/color_11_360.png",
+          "path": "vehicles\\현대\\아이오닉 5\\colors\\04_어비스 블랙 펄(A2B).png"
+        },
+        {
+          "name": "사이버 그레이 메탈릭(C5G)",
+          "code": "C12",
+          "swatch": "#878787",
+          "image_url": "https://autoimg.danawa.com/photo/4624/53765/color_12_360.png",
+          "path": "vehicles\\현대\\아이오닉 5\\colors\\05_사이버 그레이 메탈릭(C5G).png"
+        },
+        {
+          "name": "에코트로닉 그레이 펄(PE2)",
+          "code": "C13",
+          "swatch": "#4b4b4b",
+          "image_url": "https://autoimg.danawa.com/photo/4624/53765/color_13_360.png",
+          "path": "vehicles\\현대\\아이오닉 5\\colors\\06_에코트로닉 그레이 펄(PE2).png"
+        },
+        {
+          "name": "아틀라스 화이트(SAW)",
+          "code": "C14",
+          "swatch": "#eaebf1",
+          "image_url": "https://autoimg.danawa.com/photo/4624/53765/color_14_360.png",
+          "path": "vehicles\\현대\\아이오닉 5\\colors\\07_아틀라스 화이트(SAW).png"
+        },
+        {
+          "name": "루시드 블루 펄(U3P)",
+          "code": "C15",
+          "swatch": "#56677d",
+          "image_url": "https://autoimg.danawa.com/photo/4624/53765/color_15_360.png",
+          "path": "vehicles\\현대\\아이오닉 5\\colors\\08_루시드 블루 펄(U3P).png"
+        },
+        {
+          "name": "디지털 틸그린 펄(M9U)",
+          "code": "C17",
+          "swatch": "#354448",
+          "image_url": "https://autoimg.danawa.com/photo/4624/53765/color_17_360.png",
+          "path": "vehicles\\현대\\아이오닉 5\\colors\\09_디지털 틸그린 펄(M9U).png"
+        },
+        {
+          "name": "얼티메이트 레드 메탈릭(R2P)",
+          "code": "C18",
+          "swatch": "#832620",
+          "image_url": "https://autoimg.danawa.com/photo/4624/53765/color_18_360.png",
+          "path": "vehicles\\현대\\아이오닉 5\\colors\\10_얼티메이트 레드 메탈릭(R2P).png"
+        }
+      ],
+      "gallery": [
+        {
+          "name": "2025ㅣ더 뉴 아이오닉 5",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4624&Tab=image&No=137867",
+          "image_url": "https://autoimg.danawa.com/gallery/4624/20250513_4624 (1).jpg",
+          "path": "vehicles\\현대\\아이오닉 5\\gallery\\01_2025ㅣ더 뉴 아이오닉 5.jpg"
+        },
+        {
+          "name": "2025ㅣ더 뉴 아이오닉 5",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4624&Tab=image&No=137868",
+          "image_url": "https://autoimg.danawa.com/gallery/4624/20250513_4624 (2).jpg",
+          "path": "vehicles\\현대\\아이오닉 5\\gallery\\02_2025ㅣ더 뉴 아이오닉 5.jpg"
+        },
+        {
+          "name": "더 뉴 아이오닉 5",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4624&Tab=image&No=128480",
+          "image_url": "https://autoimg.danawa.com/gallery/4624/20240906_4624 (1).jpg",
+          "path": "vehicles\\현대\\아이오닉 5\\gallery\\03_더 뉴 아이오닉 5.jpg"
+        },
+        {
+          "name": "더 뉴 아이오닉 5",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4624&Tab=image&No=128481",
+          "image_url": "https://autoimg.danawa.com/gallery/4624/20240906_4624 (2).jpg",
+          "path": "vehicles\\현대\\아이오닉 5\\gallery\\04_더 뉴 아이오닉 5.jpg"
+        }
+      ]
+    },
+    {
+      "brand": "현대",
+      "brand_id": "303",
+      "model_id": "4677",
+      "name": "디 올 뉴 넥쏘",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4677",
+      "photo_code": "4677/52013",
+      "default_image_url": "https://autoimg.danawa.com/photo/4677/model_360.png",
+      "default_image_path": "vehicles\\현대\\디 올 뉴 넥쏘\\model_360.png",
+      "colors": [
+        {
+          "name": "오션 인디고 매트(NBK)",
+          "code": "C10",
+          "swatch": "#373e50",
+          "image_url": "https://autoimg.danawa.com/photo/4677/52013/color_10_360.png",
+          "path": "vehicles\\현대\\디 올 뉴 넥쏘\\colors\\01_오션 인디고 매트(NBK).png"
+        },
+        {
+          "name": "크리미 화이트 펄(TW3)",
+          "code": "C11",
+          "swatch": "#eaeeeb",
+          "image_url": "https://autoimg.danawa.com/photo/4677/52013/color_11_360.png",
+          "path": "vehicles\\현대\\디 올 뉴 넥쏘\\colors\\02_크리미 화이트 펄(TW3).png"
+        },
+        {
+          "name": "팬텀 블랙 펄(TCM)",
+          "code": "C12",
+          "swatch": "#221f1e",
+          "image_url": "https://autoimg.danawa.com/photo/4677/52013/color_12_360.png",
+          "path": "vehicles\\현대\\디 올 뉴 넥쏘\\colors\\03_팬텀 블랙 펄(TCM).png"
+        },
+        {
+          "name": "아마존 그레이 메탈릭(A5G)",
+          "code": "C13",
+          "swatch": "#4a534b",
+          "image_url": "https://autoimg.danawa.com/photo/4677/52013/color_13_360.png",
+          "path": "vehicles\\현대\\디 올 뉴 넥쏘\\colors\\04_아마존 그레이 메탈릭(A5G).png"
+        },
+        {
+          "name": "에코트로닉 그레이 펄(PE2)",
+          "code": "C14",
+          "swatch": "#4a4c48",
+          "image_url": "https://autoimg.danawa.com/photo/4677/52013/color_14_360.png",
+          "path": "vehicles\\현대\\디 올 뉴 넥쏘\\colors\\05_에코트로닉 그레이 펄(PE2).png"
+        },
+        {
+          "name": "고요 카퍼 펄(VC2)",
+          "code": "C15",
+          "swatch": "#989385",
+          "image_url": "https://autoimg.danawa.com/photo/4677/52013/color_15_360.png",
+          "path": "vehicles\\현대\\디 올 뉴 넥쏘\\colors\\06_고요 카퍼 펄(VC2).png"
+        }
+      ],
+      "gallery": [
+        {
+          "name": "디 올 뉴 넥쏘",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4677&Tab=image&No=139702",
+          "image_url": "https://autoimg.danawa.com/gallery/4677/20250820_4677 (1).jpg",
+          "path": "vehicles\\현대\\디 올 뉴 넥쏘\\gallery\\01_디 올 뉴 넥쏘.jpg"
+        },
+        {
+          "name": "디 올 뉴 넥쏘",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4677&Tab=image&No=138975",
+          "image_url": "https://autoimg.danawa.com/gallery/4677/20250707_4677 (1).jpg",
+          "path": "vehicles\\현대\\디 올 뉴 넥쏘\\gallery\\02_디 올 뉴 넥쏘.jpg"
+        },
+        {
+          "name": "디 올 뉴 넥쏘",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4677&Tab=image&No=138976",
+          "image_url": "https://autoimg.danawa.com/gallery/4677/20250707_4677 (2).jpg",
+          "path": "vehicles\\현대\\디 올 뉴 넥쏘\\gallery\\03_디 올 뉴 넥쏘.jpg"
+        },
+        {
+          "name": "디 올 뉴 넥쏘",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4677&Tab=image&No=138977",
+          "image_url": "https://autoimg.danawa.com/gallery/4677/20250707_4677 (3).jpg",
+          "path": "vehicles\\현대\\디 올 뉴 넥쏘\\gallery\\04_디 올 뉴 넥쏘.jpg"
+        }
+      ]
+    },
+    {
+      "brand": "현대",
+      "brand_id": "303",
+      "model_id": "4435",
+      "name": "싼타페",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4435",
+      "photo_code": "4435/53355",
+      "default_image_url": "https://autoimg.danawa.com/photo/4435/model_360.png",
+      "default_image_path": "vehicles\\현대\\싼타페\\model_360.png",
+      "colors": [
+        {
+          "name": "크리미 화이트 펄(WW2)",
+          "code": "C08",
+          "swatch": "#eeedee",
+          "image_url": "https://autoimg.danawa.com/photo/4435/53355/color_08_360.png",
+          "path": "vehicles\\현대\\싼타페\\colors\\01_크리미 화이트 펄(WW2).png"
+        },
+        {
+          "name": "크리미 화이트 매트(WWM)",
+          "code": "C09",
+          "swatch": "#ecebeb",
+          "image_url": "https://autoimg.danawa.com/photo/4435/53355/color_09_360.png",
+          "path": "vehicles\\현대\\싼타페\\colors\\02_크리미 화이트 매트(WWM).png"
+        },
+        {
+          "name": "얼씨 브래스 메탈릭 매트(YBM)",
+          "code": "C10",
+          "swatch": "#83624f",
+          "image_url": "https://autoimg.danawa.com/photo/4435/53355/color_10_360.png",
+          "path": "vehicles\\현대\\싼타페\\colors\\03_얼씨 브래스 메탈릭 매트(YBM).png"
+        },
+        {
+          "name": "사이버 세이지 펄(RS2)",
+          "code": "C11",
+          "swatch": "#d5d6d1",
+          "image_url": "https://autoimg.danawa.com/photo/4435/53355/color_11_360.png",
+          "path": "vehicles\\현대\\싼타페\\colors\\04_사이버 세이지 펄(RS2).png"
+        },
+        {
+          "name": "페블 블루 펄(PB2)",
+          "code": "C12",
+          "swatch": "#707378",
+          "image_url": "https://autoimg.danawa.com/photo/4435/53355/color_12_360.png",
+          "path": "vehicles\\현대\\싼타페\\colors\\05_페블 블루 펄(PB2).png"
+        },
+        {
+          "name": "오카도 그린 펄(RN2)",
+          "code": "C13",
+          "swatch": "#8e855c",
+          "image_url": "https://autoimg.danawa.com/photo/4435/53355/color_13_360.png",
+          "path": "vehicles\\현대\\싼타페\\colors\\06_오카도 그린 펄(RN2).png"
+        },
+        {
+          "name": "에코트로닉 그레이 펄(PE2)",
+          "code": "C15",
+          "swatch": "#40403b",
+          "image_url": "https://autoimg.danawa.com/photo/4435/53355/color_15_360.png",
+          "path": "vehicles\\현대\\싼타페\\colors\\07_에코트로닉 그레이 펄(PE2).png"
+        },
+        {
+          "name": "어비스 블랙 펄(A2B)",
+          "code": "C16",
+          "swatch": "#1f1a17",
+          "image_url": "https://autoimg.danawa.com/photo/4435/53355/color_16_360.png",
+          "path": "vehicles\\현대\\싼타페\\colors\\08_어비스 블랙 펄(A2B).png"
+        }
+      ],
+      "gallery": [
+        {
+          "name": "2026ㅣ디 올 뉴 싼타페 블랙 익스테리어",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4435&Tab=image&No=139601",
+          "image_url": "https://autoimg.danawa.com/gallery/4435/20250807_4435 (1).jpg",
+          "path": "vehicles\\현대\\싼타페\\gallery\\01_2026ㅣ디 올 뉴 싼타페 블랙 익스테리어.jpg"
+        },
+        {
+          "name": "디 올 뉴 싼타페 하이브리드",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4435&Tab=image&No=132928",
+          "image_url": "https://autoimg.danawa.com/gallery/4435/20241211_4435 (1).jpg",
+          "path": "vehicles\\현대\\싼타페\\gallery\\02_디 올 뉴 싼타페 하이브리드.jpg"
+        },
+        {
+          "name": "디 올 뉴 싼타페 하이브리드",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4435&Tab=image&No=132929",
+          "image_url": "https://autoimg.danawa.com/gallery/4435/20241211_4435 (2).jpg",
+          "path": "vehicles\\현대\\싼타페\\gallery\\03_디 올 뉴 싼타페 하이브리드.jpg"
+        },
+        {
+          "name": "디 올 뉴 싼타페 하이브리드",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4435&Tab=image&No=132930",
+          "image_url": "https://autoimg.danawa.com/gallery/4435/20241211_4435 (3).jpg",
+          "path": "vehicles\\현대\\싼타페\\gallery\\04_디 올 뉴 싼타페 하이브리드.jpg"
+        }
+      ]
+    },
+    {
+      "brand": "현대",
+      "brand_id": "303",
+      "model_id": "4699",
+      "name": "디 올 뉴 팰리세이드",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4699",
+      "photo_code": "4699/52362",
+      "default_image_url": "https://autoimg.danawa.com/photo/4699/model_360.png",
+      "default_image_path": "vehicles\\현대\\디 올 뉴 팰리세이드\\model_360.png",
+      "colors": [
+        {
+          "name": "크리미 화이트 펄(WC9)",
+          "code": "C10",
+          "swatch": "#f1f3f2",
+          "image_url": "https://autoimg.danawa.com/photo/4699/52362/color_10_360.png",
+          "path": "vehicles\\현대\\디 올 뉴 팰리세이드\\colors\\01_크리미 화이트 펄(WC9).png"
+        },
+        {
+          "name": "쉬머링 실버 메탈릭(R2T)",
+          "code": "C11",
+          "swatch": "#95999c",
+          "image_url": "https://autoimg.danawa.com/photo/4699/52362/color_11_360.png",
+          "path": "vehicles\\현대\\디 올 뉴 팰리세이드\\colors\\02_쉬머링 실버 메탈릭(R2T).png"
+        },
+        {
+          "name": "에코트로닉 그레이 펄(PE2)",
+          "code": "C12",
+          "swatch": "#2b3030",
+          "image_url": "https://autoimg.danawa.com/photo/4699/52362/color_12_360.png",
+          "path": "vehicles\\현대\\디 올 뉴 팰리세이드\\colors\\03_에코트로닉 그레이 펄(PE2).png"
+        },
+        {
+          "name": "클래지 블루 펄(CBP)",
+          "code": "C13",
+          "swatch": "#000d26",
+          "image_url": "https://autoimg.danawa.com/photo/4699/52362/color_13_360.png",
+          "path": "vehicles\\현대\\디 올 뉴 팰리세이드\\colors\\04_클래지 블루 펄(CBP).png"
+        },
+        {
+          "name": "캐스트 아이언 브라운 펄(CRP)",
+          "code": "C14",
+          "swatch": "#2a2825",
+          "image_url": "https://autoimg.danawa.com/photo/4699/52362/color_14_360.png",
+          "path": "vehicles\\현대\\디 올 뉴 팰리세이드\\colors\\05_캐스트 아이언 브라운 펄(CRP).png"
+        },
+        {
+          "name": "갤럭시 마룬 펄(GMP)",
+          "code": "C15",
+          "swatch": "#15050f",
+          "image_url": "https://autoimg.danawa.com/photo/4699/52362/color_15_360.png",
+          "path": "vehicles\\현대\\디 올 뉴 팰리세이드\\colors\\06_갤럭시 마룬 펄(GMP).png"
+        },
+        {
+          "name": "어비스 블랙 펄(A2B)",
+          "code": "C16",
+          "swatch": "#19181b",
+          "image_url": "https://autoimg.danawa.com/photo/4699/52362/color_16_360.png",
+          "path": "vehicles\\현대\\디 올 뉴 팰리세이드\\colors\\07_어비스 블랙 펄(A2B).png"
+        },
+        {
+          "name": "로버스트 에메랄드 펄(R8N) - 캘리그래피 전용",
+          "code": "C17",
+          "swatch": "#062817",
+          "image_url": "https://autoimg.danawa.com/photo/4699/52362/color_17_360.png",
+          "path": "vehicles\\현대\\디 올 뉴 팰리세이드\\colors\\08_로버스트 에메랄드 펄(R8N) - 캘리그래피 전용.png"
+        }
+      ],
+      "gallery": [
+        {
+          "name": "디 올 뉴 팰리세이드 하이브리드",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4699&Tab=image&No=141724",
+          "image_url": "https://autoimg.danawa.com/gallery/4699/20251117_4699 (1).jpg",
+          "path": "vehicles\\현대\\디 올 뉴 팰리세이드\\gallery\\01_디 올 뉴 팰리세이드 하이브리드.jpg"
+        },
+        {
+          "name": "디 올 뉴 팰리세이드 하이브리드",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4699&Tab=image&No=141725",
+          "image_url": "https://autoimg.danawa.com/gallery/4699/20251117_4699 (2).jpg",
+          "path": "vehicles\\현대\\디 올 뉴 팰리세이드\\gallery\\02_디 올 뉴 팰리세이드 하이브리드.jpg"
+        },
+        {
+          "name": "디 올 뉴 팰리세이드 하이브리드",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4699&Tab=image&No=141726",
+          "image_url": "https://autoimg.danawa.com/gallery/4699/20251117_4699 (3).jpg",
+          "path": "vehicles\\현대\\디 올 뉴 팰리세이드\\gallery\\03_디 올 뉴 팰리세이드 하이브리드.jpg"
+        },
+        {
+          "name": "디 올 뉴 팰리세이드 하이브리드",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4699&Tab=image&No=141727",
+          "image_url": "https://autoimg.danawa.com/gallery/4699/20251117_4699 (4).jpg",
+          "path": "vehicles\\현대\\디 올 뉴 팰리세이드\\gallery\\04_디 올 뉴 팰리세이드 하이브리드.jpg"
+        }
+      ]
+    },
+    {
+      "brand": "현대",
+      "brand_id": "303",
+      "model_id": "4088",
+      "name": "아이오닉 9",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4088",
+      "photo_code": "4088/53701",
+      "default_image_url": "https://autoimg.danawa.com/photo/4088/model_360.png",
+      "default_image_path": "vehicles\\현대\\아이오닉 9\\model_360.png",
+      "colors": [
+        {
+          "name": "셀라돈 그레이 매트(Y2T)-캘리그래피 전용",
+          "code": "C08",
+          "swatch": "#b8c2c2",
+          "image_url": "https://autoimg.danawa.com/photo/4088/53701/color_08_360.png",
+          "path": "vehicles\\현대\\아이오닉 9\\colors\\01_셀라돈 그레이 매트(Y2T)-캘리그래피 전용.png"
+        },
+        {
+          "name": "녹턴 그레이 매트(T9M)",
+          "code": "C09",
+          "swatch": "#374247",
+          "image_url": "https://autoimg.danawa.com/photo/4088/53701/color_09_360.png",
+          "path": "vehicles\\현대\\아이오닉 9\\colors\\02_녹턴 그레이 매트(T9M).png"
+        },
+        {
+          "name": "세레니티 화이트 펄(W6H)",
+          "code": "C10",
+          "swatch": "#e1e3e3",
+          "image_url": "https://autoimg.danawa.com/photo/4088/53701/color_10_360.png",
+          "path": "vehicles\\현대\\아이오닉 9\\colors\\03_세레니티 화이트 펄(W6H).png"
+        },
+        {
+          "name": "어비스 블랙 펄(A2B)",
+          "code": "C11",
+          "swatch": "#181718",
+          "image_url": "https://autoimg.danawa.com/photo/4088/53701/color_11_360.png",
+          "path": "vehicles\\현대\\아이오닉 9\\colors\\04_어비스 블랙 펄(A2B).png"
+        },
+        {
+          "name": "녹턴 그레이 메탈릭(T2G)",
+          "code": "C12",
+          "swatch": "#13191d",
+          "image_url": "https://autoimg.danawa.com/photo/4088/53701/color_12_360.png",
+          "path": "vehicles\\현대\\아이오닉 9\\colors\\05_녹턴 그레이 메탈릭(T2G).png"
+        },
+        {
+          "name": "셀라돈 그레이 메탈릭(Y2G)",
+          "code": "C15",
+          "swatch": "#7c8b8b",
+          "image_url": "https://autoimg.danawa.com/photo/4088/53701/color_15_360.png",
+          "path": "vehicles\\현대\\아이오닉 9\\colors\\06_셀라돈 그레이 메탈릭(Y2G).png"
+        },
+        {
+          "name": "이오노스피어 그린 펄(NH5)",
+          "code": "C16",
+          "swatch": "#264835",
+          "image_url": "https://autoimg.danawa.com/photo/4088/53701/color_16_360.png",
+          "path": "vehicles\\현대\\아이오닉 9\\colors\\07_이오노스피어 그린 펄(NH5).png"
+        }
+      ],
+      "gallery": [
+        {
+          "name": "2027ㅣ아이오닉 9 블랙잉크",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4088&Tab=image&No=143446",
+          "image_url": "https://autoimg.danawa.com/gallery/4088/20260305_4088 (1).jpg",
+          "path": "vehicles\\현대\\아이오닉 9\\gallery\\01_2027ㅣ아이오닉 9 블랙잉크.jpg"
+        },
+        {
+          "name": "2027ㅣ아이오닉 9 블랙잉크",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4088&Tab=image&No=143447",
+          "image_url": "https://autoimg.danawa.com/gallery/4088/20260305_4088 (2).jpg",
+          "path": "vehicles\\현대\\아이오닉 9\\gallery\\02_2027ㅣ아이오닉 9 블랙잉크.jpg"
+        },
+        {
+          "name": "2027ㅣ아이오닉 9 내장",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4088&Tab=image&No=143448",
+          "image_url": "https://autoimg.danawa.com/gallery/4088/20260305_4088 (3).jpg",
+          "path": "vehicles\\현대\\아이오닉 9\\gallery\\03_2027ㅣ아이오닉 9 내장.jpg"
+        },
+        {
+          "name": "아이오닉 9",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4088&Tab=image&No=135114",
+          "image_url": "https://autoimg.danawa.com/gallery/4088/20250213_4088 (1).jpg",
+          "path": "vehicles\\현대\\아이오닉 9\\gallery\\04_아이오닉 9.jpg"
+        }
+      ]
+    },
+    {
+      "brand": "현대",
+      "brand_id": "303",
+      "model_id": "4014",
+      "name": "스타리아",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4014",
+      "photo_code": "4014/52278",
+      "default_image_url": "https://autoimg.danawa.com/photo/4014/model_360.png",
+      "default_image_path": "vehicles\\현대\\스타리아\\model_360.png",
+      "colors": [
+        {
+          "name": "크리미 화이트(YAC)",
+          "code": "C11",
+          "swatch": "#f8faf9",
+          "image_url": "https://autoimg.danawa.com/photo/4014/52278/color_11_360.png",
+          "path": "vehicles\\현대\\스타리아\\colors\\01_크리미 화이트(YAC).png"
+        },
+        {
+          "name": "쉬머링 실버 메탈릭(R2T)",
+          "code": "C12",
+          "swatch": "#919392",
+          "image_url": "https://autoimg.danawa.com/photo/4014/52278/color_12_360.png",
+          "path": "vehicles\\현대\\스타리아\\colors\\02_쉬머링 실버 메탈릭(R2T).png"
+        },
+        {
+          "name": "어비스 블랙 펄(A2B)",
+          "code": "C13",
+          "swatch": "#0c0c0e",
+          "image_url": "https://autoimg.danawa.com/photo/4014/52278/color_13_360.png",
+          "path": "vehicles\\현대\\스타리아\\colors\\03_어비스 블랙 펄(A2B).png"
+        },
+        {
+          "name": "에코트로닉 그레이 펄(PE2)",
+          "code": "C17",
+          "swatch": "#453f41",
+          "image_url": "https://autoimg.danawa.com/photo/4014/52278/color_17_360.png",
+          "path": "vehicles\\현대\\스타리아\\colors\\04_에코트로닉 그레이 펄(PE2).png"
+        },
+        {
+          "name": "캐스트아이언 브라운 펄(CRP)",
+          "code": "C18",
+          "swatch": "#4b3e2e",
+          "image_url": "https://autoimg.danawa.com/photo/4014/52278/color_18_360.png",
+          "path": "vehicles\\현대\\스타리아\\colors\\05_캐스트아이언 브라운 펄(CRP).png"
+        }
+      ],
+      "gallery": [
+        {
+          "name": "스타리아 라운지 하이브리드",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4014&Tab=image&No=120853",
+          "image_url": "https://autoimg.danawa.com/gallery/4014/20240422_4014 (25).jpg",
+          "path": "vehicles\\현대\\스타리아\\gallery\\01_스타리아 라운지 하이브리드.jpg"
+        },
+        {
+          "name": "스타리아 라운지 하이브리드",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4014&Tab=image&No=120854",
+          "image_url": "https://autoimg.danawa.com/gallery/4014/20240422_4014 (26).jpg",
+          "path": "vehicles\\현대\\스타리아\\gallery\\02_스타리아 라운지 하이브리드.jpg"
+        },
+        {
+          "name": "스타리아 라운지 하이브리드",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4014&Tab=image&No=120855",
+          "image_url": "https://autoimg.danawa.com/gallery/4014/20240422_4014 (27).jpg",
+          "path": "vehicles\\현대\\스타리아\\gallery\\03_스타리아 라운지 하이브리드.jpg"
+        },
+        {
+          "name": "스타리아 라운지 하이브리드",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4014&Tab=image&No=120856",
+          "image_url": "https://autoimg.danawa.com/gallery/4014/20240422_4014 (28).jpg",
+          "path": "vehicles\\현대\\스타리아\\gallery\\04_스타리아 라운지 하이브리드.jpg"
+        }
+      ]
+    },
+    {
+      "brand": "현대",
+      "brand_id": "303",
+      "model_id": "4765",
+      "name": "더 뉴 스타리아",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4765",
+      "photo_code": "4765/53558",
+      "default_image_url": "https://autoimg.danawa.com/photo/4765/model_360.png",
+      "default_image_path": "vehicles\\현대\\더 뉴 스타리아\\model_360.png",
+      "colors": [
+        {
+          "name": "크리미 화이트 (YAC)",
+          "code": "C11",
+          "swatch": "#fcfcfc",
+          "image_url": "https://autoimg.danawa.com/photo/4765/53558/color_11_360.png",
+          "path": "vehicles\\현대\\더 뉴 스타리아\\colors\\01_크리미 화이트 (YAC).png"
+        },
+        {
+          "name": "쉬머링 실버 메탈릭 (R2T)",
+          "code": "C12",
+          "swatch": "#bcbfc0",
+          "image_url": "https://autoimg.danawa.com/photo/4765/53558/color_12_360.png",
+          "path": "vehicles\\현대\\더 뉴 스타리아\\colors\\02_쉬머링 실버 메탈릭 (R2T).png"
+        },
+        {
+          "name": "에코트로닉 그레이 펄 (PE2)",
+          "code": "C13",
+          "swatch": "#7c7b7b",
+          "image_url": "https://autoimg.danawa.com/photo/4765/53558/color_13_360.png",
+          "path": "vehicles\\현대\\더 뉴 스타리아\\colors\\03_에코트로닉 그레이 펄 (PE2).png"
+        },
+        {
+          "name": "클래지 블루 펄 (CBP)",
+          "code": "C14",
+          "swatch": "#2d2c3c",
+          "image_url": "https://autoimg.danawa.com/photo/4765/53558/color_14_360.png",
+          "path": "vehicles\\현대\\더 뉴 스타리아\\colors\\04_클래지 블루 펄 (CBP).png"
+        },
+        {
+          "name": "어비스 블랙 펄 (A2B)",
+          "code": "C15",
+          "swatch": "#06070a",
+          "image_url": "https://autoimg.danawa.com/photo/4765/53558/color_15_360.png",
+          "path": "vehicles\\현대\\더 뉴 스타리아\\colors\\05_어비스 블랙 펄 (A2B).png"
+        },
+        {
+          "name": "다이나믹 옐로우 (NFA)",
+          "code": "C16",
+          "swatch": "#e1c15e",
+          "image_url": "https://autoimg.danawa.com/photo/4765/53558/color_16_360.png",
+          "path": "vehicles\\현대\\더 뉴 스타리아\\colors\\06_다이나믹 옐로우 (NFA).png"
+        }
+      ],
+      "gallery": [
+        {
+          "name": "더 뉴 스타리아 리무진 트와일라잇 호라이즌 투톤",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4765&Tab=image&No=144584",
+          "image_url": "https://autoimg.danawa.com/gallery/4765/20260423_4765 (1).jpg",
+          "path": "vehicles\\현대\\더 뉴 스타리아\\gallery\\01_더 뉴 스타리아 리무진 트와일라잇 호라이즌 투톤.jpg"
+        },
+        {
+          "name": "더 뉴 스타리아 리무진 내장",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4765&Tab=image&No=144585",
+          "image_url": "https://autoimg.danawa.com/gallery/4765/20260423_4765 (2).jpg",
+          "path": "vehicles\\현대\\더 뉴 스타리아\\gallery\\02_더 뉴 스타리아 리무진 내장.jpg"
+        },
+        {
+          "name": "더 뉴 스타리아 라운지",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4765&Tab=image&No=142445",
+          "image_url": "https://autoimg.danawa.com/gallery/4765/20251217_4765 (1).jpg",
+          "path": "vehicles\\현대\\더 뉴 스타리아\\gallery\\03_더 뉴 스타리아 라운지.jpg"
+        },
+        {
+          "name": "더 뉴 스타리아 라운지 내장",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4765&Tab=image&No=142446",
+          "image_url": "https://autoimg.danawa.com/gallery/4765/20251217_4765 (2).jpg",
+          "path": "vehicles\\현대\\더 뉴 스타리아\\gallery\\04_더 뉴 스타리아 라운지 내장.jpg"
+        }
+      ]
+    },
+    {
+      "brand": "현대",
+      "brand_id": "303",
+      "model_id": "4770",
+      "name": "스타리아 일렉트릭",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4770",
+      "photo_code": "4770/53620",
+      "default_image_url": "https://autoimg.danawa.com/photo/4770/model_360.png",
+      "default_image_path": "vehicles\\현대\\스타리아 일렉트릭\\model_360.png",
+      "colors": [
+        {
+          "name": "크리미 화이트(YAC)",
+          "code": "C11",
+          "swatch": "#ffffff",
+          "image_url": "https://autoimg.danawa.com/photo/4770/53620/color_11_360.png",
+          "path": "vehicles\\현대\\스타리아 일렉트릭\\colors\\01_크리미 화이트(YAC).png"
+        },
+        {
+          "name": "쉬머링 실버 메탈릭(R2T)",
+          "code": "C12",
+          "swatch": "#a4a8a9",
+          "image_url": "https://autoimg.danawa.com/photo/4770/53620/color_12_360.png",
+          "path": "vehicles\\현대\\스타리아 일렉트릭\\colors\\02_쉬머링 실버 메탈릭(R2T).png"
+        },
+        {
+          "name": "에코트로닉 그레이 펄(PE2)",
+          "code": "C13",
+          "swatch": "#3f4040",
+          "image_url": "https://autoimg.danawa.com/photo/4770/53620/color_13_360.png",
+          "path": "vehicles\\현대\\스타리아 일렉트릭\\colors\\03_에코트로닉 그레이 펄(PE2).png"
+        },
+        {
+          "name": "클래지 블루 펄(CBP)",
+          "code": "C14",
+          "swatch": "#2b2f53",
+          "image_url": "https://autoimg.danawa.com/photo/4770/53620/color_14_360.png",
+          "path": "vehicles\\현대\\스타리아 일렉트릭\\colors\\04_클래지 블루 펄(CBP).png"
+        },
+        {
+          "name": "어비스 블랙 펄(A2B)",
+          "code": "C15",
+          "swatch": "#08090d",
+          "image_url": "https://autoimg.danawa.com/photo/4770/53620/color_15_360.png",
+          "path": "vehicles\\현대\\스타리아 일렉트릭\\colors\\05_어비스 블랙 펄(A2B).png"
+        },
+        {
+          "name": "다이나믹 옐로우(NFA)",
+          "code": "C16",
+          "swatch": "#d2ac46",
+          "image_url": "https://autoimg.danawa.com/photo/4770/53620/color_16_360.png",
+          "path": "vehicles\\현대\\스타리아 일렉트릭\\colors\\06_다이나믹 옐로우(NFA).png"
+        }
+      ],
+      "gallery": [
+        {
+          "name": "더 뉴 스타리아 리무진 일렉트릭",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4770&Tab=image&No=144581",
+          "image_url": "https://autoimg.danawa.com/gallery/4770/20260423_4770 (1).jpg",
+          "path": "vehicles\\현대\\스타리아 일렉트릭\\gallery\\01_더 뉴 스타리아 리무진 일렉트릭.jpg"
+        },
+        {
+          "name": "더 뉴 스타리아 일렉트릭 투어러",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4770&Tab=image&No=144582",
+          "image_url": "https://autoimg.danawa.com/gallery/4770/20260423_4770 (2).jpg",
+          "path": "vehicles\\현대\\스타리아 일렉트릭\\gallery\\02_더 뉴 스타리아 일렉트릭 투어러.jpg"
+        },
+        {
+          "name": "더 뉴 스타리아 일렉트릭 내장",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4770&Tab=image&No=144583",
+          "image_url": "https://autoimg.danawa.com/gallery/4770/20260423_4770 (3).jpg",
+          "path": "vehicles\\현대\\스타리아 일렉트릭\\gallery\\03_더 뉴 스타리아 일렉트릭 내장.jpg"
+        },
+        {
+          "name": "더 뉴 스타리아 일렉트릭",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4770&Tab=image&No=142646",
+          "image_url": "https://autoimg.danawa.com/gallery/4770/20260112_4770 (1).jpg",
+          "path": "vehicles\\현대\\스타리아 일렉트릭\\gallery\\04_더 뉴 스타리아 일렉트릭.jpg"
+        }
+      ]
+    },
+    {
+      "brand": "현대",
+      "brand_id": "303",
+      "model_id": "3297",
+      "name": "쏠라티",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3297",
+      "photo_code": "3297/52250",
+      "default_image_url": "https://autoimg.danawa.com/photo/3297/model_360.png",
+      "default_image_path": "vehicles\\현대\\쏠라티\\model_360.png",
+      "colors": [
+        {
+          "name": "에보니블랙",
+          "code": "C16",
+          "swatch": "#17161c",
+          "image_url": "https://autoimg.danawa.com/photo/3297/52250/color_16_360.png",
+          "path": "vehicles\\현대\\쏠라티\\colors\\01_에보니블랙.png"
+        },
+        {
+          "name": "에크루베이지",
+          "code": "C11",
+          "swatch": "#9b9583",
+          "image_url": "https://autoimg.danawa.com/photo/3297/52250/color_11_360.png",
+          "path": "vehicles\\현대\\쏠라티\\colors\\02_에크루베이지.png"
+        },
+        {
+          "name": "크리미화이트",
+          "code": "C13",
+          "swatch": "#f1f1f1",
+          "image_url": "https://autoimg.danawa.com/photo/3297/52250/color_13_360.png",
+          "path": "vehicles\\현대\\쏠라티\\colors\\03_크리미화이트.png"
+        },
+        {
+          "name": "레몬옐로우",
+          "code": "C15",
+          "swatch": "#d4d782",
+          "image_url": "https://autoimg.danawa.com/photo/3297/52250/color_15_360.png",
+          "path": "vehicles\\현대\\쏠라티\\colors\\04_레몬옐로우.png"
+        }
+      ],
+      "gallery": [
+        {
+          "name": "2019 쏠라티",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3297&Tab=image&No=66100",
+          "image_url": "https://autoimg.danawa.com/gallery/3297/20190405_solati (1).jpg",
+          "path": "vehicles\\현대\\쏠라티\\gallery\\01_2019 쏠라티.jpg"
+        },
+        {
+          "name": "2019 쏠라티",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3297&Tab=image&No=66101",
+          "image_url": "https://autoimg.danawa.com/gallery/3297/20190405_solati (2).jpg",
+          "path": "vehicles\\현대\\쏠라티\\gallery\\02_2019 쏠라티.jpg"
+        },
+        {
+          "name": "2019 쏠라티",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3297&Tab=image&No=66102",
+          "image_url": "https://autoimg.danawa.com/gallery/3297/20190405_solati (3).jpg",
+          "path": "vehicles\\현대\\쏠라티\\gallery\\03_2019 쏠라티.jpg"
+        },
+        {
+          "name": "2019 쏠라티",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3297&Tab=image&No=66103",
+          "image_url": "https://autoimg.danawa.com/gallery/3297/20190405_solati (26).jpg",
+          "path": "vehicles\\현대\\쏠라티\\gallery\\04_2019 쏠라티.jpg"
+        }
+      ]
+    },
+    {
+      "brand": "현대",
+      "brand_id": "303",
+      "model_id": "3502",
+      "name": "카운티",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3502",
+      "photo_code": "3502/53381",
+      "default_image_url": "https://autoimg.danawa.com/photo/3502/model_360.png",
+      "default_image_path": "vehicles\\현대\\카운티\\model_360.png",
+      "colors": [],
+      "gallery": [
+        {
+          "name": "2019 카운티",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3502&Tab=image&No=66083",
+          "image_url": "https://autoimg.danawa.com/gallery/3502/20190405_county (1).jpg",
+          "path": "vehicles\\현대\\카운티\\gallery\\01_2019 카운티.jpg"
+        },
+        {
+          "name": "2019 카운티",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3502&Tab=image&No=66084",
+          "image_url": "https://autoimg.danawa.com/gallery/3502/20190405_county (2).jpg",
+          "path": "vehicles\\현대\\카운티\\gallery\\02_2019 카운티.jpg"
+        },
+        {
+          "name": "2019 카운티",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3502&Tab=image&No=66085",
+          "image_url": "https://autoimg.danawa.com/gallery/3502/20190405_county (3).jpg",
+          "path": "vehicles\\현대\\카운티\\gallery\\03_2019 카운티.jpg"
+        },
+        {
+          "name": "2019 카운티",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3502&Tab=image&No=66086",
+          "image_url": "https://autoimg.danawa.com/gallery/3502/20190405_county (4).jpg",
+          "path": "vehicles\\현대\\카운티\\gallery\\04_2019 카운티.jpg"
+        }
+      ]
+    },
+    {
+      "brand": "현대",
+      "brand_id": "303",
+      "model_id": "4400",
+      "name": "카운티 일렉트릭",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4400",
+      "photo_code": "4400/53394",
+      "default_image_url": "https://autoimg.danawa.com/photo/4400/model_360.png",
+      "default_image_path": "vehicles\\현대\\카운티 일렉트릭\\model_360.png",
+      "colors": [],
+      "gallery": []
+    },
+    {
+      "brand": "현대",
+      "brand_id": "303",
+      "model_id": "1901",
+      "name": "포터2",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=1901",
+      "photo_code": "1901/53552",
+      "default_image_url": "https://autoimg.danawa.com/photo/1901/model_360.png",
+      "default_image_path": "vehicles\\현대\\포터2\\model_360.png",
+      "colors": [
+        {
+          "name": "크리미 화이트 (YAW)",
+          "code": "C11",
+          "swatch": "#eeedf3",
+          "image_url": "https://autoimg.danawa.com/photo/1901/53552/color_11_360.png",
+          "path": "vehicles\\현대\\포터2\\colors\\01_크리미 화이트 (YAW).png"
+        },
+        {
+          "name": "오닉스 블루(ZV)",
+          "code": "C12",
+          "swatch": "#3f4d70",
+          "image_url": "https://autoimg.danawa.com/photo/1901/53552/color_12_360.png",
+          "path": "vehicles\\현대\\포터2\\colors\\02_오닉스 블루(ZV).png"
+        },
+        {
+          "name": "슬레이트 브라운 (RVB)",
+          "code": "C13",
+          "swatch": "#494441",
+          "image_url": "https://autoimg.danawa.com/photo/1901/53552/color_13_360.png",
+          "path": "vehicles\\현대\\포터2\\colors\\03_슬레이트 브라운 (RVB).png"
+        }
+      ],
+      "gallery": [
+        {
+          "name": "2026ㅣ포터 2 EV, 포터 2",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=1901&Tab=image&No=142440",
+          "image_url": "https://autoimg.danawa.com/gallery/1901/20251216_1901 (1).jpg",
+          "path": "vehicles\\현대\\포터2\\gallery\\01_2026ㅣ포터 2 EV, 포터 2.jpg"
+        },
+        {
+          "name": "2026ㅣ포터 2",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=1901&Tab=image&No=142442",
+          "image_url": "https://autoimg.danawa.com/gallery/1901/20251216_1901 (3).jpg",
+          "path": "vehicles\\현대\\포터2\\gallery\\02_2026ㅣ포터 2.jpg"
+        },
+        {
+          "name": "2020 포터2",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=1901&Tab=image&No=68499",
+          "image_url": "https://autoimg.danawa.com/gallery/1901/20190827_porter2 (2).jpg",
+          "path": "vehicles\\현대\\포터2\\gallery\\03_2020 포터2.jpg"
+        },
+        {
+          "name": "2020 포터2 4등식 헤드램프",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=1901&Tab=image&No=68500",
+          "image_url": "https://autoimg.danawa.com/gallery/1901/20190827_porter2 (4).jpg",
+          "path": "vehicles\\현대\\포터2\\gallery\\04_2020 포터2 4등식 헤드램프.jpg"
+        }
+      ]
+    },
+    {
+      "brand": "현대",
+      "brand_id": "303",
+      "model_id": "4399",
+      "name": "포터2 일렉트릭",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4399",
+      "photo_code": "4399/53555",
+      "default_image_url": "https://autoimg.danawa.com/photo/4399/model_360.png",
+      "default_image_path": "vehicles\\현대\\포터2 일렉트릭\\model_360.png",
+      "colors": [],
+      "gallery": [
+        {
+          "name": "2026ㅣ포터 2 EV, 포터 2",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4399&Tab=image&No=142443",
+          "image_url": "https://autoimg.danawa.com/gallery/4399/20251216_4399 (1).jpg",
+          "path": "vehicles\\현대\\포터2 일렉트릭\\gallery\\01_2026ㅣ포터 2 EV, 포터 2.jpg"
+        },
+        {
+          "name": "2026ㅣ포터 2 EV",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4399&Tab=image&No=142444",
+          "image_url": "https://autoimg.danawa.com/gallery/4399/20251216_4399 (2).jpg",
+          "path": "vehicles\\현대\\포터2 일렉트릭\\gallery\\02_2026ㅣ포터 2 EV.jpg"
+        },
+        {
+          "name": "2025ㅣ포터2 일렉트릭 하이내장탑차",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4399&Tab=image&No=138629",
+          "image_url": "https://autoimg.danawa.com/gallery/4399/20250612_4399 (1).jpg",
+          "path": "vehicles\\현대\\포터2 일렉트릭\\gallery\\03_2025ㅣ포터2 일렉트릭 하이내장탑차.jpg"
+        },
+        {
+          "name": "2025ㅣ포터2 일렉트릭 내장탑차 라인업",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4399&Tab=image&No=138630",
+          "image_url": "https://autoimg.danawa.com/gallery/4399/20250612_4399 (2).jpg",
+          "path": "vehicles\\현대\\포터2 일렉트릭\\gallery\\04_2025ㅣ포터2 일렉트릭 내장탑차 라인업.jpg"
+        }
+      ]
+    },
+    {
+      "brand": "현대",
+      "brand_id": "303",
+      "model_id": "4626",
+      "name": "ST1",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4626",
+      "photo_code": "4626/52293",
+      "default_image_url": "https://autoimg.danawa.com/photo/4626/model_360.png",
+      "default_image_path": "vehicles\\현대\\ST1\\model_360.png",
+      "colors": [
+        {
+          "name": "크리미 화이트(YAW)",
+          "code": "C11",
+          "swatch": "#f4f6fa",
+          "image_url": "https://autoimg.danawa.com/photo/4626/52293/color_11_360.png",
+          "path": "vehicles\\현대\\ST1\\colors\\01_크리미 화이트(YAW).png"
+        }
+      ],
+      "gallery": [
+        {
+          "name": "2026ㅣST1 카고",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4626&Tab=image&No=139093",
+          "image_url": "https://autoimg.danawa.com/gallery/4626/20250716_4626 (1).jpg",
+          "path": "vehicles\\현대\\ST1\\gallery\\01_2026ㅣST1 카고.jpg"
+        },
+        {
+          "name": "2026ㅣST1 샤시캡, 카고, 카고 냉동, 하이탑",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4626&Tab=image&No=139094",
+          "image_url": "https://autoimg.danawa.com/gallery/4626/20250716_4626 (2).jpg",
+          "path": "vehicles\\현대\\ST1\\gallery\\02_2026ㅣST1 샤시캡, 카고, 카고 냉동, 하이탑.jpg"
+        },
+        {
+          "name": "2026ㅣST1 카고",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4626&Tab=image&No=139095",
+          "image_url": "https://autoimg.danawa.com/gallery/4626/20250716_4626 (3).jpg",
+          "path": "vehicles\\현대\\ST1\\gallery\\03_2026ㅣST1 카고.jpg"
+        },
+        {
+          "name": "2026ㅣST1 카고",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4626&Tab=image&No=139096",
+          "image_url": "https://autoimg.danawa.com/gallery/4626/20250716_4626 (4).jpg",
+          "path": "vehicles\\현대\\ST1\\gallery\\04_2026ㅣST1 카고.jpg"
+        }
+      ]
+    },
+    {
+      "brand": "현대",
+      "brand_id": "303",
+      "model_id": "3500",
+      "name": "마이티",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3500",
+      "photo_code": "3500/52249",
+      "default_image_url": "https://autoimg.danawa.com/photo/3500/model_360.png",
+      "default_image_path": "vehicles\\현대\\마이티\\model_360.png",
+      "colors": [],
+      "gallery": [
+        {
+          "name": "2025ㅣ더 뉴 마이티",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3500&Tab=image&No=135219",
+          "image_url": "https://autoimg.danawa.com/gallery/3500/20250218_3500 (1).jpg",
+          "path": "vehicles\\현대\\마이티\\gallery\\01_2025ㅣ더 뉴 마이티.jpg"
+        },
+        {
+          "name": "2025ㅣ더 뉴 마이티",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3500&Tab=image&No=135220",
+          "image_url": "https://autoimg.danawa.com/gallery/3500/20250218_3500 (2).jpg",
+          "path": "vehicles\\현대\\마이티\\gallery\\02_2025ㅣ더 뉴 마이티.jpg"
+        },
+        {
+          "name": "2018 마이티 QT",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3500&Tab=image&No=69245",
+          "image_url": "https://autoimg.danawa.com/gallery/3500/20190923_qt.jpg",
+          "path": "vehicles\\현대\\마이티\\gallery\\03_2018 마이티 QT.jpg"
+        },
+        {
+          "name": "2018 마이티 2.5톤 슈퍼캡 고상",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3500&Tab=image&No=61422",
+          "image_url": "https://autoimg.danawa.com/gallery/3500/mighty_20190116 (1).jpg",
+          "path": "vehicles\\현대\\마이티\\gallery\\04_2018 마이티 2.5톤 슈퍼캡 고상.jpg"
+        }
+      ]
+    },
+    {
+      "brand": "현대",
+      "brand_id": "303",
+      "model_id": "4804",
+      "name": "더 뉴 마이티",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4804",
+      "photo_code": "4804/53785",
+      "default_image_url": "https://autoimg.danawa.com/photo/4804/model_360.png",
+      "default_image_path": "vehicles\\현대\\더 뉴 마이티\\model_360.png",
+      "colors": [],
+      "gallery": [
+        {
+          "name": "더 뉴 마이티",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4804&Tab=image&No=145043",
+          "image_url": "https://autoimg.danawa.com/gallery/4804/20260507_3500 (2).jpg",
+          "path": "vehicles\\현대\\더 뉴 마이티\\gallery\\01_더 뉴 마이티.jpg"
+        },
+        {
+          "name": "더 뉴 마이티",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4804&Tab=image&No=145044",
+          "image_url": "https://autoimg.danawa.com/gallery/4804/20260507_3500 (1).jpg",
+          "path": "vehicles\\현대\\더 뉴 마이티\\gallery\\02_더 뉴 마이티.jpg"
+        }
+      ]
+    },
+    {
+      "brand": "현대",
+      "brand_id": "303",
+      "model_id": "4003",
+      "name": "파비스",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4003",
+      "photo_code": "4003/52268",
+      "default_image_url": "https://autoimg.danawa.com/photo/4003/model_360.png",
+      "default_image_path": "vehicles\\현대\\파비스\\model_360.png",
+      "colors": [],
+      "gallery": [
+        {
+          "name": "2025ㅣ파비스",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4003&Tab=image&No=134555",
+          "image_url": "https://autoimg.danawa.com/gallery/4003/20250121_4003 (1).jpg",
+          "path": "vehicles\\현대\\파비스\\gallery\\01_2025ㅣ파비스.jpg"
+        },
+        {
+          "name": "2025ㅣ파비스",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4003&Tab=image&No=134556",
+          "image_url": "https://autoimg.danawa.com/gallery/4003/20250121_4003 (2).jpg",
+          "path": "vehicles\\현대\\파비스\\gallery\\02_2025ㅣ파비스.jpg"
+        },
+        {
+          "name": "파비스",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4003&Tab=image&No=78531",
+          "image_url": "https://autoimg.danawa.com/gallery/4003/20201014_pavise (1).jpg",
+          "path": "vehicles\\현대\\파비스\\gallery\\03_파비스.jpg"
+        },
+        {
+          "name": "파비스",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4003&Tab=image&No=78532",
+          "image_url": "https://autoimg.danawa.com/gallery/4003/20201014_pavise (2).jpg",
+          "path": "vehicles\\현대\\파비스\\gallery\\04_파비스.jpg"
+        }
+      ]
+    },
+    {
+      "brand": "현대",
+      "brand_id": "303",
+      "model_id": "4805",
+      "name": "더 뉴 파비스",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4805",
+      "photo_code": "4805/53794",
+      "default_image_url": "https://autoimg.danawa.com/photo/4805/model_360.png",
+      "default_image_path": "vehicles\\현대\\더 뉴 파비스\\model_360.png",
+      "colors": [],
+      "gallery": [
+        {
+          "name": "더 뉴 파비스",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4805&Tab=image&No=145045",
+          "image_url": "https://autoimg.danawa.com/gallery/4805/20260507_4003 (1).jpg",
+          "path": "vehicles\\현대\\더 뉴 파비스\\gallery\\01_더 뉴 파비스.jpg"
+        },
+        {
+          "name": "더 뉴 파비스",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4805&Tab=image&No=145046",
+          "image_url": "https://autoimg.danawa.com/gallery/4805/20260507_4003 (2).jpg",
+          "path": "vehicles\\현대\\더 뉴 파비스\\gallery\\02_더 뉴 파비스.jpg"
+        }
+      ]
+    }
+  ]
+}

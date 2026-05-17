@@ -1,0 +1,45 @@
+{
+  "brand": "현대",
+  "brand_id": "303",
+  "model_id": "4626",
+  "name": "ST1",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4626",
+  "photo_code": "4626/52293",
+  "default_image_url": "https://autoimg.danawa.com/photo/4626/model_360.png",
+  "default_image_path": "vehicles\\현대\\ST1\\model_360.png",
+  "colors": [
+    {
+      "name": "크리미 화이트(YAW)",
+      "code": "C11",
+      "swatch": "#f4f6fa",
+      "image_url": "https://autoimg.danawa.com/photo/4626/52293/color_11_360.png",
+      "path": "vehicles\\현대\\ST1\\colors\\01_크리미 화이트(YAW).png"
+    }
+  ],
+  "gallery": [
+    {
+      "name": "2026ㅣST1 카고",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4626&Tab=image&No=139093",
+      "image_url": "https://autoimg.danawa.com/gallery/4626/20250716_4626 (1).jpg",
+      "path": "vehicles\\현대\\ST1\\gallery\\01_2026ㅣST1 카고.jpg"
+    },
+    {
+      "name": "2026ㅣST1 샤시캡, 카고, 카고 냉동, 하이탑",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4626&Tab=image&No=139094",
+      "image_url": "https://autoimg.danawa.com/gallery/4626/20250716_4626 (2).jpg",
+      "path": "vehicles\\현대\\ST1\\gallery\\02_2026ㅣST1 샤시캡, 카고, 카고 냉동, 하이탑.jpg"
+    },
+    {
+      "name": "2026ㅣST1 카고",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4626&Tab=image&No=139095",
+      "image_url": "https://autoimg.danawa.com/gallery/4626/20250716_4626 (3).jpg",
+      "path": "vehicles\\현대\\ST1\\gallery\\03_2026ㅣST1 카고.jpg"
+    },
+    {
+      "name": "2026ㅣST1 카고",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4626&Tab=image&No=139096",
+      "image_url": "https://autoimg.danawa.com/gallery/4626/20250716_4626 (4).jpg",
+      "path": "vehicles\\현대\\ST1\\gallery\\04_2026ㅣST1 카고.jpg"
+    }
+  ]
+}

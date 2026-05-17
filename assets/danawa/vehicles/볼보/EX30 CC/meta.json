@@ -1,0 +1,66 @@
+{
+  "brand": "볼보",
+  "brand_id": "459",
+  "model_id": "4750",
+  "name": "EX30 CC",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4750",
+  "photo_code": "4750/53699",
+  "default_image_url": "https://autoimg.danawa.com/photo/4750/model_360.png",
+  "default_image_path": "vehicles\\볼보\\EX30 CC\\model_360.png",
+  "colors": [
+    {
+      "name": "클라우드 블루",
+      "code": "C11",
+      "swatch": "#c8d4e1",
+      "image_url": "https://autoimg.danawa.com/photo/4750/53699/color_11_360.png",
+      "path": "vehicles\\볼보\\EX30 CC\\colors\\01_클라우드 블루.png"
+    },
+    {
+      "name": "크리스탈 화이트",
+      "code": "C12",
+      "swatch": "#f2f2f2",
+      "image_url": "https://autoimg.danawa.com/photo/4750/53699/color_12_360.png",
+      "path": "vehicles\\볼보\\EX30 CC\\colors\\02_크리스탈 화이트.png"
+    },
+    {
+      "name": "오닉스 블랙",
+      "code": "C13",
+      "swatch": "#2d2926",
+      "image_url": "https://autoimg.danawa.com/photo/4750/53699/color_13_360.png",
+      "path": "vehicles\\볼보\\EX30 CC\\colors\\03_오닉스 블랙.png"
+    },
+    {
+      "name": "베이퍼 그레이",
+      "code": "C14",
+      "swatch": "#7b8082",
+      "image_url": "https://autoimg.danawa.com/photo/4750/53699/color_14_360.png",
+      "path": "vehicles\\볼보\\EX30 CC\\colors\\04_베이퍼 그레이.png"
+    }
+  ],
+  "gallery": [
+    {
+      "name": "EX30 Cross Country",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4750&Tab=image&No=140073",
+      "image_url": "https://autoimg.danawa.com/gallery/4750/20250912_4750 (1).jpg",
+      "path": "vehicles\\볼보\\EX30 CC\\gallery\\01_EX30 Cross Country.jpg"
+    },
+    {
+      "name": "EX30 Cross Country",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4750&Tab=image&No=140074",
+      "image_url": "https://autoimg.danawa.com/gallery/4750/20250912_4750 (2).jpg",
+      "path": "vehicles\\볼보\\EX30 CC\\gallery\\02_EX30 Cross Country.jpg"
+    },
+    {
+      "name": "EX30 Cross Country",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4750&Tab=image&No=140075",
+      "image_url": "https://autoimg.danawa.com/gallery/4750/20250912_4750 (3).jpg",
+      "path": "vehicles\\볼보\\EX30 CC\\gallery\\03_EX30 Cross Country.jpg"
+    },
+    {
+      "name": "EX30 Cross Country",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4750&Tab=image&No=140076",
+      "image_url": "https://autoimg.danawa.com/gallery/4750/20250912_4750 (4).jpg",
+      "path": "vehicles\\볼보\\EX30 CC\\gallery\\04_EX30 Cross Country.jpg"
+    }
+  ]
+}

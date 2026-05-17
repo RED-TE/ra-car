@@ -1,0 +1,66 @@
+{
+  "brand": "BMW",
+  "brand_id": "362",
+  "model_id": "4422",
+  "name": "XM",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4422",
+  "photo_code": "4422/53540",
+  "default_image_url": "https://autoimg.danawa.com/photo/4422/53540/color_13_360.png",
+  "default_image_path": "vehicles\\BMW\\XM\\model_360.png",
+  "colors": [
+    {
+      "name": "블랙 사파이어",
+      "code": "C11",
+      "swatch": "#161616",
+      "image_url": "https://autoimg.danawa.com/photo/4422/53540/color_11_360.png",
+      "path": "vehicles\\BMW\\XM\\colors\\01_블랙 사파이어.png"
+    },
+    {
+      "name": "미네랄 화이트",
+      "code": "C12",
+      "swatch": "#cac9c7",
+      "image_url": "https://autoimg.danawa.com/photo/4422/53540/color_12_360.png",
+      "path": "vehicles\\BMW\\XM\\colors\\02_미네랄 화이트.png"
+    },
+    {
+      "name": "케이프 요크 그린",
+      "code": "C13",
+      "swatch": "#364a41",
+      "image_url": "https://autoimg.danawa.com/photo/4422/53540/color_13_360.png",
+      "path": "vehicles\\BMW\\XM\\colors\\03_케이프 요크 그린.png"
+    },
+    {
+      "name": "BMW 인디비주얼 드라빗 그레이",
+      "code": "C14",
+      "swatch": "#454449",
+      "image_url": "https://autoimg.danawa.com/photo/4422/53540/color_14_360.png",
+      "path": "vehicles\\BMW\\XM\\colors\\04_BMW 인디비주얼 드라빗 그레이.png"
+    }
+  ],
+  "gallery": [
+    {
+      "name": "XM 레이블",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4422&Tab=image&No=144078",
+      "image_url": "https://autoimg.danawa.com/gallery/4422/20260408_4422 (1).jpg",
+      "path": "vehicles\\BMW\\XM\\gallery\\01_XM 레이블.jpg"
+    },
+    {
+      "name": "XM 레이블",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4422&Tab=image&No=144079",
+      "image_url": "https://autoimg.danawa.com/gallery/4422/20260408_4422 (2).jpg",
+      "path": "vehicles\\BMW\\XM\\gallery\\02_XM 레이블.jpg"
+    },
+    {
+      "name": "XM 레이블",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4422&Tab=image&No=144080",
+      "image_url": "https://autoimg.danawa.com/gallery/4422/20260408_4422 (3).jpg",
+      "path": "vehicles\\BMW\\XM\\gallery\\03_XM 레이블.jpg"
+    },
+    {
+      "name": "XM 레이블",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4422&Tab=image&No=144081",
+      "image_url": "https://autoimg.danawa.com/gallery/4422/20260408_4422 (4).jpg",
+      "path": "vehicles\\BMW\\XM\\gallery\\04_XM 레이블.jpg"
+    }
+  ]
+}

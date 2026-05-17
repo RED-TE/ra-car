@@ -1,0 +1,87 @@
+{
+  "brand": "기아",
+  "brand_id": "307",
+  "model_id": "4647",
+  "name": "EV3",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4647",
+  "photo_code": "4647/53657",
+  "default_image_url": "https://autoimg.danawa.com/photo/4647/53657/color_14_360.png",
+  "default_image_path": "vehicles\\기아\\EV3\\model_360.png",
+  "colors": [
+    {
+      "name": "스노우 화이트 펄 (SWP)",
+      "code": "C10",
+      "swatch": "#cecfd2",
+      "image_url": "https://autoimg.danawa.com/photo/4647/53657/color_10_360.png",
+      "path": "vehicles\\기아\\EV3\\colors\\01_스노우 화이트 펄 (SWP).png"
+    },
+    {
+      "name": "아이보리 실버 (ISG)",
+      "code": "C11",
+      "swatch": "#878887",
+      "image_url": "https://autoimg.danawa.com/photo/4647/53657/color_11_360.png",
+      "path": "vehicles\\기아\\EV3\\colors\\02_아이보리 실버 (ISG).png"
+    },
+    {
+      "name": "아이보리 매트 실버 (ISM)",
+      "code": "C09",
+      "swatch": "#bbbab1",
+      "image_url": "https://autoimg.danawa.com/photo/4647/53657/color_09_360.png",
+      "path": "vehicles\\기아\\EV3\\colors\\03_아이보리 매트 실버 (ISM).png"
+    },
+    {
+      "name": "오로라 블랙 펄 (ABP)",
+      "code": "C12",
+      "swatch": "#171514",
+      "image_url": "https://autoimg.danawa.com/photo/4647/53657/color_12_360.png",
+      "path": "vehicles\\기아\\EV3\\colors\\04_오로라 블랙 펄 (ABP).png"
+    },
+    {
+      "name": "세일 그레이 (EBD)",
+      "code": "C13",
+      "swatch": "#3c3c3e",
+      "image_url": "https://autoimg.danawa.com/photo/4647/53657/color_13_360.png",
+      "path": "vehicles\\기아\\EV3\\colors\\05_세일 그레이 (EBD).png"
+    },
+    {
+      "name": "어벤쳐린 그린 (AG3)",
+      "code": "C14",
+      "swatch": "#77827b",
+      "image_url": "https://autoimg.danawa.com/photo/4647/53657/color_14_360.png",
+      "path": "vehicles\\기아\\EV3\\colors\\06_어벤쳐린 그린 (AG3).png"
+    },
+    {
+      "name": "프로스트 블루 (EBB)",
+      "code": "C15",
+      "swatch": "#5f7482",
+      "image_url": "https://autoimg.danawa.com/photo/4647/53657/color_15_360.png",
+      "path": "vehicles\\기아\\EV3\\colors\\07_프로스트 블루 (EBB).png"
+    }
+  ],
+  "gallery": [
+    {
+      "name": "EV4 GT & EV3 GT & EV5 GT",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4647&Tab=image&No=142973",
+      "image_url": "https://autoimg.danawa.com/gallery/4647/20260204_4647 (1).jpg",
+      "path": "vehicles\\기아\\EV3\\gallery\\01_EV4 GT & EV3 GT & EV5 GT.jpg"
+    },
+    {
+      "name": "2024 EV3",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4647&Tab=image&No=140806",
+      "image_url": "https://autoimg.danawa.com/gallery/4647/20250924_4647 (1).jpg",
+      "path": "vehicles\\기아\\EV3\\gallery\\02_2024 EV3.jpg"
+    },
+    {
+      "name": "2024 EV3",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4647&Tab=image&No=140807",
+      "image_url": "https://autoimg.danawa.com/gallery/4647/20250924_4647 (2).jpg",
+      "path": "vehicles\\기아\\EV3\\gallery\\03_2024 EV3.jpg"
+    },
+    {
+      "name": "2024 EV3",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4647&Tab=image&No=140808",
+      "image_url": "https://autoimg.danawa.com/gallery/4647/20250924_4647 (3).jpg",
+      "path": "vehicles\\기아\\EV3\\gallery\\04_2024 EV3.jpg"
+    }
+  ]
+}

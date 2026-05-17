@@ -1,0 +1,73 @@
+{
+  "brand": "테슬라",
+  "brand_id": "611",
+  "model_id": "4043",
+  "name": "Model S",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4043",
+  "photo_code": "4043/52949",
+  "default_image_url": "https://autoimg.danawa.com/photo/4043/model_360.png",
+  "default_image_path": "vehicles\\테슬라\\Model S\\model_360.png",
+  "colors": [
+    {
+      "name": "Stealth Grey",
+      "code": "C06",
+      "swatch": "#2a2930",
+      "image_url": "https://autoimg.danawa.com/photo/4043/52949/color_06_360.png",
+      "path": "vehicles\\테슬라\\Model S\\colors\\01_Stealth Grey.png"
+    },
+    {
+      "name": "Pearl White Multi-Coat",
+      "code": "C11",
+      "swatch": "#f0f1f3",
+      "image_url": "https://autoimg.danawa.com/photo/4043/52949/color_11_360.png",
+      "path": "vehicles\\테슬라\\Model S\\colors\\02_Pearl White Multi-Coat.png"
+    },
+    {
+      "name": "Diamond Black",
+      "code": "C10",
+      "swatch": "#161616",
+      "image_url": "https://autoimg.danawa.com/photo/4043/52949/color_10_360.png",
+      "path": "vehicles\\테슬라\\Model S\\colors\\03_Diamond Black.png"
+    },
+    {
+      "name": "Ultra Red",
+      "code": "C07",
+      "swatch": "#ab0014",
+      "image_url": "https://autoimg.danawa.com/photo/4043/52949/color_07_360.png",
+      "path": "vehicles\\테슬라\\Model S\\colors\\04_Ultra Red.png"
+    },
+    {
+      "name": "Frost Blue Metallic",
+      "code": "C08",
+      "swatch": "#49678b",
+      "image_url": "https://autoimg.danawa.com/photo/4043/52949/color_08_360.png",
+      "path": "vehicles\\테슬라\\Model S\\colors\\05_Frost Blue Metallic.png"
+    }
+  ],
+  "gallery": [
+    {
+      "name": "모델 S",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4043&Tab=image&No=141269",
+      "image_url": "https://autoimg.danawa.com/gallery/4043/20251027_4043 (1).jpg",
+      "path": "vehicles\\테슬라\\Model S\\gallery\\01_모델 S.jpg"
+    },
+    {
+      "name": "모델 S",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4043&Tab=image&No=141270",
+      "image_url": "https://autoimg.danawa.com/gallery/4043/20251027_4043 (2).jpg",
+      "path": "vehicles\\테슬라\\Model S\\gallery\\02_모델 S.jpg"
+    },
+    {
+      "name": "모델 S",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4043&Tab=image&No=141271",
+      "image_url": "https://autoimg.danawa.com/gallery/4043/20251027_4043 (3).jpg",
+      "path": "vehicles\\테슬라\\Model S\\gallery\\03_모델 S.jpg"
+    },
+    {
+      "name": "모델 S",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4043&Tab=image&No=138683",
+      "image_url": "https://autoimg.danawa.com/gallery/4043/20250617_4043 (1).jpg",
+      "path": "vehicles\\테슬라\\Model S\\gallery\\04_모델 S.jpg"
+    }
+  ]
+}

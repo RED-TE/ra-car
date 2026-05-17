@@ -1,0 +1,87 @@
+{
+  "brand": "테슬라",
+  "brand_id": "611",
+  "model_id": "4667",
+  "name": "Model Y",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4667",
+  "photo_code": "4667/53635",
+  "default_image_url": "https://autoimg.danawa.com/photo/4667/53635/color_07_360.png",
+  "default_image_path": "vehicles\\테슬라\\Model Y\\model_360.png",
+  "colors": [
+    {
+      "name": "Stealth Grey",
+      "code": "C11",
+      "swatch": "#2a2930",
+      "image_url": "https://autoimg.danawa.com/photo/4667/53635/color_11_360.png",
+      "path": "vehicles\\테슬라\\Model Y\\colors\\01_Stealth Grey.png"
+    },
+    {
+      "name": "Pearl White Multi-Coat",
+      "code": "C10",
+      "swatch": "#f0f1f3",
+      "image_url": "https://autoimg.danawa.com/photo/4667/53635/color_10_360.png",
+      "path": "vehicles\\테슬라\\Model Y\\colors\\02_Pearl White Multi-Coat.png"
+    },
+    {
+      "name": "Diamond Black",
+      "code": "C06",
+      "swatch": "#161616",
+      "image_url": "https://autoimg.danawa.com/photo/4667/53635/color_06_360.png",
+      "path": "vehicles\\테슬라\\Model Y\\colors\\03_Diamond Black.png"
+    },
+    {
+      "name": "Glacier Blue",
+      "code": "C09",
+      "swatch": "#486992",
+      "image_url": "https://autoimg.danawa.com/photo/4667/53635/color_09_360.png",
+      "path": "vehicles\\테슬라\\Model Y\\colors\\04_Glacier Blue.png"
+    },
+    {
+      "name": "Ultra Red",
+      "code": "C08",
+      "swatch": "#ab0014",
+      "image_url": "https://autoimg.danawa.com/photo/4667/53635/color_08_360.png",
+      "path": "vehicles\\테슬라\\Model Y\\colors\\05_Ultra Red.png"
+    },
+    {
+      "name": "Quicksilver",
+      "code": "C07",
+      "swatch": "#ababab",
+      "image_url": "https://autoimg.danawa.com/photo/4667/53635/color_07_360.png",
+      "path": "vehicles\\테슬라\\Model Y\\colors\\06_Quicksilver.png"
+    },
+    {
+      "name": "Cosmic Silver",
+      "code": "C05",
+      "swatch": "#b0ada8",
+      "image_url": "https://autoimg.danawa.com/photo/4667/53635/color_05_360.png",
+      "path": "vehicles\\테슬라\\Model Y\\colors\\07_Cosmic Silver.png"
+    }
+  ],
+  "gallery": [
+    {
+      "name": "모델 Y L",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4667&Tab=image&No=144842",
+      "image_url": "https://autoimg.danawa.com/gallery/4667/20260423_4667 (1).jpg",
+      "path": "vehicles\\테슬라\\Model Y\\gallery\\01_모델 Y L.jpg"
+    },
+    {
+      "name": "모델 Y L",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4667&Tab=image&No=144843",
+      "image_url": "https://autoimg.danawa.com/gallery/4667/20260423_4667 (2).jpg",
+      "path": "vehicles\\테슬라\\Model Y\\gallery\\02_모델 Y L.jpg"
+    },
+    {
+      "name": "모델 Y L",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4667&Tab=image&No=144844",
+      "image_url": "https://autoimg.danawa.com/gallery/4667/20260423_4667 (3).jpg",
+      "path": "vehicles\\테슬라\\Model Y\\gallery\\03_모델 Y L.jpg"
+    },
+    {
+      "name": "모델 Y L",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4667&Tab=image&No=144845",
+      "image_url": "https://autoimg.danawa.com/gallery/4667/20260423_4667 (4).jpg",
+      "path": "vehicles\\테슬라\\Model Y\\gallery\\04_모델 Y L.jpg"
+    }
+  ]
+}

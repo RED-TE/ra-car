@@ -1,0 +1,73 @@
+{
+  "brand": "KGM",
+  "brand_id": "326",
+  "model_id": "4545",
+  "name": "티볼리",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4545",
+  "photo_code": "4545/53720",
+  "default_image_url": "https://autoimg.danawa.com/photo/4545/model_360.png",
+  "default_image_path": "vehicles\\KGM\\티볼리\\model_360.png",
+  "colors": [
+    {
+      "name": "그랜드 화이트(WAA)",
+      "code": "C11",
+      "swatch": "#f2eee8",
+      "image_url": "https://autoimg.danawa.com/photo/4545/53720/color_11_360.png",
+      "path": "vehicles\\KGM\\티볼리\\colors\\01_그랜드 화이트(WAA).png"
+    },
+    {
+      "name": "아이언 메탈(ADE)",
+      "code": "C12",
+      "swatch": "#a3a5b4",
+      "image_url": "https://autoimg.danawa.com/photo/4545/53720/color_12_360.png",
+      "path": "vehicles\\KGM\\티볼리\\colors\\02_아이언 메탈(ADE).png"
+    },
+    {
+      "name": "댄디 블루(BAS)",
+      "code": "C14",
+      "swatch": "#0c2344",
+      "image_url": "https://autoimg.danawa.com/photo/4545/53720/color_14_360.png",
+      "path": "vehicles\\KGM\\티볼리\\colors\\03_댄디 블루(BAS).png"
+    },
+    {
+      "name": "스페이스 블랙(LAK)",
+      "code": "C15",
+      "swatch": "#24211e",
+      "image_url": "https://autoimg.danawa.com/photo/4545/53720/color_15_360.png",
+      "path": "vehicles\\KGM\\티볼리\\colors\\04_스페이스 블랙(LAK).png"
+    },
+    {
+      "name": "라떼 그레이지(EBL)",
+      "code": "C21",
+      "swatch": "#bcb2a9",
+      "image_url": "https://autoimg.danawa.com/photo/4545/53720/color_21_360.png",
+      "path": "vehicles\\KGM\\티볼리\\colors\\05_라떼 그레이지(EBL).png"
+    }
+  ],
+  "gallery": [
+    {
+      "name": "더 뉴 티볼리",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4545&Tab=image&No=132797",
+      "image_url": "https://autoimg.danawa.com/gallery/4545/20241203_4545 (1).jpg",
+      "path": "vehicles\\KGM\\티볼리\\gallery\\01_더 뉴 티볼리.jpg"
+    },
+    {
+      "name": "더 뉴 티볼리",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4545&Tab=image&No=128389",
+      "image_url": "https://autoimg.danawa.com/gallery/4545/20240830_4545 (1).jpg",
+      "path": "vehicles\\KGM\\티볼리\\gallery\\02_더 뉴 티볼리.jpg"
+    },
+    {
+      "name": "더 뉴 티볼리",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4545&Tab=image&No=125437",
+      "image_url": "https://autoimg.danawa.com/gallery/4545/20240617_4545 (1).JPG",
+      "path": "vehicles\\KGM\\티볼리\\gallery\\03_더 뉴 티볼리.JPG"
+    },
+    {
+      "name": "더 뉴 티볼리",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4545&Tab=image&No=121177",
+      "image_url": "https://autoimg.danawa.com/gallery/4545/20240426_4545 (1).jpg",
+      "path": "vehicles\\KGM\\티볼리\\gallery\\04_더 뉴 티볼리.jpg"
+    }
+  ]
+}

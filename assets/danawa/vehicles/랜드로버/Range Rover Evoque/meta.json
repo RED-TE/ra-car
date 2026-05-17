@@ -1,0 +1,37 @@
+{
+  "brand": "랜드로버",
+  "brand_id": "399",
+  "model_id": "4551",
+  "name": "Range Rover Evoque",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4551",
+  "photo_code": "4551/53685",
+  "default_image_url": "https://autoimg.danawa.com/photo/4551/model_360.png",
+  "default_image_path": "vehicles\\랜드로버\\Range Rover Evoque\\model_360.png",
+  "colors": [],
+  "gallery": [
+    {
+      "name": "레인지로버 이보크 혹스턴 에디션",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4551&Tab=image&No=142727",
+      "image_url": "https://autoimg.danawa.com/gallery/4551/20260114_4551 (1).jpg",
+      "path": "vehicles\\랜드로버\\Range Rover Evoque\\gallery\\01_레인지로버 이보크 혹스턴 에디션.jpg"
+    },
+    {
+      "name": "레인지로버 이보크 혹스턴 에디션",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4551&Tab=image&No=142728",
+      "image_url": "https://autoimg.danawa.com/gallery/4551/20260114_4551 (2).jpg",
+      "path": "vehicles\\랜드로버\\Range Rover Evoque\\gallery\\02_레인지로버 이보크 혹스턴 에디션.jpg"
+    },
+    {
+      "name": "레인지로버 이보크 혹스턴 에디션",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4551&Tab=image&No=142729",
+      "image_url": "https://autoimg.danawa.com/gallery/4551/20260114_4551 (3).jpg",
+      "path": "vehicles\\랜드로버\\Range Rover Evoque\\gallery\\03_레인지로버 이보크 혹스턴 에디션.jpg"
+    },
+    {
+      "name": "레인지로버 이보크 혹스턴 에디션",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4551&Tab=image&No=142730",
+      "image_url": "https://autoimg.danawa.com/gallery/4551/20260114_4551 (4).jpg",
+      "path": "vehicles\\랜드로버\\Range Rover Evoque\\gallery\\04_레인지로버 이보크 혹스턴 에디션.jpg"
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "brand": "아우디",
+  "brand_id": "371",
+  "model_id": "4774",
+  "name": "The new Q3",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4774",
+  "photo_code": "4774/",
+  "default_image_url": "https://autoimg.danawa.com/photo/4774/model_360.png",
+  "default_image_path": "vehicles\\아우디\\The new Q3\\model_360.png",
+  "colors": [],
+  "gallery": [
+    {
+      "name": "Audi Q3, Q3 Sportback",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4774&Tab=image&No=142804",
+      "image_url": "https://autoimg.danawa.com/gallery/4774/20260119_4774 (35).jpg",
+      "path": "vehicles\\아우디\\The new Q3\\gallery\\01_Audi Q3, Q3 Sportback.jpg"
+    },
+    {
+      "name": "Audi Q3",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4774&Tab=image&No=142805",
+      "image_url": "https://autoimg.danawa.com/gallery/4774/20260119_4774 (1).jpg",
+      "path": "vehicles\\아우디\\The new Q3\\gallery\\02_Audi Q3.jpg"
+    },
+    {
+      "name": "Audi Q3",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4774&Tab=image&No=142806",
+      "image_url": "https://autoimg.danawa.com/gallery/4774/20260119_4774 (2).jpg",
+      "path": "vehicles\\아우디\\The new Q3\\gallery\\03_Audi Q3.jpg"
+    },
+    {
+      "name": "Audi Q3",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4774&Tab=image&No=142807",
+      "image_url": "https://autoimg.danawa.com/gallery/4774/20260119_4774 (3).jpg",
+      "path": "vehicles\\아우디\\The new Q3\\gallery\\04_Audi Q3.jpg"
+    }
+  ]
+}

@@ -1,0 +1,94 @@
+{
+  "brand": "현대",
+  "brand_id": "303",
+  "model_id": "4558",
+  "name": "아이오닉 5 N",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4558",
+  "photo_code": "4558/53432",
+  "default_image_url": "https://autoimg.danawa.com/photo/4558/model_360.png",
+  "default_image_path": "vehicles\\현대\\아이오닉 5 N\\model_360.png",
+  "colors": [
+    {
+      "name": "퍼포먼스 블루 매트(XGE)",
+      "code": "C09",
+      "swatch": "#5586af",
+      "image_url": "https://autoimg.danawa.com/photo/4558/53432/color_09_360.png",
+      "path": "vehicles\\현대\\아이오닉 5 N\\colors\\01_퍼포먼스 블루 매트(XGE).png"
+    },
+    {
+      "name": "그래비티 골드 매트(W3T)",
+      "code": "C10",
+      "swatch": "#9f9c97",
+      "image_url": "https://autoimg.danawa.com/photo/4558/53432/color_10_360.png",
+      "path": "vehicles\\현대\\아이오닉 5 N\\colors\\02_그래비티 골드 매트(W3T).png"
+    },
+    {
+      "name": "아틀라스 화이트(SAW)",
+      "code": "C11",
+      "swatch": "#e1e4ed",
+      "image_url": "https://autoimg.danawa.com/photo/4558/53432/color_11_360.png",
+      "path": "vehicles\\현대\\아이오닉 5 N\\colors\\03_아틀라스 화이트(SAW).png"
+    },
+    {
+      "name": "퍼포먼스 블루(SFB)",
+      "code": "C12",
+      "swatch": "#5586af",
+      "image_url": "https://autoimg.danawa.com/photo/4558/53432/color_12_360.png",
+      "path": "vehicles\\현대\\아이오닉 5 N\\colors\\04_퍼포먼스 블루(SFB).png"
+    },
+    {
+      "name": "에코트로닉 그레이 펄(PE2)",
+      "code": "C13",
+      "swatch": "#505457",
+      "image_url": "https://autoimg.danawa.com/photo/4558/53432/color_13_360.png",
+      "path": "vehicles\\현대\\아이오닉 5 N\\colors\\05_에코트로닉 그레이 펄(PE2).png"
+    },
+    {
+      "name": "사이버 그레이 메탈릭(C5G)",
+      "code": "C14",
+      "swatch": "#a4a09d",
+      "image_url": "https://autoimg.danawa.com/photo/4558/53432/color_14_360.png",
+      "path": "vehicles\\현대\\아이오닉 5 N\\colors\\06_사이버 그레이 메탈릭(C5G).png"
+    },
+    {
+      "name": "어비스 블랙 펄(A2B)",
+      "code": "C15",
+      "swatch": "#0a0d0d",
+      "image_url": "https://autoimg.danawa.com/photo/4558/53432/color_15_360.png",
+      "path": "vehicles\\현대\\아이오닉 5 N\\colors\\07_어비스 블랙 펄(A2B).png"
+    },
+    {
+      "name": "소울트로닉 오렌지 펄(SOP)",
+      "code": "C16",
+      "swatch": "#982c22",
+      "image_url": "https://autoimg.danawa.com/photo/4558/53432/color_16_360.png",
+      "path": "vehicles\\현대\\아이오닉 5 N\\colors\\08_소울트로닉 오렌지 펄(SOP).png"
+    }
+  ],
+  "gallery": [
+    {
+      "name": "2026ㅣ아이오닉 5 N",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4558&Tab=image&No=140207",
+      "image_url": "https://autoimg.danawa.com/gallery/4558/20250922_4558 (1).jpg",
+      "path": "vehicles\\현대\\아이오닉 5 N\\gallery\\01_2026ㅣ아이오닉 5 N.jpg"
+    },
+    {
+      "name": "2026ㅣ아이오닉 5 N",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4558&Tab=image&No=140208",
+      "image_url": "https://autoimg.danawa.com/gallery/4558/20250922_4558 (2).jpg",
+      "path": "vehicles\\현대\\아이오닉 5 N\\gallery\\02_2026ㅣ아이오닉 5 N.jpg"
+    },
+    {
+      "name": "2026ㅣ아이오닉 5 N",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4558&Tab=image&No=140209",
+      "image_url": "https://autoimg.danawa.com/gallery/4558/20250922_4558 (3).jpg",
+      "path": "vehicles\\현대\\아이오닉 5 N\\gallery\\03_2026ㅣ아이오닉 5 N.jpg"
+    },
+    {
+      "name": "2026ㅣ아이오닉 5 N",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4558&Tab=image&No=140210",
+      "image_url": "https://autoimg.danawa.com/gallery/4558/20250922_4558 (4).jpg",
+      "path": "vehicles\\현대\\아이오닉 5 N\\gallery\\04_2026ㅣ아이오닉 5 N.jpg"
+    }
+  ]
+}

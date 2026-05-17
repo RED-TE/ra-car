@@ -1,0 +1,37 @@
+{
+  "brand": "벤츠",
+  "brand_id": "349",
+  "model_id": "4642",
+  "name": "The New S-Class",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4642",
+  "photo_code": "4642/",
+  "default_image_url": "https://autoimg.danawa.com/photo/4642/model_360.png",
+  "default_image_path": "vehicles\\벤츠\\The New S-Class\\model_360.png",
+  "colors": [],
+  "gallery": [
+    {
+      "name": "더 뉴 S-클래스",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4642&Tab=image&No=143116",
+      "image_url": "https://autoimg.danawa.com/gallery/4642/20260224_4642 (1).jpg",
+      "path": "vehicles\\벤츠\\The New S-Class\\gallery\\01_더 뉴 S-클래스.jpg"
+    },
+    {
+      "name": "더 뉴 S-클래스",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4642&Tab=image&No=143117",
+      "image_url": "https://autoimg.danawa.com/gallery/4642/20260224_4642 (2).jpg",
+      "path": "vehicles\\벤츠\\The New S-Class\\gallery\\02_더 뉴 S-클래스.jpg"
+    },
+    {
+      "name": "더 뉴 S-클래스",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4642&Tab=image&No=143118",
+      "image_url": "https://autoimg.danawa.com/gallery/4642/20260224_4642 (3).jpg",
+      "path": "vehicles\\벤츠\\The New S-Class\\gallery\\03_더 뉴 S-클래스.jpg"
+    },
+    {
+      "name": "더 뉴 S-클래스",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4642&Tab=image&No=143119",
+      "image_url": "https://autoimg.danawa.com/gallery/4642/20260224_4642 (4).jpg",
+      "path": "vehicles\\벤츠\\The New S-Class\\gallery\\04_더 뉴 S-클래스.jpg"
+    }
+  ]
+}

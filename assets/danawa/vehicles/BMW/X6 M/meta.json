@@ -1,0 +1,66 @@
+{
+  "brand": "BMW",
+  "brand_id": "362",
+  "model_id": "4480",
+  "name": "X6 M",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4480",
+  "photo_code": "4480/53510",
+  "default_image_url": "https://autoimg.danawa.com/photo/4480/53510/color_13_360.png",
+  "default_image_path": "vehicles\\BMW\\X6 M\\model_360.png",
+  "colors": [
+    {
+      "name": "블랙 사파이어 메탈릭",
+      "code": "C11",
+      "swatch": "#111111",
+      "image_url": "https://autoimg.danawa.com/photo/4480/53510/color_11_360.png",
+      "path": "vehicles\\BMW\\X6 M\\colors\\01_블랙 사파이어 메탈릭.png"
+    },
+    {
+      "name": "미네랄 화이트 메탈릭",
+      "code": "C12",
+      "swatch": "#e4e3e1",
+      "image_url": "https://autoimg.danawa.com/photo/4480/53510/color_12_360.png",
+      "path": "vehicles\\BMW\\X6 M\\colors\\02_미네랄 화이트 메탈릭.png"
+    },
+    {
+      "name": "M 브루클린 그레이 메탈릭",
+      "code": "C13",
+      "swatch": "#858e8f",
+      "image_url": "https://autoimg.danawa.com/photo/4480/53510/color_13_360.png",
+      "path": "vehicles\\BMW\\X6 M\\colors\\03_M 브루클린 그레이 메탈릭.png"
+    },
+    {
+      "name": "M 마리나 베이 블루 메탈릭",
+      "code": "C14",
+      "swatch": "#1a296a",
+      "image_url": "https://autoimg.danawa.com/photo/4480/53510/color_14_360.png",
+      "path": "vehicles\\BMW\\X6 M\\colors\\04_M 마리나 베이 블루 메탈릭.png"
+    }
+  ],
+  "gallery": [
+    {
+      "name": "2024 l 더 뉴 X6 M 컴페티션",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4480&Tab=image&No=111663",
+      "image_url": "https://autoimg.danawa.com/gallery/4480/20230814_4480 (1).jpg",
+      "path": "vehicles\\BMW\\X6 M\\gallery\\01_2024 l 더 뉴 X6 M 컴페티션.jpg"
+    },
+    {
+      "name": "2024 l 더 뉴 X6 M 컴페티션",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4480&Tab=image&No=111664",
+      "image_url": "https://autoimg.danawa.com/gallery/4480/20230814_4480 (2).jpg",
+      "path": "vehicles\\BMW\\X6 M\\gallery\\02_2024 l 더 뉴 X6 M 컴페티션.jpg"
+    },
+    {
+      "name": "2024 l 더 뉴 X6 M 컴페티션",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4480&Tab=image&No=111665",
+      "image_url": "https://autoimg.danawa.com/gallery/4480/20230814_4480 (3).jpg",
+      "path": "vehicles\\BMW\\X6 M\\gallery\\03_2024 l 더 뉴 X6 M 컴페티션.jpg"
+    },
+    {
+      "name": "2024 l 더 뉴 X6 M 컴페티션",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4480&Tab=image&No=111666",
+      "image_url": "https://autoimg.danawa.com/gallery/4480/20230814_4480 (4).jpg",
+      "path": "vehicles\\BMW\\X6 M\\gallery\\04_2024 l 더 뉴 X6 M 컴페티션.jpg"
+    }
+  ]
+}

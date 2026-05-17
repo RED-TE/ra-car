@@ -1,0 +1,94 @@
+{
+  "brand": "제네시스",
+  "brand_id": "304",
+  "model_id": "4603",
+  "name": "G80",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4603",
+  "photo_code": "4603/53602",
+  "default_image_url": "https://autoimg.danawa.com/photo/4603/model_360.png",
+  "default_image_path": "vehicles\\제네시스\\G80\\model_360.png",
+  "colors": [
+    {
+      "name": "마칼루 그레이(MPE)-유료(무광)",
+      "code": "C10",
+      "swatch": "#2e343b",
+      "image_url": "https://autoimg.danawa.com/photo/4603/53602/color_10_360.png",
+      "path": "vehicles\\제네시스\\G80\\colors\\01_마칼루 그레이(MPE)-유료(무광).png"
+    },
+    {
+      "name": "우유니 화이트(UYH)",
+      "code": "C11",
+      "swatch": "#f4f4f4",
+      "image_url": "https://autoimg.danawa.com/photo/4603/53602/color_11_360.png",
+      "path": "vehicles\\제네시스\\G80\\colors\\02_우유니 화이트(UYH).png"
+    },
+    {
+      "name": "바트나 그레이(GRY)",
+      "code": "C20",
+      "swatch": "#a2a19d",
+      "image_url": "https://autoimg.danawa.com/photo/4603/53602/color_20_360.png",
+      "path": "vehicles\\제네시스\\G80\\colors\\03_바트나 그레이(GRY).png"
+    },
+    {
+      "name": "세빌 실버(SSS)",
+      "code": "C19",
+      "swatch": "#858585",
+      "image_url": "https://autoimg.danawa.com/photo/4603/53602/color_19_360.png",
+      "path": "vehicles\\제네시스\\G80\\colors\\04_세빌 실버(SSS).png"
+    },
+    {
+      "name": "마칼루 그레이(NCM)",
+      "code": "C13",
+      "swatch": "#2e343b",
+      "image_url": "https://autoimg.danawa.com/photo/4603/53602/color_13_360.png",
+      "path": "vehicles\\제네시스\\G80\\colors\\05_마칼루 그레이(NCM).png"
+    },
+    {
+      "name": "비크 블랙(PH3)",
+      "code": "C14",
+      "swatch": "#0a1317",
+      "image_url": "https://autoimg.danawa.com/photo/4603/53602/color_14_360.png",
+      "path": "vehicles\\제네시스\\G80\\colors\\06_비크 블랙(PH3).png"
+    },
+    {
+      "name": "세레스 블루(ASA)",
+      "code": "C21",
+      "swatch": "#333e4e",
+      "image_url": "https://autoimg.danawa.com/photo/4603/53602/color_21_360.png",
+      "path": "vehicles\\제네시스\\G80\\colors\\07_세레스 블루(ASA).png"
+    },
+    {
+      "name": "태즈먼 블루(URA)",
+      "code": "C16",
+      "swatch": "#002135",
+      "image_url": "https://autoimg.danawa.com/photo/4603/53602/color_16_360.png",
+      "path": "vehicles\\제네시스\\G80\\colors\\08_태즈먼 블루(URA).png"
+    }
+  ],
+  "gallery": [
+    {
+      "name": "2026ㅣG80",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4603&Tab=image&No=142535",
+      "image_url": "https://autoimg.danawa.com/gallery/4603/20260108_4603 (1).jpg",
+      "path": "vehicles\\제네시스\\G80\\gallery\\01_2026ㅣG80.jpg"
+    },
+    {
+      "name": "2026ㅣG80 스포츠 패키지",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4603&Tab=image&No=142536",
+      "image_url": "https://autoimg.danawa.com/gallery/4603/20260108_4603 (2).jpg",
+      "path": "vehicles\\제네시스\\G80\\gallery\\02_2026ㅣG80 스포츠 패키지.jpg"
+    },
+    {
+      "name": "2026ㅣG80, G80 스포츠 패키지",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4603&Tab=image&No=142537",
+      "image_url": "https://autoimg.danawa.com/gallery/4603/20260108_4603 (3).jpg",
+      "path": "vehicles\\제네시스\\G80\\gallery\\03_2026ㅣG80, G80 스포츠 패키지.jpg"
+    },
+    {
+      "name": "2026ㅣG80",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4603&Tab=image&No=142538",
+      "image_url": "https://autoimg.danawa.com/gallery/4603/20260108_4603 (4).jpg",
+      "path": "vehicles\\제네시스\\G80\\gallery\\04_2026ㅣG80.jpg"
+    }
+  ]
+}

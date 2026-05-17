@@ -1,0 +1,73 @@
+{
+  "brand": "기아",
+  "brand_id": "307",
+  "model_id": "4586",
+  "name": "카니발",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4586",
+  "photo_code": "4586/52417",
+  "default_image_url": "https://autoimg.danawa.com/photo/4586/52417/color_11_360.png",
+  "default_image_path": "vehicles\\기아\\카니발\\model_360.png",
+  "colors": [
+    {
+      "name": "스노우 화이트 펄(SWP)",
+      "code": "C10",
+      "swatch": "#f6f6f6",
+      "image_url": "https://autoimg.danawa.com/photo/4586/52417/color_10_360.png",
+      "path": "vehicles\\기아\\카니발\\colors\\01_스노우 화이트 펄(SWP).png"
+    },
+    {
+      "name": "아이보리 실버 (ISG)",
+      "code": "C11",
+      "swatch": "#c3c3c4",
+      "image_url": "https://autoimg.danawa.com/photo/4586/52417/color_11_360.png",
+      "path": "vehicles\\기아\\카니발\\colors\\02_아이보리 실버 (ISG).png"
+    },
+    {
+      "name": "오로라 블랙 펄 (ABP)",
+      "code": "C13",
+      "swatch": "#212221",
+      "image_url": "https://autoimg.danawa.com/photo/4586/52417/color_13_360.png",
+      "path": "vehicles\\기아\\카니발\\colors\\03_오로라 블랙 펄 (ABP).png"
+    },
+    {
+      "name": "판테라 메탈 (P2M)",
+      "code": "C14",
+      "swatch": "#434347",
+      "image_url": "https://autoimg.danawa.com/photo/4586/52417/color_14_360.png",
+      "path": "vehicles\\기아\\카니발\\colors\\04_판테라 메탈 (P2M).png"
+    },
+    {
+      "name": "세라믹 실버 (C4S)",
+      "code": "C15",
+      "swatch": "#777b7a",
+      "image_url": "https://autoimg.danawa.com/photo/4586/52417/color_15_360.png",
+      "path": "vehicles\\기아\\카니발\\colors\\05_세라믹 실버 (C4S).png"
+    }
+  ],
+  "gallery": [
+    {
+      "name": "2026 카니발 하이리무진",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4586&Tab=image&No=140119",
+      "image_url": "https://autoimg.danawa.com/gallery/4586/20250917_4586 (1).jpg",
+      "path": "vehicles\\기아\\카니발\\gallery\\01_2026 카니발 하이리무진.jpg"
+    },
+    {
+      "name": "2026 카니발 하이리무진",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4586&Tab=image&No=140120",
+      "image_url": "https://autoimg.danawa.com/gallery/4586/20250917_4586 (2).jpg",
+      "path": "vehicles\\기아\\카니발\\gallery\\02_2026 카니발 하이리무진.jpg"
+    },
+    {
+      "name": "2026 카니발 하이리무진",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4586&Tab=image&No=140121",
+      "image_url": "https://autoimg.danawa.com/gallery/4586/20250917_4586 (3).jpg",
+      "path": "vehicles\\기아\\카니발\\gallery\\03_2026 카니발 하이리무진.jpg"
+    },
+    {
+      "name": "2026 카니발",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4586&Tab=image&No=139698",
+      "image_url": "https://autoimg.danawa.com/gallery/4586/20250818_4586 (1).jpg",
+      "path": "vehicles\\기아\\카니발\\gallery\\04_2026 카니발.jpg"
+    }
+  ]
+}

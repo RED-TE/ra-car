@@ -1,0 +1,66 @@
+{
+  "brand": "현대",
+  "brand_id": "303",
+  "model_id": "3297",
+  "name": "쏠라티",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3297",
+  "photo_code": "3297/52250",
+  "default_image_url": "https://autoimg.danawa.com/photo/3297/model_360.png",
+  "default_image_path": "vehicles\\현대\\쏠라티\\model_360.png",
+  "colors": [
+    {
+      "name": "에보니블랙",
+      "code": "C16",
+      "swatch": "#17161c",
+      "image_url": "https://autoimg.danawa.com/photo/3297/52250/color_16_360.png",
+      "path": "vehicles\\현대\\쏠라티\\colors\\01_에보니블랙.png"
+    },
+    {
+      "name": "에크루베이지",
+      "code": "C11",
+      "swatch": "#9b9583",
+      "image_url": "https://autoimg.danawa.com/photo/3297/52250/color_11_360.png",
+      "path": "vehicles\\현대\\쏠라티\\colors\\02_에크루베이지.png"
+    },
+    {
+      "name": "크리미화이트",
+      "code": "C13",
+      "swatch": "#f1f1f1",
+      "image_url": "https://autoimg.danawa.com/photo/3297/52250/color_13_360.png",
+      "path": "vehicles\\현대\\쏠라티\\colors\\03_크리미화이트.png"
+    },
+    {
+      "name": "레몬옐로우",
+      "code": "C15",
+      "swatch": "#d4d782",
+      "image_url": "https://autoimg.danawa.com/photo/3297/52250/color_15_360.png",
+      "path": "vehicles\\현대\\쏠라티\\colors\\04_레몬옐로우.png"
+    }
+  ],
+  "gallery": [
+    {
+      "name": "2019 쏠라티",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3297&Tab=image&No=66100",
+      "image_url": "https://autoimg.danawa.com/gallery/3297/20190405_solati (1).jpg",
+      "path": "vehicles\\현대\\쏠라티\\gallery\\01_2019 쏠라티.jpg"
+    },
+    {
+      "name": "2019 쏠라티",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3297&Tab=image&No=66101",
+      "image_url": "https://autoimg.danawa.com/gallery/3297/20190405_solati (2).jpg",
+      "path": "vehicles\\현대\\쏠라티\\gallery\\02_2019 쏠라티.jpg"
+    },
+    {
+      "name": "2019 쏠라티",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3297&Tab=image&No=66102",
+      "image_url": "https://autoimg.danawa.com/gallery/3297/20190405_solati (3).jpg",
+      "path": "vehicles\\현대\\쏠라티\\gallery\\03_2019 쏠라티.jpg"
+    },
+    {
+      "name": "2019 쏠라티",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3297&Tab=image&No=66103",
+      "image_url": "https://autoimg.danawa.com/gallery/3297/20190405_solati (26).jpg",
+      "path": "vehicles\\현대\\쏠라티\\gallery\\04_2019 쏠라티.jpg"
+    }
+  ]
+}

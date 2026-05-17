@@ -1,0 +1,37 @@
+{
+  "brand": "현대",
+  "brand_id": "303",
+  "model_id": "4802",
+  "name": "더 뉴 그랜저",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4802",
+  "photo_code": "4802/",
+  "default_image_url": "https://autoimg.danawa.com/photo/4802/model_360.png",
+  "default_image_path": "vehicles\\현대\\더 뉴 그랜저\\model_360.png",
+  "colors": [],
+  "gallery": [
+    {
+      "name": "더 뉴 그랜저",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4802&Tab=image&No=144917",
+      "image_url": "https://autoimg.danawa.com/gallery/4802/20260428_4802 (1).jpg",
+      "path": "vehicles\\현대\\더 뉴 그랜저\\gallery\\01_더 뉴 그랜저.jpg"
+    },
+    {
+      "name": "더 뉴 그랜저",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4802&Tab=image&No=144918",
+      "image_url": "https://autoimg.danawa.com/gallery/4802/20260428_4802 (2).jpg",
+      "path": "vehicles\\현대\\더 뉴 그랜저\\gallery\\02_더 뉴 그랜저.jpg"
+    },
+    {
+      "name": "더 뉴 그랜저",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4802&Tab=image&No=144919",
+      "image_url": "https://autoimg.danawa.com/gallery/4802/20260428_4802 (3).jpg",
+      "path": "vehicles\\현대\\더 뉴 그랜저\\gallery\\03_더 뉴 그랜저.jpg"
+    },
+    {
+      "name": "더 뉴 그랜저",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4802&Tab=image&No=144920",
+      "image_url": "https://autoimg.danawa.com/gallery/4802/20260428_4802 (4).jpg",
+      "path": "vehicles\\현대\\더 뉴 그랜저\\gallery\\04_더 뉴 그랜저.jpg"
+    }
+  ]
+}

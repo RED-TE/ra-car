@@ -1,0 +1,80 @@
+{
+  "brand": "기아",
+  "brand_id": "307",
+  "model_id": "4665",
+  "name": "K8",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4665",
+  "photo_code": "4665/53749",
+  "default_image_url": "https://autoimg.danawa.com/photo/4665/53749/color_12_360.png",
+  "default_image_path": "vehicles\\기아\\K8\\model_360.png",
+  "colors": [
+    {
+      "name": "스노우 화이트 펄 (SWP)",
+      "code": "C10",
+      "swatch": "#e2e2e4",
+      "image_url": "https://autoimg.danawa.com/photo/4665/53749/color_10_360.png",
+      "path": "vehicles\\기아\\K8\\colors\\01_스노우 화이트 펄 (SWP).png"
+    },
+    {
+      "name": "아이보리 실버 (ISG)",
+      "code": "C11",
+      "swatch": "#878887",
+      "image_url": "https://autoimg.danawa.com/photo/4665/53749/color_11_360.png",
+      "path": "vehicles\\기아\\K8\\colors\\02_아이보리 실버 (ISG).png"
+    },
+    {
+      "name": "문스케이프 매트 그레이(KLM)",
+      "code": "C09",
+      "swatch": "#525253",
+      "image_url": "https://autoimg.danawa.com/photo/4665/53749/color_09_360.png",
+      "path": "vehicles\\기아\\K8\\colors\\03_문스케이프 매트 그레이(KLM).png"
+    },
+    {
+      "name": "선셋 베이지 (BYG)",
+      "code": "C12",
+      "swatch": "#908277",
+      "image_url": "https://autoimg.danawa.com/photo/4665/53749/color_12_360.png",
+      "path": "vehicles\\기아\\K8\\colors\\04_선셋 베이지 (BYG).png"
+    },
+    {
+      "name": "인터스텔라 그레이 (AGT)",
+      "code": "C13",
+      "swatch": "#2c3033",
+      "image_url": "https://autoimg.danawa.com/photo/4665/53749/color_13_360.png",
+      "path": "vehicles\\기아\\K8\\colors\\05_인터스텔라 그레이 (AGT).png"
+    },
+    {
+      "name": "오로라 블랙 펄 (ABP)",
+      "code": "C14",
+      "swatch": "#211e23",
+      "image_url": "https://autoimg.danawa.com/photo/4665/53749/color_14_360.png",
+      "path": "vehicles\\기아\\K8\\colors\\06_오로라 블랙 펄 (ABP).png"
+    }
+  ],
+  "gallery": [
+    {
+      "name": "2027 K8",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4665&Tab=image&No=144579",
+      "image_url": "https://autoimg.danawa.com/gallery/4665/20260421_4665 (1).jpg",
+      "path": "vehicles\\기아\\K8\\gallery\\01_2027 K8.jpg"
+    },
+    {
+      "name": "2027 K8",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4665&Tab=image&No=144580",
+      "image_url": "https://autoimg.danawa.com/gallery/4665/20260421_4665 (2).jpg",
+      "path": "vehicles\\기아\\K8\\gallery\\02_2027 K8.jpg"
+    },
+    {
+      "name": "2025 K8",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4665&Tab=image&No=140788",
+      "image_url": "https://autoimg.danawa.com/gallery/4665/20250924_4665 (1).jpg",
+      "path": "vehicles\\기아\\K8\\gallery\\03_2025 K8.jpg"
+    },
+    {
+      "name": "2025 K8",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4665&Tab=image&No=140789",
+      "image_url": "https://autoimg.danawa.com/gallery/4665/20250924_4665 (2).jpg",
+      "path": "vehicles\\기아\\K8\\gallery\\04_2025 K8.jpg"
+    }
+  ]
+}

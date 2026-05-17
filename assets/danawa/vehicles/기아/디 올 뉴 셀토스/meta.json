@@ -1,0 +1,108 @@
+{
+  "brand": "기아",
+  "brand_id": "307",
+  "model_id": "4763",
+  "name": "디 올 뉴 셀토스",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4763",
+  "photo_code": "4763/53547",
+  "default_image_url": "https://autoimg.danawa.com/photo/4763/53547/color_10_360.png",
+  "default_image_path": "vehicles\\기아\\디 올 뉴 셀토스\\model_360.png",
+  "colors": [
+    {
+      "name": "스노우 화이트 펄(SWP)",
+      "code": "C10",
+      "swatch": "#f4f4f4",
+      "image_url": "https://autoimg.danawa.com/photo/4763/53547/color_10_360.png",
+      "path": "vehicles\\기아\\디 올 뉴 셀토스\\colors\\01_스노우 화이트 펄(SWP).png"
+    },
+    {
+      "name": "아이스버그 그린(IEG)",
+      "code": "C11",
+      "swatch": "#657878",
+      "image_url": "https://autoimg.danawa.com/photo/4763/53547/color_11_360.png",
+      "path": "vehicles\\기아\\디 올 뉴 셀토스\\colors\\02_아이스버그 그린(IEG).png"
+    },
+    {
+      "name": "그래비티 그레이(KDG)",
+      "code": "C12",
+      "swatch": "#53646b",
+      "image_url": "https://autoimg.danawa.com/photo/4763/53547/color_12_360.png",
+      "path": "vehicles\\기아\\디 올 뉴 셀토스\\colors\\03_그래비티 그레이(KDG).png"
+    },
+    {
+      "name": "아이보리 실버(ISG)",
+      "code": "C13",
+      "swatch": "#878887",
+      "image_url": "https://autoimg.danawa.com/photo/4763/53547/color_13_360.png",
+      "path": "vehicles\\기아\\디 올 뉴 셀토스\\colors\\04_아이보리 실버(ISG).png"
+    },
+    {
+      "name": "프로스트 블루(EBB)",
+      "code": "C14",
+      "swatch": "#4b6a74",
+      "image_url": "https://autoimg.danawa.com/photo/4763/53547/color_14_360.png",
+      "path": "vehicles\\기아\\디 올 뉴 셀토스\\colors\\05_프로스트 블루(EBB).png"
+    },
+    {
+      "name": "퓨전 블랙(FSB)",
+      "code": "C15",
+      "swatch": "#040406",
+      "image_url": "https://autoimg.danawa.com/photo/4763/53547/color_15_360.png",
+      "path": "vehicles\\기아\\디 올 뉴 셀토스\\colors\\06_퓨전 블랙(FSB).png"
+    },
+    {
+      "name": "퓨전 블랙+스노우 화이트 펄(CAS)",
+      "code": "C16",
+      "swatch": "#040406",
+      "image_url": "https://autoimg.danawa.com/photo/4763/53547/color_16_360.png",
+      "path": "vehicles\\기아\\디 올 뉴 셀토스\\colors\\07_퓨전 블랙+스노우 화이트 펄(CAS).png"
+    },
+    {
+      "name": "퓨전 블랙+아이스버그 그린(CBG)",
+      "code": "C17",
+      "swatch": "#040406",
+      "image_url": "https://autoimg.danawa.com/photo/4763/53547/color_17_360.png",
+      "path": "vehicles\\기아\\디 올 뉴 셀토스\\colors\\08_퓨전 블랙+아이스버그 그린(CBG).png"
+    },
+    {
+      "name": "아이보리 매트 실버(ISM)",
+      "code": "C09",
+      "swatch": "#bbbab1",
+      "image_url": "https://autoimg.danawa.com/photo/4763/53547/color_09_360.png",
+      "path": "vehicles\\기아\\디 올 뉴 셀토스\\colors\\09_아이보리 매트 실버(ISM).png"
+    },
+    {
+      "name": "마그마 매트 레드(MRM)",
+      "code": "C08",
+      "swatch": "#400d17",
+      "image_url": "https://autoimg.danawa.com/photo/4763/53547/color_08_360.png",
+      "path": "vehicles\\기아\\디 올 뉴 셀토스\\colors\\10_마그마 매트 레드(MRM).png"
+    }
+  ],
+  "gallery": [
+    {
+      "name": "디 올 뉴 셀토스",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4763&Tab=image&No=143048",
+      "image_url": "https://autoimg.danawa.com/gallery/4763/20260212_4763 (1).jpg",
+      "path": "vehicles\\기아\\디 올 뉴 셀토스\\gallery\\01_디 올 뉴 셀토스.jpg"
+    },
+    {
+      "name": "디 올 뉴 셀토스",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4763&Tab=image&No=143049",
+      "image_url": "https://autoimg.danawa.com/gallery/4763/20260212_4763 (2).jpg",
+      "path": "vehicles\\기아\\디 올 뉴 셀토스\\gallery\\02_디 올 뉴 셀토스.jpg"
+    },
+    {
+      "name": "디 올 뉴 셀토스",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4763&Tab=image&No=143050",
+      "image_url": "https://autoimg.danawa.com/gallery/4763/20260212_4763 (3).jpg",
+      "path": "vehicles\\기아\\디 올 뉴 셀토스\\gallery\\03_디 올 뉴 셀토스.jpg"
+    },
+    {
+      "name": "디 올 뉴 셀토스",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4763&Tab=image&No=143051",
+      "image_url": "https://autoimg.danawa.com/gallery/4763/20260212_4763 (4).jpg",
+      "path": "vehicles\\기아\\디 올 뉴 셀토스\\gallery\\04_디 올 뉴 셀토스.jpg"
+    }
+  ]
+}

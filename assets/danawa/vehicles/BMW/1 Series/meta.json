@@ -1,0 +1,37 @@
+{
+  "brand": "BMW",
+  "brand_id": "362",
+  "model_id": "4652",
+  "name": "1 Series",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4652",
+  "photo_code": "4652/53447",
+  "default_image_url": "https://autoimg.danawa.com/photo/4652/model_360.png",
+  "default_image_path": "vehicles\\BMW\\1 Series\\model_360.png",
+  "colors": [],
+  "gallery": [
+    {
+      "name": "M135 xDrive",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4652&Tab=image&No=142933",
+      "image_url": "https://autoimg.danawa.com/gallery/4652/20260126_4652 (1).jpg",
+      "path": "vehicles\\BMW\\1 Series\\gallery\\01_M135 xDrive.jpg"
+    },
+    {
+      "name": "M135 xDrive",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4652&Tab=image&No=142934",
+      "image_url": "https://autoimg.danawa.com/gallery/4652/20260126_4652 (2).jpg",
+      "path": "vehicles\\BMW\\1 Series\\gallery\\02_M135 xDrive.jpg"
+    },
+    {
+      "name": "M135 xDrive",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4652&Tab=image&No=142935",
+      "image_url": "https://autoimg.danawa.com/gallery/4652/20260126_4652 (3).jpg",
+      "path": "vehicles\\BMW\\1 Series\\gallery\\03_M135 xDrive.jpg"
+    },
+    {
+      "name": "M135 xDrive",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4652&Tab=image&No=142936",
+      "image_url": "https://autoimg.danawa.com/gallery/4652/20260126_4652 (4).jpg",
+      "path": "vehicles\\BMW\\1 Series\\gallery\\04_M135 xDrive.jpg"
+    }
+  ]
+}

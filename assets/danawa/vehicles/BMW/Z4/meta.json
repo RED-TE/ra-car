@@ -1,0 +1,73 @@
+{
+  "brand": "BMW",
+  "brand_id": "362",
+  "model_id": "4424",
+  "name": "Z4",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4424",
+  "photo_code": "4424/53493",
+  "default_image_url": "https://autoimg.danawa.com/photo/4424/53493/color_11_360.png",
+  "default_image_path": "vehicles\\BMW\\Z4\\model_360.png",
+  "colors": [
+    {
+      "name": "스카이 스크래퍼 그레이 (C4W)",
+      "code": "C11",
+      "swatch": "#606666",
+      "image_url": "https://autoimg.danawa.com/photo/4424/53493/color_11_360.png",
+      "path": "vehicles\\BMW\\Z4\\colors\\01_스카이 스크래퍼 그레이 (C4W).png"
+    },
+    {
+      "name": "알파인 화이트 (300)",
+      "code": "C12",
+      "swatch": "#eaeaea",
+      "image_url": "https://autoimg.danawa.com/photo/4424/53493/color_12_360.png",
+      "path": "vehicles\\BMW\\Z4\\colors\\02_알파인 화이트 (300).png"
+    },
+    {
+      "name": "블랙 사파이어 (475)",
+      "code": "C13",
+      "swatch": "#161616",
+      "image_url": "https://autoimg.danawa.com/photo/4424/53493/color_13_360.png",
+      "path": "vehicles\\BMW\\Z4\\colors\\03_블랙 사파이어 (475).png"
+    },
+    {
+      "name": "포티마오 블루 (C31)",
+      "code": "C14",
+      "swatch": "#32497f",
+      "image_url": "https://autoimg.danawa.com/photo/4424/53493/color_14_360.png",
+      "path": "vehicles\\BMW\\Z4\\colors\\04_포티마오 블루 (C31).png"
+    },
+    {
+      "name": "샌프란시스코 레드 (C34)",
+      "code": "C15",
+      "swatch": "#621712",
+      "image_url": "https://autoimg.danawa.com/photo/4424/53493/color_15_360.png",
+      "path": "vehicles\\BMW\\Z4\\colors\\05_샌프란시스코 레드 (C34).png"
+    }
+  ],
+  "gallery": [
+    {
+      "name": "Z4 파이널 에디션",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4424&Tab=image&No=141856",
+      "image_url": "https://autoimg.danawa.com/gallery/4424/20251126_4424 (1).jpg",
+      "path": "vehicles\\BMW\\Z4\\gallery\\01_Z4 파이널 에디션.jpg"
+    },
+    {
+      "name": "Z4 파이널 에디션",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4424&Tab=image&No=141857",
+      "image_url": "https://autoimg.danawa.com/gallery/4424/20251126_4424 (2).jpg",
+      "path": "vehicles\\BMW\\Z4\\gallery\\02_Z4 파이널 에디션.jpg"
+    },
+    {
+      "name": "Z4 파이널 에디션",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4424&Tab=image&No=141858",
+      "image_url": "https://autoimg.danawa.com/gallery/4424/20251126_4424 (3).jpg",
+      "path": "vehicles\\BMW\\Z4\\gallery\\03_Z4 파이널 에디션.jpg"
+    },
+    {
+      "name": "Z4 파이널 에디션",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4424&Tab=image&No=141859",
+      "image_url": "https://autoimg.danawa.com/gallery/4424/20251126_4424 (4).jpg",
+      "path": "vehicles\\BMW\\Z4\\gallery\\04_Z4 파이널 에디션.jpg"
+    }
+  ]
+}

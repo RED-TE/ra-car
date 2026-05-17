@@ -1,0 +1,80 @@
+{
+  "brand": "벤츠",
+  "brand_id": "349",
+  "model_id": "4568",
+  "name": "EQA",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4568",
+  "photo_code": "4568/53417",
+  "default_image_url": "https://autoimg.danawa.com/photo/4568/53417/color_14_360.png",
+  "default_image_path": "vehicles\\벤츠\\EQA\\model_360.png",
+  "colors": [
+    {
+      "name": "코스모스 블랙 (191U)",
+      "code": "C11",
+      "swatch": "#0c0e14",
+      "image_url": "https://autoimg.danawa.com/photo/4568/53417/color_11_360.png",
+      "path": "vehicles\\벤츠\\EQA\\colors\\01_코스모스 블랙 (191U).png"
+    },
+    {
+      "name": "폴라 화이트 (149U)",
+      "code": "C12",
+      "swatch": "#ced3c8",
+      "image_url": "https://autoimg.danawa.com/photo/4568/53417/color_12_360.png",
+      "path": "vehicles\\벤츠\\EQA\\colors\\02_폴라 화이트 (149U).png"
+    },
+    {
+      "name": "나이트 블랙 (696U)",
+      "code": "C13",
+      "swatch": "#070707",
+      "image_url": "https://autoimg.danawa.com/photo/4568/53417/color_13_360.png",
+      "path": "vehicles\\벤츠\\EQA\\colors\\03_나이트 블랙 (696U).png"
+    },
+    {
+      "name": "하이 테크 실버 (922U)",
+      "code": "C14",
+      "swatch": "#b5b8ba",
+      "image_url": "https://autoimg.danawa.com/photo/4568/53417/color_14_360.png",
+      "path": "vehicles\\벤츠\\EQA\\colors\\04_하이 테크 실버 (922U).png"
+    },
+    {
+      "name": "마운틴 그레이 (787U)",
+      "code": "C15",
+      "swatch": "#3b3e46",
+      "image_url": "https://autoimg.danawa.com/photo/4568/53417/color_15_360.png",
+      "path": "vehicles\\벤츠\\EQA\\colors\\05_마운틴 그레이 (787U).png"
+    },
+    {
+      "name": "MANUFAKTUR 파타고니아 레드 (993U)",
+      "code": "C16",
+      "swatch": "#ba0f2b",
+      "image_url": "https://autoimg.danawa.com/photo/4568/53417/color_16_360.png",
+      "path": "vehicles\\벤츠\\EQA\\colors\\06_MANUFAKTUR 파타고니아 레드 (993U).png"
+    }
+  ],
+  "gallery": [
+    {
+      "name": "2023 l EQA250+",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4568&Tab=image&No=112278",
+      "image_url": "https://autoimg.danawa.com/gallery/4568/20230825_4568 (1).jpg",
+      "path": "vehicles\\벤츠\\EQA\\gallery\\01_2023 l EQA250+.jpg"
+    },
+    {
+      "name": "2023 l EQA250+",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4568&Tab=image&No=112279",
+      "image_url": "https://autoimg.danawa.com/gallery/4568/20230825_4568 (2).jpg",
+      "path": "vehicles\\벤츠\\EQA\\gallery\\02_2023 l EQA250+.jpg"
+    },
+    {
+      "name": "2023 l EQA250+",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4568&Tab=image&No=112280",
+      "image_url": "https://autoimg.danawa.com/gallery/4568/20230825_4568 (3).jpg",
+      "path": "vehicles\\벤츠\\EQA\\gallery\\03_2023 l EQA250+.jpg"
+    },
+    {
+      "name": "2023 l EQA250+",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4568&Tab=image&No=112281",
+      "image_url": "https://autoimg.danawa.com/gallery/4568/20230825_4568 (4).jpg",
+      "path": "vehicles\\벤츠\\EQA\\gallery\\04_2023 l EQA250+.jpg"
+    }
+  ]
+}

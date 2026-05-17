@@ -1,0 +1,763 @@
+{
+  "brand_id": "326",
+  "brand": "KGM",
+  "source_url": "https://auto.danawa.com/auto/?Work=brand&Brand=326",
+  "logo_url": "https://autoimg.danawa.com/photo/brand/326_90.png",
+  "logo_path": "brands\\KGM\\logo.png",
+  "models": [
+    {
+      "brand": "KGM",
+      "brand_id": "326",
+      "model_id": "4545",
+      "name": "티볼리",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4545",
+      "photo_code": "4545/53720",
+      "default_image_url": "https://autoimg.danawa.com/photo/4545/model_360.png",
+      "default_image_path": "vehicles\\KGM\\티볼리\\model_360.png",
+      "colors": [
+        {
+          "name": "그랜드 화이트(WAA)",
+          "code": "C11",
+          "swatch": "#f2eee8",
+          "image_url": "https://autoimg.danawa.com/photo/4545/53720/color_11_360.png",
+          "path": "vehicles\\KGM\\티볼리\\colors\\01_그랜드 화이트(WAA).png"
+        },
+        {
+          "name": "아이언 메탈(ADE)",
+          "code": "C12",
+          "swatch": "#a3a5b4",
+          "image_url": "https://autoimg.danawa.com/photo/4545/53720/color_12_360.png",
+          "path": "vehicles\\KGM\\티볼리\\colors\\02_아이언 메탈(ADE).png"
+        },
+        {
+          "name": "댄디 블루(BAS)",
+          "code": "C14",
+          "swatch": "#0c2344",
+          "image_url": "https://autoimg.danawa.com/photo/4545/53720/color_14_360.png",
+          "path": "vehicles\\KGM\\티볼리\\colors\\03_댄디 블루(BAS).png"
+        },
+        {
+          "name": "스페이스 블랙(LAK)",
+          "code": "C15",
+          "swatch": "#24211e",
+          "image_url": "https://autoimg.danawa.com/photo/4545/53720/color_15_360.png",
+          "path": "vehicles\\KGM\\티볼리\\colors\\04_스페이스 블랙(LAK).png"
+        },
+        {
+          "name": "라떼 그레이지(EBL)",
+          "code": "C21",
+          "swatch": "#bcb2a9",
+          "image_url": "https://autoimg.danawa.com/photo/4545/53720/color_21_360.png",
+          "path": "vehicles\\KGM\\티볼리\\colors\\05_라떼 그레이지(EBL).png"
+        }
+      ],
+      "gallery": [
+        {
+          "name": "더 뉴 티볼리",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4545&Tab=image&No=132797",
+          "image_url": "https://autoimg.danawa.com/gallery/4545/20241203_4545 (1).jpg",
+          "path": "vehicles\\KGM\\티볼리\\gallery\\01_더 뉴 티볼리.jpg"
+        },
+        {
+          "name": "더 뉴 티볼리",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4545&Tab=image&No=128389",
+          "image_url": "https://autoimg.danawa.com/gallery/4545/20240830_4545 (1).jpg",
+          "path": "vehicles\\KGM\\티볼리\\gallery\\02_더 뉴 티볼리.jpg"
+        },
+        {
+          "name": "더 뉴 티볼리",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4545&Tab=image&No=125437",
+          "image_url": "https://autoimg.danawa.com/gallery/4545/20240617_4545 (1).JPG",
+          "path": "vehicles\\KGM\\티볼리\\gallery\\03_더 뉴 티볼리.JPG"
+        },
+        {
+          "name": "더 뉴 티볼리",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4545&Tab=image&No=121177",
+          "image_url": "https://autoimg.danawa.com/gallery/4545/20240426_4545 (1).jpg",
+          "path": "vehicles\\KGM\\티볼리\\gallery\\04_더 뉴 티볼리.jpg"
+        }
+      ]
+    },
+    {
+      "brand": "KGM",
+      "brand_id": "326",
+      "model_id": "4646",
+      "name": "토레스",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4646",
+      "photo_code": "4646/53096",
+      "default_image_url": "https://autoimg.danawa.com/photo/4646/model_360.png",
+      "default_image_path": "vehicles\\KGM\\토레스\\model_360.png",
+      "colors": [
+        {
+          "name": "라떼 그레이지(EBL)",
+          "code": "C11",
+          "swatch": "#b8aa9d",
+          "image_url": "https://autoimg.danawa.com/photo/4646/53096/color_11_360.png",
+          "path": "vehicles\\KGM\\토레스\\colors\\01_라떼 그레이지(EBL).png"
+        },
+        {
+          "name": "그랜드 화이트(WAA)",
+          "code": "C12",
+          "swatch": "#ebedea",
+          "image_url": "https://autoimg.danawa.com/photo/4646/53096/color_12_360.png",
+          "path": "vehicles\\KGM\\토레스\\colors\\02_그랜드 화이트(WAA).png"
+        },
+        {
+          "name": "아이언 메탈(ADE)",
+          "code": "C13",
+          "swatch": "#a0a0a0",
+          "image_url": "https://autoimg.danawa.com/photo/4646/53096/color_13_360.png",
+          "path": "vehicles\\KGM\\토레스\\colors\\03_아이언 메탈(ADE).png"
+        },
+        {
+          "name": "포레스트 그린 (GAO)",
+          "code": "C14",
+          "swatch": "#314442",
+          "image_url": "https://autoimg.danawa.com/photo/4646/53096/color_14_360.png",
+          "path": "vehicles\\KGM\\토레스\\colors\\04_포레스트 그린 (GAO).png"
+        },
+        {
+          "name": "댄디 블루(BAS)",
+          "code": "C15",
+          "swatch": "#2a2738",
+          "image_url": "https://autoimg.danawa.com/photo/4646/53096/color_15_360.png",
+          "path": "vehicles\\KGM\\토레스\\colors\\05_댄디 블루(BAS).png"
+        },
+        {
+          "name": "스페이스 블랙(LAK)",
+          "code": "C16",
+          "swatch": "#0e0d0e",
+          "image_url": "https://autoimg.danawa.com/photo/4646/53096/color_16_360.png",
+          "path": "vehicles\\KGM\\토레스\\colors\\06_스페이스 블랙(LAK).png"
+        },
+        {
+          "name": "블랙(LAK) 라떼 그레이지(EBL)",
+          "code": "C17",
+          "swatch": "#0e0d0e",
+          "image_url": "https://autoimg.danawa.com/photo/4646/53096/color_17_360.png",
+          "path": "vehicles\\KGM\\토레스\\colors\\07_블랙(LAK) 라떼 그레이지(EBL).png"
+        },
+        {
+          "name": "블랙(LAK) 그랜드 화이트(WAA)",
+          "code": "C18",
+          "swatch": "#0e0d0e",
+          "image_url": "https://autoimg.danawa.com/photo/4646/53096/color_18_360.png",
+          "path": "vehicles\\KGM\\토레스\\colors\\08_블랙(LAK) 그랜드 화이트(WAA).png"
+        },
+        {
+          "name": "블랙(LAK) 아이언 메탈(ADE)",
+          "code": "C19",
+          "swatch": "#0e0d0e",
+          "image_url": "https://autoimg.danawa.com/photo/4646/53096/color_19_360.png",
+          "path": "vehicles\\KGM\\토레스\\colors\\09_블랙(LAK) 아이언 메탈(ADE).png"
+        },
+        {
+          "name": "블랙(LAK) 포레스트 그린 (GAO)",
+          "code": "C20",
+          "swatch": "#0e0d0e",
+          "image_url": "https://autoimg.danawa.com/photo/4646/53096/color_20_360.png",
+          "path": "vehicles\\KGM\\토레스\\colors\\10_블랙(LAK) 포레스트 그린 (GAO).png"
+        }
+      ],
+      "gallery": [
+        {
+          "name": "더 뉴 토레스 하이브리드",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4646&Tab=image&No=137744",
+          "image_url": "https://autoimg.danawa.com/gallery/4646/20250507_4646 (1).jpg",
+          "path": "vehicles\\KGM\\토레스\\gallery\\01_더 뉴 토레스 하이브리드.jpg"
+        },
+        {
+          "name": "더 뉴 토레스 하이브리드",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4646&Tab=image&No=137745",
+          "image_url": "https://autoimg.danawa.com/gallery/4646/20250507_4646 (2).jpg",
+          "path": "vehicles\\KGM\\토레스\\gallery\\02_더 뉴 토레스 하이브리드.jpg"
+        },
+        {
+          "name": "더 뉴 토레스 하이브리드",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4646&Tab=image&No=137746",
+          "image_url": "https://autoimg.danawa.com/gallery/4646/20250507_4646 (3).jpg",
+          "path": "vehicles\\KGM\\토레스\\gallery\\03_더 뉴 토레스 하이브리드.jpg"
+        },
+        {
+          "name": "더 뉴 토레스 하이브리드",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4646&Tab=image&No=137747",
+          "image_url": "https://autoimg.danawa.com/gallery/4646/20250507_4646 (4).jpg",
+          "path": "vehicles\\KGM\\토레스\\gallery\\04_더 뉴 토레스 하이브리드.jpg"
+        }
+      ]
+    },
+    {
+      "brand": "KGM",
+      "brand_id": "326",
+      "model_id": "4622",
+      "name": "액티언",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4622",
+      "photo_code": "4622/53301",
+      "default_image_url": "https://autoimg.danawa.com/photo/4622/model_360.png",
+      "default_image_path": "vehicles\\KGM\\액티언\\model_360.png",
+      "colors": [
+        {
+          "name": "그랜드 화이트",
+          "code": "C11",
+          "swatch": "#d3d3d3",
+          "image_url": "https://autoimg.danawa.com/photo/4622/53301/color_11_360.png",
+          "path": "vehicles\\KGM\\액티언\\colors\\01_그랜드 화이트.png"
+        },
+        {
+          "name": "아이언 메탈",
+          "code": "C12",
+          "swatch": "#5b5d69",
+          "image_url": "https://autoimg.danawa.com/photo/4622/53301/color_12_360.png",
+          "path": "vehicles\\KGM\\액티언\\colors\\02_아이언 메탈.png"
+        },
+        {
+          "name": "라떼 그레이지",
+          "code": "C13",
+          "swatch": "#948f89",
+          "image_url": "https://autoimg.danawa.com/photo/4622/53301/color_13_360.png",
+          "path": "vehicles\\KGM\\액티언\\colors\\03_라떼 그레이지.png"
+        },
+        {
+          "name": "포레스트 그린",
+          "code": "C14",
+          "swatch": "#4b5652",
+          "image_url": "https://autoimg.danawa.com/photo/4622/53301/color_14_360.png",
+          "path": "vehicles\\KGM\\액티언\\colors\\04_포레스트 그린.png"
+        },
+        {
+          "name": "댄디 블루",
+          "code": "C15",
+          "swatch": "#2e364d",
+          "image_url": "https://autoimg.danawa.com/photo/4622/53301/color_15_360.png",
+          "path": "vehicles\\KGM\\액티언\\colors\\05_댄디 블루.png"
+        },
+        {
+          "name": "스페이스 블랙",
+          "code": "C16",
+          "swatch": "#101010",
+          "image_url": "https://autoimg.danawa.com/photo/4622/53301/color_16_360.png",
+          "path": "vehicles\\KGM\\액티언\\colors\\06_스페이스 블랙.png"
+        },
+        {
+          "name": "블랙 그랜드 화이트",
+          "code": "C17",
+          "swatch": "#000000",
+          "image_url": "https://autoimg.danawa.com/photo/4622/53301/color_17_360.png",
+          "path": "vehicles\\KGM\\액티언\\colors\\07_블랙 그랜드 화이트.png"
+        },
+        {
+          "name": "블랙 아이언 메탈",
+          "code": "C18",
+          "swatch": "#000000",
+          "image_url": "https://autoimg.danawa.com/photo/4622/53301/color_18_360.png",
+          "path": "vehicles\\KGM\\액티언\\colors\\08_블랙 아이언 메탈.png"
+        },
+        {
+          "name": "블랙 라떼 그레이지",
+          "code": "C19",
+          "swatch": "#000000",
+          "image_url": "https://autoimg.danawa.com/photo/4622/53301/color_19_360.png",
+          "path": "vehicles\\KGM\\액티언\\colors\\09_블랙 라떼 그레이지.png"
+        },
+        {
+          "name": "블랙 포레스트 그린",
+          "code": "C20",
+          "swatch": "#000000",
+          "image_url": "https://autoimg.danawa.com/photo/4622/53301/color_20_360.png",
+          "path": "vehicles\\KGM\\액티언\\colors\\10_블랙 포레스트 그린.png"
+        }
+      ],
+      "gallery": [
+        {
+          "name": "액티언 하이브리드",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4622&Tab=image&No=142450",
+          "image_url": "https://autoimg.danawa.com/gallery/4622/58900_112110_5721.jpg",
+          "path": "vehicles\\KGM\\액티언\\gallery\\01_액티언 하이브리드.jpg"
+        },
+        {
+          "name": "액티언 하이브리드",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4622&Tab=image&No=142451",
+          "image_url": "https://autoimg.danawa.com/gallery/4622/58900_112111_5722.jpg",
+          "path": "vehicles\\KGM\\액티언\\gallery\\02_액티언 하이브리드.jpg"
+        },
+        {
+          "name": "액티언 하이브리드",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4622&Tab=image&No=142452",
+          "image_url": "https://autoimg.danawa.com/gallery/4622/58900_112112_5723.jpg",
+          "path": "vehicles\\KGM\\액티언\\gallery\\03_액티언 하이브리드.jpg"
+        },
+        {
+          "name": "액티언 하이브리드",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4622&Tab=image&No=142453",
+          "image_url": "https://autoimg.danawa.com/gallery/4622/58900_112113_5724.jpg",
+          "path": "vehicles\\KGM\\액티언\\gallery\\04_액티언 하이브리드.jpg"
+        }
+      ]
+    },
+    {
+      "brand": "KGM",
+      "brand_id": "326",
+      "model_id": "4492",
+      "name": "토레스 EVX",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4492",
+      "photo_code": "4492/53664",
+      "default_image_url": "https://autoimg.danawa.com/photo/4492/model_360.png",
+      "default_image_path": "vehicles\\KGM\\토레스 EVX\\model_360.png",
+      "colors": [
+        {
+          "name": "그랜드 화이트 (WAA)",
+          "code": "C11",
+          "swatch": "#eaebe9",
+          "image_url": "https://autoimg.danawa.com/photo/4492/53664/color_11_360.png",
+          "path": "vehicles\\KGM\\토레스 EVX\\colors\\01_그랜드 화이트 (WAA).png"
+        },
+        {
+          "name": "라떼 그레이지 (EBL)",
+          "code": "C12",
+          "swatch": "#b8b294",
+          "image_url": "https://autoimg.danawa.com/photo/4492/53664/color_12_360.png",
+          "path": "vehicles\\KGM\\토레스 EVX\\colors\\02_라떼 그레이지 (EBL).png"
+        },
+        {
+          "name": "아이언 메탈 (ADE)",
+          "code": "C13",
+          "swatch": "#848599",
+          "image_url": "https://autoimg.danawa.com/photo/4492/53664/color_13_360.png",
+          "path": "vehicles\\KGM\\토레스 EVX\\colors\\03_아이언 메탈 (ADE).png"
+        },
+        {
+          "name": "포레스트 그린 (GAO)",
+          "code": "C14",
+          "swatch": "#475556",
+          "image_url": "https://autoimg.danawa.com/photo/4492/53664/color_14_360.png",
+          "path": "vehicles\\KGM\\토레스 EVX\\colors\\04_포레스트 그린 (GAO).png"
+        },
+        {
+          "name": "댄디 블루 (BAS)",
+          "code": "C15",
+          "swatch": "#192032",
+          "image_url": "https://autoimg.danawa.com/photo/4492/53664/color_15_360.png",
+          "path": "vehicles\\KGM\\토레스 EVX\\colors\\05_댄디 블루 (BAS).png"
+        },
+        {
+          "name": "스페이스 블랙 (LAK)",
+          "code": "C16",
+          "swatch": "#1f1f1f",
+          "image_url": "https://autoimg.danawa.com/photo/4492/53664/color_16_360.png",
+          "path": "vehicles\\KGM\\토레스 EVX\\colors\\06_스페이스 블랙 (LAK).png"
+        },
+        {
+          "name": "블랙 그랜드 화이트 (WAA)",
+          "code": "C17",
+          "swatch": "#1c1c1c",
+          "image_url": "https://autoimg.danawa.com/photo/4492/53664/color_17_360.png",
+          "path": "vehicles\\KGM\\토레스 EVX\\colors\\07_블랙 그랜드 화이트 (WAA).png"
+        },
+        {
+          "name": "블랙 라떼 그레이지 (EBL)",
+          "code": "C18",
+          "swatch": "#1c1c1c",
+          "image_url": "https://autoimg.danawa.com/photo/4492/53664/color_18_360.png",
+          "path": "vehicles\\KGM\\토레스 EVX\\colors\\08_블랙 라떼 그레이지 (EBL).png"
+        },
+        {
+          "name": "블랙 아이언 메탈 (ADE)",
+          "code": "C19",
+          "swatch": "#1c1c1c",
+          "image_url": "https://autoimg.danawa.com/photo/4492/53664/color_19_360.png",
+          "path": "vehicles\\KGM\\토레스 EVX\\colors\\09_블랙 아이언 메탈 (ADE).png"
+        },
+        {
+          "name": "블랙 포레스트 그린 (GAO)",
+          "code": "C20",
+          "swatch": "#1c1c1c",
+          "image_url": "https://autoimg.danawa.com/photo/4492/53664/color_20_360.png",
+          "path": "vehicles\\KGM\\토레스 EVX\\colors\\10_블랙 포레스트 그린 (GAO).png"
+        }
+      ],
+      "gallery": [
+        {
+          "name": "토레스 EVX 알파",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4492&Tab=image&No=136877",
+          "image_url": "https://autoimg.danawa.com/gallery/4492/20250408_4492 (1).jpg",
+          "path": "vehicles\\KGM\\토레스 EVX\\gallery\\01_토레스 EVX 알파.jpg"
+        },
+        {
+          "name": "토레스 EVX 알파",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4492&Tab=image&No=136878",
+          "image_url": "https://autoimg.danawa.com/gallery/4492/20250408_4492 (2).jpg",
+          "path": "vehicles\\KGM\\토레스 EVX\\gallery\\02_토레스 EVX 알파.jpg"
+        },
+        {
+          "name": "토레스 EVX 알파",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4492&Tab=image&No=136879",
+          "image_url": "https://autoimg.danawa.com/gallery/4492/20250408_4492 (3).jpg",
+          "path": "vehicles\\KGM\\토레스 EVX\\gallery\\03_토레스 EVX 알파.jpg"
+        },
+        {
+          "name": "토레스 EVX 알파",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4492&Tab=image&No=136880",
+          "image_url": "https://autoimg.danawa.com/gallery/4492/20250408_4492 (4).jpg",
+          "path": "vehicles\\KGM\\토레스 EVX\\gallery\\04_토레스 EVX 알파.jpg"
+        }
+      ]
+    },
+    {
+      "brand": "KGM",
+      "brand_id": "326",
+      "model_id": "4518",
+      "name": "렉스턴 뉴 아레나",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4518",
+      "photo_code": "4518/53376",
+      "default_image_url": "https://autoimg.danawa.com/photo/4518/model_360.png",
+      "default_image_path": "vehicles\\KGM\\렉스턴 뉴 아레나\\model_360.png",
+      "colors": [
+        {
+          "name": "실키 화이트 펄(WAK)",
+          "code": "C10",
+          "swatch": "#f0f4f4",
+          "image_url": "https://autoimg.danawa.com/photo/4518/53376/color_10_360.png",
+          "path": "vehicles\\KGM\\렉스턴 뉴 아레나\\colors\\01_실키 화이트 펄(WAK).png"
+        },
+        {
+          "name": "그랜드 화이트(WAA)",
+          "code": "C11",
+          "swatch": "#edeeeb",
+          "image_url": "https://autoimg.danawa.com/photo/4518/53376/color_11_360.png",
+          "path": "vehicles\\KGM\\렉스턴 뉴 아레나\\colors\\02_그랜드 화이트(WAA).png"
+        },
+        {
+          "name": "마블 그레이(ACM)",
+          "code": "C14",
+          "swatch": "#6c6c72",
+          "image_url": "https://autoimg.danawa.com/photo/4518/53376/color_14_360.png",
+          "path": "vehicles\\KGM\\렉스턴 뉴 아레나\\colors\\03_마블 그레이(ACM).png"
+        },
+        {
+          "name": "스페이스 블랙(LAK)",
+          "code": "C16",
+          "swatch": "#080709",
+          "image_url": "https://autoimg.danawa.com/photo/4518/53376/color_16_360.png",
+          "path": "vehicles\\KGM\\렉스턴 뉴 아레나\\colors\\04_스페이스 블랙(LAK).png"
+        }
+      ],
+      "gallery": [
+        {
+          "name": "렉스턴 뉴 아레나",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4518&Tab=image&No=128386",
+          "image_url": "https://autoimg.danawa.com/gallery/4518/20240830_4518 (1).jpg",
+          "path": "vehicles\\KGM\\렉스턴 뉴 아레나\\gallery\\01_렉스턴 뉴 아레나.jpg"
+        },
+        {
+          "name": "렉스턴 뉴 아레나",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4518&Tab=image&No=125439",
+          "image_url": "https://autoimg.danawa.com/gallery/4518/20240617_4518 (2).jpg",
+          "path": "vehicles\\KGM\\렉스턴 뉴 아레나\\gallery\\02_렉스턴 뉴 아레나.jpg"
+        },
+        {
+          "name": "렉스턴 뉴 아레나 써밋",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4518&Tab=image&No=125336",
+          "image_url": "https://autoimg.danawa.com/gallery/4518/20240613_4518 (1).jpg",
+          "path": "vehicles\\KGM\\렉스턴 뉴 아레나\\gallery\\03_렉스턴 뉴 아레나 써밋.jpg"
+        },
+        {
+          "name": "렉스턴 뉴 아레나",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4518&Tab=image&No=123554",
+          "image_url": "https://autoimg.danawa.com/gallery/4518/20240514_4518 (1).jpg",
+          "path": "vehicles\\KGM\\렉스턴 뉴 아레나\\gallery\\04_렉스턴 뉴 아레나.jpg"
+        }
+      ]
+    },
+    {
+      "brand": "KGM",
+      "brand_id": "326",
+      "model_id": "4716",
+      "name": "무쏘 스포츠",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4716",
+      "photo_code": "4716/53378",
+      "default_image_url": "https://autoimg.danawa.com/photo/4716/model_360.png",
+      "default_image_path": "vehicles\\KGM\\무쏘 스포츠\\model_360.png",
+      "colors": [
+        {
+          "name": "그랜드 화이트(WAA)",
+          "code": "C11",
+          "swatch": "#ecece9",
+          "image_url": "https://autoimg.danawa.com/photo/4716/53378/color_11_360.png",
+          "path": "vehicles\\KGM\\무쏘 스포츠\\colors\\01_그랜드 화이트(WAA).png"
+        },
+        {
+          "name": "마블 그레이(ACM)",
+          "code": "C12",
+          "swatch": "#717076",
+          "image_url": "https://autoimg.danawa.com/photo/4716/53378/color_12_360.png",
+          "path": "vehicles\\KGM\\무쏘 스포츠\\colors\\02_마블 그레이(ACM).png"
+        },
+        {
+          "name": "인디안 레드(RAJ)",
+          "code": "C14",
+          "swatch": "#8f1a23",
+          "image_url": "https://autoimg.danawa.com/photo/4716/53378/color_14_360.png",
+          "path": "vehicles\\KGM\\무쏘 스포츠\\colors\\03_인디안 레드(RAJ).png"
+        },
+        {
+          "name": "아마조니아 그린(GAM)",
+          "code": "C16",
+          "swatch": "#313630",
+          "image_url": "https://autoimg.danawa.com/photo/4716/53378/color_16_360.png",
+          "path": "vehicles\\KGM\\무쏘 스포츠\\colors\\04_아마조니아 그린(GAM).png"
+        },
+        {
+          "name": "스페이스 블랙(LAK)",
+          "code": "C17",
+          "swatch": "#101010",
+          "image_url": "https://autoimg.danawa.com/photo/4716/53378/color_17_360.png",
+          "path": "vehicles\\KGM\\무쏘 스포츠\\colors\\05_스페이스 블랙(LAK).png"
+        },
+        {
+          "name": "샌드스톤 베이지(EBK)",
+          "code": "C18",
+          "swatch": "#9a9788",
+          "image_url": "https://autoimg.danawa.com/photo/4716/53378/color_18_360.png",
+          "path": "vehicles\\KGM\\무쏘 스포츠\\colors\\06_샌드스톤 베이지(EBK).png"
+        },
+        {
+          "name": "실키 화이트 펄(WAK)",
+          "code": "C10",
+          "swatch": "#e3e6e7",
+          "image_url": "https://autoimg.danawa.com/photo/4716/53378/color_10_360.png",
+          "path": "vehicles\\KGM\\무쏘 스포츠\\colors\\07_실키 화이트 펄(WAK).png"
+        }
+      ],
+      "gallery": []
+    },
+    {
+      "brand": "KGM",
+      "brand_id": "326",
+      "model_id": "4717",
+      "name": "무쏘 칸",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4717",
+      "photo_code": "4717/53379",
+      "default_image_url": "https://autoimg.danawa.com/photo/4717/model_360.png",
+      "default_image_path": "vehicles\\KGM\\무쏘 칸\\model_360.png",
+      "colors": [
+        {
+          "name": "그랜드 화이트(WAA)",
+          "code": "C11",
+          "swatch": "#ecece9",
+          "image_url": "https://autoimg.danawa.com/photo/4717/53379/color_11_360.png",
+          "path": "vehicles\\KGM\\무쏘 칸\\colors\\01_그랜드 화이트(WAA).png"
+        },
+        {
+          "name": "마블 그레이(ACM)",
+          "code": "C12",
+          "swatch": "#717076",
+          "image_url": "https://autoimg.danawa.com/photo/4717/53379/color_12_360.png",
+          "path": "vehicles\\KGM\\무쏘 칸\\colors\\02_마블 그레이(ACM).png"
+        },
+        {
+          "name": "인디안 레드(RAJ)",
+          "code": "C14",
+          "swatch": "#8f1a23",
+          "image_url": "https://autoimg.danawa.com/photo/4717/53379/color_14_360.png",
+          "path": "vehicles\\KGM\\무쏘 칸\\colors\\03_인디안 레드(RAJ).png"
+        },
+        {
+          "name": "아마조니아 그린(GAM)",
+          "code": "C16",
+          "swatch": "#313630",
+          "image_url": "https://autoimg.danawa.com/photo/4717/53379/color_16_360.png",
+          "path": "vehicles\\KGM\\무쏘 칸\\colors\\04_아마조니아 그린(GAM).png"
+        },
+        {
+          "name": "스페이스 블랙(LAK)",
+          "code": "C17",
+          "swatch": "#101010",
+          "image_url": "https://autoimg.danawa.com/photo/4717/53379/color_17_360.png",
+          "path": "vehicles\\KGM\\무쏘 칸\\colors\\05_스페이스 블랙(LAK).png"
+        },
+        {
+          "name": "샌드스톤 베이지(EBK)",
+          "code": "C18",
+          "swatch": "#9a9788",
+          "image_url": "https://autoimg.danawa.com/photo/4717/53379/color_18_360.png",
+          "path": "vehicles\\KGM\\무쏘 칸\\colors\\06_샌드스톤 베이지(EBK).png"
+        },
+        {
+          "name": "실키 화이트 펄(WAK)",
+          "code": "C10",
+          "swatch": "#e3e6e7",
+          "image_url": "https://autoimg.danawa.com/photo/4717/53379/color_10_360.png",
+          "path": "vehicles\\KGM\\무쏘 칸\\colors\\07_실키 화이트 펄(WAK).png"
+        }
+      ],
+      "gallery": []
+    },
+    {
+      "brand": "KGM",
+      "brand_id": "326",
+      "model_id": "4766",
+      "name": "무쏘",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4766",
+      "photo_code": "4766/53570",
+      "default_image_url": "https://autoimg.danawa.com/photo/4766/model_360.png",
+      "default_image_path": "vehicles\\KGM\\무쏘\\model_360.png",
+      "colors": [
+        {
+          "name": "스모크 토프 OBH",
+          "code": "C11",
+          "swatch": "#716761",
+          "image_url": "https://autoimg.danawa.com/photo/4766/53570/color_11_360.png",
+          "path": "vehicles\\KGM\\무쏘\\colors\\01_스모크 토프 OBH.png"
+        },
+        {
+          "name": "그랜드 화이트 WAA",
+          "code": "C12",
+          "swatch": "#e3e5e6",
+          "image_url": "https://autoimg.danawa.com/photo/4766/53570/color_12_360.png",
+          "path": "vehicles\\KGM\\무쏘\\colors\\02_그랜드 화이트 WAA.png"
+        },
+        {
+          "name": "샌드스톤 베이지 EBK",
+          "code": "C13",
+          "swatch": "#b9b498",
+          "image_url": "https://autoimg.danawa.com/photo/4766/53570/color_13_360.png",
+          "path": "vehicles\\KGM\\무쏘\\colors\\03_샌드스톤 베이지 EBK.png"
+        },
+        {
+          "name": "아마조니아 그린 GAM",
+          "code": "C14",
+          "swatch": "#313731",
+          "image_url": "https://autoimg.danawa.com/photo/4766/53570/color_14_360.png",
+          "path": "vehicles\\KGM\\무쏘\\colors\\04_아마조니아 그린 GAM.png"
+        },
+        {
+          "name": "마블 그레이 ACM",
+          "code": "C15",
+          "swatch": "#606065",
+          "image_url": "https://autoimg.danawa.com/photo/4766/53570/color_15_360.png",
+          "path": "vehicles\\KGM\\무쏘\\colors\\05_마블 그레이 ACM.png"
+        },
+        {
+          "name": "울트라 마린 BBE",
+          "code": "C16",
+          "swatch": "#143662",
+          "image_url": "https://autoimg.danawa.com/photo/4766/53570/color_16_360.png",
+          "path": "vehicles\\KGM\\무쏘\\colors\\06_울트라 마린 BBE.png"
+        },
+        {
+          "name": "스페이스 블랙 LAK",
+          "code": "C17",
+          "swatch": "#171719",
+          "image_url": "https://autoimg.danawa.com/photo/4766/53570/color_17_360.png",
+          "path": "vehicles\\KGM\\무쏘\\colors\\07_스페이스 블랙 LAK.png"
+        }
+      ],
+      "gallery": [
+        {
+          "name": "무쏘",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4766&Tab=image&No=143080",
+          "image_url": "https://autoimg.danawa.com/gallery/4766/20260219_4766 (26).jpg",
+          "path": "vehicles\\KGM\\무쏘\\gallery\\01_무쏘.jpg"
+        },
+        {
+          "name": "무쏘",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4766&Tab=image&No=143081",
+          "image_url": "https://autoimg.danawa.com/gallery/4766/20260219_4766 (1).jpg",
+          "path": "vehicles\\KGM\\무쏘\\gallery\\02_무쏘.jpg"
+        },
+        {
+          "name": "무쏘 그랜드",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4766&Tab=image&No=143082",
+          "image_url": "https://autoimg.danawa.com/gallery/4766/20260219_4766 (2).jpg",
+          "path": "vehicles\\KGM\\무쏘\\gallery\\03_무쏘 그랜드.jpg"
+        },
+        {
+          "name": "무쏘 그랜드",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4766&Tab=image&No=143083",
+          "image_url": "https://autoimg.danawa.com/gallery/4766/20260219_4766 (3).jpg",
+          "path": "vehicles\\KGM\\무쏘\\gallery\\04_무쏘 그랜드.jpg"
+        }
+      ]
+    },
+    {
+      "brand": "KGM",
+      "brand_id": "326",
+      "model_id": "4666",
+      "name": "무쏘 EV",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4666",
+      "photo_code": "4666/53071",
+      "default_image_url": "https://autoimg.danawa.com/photo/4666/model_360.png",
+      "default_image_path": "vehicles\\KGM\\무쏘 EV\\model_360.png",
+      "colors": [
+        {
+          "name": "그랜드 화이트(WAA)",
+          "code": "C11",
+          "swatch": "#f7f7f7",
+          "image_url": "https://autoimg.danawa.com/photo/4666/53071/color_11_360.png",
+          "path": "vehicles\\KGM\\무쏘 EV\\colors\\01_그랜드 화이트(WAA).png"
+        },
+        {
+          "name": "블레이징 골드(DAA)",
+          "code": "C12",
+          "swatch": "#e1c368",
+          "image_url": "https://autoimg.danawa.com/photo/4666/53071/color_12_360.png",
+          "path": "vehicles\\KGM\\무쏘 EV\\colors\\02_블레이징 골드(DAA).png"
+        },
+        {
+          "name": "아마조니아 그린(GAM)",
+          "code": "C13",
+          "swatch": "#293325",
+          "image_url": "https://autoimg.danawa.com/photo/4666/53071/color_13_360.png",
+          "path": "vehicles\\KGM\\무쏘 EV\\colors\\03_아마조니아 그린(GAM).png"
+        },
+        {
+          "name": "울트라 마린(BBE)",
+          "code": "C14",
+          "swatch": "#002e72",
+          "image_url": "https://autoimg.danawa.com/photo/4666/53071/color_14_360.png",
+          "path": "vehicles\\KGM\\무쏘 EV\\colors\\04_울트라 마린(BBE).png"
+        },
+        {
+          "name": "마블 그레이(ACM)",
+          "code": "C15",
+          "swatch": "#111822",
+          "image_url": "https://autoimg.danawa.com/photo/4666/53071/color_15_360.png",
+          "path": "vehicles\\KGM\\무쏘 EV\\colors\\05_마블 그레이(ACM).png"
+        },
+        {
+          "name": "스페이스 블랙(LAK)",
+          "code": "C16",
+          "swatch": "#161616",
+          "image_url": "https://autoimg.danawa.com/photo/4666/53071/color_16_360.png",
+          "path": "vehicles\\KGM\\무쏘 EV\\colors\\06_스페이스 블랙(LAK).png"
+        }
+      ],
+      "gallery": [
+        {
+          "name": "무쏘 EV 블랙 엣지 2WD",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4666&Tab=image&No=140933",
+          "image_url": "https://autoimg.danawa.com/gallery/4666/20250929_4666 (1).jpg",
+          "path": "vehicles\\KGM\\무쏘 EV\\gallery\\01_무쏘 EV 블랙 엣지 2WD.jpg"
+        },
+        {
+          "name": "무쏘 EV 블랙 엣지 2WD",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4666&Tab=image&No=140934",
+          "image_url": "https://autoimg.danawa.com/gallery/4666/20250929_4666 (2).jpg",
+          "path": "vehicles\\KGM\\무쏘 EV\\gallery\\02_무쏘 EV 블랙 엣지 2WD.jpg"
+        },
+        {
+          "name": "무쏘 EV 블랙 엣지 2WD",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4666&Tab=image&No=140935",
+          "image_url": "https://autoimg.danawa.com/gallery/4666/20250929_4666 (3).jpg",
+          "path": "vehicles\\KGM\\무쏘 EV\\gallery\\03_무쏘 EV 블랙 엣지 2WD.jpg"
+        },
+        {
+          "name": "무쏘 EV 블랙 엣지 2WD",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4666&Tab=image&No=140936",
+          "image_url": "https://autoimg.danawa.com/gallery/4666/20250929_4666 (4).jpg",
+          "path": "vehicles\\KGM\\무쏘 EV\\gallery\\04_무쏘 EV 블랙 엣지 2WD.jpg"
+        }
+      ]
+    }
+  ]
+}

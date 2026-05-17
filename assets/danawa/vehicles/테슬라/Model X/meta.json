@@ -1,0 +1,73 @@
+{
+  "brand": "테슬라",
+  "brand_id": "611",
+  "model_id": "4027",
+  "name": "Model X",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4027",
+  "photo_code": "4027/52950",
+  "default_image_url": "https://autoimg.danawa.com/photo/4027/52950/color_08_360.png",
+  "default_image_path": "vehicles\\테슬라\\Model X\\model_360.png",
+  "colors": [
+    {
+      "name": "Stealth Grey",
+      "code": "C06",
+      "swatch": "#2a2930",
+      "image_url": "https://autoimg.danawa.com/photo/4027/52950/color_06_360.png",
+      "path": "vehicles\\테슬라\\Model X\\colors\\01_Stealth Grey.png"
+    },
+    {
+      "name": "Pearl White Multi-Coat",
+      "code": "C11",
+      "swatch": "#f0f1f3",
+      "image_url": "https://autoimg.danawa.com/photo/4027/52950/color_11_360.png",
+      "path": "vehicles\\테슬라\\Model X\\colors\\02_Pearl White Multi-Coat.png"
+    },
+    {
+      "name": "Diamond Black",
+      "code": "C10",
+      "swatch": "#161616",
+      "image_url": "https://autoimg.danawa.com/photo/4027/52950/color_10_360.png",
+      "path": "vehicles\\테슬라\\Model X\\colors\\03_Diamond Black.png"
+    },
+    {
+      "name": "Ultra Red",
+      "code": "C07",
+      "swatch": "#ab0014",
+      "image_url": "https://autoimg.danawa.com/photo/4027/52950/color_07_360.png",
+      "path": "vehicles\\테슬라\\Model X\\colors\\04_Ultra Red.png"
+    },
+    {
+      "name": "Frost Blue Metallic",
+      "code": "C08",
+      "swatch": "#49678b",
+      "image_url": "https://autoimg.danawa.com/photo/4027/52950/color_08_360.png",
+      "path": "vehicles\\테슬라\\Model X\\colors\\05_Frost Blue Metallic.png"
+    }
+  ],
+  "gallery": [
+    {
+      "name": "모델 X",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4027&Tab=image&No=141272",
+      "image_url": "https://autoimg.danawa.com/gallery/4027/20251027_4027 (1).jpg",
+      "path": "vehicles\\테슬라\\Model X\\gallery\\01_모델 X.jpg"
+    },
+    {
+      "name": "모델 X",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4027&Tab=image&No=141273",
+      "image_url": "https://autoimg.danawa.com/gallery/4027/20251027_4027 (2).jpg",
+      "path": "vehicles\\테슬라\\Model X\\gallery\\02_모델 X.jpg"
+    },
+    {
+      "name": "모델 X",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4027&Tab=image&No=141274",
+      "image_url": "https://autoimg.danawa.com/gallery/4027/20251027_4027 (3).jpg",
+      "path": "vehicles\\테슬라\\Model X\\gallery\\03_모델 X.jpg"
+    },
+    {
+      "name": "모델 X",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4027&Tab=image&No=138711",
+      "image_url": "https://autoimg.danawa.com/gallery/4027/20250617_4027 (1).jpg",
+      "path": "vehicles\\테슬라\\Model X\\gallery\\04_모델 X.jpg"
+    }
+  ]
+}

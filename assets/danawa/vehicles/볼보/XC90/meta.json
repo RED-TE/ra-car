@@ -1,0 +1,87 @@
+{
+  "brand": "볼보",
+  "brand_id": "459",
+  "model_id": "4737",
+  "name": "XC90",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4737",
+  "photo_code": "4737/53320",
+  "default_image_url": "https://autoimg.danawa.com/photo/4737/model_360.png",
+  "default_image_path": "vehicles\\볼보\\XC90\\model_360.png",
+  "colors": [
+    {
+      "name": "크리스탈 화이트",
+      "code": "C11",
+      "swatch": "#ffffff",
+      "image_url": "https://autoimg.danawa.com/photo/4737/53320/color_11_360.png",
+      "path": "vehicles\\볼보\\XC90\\colors\\01_크리스탈 화이트.png"
+    },
+    {
+      "name": "오닉스 블랙",
+      "code": "C12",
+      "swatch": "#000000",
+      "image_url": "https://autoimg.danawa.com/photo/4737/53320/color_12_360.png",
+      "path": "vehicles\\볼보\\XC90\\colors\\02_오닉스 블랙.png"
+    },
+    {
+      "name": "데님 블루",
+      "code": "C13",
+      "swatch": "#445262",
+      "image_url": "https://autoimg.danawa.com/photo/4737/53320/color_13_360.png",
+      "path": "vehicles\\볼보\\XC90\\colors\\03_데님 블루.png"
+    },
+    {
+      "name": "브라이트 더스크",
+      "code": "C14",
+      "swatch": "#d1cfd0",
+      "image_url": "https://autoimg.danawa.com/photo/4737/53320/color_14_360.png",
+      "path": "vehicles\\볼보\\XC90\\colors\\04_브라이트 더스크.png"
+    },
+    {
+      "name": "멀베리 레드",
+      "code": "C15",
+      "swatch": "#4b363b",
+      "image_url": "https://autoimg.danawa.com/photo/4737/53320/color_15_360.png",
+      "path": "vehicles\\볼보\\XC90\\colors\\05_멀베리 레드.png"
+    },
+    {
+      "name": "베이퍼 그레이",
+      "code": "C16",
+      "swatch": "#a8a9ad",
+      "image_url": "https://autoimg.danawa.com/photo/4737/53320/color_16_360.png",
+      "path": "vehicles\\볼보\\XC90\\colors\\06_베이퍼 그레이.png"
+    },
+    {
+      "name": "오로라 실버",
+      "code": "C17",
+      "swatch": "#828286",
+      "image_url": "https://autoimg.danawa.com/photo/4737/53320/color_17_360.png",
+      "path": "vehicles\\볼보\\XC90\\colors\\07_오로라 실버.png"
+    }
+  ],
+  "gallery": [
+    {
+      "name": "XC90 블랙 에디션",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4737&Tab=image&No=145036",
+      "image_url": "https://autoimg.danawa.com/gallery/4737/20260506_4737 (10).jpg",
+      "path": "vehicles\\볼보\\XC90\\gallery\\01_XC90 블랙 에디션.jpg"
+    },
+    {
+      "name": "XC90 블랙 에디션",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4737&Tab=image&No=145037",
+      "image_url": "https://autoimg.danawa.com/gallery/4737/20260506_4737 (11).jpg",
+      "path": "vehicles\\볼보\\XC90\\gallery\\02_XC90 블랙 에디션.jpg"
+    },
+    {
+      "name": "XC90 블랙 에디션",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4737&Tab=image&No=145038",
+      "image_url": "https://autoimg.danawa.com/gallery/4737/20260506_4737 (12).jpg",
+      "path": "vehicles\\볼보\\XC90\\gallery\\03_XC90 블랙 에디션.jpg"
+    },
+    {
+      "name": "New XC90",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4737&Tab=image&No=139016",
+      "image_url": "https://autoimg.danawa.com/gallery/4737/20250711_4737 (6).jpg",
+      "path": "vehicles\\볼보\\XC90\\gallery\\04_New XC90.jpg"
+    }
+  ]
+}

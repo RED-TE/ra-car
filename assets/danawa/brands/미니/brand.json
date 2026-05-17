@@ -1,0 +1,231 @@
+{
+  "brand_id": "367",
+  "brand": "미니",
+  "source_url": "https://auto.danawa.com/auto/?Work=brand&Brand=367",
+  "logo_url": "https://autoimg.danawa.com/photo/brand/367_90.png",
+  "logo_path": "brands\\미니\\logo.png",
+  "models": [
+    {
+      "brand": "미니",
+      "brand_id": "367",
+      "model_id": "4618",
+      "name": "Cooper",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4618",
+      "photo_code": "4618/53541",
+      "default_image_url": "https://autoimg.danawa.com/photo/4618/model_360.png",
+      "default_image_path": "vehicles\\미니\\Cooper\\model_360.png",
+      "colors": [],
+      "gallery": [
+        {
+          "name": "미니 JCW 3도어",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4618&Tab=image&No=143836",
+          "image_url": "https://autoimg.danawa.com/gallery/4618/20260326_4618 (1).jpg",
+          "path": "vehicles\\미니\\Cooper\\gallery\\01_미니 JCW 3도어.jpg"
+        },
+        {
+          "name": "미니 JCW 3도어",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4618&Tab=image&No=143837",
+          "image_url": "https://autoimg.danawa.com/gallery/4618/20260326_4618 (2).jpg",
+          "path": "vehicles\\미니\\Cooper\\gallery\\02_미니 JCW 3도어.jpg"
+        },
+        {
+          "name": "미니 JCW 3도어",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4618&Tab=image&No=143838",
+          "image_url": "https://autoimg.danawa.com/gallery/4618/20260326_4618 (3).jpg",
+          "path": "vehicles\\미니\\Cooper\\gallery\\03_미니 JCW 3도어.jpg"
+        },
+        {
+          "name": "미니 JCW 3도어",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4618&Tab=image&No=143839",
+          "image_url": "https://autoimg.danawa.com/gallery/4618/20260326_4618 (4).jpg",
+          "path": "vehicles\\미니\\Cooper\\gallery\\04_미니 JCW 3도어.jpg"
+        }
+      ]
+    },
+    {
+      "brand": "미니",
+      "brand_id": "367",
+      "model_id": "4571",
+      "name": "Mini Electric",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4571",
+      "photo_code": "4571/53698",
+      "default_image_url": "https://autoimg.danawa.com/photo/4571/model_360.png",
+      "default_image_path": "vehicles\\미니\\Mini Electric\\model_360.png",
+      "colors": [],
+      "gallery": [
+        {
+          "name": "미니 쿠퍼 SE 폴 스미스 에디션",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4571&Tab=image&No=142894",
+          "image_url": "https://autoimg.danawa.com/gallery/4571/20260121_4571 (1).jpg",
+          "path": "vehicles\\미니\\Mini Electric\\gallery\\01_미니 쿠퍼 SE 폴 스미스 에디션.jpg"
+        },
+        {
+          "name": "미니 쿠퍼 SE 폴 스미스 에디션",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4571&Tab=image&No=142895",
+          "image_url": "https://autoimg.danawa.com/gallery/4571/20260121_4571 (2).jpg",
+          "path": "vehicles\\미니\\Mini Electric\\gallery\\02_미니 쿠퍼 SE 폴 스미스 에디션.jpg"
+        },
+        {
+          "name": "미니 쿠퍼 SE 폴 스미스 에디션",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4571&Tab=image&No=142896",
+          "image_url": "https://autoimg.danawa.com/gallery/4571/20260121_4571 (3).jpg",
+          "path": "vehicles\\미니\\Mini Electric\\gallery\\03_미니 쿠퍼 SE 폴 스미스 에디션.jpg"
+        },
+        {
+          "name": "미니 쿠퍼 SE 폴 스미스 에디션",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4571&Tab=image&No=142897",
+          "image_url": "https://autoimg.danawa.com/gallery/4571/20260121_4571 (4).jpg",
+          "path": "vehicles\\미니\\Mini Electric\\gallery\\04_미니 쿠퍼 SE 폴 스미스 에디션.jpg"
+        }
+      ]
+    },
+    {
+      "brand": "미니",
+      "brand_id": "367",
+      "model_id": "4681",
+      "name": "Convertible",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4681",
+      "photo_code": "4681/53486",
+      "default_image_url": "https://autoimg.danawa.com/photo/4681/model_360.png",
+      "default_image_path": "vehicles\\미니\\Convertible\\model_360.png",
+      "colors": [],
+      "gallery": [
+        {
+          "name": "미니 폴 스미스 에디션",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4681&Tab=image&No=141382",
+          "image_url": "https://autoimg.danawa.com/gallery/4681/20251030_4681 (1).jpg",
+          "path": "vehicles\\미니\\Convertible\\gallery\\01_미니 폴 스미스 에디션.jpg"
+        },
+        {
+          "name": "미니 쿠퍼 컨버터블 폴 스미스 에디션",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4681&Tab=image&No=141383",
+          "image_url": "https://autoimg.danawa.com/gallery/4681/20251030_4681 (2).jpg",
+          "path": "vehicles\\미니\\Convertible\\gallery\\02_미니 쿠퍼 컨버터블 폴 스미스 에디션.jpg"
+        },
+        {
+          "name": "미니 쿠퍼 컨버터블 폴 스미스 에디션",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4681&Tab=image&No=141384",
+          "image_url": "https://autoimg.danawa.com/gallery/4681/20251030_4681 (3).jpg",
+          "path": "vehicles\\미니\\Convertible\\gallery\\03_미니 쿠퍼 컨버터블 폴 스미스 에디션.jpg"
+        },
+        {
+          "name": "미니 쿠퍼 컨버터블 폴 스미스 에디션",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4681&Tab=image&No=141385",
+          "image_url": "https://autoimg.danawa.com/gallery/4681/20251030_4681 (4).jpg",
+          "path": "vehicles\\미니\\Convertible\\gallery\\04_미니 쿠퍼 컨버터블 폴 스미스 에디션.jpg"
+        }
+      ]
+    },
+    {
+      "brand": "미니",
+      "brand_id": "367",
+      "model_id": "4640",
+      "name": "Aceman",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4640",
+      "photo_code": "4640/53703",
+      "default_image_url": "https://autoimg.danawa.com/photo/4640/model_360.png",
+      "default_image_path": "vehicles\\미니\\Aceman\\model_360.png",
+      "colors": [],
+      "gallery": [
+        {
+          "name": "에이스맨 JCW",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4640&Tab=image&No=143419",
+          "image_url": "https://autoimg.danawa.com/gallery/4640/20260304_4640 (1).jpg",
+          "path": "vehicles\\미니\\Aceman\\gallery\\01_에이스맨 JCW.jpg"
+        },
+        {
+          "name": "에이스맨 JCW",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4640&Tab=image&No=143420",
+          "image_url": "https://autoimg.danawa.com/gallery/4640/20260304_4640 (2).jpg",
+          "path": "vehicles\\미니\\Aceman\\gallery\\02_에이스맨 JCW.jpg"
+        },
+        {
+          "name": "에이스맨 JCW",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4640&Tab=image&No=143421",
+          "image_url": "https://autoimg.danawa.com/gallery/4640/20260304_4640 (3).jpg",
+          "path": "vehicles\\미니\\Aceman\\gallery\\03_에이스맨 JCW.jpg"
+        },
+        {
+          "name": "에이스맨 JCW",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4640&Tab=image&No=143422",
+          "image_url": "https://autoimg.danawa.com/gallery/4640/20260304_4640 (4).jpg",
+          "path": "vehicles\\미니\\Aceman\\gallery\\04_에이스맨 JCW.jpg"
+        }
+      ]
+    },
+    {
+      "brand": "미니",
+      "brand_id": "367",
+      "model_id": "4587",
+      "name": "Countryman",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4587",
+      "photo_code": "4587/53543",
+      "default_image_url": "https://autoimg.danawa.com/photo/4587/model_360.png",
+      "default_image_path": "vehicles\\미니\\Countryman\\model_360.png",
+      "colors": [],
+      "gallery": [
+        {
+          "name": "컨트리맨 JCW ALL4",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4587&Tab=image&No=143518",
+          "image_url": "https://autoimg.danawa.com/gallery/4587/20260316_4587 (1).jpg",
+          "path": "vehicles\\미니\\Countryman\\gallery\\01_컨트리맨 JCW ALL4.jpg"
+        },
+        {
+          "name": "컨트리맨 JCW ALL4",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4587&Tab=image&No=143519",
+          "image_url": "https://autoimg.danawa.com/gallery/4587/20260316_4587 (2).jpg",
+          "path": "vehicles\\미니\\Countryman\\gallery\\02_컨트리맨 JCW ALL4.jpg"
+        },
+        {
+          "name": "컨트리맨 JCW ALL4",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4587&Tab=image&No=143520",
+          "image_url": "https://autoimg.danawa.com/gallery/4587/20260316_4587 (3).jpg",
+          "path": "vehicles\\미니\\Countryman\\gallery\\03_컨트리맨 JCW ALL4.jpg"
+        },
+        {
+          "name": "컨트리맨 JCW ALL4",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4587&Tab=image&No=143521",
+          "image_url": "https://autoimg.danawa.com/gallery/4587/20260316_4587 (4).jpg",
+          "path": "vehicles\\미니\\Countryman\\gallery\\04_컨트리맨 JCW ALL4.jpg"
+        }
+      ]
+    },
+    {
+      "brand": "미니",
+      "brand_id": "367",
+      "model_id": "4572",
+      "name": "Countryman Electric",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4572",
+      "photo_code": "4572/53724",
+      "default_image_url": "https://autoimg.danawa.com/photo/4572/model_360.png",
+      "default_image_path": "vehicles\\미니\\Countryman Electric\\model_360.png",
+      "colors": [],
+      "gallery": [
+        {
+          "name": "컨트리맨 SE ALL4",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4572&Tab=image&No=141625",
+          "image_url": "https://autoimg.danawa.com/gallery/4572/20251112_4572 (1).jpg",
+          "path": "vehicles\\미니\\Countryman Electric\\gallery\\01_컨트리맨 SE ALL4.jpg"
+        },
+        {
+          "name": "컨트리맨 SE ALL4",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4572&Tab=image&No=141626",
+          "image_url": "https://autoimg.danawa.com/gallery/4572/20251112_4572 (2).jpg",
+          "path": "vehicles\\미니\\Countryman Electric\\gallery\\02_컨트리맨 SE ALL4.jpg"
+        },
+        {
+          "name": "컨트리맨 SE ALL4",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4572&Tab=image&No=141627",
+          "image_url": "https://autoimg.danawa.com/gallery/4572/20251112_4572 (3).jpg",
+          "path": "vehicles\\미니\\Countryman Electric\\gallery\\03_컨트리맨 SE ALL4.jpg"
+        },
+        {
+          "name": "컨트리맨 SE ALL4",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4572&Tab=image&No=141628",
+          "image_url": "https://autoimg.danawa.com/gallery/4572/20251112_4572 (4).jpg",
+          "path": "vehicles\\미니\\Countryman Electric\\gallery\\04_컨트리맨 SE ALL4.jpg"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,87 @@
+{
+  "brand": "기아",
+  "brand_id": "307",
+  "model_id": "4128",
+  "name": "EV9",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4128",
+  "photo_code": "4128/53668",
+  "default_image_url": "https://autoimg.danawa.com/photo/4128/53668/color_09_360.png",
+  "default_image_path": "vehicles\\기아\\EV9\\model_360.png",
+  "colors": [
+    {
+      "name": "스노우 화이트 펄(SWP)",
+      "code": "C10",
+      "swatch": "#f5f5f5",
+      "image_url": "https://autoimg.danawa.com/photo/4128/53668/color_10_360.png",
+      "path": "vehicles\\기아\\EV9\\colors\\01_스노우 화이트 펄(SWP).png"
+    },
+    {
+      "name": "아이보리 매트 실버(ISM)",
+      "code": "C09",
+      "swatch": "#bbbab1",
+      "image_url": "https://autoimg.danawa.com/photo/4128/53668/color_09_360.png",
+      "path": "vehicles\\기아\\EV9\\colors\\02_아이보리 매트 실버(ISM).png"
+    },
+    {
+      "name": "페블 그레이(DFG)",
+      "code": "C11",
+      "swatch": "#8a878a",
+      "image_url": "https://autoimg.danawa.com/photo/4128/53668/color_11_360.png",
+      "path": "vehicles\\기아\\EV9\\colors\\03_페블 그레이(DFG).png"
+    },
+    {
+      "name": "판테라 메탈(P2M)",
+      "code": "C12",
+      "swatch": "#404147",
+      "image_url": "https://autoimg.danawa.com/photo/4128/53668/color_12_360.png",
+      "path": "vehicles\\기아\\EV9\\colors\\04_판테라 메탈(P2M).png"
+    },
+    {
+      "name": "오로라 블랙 펄(ABP)",
+      "code": "C13",
+      "swatch": "#141115",
+      "image_url": "https://autoimg.danawa.com/photo/4128/53668/color_13_360.png",
+      "path": "vehicles\\기아\\EV9\\colors\\05_오로라 블랙 펄(ABP).png"
+    },
+    {
+      "name": "아이스버그 그린(IEG)",
+      "code": "C14",
+      "swatch": "#86938c",
+      "image_url": "https://autoimg.danawa.com/photo/4128/53668/color_14_360.png",
+      "path": "vehicles\\기아\\EV9\\colors\\06_아이스버그 그린(IEG).png"
+    },
+    {
+      "name": "오션 블루(OBG)",
+      "code": "C15",
+      "swatch": "#004672",
+      "image_url": "https://autoimg.danawa.com/photo/4128/53668/color_15_360.png",
+      "path": "vehicles\\기아\\EV9\\colors\\07_오션 블루(OBG).png"
+    }
+  ],
+  "gallery": [
+    {
+      "name": "2026 EV9",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4128&Tab=image&No=142976",
+      "image_url": "https://autoimg.danawa.com/gallery/4128/20260204_4128 (1).jpg",
+      "path": "vehicles\\기아\\EV9\\gallery\\01_2026 EV9.jpg"
+    },
+    {
+      "name": "2026 EV9",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4128&Tab=image&No=142977",
+      "image_url": "https://autoimg.danawa.com/gallery/4128/20260204_4128 (2).jpg",
+      "path": "vehicles\\기아\\EV9\\gallery\\02_2026 EV9.jpg"
+    },
+    {
+      "name": "2025 EV9",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4128&Tab=image&No=140856",
+      "image_url": "https://autoimg.danawa.com/gallery/4128/20250925_4128 (1).jpg",
+      "path": "vehicles\\기아\\EV9\\gallery\\03_2025 EV9.jpg"
+    },
+    {
+      "name": "2025 EV9",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4128&Tab=image&No=140857",
+      "image_url": "https://autoimg.danawa.com/gallery/4128/20250925_4128 (2).jpg",
+      "path": "vehicles\\기아\\EV9\\gallery\\04_2025 EV9.jpg"
+    }
+  ]
+}

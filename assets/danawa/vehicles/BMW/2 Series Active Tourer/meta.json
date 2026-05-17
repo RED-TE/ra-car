@@ -1,0 +1,59 @@
+{
+  "brand": "BMW",
+  "brand_id": "362",
+  "model_id": "4114",
+  "name": "2 Series Active Tourer",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4114",
+  "photo_code": "4114/53448",
+  "default_image_url": "https://autoimg.danawa.com/photo/4114/53448/color_11_360.png",
+  "default_image_path": "vehicles\\BMW\\2 Series Active Tourer\\model_360.png",
+  "colors": [
+    {
+      "name": "알파인 화이트 (300)",
+      "code": "C11",
+      "swatch": "#e7e7e7",
+      "image_url": "https://autoimg.danawa.com/photo/4114/53448/color_11_360.png",
+      "path": "vehicles\\BMW\\2 Series Active Tourer\\colors\\01_알파인 화이트 (300).png"
+    },
+    {
+      "name": "스카이스크래퍼 그레이 (C4W)",
+      "code": "C12",
+      "swatch": "#4d5353",
+      "image_url": "https://autoimg.danawa.com/photo/4114/53448/color_12_360.png",
+      "path": "vehicles\\BMW\\2 Series Active Tourer\\colors\\02_스카이스크래퍼 그레이 (C4W).png"
+    },
+    {
+      "name": "산마리노 그린 (C4E)",
+      "code": "C13",
+      "swatch": "#202f18",
+      "image_url": "https://autoimg.danawa.com/photo/4114/53448/color_13_360.png",
+      "path": "vehicles\\BMW\\2 Series Active Tourer\\colors\\03_산마리노 그린 (C4E).png"
+    }
+  ],
+  "gallery": [
+    {
+      "name": "2023 l 218d 액티브 투어러",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4114&Tab=image&No=104756",
+      "image_url": "https://autoimg.danawa.com/gallery/4114/20230203_4114 (1).jpg",
+      "path": "vehicles\\BMW\\2 Series Active Tourer\\gallery\\01_2023 l 218d 액티브 투어러.jpg"
+    },
+    {
+      "name": "2023 l 218d 액티브 투어러",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4114&Tab=image&No=104757",
+      "image_url": "https://autoimg.danawa.com/gallery/4114/20230203_4114 (2).jpg",
+      "path": "vehicles\\BMW\\2 Series Active Tourer\\gallery\\02_2023 l 218d 액티브 투어러.jpg"
+    },
+    {
+      "name": "2023 l 218d 액티브 투어러",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4114&Tab=image&No=104758",
+      "image_url": "https://autoimg.danawa.com/gallery/4114/20230203_4114 (3).jpg",
+      "path": "vehicles\\BMW\\2 Series Active Tourer\\gallery\\03_2023 l 218d 액티브 투어러.jpg"
+    },
+    {
+      "name": "2023 l 218d 액티브 투어러",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4114&Tab=image&No=104759",
+      "image_url": "https://autoimg.danawa.com/gallery/4114/20230203_4114 (4).jpg",
+      "path": "vehicles\\BMW\\2 Series Active Tourer\\gallery\\04_2023 l 218d 액티브 투어러.jpg"
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "brand": "폴스타",
+  "brand_id": "458",
+  "model_id": "4513",
+  "name": "Polestar 4",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4513",
+  "photo_code": "4513/53317",
+  "default_image_url": "https://autoimg.danawa.com/photo/4513/model_360.png",
+  "default_image_path": "vehicles\\폴스타\\Polestar 4\\model_360.png",
+  "colors": [
+    {
+      "name": "Snow(유료)",
+      "code": "C09",
+      "swatch": "#f5f5f5",
+      "image_url": "https://autoimg.danawa.com/photo/4513/53317/color_09_360.png",
+      "path": "vehicles\\폴스타\\Polestar 4\\colors\\01_Snow(유료).png"
+    },
+    {
+      "name": "Magnesium",
+      "code": "C11",
+      "swatch": "#bfc2c3",
+      "image_url": "https://autoimg.danawa.com/photo/4513/53317/color_11_360.png",
+      "path": "vehicles\\폴스타\\Polestar 4\\colors\\02_Magnesium.png"
+    },
+    {
+      "name": "Electron",
+      "code": "C12",
+      "swatch": "#8a94a0",
+      "image_url": "https://autoimg.danawa.com/photo/4513/53317/color_12_360.png",
+      "path": "vehicles\\폴스타\\Polestar 4\\colors\\03_Electron.png"
+    },
+    {
+      "name": "Storm",
+      "code": "C13",
+      "swatch": "#454d51",
+      "image_url": "https://autoimg.danawa.com/photo/4513/53317/color_13_360.png",
+      "path": "vehicles\\폴스타\\Polestar 4\\colors\\04_Storm.png"
+    },
+    {
+      "name": "Space",
+      "code": "C14",
+      "swatch": "#000000",
+      "image_url": "https://autoimg.danawa.com/photo/4513/53317/color_14_360.png",
+      "path": "vehicles\\폴스타\\Polestar 4\\colors\\05_Space.png"
+    }
+  ],
+  "gallery": [
+    {
+      "name": "폴스타 4 듀얼 모터",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4513&Tab=image&No=135098",
+      "image_url": "https://autoimg.danawa.com/gallery/4513/20250210_4513 (1).jpg",
+      "path": "vehicles\\폴스타\\Polestar 4\\gallery\\01_폴스타 4 듀얼 모터.jpg"
+    },
+    {
+      "name": "폴스타 4 듀얼 모터",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4513&Tab=image&No=135099",
+      "image_url": "https://autoimg.danawa.com/gallery/4513/20250210_4513 (2).jpg",
+      "path": "vehicles\\폴스타\\Polestar 4\\gallery\\02_폴스타 4 듀얼 모터.jpg"
+    },
+    {
+      "name": "폴스타 4 듀얼 모터",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4513&Tab=image&No=135100",
+      "image_url": "https://autoimg.danawa.com/gallery/4513/20250210_4513 (3).jpg",
+      "path": "vehicles\\폴스타\\Polestar 4\\gallery\\03_폴스타 4 듀얼 모터.jpg"
+    },
+    {
+      "name": "폴스타 4 듀얼 모터",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4513&Tab=image&No=135101",
+      "image_url": "https://autoimg.danawa.com/gallery/4513/20250210_4513 (4).jpg",
+      "path": "vehicles\\폴스타\\Polestar 4\\gallery\\04_폴스타 4 듀얼 모터.jpg"
+    }
+  ]
+}

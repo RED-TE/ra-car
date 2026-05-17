@@ -1,0 +1,37 @@
+{
+  "brand": "페라리",
+  "brand_id": "436",
+  "model_id": "4754",
+  "name": "849 Testarossa",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4754",
+  "photo_code": "4754/",
+  "default_image_url": "https://autoimg.danawa.com/photo/4754/model_360.png",
+  "default_image_path": "vehicles\\페라리\\849 Testarossa\\model_360.png",
+  "colors": [],
+  "gallery": [
+    {
+      "name": "849 테스타로사",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4754&Tab=image&No=144247",
+      "image_url": "https://autoimg.danawa.com/gallery/4754/20260408_4754 (1).jpg",
+      "path": "vehicles\\페라리\\849 Testarossa\\gallery\\01_849 테스타로사.jpg"
+    },
+    {
+      "name": "849 테스타로사",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4754&Tab=image&No=144248",
+      "image_url": "https://autoimg.danawa.com/gallery/4754/20260408_4754 (2).jpg",
+      "path": "vehicles\\페라리\\849 Testarossa\\gallery\\02_849 테스타로사.jpg"
+    },
+    {
+      "name": "849 테스타로사",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4754&Tab=image&No=144249",
+      "image_url": "https://autoimg.danawa.com/gallery/4754/20260408_4754 (3).jpg",
+      "path": "vehicles\\페라리\\849 Testarossa\\gallery\\03_849 테스타로사.jpg"
+    },
+    {
+      "name": "849 테스타로사",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4754&Tab=image&No=144250",
+      "image_url": "https://autoimg.danawa.com/gallery/4754/20260408_4754 (4).jpg",
+      "path": "vehicles\\페라리\\849 Testarossa\\gallery\\04_849 테스타로사.jpg"
+    }
+  ]
+}

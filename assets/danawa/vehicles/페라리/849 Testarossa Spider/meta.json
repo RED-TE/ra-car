@@ -1,0 +1,37 @@
+{
+  "brand": "페라리",
+  "brand_id": "436",
+  "model_id": "4755",
+  "name": "849 Testarossa Spider",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4755",
+  "photo_code": "4755/",
+  "default_image_url": "https://autoimg.danawa.com/photo/4755/model_360.png",
+  "default_image_path": "vehicles\\페라리\\849 Testarossa Spider\\model_360.png",
+  "colors": [],
+  "gallery": [
+    {
+      "name": "849 테스타로사 스파이더",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4755&Tab=image&No=140608",
+      "image_url": "https://autoimg.danawa.com/gallery/4755/20250923_4755 (1).jpg",
+      "path": "vehicles\\페라리\\849 Testarossa Spider\\gallery\\01_849 테스타로사 스파이더.jpg"
+    },
+    {
+      "name": "849 테스타로사 스파이더",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4755&Tab=image&No=140609",
+      "image_url": "https://autoimg.danawa.com/gallery/4755/20250923_4755 (2).jpg",
+      "path": "vehicles\\페라리\\849 Testarossa Spider\\gallery\\02_849 테스타로사 스파이더.jpg"
+    },
+    {
+      "name": "849 테스타로사 스파이더",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4755&Tab=image&No=140610",
+      "image_url": "https://autoimg.danawa.com/gallery/4755/20250923_4755 (3).jpg",
+      "path": "vehicles\\페라리\\849 Testarossa Spider\\gallery\\03_849 테스타로사 스파이더.jpg"
+    },
+    {
+      "name": "849 테스타로사 스파이더",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4755&Tab=image&No=140611",
+      "image_url": "https://autoimg.danawa.com/gallery/4755/20250923_4755 (4).jpg",
+      "path": "vehicles\\페라리\\849 Testarossa Spider\\gallery\\04_849 테스타로사 스파이더.jpg"
+    }
+  ]
+}

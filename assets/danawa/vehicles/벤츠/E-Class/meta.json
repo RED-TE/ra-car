@@ -1,0 +1,108 @@
+{
+  "brand": "벤츠",
+  "brand_id": "349",
+  "model_id": "4516",
+  "name": "E-Class",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4516",
+  "photo_code": "4516/53738",
+  "default_image_url": "https://autoimg.danawa.com/photo/4516/53738/color_12_360.png",
+  "default_image_path": "vehicles\\벤츠\\E-Class\\model_360.png",
+  "colors": [
+    {
+      "name": "폴라 화이트 (149U)",
+      "code": "C11",
+      "swatch": "#ffffff",
+      "image_url": "https://autoimg.danawa.com/photo/4516/53738/color_11_360.png",
+      "path": "vehicles\\벤츠\\E-Class\\colors\\01_폴라 화이트 (149U).png"
+    },
+    {
+      "name": "베르데 실버 (188U)",
+      "code": "C12",
+      "swatch": "#6d8385",
+      "image_url": "https://autoimg.danawa.com/photo/4516/53738/color_12_360.png",
+      "path": "vehicles\\벤츠\\E-Class\\colors\\02_베르데 실버 (188U).png"
+    },
+    {
+      "name": "옵시디안 블랙 (197U)",
+      "code": "C13",
+      "swatch": "#0c0c0c",
+      "image_url": "https://autoimg.danawa.com/photo/4516/53738/color_13_360.png",
+      "path": "vehicles\\벤츠\\E-Class\\colors\\03_옵시디안 블랙 (197U).png"
+    },
+    {
+      "name": "노틱 블루 (595U)",
+      "code": "C14",
+      "swatch": "#020a24",
+      "image_url": "https://autoimg.danawa.com/photo/4516/53738/color_14_360.png",
+      "path": "vehicles\\벤츠\\E-Class\\colors\\04_노틱 블루 (595U).png"
+    },
+    {
+      "name": "벨벳 브라운 (771U)",
+      "code": "C15",
+      "swatch": "#786c63",
+      "image_url": "https://autoimg.danawa.com/photo/4516/53738/color_15_360.png",
+      "path": "vehicles\\벤츠\\E-Class\\colors\\05_벨벳 브라운 (771U).png"
+    },
+    {
+      "name": "그라파이트 그레이 (831U)",
+      "code": "C16",
+      "swatch": "#3e4147",
+      "image_url": "https://autoimg.danawa.com/photo/4516/53738/color_16_360.png",
+      "path": "vehicles\\벤츠\\E-Class\\colors\\06_그라파이트 그레이 (831U).png"
+    },
+    {
+      "name": "하이-테크 실버 (922U)",
+      "code": "C17",
+      "swatch": "#b5b8ba",
+      "image_url": "https://autoimg.danawa.com/photo/4516/53738/color_17_360.png",
+      "path": "vehicles\\벤츠\\E-Class\\colors\\07_하이-테크 실버 (922U).png"
+    },
+    {
+      "name": "MANUFAKTUR 오팔라이트 화이트 (885U)",
+      "code": "C18",
+      "swatch": "#e3e2e6",
+      "image_url": "https://autoimg.danawa.com/photo/4516/53738/color_18_360.png",
+      "path": "vehicles\\벤츠\\E-Class\\colors\\08_MANUFAKTUR 오팔라이트 화이트 (885U).png"
+    },
+    {
+      "name": "MANUFAKTUR 알파인 그레이 (956U)",
+      "code": "C19",
+      "swatch": "#b2b1b5",
+      "image_url": "https://autoimg.danawa.com/photo/4516/53738/color_19_360.png",
+      "path": "vehicles\\벤츠\\E-Class\\colors\\09_MANUFAKTUR 알파인 그레이 (956U).png"
+    },
+    {
+      "name": "MANUFAKTUR 파타고니아 레드 (993U)",
+      "code": "C20",
+      "swatch": "#9a131a",
+      "image_url": "https://autoimg.danawa.com/photo/4516/53738/color_20_360.png",
+      "path": "vehicles\\벤츠\\E-Class\\colors\\10_MANUFAKTUR 파타고니아 레드 (993U).png"
+    }
+  ],
+  "gallery": [
+    {
+      "name": "메르세데스-AMG E53 하이브리드 4MATIC+",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4516&Tab=image&No=138805",
+      "image_url": "https://autoimg.danawa.com/gallery/4516/20250626_4516 (1).jpg",
+      "path": "vehicles\\벤츠\\E-Class\\gallery\\01_메르세데스-AMG E53 하이브리드 4MATIC+.jpg"
+    },
+    {
+      "name": "메르세데스-AMG E53 하이브리드 4MATIC+",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4516&Tab=image&No=138806",
+      "image_url": "https://autoimg.danawa.com/gallery/4516/20250626_4516 (2).jpg",
+      "path": "vehicles\\벤츠\\E-Class\\gallery\\02_메르세데스-AMG E53 하이브리드 4MATIC+.jpg"
+    },
+    {
+      "name": "메르세데스-AMG E53 하이브리드 4MATIC+",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4516&Tab=image&No=138807",
+      "image_url": "https://autoimg.danawa.com/gallery/4516/20250626_4516 (3).jpg",
+      "path": "vehicles\\벤츠\\E-Class\\gallery\\03_메르세데스-AMG E53 하이브리드 4MATIC+.jpg"
+    },
+    {
+      "name": "메르세데스-AMG E53 하이브리드 4MATIC+",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4516&Tab=image&No=138808",
+      "image_url": "https://autoimg.danawa.com/gallery/4516/20250626_4516 (4).jpg",
+      "path": "vehicles\\벤츠\\E-Class\\gallery\\04_메르세데스-AMG E53 하이브리드 4MATIC+.jpg"
+    }
+  ]
+}

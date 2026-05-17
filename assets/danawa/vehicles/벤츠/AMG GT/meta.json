@@ -1,0 +1,37 @@
+{
+  "brand": "벤츠",
+  "brand_id": "349",
+  "model_id": "3982",
+  "name": "AMG GT",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3982",
+  "photo_code": "3982/53526",
+  "default_image_url": "https://autoimg.danawa.com/photo/3982/model_360.png",
+  "default_image_path": "vehicles\\벤츠\\AMG GT\\model_360.png",
+  "colors": [],
+  "gallery": [
+    {
+      "name": "2023 l AMG GT 53 4도어 쿠페",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3982&Tab=image&No=108401",
+      "image_url": "https://autoimg.danawa.com/gallery/3982/20230509_3982 (1).jpg",
+      "path": "vehicles\\벤츠\\AMG GT\\gallery\\01_2023 l AMG GT 53 4도어 쿠페.jpg"
+    },
+    {
+      "name": "2023 l AMG GT 53 4도어 쿠페",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3982&Tab=image&No=108402",
+      "image_url": "https://autoimg.danawa.com/gallery/3982/20230509_3982 (2).jpg",
+      "path": "vehicles\\벤츠\\AMG GT\\gallery\\02_2023 l AMG GT 53 4도어 쿠페.jpg"
+    },
+    {
+      "name": "2023 l AMG GT 53 4도어 쿠페",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3982&Tab=image&No=108403",
+      "image_url": "https://autoimg.danawa.com/gallery/3982/20230509_3982 (3).jpg",
+      "path": "vehicles\\벤츠\\AMG GT\\gallery\\03_2023 l AMG GT 53 4도어 쿠페.jpg"
+    },
+    {
+      "name": "2023 l AMG GT 53 4도어 쿠페",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3982&Tab=image&No=108404",
+      "image_url": "https://autoimg.danawa.com/gallery/3982/20230509_3982 (4).jpg",
+      "path": "vehicles\\벤츠\\AMG GT\\gallery\\04_2023 l AMG GT 53 4도어 쿠페.jpg"
+    }
+  ]
+}

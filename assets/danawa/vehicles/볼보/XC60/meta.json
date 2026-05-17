@@ -1,0 +1,87 @@
+{
+  "brand": "볼보",
+  "brand_id": "459",
+  "model_id": "4747",
+  "name": "XC60",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4747",
+  "photo_code": "4747/53348",
+  "default_image_url": "https://autoimg.danawa.com/photo/4747/model_360.png",
+  "default_image_path": "vehicles\\볼보\\XC60\\model_360.png",
+  "colors": [
+    {
+      "name": "크리스탈 화이트",
+      "code": "C11",
+      "swatch": "#f2f2f2",
+      "image_url": "https://autoimg.danawa.com/photo/4747/53348/color_11_360.png",
+      "path": "vehicles\\볼보\\XC60\\colors\\01_크리스탈 화이트.png"
+    },
+    {
+      "name": "오닉스 블랙",
+      "code": "C12",
+      "swatch": "#2d2926",
+      "image_url": "https://autoimg.danawa.com/photo/4747/53348/color_12_360.png",
+      "path": "vehicles\\볼보\\XC60\\colors\\02_오닉스 블랙.png"
+    },
+    {
+      "name": "데님 블루",
+      "code": "C13",
+      "swatch": "#4f5a78",
+      "image_url": "https://autoimg.danawa.com/photo/4747/53348/color_13_360.png",
+      "path": "vehicles\\볼보\\XC60\\colors\\03_데님 블루.png"
+    },
+    {
+      "name": "멀베리 레드",
+      "code": "C14",
+      "swatch": "#624446",
+      "image_url": "https://autoimg.danawa.com/photo/4747/53348/color_14_360.png",
+      "path": "vehicles\\볼보\\XC60\\colors\\04_멀베리 레드.png"
+    },
+    {
+      "name": "베이퍼 그레이",
+      "code": "C15",
+      "swatch": "#7b8082",
+      "image_url": "https://autoimg.danawa.com/photo/4747/53348/color_15_360.png",
+      "path": "vehicles\\볼보\\XC60\\colors\\05_베이퍼 그레이.png"
+    },
+    {
+      "name": "오로라 실버",
+      "code": "C16",
+      "swatch": "#acaaae",
+      "image_url": "https://autoimg.danawa.com/photo/4747/53348/color_16_360.png",
+      "path": "vehicles\\볼보\\XC60\\colors\\06_오로라 실버.png"
+    },
+    {
+      "name": "포레스트 레이크",
+      "code": "C17",
+      "swatch": "#5a6363",
+      "image_url": "https://autoimg.danawa.com/photo/4747/53348/color_17_360.png",
+      "path": "vehicles\\볼보\\XC60\\colors\\07_포레스트 레이크.png"
+    }
+  ],
+  "gallery": [
+    {
+      "name": "XC60 T8 PHEV",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4747&Tab=image&No=142654",
+      "image_url": "https://autoimg.danawa.com/gallery/4747/20260113_4747 (1).jpg",
+      "path": "vehicles\\볼보\\XC60\\gallery\\01_XC60 T8 PHEV.jpg"
+    },
+    {
+      "name": "XC60 T8 PHEV",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4747&Tab=image&No=142655",
+      "image_url": "https://autoimg.danawa.com/gallery/4747/20260113_4747 (2).jpg",
+      "path": "vehicles\\볼보\\XC60\\gallery\\02_XC60 T8 PHEV.jpg"
+    },
+    {
+      "name": "XC60 T8 PHEV",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4747&Tab=image&No=142656",
+      "image_url": "https://autoimg.danawa.com/gallery/4747/20260113_4747 (3).jpg",
+      "path": "vehicles\\볼보\\XC60\\gallery\\03_XC60 T8 PHEV.jpg"
+    },
+    {
+      "name": "XC60 T8 PHEV",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4747&Tab=image&No=142657",
+      "image_url": "https://autoimg.danawa.com/gallery/4747/20260113_4747 (4).jpg",
+      "path": "vehicles\\볼보\\XC60\\gallery\\04_XC60 T8 PHEV.jpg"
+    }
+  ]
+}

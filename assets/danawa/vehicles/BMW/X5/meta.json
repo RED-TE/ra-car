@@ -1,0 +1,80 @@
+{
+  "brand": "BMW",
+  "brand_id": "362",
+  "model_id": "4475",
+  "name": "X5",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4475",
+  "photo_code": "4475/53499",
+  "default_image_url": "https://autoimg.danawa.com/photo/4475/53499/color_15_360.png",
+  "default_image_path": "vehicles\\BMW\\X5\\model_360.png",
+  "colors": [
+    {
+      "name": "블랙 사파이어 메탈릭",
+      "code": "C11",
+      "swatch": "#111111",
+      "image_url": "https://autoimg.danawa.com/photo/4475/53499/color_11_360.png",
+      "path": "vehicles\\BMW\\X5\\colors\\01_블랙 사파이어 메탈릭.png"
+    },
+    {
+      "name": "카본 블랙 메탈릭",
+      "code": "C12",
+      "swatch": "#0c0c14",
+      "image_url": "https://autoimg.danawa.com/photo/4475/53499/color_12_360.png",
+      "path": "vehicles\\BMW\\X5\\colors\\02_카본 블랙 메탈릭.png"
+    },
+    {
+      "name": "맨해탄 메탈릭",
+      "code": "C13",
+      "swatch": "#585544",
+      "image_url": "https://autoimg.danawa.com/photo/4475/53499/color_13_360.png",
+      "path": "vehicles\\BMW\\X5\\colors\\03_맨해탄 메탈릭.png"
+    },
+    {
+      "name": "미네랄 화이트 메탈릭",
+      "code": "C14",
+      "swatch": "#e4e3e1",
+      "image_url": "https://autoimg.danawa.com/photo/4475/53499/color_14_360.png",
+      "path": "vehicles\\BMW\\X5\\colors\\04_미네랄 화이트 메탈릭.png"
+    },
+    {
+      "name": "스카이스크래퍼 그레이 메탈릭",
+      "code": "C15",
+      "swatch": "#737c7b",
+      "image_url": "https://autoimg.danawa.com/photo/4475/53499/color_15_360.png",
+      "path": "vehicles\\BMW\\X5\\colors\\05_스카이스크래퍼 그레이 메탈릭.png"
+    },
+    {
+      "name": "브루클린 그레이 메탈릭",
+      "code": "C16",
+      "swatch": "#858e8f",
+      "image_url": "https://autoimg.danawa.com/photo/4475/53499/color_16_360.png",
+      "path": "vehicles\\BMW\\X5\\colors\\06_브루클린 그레이 메탈릭.png"
+    }
+  ],
+  "gallery": [
+    {
+      "name": "2024 l X5 프로텍션 VR6",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4475&Tab=image&No=112351",
+      "image_url": "https://autoimg.danawa.com/gallery/4475/20230829_4475 (1).jpg",
+      "path": "vehicles\\BMW\\X5\\gallery\\01_2024 l X5 프로텍션 VR6.jpg"
+    },
+    {
+      "name": "2024 l X5 프로텍션 VR6",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4475&Tab=image&No=112352",
+      "image_url": "https://autoimg.danawa.com/gallery/4475/20230829_4475 (2).jpg",
+      "path": "vehicles\\BMW\\X5\\gallery\\02_2024 l X5 프로텍션 VR6.jpg"
+    },
+    {
+      "name": "2024 l X5 프로텍션 VR6",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4475&Tab=image&No=112353",
+      "image_url": "https://autoimg.danawa.com/gallery/4475/20230829_4475 (3).jpg",
+      "path": "vehicles\\BMW\\X5\\gallery\\03_2024 l X5 프로텍션 VR6.jpg"
+    },
+    {
+      "name": "2024 l X5 프로텍션 VR6",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4475&Tab=image&No=112354",
+      "image_url": "https://autoimg.danawa.com/gallery/4475/20230829_4475 (4).jpg",
+      "path": "vehicles\\BMW\\X5\\gallery\\04_2024 l X5 프로텍션 VR6.jpg"
+    }
+  ]
+}

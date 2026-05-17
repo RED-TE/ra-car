@@ -1,0 +1,80 @@
+{
+  "brand": "볼보",
+  "brand_id": "459",
+  "model_id": "4405",
+  "name": "XC40",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4405",
+  "photo_code": "4405/53468",
+  "default_image_url": "https://autoimg.danawa.com/photo/4405/model_360.png",
+  "default_image_path": "vehicles\\볼보\\XC40\\model_360.png",
+  "colors": [
+    {
+      "name": "클라우드 블루",
+      "code": "C11",
+      "swatch": "#c8d4e1",
+      "image_url": "https://autoimg.danawa.com/photo/4405/53468/color_11_360.png",
+      "path": "vehicles\\볼보\\XC40\\colors\\01_클라우드 블루.png"
+    },
+    {
+      "name": "크리스탈 화이트",
+      "code": "C12",
+      "swatch": "#f2f2f2",
+      "image_url": "https://autoimg.danawa.com/photo/4405/53468/color_12_360.png",
+      "path": "vehicles\\볼보\\XC40\\colors\\02_크리스탈 화이트.png"
+    },
+    {
+      "name": "오닉스 블랙",
+      "code": "C13",
+      "swatch": "#2d2926",
+      "image_url": "https://autoimg.danawa.com/photo/4405/53468/color_13_360.png",
+      "path": "vehicles\\볼보\\XC40\\colors\\03_오닉스 블랙.png"
+    },
+    {
+      "name": "데님 블루",
+      "code": "C14",
+      "swatch": "#4f5a78",
+      "image_url": "https://autoimg.danawa.com/photo/4405/53468/color_14_360.png",
+      "path": "vehicles\\볼보\\XC40\\colors\\04_데님 블루.png"
+    },
+    {
+      "name": "베이퍼 그레이",
+      "code": "C15",
+      "swatch": "#7b8082",
+      "image_url": "https://autoimg.danawa.com/photo/4405/53468/color_15_360.png",
+      "path": "vehicles\\볼보\\XC40\\colors\\05_베이퍼 그레이.png"
+    },
+    {
+      "name": "오로라 실버",
+      "code": "C16",
+      "swatch": "#acaaae",
+      "image_url": "https://autoimg.danawa.com/photo/4405/53468/color_16_360.png",
+      "path": "vehicles\\볼보\\XC40\\colors\\06_오로라 실버.png"
+    }
+  ],
+  "gallery": [
+    {
+      "name": "XC40 블랙 에디션",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4405&Tab=image&No=131841",
+      "image_url": "https://autoimg.danawa.com/gallery/4405/20241115_4405 (2).jpg",
+      "path": "vehicles\\볼보\\XC40\\gallery\\01_XC40 블랙 에디션.jpg"
+    },
+    {
+      "name": "XC40 블랙 에디션",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4405&Tab=image&No=131842",
+      "image_url": "https://autoimg.danawa.com/gallery/4405/20241115_4405 (3).jpg",
+      "path": "vehicles\\볼보\\XC40\\gallery\\02_XC40 블랙 에디션.jpg"
+    },
+    {
+      "name": "XC40 블랙 에디션",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4405&Tab=image&No=131843",
+      "image_url": "https://autoimg.danawa.com/gallery/4405/20241115_4405 (4).jpg",
+      "path": "vehicles\\볼보\\XC40\\gallery\\03_XC40 블랙 에디션.jpg"
+    },
+    {
+      "name": "XC40 블랙 에디션",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4405&Tab=image&No=131844",
+      "image_url": "https://autoimg.danawa.com/gallery/4405/20241115_4405 (1).jpg",
+      "path": "vehicles\\볼보\\XC40\\gallery\\04_XC40 블랙 에디션.jpg"
+    }
+  ]
+}

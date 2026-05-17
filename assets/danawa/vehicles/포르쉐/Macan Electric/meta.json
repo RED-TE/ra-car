@@ -1,0 +1,129 @@
+{
+  "brand": "포르쉐",
+  "brand_id": "381",
+  "model_id": "4613",
+  "name": "Macan Electric",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4613",
+  "photo_code": "4613/53362",
+  "default_image_url": "https://autoimg.danawa.com/photo/4613/model_360.png",
+  "default_image_path": "vehicles\\포르쉐\\Macan Electric\\model_360.png",
+  "colors": [
+    {
+      "name": "화이트",
+      "code": "C11",
+      "swatch": "#efefef",
+      "image_url": "https://autoimg.danawa.com/photo/4613/53362/color_11_360.png",
+      "path": "vehicles\\포르쉐\\Macan Electric\\colors\\01_화이트.png"
+    },
+    {
+      "name": "블랙",
+      "code": "C12",
+      "swatch": "#000000",
+      "image_url": "https://autoimg.danawa.com/photo/4613/53362/color_12_360.png",
+      "path": "vehicles\\포르쉐\\Macan Electric\\colors\\02_블랙.png"
+    },
+    {
+      "name": "제트 블랙 메탈릭",
+      "code": "C13",
+      "swatch": "#000000",
+      "image_url": "https://autoimg.danawa.com/photo/4613/53362/color_13_360.png",
+      "path": "vehicles\\포르쉐\\Macan Electric\\colors\\03_제트 블랙 메탈릭.png"
+    },
+    {
+      "name": "아이스 그레이 메탈릭",
+      "code": "C14",
+      "swatch": "#dfe2e9",
+      "image_url": "https://autoimg.danawa.com/photo/4613/53362/color_14_360.png",
+      "path": "vehicles\\포르쉐\\Macan Electric\\colors\\04_아이스 그레이 메탈릭.png"
+    },
+    {
+      "name": "볼케이노 그레이 메탈릭",
+      "code": "C15",
+      "swatch": "#343c44",
+      "image_url": "https://autoimg.danawa.com/photo/4613/53362/color_15_360.png",
+      "path": "vehicles\\포르쉐\\Macan Electric\\colors\\05_볼케이노 그레이 메탈릭.png"
+    },
+    {
+      "name": "돌로마이트 실버 메탈릭",
+      "code": "C16",
+      "swatch": "#c3cdd3",
+      "image_url": "https://autoimg.danawa.com/photo/4613/53362/color_16_360.png",
+      "path": "vehicles\\포르쉐\\Macan Electric\\colors\\06_돌로마이트 실버 메탈릭.png"
+    },
+    {
+      "name": "프로방스",
+      "code": "C17",
+      "swatch": "#94849c",
+      "image_url": "https://autoimg.danawa.com/photo/4613/53362/color_17_360.png",
+      "path": "vehicles\\포르쉐\\Macan Electric\\colors\\07_프로방스.png"
+    },
+    {
+      "name": "젠션 블루 메탈릭",
+      "code": "C18",
+      "swatch": "#00194b",
+      "image_url": "https://autoimg.danawa.com/photo/4613/53362/color_18_360.png",
+      "path": "vehicles\\포르쉐\\Macan Electric\\colors\\08_젠션 블루 메탈릭.png"
+    },
+    {
+      "name": "프로즌 블루 메탈릭",
+      "code": "C19",
+      "swatch": "#7ba7bc",
+      "image_url": "https://autoimg.danawa.com/photo/4613/53362/color_19_360.png",
+      "path": "vehicles\\포르쉐\\Macan Electric\\colors\\09_프로즌 블루 메탈릭.png"
+    },
+    {
+      "name": "크레용",
+      "code": "C20",
+      "swatch": "#979892",
+      "image_url": "https://autoimg.danawa.com/photo/4613/53362/color_20_360.png",
+      "path": "vehicles\\포르쉐\\Macan Electric\\colors\\10_크레용.png"
+    },
+    {
+      "name": "오크 그린 메탈릭 네오",
+      "code": "C21",
+      "swatch": "#484c3c",
+      "image_url": "https://autoimg.danawa.com/photo/4613/53362/color_21_360.png",
+      "path": "vehicles\\포르쉐\\Macan Electric\\colors\\11_오크 그린 메탈릭 네오.png"
+    },
+    {
+      "name": "어벤추린 그린 메탈릭",
+      "code": "C22",
+      "swatch": "#6c746c",
+      "image_url": "https://autoimg.danawa.com/photo/4613/53362/color_22_360.png",
+      "path": "vehicles\\포르쉐\\Macan Electric\\colors\\12_어벤추린 그린 메탈릭.png"
+    },
+    {
+      "name": "슬레이트 그레이 네오",
+      "code": "C23",
+      "swatch": "#4e4e53",
+      "image_url": "https://autoimg.danawa.com/photo/4613/53362/color_23_360.png",
+      "path": "vehicles\\포르쉐\\Macan Electric\\colors\\13_슬레이트 그레이 네오.png"
+    }
+  ],
+  "gallery": [
+    {
+      "name": "마칸 일렉트릭 GTS",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4613&Tab=image&No=141097",
+      "image_url": "https://autoimg.danawa.com/gallery/4613/20251022_4613 (14).jpg",
+      "path": "vehicles\\포르쉐\\Macan Electric\\gallery\\01_마칸 일렉트릭 GTS.jpg"
+    },
+    {
+      "name": "마칸 일렉트릭 GTS",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4613&Tab=image&No=141098",
+      "image_url": "https://autoimg.danawa.com/gallery/4613/20251022_4613 (13).jpg",
+      "path": "vehicles\\포르쉐\\Macan Electric\\gallery\\02_마칸 일렉트릭 GTS.jpg"
+    },
+    {
+      "name": "마칸 일렉트릭 GTS",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4613&Tab=image&No=141099",
+      "image_url": "https://autoimg.danawa.com/gallery/4613/20251022_4613 (12).jpg",
+      "path": "vehicles\\포르쉐\\Macan Electric\\gallery\\03_마칸 일렉트릭 GTS.jpg"
+    },
+    {
+      "name": "마칸 일렉트릭 GTS",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4613&Tab=image&No=141100",
+      "image_url": "https://autoimg.danawa.com/gallery/4613/20251022_4613 (11).jpg",
+      "path": "vehicles\\포르쉐\\Macan Electric\\gallery\\04_마칸 일렉트릭 GTS.jpg"
+    }
+  ]
+}

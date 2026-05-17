@@ -1,0 +1,37 @@
+{
+  "brand": "르노",
+  "brand_id": "321",
+  "model_id": "4560",
+  "name": "아르카나",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4560",
+  "photo_code": "4560/53706",
+  "default_image_url": "https://autoimg.danawa.com/photo/4560/model_360.png",
+  "default_image_path": "vehicles\\르노\\아르카나\\model_360.png",
+  "colors": [],
+  "gallery": [
+    {
+      "name": "2027 아르카나",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4560&Tab=image&No=143516",
+      "image_url": "https://autoimg.danawa.com/gallery/4560/20260316_4560 (1).jpg",
+      "path": "vehicles\\르노\\아르카나\\gallery\\01_2027 아르카나.jpg"
+    },
+    {
+      "name": "2027 아르카나",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4560&Tab=image&No=143517",
+      "image_url": "https://autoimg.danawa.com/gallery/4560/20260316_4560 (2).jpg",
+      "path": "vehicles\\르노\\아르카나\\gallery\\02_2027 아르카나.jpg"
+    },
+    {
+      "name": "2026 아르카나 하이브리드 E-TECH",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4560&Tab=image&No=137178",
+      "image_url": "https://autoimg.danawa.com/gallery/4560/20250421_4560 (1).jpg",
+      "path": "vehicles\\르노\\아르카나\\gallery\\03_2026 아르카나 하이브리드 E-TECH.jpg"
+    },
+    {
+      "name": "2026 아르카나 하이브리드 E-TECH",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4560&Tab=image&No=137179",
+      "image_url": "https://autoimg.danawa.com/gallery/4560/20250421_4560 (2).jpg",
+      "path": "vehicles\\르노\\아르카나\\gallery\\04_2026 아르카나 하이브리드 E-TECH.jpg"
+    }
+  ]
+}

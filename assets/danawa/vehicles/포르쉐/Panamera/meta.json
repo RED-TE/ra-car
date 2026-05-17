@@ -1,0 +1,150 @@
+{
+  "brand": "포르쉐",
+  "brand_id": "381",
+  "model_id": "4593",
+  "name": "Panamera",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4593",
+  "photo_code": "4593/53800",
+  "default_image_url": "https://autoimg.danawa.com/photo/4593/53800/color_11_360.png",
+  "default_image_path": "vehicles\\포르쉐\\Panamera\\model_360.png",
+  "colors": [
+    {
+      "name": "화이트",
+      "code": "C11",
+      "swatch": "#efefef",
+      "image_url": "https://autoimg.danawa.com/photo/4593/53800/color_11_360.png",
+      "path": "vehicles\\포르쉐\\Panamera\\colors\\01_화이트.png"
+    },
+    {
+      "name": "블랙",
+      "code": "C12",
+      "swatch": "#000000",
+      "image_url": "https://autoimg.danawa.com/photo/4593/53800/color_12_360.png",
+      "path": "vehicles\\포르쉐\\Panamera\\colors\\02_블랙.png"
+    },
+    {
+      "name": "제트 블랙 메탈릭",
+      "code": "C13",
+      "swatch": "#000000",
+      "image_url": "https://autoimg.danawa.com/photo/4593/53800/color_13_360.png",
+      "path": "vehicles\\포르쉐\\Panamera\\colors\\03_제트 블랙 메탈릭.png"
+    },
+    {
+      "name": "카라라 화이트 메탈릭",
+      "code": "C14",
+      "swatch": "#eff5f9",
+      "image_url": "https://autoimg.danawa.com/photo/4593/53800/color_14_360.png",
+      "path": "vehicles\\포르쉐\\Panamera\\colors\\04_카라라 화이트 메탈릭.png"
+    },
+    {
+      "name": "볼케이노 그레이 메탈릭",
+      "code": "C15",
+      "swatch": "#252625",
+      "image_url": "https://autoimg.danawa.com/photo/4593/53800/color_15_360.png",
+      "path": "vehicles\\포르쉐\\Panamera\\colors\\05_볼케이노 그레이 메탈릭.png"
+    },
+    {
+      "name": "돌로마이트 실버 메탈릭",
+      "code": "C16",
+      "swatch": "#c3cdd3",
+      "image_url": "https://autoimg.danawa.com/photo/4593/53800/color_16_360.png",
+      "path": "vehicles\\포르쉐\\Panamera\\colors\\06_돌로마이트 실버 메탈릭.png"
+    },
+    {
+      "name": "아이스 그레이 메탈릭",
+      "code": "C17",
+      "swatch": "#dfe2e9",
+      "image_url": "https://autoimg.danawa.com/photo/4593/53800/color_17_360.png",
+      "path": "vehicles\\포르쉐\\Panamera\\colors\\07_아이스 그레이 메탈릭.png"
+    },
+    {
+      "name": "프로방스",
+      "code": "C18",
+      "swatch": "#94849c",
+      "image_url": "https://autoimg.danawa.com/photo/4593/53800/color_18_360.png",
+      "path": "vehicles\\포르쉐\\Panamera\\colors\\08_프로방스.png"
+    },
+    {
+      "name": "마데이라 골드 메탈릭",
+      "code": "C19",
+      "swatch": "#b87c44",
+      "image_url": "https://autoimg.danawa.com/photo/4593/53800/color_19_360.png",
+      "path": "vehicles\\포르쉐\\Panamera\\colors\\09_마데이라 골드 메탈릭.png"
+    },
+    {
+      "name": "루가노 블루",
+      "code": "C20",
+      "swatch": "#3864b4",
+      "image_url": "https://autoimg.danawa.com/photo/4593/53800/color_20_360.png",
+      "path": "vehicles\\포르쉐\\Panamera\\colors\\10_루가노 블루.png"
+    },
+    {
+      "name": "젠션 블루 메탈릭",
+      "code": "C21",
+      "swatch": "#00194b",
+      "image_url": "https://autoimg.danawa.com/photo/4593/53800/color_21_360.png",
+      "path": "vehicles\\포르쉐\\Panamera\\colors\\11_젠션 블루 메탈릭.png"
+    },
+    {
+      "name": "카민 레드",
+      "code": "C23",
+      "swatch": "#990033",
+      "image_url": "https://autoimg.danawa.com/photo/4593/53800/color_23_360.png",
+      "path": "vehicles\\포르쉐\\Panamera\\colors\\12_카민 레드.png"
+    },
+    {
+      "name": "오크 그린 메탈릭 네오",
+      "code": "C24",
+      "swatch": "#484c3c",
+      "image_url": "https://autoimg.danawa.com/photo/4593/53800/color_24_360.png",
+      "path": "vehicles\\포르쉐\\Panamera\\colors\\13_오크 그린 메탈릭 네오.png"
+    },
+    {
+      "name": "어벤추리 그린 메탈릭",
+      "code": "C26",
+      "swatch": "#6c746c",
+      "image_url": "https://autoimg.danawa.com/photo/4593/53800/color_26_360.png",
+      "path": "vehicles\\포르쉐\\Panamera\\colors\\14_어벤추리 그린 메탈릭.png"
+    },
+    {
+      "name": "크레용",
+      "code": "C27",
+      "swatch": "#c7c7bf",
+      "image_url": "https://autoimg.danawa.com/photo/4593/53800/color_27_360.png",
+      "path": "vehicles\\포르쉐\\Panamera\\colors\\15_크레용.png"
+    },
+    {
+      "name": "슬레이트 그레이 네오",
+      "code": "C28",
+      "swatch": "#4e4e53",
+      "image_url": "https://autoimg.danawa.com/photo/4593/53800/color_28_360.png",
+      "path": "vehicles\\포르쉐\\Panamera\\colors\\16_슬레이트 그레이 네오.png"
+    }
+  ],
+  "gallery": [
+    {
+      "name": "파나메라 레드 익스클루시브",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4593&Tab=image&No=142959",
+      "image_url": "https://autoimg.danawa.com/gallery/4593/20260129_4593 (1).jpg",
+      "path": "vehicles\\포르쉐\\Panamera\\gallery\\01_파나메라 레드 익스클루시브.jpg"
+    },
+    {
+      "name": "파나메라 레드 익스클루시브",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4593&Tab=image&No=142960",
+      "image_url": "https://autoimg.danawa.com/gallery/4593/20260129_4593 (2).jpg",
+      "path": "vehicles\\포르쉐\\Panamera\\gallery\\02_파나메라 레드 익스클루시브.jpg"
+    },
+    {
+      "name": "파나메라 레드 익스클루시브",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4593&Tab=image&No=142961",
+      "image_url": "https://autoimg.danawa.com/gallery/4593/20260129_4593 (3).jpg",
+      "path": "vehicles\\포르쉐\\Panamera\\gallery\\03_파나메라 레드 익스클루시브.jpg"
+    },
+    {
+      "name": "파나메라 GTS",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4593&Tab=image&No=141418",
+      "image_url": "https://autoimg.danawa.com/gallery/4593/20251031_4593 (1).jpg",
+      "path": "vehicles\\포르쉐\\Panamera\\gallery\\04_파나메라 GTS.jpg"
+    }
+  ]
+}

@@ -1,0 +1,80 @@
+{
+  "brand": "BMW",
+  "brand_id": "362",
+  "model_id": "4580",
+  "name": "X2",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4580",
+  "photo_code": "4580/53488",
+  "default_image_url": "https://autoimg.danawa.com/photo/4580/53488/color_13_360.png",
+  "default_image_path": "vehicles\\BMW\\X2\\model_360.png",
+  "colors": [
+    {
+      "name": "알파인 화이트 (300)",
+      "code": "C11",
+      "swatch": "#e8e8e8",
+      "image_url": "https://autoimg.danawa.com/photo/4580/53488/color_11_360.png",
+      "path": "vehicles\\BMW\\X2\\colors\\01_알파인 화이트 (300).png"
+    },
+    {
+      "name": "블랙 사파이어 메탈릭",
+      "code": "C12",
+      "swatch": "#111111",
+      "image_url": "https://autoimg.danawa.com/photo/4580/53488/color_12_360.png",
+      "path": "vehicles\\BMW\\X2\\colors\\02_블랙 사파이어 메탈릭.png"
+    },
+    {
+      "name": "포티마오 블루 메탈릭",
+      "code": "C13",
+      "swatch": "#213769",
+      "image_url": "https://autoimg.danawa.com/photo/4580/53488/color_13_360.png",
+      "path": "vehicles\\BMW\\X2\\colors\\03_포티마오 블루 메탈릭.png"
+    },
+    {
+      "name": "브루클린 그레이 메탈릭",
+      "code": "C14",
+      "swatch": "#8a9392",
+      "image_url": "https://autoimg.danawa.com/photo/4580/53488/color_14_360.png",
+      "path": "vehicles\\BMW\\X2\\colors\\04_브루클린 그레이 메탈릭.png"
+    },
+    {
+      "name": "케이프 요크 그린 (C5Y)",
+      "code": "C15",
+      "swatch": "#3c4f49",
+      "image_url": "https://autoimg.danawa.com/photo/4580/53488/color_15_360.png",
+      "path": "vehicles\\BMW\\X2\\colors\\05_케이프 요크 그린 (C5Y).png"
+    },
+    {
+      "name": "파이어 레드 메탈릭",
+      "code": "C16",
+      "swatch": "#66171d",
+      "image_url": "https://autoimg.danawa.com/photo/4580/53488/color_16_360.png",
+      "path": "vehicles\\BMW\\X2\\colors\\06_파이어 레드 메탈릭.png"
+    }
+  ],
+  "gallery": [
+    {
+      "name": "2024 X2 xDrive20i M 스포츠",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4580&Tab=image&No=124367",
+      "image_url": "https://autoimg.danawa.com/gallery/4580/20240528_4580 (1).jpg",
+      "path": "vehicles\\BMW\\X2\\gallery\\01_2024 X2 xDrive20i M 스포츠.jpg"
+    },
+    {
+      "name": "2024 X2 xDrive20i M 스포츠",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4580&Tab=image&No=124368",
+      "image_url": "https://autoimg.danawa.com/gallery/4580/20240528_4580 (2).jpg",
+      "path": "vehicles\\BMW\\X2\\gallery\\02_2024 X2 xDrive20i M 스포츠.jpg"
+    },
+    {
+      "name": "2024 X2 xDrive20i M 스포츠",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4580&Tab=image&No=124369",
+      "image_url": "https://autoimg.danawa.com/gallery/4580/20240528_4580 (3).jpg",
+      "path": "vehicles\\BMW\\X2\\gallery\\03_2024 X2 xDrive20i M 스포츠.jpg"
+    },
+    {
+      "name": "2024 X2 xDrive20i M 스포츠",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4580&Tab=image&No=124370",
+      "image_url": "https://autoimg.danawa.com/gallery/4580/20240528_4580 (4).jpg",
+      "path": "vehicles\\BMW\\X2\\gallery\\04_2024 X2 xDrive20i M 스포츠.jpg"
+    }
+  ]
+}

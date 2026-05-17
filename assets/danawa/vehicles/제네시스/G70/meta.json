@@ -1,0 +1,108 @@
+{
+  "brand": "제네시스",
+  "brand_id": "304",
+  "model_id": "3995",
+  "name": "G70",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3995",
+  "photo_code": "3995/53617",
+  "default_image_url": "https://autoimg.danawa.com/photo/3995/model_360.png",
+  "default_image_path": "vehicles\\제네시스\\G70\\model_360.png",
+  "colors": [
+    {
+      "name": "무광 본드 실버(SMT)-유료",
+      "code": "C09",
+      "swatch": "#b9b9b9",
+      "image_url": "https://autoimg.danawa.com/photo/3995/53617/color_09_360.png",
+      "path": "vehicles\\제네시스\\G70\\colors\\01_무광 본드 실버(SMT)-유료.png"
+    },
+    {
+      "name": "무광 마칼루 그레이(MPE)-유료",
+      "code": "C08",
+      "swatch": "#343b44",
+      "image_url": "https://autoimg.danawa.com/photo/3995/53617/color_08_360.png",
+      "path": "vehicles\\제네시스\\G70\\colors\\02_무광 마칼루 그레이(MPE)-유료.png"
+    },
+    {
+      "name": "무광 벌리 블루(MBM)-유료",
+      "code": "C07",
+      "swatch": "#082961",
+      "image_url": "https://autoimg.danawa.com/photo/3995/53617/color_07_360.png",
+      "path": "vehicles\\제네시스\\G70\\colors\\03_무광 벌리 블루(MBM)-유료.png"
+    },
+    {
+      "name": "바트나 그레이(GRY)",
+      "code": "C11",
+      "swatch": "#a3a29e",
+      "image_url": "https://autoimg.danawa.com/photo/3995/53617/color_11_360.png",
+      "path": "vehicles\\제네시스\\G70\\colors\\04_바트나 그레이(GRY).png"
+    },
+    {
+      "name": "우유니 화이트(UYH)",
+      "code": "C13",
+      "swatch": "#fafafa",
+      "image_url": "https://autoimg.danawa.com/photo/3995/53617/color_13_360.png",
+      "path": "vehicles\\제네시스\\G70\\colors\\05_우유니 화이트(UYH).png"
+    },
+    {
+      "name": "세빌 실버(SSS)",
+      "code": "C14",
+      "swatch": "#aeaeae",
+      "image_url": "https://autoimg.danawa.com/photo/3995/53617/color_14_360.png",
+      "path": "vehicles\\제네시스\\G70\\colors\\06_세빌 실버(SSS).png"
+    },
+    {
+      "name": "비크 블랙(PH3)",
+      "code": "C15",
+      "swatch": "#0e131a",
+      "image_url": "https://autoimg.danawa.com/photo/3995/53617/color_15_360.png",
+      "path": "vehicles\\제네시스\\G70\\colors\\07_비크 블랙(PH3).png"
+    },
+    {
+      "name": "태즈먼 블루(URA)",
+      "code": "C16",
+      "swatch": "#002d43",
+      "image_url": "https://autoimg.danawa.com/photo/3995/53617/color_16_360.png",
+      "path": "vehicles\\제네시스\\G70\\colors\\08_태즈먼 블루(URA).png"
+    },
+    {
+      "name": "마칼루 그레이(MPE)",
+      "code": "C17",
+      "swatch": "#2b2f38",
+      "image_url": "https://autoimg.danawa.com/photo/3995/53617/color_17_360.png",
+      "path": "vehicles\\제네시스\\G70\\colors\\09_마칼루 그레이(MPE).png"
+    },
+    {
+      "name": "카프리 블루(NRB)",
+      "code": "C20",
+      "swatch": "#001031",
+      "image_url": "https://autoimg.danawa.com/photo/3995/53617/color_20_360.png",
+      "path": "vehicles\\제네시스\\G70\\colors\\10_카프리 블루(NRB).png"
+    }
+  ],
+  "gallery": [
+    {
+      "name": "2026ㅣG70",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3995&Tab=image&No=142575",
+      "image_url": "https://autoimg.danawa.com/gallery/3995/20260112_3995 (1).jpg",
+      "path": "vehicles\\제네시스\\G70\\gallery\\01_2026ㅣG70.jpg"
+    },
+    {
+      "name": "2026ㅣG70 슈팅 브레이크",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3995&Tab=image&No=142576",
+      "image_url": "https://autoimg.danawa.com/gallery/3995/20260112_3995 (2).jpg",
+      "path": "vehicles\\제네시스\\G70\\gallery\\02_2026ㅣG70 슈팅 브레이크.jpg"
+    },
+    {
+      "name": "2026ㅣG70 그래파이트 에디션",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3995&Tab=image&No=142577",
+      "image_url": "https://autoimg.danawa.com/gallery/3995/20260112_3995 (3).jpg",
+      "path": "vehicles\\제네시스\\G70\\gallery\\03_2026ㅣG70 그래파이트 에디션.jpg"
+    },
+    {
+      "name": "2023 G70",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3995&Tab=image&No=109692",
+      "image_url": "https://autoimg.danawa.com/gallery/3995/20230612_3995 (1).jpg",
+      "path": "vehicles\\제네시스\\G70\\gallery\\04_2023 G70.jpg"
+    }
+  ]
+}

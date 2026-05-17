@@ -1,0 +1,37 @@
+{
+  "brand": "페라리",
+  "brand_id": "436",
+  "model_id": "4010",
+  "name": "SF90 Spider",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4010",
+  "photo_code": "4010/53073",
+  "default_image_url": "https://autoimg.danawa.com/photo/4010/model_360.png",
+  "default_image_path": "vehicles\\페라리\\SF90 Spider\\model_360.png",
+  "colors": [],
+  "gallery": [
+    {
+      "name": "2021 l SF90 스파이더",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4010&Tab=image&No=82040",
+      "image_url": "https://autoimg.danawa.com/gallery/4010/20210305.jpg",
+      "path": "vehicles\\페라리\\SF90 Spider\\gallery\\01_2021 l SF90 스파이더.jpg"
+    },
+    {
+      "name": "2021 l SF90 스파이더",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4010&Tab=image&No=79817",
+      "image_url": "https://autoimg.danawa.com/gallery/4010/20201113 (1).jpg",
+      "path": "vehicles\\페라리\\SF90 Spider\\gallery\\02_2021 l SF90 스파이더.jpg"
+    },
+    {
+      "name": "2021 l SF90 스파이더",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4010&Tab=image&No=79818",
+      "image_url": "https://autoimg.danawa.com/gallery/4010/20201113 (2).jpg",
+      "path": "vehicles\\페라리\\SF90 Spider\\gallery\\03_2021 l SF90 스파이더.jpg"
+    },
+    {
+      "name": "2021 l SF90 스파이더",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4010&Tab=image&No=79819",
+      "image_url": "https://autoimg.danawa.com/gallery/4010/20201113 (3).jpg",
+      "path": "vehicles\\페라리\\SF90 Spider\\gallery\\04_2021 l SF90 스파이더.jpg"
+    }
+  ]
+}

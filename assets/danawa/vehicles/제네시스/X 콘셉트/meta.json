@@ -1,0 +1,37 @@
+{
+  "brand": "제네시스",
+  "brand_id": "304",
+  "model_id": "4049",
+  "name": "X 콘셉트",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4049",
+  "photo_code": "4049/",
+  "default_image_url": "https://autoimg.danawa.com/photo/4049/model_360.png",
+  "default_image_path": "vehicles\\제네시스\\X 콘셉트\\model_360.png",
+  "colors": [],
+  "gallery": [
+    {
+      "name": "제네시스 엑스 그란 쿠페, 엑스 그란 컨버터블",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4049&Tab=image&No=136821",
+      "image_url": "https://autoimg.danawa.com/gallery/4049/20250403_4049 (1).jpg",
+      "path": "vehicles\\제네시스\\X 콘셉트\\gallery\\01_제네시스 엑스 그란 쿠페, 엑스 그란 컨버터블.jpg"
+    },
+    {
+      "name": "제네시스 엑스 그란 쿠페",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4049&Tab=image&No=136822",
+      "image_url": "https://autoimg.danawa.com/gallery/4049/20250403_4049 (2).jpg",
+      "path": "vehicles\\제네시스\\X 콘셉트\\gallery\\02_제네시스 엑스 그란 쿠페.jpg"
+    },
+    {
+      "name": "제네시스 엑스 그란 컨버터블",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4049&Tab=image&No=136823",
+      "image_url": "https://autoimg.danawa.com/gallery/4049/20250403_4049 (3).jpg",
+      "path": "vehicles\\제네시스\\X 콘셉트\\gallery\\03_제네시스 엑스 그란 컨버터블.jpg"
+    },
+    {
+      "name": "제네시스 엑스 그란 쿠페, 엑스 그란 컨버터블",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4049&Tab=image&No=136824",
+      "image_url": "https://autoimg.danawa.com/gallery/4049/20250403_4049 (4).jpg",
+      "path": "vehicles\\제네시스\\X 콘셉트\\gallery\\04_제네시스 엑스 그란 쿠페, 엑스 그란 컨버터블.jpg"
+    }
+  ]
+}

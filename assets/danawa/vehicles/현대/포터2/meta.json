@@ -1,0 +1,59 @@
+{
+  "brand": "현대",
+  "brand_id": "303",
+  "model_id": "1901",
+  "name": "포터2",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=1901",
+  "photo_code": "1901/53552",
+  "default_image_url": "https://autoimg.danawa.com/photo/1901/model_360.png",
+  "default_image_path": "vehicles\\현대\\포터2\\model_360.png",
+  "colors": [
+    {
+      "name": "크리미 화이트 (YAW)",
+      "code": "C11",
+      "swatch": "#eeedf3",
+      "image_url": "https://autoimg.danawa.com/photo/1901/53552/color_11_360.png",
+      "path": "vehicles\\현대\\포터2\\colors\\01_크리미 화이트 (YAW).png"
+    },
+    {
+      "name": "오닉스 블루(ZV)",
+      "code": "C12",
+      "swatch": "#3f4d70",
+      "image_url": "https://autoimg.danawa.com/photo/1901/53552/color_12_360.png",
+      "path": "vehicles\\현대\\포터2\\colors\\02_오닉스 블루(ZV).png"
+    },
+    {
+      "name": "슬레이트 브라운 (RVB)",
+      "code": "C13",
+      "swatch": "#494441",
+      "image_url": "https://autoimg.danawa.com/photo/1901/53552/color_13_360.png",
+      "path": "vehicles\\현대\\포터2\\colors\\03_슬레이트 브라운 (RVB).png"
+    }
+  ],
+  "gallery": [
+    {
+      "name": "2026ㅣ포터 2 EV, 포터 2",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=1901&Tab=image&No=142440",
+      "image_url": "https://autoimg.danawa.com/gallery/1901/20251216_1901 (1).jpg",
+      "path": "vehicles\\현대\\포터2\\gallery\\01_2026ㅣ포터 2 EV, 포터 2.jpg"
+    },
+    {
+      "name": "2026ㅣ포터 2",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=1901&Tab=image&No=142442",
+      "image_url": "https://autoimg.danawa.com/gallery/1901/20251216_1901 (3).jpg",
+      "path": "vehicles\\현대\\포터2\\gallery\\02_2026ㅣ포터 2.jpg"
+    },
+    {
+      "name": "2020 포터2",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=1901&Tab=image&No=68499",
+      "image_url": "https://autoimg.danawa.com/gallery/1901/20190827_porter2 (2).jpg",
+      "path": "vehicles\\현대\\포터2\\gallery\\03_2020 포터2.jpg"
+    },
+    {
+      "name": "2020 포터2 4등식 헤드램프",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=1901&Tab=image&No=68500",
+      "image_url": "https://autoimg.danawa.com/gallery/1901/20190827_porter2 (4).jpg",
+      "path": "vehicles\\현대\\포터2\\gallery\\04_2020 포터2 4등식 헤드램프.jpg"
+    }
+  ]
+}

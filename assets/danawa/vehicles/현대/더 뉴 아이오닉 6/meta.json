@@ -1,0 +1,108 @@
+{
+  "brand": "현대",
+  "brand_id": "303",
+  "model_id": "4746",
+  "name": "더 뉴 아이오닉 6",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4746",
+  "photo_code": "4746/53344",
+  "default_image_url": "https://autoimg.danawa.com/photo/4746/model_360.png",
+  "default_image_path": "vehicles\\현대\\더 뉴 아이오닉 6\\model_360.png",
+  "colors": [
+    {
+      "name": "세레니티 화이트 펄(W6H)",
+      "code": "C07",
+      "swatch": "#f5f7f2",
+      "image_url": "https://autoimg.danawa.com/photo/4746/53344/color_07_360.png",
+      "path": "vehicles\\현대\\더 뉴 아이오닉 6\\colors\\01_세레니티 화이트 펄(W6H).png"
+    },
+    {
+      "name": "그래비티 골드 매트(W3T)",
+      "code": "C08",
+      "swatch": "#afaba3",
+      "image_url": "https://autoimg.danawa.com/photo/4746/53344/color_08_360.png",
+      "path": "vehicles\\현대\\더 뉴 아이오닉 6\\colors\\02_그래비티 골드 매트(W3T).png"
+    },
+    {
+      "name": "트랜스미션 블루 매트(M7D)",
+      "code": "C09",
+      "swatch": "#575861",
+      "image_url": "https://autoimg.danawa.com/photo/4746/53344/color_09_360.png",
+      "path": "vehicles\\현대\\더 뉴 아이오닉 6\\colors\\03_트랜스미션 블루 매트(M7D).png"
+    },
+    {
+      "name": "녹턴 그레이 매트(T9M)",
+      "code": "C10",
+      "swatch": "#414245",
+      "image_url": "https://autoimg.danawa.com/photo/4746/53344/color_10_360.png",
+      "path": "vehicles\\현대\\더 뉴 아이오닉 6\\colors\\04_녹턴 그레이 매트(T9M).png"
+    },
+    {
+      "name": "트랜스미션 블루 펄(NY9)",
+      "code": "C11",
+      "swatch": "#5f636c",
+      "image_url": "https://autoimg.danawa.com/photo/4746/53344/color_11_360.png",
+      "path": "vehicles\\현대\\더 뉴 아이오닉 6\\colors\\05_트랜스미션 블루 펄(NY9).png"
+    },
+    {
+      "name": "녹턴 그레이 메탈릭(T2G)",
+      "code": "C12",
+      "swatch": "#43484b",
+      "image_url": "https://autoimg.danawa.com/photo/4746/53344/color_12_360.png",
+      "path": "vehicles\\현대\\더 뉴 아이오닉 6\\colors\\06_녹턴 그레이 메탈릭(T2G).png"
+    },
+    {
+      "name": "바이오 필릭 블루 펄(XB9)",
+      "code": "C13",
+      "swatch": "#161920",
+      "image_url": "https://autoimg.danawa.com/photo/4746/53344/color_13_360.png",
+      "path": "vehicles\\현대\\더 뉴 아이오닉 6\\colors\\07_바이오 필릭 블루 펄(XB9).png"
+    },
+    {
+      "name": "어비스 블랙 펄(A2B)",
+      "code": "C14",
+      "swatch": "#141414",
+      "image_url": "https://autoimg.danawa.com/photo/4746/53344/color_14_360.png",
+      "path": "vehicles\\현대\\더 뉴 아이오닉 6\\colors\\08_어비스 블랙 펄(A2B).png"
+    },
+    {
+      "name": "얼티메이트 레드 메탈릭(R2P)",
+      "code": "C15",
+      "swatch": "#6a1010",
+      "image_url": "https://autoimg.danawa.com/photo/4746/53344/color_15_360.png",
+      "path": "vehicles\\현대\\더 뉴 아이오닉 6\\colors\\09_얼티메이트 레드 메탈릭(R2P).png"
+    },
+    {
+      "name": "에어로 실버 메탈릭(T4A)",
+      "code": "C16",
+      "swatch": "#b2b2b2",
+      "image_url": "https://autoimg.danawa.com/photo/4746/53344/color_16_360.png",
+      "path": "vehicles\\현대\\더 뉴 아이오닉 6\\colors\\10_에어로 실버 메탈릭(T4A).png"
+    }
+  ],
+  "gallery": [
+    {
+      "name": "더 뉴 아이오닉 6",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4746&Tab=image&No=139887",
+      "image_url": "https://autoimg.danawa.com/gallery/4746/20250901_4746 (1).jpg",
+      "path": "vehicles\\현대\\더 뉴 아이오닉 6\\gallery\\01_더 뉴 아이오닉 6.jpg"
+    },
+    {
+      "name": "더 뉴 아이오닉 6",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4746&Tab=image&No=139888",
+      "image_url": "https://autoimg.danawa.com/gallery/4746/20250901_4746 (2).jpg",
+      "path": "vehicles\\현대\\더 뉴 아이오닉 6\\gallery\\02_더 뉴 아이오닉 6.jpg"
+    },
+    {
+      "name": "더 뉴 아이오닉 6",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4746&Tab=image&No=139889",
+      "image_url": "https://autoimg.danawa.com/gallery/4746/20250901_4746 (3).jpg",
+      "path": "vehicles\\현대\\더 뉴 아이오닉 6\\gallery\\03_더 뉴 아이오닉 6.jpg"
+    },
+    {
+      "name": "더 뉴 아이오닉 6",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4746&Tab=image&No=139890",
+      "image_url": "https://autoimg.danawa.com/gallery/4746/20250901_4746 (4).jpg",
+      "path": "vehicles\\현대\\더 뉴 아이오닉 6\\gallery\\04_더 뉴 아이오닉 6.jpg"
+    }
+  ]
+}

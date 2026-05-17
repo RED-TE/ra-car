@@ -1,0 +1,87 @@
+{
+  "brand": "벤츠",
+  "brand_id": "349",
+  "model_id": "4427",
+  "name": "A-Class",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4427",
+  "photo_code": "4427/53411",
+  "default_image_url": "https://autoimg.danawa.com/photo/4427/53411/color_17_360.png",
+  "default_image_path": "vehicles\\벤츠\\A-Class\\model_360.png",
+  "colors": [
+    {
+      "name": "폴라 화이트 (149U)",
+      "code": "C11",
+      "swatch": "#ced3c8",
+      "image_url": "https://autoimg.danawa.com/photo/4427/53411/color_11_360.png",
+      "path": "vehicles\\벤츠\\A-Class\\colors\\01_폴라 화이트 (149U).png"
+    },
+    {
+      "name": "나이트 블랙 (696U)",
+      "code": "C12",
+      "swatch": "#070707",
+      "image_url": "https://autoimg.danawa.com/photo/4427/53411/color_12_360.png",
+      "path": "vehicles\\벤츠\\A-Class\\colors\\02_나이트 블랙 (696U).png"
+    },
+    {
+      "name": "코스모스 블랙 (191U)",
+      "code": "C13",
+      "swatch": "#0c0e14",
+      "image_url": "https://autoimg.danawa.com/photo/4427/53411/color_13_360.png",
+      "path": "vehicles\\벤츠\\A-Class\\colors\\03_코스모스 블랙 (191U).png"
+    },
+    {
+      "name": "마운틴 그레이 (787U)",
+      "code": "C14",
+      "swatch": "#3b3e46",
+      "image_url": "https://autoimg.danawa.com/photo/4427/53411/color_14_360.png",
+      "path": "vehicles\\벤츠\\A-Class\\colors\\04_마운틴 그레이 (787U).png"
+    },
+    {
+      "name": "하이 테크 실버 (922U)",
+      "code": "C15",
+      "swatch": "#97979a",
+      "image_url": "https://autoimg.danawa.com/photo/4427/53411/color_15_360.png",
+      "path": "vehicles\\벤츠\\A-Class\\colors\\05_하이 테크 실버 (922U).png"
+    },
+    {
+      "name": "MANUFAKTUR 마운틴 그레이 마그노 (662U)",
+      "code": "C17",
+      "swatch": "#3f434b",
+      "image_url": "https://autoimg.danawa.com/photo/4427/53411/color_17_360.png",
+      "path": "vehicles\\벤츠\\A-Class\\colors\\06_MANUFAKTUR 마운틴 그레이 마그노 (662U).png"
+    },
+    {
+      "name": "MANUFAKTUR 파타고니아 레드 (993U)",
+      "code": "C18",
+      "swatch": "#ba0f2b",
+      "image_url": "https://autoimg.danawa.com/photo/4427/53411/color_18_360.png",
+      "path": "vehicles\\벤츠\\A-Class\\colors\\07_MANUFAKTUR 파타고니아 레드 (993U).png"
+    }
+  ],
+  "gallery": [
+    {
+      "name": "2024 l 메르세데스-AMG A45 S 4MATIC+ 리미티드 에디션",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4427&Tab=image&No=118053",
+      "image_url": "https://autoimg.danawa.com/gallery/4427/20240216_4427 (1).jpg",
+      "path": "vehicles\\벤츠\\A-Class\\gallery\\01_2024 l 메르세데스-AMG A45 S 4MATIC+ 리미티드 에디션.jpg"
+    },
+    {
+      "name": "2024 l 메르세데스-AMG A45 S 4MATIC+ 리미티드 에디션",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4427&Tab=image&No=118054",
+      "image_url": "https://autoimg.danawa.com/gallery/4427/20240216_4427 (2).jpg",
+      "path": "vehicles\\벤츠\\A-Class\\gallery\\02_2024 l 메르세데스-AMG A45 S 4MATIC+ 리미티드 에디션.jpg"
+    },
+    {
+      "name": "2024 l 메르세데스-AMG A45 S 4MATIC+ 리미티드 에디션",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4427&Tab=image&No=118055",
+      "image_url": "https://autoimg.danawa.com/gallery/4427/20240216_4427 (3).jpg",
+      "path": "vehicles\\벤츠\\A-Class\\gallery\\03_2024 l 메르세데스-AMG A45 S 4MATIC+ 리미티드 에디션.jpg"
+    },
+    {
+      "name": "2024 l 메르세데스-AMG A45 S 4MATIC+ 리미티드 에디션",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4427&Tab=image&No=118056",
+      "image_url": "https://autoimg.danawa.com/gallery/4427/20240216_4427 (4).jpg",
+      "path": "vehicles\\벤츠\\A-Class\\gallery\\04_2024 l 메르세데스-AMG A45 S 4MATIC+ 리미티드 에디션.jpg"
+    }
+  ]
+}

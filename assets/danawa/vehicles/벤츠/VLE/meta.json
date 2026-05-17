@@ -1,0 +1,37 @@
+{
+  "brand": "벤츠",
+  "brand_id": "349",
+  "model_id": "4787",
+  "name": "VLE",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4787",
+  "photo_code": "4787/",
+  "default_image_url": "https://autoimg.danawa.com/photo/4787/model_360.png",
+  "default_image_path": "vehicles\\벤츠\\VLE\\model_360.png",
+  "colors": [],
+  "gallery": [
+    {
+      "name": "VLE",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4787&Tab=image&No=143539",
+      "image_url": "https://autoimg.danawa.com/gallery/4787/20260316_4787 (1).jpg",
+      "path": "vehicles\\벤츠\\VLE\\gallery\\01_VLE.jpg"
+    },
+    {
+      "name": "VLE",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4787&Tab=image&No=143540",
+      "image_url": "https://autoimg.danawa.com/gallery/4787/20260316_4787 (2).jpg",
+      "path": "vehicles\\벤츠\\VLE\\gallery\\02_VLE.jpg"
+    },
+    {
+      "name": "VLE",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4787&Tab=image&No=143541",
+      "image_url": "https://autoimg.danawa.com/gallery/4787/20260316_4787 (3).jpg",
+      "path": "vehicles\\벤츠\\VLE\\gallery\\03_VLE.jpg"
+    },
+    {
+      "name": "VLE",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4787&Tab=image&No=143542",
+      "image_url": "https://autoimg.danawa.com/gallery/4787/20260316_4787 (4).jpg",
+      "path": "vehicles\\벤츠\\VLE\\gallery\\04_VLE.jpg"
+    }
+  ]
+}

@@ -1,0 +1,73 @@
+{
+  "brand": "기아",
+  "brand_id": "307",
+  "model_id": "4066",
+  "name": "K9",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4066",
+  "photo_code": "4066/53671",
+  "default_image_url": "https://autoimg.danawa.com/photo/4066/53671/color_13_360.png",
+  "default_image_path": "vehicles\\기아\\K9\\model_360.png",
+  "colors": [
+    {
+      "name": "스노우 화이트 펄(SWP)",
+      "code": "C10",
+      "swatch": "#f8f8f8",
+      "image_url": "https://autoimg.danawa.com/photo/4066/53671/color_10_360.png",
+      "path": "vehicles\\기아\\K9\\colors\\01_스노우 화이트 펄(SWP).png"
+    },
+    {
+      "name": "판테라 메탈(P2M)",
+      "code": "C11",
+      "swatch": "#484848",
+      "image_url": "https://autoimg.danawa.com/photo/4066/53671/color_11_360.png",
+      "path": "vehicles\\기아\\K9\\colors\\02_판테라 메탈(P2M).png"
+    },
+    {
+      "name": "페블 그레이(DFG)",
+      "code": "C12",
+      "swatch": "#c6c5ca",
+      "image_url": "https://autoimg.danawa.com/photo/4066/53671/color_12_360.png",
+      "path": "vehicles\\기아\\K9\\colors\\03_페블 그레이(DFG).png"
+    },
+    {
+      "name": "딥 크로마 블루(D9B)",
+      "code": "C13",
+      "swatch": "#0f142d",
+      "image_url": "https://autoimg.danawa.com/photo/4066/53671/color_13_360.png",
+      "path": "vehicles\\기아\\K9\\colors\\04_딥 크로마 블루(D9B).png"
+    },
+    {
+      "name": "오로라 블랙 펄(ABP)",
+      "code": "C14",
+      "swatch": "#1c1b20",
+      "image_url": "https://autoimg.danawa.com/photo/4066/53671/color_14_360.png",
+      "path": "vehicles\\기아\\K9\\colors\\05_오로라 블랙 펄(ABP).png"
+    }
+  ],
+  "gallery": [
+    {
+      "name": "2024 K9",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4066&Tab=image&No=119115",
+      "image_url": "https://autoimg.danawa.com/gallery/4066/20240403_4066 (1).jpg",
+      "path": "vehicles\\기아\\K9\\gallery\\01_2024 K9.jpg"
+    },
+    {
+      "name": "2024 K9",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4066&Tab=image&No=119116",
+      "image_url": "https://autoimg.danawa.com/gallery/4066/20240403_4066 (2).jpg",
+      "path": "vehicles\\기아\\K9\\gallery\\02_2024 K9.jpg"
+    },
+    {
+      "name": "2024 K9",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4066&Tab=image&No=119117",
+      "image_url": "https://autoimg.danawa.com/gallery/4066/20240403_4066 (3).jpg",
+      "path": "vehicles\\기아\\K9\\gallery\\03_2024 K9.jpg"
+    },
+    {
+      "name": "2023 l K9",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4066&Tab=image&No=110117",
+      "image_url": "https://autoimg.danawa.com/gallery/4066/20230621_4066 (1).jpg",
+      "path": "vehicles\\기아\\K9\\gallery\\04_2023 l K9.jpg"
+    }
+  ]
+}

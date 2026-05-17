@@ -1,0 +1,26 @@
+node_modules/
+.env
+.env.*
+server-output.log
+server-error.log
+
+# Local runtime data
+data/admin-bootstrap.txt
+data/admin-calendar.json
+data/admin-users.json
+data/lead-meta.json
+data/leads.jsonl
+
+# Local crawl archives and logs
+assets/danawa.zip
+assets/danawa/*.log
+assets/danawa/*.err.log
+
+# Local verification artifacts
+*-preview.png
+audit-*.png
+final-*.png
+step*-*.png
+verify-*.png
+launch-final-*.png
+page-preview.pdf

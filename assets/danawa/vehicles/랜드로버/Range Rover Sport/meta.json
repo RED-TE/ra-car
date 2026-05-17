@@ -1,0 +1,37 @@
+{
+  "brand": "랜드로버",
+  "brand_id": "399",
+  "model_id": "4363",
+  "name": "Range Rover Sport",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4363",
+  "photo_code": "4363/53682",
+  "default_image_url": "https://autoimg.danawa.com/photo/4363/model_360.png",
+  "default_image_path": "vehicles\\랜드로버\\Range Rover Sport\\model_360.png",
+  "colors": [],
+  "gallery": [
+    {
+      "name": "레인지로버 스포츠 배터시 에디션",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4363&Tab=image&No=144962",
+      "image_url": "https://autoimg.danawa.com/gallery/4363/20260430_4363 (1).jpg",
+      "path": "vehicles\\랜드로버\\Range Rover Sport\\gallery\\01_레인지로버 스포츠 배터시 에디션.jpg"
+    },
+    {
+      "name": "레인지로버 스포츠 배터시 에디션",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4363&Tab=image&No=144963",
+      "image_url": "https://autoimg.danawa.com/gallery/4363/20260430_4363 (2).jpg",
+      "path": "vehicles\\랜드로버\\Range Rover Sport\\gallery\\02_레인지로버 스포츠 배터시 에디션.jpg"
+    },
+    {
+      "name": "레인지로버 스포츠 배터시 에디션",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4363&Tab=image&No=144964",
+      "image_url": "https://autoimg.danawa.com/gallery/4363/20260430_4363 (3).jpg",
+      "path": "vehicles\\랜드로버\\Range Rover Sport\\gallery\\03_레인지로버 스포츠 배터시 에디션.jpg"
+    },
+    {
+      "name": "레인지로버 스포츠 배터시 에디션",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4363&Tab=image&No=144965",
+      "image_url": "https://autoimg.danawa.com/gallery/4363/20260430_4363 (4).jpg",
+      "path": "vehicles\\랜드로버\\Range Rover Sport\\gallery\\04_레인지로버 스포츠 배터시 에디션.jpg"
+    }
+  ]
+}

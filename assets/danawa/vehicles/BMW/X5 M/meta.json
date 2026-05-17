@@ -1,0 +1,52 @@
+{
+  "brand": "BMW",
+  "brand_id": "362",
+  "model_id": "4479",
+  "name": "X5 M",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4479",
+  "photo_code": "4479/53509",
+  "default_image_url": "https://autoimg.danawa.com/photo/4479/model_360.png",
+  "default_image_path": "vehicles\\BMW\\X5 M\\model_360.png",
+  "colors": [
+    {
+      "name": "블랙 사파이어 메탈릭",
+      "code": "C11",
+      "swatch": "#111111",
+      "image_url": "https://autoimg.danawa.com/photo/4479/53509/color_11_360.png",
+      "path": "vehicles\\BMW\\X5 M\\colors\\01_블랙 사파이어 메탈릭.png"
+    },
+    {
+      "name": "미네랄 화이트 메탈릭",
+      "code": "C12",
+      "swatch": "#e4e3e1",
+      "image_url": "https://autoimg.danawa.com/photo/4479/53509/color_12_360.png",
+      "path": "vehicles\\BMW\\X5 M\\colors\\02_미네랄 화이트 메탈릭.png"
+    }
+  ],
+  "gallery": [
+    {
+      "name": "2024 l 더 뉴 X5 M 컴페티션",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4479&Tab=image&No=111613",
+      "image_url": "https://autoimg.danawa.com/gallery/4479/20230814_4479 (1).jpg",
+      "path": "vehicles\\BMW\\X5 M\\gallery\\01_2024 l 더 뉴 X5 M 컴페티션.jpg"
+    },
+    {
+      "name": "2024 l 더 뉴 X5 M 컴페티션",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4479&Tab=image&No=111614",
+      "image_url": "https://autoimg.danawa.com/gallery/4479/20230814_4479 (2).jpg",
+      "path": "vehicles\\BMW\\X5 M\\gallery\\02_2024 l 더 뉴 X5 M 컴페티션.jpg"
+    },
+    {
+      "name": "2024 l 더 뉴 X5 M 컴페티션",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4479&Tab=image&No=111615",
+      "image_url": "https://autoimg.danawa.com/gallery/4479/20230814_4479 (3).jpg",
+      "path": "vehicles\\BMW\\X5 M\\gallery\\03_2024 l 더 뉴 X5 M 컴페티션.jpg"
+    },
+    {
+      "name": "2024 l 더 뉴 X5 M 컴페티션",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4479&Tab=image&No=111616",
+      "image_url": "https://autoimg.danawa.com/gallery/4479/20230814_4479 (4).jpg",
+      "path": "vehicles\\BMW\\X5 M\\gallery\\04_2024 l 더 뉴 X5 M 컴페티션.jpg"
+    }
+  ]
+}

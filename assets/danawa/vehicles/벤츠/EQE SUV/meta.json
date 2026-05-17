@@ -1,0 +1,94 @@
+{
+  "brand": "벤츠",
+  "brand_id": "349",
+  "model_id": "4430",
+  "name": "EQE SUV",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4430",
+  "photo_code": "4430/53695",
+  "default_image_url": "https://autoimg.danawa.com/photo/4430/53695/color_11_360.png",
+  "default_image_path": "vehicles\\벤츠\\EQE SUV\\model_360.png",
+  "colors": [
+    {
+      "name": "옵시디안 블랙 (197U)",
+      "code": "C11",
+      "swatch": "#0c0c0c",
+      "image_url": "https://autoimg.danawa.com/photo/4430/53695/color_11_360.png",
+      "path": "vehicles\\벤츠\\EQE SUV\\colors\\01_옵시디안 블랙 (197U).png"
+    },
+    {
+      "name": "폴라 화이트 (149U)",
+      "code": "C12",
+      "swatch": "#ced3c8",
+      "image_url": "https://autoimg.danawa.com/photo/4430/53695/color_12_360.png",
+      "path": "vehicles\\벤츠\\EQE SUV\\colors\\02_폴라 화이트 (149U).png"
+    },
+    {
+      "name": "블랙 (040U)",
+      "code": "C13",
+      "swatch": "#010101",
+      "image_url": "https://autoimg.danawa.com/photo/4430/53695/color_13_360.png",
+      "path": "vehicles\\벤츠\\EQE SUV\\colors\\03_블랙 (040U).png"
+    },
+    {
+      "name": "벨벳 브라운 (771U)",
+      "code": "C14",
+      "swatch": "#786c63",
+      "image_url": "https://autoimg.danawa.com/photo/4430/53695/color_14_360.png",
+      "path": "vehicles\\벤츠\\EQE SUV\\colors\\04_벨벳 브라운 (771U).png"
+    },
+    {
+      "name": "소다라이트 블루 (842U)",
+      "code": "C15",
+      "swatch": "#2a2f5e",
+      "image_url": "https://autoimg.danawa.com/photo/4430/53695/color_15_360.png",
+      "path": "vehicles\\벤츠\\EQE SUV\\colors\\05_소다라이트 블루 (842U).png"
+    },
+    {
+      "name": "하이 테크 실버 (922U)",
+      "code": "C16",
+      "swatch": "#b5b8ba",
+      "image_url": "https://autoimg.danawa.com/photo/4430/53695/color_16_360.png",
+      "path": "vehicles\\벤츠\\EQE SUV\\colors\\06_하이 테크 실버 (922U).png"
+    },
+    {
+      "name": "에메랄드 그린 (989U)",
+      "code": "C17",
+      "swatch": "#132421",
+      "image_url": "https://autoimg.danawa.com/photo/4430/53695/color_17_360.png",
+      "path": "vehicles\\벤츠\\EQE SUV\\colors\\07_에메랄드 그린 (989U).png"
+    },
+    {
+      "name": "셀레나이트 그레이 (992U)",
+      "code": "C18",
+      "swatch": "#3a393e",
+      "image_url": "https://autoimg.danawa.com/photo/4430/53695/color_18_360.png",
+      "path": "vehicles\\벤츠\\EQE SUV\\colors\\08_셀레나이트 그레이 (992U).png"
+    }
+  ],
+  "gallery": [
+    {
+      "name": "2023 l EQE350 4MATIC SUV",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4430&Tab=image&No=107293",
+      "image_url": "https://autoimg.danawa.com/gallery/4430/20230405_4430 (1).jpg",
+      "path": "vehicles\\벤츠\\EQE SUV\\gallery\\01_2023 l EQE350 4MATIC SUV.jpg"
+    },
+    {
+      "name": "2023 l EQE350 4MATIC SUV",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4430&Tab=image&No=107294",
+      "image_url": "https://autoimg.danawa.com/gallery/4430/20230405_4430 (2).jpg",
+      "path": "vehicles\\벤츠\\EQE SUV\\gallery\\02_2023 l EQE350 4MATIC SUV.jpg"
+    },
+    {
+      "name": "2023 l EQE350 4MATIC SUV",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4430&Tab=image&No=107295",
+      "image_url": "https://autoimg.danawa.com/gallery/4430/20230405_4430 (3).jpg",
+      "path": "vehicles\\벤츠\\EQE SUV\\gallery\\03_2023 l EQE350 4MATIC SUV.jpg"
+    },
+    {
+      "name": "2023 l EQE350 4MATIC SUV",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4430&Tab=image&No=107296",
+      "image_url": "https://autoimg.danawa.com/gallery/4430/20230405_4430 (4).jpg",
+      "path": "vehicles\\벤츠\\EQE SUV\\gallery\\04_2023 l EQE350 4MATIC SUV.jpg"
+    }
+  ]
+}

@@ -1,0 +1,87 @@
+{
+  "brand": "벤츠",
+  "brand_id": "349",
+  "model_id": "4496",
+  "name": "GLB-Class",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4496",
+  "photo_code": "4496/53416",
+  "default_image_url": "https://autoimg.danawa.com/photo/4496/53416/color_14_360.png",
+  "default_image_path": "vehicles\\벤츠\\GLB-Class\\model_360.png",
+  "colors": [
+    {
+      "name": "폴라 화이트 (149U)",
+      "code": "C11",
+      "swatch": "#ced3c8",
+      "image_url": "https://autoimg.danawa.com/photo/4496/53416/color_11_360.png",
+      "path": "vehicles\\벤츠\\GLB-Class\\colors\\01_폴라 화이트 (149U).png"
+    },
+    {
+      "name": "나이트 블랙 (696U)",
+      "code": "C12",
+      "swatch": "#070707",
+      "image_url": "https://autoimg.danawa.com/photo/4496/53416/color_12_360.png",
+      "path": "vehicles\\벤츠\\GLB-Class\\colors\\02_나이트 블랙 (696U).png"
+    },
+    {
+      "name": "코스모스 블랙 (191U)",
+      "code": "C13",
+      "swatch": "#0c0e14",
+      "image_url": "https://autoimg.danawa.com/photo/4496/53416/color_13_360.png",
+      "path": "vehicles\\벤츠\\GLB-Class\\colors\\03_코스모스 블랙 (191U).png"
+    },
+    {
+      "name": "마운틴 그레이 (787U)",
+      "code": "C14",
+      "swatch": "#3b3e46",
+      "image_url": "https://autoimg.danawa.com/photo/4496/53416/color_14_360.png",
+      "path": "vehicles\\벤츠\\GLB-Class\\colors\\04_마운틴 그레이 (787U).png"
+    },
+    {
+      "name": "하이 테크 실버 (922U)",
+      "code": "C15",
+      "swatch": "#97979a",
+      "image_url": "https://autoimg.danawa.com/photo/4496/53416/color_15_360.png",
+      "path": "vehicles\\벤츠\\GLB-Class\\colors\\05_하이 테크 실버 (922U).png"
+    },
+    {
+      "name": "스펙트럴 블루 (970U)",
+      "code": "C16",
+      "swatch": "#1b568d",
+      "image_url": "https://autoimg.danawa.com/photo/4496/53416/color_16_360.png",
+      "path": "vehicles\\벤츠\\GLB-Class\\colors\\06_스펙트럴 블루 (970U).png"
+    },
+    {
+      "name": "MANUFAKTUR 파타고니아 레드 (993U)",
+      "code": "C17",
+      "swatch": "#ba0f2b",
+      "image_url": "https://autoimg.danawa.com/photo/4496/53416/color_17_360.png",
+      "path": "vehicles\\벤츠\\GLB-Class\\colors\\07_MANUFAKTUR 파타고니아 레드 (993U).png"
+    }
+  ],
+  "gallery": [
+    {
+      "name": "2024 l 더 뉴 GLA & 더 뉴 GLB",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4496&Tab=image&No=106301",
+      "image_url": "https://autoimg.danawa.com/gallery/4496/20230317_4496 (1).jpg",
+      "path": "vehicles\\벤츠\\GLB-Class\\gallery\\01_2024 l 더 뉴 GLA & 더 뉴 GLB.jpg"
+    },
+    {
+      "name": "2024 l 더 뉴 GLA & 더 뉴 GLB",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4496&Tab=image&No=106302",
+      "image_url": "https://autoimg.danawa.com/gallery/4496/20230317_4496 (2).jpg",
+      "path": "vehicles\\벤츠\\GLB-Class\\gallery\\02_2024 l 더 뉴 GLA & 더 뉴 GLB.jpg"
+    },
+    {
+      "name": "2024 l 더 뉴 GLB",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4496&Tab=image&No=106303",
+      "image_url": "https://autoimg.danawa.com/gallery/4496/20230317_4496 (3).jpg",
+      "path": "vehicles\\벤츠\\GLB-Class\\gallery\\03_2024 l 더 뉴 GLB.jpg"
+    },
+    {
+      "name": "2024 l 더 뉴 GLB",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4496&Tab=image&No=106304",
+      "image_url": "https://autoimg.danawa.com/gallery/4496/20230317_4496 (4).jpg",
+      "path": "vehicles\\벤츠\\GLB-Class\\gallery\\04_2024 l 더 뉴 GLB.jpg"
+    }
+  ]
+}

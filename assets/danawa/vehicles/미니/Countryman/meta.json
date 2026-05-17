@@ -1,0 +1,37 @@
+{
+  "brand": "미니",
+  "brand_id": "367",
+  "model_id": "4587",
+  "name": "Countryman",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4587",
+  "photo_code": "4587/53543",
+  "default_image_url": "https://autoimg.danawa.com/photo/4587/model_360.png",
+  "default_image_path": "vehicles\\미니\\Countryman\\model_360.png",
+  "colors": [],
+  "gallery": [
+    {
+      "name": "컨트리맨 JCW ALL4",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4587&Tab=image&No=143518",
+      "image_url": "https://autoimg.danawa.com/gallery/4587/20260316_4587 (1).jpg",
+      "path": "vehicles\\미니\\Countryman\\gallery\\01_컨트리맨 JCW ALL4.jpg"
+    },
+    {
+      "name": "컨트리맨 JCW ALL4",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4587&Tab=image&No=143519",
+      "image_url": "https://autoimg.danawa.com/gallery/4587/20260316_4587 (2).jpg",
+      "path": "vehicles\\미니\\Countryman\\gallery\\02_컨트리맨 JCW ALL4.jpg"
+    },
+    {
+      "name": "컨트리맨 JCW ALL4",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4587&Tab=image&No=143520",
+      "image_url": "https://autoimg.danawa.com/gallery/4587/20260316_4587 (3).jpg",
+      "path": "vehicles\\미니\\Countryman\\gallery\\03_컨트리맨 JCW ALL4.jpg"
+    },
+    {
+      "name": "컨트리맨 JCW ALL4",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4587&Tab=image&No=143521",
+      "image_url": "https://autoimg.danawa.com/gallery/4587/20260316_4587 (4).jpg",
+      "path": "vehicles\\미니\\Countryman\\gallery\\04_컨트리맨 JCW ALL4.jpg"
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "brand": "BMW",
+  "brand_id": "362",
+  "model_id": "4072",
+  "name": "X4",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4072",
+  "photo_code": "4072/52611",
+  "default_image_url": "https://autoimg.danawa.com/photo/4072/model_360.png",
+  "default_image_path": "vehicles\\BMW\\X4\\model_360.png",
+  "colors": [],
+  "gallery": [
+    {
+      "name": "2022 l X4 M40i",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4072&Tab=image&No=84652",
+      "image_url": "https://autoimg.danawa.com/gallery/4072/20210609 (1).jpg",
+      "path": "vehicles\\BMW\\X4\\gallery\\01_2022 l X4 M40i.jpg"
+    },
+    {
+      "name": "2022 l X4 M40i",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4072&Tab=image&No=84653",
+      "image_url": "https://autoimg.danawa.com/gallery/4072/20210609 (2).jpg",
+      "path": "vehicles\\BMW\\X4\\gallery\\02_2022 l X4 M40i.jpg"
+    },
+    {
+      "name": "2022 l X4 M40i",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4072&Tab=image&No=84654",
+      "image_url": "https://autoimg.danawa.com/gallery/4072/20210609 (3).jpg",
+      "path": "vehicles\\BMW\\X4\\gallery\\03_2022 l X4 M40i.jpg"
+    },
+    {
+      "name": "2022 l X4 M40i",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4072&Tab=image&No=84655",
+      "image_url": "https://autoimg.danawa.com/gallery/4072/20210609 (4).jpg",
+      "path": "vehicles\\BMW\\X4\\gallery\\04_2022 l X4 M40i.jpg"
+    }
+  ]
+}

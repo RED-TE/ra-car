@@ -1,0 +1,37 @@
+{
+  "brand": "폴스타",
+  "brand_id": "458",
+  "model_id": "4409",
+  "name": "Polestar 6",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4409",
+  "photo_code": "4409/",
+  "default_image_url": "https://autoimg.danawa.com/photo/4409/model_360.png",
+  "default_image_path": "vehicles\\폴스타\\Polestar 6\\model_360.png",
+  "colors": [],
+  "gallery": [
+    {
+      "name": "폴스타 6 BST 콘셉트",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4409&Tab=image&No=126924",
+      "image_url": "https://autoimg.danawa.com/gallery/4409/20240715_4409 (1).jpg",
+      "path": "vehicles\\폴스타\\Polestar 6\\gallery\\01_폴스타 6 BST 콘셉트.jpg"
+    },
+    {
+      "name": "폴스타 6 BST 콘셉트",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4409&Tab=image&No=126925",
+      "image_url": "https://autoimg.danawa.com/gallery/4409/20240715_4409 (2).jpg",
+      "path": "vehicles\\폴스타\\Polestar 6\\gallery\\02_폴스타 6 BST 콘셉트.jpg"
+    },
+    {
+      "name": "폴스타 6 BST 콘셉트",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4409&Tab=image&No=126926",
+      "image_url": "https://autoimg.danawa.com/gallery/4409/20240715_4409 (3).jpg",
+      "path": "vehicles\\폴스타\\Polestar 6\\gallery\\03_폴스타 6 BST 콘셉트.jpg"
+    },
+    {
+      "name": "폴스타 6 BST 콘셉트",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4409&Tab=image&No=126927",
+      "image_url": "https://autoimg.danawa.com/gallery/4409/20240715_4409 (4).jpg",
+      "path": "vehicles\\폴스타\\Polestar 6\\gallery\\04_폴스타 6 BST 콘셉트.jpg"
+    }
+  ]
+}

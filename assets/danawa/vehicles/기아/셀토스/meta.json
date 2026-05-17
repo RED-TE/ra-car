@@ -1,0 +1,87 @@
+{
+  "brand": "기아",
+  "brand_id": "307",
+  "model_id": "4391",
+  "name": "셀토스",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4391",
+  "photo_code": "4391/53252",
+  "default_image_url": "https://autoimg.danawa.com/photo/4391/53252/color_15_360.png",
+  "default_image_path": "vehicles\\기아\\셀토스\\model_360.png",
+  "colors": [
+    {
+      "name": "스노우 화이트 펄(SWP)",
+      "code": "C10",
+      "swatch": "#f4f4f4",
+      "image_url": "https://autoimg.danawa.com/photo/4391/53252/color_10_360.png",
+      "path": "vehicles\\기아\\셀토스\\colors\\01_스노우 화이트 펄(SWP).png"
+    },
+    {
+      "name": "그래비티 그레이(KDG)",
+      "code": "C11",
+      "swatch": "#53646b",
+      "image_url": "https://autoimg.danawa.com/photo/4391/53252/color_11_360.png",
+      "path": "vehicles\\기아\\셀토스\\colors\\02_그래비티 그레이(KDG).png"
+    },
+    {
+      "name": "퓨전 블랙(FSB)",
+      "code": "C12",
+      "swatch": "#040406",
+      "image_url": "https://autoimg.danawa.com/photo/4391/53252/color_12_360.png",
+      "path": "vehicles\\기아\\셀토스\\colors\\03_퓨전 블랙(FSB).png"
+    },
+    {
+      "name": "플루톤 블루(PLU)",
+      "code": "C13",
+      "swatch": "#3c5e69",
+      "image_url": "https://autoimg.danawa.com/photo/4391/53252/color_13_360.png",
+      "path": "vehicles\\기아\\셀토스\\colors\\04_플루톤 블루(PLU).png"
+    },
+    {
+      "name": "다크 오션 블루(BU3)",
+      "code": "C14",
+      "swatch": "#031134",
+      "image_url": "https://autoimg.danawa.com/photo/4391/53252/color_14_360.png",
+      "path": "vehicles\\기아\\셀토스\\colors\\05_다크 오션 블루(BU3).png"
+    },
+    {
+      "name": "퓨전 블랙+클리어 화이트(F1D)",
+      "code": "C15",
+      "swatch": "#040406",
+      "image_url": "https://autoimg.danawa.com/photo/4391/53252/color_15_360.png",
+      "path": "vehicles\\기아\\셀토스\\colors\\06_퓨전 블랙+클리어 화이트(F1D).png"
+    },
+    {
+      "name": "퓨전 블랙+플루톤 블루(F1A)",
+      "code": "C16",
+      "swatch": "#040406",
+      "image_url": "https://autoimg.danawa.com/photo/4391/53252/color_16_360.png",
+      "path": "vehicles\\기아\\셀토스\\colors\\07_퓨전 블랙+플루톤 블루(F1A).png"
+    }
+  ],
+  "gallery": [
+    {
+      "name": "2025 셀토스",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4391&Tab=image&No=128218",
+      "image_url": "https://autoimg.danawa.com/gallery/4391/20240827_4391 (1).jpg",
+      "path": "vehicles\\기아\\셀토스\\gallery\\01_2025 셀토스.jpg"
+    },
+    {
+      "name": "2025 셀토스",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4391&Tab=image&No=128219",
+      "image_url": "https://autoimg.danawa.com/gallery/4391/20240827_4391 (2).jpg",
+      "path": "vehicles\\기아\\셀토스\\gallery\\02_2025 셀토스.jpg"
+    },
+    {
+      "name": "2025 셀토스",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4391&Tab=image&No=128220",
+      "image_url": "https://autoimg.danawa.com/gallery/4391/20240827_4391 (3).jpg",
+      "path": "vehicles\\기아\\셀토스\\gallery\\03_2025 셀토스.jpg"
+    },
+    {
+      "name": "2025 셀토스",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4391&Tab=image&No=128221",
+      "image_url": "https://autoimg.danawa.com/gallery/4391/20240827_4391 (4).jpg",
+      "path": "vehicles\\기아\\셀토스\\gallery\\04_2025 셀토스.jpg"
+    }
+  ]
+}

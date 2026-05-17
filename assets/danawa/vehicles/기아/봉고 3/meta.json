@@ -1,0 +1,37 @@
+{
+  "brand": "기아",
+  "brand_id": "307",
+  "model_id": "3772",
+  "name": "봉고 3",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3772",
+  "photo_code": "3772/53770",
+  "default_image_url": "https://autoimg.danawa.com/photo/3772/model_360.png",
+  "default_image_path": "vehicles\\기아\\봉고 3\\model_360.png",
+  "colors": [],
+  "gallery": [
+    {
+      "name": "2026 봉고 III",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3772&Tab=image&No=142534",
+      "image_url": "https://autoimg.danawa.com/gallery/3772/20260106_3772 (1).jpg",
+      "path": "vehicles\\기아\\봉고 3\\gallery\\01_2026 봉고 III.jpg"
+    },
+    {
+      "name": "2025 봉고 3",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3772&Tab=image&No=127096",
+      "image_url": "https://autoimg.danawa.com/gallery/3772/20240718_3772 (1).jpg",
+      "path": "vehicles\\기아\\봉고 3\\gallery\\02_2025 봉고 3.jpg"
+    },
+    {
+      "name": "2024 봉고 III LPG",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3772&Tab=image&No=118419",
+      "image_url": "https://autoimg.danawa.com/gallery/3772/20240304_3772 (1).jpg",
+      "path": "vehicles\\기아\\봉고 3\\gallery\\03_2024 봉고 III LPG.jpg"
+    },
+    {
+      "name": "2024 봉고 III LPG",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3772&Tab=image&No=118420",
+      "image_url": "https://autoimg.danawa.com/gallery/3772/20240304_3772 (2).jpg",
+      "path": "vehicles\\기아\\봉고 3\\gallery\\04_2024 봉고 III LPG.jpg"
+    }
+  ]
+}

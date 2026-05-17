@@ -1,0 +1,37 @@
+{
+  "brand": "BMW",
+  "brand_id": "362",
+  "model_id": "4650",
+  "name": "3 Series",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4650",
+  "photo_code": "4650/53453",
+  "default_image_url": "https://autoimg.danawa.com/photo/4650/model_360.png",
+  "default_image_path": "vehicles\\BMW\\3 Series\\model_360.png",
+  "colors": [],
+  "gallery": [
+    {
+      "name": "2025 330i 세단 & 330e 투어링",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4650&Tab=image&No=124607",
+      "image_url": "https://autoimg.danawa.com/gallery/4650/20240529_4650 (1).jpg",
+      "path": "vehicles\\BMW\\3 Series\\gallery\\01_2025 330i 세단 & 330e 투어링.jpg"
+    },
+    {
+      "name": "2025 330i 세단 & 330e 투어링",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4650&Tab=image&No=124608",
+      "image_url": "https://autoimg.danawa.com/gallery/4650/20240529_4650 (2).jpg",
+      "path": "vehicles\\BMW\\3 Series\\gallery\\02_2025 330i 세단 & 330e 투어링.jpg"
+    },
+    {
+      "name": "2025 330i 세단",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4650&Tab=image&No=124609",
+      "image_url": "https://autoimg.danawa.com/gallery/4650/20240529_4650 (3).jpg",
+      "path": "vehicles\\BMW\\3 Series\\gallery\\03_2025 330i 세단.jpg"
+    },
+    {
+      "name": "2025 330i 세단",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4650&Tab=image&No=124610",
+      "image_url": "https://autoimg.danawa.com/gallery/4650/20240529_4650 (4).jpg",
+      "path": "vehicles\\BMW\\3 Series\\gallery\\04_2025 330i 세단.jpg"
+    }
+  ]
+}

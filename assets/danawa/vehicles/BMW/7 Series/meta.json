@@ -1,0 +1,73 @@
+{
+  "brand": "BMW",
+  "brand_id": "362",
+  "model_id": "4196",
+  "name": "7 Series",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4196",
+  "photo_code": "4196/52641",
+  "default_image_url": "https://autoimg.danawa.com/photo/4196/52641/color_14_360.png",
+  "default_image_path": "vehicles\\BMW\\7 Series\\model_360.png",
+  "colors": [
+    {
+      "name": "Mineral White",
+      "code": "C11",
+      "swatch": "#eaeaea",
+      "image_url": "https://autoimg.danawa.com/photo/4196/52641/color_11_360.png",
+      "path": "vehicles\\BMW\\7 Series\\colors\\01_Mineral White.png"
+    },
+    {
+      "name": "Black Sapphire",
+      "code": "C12",
+      "swatch": "#111111",
+      "image_url": "https://autoimg.danawa.com/photo/4196/52641/color_12_360.png",
+      "path": "vehicles\\BMW\\7 Series\\colors\\02_Black Sapphire.png"
+    },
+    {
+      "name": "Oxid Grey",
+      "code": "C13",
+      "swatch": "#999893",
+      "image_url": "https://autoimg.danawa.com/photo/4196/52641/color_13_360.png",
+      "path": "vehicles\\BMW\\7 Series\\colors\\03_Oxid Grey.png"
+    },
+    {
+      "name": "Sophisto Grey",
+      "code": "C14",
+      "swatch": "#2c2d2f",
+      "image_url": "https://autoimg.danawa.com/photo/4196/52641/color_14_360.png",
+      "path": "vehicles\\BMW\\7 Series\\colors\\04_Sophisto Grey.png"
+    },
+    {
+      "name": "M Brooklyn Grey",
+      "code": "C17",
+      "swatch": "#858e8f",
+      "image_url": "https://autoimg.danawa.com/photo/4196/52641/color_17_360.png",
+      "path": "vehicles\\BMW\\7 Series\\colors\\05_M Brooklyn Grey.png"
+    }
+  ],
+  "gallery": [
+    {
+      "name": "2023 l 760i xDrive 프로텍션",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4196&Tab=image&No=111490",
+      "image_url": "https://autoimg.danawa.com/gallery/4196/20230809_4196 (1).jpg",
+      "path": "vehicles\\BMW\\7 Series\\gallery\\01_2023 l 760i xDrive 프로텍션.jpg"
+    },
+    {
+      "name": "2023 l 760i xDrive 프로텍션",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4196&Tab=image&No=111491",
+      "image_url": "https://autoimg.danawa.com/gallery/4196/20230809_4196 (2).jpg",
+      "path": "vehicles\\BMW\\7 Series\\gallery\\02_2023 l 760i xDrive 프로텍션.jpg"
+    },
+    {
+      "name": "2023 l 760i xDrive 프로텍션",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4196&Tab=image&No=111492",
+      "image_url": "https://autoimg.danawa.com/gallery/4196/20230809_4196 (3).jpg",
+      "path": "vehicles\\BMW\\7 Series\\gallery\\03_2023 l 760i xDrive 프로텍션.jpg"
+    },
+    {
+      "name": "2023 l 760i xDrive 프로텍션",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4196&Tab=image&No=111493",
+      "image_url": "https://autoimg.danawa.com/gallery/4196/20230809_4196 (4).jpg",
+      "path": "vehicles\\BMW\\7 Series\\gallery\\04_2023 l 760i xDrive 프로텍션.jpg"
+    }
+  ]
+}

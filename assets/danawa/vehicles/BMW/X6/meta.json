@@ -1,0 +1,37 @@
+{
+  "brand": "BMW",
+  "brand_id": "362",
+  "model_id": "4476",
+  "name": "X6",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4476",
+  "photo_code": "4476/53506",
+  "default_image_url": "https://autoimg.danawa.com/photo/4476/model_360.png",
+  "default_image_path": "vehicles\\BMW\\X6\\model_360.png",
+  "colors": [],
+  "gallery": [
+    {
+      "name": "2024 l X6 M60i xDrive",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4476&Tab=image&No=112207",
+      "image_url": "https://autoimg.danawa.com/gallery/4476/20230824_4476 (1).jpg",
+      "path": "vehicles\\BMW\\X6\\gallery\\01_2024 l X6 M60i xDrive.jpg"
+    },
+    {
+      "name": "2024 l X6 M60i xDrive",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4476&Tab=image&No=112208",
+      "image_url": "https://autoimg.danawa.com/gallery/4476/20230824_4476 (2).jpg",
+      "path": "vehicles\\BMW\\X6\\gallery\\02_2024 l X6 M60i xDrive.jpg"
+    },
+    {
+      "name": "2024 l X6 M60i xDrive",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4476&Tab=image&No=112209",
+      "image_url": "https://autoimg.danawa.com/gallery/4476/20230824_4476 (3).jpg",
+      "path": "vehicles\\BMW\\X6\\gallery\\03_2024 l X6 M60i xDrive.jpg"
+    },
+    {
+      "name": "2024 l X6 M60i xDrive",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4476&Tab=image&No=112210",
+      "image_url": "https://autoimg.danawa.com/gallery/4476/20230824_4476 (4).jpg",
+      "path": "vehicles\\BMW\\X6\\gallery\\04_2024 l X6 M60i xDrive.jpg"
+    }
+  ]
+}

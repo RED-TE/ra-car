@@ -1,0 +1,37 @@
+{
+  "brand": "벤츠",
+  "brand_id": "349",
+  "model_id": "4634",
+  "name": "EQS",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4634",
+  "photo_code": "4634/53116",
+  "default_image_url": "https://autoimg.danawa.com/photo/4634/model_360.png",
+  "default_image_path": "vehicles\\벤츠\\EQS\\model_360.png",
+  "colors": [],
+  "gallery": [
+    {
+      "name": "2024 EQS580 4MATIC",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4634&Tab=image&No=119769",
+      "image_url": "https://autoimg.danawa.com/gallery/4634/20240416_4634 (1).jpg",
+      "path": "vehicles\\벤츠\\EQS\\gallery\\01_2024 EQS580 4MATIC.jpg"
+    },
+    {
+      "name": "2024 EQS580 4MATIC",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4634&Tab=image&No=119770",
+      "image_url": "https://autoimg.danawa.com/gallery/4634/20240416_4634 (2).jpg",
+      "path": "vehicles\\벤츠\\EQS\\gallery\\02_2024 EQS580 4MATIC.jpg"
+    },
+    {
+      "name": "2024 EQS580 4MATIC",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4634&Tab=image&No=119771",
+      "image_url": "https://autoimg.danawa.com/gallery/4634/20240416_4634 (3).jpg",
+      "path": "vehicles\\벤츠\\EQS\\gallery\\03_2024 EQS580 4MATIC.jpg"
+    },
+    {
+      "name": "2024 EQS580 4MATIC",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4634&Tab=image&No=119772",
+      "image_url": "https://autoimg.danawa.com/gallery/4634/20240416_4634 (4).jpg",
+      "path": "vehicles\\벤츠\\EQS\\gallery\\04_2024 EQS580 4MATIC.jpg"
+    }
+  ]
+}

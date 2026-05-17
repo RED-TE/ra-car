@@ -1,0 +1,101 @@
+{
+  "brand": "제네시스",
+  "brand_id": "304",
+  "model_id": "4701",
+  "name": "GV60",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4701",
+  "photo_code": "4701/53714",
+  "default_image_url": "https://autoimg.danawa.com/photo/4701/model_360.png",
+  "default_image_path": "vehicles\\제네시스\\GV60\\model_360.png",
+  "colors": [
+    {
+      "name": "마테호른 화이트(FT7)(무광-유료)",
+      "code": "C07",
+      "swatch": "#dad9de",
+      "image_url": "https://autoimg.danawa.com/photo/4701/53714/color_07_360.png",
+      "path": "vehicles\\제네시스\\GV60\\colors\\01_마테호른 화이트(FT7)(무광-유료).png"
+    },
+    {
+      "name": "마칼루 그레이(MPE)(무광-유료)",
+      "code": "C08",
+      "swatch": "#2a343d",
+      "image_url": "https://autoimg.danawa.com/photo/4701/53714/color_08_360.png",
+      "path": "vehicles\\제네시스\\GV60\\colors\\02_마칼루 그레이(MPE)(무광-유료).png"
+    },
+    {
+      "name": "세레스 블루(MSA)(무광-유료)",
+      "code": "C10",
+      "swatch": "#3b4655",
+      "image_url": "https://autoimg.danawa.com/photo/4701/53714/color_10_360.png",
+      "path": "vehicles\\제네시스\\GV60\\colors\\03_세레스 블루(MSA)(무광-유료).png"
+    },
+    {
+      "name": "우유니 화이트(UYH)(유광)",
+      "code": "C11",
+      "swatch": "#f0f2f2",
+      "image_url": "https://autoimg.danawa.com/photo/4701/53714/color_11_360.png",
+      "path": "vehicles\\제네시스\\GV60\\colors\\04_우유니 화이트(UYH)(유광).png"
+    },
+    {
+      "name": "세빌 실버(SSS)(유광)",
+      "code": "C12",
+      "swatch": "#808183",
+      "image_url": "https://autoimg.danawa.com/photo/4701/53714/color_12_360.png",
+      "path": "vehicles\\제네시스\\GV60\\colors\\05_세빌 실버(SSS)(유광).png"
+    },
+    {
+      "name": "마칼루 그레이(NCM)(유광)",
+      "code": "C13",
+      "swatch": "#232d36",
+      "image_url": "https://autoimg.danawa.com/photo/4701/53714/color_13_360.png",
+      "path": "vehicles\\제네시스\\GV60\\colors\\06_마칼루 그레이(NCM)(유광).png"
+    },
+    {
+      "name": "비크 블랙(PH3)(유광)",
+      "code": "C14",
+      "swatch": "#020811",
+      "image_url": "https://autoimg.danawa.com/photo/4701/53714/color_14_360.png",
+      "path": "vehicles\\제네시스\\GV60\\colors\\07_비크 블랙(PH3)(유광).png"
+    },
+    {
+      "name": "세레스 블루(ASA)(유광)",
+      "code": "C16",
+      "swatch": "#3b4656",
+      "image_url": "https://autoimg.danawa.com/photo/4701/53714/color_16_360.png",
+      "path": "vehicles\\제네시스\\GV60\\colors\\08_세레스 블루(ASA)(유광).png"
+    },
+    {
+      "name": "트롬소 그린(PBG)(유광)",
+      "code": "C18",
+      "swatch": "#033241",
+      "image_url": "https://autoimg.danawa.com/photo/4701/53714/color_18_360.png",
+      "path": "vehicles\\제네시스\\GV60\\colors\\09_트롬소 그린(PBG)(유광).png"
+    }
+  ],
+  "gallery": [
+    {
+      "name": "2027ㅣGV60",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4701&Tab=image&No=143718",
+      "image_url": "https://autoimg.danawa.com/gallery/4701/20260319_4701 (1).jpg",
+      "path": "vehicles\\제네시스\\GV60\\gallery\\01_2027ㅣGV60.jpg"
+    },
+    {
+      "name": "2027ㅣGV60",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4701&Tab=image&No=143719",
+      "image_url": "https://autoimg.danawa.com/gallery/4701/20260319_4701 (2).jpg",
+      "path": "vehicles\\제네시스\\GV60\\gallery\\02_2027ㅣGV60.jpg"
+    },
+    {
+      "name": "GV60 F L",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4701&Tab=image&No=137370",
+      "image_url": "https://autoimg.danawa.com/gallery/4701/20250423_4701 (1).jpg",
+      "path": "vehicles\\제네시스\\GV60\\gallery\\03_GV60 F L.jpg"
+    },
+    {
+      "name": "GV60 F L",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4701&Tab=image&No=137371",
+      "image_url": "https://autoimg.danawa.com/gallery/4701/20250423_4701 (2).jpg",
+      "path": "vehicles\\제네시스\\GV60\\gallery\\04_GV60 F L.jpg"
+    }
+  ]
+}

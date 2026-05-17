@@ -1,0 +1,94 @@
+{
+  "brand": "기아",
+  "brand_id": "307",
+  "model_id": "4686",
+  "name": "타스만",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4686",
+  "photo_code": "4686/52081",
+  "default_image_url": "https://autoimg.danawa.com/photo/4686/52081/color_17_360.png",
+  "default_image_path": "vehicles\\기아\\타스만\\model_360.png",
+  "colors": [
+    {
+      "name": "스노우 화이트 펄 (SWP)",
+      "code": "C10",
+      "swatch": "#cecfd2",
+      "image_url": "https://autoimg.danawa.com/photo/4686/52081/color_10_360.png",
+      "path": "vehicles\\기아\\타스만\\colors\\01_스노우 화이트 펄 (SWP).png"
+    },
+    {
+      "name": "오로라 블랙 펄 (ABP)",
+      "code": "C11",
+      "swatch": "#1f1b22",
+      "image_url": "https://autoimg.danawa.com/photo/4686/52081/color_11_360.png",
+      "path": "vehicles\\기아\\타스만\\colors\\02_오로라 블랙 펄 (ABP).png"
+    },
+    {
+      "name": "인터스텔라 그레이 (AGT)",
+      "code": "C12",
+      "swatch": "#2c3033",
+      "image_url": "https://autoimg.danawa.com/photo/4686/52081/color_12_360.png",
+      "path": "vehicles\\기아\\타스만\\colors\\03_인터스텔라 그레이 (AGT).png"
+    },
+    {
+      "name": "스틸 그레이 (KLG)",
+      "code": "C13",
+      "swatch": "#7b7a7e",
+      "image_url": "https://autoimg.danawa.com/photo/4686/52081/color_13_360.png",
+      "path": "vehicles\\기아\\타스만\\colors\\04_스틸 그레이 (KLG).png"
+    },
+    {
+      "name": "시티스케이프 그린 (CGE)",
+      "code": "C14",
+      "swatch": "#404f4c",
+      "image_url": "https://autoimg.danawa.com/photo/4686/52081/color_14_360.png",
+      "path": "vehicles\\기아\\타스만\\colors\\05_시티스케이프 그린 (CGE).png"
+    },
+    {
+      "name": "런웨이 레드 (CR5)",
+      "code": "C15",
+      "swatch": "#6d1418",
+      "image_url": "https://autoimg.danawa.com/photo/4686/52081/color_15_360.png",
+      "path": "vehicles\\기아\\타스만\\colors\\06_런웨이 레드 (CR5).png"
+    },
+    {
+      "name": "데님 블루 (DNB)",
+      "code": "C16",
+      "swatch": "#35424f",
+      "image_url": "https://autoimg.danawa.com/photo/4686/52081/color_16_360.png",
+      "path": "vehicles\\기아\\타스만\\colors\\07_데님 블루 (DNB).png"
+    },
+    {
+      "name": "탠 베이지 (TAM)",
+      "code": "C17",
+      "swatch": "#897e73",
+      "image_url": "https://autoimg.danawa.com/photo/4686/52081/color_17_360.png",
+      "path": "vehicles\\기아\\타스만\\colors\\08_탠 베이지 (TAM).png"
+    }
+  ],
+  "gallery": [
+    {
+      "name": "2025 타스만",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4686&Tab=image&No=140635",
+      "image_url": "https://autoimg.danawa.com/gallery/4686/20250924_4686 (1).jpg",
+      "path": "vehicles\\기아\\타스만\\gallery\\01_2025 타스만.jpg"
+    },
+    {
+      "name": "2025 타스만",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4686&Tab=image&No=140636",
+      "image_url": "https://autoimg.danawa.com/gallery/4686/20250924_4686 (2).jpg",
+      "path": "vehicles\\기아\\타스만\\gallery\\02_2025 타스만.jpg"
+    },
+    {
+      "name": "2025 타스만",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4686&Tab=image&No=140637",
+      "image_url": "https://autoimg.danawa.com/gallery/4686/20250924_4686 (3).jpg",
+      "path": "vehicles\\기아\\타스만\\gallery\\03_2025 타스만.jpg"
+    },
+    {
+      "name": "2025 타스만",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4686&Tab=image&No=140638",
+      "image_url": "https://autoimg.danawa.com/gallery/4686/20250924_4686 (4).jpg",
+      "path": "vehicles\\기아\\타스만\\gallery\\04_2025 타스만.jpg"
+    }
+  ]
+}

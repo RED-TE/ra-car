@@ -1,0 +1,94 @@
+{
+  "brand": "볼보",
+  "brand_id": "459",
+  "model_id": "4418",
+  "name": "EX90",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4418",
+  "photo_code": "4418/51624",
+  "default_image_url": "https://autoimg.danawa.com/photo/4418/model_360.png",
+  "default_image_path": "vehicles\\볼보\\EX90\\model_360.png",
+  "colors": [
+    {
+      "name": "Onyx Black",
+      "code": "C11",
+      "swatch": "#000000",
+      "image_url": "https://autoimg.danawa.com/photo/4418/51624/color_11_360.png",
+      "path": "vehicles\\볼보\\EX90\\colors\\01_Onyx Black.png"
+    },
+    {
+      "name": "Aurora Silver",
+      "code": "C12",
+      "swatch": "#abaaae",
+      "image_url": "https://autoimg.danawa.com/photo/4418/51624/color_12_360.png",
+      "path": "vehicles\\볼보\\EX90\\colors\\02_Aurora Silver.png"
+    },
+    {
+      "name": "Crystal White",
+      "code": "C13",
+      "swatch": "#ffffff",
+      "image_url": "https://autoimg.danawa.com/photo/4418/51624/color_13_360.png",
+      "path": "vehicles\\볼보\\EX90\\colors\\03_Crystal White.png"
+    },
+    {
+      "name": "Sand Dune",
+      "code": "C14",
+      "swatch": "#eee8dc",
+      "image_url": "https://autoimg.danawa.com/photo/4418/51624/color_14_360.png",
+      "path": "vehicles\\볼보\\EX90\\colors\\04_Sand Dune.png"
+    },
+    {
+      "name": "Denim Blue",
+      "code": "C15",
+      "swatch": "#4d5875",
+      "image_url": "https://autoimg.danawa.com/photo/4418/51624/color_15_360.png",
+      "path": "vehicles\\볼보\\EX90\\colors\\05_Denim Blue.png"
+    },
+    {
+      "name": "Forest Lake",
+      "code": "C16",
+      "swatch": "#586263",
+      "image_url": "https://autoimg.danawa.com/photo/4418/51624/color_16_360.png",
+      "path": "vehicles\\볼보\\EX90\\colors\\06_Forest Lake.png"
+    },
+    {
+      "name": "Vapour Grey",
+      "code": "C17",
+      "swatch": "#7a7f83",
+      "image_url": "https://autoimg.danawa.com/photo/4418/51624/color_17_360.png",
+      "path": "vehicles\\볼보\\EX90\\colors\\07_Vapour Grey.png"
+    },
+    {
+      "name": "Mulberry Red",
+      "code": "C18",
+      "swatch": "#614345",
+      "image_url": "https://autoimg.danawa.com/photo/4418/51624/color_18_360.png",
+      "path": "vehicles\\볼보\\EX90\\colors\\08_Mulberry Red.png"
+    }
+  ],
+  "gallery": [
+    {
+      "name": "EX90",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4418&Tab=image&No=144064",
+      "image_url": "https://autoimg.danawa.com/gallery/4418/20260401_4418 (1).jpg",
+      "path": "vehicles\\볼보\\EX90\\gallery\\01_EX90.jpg"
+    },
+    {
+      "name": "EX90",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4418&Tab=image&No=144065",
+      "image_url": "https://autoimg.danawa.com/gallery/4418/20260401_4418 (2).jpg",
+      "path": "vehicles\\볼보\\EX90\\gallery\\02_EX90.jpg"
+    },
+    {
+      "name": "EX90",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4418&Tab=image&No=128970",
+      "image_url": "https://autoimg.danawa.com/gallery/4418/20240924_4418 (2).jpg",
+      "path": "vehicles\\볼보\\EX90\\gallery\\03_EX90.jpg"
+    },
+    {
+      "name": "EX90",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4418&Tab=image&No=128971",
+      "image_url": "https://autoimg.danawa.com/gallery/4418/20240924_4418 (1).jpg",
+      "path": "vehicles\\볼보\\EX90\\gallery\\04_EX90.jpg"
+    }
+  ]
+}

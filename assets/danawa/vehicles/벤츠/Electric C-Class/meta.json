@@ -1,0 +1,37 @@
+{
+  "brand": "벤츠",
+  "brand_id": "349",
+  "model_id": "4799",
+  "name": "Electric C-Class",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4799",
+  "photo_code": "4799/",
+  "default_image_url": "https://autoimg.danawa.com/photo/4799/model_360.png",
+  "default_image_path": "vehicles\\벤츠\\Electric C-Class\\model_360.png",
+  "colors": [],
+  "gallery": [
+    {
+      "name": "C400 4MATIC 일렉트릭",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4799&Tab=image&No=144601",
+      "image_url": "https://autoimg.danawa.com/gallery/4799/20260423_4799 (1).jpg",
+      "path": "vehicles\\벤츠\\Electric C-Class\\gallery\\01_C400 4MATIC 일렉트릭.jpg"
+    },
+    {
+      "name": "C400 4MATIC 일렉트릭",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4799&Tab=image&No=144602",
+      "image_url": "https://autoimg.danawa.com/gallery/4799/20260423_4799 (2).jpg",
+      "path": "vehicles\\벤츠\\Electric C-Class\\gallery\\02_C400 4MATIC 일렉트릭.jpg"
+    },
+    {
+      "name": "C400 4MATIC 일렉트릭",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4799&Tab=image&No=144603",
+      "image_url": "https://autoimg.danawa.com/gallery/4799/20260423_4799 (3).jpg",
+      "path": "vehicles\\벤츠\\Electric C-Class\\gallery\\03_C400 4MATIC 일렉트릭.jpg"
+    },
+    {
+      "name": "C400 4MATIC 일렉트릭",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4799&Tab=image&No=144604",
+      "image_url": "https://autoimg.danawa.com/gallery/4799/20260423_4799 (4).jpg",
+      "path": "vehicles\\벤츠\\Electric C-Class\\gallery\\04_C400 4MATIC 일렉트릭.jpg"
+    }
+  ]
+}

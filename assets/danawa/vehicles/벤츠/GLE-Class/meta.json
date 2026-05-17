@@ -1,0 +1,115 @@
+{
+  "brand": "벤츠",
+  "brand_id": "349",
+  "model_id": "4471",
+  "name": "GLE-Class",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4471",
+  "photo_code": "4471/53605",
+  "default_image_url": "https://autoimg.danawa.com/photo/4471/53605/color_12_360.png",
+  "default_image_path": "vehicles\\벤츠\\GLE-Class\\model_360.png",
+  "colors": [
+    {
+      "name": "폴라 화이트 (149U)",
+      "code": "C11",
+      "swatch": "#ced3c8",
+      "image_url": "https://autoimg.danawa.com/photo/4471/53605/color_11_360.png",
+      "path": "vehicles\\벤츠\\GLE-Class\\colors\\01_폴라 화이트 (149U).png"
+    },
+    {
+      "name": "옵시디안 블랙 (197U)",
+      "code": "C12",
+      "swatch": "#0c0c0c",
+      "image_url": "https://autoimg.danawa.com/photo/4471/53605/color_12_360.png",
+      "path": "vehicles\\벤츠\\GLE-Class\\colors\\02_옵시디안 블랙 (197U).png"
+    },
+    {
+      "name": "소달라이트 블루 (842U)",
+      "code": "C13",
+      "swatch": "#2a2f5e",
+      "image_url": "https://autoimg.danawa.com/photo/4471/53605/color_13_360.png",
+      "path": "vehicles\\벤츠\\GLE-Class\\colors\\03_소달라이트 블루 (842U).png"
+    },
+    {
+      "name": "하이 테크 실버 (922U)",
+      "code": "C14",
+      "swatch": "#b5b8ba",
+      "image_url": "https://autoimg.danawa.com/photo/4471/53605/color_14_360.png",
+      "path": "vehicles\\벤츠\\GLE-Class\\colors\\04_하이 테크 실버 (922U).png"
+    },
+    {
+      "name": "셀레나이트 그레이 (992U)",
+      "code": "C16",
+      "swatch": "#3a393e",
+      "image_url": "https://autoimg.danawa.com/photo/4471/53605/color_16_360.png",
+      "path": "vehicles\\벤츠\\GLE-Class\\colors\\05_셀레나이트 그레이 (992U).png"
+    },
+    {
+      "name": "MANUFAKTUR 미스틱 블루 (032U)",
+      "code": "C17",
+      "swatch": "#111a37",
+      "image_url": "https://autoimg.danawa.com/photo/4471/53605/color_17_360.png",
+      "path": "vehicles\\벤츠\\GLE-Class\\colors\\06_MANUFAKTUR 미스틱 블루 (032U).png"
+    },
+    {
+      "name": "MANUFAKTUR 실리콘 그레이 솔리드 (190U)",
+      "code": "C18",
+      "swatch": "#4e5556",
+      "image_url": "https://autoimg.danawa.com/photo/4471/53605/color_18_360.png",
+      "path": "vehicles\\벤츠\\GLE-Class\\colors\\07_MANUFAKTUR 실리콘 그레이 솔리드 (190U).png"
+    },
+    {
+      "name": "MANUFAKTUR 코트다쥐르 라이트 블루 (385U)",
+      "code": "C19",
+      "swatch": "#8395a2",
+      "image_url": "https://autoimg.danawa.com/photo/4471/53605/color_19_360.png",
+      "path": "vehicles\\벤츠\\GLE-Class\\colors\\08_MANUFAKTUR 코트다쥐르 라이트 블루 (385U).png"
+    },
+    {
+      "name": "MANUFAKTUR 오팔라이트 화이트 브라이트 (885U)",
+      "code": "C20",
+      "swatch": "#b7b7b7",
+      "image_url": "https://autoimg.danawa.com/photo/4471/53605/color_20_360.png",
+      "path": "vehicles\\벤츠\\GLE-Class\\colors\\09_MANUFAKTUR 오팔라이트 화이트 브라이트 (885U).png"
+    },
+    {
+      "name": "MANUFAKTUR 아일랜드 그린 (886U)",
+      "code": "C21",
+      "swatch": "#4f6858",
+      "image_url": "https://autoimg.danawa.com/photo/4471/53605/color_21_360.png",
+      "path": "vehicles\\벤츠\\GLE-Class\\colors\\10_MANUFAKTUR 아일랜드 그린 (886U).png"
+    },
+    {
+      "name": "MANUFAKTUR 알파인 그레이 솔리드 (956U)",
+      "code": "C22",
+      "swatch": "#84838a",
+      "image_url": "https://autoimg.danawa.com/photo/4471/53605/color_22_360.png",
+      "path": "vehicles\\벤츠\\GLE-Class\\colors\\11_MANUFAKTUR 알파인 그레이 솔리드 (956U).png"
+    }
+  ],
+  "gallery": [
+    {
+      "name": "AMG GLE63 S 쿠페 마누팍투어 아틱 실버 에디션",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4471&Tab=image&No=138400",
+      "image_url": "https://autoimg.danawa.com/gallery/4471/20250604_4471 (1).jpg",
+      "path": "vehicles\\벤츠\\GLE-Class\\gallery\\01_AMG GLE63 S 쿠페 마누팍투어 아틱 실버 에디션.jpg"
+    },
+    {
+      "name": "AMG GLE63 S 쿠페 마누팍투어 아틱 실버 에디션",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4471&Tab=image&No=138401",
+      "image_url": "https://autoimg.danawa.com/gallery/4471/20250604_4471 (2).jpg",
+      "path": "vehicles\\벤츠\\GLE-Class\\gallery\\02_AMG GLE63 S 쿠페 마누팍투어 아틱 실버 에디션.jpg"
+    },
+    {
+      "name": "AMG GLE63 S 마누팍투어 아틱 실버 에디션",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4471&Tab=image&No=138402",
+      "image_url": "https://autoimg.danawa.com/gallery/4471/20250604_4471 (3).jpg",
+      "path": "vehicles\\벤츠\\GLE-Class\\gallery\\03_AMG GLE63 S 마누팍투어 아틱 실버 에디션.jpg"
+    },
+    {
+      "name": "AMG GLE63 S 마누팍투어 아틱 실버 에디션",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4471&Tab=image&No=138403",
+      "image_url": "https://autoimg.danawa.com/gallery/4471/20250604_4471 (4).jpg",
+      "path": "vehicles\\벤츠\\GLE-Class\\gallery\\04_AMG GLE63 S 마누팍투어 아틱 실버 에디션.jpg"
+    }
+  ]
+}

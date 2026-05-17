@@ -1,0 +1,37 @@
+{
+  "brand": "현대",
+  "brand_id": "303",
+  "model_id": "4399",
+  "name": "포터2 일렉트릭",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4399",
+  "photo_code": "4399/53555",
+  "default_image_url": "https://autoimg.danawa.com/photo/4399/model_360.png",
+  "default_image_path": "vehicles\\현대\\포터2 일렉트릭\\model_360.png",
+  "colors": [],
+  "gallery": [
+    {
+      "name": "2026ㅣ포터 2 EV, 포터 2",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4399&Tab=image&No=142443",
+      "image_url": "https://autoimg.danawa.com/gallery/4399/20251216_4399 (1).jpg",
+      "path": "vehicles\\현대\\포터2 일렉트릭\\gallery\\01_2026ㅣ포터 2 EV, 포터 2.jpg"
+    },
+    {
+      "name": "2026ㅣ포터 2 EV",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4399&Tab=image&No=142444",
+      "image_url": "https://autoimg.danawa.com/gallery/4399/20251216_4399 (2).jpg",
+      "path": "vehicles\\현대\\포터2 일렉트릭\\gallery\\02_2026ㅣ포터 2 EV.jpg"
+    },
+    {
+      "name": "2025ㅣ포터2 일렉트릭 하이내장탑차",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4399&Tab=image&No=138629",
+      "image_url": "https://autoimg.danawa.com/gallery/4399/20250612_4399 (1).jpg",
+      "path": "vehicles\\현대\\포터2 일렉트릭\\gallery\\03_2025ㅣ포터2 일렉트릭 하이내장탑차.jpg"
+    },
+    {
+      "name": "2025ㅣ포터2 일렉트릭 내장탑차 라인업",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4399&Tab=image&No=138630",
+      "image_url": "https://autoimg.danawa.com/gallery/4399/20250612_4399 (2).jpg",
+      "path": "vehicles\\현대\\포터2 일렉트릭\\gallery\\04_2025ㅣ포터2 일렉트릭 내장탑차 라인업.jpg"
+    }
+  ]
+}

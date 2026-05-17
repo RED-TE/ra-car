@@ -1,0 +1,3747 @@
+{
+  "sourceFile": "C:\\Users\\jhxox\\Downloads\\vehicle_prices_3y_4y_5y_linear_regression.xlsx",
+  "generatedAt": "2026-05-17T13:57:53.134701+00:00",
+  "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
+  "baseAnnualKm": 10000,
+  "supportedAnnualKm": [
+    10000,
+    15000,
+    20000,
+    30000,
+    40000
+  ],
+  "defaultMileageStepRatioPer10000Km": 0.025,
+  "terms": [
+    36,
+    48,
+    60
+  ],
+  "entries": [
+    {
+      "name": "A-클래스",
+      "key": "a클래스",
+      "products": {
+        "lease": {
+          "label": "리스",
+          "actualMonthly": {
+            "36": null,
+            "48": 597700,
+            "60": 548300
+          },
+          "monthly": {
+            "36": 647100,
+            "48": 597700,
+            "60": 548300
+          },
+          "regression": {
+            "slopePerMonth": -4116.666666666667,
+            "intercept": 795300.0
+          },
+          "dataPoints": 2,
+          "minMonthly": 548300,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "A6",
+      "key": "a6",
+      "products": {
+        "lease": {
+          "label": "리스",
+          "actualMonthly": {
+            "36": null,
+            "48": 963100,
+            "60": 872500
+          },
+          "monthly": {
+            "36": 1053700,
+            "48": 963100,
+            "60": 872500
+          },
+          "regression": {
+            "slopePerMonth": -7550.0,
+            "intercept": 1325500.0
+          },
+          "dataPoints": 2,
+          "minMonthly": 872500,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "C-클래스",
+      "key": "c클래스",
+      "products": {
+        "lease": {
+          "label": "리스",
+          "actualMonthly": {
+            "36": null,
+            "48": 828300,
+            "60": 759900
+          },
+          "monthly": {
+            "36": 896700,
+            "48": 828300,
+            "60": 759900
+          },
+          "regression": {
+            "slopePerMonth": -5700.0,
+            "intercept": 1101900.0
+          },
+          "dataPoints": 2,
+          "minMonthly": 759900,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "CLA",
+      "key": "cla",
+      "products": {
+        "lease": {
+          "label": "리스",
+          "actualMonthly": {
+            "36": null,
+            "48": 864900,
+            "60": 793300
+          },
+          "monthly": {
+            "36": 936500,
+            "48": 864900,
+            "60": 793300
+          },
+          "regression": {
+            "slopePerMonth": -5966.666666666667,
+            "intercept": 1151300.0
+          },
+          "dataPoints": 2,
+          "minMonthly": 793300,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "CLE",
+      "key": "cle",
+      "products": {
+        "lease": {
+          "label": "리스",
+          "actualMonthly": {
+            "36": null,
+            "48": 1007900,
+            "60": 921500
+          },
+          "monthly": {
+            "36": 1094300,
+            "48": 1007900,
+            "60": 921500
+          },
+          "regression": {
+            "slopePerMonth": -7200.0,
+            "intercept": 1353500.0
+          },
+          "dataPoints": 2,
+          "minMonthly": 921500,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "Cybertruck",
+      "key": "cybertruck",
+      "products": {
+        "lease": {
+          "label": "리스",
+          "actualMonthly": {
+            "36": null,
+            "48": 2590700,
+            "60": 2290100
+          },
+          "monthly": {
+            "36": 2891300,
+            "48": 2590700,
+            "60": 2290100
+          },
+          "regression": {
+            "slopePerMonth": -25050.0,
+            "intercept": 3793100.0
+          },
+          "dataPoints": 2,
+          "minMonthly": 2290100,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "E-클래스",
+      "key": "e클래스",
+      "products": {
+        "lease": {
+          "label": "리스",
+          "actualMonthly": {
+            "36": null,
+            "48": 838200,
+            "60": 776200
+          },
+          "monthly": {
+            "36": 900200,
+            "48": 838200,
+            "60": 776200
+          },
+          "regression": {
+            "slopePerMonth": -5166.666666666667,
+            "intercept": 1086200.0
+          },
+          "dataPoints": 2,
+          "minMonthly": 776200,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "EQA",
+      "key": "eqa",
+      "products": {
+        "lease": {
+          "label": "리스",
+          "actualMonthly": {
+            "36": null,
+            "48": 914300,
+            "60": 828700
+          },
+          "monthly": {
+            "36": 999900,
+            "48": 914300,
+            "60": 828700
+          },
+          "regression": {
+            "slopePerMonth": -7133.333333333333,
+            "intercept": 1256700.0
+          },
+          "dataPoints": 2,
+          "minMonthly": 828700,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "EQB",
+      "key": "eqb",
+      "products": {
+        "lease": {
+          "label": "리스",
+          "actualMonthly": {
+            "36": null,
+            "48": 1058800,
+            "60": 952200
+          },
+          "monthly": {
+            "36": 1165400,
+            "48": 1058800,
+            "60": 952200
+          },
+          "regression": {
+            "slopePerMonth": -8883.333333333334,
+            "intercept": 1485200.0
+          },
+          "dataPoints": 2,
+          "minMonthly": 952200,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "EQE",
+      "key": "eqe",
+      "products": {
+        "lease": {
+          "label": "리스",
+          "actualMonthly": {
+            "36": null,
+            "48": 1688760,
+            "60": 1572130
+          },
+          "monthly": {
+            "36": 1805390,
+            "48": 1688760,
+            "60": 1572130
+          },
+          "regression": {
+            "slopePerMonth": -9719.166666666666,
+            "intercept": 2155280.0
+          },
+          "dataPoints": 2,
+          "minMonthly": 1572130,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "ES",
+      "key": "es",
+      "products": {
+        "lease": {
+          "label": "리스",
+          "actualMonthly": {
+            "36": null,
+            "48": 859400,
+            "60": 804900
+          },
+          "monthly": {
+            "36": 913900,
+            "48": 859400,
+            "60": 804900
+          },
+          "regression": {
+            "slopePerMonth": -4541.666666666667,
+            "intercept": 1077400.0
+          },
+          "dataPoints": 2,
+          "minMonthly": 804900,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "EV3",
+      "key": "ev3",
+      "products": {
+        "rent": {
+          "label": "장기렌트",
+          "actualMonthly": {
+            "36": 465468,
+            "48": 466790,
+            "60": 464320
+          },
+          "monthly": {
+            "36": 465468,
+            "48": 466790,
+            "60": 464320
+          },
+          "regression": {
+            "slopePerMonth": -47.833333333333336,
+            "intercept": 467822.0
+          },
+          "dataPoints": 3,
+          "minMonthly": 464320,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "EV4",
+      "key": "ev4",
+      "products": {
+        "rent": {
+          "label": "장기렌트",
+          "actualMonthly": {
+            "36": 403320,
+            "48": 408980,
+            "60": 407280
+          },
+          "monthly": {
+            "36": 403320,
+            "48": 408980,
+            "60": 407280
+          },
+          "regression": {
+            "slopePerMonth": 165.0,
+            "intercept": 398606.6666666667
+          },
+          "dataPoints": 3,
+          "minMonthly": 403320,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "EV5",
+      "key": "ev5",
+      "products": {
+        "rent": {
+          "label": "장기렌트",
+          "actualMonthly": {
+            "36": 559300,
+            "48": 531000,
+            "60": 540300
+          },
+          "monthly": {
+            "36": 559300,
+            "48": 531000,
+            "60": 540300
+          },
+          "regression": {
+            "slopePerMonth": -791.6666666666666,
+            "intercept": 581533.3333333334
+          },
+          "dataPoints": 3,
+          "minMonthly": 531000,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "EV6",
+      "key": "ev6",
+      "products": {
+        "rent": {
+          "label": "장기렌트",
+          "actualMonthly": {
+            "36": 644500,
+            "48": 594880,
+            "60": 569910
+          },
+          "monthly": {
+            "36": 644500,
+            "48": 594880,
+            "60": 569910
+          },
+          "regression": {
+            "slopePerMonth": -3107.9166666666665,
+            "intercept": 752276.6666666666
+          },
+          "dataPoints": 3,
+          "minMonthly": 569910,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "EV6 GT",
+      "key": "ev6gt",
+      "products": {
+        "rent": {
+          "label": "장기렌트",
+          "actualMonthly": {
+            "36": 1733700,
+            "48": 1546700,
+            "60": 1455800
+          },
+          "monthly": {
+            "36": 1733700,
+            "48": 1546700,
+            "60": 1455800
+          },
+          "regression": {
+            "slopePerMonth": -11579.166666666666,
+            "intercept": 2134533.333333333
+          },
+          "dataPoints": 3,
+          "minMonthly": 1455800,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "EV9",
+      "key": "ev9",
+      "products": {
+        "rent": {
+          "label": "장기렌트",
+          "actualMonthly": {
+            "36": 903800,
+            "48": 823500,
+            "60": 810800
+          },
+          "monthly": {
+            "36": 903800,
+            "48": 823500,
+            "60": 810800
+          },
+          "regression": {
+            "slopePerMonth": -3875.0,
+            "intercept": 1032033.3333333334
+          },
+          "dataPoints": 3,
+          "minMonthly": 810800,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "EX30",
+      "key": "ex30",
+      "products": {
+        "lease": {
+          "label": "리스",
+          "actualMonthly": {
+            "36": null,
+            "48": 713000,
+            "60": 638800
+          },
+          "monthly": {
+            "36": 787200,
+            "48": 713000,
+            "60": 638800
+          },
+          "regression": {
+            "slopePerMonth": -6183.333333333333,
+            "intercept": 1009800.0
+          },
+          "dataPoints": 2,
+          "minMonthly": 638800,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "EX30 CC",
+      "key": "ex30cc",
+      "products": {
+        "lease": {
+          "label": "리스",
+          "actualMonthly": {
+            "36": null,
+            "48": 884961,
+            "60": 782062
+          },
+          "monthly": {
+            "36": 987860,
+            "48": 884961,
+            "60": 782062
+          },
+          "regression": {
+            "slopePerMonth": -8574.916666666666,
+            "intercept": 1296557.0
+          },
+          "dataPoints": 2,
+          "minMonthly": 782062,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "G70",
+      "key": "g70",
+      "products": {
+        "rent": {
+          "label": "장기렌트",
+          "actualMonthly": {
+            "36": 799300,
+            "48": 724900,
+            "60": 691100
+          },
+          "monthly": {
+            "36": 799300,
+            "48": 724900,
+            "60": 691100
+          },
+          "regression": {
+            "slopePerMonth": -4508.333333333333,
+            "intercept": 954833.3333333334
+          },
+          "dataPoints": 3,
+          "minMonthly": 691100,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "G70 슈팅브레이크",
+      "key": "g70슈팅브레이크",
+      "products": {
+        "lease": {
+          "label": "리스",
+          "actualMonthly": {
+            "36": null,
+            "48": 723800,
+            "60": 652400
+          },
+          "monthly": {
+            "36": 795200,
+            "48": 723800,
+            "60": 652400
+          },
+          "regression": {
+            "slopePerMonth": -5950.0,
+            "intercept": 1009400.0
+          },
+          "dataPoints": 2,
+          "minMonthly": 652400,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "G80",
+      "key": "g80",
+      "products": {
+        "rent": {
+          "label": "장기렌트",
+          "actualMonthly": {
+            "36": 868300,
+            "48": 810400,
+            "60": 790700
+          },
+          "monthly": {
+            "36": 868300,
+            "48": 810400,
+            "60": 790700
+          },
+          "regression": {
+            "slopePerMonth": -3233.3333333333335,
+            "intercept": 978333.3333333334
+          },
+          "dataPoints": 3,
+          "minMonthly": 790700,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "G80 EV",
+      "key": "g80ev",
+      "products": {
+        "rent": {
+          "label": "장기렌트",
+          "actualMonthly": {
+            "36": 1364100,
+            "48": 1209100,
+            "60": 1165000
+          },
+          "monthly": {
+            "36": 1364100,
+            "48": 1209100,
+            "60": 1165000
+          },
+          "regression": {
+            "slopePerMonth": -8295.833333333334,
+            "intercept": 1644266.6666666667
+          },
+          "dataPoints": 3,
+          "minMonthly": 1165000,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "G80 블랙",
+      "key": "g80블랙",
+      "products": {
+        "rent": {
+          "label": "장기렌트",
+          "actualMonthly": {
+            "36": 1216300,
+            "48": 1128100,
+            "60": 1095000
+          },
+          "monthly": {
+            "36": 1216300,
+            "48": 1128100,
+            "60": 1095000
+          },
+          "regression": {
+            "slopePerMonth": -5054.166666666667,
+            "intercept": 1389066.6666666667
+          },
+          "dataPoints": 3,
+          "minMonthly": 1095000,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "G90",
+      "key": "g90",
+      "products": {
+        "rent": {
+          "label": "장기렌트",
+          "actualMonthly": {
+            "36": 1641700,
+            "48": 1479800,
+            "60": 1405900
+          },
+          "monthly": {
+            "36": 1641700,
+            "48": 1479800,
+            "60": 1405900
+          },
+          "regression": {
+            "slopePerMonth": -9825.0,
+            "intercept": 1980733.3333333333
+          },
+          "dataPoints": 3,
+          "minMonthly": 1405900,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "G90 롱휠베이스",
+      "key": "g90롱휠베이스",
+      "products": {
+        "rent": {
+          "label": "장기렌트",
+          "actualMonthly": {
+            "36": 2000000,
+            "48": 2000000,
+            "60": 2000000
+          },
+          "monthly": {
+            "36": 2000000,
+            "48": 2000000,
+            "60": 2000000
+          },
+          "regression": {
+            "slopePerMonth": 0.0,
+            "intercept": 2000000.0
+          },
+          "dataPoints": 3,
+          "minMonthly": 2000000,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "G90 롱휠베이스 블랙",
+      "key": "g90롱휠베이스블랙",
+      "products": {
+        "rent": {
+          "label": "장기렌트",
+          "actualMonthly": {
+            "36": 2000000,
+            "48": 2000000,
+            "60": 2000000
+          },
+          "monthly": {
+            "36": 2000000,
+            "48": 2000000,
+            "60": 2000000
+          },
+          "regression": {
+            "slopePerMonth": 0.0,
+            "intercept": 2000000.0
+          },
+          "dataPoints": 3,
+          "minMonthly": 2000000,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "GLA",
+      "key": "gla",
+      "products": {
+        "lease": {
+          "label": "리스",
+          "actualMonthly": {
+            "36": null,
+            "48": 942108,
+            "60": 848866
+          },
+          "monthly": {
+            "36": 1035350,
+            "48": 942108,
+            "60": 848866
+          },
+          "regression": {
+            "slopePerMonth": -7770.166666666667,
+            "intercept": 1315076.0
+          },
+          "dataPoints": 2,
+          "minMonthly": 848866,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "GLB",
+      "key": "glb",
+      "products": {
+        "lease": {
+          "label": "리스",
+          "actualMonthly": {
+            "36": null,
+            "48": 882700,
+            "60": 808300
+          },
+          "monthly": {
+            "36": 957100,
+            "48": 882700,
+            "60": 808300
+          },
+          "regression": {
+            "slopePerMonth": -6200.0,
+            "intercept": 1180300.0
+          },
+          "dataPoints": 2,
+          "minMonthly": 808300,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "GLC",
+      "key": "glc",
+      "products": {
+        "lease": {
+          "label": "리스",
+          "actualMonthly": {
+            "36": null,
+            "48": 1058050,
+            "60": 958500
+          },
+          "monthly": {
+            "36": 1157600,
+            "48": 1058050,
+            "60": 958500
+          },
+          "regression": {
+            "slopePerMonth": -8295.833333333334,
+            "intercept": 1456250.0
+          },
+          "dataPoints": 2,
+          "minMonthly": 958500,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "GLE",
+      "key": "gle",
+      "products": {
+        "lease": {
+          "label": "리스",
+          "actualMonthly": {
+            "36": null,
+            "48": 1429700,
+            "60": 1323700
+          },
+          "monthly": {
+            "36": 1535700,
+            "48": 1429700,
+            "60": 1323700
+          },
+          "regression": {
+            "slopePerMonth": -8833.333333333334,
+            "intercept": 1853700.0
+          },
+          "dataPoints": 2,
+          "minMonthly": 1323700,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "GV60",
+      "key": "gv60",
+      "products": {
+        "rent": {
+          "label": "장기렌트",
+          "actualMonthly": {
+            "36": 969500,
+            "48": 877700,
+            "60": 860000
+          },
+          "monthly": {
+            "36": 969500,
+            "48": 877700,
+            "60": 860000
+          },
+          "regression": {
+            "slopePerMonth": -4562.5,
+            "intercept": 1121400.0
+          },
+          "dataPoints": 3,
+          "minMonthly": 860000,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "GV60 마그마",
+      "key": "gv60마그마",
+      "products": {
+        "rent": {
+          "label": "장기렌트",
+          "actualMonthly": {
+            "36": 2227600,
+            "48": 2015500,
+            "60": 1903000
+          },
+          "monthly": {
+            "36": 2227600,
+            "48": 2015500,
+            "60": 1903000
+          },
+          "regression": {
+            "slopePerMonth": -13525.0,
+            "intercept": 2697900.0
+          },
+          "dataPoints": 3,
+          "minMonthly": 1903000,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "GV70",
+      "key": "gv70",
+      "products": {
+        "rent": {
+          "label": "장기렌트",
+          "actualMonthly": {
+            "36": 786390,
+            "48": 737000,
+            "60": 719840
+          },
+          "monthly": {
+            "36": 786390,
+            "48": 737000,
+            "60": 719840
+          },
+          "regression": {
+            "slopePerMonth": -2772.9166666666665,
+            "intercept": 880843.3333333334
+          },
+          "dataPoints": 3,
+          "minMonthly": 719840,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "GV70 EV",
+      "key": "gv70ev",
+      "products": {
+        "rent": {
+          "label": "장기렌트",
+          "actualMonthly": {
+            "36": 1208600,
+            "48": 1107000,
+            "60": 1042000
+          },
+          "monthly": {
+            "36": 1208600,
+            "48": 1107000,
+            "60": 1042000
+          },
+          "regression": {
+            "slopePerMonth": -6941.666666666667,
+            "intercept": 1452400.0
+          },
+          "dataPoints": 3,
+          "minMonthly": 1042000,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "GV80",
+      "key": "gv80",
+      "products": {
+        "rent": {
+          "label": "장기렌트",
+          "actualMonthly": {
+            "36": 956120,
+            "48": 909400,
+            "60": 883520
+          },
+          "monthly": {
+            "36": 956120,
+            "48": 909400,
+            "60": 883520
+          },
+          "regression": {
+            "slopePerMonth": -3025.0,
+            "intercept": 1061546.6666666665
+          },
+          "dataPoints": 3,
+          "minMonthly": 883520,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "GV80 블랙",
+      "key": "gv80블랙",
+      "products": {
+        "rent": {
+          "label": "장기렌트",
+          "actualMonthly": {
+            "36": 1356780,
+            "48": 1219000,
+            "60": 1195920
+          },
+          "monthly": {
+            "36": 1356780,
+            "48": 1219000,
+            "60": 1195920
+          },
+          "regression": {
+            "slopePerMonth": -6702.5,
+            "intercept": 1578953.3333333333
+          },
+          "dataPoints": 3,
+          "minMonthly": 1195920,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "GV80 쿠페",
+      "key": "gv80쿠페",
+      "products": {
+        "rent": {
+          "label": "장기렌트",
+          "actualMonthly": {
+            "36": 1178400,
+            "48": 1058800,
+            "60": 1023440
+          },
+          "monthly": {
+            "36": 1178400,
+            "48": 1058800,
+            "60": 1023440
+          },
+          "regression": {
+            "slopePerMonth": -6456.666666666667,
+            "intercept": 1396800.0
+          },
+          "dataPoints": 3,
+          "minMonthly": 1023440,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "GV80 쿠페 블랙",
+      "key": "gv80쿠페블랙",
+      "products": {
+        "rent": {
+          "label": "장기렌트",
+          "actualMonthly": {
+            "36": 1423022,
+            "48": 1253200,
+            "60": 1243400
+          },
+          "monthly": {
+            "36": 1423022,
+            "48": 1253200,
+            "60": 1243400
+          },
+          "regression": {
+            "slopePerMonth": -7484.25,
+            "intercept": 1665784.6666666667
+          },
+          "dataPoints": 3,
+          "minMonthly": 1243400,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "K5",
+      "key": "k5",
+      "products": {
+        "rent": {
+          "label": "장기렌트",
+          "actualMonthly": {
+            "36": 434830,
+            "48": 427270,
+            "60": 404930
+          },
+          "monthly": {
+            "36": 434830,
+            "48": 427270,
+            "60": 404930
+          },
+          "regression": {
+            "slopePerMonth": -1245.8333333333333,
+            "intercept": 482143.3333333333
+          },
+          "dataPoints": 3,
+          "minMonthly": 404930,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "K5 Hybrid",
+      "key": "k5hybrid",
+      "products": {
+        "rent": {
+          "label": "장기렌트",
+          "actualMonthly": {
+            "36": 497420,
+            "48": 471460,
+            "60": 463650
+          },
+          "monthly": {
+            "36": 497420,
+            "48": 471460,
+            "60": 463650
+          },
+          "regression": {
+            "slopePerMonth": -1407.0833333333333,
+            "intercept": 545050.0
+          },
+          "dataPoints": 3,
+          "minMonthly": 463650,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "K8",
+      "key": "k8",
+      "products": {
+        "rent": {
+          "label": "장기렌트",
+          "actualMonthly": {
+            "36": 606100,
+            "48": 576290,
+            "60": 553850
+          },
+          "monthly": {
+            "36": 606100,
+            "48": 576290,
+            "60": 553850
+          },
+          "regression": {
+            "slopePerMonth": -2177.0833333333335,
+            "intercept": 683246.6666666666
+          },
+          "dataPoints": 3,
+          "minMonthly": 553850,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "K8 Hybrid",
+      "key": "k8hybrid",
+      "products": {
+        "rent": {
+          "label": "장기렌트",
+          "actualMonthly": {
+            "36": 598500,
+            "48": 570930,
+            "60": 544280
+          },
+          "monthly": {
+            "36": 598500,
+            "48": 570930,
+            "60": 544280
+          },
+          "regression": {
+            "slopePerMonth": -2259.1666666666665,
+            "intercept": 679676.6666666666
+          },
+          "dataPoints": 3,
+          "minMonthly": 544280,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "K9",
+      "key": "k9",
+      "products": {
+        "rent": {
+          "label": "장기렌트",
+          "actualMonthly": {
+            "36": 1086600,
+            "48": 979100,
+            "60": 929100
+          },
+          "monthly": {
+            "36": 1086600,
+            "48": 979100,
+            "60": 929100
+          },
+          "regression": {
+            "slopePerMonth": -6562.5,
+            "intercept": 1313266.6666666665
+          },
+          "dataPoints": 3,
+          "minMonthly": 929100,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "M2",
+      "key": "m2",
+      "products": {
+        "lease": {
+          "label": "리스",
+          "actualMonthly": {
+            "36": null,
+            "48": 1361400,
+            "60": 1229300
+          },
+          "monthly": {
+            "36": 1493500,
+            "48": 1361400,
+            "60": 1229300
+          },
+          "regression": {
+            "slopePerMonth": -11008.333333333334,
+            "intercept": 1889800.0
+          },
+          "dataPoints": 2,
+          "minMonthly": 1229300,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "M3",
+      "key": "m3",
+      "products": {
+        "lease": {
+          "label": "리스",
+          "actualMonthly": {
+            "36": null,
+            "48": 1940000,
+            "60": 1749800
+          },
+          "monthly": {
+            "36": 2130200,
+            "48": 1940000,
+            "60": 1749800
+          },
+          "regression": {
+            "slopePerMonth": -15850.0,
+            "intercept": 2700800.0
+          },
+          "dataPoints": 2,
+          "minMonthly": 1749800,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "M4",
+      "key": "m4",
+      "products": {
+        "lease": {
+          "label": "리스",
+          "actualMonthly": {
+            "36": null,
+            "48": 1916124,
+            "60": 1736617
+          },
+          "monthly": {
+            "36": 2095630,
+            "48": 1916124,
+            "60": 1736617
+          },
+          "regression": {
+            "slopePerMonth": -14958.916666666666,
+            "intercept": 2634152.0
+          },
+          "dataPoints": 2,
+          "minMonthly": 1736617,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "M5",
+      "key": "m5",
+      "products": {
+        "lease": {
+          "label": "리스",
+          "actualMonthly": {
+            "36": null,
+            "48": 2488000,
+            "60": 2244400
+          },
+          "monthly": {
+            "36": 2731600,
+            "48": 2488000,
+            "60": 2244400
+          },
+          "regression": {
+            "slopePerMonth": -20300.0,
+            "intercept": 3462400.0
+          },
+          "dataPoints": 2,
+          "minMonthly": 2244400,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "Model 3",
+      "key": "model3",
+      "products": {
+        "rent": {
+          "label": "장기렌트",
+          "actualMonthly": {
+            "36": 764060,
+            "48": 706100,
+            "60": 667370
+          },
+          "monthly": {
+            "36": 764060,
+            "48": 706100,
+            "60": 667370
+          },
+          "regression": {
+            "slopePerMonth": -4028.75,
+            "intercept": 905890.0
+          },
+          "dataPoints": 3,
+          "minMonthly": 667370,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "Model X",
+      "key": "modelx",
+      "products": {
+        "lease": {
+          "label": "리스",
+          "actualMonthly": {
+            "36": null,
+            "48": 1923300,
+            "60": 1767100
+          },
+          "monthly": {
+            "36": 2079500,
+            "48": 1923300,
+            "60": 1767100
+          },
+          "regression": {
+            "slopePerMonth": -13016.666666666666,
+            "intercept": 2548100.0
+          },
+          "dataPoints": 2,
+          "minMonthly": 1767100,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "Model Y",
+      "key": "modely",
+      "products": {
+        "rent": {
+          "label": "장기렌트",
+          "actualMonthly": {
+            "36": 865370,
+            "48": 800690,
+            "60": 759220
+          },
+          "monthly": {
+            "36": 865370,
+            "48": 800690,
+            "60": 759220
+          },
+          "regression": {
+            "slopePerMonth": -4422.916666666667,
+            "intercept": 1020726.6666666666
+          },
+          "dataPoints": 3,
+          "minMonthly": 759220,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "Model Y L",
+      "key": "modelyl",
+      "products": {
+        "rent": {
+          "label": "장기렌트",
+          "actualMonthly": {
+            "36": 1168310,
+            "48": 1071730,
+            "60": 1010240
+          },
+          "monthly": {
+            "36": 1168310,
+            "48": 1071730,
+            "60": 1010240
+          },
+          "regression": {
+            "slopePerMonth": -6586.25,
+            "intercept": 1399566.6666666667
+          },
+          "dataPoints": 3,
+          "minMonthly": 1010240,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "NX",
+      "key": "nx",
+      "products": {
+        "lease": {
+          "label": "리스",
+          "actualMonthly": {
+            "36": null,
+            "48": 955200,
+            "60": 878700
+          },
+          "monthly": {
+            "36": 1031700,
+            "48": 955200,
+            "60": 878700
+          },
+          "regression": {
+            "slopePerMonth": -6375.0,
+            "intercept": 1261200.0
+          },
+          "dataPoints": 2,
+          "minMonthly": 878700,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "PV5",
+      "key": "pv5",
+      "products": {
+        "rent": {
+          "label": "장기렌트",
+          "actualMonthly": {
+            "36": 751100,
+            "48": 691450,
+            "60": 641940
+          },
+          "monthly": {
+            "36": 751100,
+            "48": 691450,
+            "60": 641940
+          },
+          "regression": {
+            "slopePerMonth": -4548.333333333333,
+            "intercept": 913150.0
+          },
+          "dataPoints": 3,
+          "minMonthly": 641940,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "Q8",
+      "key": "q8",
+      "products": {
+        "lease": {
+          "label": "리스",
+          "actualMonthly": {
+            "36": null,
+            "48": 1868800,
+            "60": 1713700
+          },
+          "monthly": {
+            "36": 2023900,
+            "48": 1868800,
+            "60": 1713700
+          },
+          "regression": {
+            "slopePerMonth": -12925.0,
+            "intercept": 2489200.0
+          },
+          "dataPoints": 2,
+          "minMonthly": 1713700,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "RX",
+      "key": "rx",
+      "products": {
+        "lease": {
+          "label": "리스",
+          "actualMonthly": {
+            "36": null,
+            "48": 1219700,
+            "60": 1124600
+          },
+          "monthly": {
+            "36": 1314800,
+            "48": 1219700,
+            "60": 1124600
+          },
+          "regression": {
+            "slopePerMonth": -7925.0,
+            "intercept": 1600100.0
+          },
+          "dataPoints": 2,
+          "minMonthly": 1124600,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "S-클래스",
+      "key": "s클래스",
+      "products": {
+        "lease": {
+          "label": "리스",
+          "actualMonthly": {
+            "36": null,
+            "48": 1893400,
+            "60": 1737100
+          },
+          "monthly": {
+            "36": 2049700,
+            "48": 1893400,
+            "60": 1737100
+          },
+          "regression": {
+            "slopePerMonth": -13025.0,
+            "intercept": 2518600.0
+          },
+          "dataPoints": 2,
+          "minMonthly": 1737100,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "S90",
+      "key": "s90",
+      "products": {
+        "lease": {
+          "label": "리스",
+          "actualMonthly": {
+            "36": null,
+            "48": 1006100,
+            "60": 916400
+          },
+          "monthly": {
+            "36": 1095800,
+            "48": 1006100,
+            "60": 916400
+          },
+          "regression": {
+            "slopePerMonth": -7475.0,
+            "intercept": 1364900.0
+          },
+          "dataPoints": 2,
+          "minMonthly": 916400,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "SL",
+      "key": "sl",
+      "products": {
+        "lease": {
+          "label": "리스",
+          "actualMonthly": {
+            "36": null,
+            "48": 2261000,
+            "60": 2058600
+          },
+          "monthly": {
+            "36": 2463400,
+            "48": 2261000,
+            "60": 2058600
+          },
+          "regression": {
+            "slopePerMonth": -16866.666666666668,
+            "intercept": 3070600.0
+          },
+          "dataPoints": 2,
+          "minMonthly": 2058600,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "The 1",
+      "key": "the1",
+      "products": {
+        "lease": {
+          "label": "리스",
+          "actualMonthly": {
+            "36": null,
+            "48": 639600,
+            "60": 587300
+          },
+          "monthly": {
+            "36": 691900,
+            "48": 639600,
+            "60": 587300
+          },
+          "regression": {
+            "slopePerMonth": -4358.333333333333,
+            "intercept": 848800.0
+          },
+          "dataPoints": 2,
+          "minMonthly": 587300,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "The 2",
+      "key": "the2",
+      "products": {
+        "lease": {
+          "label": "리스",
+          "actualMonthly": {
+            "36": null,
+            "48": 651972,
+            "60": 598263
+          },
+          "monthly": {
+            "36": 705680,
+            "48": 651972,
+            "60": 598263
+          },
+          "regression": {
+            "slopePerMonth": -4475.75,
+            "intercept": 866808.0
+          },
+          "dataPoints": 2,
+          "minMonthly": 598263,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "The 3",
+      "key": "the3",
+      "products": {
+        "lease": {
+          "label": "리스",
+          "actualMonthly": {
+            "36": null,
+            "48": 699300,
+            "60": 646800
+          },
+          "monthly": {
+            "36": 751800,
+            "48": 699300,
+            "60": 646800
+          },
+          "regression": {
+            "slopePerMonth": -4375.0,
+            "intercept": 909300.0
+          },
+          "dataPoints": 2,
+          "minMonthly": 646800,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "The 4",
+      "key": "the4",
+      "products": {
+        "lease": {
+          "label": "리스",
+          "actualMonthly": {
+            "36": null,
+            "48": 840683,
+            "60": 774701
+          },
+          "monthly": {
+            "36": 906660,
+            "48": 840683,
+            "60": 774701
+          },
+          "regression": {
+            "slopePerMonth": -5498.5,
+            "intercept": 1104611.0
+          },
+          "dataPoints": 2,
+          "minMonthly": 774701,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "The 5",
+      "key": "the5",
+      "products": {
+        "lease": {
+          "label": "리스",
+          "actualMonthly": {
+            "36": null,
+            "48": 815900,
+            "60": 758800
+          },
+          "monthly": {
+            "36": 873000,
+            "48": 815900,
+            "60": 758800
+          },
+          "regression": {
+            "slopePerMonth": -4758.333333333333,
+            "intercept": 1044300.0
+          },
+          "dataPoints": 2,
+          "minMonthly": 758800,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "The 7",
+      "key": "the7",
+      "products": {
+        "lease": {
+          "label": "리스",
+          "actualMonthly": {
+            "36": null,
+            "48": 2074000,
+            "60": 1887100
+          },
+          "monthly": {
+            "36": 2260900,
+            "48": 2074000,
+            "60": 1887100
+          },
+          "regression": {
+            "slopePerMonth": -15575.0,
+            "intercept": 2821600.0
+          },
+          "dataPoints": 2,
+          "minMonthly": 1887100,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "UX",
+      "key": "ux",
+      "products": {
+        "lease": {
+          "label": "리스",
+          "actualMonthly": {
+            "36": null,
+            "48": 751061,
+            "60": 683600
+          },
+          "monthly": {
+            "36": 818520,
+            "48": 751061,
+            "60": 683600
+          },
+          "regression": {
+            "slopePerMonth": -5621.75,
+            "intercept": 1020905.0
+          },
+          "dataPoints": 2,
+          "minMonthly": 683600,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "X1",
+      "key": "x1",
+      "products": {
+        "lease": {
+          "label": "리스",
+          "actualMonthly": {
+            "36": null,
+            "48": 728100,
+            "60": 671500
+          },
+          "monthly": {
+            "36": 784700,
+            "48": 728100,
+            "60": 671500
+          },
+          "regression": {
+            "slopePerMonth": -4716.666666666667,
+            "intercept": 954500.0
+          },
+          "dataPoints": 2,
+          "minMonthly": 671500,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "X2",
+      "key": "x2",
+      "products": {
+        "lease": {
+          "label": "리스",
+          "actualMonthly": {
+            "36": null,
+            "48": 827400,
+            "60": 766100
+          },
+          "monthly": {
+            "36": 888700,
+            "48": 827400,
+            "60": 766100
+          },
+          "regression": {
+            "slopePerMonth": -5108.333333333333,
+            "intercept": 1072600.0
+          },
+          "dataPoints": 2,
+          "minMonthly": 766100,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "X3",
+      "key": "x3",
+      "products": {
+        "lease": {
+          "label": "리스",
+          "actualMonthly": {
+            "36": null,
+            "48": 837700,
+            "60": 778400
+          },
+          "monthly": {
+            "36": 897000,
+            "48": 837700,
+            "60": 778400
+          },
+          "regression": {
+            "slopePerMonth": -4941.666666666667,
+            "intercept": 1074900.0
+          },
+          "dataPoints": 2,
+          "minMonthly": 778400,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "X5",
+      "key": "x5",
+      "products": {
+        "lease": {
+          "label": "리스",
+          "actualMonthly": {
+            "36": null,
+            "48": 1405900,
+            "60": 1312500
+          },
+          "monthly": {
+            "36": 1499300,
+            "48": 1405900,
+            "60": 1312500
+          },
+          "regression": {
+            "slopePerMonth": -7783.333333333333,
+            "intercept": 1779500.0
+          },
+          "dataPoints": 2,
+          "minMonthly": 1312500,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "X5 M",
+      "key": "x5m",
+      "products": {
+        "lease": {
+          "label": "리스",
+          "actualMonthly": {
+            "36": null,
+            "48": 2793900,
+            "60": 2540700
+          },
+          "monthly": {
+            "36": 3047100,
+            "48": 2793900,
+            "60": 2540700
+          },
+          "regression": {
+            "slopePerMonth": -21100.0,
+            "intercept": 3806700.0
+          },
+          "dataPoints": 2,
+          "minMonthly": 2540700,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "X6",
+      "key": "x6",
+      "products": {
+        "lease": {
+          "label": "리스",
+          "actualMonthly": {
+            "36": null,
+            "48": 1513000,
+            "60": 1402700
+          },
+          "monthly": {
+            "36": 1623300,
+            "48": 1513000,
+            "60": 1402700
+          },
+          "regression": {
+            "slopePerMonth": -9191.666666666666,
+            "intercept": 1954200.0
+          },
+          "dataPoints": 2,
+          "minMonthly": 1402700,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "X6 M",
+      "key": "x6m",
+      "products": {
+        "lease": {
+          "label": "리스",
+          "actualMonthly": {
+            "36": null,
+            "48": 2622100,
+            "60": 2377200
+          },
+          "monthly": {
+            "36": 2867000,
+            "48": 2622100,
+            "60": 2377200
+          },
+          "regression": {
+            "slopePerMonth": -20408.333333333332,
+            "intercept": 3601700.0
+          },
+          "dataPoints": 2,
+          "minMonthly": 2377200,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "X7",
+      "key": "x7",
+      "products": {
+        "lease": {
+          "label": "리스",
+          "actualMonthly": {
+            "36": null,
+            "48": 1841100,
+            "60": 1713300
+          },
+          "monthly": {
+            "36": 1968900,
+            "48": 1841100,
+            "60": 1713300
+          },
+          "regression": {
+            "slopePerMonth": -10650.0,
+            "intercept": 2352300.0
+          },
+          "dataPoints": 2,
+          "minMonthly": 1713300,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "XC40",
+      "key": "xc40",
+      "products": {
+        "lease": {
+          "label": "리스",
+          "actualMonthly": {
+            "36": null,
+            "48": 762900,
+            "60": 696400
+          },
+          "monthly": {
+            "36": 829400,
+            "48": 762900,
+            "60": 696400
+          },
+          "regression": {
+            "slopePerMonth": -5541.666666666667,
+            "intercept": 1028900.0
+          },
+          "dataPoints": 2,
+          "minMonthly": 696400,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "XC60",
+      "key": "xc60",
+      "products": {
+        "lease": {
+          "label": "리스",
+          "actualMonthly": {
+            "36": null,
+            "48": 963500,
+            "60": 881000
+          },
+          "monthly": {
+            "36": 1046000,
+            "48": 963500,
+            "60": 881000
+          },
+          "regression": {
+            "slopePerMonth": -6875.0,
+            "intercept": 1293500.0
+          },
+          "dataPoints": 2,
+          "minMonthly": 881000,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "XC90",
+      "key": "xc90",
+      "products": {
+        "lease": {
+          "label": "리스",
+          "actualMonthly": {
+            "36": null,
+            "48": 1260800,
+            "60": 1148500
+          },
+          "monthly": {
+            "36": 1373100,
+            "48": 1260800,
+            "60": 1148500
+          },
+          "regression": {
+            "slopePerMonth": -9358.333333333334,
+            "intercept": 1710000.0
+          },
+          "dataPoints": 2,
+          "minMonthly": 1148500,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "Z4",
+      "key": "z4",
+      "products": {
+        "lease": {
+          "label": "리스",
+          "actualMonthly": {
+            "36": null,
+            "48": 1062200,
+            "60": 968800
+          },
+          "monthly": {
+            "36": 1155600,
+            "48": 1062200,
+            "60": 968800
+          },
+          "regression": {
+            "slopePerMonth": -7783.333333333333,
+            "intercept": 1435800.0
+          },
+          "dataPoints": 2,
+          "minMonthly": 968800,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "i4",
+      "key": "i4",
+      "products": {
+        "lease": {
+          "label": "리스",
+          "actualMonthly": {
+            "36": null,
+            "48": 945000,
+            "60": 869200
+          },
+          "monthly": {
+            "36": 1020800,
+            "48": 945000,
+            "60": 869200
+          },
+          "regression": {
+            "slopePerMonth": -6316.666666666667,
+            "intercept": 1248200.0
+          },
+          "dataPoints": 2,
+          "minMonthly": 869200,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "i5",
+      "key": "i5",
+      "products": {
+        "lease": {
+          "label": "리스",
+          "actualMonthly": {
+            "36": null,
+            "48": 1007600,
+            "60": 942000
+          },
+          "monthly": {
+            "36": 1073200,
+            "48": 1007600,
+            "60": 942000
+          },
+          "regression": {
+            "slopePerMonth": -5466.666666666667,
+            "intercept": 1270000.0
+          },
+          "dataPoints": 2,
+          "minMonthly": 942000,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "i7",
+      "key": "i7",
+      "products": {
+        "lease": {
+          "label": "리스",
+          "actualMonthly": {
+            "36": null,
+            "48": 2159800,
+            "60": 1971200
+          },
+          "monthly": {
+            "36": 2348400,
+            "48": 2159800,
+            "60": 1971200
+          },
+          "regression": {
+            "slopePerMonth": -15716.666666666666,
+            "intercept": 2914200.0
+          },
+          "dataPoints": 2,
+          "minMonthly": 1971200,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "iX",
+      "key": "ix",
+      "products": {
+        "lease": {
+          "label": "리스",
+          "actualMonthly": {
+            "36": null,
+            "48": 1536500,
+            "60": 1424800
+          },
+          "monthly": {
+            "36": 1648200,
+            "48": 1536500,
+            "60": 1424800
+          },
+          "regression": {
+            "slopePerMonth": -9308.333333333334,
+            "intercept": 1983300.0
+          },
+          "dataPoints": 2,
+          "minMonthly": 1424800,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "iX1",
+      "key": "ix1",
+      "products": {
+        "lease": {
+          "label": "리스",
+          "actualMonthly": {
+            "36": null,
+            "48": 692800,
+            "60": 651800
+          },
+          "monthly": {
+            "36": 733800,
+            "48": 692800,
+            "60": 651800
+          },
+          "regression": {
+            "slopePerMonth": -3416.6666666666665,
+            "intercept": 856800.0
+          },
+          "dataPoints": 2,
+          "minMonthly": 651800,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "iX2",
+      "key": "ix2",
+      "products": {
+        "lease": {
+          "label": "리스",
+          "actualMonthly": {
+            "36": null,
+            "48": 726600,
+            "60": 683200
+          },
+          "monthly": {
+            "36": 770000,
+            "48": 726600,
+            "60": 683200
+          },
+          "regression": {
+            "slopePerMonth": -3616.6666666666665,
+            "intercept": 900200.0
+          },
+          "dataPoints": 2,
+          "minMonthly": 683200,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "그랑 콜레오스",
+      "key": "그랑콜레오스",
+      "products": {
+        "rent": {
+          "label": "장기렌트",
+          "actualMonthly": {
+            "36": 630080,
+            "48": 603050,
+            "60": 546450
+          },
+          "monthly": {
+            "36": 630080,
+            "48": 603050,
+            "60": 546450
+          },
+          "regression": {
+            "slopePerMonth": -3484.5833333333335,
+            "intercept": 760453.3333333334
+          },
+          "dataPoints": 3,
+          "minMonthly": 546450,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "그랑 콜레오스 Hybrid",
+      "key": "그랑콜레오스hybrid",
+      "products": {
+        "rent": {
+          "label": "장기렌트",
+          "actualMonthly": {
+            "36": 620840,
+            "48": 585970,
+            "60": 570680
+          },
+          "monthly": {
+            "36": 620840,
+            "48": 585970,
+            "60": 570680
+          },
+          "regression": {
+            "slopePerMonth": -2090.0,
+            "intercept": 692816.6666666666
+          },
+          "dataPoints": 3,
+          "minMonthly": 570680,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "그랜저",
+      "key": "그랜저",
+      "products": {
+        "rent": {
+          "label": "장기렌트",
+          "actualMonthly": {
+            "36": 679800,
+            "48": 591400,
+            "60": 587400
+          },
+          "monthly": {
+            "36": 679800,
+            "48": 591400,
+            "60": 587400
+          },
+          "regression": {
+            "slopePerMonth": -3850.0,
+            "intercept": 804333.3333333334
+          },
+          "dataPoints": 3,
+          "minMonthly": 587400,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "그랜저 Hybrid",
+      "key": "그랜저hybrid",
+      "products": {
+        "rent": {
+          "label": "장기렌트",
+          "actualMonthly": {
+            "36": 615230,
+            "48": 596970,
+            "60": 590590
+          },
+          "monthly": {
+            "36": 615230,
+            "48": 596970,
+            "60": 590590
+          },
+          "regression": {
+            "slopePerMonth": -1026.6666666666667,
+            "intercept": 650210.0
+          },
+          "dataPoints": 3,
+          "minMonthly": 590590,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "니로 Hybrid",
+      "key": "니로hybrid",
+      "products": {
+        "rent": {
+          "label": "장기렌트",
+          "actualMonthly": {
+            "36": 479000,
+            "48": 433900,
+            "60": 432700
+          },
+          "monthly": {
+            "36": 479000,
+            "48": 433900,
+            "60": 432700
+          },
+          "regression": {
+            "slopePerMonth": -1929.1666666666667,
+            "intercept": 541133.3333333333
+          },
+          "dataPoints": 3,
+          "minMonthly": 432700,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "더 뉴 티볼리",
+      "key": "더뉴티볼리",
+      "products": {
+        "rent": {
+          "label": "장기렌트",
+          "actualMonthly": {
+            "36": 423390,
+            "48": 383350,
+            "60": 359040
+          },
+          "monthly": {
+            "36": 423390,
+            "48": 383350,
+            "60": 359040
+          },
+          "regression": {
+            "slopePerMonth": -2681.25,
+            "intercept": 517293.3333333333
+          },
+          "dataPoints": 3,
+          "minMonthly": 359040,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "레이",
+      "key": "레이",
+      "products": {
+        "rent": {
+          "label": "장기렌트",
+          "actualMonthly": {
+            "36": 314050,
+            "48": 293700,
+            "60": 272560
+          },
+          "monthly": {
+            "36": 314050,
+            "48": 293700,
+            "60": 272560
+          },
+          "regression": {
+            "slopePerMonth": -1728.75,
+            "intercept": 376416.6666666667
+          },
+          "dataPoints": 3,
+          "minMonthly": 272560,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "레이 EV",
+      "key": "레이ev",
+      "products": {
+        "rent": {
+          "label": "장기렌트",
+          "actualMonthly": {
+            "36": 323720,
+            "48": 331210,
+            "60": 333190
+          },
+          "monthly": {
+            "36": 323720,
+            "48": 331210,
+            "60": 333190
+          },
+          "regression": {
+            "slopePerMonth": 394.5833333333333,
+            "intercept": 310433.3333333333
+          },
+          "dataPoints": 3,
+          "minMonthly": 323720,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "렉스턴",
+      "key": "렉스턴",
+      "products": {
+        "rent": {
+          "label": "장기렌트",
+          "actualMonthly": {
+            "36": 784190,
+            "48": 695750,
+            "60": 641300
+          },
+          "monthly": {
+            "36": 784190,
+            "48": 695750,
+            "60": 641300
+          },
+          "regression": {
+            "slopePerMonth": -5953.75,
+            "intercept": 992860.0
+          },
+          "dataPoints": 3,
+          "minMonthly": 641300,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "모닝",
+      "key": "모닝",
+      "products": {
+        "rent": {
+          "label": "장기렌트",
+          "actualMonthly": {
+            "36": 309360,
+            "48": 280630,
+            "60": 261850
+          },
+          "monthly": {
+            "36": 309360,
+            "48": 280630,
+            "60": 261850
+          },
+          "regression": {
+            "slopePerMonth": -1979.5833333333333,
+            "intercept": 378966.6666666667
+          },
+          "dataPoints": 3,
+          "minMonthly": 261850,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "베뉴",
+      "key": "베뉴",
+      "products": {
+        "rent": {
+          "label": "장기렌트",
+          "actualMonthly": {
+            "36": 376860,
+            "48": 353650,
+            "60": 336210
+          },
+          "monthly": {
+            "36": 376860,
+            "48": 353650,
+            "60": 336210
+          },
+          "regression": {
+            "slopePerMonth": -1693.75,
+            "intercept": 436873.3333333333
+          },
+          "dataPoints": 3,
+          "minMonthly": 336210,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "세닉",
+      "key": "세닉",
+      "products": {
+        "rent": {
+          "label": "장기렌트",
+          "actualMonthly": {
+            "36": 1270280,
+            "48": 1087660,
+            "60": 1011060
+          },
+          "monthly": {
+            "36": 1270280,
+            "48": 1087660,
+            "60": 1011060
+          },
+          "regression": {
+            "slopePerMonth": -10800.833333333334,
+            "intercept": 1641440.0
+          },
+          "dataPoints": 3,
+          "minMonthly": 1011060,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "셀토스",
+      "key": "셀토스",
+      "products": {
+        "rent": {
+          "label": "장기렌트",
+          "actualMonthly": {
+            "36": 397540,
+            "48": 381700,
+            "60": 366960
+          },
+          "monthly": {
+            "36": 397540,
+            "48": 381700,
+            "60": 366960
+          },
+          "regression": {
+            "slopePerMonth": -1274.1666666666667,
+            "intercept": 443226.6666666667
+          },
+          "dataPoints": 3,
+          "minMonthly": 366960,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "셀토스 Hybrid",
+      "key": "셀토스hybrid",
+      "products": {
+        "rent": {
+          "label": "장기렌트",
+          "actualMonthly": {
+            "36": 429770,
+            "48": 418660,
+            "60": 405350
+          },
+          "monthly": {
+            "36": 429770,
+            "48": 418660,
+            "60": 405350
+          },
+          "regression": {
+            "slopePerMonth": -1017.5,
+            "intercept": 466766.6666666667
+          },
+          "dataPoints": 3,
+          "minMonthly": 405350,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "스타리아",
+      "key": "스타리아",
+      "products": {
+        "rent": {
+          "label": "장기렌트",
+          "actualMonthly": {
+            "36": 631730,
+            "48": 596000,
+            "60": 575300
+          },
+          "monthly": {
+            "36": 631730,
+            "48": 596000,
+            "60": 575300
+          },
+          "regression": {
+            "slopePerMonth": -2351.25,
+            "intercept": 713870.0
+          },
+          "dataPoints": 3,
+          "minMonthly": 575300,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "스타리아 Hybrid",
+      "key": "스타리아hybrid",
+      "products": {
+        "rent": {
+          "label": "장기렌트",
+          "actualMonthly": {
+            "36": 634150,
+            "48": 603570,
+            "60": 576840
+          },
+          "monthly": {
+            "36": 634150,
+            "48": 603570,
+            "60": 576840
+          },
+          "regression": {
+            "slopePerMonth": -2387.9166666666665,
+            "intercept": 719473.3333333334
+          },
+          "dataPoints": 3,
+          "minMonthly": 576840,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "스타리아 라운지",
+      "key": "스타리아라운지",
+      "products": {
+        "rent": {
+          "label": "장기렌트",
+          "actualMonthly": {
+            "36": 803500,
+            "48": 715400,
+            "60": 702100
+          },
+          "monthly": {
+            "36": 803500,
+            "48": 715400,
+            "60": 702100
+          },
+          "regression": {
+            "slopePerMonth": -4225.0,
+            "intercept": 943133.3333333334
+          },
+          "dataPoints": 3,
+          "minMonthly": 702100,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "스타리아 라운지 Hybrid",
+      "key": "스타리아라운지hybrid",
+      "products": {
+        "rent": {
+          "label": "장기렌트",
+          "actualMonthly": {
+            "36": 762500,
+            "48": 673400,
+            "60": 658100
+          },
+          "monthly": {
+            "36": 762500,
+            "48": 673400,
+            "60": 658100
+          },
+          "regression": {
+            "slopePerMonth": -4350.0,
+            "intercept": 906800.0
+          },
+          "dataPoints": 3,
+          "minMonthly": 658100,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "스포티지",
+      "key": "스포티지",
+      "products": {
+        "rent": {
+          "label": "장기렌트",
+          "actualMonthly": {
+            "36": 450800,
+            "48": 421610,
+            "60": 406200
+          },
+          "monthly": {
+            "36": 450800,
+            "48": 421610,
+            "60": 406200
+          },
+          "regression": {
+            "slopePerMonth": -1858.3333333333333,
+            "intercept": 515403.3333333333
+          },
+          "dataPoints": 3,
+          "minMonthly": 406200,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "스포티지 Hybrid",
+      "key": "스포티지hybrid",
+      "products": {
+        "rent": {
+          "label": "장기렌트",
+          "actualMonthly": {
+            "36": 447590,
+            "48": 437580,
+            "60": 429550
+          },
+          "monthly": {
+            "36": 447590,
+            "48": 437580,
+            "60": 429550
+          },
+          "regression": {
+            "slopePerMonth": -751.6666666666666,
+            "intercept": 474320.0
+          },
+          "dataPoints": 3,
+          "minMonthly": 429550,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "싼타페",
+      "key": "싼타페",
+      "products": {
+        "rent": {
+          "label": "장기렌트",
+          "actualMonthly": {
+            "36": 547360,
+            "48": 513370,
+            "60": 496430
+          },
+          "monthly": {
+            "36": 547360,
+            "48": 513370,
+            "60": 496430
+          },
+          "regression": {
+            "slopePerMonth": -2122.0833333333335,
+            "intercept": 620913.3333333333
+          },
+          "dataPoints": 3,
+          "minMonthly": 496430,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "싼타페 Hybrid",
+      "key": "싼타페hybrid",
+      "products": {
+        "rent": {
+          "label": "장기렌트",
+          "actualMonthly": {
+            "36": 552900,
+            "48": 532800,
+            "60": 522830
+          },
+          "monthly": {
+            "36": 552900,
+            "48": 532800,
+            "60": 522830
+          },
+          "regression": {
+            "slopePerMonth": -1252.9166666666667,
+            "intercept": 596316.6666666666
+          },
+          "dataPoints": 3,
+          "minMonthly": 522830,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "쏘나타",
+      "key": "쏘나타",
+      "products": {
+        "rent": {
+          "label": "장기렌트",
+          "actualMonthly": {
+            "36": 493020,
+            "48": 447600,
+            "60": 441200
+          },
+          "monthly": {
+            "36": 493020,
+            "48": 447600,
+            "60": 441200
+          },
+          "regression": {
+            "slopePerMonth": -2159.1666666666665,
+            "intercept": 564246.6666666667
+          },
+          "dataPoints": 3,
+          "minMonthly": 441200,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "쏘나타 Hybrid",
+      "key": "쏘나타hybrid",
+      "products": {
+        "rent": {
+          "label": "장기렌트",
+          "actualMonthly": {
+            "36": 540800,
+            "48": 487400,
+            "60": 483280
+          },
+          "monthly": {
+            "36": 540800,
+            "48": 487400,
+            "60": 483280
+          },
+          "regression": {
+            "slopePerMonth": -2396.6666666666665,
+            "intercept": 618866.6666666667
+          },
+          "dataPoints": 3,
+          "minMonthly": 483280,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "쏘렌토",
+      "key": "쏘렌토",
+      "products": {
+        "rent": {
+          "label": "장기렌트",
+          "actualMonthly": {
+            "36": 526460,
+            "48": 497090,
+            "60": 482900
+          },
+          "monthly": {
+            "36": 526460,
+            "48": 497090,
+            "60": 482900
+          },
+          "regression": {
+            "slopePerMonth": -1815.0,
+            "intercept": 589270.0
+          },
+          "dataPoints": 3,
+          "minMonthly": 482900,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "쏘렌토 Hybrid",
+      "key": "쏘렌토hybrid",
+      "products": {
+        "rent": {
+          "label": "장기렌트",
+          "actualMonthly": {
+            "36": 521950,
+            "48": 504570,
+            "60": 492030
+          },
+          "monthly": {
+            "36": 521950,
+            "48": 504570,
+            "60": 492030
+          },
+          "regression": {
+            "slopePerMonth": -1246.6666666666667,
+            "intercept": 566023.3333333333
+          },
+          "dataPoints": 3,
+          "minMonthly": 492030,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "아르카나",
+      "key": "아르카나",
+      "products": {
+        "rent": {
+          "label": "장기렌트",
+          "actualMonthly": {
+            "36": 438600,
+            "48": 412300,
+            "60": 402900
+          },
+          "monthly": {
+            "36": 438600,
+            "48": 412300,
+            "60": 402900
+          },
+          "regression": {
+            "slopePerMonth": -1487.5,
+            "intercept": 489333.3333333333
+          },
+          "dataPoints": 3,
+          "minMonthly": 402900,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "아르카나 Hybrid",
+      "key": "아르카나hybrid",
+      "products": {
+        "rent": {
+          "label": "장기렌트",
+          "actualMonthly": {
+            "36": 597600,
+            "48": 549500,
+            "60": 528900
+          },
+          "monthly": {
+            "36": 597600,
+            "48": 549500,
+            "60": 528900
+          },
+          "regression": {
+            "slopePerMonth": -2862.5,
+            "intercept": 696066.6666666666
+          },
+          "dataPoints": 3,
+          "minMonthly": 528900,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "아반떼",
+      "key": "아반떼",
+      "products": {
+        "rent": {
+          "label": "장기렌트",
+          "actualMonthly": {
+            "36": 347800,
+            "48": 330840,
+            "60": 317750
+          },
+          "monthly": {
+            "36": 347800,
+            "48": 330840,
+            "60": 317750
+          },
+          "regression": {
+            "slopePerMonth": -1252.0833333333333,
+            "intercept": 392230.0
+          },
+          "dataPoints": 3,
+          "minMonthly": 317750,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "아반떼 Hybrid",
+      "key": "아반떼hybrid",
+      "products": {
+        "rent": {
+          "label": "장기렌트",
+          "actualMonthly": {
+            "36": 396770,
+            "48": 378620,
+            "60": 373890
+          },
+          "monthly": {
+            "36": 396770,
+            "48": 378620,
+            "60": 373890
+          },
+          "regression": {
+            "slopePerMonth": -953.3333333333334,
+            "intercept": 428853.3333333333
+          },
+          "dataPoints": 3,
+          "minMonthly": 373890,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "아이오닉 5",
+      "key": "아이오닉5",
+      "products": {
+        "rent": {
+          "label": "장기렌트",
+          "actualMonthly": {
+            "36": 678200,
+            "48": 640600,
+            "60": 629900
+          },
+          "monthly": {
+            "36": 678200,
+            "48": 640600,
+            "60": 629900
+          },
+          "regression": {
+            "slopePerMonth": -2012.5,
+            "intercept": 746166.6666666666
+          },
+          "dataPoints": 3,
+          "minMonthly": 629900,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "아이오닉 6",
+      "key": "아이오닉6",
+      "products": {
+        "rent": {
+          "label": "장기렌트",
+          "actualMonthly": {
+            "36": 699270,
+            "48": 649300,
+            "60": 638200
+          },
+          "monthly": {
+            "36": 699270,
+            "48": 649300,
+            "60": 638200
+          },
+          "regression": {
+            "slopePerMonth": -2544.5833333333335,
+            "intercept": 784396.6666666666
+          },
+          "dataPoints": 3,
+          "minMonthly": 638200,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "아이오닉 6 N",
+      "key": "아이오닉6n",
+      "products": {
+        "rent": {
+          "label": "장기렌트",
+          "actualMonthly": {
+            "36": 1719000,
+            "48": 1557600,
+            "60": 1485000
+          },
+          "monthly": {
+            "36": 1719000,
+            "48": 1557600,
+            "60": 1485000
+          },
+          "regression": {
+            "slopePerMonth": -9750.0,
+            "intercept": 2055200.0
+          },
+          "dataPoints": 3,
+          "minMonthly": 1485000,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "아이오닉 9",
+      "key": "아이오닉9",
+      "products": {
+        "rent": {
+          "label": "장기렌트",
+          "actualMonthly": {
+            "36": 988400,
+            "48": 896800,
+            "60": 880500
+          },
+          "monthly": {
+            "36": 988400,
+            "48": 896800,
+            "60": 880500
+          },
+          "regression": {
+            "slopePerMonth": -4495.833333333333,
+            "intercept": 1137700.0
+          },
+          "dataPoints": 3,
+          "minMonthly": 880500,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "액티언",
+      "key": "액티언",
+      "products": {
+        "rent": {
+          "label": "장기렌트",
+          "actualMonthly": {
+            "36": 587620,
+            "48": 546590,
+            "60": 517110
+          },
+          "monthly": {
+            "36": 587620,
+            "48": 546590,
+            "60": 517110
+          },
+          "regression": {
+            "slopePerMonth": -2937.9166666666665,
+            "intercept": 691460.0
+          },
+          "dataPoints": 3,
+          "minMonthly": 517110,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "액티언 Hybrid",
+      "key": "액티언hybrid",
+      "products": {
+        "rent": {
+          "label": "장기렌트",
+          "actualMonthly": {
+            "36": 585280,
+            "48": 560570,
+            "60": 542430
+          },
+          "monthly": {
+            "36": 585280,
+            "48": 560570,
+            "60": 542430
+          },
+          "regression": {
+            "slopePerMonth": -1785.4166666666667,
+            "intercept": 648460.0
+          },
+          "dataPoints": 3,
+          "minMonthly": 542430,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "카니발",
+      "key": "카니발",
+      "products": {
+        "rent": {
+          "label": "장기렌트",
+          "actualMonthly": {
+            "36": 557590,
+            "48": 523600,
+            "60": 506440
+          },
+          "monthly": {
+            "36": 557590,
+            "48": 523600,
+            "60": 506440
+          },
+          "regression": {
+            "slopePerMonth": -2131.25,
+            "intercept": 631510.0
+          },
+          "dataPoints": 3,
+          "minMonthly": 506440,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "카니발 Hybrid",
+      "key": "카니발hybrid",
+      "products": {
+        "rent": {
+          "label": "장기렌트",
+          "actualMonthly": {
+            "36": 583440,
+            "48": 545270,
+            "60": 532400
+          },
+          "monthly": {
+            "36": 583440,
+            "48": 545270,
+            "60": 532400
+          },
+          "regression": {
+            "slopePerMonth": -2126.6666666666665,
+            "intercept": 655783.3333333334
+          },
+          "dataPoints": 3,
+          "minMonthly": 532400,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "카니발 하이리무진",
+      "key": "카니발하이리무진",
+      "products": {
+        "rent": {
+          "label": "장기렌트",
+          "actualMonthly": {
+            "36": 940020,
+            "48": 923830,
+            "60": 886757
+          },
+          "monthly": {
+            "36": 940020,
+            "48": 923830,
+            "60": 886757
+          },
+          "regression": {
+            "slopePerMonth": -2219.2916666666665,
+            "intercept": 1023395.0
+          },
+          "dataPoints": 3,
+          "minMonthly": 886757,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "카니발 하이리무진 Hybrid",
+      "key": "카니발하이리무진hybrid",
+      "products": {
+        "rent": {
+          "label": "장기렌트",
+          "actualMonthly": {
+            "36": 971360,
+            "48": 903340,
+            "60": 856030
+          },
+          "monthly": {
+            "36": 971360,
+            "48": 903340,
+            "60": 856030
+          },
+          "regression": {
+            "slopePerMonth": -4805.416666666667,
+            "intercept": 1140903.3333333335
+          },
+          "dataPoints": 3,
+          "minMonthly": 856030,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "캐스퍼",
+      "key": "캐스퍼",
+      "products": {
+        "rent": {
+          "label": "장기렌트",
+          "actualMonthly": {
+            "36": 334290,
+            "48": 300700,
+            "60": 276820
+          },
+          "monthly": {
+            "36": 334290,
+            "48": 300700,
+            "60": 276820
+          },
+          "regression": {
+            "slopePerMonth": -2394.5833333333335,
+            "intercept": 418876.6666666667
+          },
+          "dataPoints": 3,
+          "minMonthly": 276820,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "캐스퍼 EV",
+      "key": "캐스퍼ev",
+      "products": {
+        "rent": {
+          "label": "장기렌트",
+          "actualMonthly": {
+            "36": 351398,
+            "48": 371278,
+            "60": 363498
+          },
+          "monthly": {
+            "36": 351398,
+            "48": 371278,
+            "60": 363498
+          },
+          "regression": {
+            "slopePerMonth": 504.1666666666667,
+            "intercept": 337858.0
+          },
+          "dataPoints": 3,
+          "minMonthly": 351398,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "코나",
+      "key": "코나",
+      "products": {
+        "rent": {
+          "label": "장기렌트",
+          "actualMonthly": {
+            "36": 422760,
+            "48": 391450,
+            "60": 364920
+          },
+          "monthly": {
+            "36": 422760,
+            "48": 391450,
+            "60": 364920
+          },
+          "regression": {
+            "slopePerMonth": -2410.0,
+            "intercept": 508723.3333333333
+          },
+          "dataPoints": 3,
+          "minMonthly": 364920,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "코나 EV",
+      "key": "코나ev",
+      "products": {
+        "rent": {
+          "label": "장기렌트",
+          "actualMonthly": {
+            "36": 603500,
+            "48": 575200,
+            "60": 568000
+          },
+          "monthly": {
+            "36": 603500,
+            "48": 575200,
+            "60": 568000
+          },
+          "regression": {
+            "slopePerMonth": -1479.1666666666667,
+            "intercept": 653233.3333333334
+          },
+          "dataPoints": 3,
+          "minMonthly": 568000,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "코나 Hybrid",
+      "key": "코나hybrid",
+      "products": {
+        "rent": {
+          "label": "장기렌트",
+          "actualMonthly": {
+            "36": 500000,
+            "48": 450200,
+            "60": 439100
+          },
+          "monthly": {
+            "36": 500000,
+            "48": 450200,
+            "60": 439100
+          },
+          "regression": {
+            "slopePerMonth": -2537.5,
+            "intercept": 584900.0
+          },
+          "dataPoints": 3,
+          "minMonthly": 439100,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "토레스",
+      "key": "토레스",
+      "products": {
+        "rent": {
+          "label": "장기렌트",
+          "actualMonthly": {
+            "36": 515020,
+            "48": 469810,
+            "60": 441760
+          },
+          "monthly": {
+            "36": 515020,
+            "48": 469810,
+            "60": 441760
+          },
+          "regression": {
+            "slopePerMonth": -3052.5,
+            "intercept": 622050.0
+          },
+          "dataPoints": 3,
+          "minMonthly": 441760,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "토레스 Hybrid",
+      "key": "토레스hybrid",
+      "products": {
+        "rent": {
+          "label": "장기렌트",
+          "actualMonthly": {
+            "36": 517620,
+            "48": 492620,
+            "60": 474800
+          },
+          "monthly": {
+            "36": 517620,
+            "48": 492620,
+            "60": 474800
+          },
+          "regression": {
+            "slopePerMonth": -1784.1666666666667,
+            "intercept": 580653.3333333333
+          },
+          "dataPoints": 3,
+          "minMonthly": 474800,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "투싼",
+      "key": "투싼",
+      "products": {
+        "rent": {
+          "label": "장기렌트",
+          "actualMonthly": {
+            "36": 439670,
+            "48": 418990,
+            "60": 403230
+          },
+          "monthly": {
+            "36": 439670,
+            "48": 418990,
+            "60": 403230
+          },
+          "regression": {
+            "slopePerMonth": -1518.3333333333333,
+            "intercept": 493510.0
+          },
+          "dataPoints": 3,
+          "minMonthly": 403230,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "투싼 Hybrid",
+      "key": "투싼hybrid",
+      "products": {
+        "rent": {
+          "label": "장기렌트",
+          "actualMonthly": {
+            "36": 467100,
+            "48": 450560,
+            "60": 442970
+          },
+          "monthly": {
+            "36": 467100,
+            "48": 450560,
+            "60": 442970
+          },
+          "regression": {
+            "slopePerMonth": -1005.4166666666666,
+            "intercept": 501803.3333333333
+          },
+          "dataPoints": 3,
+          "minMonthly": 442970,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "트랙스 크로스오버",
+      "key": "트랙스크로스오버",
+      "products": {
+        "rent": {
+          "label": "장기렌트",
+          "actualMonthly": {
+            "36": 404400,
+            "48": 378000,
+            "60": 370500
+          },
+          "monthly": {
+            "36": 404400,
+            "48": 378000,
+            "60": 370500
+          },
+          "regression": {
+            "slopePerMonth": -1412.5,
+            "intercept": 452100.0
+          },
+          "dataPoints": 3,
+          "minMonthly": 370500,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "트레일블레이저",
+      "key": "트레일블레이저",
+      "products": {
+        "rent": {
+          "label": "장기렌트",
+          "actualMonthly": {
+            "36": 495550,
+            "48": 453420,
+            "60": 427460
+          },
+          "monthly": {
+            "36": 495550,
+            "48": 453420,
+            "60": 427460
+          },
+          "regression": {
+            "slopePerMonth": -2837.0833333333335,
+            "intercept": 594990.0
+          },
+          "dataPoints": 3,
+          "minMonthly": 427460,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "팰리세이드",
+      "key": "팰리세이드",
+      "products": {
+        "rent": {
+          "label": "장기렌트",
+          "actualMonthly": {
+            "36": 661000,
+            "48": 622160,
+            "60": 603130
+          },
+          "monthly": {
+            "36": 661000,
+            "48": 622160,
+            "60": 603130
+          },
+          "regression": {
+            "slopePerMonth": -2411.25,
+            "intercept": 744503.3333333334
+          },
+          "dataPoints": 3,
+          "minMonthly": 603130,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "팰리세이드 Hybrid",
+      "key": "팰리세이드hybrid",
+      "products": {
+        "rent": {
+          "label": "장기렌트",
+          "actualMonthly": {
+            "36": 690030,
+            "48": 656150,
+            "60": 647900
+          },
+          "monthly": {
+            "36": 690030,
+            "48": 656150,
+            "60": 647900
+          },
+          "regression": {
+            "slopePerMonth": -1755.4166666666667,
+            "intercept": 748953.3333333334
+          },
+          "dataPoints": 3,
+          "minMonthly": 647900,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    },
+    {
+      "name": "필랑트 Hybrid",
+      "key": "필랑트hybrid",
+      "products": {
+        "rent": {
+          "label": "장기렌트",
+          "actualMonthly": {
+            "36": 831460,
+            "48": 762820,
+            "60": 717000
+          },
+          "monthly": {
+            "36": 831460,
+            "48": 762820,
+            "60": 717000
+          },
+          "regression": {
+            "slopePerMonth": -4769.166666666667,
+            "intercept": 999346.6666666666
+          },
+          "dataPoints": 3,
+          "minMonthly": 717000,
+          "bestTerm": null,
+          "basis": "최저등급/무옵션/선납0%/보증0%/연1만km"
+        }
+      }
+    }
+  ]
+}

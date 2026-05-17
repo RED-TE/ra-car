@@ -1,0 +1,37 @@
+{
+  "brand": "BMW",
+  "brand_id": "362",
+  "model_id": "3803",
+  "name": "2 Series",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3803",
+  "photo_code": "3803/52644",
+  "default_image_url": "https://autoimg.danawa.com/photo/3803/model_360.png",
+  "default_image_path": "vehicles\\BMW\\2 Series\\model_360.png",
+  "colors": [],
+  "gallery": [
+    {
+      "name": "2024 M240i xDrive 쿠페",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3803&Tab=image&No=125313",
+      "image_url": "https://autoimg.danawa.com/gallery/3803/20240613_4654 (1).jpg",
+      "path": "vehicles\\BMW\\2 Series\\gallery\\01_2024 M240i xDrive 쿠페.jpg"
+    },
+    {
+      "name": "2024 M240i xDrive 쿠페",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3803&Tab=image&No=125314",
+      "image_url": "https://autoimg.danawa.com/gallery/3803/20240613_4654 (2).jpg",
+      "path": "vehicles\\BMW\\2 Series\\gallery\\02_2024 M240i xDrive 쿠페.jpg"
+    },
+    {
+      "name": "2024 M240i xDrive 쿠페",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3803&Tab=image&No=125315",
+      "image_url": "https://autoimg.danawa.com/gallery/3803/20240613_4654 (3).jpg",
+      "path": "vehicles\\BMW\\2 Series\\gallery\\03_2024 M240i xDrive 쿠페.jpg"
+    },
+    {
+      "name": "2024 M240i xDrive 쿠페",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3803&Tab=image&No=125316",
+      "image_url": "https://autoimg.danawa.com/gallery/3803/20240613_4654 (4).jpg",
+      "path": "vehicles\\BMW\\2 Series\\gallery\\04_2024 M240i xDrive 쿠페.jpg"
+    }
+  ]
+}

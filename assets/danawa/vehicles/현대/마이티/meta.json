@@ -1,0 +1,37 @@
+{
+  "brand": "현대",
+  "brand_id": "303",
+  "model_id": "3500",
+  "name": "마이티",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3500",
+  "photo_code": "3500/52249",
+  "default_image_url": "https://autoimg.danawa.com/photo/3500/model_360.png",
+  "default_image_path": "vehicles\\현대\\마이티\\model_360.png",
+  "colors": [],
+  "gallery": [
+    {
+      "name": "2025ㅣ더 뉴 마이티",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3500&Tab=image&No=135219",
+      "image_url": "https://autoimg.danawa.com/gallery/3500/20250218_3500 (1).jpg",
+      "path": "vehicles\\현대\\마이티\\gallery\\01_2025ㅣ더 뉴 마이티.jpg"
+    },
+    {
+      "name": "2025ㅣ더 뉴 마이티",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3500&Tab=image&No=135220",
+      "image_url": "https://autoimg.danawa.com/gallery/3500/20250218_3500 (2).jpg",
+      "path": "vehicles\\현대\\마이티\\gallery\\02_2025ㅣ더 뉴 마이티.jpg"
+    },
+    {
+      "name": "2018 마이티 QT",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3500&Tab=image&No=69245",
+      "image_url": "https://autoimg.danawa.com/gallery/3500/20190923_qt.jpg",
+      "path": "vehicles\\현대\\마이티\\gallery\\03_2018 마이티 QT.jpg"
+    },
+    {
+      "name": "2018 마이티 2.5톤 슈퍼캡 고상",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3500&Tab=image&No=61422",
+      "image_url": "https://autoimg.danawa.com/gallery/3500/mighty_20190116 (1).jpg",
+      "path": "vehicles\\현대\\마이티\\gallery\\04_2018 마이티 2.5톤 슈퍼캡 고상.jpg"
+    }
+  ]
+}

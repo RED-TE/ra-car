@@ -1,0 +1,37 @@
+{
+  "brand": "랜드로버",
+  "brand_id": "399",
+  "model_id": "4776",
+  "name": "Defender",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4776",
+  "photo_code": "4776/53674",
+  "default_image_url": "https://autoimg.danawa.com/photo/4776/model_360.png",
+  "default_image_path": "vehicles\\랜드로버\\Defender\\model_360.png",
+  "colors": [],
+  "gallery": [
+    {
+      "name": "디펜더 옥타 블랙",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4776&Tab=image&No=144922",
+      "image_url": "https://autoimg.danawa.com/gallery/4776/20260429_4776 (1).jpg",
+      "path": "vehicles\\랜드로버\\Defender\\gallery\\01_디펜더 옥타 블랙.jpg"
+    },
+    {
+      "name": "디펜더 옥타 블랙",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4776&Tab=image&No=144923",
+      "image_url": "https://autoimg.danawa.com/gallery/4776/20260429_4776 (2).jpg",
+      "path": "vehicles\\랜드로버\\Defender\\gallery\\02_디펜더 옥타 블랙.jpg"
+    },
+    {
+      "name": "디펜더 옥타 블랙",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4776&Tab=image&No=144924",
+      "image_url": "https://autoimg.danawa.com/gallery/4776/20260429_4776 (3).jpg",
+      "path": "vehicles\\랜드로버\\Defender\\gallery\\03_디펜더 옥타 블랙.jpg"
+    },
+    {
+      "name": "디펜더 옥타 블랙",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4776&Tab=image&No=144925",
+      "image_url": "https://autoimg.danawa.com/gallery/4776/20260429_4776 (4).jpg",
+      "path": "vehicles\\랜드로버\\Defender\\gallery\\04_디펜더 옥타 블랙.jpg"
+    }
+  ]
+}

@@ -1,0 +1,108 @@
+{
+  "brand": "제네시스",
+  "brand_id": "304",
+  "model_id": "4016",
+  "name": "G90",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4016",
+  "photo_code": "4016/53095",
+  "default_image_url": "https://autoimg.danawa.com/photo/4016/model_360.png",
+  "default_image_path": "vehicles\\제네시스\\G90\\model_360.png",
+  "colors": [
+    {
+      "name": "마칼루 그레이-무광 (MPE)",
+      "code": "C10",
+      "swatch": "#2a3037",
+      "image_url": "https://autoimg.danawa.com/photo/4016/53095/color_10_360.png",
+      "path": "vehicles\\제네시스\\G90\\colors\\01_마칼루 그레이-무광 (MPE).png"
+    },
+    {
+      "name": "우유니 화이트 (UYH)",
+      "code": "C11",
+      "swatch": "#f4f4f4",
+      "image_url": "https://autoimg.danawa.com/photo/4016/53095/color_11_360.png",
+      "path": "vehicles\\제네시스\\G90\\colors\\02_우유니 화이트 (UYH).png"
+    },
+    {
+      "name": "세빌 실버 (SSS)",
+      "code": "C12",
+      "swatch": "#777777",
+      "image_url": "https://autoimg.danawa.com/photo/4016/53095/color_12_360.png",
+      "path": "vehicles\\제네시스\\G90\\colors\\03_세빌 실버 (SSS).png"
+    },
+    {
+      "name": "마칼루 그레이 (NCM)",
+      "code": "C13",
+      "swatch": "#21262d",
+      "image_url": "https://autoimg.danawa.com/photo/4016/53095/color_13_360.png",
+      "path": "vehicles\\제네시스\\G90\\colors\\04_마칼루 그레이 (NCM).png"
+    },
+    {
+      "name": "비크 블랙 (PH3)",
+      "code": "C14",
+      "swatch": "#0b1318",
+      "image_url": "https://autoimg.danawa.com/photo/4016/53095/color_14_360.png",
+      "path": "vehicles\\제네시스\\G90\\colors\\05_비크 블랙 (PH3).png"
+    },
+    {
+      "name": "마우이 블랙 (HBK)",
+      "code": "C15",
+      "swatch": "#071014",
+      "image_url": "https://autoimg.danawa.com/photo/4016/53095/color_15_360.png",
+      "path": "vehicles\\제네시스\\G90\\colors\\06_마우이 블랙 (HBK).png"
+    },
+    {
+      "name": "한라산 그린 (MDY)",
+      "code": "C16",
+      "swatch": "#14292c",
+      "image_url": "https://autoimg.danawa.com/photo/4016/53095/color_16_360.png",
+      "path": "vehicles\\제네시스\\G90\\colors\\07_한라산 그린 (MDY).png"
+    },
+    {
+      "name": "카프리 블루 (NRB)",
+      "code": "C17",
+      "swatch": "#00173a",
+      "image_url": "https://autoimg.danawa.com/photo/4016/53095/color_17_360.png",
+      "path": "vehicles\\제네시스\\G90\\colors\\08_카프리 블루 (NRB).png"
+    },
+    {
+      "name": "태즈먼 블루 (URA)",
+      "code": "C18",
+      "swatch": "#002237",
+      "image_url": "https://autoimg.danawa.com/photo/4016/53095/color_18_360.png",
+      "path": "vehicles\\제네시스\\G90\\colors\\09_태즈먼 블루 (URA).png"
+    },
+    {
+      "name": "비크 블랙 (NXX)-블랙전용",
+      "code": "C21",
+      "swatch": "#0b1418",
+      "image_url": "https://autoimg.danawa.com/photo/4016/53095/color_21_360.png",
+      "path": "vehicles\\제네시스\\G90\\colors\\10_비크 블랙 (NXX)-블랙전용.png"
+    }
+  ],
+  "gallery": [
+    {
+      "name": "2025ㅣG90 롱휠베이스 블랙",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4016&Tab=image&No=135818",
+      "image_url": "https://autoimg.danawa.com/gallery/4016/20250305_4016 (1).jpg",
+      "path": "vehicles\\제네시스\\G90\\gallery\\01_2025ㅣG90 롱휠베이스 블랙.jpg"
+    },
+    {
+      "name": "2025ㅣG90 롱휠베이스 블랙",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4016&Tab=image&No=135819",
+      "image_url": "https://autoimg.danawa.com/gallery/4016/20250305_4016 (2).jpg",
+      "path": "vehicles\\제네시스\\G90\\gallery\\02_2025ㅣG90 롱휠베이스 블랙.jpg"
+    },
+    {
+      "name": "2025ㅣG90 롱휠베이스 블랙",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4016&Tab=image&No=135820",
+      "image_url": "https://autoimg.danawa.com/gallery/4016/20250305_4016 (3).jpg",
+      "path": "vehicles\\제네시스\\G90\\gallery\\03_2025ㅣG90 롱휠베이스 블랙.jpg"
+    },
+    {
+      "name": "2025ㅣG90 롱휠베이스 블랙",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4016&Tab=image&No=135821",
+      "image_url": "https://autoimg.danawa.com/gallery/4016/20250305_4016 (4).jpg",
+      "path": "vehicles\\제네시스\\G90\\gallery\\04_2025ㅣG90 롱휠베이스 블랙.jpg"
+    }
+  ]
+}

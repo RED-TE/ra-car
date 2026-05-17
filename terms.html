@@ -1,206 +1,58 @@
 <!doctype html>
 <html lang="ko">
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>리카 서비스 이용약관 | Recar Service Terms</title>
-  <meta name="description" content="리카(Recar) 서비스 이용약관 MVP 테스트용 초안" />
-  <style>
-    :root {
-      color-scheme: light;
-      --bg: #f6f8fc;
-      --card: #ffffff;
-      --text: #111827;
-      --muted: #6b7280;
-      --line: #e5e7eb;
-      --blue: #2563eb;
-      --soft-blue: #eff6ff;
-    }
-    * { box-sizing: border-box; }
-    body {
-      margin: 0;
-      background: var(--bg);
-      color: var(--text);
-      font-family: -apple-system, BlinkMacSystemFont, "Apple SD Gothic Neo", "Noto Sans KR", "Segoe UI", sans-serif;
-      line-height: 1.72;
-    }
-    main {
-      width: min(920px, calc(100% - 32px));
-      margin: 0 auto;
-      padding: 48px 0 72px;
-    }
-    .doc {
-      background: var(--card);
-      border: 1px solid var(--line);
-      border-radius: 28px;
-      box-shadow: 0 18px 48px rgba(15, 23, 42, 0.08);
-      overflow: hidden;
-    }
-    header {
-      padding: 36px 32px 28px;
-      border-bottom: 1px solid var(--line);
-      background: linear-gradient(180deg, #ffffff 0%, #f8fbff 100%);
-    }
-    .brand {
-      margin: 0 0 20px;
-      font-size: 18px;
-      font-weight: 800;
-      letter-spacing: 0.04em;
-    }
-    .badge {
-      display: inline-flex;
-      align-items: center;
-      padding: 7px 12px;
-      border-radius: 999px;
-      background: var(--soft-blue);
-      color: var(--blue);
-      font-size: 13px;
-      font-weight: 700;
-    }
-    h1 {
-      margin: 18px 0 10px;
-      font-size: clamp(30px, 5vw, 44px);
-      line-height: 1.2;
-      letter-spacing: -0.02em;
-    }
-    .sub {
-      margin: 0;
-      color: var(--muted);
-      font-size: 16px;
-    }
-    section {
-      padding: 0 32px;
-      margin: 32px 0;
-    }
-    h2 {
-      margin: 0 0 12px;
-      font-size: 22px;
-      letter-spacing: -0.01em;
-    }
-    p, li {
-      font-size: 16px;
-      word-break: keep-all;
-    }
-    ul, ol {
-      padding-left: 22px;
-      margin: 10px 0 0;
-    }
-    .notice {
-      margin: 28px 32px 0;
-      padding: 18px 20px;
-      border-radius: 18px;
-      background: #f9fafb;
-      border: 1px solid var(--line);
-      color: #374151;
-    }
-    footer {
-      padding: 28px 32px 34px;
-      border-top: 1px solid var(--line);
-      color: var(--muted);
-      font-size: 14px;
-    }
-    @media (max-width: 640px) {
-      main { width: min(100% - 20px, 920px); padding-top: 18px; }
-      header, section, footer { padding-left: 20px; padding-right: 20px; }
-      .notice { margin-left: 20px; margin-right: 20px; }
-      .doc { border-radius: 22px; }
-    }
-  </style>
-</head>
-<body>
-  <main>
-    <article class="doc">
-      <header>
-        <p class="brand">RE:CAR</p>
-        <span class="badge">카카오 간편가입 등록용</span>
-        <h1>리카 서비스 이용약관</h1>
-        <p class="sub">Recar Service Terms · 시행일 2026.05.09</p>
-      </header>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>상담 유의사항 | RE:CAR</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body class="legal-page">
+    <header class="simple-header">
+      <a class="simple-brand" href="./index.html">RE:CAR</a>
+      <a class="simple-link" href="./index.html#quote">견적 문의</a>
+    </header>
 
-      <div class="notice">
-        본 약관은 Recar(리카) MVP 테스트 서비스를 위한 초안입니다. 실제 운영, 심사 신청, 금융사 연동, 계약 진행 전에는 서비스 범위와 법적 책임에 맞춰 정식 검토가 필요합니다.
-      </div>
-
-      <section>
-        <h2>1. 목적</h2>
-        <p>이 약관은 Recar(이하 “회사”)가 제공하는 장기렌트, 리스, 차량 견적 비교, 심사 신청 관리 및 관련 정보 제공 서비스(이하 “서비스”)의 이용 조건과 절차, 회사와 이용자의 권리와 의무를 정합니다.</p>
+    <main class="legal-main">
+      <section class="legal-hero">
+        <p class="eyebrow">Consulting Notice</p>
+        <h1>상담 유의사항</h1>
+        <p>RE:CAR 홈페이지와 상담 과정에서 안내되는 정보의 범위와 한계를 명확히 고지합니다.</p>
       </section>
 
-      <section>
-        <h2>2. 서비스의 성격</h2>
-        <ol>
-          <li>Recar는 차량 조건과 이용 조건을 바탕으로 예상 월 납입료, 견적 비교, 심사 진행 상태를 확인할 수 있도록 돕는 차량 금융 견적 플랫폼입니다.</li>
-          <li>앱에서 표시되는 월 납입료와 비교 금액은 실제 계약 확정 금액이 아니며, 차량 재고, 트림, 옵션, 선납금, 주행거리, 신용 심사, 금융사 정책 등에 따라 달라질 수 있습니다.</li>
-          <li>최종 계약 가능 여부와 조건은 별도 심사와 서류 확인, 금융사 또는 제휴사의 최종 승인 절차를 거쳐 결정됩니다.</li>
-        </ol>
+      <section class="legal-card">
+        <h2>견적 및 조건 안내</h2>
+        <p>홈페이지의 월 납입료, 프로모션, 출고 가능 여부, 비용처리 관련 문구는 고객의 이해를 돕기 위한 예시 또는 상담 전 안내입니다. 최종 견적은 차량 재고, 차량 가격, 보험 조건, 금융사 심사, 고객 신용도, 계약 시점의 정책에 따라 달라질 수 있습니다.</p>
       </section>
 
-      <section>
-        <h2>3. 회원가입 및 로그인</h2>
-        <ol>
-          <li>이용자는 카카오 로그인 또는 회사가 제공하는 방식으로 서비스에 가입하거나 로그인할 수 있습니다.</li>
-          <li>카카오 로그인 시 회사는 카카오 회원번호(user.id)를 소셜 계정 식별자로 활용합니다. 카카오 이메일 또는 전화번호를 Recar 회원 ID로 사용하지 않습니다.</li>
-          <li>Recar 회원 중복 확인과 본인 연락 수단 확인은 회사가 별도로 제공하는 휴대폰 SMS 인증을 기준으로 처리할 수 있습니다.</li>
-          <li>카카오 간편가입 동의 화면은 서비스 이용약관, 개인정보 수집 및 이용 동의, 선택적 마케팅 수신 동의를 확인받는 용도로 사용됩니다.</li>
-          <li>최종 Recar 로그인 세션은 회사가 발급하는 자체 인증 토큰 또는 세션 정책을 따릅니다.</li>
-        </ol>
+      <section class="legal-card">
+        <h2>계약 성립 기준</h2>
+        <p>홈페이지 문의 접수와 상담 안내만으로 계약이 성립하지 않습니다. 최종 계약 조건은 고객이 별도로 확인하고 서명 또는 전자적으로 동의한 계약서, 약관, 금융사 심사 결과를 기준으로 확정됩니다.</p>
       </section>
 
-      <section>
-        <h2>4. 이용자의 의무</h2>
-        <ol>
-          <li>이용자는 서비스 신청, 상담, 심사 진행에 필요한 정보를 정확하게 입력해야 합니다.</li>
-          <li>타인의 휴대폰 번호, 카카오 계정, 개인정보를 무단으로 사용해서는 안 됩니다.</li>
-          <li>허위 정보 입력, 부정 이용, 서비스 장애를 유발하는 행위, 다른 이용자의 권리를 침해하는 행위를 해서는 안 됩니다.</li>
-        </ol>
+      <section class="legal-card">
+        <h2>세무·법률 안내의 한계</h2>
+        <p>비용처리, 세무 검토, 법인 운영 관련 안내는 일반적인 상담 보조 정보입니다. 세무·회계·법률 판단은 고객의 사업 형태와 회계 기준에 따라 달라질 수 있으므로 최종 판단은 세무사, 회계사, 변호사 등 전문가에게 확인해야 합니다.</p>
       </section>
 
-      <section>
-        <h2>5. 견적 및 심사 신청</h2>
-        <ol>
-          <li>서비스 내 견적은 이용자가 선택한 조건을 기준으로 산정된 예상 정보입니다.</li>
-          <li>심사 신청, 서류 제출, 상담 요청 등 개인정보 또는 실제 계약과 연결될 수 있는 단계에서는 추가 인증과 별도 동의가 필요할 수 있습니다.</li>
-          <li>회사는 금융사 또는 제휴사로 정보를 전달하기 전에 필요한 법적 고지와 별도 동의 절차를 제공합니다.</li>
-        </ol>
+      <section class="legal-card">
+        <h2>고객 제공 정보</h2>
+        <p>고객이 제공한 차량, 이름, 연락처, 요청사항이 부정확하거나 허위인 경우 견적 안내가 제한되거나 실제 조건과 차이가 발생할 수 있습니다.</p>
       </section>
 
-      <section>
-        <h2>6. 커뮤니티 및 게시물</h2>
-        <ol>
-          <li>이용자는 Q&amp;A, 후기, 댓글 등 커뮤니티 기능을 사용할 수 있습니다.</li>
-          <li>불법 정보, 광고성 도배, 타인 비방, 개인정보 노출, 허위 후기 등 서비스 신뢰를 훼손하는 게시물은 제한되거나 삭제될 수 있습니다.</li>
-          <li>이용자가 작성한 게시물은 서비스 운영, 문의 답변, 품질 개선을 위해 필요한 범위에서 노출될 수 있습니다.</li>
-        </ol>
+      <section class="legal-card">
+        <h2>강행 법규 및 소비자 권리</h2>
+        <p>본 유의사항은 법령상 보장되는 소비자 권리 또는 사업자의 법적 책임을 부당하게 제한하기 위한 것이 아닙니다. 법령에 따라 책임 제한이 허용되지 않는 경우 해당 법령이 우선 적용됩니다.</p>
       </section>
 
-      <section>
-        <h2>7. 서비스 변경 및 중단</h2>
-        <p>회사는 운영상, 기술상 필요에 따라 서비스의 일부를 변경하거나 일시 중단할 수 있습니다. 중요한 변경이 이용자에게 불리하게 작용하는 경우 앱 또는 웹사이트를 통해 사전에 안내합니다.</p>
+      <section class="legal-card">
+        <h2>문의처</h2>
+        <ul class="legal-list">
+          <li>상호: 리카오토플랜</li>
+          <li>대표자: 조용철</li>
+          <li>연락처: <a href="tel:01065731038">010-6573-1038</a></li>
+          <li>이메일: <a href="mailto:jhxox666@gmail.com">jhxox666@gmail.com</a></li>
+        </ul>
       </section>
-
-      <section>
-        <h2>8. 책임의 제한</h2>
-        <ol>
-          <li>회사는 이용자가 입력한 조건과 외부 금융사 정책에 따라 변동되는 견적 차이에 대해 확정 조건을 보장하지 않습니다.</li>
-          <li>천재지변, 통신 장애, 외부 플랫폼 장애, 이용자의 귀책 사유로 발생한 손해에 대해서는 관련 법령이 허용하는 범위 내에서 책임이 제한될 수 있습니다.</li>
-        </ol>
-      </section>
-
-      <section>
-        <h2>9. 약관의 변경</h2>
-        <p>회사는 필요한 경우 관련 법령을 위반하지 않는 범위에서 약관을 변경할 수 있습니다. 변경된 약관은 서비스 화면 또는 웹사이트에 게시하며, 중요한 변경은 별도로 안내합니다.</p>
-      </section>
-
-      <section>
-        <h2>10. 문의</h2>
-        <p>서비스 이용과 약관에 관한 문의는 Recar 앱 또는 홈페이지의 고객센터 및 문의 채널을 통해 접수할 수 있습니다.</p>
-      </section>
-
-      <footer>
-        <strong>내부 참고:</strong> 본 문서는 MVP 테스트용 초안이며 정식 출시 전 법률 검토가 필요합니다.
-      </footer>
-    </article>
-  </main>
-  <!-- 본 문서는 MVP 테스트용 초안이며 정식 출시 전 법률 검토가 필요합니다. -->
-</body>
+    </main>
+  </body>
 </html>

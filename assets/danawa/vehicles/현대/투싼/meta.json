@@ -1,0 +1,94 @@
+{
+  "brand": "현대",
+  "brand_id": "303",
+  "model_id": "4592",
+  "name": "투싼",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4592",
+  "photo_code": "4592/53356",
+  "default_image_url": "https://autoimg.danawa.com/photo/4592/model_360.png",
+  "default_image_path": "vehicles\\현대\\투싼\\model_360.png",
+  "colors": [
+    {
+      "name": "팬텀 블랙 펄(TCM)",
+      "code": "C11",
+      "swatch": "#171718",
+      "image_url": "https://autoimg.danawa.com/photo/4592/53356/color_11_360.png",
+      "path": "vehicles\\현대\\투싼\\colors\\01_팬텀 블랙 펄(TCM).png"
+    },
+    {
+      "name": "크리미 화이트 펄(TW3)",
+      "code": "C12",
+      "swatch": "#f2f1ee",
+      "image_url": "https://autoimg.danawa.com/photo/4592/53356/color_12_360.png",
+      "path": "vehicles\\현대\\투싼\\colors\\02_크리미 화이트 펄(TW3).png"
+    },
+    {
+      "name": "쉬머링 실버 메탈릭(R2T)",
+      "code": "C13",
+      "swatch": "#a9a9a9",
+      "image_url": "https://autoimg.danawa.com/photo/4592/53356/color_13_360.png",
+      "path": "vehicles\\현대\\투싼\\colors\\03_쉬머링 실버 메탈릭(R2T).png"
+    },
+    {
+      "name": "에코트로닉 그레이 펄(PE2)",
+      "code": "C14",
+      "swatch": "#3c3c3a",
+      "image_url": "https://autoimg.danawa.com/photo/4592/53356/color_14_360.png",
+      "path": "vehicles\\현대\\투싼\\colors\\04_에코트로닉 그레이 펄(PE2).png"
+    },
+    {
+      "name": "얼티메이트 레드 메탈릭(R2P)",
+      "code": "C15",
+      "swatch": "#741e1d",
+      "image_url": "https://autoimg.danawa.com/photo/4592/53356/color_15_360.png",
+      "path": "vehicles\\현대\\투싼\\colors\\05_얼티메이트 레드 메탈릭(R2P).png"
+    },
+    {
+      "name": "오션 인디고 펄(PS8)",
+      "code": "C16",
+      "swatch": "#1d262d",
+      "image_url": "https://autoimg.danawa.com/photo/4592/53356/color_16_360.png",
+      "path": "vehicles\\현대\\투싼\\colors\\06_오션 인디고 펄(PS8).png"
+    },
+    {
+      "name": "아마존 그레이 메탈릭(A5G)",
+      "code": "C17",
+      "swatch": "#363934",
+      "image_url": "https://autoimg.danawa.com/photo/4592/53356/color_17_360.png",
+      "path": "vehicles\\현대\\투싼\\colors\\07_아마존 그레이 메탈릭(A5G).png"
+    },
+    {
+      "name": "파인 그린 매트(RB2)",
+      "code": "C09",
+      "swatch": "#313533",
+      "image_url": "https://autoimg.danawa.com/photo/4592/53356/color_09_360.png",
+      "path": "vehicles\\현대\\투싼\\colors\\08_파인 그린 매트(RB2).png"
+    }
+  ],
+  "gallery": [
+    {
+      "name": "2026ㅣ투싼 블랙 익스테리어",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4592&Tab=image&No=139602",
+      "image_url": "https://autoimg.danawa.com/gallery/4592/20250807_4592 (1).jpg",
+      "path": "vehicles\\현대\\투싼\\gallery\\01_2026ㅣ투싼 블랙 익스테리어.jpg"
+    },
+    {
+      "name": "더 뉴 투싼 XRT",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4592&Tab=image&No=132974",
+      "image_url": "https://autoimg.danawa.com/gallery/4592/20241211_4592 (1).jpg",
+      "path": "vehicles\\현대\\투싼\\gallery\\02_더 뉴 투싼 XRT.jpg"
+    },
+    {
+      "name": "더 뉴 투싼 XRT",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4592&Tab=image&No=132975",
+      "image_url": "https://autoimg.danawa.com/gallery/4592/20241211_4592 (2).jpg",
+      "path": "vehicles\\현대\\투싼\\gallery\\03_더 뉴 투싼 XRT.jpg"
+    },
+    {
+      "name": "더 뉴 투싼 XRT",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4592&Tab=image&No=132976",
+      "image_url": "https://autoimg.danawa.com/gallery/4592/20241211_4592 (3).jpg",
+      "path": "vehicles\\현대\\투싼\\gallery\\04_더 뉴 투싼 XRT.jpg"
+    }
+  ]
+}

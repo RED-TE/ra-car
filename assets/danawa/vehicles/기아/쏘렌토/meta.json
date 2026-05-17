@@ -1,0 +1,73 @@
+{
+  "brand": "기아",
+  "brand_id": "307",
+  "model_id": "4563",
+  "name": "쏘렌토",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4563",
+  "photo_code": "4563/53335",
+  "default_image_url": "https://autoimg.danawa.com/photo/4563/model_360.png",
+  "default_image_path": "vehicles\\기아\\쏘렌토\\model_360.png",
+  "colors": [
+    {
+      "name": "스노우 화이트 펄 (SWP)",
+      "code": "C10",
+      "swatch": "#f6f6f6",
+      "image_url": "https://autoimg.danawa.com/photo/4563/53335/color_10_360.png",
+      "path": "vehicles\\기아\\쏘렌토\\colors\\01_스노우 화이트 펄 (SWP).png"
+    },
+    {
+      "name": "볼캐닉 샌드 브라운 (BN4)",
+      "code": "C12",
+      "swatch": "#8e897b",
+      "image_url": "https://autoimg.danawa.com/photo/4563/53335/color_12_360.png",
+      "path": "vehicles\\기아\\쏘렌토\\colors\\02_볼캐닉 샌드 브라운 (BN4).png"
+    },
+    {
+      "name": "시티스케이프 그린 (CGE)",
+      "code": "C13",
+      "swatch": "#404f4c",
+      "image_url": "https://autoimg.danawa.com/photo/4563/53335/color_13_360.png",
+      "path": "vehicles\\기아\\쏘렌토\\colors\\03_시티스케이프 그린 (CGE).png"
+    },
+    {
+      "name": "인터스텔라 그레이 (AGT)",
+      "code": "C14",
+      "swatch": "#2c3033",
+      "image_url": "https://autoimg.danawa.com/photo/4563/53335/color_14_360.png",
+      "path": "vehicles\\기아\\쏘렌토\\colors\\04_인터스텔라 그레이 (AGT).png"
+    },
+    {
+      "name": "오로라 블랙펄 (ABP)",
+      "code": "C15",
+      "swatch": "#1f1b22",
+      "image_url": "https://autoimg.danawa.com/photo/4563/53335/color_15_360.png",
+      "path": "vehicles\\기아\\쏘렌토\\colors\\05_오로라 블랙펄 (ABP).png"
+    }
+  ],
+  "gallery": [
+    {
+      "name": "2026 쏘렌토",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4563&Tab=image&No=139114",
+      "image_url": "https://autoimg.danawa.com/gallery/4563/20250724_4563 (1).jpg",
+      "path": "vehicles\\기아\\쏘렌토\\gallery\\01_2026 쏘렌토.jpg"
+    },
+    {
+      "name": "2026 쏘렌토 X-Line",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4563&Tab=image&No=139115",
+      "image_url": "https://autoimg.danawa.com/gallery/4563/20250724_4563 (2).jpg",
+      "path": "vehicles\\기아\\쏘렌토\\gallery\\02_2026 쏘렌토 X-Line.jpg"
+    },
+    {
+      "name": "2026 쏘렌토",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4563&Tab=image&No=139116",
+      "image_url": "https://autoimg.danawa.com/gallery/4563/20250724_4563 (3).jpg",
+      "path": "vehicles\\기아\\쏘렌토\\gallery\\03_2026 쏘렌토.jpg"
+    },
+    {
+      "name": "2026 쏘렌토",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4563&Tab=image&No=139117",
+      "image_url": "https://autoimg.danawa.com/gallery/4563/20250724_4563 (4).jpg",
+      "path": "vehicles\\기아\\쏘렌토\\gallery\\04_2026 쏘렌토.jpg"
+    }
+  ]
+}

@@ -1,499 +1,482 @@
 <!doctype html>
 <html lang="ko">
-
-<head>
-  <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" />
-  <title>RE : CAR | 장기렌트 · 리스 전문 플래너</title>
-
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Pretendard:wght@300;400;600;700;800;900&display=swap"
-    rel="stylesheet">
-  <link rel="stylesheet" href="./styles.css" />
-
-  <meta property="og:type" content="website">
-  <meta property="og:title" content="RE:CAR | 장기렌트 · 리스 전문 플래너">
-  <meta property="og:description" content="내 상황에 딱 맞는 차를, 가장 합리적인 조건으로. RE:CAR 무료 맞춤 견적 받아보세요.">
-  <meta property="og:image" content="https://recarplan.com/assets/og-recar.png">
-
-  <style>
-    /* ===== 추가 스타일 ===== */
-
-    /* 헤더 카카오 버튼 */
-    .header-kakao {
-      display: inline-flex;
-      align-items: center;
-      gap: 7px;
-      background: #FEE500;
-      color: #000;
-      font-size: 0.82rem;
-      font-weight: 700;
-      padding: 9px 16px;
-      border-radius: 50px;
-      text-decoration: none;
-      transition: opacity 0.2s, transform 0.2s;
-      white-space: nowrap;
-    }
-
-    .header-kakao:hover {
-      opacity: 0.88;
-      transform: translateY(-1px);
-    }
-
-    .header-kakao svg {
-      width: 18px;
-      height: 18px;
-      flex-shrink: 0;
-    }
-
-
-    /* ===== FAQ 섹션 ===== */
-    .faq {
-      background: #0a0a0a;
-      padding: 80px 20px;
-    }
-
-    .faq .sec-title {
-      margin-bottom: 40px;
-    }
-
-    .faq-list {
-      max-width: 780px;
-      margin: 0 auto;
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-
-    .faq-item {
-      border: 1px solid rgba(255, 255, 255, 0.08);
-      border-radius: 14px;
-      overflow: hidden;
-      background: rgba(255, 255, 255, 0.03);
-      transition: border-color 0.2s;
-    }
-
-    .faq-item.open {
-      border-color: rgba(37, 99, 235, 0.4);
-    }
-
-    .faq-q {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      padding: 20px 24px;
-      cursor: pointer;
-      user-select: none;
-      font-size: 1rem;
-      font-weight: 600;
-      gap: 16px;
-    }
-
-    .faq-q-text {
-      flex: 1;
-    }
-
-    .faq-q-prefix {
-      color: #2563eb;
-      font-weight: 800;
-      margin-right: 10px;
-      font-size: 1rem;
-    }
-
-    .faq-icon {
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.07);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.1rem;
-      flex-shrink: 0;
-      transition: transform 0.3s, background 0.2s;
-    }
-
-    .faq-item.open .faq-icon {
-      transform: rotate(45deg);
-      background: #2563eb;
-    }
-
-    .faq-a {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height 0.35s cubic-bezier(0.16, 1, 0.3, 1), padding 0.25s;
-      padding: 0 24px;
-      font-size: 0.95rem;
-      color: rgba(255, 255, 255, 0.65);
-      line-height: 1.7;
-    }
-
-    .faq-item.open .faq-a {
-      max-height: 1000px;
-      padding: 0 24px 20px;
-    }
-
-    /* ===== Footer 개선 ===== */
-    .foot-inner-wrap {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 24px;
-    }
-
-    .foot-biz {
-      font-size: 0.78rem;
-      color: rgba(255, 255, 255, 0.35);
-      line-height: 1.9;
-      text-align: center;
-    }
-
-    .foot-links {
-      display: flex;
-      gap: 20px;
-      font-size: 0.82rem;
-      color: rgba(255, 255, 255, 0.4);
-    }
-
-    .foot-links a:hover {
-      color: rgba(255, 255, 255, 0.8);
-    }
-
-    .foot-kakao-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: #FEE500;
-      color: #000;
-      font-weight: 700;
-      font-size: 0.95rem;
-      padding: 12px 28px;
-      border-radius: 50px;
-      transition: opacity 0.2s, transform 0.2s;
-    }
-
-    .foot-kakao-btn:hover {
-      opacity: 0.88;
-      transform: translateY(-2px);
-    }
-
-    .foot-kakao-btn svg {
-      width: 20px;
-      height: 20px;
-    }
-  </style>
-</head>
-
-<body>
-
-  <header class="header">
-    <div class="h-inner">
-      <a class="logo" href="landing.html" aria-label="RE : CAR">
-        <img src="logo12.png" alt="RE : CAR Logo">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RE:CAR 장기렌트·리스</title>
+    <link rel="preconnect" href="https://unpkg.com" />
+    <link rel="preconnect" href="https://api.recarplan.com" crossorigin />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <nav class="desktop-nav nav-left" aria-label="브랜드 메뉴">
+        <a href="#quote">빠른견적</a>
+        <a href="#ready">즉시출고</a>
+        <a href="#special">특가차량</a>
+        <a href="#compare">장기렌트</a>
+        <a href="#compare">리스</a>
+      </nav>
+      <a class="brand" href="#home" aria-label="RE:CAR 홈">
+        <img src="./assets/recar-logo-transparent.png" alt="RE:CAR" />
       </a>
-      <div style="display:flex; align-items:center; gap:12px;">
-        <a class="header-kakao" href="https://open.kakao.com/o/s7SanMki" target="_blank" rel="noopener"
-          aria-label="카카오 오픈채팅 상담">
-          <svg viewBox="0 0 24 24" fill="currentColor">
-            <path
-              d="M12 3C6.477 3 2 6.477 2 10.5c0 2.544 1.522 4.776 3.81 6.198l-.972 3.63a.374.374 0 0 0 .554.41l4.198-2.795C10.484 18.01 11.234 18 12 18c5.523 0 10-3.477 10-7.5S17.523 3 12 3z" />
-          </svg>
-          카카오 상담
-        </a>
-        <button class="hamburger" id="openMenu" aria-label="open menu">
-          <span></span><span></span><span></span>
-        </button>
-      </div>
-    </div>
-  </header>
+      <nav class="desktop-nav nav-right" aria-label="유틸리티 메뉴">
+        <a href="#business">법인차량</a>
+        <a class="quote-focus-button" href="#quote" data-vehicle="조건 비교 상담">문의하기</a>
+        <a class="vehicle-search-button" href="#quote">검색</a>
+      </nav>
+    </header>
 
-  <main id="top">
-    <!-- Hero -->
-    <section class="hero" aria-label="hero">
-      <video class="hero-video" autoplay muted loop playsinline poster="./assets/hero-poster.jpg">
-        <source src="./assets/hero.mp4" type="video/mp4" />
-      </video>
-      <div class="hero-dim"></div>
-
-      <div class="hero-center">
-        <h1>Your Car Your Terms</h1>
-        <p>원하는 대로, 자유롭게</p>
-
-        <a class="hero-cta" href="#services">
-          <span class="dl">↓</span> 맞춤 견적 문의
-        </a>
-      </div>
-
-      <div class="scroll-hint">
-        아래로 스크롤하세요
-        <div class="scroll-arrow"></div>
-      </div>
-    </section>
-
-
-
-    <!-- Spotlight -->
-    <section class="section spotlight">
-      <div class="wrap">
-        <div class="spot-head">
-          <h2>차가 필요한 모든 순간<br />리카 플래너와 함께</h2>
-        </div>
-
-        <div class="spot-card">
-          <div class="spot-dark" style="position:absolute; inset:0; background:rgba(0,0,0,0.45); z-index:1;"></div>
-          <div class="spot-arrow left" data-dir="-1">‹</div>
-          <div class="spot-arrow right" data-dir="1">›</div>
-
-          <div class="spot-slide" data-bg="./assets/ADV_1.png" style="position:relative; z-index:2; display: flex;">
-            <div class="spot-copy">
-              <h3>1 : 1 맞춤 어드바이저</h3>
-              <p>나의 상황에 딱 맞춰주는 최고의 전문가<br />상품추천, 맞춤견적, 계약 검토까지</p>
-            </div>
-          </div>
-          <div class="spot-slide" data-bg="./assets/ADV_2.png" style="display:none; position:relative; z-index:2;">
-            <div class="spot-copy">
-              <h3>합리적인 가격</h3>
-              <p>원하는 조건에 맞춰 최적의 견적을 추천합니다.</p>
-            </div>
-          </div>
-          <div class="spot-slide" data-bg="./assets/ADV_3.png" style="display:none; position:relative; z-index:2;">
-            <div class="spot-copy">
-              <h3>빠른 배송</h3>
-              <p>전국 어디든 빠른 차량 배송<br />원하는 시간, 원하는 장소로</p>
-            </div>
-          </div>
-        </div>
-
-        <!-- 슬라이드 인디케이터 -->
-        <div id="spotDots" style="display:flex; justify-content:center; gap:8px; margin-top:20px;">
-          <span class="spot-dot active"></span>
-          <span class="spot-dot"></span>
-          <span class="spot-dot"></span>
-        </div>
-      </div>
-    </section>
-
-    <!-- Services -->
-    <section class="section services" id="services">
-      <div class="wrap">
-        <div class="sec-title">
-          <h2>끊임없이 확장되는 이동 경험<br />리카의 다양한 서비스</h2>
-        </div>
-
-        <div class="svc-grid">
-          <article class="svc-card big" onclick="location.href='inquiry.html?type=장기렌트'" role="button" tabindex="0"
-            aria-label="장기렌트 문의하기">
-            <div class="svc-bg"
-              style="background-image:url('./assets/rent.png'); background-size:cover; background-position:center;">
-              <div
-                style="position:absolute; inset:0; background:linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.45) 60%, rgba(0,0,0,0.65) 100%);">
+    <main>
+      <section class="hero" id="home" aria-label="RE:CAR 장기렌트 리스 메인">
+        <div class="hero-slider" aria-live="polite">
+          <article class="hero-slide is-active">
+            <img src="./assets/hero-tesla.png" alt="사막 도로 위의 테슬라 전기차 라인업" />
+            <div class="hero-shade"></div>
+            <div class="hero-content">
+              <p>전기차 조건 비교</p>
+              <h1>테슬라 장기렌트·리스</h1>
+              <div class="hero-actions">
+                <a class="primary-button light" href="#special">조건 보기</a>
+                <a class="primary-button navy quote-focus-button" href="#quote" data-vehicle="테슬라 장기렌트·리스">1분 견적 받기</a>
               </div>
+              <p class="hero-note">상담비 없이 조건만 먼저 확인해도 괜찮습니다.</p>
             </div>
-            <div class="svc-overlay">
-              <h3>장기렌트</h3>
-              <p>원하는 만큼 내 차처럼 이용하는<br />신차 장기 대여 서비스</p>
-            </div>
-            <div class="svc-next">→</div>
           </article>
-
-          <article class="svc-card big" onclick="location.href='inquiry.html?type=리스'" role="button" tabindex="0"
-            aria-label="리스 문의하기">
-            <div class="svc-bg"
-              style="background-image:url('./assets/ris.png'); background-size:cover; background-position:center;">
-              <div
-                style="position:absolute; inset:0; background:linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0.45) 60%, rgba(0,0,0,0.65) 100%);">
+          <article class="hero-slide">
+            <img src="./assets/hero-bmw.png" alt="석양의 도로를 달리는 BMW 차량 라인업" />
+            <div class="hero-shade"></div>
+            <div class="hero-content">
+              <p>수입차 프로모션</p>
+              <h1>BMW 프로모션</h1>
+              <div class="hero-actions">
+                <a class="primary-button light" href="#special">조건 보기</a>
+                <a class="primary-button navy quote-focus-button" href="#quote" data-vehicle="BMW 프로모션">1분 견적 받기</a>
               </div>
+              <p class="hero-note">여러 조건을 비교해 월 납입료부터 안내드립니다.</p>
             </div>
-            <div class="svc-overlay">
-              <h3>리스</h3>
-              <p>수입차를 저렴하게 이용하는<br />오토 리스 서비스</p>
+          </article>
+          <article class="hero-slide">
+            <img src="./assets/hero-executive.png" alt="고급 저택 앞의 법인 의전 차량" />
+            <div class="hero-shade"></div>
+            <div class="hero-content">
+              <p>법인차량 상담</p>
+              <h1>법인 의전차량</h1>
+              <div class="hero-actions">
+                <a class="primary-button light" href="#business">서비스 보기</a>
+                <a class="primary-button navy quote-focus-button" href="#quote" data-vehicle="RE:CAR ONUS 법인차량">법인 견적 받기</a>
+              </div>
+              <p class="hero-note">법인 운영과 비용처리 기준까지 함께 확인합니다.</p>
             </div>
-            <div class="svc-next">→</div>
+          </article>
+          <article class="hero-slide">
+            <img src="./assets/hero-family-suv.png" alt="호숫가 캠핑장에 세워진 패밀리 SUV와 카니발" />
+            <div class="hero-shade"></div>
+            <div class="hero-content">
+              <p>패밀리 SUV</p>
+              <h1>패밀리 SUV 특가</h1>
+              <div class="hero-actions">
+                <a class="primary-button light" href="#special">SUV 보기</a>
+                <a class="primary-button navy quote-focus-button" href="#quote" data-vehicle="패밀리 SUV 장기렌트·리스">패밀리 견적 받기</a>
+              </div>
+              <p class="hero-note">캠핑, 출퇴근, 자녀 픽업까지 가족 생활에 맞는 조건을 비교합니다.</p>
+            </div>
           </article>
         </div>
-      </div>
-    </section>
+        <div class="hero-dots" aria-label="메인 슬라이드 선택">
+          <button class="hero-dot is-active" type="button" aria-label="1번 슬라이드"></button>
+          <button class="hero-dot" type="button" aria-label="2번 슬라이드"></button>
+          <button class="hero-dot" type="button" aria-label="3번 슬라이드"></button>
+          <button class="hero-dot" type="button" aria-label="4번 슬라이드"></button>
+        </div>
+        <a class="ai-float" href="#quote" aria-label="AI 상담">
+          <span>AI</span>
+        </a>
+      </section>
 
-    <!-- FAQ -->
-    <section class="faq section" id="faq">
-      <div class="wrap">
-        <div class="sec-title">
-          <h2>자주 묻는 질문</h2>
+      <section class="quote-section" id="quote">
+        <div class="section-heading">
+          <h2>부담 없이 조건만 먼저 확인하세요.</h2>
+          <p class="section-support">차량, 연락처, 이름만 남기면 가능한 조건을 확인해 안내드립니다. 필요한 요청사항이 있으면 함께 적어주세요.</p>
+        </div>
+        <form class="quote-form" novalidate>
+          <label>
+            차량
+            <input id="vehicleWish" name="vehicle" type="text" placeholder="예: 쏘렌토 하이브리드" aria-label="차량" required />
+          </label>
+          <label>
+            연락처
+            <input id="contactPhone" name="phone" type="tel" placeholder="010-0000-0000" aria-label="연락처" autocomplete="tel" required />
+          </label>
+          <label>
+            이름
+            <input id="customerName" name="name" type="text" placeholder="예: 홍길동" aria-label="이름" autocomplete="name" required />
+          </label>
+          <label class="request-field">
+            <span class="request-title">요청사항 <em>선택사항</em></span>
+            <textarea id="requestNote" name="request" rows="4" maxlength="500" placeholder="예: 월 납입료 중심으로 보고 싶어요 / 문자로 먼저 안내해주세요" aria-label="요청사항"></textarea>
+          </label>
+          <div class="consent-group">
+            <div class="consent-item">
+              <label class="consent-row">
+                <input id="privacyConsent" name="privacyConsent" type="checkbox" required />
+                <span>
+                  <strong>개인정보 수집·이용 동의</strong>
+                  <small>견적 상담에만 사용합니다.</small>
+                </span>
+              </label>
+              <details class="consent-disclosure">
+                <summary>자세히 보기</summary>
+                <ul>
+                  <li>수집 항목: 차량, 연락처, 이름, 요청사항</li>
+                  <li>이용 목적: 차량 견적 상담, 출고 가능 여부 확인, 장기렌트·리스 조건 안내, 문의 응대</li>
+                  <li>보유 기간: 상담 종료 후 3개월까지 보관 후 파기</li>
+                  <li>동의 거부 시 견적 상담 및 문의 응대가 제한될 수 있습니다.</li>
+                </ul>
+                <a href="./privacy.html">전체 개인정보 처리방침 보기</a>
+              </details>
+            </div>
+
+            <div class="consent-item">
+              <label class="consent-row">
+                <input id="termsConsent" name="termsConsent" type="checkbox" required />
+                <span>
+                  <strong>상담 유의사항 확인</strong>
+                  <small>최종 조건은 상담 후 확정됩니다.</small>
+                </span>
+              </label>
+              <details class="consent-disclosure">
+                <summary>자세히 보기</summary>
+                <ul>
+                  <li>홈페이지의 월 납입료, 출고 가능 여부, 프로모션 문구는 예시 또는 상담 전 안내입니다.</li>
+                  <li>최종 조건은 차량 재고, 금융사 심사, 보험 조건, 계약 시점에 따라 달라질 수 있습니다.</li>
+                  <li>세무·법률 판단은 전문 자문기관 확인이 필요하며, 최종 계약 내용은 별도 계약서가 우선합니다.</li>
+                </ul>
+                <a href="./terms.html">전체 상담 유의사항 보기</a>
+              </details>
+            </div>
+            <p class="consent-required-note">필수 동의가 완료되어야 문의 접수가 가능합니다.</p>
+          </div>
+          <button class="submit-button" type="submit">
+            <span>조건 확인하기</span>
+            <i data-lucide="send"></i>
+          </button>
+          <p class="quote-assurance">상담비 없음 · 원치 않으면 진행하지 않아도 됩니다 · 동의 철회 가능</p>
+          <p class="form-status" aria-live="polite" hidden>문의가 접수되었습니다. 가능한 조건을 확인해 연락드리겠습니다.</p>
+        </form>
+      </section>
+
+      <section class="benefits-section" id="benefits">
+        <div class="section-heading">
+          <h2>견적 비교부터 출고 이후까지, 리카가 챙깁니다.</h2>
+          <p class="section-support">단순히 월 납입료만 전달하지 않습니다. 고객의 예산, 이용 목적, 출고 일정에 맞춰 조건을 비교하고 계약 과정까지 함께 관리합니다.</p>
+        </div>
+        <div class="benefit-overview" aria-label="리카 주요 혜택">
+          <article>
+            <i data-lucide="list-checks"></i>
+            <strong>맞춤 견적 비교</strong>
+            <span>조건 비교 후 맞춤 견적 안내</span>
+          </article>
+          <article>
+            <i data-lucide="gift"></i>
+            <strong>출고 선물 제공</strong>
+            <span>기본용품과 프로모션에 맞춘 출고 혜택</span>
+          </article>
+          <article>
+            <i data-lucide="fuel"></i>
+            <strong>10만원 주유권</strong>
+            <span>고유가 부담을 덜어주는 계약 고객 혜택</span>
+          </article>
+          <article>
+            <i data-lucide="shield-check"></i>
+            <strong>끝까지 계약 관리</strong>
+            <span>상담부터 출고 이후까지 담당자가 관리</span>
+          </article>
+        </div>
+        <div class="benefit-table" role="table" aria-label="리카만의 혜택 상세">
+          <div class="benefit-row benefit-head" role="row">
+            <span role="columnheader">혜택</span>
+            <span role="columnheader">고객에게 좋은 점</span>
+            <span role="columnheader">리카가 챙기는 부분</span>
+          </div>
+          <div class="benefit-row" role="row">
+            <strong role="cell">여러 조건 비교</strong>
+            <span role="cell">차량, 금융사, 기간, 선납금 조건을 함께 보고 고객 상황에 맞는 견적을 먼저 확인합니다.</span>
+            <span role="cell">월 납입료만 낮추는 방식이 아니라 이용 목적과 예산에 맞는 조건을 정리합니다.</span>
+          </div>
+          <div class="benefit-row" role="row">
+            <strong role="cell">출고 패키지</strong>
+            <span role="cell">출고 시 필요한 기본용품과 시기별 프로모션에 맞는 출고 선물을 받을 수 있습니다.</span>
+            <span role="cell">차량 출고 전 필요한 항목을 확인하고, 적용 가능한 혜택을 함께 안내합니다.</span>
+          </div>
+          <div class="benefit-row" role="row">
+            <strong role="cell">10만원 주유권</strong>
+            <span role="cell">고유가 부담을 조금이라도 덜 수 있도록 계약 고객에게 주유권 혜택을 제공합니다.</span>
+            <span role="cell">계약 조건과 프로모션 적용 기준을 확인해 안내합니다.</span>
+          </div>
+          <div class="benefit-row" role="row">
+            <strong role="cell">계약 관리</strong>
+            <span role="cell">상담, 심사, 발주, 출고, 만기까지 진행 상황을 놓치지 않고 확인할 수 있습니다.</span>
+            <span role="cell">계약 이후에도 담당자가 흐름을 끝까지 관리해 불필요한 확인 부담을 줄입니다.</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="ready-band" id="ready">
+        <div>
+          <h2>출고 가능한 차량부터 빠르게 확인해드립니다.</h2>
+        </div>
+        <div class="ready-metrics">
+          <span>국산 500+</span>
+          <span>수입 300+</span>
+        </div>
+      </section>
+
+      <section class="vehicle-section" id="special">
+        <div class="best-heading">
+          <h2>BEST</h2>
+          <div class="best-tabs" aria-label="차량 분류">
+            <button class="is-active" type="button" data-filter="time" aria-pressed="true">타임 특가</button>
+            <button type="button" data-filter="sedan" aria-pressed="false">세단</button>
+            <button type="button" data-filter="suv" aria-pressed="false">SUV</button>
+            <button type="button" data-filter="imported" aria-pressed="false">수입차</button>
+          </div>
+          <p class="vehicle-condition">인기 차종을 60개월 · 선납금 0% · 연 10,000km 기준으로 먼저 보여드립니다.</p>
+        </div>
+        <p class="vehicle-error" id="vehicleError" hidden>차량 정보를 불러오지 못했습니다</p>
+        <div class="vehicle-grid" data-vehicle-mode="home" data-default-filter="time" aria-live="polite" aria-busy="true">
+          <article class="vehicle-card is-skeleton" aria-hidden="true">
+            <div class="skeleton-image"></div>
+            <div class="vehicle-body">
+              <div class="skeleton-line short"></div>
+              <div class="skeleton-line title"></div>
+              <div class="skeleton-line"></div>
+              <div class="skeleton-line price-line"></div>
+            </div>
+          </article>
+          <article class="vehicle-card is-skeleton" aria-hidden="true">
+            <div class="skeleton-image"></div>
+            <div class="vehicle-body">
+              <div class="skeleton-line short"></div>
+              <div class="skeleton-line title"></div>
+              <div class="skeleton-line"></div>
+              <div class="skeleton-line price-line"></div>
+            </div>
+          </article>
+          <article class="vehicle-card is-skeleton" aria-hidden="true">
+            <div class="skeleton-image"></div>
+            <div class="vehicle-body">
+              <div class="skeleton-line short"></div>
+              <div class="skeleton-line title"></div>
+              <div class="skeleton-line"></div>
+              <div class="skeleton-line price-line"></div>
+            </div>
+          </article>
+        </div>
+        <div class="vehicle-detail-panel" id="vehicleDetailPanel" hidden></div>
+        <div class="vehicle-more-actions">
+          <a class="vehicle-more-button" href="./vehicles.html">더 많은 차량 보러가기</a>
+        </div>
+      </section>
+
+      <section class="compare-section" id="compare">
+        <div class="section-heading">
+          <h2>렌트와 리스, 필요한 차이만 쉽게 정리했습니다.</h2>
+        </div>
+        <div class="compare-table" role="table" aria-label="장기렌트 리스 비교">
+          <div class="compare-row head" role="row">
+            <span role="columnheader">항목</span>
+            <span role="columnheader">장기렌트</span>
+            <span role="columnheader">리스</span>
+          </div>
+          <div class="compare-row" role="row">
+            <span role="cell">번호판</span>
+            <span role="cell">하·허·호</span>
+            <span role="cell">일반 번호판</span>
+          </div>
+          <div class="compare-row" role="row">
+            <span role="cell">보험</span>
+            <span role="cell">렌트료 포함</span>
+            <span role="cell">직접 관리</span>
+          </div>
+          <div class="compare-row" role="row">
+            <span role="cell">추천 대상</span>
+            <span role="cell">관리 부담을 줄이고 싶은 개인·법인</span>
+            <span role="cell">자산·비용 처리가 중요한 사업자</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="business-section" id="business">
+        <div class="business-copy">
+          <h2>RE:CAR ONUS</h2>
+          <p>법인 차량은 계약 이후 운영이 더 중요합니다. 리카 오너스는 차량 선택, 비용처리 확인, 교체 주기까지 한 번에 상담합니다.</p>
+          <div class="business-points" aria-label="리카 오너스 주요 서비스">
+            <span><i data-lucide="building-2"></i> 법인 다대수 견적</span>
+            <span><i data-lucide="receipt-text"></i> 비용처리 체크</span>
+            <span><i data-lucide="refresh-cw"></i> 만기 교체 설계</span>
+          </div>
+        </div>
+        <div class="business-panel">
+          <p>법인 케어</p>
+          <strong>법인 차량 운영에 필요한 조건을 함께 정리합니다.</strong>
+          <ul>
+            <li>임직원 차량별 예산과 등급 정리</li>
+            <li>보험·정비·비용처리 항목 확인</li>
+            <li>만기 인수와 교체 시점 안내</li>
+          </ul>
+          <a class="primary-button dark business-quote-button" href="#quote" data-vehicle="RE:CAR ONUS 법인차량">
+            <span>법인 조건 문의하기</span>
+            <i data-lucide="briefcase-business"></i>
+          </a>
+        </div>
+      </section>
+
+      <section class="reviews-section" id="reviews">
+        <div class="section-heading split">
+          <div>
+            <h2>문의 전에 상담 방식부터 확인하세요.</h2>
+            <p class="section-support">월 납입료만 먼저 물어봐도 괜찮습니다. 필요한 조건을 비교한 뒤 충분히 확인하고 결정하세요.</p>
+          </div>
+          <a class="text-link quote-focus-button" href="#quote" data-vehicle="조건 비교 상담">상담비 없이 문의하기</a>
+        </div>
+        <div class="review-grid">
+          <article>
+            <strong>쏘렌토 HEV · 개인</strong>
+            <span>월 납입료 비교</span>
+            <p>선납금과 보험 포함 여부를 한 번에 확인해서 조건 비교가 쉬웠습니다.</p>
+          </article>
+          <article>
+            <strong>카니발 · 법인</strong>
+            <span>법인 다대수</span>
+            <p>차량 3대 조건을 용도별로 정리해줘서 내부 검토가 편했습니다.</p>
+          </article>
+          <article>
+            <strong>전기차 · 리스</strong>
+            <span>만기 인수 조건</span>
+            <p>렌트와 리스의 만기 선택지를 비교하고 결정했습니다.</p>
+          </article>
+        </div>
+        <div class="trust-strip" aria-label="문의 전 안심 기준">
+          <div>
+            <strong>상담비 0원</strong>
+            <span>조건 확인만 해도 부담 없습니다.</span>
+          </div>
+          <div>
+            <strong>강요 없는 안내</strong>
+            <span>계약 전까지 비교와 설명 중심으로 안내합니다.</span>
+          </div>
+          <div>
+            <strong>24시간 내 회신</strong>
+            <span>가능한 차량과 조건을 확인해 안내드립니다.</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="faq-section" id="faq">
+        <div class="section-heading">
+          <h2>문의 전에 많이 확인하는 내용</h2>
         </div>
         <div class="faq-list">
-
-          <div class="faq-item">
-            <div class="faq-q" onclick="toggleFaq(this)">
-              <span class="faq-q-text"><span class="faq-q-prefix">Q.</span>장기렌트와 리스의 차이가 뭔가요?</span>
-              <span class="faq-icon">+</span>
-            </div>
-            <div class="faq-a">
-              장기렌트는 렌트사 명의 차량을 일정 기간 동안 이용하는 방식으로 보험, 자동차세, 정비 등이 포함되어 있어 관리가 편리합니다.<br>
-              리스는 금융상품에 가까운 방식으로 차량이 본인 명의로 등록되며, 보험과 세금 등을 직접 관리해야 합니다.<br><br>
-              일반적으로<br>
-              <strong>사업자 → 리스 선호</strong><br>
-              <strong>개인 / 관리 편의 → 장기렌트 선호</strong><br>
-              하는 경우가 많습니다.
-            </div>
-          </div>
-
-          <div class="faq-item">
-            <div class="faq-q" onclick="toggleFaq(this)">
-              <span class="faq-q-text"><span class="faq-q-prefix">Q.</span>보증금 없이도 계약이 가능한가요?</span>
-              <span class="faq-icon">+</span>
-            </div>
-            <div class="faq-a">
-              네, 가능합니다.<br>
-              고객님의 신용도와 금융사 심사 결과에 따라<br>
-              <strong>보증금 0원 / 선수금 없이 진행</strong>도 가능합니다.<br><br>
-              다만 심사 조건에 따라 보증금 또는 선수금이 일부 필요할 수 있으며, 상담을 통해 가장 유리한 조건으로 안내드립니다.
-            </div>
-          </div>
-
-          <div class="faq-item">
-            <div class="faq-q" onclick="toggleFaq(this)">
-              <span class="faq-q-text"><span class="faq-q-prefix">Q.</span>신용등급이 낮아도 계약이 가능한가요?</span>
-              <span class="faq-icon">+</span>
-            </div>
-            <div class="faq-a">
-              신용등급이 다소 낮더라도 계약 가능한 금융사를 찾아 진행할 수 있습니다.<br>
-              금융사마다 심사 기준이 다르기 때문에 <strong>여러 금융사 비교 및 조건에 맞는 금융사 매칭</strong>을 통해 가능한 계약 조건을 안내드립니다.<br><br>
-              단, 일반적인 조건에 비해 금액은 오를 수 있습니다.
-            </div>
-          </div>
-
-          <div class="faq-item">
-            <div class="faq-q" onclick="toggleFaq(this)">
-              <span class="faq-q-text"><span class="faq-q-prefix">Q.</span>계약 후 차량 수령까지 얼마나 걸리나요?</span>
-              <span class="faq-icon">+</span>
-            </div>
-            <div class="faq-a">
-              차량 수령 기간은 차종과 재고 여부에 따라 달라집니다.<br>
-              보통<br>
-              <strong>재고 차량 → 약 1~2주</strong><br>
-              <strong>신차 출고 → 약 3주 ~ 2개월 이상</strong><br>
-              정도 소요될 수 있습니다. 빠른 출고를 원하실 경우 즉시출고 가능한 차량도 안내해드립니다.
-            </div>
-          </div>
-
-          <div class="faq-item">
-            <div class="faq-q" onclick="toggleFaq(this)">
-              <span class="faq-q-text"><span class="faq-q-prefix">Q.</span>상담은 어떻게 진행되나요?</span>
-              <span class="faq-icon">+</span>
-            </div>
-            <div class="faq-a">
-              상담은 간단하게 3단계로 진행됩니다.<br><br>
-              1️⃣ 원하는 차종 / 조건 상담<br>
-              2️⃣ 여러 금융사 견적 비교 안내<br>
-              3️⃣ 가장 유리한 조건으로 계약 진행<br><br>
-              전화, 카톡, 문자 등 편하신 방식으로 상담 가능하며 견적 상담은 무료로 진행됩니다.
-            </div>
-          </div>
-
+          <details open>
+            <summary>초기비용 없이 계약할 수 있나요?</summary>
+            <p>차량, 심사, 금융사 조건에 따라 보증금·선납금 0원 조건을 확인할 수 있습니다. 가능 여부를 먼저 안내한 뒤 진행합니다.</p>
+          </details>
+          <details>
+            <summary>문의만 남기면 계약이 진행되나요?</summary>
+            <p>아닙니다. 처음에는 희망 차량, 예산, 이용 방식에 맞는 조건을 비교해드리고 계약 여부는 고객이 충분히 확인한 뒤 결정합니다.</p>
+          </details>
+          <details>
+            <summary>연락은 어떤 방식으로 오나요?</summary>
+            <p>남겨주신 연락처로 견적 확인을 위해 연락드립니다. 통화가 부담스러우면 문자 안내 중심으로 상담할 수 있습니다.</p>
+          </details>
+          <details>
+            <summary>개인사업자도 비용처리가 가능한가요?</summary>
+            <p>이용 방식과 회계 처리 기준에 따라 달라집니다. 계약 전 비용처리 가능 범위와 필요한 확인 항목을 함께 점검합니다.</p>
+          </details>
+          <details>
+            <summary>만기에는 어떤 선택지가 있나요?</summary>
+            <p>반납, 연장, 인수 중 선택할 수 있으며 차량과 금융사별 조건이 다릅니다. 견적 단계에서 만기 선택지까지 같이 비교합니다.</p>
+          </details>
         </div>
-      </div>
-    </section>
-
-    <!-- Footer -->
-    <footer class="footer">
-      <div class="wrap foot-inner-wrap">
-
-        <a class="foot-kakao-btn" href="https://open.kakao.com/o/s7SanMki" target="_blank" rel="noopener">
-          <svg viewBox="0 0 24 24" fill="currentColor">
-            <path
-              d="M12 3C6.477 3 2 6.477 2 10.5c0 2.544 1.522 4.776 3.81 6.198l-.972 3.63a.374.374 0 0 0 .554.41l4.198-2.795C10.484 18.01 11.234 18 12 18c5.523 0 10-3.477 10-7.5S17.523 3 12 3z" />
-          </svg>
-          카카오 오픈채팅 바로가기
-        </a>
-
-        <span class="word" style="color:white; font-weight:bold; font-size:1.1rem;">RE : CAR</span>
-
-        <div class="foot-links">
-          <a href="privacyPolicy.html">개인정보처리방침</a>
-          <a href="inquiry.html">무료 견적 문의</a>
+        <div class="faq-cta">
+          <div>
+            <strong>차량이 아직 정해지지 않아도 괜찮습니다.</strong>
+            <p>예산과 용도만 알려주시면 가능한 조건부터 함께 좁혀드립니다.</p>
+          </div>
+          <a class="primary-button navy quote-focus-button" href="#quote" data-vehicle="조건 비교 상담">조건 비교 시작</a>
         </div>
+      </section>
+    </main>
 
-        <p class="muted">Copyright © RE:CAR All rights reserved.</p>
+    <footer class="site-footer" aria-label="사업자 정보">
+      <div class="footer-brand">
+        <strong>RE:CAR</strong>
+        <p>리카오토플랜은 장기렌트·리스 조건을 비교하고 고객에게 맞는 상담을 안내합니다.</p>
       </div>
+      <dl class="business-info">
+        <div>
+          <dt>상호</dt>
+          <dd>리카오토플랜</dd>
+        </div>
+        <div>
+          <dt>대표자</dt>
+          <dd>조용철</dd>
+        </div>
+        <div>
+          <dt>사업자등록번호</dt>
+          <dd>325-60-00844</dd>
+        </div>
+        <div>
+          <dt>주소</dt>
+          <dd>경기도 부천시 원미구 신흥로 40, 709호(심곡동, 디오스빌)</dd>
+        </div>
+        <div>
+          <dt>업태</dt>
+          <dd>정보통신업, 도매 및 소매업</dd>
+        </div>
+        <div>
+          <dt>종목</dt>
+          <dd>응용 소프트웨어 개발 및 공급업, 전자상거래 소매업</dd>
+        </div>
+        <div>
+          <dt>연락처</dt>
+          <dd><a href="tel:01065731038">010-6573-1038</a></dd>
+        </div>
+        <div>
+          <dt>이메일</dt>
+          <dd><a href="mailto:jhxox666@gmail.com">jhxox666@gmail.com</a></dd>
+        </div>
+      </dl>
+      <p class="footer-notice">
+        Copyright © RE:CAR. All rights reserved.
+        <a href="./privacy.html">개인정보 처리방침</a>
+        <a href="./terms.html">상담 유의사항</a>
+        <a href="./admin.html">관리자</a>
+      </p>
     </footer>
-  </main>
 
-  <div class="m-menu" id="mobileMenu" aria-hidden="true">
-    <div class="m-sheet">
-      <button id="closeMenu" class="m-close">닫기</button>
-      <a href="#top">홈</a>
-      <a href="#services">서비스</a>
-      <a href="#faq">FAQ</a>
-      <a href="inquiry.html">견적 문의</a>
-      <a href="https://open.kakao.com/o/s7SanMki" target="_blank" rel="noopener" style="color:#FEE500;">카카오 상담</a>
-    </div>
-  </div>
+    <aside class="floating-contact" aria-label="빠른 문의">
+      <p>빠른 상담</p>
+      <strong>조건만 먼저 확인해보세요.</strong>
+      <span>차량명만 남겨도 가능한 견적을 확인해드립니다.</span>
+      <a class="floating-contact-primary quote-focus-button" href="#quote" data-vehicle="조건 비교 상담">
+        <i data-lucide="message-circle"></i>
+        문의하기
+      </a>
+      <a class="floating-contact-kakao" href="https://open.kakao.com/o/s7SanMki" target="_blank" rel="noopener noreferrer">
+        카카오톡 상담하기
+      </a>
+    </aside>
 
-  <script src="./script.js"></script>
-  <script>
-    /* ===== FAQ 토글 ===== */
-    function toggleFaq(el) {
-      const item = el.closest('.faq-item');
-      const isOpen = item.classList.contains('open');
-      document.querySelectorAll('.faq-item.open').forEach(i => i.classList.remove('open'));
-      if (!isOpen) item.classList.add('open');
-    }
+    <nav class="mobile-bottom" aria-label="모바일 빠른 메뉴">
+      <a href="#home"><i data-lucide="home"></i><span>홈</span></a>
+      <a class="quote-focus-button" href="#quote" data-vehicle="조건 비교 상담"><i data-lucide="calculator"></i><span>견적</span></a>
+      <a href="#special"><i data-lucide="badge-percent"></i><span>특가</span></a>
+      <a class="quote-focus-button" href="#quote" data-vehicle="조건 비교 상담"><i data-lucide="phone"></i><span>상담</span></a>
+    </nav>
 
-
-    /* ===== Spotlight 자동 전환 ===== */
-    let autoSlideTimer;
-    function startAutoSlide() {
-      autoSlideTimer = setInterval(() => {
-        if (typeof updateSlide === 'function') {
-          updateSlide(window._spotIdx !== undefined ? window._spotIdx + 1 : 1);
-        }
-      }, 3500);
-    }
-    function resetAutoSlide() {
-      clearInterval(autoSlideTimer);
-      startAutoSlide();
-    }
-
-    window.addEventListener('load', () => {
-      startAutoSlide();
-      document.querySelectorAll('.spot-arrow').forEach(btn => {
-        btn.addEventListener('click', resetAutoSlide);
-      });
-    });
-
-    /* ===== Spot dot 인디케이터 ===== */
-    const dots = document.querySelectorAll('.spot-dot');
-    const origUpdateSlide = window.updateSlide;
-    // script.js의 updateSlide를 오버라이드하여 dot 업데이트 추가
-    const _patchDots = () => {
-      if (typeof updateSlide !== 'undefined') {
-        const _orig = updateSlide;
-        window.updateSlide = function (idx) {
-          _orig(idx);
-          dots.forEach((d, i) => d.classList.toggle('active', i === window._lastIdx));
-        };
-      }
-    };
-    window.addEventListener('load', _patchDots);
-  </script>
-
-  <style>
-    /* Spotlight dot 인디케이터 스타일 */
-    .spot-dot {
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: rgba(255, 255, 255, 0.25);
-      transition: background 0.3s, transform 0.3s;
-      cursor: pointer;
-    }
-
-    .spot-dot.active {
-      background: #2563eb;
-      transform: scale(1.3);
-    }
-  </style>
-</body>
-
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <script src="./script.js?v=20260518-launch"></script>
+  </body>
 </html>

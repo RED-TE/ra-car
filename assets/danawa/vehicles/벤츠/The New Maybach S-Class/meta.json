@@ -1,0 +1,37 @@
+{
+  "brand": "벤츠",
+  "brand_id": "349",
+  "model_id": "4789",
+  "name": "The New Maybach S-Class",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4789",
+  "photo_code": "4789/",
+  "default_image_url": "https://autoimg.danawa.com/photo/4789/model_360.png",
+  "default_image_path": "vehicles\\벤츠\\The New Maybach S-Class\\model_360.png",
+  "colors": [],
+  "gallery": [
+    {
+      "name": "메르세데스-마이바흐 S-클래스",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4789&Tab=image&No=143874",
+      "image_url": "https://autoimg.danawa.com/gallery/4789/20260326_4789 (1).jpg",
+      "path": "vehicles\\벤츠\\The New Maybach S-Class\\gallery\\01_메르세데스-마이바흐 S-클래스.jpg"
+    },
+    {
+      "name": "메르세데스-마이바흐 S-클래스",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4789&Tab=image&No=143875",
+      "image_url": "https://autoimg.danawa.com/gallery/4789/20260326_4789 (2).jpg",
+      "path": "vehicles\\벤츠\\The New Maybach S-Class\\gallery\\02_메르세데스-마이바흐 S-클래스.jpg"
+    },
+    {
+      "name": "메르세데스-마이바흐 S-클래스",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4789&Tab=image&No=143876",
+      "image_url": "https://autoimg.danawa.com/gallery/4789/20260326_4789 (3).jpg",
+      "path": "vehicles\\벤츠\\The New Maybach S-Class\\gallery\\03_메르세데스-마이바흐 S-클래스.jpg"
+    },
+    {
+      "name": "메르세데스-마이바흐 S-클래스",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4789&Tab=image&No=143877",
+      "image_url": "https://autoimg.danawa.com/gallery/4789/20260326_4789 (4).jpg",
+      "path": "vehicles\\벤츠\\The New Maybach S-Class\\gallery\\04_메르세데스-마이바흐 S-클래스.jpg"
+    }
+  ]
+}

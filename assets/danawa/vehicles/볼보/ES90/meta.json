@@ -1,0 +1,37 @@
+{
+  "brand": "볼보",
+  "brand_id": "459",
+  "model_id": "4756",
+  "name": "ES90",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4756",
+  "photo_code": "4756/",
+  "default_image_url": "https://autoimg.danawa.com/photo/4756/model_360.png",
+  "default_image_path": "vehicles\\볼보\\ES90\\model_360.png",
+  "colors": [],
+  "gallery": [
+    {
+      "name": "ES90",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4756&Tab=image&No=140127",
+      "image_url": "https://autoimg.danawa.com/gallery/4756/20250919_4579 (1).jpg",
+      "path": "vehicles\\볼보\\ES90\\gallery\\01_ES90.jpg"
+    },
+    {
+      "name": "ES90",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4756&Tab=image&No=140128",
+      "image_url": "https://autoimg.danawa.com/gallery/4756/20250919_4579 (9).jpg",
+      "path": "vehicles\\볼보\\ES90\\gallery\\02_ES90.jpg"
+    },
+    {
+      "name": "ES90",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4756&Tab=image&No=140129",
+      "image_url": "https://autoimg.danawa.com/gallery/4756/20250919_4579 (10).jpg",
+      "path": "vehicles\\볼보\\ES90\\gallery\\03_ES90.jpg"
+    },
+    {
+      "name": "ES90",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4756&Tab=image&No=140130",
+      "image_url": "https://autoimg.danawa.com/gallery/4756/20250919_4579 (8).jpg",
+      "path": "vehicles\\볼보\\ES90\\gallery\\04_ES90.jpg"
+    }
+  ]
+}

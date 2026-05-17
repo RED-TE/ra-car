@@ -1,0 +1,62 @@
+{
+  "brand": "KGM",
+  "brand_id": "326",
+  "model_id": "4717",
+  "name": "무쏘 칸",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4717",
+  "photo_code": "4717/53379",
+  "default_image_url": "https://autoimg.danawa.com/photo/4717/model_360.png",
+  "default_image_path": "vehicles\\KGM\\무쏘 칸\\model_360.png",
+  "colors": [
+    {
+      "name": "그랜드 화이트(WAA)",
+      "code": "C11",
+      "swatch": "#ecece9",
+      "image_url": "https://autoimg.danawa.com/photo/4717/53379/color_11_360.png",
+      "path": "vehicles\\KGM\\무쏘 칸\\colors\\01_그랜드 화이트(WAA).png"
+    },
+    {
+      "name": "마블 그레이(ACM)",
+      "code": "C12",
+      "swatch": "#717076",
+      "image_url": "https://autoimg.danawa.com/photo/4717/53379/color_12_360.png",
+      "path": "vehicles\\KGM\\무쏘 칸\\colors\\02_마블 그레이(ACM).png"
+    },
+    {
+      "name": "인디안 레드(RAJ)",
+      "code": "C14",
+      "swatch": "#8f1a23",
+      "image_url": "https://autoimg.danawa.com/photo/4717/53379/color_14_360.png",
+      "path": "vehicles\\KGM\\무쏘 칸\\colors\\03_인디안 레드(RAJ).png"
+    },
+    {
+      "name": "아마조니아 그린(GAM)",
+      "code": "C16",
+      "swatch": "#313630",
+      "image_url": "https://autoimg.danawa.com/photo/4717/53379/color_16_360.png",
+      "path": "vehicles\\KGM\\무쏘 칸\\colors\\04_아마조니아 그린(GAM).png"
+    },
+    {
+      "name": "스페이스 블랙(LAK)",
+      "code": "C17",
+      "swatch": "#101010",
+      "image_url": "https://autoimg.danawa.com/photo/4717/53379/color_17_360.png",
+      "path": "vehicles\\KGM\\무쏘 칸\\colors\\05_스페이스 블랙(LAK).png"
+    },
+    {
+      "name": "샌드스톤 베이지(EBK)",
+      "code": "C18",
+      "swatch": "#9a9788",
+      "image_url": "https://autoimg.danawa.com/photo/4717/53379/color_18_360.png",
+      "path": "vehicles\\KGM\\무쏘 칸\\colors\\06_샌드스톤 베이지(EBK).png"
+    },
+    {
+      "name": "실키 화이트 펄(WAK)",
+      "code": "C10",
+      "swatch": "#e3e6e7",
+      "image_url": "https://autoimg.danawa.com/photo/4717/53379/color_10_360.png",
+      "path": "vehicles\\KGM\\무쏘 칸\\colors\\07_실키 화이트 펄(WAK).png"
+    }
+  ],
+  "gallery": []
+}

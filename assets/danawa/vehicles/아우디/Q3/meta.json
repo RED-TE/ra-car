@@ -1,0 +1,108 @@
+{
+  "brand": "아우디",
+  "brand_id": "371",
+  "model_id": "3668",
+  "name": "Q3",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3668",
+  "photo_code": "3668/53564",
+  "default_image_url": "https://autoimg.danawa.com/photo/3668/model_360.png",
+  "default_image_path": "vehicles\\아우디\\Q3\\model_360.png",
+  "colors": [
+    {
+      "name": "Chronos Gray, metallic",
+      "code": "C11",
+      "swatch": "#595c58",
+      "image_url": "https://autoimg.danawa.com/photo/3668/53564/color_11_360.png",
+      "path": "vehicles\\아우디\\Q3\\colors\\01_Chronos Gray, metallic.png"
+    },
+    {
+      "name": "Mythos Black, metallic",
+      "code": "C12",
+      "swatch": "#071313",
+      "image_url": "https://autoimg.danawa.com/photo/3668/53564/color_12_360.png",
+      "path": "vehicles\\아우디\\Q3\\colors\\02_Mythos Black, metallic.png"
+    },
+    {
+      "name": "Florett Silver Metallic",
+      "code": "C13",
+      "swatch": "#c9c8cd",
+      "image_url": "https://autoimg.danawa.com/photo/3668/53564/color_13_360.png",
+      "path": "vehicles\\아우디\\Q3\\colors\\03_Florett Silver Metallic.png"
+    },
+    {
+      "name": "Arkona White",
+      "code": "C14",
+      "swatch": "#fdfffc",
+      "image_url": "https://autoimg.danawa.com/photo/3668/53564/color_14_360.png",
+      "path": "vehicles\\아우디\\Q3\\colors\\04_Arkona White.png"
+    },
+    {
+      "name": "Pulse Orange",
+      "code": "C15",
+      "swatch": "#d15a0a",
+      "image_url": "https://autoimg.danawa.com/photo/3668/53564/color_15_360.png",
+      "path": "vehicles\\아우디\\Q3\\colors\\05_Pulse Orange.png"
+    },
+    {
+      "name": "Nano Gray, metallic",
+      "code": "C16",
+      "swatch": "#474d55",
+      "image_url": "https://autoimg.danawa.com/photo/3668/53564/color_16_360.png",
+      "path": "vehicles\\아우디\\Q3\\colors\\06_Nano Gray, metallic.png"
+    },
+    {
+      "name": "Daytona Gray, pearlescent",
+      "code": "C17",
+      "swatch": "#565859",
+      "image_url": "https://autoimg.danawa.com/photo/3668/53564/color_17_360.png",
+      "path": "vehicles\\아우디\\Q3\\colors\\07_Daytona Gray, pearlescent.png"
+    },
+    {
+      "name": "Navarra Blue, metallic",
+      "code": "C18",
+      "swatch": "#233359",
+      "image_url": "https://autoimg.danawa.com/photo/3668/53564/color_18_360.png",
+      "path": "vehicles\\아우디\\Q3\\colors\\08_Navarra Blue, metallic.png"
+    },
+    {
+      "name": "Progressive Red, metallic",
+      "code": "C19",
+      "swatch": "#cf0027",
+      "image_url": "https://autoimg.danawa.com/photo/3668/53564/color_19_360.png",
+      "path": "vehicles\\아우디\\Q3\\colors\\09_Progressive Red, metallic.png"
+    },
+    {
+      "name": "Glacier White, metallic",
+      "code": "C20",
+      "swatch": "#fdfeff",
+      "image_url": "https://autoimg.danawa.com/photo/3668/53564/color_20_360.png",
+      "path": "vehicles\\아우디\\Q3\\colors\\10_Glacier White, metallic.png"
+    }
+  ],
+  "gallery": [
+    {
+      "name": "아우디 Q3 스포트백",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3668&Tab=image&No=121505",
+      "image_url": "https://autoimg.danawa.com/gallery/3668/20240429_3668 (1).jpg",
+      "path": "vehicles\\아우디\\Q3\\gallery\\01_아우디 Q3 스포트백.jpg"
+    },
+    {
+      "name": "아우디 Q3 스포트백",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3668&Tab=image&No=121506",
+      "image_url": "https://autoimg.danawa.com/gallery/3668/20240429_3668 (2).jpg",
+      "path": "vehicles\\아우디\\Q3\\gallery\\02_아우디 Q3 스포트백.jpg"
+    },
+    {
+      "name": "아우디 Q3 스포트백",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3668&Tab=image&No=121507",
+      "image_url": "https://autoimg.danawa.com/gallery/3668/20240429_3668 (3).jpg",
+      "path": "vehicles\\아우디\\Q3\\gallery\\03_아우디 Q3 스포트백.jpg"
+    },
+    {
+      "name": "아우디 Q3 스포트백",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3668&Tab=image&No=121508",
+      "image_url": "https://autoimg.danawa.com/gallery/3668/20240429_3668 (4).jpg",
+      "path": "vehicles\\아우디\\Q3\\gallery\\04_아우디 Q3 스포트백.jpg"
+    }
+  ]
+}

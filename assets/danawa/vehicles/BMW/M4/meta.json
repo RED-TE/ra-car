@@ -1,0 +1,80 @@
+{
+  "brand": "BMW",
+  "brand_id": "362",
+  "model_id": "4615",
+  "name": "M4",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4615",
+  "photo_code": "4615/53550",
+  "default_image_url": "https://autoimg.danawa.com/photo/4615/53550/color_15_360.png",
+  "default_image_path": "vehicles\\BMW\\M4\\model_360.png",
+  "colors": [
+    {
+      "name": "알파인 화이트",
+      "code": "C11",
+      "swatch": "#fefefe",
+      "image_url": "https://autoimg.danawa.com/photo/4615/53550/color_11_360.png",
+      "path": "vehicles\\BMW\\M4\\colors\\01_알파인 화이트.png"
+    },
+    {
+      "name": "블랙 사파이어 메탈릭",
+      "code": "C12",
+      "swatch": "#1c1c1c",
+      "image_url": "https://autoimg.danawa.com/photo/4615/53550/color_12_360.png",
+      "path": "vehicles\\BMW\\M4\\colors\\02_블랙 사파이어 메탈릭.png"
+    },
+    {
+      "name": "M 포티마오 블루 메탈릭",
+      "code": "C13",
+      "swatch": "#355085",
+      "image_url": "https://autoimg.danawa.com/photo/4615/53550/color_13_360.png",
+      "path": "vehicles\\BMW\\M4\\colors\\03_M 포티마오 블루 메탈릭.png"
+    },
+    {
+      "name": "M 토론토 레드 메탈릭",
+      "code": "C14",
+      "swatch": "#ba2014",
+      "image_url": "https://autoimg.danawa.com/photo/4615/53550/color_14_360.png",
+      "path": "vehicles\\BMW\\M4\\colors\\04_M 토론토 레드 메탈릭.png"
+    },
+    {
+      "name": "M 아일 오브 맨 그린 메탈릭",
+      "code": "C15",
+      "swatch": "#044332",
+      "image_url": "https://autoimg.danawa.com/photo/4615/53550/color_15_360.png",
+      "path": "vehicles\\BMW\\M4\\colors\\05_M 아일 오브 맨 그린 메탈릭.png"
+    },
+    {
+      "name": "M 브루클린 그레이 메탈릭",
+      "code": "C16",
+      "swatch": "#acb2b2",
+      "image_url": "https://autoimg.danawa.com/photo/4615/53550/color_16_360.png",
+      "path": "vehicles\\BMW\\M4\\colors\\06_M 브루클린 그레이 메탈릭.png"
+    }
+  ],
+  "gallery": [
+    {
+      "name": "M4 CS 에디션 VR46",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4615&Tab=image&No=135313",
+      "image_url": "https://autoimg.danawa.com/gallery/4615/20250225_4615 (1).jpg",
+      "path": "vehicles\\BMW\\M4\\gallery\\01_M4 CS 에디션 VR46.jpg"
+    },
+    {
+      "name": "M4 CS 에디션 VR46",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4615&Tab=image&No=135314",
+      "image_url": "https://autoimg.danawa.com/gallery/4615/20250225_4615 (2).jpg",
+      "path": "vehicles\\BMW\\M4\\gallery\\02_M4 CS 에디션 VR46.jpg"
+    },
+    {
+      "name": "M4 CS 에디션 VR46",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4615&Tab=image&No=135315",
+      "image_url": "https://autoimg.danawa.com/gallery/4615/20250225_4615 (3).jpg",
+      "path": "vehicles\\BMW\\M4\\gallery\\03_M4 CS 에디션 VR46.jpg"
+    },
+    {
+      "name": "M4 CS 에디션 VR46",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4615&Tab=image&No=135316",
+      "image_url": "https://autoimg.danawa.com/gallery/4615/20250225_4615 (4).jpg",
+      "path": "vehicles\\BMW\\M4\\gallery\\04_M4 CS 에디션 VR46.jpg"
+    }
+  ]
+}

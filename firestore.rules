@@ -2,36 +2,42 @@ rules_version = '2';
 
 service cloud.firestore {
   match /databases/{database}/documents {
-  
-    // Admin access: Multiple admins authorized
-    match /{document=**} {
-      allow read, write: if request.auth != null && 
-        (request.auth.token.email == 'jhxox666@gmail.com' || 
-         request.auth.token.email == 'jhxox666@test.com' || 
-         request.auth.token.email == 'sungho4768@gmail.com');
+    function isValidLeadId(leadId) {
+      return leadId.matches('^RECAR-[0-9]{8}-[A-Z0-9]{4}$');
     }
 
-    match /users/{userId} {
-      allow read, write: if request.auth != null && request.auth.uid == userId;
+    function isValidLeadCreate(leadId) {
+      return request.resource.data.keys().hasAll([
+          'id',
+          'vehicle',
+          'phone',
+          'customerName',
+          'privacyConsent',
+          'termsConsent'
+        ])
+        && request.resource.data.id == leadId
+        && request.resource.data.vehicle is string
+        && request.resource.data.vehicle.size() >= 1
+        && request.resource.data.vehicle.size() <= 120
+        && request.resource.data.phone is string
+        && request.resource.data.phone.matches('^01[016789][0-9]{7,8}$')
+        && request.resource.data.customerName is string
+        && request.resource.data.customerName.size() >= 1
+        && request.resource.data.customerName.size() <= 40
+        && (!('requestNote' in request.resource.data) || request.resource.data.requestNote is string)
+        && request.resource.data.privacyConsent == true
+        && request.resource.data.termsConsent == true;
     }
-    
-    match /reviews/{reviewId} {
-      allow read: if true;
-      allow create: if request.auth != null && request.resource.data.uid == request.auth.uid;
-      allow update, delete: if request.auth != null && (request.auth.uid == resource.data.uid);
-    }
-    
-    match /inquiries/{inquiryId} {
-      allow create: if true;
+
+    match /leads/{leadId} {
+      allow write: if !exists(/databases/$(database)/documents/leads/$(leadId))
+        && isValidLeadId(leadId)
+        && isValidLeadCreate(leadId);
       allow read, update, delete: if false;
     }
 
-    match /trial_logs/{hwid} {
-      allow read, write: if request.auth != null;
-    }
-    
-    match /activeSessions/{sessionId} {
-      allow read, write: if request.auth != null;
+    match /{document=**} {
+      allow read, write: if false;
     }
   }
 }

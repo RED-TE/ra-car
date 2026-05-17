@@ -1,0 +1,129 @@
+{
+  "brand": "제네시스",
+  "brand_id": "304",
+  "model_id": "4761",
+  "name": "GV60 MAGMA",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4761",
+  "photo_code": "4761/53520",
+  "default_image_url": "https://autoimg.danawa.com/photo/4761/model_360.png",
+  "default_image_path": "vehicles\\제네시스\\GV60 MAGMA\\model_360.png",
+  "colors": [
+    {
+      "name": "마테호른 화이트(FT7)-유료(무광)",
+      "code": "C06",
+      "swatch": "#f0f1f0",
+      "image_url": "https://autoimg.danawa.com/photo/4761/53520/color_06_360.png",
+      "path": "vehicles\\제네시스\\GV60 MAGMA\\colors\\01_마테호른 화이트(FT7)-유료(무광).png"
+    },
+    {
+      "name": "마칼루 그레이(MPE)-유료(무광)",
+      "code": "C07",
+      "swatch": "#232d36",
+      "image_url": "https://autoimg.danawa.com/photo/4761/53520/color_07_360.png",
+      "path": "vehicles\\제네시스\\GV60 MAGMA\\colors\\02_마칼루 그레이(MPE)-유료(무광).png"
+    },
+    {
+      "name": "스토르 그린(MKG)-유료(무광)",
+      "code": "C08",
+      "swatch": "#0d1c15",
+      "image_url": "https://autoimg.danawa.com/photo/4761/53520/color_08_360.png",
+      "path": "vehicles\\제네시스\\GV60 MAGMA\\colors\\03_스토르 그린(MKG)-유료(무광).png"
+    },
+    {
+      "name": "세레스 블루(MSA)-유료(무광)",
+      "code": "C09",
+      "swatch": "#273a48",
+      "image_url": "https://autoimg.danawa.com/photo/4761/53520/color_09_360.png",
+      "path": "vehicles\\제네시스\\GV60 MAGMA\\colors\\04_세레스 블루(MSA)-유료(무광).png"
+    },
+    {
+      "name": "마그마 오렌지(8MB)-유료",
+      "code": "C10",
+      "swatch": "#df5f25",
+      "image_url": "https://autoimg.danawa.com/photo/4761/53520/color_10_360.png",
+      "path": "vehicles\\제네시스\\GV60 MAGMA\\colors\\05_마그마 오렌지(8MB)-유료.png"
+    },
+    {
+      "name": "우유니 화이트(UYH)",
+      "code": "C11",
+      "swatch": "#f2f2f2",
+      "image_url": "https://autoimg.danawa.com/photo/4761/53520/color_11_360.png",
+      "path": "vehicles\\제네시스\\GV60 MAGMA\\colors\\06_우유니 화이트(UYH).png"
+    },
+    {
+      "name": "세빌 실버(SSS)",
+      "code": "C12",
+      "swatch": "#767778",
+      "image_url": "https://autoimg.danawa.com/photo/4761/53520/color_12_360.png",
+      "path": "vehicles\\제네시스\\GV60 MAGMA\\colors\\07_세빌 실버(SSS).png"
+    },
+    {
+      "name": "마칼루 그레이(NCM)",
+      "code": "C13",
+      "swatch": "#202a33",
+      "image_url": "https://autoimg.danawa.com/photo/4761/53520/color_13_360.png",
+      "path": "vehicles\\제네시스\\GV60 MAGMA\\colors\\08_마칼루 그레이(NCM).png"
+    },
+    {
+      "name": "비크 블랙(PH3)",
+      "code": "C14",
+      "swatch": "#020c12",
+      "image_url": "https://autoimg.danawa.com/photo/4761/53520/color_14_360.png",
+      "path": "vehicles\\제네시스\\GV60 MAGMA\\colors\\09_비크 블랙(PH3).png"
+    },
+    {
+      "name": "스토르 그린(KGN)",
+      "code": "C15",
+      "swatch": "#0d1613",
+      "image_url": "https://autoimg.danawa.com/photo/4761/53520/color_15_360.png",
+      "path": "vehicles\\제네시스\\GV60 MAGMA\\colors\\10_스토르 그린(KGN).png"
+    },
+    {
+      "name": "카프리 블루(NRB)",
+      "code": "C16",
+      "swatch": "#00103c",
+      "image_url": "https://autoimg.danawa.com/photo/4761/53520/color_16_360.png",
+      "path": "vehicles\\제네시스\\GV60 MAGMA\\colors\\11_카프리 블루(NRB).png"
+    },
+    {
+      "name": "세레스 블루(ASA)",
+      "code": "C17",
+      "swatch": "#203443",
+      "image_url": "https://autoimg.danawa.com/photo/4761/53520/color_17_360.png",
+      "path": "vehicles\\제네시스\\GV60 MAGMA\\colors\\12_세레스 블루(ASA).png"
+    },
+    {
+      "name": "트롬소 그린(PBG)",
+      "code": "C18",
+      "swatch": "#16303e",
+      "image_url": "https://autoimg.danawa.com/photo/4761/53520/color_18_360.png",
+      "path": "vehicles\\제네시스\\GV60 MAGMA\\colors\\13_트롬소 그린(PBG).png"
+    }
+  ],
+  "gallery": [
+    {
+      "name": "GV60 마그마",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4761&Tab=image&No=144069",
+      "image_url": "https://autoimg.danawa.com/gallery/4761/20260402_4761 (1).jpg",
+      "path": "vehicles\\제네시스\\GV60 MAGMA\\gallery\\01_GV60 마그마.jpg"
+    },
+    {
+      "name": "GV60 마그마",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4761&Tab=image&No=143066",
+      "image_url": "https://autoimg.danawa.com/gallery/4761/20260213_4761 (1).jpg",
+      "path": "vehicles\\제네시스\\GV60 MAGMA\\gallery\\02_GV60 마그마.jpg"
+    },
+    {
+      "name": "GV60 마그마",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4761&Tab=image&No=143067",
+      "image_url": "https://autoimg.danawa.com/gallery/4761/20260213_4761 (2).jpg",
+      "path": "vehicles\\제네시스\\GV60 MAGMA\\gallery\\03_GV60 마그마.jpg"
+    },
+    {
+      "name": "GV60 마그마",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4761&Tab=image&No=143068",
+      "image_url": "https://autoimg.danawa.com/gallery/4761/20260213_4761 (3).jpg",
+      "path": "vehicles\\제네시스\\GV60 MAGMA\\gallery\\04_GV60 마그마.jpg"
+    }
+  ]
+}

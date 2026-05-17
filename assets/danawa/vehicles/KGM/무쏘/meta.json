@@ -1,0 +1,87 @@
+{
+  "brand": "KGM",
+  "brand_id": "326",
+  "model_id": "4766",
+  "name": "무쏘",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4766",
+  "photo_code": "4766/53570",
+  "default_image_url": "https://autoimg.danawa.com/photo/4766/model_360.png",
+  "default_image_path": "vehicles\\KGM\\무쏘\\model_360.png",
+  "colors": [
+    {
+      "name": "스모크 토프 OBH",
+      "code": "C11",
+      "swatch": "#716761",
+      "image_url": "https://autoimg.danawa.com/photo/4766/53570/color_11_360.png",
+      "path": "vehicles\\KGM\\무쏘\\colors\\01_스모크 토프 OBH.png"
+    },
+    {
+      "name": "그랜드 화이트 WAA",
+      "code": "C12",
+      "swatch": "#e3e5e6",
+      "image_url": "https://autoimg.danawa.com/photo/4766/53570/color_12_360.png",
+      "path": "vehicles\\KGM\\무쏘\\colors\\02_그랜드 화이트 WAA.png"
+    },
+    {
+      "name": "샌드스톤 베이지 EBK",
+      "code": "C13",
+      "swatch": "#b9b498",
+      "image_url": "https://autoimg.danawa.com/photo/4766/53570/color_13_360.png",
+      "path": "vehicles\\KGM\\무쏘\\colors\\03_샌드스톤 베이지 EBK.png"
+    },
+    {
+      "name": "아마조니아 그린 GAM",
+      "code": "C14",
+      "swatch": "#313731",
+      "image_url": "https://autoimg.danawa.com/photo/4766/53570/color_14_360.png",
+      "path": "vehicles\\KGM\\무쏘\\colors\\04_아마조니아 그린 GAM.png"
+    },
+    {
+      "name": "마블 그레이 ACM",
+      "code": "C15",
+      "swatch": "#606065",
+      "image_url": "https://autoimg.danawa.com/photo/4766/53570/color_15_360.png",
+      "path": "vehicles\\KGM\\무쏘\\colors\\05_마블 그레이 ACM.png"
+    },
+    {
+      "name": "울트라 마린 BBE",
+      "code": "C16",
+      "swatch": "#143662",
+      "image_url": "https://autoimg.danawa.com/photo/4766/53570/color_16_360.png",
+      "path": "vehicles\\KGM\\무쏘\\colors\\06_울트라 마린 BBE.png"
+    },
+    {
+      "name": "스페이스 블랙 LAK",
+      "code": "C17",
+      "swatch": "#171719",
+      "image_url": "https://autoimg.danawa.com/photo/4766/53570/color_17_360.png",
+      "path": "vehicles\\KGM\\무쏘\\colors\\07_스페이스 블랙 LAK.png"
+    }
+  ],
+  "gallery": [
+    {
+      "name": "무쏘",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4766&Tab=image&No=143080",
+      "image_url": "https://autoimg.danawa.com/gallery/4766/20260219_4766 (26).jpg",
+      "path": "vehicles\\KGM\\무쏘\\gallery\\01_무쏘.jpg"
+    },
+    {
+      "name": "무쏘",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4766&Tab=image&No=143081",
+      "image_url": "https://autoimg.danawa.com/gallery/4766/20260219_4766 (1).jpg",
+      "path": "vehicles\\KGM\\무쏘\\gallery\\02_무쏘.jpg"
+    },
+    {
+      "name": "무쏘 그랜드",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4766&Tab=image&No=143082",
+      "image_url": "https://autoimg.danawa.com/gallery/4766/20260219_4766 (2).jpg",
+      "path": "vehicles\\KGM\\무쏘\\gallery\\03_무쏘 그랜드.jpg"
+    },
+    {
+      "name": "무쏘 그랜드",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4766&Tab=image&No=143083",
+      "image_url": "https://autoimg.danawa.com/gallery/4766/20260219_4766 (3).jpg",
+      "path": "vehicles\\KGM\\무쏘\\gallery\\04_무쏘 그랜드.jpg"
+    }
+  ]
+}

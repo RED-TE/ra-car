@@ -1,0 +1,94 @@
+{
+  "brand": "렉서스",
+  "brand_id": "486",
+  "model_id": "4031",
+  "name": "LS",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4031",
+  "photo_code": "4031/53544",
+  "default_image_url": "https://autoimg.danawa.com/photo/4031/model_360.png",
+  "default_image_path": "vehicles\\렉서스\\LS\\model_360.png",
+  "colors": [
+    {
+      "name": "WHITE NOVA GLASS FLAKE",
+      "code": "C11",
+      "swatch": "#d6d8e3",
+      "image_url": "https://autoimg.danawa.com/photo/4031/53544/color_11_360.png",
+      "path": "vehicles\\렉서스\\LS\\colors\\01_WHITE NOVA GLASS FLAKE.png"
+    },
+    {
+      "name": "LUNAR LUSTER",
+      "code": "C12",
+      "swatch": "#919499",
+      "image_url": "https://autoimg.danawa.com/photo/4031/53544/color_12_360.png",
+      "path": "vehicles\\렉서스\\LS\\colors\\02_LUNAR LUSTER.png"
+    },
+    {
+      "name": "MANGANESE LUSTER",
+      "code": "C13",
+      "swatch": "#4b4b4d",
+      "image_url": "https://autoimg.danawa.com/photo/4031/53544/color_13_360.png",
+      "path": "vehicles\\렉서스\\LS\\colors\\03_MANGANESE LUSTER.png"
+    },
+    {
+      "name": "GRAPHITE BLACK GLASS FLAKE",
+      "code": "C14",
+      "swatch": "#212224",
+      "image_url": "https://autoimg.danawa.com/photo/4031/53544/color_14_360.png",
+      "path": "vehicles\\렉서스\\LS\\colors\\04_GRAPHITE BLACK GLASS FLAKE.png"
+    },
+    {
+      "name": "SONIC IRIDIUM",
+      "code": "C15",
+      "swatch": "#b4bbc3",
+      "image_url": "https://autoimg.danawa.com/photo/4031/53544/color_15_360.png",
+      "path": "vehicles\\렉서스\\LS\\colors\\05_SONIC IRIDIUM.png"
+    },
+    {
+      "name": "SONIC TITANIUM",
+      "code": "C16",
+      "swatch": "#878785",
+      "image_url": "https://autoimg.danawa.com/photo/4031/53544/color_16_360.png",
+      "path": "vehicles\\렉서스\\LS\\colors\\06_SONIC TITANIUM.png"
+    },
+    {
+      "name": "SONIC AGATE",
+      "code": "C17",
+      "swatch": "#613f40",
+      "image_url": "https://autoimg.danawa.com/photo/4031/53544/color_17_360.png",
+      "path": "vehicles\\렉서스\\LS\\colors\\07_SONIC AGATE.png"
+    },
+    {
+      "name": "DEEP BLUE MICA",
+      "code": "C18",
+      "swatch": "#28305f",
+      "image_url": "https://autoimg.danawa.com/photo/4031/53544/color_18_360.png",
+      "path": "vehicles\\렉서스\\LS\\colors\\08_DEEP BLUE MICA.png"
+    }
+  ],
+  "gallery": [
+    {
+      "name": "LS 500h",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4031&Tab=image&No=115524",
+      "image_url": "https://autoimg.danawa.com/gallery/4031/20231121_4031 (1).jpg",
+      "path": "vehicles\\렉서스\\LS\\gallery\\01_LS 500h.jpg"
+    },
+    {
+      "name": "LS 500h",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4031&Tab=image&No=115525",
+      "image_url": "https://autoimg.danawa.com/gallery/4031/20231121_4031 (2).jpg",
+      "path": "vehicles\\렉서스\\LS\\gallery\\02_LS 500h.jpg"
+    },
+    {
+      "name": "LS 500h",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4031&Tab=image&No=115526",
+      "image_url": "https://autoimg.danawa.com/gallery/4031/20231121_4031 (3).jpg",
+      "path": "vehicles\\렉서스\\LS\\gallery\\03_LS 500h.jpg"
+    },
+    {
+      "name": "LS 500h",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4031&Tab=image&No=115527",
+      "image_url": "https://autoimg.danawa.com/gallery/4031/20231121_4031 (4).jpg",
+      "path": "vehicles\\렉서스\\LS\\gallery\\04_LS 500h.jpg"
+    }
+  ]
+}

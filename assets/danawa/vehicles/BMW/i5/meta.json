@@ -1,0 +1,80 @@
+{
+  "brand": "BMW",
+  "brand_id": "362",
+  "model_id": "4528",
+  "name": "i5",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4528",
+  "photo_code": "4528/53473",
+  "default_image_url": "https://autoimg.danawa.com/photo/4528/53473/color_16_360.png",
+  "default_image_path": "vehicles\\BMW\\i5\\model_360.png",
+  "colors": [
+    {
+      "name": "알파인 화이트 (300)",
+      "code": "C11",
+      "swatch": "#e8e8e8",
+      "image_url": "https://autoimg.danawa.com/photo/4528/53473/color_11_360.png",
+      "path": "vehicles\\BMW\\i5\\colors\\01_알파인 화이트 (300).png"
+    },
+    {
+      "name": "블랙 사파이어 (475)",
+      "code": "C12",
+      "swatch": "#111111",
+      "image_url": "https://autoimg.danawa.com/photo/4528/53473/color_12_360.png",
+      "path": "vehicles\\BMW\\i5\\colors\\02_블랙 사파이어 (475).png"
+    },
+    {
+      "name": "소피스토 그레이 (A90)",
+      "code": "C13",
+      "swatch": "#333436",
+      "image_url": "https://autoimg.danawa.com/photo/4528/53473/color_13_360.png",
+      "path": "vehicles\\BMW\\i5\\colors\\03_소피스토 그레이 (A90).png"
+    },
+    {
+      "name": "케이프 요크 그린 (C5Y)",
+      "code": "C14",
+      "swatch": "#3c4f49",
+      "image_url": "https://autoimg.danawa.com/photo/4528/53473/color_14_360.png",
+      "path": "vehicles\\BMW\\i5\\colors\\04_케이프 요크 그린 (C5Y).png"
+    },
+    {
+      "name": "카본 블랙 (416)",
+      "code": "C15",
+      "swatch": "#0b0c11",
+      "image_url": "https://autoimg.danawa.com/photo/4528/53473/color_15_360.png",
+      "path": "vehicles\\BMW\\i5\\colors\\05_카본 블랙 (416).png"
+    },
+    {
+      "name": "M 브루클린 그레이 (C4P)",
+      "code": "C16",
+      "swatch": "#8a9392",
+      "image_url": "https://autoimg.danawa.com/photo/4528/53473/color_16_360.png",
+      "path": "vehicles\\BMW\\i5\\colors\\06_M 브루클린 그레이 (C4P).png"
+    }
+  ],
+  "gallery": [
+    {
+      "name": "2024 l i5 M60 xDrive 투어링 & i5 eDrive40 투어링",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4528&Tab=image&No=124174",
+      "image_url": "https://autoimg.danawa.com/gallery/4528/20240527_4528 (1).jpg",
+      "path": "vehicles\\BMW\\i5\\gallery\\01_2024 l i5 M60 xDrive 투어링 & i5 eDrive40 투어링.jpg"
+    },
+    {
+      "name": "2024 l i5 M60 xDrive 투어링",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4528&Tab=image&No=124175",
+      "image_url": "https://autoimg.danawa.com/gallery/4528/20240527_4528 (2).jpg",
+      "path": "vehicles\\BMW\\i5\\gallery\\02_2024 l i5 M60 xDrive 투어링.jpg"
+    },
+    {
+      "name": "2024 l i5 M60 xDrive 투어링",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4528&Tab=image&No=124176",
+      "image_url": "https://autoimg.danawa.com/gallery/4528/20240527_4528 (3).jpg",
+      "path": "vehicles\\BMW\\i5\\gallery\\03_2024 l i5 M60 xDrive 투어링.jpg"
+    },
+    {
+      "name": "2024 l i5 M60 xDrive 투어링",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4528&Tab=image&No=124177",
+      "image_url": "https://autoimg.danawa.com/gallery/4528/20240527_4528 (4).jpg",
+      "path": "vehicles\\BMW\\i5\\gallery\\04_2024 l i5 M60 xDrive 투어링.jpg"
+    }
+  ]
+}

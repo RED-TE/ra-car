@@ -1,0 +1,73 @@
+{
+  "brand": "기아",
+  "brand_id": "307",
+  "model_id": "4585",
+  "name": "K5",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4585",
+  "photo_code": "4585/53302",
+  "default_image_url": "https://autoimg.danawa.com/photo/4585/model_360.png",
+  "default_image_path": "vehicles\\기아\\K5\\model_360.png",
+  "colors": [
+    {
+      "name": "스노우 화이트 펄(SWP)",
+      "code": "C10",
+      "swatch": "#f1f1f1",
+      "image_url": "https://autoimg.danawa.com/photo/4585/53302/color_10_360.png",
+      "path": "vehicles\\기아\\K5\\colors\\01_스노우 화이트 펄(SWP).png"
+    },
+    {
+      "name": "인터스텔라 그레이(AGT)",
+      "code": "C11",
+      "swatch": "#2c3033",
+      "image_url": "https://autoimg.danawa.com/photo/4585/53302/color_11_360.png",
+      "path": "vehicles\\기아\\K5\\colors\\02_인터스텔라 그레이(AGT).png"
+    },
+    {
+      "name": "오로라 블랙펄(ABP)",
+      "code": "C12",
+      "swatch": "#171514",
+      "image_url": "https://autoimg.danawa.com/photo/4585/53302/color_12_360.png",
+      "path": "vehicles\\기아\\K5\\colors\\03_오로라 블랙펄(ABP).png"
+    },
+    {
+      "name": "울프 그레이(C7S)",
+      "code": "C13",
+      "swatch": "#75797f",
+      "image_url": "https://autoimg.danawa.com/photo/4585/53302/color_13_360.png",
+      "path": "vehicles\\기아\\K5\\colors\\04_울프 그레이(C7S).png"
+    },
+    {
+      "name": "그래비티 블루(B4U)",
+      "code": "C14",
+      "swatch": "#222933",
+      "image_url": "https://autoimg.danawa.com/photo/4585/53302/color_14_360.png",
+      "path": "vehicles\\기아\\K5\\colors\\05_그래비티 블루(B4U).png"
+    }
+  ],
+  "gallery": [
+    {
+      "name": "2025 K5",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4585&Tab=image&No=140772",
+      "image_url": "https://autoimg.danawa.com/gallery/4585/20250924_4585 (1).jpg",
+      "path": "vehicles\\기아\\K5\\gallery\\01_2025 K5.jpg"
+    },
+    {
+      "name": "2025 K5",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4585&Tab=image&No=140773",
+      "image_url": "https://autoimg.danawa.com/gallery/4585/20250924_4585 (2).jpg",
+      "path": "vehicles\\기아\\K5\\gallery\\02_2025 K5.jpg"
+    },
+    {
+      "name": "2025 K5",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4585&Tab=image&No=140774",
+      "image_url": "https://autoimg.danawa.com/gallery/4585/20250924_4585 (3).jpg",
+      "path": "vehicles\\기아\\K5\\gallery\\03_2025 K5.jpg"
+    },
+    {
+      "name": "2025 K5",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4585&Tab=image&No=140775",
+      "image_url": "https://autoimg.danawa.com/gallery/4585/20250924_4585 (4).jpg",
+      "path": "vehicles\\기아\\K5\\gallery\\04_2025 K5.jpg"
+    }
+  ]
+}

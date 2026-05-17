@@ -1,0 +1,37 @@
+{
+  "brand": "벤츠",
+  "brand_id": "349",
+  "model_id": "4752",
+  "name": "Electric GLC",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4752",
+  "photo_code": "4752/",
+  "default_image_url": "https://autoimg.danawa.com/photo/4752/model_360.png",
+  "default_image_path": "vehicles\\벤츠\\Electric GLC\\model_360.png",
+  "colors": [],
+  "gallery": [
+    {
+      "name": "GLC400 4MATIC 위드 EQ 테크놀로지",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4752&Tab=image&No=143910",
+      "image_url": "https://autoimg.danawa.com/gallery/4752/20260330_4752 (1).jpg",
+      "path": "vehicles\\벤츠\\Electric GLC\\gallery\\01_GLC400 4MATIC 위드 EQ 테크놀로지.jpg"
+    },
+    {
+      "name": "GLC400 4MATIC 위드 EQ 테크놀로지",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4752&Tab=image&No=143911",
+      "image_url": "https://autoimg.danawa.com/gallery/4752/20260330_4752 (2).jpg",
+      "path": "vehicles\\벤츠\\Electric GLC\\gallery\\02_GLC400 4MATIC 위드 EQ 테크놀로지.jpg"
+    },
+    {
+      "name": "GLC400 4MATIC 위드 EQ 테크놀로지",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4752&Tab=image&No=143912",
+      "image_url": "https://autoimg.danawa.com/gallery/4752/20260330_4752 (3).jpg",
+      "path": "vehicles\\벤츠\\Electric GLC\\gallery\\03_GLC400 4MATIC 위드 EQ 테크놀로지.jpg"
+    },
+    {
+      "name": "GLC400 4MATIC 위드 EQ 테크놀로지",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4752&Tab=image&No=143913",
+      "image_url": "https://autoimg.danawa.com/gallery/4752/20260330_4752 (4).jpg",
+      "path": "vehicles\\벤츠\\Electric GLC\\gallery\\04_GLC400 4MATIC 위드 EQ 테크놀로지.jpg"
+    }
+  ]
+}

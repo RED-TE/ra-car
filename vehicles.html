@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>전체 차량 견적 | RE:CAR</title>
+    <link rel="preconnect" href="https://unpkg.com" />
+    <link rel="preconnect" href="https://api.recarplan.com" crossorigin />
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body class="all-vehicles-page">
+    <header class="site-header">
+      <nav class="desktop-nav nav-left" aria-label="주요 메뉴">
+        <a href="./index.html#quote">빠른견적</a>
+        <a href="./index.html#ready">즉시출고</a>
+        <a href="./index.html#special">특가차량</a>
+        <a href="./index.html#compare">장기렌트</a>
+        <a href="./index.html#compare">리스</a>
+      </nav>
+      <a class="brand" href="./index.html#home" aria-label="RE:CAR 홈">
+        <img src="./assets/recar-logo-transparent.png" alt="RE:CAR" />
+      </a>
+      <nav class="desktop-nav nav-right" aria-label="보조 메뉴">
+        <a href="./index.html#business">법인차량</a>
+        <a class="quote-focus-button" href="./index.html#quote" data-vehicle="차량 조건 상담">문의하기</a>
+        <a class="vehicle-search-button" href="./index.html#quote">검색</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="vehicle-section all-vehicle-section" id="vehicles">
+        <div class="section-heading all-vehicle-heading">
+          <h1 class="all-vehicle-title">전체 차량 견적</h1>
+          <p class="section-support">등록된 차량을 최저 월 납입료 기준으로 정렬했습니다. 차량을 선택하면 트림과 옵션에 따른 예상 금액 변화를 확인할 수 있습니다.</p>
+        </div>
+        <div class="best-heading">
+          <div class="best-tabs" aria-label="전체 차량 분류">
+            <button class="is-active" type="button" data-filter="all" aria-pressed="true">모든 차량</button>
+            <button type="button" data-filter="sedan" aria-pressed="false">세단</button>
+            <button type="button" data-filter="suv" aria-pressed="false">SUV</button>
+            <button type="button" data-filter="domestic" aria-pressed="false">국산</button>
+            <button type="button" data-filter="imported" aria-pressed="false">수입차</button>
+          </div>
+          <p class="vehicle-condition">60개월 · 선납금 0% · 연 10,000km 기준 가격순</p>
+        </div>
+        <p class="vehicle-error" id="vehicleError" hidden>차량 정보를 불러오지 못했습니다</p>
+        <div class="vehicle-grid" data-vehicle-mode="all" data-default-filter="all" aria-live="polite" aria-busy="true">
+          <article class="vehicle-card is-skeleton" aria-hidden="true">
+            <div class="skeleton-image"></div>
+            <div class="vehicle-body">
+              <div class="skeleton-line short"></div>
+              <div class="skeleton-line title"></div>
+              <div class="skeleton-line"></div>
+              <div class="skeleton-line price-line"></div>
+            </div>
+          </article>
+          <article class="vehicle-card is-skeleton" aria-hidden="true">
+            <div class="skeleton-image"></div>
+            <div class="vehicle-body">
+              <div class="skeleton-line short"></div>
+              <div class="skeleton-line title"></div>
+              <div class="skeleton-line"></div>
+              <div class="skeleton-line price-line"></div>
+            </div>
+          </article>
+          <article class="vehicle-card is-skeleton" aria-hidden="true">
+            <div class="skeleton-image"></div>
+            <div class="vehicle-body">
+              <div class="skeleton-line short"></div>
+              <div class="skeleton-line title"></div>
+              <div class="skeleton-line"></div>
+              <div class="skeleton-line price-line"></div>
+            </div>
+          </article>
+        </div>
+        <div class="vehicle-detail-panel" id="vehicleDetailPanel" hidden></div>
+      </section>
+    </main>
+
+    <footer class="site-footer" aria-label="사업자 정보">
+      <div class="footer-brand">
+        <strong>RE:CAR</strong>
+        <p>장기렌트·리스 조건을 비교하고 고객에게 맞는 상담을 안내합니다.</p>
+      </div>
+      <dl class="business-info">
+        <div>
+          <dt>상호</dt>
+          <dd>리카오토플랜</dd>
+        </div>
+        <div>
+          <dt>대표자</dt>
+          <dd>조용천</dd>
+        </div>
+        <div>
+          <dt>사업자등록번호</dt>
+          <dd>325-60-00844</dd>
+        </div>
+        <div>
+          <dt>연락처</dt>
+          <dd><a href="tel:01065731038">010-6573-1038</a></dd>
+        </div>
+        <div>
+          <dt>이메일</dt>
+          <dd><a href="mailto:jhxox666@gmail.com">jhxox666@gmail.com</a></dd>
+        </div>
+      </dl>
+      <p class="footer-notice">
+        Copyright © RE:CAR. All rights reserved.
+        <a href="./privacy.html">개인정보 처리방침</a>
+        <a href="./terms.html">상담 유의사항</a>
+        <a href="./admin.html">관리자</a>
+      </p>
+    </footer>
+
+    <nav class="mobile-bottom" aria-label="모바일 빠른 메뉴">
+      <a href="./index.html#home"><i data-lucide="home"></i><span>홈</span></a>
+      <a class="quote-focus-button" href="./index.html#quote" data-vehicle="차량 조건 상담"><i data-lucide="calculator"></i><span>견적</span></a>
+      <a href="./index.html#special"><i data-lucide="badge-percent"></i><span>특가</span></a>
+      <a class="quote-focus-button" href="./index.html#quote" data-vehicle="차량 조건 상담"><i data-lucide="phone"></i><span>상담</span></a>
+    </nav>
+
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <script src="./script.js?v=20260518-launch"></script>
+  </body>
+</html>

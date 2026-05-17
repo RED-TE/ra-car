@@ -1,0 +1,129 @@
+{
+  "brand": "포르쉐",
+  "brand_id": "381",
+  "model_id": "4762",
+  "name": "Cayenne Electric",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4762",
+  "photo_code": "4762/53531",
+  "default_image_url": "https://autoimg.danawa.com/photo/4762/model_360.png",
+  "default_image_path": "vehicles\\포르쉐\\Cayenne Electric\\model_360.png",
+  "colors": [
+    {
+      "name": "화이트",
+      "code": "C11",
+      "swatch": "#dbdfde",
+      "image_url": "https://autoimg.danawa.com/photo/4762/53531/color_11_360.png",
+      "path": "vehicles\\포르쉐\\Cayenne Electric\\colors\\01_화이트.png"
+    },
+    {
+      "name": "크로마이트 블랙 메탈릭",
+      "code": "C12",
+      "swatch": "#090909",
+      "image_url": "https://autoimg.danawa.com/photo/4762/53531/color_12_360.png",
+      "path": "vehicles\\포르쉐\\Cayenne Electric\\colors\\02_크로마이트 블랙 메탈릭.png"
+    },
+    {
+      "name": "바나듐 그레이 메탈릭",
+      "code": "C13",
+      "swatch": "#9ea6b1",
+      "image_url": "https://autoimg.danawa.com/photo/4762/53531/color_13_360.png",
+      "path": "vehicles\\포르쉐\\Cayenne Electric\\colors\\03_바나듐 그레이 메탈릭.png"
+    },
+    {
+      "name": "카라라 화이트 메탈릭",
+      "code": "C14",
+      "swatch": "#ced2d1",
+      "image_url": "https://autoimg.danawa.com/photo/4762/53531/color_14_360.png",
+      "path": "vehicles\\포르쉐\\Cayenne Electric\\colors\\04_카라라 화이트 메탈릭.png"
+    },
+    {
+      "name": "돌로마이트 실버 메탈릭",
+      "code": "C15",
+      "swatch": "#f8fdff",
+      "image_url": "https://autoimg.danawa.com/photo/4762/53531/color_15_360.png",
+      "path": "vehicles\\포르쉐\\Cayenne Electric\\colors\\05_돌로마이트 실버 메탈릭.png"
+    },
+    {
+      "name": "미스틱 그린 메탈릭",
+      "code": "C16",
+      "swatch": "#626e6c",
+      "image_url": "https://autoimg.danawa.com/photo/4762/53531/color_16_360.png",
+      "path": "vehicles\\포르쉐\\Cayenne Electric\\colors\\06_미스틱 그린 메탈릭.png"
+    },
+    {
+      "name": "마데이라 골드 메탈릭",
+      "code": "C17",
+      "swatch": "#b4762d",
+      "image_url": "https://autoimg.danawa.com/photo/4762/53531/color_17_360.png",
+      "path": "vehicles\\포르쉐\\Cayenne Electric\\colors\\07_마데이라 골드 메탈릭.png"
+    },
+    {
+      "name": "알가르브 블루 메탈릭",
+      "code": "C18",
+      "swatch": "#404b5f",
+      "image_url": "https://autoimg.danawa.com/photo/4762/53531/color_18_360.png",
+      "path": "vehicles\\포르쉐\\Cayenne Electric\\colors\\08_알가르브 블루 메탈릭.png"
+    },
+    {
+      "name": "나팔리 블루 메탈릭",
+      "code": "C21",
+      "swatch": "#0b1b33",
+      "image_url": "https://autoimg.danawa.com/photo/4762/53531/color_21_360.png",
+      "path": "vehicles\\포르쉐\\Cayenne Electric\\colors\\09_나팔리 블루 메탈릭.png"
+    },
+    {
+      "name": "오크 그린 메탈릭 네오",
+      "code": "C22",
+      "swatch": "#121912",
+      "image_url": "https://autoimg.danawa.com/photo/4762/53531/color_22_360.png",
+      "path": "vehicles\\포르쉐\\Cayenne Electric\\colors\\10_오크 그린 메탈릭 네오.png"
+    },
+    {
+      "name": "페일 블루 메탈릭",
+      "code": "C23",
+      "swatch": "#242831",
+      "image_url": "https://autoimg.danawa.com/photo/4762/53531/color_23_360.png",
+      "path": "vehicles\\포르쉐\\Cayenne Electric\\colors\\11_페일 블루 메탈릭.png"
+    },
+    {
+      "name": "슬레이트 그레이 네오",
+      "code": "C19",
+      "swatch": "#4e5255",
+      "image_url": "https://autoimg.danawa.com/photo/4762/53531/color_19_360.png",
+      "path": "vehicles\\포르쉐\\Cayenne Electric\\colors\\12_슬레이트 그레이 네오.png"
+    },
+    {
+      "name": "몬테베르데 메탈릭",
+      "code": "C20",
+      "swatch": "#585d51",
+      "image_url": "https://autoimg.danawa.com/photo/4762/53531/color_20_360.png",
+      "path": "vehicles\\포르쉐\\Cayenne Electric\\colors\\13_몬테베르데 메탈릭.png"
+    }
+  ],
+  "gallery": [
+    {
+      "name": "카이엔 S 쿠페 일렉트릭",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4762&Tab=image&No=144892",
+      "image_url": "https://autoimg.danawa.com/gallery/4762/20260427_4762 (1).jpg",
+      "path": "vehicles\\포르쉐\\Cayenne Electric\\gallery\\01_카이엔 S 쿠페 일렉트릭.jpg"
+    },
+    {
+      "name": "카이엔 S 쿠페 일렉트릭",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4762&Tab=image&No=144893",
+      "image_url": "https://autoimg.danawa.com/gallery/4762/20260427_4762 (2).jpg",
+      "path": "vehicles\\포르쉐\\Cayenne Electric\\gallery\\02_카이엔 S 쿠페 일렉트릭.jpg"
+    },
+    {
+      "name": "카이엔 S 쿠페 일렉트릭",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4762&Tab=image&No=144894",
+      "image_url": "https://autoimg.danawa.com/gallery/4762/20260427_4762 (3).jpg",
+      "path": "vehicles\\포르쉐\\Cayenne Electric\\gallery\\03_카이엔 S 쿠페 일렉트릭.jpg"
+    },
+    {
+      "name": "카이엔 S 쿠페 일렉트릭",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4762&Tab=image&No=144895",
+      "image_url": "https://autoimg.danawa.com/gallery/4762/20260427_4762 (4).jpg",
+      "path": "vehicles\\포르쉐\\Cayenne Electric\\gallery\\04_카이엔 S 쿠페 일렉트릭.jpg"
+    }
+  ]
+}

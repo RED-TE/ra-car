@@ -1,0 +1,37 @@
+{
+  "brand": "벤츠",
+  "brand_id": "349",
+  "model_id": "4555",
+  "name": "CLE",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4555",
+  "photo_code": "4555/53419",
+  "default_image_url": "https://autoimg.danawa.com/photo/4555/model_360.png",
+  "default_image_path": "vehicles\\벤츠\\CLE\\model_360.png",
+  "colors": [],
+  "gallery": [
+    {
+      "name": "메르세데스-AMG CLE53 쿠페",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4555&Tab=image&No=142539",
+      "image_url": "https://autoimg.danawa.com/gallery/4555/20260109_4555 (1).jpg",
+      "path": "vehicles\\벤츠\\CLE\\gallery\\01_메르세데스-AMG CLE53 쿠페.jpg"
+    },
+    {
+      "name": "메르세데스-AMG CLE53 쿠페",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4555&Tab=image&No=142540",
+      "image_url": "https://autoimg.danawa.com/gallery/4555/20260109_4555 (2).jpg",
+      "path": "vehicles\\벤츠\\CLE\\gallery\\02_메르세데스-AMG CLE53 쿠페.jpg"
+    },
+    {
+      "name": "메르세데스-AMG CLE53 쿠페",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4555&Tab=image&No=142541",
+      "image_url": "https://autoimg.danawa.com/gallery/4555/20260109_4555 (3).jpg",
+      "path": "vehicles\\벤츠\\CLE\\gallery\\03_메르세데스-AMG CLE53 쿠페.jpg"
+    },
+    {
+      "name": "메르세데스-AMG CLE53 쿠페",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4555&Tab=image&No=142542",
+      "image_url": "https://autoimg.danawa.com/gallery/4555/20260109_4555 (4).jpg",
+      "path": "vehicles\\벤츠\\CLE\\gallery\\04_메르세데스-AMG CLE53 쿠페.jpg"
+    }
+  ]
+}

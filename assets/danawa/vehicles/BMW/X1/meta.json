@@ -1,0 +1,73 @@
+{
+  "brand": "BMW",
+  "brand_id": "362",
+  "model_id": "4371",
+  "name": "X1",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4371",
+  "photo_code": "4371/52642",
+  "default_image_url": "https://autoimg.danawa.com/photo/4371/52642/color_13_360.png",
+  "default_image_path": "vehicles\\BMW\\X1\\model_360.png",
+  "colors": [
+    {
+      "name": "알파인 화이트 (300)",
+      "code": "C11",
+      "swatch": "#e2e2e2",
+      "image_url": "https://autoimg.danawa.com/photo/4371/52642/color_11_360.png",
+      "path": "vehicles\\BMW\\X1\\colors\\01_알파인 화이트 (300).png"
+    },
+    {
+      "name": "블랙 사파이어 (475)",
+      "code": "C12",
+      "swatch": "#141414",
+      "image_url": "https://autoimg.danawa.com/photo/4371/52642/color_12_360.png",
+      "path": "vehicles\\BMW\\X1\\colors\\02_블랙 사파이어 (475).png"
+    },
+    {
+      "name": "케이프 요크 그린 (C5Y)",
+      "code": "C13",
+      "swatch": "#475b52",
+      "image_url": "https://autoimg.danawa.com/photo/4371/52642/color_13_360.png",
+      "path": "vehicles\\BMW\\X1\\colors\\03_케이프 요크 그린 (C5Y).png"
+    },
+    {
+      "name": "산레모 그린 (C4E)",
+      "code": "C14",
+      "swatch": "#21331b",
+      "image_url": "https://autoimg.danawa.com/photo/4371/52642/color_14_360.png",
+      "path": "vehicles\\BMW\\X1\\colors\\04_산레모 그린 (C4E).png"
+    },
+    {
+      "name": "스페이스 실버 (C67)",
+      "code": "C15",
+      "swatch": "#81847d",
+      "image_url": "https://autoimg.danawa.com/photo/4371/52642/color_15_360.png",
+      "path": "vehicles\\BMW\\X1\\colors\\05_스페이스 실버 (C67).png"
+    }
+  ],
+  "gallery": [
+    {
+      "name": "2024 X1 M35i xDrive",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4371&Tab=image&No=118470",
+      "image_url": "https://autoimg.danawa.com/gallery/4371/20240307_4371 (1).jpg",
+      "path": "vehicles\\BMW\\X1\\gallery\\01_2024 X1 M35i xDrive.jpg"
+    },
+    {
+      "name": "2024 X1 M35i xDrive",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4371&Tab=image&No=118471",
+      "image_url": "https://autoimg.danawa.com/gallery/4371/20240307_4371 (2).jpg",
+      "path": "vehicles\\BMW\\X1\\gallery\\02_2024 X1 M35i xDrive.jpg"
+    },
+    {
+      "name": "2024 X1 M35i xDrive",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4371&Tab=image&No=118472",
+      "image_url": "https://autoimg.danawa.com/gallery/4371/20240307_4371 (3).jpg",
+      "path": "vehicles\\BMW\\X1\\gallery\\03_2024 X1 M35i xDrive.jpg"
+    },
+    {
+      "name": "2024 X1 M35i xDrive",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4371&Tab=image&No=118473",
+      "image_url": "https://autoimg.danawa.com/gallery/4371/20240307_4371 (4).jpg",
+      "path": "vehicles\\BMW\\X1\\gallery\\04_2024 X1 M35i xDrive.jpg"
+    }
+  ]
+}

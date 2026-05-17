@@ -1,0 +1,37 @@
+{
+  "brand": "BMW",
+  "brand_id": "362",
+  "model_id": "4656",
+  "name": "X3",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4656",
+  "photo_code": "4656/53503",
+  "default_image_url": "https://autoimg.danawa.com/photo/4656/model_360.png",
+  "default_image_path": "vehicles\\BMW\\X3\\model_360.png",
+  "colors": [],
+  "gallery": [
+    {
+      "name": "뉴 X3",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4656&Tab=image&No=132798",
+      "image_url": "https://autoimg.danawa.com/gallery/4656/20241203_4656 (1).jpg",
+      "path": "vehicles\\BMW\\X3\\gallery\\01_뉴 X3.jpg"
+    },
+    {
+      "name": "뉴 X3",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4656&Tab=image&No=132799",
+      "image_url": "https://autoimg.danawa.com/gallery/4656/20241203_4656 (2).jpg",
+      "path": "vehicles\\BMW\\X3\\gallery\\02_뉴 X3.jpg"
+    },
+    {
+      "name": "뉴 X3",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4656&Tab=image&No=132800",
+      "image_url": "https://autoimg.danawa.com/gallery/4656/20241203_4656 (3).jpg",
+      "path": "vehicles\\BMW\\X3\\gallery\\03_뉴 X3.jpg"
+    },
+    {
+      "name": "뉴 X3",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4656&Tab=image&No=132801",
+      "image_url": "https://autoimg.danawa.com/gallery/4656/20241203_4656 (4).jpg",
+      "path": "vehicles\\BMW\\X3\\gallery\\04_뉴 X3.jpg"
+    }
+  ]
+}

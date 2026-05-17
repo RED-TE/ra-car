@@ -1,0 +1,87 @@
+{
+  "brand": "벤츠",
+  "brand_id": "349",
+  "model_id": "4495",
+  "name": "GLA-Class",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4495",
+  "photo_code": "4495/53415",
+  "default_image_url": "https://autoimg.danawa.com/photo/4495/model_360.png",
+  "default_image_path": "vehicles\\벤츠\\GLA-Class\\model_360.png",
+  "colors": [
+    {
+      "name": "폴라 화이트 (149U)",
+      "code": "C11",
+      "swatch": "#ced3c8",
+      "image_url": "https://autoimg.danawa.com/photo/4495/53415/color_11_360.png",
+      "path": "vehicles\\벤츠\\GLA-Class\\colors\\01_폴라 화이트 (149U).png"
+    },
+    {
+      "name": "나이트 블랙 (696U)",
+      "code": "C12",
+      "swatch": "#070707",
+      "image_url": "https://autoimg.danawa.com/photo/4495/53415/color_12_360.png",
+      "path": "vehicles\\벤츠\\GLA-Class\\colors\\02_나이트 블랙 (696U).png"
+    },
+    {
+      "name": "코스모스 블랙 (191U)",
+      "code": "C14",
+      "swatch": "#0c0e14",
+      "image_url": "https://autoimg.danawa.com/photo/4495/53415/color_14_360.png",
+      "path": "vehicles\\벤츠\\GLA-Class\\colors\\03_코스모스 블랙 (191U).png"
+    },
+    {
+      "name": "마운틴 그레이 (787U)",
+      "code": "C16",
+      "swatch": "#3b3e46",
+      "image_url": "https://autoimg.danawa.com/photo/4495/53415/color_16_360.png",
+      "path": "vehicles\\벤츠\\GLA-Class\\colors\\04_마운틴 그레이 (787U).png"
+    },
+    {
+      "name": "하이테크 실버 (922U)",
+      "code": "C15",
+      "swatch": "#97979a",
+      "image_url": "https://autoimg.danawa.com/photo/4495/53415/color_15_360.png",
+      "path": "vehicles\\벤츠\\GLA-Class\\colors\\05_하이테크 실버 (922U).png"
+    },
+    {
+      "name": "MANUFAKTUR 마운틴 그레이 (662U)",
+      "code": "C19",
+      "swatch": "#3f434b",
+      "image_url": "https://autoimg.danawa.com/photo/4495/53415/color_19_360.png",
+      "path": "vehicles\\벤츠\\GLA-Class\\colors\\06_MANUFAKTUR 마운틴 그레이 (662U).png"
+    },
+    {
+      "name": "MANUFAKTUR 파타고니아 레드 (993U)",
+      "code": "C20",
+      "swatch": "#ba0f2b",
+      "image_url": "https://autoimg.danawa.com/photo/4495/53415/color_20_360.png",
+      "path": "vehicles\\벤츠\\GLA-Class\\colors\\07_MANUFAKTUR 파타고니아 레드 (993U).png"
+    }
+  ],
+  "gallery": [
+    {
+      "name": "2024 l 메르세데스-AMG GLA45 S 4MATIC+",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4495&Tab=image&No=113774",
+      "image_url": "https://autoimg.danawa.com/gallery/4495/20231013_4495 (1).jpg",
+      "path": "vehicles\\벤츠\\GLA-Class\\gallery\\01_2024 l 메르세데스-AMG GLA45 S 4MATIC+.jpg"
+    },
+    {
+      "name": "2024 l 메르세데스-AMG GLA45 S 4MATIC+",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4495&Tab=image&No=113775",
+      "image_url": "https://autoimg.danawa.com/gallery/4495/20231013_4495 (2).jpg",
+      "path": "vehicles\\벤츠\\GLA-Class\\gallery\\02_2024 l 메르세데스-AMG GLA45 S 4MATIC+.jpg"
+    },
+    {
+      "name": "2024 l 메르세데스-AMG GLA45 S 4MATIC+",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4495&Tab=image&No=113776",
+      "image_url": "https://autoimg.danawa.com/gallery/4495/20231013_4495 (3).jpg",
+      "path": "vehicles\\벤츠\\GLA-Class\\gallery\\03_2024 l 메르세데스-AMG GLA45 S 4MATIC+.jpg"
+    },
+    {
+      "name": "2024 l 메르세데스-AMG GLA45 S 4MATIC+",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4495&Tab=image&No=113777",
+      "image_url": "https://autoimg.danawa.com/gallery/4495/20231013_4495 (4).jpg",
+      "path": "vehicles\\벤츠\\GLA-Class\\gallery\\04_2024 l 메르세데스-AMG GLA45 S 4MATIC+.jpg"
+    }
+  ]
+}

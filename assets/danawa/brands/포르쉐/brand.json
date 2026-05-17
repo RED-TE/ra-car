@@ -1,0 +1,1289 @@
+{
+  "brand_id": "381",
+  "brand": "포르쉐",
+  "source_url": "https://auto.danawa.com/auto/?Work=brand&Brand=381",
+  "logo_url": "https://autoimg.danawa.com/photo/brand/381_90.png",
+  "logo_path": "brands\\포르쉐\\logo.png",
+  "models": [
+    {
+      "brand": "포르쉐",
+      "brand_id": "381",
+      "model_id": "3336",
+      "name": "718 Boxster",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3336",
+      "photo_code": "3336/52761",
+      "default_image_url": "https://autoimg.danawa.com/photo/3336/model_360.png",
+      "default_image_path": "vehicles\\포르쉐\\718 Boxster\\model_360.png",
+      "colors": [
+        {
+          "name": "화이트",
+          "code": "C11",
+          "swatch": "#efefef",
+          "image_url": "https://autoimg.danawa.com/photo/3336/52761/color_11_360.png",
+          "path": "vehicles\\포르쉐\\718 Boxster\\colors\\01_화이트.png"
+        },
+        {
+          "name": "블랙",
+          "code": "C12",
+          "swatch": "#000000",
+          "image_url": "https://autoimg.danawa.com/photo/3336/52761/color_12_360.png",
+          "path": "vehicles\\포르쉐\\718 Boxster\\colors\\02_블랙.png"
+        },
+        {
+          "name": "가드 레드",
+          "code": "C13",
+          "swatch": "#cc0033",
+          "image_url": "https://autoimg.danawa.com/photo/3336/52761/color_13_360.png",
+          "path": "vehicles\\포르쉐\\718 Boxster\\colors\\03_가드 레드.png"
+        },
+        {
+          "name": "레이싱 옐로",
+          "code": "C14",
+          "swatch": "#ffcc00",
+          "image_url": "https://autoimg.danawa.com/photo/3336/52761/color_14_360.png",
+          "path": "vehicles\\포르쉐\\718 Boxster\\colors\\04_레이싱 옐로.png"
+        },
+        {
+          "name": "제트 블랙 메탈릭",
+          "code": "C15",
+          "swatch": "#000000",
+          "image_url": "https://autoimg.danawa.com/photo/3336/52761/color_15_360.png",
+          "path": "vehicles\\포르쉐\\718 Boxster\\colors\\05_제트 블랙 메탈릭.png"
+        },
+        {
+          "name": "바나듐 그레이 메탈릭",
+          "code": "C16",
+          "swatch": "#2e2f36",
+          "image_url": "https://autoimg.danawa.com/photo/3336/52761/color_16_360.png",
+          "path": "vehicles\\포르쉐\\718 Boxster\\colors\\06_바나듐 그레이 메탈릭.png"
+        },
+        {
+          "name": "GT 실버 메탈릭",
+          "code": "C17",
+          "swatch": "#cccccc",
+          "image_url": "https://autoimg.danawa.com/photo/3336/52761/color_17_360.png",
+          "path": "vehicles\\포르쉐\\718 Boxster\\colors\\07_GT 실버 메탈릭.png"
+        },
+        {
+          "name": "아게이트 그레이 메탈릭",
+          "code": "C18",
+          "swatch": "#333333",
+          "image_url": "https://autoimg.danawa.com/photo/3336/52761/color_18_360.png",
+          "path": "vehicles\\포르쉐\\718 Boxster\\colors\\08_아게이트 그레이 메탈릭.png"
+        },
+        {
+          "name": "젠션 블루 메탈릭",
+          "code": "C19",
+          "swatch": "#00194b",
+          "image_url": "https://autoimg.danawa.com/photo/3336/52761/color_19_360.png",
+          "path": "vehicles\\포르쉐\\718 Boxster\\colors\\09_젠션 블루 메탈릭.png"
+        },
+        {
+          "name": "어벤추린 그린 메탈릭",
+          "code": "C20",
+          "swatch": "#252927",
+          "image_url": "https://autoimg.danawa.com/photo/3336/52761/color_20_360.png",
+          "path": "vehicles\\포르쉐\\718 Boxster\\colors\\10_어벤추린 그린 메탈릭.png"
+        },
+        {
+          "name": "아이스 그레이 메탈릭",
+          "code": "C21",
+          "swatch": "#dfe2e9",
+          "image_url": "https://autoimg.danawa.com/photo/3336/52761/color_21_360.png",
+          "path": "vehicles\\포르쉐\\718 Boxster\\colors\\11_아이스 그레이 메탈릭.png"
+        },
+        {
+          "name": "카민 레드",
+          "code": "C22",
+          "swatch": "#990033",
+          "image_url": "https://autoimg.danawa.com/photo/3336/52761/color_22_360.png",
+          "path": "vehicles\\포르쉐\\718 Boxster\\colors\\12_카민 레드.png"
+        },
+        {
+          "name": "아크틱 그레이",
+          "code": "C23",
+          "swatch": "#6a6c70",
+          "image_url": "https://autoimg.danawa.com/photo/3336/52761/color_23_360.png",
+          "path": "vehicles\\포르쉐\\718 Boxster\\colors\\13_아크틱 그레이.png"
+        },
+        {
+          "name": "루비 스타 네오",
+          "code": "C24",
+          "swatch": "#aa1059",
+          "image_url": "https://autoimg.danawa.com/photo/3336/52761/color_24_360.png",
+          "path": "vehicles\\포르쉐\\718 Boxster\\colors\\14_루비 스타 네오.png"
+        },
+        {
+          "name": "샤크 블루",
+          "code": "C25",
+          "swatch": "#006dd1",
+          "image_url": "https://autoimg.danawa.com/photo/3336/52761/color_25_360.png",
+          "path": "vehicles\\포르쉐\\718 Boxster\\colors\\15_샤크 블루.png"
+        },
+        {
+          "name": "크레용",
+          "code": "C26",
+          "swatch": "#c7c7bf",
+          "image_url": "https://autoimg.danawa.com/photo/3336/52761/color_26_360.png",
+          "path": "vehicles\\포르쉐\\718 Boxster\\colors\\16_크레용.png"
+        }
+      ],
+      "gallery": [
+        {
+          "name": "포르쉐 718 박스터 GTS",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3336&Tab=image&No=97185",
+          "image_url": "https://autoimg.danawa.com/gallery/3336/20220804_3336 (1).jpg",
+          "path": "vehicles\\포르쉐\\718 Boxster\\gallery\\01_포르쉐 718 박스터 GTS.jpg"
+        },
+        {
+          "name": "포르쉐 718 박스터 GTS",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3336&Tab=image&No=97186",
+          "image_url": "https://autoimg.danawa.com/gallery/3336/20220804_3336 (2).jpg",
+          "path": "vehicles\\포르쉐\\718 Boxster\\gallery\\02_포르쉐 718 박스터 GTS.jpg"
+        },
+        {
+          "name": "포르쉐 718 박스터 GTS",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3336&Tab=image&No=97187",
+          "image_url": "https://autoimg.danawa.com/gallery/3336/20220804_3336 (3).jpg",
+          "path": "vehicles\\포르쉐\\718 Boxster\\gallery\\03_포르쉐 718 박스터 GTS.jpg"
+        },
+        {
+          "name": "포르쉐 718 박스터 GTS",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3336&Tab=image&No=97188",
+          "image_url": "https://autoimg.danawa.com/gallery/3336/20220804_3336 (4).jpg",
+          "path": "vehicles\\포르쉐\\718 Boxster\\gallery\\04_포르쉐 718 박스터 GTS.jpg"
+        }
+      ]
+    },
+    {
+      "brand": "포르쉐",
+      "brand_id": "381",
+      "model_id": "3361",
+      "name": "718 Cayman",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3361",
+      "photo_code": "3361/52760",
+      "default_image_url": "https://autoimg.danawa.com/photo/3361/model_360.png",
+      "default_image_path": "vehicles\\포르쉐\\718 Cayman\\model_360.png",
+      "colors": [
+        {
+          "name": "화이트",
+          "code": "C11",
+          "swatch": "#efefef",
+          "image_url": "https://autoimg.danawa.com/photo/3361/52760/color_11_360.png",
+          "path": "vehicles\\포르쉐\\718 Cayman\\colors\\01_화이트.png"
+        },
+        {
+          "name": "블랙",
+          "code": "C12",
+          "swatch": "#000000",
+          "image_url": "https://autoimg.danawa.com/photo/3361/52760/color_12_360.png",
+          "path": "vehicles\\포르쉐\\718 Cayman\\colors\\02_블랙.png"
+        },
+        {
+          "name": "가드 레드",
+          "code": "C13",
+          "swatch": "#cc0033",
+          "image_url": "https://autoimg.danawa.com/photo/3361/52760/color_13_360.png",
+          "path": "vehicles\\포르쉐\\718 Cayman\\colors\\03_가드 레드.png"
+        },
+        {
+          "name": "레이싱 옐로",
+          "code": "C14",
+          "swatch": "#ffcc00",
+          "image_url": "https://autoimg.danawa.com/photo/3361/52760/color_14_360.png",
+          "path": "vehicles\\포르쉐\\718 Cayman\\colors\\04_레이싱 옐로.png"
+        },
+        {
+          "name": "제트 블랙 메탈릭",
+          "code": "C15",
+          "swatch": "#000000",
+          "image_url": "https://autoimg.danawa.com/photo/3361/52760/color_15_360.png",
+          "path": "vehicles\\포르쉐\\718 Cayman\\colors\\05_제트 블랙 메탈릭.png"
+        },
+        {
+          "name": "바나듐 그레이 메탈릭",
+          "code": "C16",
+          "swatch": "#2e2f36",
+          "image_url": "https://autoimg.danawa.com/photo/3361/52760/color_16_360.png",
+          "path": "vehicles\\포르쉐\\718 Cayman\\colors\\06_바나듐 그레이 메탈릭.png"
+        },
+        {
+          "name": "GT 실버 메탈릭",
+          "code": "C17",
+          "swatch": "#cccccc",
+          "image_url": "https://autoimg.danawa.com/photo/3361/52760/color_17_360.png",
+          "path": "vehicles\\포르쉐\\718 Cayman\\colors\\07_GT 실버 메탈릭.png"
+        },
+        {
+          "name": "아게이트 그레이 메탈릭",
+          "code": "C18",
+          "swatch": "#333333",
+          "image_url": "https://autoimg.danawa.com/photo/3361/52760/color_18_360.png",
+          "path": "vehicles\\포르쉐\\718 Cayman\\colors\\08_아게이트 그레이 메탈릭.png"
+        },
+        {
+          "name": "젠션 블루 메탈릭",
+          "code": "C19",
+          "swatch": "#00194b",
+          "image_url": "https://autoimg.danawa.com/photo/3361/52760/color_19_360.png",
+          "path": "vehicles\\포르쉐\\718 Cayman\\colors\\09_젠션 블루 메탈릭.png"
+        },
+        {
+          "name": "어벤추린 그린 메탈릭",
+          "code": "C20",
+          "swatch": "#252927",
+          "image_url": "https://autoimg.danawa.com/photo/3361/52760/color_20_360.png",
+          "path": "vehicles\\포르쉐\\718 Cayman\\colors\\10_어벤추린 그린 메탈릭.png"
+        },
+        {
+          "name": "아이스 그레이 메탈릭",
+          "code": "C21",
+          "swatch": "#dfe2e9",
+          "image_url": "https://autoimg.danawa.com/photo/3361/52760/color_21_360.png",
+          "path": "vehicles\\포르쉐\\718 Cayman\\colors\\11_아이스 그레이 메탈릭.png"
+        },
+        {
+          "name": "카민 레드",
+          "code": "C22",
+          "swatch": "#990033",
+          "image_url": "https://autoimg.danawa.com/photo/3361/52760/color_22_360.png",
+          "path": "vehicles\\포르쉐\\718 Cayman\\colors\\12_카민 레드.png"
+        },
+        {
+          "name": "아크틱 그레이",
+          "code": "C23",
+          "swatch": "#6a6c70",
+          "image_url": "https://autoimg.danawa.com/photo/3361/52760/color_23_360.png",
+          "path": "vehicles\\포르쉐\\718 Cayman\\colors\\13_아크틱 그레이.png"
+        },
+        {
+          "name": "루비 스타 네오",
+          "code": "C24",
+          "swatch": "#aa1059",
+          "image_url": "https://autoimg.danawa.com/photo/3361/52760/color_24_360.png",
+          "path": "vehicles\\포르쉐\\718 Cayman\\colors\\14_루비 스타 네오.png"
+        },
+        {
+          "name": "샤크 블루",
+          "code": "C25",
+          "swatch": "#006dd1",
+          "image_url": "https://autoimg.danawa.com/photo/3361/52760/color_25_360.png",
+          "path": "vehicles\\포르쉐\\718 Cayman\\colors\\15_샤크 블루.png"
+        },
+        {
+          "name": "크레용",
+          "code": "C26",
+          "swatch": "#c7c7bf",
+          "image_url": "https://autoimg.danawa.com/photo/3361/52760/color_26_360.png",
+          "path": "vehicles\\포르쉐\\718 Cayman\\colors\\16_크레용.png"
+        }
+      ],
+      "gallery": [
+        {
+          "name": "2023 718 카이맨 GT4",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3361&Tab=image&No=98785",
+          "image_url": "https://autoimg.danawa.com/gallery/3361/20220922_3361 (2).jpg",
+          "path": "vehicles\\포르쉐\\718 Cayman\\gallery\\01_2023 718 카이맨 GT4.jpg"
+        },
+        {
+          "name": "2023 718 카이맨 GT4",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3361&Tab=image&No=98786",
+          "image_url": "https://autoimg.danawa.com/gallery/3361/20220922_3361 (3).jpg",
+          "path": "vehicles\\포르쉐\\718 Cayman\\gallery\\02_2023 718 카이맨 GT4.jpg"
+        },
+        {
+          "name": "2023 718 카이맨 GT4",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3361&Tab=image&No=98788",
+          "image_url": "https://autoimg.danawa.com/gallery/3361/20220922_3361 (9).jpg",
+          "path": "vehicles\\포르쉐\\718 Cayman\\gallery\\03_2023 718 카이맨 GT4.jpg"
+        },
+        {
+          "name": "2023 718 카이맨 GT4",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3361&Tab=image&No=98789",
+          "image_url": "https://autoimg.danawa.com/gallery/3361/20220922_3361 (5).jpg",
+          "path": "vehicles\\포르쉐\\718 Cayman\\gallery\\04_2023 718 카이맨 GT4.jpg"
+        }
+      ]
+    },
+    {
+      "brand": "포르쉐",
+      "brand_id": "381",
+      "model_id": "3666",
+      "name": "911",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3666",
+      "photo_code": "3666/51159",
+      "default_image_url": "https://autoimg.danawa.com/photo/3666/model_360.png",
+      "default_image_path": "vehicles\\포르쉐\\911\\model_360.png",
+      "colors": [
+        {
+          "name": "White",
+          "code": "C11",
+          "swatch": "#efefef",
+          "image_url": "https://autoimg.danawa.com/photo/3666/51159/color_11_360.png",
+          "path": "vehicles\\포르쉐\\911\\colors\\01_White.png"
+        },
+        {
+          "name": "Black",
+          "code": "C12",
+          "swatch": "#000000",
+          "image_url": "https://autoimg.danawa.com/photo/3666/51159/color_12_360.png",
+          "path": "vehicles\\포르쉐\\911\\colors\\02_Black.png"
+        },
+        {
+          "name": "Guards Red",
+          "code": "C13",
+          "swatch": "#cc0033",
+          "image_url": "https://autoimg.danawa.com/photo/3666/51159/color_13_360.png",
+          "path": "vehicles\\포르쉐\\911\\colors\\03_Guards Red.png"
+        },
+        {
+          "name": "Racing Yellow",
+          "code": "C14",
+          "swatch": "#ffcc00",
+          "image_url": "https://autoimg.danawa.com/photo/3666/51159/color_14_360.png",
+          "path": "vehicles\\포르쉐\\911\\colors\\04_Racing Yellow.png"
+        },
+        {
+          "name": "Jet Black Metallic",
+          "code": "C16",
+          "swatch": "#000000",
+          "image_url": "https://autoimg.danawa.com/photo/3666/51159/color_16_360.png",
+          "path": "vehicles\\포르쉐\\911\\colors\\05_Jet Black Metallic.png"
+        },
+        {
+          "name": "Agate Grey Metallic",
+          "code": "C17",
+          "swatch": "#333333",
+          "image_url": "https://autoimg.danawa.com/photo/3666/51159/color_17_360.png",
+          "path": "vehicles\\포르쉐\\911\\colors\\06_Agate Grey Metallic.png"
+        },
+        {
+          "name": "GT Silver Metallic",
+          "code": "C18",
+          "swatch": "#cccccc",
+          "image_url": "https://autoimg.danawa.com/photo/3666/51159/color_18_360.png",
+          "path": "vehicles\\포르쉐\\911\\colors\\07_GT Silver Metallic.png"
+        },
+        {
+          "name": "Gentian Blue Metallic",
+          "code": "C19",
+          "swatch": "#00194b",
+          "image_url": "https://autoimg.danawa.com/photo/3666/51159/color_19_360.png",
+          "path": "vehicles\\포르쉐\\911\\colors\\08_Gentian Blue Metallic.png"
+        },
+        {
+          "name": "Ruby Star Neo",
+          "code": "C28",
+          "swatch": "#aa1059",
+          "image_url": "https://autoimg.danawa.com/photo/3666/51159/color_28_360.png",
+          "path": "vehicles\\포르쉐\\911\\colors\\09_Ruby Star Neo.png"
+        },
+        {
+          "name": "Shark Blue",
+          "code": "C21",
+          "swatch": "#006dd1",
+          "image_url": "https://autoimg.danawa.com/photo/3666/51159/color_21_360.png",
+          "path": "vehicles\\포르쉐\\911\\colors\\10_Shark Blue.png"
+        },
+        {
+          "name": "Arctic Grey",
+          "code": "C22",
+          "swatch": "#6a6c70",
+          "image_url": "https://autoimg.danawa.com/photo/3666/51159/color_22_360.png",
+          "path": "vehicles\\포르쉐\\911\\colors\\11_Arctic Grey.png"
+        },
+        {
+          "name": "Carmine Red",
+          "code": "C23",
+          "swatch": "#990033",
+          "image_url": "https://autoimg.danawa.com/photo/3666/51159/color_23_360.png",
+          "path": "vehicles\\포르쉐\\911\\colors\\12_Carmine Red.png"
+        },
+        {
+          "name": "Crayon",
+          "code": "C24",
+          "swatch": "#c7c7bf",
+          "image_url": "https://autoimg.danawa.com/photo/3666/51159/color_24_360.png",
+          "path": "vehicles\\포르쉐\\911\\colors\\13_Crayon.png"
+        },
+        {
+          "name": "Ice Grey Metallic",
+          "code": "C27",
+          "swatch": "#dfe2e9",
+          "image_url": "https://autoimg.danawa.com/photo/3666/51159/color_27_360.png",
+          "path": "vehicles\\포르쉐\\911\\colors\\14_Ice Grey Metallic.png"
+        },
+        {
+          "name": "Aventurine Green Metallic",
+          "code": "C28",
+          "swatch": "#6c746c",
+          "image_url": "https://autoimg.danawa.com/photo/3666/51159/color_28_360.png",
+          "path": "vehicles\\포르쉐\\911\\colors\\15_Aventurine Green Metallic.png"
+        }
+      ],
+      "gallery": [
+        {
+          "name": "911 GT3 RS with Manthey Kit",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3666&Tab=image&No=133539",
+          "image_url": "https://autoimg.danawa.com/gallery/3666/20241217_3666 (2).jpg",
+          "path": "vehicles\\포르쉐\\911\\gallery\\01_911 GT3 RS with Manthey Kit.jpg"
+        },
+        {
+          "name": "911 GT3 RS with Manthey Kit",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3666&Tab=image&No=133540",
+          "image_url": "https://autoimg.danawa.com/gallery/3666/20241217_3666 (3).jpg",
+          "path": "vehicles\\포르쉐\\911\\gallery\\02_911 GT3 RS with Manthey Kit.jpg"
+        },
+        {
+          "name": "911 GT3 RS with Manthey Kit",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3666&Tab=image&No=133541",
+          "image_url": "https://autoimg.danawa.com/gallery/3666/20241217_3666 (4).jpg",
+          "path": "vehicles\\포르쉐\\911\\gallery\\03_911 GT3 RS with Manthey Kit.jpg"
+        },
+        {
+          "name": "911 GT3 RS with Manthey Kit",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3666&Tab=image&No=133542",
+          "image_url": "https://autoimg.danawa.com/gallery/3666/20241217_3666 (5).jpg",
+          "path": "vehicles\\포르쉐\\911\\gallery\\04_911 GT3 RS with Manthey Kit.jpg"
+        }
+      ]
+    },
+    {
+      "brand": "포르쉐",
+      "brand_id": "381",
+      "model_id": "4651",
+      "name": "The New 911",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4651",
+      "photo_code": "4651/53143",
+      "default_image_url": "https://autoimg.danawa.com/photo/4651/model_360.png",
+      "default_image_path": "vehicles\\포르쉐\\The New 911\\model_360.png",
+      "colors": [
+        {
+          "name": "화이트",
+          "code": "C11",
+          "swatch": "#efefef",
+          "image_url": "https://autoimg.danawa.com/photo/4651/53143/color_11_360.png",
+          "path": "vehicles\\포르쉐\\The New 911\\colors\\01_화이트.png"
+        },
+        {
+          "name": "블랙",
+          "code": "C12",
+          "swatch": "#000000",
+          "image_url": "https://autoimg.danawa.com/photo/4651/53143/color_12_360.png",
+          "path": "vehicles\\포르쉐\\The New 911\\colors\\02_블랙.png"
+        },
+        {
+          "name": "제트 블랙 메탈릭",
+          "code": "C13",
+          "swatch": "#000000",
+          "image_url": "https://autoimg.danawa.com/photo/4651/53143/color_13_360.png",
+          "path": "vehicles\\포르쉐\\The New 911\\colors\\03_제트 블랙 메탈릭.png"
+        },
+        {
+          "name": "바나듐 그레이 메탈릭",
+          "code": "C14",
+          "swatch": "#646970",
+          "image_url": "https://autoimg.danawa.com/photo/4651/53143/color_14_360.png",
+          "path": "vehicles\\포르쉐\\The New 911\\colors\\04_바나듐 그레이 메탈릭.png"
+        },
+        {
+          "name": "GT 실버 메탈릭",
+          "code": "C15",
+          "swatch": "#646970",
+          "image_url": "https://autoimg.danawa.com/photo/4651/53143/color_15_360.png",
+          "path": "vehicles\\포르쉐\\The New 911\\colors\\05_GT 실버 메탈릭.png"
+        },
+        {
+          "name": "아이스 그레이 메탈릭",
+          "code": "C16",
+          "swatch": "#dfe2e9",
+          "image_url": "https://autoimg.danawa.com/photo/4651/53143/color_16_360.png",
+          "path": "vehicles\\포르쉐\\The New 911\\colors\\06_아이스 그레이 메탈릭.png"
+        },
+        {
+          "name": "가드 레드",
+          "code": "C17",
+          "swatch": "#cc0033",
+          "image_url": "https://autoimg.danawa.com/photo/4651/53143/color_17_360.png",
+          "path": "vehicles\\포르쉐\\The New 911\\colors\\07_가드 레드.png"
+        },
+        {
+          "name": "젠션 블루 메탈릭",
+          "code": "C21",
+          "swatch": "#00194b",
+          "image_url": "https://autoimg.danawa.com/photo/4651/53143/color_21_360.png",
+          "path": "vehicles\\포르쉐\\The New 911\\colors\\08_젠션 블루 메탈릭.png"
+        },
+        {
+          "name": "카민 레드",
+          "code": "C18",
+          "swatch": "#990033",
+          "image_url": "https://autoimg.danawa.com/photo/4651/53143/color_18_360.png",
+          "path": "vehicles\\포르쉐\\The New 911\\colors\\09_카민 레드.png"
+        },
+        {
+          "name": "카르타헤나 옐로 메탈릭",
+          "code": "C19",
+          "swatch": "#ced27b",
+          "image_url": "https://autoimg.danawa.com/photo/4651/53143/color_19_360.png",
+          "path": "vehicles\\포르쉐\\The New 911\\colors\\10_카르타헤나 옐로 메탈릭.png"
+        },
+        {
+          "name": "프로방스",
+          "code": "C25",
+          "swatch": "#5e595f",
+          "image_url": "https://autoimg.danawa.com/photo/4651/53143/color_25_360.png",
+          "path": "vehicles\\포르쉐\\The New 911\\colors\\11_프로방스.png"
+        },
+        {
+          "name": "루가노 블루",
+          "code": "C20",
+          "swatch": "#3864b4",
+          "image_url": "https://autoimg.danawa.com/photo/4651/53143/color_20_360.png",
+          "path": "vehicles\\포르쉐\\The New 911\\colors\\12_루가노 블루.png"
+        },
+        {
+          "name": "오크 그린 메탈릭 네오",
+          "code": "C26",
+          "swatch": "#3b4f3a",
+          "image_url": "https://autoimg.danawa.com/photo/4651/53143/color_26_360.png",
+          "path": "vehicles\\포르쉐\\The New 911\\colors\\13_오크 그린 메탈릭 네오.png"
+        },
+        {
+          "name": "셰이드 그린 메탈릭",
+          "code": "C22",
+          "swatch": "#a4c4b8",
+          "image_url": "https://autoimg.danawa.com/photo/4651/53143/color_22_360.png",
+          "path": "vehicles\\포르쉐\\The New 911\\colors\\14_셰이드 그린 메탈릭.png"
+        },
+        {
+          "name": "슬레이트 그레이 네오",
+          "code": "C23",
+          "swatch": "#4e4e53",
+          "image_url": "https://autoimg.danawa.com/photo/4651/53143/color_23_360.png",
+          "path": "vehicles\\포르쉐\\The New 911\\colors\\15_슬레이트 그레이 네오.png"
+        },
+        {
+          "name": "크레용",
+          "code": "C24",
+          "swatch": "#c7c7bf",
+          "image_url": "https://autoimg.danawa.com/photo/4651/53143/color_24_360.png",
+          "path": "vehicles\\포르쉐\\The New 911\\colors\\16_크레용.png"
+        }
+      ],
+      "gallery": [
+        {
+          "name": "911 GT3 S C",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4651&Tab=image&No=144477",
+          "image_url": "https://autoimg.danawa.com/gallery/4651/20260415_4651 (8).jpg",
+          "path": "vehicles\\포르쉐\\The New 911\\gallery\\01_911 GT3 S C.jpg"
+        },
+        {
+          "name": "911 GT3 S C",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4651&Tab=image&No=144478",
+          "image_url": "https://autoimg.danawa.com/gallery/4651/20260415_4651 (10).jpg",
+          "path": "vehicles\\포르쉐\\The New 911\\gallery\\02_911 GT3 S C.jpg"
+        },
+        {
+          "name": "911 GT3 S C",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4651&Tab=image&No=144479",
+          "image_url": "https://autoimg.danawa.com/gallery/4651/20260415_4651 (9).jpg",
+          "path": "vehicles\\포르쉐\\The New 911\\gallery\\03_911 GT3 S C.jpg"
+        },
+        {
+          "name": "911 GT3 S C",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4651&Tab=image&No=144480",
+          "image_url": "https://autoimg.danawa.com/gallery/4651/20260415_4651 (7).jpg",
+          "path": "vehicles\\포르쉐\\The New 911\\gallery\\04_911 GT3 S C.jpg"
+        }
+      ]
+    },
+    {
+      "brand": "포르쉐",
+      "brand_id": "381",
+      "model_id": "4593",
+      "name": "Panamera",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4593",
+      "photo_code": "4593/53800",
+      "default_image_url": "https://autoimg.danawa.com/photo/4593/53800/color_11_360.png",
+      "default_image_path": "vehicles\\포르쉐\\Panamera\\model_360.png",
+      "colors": [
+        {
+          "name": "화이트",
+          "code": "C11",
+          "swatch": "#efefef",
+          "image_url": "https://autoimg.danawa.com/photo/4593/53800/color_11_360.png",
+          "path": "vehicles\\포르쉐\\Panamera\\colors\\01_화이트.png"
+        },
+        {
+          "name": "블랙",
+          "code": "C12",
+          "swatch": "#000000",
+          "image_url": "https://autoimg.danawa.com/photo/4593/53800/color_12_360.png",
+          "path": "vehicles\\포르쉐\\Panamera\\colors\\02_블랙.png"
+        },
+        {
+          "name": "제트 블랙 메탈릭",
+          "code": "C13",
+          "swatch": "#000000",
+          "image_url": "https://autoimg.danawa.com/photo/4593/53800/color_13_360.png",
+          "path": "vehicles\\포르쉐\\Panamera\\colors\\03_제트 블랙 메탈릭.png"
+        },
+        {
+          "name": "카라라 화이트 메탈릭",
+          "code": "C14",
+          "swatch": "#eff5f9",
+          "image_url": "https://autoimg.danawa.com/photo/4593/53800/color_14_360.png",
+          "path": "vehicles\\포르쉐\\Panamera\\colors\\04_카라라 화이트 메탈릭.png"
+        },
+        {
+          "name": "볼케이노 그레이 메탈릭",
+          "code": "C15",
+          "swatch": "#252625",
+          "image_url": "https://autoimg.danawa.com/photo/4593/53800/color_15_360.png",
+          "path": "vehicles\\포르쉐\\Panamera\\colors\\05_볼케이노 그레이 메탈릭.png"
+        },
+        {
+          "name": "돌로마이트 실버 메탈릭",
+          "code": "C16",
+          "swatch": "#c3cdd3",
+          "image_url": "https://autoimg.danawa.com/photo/4593/53800/color_16_360.png",
+          "path": "vehicles\\포르쉐\\Panamera\\colors\\06_돌로마이트 실버 메탈릭.png"
+        },
+        {
+          "name": "아이스 그레이 메탈릭",
+          "code": "C17",
+          "swatch": "#dfe2e9",
+          "image_url": "https://autoimg.danawa.com/photo/4593/53800/color_17_360.png",
+          "path": "vehicles\\포르쉐\\Panamera\\colors\\07_아이스 그레이 메탈릭.png"
+        },
+        {
+          "name": "프로방스",
+          "code": "C18",
+          "swatch": "#94849c",
+          "image_url": "https://autoimg.danawa.com/photo/4593/53800/color_18_360.png",
+          "path": "vehicles\\포르쉐\\Panamera\\colors\\08_프로방스.png"
+        },
+        {
+          "name": "마데이라 골드 메탈릭",
+          "code": "C19",
+          "swatch": "#b87c44",
+          "image_url": "https://autoimg.danawa.com/photo/4593/53800/color_19_360.png",
+          "path": "vehicles\\포르쉐\\Panamera\\colors\\09_마데이라 골드 메탈릭.png"
+        },
+        {
+          "name": "루가노 블루",
+          "code": "C20",
+          "swatch": "#3864b4",
+          "image_url": "https://autoimg.danawa.com/photo/4593/53800/color_20_360.png",
+          "path": "vehicles\\포르쉐\\Panamera\\colors\\10_루가노 블루.png"
+        },
+        {
+          "name": "젠션 블루 메탈릭",
+          "code": "C21",
+          "swatch": "#00194b",
+          "image_url": "https://autoimg.danawa.com/photo/4593/53800/color_21_360.png",
+          "path": "vehicles\\포르쉐\\Panamera\\colors\\11_젠션 블루 메탈릭.png"
+        },
+        {
+          "name": "카민 레드",
+          "code": "C23",
+          "swatch": "#990033",
+          "image_url": "https://autoimg.danawa.com/photo/4593/53800/color_23_360.png",
+          "path": "vehicles\\포르쉐\\Panamera\\colors\\12_카민 레드.png"
+        },
+        {
+          "name": "오크 그린 메탈릭 네오",
+          "code": "C24",
+          "swatch": "#484c3c",
+          "image_url": "https://autoimg.danawa.com/photo/4593/53800/color_24_360.png",
+          "path": "vehicles\\포르쉐\\Panamera\\colors\\13_오크 그린 메탈릭 네오.png"
+        },
+        {
+          "name": "어벤추리 그린 메탈릭",
+          "code": "C26",
+          "swatch": "#6c746c",
+          "image_url": "https://autoimg.danawa.com/photo/4593/53800/color_26_360.png",
+          "path": "vehicles\\포르쉐\\Panamera\\colors\\14_어벤추리 그린 메탈릭.png"
+        },
+        {
+          "name": "크레용",
+          "code": "C27",
+          "swatch": "#c7c7bf",
+          "image_url": "https://autoimg.danawa.com/photo/4593/53800/color_27_360.png",
+          "path": "vehicles\\포르쉐\\Panamera\\colors\\15_크레용.png"
+        },
+        {
+          "name": "슬레이트 그레이 네오",
+          "code": "C28",
+          "swatch": "#4e4e53",
+          "image_url": "https://autoimg.danawa.com/photo/4593/53800/color_28_360.png",
+          "path": "vehicles\\포르쉐\\Panamera\\colors\\16_슬레이트 그레이 네오.png"
+        }
+      ],
+      "gallery": [
+        {
+          "name": "파나메라 레드 익스클루시브",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4593&Tab=image&No=142959",
+          "image_url": "https://autoimg.danawa.com/gallery/4593/20260129_4593 (1).jpg",
+          "path": "vehicles\\포르쉐\\Panamera\\gallery\\01_파나메라 레드 익스클루시브.jpg"
+        },
+        {
+          "name": "파나메라 레드 익스클루시브",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4593&Tab=image&No=142960",
+          "image_url": "https://autoimg.danawa.com/gallery/4593/20260129_4593 (2).jpg",
+          "path": "vehicles\\포르쉐\\Panamera\\gallery\\02_파나메라 레드 익스클루시브.jpg"
+        },
+        {
+          "name": "파나메라 레드 익스클루시브",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4593&Tab=image&No=142961",
+          "image_url": "https://autoimg.danawa.com/gallery/4593/20260129_4593 (3).jpg",
+          "path": "vehicles\\포르쉐\\Panamera\\gallery\\03_파나메라 레드 익스클루시브.jpg"
+        },
+        {
+          "name": "파나메라 GTS",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4593&Tab=image&No=141418",
+          "image_url": "https://autoimg.danawa.com/gallery/4593/20251031_4593 (1).jpg",
+          "path": "vehicles\\포르쉐\\Panamera\\gallery\\04_파나메라 GTS.jpg"
+        }
+      ]
+    },
+    {
+      "brand": "포르쉐",
+      "brand_id": "381",
+      "model_id": "4619",
+      "name": "Taycan",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4619",
+      "photo_code": "4619/53137",
+      "default_image_url": "https://autoimg.danawa.com/photo/4619/model_360.png",
+      "default_image_path": "vehicles\\포르쉐\\Taycan\\model_360.png",
+      "colors": [
+        {
+          "name": "화이트",
+          "code": "C11",
+          "swatch": "#ffffff",
+          "image_url": "https://autoimg.danawa.com/photo/4619/53137/color_11_360.png",
+          "path": "vehicles\\포르쉐\\Taycan\\colors\\01_화이트.png"
+        },
+        {
+          "name": "블랙",
+          "code": "C12",
+          "swatch": "#000000",
+          "image_url": "https://autoimg.danawa.com/photo/4619/53137/color_12_360.png",
+          "path": "vehicles\\포르쉐\\Taycan\\colors\\02_블랙.png"
+        },
+        {
+          "name": "제트 블랙 메탈릭",
+          "code": "C13",
+          "swatch": "#000000",
+          "image_url": "https://autoimg.danawa.com/photo/4619/53137/color_13_360.png",
+          "path": "vehicles\\포르쉐\\Taycan\\colors\\03_제트 블랙 메탈릭.png"
+        },
+        {
+          "name": "볼케이노 그레이 메탈릭",
+          "code": "C14",
+          "swatch": "#343c44",
+          "image_url": "https://autoimg.danawa.com/photo/4619/53137/color_14_360.png",
+          "path": "vehicles\\포르쉐\\Taycan\\colors\\04_볼케이노 그레이 메탈릭.png"
+        },
+        {
+          "name": "돌로마이트 실버 메탈릭",
+          "code": "C15",
+          "swatch": "#c3cdd3",
+          "image_url": "https://autoimg.danawa.com/photo/4619/53137/color_15_360.png",
+          "path": "vehicles\\포르쉐\\Taycan\\colors\\05_돌로마이트 실버 메탈릭.png"
+        },
+        {
+          "name": "아이스 그레이 메탈릭",
+          "code": "C16",
+          "swatch": "#dfe2e9",
+          "image_url": "https://autoimg.danawa.com/photo/4619/53137/color_16_360.png",
+          "path": "vehicles\\포르쉐\\Taycan\\colors\\06_아이스 그레이 메탈릭.png"
+        },
+        {
+          "name": "프로방스",
+          "code": "C17",
+          "swatch": "#94849c",
+          "image_url": "https://autoimg.danawa.com/photo/4619/53137/color_17_360.png",
+          "path": "vehicles\\포르쉐\\Taycan\\colors\\07_프로방스.png"
+        },
+        {
+          "name": "카민 레드",
+          "code": "C18",
+          "swatch": "#990033",
+          "image_url": "https://autoimg.danawa.com/photo/4619/53137/color_18_360.png",
+          "path": "vehicles\\포르쉐\\Taycan\\colors\\08_카민 레드.png"
+        },
+        {
+          "name": "젠션 블루 메탈릭",
+          "code": "C19",
+          "swatch": "#00194b",
+          "image_url": "https://autoimg.danawa.com/photo/4619/53137/color_19_360.png",
+          "path": "vehicles\\포르쉐\\Taycan\\colors\\09_젠션 블루 메탈릭.png"
+        },
+        {
+          "name": "넵튠 블루",
+          "code": "C20",
+          "swatch": "#345e88",
+          "image_url": "https://autoimg.danawa.com/photo/4619/53137/color_20_360.png",
+          "path": "vehicles\\포르쉐\\Taycan\\colors\\10_넵튠 블루.png"
+        },
+        {
+          "name": "프로즌 블루 메탈릭",
+          "code": "C21",
+          "swatch": "#7ba7bc",
+          "image_url": "https://autoimg.danawa.com/photo/4619/53137/color_21_360.png",
+          "path": "vehicles\\포르쉐\\Taycan\\colors\\11_프로즌 블루 메탈릭.png"
+        },
+        {
+          "name": "프로즌 베리 메탈릭",
+          "code": "C22",
+          "swatch": "#bca9ac",
+          "image_url": "https://autoimg.danawa.com/photo/4619/53137/color_22_360.png",
+          "path": "vehicles\\포르쉐\\Taycan\\colors\\12_프로즌 베리 메탈릭.png"
+        },
+        {
+          "name": "오크 그린 메탈릭 네오",
+          "code": "C23",
+          "swatch": "#484c3c",
+          "image_url": "https://autoimg.danawa.com/photo/4619/53137/color_23_360.png",
+          "path": "vehicles\\포르쉐\\Taycan\\colors\\13_오크 그린 메탈릭 네오.png"
+        },
+        {
+          "name": "셰이드 그린 메탈릭",
+          "code": "C24",
+          "swatch": "#a4c4b8",
+          "image_url": "https://autoimg.danawa.com/photo/4619/53137/color_24_360.png",
+          "path": "vehicles\\포르쉐\\Taycan\\colors\\14_셰이드 그린 메탈릭.png"
+        },
+        {
+          "name": "크레용",
+          "code": "C25",
+          "swatch": "#c7c7bf",
+          "image_url": "https://autoimg.danawa.com/photo/4619/53137/color_25_360.png",
+          "path": "vehicles\\포르쉐\\Taycan\\colors\\15_크레용.png"
+        },
+        {
+          "name": "퍼플 스카이 메탈릭",
+          "code": "C26",
+          "swatch": "#524486",
+          "image_url": "https://autoimg.danawa.com/photo/4619/53137/color_26_360.png",
+          "path": "vehicles\\포르쉐\\Taycan\\colors\\16_퍼플 스카이 메탈릭.png"
+        },
+        {
+          "name": "페일 블루 메탈릭",
+          "code": "C27",
+          "swatch": "#5c747c",
+          "image_url": "https://autoimg.danawa.com/photo/4619/53137/color_27_360.png",
+          "path": "vehicles\\포르쉐\\Taycan\\colors\\17_페일 블루 메탈릭.png"
+        },
+        {
+          "name": "슬레이트 그레이 네오",
+          "code": "C28",
+          "swatch": "#4e4e53",
+          "image_url": "https://autoimg.danawa.com/photo/4619/53137/color_28_360.png",
+          "path": "vehicles\\포르쉐\\Taycan\\colors\\18_슬레이트 그레이 네오.png"
+        }
+      ],
+      "gallery": [
+        {
+          "name": "타이칸 GTS",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4619&Tab=image&No=141421",
+          "image_url": "https://autoimg.danawa.com/gallery/4619/20251031_4619 (1).jpg",
+          "path": "vehicles\\포르쉐\\Taycan\\gallery\\01_타이칸 GTS.jpg"
+        },
+        {
+          "name": "Taycan 4S Black Edition",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4619&Tab=image&No=139047",
+          "image_url": "https://autoimg.danawa.com/gallery/4619/20250711_4619 (5).jpg",
+          "path": "vehicles\\포르쉐\\Taycan\\gallery\\02_Taycan 4S Black Edition.jpg"
+        },
+        {
+          "name": "Taycan 4S Black Edition",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4619&Tab=image&No=139048",
+          "image_url": "https://autoimg.danawa.com/gallery/4619/20250711_4619 (3).jpg",
+          "path": "vehicles\\포르쉐\\Taycan\\gallery\\03_Taycan 4S Black Edition.jpg"
+        },
+        {
+          "name": "Taycan 4S Black Edition",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4619&Tab=image&No=139049",
+          "image_url": "https://autoimg.danawa.com/gallery/4619/20250711_4619 (2).jpg",
+          "path": "vehicles\\포르쉐\\Taycan\\gallery\\04_Taycan 4S Black Edition.jpg"
+        }
+      ]
+    },
+    {
+      "brand": "포르쉐",
+      "brand_id": "381",
+      "model_id": "4613",
+      "name": "Macan Electric",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4613",
+      "photo_code": "4613/53362",
+      "default_image_url": "https://autoimg.danawa.com/photo/4613/model_360.png",
+      "default_image_path": "vehicles\\포르쉐\\Macan Electric\\model_360.png",
+      "colors": [
+        {
+          "name": "화이트",
+          "code": "C11",
+          "swatch": "#efefef",
+          "image_url": "https://autoimg.danawa.com/photo/4613/53362/color_11_360.png",
+          "path": "vehicles\\포르쉐\\Macan Electric\\colors\\01_화이트.png"
+        },
+        {
+          "name": "블랙",
+          "code": "C12",
+          "swatch": "#000000",
+          "image_url": "https://autoimg.danawa.com/photo/4613/53362/color_12_360.png",
+          "path": "vehicles\\포르쉐\\Macan Electric\\colors\\02_블랙.png"
+        },
+        {
+          "name": "제트 블랙 메탈릭",
+          "code": "C13",
+          "swatch": "#000000",
+          "image_url": "https://autoimg.danawa.com/photo/4613/53362/color_13_360.png",
+          "path": "vehicles\\포르쉐\\Macan Electric\\colors\\03_제트 블랙 메탈릭.png"
+        },
+        {
+          "name": "아이스 그레이 메탈릭",
+          "code": "C14",
+          "swatch": "#dfe2e9",
+          "image_url": "https://autoimg.danawa.com/photo/4613/53362/color_14_360.png",
+          "path": "vehicles\\포르쉐\\Macan Electric\\colors\\04_아이스 그레이 메탈릭.png"
+        },
+        {
+          "name": "볼케이노 그레이 메탈릭",
+          "code": "C15",
+          "swatch": "#343c44",
+          "image_url": "https://autoimg.danawa.com/photo/4613/53362/color_15_360.png",
+          "path": "vehicles\\포르쉐\\Macan Electric\\colors\\05_볼케이노 그레이 메탈릭.png"
+        },
+        {
+          "name": "돌로마이트 실버 메탈릭",
+          "code": "C16",
+          "swatch": "#c3cdd3",
+          "image_url": "https://autoimg.danawa.com/photo/4613/53362/color_16_360.png",
+          "path": "vehicles\\포르쉐\\Macan Electric\\colors\\06_돌로마이트 실버 메탈릭.png"
+        },
+        {
+          "name": "프로방스",
+          "code": "C17",
+          "swatch": "#94849c",
+          "image_url": "https://autoimg.danawa.com/photo/4613/53362/color_17_360.png",
+          "path": "vehicles\\포르쉐\\Macan Electric\\colors\\07_프로방스.png"
+        },
+        {
+          "name": "젠션 블루 메탈릭",
+          "code": "C18",
+          "swatch": "#00194b",
+          "image_url": "https://autoimg.danawa.com/photo/4613/53362/color_18_360.png",
+          "path": "vehicles\\포르쉐\\Macan Electric\\colors\\08_젠션 블루 메탈릭.png"
+        },
+        {
+          "name": "프로즌 블루 메탈릭",
+          "code": "C19",
+          "swatch": "#7ba7bc",
+          "image_url": "https://autoimg.danawa.com/photo/4613/53362/color_19_360.png",
+          "path": "vehicles\\포르쉐\\Macan Electric\\colors\\09_프로즌 블루 메탈릭.png"
+        },
+        {
+          "name": "크레용",
+          "code": "C20",
+          "swatch": "#979892",
+          "image_url": "https://autoimg.danawa.com/photo/4613/53362/color_20_360.png",
+          "path": "vehicles\\포르쉐\\Macan Electric\\colors\\10_크레용.png"
+        },
+        {
+          "name": "오크 그린 메탈릭 네오",
+          "code": "C21",
+          "swatch": "#484c3c",
+          "image_url": "https://autoimg.danawa.com/photo/4613/53362/color_21_360.png",
+          "path": "vehicles\\포르쉐\\Macan Electric\\colors\\11_오크 그린 메탈릭 네오.png"
+        },
+        {
+          "name": "어벤추린 그린 메탈릭",
+          "code": "C22",
+          "swatch": "#6c746c",
+          "image_url": "https://autoimg.danawa.com/photo/4613/53362/color_22_360.png",
+          "path": "vehicles\\포르쉐\\Macan Electric\\colors\\12_어벤추린 그린 메탈릭.png"
+        },
+        {
+          "name": "슬레이트 그레이 네오",
+          "code": "C23",
+          "swatch": "#4e4e53",
+          "image_url": "https://autoimg.danawa.com/photo/4613/53362/color_23_360.png",
+          "path": "vehicles\\포르쉐\\Macan Electric\\colors\\13_슬레이트 그레이 네오.png"
+        }
+      ],
+      "gallery": [
+        {
+          "name": "마칸 일렉트릭 GTS",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4613&Tab=image&No=141097",
+          "image_url": "https://autoimg.danawa.com/gallery/4613/20251022_4613 (14).jpg",
+          "path": "vehicles\\포르쉐\\Macan Electric\\gallery\\01_마칸 일렉트릭 GTS.jpg"
+        },
+        {
+          "name": "마칸 일렉트릭 GTS",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4613&Tab=image&No=141098",
+          "image_url": "https://autoimg.danawa.com/gallery/4613/20251022_4613 (13).jpg",
+          "path": "vehicles\\포르쉐\\Macan Electric\\gallery\\02_마칸 일렉트릭 GTS.jpg"
+        },
+        {
+          "name": "마칸 일렉트릭 GTS",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4613&Tab=image&No=141099",
+          "image_url": "https://autoimg.danawa.com/gallery/4613/20251022_4613 (12).jpg",
+          "path": "vehicles\\포르쉐\\Macan Electric\\gallery\\03_마칸 일렉트릭 GTS.jpg"
+        },
+        {
+          "name": "마칸 일렉트릭 GTS",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4613&Tab=image&No=141100",
+          "image_url": "https://autoimg.danawa.com/gallery/4613/20251022_4613 (11).jpg",
+          "path": "vehicles\\포르쉐\\Macan Electric\\gallery\\04_마칸 일렉트릭 GTS.jpg"
+        }
+      ]
+    },
+    {
+      "brand": "포르쉐",
+      "brand_id": "381",
+      "model_id": "4506",
+      "name": "Cayenne",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4506",
+      "photo_code": "4506/53124",
+      "default_image_url": "https://autoimg.danawa.com/photo/4506/model_360.png",
+      "default_image_path": "vehicles\\포르쉐\\Cayenne\\model_360.png",
+      "colors": [
+        {
+          "name": "화이트",
+          "code": "C11",
+          "swatch": "#efefef",
+          "image_url": "https://autoimg.danawa.com/photo/4506/53124/color_11_360.png",
+          "path": "vehicles\\포르쉐\\Cayenne\\colors\\01_화이트.png"
+        },
+        {
+          "name": "크로마이트 블랙 메탈릭",
+          "code": "C14",
+          "swatch": "#171a21",
+          "image_url": "https://autoimg.danawa.com/photo/4506/53124/color_14_360.png",
+          "path": "vehicles\\포르쉐\\Cayenne\\colors\\02_크로마이트 블랙 메탈릭.png"
+        },
+        {
+          "name": "카라라 화이트 메탈릭",
+          "code": "C13",
+          "swatch": "#eff5f9",
+          "image_url": "https://autoimg.danawa.com/photo/4506/53124/color_13_360.png",
+          "path": "vehicles\\포르쉐\\Cayenne\\colors\\03_카라라 화이트 메탈릭.png"
+        },
+        {
+          "name": "돌로마이트 실버 메탈릭",
+          "code": "C17",
+          "swatch": "#c3cdd3",
+          "image_url": "https://autoimg.danawa.com/photo/4506/53124/color_17_360.png",
+          "path": "vehicles\\포르쉐\\Cayenne\\colors\\04_돌로마이트 실버 메탈릭.png"
+        },
+        {
+          "name": "쿼차이트 그레이 메탈릭",
+          "code": "C18",
+          "swatch": "#4d4d4b",
+          "image_url": "https://autoimg.danawa.com/photo/4506/53124/color_18_360.png",
+          "path": "vehicles\\포르쉐\\Cayenne\\colors\\05_쿼차이트 그레이 메탈릭.png"
+        },
+        {
+          "name": "카민 레드",
+          "code": "C20",
+          "swatch": "#990033",
+          "image_url": "https://autoimg.danawa.com/photo/4506/53124/color_20_360.png",
+          "path": "vehicles\\포르쉐\\Cayenne\\colors\\06_카민 레드.png"
+        },
+        {
+          "name": "캐시미어 베이지 메탈릭",
+          "code": "C22",
+          "swatch": "#a39a89",
+          "image_url": "https://autoimg.danawa.com/photo/4506/53124/color_22_360.png",
+          "path": "vehicles\\포르쉐\\Cayenne\\colors\\07_캐시미어 베이지 메탈릭.png"
+        },
+        {
+          "name": "아크틱 그레이",
+          "code": "C19",
+          "swatch": "#6a6c70",
+          "image_url": "https://autoimg.danawa.com/photo/4506/53124/color_19_360.png",
+          "path": "vehicles\\포르쉐\\Cayenne\\colors\\08_아크틱 그레이.png"
+        },
+        {
+          "name": "몬테고 블루 메탈릭",
+          "code": "C15",
+          "swatch": "#293f4d",
+          "image_url": "https://autoimg.danawa.com/photo/4506/53124/color_15_360.png",
+          "path": "vehicles\\포르쉐\\Cayenne\\colors\\09_몬테고 블루 메탈릭.png"
+        },
+        {
+          "name": "알가르브 블루 메탈릭",
+          "code": "C16",
+          "swatch": "#2f3743",
+          "image_url": "https://autoimg.danawa.com/photo/4506/53124/color_16_360.png",
+          "path": "vehicles\\포르쉐\\Cayenne\\colors\\10_알가르브 블루 메탈릭.png"
+        },
+        {
+          "name": "크레용",
+          "code": "C21",
+          "swatch": "#c7c7bf",
+          "image_url": "https://autoimg.danawa.com/photo/4506/53124/color_21_360.png",
+          "path": "vehicles\\포르쉐\\Cayenne\\colors\\11_크레용.png"
+        }
+      ],
+      "gallery": [
+        {
+          "name": "카이엔 S E-하이브리드 블랙 에디션",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4506&Tab=image&No=139053",
+          "image_url": "https://autoimg.danawa.com/gallery/4506/20250711_4506 (1).jpg",
+          "path": "vehicles\\포르쉐\\Cayenne\\gallery\\01_카이엔 S E-하이브리드 블랙 에디션.jpg"
+        },
+        {
+          "name": "카이엔 S E-하이브리드 블랙 에디션",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4506&Tab=image&No=139054",
+          "image_url": "https://autoimg.danawa.com/gallery/4506/20250711_4506 (3).jpg",
+          "path": "vehicles\\포르쉐\\Cayenne\\gallery\\02_카이엔 S E-하이브리드 블랙 에디션.jpg"
+        },
+        {
+          "name": "카이엔 S E-하이브리드 블랙 에디션",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4506&Tab=image&No=139055",
+          "image_url": "https://autoimg.danawa.com/gallery/4506/20250711_4506 (4).jpg",
+          "path": "vehicles\\포르쉐\\Cayenne\\gallery\\03_카이엔 S E-하이브리드 블랙 에디션.jpg"
+        },
+        {
+          "name": "카이엔 S E-하이브리드 블랙 에디션",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4506&Tab=image&No=139056",
+          "image_url": "https://autoimg.danawa.com/gallery/4506/20250711_4506 (2).jpg",
+          "path": "vehicles\\포르쉐\\Cayenne\\gallery\\04_카이엔 S E-하이브리드 블랙 에디션.jpg"
+        }
+      ]
+    },
+    {
+      "brand": "포르쉐",
+      "brand_id": "381",
+      "model_id": "4762",
+      "name": "Cayenne Electric",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4762",
+      "photo_code": "4762/53531",
+      "default_image_url": "https://autoimg.danawa.com/photo/4762/model_360.png",
+      "default_image_path": "vehicles\\포르쉐\\Cayenne Electric\\model_360.png",
+      "colors": [
+        {
+          "name": "화이트",
+          "code": "C11",
+          "swatch": "#dbdfde",
+          "image_url": "https://autoimg.danawa.com/photo/4762/53531/color_11_360.png",
+          "path": "vehicles\\포르쉐\\Cayenne Electric\\colors\\01_화이트.png"
+        },
+        {
+          "name": "크로마이트 블랙 메탈릭",
+          "code": "C12",
+          "swatch": "#090909",
+          "image_url": "https://autoimg.danawa.com/photo/4762/53531/color_12_360.png",
+          "path": "vehicles\\포르쉐\\Cayenne Electric\\colors\\02_크로마이트 블랙 메탈릭.png"
+        },
+        {
+          "name": "바나듐 그레이 메탈릭",
+          "code": "C13",
+          "swatch": "#9ea6b1",
+          "image_url": "https://autoimg.danawa.com/photo/4762/53531/color_13_360.png",
+          "path": "vehicles\\포르쉐\\Cayenne Electric\\colors\\03_바나듐 그레이 메탈릭.png"
+        },
+        {
+          "name": "카라라 화이트 메탈릭",
+          "code": "C14",
+          "swatch": "#ced2d1",
+          "image_url": "https://autoimg.danawa.com/photo/4762/53531/color_14_360.png",
+          "path": "vehicles\\포르쉐\\Cayenne Electric\\colors\\04_카라라 화이트 메탈릭.png"
+        },
+        {
+          "name": "돌로마이트 실버 메탈릭",
+          "code": "C15",
+          "swatch": "#f8fdff",
+          "image_url": "https://autoimg.danawa.com/photo/4762/53531/color_15_360.png",
+          "path": "vehicles\\포르쉐\\Cayenne Electric\\colors\\05_돌로마이트 실버 메탈릭.png"
+        },
+        {
+          "name": "미스틱 그린 메탈릭",
+          "code": "C16",
+          "swatch": "#626e6c",
+          "image_url": "https://autoimg.danawa.com/photo/4762/53531/color_16_360.png",
+          "path": "vehicles\\포르쉐\\Cayenne Electric\\colors\\06_미스틱 그린 메탈릭.png"
+        },
+        {
+          "name": "마데이라 골드 메탈릭",
+          "code": "C17",
+          "swatch": "#b4762d",
+          "image_url": "https://autoimg.danawa.com/photo/4762/53531/color_17_360.png",
+          "path": "vehicles\\포르쉐\\Cayenne Electric\\colors\\07_마데이라 골드 메탈릭.png"
+        },
+        {
+          "name": "알가르브 블루 메탈릭",
+          "code": "C18",
+          "swatch": "#404b5f",
+          "image_url": "https://autoimg.danawa.com/photo/4762/53531/color_18_360.png",
+          "path": "vehicles\\포르쉐\\Cayenne Electric\\colors\\08_알가르브 블루 메탈릭.png"
+        },
+        {
+          "name": "나팔리 블루 메탈릭",
+          "code": "C21",
+          "swatch": "#0b1b33",
+          "image_url": "https://autoimg.danawa.com/photo/4762/53531/color_21_360.png",
+          "path": "vehicles\\포르쉐\\Cayenne Electric\\colors\\09_나팔리 블루 메탈릭.png"
+        },
+        {
+          "name": "오크 그린 메탈릭 네오",
+          "code": "C22",
+          "swatch": "#121912",
+          "image_url": "https://autoimg.danawa.com/photo/4762/53531/color_22_360.png",
+          "path": "vehicles\\포르쉐\\Cayenne Electric\\colors\\10_오크 그린 메탈릭 네오.png"
+        },
+        {
+          "name": "페일 블루 메탈릭",
+          "code": "C23",
+          "swatch": "#242831",
+          "image_url": "https://autoimg.danawa.com/photo/4762/53531/color_23_360.png",
+          "path": "vehicles\\포르쉐\\Cayenne Electric\\colors\\11_페일 블루 메탈릭.png"
+        },
+        {
+          "name": "슬레이트 그레이 네오",
+          "code": "C19",
+          "swatch": "#4e5255",
+          "image_url": "https://autoimg.danawa.com/photo/4762/53531/color_19_360.png",
+          "path": "vehicles\\포르쉐\\Cayenne Electric\\colors\\12_슬레이트 그레이 네오.png"
+        },
+        {
+          "name": "몬테베르데 메탈릭",
+          "code": "C20",
+          "swatch": "#585d51",
+          "image_url": "https://autoimg.danawa.com/photo/4762/53531/color_20_360.png",
+          "path": "vehicles\\포르쉐\\Cayenne Electric\\colors\\13_몬테베르데 메탈릭.png"
+        }
+      ],
+      "gallery": [
+        {
+          "name": "카이엔 S 쿠페 일렉트릭",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4762&Tab=image&No=144892",
+          "image_url": "https://autoimg.danawa.com/gallery/4762/20260427_4762 (1).jpg",
+          "path": "vehicles\\포르쉐\\Cayenne Electric\\gallery\\01_카이엔 S 쿠페 일렉트릭.jpg"
+        },
+        {
+          "name": "카이엔 S 쿠페 일렉트릭",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4762&Tab=image&No=144893",
+          "image_url": "https://autoimg.danawa.com/gallery/4762/20260427_4762 (2).jpg",
+          "path": "vehicles\\포르쉐\\Cayenne Electric\\gallery\\02_카이엔 S 쿠페 일렉트릭.jpg"
+        },
+        {
+          "name": "카이엔 S 쿠페 일렉트릭",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4762&Tab=image&No=144894",
+          "image_url": "https://autoimg.danawa.com/gallery/4762/20260427_4762 (3).jpg",
+          "path": "vehicles\\포르쉐\\Cayenne Electric\\gallery\\03_카이엔 S 쿠페 일렉트릭.jpg"
+        },
+        {
+          "name": "카이엔 S 쿠페 일렉트릭",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4762&Tab=image&No=144895",
+          "image_url": "https://autoimg.danawa.com/gallery/4762/20260427_4762 (4).jpg",
+          "path": "vehicles\\포르쉐\\Cayenne Electric\\gallery\\04_카이엔 S 쿠페 일렉트릭.jpg"
+        }
+      ]
+    }
+  ]
+}

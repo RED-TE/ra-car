@@ -1,0 +1,37 @@
+{
+  "brand": "현대",
+  "brand_id": "303",
+  "model_id": "4797",
+  "name": "아이오닉 3",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4797",
+  "photo_code": "4797/",
+  "default_image_url": "https://autoimg.danawa.com/photo/4797/model_360.png",
+  "default_image_path": "vehicles\\현대\\아이오닉 3\\model_360.png",
+  "colors": [],
+  "gallery": [
+    {
+      "name": "아이오닉 3 N라인",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4797&Tab=image&No=144575",
+      "image_url": "https://autoimg.danawa.com/gallery/4797/20260421_4797 (1).jpg",
+      "path": "vehicles\\현대\\아이오닉 3\\gallery\\01_아이오닉 3 N라인.jpg"
+    },
+    {
+      "name": "아이오닉 3 N라인",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4797&Tab=image&No=144576",
+      "image_url": "https://autoimg.danawa.com/gallery/4797/20260421_4797 (2).jpg",
+      "path": "vehicles\\현대\\아이오닉 3\\gallery\\02_아이오닉 3 N라인.jpg"
+    },
+    {
+      "name": "아이오닉 3 N라인",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4797&Tab=image&No=144577",
+      "image_url": "https://autoimg.danawa.com/gallery/4797/20260421_4797 (3).jpg",
+      "path": "vehicles\\현대\\아이오닉 3\\gallery\\03_아이오닉 3 N라인.jpg"
+    },
+    {
+      "name": "아이오닉 3 N라인",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4797&Tab=image&No=144578",
+      "image_url": "https://autoimg.danawa.com/gallery/4797/20260421_4797 (4).jpg",
+      "path": "vehicles\\현대\\아이오닉 3\\gallery\\04_아이오닉 3 N라인.jpg"
+    }
+  ]
+}

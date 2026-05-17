@@ -1,0 +1,37 @@
+{
+  "brand": "벤츠",
+  "brand_id": "349",
+  "model_id": "4508",
+  "name": "Maybach GLS",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4508",
+  "photo_code": "4508/53612",
+  "default_image_url": "https://autoimg.danawa.com/photo/4508/model_360.png",
+  "default_image_path": "vehicles\\벤츠\\Maybach GLS\\model_360.png",
+  "colors": [],
+  "gallery": [
+    {
+      "name": "2023 l 마이바흐 GLS600 4MATIC",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4508&Tab=image&No=107280",
+      "image_url": "https://autoimg.danawa.com/gallery/4508/20230405_4508 (1).jpg",
+      "path": "vehicles\\벤츠\\Maybach GLS\\gallery\\01_2023 l 마이바흐 GLS600 4MATIC.jpg"
+    },
+    {
+      "name": "2023 l 마이바흐 GLS600 4MATIC",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4508&Tab=image&No=107281",
+      "image_url": "https://autoimg.danawa.com/gallery/4508/20230405_4508 (2).jpg",
+      "path": "vehicles\\벤츠\\Maybach GLS\\gallery\\02_2023 l 마이바흐 GLS600 4MATIC.jpg"
+    },
+    {
+      "name": "2023 l 마이바흐 GLS600 4MATIC",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4508&Tab=image&No=107282",
+      "image_url": "https://autoimg.danawa.com/gallery/4508/20230405_4508 (3).jpg",
+      "path": "vehicles\\벤츠\\Maybach GLS\\gallery\\03_2023 l 마이바흐 GLS600 4MATIC.jpg"
+    },
+    {
+      "name": "2023 l 마이바흐 GLS600 4MATIC",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4508&Tab=image&No=107283",
+      "image_url": "https://autoimg.danawa.com/gallery/4508/20230405_4508 (4).jpg",
+      "path": "vehicles\\벤츠\\Maybach GLS\\gallery\\04_2023 l 마이바흐 GLS600 4MATIC.jpg"
+    }
+  ]
+}

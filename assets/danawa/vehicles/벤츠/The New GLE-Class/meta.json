@@ -1,0 +1,37 @@
+{
+  "brand": "벤츠",
+  "brand_id": "349",
+  "model_id": "4792",
+  "name": "The New GLE-Class",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4792",
+  "photo_code": "4792/",
+  "default_image_url": "https://autoimg.danawa.com/photo/4792/model_360.png",
+  "default_image_path": "vehicles\\벤츠\\The New GLE-Class\\model_360.png",
+  "colors": [],
+  "gallery": [
+    {
+      "name": "더 뉴 GLE",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4792&Tab=image&No=144084",
+      "image_url": "https://autoimg.danawa.com/gallery/4792/20260408_4792 (1).jpg",
+      "path": "vehicles\\벤츠\\The New GLE-Class\\gallery\\01_더 뉴 GLE.jpg"
+    },
+    {
+      "name": "더 뉴 GLE",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4792&Tab=image&No=144085",
+      "image_url": "https://autoimg.danawa.com/gallery/4792/20260408_4792 (2).jpg",
+      "path": "vehicles\\벤츠\\The New GLE-Class\\gallery\\02_더 뉴 GLE.jpg"
+    },
+    {
+      "name": "더 뉴 GLE",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4792&Tab=image&No=144086",
+      "image_url": "https://autoimg.danawa.com/gallery/4792/20260408_4792 (3).jpg",
+      "path": "vehicles\\벤츠\\The New GLE-Class\\gallery\\03_더 뉴 GLE.jpg"
+    },
+    {
+      "name": "더 뉴 GLE",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4792&Tab=image&No=144087",
+      "image_url": "https://autoimg.danawa.com/gallery/4792/20260408_4792 (4).jpg",
+      "path": "vehicles\\벤츠\\The New GLE-Class\\gallery\\04_더 뉴 GLE.jpg"
+    }
+  ]
+}

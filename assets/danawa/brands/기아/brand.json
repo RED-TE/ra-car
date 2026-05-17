@@ -1,0 +1,1673 @@
+{
+  "brand_id": "307",
+  "brand": "기아",
+  "source_url": "https://auto.danawa.com/auto/?Work=brand&Brand=307",
+  "logo_url": "https://autoimg.danawa.com/photo/brand/307_90.png",
+  "logo_path": "brands\\기아\\logo.png",
+  "models": [
+    {
+      "brand": "기아",
+      "brand_id": "307",
+      "model_id": "4554",
+      "name": "모닝",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4554",
+      "photo_code": "4554/52374",
+      "default_image_url": "https://autoimg.danawa.com/photo/4554/52374/color_13_360.png",
+      "default_image_path": "vehicles\\기아\\모닝\\model_360.png",
+      "colors": [
+        {
+          "name": "클리어 화이트 (UD)",
+          "code": "C11",
+          "swatch": "#e0dfe4",
+          "image_url": "https://autoimg.danawa.com/photo/4554/52374/color_11_360.png",
+          "path": "vehicles\\기아\\모닝\\colors\\01_클리어 화이트 (UD).png"
+        },
+        {
+          "name": "밀키 베이지 (M9Y)",
+          "code": "C12",
+          "swatch": "#ccc8c2",
+          "image_url": "https://autoimg.danawa.com/photo/4554/52374/color_12_360.png",
+          "path": "vehicles\\기아\\모닝\\colors\\02_밀키 베이지 (M9Y).png"
+        },
+        {
+          "name": "어드벤쳐러스 그린 (A2G)",
+          "code": "C13",
+          "swatch": "#4c5d55",
+          "image_url": "https://autoimg.danawa.com/photo/4554/52374/color_13_360.png",
+          "path": "vehicles\\기아\\모닝\\colors\\03_어드벤쳐러스 그린 (A2G).png"
+        },
+        {
+          "name": "스파클링 실버 (KCS)",
+          "code": "C14",
+          "swatch": "#a5a4a9",
+          "image_url": "https://autoimg.danawa.com/photo/4554/52374/color_14_360.png",
+          "path": "vehicles\\기아\\모닝\\colors\\04_스파클링 실버 (KCS).png"
+        },
+        {
+          "name": "시그널 레드 (BEG)",
+          "code": "C15",
+          "swatch": "#9d2321",
+          "image_url": "https://autoimg.danawa.com/photo/4554/52374/color_15_360.png",
+          "path": "vehicles\\기아\\모닝\\colors\\05_시그널 레드 (BEG).png"
+        },
+        {
+          "name": "아스트로 그레이 (M7G)",
+          "code": "C16",
+          "swatch": "#52534e",
+          "image_url": "https://autoimg.danawa.com/photo/4554/52374/color_16_360.png",
+          "path": "vehicles\\기아\\모닝\\colors\\06_아스트로 그레이 (M7G).png"
+        },
+        {
+          "name": "오로라 블랙 펄 (ABP)",
+          "code": "C17",
+          "swatch": "#181415",
+          "image_url": "https://autoimg.danawa.com/photo/4554/52374/color_17_360.png",
+          "path": "vehicles\\기아\\모닝\\colors\\07_오로라 블랙 펄 (ABP).png"
+        }
+      ],
+      "gallery": [
+        {
+          "name": "2024 l 모닝 GT-line",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4554&Tab=image&No=125256",
+          "image_url": "https://autoimg.danawa.com/gallery/4554/20240611_4554 (1).jpg",
+          "path": "vehicles\\기아\\모닝\\gallery\\01_2024 l 모닝 GT-line.jpg"
+        },
+        {
+          "name": "2024 l 모닝 GT-line",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4554&Tab=image&No=125257",
+          "image_url": "https://autoimg.danawa.com/gallery/4554/20240611_4554 (2).jpg",
+          "path": "vehicles\\기아\\모닝\\gallery\\02_2024 l 모닝 GT-line.jpg"
+        },
+        {
+          "name": "2024 l 모닝 GT-line",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4554&Tab=image&No=125258",
+          "image_url": "https://autoimg.danawa.com/gallery/4554/20240611_4554 (3).jpg",
+          "path": "vehicles\\기아\\모닝\\gallery\\03_2024 l 모닝 GT-line.jpg"
+        },
+        {
+          "name": "2024 l 모닝 GT-line",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4554&Tab=image&No=125259",
+          "image_url": "https://autoimg.danawa.com/gallery/4554/20240611_4554 (4).jpg",
+          "path": "vehicles\\기아\\모닝\\gallery\\04_2024 l 모닝 GT-line.jpg"
+        }
+      ]
+    },
+    {
+      "brand": "기아",
+      "brand_id": "307",
+      "model_id": "4689",
+      "name": "레이",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4689",
+      "photo_code": "4689/53384",
+      "default_image_url": "https://autoimg.danawa.com/photo/4689/53384/color_16_360.png",
+      "default_image_path": "vehicles\\기아\\레이\\model_360.png",
+      "colors": [
+        {
+          "name": "클리어 화이트(UD)",
+          "code": "C11",
+          "swatch": "#ebecee",
+          "image_url": "https://autoimg.danawa.com/photo/4689/53384/color_11_360.png",
+          "path": "vehicles\\기아\\레이\\colors\\01_클리어 화이트(UD).png"
+        },
+        {
+          "name": "아스트로 그레이(M7G)",
+          "code": "C12",
+          "swatch": "#52534e",
+          "image_url": "https://autoimg.danawa.com/photo/4689/53384/color_12_360.png",
+          "path": "vehicles\\기아\\레이\\colors\\02_아스트로 그레이(M7G).png"
+        },
+        {
+          "name": "오로라 블랙 펄(ABP)",
+          "code": "C13",
+          "swatch": "#000000",
+          "image_url": "https://autoimg.danawa.com/photo/4689/53384/color_13_360.png",
+          "path": "vehicles\\기아\\레이\\colors\\03_오로라 블랙 펄(ABP).png"
+        },
+        {
+          "name": "밀키 베이지(M9Y)",
+          "code": "C14",
+          "swatch": "#c5c3bd",
+          "image_url": "https://autoimg.danawa.com/photo/4689/53384/color_14_360.png",
+          "path": "vehicles\\기아\\레이\\colors\\04_밀키 베이지(M9Y).png"
+        },
+        {
+          "name": "아쿠아 민트(AEQ)",
+          "code": "C15",
+          "swatch": "#a2c7c4",
+          "image_url": "https://autoimg.danawa.com/photo/4689/53384/color_15_360.png",
+          "path": "vehicles\\기아\\레이\\colors\\05_아쿠아 민트(AEQ).png"
+        },
+        {
+          "name": "스모크 블루(EU3)",
+          "code": "C16",
+          "swatch": "#282d47",
+          "image_url": "https://autoimg.danawa.com/photo/4689/53384/color_16_360.png",
+          "path": "vehicles\\기아\\레이\\colors\\06_스모크 블루(EU3).png"
+        },
+        {
+          "name": "어드벤쳐러스 그린(A2G)",
+          "code": "C17",
+          "swatch": "#4c5d55",
+          "image_url": "https://autoimg.danawa.com/photo/4689/53384/color_17_360.png",
+          "path": "vehicles\\기아\\레이\\colors\\07_어드벤쳐러스 그린(A2G).png"
+        }
+      ],
+      "gallery": [
+        {
+          "name": "2025 레이",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4689&Tab=image&No=129617",
+          "image_url": "https://autoimg.danawa.com/gallery/4689/20241002_4402 (1).jpg",
+          "path": "vehicles\\기아\\레이\\gallery\\01_2025 레이.jpg"
+        },
+        {
+          "name": "2025 레이",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4689&Tab=image&No=129618",
+          "image_url": "https://autoimg.danawa.com/gallery/4689/20241002_4402 (2).jpg",
+          "path": "vehicles\\기아\\레이\\gallery\\02_2025 레이.jpg"
+        },
+        {
+          "name": "2023 l 더 뉴 레이 그래비티",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4689&Tab=image&No=102188",
+          "image_url": "https://autoimg.danawa.com/gallery/4689/20221117_4402 (1).jpg",
+          "path": "vehicles\\기아\\레이\\gallery\\03_2023 l 더 뉴 레이 그래비티.jpg"
+        },
+        {
+          "name": "2023 l 더 뉴 레이 그래비티",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4689&Tab=image&No=102189",
+          "image_url": "https://autoimg.danawa.com/gallery/4689/20221117_4402 (2).jpg",
+          "path": "vehicles\\기아\\레이\\gallery\\04_2023 l 더 뉴 레이 그래비티.jpg"
+        }
+      ]
+    },
+    {
+      "brand": "기아",
+      "brand_id": "307",
+      "model_id": "4691",
+      "name": "레이 EV",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4691",
+      "photo_code": "4691/53388",
+      "default_image_url": "https://autoimg.danawa.com/photo/4691/53388/color_16_360.png",
+      "default_image_path": "vehicles\\기아\\레이 EV\\model_360.png",
+      "colors": [
+        {
+          "name": "클리어 화이트(UD)",
+          "code": "C11",
+          "swatch": "#ebecee",
+          "image_url": "https://autoimg.danawa.com/photo/4691/53388/color_11_360.png",
+          "path": "vehicles\\기아\\레이 EV\\colors\\01_클리어 화이트(UD).png"
+        },
+        {
+          "name": "아스트로 그레이(M7G)",
+          "code": "C12",
+          "swatch": "#52534e",
+          "image_url": "https://autoimg.danawa.com/photo/4691/53388/color_12_360.png",
+          "path": "vehicles\\기아\\레이 EV\\colors\\02_아스트로 그레이(M7G).png"
+        },
+        {
+          "name": "오로라 블랙 펄(ABP)",
+          "code": "C13",
+          "swatch": "#000000",
+          "image_url": "https://autoimg.danawa.com/photo/4691/53388/color_13_360.png",
+          "path": "vehicles\\기아\\레이 EV\\colors\\03_오로라 블랙 펄(ABP).png"
+        },
+        {
+          "name": "밀키 베이지(M9Y)",
+          "code": "C14",
+          "swatch": "#c5c3bd",
+          "image_url": "https://autoimg.danawa.com/photo/4691/53388/color_14_360.png",
+          "path": "vehicles\\기아\\레이 EV\\colors\\04_밀키 베이지(M9Y).png"
+        },
+        {
+          "name": "아쿠아 민트(AEQ)",
+          "code": "C15",
+          "swatch": "#a2c7c4",
+          "image_url": "https://autoimg.danawa.com/photo/4691/53388/color_15_360.png",
+          "path": "vehicles\\기아\\레이 EV\\colors\\05_아쿠아 민트(AEQ).png"
+        },
+        {
+          "name": "스모크 블루(EU3)",
+          "code": "C16",
+          "swatch": "#282d47",
+          "image_url": "https://autoimg.danawa.com/photo/4691/53388/color_16_360.png",
+          "path": "vehicles\\기아\\레이 EV\\colors\\06_스모크 블루(EU3).png"
+        },
+        {
+          "name": "어드벤쳐러스 그린(A2G)",
+          "code": "C17",
+          "swatch": "#4c5d55",
+          "image_url": "https://autoimg.danawa.com/photo/4691/53388/color_17_360.png",
+          "path": "vehicles\\기아\\레이 EV\\colors\\07_어드벤쳐러스 그린(A2G).png"
+        }
+      ],
+      "gallery": [
+        {
+          "name": "2025 l 레이 EV",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4691&Tab=image&No=129619",
+          "image_url": "https://autoimg.danawa.com/gallery/4691/20241002_4567 (1).jpg",
+          "path": "vehicles\\기아\\레이 EV\\gallery\\01_2025 l 레이 EV.jpg"
+        },
+        {
+          "name": "2024 l 레이 EV",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4691&Tab=image&No=116923",
+          "image_url": "https://autoimg.danawa.com/gallery/4691/20240122_4567 (1).jpg",
+          "path": "vehicles\\기아\\레이 EV\\gallery\\02_2024 l 레이 EV.jpg"
+        },
+        {
+          "name": "2024 l 레이 EV",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4691&Tab=image&No=116924",
+          "image_url": "https://autoimg.danawa.com/gallery/4691/20240122_4567 (2).jpg",
+          "path": "vehicles\\기아\\레이 EV\\gallery\\03_2024 l 레이 EV.jpg"
+        },
+        {
+          "name": "2024 l 레이 EV",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4691&Tab=image&No=116925",
+          "image_url": "https://autoimg.danawa.com/gallery/4691/20240122_4567 (3).jpg",
+          "path": "vehicles\\기아\\레이 EV\\gallery\\04_2024 l 레이 EV.jpg"
+        }
+      ]
+    },
+    {
+      "brand": "기아",
+      "brand_id": "307",
+      "model_id": "4712",
+      "name": "EV4",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4712",
+      "photo_code": "4712/53660",
+      "default_image_url": "https://autoimg.danawa.com/photo/4712/53660/color_14_360.png",
+      "default_image_path": "vehicles\\기아\\EV4\\model_360.png",
+      "colors": [
+        {
+          "name": "스노우 화이트 펄(SWP)",
+          "code": "C10",
+          "swatch": "#f1f1f1",
+          "image_url": "https://autoimg.danawa.com/photo/4712/53660/color_10_360.png",
+          "path": "vehicles\\기아\\EV4\\colors\\01_스노우 화이트 펄(SWP).png"
+        },
+        {
+          "name": "아이보리 실버(ISG)",
+          "code": "C11",
+          "swatch": "#c3c0bc",
+          "image_url": "https://autoimg.danawa.com/photo/4712/53660/color_11_360.png",
+          "path": "vehicles\\기아\\EV4\\colors\\02_아이보리 실버(ISG).png"
+        },
+        {
+          "name": "셰일 그레이(EBD)",
+          "code": "C12",
+          "swatch": "#404144",
+          "image_url": "https://autoimg.danawa.com/photo/4712/53660/color_12_360.png",
+          "path": "vehicles\\기아\\EV4\\colors\\03_셰일 그레이(EBD).png"
+        },
+        {
+          "name": "오로라 블랙 펄(ABP)",
+          "code": "C13",
+          "swatch": "#171514",
+          "image_url": "https://autoimg.danawa.com/photo/4712/53660/color_13_360.png",
+          "path": "vehicles\\기아\\EV4\\colors\\04_오로라 블랙 펄(ABP).png"
+        },
+        {
+          "name": "모닝 헤이즈(ACW)",
+          "code": "C14",
+          "swatch": "#879597",
+          "image_url": "https://autoimg.danawa.com/photo/4712/53660/color_14_360.png",
+          "path": "vehicles\\기아\\EV4\\colors\\05_모닝 헤이즈(ACW).png"
+        },
+        {
+          "name": "마그마 레드(OVR)",
+          "code": "C15",
+          "swatch": "#491e22",
+          "image_url": "https://autoimg.danawa.com/photo/4712/53660/color_15_360.png",
+          "path": "vehicles\\기아\\EV4\\colors\\06_마그마 레드(OVR).png"
+        },
+        {
+          "name": "아이보리 매트 실버(ISM)",
+          "code": "C09",
+          "swatch": "#bbbab1",
+          "image_url": "https://autoimg.danawa.com/photo/4712/53660/color_09_360.png",
+          "path": "vehicles\\기아\\EV4\\colors\\07_아이보리 매트 실버(ISM).png"
+        },
+        {
+          "name": "요트 매트 블루(ACY)",
+          "code": "C08",
+          "swatch": "#30315f",
+          "image_url": "https://autoimg.danawa.com/photo/4712/53660/color_08_360.png",
+          "path": "vehicles\\기아\\EV4\\colors\\08_요트 매트 블루(ACY).png"
+        }
+      ],
+      "gallery": [
+        {
+          "name": "EV4",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4712&Tab=image&No=143054",
+          "image_url": "https://autoimg.danawa.com/gallery/4712/20260212_4712 (1).jpg",
+          "path": "vehicles\\기아\\EV4\\gallery\\01_EV4.jpg"
+        },
+        {
+          "name": "EV4",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4712&Tab=image&No=143055",
+          "image_url": "https://autoimg.danawa.com/gallery/4712/20260212_4712 (2).jpg",
+          "path": "vehicles\\기아\\EV4\\gallery\\02_EV4.jpg"
+        },
+        {
+          "name": "EV4",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4712&Tab=image&No=143056",
+          "image_url": "https://autoimg.danawa.com/gallery/4712/20260212_4712 (3).jpg",
+          "path": "vehicles\\기아\\EV4\\gallery\\03_EV4.jpg"
+        },
+        {
+          "name": "EV4",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4712&Tab=image&No=143057",
+          "image_url": "https://autoimg.danawa.com/gallery/4712/20260212_4712 (4).jpg",
+          "path": "vehicles\\기아\\EV4\\gallery\\04_EV4.jpg"
+        }
+      ]
+    },
+    {
+      "brand": "기아",
+      "brand_id": "307",
+      "model_id": "4585",
+      "name": "K5",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4585",
+      "photo_code": "4585/53302",
+      "default_image_url": "https://autoimg.danawa.com/photo/4585/model_360.png",
+      "default_image_path": "vehicles\\기아\\K5\\model_360.png",
+      "colors": [
+        {
+          "name": "스노우 화이트 펄(SWP)",
+          "code": "C10",
+          "swatch": "#f1f1f1",
+          "image_url": "https://autoimg.danawa.com/photo/4585/53302/color_10_360.png",
+          "path": "vehicles\\기아\\K5\\colors\\01_스노우 화이트 펄(SWP).png"
+        },
+        {
+          "name": "인터스텔라 그레이(AGT)",
+          "code": "C11",
+          "swatch": "#2c3033",
+          "image_url": "https://autoimg.danawa.com/photo/4585/53302/color_11_360.png",
+          "path": "vehicles\\기아\\K5\\colors\\02_인터스텔라 그레이(AGT).png"
+        },
+        {
+          "name": "오로라 블랙펄(ABP)",
+          "code": "C12",
+          "swatch": "#171514",
+          "image_url": "https://autoimg.danawa.com/photo/4585/53302/color_12_360.png",
+          "path": "vehicles\\기아\\K5\\colors\\03_오로라 블랙펄(ABP).png"
+        },
+        {
+          "name": "울프 그레이(C7S)",
+          "code": "C13",
+          "swatch": "#75797f",
+          "image_url": "https://autoimg.danawa.com/photo/4585/53302/color_13_360.png",
+          "path": "vehicles\\기아\\K5\\colors\\04_울프 그레이(C7S).png"
+        },
+        {
+          "name": "그래비티 블루(B4U)",
+          "code": "C14",
+          "swatch": "#222933",
+          "image_url": "https://autoimg.danawa.com/photo/4585/53302/color_14_360.png",
+          "path": "vehicles\\기아\\K5\\colors\\05_그래비티 블루(B4U).png"
+        }
+      ],
+      "gallery": [
+        {
+          "name": "2025 K5",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4585&Tab=image&No=140772",
+          "image_url": "https://autoimg.danawa.com/gallery/4585/20250924_4585 (1).jpg",
+          "path": "vehicles\\기아\\K5\\gallery\\01_2025 K5.jpg"
+        },
+        {
+          "name": "2025 K5",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4585&Tab=image&No=140773",
+          "image_url": "https://autoimg.danawa.com/gallery/4585/20250924_4585 (2).jpg",
+          "path": "vehicles\\기아\\K5\\gallery\\02_2025 K5.jpg"
+        },
+        {
+          "name": "2025 K5",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4585&Tab=image&No=140774",
+          "image_url": "https://autoimg.danawa.com/gallery/4585/20250924_4585 (3).jpg",
+          "path": "vehicles\\기아\\K5\\gallery\\03_2025 K5.jpg"
+        },
+        {
+          "name": "2025 K5",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4585&Tab=image&No=140775",
+          "image_url": "https://autoimg.danawa.com/gallery/4585/20250924_4585 (4).jpg",
+          "path": "vehicles\\기아\\K5\\gallery\\04_2025 K5.jpg"
+        }
+      ]
+    },
+    {
+      "brand": "기아",
+      "brand_id": "307",
+      "model_id": "4665",
+      "name": "K8",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4665",
+      "photo_code": "4665/53749",
+      "default_image_url": "https://autoimg.danawa.com/photo/4665/53749/color_12_360.png",
+      "default_image_path": "vehicles\\기아\\K8\\model_360.png",
+      "colors": [
+        {
+          "name": "스노우 화이트 펄 (SWP)",
+          "code": "C10",
+          "swatch": "#e2e2e4",
+          "image_url": "https://autoimg.danawa.com/photo/4665/53749/color_10_360.png",
+          "path": "vehicles\\기아\\K8\\colors\\01_스노우 화이트 펄 (SWP).png"
+        },
+        {
+          "name": "아이보리 실버 (ISG)",
+          "code": "C11",
+          "swatch": "#878887",
+          "image_url": "https://autoimg.danawa.com/photo/4665/53749/color_11_360.png",
+          "path": "vehicles\\기아\\K8\\colors\\02_아이보리 실버 (ISG).png"
+        },
+        {
+          "name": "문스케이프 매트 그레이(KLM)",
+          "code": "C09",
+          "swatch": "#525253",
+          "image_url": "https://autoimg.danawa.com/photo/4665/53749/color_09_360.png",
+          "path": "vehicles\\기아\\K8\\colors\\03_문스케이프 매트 그레이(KLM).png"
+        },
+        {
+          "name": "선셋 베이지 (BYG)",
+          "code": "C12",
+          "swatch": "#908277",
+          "image_url": "https://autoimg.danawa.com/photo/4665/53749/color_12_360.png",
+          "path": "vehicles\\기아\\K8\\colors\\04_선셋 베이지 (BYG).png"
+        },
+        {
+          "name": "인터스텔라 그레이 (AGT)",
+          "code": "C13",
+          "swatch": "#2c3033",
+          "image_url": "https://autoimg.danawa.com/photo/4665/53749/color_13_360.png",
+          "path": "vehicles\\기아\\K8\\colors\\05_인터스텔라 그레이 (AGT).png"
+        },
+        {
+          "name": "오로라 블랙 펄 (ABP)",
+          "code": "C14",
+          "swatch": "#211e23",
+          "image_url": "https://autoimg.danawa.com/photo/4665/53749/color_14_360.png",
+          "path": "vehicles\\기아\\K8\\colors\\06_오로라 블랙 펄 (ABP).png"
+        }
+      ],
+      "gallery": [
+        {
+          "name": "2027 K8",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4665&Tab=image&No=144579",
+          "image_url": "https://autoimg.danawa.com/gallery/4665/20260421_4665 (1).jpg",
+          "path": "vehicles\\기아\\K8\\gallery\\01_2027 K8.jpg"
+        },
+        {
+          "name": "2027 K8",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4665&Tab=image&No=144580",
+          "image_url": "https://autoimg.danawa.com/gallery/4665/20260421_4665 (2).jpg",
+          "path": "vehicles\\기아\\K8\\gallery\\02_2027 K8.jpg"
+        },
+        {
+          "name": "2025 K8",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4665&Tab=image&No=140788",
+          "image_url": "https://autoimg.danawa.com/gallery/4665/20250924_4665 (1).jpg",
+          "path": "vehicles\\기아\\K8\\gallery\\03_2025 K8.jpg"
+        },
+        {
+          "name": "2025 K8",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4665&Tab=image&No=140789",
+          "image_url": "https://autoimg.danawa.com/gallery/4665/20250924_4665 (2).jpg",
+          "path": "vehicles\\기아\\K8\\gallery\\04_2025 K8.jpg"
+        }
+      ]
+    },
+    {
+      "brand": "기아",
+      "brand_id": "307",
+      "model_id": "4066",
+      "name": "K9",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4066",
+      "photo_code": "4066/53671",
+      "default_image_url": "https://autoimg.danawa.com/photo/4066/53671/color_13_360.png",
+      "default_image_path": "vehicles\\기아\\K9\\model_360.png",
+      "colors": [
+        {
+          "name": "스노우 화이트 펄(SWP)",
+          "code": "C10",
+          "swatch": "#f8f8f8",
+          "image_url": "https://autoimg.danawa.com/photo/4066/53671/color_10_360.png",
+          "path": "vehicles\\기아\\K9\\colors\\01_스노우 화이트 펄(SWP).png"
+        },
+        {
+          "name": "판테라 메탈(P2M)",
+          "code": "C11",
+          "swatch": "#484848",
+          "image_url": "https://autoimg.danawa.com/photo/4066/53671/color_11_360.png",
+          "path": "vehicles\\기아\\K9\\colors\\02_판테라 메탈(P2M).png"
+        },
+        {
+          "name": "페블 그레이(DFG)",
+          "code": "C12",
+          "swatch": "#c6c5ca",
+          "image_url": "https://autoimg.danawa.com/photo/4066/53671/color_12_360.png",
+          "path": "vehicles\\기아\\K9\\colors\\03_페블 그레이(DFG).png"
+        },
+        {
+          "name": "딥 크로마 블루(D9B)",
+          "code": "C13",
+          "swatch": "#0f142d",
+          "image_url": "https://autoimg.danawa.com/photo/4066/53671/color_13_360.png",
+          "path": "vehicles\\기아\\K9\\colors\\04_딥 크로마 블루(D9B).png"
+        },
+        {
+          "name": "오로라 블랙 펄(ABP)",
+          "code": "C14",
+          "swatch": "#1c1b20",
+          "image_url": "https://autoimg.danawa.com/photo/4066/53671/color_14_360.png",
+          "path": "vehicles\\기아\\K9\\colors\\05_오로라 블랙 펄(ABP).png"
+        }
+      ],
+      "gallery": [
+        {
+          "name": "2024 K9",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4066&Tab=image&No=119115",
+          "image_url": "https://autoimg.danawa.com/gallery/4066/20240403_4066 (1).jpg",
+          "path": "vehicles\\기아\\K9\\gallery\\01_2024 K9.jpg"
+        },
+        {
+          "name": "2024 K9",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4066&Tab=image&No=119116",
+          "image_url": "https://autoimg.danawa.com/gallery/4066/20240403_4066 (2).jpg",
+          "path": "vehicles\\기아\\K9\\gallery\\02_2024 K9.jpg"
+        },
+        {
+          "name": "2024 K9",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4066&Tab=image&No=119117",
+          "image_url": "https://autoimg.danawa.com/gallery/4066/20240403_4066 (3).jpg",
+          "path": "vehicles\\기아\\K9\\gallery\\03_2024 K9.jpg"
+        },
+        {
+          "name": "2023 l K9",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4066&Tab=image&No=110117",
+          "image_url": "https://autoimg.danawa.com/gallery/4066/20230621_4066 (1).jpg",
+          "path": "vehicles\\기아\\K9\\gallery\\04_2023 l K9.jpg"
+        }
+      ]
+    },
+    {
+      "brand": "기아",
+      "brand_id": "307",
+      "model_id": "4391",
+      "name": "셀토스",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4391",
+      "photo_code": "4391/53252",
+      "default_image_url": "https://autoimg.danawa.com/photo/4391/53252/color_15_360.png",
+      "default_image_path": "vehicles\\기아\\셀토스\\model_360.png",
+      "colors": [
+        {
+          "name": "스노우 화이트 펄(SWP)",
+          "code": "C10",
+          "swatch": "#f4f4f4",
+          "image_url": "https://autoimg.danawa.com/photo/4391/53252/color_10_360.png",
+          "path": "vehicles\\기아\\셀토스\\colors\\01_스노우 화이트 펄(SWP).png"
+        },
+        {
+          "name": "그래비티 그레이(KDG)",
+          "code": "C11",
+          "swatch": "#53646b",
+          "image_url": "https://autoimg.danawa.com/photo/4391/53252/color_11_360.png",
+          "path": "vehicles\\기아\\셀토스\\colors\\02_그래비티 그레이(KDG).png"
+        },
+        {
+          "name": "퓨전 블랙(FSB)",
+          "code": "C12",
+          "swatch": "#040406",
+          "image_url": "https://autoimg.danawa.com/photo/4391/53252/color_12_360.png",
+          "path": "vehicles\\기아\\셀토스\\colors\\03_퓨전 블랙(FSB).png"
+        },
+        {
+          "name": "플루톤 블루(PLU)",
+          "code": "C13",
+          "swatch": "#3c5e69",
+          "image_url": "https://autoimg.danawa.com/photo/4391/53252/color_13_360.png",
+          "path": "vehicles\\기아\\셀토스\\colors\\04_플루톤 블루(PLU).png"
+        },
+        {
+          "name": "다크 오션 블루(BU3)",
+          "code": "C14",
+          "swatch": "#031134",
+          "image_url": "https://autoimg.danawa.com/photo/4391/53252/color_14_360.png",
+          "path": "vehicles\\기아\\셀토스\\colors\\05_다크 오션 블루(BU3).png"
+        },
+        {
+          "name": "퓨전 블랙+클리어 화이트(F1D)",
+          "code": "C15",
+          "swatch": "#040406",
+          "image_url": "https://autoimg.danawa.com/photo/4391/53252/color_15_360.png",
+          "path": "vehicles\\기아\\셀토스\\colors\\06_퓨전 블랙+클리어 화이트(F1D).png"
+        },
+        {
+          "name": "퓨전 블랙+플루톤 블루(F1A)",
+          "code": "C16",
+          "swatch": "#040406",
+          "image_url": "https://autoimg.danawa.com/photo/4391/53252/color_16_360.png",
+          "path": "vehicles\\기아\\셀토스\\colors\\07_퓨전 블랙+플루톤 블루(F1A).png"
+        }
+      ],
+      "gallery": [
+        {
+          "name": "2025 셀토스",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4391&Tab=image&No=128218",
+          "image_url": "https://autoimg.danawa.com/gallery/4391/20240827_4391 (1).jpg",
+          "path": "vehicles\\기아\\셀토스\\gallery\\01_2025 셀토스.jpg"
+        },
+        {
+          "name": "2025 셀토스",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4391&Tab=image&No=128219",
+          "image_url": "https://autoimg.danawa.com/gallery/4391/20240827_4391 (2).jpg",
+          "path": "vehicles\\기아\\셀토스\\gallery\\02_2025 셀토스.jpg"
+        },
+        {
+          "name": "2025 셀토스",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4391&Tab=image&No=128220",
+          "image_url": "https://autoimg.danawa.com/gallery/4391/20240827_4391 (3).jpg",
+          "path": "vehicles\\기아\\셀토스\\gallery\\03_2025 셀토스.jpg"
+        },
+        {
+          "name": "2025 셀토스",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4391&Tab=image&No=128221",
+          "image_url": "https://autoimg.danawa.com/gallery/4391/20240827_4391 (4).jpg",
+          "path": "vehicles\\기아\\셀토스\\gallery\\04_2025 셀토스.jpg"
+        }
+      ]
+    },
+    {
+      "brand": "기아",
+      "brand_id": "307",
+      "model_id": "4763",
+      "name": "디 올 뉴 셀토스",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4763",
+      "photo_code": "4763/53547",
+      "default_image_url": "https://autoimg.danawa.com/photo/4763/53547/color_10_360.png",
+      "default_image_path": "vehicles\\기아\\디 올 뉴 셀토스\\model_360.png",
+      "colors": [
+        {
+          "name": "스노우 화이트 펄(SWP)",
+          "code": "C10",
+          "swatch": "#f4f4f4",
+          "image_url": "https://autoimg.danawa.com/photo/4763/53547/color_10_360.png",
+          "path": "vehicles\\기아\\디 올 뉴 셀토스\\colors\\01_스노우 화이트 펄(SWP).png"
+        },
+        {
+          "name": "아이스버그 그린(IEG)",
+          "code": "C11",
+          "swatch": "#657878",
+          "image_url": "https://autoimg.danawa.com/photo/4763/53547/color_11_360.png",
+          "path": "vehicles\\기아\\디 올 뉴 셀토스\\colors\\02_아이스버그 그린(IEG).png"
+        },
+        {
+          "name": "그래비티 그레이(KDG)",
+          "code": "C12",
+          "swatch": "#53646b",
+          "image_url": "https://autoimg.danawa.com/photo/4763/53547/color_12_360.png",
+          "path": "vehicles\\기아\\디 올 뉴 셀토스\\colors\\03_그래비티 그레이(KDG).png"
+        },
+        {
+          "name": "아이보리 실버(ISG)",
+          "code": "C13",
+          "swatch": "#878887",
+          "image_url": "https://autoimg.danawa.com/photo/4763/53547/color_13_360.png",
+          "path": "vehicles\\기아\\디 올 뉴 셀토스\\colors\\04_아이보리 실버(ISG).png"
+        },
+        {
+          "name": "프로스트 블루(EBB)",
+          "code": "C14",
+          "swatch": "#4b6a74",
+          "image_url": "https://autoimg.danawa.com/photo/4763/53547/color_14_360.png",
+          "path": "vehicles\\기아\\디 올 뉴 셀토스\\colors\\05_프로스트 블루(EBB).png"
+        },
+        {
+          "name": "퓨전 블랙(FSB)",
+          "code": "C15",
+          "swatch": "#040406",
+          "image_url": "https://autoimg.danawa.com/photo/4763/53547/color_15_360.png",
+          "path": "vehicles\\기아\\디 올 뉴 셀토스\\colors\\06_퓨전 블랙(FSB).png"
+        },
+        {
+          "name": "퓨전 블랙+스노우 화이트 펄(CAS)",
+          "code": "C16",
+          "swatch": "#040406",
+          "image_url": "https://autoimg.danawa.com/photo/4763/53547/color_16_360.png",
+          "path": "vehicles\\기아\\디 올 뉴 셀토스\\colors\\07_퓨전 블랙+스노우 화이트 펄(CAS).png"
+        },
+        {
+          "name": "퓨전 블랙+아이스버그 그린(CBG)",
+          "code": "C17",
+          "swatch": "#040406",
+          "image_url": "https://autoimg.danawa.com/photo/4763/53547/color_17_360.png",
+          "path": "vehicles\\기아\\디 올 뉴 셀토스\\colors\\08_퓨전 블랙+아이스버그 그린(CBG).png"
+        },
+        {
+          "name": "아이보리 매트 실버(ISM)",
+          "code": "C09",
+          "swatch": "#bbbab1",
+          "image_url": "https://autoimg.danawa.com/photo/4763/53547/color_09_360.png",
+          "path": "vehicles\\기아\\디 올 뉴 셀토스\\colors\\09_아이보리 매트 실버(ISM).png"
+        },
+        {
+          "name": "마그마 매트 레드(MRM)",
+          "code": "C08",
+          "swatch": "#400d17",
+          "image_url": "https://autoimg.danawa.com/photo/4763/53547/color_08_360.png",
+          "path": "vehicles\\기아\\디 올 뉴 셀토스\\colors\\10_마그마 매트 레드(MRM).png"
+        }
+      ],
+      "gallery": [
+        {
+          "name": "디 올 뉴 셀토스",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4763&Tab=image&No=143048",
+          "image_url": "https://autoimg.danawa.com/gallery/4763/20260212_4763 (1).jpg",
+          "path": "vehicles\\기아\\디 올 뉴 셀토스\\gallery\\01_디 올 뉴 셀토스.jpg"
+        },
+        {
+          "name": "디 올 뉴 셀토스",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4763&Tab=image&No=143049",
+          "image_url": "https://autoimg.danawa.com/gallery/4763/20260212_4763 (2).jpg",
+          "path": "vehicles\\기아\\디 올 뉴 셀토스\\gallery\\02_디 올 뉴 셀토스.jpg"
+        },
+        {
+          "name": "디 올 뉴 셀토스",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4763&Tab=image&No=143050",
+          "image_url": "https://autoimg.danawa.com/gallery/4763/20260212_4763 (3).jpg",
+          "path": "vehicles\\기아\\디 올 뉴 셀토스\\gallery\\03_디 올 뉴 셀토스.jpg"
+        },
+        {
+          "name": "디 올 뉴 셀토스",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4763&Tab=image&No=143051",
+          "image_url": "https://autoimg.danawa.com/gallery/4763/20260212_4763 (4).jpg",
+          "path": "vehicles\\기아\\디 올 뉴 셀토스\\gallery\\04_디 올 뉴 셀토스.jpg"
+        }
+      ]
+    },
+    {
+      "brand": "기아",
+      "brand_id": "307",
+      "model_id": "4775",
+      "name": "더 뉴 니로",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4775",
+      "photo_code": "4775/53704",
+      "default_image_url": "https://autoimg.danawa.com/photo/4775/model_360.png",
+      "default_image_path": "vehicles\\기아\\더 뉴 니로\\model_360.png",
+      "colors": [],
+      "gallery": [
+        {
+          "name": "더 뉴 니로",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4775&Tab=image&No=144529",
+          "image_url": "https://autoimg.danawa.com/gallery/4775/20260416_4775 (1).jpg",
+          "path": "vehicles\\기아\\더 뉴 니로\\gallery\\01_더 뉴 니로.jpg"
+        },
+        {
+          "name": "더 뉴 니로",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4775&Tab=image&No=144530",
+          "image_url": "https://autoimg.danawa.com/gallery/4775/20260416_4775 (2).jpg",
+          "path": "vehicles\\기아\\더 뉴 니로\\gallery\\02_더 뉴 니로.jpg"
+        },
+        {
+          "name": "더 뉴 니로",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4775&Tab=image&No=144531",
+          "image_url": "https://autoimg.danawa.com/gallery/4775/20260416_4775 (3).jpg",
+          "path": "vehicles\\기아\\더 뉴 니로\\gallery\\03_더 뉴 니로.jpg"
+        },
+        {
+          "name": "더 뉴 니로",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4775&Tab=image&No=144532",
+          "image_url": "https://autoimg.danawa.com/gallery/4775/20260416_4775 (4).jpg",
+          "path": "vehicles\\기아\\더 뉴 니로\\gallery\\04_더 뉴 니로.jpg"
+        }
+      ]
+    },
+    {
+      "brand": "기아",
+      "brand_id": "307",
+      "model_id": "4768",
+      "name": "EV2",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4768",
+      "photo_code": "4768/",
+      "default_image_url": "https://autoimg.danawa.com/photo/4768/model_360.png",
+      "default_image_path": "vehicles\\기아\\EV2\\model_360.png",
+      "colors": [],
+      "gallery": [
+        {
+          "name": "EV2",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4768&Tab=image&No=142578",
+          "image_url": "https://autoimg.danawa.com/gallery/4768/20260112_4768 (1).jpg",
+          "path": "vehicles\\기아\\EV2\\gallery\\01_EV2.jpg"
+        },
+        {
+          "name": "EV2",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4768&Tab=image&No=142579",
+          "image_url": "https://autoimg.danawa.com/gallery/4768/20260112_4768 (2).jpg",
+          "path": "vehicles\\기아\\EV2\\gallery\\02_EV2.jpg"
+        },
+        {
+          "name": "EV2",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4768&Tab=image&No=142580",
+          "image_url": "https://autoimg.danawa.com/gallery/4768/20260112_4768 (3).jpg",
+          "path": "vehicles\\기아\\EV2\\gallery\\03_EV2.jpg"
+        },
+        {
+          "name": "EV2",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4768&Tab=image&No=142581",
+          "image_url": "https://autoimg.danawa.com/gallery/4768/20260112_4768 (4).jpg",
+          "path": "vehicles\\기아\\EV2\\gallery\\04_EV2.jpg"
+        }
+      ]
+    },
+    {
+      "brand": "기아",
+      "brand_id": "307",
+      "model_id": "4647",
+      "name": "EV3",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4647",
+      "photo_code": "4647/53657",
+      "default_image_url": "https://autoimg.danawa.com/photo/4647/53657/color_14_360.png",
+      "default_image_path": "vehicles\\기아\\EV3\\model_360.png",
+      "colors": [
+        {
+          "name": "스노우 화이트 펄 (SWP)",
+          "code": "C10",
+          "swatch": "#cecfd2",
+          "image_url": "https://autoimg.danawa.com/photo/4647/53657/color_10_360.png",
+          "path": "vehicles\\기아\\EV3\\colors\\01_스노우 화이트 펄 (SWP).png"
+        },
+        {
+          "name": "아이보리 실버 (ISG)",
+          "code": "C11",
+          "swatch": "#878887",
+          "image_url": "https://autoimg.danawa.com/photo/4647/53657/color_11_360.png",
+          "path": "vehicles\\기아\\EV3\\colors\\02_아이보리 실버 (ISG).png"
+        },
+        {
+          "name": "아이보리 매트 실버 (ISM)",
+          "code": "C09",
+          "swatch": "#bbbab1",
+          "image_url": "https://autoimg.danawa.com/photo/4647/53657/color_09_360.png",
+          "path": "vehicles\\기아\\EV3\\colors\\03_아이보리 매트 실버 (ISM).png"
+        },
+        {
+          "name": "오로라 블랙 펄 (ABP)",
+          "code": "C12",
+          "swatch": "#171514",
+          "image_url": "https://autoimg.danawa.com/photo/4647/53657/color_12_360.png",
+          "path": "vehicles\\기아\\EV3\\colors\\04_오로라 블랙 펄 (ABP).png"
+        },
+        {
+          "name": "세일 그레이 (EBD)",
+          "code": "C13",
+          "swatch": "#3c3c3e",
+          "image_url": "https://autoimg.danawa.com/photo/4647/53657/color_13_360.png",
+          "path": "vehicles\\기아\\EV3\\colors\\05_세일 그레이 (EBD).png"
+        },
+        {
+          "name": "어벤쳐린 그린 (AG3)",
+          "code": "C14",
+          "swatch": "#77827b",
+          "image_url": "https://autoimg.danawa.com/photo/4647/53657/color_14_360.png",
+          "path": "vehicles\\기아\\EV3\\colors\\06_어벤쳐린 그린 (AG3).png"
+        },
+        {
+          "name": "프로스트 블루 (EBB)",
+          "code": "C15",
+          "swatch": "#5f7482",
+          "image_url": "https://autoimg.danawa.com/photo/4647/53657/color_15_360.png",
+          "path": "vehicles\\기아\\EV3\\colors\\07_프로스트 블루 (EBB).png"
+        }
+      ],
+      "gallery": [
+        {
+          "name": "EV4 GT & EV3 GT & EV5 GT",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4647&Tab=image&No=142973",
+          "image_url": "https://autoimg.danawa.com/gallery/4647/20260204_4647 (1).jpg",
+          "path": "vehicles\\기아\\EV3\\gallery\\01_EV4 GT & EV3 GT & EV5 GT.jpg"
+        },
+        {
+          "name": "2024 EV3",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4647&Tab=image&No=140806",
+          "image_url": "https://autoimg.danawa.com/gallery/4647/20250924_4647 (1).jpg",
+          "path": "vehicles\\기아\\EV3\\gallery\\02_2024 EV3.jpg"
+        },
+        {
+          "name": "2024 EV3",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4647&Tab=image&No=140807",
+          "image_url": "https://autoimg.danawa.com/gallery/4647/20250924_4647 (2).jpg",
+          "path": "vehicles\\기아\\EV3\\gallery\\03_2024 EV3.jpg"
+        },
+        {
+          "name": "2024 EV3",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4647&Tab=image&No=140808",
+          "image_url": "https://autoimg.danawa.com/gallery/4647/20250924_4647 (3).jpg",
+          "path": "vehicles\\기아\\EV3\\gallery\\04_2024 EV3.jpg"
+        }
+      ]
+    },
+    {
+      "brand": "기아",
+      "brand_id": "307",
+      "model_id": "4499",
+      "name": "EV5",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4499",
+      "photo_code": "4499/53638",
+      "default_image_url": "https://autoimg.danawa.com/photo/4499/model_360.png",
+      "default_image_path": "vehicles\\기아\\EV5\\model_360.png",
+      "colors": [],
+      "gallery": [
+        {
+          "name": "EV4 GT & EV3 GT & EV5 GT",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4499&Tab=image&No=142975",
+          "image_url": "https://autoimg.danawa.com/gallery/4499/20260204_4499 (1).jpg",
+          "path": "vehicles\\기아\\EV5\\gallery\\01_EV4 GT & EV3 GT & EV5 GT.jpg"
+        },
+        {
+          "name": "EV5 스탠다드",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4499&Tab=image&No=142921",
+          "image_url": "https://autoimg.danawa.com/gallery/4499/20260122_4499 (1).jpg",
+          "path": "vehicles\\기아\\EV5\\gallery\\02_EV5 스탠다드.jpg"
+        },
+        {
+          "name": "EV5 스탠다드",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4499&Tab=image&No=142922",
+          "image_url": "https://autoimg.danawa.com/gallery/4499/20260122_4499 (2).jpg",
+          "path": "vehicles\\기아\\EV5\\gallery\\03_EV5 스탠다드.jpg"
+        },
+        {
+          "name": "EV5",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4499&Tab=image&No=141111",
+          "image_url": "https://autoimg.danawa.com/gallery/4499/20251022_4499 (1).jpg",
+          "path": "vehicles\\기아\\EV5\\gallery\\04_EV5.jpg"
+        }
+      ]
+    },
+    {
+      "brand": "기아",
+      "brand_id": "307",
+      "model_id": "4641",
+      "name": "EV6",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4641",
+      "photo_code": "4641/53639",
+      "default_image_url": "https://autoimg.danawa.com/photo/4641/53639/color_08_360.png",
+      "default_image_path": "vehicles\\기아\\EV6\\model_360.png",
+      "colors": [
+        {
+          "name": "스노우 화이트 펄 (SWP)",
+          "code": "C10",
+          "swatch": "#cecfd2",
+          "image_url": "https://autoimg.danawa.com/photo/4641/53639/color_10_360.png",
+          "path": "vehicles\\기아\\EV6\\colors\\01_스노우 화이트 펄 (SWP).png"
+        },
+        {
+          "name": "오로라 블랙 펄 (ABP)",
+          "code": "C11",
+          "swatch": "#171514",
+          "image_url": "https://autoimg.danawa.com/photo/4641/53639/color_11_360.png",
+          "path": "vehicles\\기아\\EV6\\colors\\02_오로라 블랙 펄 (ABP).png"
+        },
+        {
+          "name": "인터스텔라 그레이 (AGT)",
+          "code": "C12",
+          "swatch": "#2c3033",
+          "image_url": "https://autoimg.danawa.com/photo/4641/53639/color_12_360.png",
+          "path": "vehicles\\기아\\EV6\\colors\\03_인터스텔라 그레이 (AGT).png"
+        },
+        {
+          "name": "런웨이 레드 (CR5)",
+          "code": "C13",
+          "swatch": "#6d1418",
+          "image_url": "https://autoimg.danawa.com/photo/4641/53639/color_13_360.png",
+          "path": "vehicles\\기아\\EV6\\colors\\04_런웨이 레드 (CR5).png"
+        },
+        {
+          "name": "문스케이프 매트 그레이 (KLM)",
+          "code": "C09",
+          "swatch": "#727272",
+          "image_url": "https://autoimg.danawa.com/photo/4641/53639/color_09_360.png",
+          "path": "vehicles\\기아\\EV6\\colors\\05_문스케이프 매트 그레이 (KLM).png"
+        },
+        {
+          "name": "글래시어 (GLB)",
+          "code": "C14",
+          "swatch": "#a6a89d",
+          "image_url": "https://autoimg.danawa.com/photo/4641/53639/color_14_360.png",
+          "path": "vehicles\\기아\\EV6\\colors\\06_글래시어 (GLB).png"
+        },
+        {
+          "name": "요트 블루 (DU3)",
+          "code": "C15",
+          "swatch": "#142f8b",
+          "image_url": "https://autoimg.danawa.com/photo/4641/53639/color_15_360.png",
+          "path": "vehicles\\기아\\EV6\\colors\\07_요트 블루 (DU3).png"
+        },
+        {
+          "name": "아이보리 매트 실버 (ISM)",
+          "code": "C08",
+          "swatch": "#bbbab1",
+          "image_url": "https://autoimg.danawa.com/photo/4641/53639/color_08_360.png",
+          "path": "vehicles\\기아\\EV6\\colors\\08_아이보리 매트 실버 (ISM).png"
+        },
+        {
+          "name": "울프 그레이 (C7S)",
+          "code": "C16",
+          "swatch": "#75797f",
+          "image_url": "https://autoimg.danawa.com/photo/4641/53639/color_16_360.png",
+          "path": "vehicles\\기아\\EV6\\colors\\09_울프 그레이 (C7S).png"
+        },
+        {
+          "name": "요트 매트 블루 (DUM)",
+          "code": "C07",
+          "swatch": "#313965",
+          "image_url": "https://autoimg.danawa.com/photo/4641/53639/color_07_360.png",
+          "path": "vehicles\\기아\\EV6\\colors\\10_요트 매트 블루 (DUM).png"
+        }
+      ],
+      "gallery": [
+        {
+          "name": "2024 EV6",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4641&Tab=image&No=140829",
+          "image_url": "https://autoimg.danawa.com/gallery/4641/20250924_4641 (1).jpg",
+          "path": "vehicles\\기아\\EV6\\gallery\\01_2024 EV6.jpg"
+        },
+        {
+          "name": "2024 EV6",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4641&Tab=image&No=140830",
+          "image_url": "https://autoimg.danawa.com/gallery/4641/20250924_4641 (2).jpg",
+          "path": "vehicles\\기아\\EV6\\gallery\\02_2024 EV6.jpg"
+        },
+        {
+          "name": "2024 EV6",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4641&Tab=image&No=140831",
+          "image_url": "https://autoimg.danawa.com/gallery/4641/20250924_4641 (3).jpg",
+          "path": "vehicles\\기아\\EV6\\gallery\\03_2024 EV6.jpg"
+        },
+        {
+          "name": "2024 EV6",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4641&Tab=image&No=140832",
+          "image_url": "https://autoimg.danawa.com/gallery/4641/20250924_4641 (4).jpg",
+          "path": "vehicles\\기아\\EV6\\gallery\\04_2024 EV6.jpg"
+        }
+      ]
+    },
+    {
+      "brand": "기아",
+      "brand_id": "307",
+      "model_id": "4684",
+      "name": "스포티지",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4684",
+      "photo_code": "4684/53375",
+      "default_image_url": "https://autoimg.danawa.com/photo/4684/53375/color_12_360.png",
+      "default_image_path": "vehicles\\기아\\스포티지\\model_360.png",
+      "colors": [
+        {
+          "name": "스노우 화이트 펄 (SWP)",
+          "code": "C10",
+          "swatch": "#cecfd2",
+          "image_url": "https://autoimg.danawa.com/photo/4684/53375/color_10_360.png",
+          "path": "vehicles\\기아\\스포티지\\colors\\01_스노우 화이트 펄 (SWP).png"
+        },
+        {
+          "name": "헤리티지 블루 (HRB)",
+          "code": "C11",
+          "swatch": "#4d6779",
+          "image_url": "https://autoimg.danawa.com/photo/4684/53375/color_11_360.png",
+          "path": "vehicles\\기아\\스포티지\\colors\\02_헤리티지 블루 (HRB).png"
+        },
+        {
+          "name": "울프 그레이 (C7A)",
+          "code": "C12",
+          "swatch": "#797c7e",
+          "image_url": "https://autoimg.danawa.com/photo/4684/53375/color_12_360.png",
+          "path": "vehicles\\기아\\스포티지\\colors\\03_울프 그레이 (C7A).png"
+        },
+        {
+          "name": "그래비티 그레이 (KDG)",
+          "code": "C13",
+          "swatch": "#33373e",
+          "image_url": "https://autoimg.danawa.com/photo/4684/53375/color_13_360.png",
+          "path": "vehicles\\기아\\스포티지\\colors\\04_그래비티 그레이 (KDG).png"
+        },
+        {
+          "name": "베스타 블루 (BB2)",
+          "code": "C14",
+          "swatch": "#16253a",
+          "image_url": "https://autoimg.danawa.com/photo/4684/53375/color_14_360.png",
+          "path": "vehicles\\기아\\스포티지\\colors\\05_베스타 블루 (BB2).png"
+        },
+        {
+          "name": "퓨전 블랙 (FSB)",
+          "code": "C15",
+          "swatch": "#1b1a18",
+          "image_url": "https://autoimg.danawa.com/photo/4684/53375/color_15_360.png",
+          "path": "vehicles\\기아\\스포티지\\colors\\06_퓨전 블랙 (FSB).png"
+        },
+        {
+          "name": "쉐도우 매트 그레이 (MGG)",
+          "code": "C09",
+          "swatch": "#3d4145",
+          "image_url": "https://autoimg.danawa.com/photo/4684/53375/color_09_360.png",
+          "path": "vehicles\\기아\\스포티지\\colors\\07_쉐도우 매트 그레이 (MGG).png"
+        },
+        {
+          "name": "정글 우드 그린 (JUG)",
+          "code": "C16",
+          "swatch": "#586156",
+          "image_url": "https://autoimg.danawa.com/photo/4684/53375/color_16_360.png",
+          "path": "vehicles\\기아\\스포티지\\colors\\08_정글 우드 그린 (JUG).png"
+        }
+      ],
+      "gallery": [
+        {
+          "name": "2025 스포티지",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4684&Tab=image&No=140745",
+          "image_url": "https://autoimg.danawa.com/gallery/4684/20250924_4684 (1).jpg",
+          "path": "vehicles\\기아\\스포티지\\gallery\\01_2025 스포티지.jpg"
+        },
+        {
+          "name": "2025 스포티지",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4684&Tab=image&No=140746",
+          "image_url": "https://autoimg.danawa.com/gallery/4684/20250924_4684 (2).jpg",
+          "path": "vehicles\\기아\\스포티지\\gallery\\02_2025 스포티지.jpg"
+        },
+        {
+          "name": "2025 스포티지",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4684&Tab=image&No=140747",
+          "image_url": "https://autoimg.danawa.com/gallery/4684/20250924_4684 (3).jpg",
+          "path": "vehicles\\기아\\스포티지\\gallery\\03_2025 스포티지.jpg"
+        },
+        {
+          "name": "2025 스포티지",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4684&Tab=image&No=140748",
+          "image_url": "https://autoimg.danawa.com/gallery/4684/20250924_4684 (4).jpg",
+          "path": "vehicles\\기아\\스포티지\\gallery\\04_2025 스포티지.jpg"
+        }
+      ]
+    },
+    {
+      "brand": "기아",
+      "brand_id": "307",
+      "model_id": "4563",
+      "name": "쏘렌토",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4563",
+      "photo_code": "4563/53335",
+      "default_image_url": "https://autoimg.danawa.com/photo/4563/model_360.png",
+      "default_image_path": "vehicles\\기아\\쏘렌토\\model_360.png",
+      "colors": [
+        {
+          "name": "스노우 화이트 펄 (SWP)",
+          "code": "C10",
+          "swatch": "#f6f6f6",
+          "image_url": "https://autoimg.danawa.com/photo/4563/53335/color_10_360.png",
+          "path": "vehicles\\기아\\쏘렌토\\colors\\01_스노우 화이트 펄 (SWP).png"
+        },
+        {
+          "name": "볼캐닉 샌드 브라운 (BN4)",
+          "code": "C12",
+          "swatch": "#8e897b",
+          "image_url": "https://autoimg.danawa.com/photo/4563/53335/color_12_360.png",
+          "path": "vehicles\\기아\\쏘렌토\\colors\\02_볼캐닉 샌드 브라운 (BN4).png"
+        },
+        {
+          "name": "시티스케이프 그린 (CGE)",
+          "code": "C13",
+          "swatch": "#404f4c",
+          "image_url": "https://autoimg.danawa.com/photo/4563/53335/color_13_360.png",
+          "path": "vehicles\\기아\\쏘렌토\\colors\\03_시티스케이프 그린 (CGE).png"
+        },
+        {
+          "name": "인터스텔라 그레이 (AGT)",
+          "code": "C14",
+          "swatch": "#2c3033",
+          "image_url": "https://autoimg.danawa.com/photo/4563/53335/color_14_360.png",
+          "path": "vehicles\\기아\\쏘렌토\\colors\\04_인터스텔라 그레이 (AGT).png"
+        },
+        {
+          "name": "오로라 블랙펄 (ABP)",
+          "code": "C15",
+          "swatch": "#1f1b22",
+          "image_url": "https://autoimg.danawa.com/photo/4563/53335/color_15_360.png",
+          "path": "vehicles\\기아\\쏘렌토\\colors\\05_오로라 블랙펄 (ABP).png"
+        }
+      ],
+      "gallery": [
+        {
+          "name": "2026 쏘렌토",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4563&Tab=image&No=139114",
+          "image_url": "https://autoimg.danawa.com/gallery/4563/20250724_4563 (1).jpg",
+          "path": "vehicles\\기아\\쏘렌토\\gallery\\01_2026 쏘렌토.jpg"
+        },
+        {
+          "name": "2026 쏘렌토 X-Line",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4563&Tab=image&No=139115",
+          "image_url": "https://autoimg.danawa.com/gallery/4563/20250724_4563 (2).jpg",
+          "path": "vehicles\\기아\\쏘렌토\\gallery\\02_2026 쏘렌토 X-Line.jpg"
+        },
+        {
+          "name": "2026 쏘렌토",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4563&Tab=image&No=139116",
+          "image_url": "https://autoimg.danawa.com/gallery/4563/20250724_4563 (3).jpg",
+          "path": "vehicles\\기아\\쏘렌토\\gallery\\03_2026 쏘렌토.jpg"
+        },
+        {
+          "name": "2026 쏘렌토",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4563&Tab=image&No=139117",
+          "image_url": "https://autoimg.danawa.com/gallery/4563/20250724_4563 (4).jpg",
+          "path": "vehicles\\기아\\쏘렌토\\gallery\\04_2026 쏘렌토.jpg"
+        }
+      ]
+    },
+    {
+      "brand": "기아",
+      "brand_id": "307",
+      "model_id": "4128",
+      "name": "EV9",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4128",
+      "photo_code": "4128/53668",
+      "default_image_url": "https://autoimg.danawa.com/photo/4128/53668/color_09_360.png",
+      "default_image_path": "vehicles\\기아\\EV9\\model_360.png",
+      "colors": [
+        {
+          "name": "스노우 화이트 펄(SWP)",
+          "code": "C10",
+          "swatch": "#f5f5f5",
+          "image_url": "https://autoimg.danawa.com/photo/4128/53668/color_10_360.png",
+          "path": "vehicles\\기아\\EV9\\colors\\01_스노우 화이트 펄(SWP).png"
+        },
+        {
+          "name": "아이보리 매트 실버(ISM)",
+          "code": "C09",
+          "swatch": "#bbbab1",
+          "image_url": "https://autoimg.danawa.com/photo/4128/53668/color_09_360.png",
+          "path": "vehicles\\기아\\EV9\\colors\\02_아이보리 매트 실버(ISM).png"
+        },
+        {
+          "name": "페블 그레이(DFG)",
+          "code": "C11",
+          "swatch": "#8a878a",
+          "image_url": "https://autoimg.danawa.com/photo/4128/53668/color_11_360.png",
+          "path": "vehicles\\기아\\EV9\\colors\\03_페블 그레이(DFG).png"
+        },
+        {
+          "name": "판테라 메탈(P2M)",
+          "code": "C12",
+          "swatch": "#404147",
+          "image_url": "https://autoimg.danawa.com/photo/4128/53668/color_12_360.png",
+          "path": "vehicles\\기아\\EV9\\colors\\04_판테라 메탈(P2M).png"
+        },
+        {
+          "name": "오로라 블랙 펄(ABP)",
+          "code": "C13",
+          "swatch": "#141115",
+          "image_url": "https://autoimg.danawa.com/photo/4128/53668/color_13_360.png",
+          "path": "vehicles\\기아\\EV9\\colors\\05_오로라 블랙 펄(ABP).png"
+        },
+        {
+          "name": "아이스버그 그린(IEG)",
+          "code": "C14",
+          "swatch": "#86938c",
+          "image_url": "https://autoimg.danawa.com/photo/4128/53668/color_14_360.png",
+          "path": "vehicles\\기아\\EV9\\colors\\06_아이스버그 그린(IEG).png"
+        },
+        {
+          "name": "오션 블루(OBG)",
+          "code": "C15",
+          "swatch": "#004672",
+          "image_url": "https://autoimg.danawa.com/photo/4128/53668/color_15_360.png",
+          "path": "vehicles\\기아\\EV9\\colors\\07_오션 블루(OBG).png"
+        }
+      ],
+      "gallery": [
+        {
+          "name": "2026 EV9",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4128&Tab=image&No=142976",
+          "image_url": "https://autoimg.danawa.com/gallery/4128/20260204_4128 (1).jpg",
+          "path": "vehicles\\기아\\EV9\\gallery\\01_2026 EV9.jpg"
+        },
+        {
+          "name": "2026 EV9",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4128&Tab=image&No=142977",
+          "image_url": "https://autoimg.danawa.com/gallery/4128/20260204_4128 (2).jpg",
+          "path": "vehicles\\기아\\EV9\\gallery\\02_2026 EV9.jpg"
+        },
+        {
+          "name": "2025 EV9",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4128&Tab=image&No=140856",
+          "image_url": "https://autoimg.danawa.com/gallery/4128/20250925_4128 (1).jpg",
+          "path": "vehicles\\기아\\EV9\\gallery\\03_2025 EV9.jpg"
+        },
+        {
+          "name": "2025 EV9",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4128&Tab=image&No=140857",
+          "image_url": "https://autoimg.danawa.com/gallery/4128/20250925_4128 (2).jpg",
+          "path": "vehicles\\기아\\EV9\\gallery\\04_2025 EV9.jpg"
+        }
+      ]
+    },
+    {
+      "brand": "기아",
+      "brand_id": "307",
+      "model_id": "4714",
+      "name": "PV5",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4714",
+      "photo_code": "4714/53291",
+      "default_image_url": "https://autoimg.danawa.com/photo/4714/53291/color_16_360.png",
+      "default_image_path": "vehicles\\기아\\PV5\\model_360.png",
+      "colors": [
+        {
+          "name": "클리어 화이트(UD)",
+          "code": "C11",
+          "swatch": "#f3f3f3",
+          "image_url": "https://autoimg.danawa.com/photo/4714/53291/color_11_360.png",
+          "path": "vehicles\\기아\\PV5\\colors\\01_클리어 화이트(UD).png"
+        },
+        {
+          "name": "스틸 그레이(KLG)",
+          "code": "C12",
+          "swatch": "#7b7a7e",
+          "image_url": "https://autoimg.danawa.com/photo/4714/53291/color_12_360.png",
+          "path": "vehicles\\기아\\PV5\\colors\\02_스틸 그레이(KLG).png"
+        },
+        {
+          "name": "오로라 블랙펄(ABP)",
+          "code": "C13",
+          "swatch": "#171514",
+          "image_url": "https://autoimg.danawa.com/photo/4714/53291/color_13_360.png",
+          "path": "vehicles\\기아\\PV5\\colors\\03_오로라 블랙펄(ABP).png"
+        },
+        {
+          "name": "프로스트 블루(EBB)",
+          "code": "C14",
+          "swatch": "#5f7381",
+          "image_url": "https://autoimg.danawa.com/photo/4714/53291/color_14_360.png",
+          "path": "vehicles\\기아\\PV5\\colors\\04_프로스트 블루(EBB).png"
+        },
+        {
+          "name": "시티스케이프 그린(CGE)",
+          "code": "C15",
+          "swatch": "#404f4c",
+          "image_url": "https://autoimg.danawa.com/photo/4714/53291/color_15_360.png",
+          "path": "vehicles\\기아\\PV5\\colors\\05_시티스케이프 그린(CGE).png"
+        },
+        {
+          "name": "소프트 민트(SML)",
+          "code": "C16",
+          "swatch": "#767d7f",
+          "image_url": "https://autoimg.danawa.com/photo/4714/53291/color_16_360.png",
+          "path": "vehicles\\기아\\PV5\\colors\\06_소프트 민트(SML).png"
+        },
+        {
+          "name": "레이크하우스 그레이(LHG)",
+          "code": "C17",
+          "swatch": "#252c31",
+          "image_url": "https://autoimg.danawa.com/photo/4714/53291/color_17_360.png",
+          "path": "vehicles\\기아\\PV5\\colors\\07_레이크하우스 그레이(LHG).png"
+        }
+      ],
+      "gallery": [
+        {
+          "name": "PV5 오픈베드 & PV5 WAV",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4714&Tab=image&No=144240",
+          "image_url": "https://autoimg.danawa.com/gallery/4714/20260408_4714 (1).jpg",
+          "path": "vehicles\\기아\\PV5\\gallery\\01_PV5 오픈베드 & PV5 WAV.jpg"
+        },
+        {
+          "name": "PV5 오픈베드",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4714&Tab=image&No=144241",
+          "image_url": "https://autoimg.danawa.com/gallery/4714/20260408_4714 (2).jpg",
+          "path": "vehicles\\기아\\PV5\\gallery\\02_PV5 오픈베드.jpg"
+        },
+        {
+          "name": "PV5 오픈베드",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4714&Tab=image&No=144242",
+          "image_url": "https://autoimg.danawa.com/gallery/4714/20260408_4714 (3).jpg",
+          "path": "vehicles\\기아\\PV5\\gallery\\03_PV5 오픈베드.jpg"
+        },
+        {
+          "name": "PV5 WAV",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4714&Tab=image&No=144243",
+          "image_url": "https://autoimg.danawa.com/gallery/4714/20260408_4714 (4).jpg",
+          "path": "vehicles\\기아\\PV5\\gallery\\04_PV5 WAV.jpg"
+        }
+      ]
+    },
+    {
+      "brand": "기아",
+      "brand_id": "307",
+      "model_id": "4586",
+      "name": "카니발",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4586",
+      "photo_code": "4586/52417",
+      "default_image_url": "https://autoimg.danawa.com/photo/4586/52417/color_11_360.png",
+      "default_image_path": "vehicles\\기아\\카니발\\model_360.png",
+      "colors": [
+        {
+          "name": "스노우 화이트 펄(SWP)",
+          "code": "C10",
+          "swatch": "#f6f6f6",
+          "image_url": "https://autoimg.danawa.com/photo/4586/52417/color_10_360.png",
+          "path": "vehicles\\기아\\카니발\\colors\\01_스노우 화이트 펄(SWP).png"
+        },
+        {
+          "name": "아이보리 실버 (ISG)",
+          "code": "C11",
+          "swatch": "#c3c3c4",
+          "image_url": "https://autoimg.danawa.com/photo/4586/52417/color_11_360.png",
+          "path": "vehicles\\기아\\카니발\\colors\\02_아이보리 실버 (ISG).png"
+        },
+        {
+          "name": "오로라 블랙 펄 (ABP)",
+          "code": "C13",
+          "swatch": "#212221",
+          "image_url": "https://autoimg.danawa.com/photo/4586/52417/color_13_360.png",
+          "path": "vehicles\\기아\\카니발\\colors\\03_오로라 블랙 펄 (ABP).png"
+        },
+        {
+          "name": "판테라 메탈 (P2M)",
+          "code": "C14",
+          "swatch": "#434347",
+          "image_url": "https://autoimg.danawa.com/photo/4586/52417/color_14_360.png",
+          "path": "vehicles\\기아\\카니발\\colors\\04_판테라 메탈 (P2M).png"
+        },
+        {
+          "name": "세라믹 실버 (C4S)",
+          "code": "C15",
+          "swatch": "#777b7a",
+          "image_url": "https://autoimg.danawa.com/photo/4586/52417/color_15_360.png",
+          "path": "vehicles\\기아\\카니발\\colors\\05_세라믹 실버 (C4S).png"
+        }
+      ],
+      "gallery": [
+        {
+          "name": "2026 카니발 하이리무진",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4586&Tab=image&No=140119",
+          "image_url": "https://autoimg.danawa.com/gallery/4586/20250917_4586 (1).jpg",
+          "path": "vehicles\\기아\\카니발\\gallery\\01_2026 카니발 하이리무진.jpg"
+        },
+        {
+          "name": "2026 카니발 하이리무진",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4586&Tab=image&No=140120",
+          "image_url": "https://autoimg.danawa.com/gallery/4586/20250917_4586 (2).jpg",
+          "path": "vehicles\\기아\\카니발\\gallery\\02_2026 카니발 하이리무진.jpg"
+        },
+        {
+          "name": "2026 카니발 하이리무진",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4586&Tab=image&No=140121",
+          "image_url": "https://autoimg.danawa.com/gallery/4586/20250917_4586 (3).jpg",
+          "path": "vehicles\\기아\\카니발\\gallery\\03_2026 카니발 하이리무진.jpg"
+        },
+        {
+          "name": "2026 카니발",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4586&Tab=image&No=139698",
+          "image_url": "https://autoimg.danawa.com/gallery/4586/20250818_4586 (1).jpg",
+          "path": "vehicles\\기아\\카니발\\gallery\\04_2026 카니발.jpg"
+        }
+      ]
+    },
+    {
+      "brand": "기아",
+      "brand_id": "307",
+      "model_id": "4686",
+      "name": "타스만",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4686",
+      "photo_code": "4686/52081",
+      "default_image_url": "https://autoimg.danawa.com/photo/4686/52081/color_17_360.png",
+      "default_image_path": "vehicles\\기아\\타스만\\model_360.png",
+      "colors": [
+        {
+          "name": "스노우 화이트 펄 (SWP)",
+          "code": "C10",
+          "swatch": "#cecfd2",
+          "image_url": "https://autoimg.danawa.com/photo/4686/52081/color_10_360.png",
+          "path": "vehicles\\기아\\타스만\\colors\\01_스노우 화이트 펄 (SWP).png"
+        },
+        {
+          "name": "오로라 블랙 펄 (ABP)",
+          "code": "C11",
+          "swatch": "#1f1b22",
+          "image_url": "https://autoimg.danawa.com/photo/4686/52081/color_11_360.png",
+          "path": "vehicles\\기아\\타스만\\colors\\02_오로라 블랙 펄 (ABP).png"
+        },
+        {
+          "name": "인터스텔라 그레이 (AGT)",
+          "code": "C12",
+          "swatch": "#2c3033",
+          "image_url": "https://autoimg.danawa.com/photo/4686/52081/color_12_360.png",
+          "path": "vehicles\\기아\\타스만\\colors\\03_인터스텔라 그레이 (AGT).png"
+        },
+        {
+          "name": "스틸 그레이 (KLG)",
+          "code": "C13",
+          "swatch": "#7b7a7e",
+          "image_url": "https://autoimg.danawa.com/photo/4686/52081/color_13_360.png",
+          "path": "vehicles\\기아\\타스만\\colors\\04_스틸 그레이 (KLG).png"
+        },
+        {
+          "name": "시티스케이프 그린 (CGE)",
+          "code": "C14",
+          "swatch": "#404f4c",
+          "image_url": "https://autoimg.danawa.com/photo/4686/52081/color_14_360.png",
+          "path": "vehicles\\기아\\타스만\\colors\\05_시티스케이프 그린 (CGE).png"
+        },
+        {
+          "name": "런웨이 레드 (CR5)",
+          "code": "C15",
+          "swatch": "#6d1418",
+          "image_url": "https://autoimg.danawa.com/photo/4686/52081/color_15_360.png",
+          "path": "vehicles\\기아\\타스만\\colors\\06_런웨이 레드 (CR5).png"
+        },
+        {
+          "name": "데님 블루 (DNB)",
+          "code": "C16",
+          "swatch": "#35424f",
+          "image_url": "https://autoimg.danawa.com/photo/4686/52081/color_16_360.png",
+          "path": "vehicles\\기아\\타스만\\colors\\07_데님 블루 (DNB).png"
+        },
+        {
+          "name": "탠 베이지 (TAM)",
+          "code": "C17",
+          "swatch": "#897e73",
+          "image_url": "https://autoimg.danawa.com/photo/4686/52081/color_17_360.png",
+          "path": "vehicles\\기아\\타스만\\colors\\08_탠 베이지 (TAM).png"
+        }
+      ],
+      "gallery": [
+        {
+          "name": "2025 타스만",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4686&Tab=image&No=140635",
+          "image_url": "https://autoimg.danawa.com/gallery/4686/20250924_4686 (1).jpg",
+          "path": "vehicles\\기아\\타스만\\gallery\\01_2025 타스만.jpg"
+        },
+        {
+          "name": "2025 타스만",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4686&Tab=image&No=140636",
+          "image_url": "https://autoimg.danawa.com/gallery/4686/20250924_4686 (2).jpg",
+          "path": "vehicles\\기아\\타스만\\gallery\\02_2025 타스만.jpg"
+        },
+        {
+          "name": "2025 타스만",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4686&Tab=image&No=140637",
+          "image_url": "https://autoimg.danawa.com/gallery/4686/20250924_4686 (3).jpg",
+          "path": "vehicles\\기아\\타스만\\gallery\\03_2025 타스만.jpg"
+        },
+        {
+          "name": "2025 타스만",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4686&Tab=image&No=140638",
+          "image_url": "https://autoimg.danawa.com/gallery/4686/20250924_4686 (4).jpg",
+          "path": "vehicles\\기아\\타스만\\gallery\\04_2025 타스만.jpg"
+        }
+      ]
+    },
+    {
+      "brand": "기아",
+      "brand_id": "307",
+      "model_id": "3772",
+      "name": "봉고 3",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3772",
+      "photo_code": "3772/53770",
+      "default_image_url": "https://autoimg.danawa.com/photo/3772/model_360.png",
+      "default_image_path": "vehicles\\기아\\봉고 3\\model_360.png",
+      "colors": [],
+      "gallery": [
+        {
+          "name": "2026 봉고 III",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3772&Tab=image&No=142534",
+          "image_url": "https://autoimg.danawa.com/gallery/3772/20260106_3772 (1).jpg",
+          "path": "vehicles\\기아\\봉고 3\\gallery\\01_2026 봉고 III.jpg"
+        },
+        {
+          "name": "2025 봉고 3",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3772&Tab=image&No=127096",
+          "image_url": "https://autoimg.danawa.com/gallery/3772/20240718_3772 (1).jpg",
+          "path": "vehicles\\기아\\봉고 3\\gallery\\02_2025 봉고 3.jpg"
+        },
+        {
+          "name": "2024 봉고 III LPG",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3772&Tab=image&No=118419",
+          "image_url": "https://autoimg.danawa.com/gallery/3772/20240304_3772 (1).jpg",
+          "path": "vehicles\\기아\\봉고 3\\gallery\\03_2024 봉고 III LPG.jpg"
+        },
+        {
+          "name": "2024 봉고 III LPG",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3772&Tab=image&No=118420",
+          "image_url": "https://autoimg.danawa.com/gallery/3772/20240304_3772 (2).jpg",
+          "path": "vehicles\\기아\\봉고 3\\gallery\\04_2024 봉고 III LPG.jpg"
+        }
+      ]
+    },
+    {
+      "brand": "기아",
+      "brand_id": "307",
+      "model_id": "4404",
+      "name": "봉고 3 EV",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4404",
+      "photo_code": "4404/53783",
+      "default_image_url": "https://autoimg.danawa.com/photo/4404/model_360.png",
+      "default_image_path": "vehicles\\기아\\봉고 3 EV\\model_360.png",
+      "colors": [],
+      "gallery": [
+        {
+          "name": "2025 봉고 III EV 특장차",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4404&Tab=image&No=138635",
+          "image_url": "https://autoimg.danawa.com/gallery/4404/20250617_4404 (1).jpg",
+          "path": "vehicles\\기아\\봉고 3 EV\\gallery\\01_2025 봉고 III EV 특장차.jpg"
+        },
+        {
+          "name": "2025 봉고 III EV",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4404&Tab=image&No=137315",
+          "image_url": "https://autoimg.danawa.com/gallery/4404/20250422_4404 (1).jpg",
+          "path": "vehicles\\기아\\봉고 3 EV\\gallery\\02_2025 봉고 III EV.jpg"
+        },
+        {
+          "name": "2025 봉고 III EV",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4404&Tab=image&No=137316",
+          "image_url": "https://autoimg.danawa.com/gallery/4404/20250422_4404 (2).jpg",
+          "path": "vehicles\\기아\\봉고 3 EV\\gallery\\03_2025 봉고 III EV.jpg"
+        },
+        {
+          "name": "2021 봉고 III EV 내장탑차(표준형)",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4404&Tab=image&No=81434",
+          "image_url": "https://autoimg.danawa.com/gallery/4404/20210209_bong3_ev (1).jpg",
+          "path": "vehicles\\기아\\봉고 3 EV\\gallery\\04_2021 봉고 III EV 내장탑차(표준형).jpg"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "brand": "르노",
+  "brand_id": "321",
+  "model_id": "4549",
+  "name": "라팔",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4549",
+  "photo_code": "4549/",
+  "default_image_url": "https://autoimg.danawa.com/photo/4549/model_360.png",
+  "default_image_path": "vehicles\\르노\\라팔\\model_360.png",
+  "colors": [],
+  "gallery": [
+    {
+      "name": "2024 l 라팔",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4549&Tab=image&No=109832",
+      "image_url": "https://autoimg.danawa.com/gallery/4549/20230621_4549 (1).jpg",
+      "path": "vehicles\\르노\\라팔\\gallery\\01_2024 l 라팔.jpg"
+    },
+    {
+      "name": "2024 l 라팔",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4549&Tab=image&No=109833",
+      "image_url": "https://autoimg.danawa.com/gallery/4549/20230621_4549 (2).jpg",
+      "path": "vehicles\\르노\\라팔\\gallery\\02_2024 l 라팔.jpg"
+    },
+    {
+      "name": "2024 l 라팔",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4549&Tab=image&No=109834",
+      "image_url": "https://autoimg.danawa.com/gallery/4549/20230621_4549 (3).jpg",
+      "path": "vehicles\\르노\\라팔\\gallery\\03_2024 l 라팔.jpg"
+    },
+    {
+      "name": "2024 l 라팔",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4549&Tab=image&No=109835",
+      "image_url": "https://autoimg.danawa.com/gallery/4549/20230621_4549 (4).jpg",
+      "path": "vehicles\\르노\\라팔\\gallery\\04_2024 l 라팔.jpg"
+    }
+  ]
+}

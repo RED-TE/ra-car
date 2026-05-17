@@ -1,0 +1,80 @@
+{
+  "brand": "테슬라",
+  "brand_id": "611",
+  "model_id": "4610",
+  "name": "Model 3",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4610",
+  "photo_code": "4610/53634",
+  "default_image_url": "https://autoimg.danawa.com/photo/4610/53634/color_07_360.png",
+  "default_image_path": "vehicles\\테슬라\\Model 3\\model_360.png",
+  "colors": [
+    {
+      "name": "Pearl White Multi-Coat",
+      "code": "C11",
+      "swatch": "#f0f1f3",
+      "image_url": "https://autoimg.danawa.com/photo/4610/53634/color_11_360.png",
+      "path": "vehicles\\테슬라\\Model 3\\colors\\01_Pearl White Multi-Coat.png"
+    },
+    {
+      "name": "Diamond Black",
+      "code": "C10",
+      "swatch": "#161616",
+      "image_url": "https://autoimg.danawa.com/photo/4610/53634/color_10_360.png",
+      "path": "vehicles\\테슬라\\Model 3\\colors\\02_Diamond Black.png"
+    },
+    {
+      "name": "Marine Blue",
+      "code": "C09",
+      "swatch": "#082350",
+      "image_url": "https://autoimg.danawa.com/photo/4610/53634/color_09_360.png",
+      "path": "vehicles\\테슬라\\Model 3\\colors\\03_Marine Blue.png"
+    },
+    {
+      "name": "Stealth Grey",
+      "code": "C08",
+      "swatch": "#2a2930",
+      "image_url": "https://autoimg.danawa.com/photo/4610/53634/color_08_360.png",
+      "path": "vehicles\\테슬라\\Model 3\\colors\\04_Stealth Grey.png"
+    },
+    {
+      "name": "Ultra Red",
+      "code": "C07",
+      "swatch": "#ab0014",
+      "image_url": "https://autoimg.danawa.com/photo/4610/53634/color_07_360.png",
+      "path": "vehicles\\테슬라\\Model 3\\colors\\05_Ultra Red.png"
+    },
+    {
+      "name": "Quicksilver",
+      "code": "C06",
+      "swatch": "#ababab",
+      "image_url": "https://autoimg.danawa.com/photo/4610/53634/color_06_360.png",
+      "path": "vehicles\\테슬라\\Model 3\\colors\\06_Quicksilver.png"
+    }
+  ],
+  "gallery": [
+    {
+      "name": "모델 3",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4610&Tab=image&No=143233",
+      "image_url": "https://autoimg.danawa.com/gallery/4610/20260225_4610 (1).jpg",
+      "path": "vehicles\\테슬라\\Model 3\\gallery\\01_모델 3.jpg"
+    },
+    {
+      "name": "모델 3",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4610&Tab=image&No=143234",
+      "image_url": "https://autoimg.danawa.com/gallery/4610/20260225_4610 (2).jpg",
+      "path": "vehicles\\테슬라\\Model 3\\gallery\\02_모델 3.jpg"
+    },
+    {
+      "name": "모델 3",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4610&Tab=image&No=143235",
+      "image_url": "https://autoimg.danawa.com/gallery/4610/20260225_4610 (3).jpg",
+      "path": "vehicles\\테슬라\\Model 3\\gallery\\03_모델 3.jpg"
+    },
+    {
+      "name": "모델 3",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4610&Tab=image&No=143236",
+      "image_url": "https://autoimg.danawa.com/gallery/4610/20260225_4610 (4).jpg",
+      "path": "vehicles\\테슬라\\Model 3\\gallery\\04_모델 3.jpg"
+    }
+  ]
+}

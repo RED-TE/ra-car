@@ -1,0 +1,94 @@
+{
+  "brand": "기아",
+  "brand_id": "307",
+  "model_id": "4684",
+  "name": "스포티지",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4684",
+  "photo_code": "4684/53375",
+  "default_image_url": "https://autoimg.danawa.com/photo/4684/53375/color_12_360.png",
+  "default_image_path": "vehicles\\기아\\스포티지\\model_360.png",
+  "colors": [
+    {
+      "name": "스노우 화이트 펄 (SWP)",
+      "code": "C10",
+      "swatch": "#cecfd2",
+      "image_url": "https://autoimg.danawa.com/photo/4684/53375/color_10_360.png",
+      "path": "vehicles\\기아\\스포티지\\colors\\01_스노우 화이트 펄 (SWP).png"
+    },
+    {
+      "name": "헤리티지 블루 (HRB)",
+      "code": "C11",
+      "swatch": "#4d6779",
+      "image_url": "https://autoimg.danawa.com/photo/4684/53375/color_11_360.png",
+      "path": "vehicles\\기아\\스포티지\\colors\\02_헤리티지 블루 (HRB).png"
+    },
+    {
+      "name": "울프 그레이 (C7A)",
+      "code": "C12",
+      "swatch": "#797c7e",
+      "image_url": "https://autoimg.danawa.com/photo/4684/53375/color_12_360.png",
+      "path": "vehicles\\기아\\스포티지\\colors\\03_울프 그레이 (C7A).png"
+    },
+    {
+      "name": "그래비티 그레이 (KDG)",
+      "code": "C13",
+      "swatch": "#33373e",
+      "image_url": "https://autoimg.danawa.com/photo/4684/53375/color_13_360.png",
+      "path": "vehicles\\기아\\스포티지\\colors\\04_그래비티 그레이 (KDG).png"
+    },
+    {
+      "name": "베스타 블루 (BB2)",
+      "code": "C14",
+      "swatch": "#16253a",
+      "image_url": "https://autoimg.danawa.com/photo/4684/53375/color_14_360.png",
+      "path": "vehicles\\기아\\스포티지\\colors\\05_베스타 블루 (BB2).png"
+    },
+    {
+      "name": "퓨전 블랙 (FSB)",
+      "code": "C15",
+      "swatch": "#1b1a18",
+      "image_url": "https://autoimg.danawa.com/photo/4684/53375/color_15_360.png",
+      "path": "vehicles\\기아\\스포티지\\colors\\06_퓨전 블랙 (FSB).png"
+    },
+    {
+      "name": "쉐도우 매트 그레이 (MGG)",
+      "code": "C09",
+      "swatch": "#3d4145",
+      "image_url": "https://autoimg.danawa.com/photo/4684/53375/color_09_360.png",
+      "path": "vehicles\\기아\\스포티지\\colors\\07_쉐도우 매트 그레이 (MGG).png"
+    },
+    {
+      "name": "정글 우드 그린 (JUG)",
+      "code": "C16",
+      "swatch": "#586156",
+      "image_url": "https://autoimg.danawa.com/photo/4684/53375/color_16_360.png",
+      "path": "vehicles\\기아\\스포티지\\colors\\08_정글 우드 그린 (JUG).png"
+    }
+  ],
+  "gallery": [
+    {
+      "name": "2025 스포티지",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4684&Tab=image&No=140745",
+      "image_url": "https://autoimg.danawa.com/gallery/4684/20250924_4684 (1).jpg",
+      "path": "vehicles\\기아\\스포티지\\gallery\\01_2025 스포티지.jpg"
+    },
+    {
+      "name": "2025 스포티지",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4684&Tab=image&No=140746",
+      "image_url": "https://autoimg.danawa.com/gallery/4684/20250924_4684 (2).jpg",
+      "path": "vehicles\\기아\\스포티지\\gallery\\02_2025 스포티지.jpg"
+    },
+    {
+      "name": "2025 스포티지",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4684&Tab=image&No=140747",
+      "image_url": "https://autoimg.danawa.com/gallery/4684/20250924_4684 (3).jpg",
+      "path": "vehicles\\기아\\스포티지\\gallery\\03_2025 스포티지.jpg"
+    },
+    {
+      "name": "2025 스포티지",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4684&Tab=image&No=140748",
+      "image_url": "https://autoimg.danawa.com/gallery/4684/20250924_4684 (4).jpg",
+      "path": "vehicles\\기아\\스포티지\\gallery\\04_2025 스포티지.jpg"
+    }
+  ]
+}

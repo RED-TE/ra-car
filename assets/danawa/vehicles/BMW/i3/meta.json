@@ -1,0 +1,37 @@
+{
+  "brand": "BMW",
+  "brand_id": "362",
+  "model_id": "4451",
+  "name": "i3",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4451",
+  "photo_code": "4451/",
+  "default_image_url": "https://autoimg.danawa.com/photo/4451/model_360.png",
+  "default_image_path": "vehicles\\BMW\\i3\\model_360.png",
+  "colors": [],
+  "gallery": [
+    {
+      "name": "i3 50 xDrive",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4451&Tab=image&No=143742",
+      "image_url": "https://autoimg.danawa.com/gallery/4451/20260323_4451 (1).jpg",
+      "path": "vehicles\\BMW\\i3\\gallery\\01_i3 50 xDrive.jpg"
+    },
+    {
+      "name": "i3 50 xDrive",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4451&Tab=image&No=143743",
+      "image_url": "https://autoimg.danawa.com/gallery/4451/20260323_4451 (2).jpg",
+      "path": "vehicles\\BMW\\i3\\gallery\\02_i3 50 xDrive.jpg"
+    },
+    {
+      "name": "i3 50 xDrive",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4451&Tab=image&No=143744",
+      "image_url": "https://autoimg.danawa.com/gallery/4451/20260323_4451 (3).jpg",
+      "path": "vehicles\\BMW\\i3\\gallery\\03_i3 50 xDrive.jpg"
+    },
+    {
+      "name": "i3 50 xDrive",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4451&Tab=image&No=143745",
+      "image_url": "https://autoimg.danawa.com/gallery/4451/20260323_4451 (4).jpg",
+      "path": "vehicles\\BMW\\i3\\gallery\\04_i3 50 xDrive.jpg"
+    }
+  ]
+}

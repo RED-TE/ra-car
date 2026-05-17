@@ -1,0 +1,37 @@
+{
+  "brand": "BMW",
+  "brand_id": "362",
+  "model_id": "4683",
+  "name": "2 Series Gran Coupe",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4683",
+  "photo_code": "4683/53548",
+  "default_image_url": "https://autoimg.danawa.com/photo/4683/model_360.png",
+  "default_image_path": "vehicles\\BMW\\2 Series Gran Coupe\\model_360.png",
+  "colors": [],
+  "gallery": [
+    {
+      "name": "더 뉴 2시리즈 그란쿠페",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4683&Tab=image&No=135445",
+      "image_url": "https://autoimg.danawa.com/gallery/4683/20250226_4683 (1).jpg",
+      "path": "vehicles\\BMW\\2 Series Gran Coupe\\gallery\\01_더 뉴 2시리즈 그란쿠페.jpg"
+    },
+    {
+      "name": "더 뉴 2시리즈 그란쿠페",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4683&Tab=image&No=135446",
+      "image_url": "https://autoimg.danawa.com/gallery/4683/20250226_4683 (2).jpg",
+      "path": "vehicles\\BMW\\2 Series Gran Coupe\\gallery\\02_더 뉴 2시리즈 그란쿠페.jpg"
+    },
+    {
+      "name": "더 뉴 2시리즈 그란쿠페",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4683&Tab=image&No=135447",
+      "image_url": "https://autoimg.danawa.com/gallery/4683/20250226_4683 (3).jpg",
+      "path": "vehicles\\BMW\\2 Series Gran Coupe\\gallery\\03_더 뉴 2시리즈 그란쿠페.jpg"
+    },
+    {
+      "name": "더 뉴 2시리즈 그란쿠페",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4683&Tab=image&No=135448",
+      "image_url": "https://autoimg.danawa.com/gallery/4683/20250226_4683 (4).jpg",
+      "path": "vehicles\\BMW\\2 Series Gran Coupe\\gallery\\04_더 뉴 2시리즈 그란쿠페.jpg"
+    }
+  ]
+}

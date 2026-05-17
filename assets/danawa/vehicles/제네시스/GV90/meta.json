@@ -1,0 +1,37 @@
+{
+  "brand": "제네시스",
+  "brand_id": "304",
+  "model_id": "4608",
+  "name": "GV90",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4608",
+  "photo_code": "4608/",
+  "default_image_url": "https://autoimg.danawa.com/photo/4608/model_360.png",
+  "default_image_path": "vehicles\\제네시스\\GV90\\model_360.png",
+  "colors": [],
+  "gallery": [
+    {
+      "name": "네오룬 콘셉트",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4608&Tab=image&No=140618",
+      "image_url": "https://autoimg.danawa.com/gallery/4608/20250924_4608 (1).jpg",
+      "path": "vehicles\\제네시스\\GV90\\gallery\\01_네오룬 콘셉트.jpg"
+    },
+    {
+      "name": "네오룬 콘셉트",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4608&Tab=image&No=140619",
+      "image_url": "https://autoimg.danawa.com/gallery/4608/20250924_4608 (2).jpg",
+      "path": "vehicles\\제네시스\\GV90\\gallery\\02_네오룬 콘셉트.jpg"
+    },
+    {
+      "name": "네오룬 콘셉트",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4608&Tab=image&No=140620",
+      "image_url": "https://autoimg.danawa.com/gallery/4608/20250924_4608 (3).jpg",
+      "path": "vehicles\\제네시스\\GV90\\gallery\\03_네오룬 콘셉트.jpg"
+    },
+    {
+      "name": "네오룬 콘셉트",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4608&Tab=image&No=126121",
+      "image_url": "https://autoimg.danawa.com/gallery/4608/20240627_4608 (1).jpg",
+      "path": "vehicles\\제네시스\\GV90\\gallery\\04_네오룬 콘셉트.jpg"
+    }
+  ]
+}

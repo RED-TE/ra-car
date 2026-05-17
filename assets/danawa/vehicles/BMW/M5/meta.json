@@ -1,0 +1,37 @@
+{
+  "brand": "BMW",
+  "brand_id": "362",
+  "model_id": "4657",
+  "name": "M5",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4657",
+  "photo_code": "4657/53470",
+  "default_image_url": "https://autoimg.danawa.com/photo/4657/model_360.png",
+  "default_image_path": "vehicles\\BMW\\M5\\model_360.png",
+  "colors": [],
+  "gallery": [
+    {
+      "name": "올 뉴 M5 투어링",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4657&Tab=image&No=131976",
+      "image_url": "https://autoimg.danawa.com/gallery/4657/20241120_4657 (1).jpg",
+      "path": "vehicles\\BMW\\M5\\gallery\\01_올 뉴 M5 투어링.jpg"
+    },
+    {
+      "name": "올 뉴 M5 투어링",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4657&Tab=image&No=131977",
+      "image_url": "https://autoimg.danawa.com/gallery/4657/20241120_4657 (2).jpg",
+      "path": "vehicles\\BMW\\M5\\gallery\\02_올 뉴 M5 투어링.jpg"
+    },
+    {
+      "name": "올 뉴 M5 투어링",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4657&Tab=image&No=131978",
+      "image_url": "https://autoimg.danawa.com/gallery/4657/20241120_4657 (3).jpg",
+      "path": "vehicles\\BMW\\M5\\gallery\\03_올 뉴 M5 투어링.jpg"
+    },
+    {
+      "name": "올 뉴 M5 투어링",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4657&Tab=image&No=131979",
+      "image_url": "https://autoimg.danawa.com/gallery/4657/20241120_4657 (4).jpg",
+      "path": "vehicles\\BMW\\M5\\gallery\\04_올 뉴 M5 투어링.jpg"
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+{
+  "brand": "현대",
+  "brand_id": "303",
+  "model_id": "4400",
+  "name": "카운티 일렉트릭",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4400",
+  "photo_code": "4400/53394",
+  "default_image_url": "https://autoimg.danawa.com/photo/4400/model_360.png",
+  "default_image_path": "vehicles\\현대\\카운티 일렉트릭\\model_360.png",
+  "colors": [],
+  "gallery": []
+}

@@ -1,0 +1,37 @@
+{
+  "brand": "현대",
+  "brand_id": "303",
+  "model_id": "4003",
+  "name": "파비스",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4003",
+  "photo_code": "4003/52268",
+  "default_image_url": "https://autoimg.danawa.com/photo/4003/model_360.png",
+  "default_image_path": "vehicles\\현대\\파비스\\model_360.png",
+  "colors": [],
+  "gallery": [
+    {
+      "name": "2025ㅣ파비스",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4003&Tab=image&No=134555",
+      "image_url": "https://autoimg.danawa.com/gallery/4003/20250121_4003 (1).jpg",
+      "path": "vehicles\\현대\\파비스\\gallery\\01_2025ㅣ파비스.jpg"
+    },
+    {
+      "name": "2025ㅣ파비스",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4003&Tab=image&No=134556",
+      "image_url": "https://autoimg.danawa.com/gallery/4003/20250121_4003 (2).jpg",
+      "path": "vehicles\\현대\\파비스\\gallery\\02_2025ㅣ파비스.jpg"
+    },
+    {
+      "name": "파비스",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4003&Tab=image&No=78531",
+      "image_url": "https://autoimg.danawa.com/gallery/4003/20201014_pavise (1).jpg",
+      "path": "vehicles\\현대\\파비스\\gallery\\03_파비스.jpg"
+    },
+    {
+      "name": "파비스",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4003&Tab=image&No=78532",
+      "image_url": "https://autoimg.danawa.com/gallery/4003/20201014_pavise (2).jpg",
+      "path": "vehicles\\현대\\파비스\\gallery\\04_파비스.jpg"
+    }
+  ]
+}

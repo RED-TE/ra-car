@@ -1,0 +1,37 @@
+{
+  "brand": "아우디",
+  "brand_id": "371",
+  "model_id": "4431",
+  "name": "A8",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4431",
+  "photo_code": "4431/53350",
+  "default_image_url": "https://autoimg.danawa.com/photo/4431/model_360.png",
+  "default_image_path": "vehicles\\아우디\\A8\\model_360.png",
+  "colors": [],
+  "gallery": [
+    {
+      "name": "A8 L",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4431&Tab=image&No=125263",
+      "image_url": "https://autoimg.danawa.com/gallery/4431/20240612_4431 (1).jpg",
+      "path": "vehicles\\아우디\\A8\\gallery\\01_A8 L.jpg"
+    },
+    {
+      "name": "아우디 A8",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4431&Tab=image&No=123609",
+      "image_url": "https://autoimg.danawa.com/gallery/4431/20240517_4431 (1).jpg",
+      "path": "vehicles\\아우디\\A8\\gallery\\02_아우디 A8.jpg"
+    },
+    {
+      "name": "A8 L 55 TFSI 콰트로 프리미엄",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4431&Tab=image&No=121235",
+      "image_url": "https://autoimg.danawa.com/gallery/4431/20240426_4431 (1).jpg",
+      "path": "vehicles\\아우디\\A8\\gallery\\03_A8 L 55 TFSI 콰트로 프리미엄.jpg"
+    },
+    {
+      "name": "A8 L 55 TFSI 콰트로 프리미엄",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4431&Tab=image&No=121236",
+      "image_url": "https://autoimg.danawa.com/gallery/4431/20240426_4431 (2).jpg",
+      "path": "vehicles\\아우디\\A8\\gallery\\04_A8 L 55 TFSI 콰트로 프리미엄.jpg"
+    }
+  ]
+}

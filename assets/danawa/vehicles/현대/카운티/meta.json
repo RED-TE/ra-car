@@ -1,0 +1,37 @@
+{
+  "brand": "현대",
+  "brand_id": "303",
+  "model_id": "3502",
+  "name": "카운티",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3502",
+  "photo_code": "3502/53381",
+  "default_image_url": "https://autoimg.danawa.com/photo/3502/model_360.png",
+  "default_image_path": "vehicles\\현대\\카운티\\model_360.png",
+  "colors": [],
+  "gallery": [
+    {
+      "name": "2019 카운티",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3502&Tab=image&No=66083",
+      "image_url": "https://autoimg.danawa.com/gallery/3502/20190405_county (1).jpg",
+      "path": "vehicles\\현대\\카운티\\gallery\\01_2019 카운티.jpg"
+    },
+    {
+      "name": "2019 카운티",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3502&Tab=image&No=66084",
+      "image_url": "https://autoimg.danawa.com/gallery/3502/20190405_county (2).jpg",
+      "path": "vehicles\\현대\\카운티\\gallery\\02_2019 카운티.jpg"
+    },
+    {
+      "name": "2019 카운티",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3502&Tab=image&No=66085",
+      "image_url": "https://autoimg.danawa.com/gallery/3502/20190405_county (3).jpg",
+      "path": "vehicles\\현대\\카운티\\gallery\\03_2019 카운티.jpg"
+    },
+    {
+      "name": "2019 카운티",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3502&Tab=image&No=66086",
+      "image_url": "https://autoimg.danawa.com/gallery/3502/20190405_county (4).jpg",
+      "path": "vehicles\\현대\\카운티\\gallery\\04_2019 카운티.jpg"
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "brand": "랜드로버",
+  "brand_id": "399",
+  "model_id": "4119",
+  "name": "Range Rover",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4119",
+  "photo_code": "4119/53680",
+  "default_image_url": "https://autoimg.danawa.com/photo/4119/model_360.png",
+  "default_image_path": "vehicles\\랜드로버\\Range Rover\\model_360.png",
+  "colors": [],
+  "gallery": [
+    {
+      "name": "레인지로버 웨스트민스터 에디션",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4119&Tab=image&No=144978",
+      "image_url": "https://autoimg.danawa.com/gallery/4119/20260430_4119 (1).jpg",
+      "path": "vehicles\\랜드로버\\Range Rover\\gallery\\01_레인지로버 웨스트민스터 에디션.jpg"
+    },
+    {
+      "name": "레인지로버 웨스트민스터 에디션",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4119&Tab=image&No=144979",
+      "image_url": "https://autoimg.danawa.com/gallery/4119/20260430_4119 (2).jpg",
+      "path": "vehicles\\랜드로버\\Range Rover\\gallery\\02_레인지로버 웨스트민스터 에디션.jpg"
+    },
+    {
+      "name": "레인지로버 웨스트민스터 에디션",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4119&Tab=image&No=144980",
+      "image_url": "https://autoimg.danawa.com/gallery/4119/20260430_4119 (3).jpg",
+      "path": "vehicles\\랜드로버\\Range Rover\\gallery\\03_레인지로버 웨스트민스터 에디션.jpg"
+    },
+    {
+      "name": "레인지로버 웨스트민스터 에디션",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4119&Tab=image&No=144981",
+      "image_url": "https://autoimg.danawa.com/gallery/4119/20260430_4119 (4).jpg",
+      "path": "vehicles\\랜드로버\\Range Rover\\gallery\\04_레인지로버 웨스트민스터 에디션.jpg"
+    }
+  ]
+}

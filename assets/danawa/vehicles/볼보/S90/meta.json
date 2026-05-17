@@ -1,0 +1,80 @@
+{
+  "brand": "볼보",
+  "brand_id": "459",
+  "model_id": "4740",
+  "name": "S90",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4740",
+  "photo_code": "4740/53327",
+  "default_image_url": "https://autoimg.danawa.com/photo/4740/model_360.png",
+  "default_image_path": "vehicles\\볼보\\S90\\model_360.png",
+  "colors": [
+    {
+      "name": "크리스탈 화이트",
+      "code": "C11",
+      "swatch": "#ffffff",
+      "image_url": "https://autoimg.danawa.com/photo/4740/53327/color_11_360.png",
+      "path": "vehicles\\볼보\\S90\\colors\\01_크리스탈 화이트.png"
+    },
+    {
+      "name": "오닉스 블랙",
+      "code": "C12",
+      "swatch": "#000000",
+      "image_url": "https://autoimg.danawa.com/photo/4740/53327/color_12_360.png",
+      "path": "vehicles\\볼보\\S90\\colors\\02_오닉스 블랙.png"
+    },
+    {
+      "name": "데님 블루",
+      "code": "C13",
+      "swatch": "#445262",
+      "image_url": "https://autoimg.danawa.com/photo/4740/53327/color_13_360.png",
+      "path": "vehicles\\볼보\\S90\\colors\\03_데님 블루.png"
+    },
+    {
+      "name": "브라이트 더스크",
+      "code": "C14",
+      "swatch": "#d1cfd0",
+      "image_url": "https://autoimg.danawa.com/photo/4740/53327/color_14_360.png",
+      "path": "vehicles\\볼보\\S90\\colors\\04_브라이트 더스크.png"
+    },
+    {
+      "name": "멀베리 레드",
+      "code": "C15",
+      "swatch": "#4b363b",
+      "image_url": "https://autoimg.danawa.com/photo/4740/53327/color_15_360.png",
+      "path": "vehicles\\볼보\\S90\\colors\\05_멀베리 레드.png"
+    },
+    {
+      "name": "베이퍼 그레이",
+      "code": "C16",
+      "swatch": "#a8a9ad",
+      "image_url": "https://autoimg.danawa.com/photo/4740/53327/color_16_360.png",
+      "path": "vehicles\\볼보\\S90\\colors\\06_베이퍼 그레이.png"
+    }
+  ],
+  "gallery": [
+    {
+      "name": "The new Volvo S90",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4740&Tab=image&No=138907",
+      "image_url": "https://autoimg.danawa.com/gallery/4740/20250703_4740 (3).jpg",
+      "path": "vehicles\\볼보\\S90\\gallery\\01_The new Volvo S90.jpg"
+    },
+    {
+      "name": "The new Volvo S90",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4740&Tab=image&No=138908",
+      "image_url": "https://autoimg.danawa.com/gallery/4740/20250703_4740 (2).jpg",
+      "path": "vehicles\\볼보\\S90\\gallery\\02_The new Volvo S90.jpg"
+    },
+    {
+      "name": "The new Volvo S90",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4740&Tab=image&No=138909",
+      "image_url": "https://autoimg.danawa.com/gallery/4740/20250703_4740 (1).jpg",
+      "path": "vehicles\\볼보\\S90\\gallery\\03_The new Volvo S90.jpg"
+    },
+    {
+      "name": "The new Volvo S90",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4740&Tab=image&No=138910",
+      "image_url": "https://autoimg.danawa.com/gallery/4740/20250703_4740 (5).jpg",
+      "path": "vehicles\\볼보\\S90\\gallery\\04_The new Volvo S90.jpg"
+    }
+  ]
+}

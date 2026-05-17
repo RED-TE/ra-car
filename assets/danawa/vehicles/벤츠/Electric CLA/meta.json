@@ -1,0 +1,37 @@
+{
+  "brand": "벤츠",
+  "brand_id": "349",
+  "model_id": "4719",
+  "name": "Electric CLA",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4719",
+  "photo_code": "4719/",
+  "default_image_url": "https://autoimg.danawa.com/photo/4719/model_360.png",
+  "default_image_path": "vehicles\\벤츠\\Electric CLA\\model_360.png",
+  "colors": [],
+  "gallery": [
+    {
+      "name": "CLA350 4MATIC 슈팅 브레이크 위드 EQ 테크놀로지",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4719&Tab=image&No=144252",
+      "image_url": "https://autoimg.danawa.com/gallery/4719/20260413_4719 (1).jpg",
+      "path": "vehicles\\벤츠\\Electric CLA\\gallery\\01_CLA350 4MATIC 슈팅 브레이크 위드 EQ 테크놀로지.jpg"
+    },
+    {
+      "name": "CLA350 4MATIC 슈팅 브레이크 위드 EQ 테크놀로지",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4719&Tab=image&No=144253",
+      "image_url": "https://autoimg.danawa.com/gallery/4719/20260413_4719 (2).jpg",
+      "path": "vehicles\\벤츠\\Electric CLA\\gallery\\02_CLA350 4MATIC 슈팅 브레이크 위드 EQ 테크놀로지.jpg"
+    },
+    {
+      "name": "CLA350 4MATIC 슈팅 브레이크 위드 EQ 테크놀로지",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4719&Tab=image&No=144254",
+      "image_url": "https://autoimg.danawa.com/gallery/4719/20260413_4719 (3).jpg",
+      "path": "vehicles\\벤츠\\Electric CLA\\gallery\\03_CLA350 4MATIC 슈팅 브레이크 위드 EQ 테크놀로지.jpg"
+    },
+    {
+      "name": "CLA350 4MATIC 슈팅 브레이크 위드 EQ 테크놀로지",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4719&Tab=image&No=144255",
+      "image_url": "https://autoimg.danawa.com/gallery/4719/20260413_4719 (4).jpg",
+      "path": "vehicles\\벤츠\\Electric CLA\\gallery\\04_CLA350 4MATIC 슈팅 브레이크 위드 EQ 테크놀로지.jpg"
+    }
+  ]
+}

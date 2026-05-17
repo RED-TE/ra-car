@@ -1,0 +1,101 @@
+{
+  "brand": "렉서스",
+  "brand_id": "486",
+  "model_id": "4164",
+  "name": "NX",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4164",
+  "photo_code": "4164/53598",
+  "default_image_url": "https://autoimg.danawa.com/photo/4164/model_360.png",
+  "default_image_path": "vehicles\\렉서스\\NX\\model_360.png",
+  "colors": [
+    {
+      "name": "Sonic Chrome",
+      "code": "C11",
+      "swatch": "#676d7b",
+      "image_url": "https://autoimg.danawa.com/photo/4164/53598/color_11_360.png",
+      "path": "vehicles\\렉서스\\NX\\colors\\01_Sonic Chrome.png"
+    },
+    {
+      "name": "Sonic Quartz",
+      "code": "C12",
+      "swatch": "#cacfd3",
+      "image_url": "https://autoimg.danawa.com/photo/4164/53598/color_12_360.png",
+      "path": "vehicles\\렉서스\\NX\\colors\\02_Sonic Quartz.png"
+    },
+    {
+      "name": "Sonic Titanium",
+      "code": "C13",
+      "swatch": "#7f8480",
+      "image_url": "https://autoimg.danawa.com/photo/4164/53598/color_13_360.png",
+      "path": "vehicles\\렉서스\\NX\\colors\\03_Sonic Titanium.png"
+    },
+    {
+      "name": "Graphite Black Glass Flake",
+      "code": "C14",
+      "swatch": "#232a32",
+      "image_url": "https://autoimg.danawa.com/photo/4164/53598/color_14_360.png",
+      "path": "vehicles\\렉서스\\NX\\colors\\04_Graphite Black Glass Flake.png"
+    },
+    {
+      "name": "Black",
+      "code": "C15",
+      "swatch": "#000000",
+      "image_url": "https://autoimg.danawa.com/photo/4164/53598/color_15_360.png",
+      "path": "vehicles\\렉서스\\NX\\colors\\05_Black.png"
+    },
+    {
+      "name": "Madder Red",
+      "code": "C16",
+      "swatch": "#d13125",
+      "image_url": "https://autoimg.danawa.com/photo/4164/53598/color_16_360.png",
+      "path": "vehicles\\렉서스\\NX\\colors\\06_Madder Red.png"
+    },
+    {
+      "name": "Sonic Copper",
+      "code": "C17",
+      "swatch": "#bf7a67",
+      "image_url": "https://autoimg.danawa.com/photo/4164/53598/color_17_360.png",
+      "path": "vehicles\\렉서스\\NX\\colors\\07_Sonic Copper.png"
+    },
+    {
+      "name": "Terrane Khaki Mica Metallic",
+      "code": "C18",
+      "swatch": "#585743",
+      "image_url": "https://autoimg.danawa.com/photo/4164/53598/color_18_360.png",
+      "path": "vehicles\\렉서스\\NX\\colors\\08_Terrane Khaki Mica Metallic.png"
+    },
+    {
+      "name": "Celestial Blue Glass Flake",
+      "code": "C19",
+      "swatch": "#365089",
+      "image_url": "https://autoimg.danawa.com/photo/4164/53598/color_19_360.png",
+      "path": "vehicles\\렉서스\\NX\\colors\\09_Celestial Blue Glass Flake.png"
+    }
+  ],
+  "gallery": [
+    {
+      "name": "2025ㅣNX",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4164&Tab=image&No=124741",
+      "image_url": "https://autoimg.danawa.com/gallery/4164/20240531_4164 (1).jpg",
+      "path": "vehicles\\렉서스\\NX\\gallery\\01_2025ㅣNX.jpg"
+    },
+    {
+      "name": "2025ㅣNX",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4164&Tab=image&No=124742",
+      "image_url": "https://autoimg.danawa.com/gallery/4164/20240531_4164 (2).jpg",
+      "path": "vehicles\\렉서스\\NX\\gallery\\02_2025ㅣNX.jpg"
+    },
+    {
+      "name": "2025ㅣNX",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4164&Tab=image&No=124743",
+      "image_url": "https://autoimg.danawa.com/gallery/4164/20240531_4164 (3).jpg",
+      "path": "vehicles\\렉서스\\NX\\gallery\\03_2025ㅣNX.jpg"
+    },
+    {
+      "name": "2025ㅣNX",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4164&Tab=image&No=124744",
+      "image_url": "https://autoimg.danawa.com/gallery/4164/20240531_4164 (4).jpg",
+      "path": "vehicles\\렉서스\\NX\\gallery\\04_2025ㅣNX.jpg"
+    }
+  ]
+}

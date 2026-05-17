@@ -1,0 +1,101 @@
+{
+  "brand": "렉서스",
+  "brand_id": "486",
+  "model_id": "4390",
+  "name": "RX",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4390",
+  "photo_code": "4390/53643",
+  "default_image_url": "https://autoimg.danawa.com/photo/4390/model_360.png",
+  "default_image_path": "vehicles\\렉서스\\RX\\model_360.png",
+  "colors": [
+    {
+      "name": "SONIC COPPER",
+      "code": "C11",
+      "swatch": "#cb7662",
+      "image_url": "https://autoimg.danawa.com/photo/4390/53643/color_11_360.png",
+      "path": "vehicles\\렉서스\\RX\\colors\\01_SONIC COPPER.png"
+    },
+    {
+      "name": "SONIC QUARTZ",
+      "code": "C12",
+      "swatch": "#d1d6d9",
+      "image_url": "https://autoimg.danawa.com/photo/4390/53643/color_12_360.png",
+      "path": "vehicles\\렉서스\\RX\\colors\\02_SONIC QUARTZ.png"
+    },
+    {
+      "name": "SONIC TITANIUM",
+      "code": "C13",
+      "swatch": "#92918f",
+      "image_url": "https://autoimg.danawa.com/photo/4390/53643/color_13_360.png",
+      "path": "vehicles\\렉서스\\RX\\colors\\03_SONIC TITANIUM.png"
+    },
+    {
+      "name": "SONIC CHROME",
+      "code": "C14",
+      "swatch": "#45484d",
+      "image_url": "https://autoimg.danawa.com/photo/4390/53643/color_14_360.png",
+      "path": "vehicles\\렉서스\\RX\\colors\\04_SONIC CHROME.png"
+    },
+    {
+      "name": "SONIC IRIDIUM",
+      "code": "C15",
+      "swatch": "#979ca2",
+      "image_url": "https://autoimg.danawa.com/photo/4390/53643/color_15_360.png",
+      "path": "vehicles\\렉서스\\RX\\colors\\05_SONIC IRIDIUM.png"
+    },
+    {
+      "name": "GRAPHITE BLACK GLASS FAKE",
+      "code": "C16",
+      "swatch": "#232426",
+      "image_url": "https://autoimg.danawa.com/photo/4390/53643/color_16_360.png",
+      "path": "vehicles\\렉서스\\RX\\colors\\06_GRAPHITE BLACK GLASS FAKE.png"
+    },
+    {
+      "name": "RED MICA CRYSTAL SHINE",
+      "code": "C17",
+      "swatch": "#9a322f",
+      "image_url": "https://autoimg.danawa.com/photo/4390/53643/color_17_360.png",
+      "path": "vehicles\\렉서스\\RX\\colors\\07_RED MICA CRYSTAL SHINE.png"
+    },
+    {
+      "name": "TERRANE KHAKI MICA METALLIC",
+      "code": "C18",
+      "swatch": "#585743",
+      "image_url": "https://autoimg.danawa.com/photo/4390/53643/color_18_360.png",
+      "path": "vehicles\\렉서스\\RX\\colors\\08_TERRANE KHAKI MICA METALLIC.png"
+    },
+    {
+      "name": "DEEP BLUE MICA",
+      "code": "C19",
+      "swatch": "#010b53",
+      "image_url": "https://autoimg.danawa.com/photo/4390/53643/color_19_360.png",
+      "path": "vehicles\\렉서스\\RX\\colors\\09_DEEP BLUE MICA.png"
+    }
+  ],
+  "gallery": [
+    {
+      "name": "RX 450h+ 아웃도어 콘셉트",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4390&Tab=image&No=124767",
+      "image_url": "https://autoimg.danawa.com/gallery/4390/20240605_4390 (1).jpg",
+      "path": "vehicles\\렉서스\\RX\\gallery\\01_RX 450h+ 아웃도어 콘셉트.jpg"
+    },
+    {
+      "name": "2023ㅣ RX 350",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4390&Tab=image&No=115759",
+      "image_url": "https://autoimg.danawa.com/gallery/4390/20231128_4390 (1).jpg",
+      "path": "vehicles\\렉서스\\RX\\gallery\\02_2023ㅣ RX 350.jpg"
+    },
+    {
+      "name": "2023ㅣ RX 350",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4390&Tab=image&No=115760",
+      "image_url": "https://autoimg.danawa.com/gallery/4390/20231127_4390 (2).jpg",
+      "path": "vehicles\\렉서스\\RX\\gallery\\03_2023ㅣ RX 350.jpg"
+    },
+    {
+      "name": "2023ㅣ RX 350",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4390&Tab=image&No=115761",
+      "image_url": "https://autoimg.danawa.com/gallery/4390/20231127_4390 (3).jpg",
+      "path": "vehicles\\렉서스\\RX\\gallery\\04_2023ㅣ RX 350.jpg"
+    }
+  ]
+}

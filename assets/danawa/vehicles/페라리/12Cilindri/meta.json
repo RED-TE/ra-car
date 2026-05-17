@@ -1,0 +1,37 @@
+{
+  "brand": "페라리",
+  "brand_id": "436",
+  "model_id": "4643",
+  "name": "12Cilindri",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4643",
+  "photo_code": "4643/53435",
+  "default_image_url": "https://autoimg.danawa.com/photo/4643/model_360.png",
+  "default_image_path": "vehicles\\페라리\\12Cilindri\\model_360.png",
+  "colors": [],
+  "gallery": [
+    {
+      "name": "2024 12 칠린드리",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4643&Tab=image&No=122429",
+      "image_url": "https://autoimg.danawa.com/gallery/4643/20240507_4643 (1).jpg",
+      "path": "vehicles\\페라리\\12Cilindri\\gallery\\01_2024 12 칠린드리.jpg"
+    },
+    {
+      "name": "2024 12 칠린드리",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4643&Tab=image&No=122430",
+      "image_url": "https://autoimg.danawa.com/gallery/4643/20240507_4643 (2).jpg",
+      "path": "vehicles\\페라리\\12Cilindri\\gallery\\02_2024 12 칠린드리.jpg"
+    },
+    {
+      "name": "2024 12 칠린드리",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4643&Tab=image&No=122431",
+      "image_url": "https://autoimg.danawa.com/gallery/4643/20240507_4643 (3).jpg",
+      "path": "vehicles\\페라리\\12Cilindri\\gallery\\03_2024 12 칠린드리.jpg"
+    },
+    {
+      "name": "2024 12 칠린드리",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4643&Tab=image&No=122432",
+      "image_url": "https://autoimg.danawa.com/gallery/4643/20240507_4643 (4).jpg",
+      "path": "vehicles\\페라리\\12Cilindri\\gallery\\04_2024 12 칠린드리.jpg"
+    }
+  ]
+}

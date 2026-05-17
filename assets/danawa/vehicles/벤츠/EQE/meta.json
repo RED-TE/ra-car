@@ -1,0 +1,37 @@
+{
+  "brand": "벤츠",
+  "brand_id": "349",
+  "model_id": "4111",
+  "name": "EQE",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4111",
+  "photo_code": "4111/53642",
+  "default_image_url": "https://autoimg.danawa.com/photo/4111/model_360.png",
+  "default_image_path": "vehicles\\벤츠\\EQE\\model_360.png",
+  "colors": [],
+  "gallery": [
+    {
+      "name": "2022 l EQE350+",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4111&Tab=image&No=100063",
+      "image_url": "https://autoimg.danawa.com/gallery/4111/20221013_4111 (1).jpg",
+      "path": "vehicles\\벤츠\\EQE\\gallery\\01_2022 l EQE350+.jpg"
+    },
+    {
+      "name": "2022 l EQE350+",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4111&Tab=image&No=100064",
+      "image_url": "https://autoimg.danawa.com/gallery/4111/20221013_4111 (2).jpg",
+      "path": "vehicles\\벤츠\\EQE\\gallery\\02_2022 l EQE350+.jpg"
+    },
+    {
+      "name": "2022 l EQE350+",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4111&Tab=image&No=100065",
+      "image_url": "https://autoimg.danawa.com/gallery/4111/20221013_4111 (3).jpg",
+      "path": "vehicles\\벤츠\\EQE\\gallery\\03_2022 l EQE350+.jpg"
+    },
+    {
+      "name": "2022 l EQE350+",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4111&Tab=image&No=100066",
+      "image_url": "https://autoimg.danawa.com/gallery/4111/20221013_4111 (4).jpg",
+      "path": "vehicles\\벤츠\\EQE\\gallery\\04_2022 l EQE350+.jpg"
+    }
+  ]
+}

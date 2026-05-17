@@ -1,0 +1,66 @@
+{
+  "brand": "KGM",
+  "brand_id": "326",
+  "model_id": "4518",
+  "name": "렉스턴 뉴 아레나",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4518",
+  "photo_code": "4518/53376",
+  "default_image_url": "https://autoimg.danawa.com/photo/4518/model_360.png",
+  "default_image_path": "vehicles\\KGM\\렉스턴 뉴 아레나\\model_360.png",
+  "colors": [
+    {
+      "name": "실키 화이트 펄(WAK)",
+      "code": "C10",
+      "swatch": "#f0f4f4",
+      "image_url": "https://autoimg.danawa.com/photo/4518/53376/color_10_360.png",
+      "path": "vehicles\\KGM\\렉스턴 뉴 아레나\\colors\\01_실키 화이트 펄(WAK).png"
+    },
+    {
+      "name": "그랜드 화이트(WAA)",
+      "code": "C11",
+      "swatch": "#edeeeb",
+      "image_url": "https://autoimg.danawa.com/photo/4518/53376/color_11_360.png",
+      "path": "vehicles\\KGM\\렉스턴 뉴 아레나\\colors\\02_그랜드 화이트(WAA).png"
+    },
+    {
+      "name": "마블 그레이(ACM)",
+      "code": "C14",
+      "swatch": "#6c6c72",
+      "image_url": "https://autoimg.danawa.com/photo/4518/53376/color_14_360.png",
+      "path": "vehicles\\KGM\\렉스턴 뉴 아레나\\colors\\03_마블 그레이(ACM).png"
+    },
+    {
+      "name": "스페이스 블랙(LAK)",
+      "code": "C16",
+      "swatch": "#080709",
+      "image_url": "https://autoimg.danawa.com/photo/4518/53376/color_16_360.png",
+      "path": "vehicles\\KGM\\렉스턴 뉴 아레나\\colors\\04_스페이스 블랙(LAK).png"
+    }
+  ],
+  "gallery": [
+    {
+      "name": "렉스턴 뉴 아레나",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4518&Tab=image&No=128386",
+      "image_url": "https://autoimg.danawa.com/gallery/4518/20240830_4518 (1).jpg",
+      "path": "vehicles\\KGM\\렉스턴 뉴 아레나\\gallery\\01_렉스턴 뉴 아레나.jpg"
+    },
+    {
+      "name": "렉스턴 뉴 아레나",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4518&Tab=image&No=125439",
+      "image_url": "https://autoimg.danawa.com/gallery/4518/20240617_4518 (2).jpg",
+      "path": "vehicles\\KGM\\렉스턴 뉴 아레나\\gallery\\02_렉스턴 뉴 아레나.jpg"
+    },
+    {
+      "name": "렉스턴 뉴 아레나 써밋",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4518&Tab=image&No=125336",
+      "image_url": "https://autoimg.danawa.com/gallery/4518/20240613_4518 (1).jpg",
+      "path": "vehicles\\KGM\\렉스턴 뉴 아레나\\gallery\\03_렉스턴 뉴 아레나 써밋.jpg"
+    },
+    {
+      "name": "렉스턴 뉴 아레나",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4518&Tab=image&No=123554",
+      "image_url": "https://autoimg.danawa.com/gallery/4518/20240514_4518 (1).jpg",
+      "path": "vehicles\\KGM\\렉스턴 뉴 아레나\\gallery\\04_렉스턴 뉴 아레나.jpg"
+    }
+  ]
+}

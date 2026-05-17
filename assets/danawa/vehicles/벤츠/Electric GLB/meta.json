@@ -1,0 +1,37 @@
+{
+  "brand": "벤츠",
+  "brand_id": "349",
+  "model_id": "4764",
+  "name": "Electric GLB",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4764",
+  "photo_code": "4764/",
+  "default_image_url": "https://autoimg.danawa.com/photo/4764/model_360.png",
+  "default_image_path": "vehicles\\벤츠\\Electric GLB\\model_360.png",
+  "colors": [],
+  "gallery": [
+    {
+      "name": "GLB250+ 위드 EQ 테크놀로지",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4764&Tab=image&No=144361",
+      "image_url": "https://autoimg.danawa.com/gallery/4764/20260413_4764 (1).jpg",
+      "path": "vehicles\\벤츠\\Electric GLB\\gallery\\01_GLB250+ 위드 EQ 테크놀로지.jpg"
+    },
+    {
+      "name": "GLB250+ 위드 EQ 테크놀로지",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4764&Tab=image&No=144362",
+      "image_url": "https://autoimg.danawa.com/gallery/4764/20260413_4764 (2).jpg",
+      "path": "vehicles\\벤츠\\Electric GLB\\gallery\\02_GLB250+ 위드 EQ 테크놀로지.jpg"
+    },
+    {
+      "name": "GLB250+ 위드 EQ 테크놀로지",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4764&Tab=image&No=144363",
+      "image_url": "https://autoimg.danawa.com/gallery/4764/20260413_4764 (3).jpg",
+      "path": "vehicles\\벤츠\\Electric GLB\\gallery\\03_GLB250+ 위드 EQ 테크놀로지.jpg"
+    },
+    {
+      "name": "GLB250+ 위드 EQ 테크놀로지",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4764&Tab=image&No=144364",
+      "image_url": "https://autoimg.danawa.com/gallery/4764/20260413_4764 (4).jpg",
+      "path": "vehicles\\벤츠\\Electric GLB\\gallery\\04_GLB250+ 위드 EQ 테크놀로지.jpg"
+    }
+  ]
+}

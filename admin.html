@@ -1,17 +1,1051 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>관리자 페이지 | RE:CAR</title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body class="admin-page">
+    <header class="simple-header">
+      <a class="simple-brand" href="./index.html">RE:CAR Admin</a>
+      <a class="simple-link" href="./index.html">홈으로</a>
+    </header>
 
-<head>
-    <title>Redirecting...</title>
+    <main class="admin-main">
+      <section id="authSection" class="admin-auth">
+        <div class="admin-auth-copy">
+          <p class="eyebrow">Admin Access</p>
+          <h1>로그인</h1>
+        </div>
+
+        <div class="auth-grid is-login-only">
+          <form id="loginForm" class="auth-card">
+            <h2>로그인</h2>
+            <label>
+              아이디
+              <input name="username" type="text" autocomplete="username" placeholder="아이디" required />
+            </label>
+            <label>
+              비밀번호
+              <input name="password" type="password" autocomplete="current-password" placeholder="비밀번호" required />
+            </label>
+            <button class="auth-submit" type="submit">관리자 로그인</button>
+            <p id="loginStatus" class="auth-status" role="status"></p>
+          </form>
+        </div>
+      </section>
+
+      <section id="adminShell" class="admin-shell" hidden>
+        <aside class="admin-sidebar" aria-label="관리자 메뉴">
+          <div class="admin-profile">
+            <strong id="sidebarUserName">관리자</strong>
+            <span id="sidebarUserRole">관리자</span>
+          </div>
+
+          <nav class="admin-side-nav">
+            <p>CORE</p>
+            <a class="is-active" href="#dashboard">HOME</a>
+
+            <p>MANAGEMENT</p>
+            <a class="is-active" href="#db">DB 관리</a>
+            <a href="#db">전체 OPEN DB</a>
+            <a href="#db">계약완료 DB</a>
+            <a href="#db">달력메모장</a>
+
+            <p>SETTINGS</p>
+            <button id="logoutButton" type="button">로그아웃</button>
+          </nav>
+        </aside>
+
+        <section class="admin-content">
+          <section class="admin-topbar" id="dashboard">
+            <div>
+              <p class="eyebrow">Lead Dashboard</p>
+              <h1>DB 관리</h1>
+              <p id="heroDescription">배정된 문의의 진행상황, 상담 메모, DB 담당자를 관리합니다.</p>
+            </div>
+            <div class="admin-session">
+              <span id="sessionLabel">로그인됨</span>
+              <div class="admin-actions">
+                <button id="refreshLeads" type="button">새로고침</button>
+                <button id="downloadCsv" type="button">CSV 다운로드</button>
+              </div>
+            </div>
+          </section>
+
+          <section id="userPanel" class="user-panel" hidden>
+            <div class="user-panel-head">
+              <div>
+                <p class="eyebrow">Account Approval</p>
+                <h2>관리자 가입 신청</h2>
+                <p>승인된 관리자에게만 문의 DB를 배정할 수 있습니다.</p>
+              </div>
+              <div class="user-summary">
+                <strong id="pendingCount">0</strong>
+                <span>승인 대기</span>
+              </div>
+            </div>
+            <div id="userRows" class="user-list"></div>
+          </section>
+
+          <section class="admin-today-panel" aria-label="오늘 할 일과 일정">
+            <article class="today-memo-card">
+              <div class="today-card-head">
+                <div>
+                  <p class="eyebrow">Today Memo</p>
+                  <h2>오늘 할 일</h2>
+                </div>
+                <span id="todayDateLabel">오늘</span>
+              </div>
+              <textarea id="todayMemoInput" placeholder="예: 오늘 김테스트 쏘렌토 조건 확인&#10;5월 20일 김테스트 재연락&#10;5월 22일 출고 일정 확인"></textarea>
+              <div class="today-memo-actions">
+                <button id="saveTodayMemo" type="button">메모 저장</button>
+                <p id="calendarStatus" role="status">날짜가 들어간 메모는 달력 일정으로 자동 저장됩니다.</p>
+              </div>
+            </article>
+
+            <article class="today-schedule-card">
+              <div class="today-card-head">
+                <div>
+                  <p class="eyebrow">Calendar</p>
+                  <h2>오늘 일정</h2>
+                </div>
+              </div>
+              <ul id="todayScheduleList" class="today-schedule-list"></ul>
+              <div class="mini-calendar">
+                <div class="mini-calendar-head">
+                  <button id="prevCalendarMonth" type="button" aria-label="이전 달">‹</button>
+                  <strong id="calendarMonthLabel">이번 달</strong>
+                  <button id="nextCalendarMonth" type="button" aria-label="다음 달">›</button>
+                </div>
+                <div class="mini-calendar-weekdays" aria-hidden="true">
+                  <span>일</span><span>월</span><span>화</span><span>수</span><span>목</span><span>금</span><span>토</span>
+                </div>
+                <div id="calendarGrid" class="mini-calendar-grid"></div>
+              </div>
+            </article>
+          </section>
+
+          <section class="db-board" id="db">
+            <div class="date-quickbar" aria-label="기간 선택">
+              <strong>기간 선택</strong>
+              <button class="is-active" type="button" data-period="all">전체</button>
+              <button type="button" data-period="today">오늘</button>
+              <button type="button" data-period="yesterday">어제</button>
+              <button type="button" data-period="14days">최근14일</button>
+              <button type="button" data-period="lastMonth">지난달</button>
+              <button type="button" data-period="thisMonth">이번달</button>
+            </div>
+
+            <div id="statusSummary" class="status-summary" aria-label="진행상황 요약"></div>
+
+            <div class="db-filter-grid">
+              <label>
+                시작일
+                <input id="filterStart" type="date" />
+              </label>
+              <label>
+                종료일
+                <input id="filterEnd" type="date" />
+              </label>
+              <label>
+                담당자
+                <select id="assigneeFilter">
+                  <option value="">전체</option>
+                </select>
+              </label>
+              <label>
+                통합조회
+                <input id="leadSearch" type="search" placeholder="고객명, 휴대폰번호, 희망차량, 특이사항" />
+              </label>
+              <button id="resetFilters" type="button">초기화</button>
+              <button id="searchButton" type="button">검색</button>
+            </div>
+
+            <div class="db-list-head">
+              <h2>DB 리스트 <span>(총 <strong id="leadCount">0</strong>)</span></h2>
+              <select id="pageSize" aria-label="목록 개수">
+                <option value="10">10개씩 보기</option>
+                <option value="20">20개씩 보기</option>
+                <option value="50">50개씩 보기</option>
+                <option value="all">전체 보기</option>
+              </select>
+            </div>
+
+            <div class="db-bulk-actions">
+              <select id="bulkAssigneeSelect" aria-label="담당자 선택">
+                <option value="">담당자 선택</option>
+              </select>
+              <button id="bulkAssignButton" type="button">DB이동</button>
+              <p id="adminStatus" class="admin-status">문의 데이터를 불러오는 중입니다.</p>
+            </div>
+
+            <div class="lead-table-wrap">
+              <table class="lead-table">
+                <thead id="leadHead"></thead>
+                <tbody id="leadRows"></tbody>
+              </table>
+            </div>
+          </section>
+        </section>
+      </section>
+    </main>
+
     <script>
-        alert("이 페이지는 더 이상 사용되지 않습니다. 새로운 보안 주소로 이동합니다.");
-        window.location.href = "ricar_mgr_7468_gate.html";
+      const tokenStorageKey = "recarAdminToken";
+      const apiBase = window.location.protocol === "file:" ? "http://localhost:5173" : "";
+      const progressOptions = ["선택", "부재", "상담", "심사", "출고", "발주", "부결"];
+      const saveTimers = {};
+
+      const state = {
+        token: window.localStorage.getItem(tokenStorageKey) || "",
+        user: null,
+        users: [],
+        leads: [],
+      };
+
+      const authSection = document.querySelector("#authSection");
+      const adminShell = document.querySelector("#adminShell");
+      const loginForm = document.querySelector("#loginForm");
+      const loginStatus = document.querySelector("#loginStatus");
+      const userPanel = document.querySelector("#userPanel");
+      const userRows = document.querySelector("#userRows");
+      const pendingCount = document.querySelector("#pendingCount");
+      const sessionLabel = document.querySelector("#sessionLabel");
+      const sidebarUserName = document.querySelector("#sidebarUserName");
+      const sidebarUserRole = document.querySelector("#sidebarUserRole");
+      const heroDescription = document.querySelector("#heroDescription");
+      const leadTable = document.querySelector(".lead-table");
+      const leadHead = document.querySelector("#leadHead");
+      const rows = document.querySelector("#leadRows");
+      const search = document.querySelector("#leadSearch");
+      const status = document.querySelector("#adminStatus");
+      const count = document.querySelector("#leadCount");
+      const statusSummary = document.querySelector("#statusSummary");
+      const filterStart = document.querySelector("#filterStart");
+      const filterEnd = document.querySelector("#filterEnd");
+      const assigneeFilter = document.querySelector("#assigneeFilter");
+      const resetFilters = document.querySelector("#resetFilters");
+      const searchButton = document.querySelector("#searchButton");
+      const pageSize = document.querySelector("#pageSize");
+      const bulkAssigneeSelect = document.querySelector("#bulkAssigneeSelect");
+      const bulkAssignButton = document.querySelector("#bulkAssignButton");
+      const periodButtons = [...document.querySelectorAll("[data-period]")];
+      const todayMemoInput = document.querySelector("#todayMemoInput");
+      const saveTodayMemo = document.querySelector("#saveTodayMemo");
+      const calendarStatus = document.querySelector("#calendarStatus");
+      const todayDateLabel = document.querySelector("#todayDateLabel");
+      const todayScheduleList = document.querySelector("#todayScheduleList");
+      const calendarMonthLabel = document.querySelector("#calendarMonthLabel");
+      const calendarGrid = document.querySelector("#calendarGrid");
+      const prevCalendarMonth = document.querySelector("#prevCalendarMonth");
+      const nextCalendarMonth = document.querySelector("#nextCalendarMonth");
+      let activeStatusFilter = "all";
+      let calendarCursor = new Date();
+      let calendarState = {
+        memo: "",
+        events: [],
+        monthEvents: {},
+        monthNotes: {},
+      };
+
+      const errorMessages = {
+        invalid_username: "아이디는 영문, 숫자 기준 3자 이상으로 입력해주세요.",
+        weak_password: "비밀번호는 6자 이상으로 입력해주세요.",
+        name_required: "이름을 입력해주세요.",
+        username_exists: "이미 사용 중인 아이디입니다.",
+        invalid_login: "아이디 또는 비밀번호를 확인해주세요.",
+        approval_pending: "회원가입 신청이 접수되었습니다. 총관리자 승인 후 로그인할 수 있습니다.",
+        account_not_approved: "승인되지 않은 계정입니다. 총관리자에게 확인해주세요.",
+        admin_login_required: "관리자 로그인이 필요합니다.",
+        super_admin_required: "총관리자 권한이 필요합니다.",
+        lead_not_assigned: "이 문의는 현재 계정에 배정되지 않았습니다.",
+      };
+
+      function isSuperAdmin() {
+        return state.user?.role === "super";
+      }
+
+      function getMessage(error, fallback = "처리 중 문제가 발생했습니다.") {
+        return errorMessages[error] || fallback;
+      }
+
+      function escapeHtml(value) {
+        return String(value ?? "")
+          .replaceAll("&", "&amp;")
+          .replaceAll("<", "&lt;")
+          .replaceAll(">", "&gt;")
+          .replaceAll('"', "&quot;")
+          .replaceAll("'", "&#039;");
+      }
+
+      function escapeCsv(value) {
+        return `"${String(value || "").replaceAll('"', '""')}"`;
+      }
+
+      function formatDate(value) {
+        if (!value) return "-";
+        const date = new Date(value);
+        if (Number.isNaN(date.getTime())) return value;
+
+        return new Intl.DateTimeFormat("ko-KR", {
+          dateStyle: "short",
+          timeStyle: "short",
+        }).format(date);
+      }
+
+      async function apiFetch(path, options = {}) {
+        const headers = {
+          ...(options.body ? { "Content-Type": "application/json" } : {}),
+          ...(state.token ? { Authorization: `Bearer ${state.token}` } : {}),
+          ...(options.headers || {}),
+        };
+
+        const response = await fetch(`${apiBase}${path}`, {
+          cache: "no-store",
+          ...options,
+          headers,
+        });
+        const payload = await response.json().catch(() => ({}));
+
+        if (!response.ok || payload.ok === false) {
+          const error = new Error(payload.error || "request_failed");
+          error.code = payload.error || "request_failed";
+          error.status = response.status;
+          throw error;
+        }
+
+        return payload;
+      }
+
+      function showAuth(message = "") {
+        authSection.hidden = false;
+        adminShell.hidden = true;
+        if (message) loginStatus.textContent = message;
+      }
+
+      function showDashboard() {
+        authSection.hidden = true;
+        adminShell.hidden = false;
+        const roleLabel = isSuperAdmin() ? "최고" : "일반";
+        sessionLabel.textContent = `${state.user?.name || state.user?.username || "관리자"} · ${roleLabel}`;
+        sidebarUserName.textContent = state.user?.name || state.user?.username || "관리자";
+        sidebarUserRole.textContent = roleLabel === "최고" ? "최고 관리자" : "일반 관리자";
+        heroDescription.textContent = isSuperAdmin()
+          ? "전체 문의 DB를 확인하고, 승인된 관리자에게 필요한 DB만 배정합니다."
+          : "총관리자가 배정한 문의 DB만 확인하고 상담 진행상황을 관리합니다.";
+        userPanel.hidden = !isSuperAdmin();
+      }
+
+      function normalizeLead(lead) {
+        return {
+          ...lead,
+          progressStatus: progressOptions.includes(lead.progressStatus) ? lead.progressStatus : "선택",
+          adminMemo: lead.adminMemo || "",
+          dbManager: lead.dbManager || "",
+          assignedAdminId: lead.assignedAdminId || "",
+          assignedAdminName: lead.assignedAdminName || "",
+          assignedAdminUsername: lead.assignedAdminUsername || "",
+        };
+      }
+
+      function getAssignableUsers() {
+        return state.users.filter((user) => user.status === "approved" && ["admin", "super"].includes(user.role));
+      }
+
+      function getFilteredLeads() {
+        const keyword = search.value.trim().toLowerCase();
+        const startDate = filterStart.value ? new Date(`${filterStart.value}T00:00:00`) : null;
+        const endDate = filterEnd.value ? new Date(`${filterEnd.value}T23:59:59`) : null;
+        const assigneeId = assigneeFilter.value;
+
+        return state.leads.filter((lead) => {
+          const createdAt = lead.createdAt ? new Date(lead.createdAt) : null;
+          const matchesKeyword =
+            !keyword ||
+            [
+              lead.vehicle,
+              lead.customerName,
+              lead.phone,
+              lead.requestNote,
+              lead.source,
+              lead.progressStatus,
+              lead.adminMemo,
+              lead.dbManager,
+              lead.assignedAdminName,
+              lead.assignedAdminUsername,
+            ]
+              .join(" ")
+              .toLowerCase()
+              .includes(keyword);
+          const matchesStart = !startDate || (createdAt && createdAt >= startDate);
+          const matchesEnd = !endDate || (createdAt && createdAt <= endDate);
+          const matchesAssignee = !assigneeId || lead.assignedAdminId === assigneeId;
+          const matchesStatus = activeStatusFilter === "all" || lead.progressStatus === activeStatusFilter;
+
+          return matchesKeyword && matchesStart && matchesEnd && matchesAssignee && matchesStatus;
+        });
+      }
+
+      function renderUsers() {
+        if (!isSuperAdmin()) return;
+
+        const users = state.users.filter((user) => user.id !== state.user.id);
+        const pendingUsers = users.filter((user) => user.status === "pending");
+        pendingCount.textContent = pendingUsers.length;
+
+        if (!users.length) {
+          userRows.innerHTML = `<p class="empty-state">아직 가입 신청이 없습니다.</p>`;
+          return;
+        }
+
+        userRows.innerHTML = users
+          .map((user) => {
+            const statusLabel = user.status === "approved" ? "승인됨" : user.status === "rejected" ? "거절됨" : "승인 대기";
+            const approveButton =
+              user.status !== "approved"
+                ? `<button type="button" data-user-action="approved" data-user-id="${escapeHtml(user.id)}">승인</button>`
+                : "";
+            const rejectButton =
+              user.status !== "rejected"
+                ? `<button type="button" data-user-action="rejected" data-user-id="${escapeHtml(user.id)}">거절</button>`
+                : "";
+
+            return `
+              <article class="user-card">
+                <div>
+                  <strong>${escapeHtml(user.name || user.username)}</strong>
+                  <span>${escapeHtml(user.username)} · ${escapeHtml(statusLabel)}</span>
+                  <small>신청일 ${escapeHtml(formatDate(user.createdAt))}</small>
+                </div>
+                <div class="user-actions">${approveButton}${rejectButton}</div>
+              </article>
+            `;
+          })
+          .join("");
+      }
+
+      function renderAdminSelectors() {
+        const users = getAssignableUsers();
+        const assigneeValue = assigneeFilter.value;
+        const bulkValue = bulkAssigneeSelect.value;
+        const options = users
+          .map((user) => `<option value="${escapeHtml(user.id)}">${escapeHtml(user.name || user.username)}</option>`)
+          .join("");
+
+        assigneeFilter.innerHTML = `<option value="">전체</option>${options}`;
+        bulkAssigneeSelect.innerHTML = `<option value="">담당자 선택</option>${options}`;
+        assigneeFilter.value = users.some((user) => user.id === assigneeValue) ? assigneeValue : "";
+        bulkAssigneeSelect.value = users.some((user) => user.id === bulkValue) ? bulkValue : "";
+
+        const canAssign = isSuperAdmin();
+        assigneeFilter.disabled = !canAssign;
+        bulkAssigneeSelect.disabled = !canAssign;
+        bulkAssignButton.disabled = !canAssign;
+      }
+
+      function renderStatusSummary() {
+        const counts = state.leads.reduce(
+          (acc, lead) => {
+            acc.all += 1;
+            acc[lead.progressStatus] = (acc[lead.progressStatus] || 0) + 1;
+            return acc;
+          },
+          { all: 0 },
+        );
+        const cards = [
+          { key: "all", label: "전체", className: "is-dark" },
+          { key: "선택", label: "선택", className: "is-gray" },
+          { key: "부재", label: "부재", className: "is-gray" },
+          { key: "상담", label: "상담중", className: "is-blue" },
+          { key: "심사", label: "심사", className: "is-purple" },
+          { key: "발주", label: "발주", className: "is-orange" },
+          { key: "출고", label: "출고", className: "is-green" },
+          { key: "부결", label: "부결", className: "is-red" },
+        ];
+
+        statusSummary.innerHTML = cards
+          .map((card) => {
+            const active = activeStatusFilter === card.key ? " is-active" : "";
+            return `
+              <button class="status-card ${card.className}${active}" type="button" data-status-filter="${escapeHtml(card.key)}">
+                <span>${escapeHtml(card.label)}</span>
+                <strong>${escapeHtml(counts[card.key] || 0)}건</strong>
+              </button>
+            `;
+          })
+          .join("");
+      }
+
+      function getVisibleLeads(leads) {
+        if (pageSize.value === "all") return leads;
+        const limit = Number(pageSize.value || 10);
+        return leads.slice(0, limit);
+      }
+
+      function renderTableHead() {
+        leadTable.classList.toggle("is-super", isSuperAdmin());
+        leadHead.innerHTML = `
+          <tr>
+            <th><input id="selectAllLeads" type="checkbox" aria-label="전체 선택" /></th>
+            <th>접수일</th>
+            <th>고객명</th>
+            <th>휴대폰번호</th>
+            <th>희망차량</th>
+            <th>특이사항</th>
+            <th>진행상황</th>
+            ${isSuperAdmin() ? "<th>DB 배정</th>" : ""}
+            <th>담당자 메모</th>
+            <th>DB담당자</th>
+          </tr>
+        `;
+      }
+
+      function renderStatusButtons(lead) {
+        const currentStatus = progressOptions.includes(lead.progressStatus) ? lead.progressStatus : "선택";
+        const valueClass = currentStatus === "선택" ? "" : " has-value";
+
+        return `
+          <select class="status-select${valueClass}" data-status-select data-lead-id="${escapeHtml(lead.id)}" aria-label="진행상황 선택">
+            ${progressOptions
+              .map((option) => {
+                const selected = currentStatus === option ? " selected" : "";
+                return `<option value="${escapeHtml(option)}"${selected}>${escapeHtml(option)}</option>`;
+              })
+              .join("")}
+          </select>
+        `;
+      }
+
+      function renderAssignmentSelect(lead) {
+        const users = getAssignableUsers();
+        const selectedUser = state.users.find((user) => user.id === lead.assignedAdminId);
+        const extraSelected =
+          selectedUser && !users.some((user) => user.id === selectedUser.id)
+            ? `<option value="${escapeHtml(selectedUser.id)}" selected>${escapeHtml(selectedUser.name || selectedUser.username)}</option>`
+            : "";
+
+        return `
+          <select class="assignment-select" data-meta-field="assignedAdminId" data-lead-id="${escapeHtml(lead.id)}">
+            <option value="">미배정</option>
+            ${extraSelected}
+            ${users
+              .map((user) => {
+                const selected = user.id === lead.assignedAdminId ? " selected" : "";
+                return `<option value="${escapeHtml(user.id)}"${selected}>${escapeHtml(user.name || user.username)}</option>`;
+              })
+              .join("")}
+          </select>
+          <small>${lead.assignedAdminName ? `${escapeHtml(lead.assignedAdminName)}에게 배정됨` : "아직 배정 전"}</small>
+        `;
+      }
+
+      function renderLeads() {
+        renderTableHead();
+        renderUsers();
+        renderAdminSelectors();
+        renderStatusSummary();
+
+        const leads = getFilteredLeads();
+        count.textContent = leads.length;
+
+        if (!leads.length) {
+          const colspan = isSuperAdmin() ? 10 : 9;
+          rows.innerHTML = `<tr><td colspan="${colspan}">표시할 문의 DB가 없습니다.</td></tr>`;
+          return;
+        }
+
+        rows.innerHTML = getVisibleLeads(leads)
+          .map((lead) => {
+            const requestNote = lead.requestNote ? escapeHtml(lead.requestNote) : "-";
+            const assignmentCell = isSuperAdmin() ? `<td>${renderAssignmentSelect(lead)}</td>` : "";
+
+            return `
+              <tr>
+                <td><input class="lead-select" type="checkbox" value="${escapeHtml(lead.id)}" aria-label="${escapeHtml(lead.customerName || "문의")} 선택" /></td>
+                <td>${escapeHtml(formatDate(lead.createdAt))}</td>
+                <td><strong>${escapeHtml(lead.customerName || "-")}</strong><small>${escapeHtml(lead.source || "")}</small></td>
+                <td><a href="tel:${escapeHtml(lead.phone || "")}">${escapeHtml(lead.phone || "-")}</a></td>
+                <td><strong>${escapeHtml(lead.vehicle || "-")}</strong></td>
+                <td>${requestNote}</td>
+                <td><div class="status-control">${renderStatusButtons(lead)}</div></td>
+                ${assignmentCell}
+                <td class="memo-cell">
+                  <textarea class="admin-memo-input" data-meta-field="adminMemo" data-lead-id="${escapeHtml(lead.id)}" placeholder="상담 내용, 부재 사유, 금융사 피드백 등을 기록하세요.">${escapeHtml(lead.adminMemo)}</textarea>
+                </td>
+                <td>
+                  <input class="db-manager-input" data-meta-field="dbManager" data-lead-id="${escapeHtml(lead.id)}" type="text" value="${escapeHtml(lead.dbManager)}" placeholder="이름" />
+                </td>
+              </tr>
+            `;
+          })
+          .join("");
+      }
+
+      function findLead(leadId) {
+        return state.leads.find((lead) => lead.id === leadId);
+      }
+
+      function updateLeadMeta(leadId, changes) {
+        const lead = findLead(leadId);
+        if (!lead) return;
+
+        Object.assign(lead, changes);
+        if (Object.prototype.hasOwnProperty.call(changes, "assignedAdminId")) {
+          const assignedUser = state.users.find((user) => user.id === changes.assignedAdminId);
+          lead.assignedAdminName = assignedUser ? assignedUser.name : "";
+          lead.assignedAdminUsername = assignedUser ? assignedUser.username : "";
+        }
+
+        queueMetaSave(leadId);
+      }
+
+      function queueMetaSave(leadId) {
+        window.clearTimeout(saveTimers[leadId]);
+        status.textContent = "변경 내용을 저장하는 중입니다.";
+        saveTimers[leadId] = window.setTimeout(() => saveLeadMeta(leadId), 450);
+      }
+
+      async function saveLeadMeta(leadId) {
+        const lead = findLead(leadId);
+        if (!lead) return;
+
+        const meta = {
+          progressStatus: lead.progressStatus,
+          adminMemo: lead.adminMemo,
+          dbManager: lead.dbManager,
+        };
+
+        if (isSuperAdmin()) {
+          meta.assignedAdminId = lead.assignedAdminId || "";
+        }
+
+        try {
+          await apiFetch(`/api/leads/${encodeURIComponent(leadId)}/meta`, {
+            method: "PATCH",
+            body: JSON.stringify(meta),
+          });
+          status.textContent = "변경 내용이 저장되었습니다.";
+        } catch (error) {
+          status.textContent = getMessage(error.code, "저장에 실패했습니다. 권한 또는 서버 상태를 확인해주세요.");
+          if (error.status === 401) clearSession();
+        }
+      }
+
+      async function loadLeads() {
+        status.textContent = "문의 데이터를 불러오는 중입니다.";
+
+        try {
+          const payload = await apiFetch("/api/leads");
+          state.user = payload.user || state.user;
+          state.users = payload.users || [];
+          state.leads = (payload.leads || []).map(normalizeLead);
+          showDashboard();
+          status.textContent = isSuperAdmin()
+            ? "전체 문의 DB를 표시합니다."
+            : "배정받은 문의 DB만 표시합니다.";
+          renderLeads();
+          await loadAdminCalendar();
+        } catch (error) {
+          state.leads = [];
+          renderLeads();
+          status.textContent = getMessage(error.code, "문의 데이터를 불러오지 못했습니다.");
+          if (error.status === 401) clearSession();
+        }
+      }
+
+      async function loadSession() {
+        if (!state.token) {
+          showAuth();
+          return;
+        }
+
+        try {
+          const payload = await apiFetch("/api/admin/session");
+          state.user = payload.user;
+          showDashboard();
+          await loadLeads();
+        } catch (error) {
+          clearSession(getMessage(error.code, "다시 로그인해주세요."));
+        }
+      }
+
+      function clearSession(message = "") {
+        state.token = "";
+        state.user = null;
+        state.users = [];
+        state.leads = [];
+        window.localStorage.removeItem(tokenStorageKey);
+        showAuth(message);
+      }
+
+      async function updateUser(userId, changes) {
+        try {
+          await apiFetch(`/api/admin/users/${encodeURIComponent(userId)}`, {
+            method: "PATCH",
+            body: JSON.stringify(changes),
+          });
+          status.textContent = "관리자 계정 상태가 변경되었습니다.";
+          await loadLeads();
+        } catch (error) {
+          status.textContent = getMessage(error.code, "관리자 계정 변경에 실패했습니다.");
+        }
+      }
+
+      function downloadCsv() {
+        const leads = getFilteredLeads();
+        const header = ["접수일", "이름", "희망 차량", "연락처", "요청사항", "진행상황", "배정 관리자", "담당자 메모", "DB담당자"];
+        const lines = leads.map((lead) => [
+          lead.createdAt,
+          lead.customerName,
+          lead.vehicle,
+          lead.phone,
+          lead.requestNote,
+          lead.progressStatus,
+          lead.assignedAdminName,
+          lead.adminMemo,
+          lead.dbManager,
+        ]);
+        const csv = [header, ...lines].map((line) => line.map(escapeCsv).join(",")).join("\n");
+        const blob = new Blob([`\ufeff${csv}`], { type: "text/csv;charset=utf-8" });
+        const url = URL.createObjectURL(blob);
+        const link = document.createElement("a");
+        link.href = url;
+        link.download = "recar-leads.csv";
+        link.click();
+        URL.revokeObjectURL(url);
+      }
+
+      function toDateInput(date) {
+        const localDate = new Date(date.getTime() - date.getTimezoneOffset() * 60000);
+        return localDate.toISOString().slice(0, 10);
+      }
+
+      function getMonthKey(date) {
+        return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}`;
+      }
+
+      function getTodayKey() {
+        return toDateInput(new Date());
+      }
+
+      function getDateLabel(dateKey) {
+        const date = new Date(`${dateKey}T00:00:00`);
+        if (Number.isNaN(date.getTime())) return dateKey;
+        return new Intl.DateTimeFormat("ko-KR", {
+          month: "long",
+          day: "numeric",
+          weekday: "short",
+        }).format(date);
+      }
+
+      function setCalendarStatus(message, tone = "") {
+        calendarStatus.textContent = message;
+        calendarStatus.dataset.tone = tone;
+      }
+
+      function renderTodaySchedule() {
+        const todayMemo = String(calendarState.memo || "").trim();
+        const todayEvents = Array.isArray(calendarState.events) ? calendarState.events : [];
+        const items = [];
+
+        if (todayMemo) {
+          const shortMemo = todayMemo.split("\n").filter(Boolean).slice(0, 2).join(" / ");
+          items.push(`<li><strong>오늘 메모</strong><span>${escapeHtml(shortMemo.slice(0, 120))}</span></li>`);
+        }
+
+        todayEvents.forEach((event) => {
+          items.push(`<li><strong>${escapeHtml(event.title || "일정")}</strong><span>${escapeHtml(event.createdByName || "메모에서 자동 등록")}</span></li>`);
+        });
+
+        todayScheduleList.innerHTML = items.length
+          ? items.join("")
+          : `<li class="is-empty"><strong>오늘 일정 없음</strong><span>오늘 처리할 메모를 남겨두면 이곳에서 바로 확인할 수 있습니다.</span></li>`;
+      }
+
+      function renderMiniCalendar() {
+        const year = calendarCursor.getFullYear();
+        const month = calendarCursor.getMonth();
+        const monthKey = getMonthKey(calendarCursor);
+        const todayKey = getTodayKey();
+        const firstDay = new Date(year, month, 1).getDay();
+        const lastDate = new Date(year, month + 1, 0).getDate();
+        const cells = [];
+
+        calendarMonthLabel.textContent = new Intl.DateTimeFormat("ko-KR", {
+          year: "numeric",
+          month: "long",
+        }).format(calendarCursor);
+
+        for (let index = 0; index < firstDay; index += 1) {
+          cells.push(`<span class="calendar-cell is-empty"></span>`);
+        }
+
+        for (let day = 1; day <= lastDate; day += 1) {
+          const dateKey = `${monthKey}-${String(day).padStart(2, "0")}`;
+          const events = calendarState.monthEvents?.[dateKey] || [];
+          const note = calendarState.monthNotes?.[dateKey]?.memo || "";
+          const chips = [
+            note ? "메모" : "",
+            ...events.map((event) => event.title || "일정"),
+          ].filter(Boolean);
+          const classes = [
+            "calendar-cell",
+            dateKey === todayKey ? "is-today" : "",
+            chips.length ? "has-event" : "",
+          ]
+            .filter(Boolean)
+            .join(" ");
+
+          cells.push(`
+            <span class="${classes}">
+              <strong>${day}</strong>
+              ${chips.slice(0, 2).map((chip) => `<em>${escapeHtml(chip)}</em>`).join("")}
+            </span>
+          `);
+        }
+
+        calendarGrid.innerHTML = cells.join("");
+      }
+
+      function renderAdminCalendar(payload = {}) {
+        calendarState = {
+          memo: payload.memo || "",
+          events: payload.events || [],
+          monthEvents: payload.monthEvents || {},
+          monthNotes: payload.monthNotes || {},
+        };
+        todayMemoInput.value = calendarState.memo;
+        todayDateLabel.textContent = getDateLabel(payload.date || getTodayKey());
+        renderTodaySchedule();
+        renderMiniCalendar();
+      }
+
+      async function loadAdminCalendar() {
+        if (!state.token) return;
+
+        try {
+          const dateKey = getTodayKey();
+          const monthKey = getMonthKey(calendarCursor);
+          const payload = await apiFetch(`/api/admin/calendar?date=${encodeURIComponent(dateKey)}&month=${encodeURIComponent(monthKey)}`);
+          renderAdminCalendar(payload);
+          setCalendarStatus("날짜가 들어간 메모는 달력 일정으로 자동 저장됩니다.");
+        } catch (error) {
+          setCalendarStatus("메모와 일정을 불러오지 못했습니다.", "error");
+        }
+      }
+
+      async function saveTodayMemoText() {
+        if (!state.token) return;
+
+        saveTodayMemo.disabled = true;
+        setCalendarStatus("메모를 저장하는 중입니다.");
+
+        try {
+          const dateKey = getTodayKey();
+          const monthKey = getMonthKey(calendarCursor);
+          const payload = await apiFetch("/api/admin/calendar", {
+            method: "PUT",
+            body: JSON.stringify({
+              date: dateKey,
+              month: monthKey,
+              memo: todayMemoInput.value,
+            }),
+          });
+          renderAdminCalendar(payload);
+          setCalendarStatus("저장되었습니다. 날짜가 언급된 내용은 달력 일정에 반영됐습니다.", "success");
+        } catch (error) {
+          setCalendarStatus("메모 저장에 실패했습니다.", "error");
+        } finally {
+          saveTodayMemo.disabled = false;
+        }
+      }
+
+      function setPeriod(period) {
+        const today = new Date();
+        let start = "";
+        let end = "";
+
+        if (period === "today") {
+          start = toDateInput(today);
+          end = start;
+        }
+
+        if (period === "yesterday") {
+          const yesterday = new Date(today);
+          yesterday.setDate(today.getDate() - 1);
+          start = toDateInput(yesterday);
+          end = start;
+        }
+
+        if (period === "14days") {
+          const past = new Date(today);
+          past.setDate(today.getDate() - 13);
+          start = toDateInput(past);
+          end = toDateInput(today);
+        }
+
+        if (period === "lastMonth") {
+          start = toDateInput(new Date(today.getFullYear(), today.getMonth() - 1, 1));
+          end = toDateInput(new Date(today.getFullYear(), today.getMonth(), 0));
+        }
+
+        if (period === "thisMonth") {
+          start = toDateInput(new Date(today.getFullYear(), today.getMonth(), 1));
+          end = toDateInput(today);
+        }
+
+        filterStart.value = start;
+        filterEnd.value = end;
+        periodButtons.forEach((button) => button.classList.toggle("is-active", button.dataset.period === period));
+        renderLeads();
+      }
+
+      async function assignSelectedLeads() {
+        if (!isSuperAdmin()) {
+          status.textContent = "최고 관리자만 DB를 이동할 수 있습니다.";
+          return;
+        }
+
+        const assigneeId = bulkAssigneeSelect.value;
+        const selectedIds = [...rows.querySelectorAll(".lead-select:checked")].map((checkbox) => checkbox.value);
+
+        if (!selectedIds.length) {
+          status.textContent = "이동할 DB를 선택해주세요.";
+          return;
+        }
+
+        if (!assigneeId) {
+          status.textContent = "배정할 담당자를 선택해주세요.";
+          return;
+        }
+
+        status.textContent = "선택한 DB를 이동하는 중입니다.";
+        for (const leadId of selectedIds) {
+          updateLeadMeta(leadId, { assignedAdminId: assigneeId });
+          window.clearTimeout(saveTimers[leadId]);
+          await saveLeadMeta(leadId);
+        }
+
+        status.textContent = "선택한 DB 이동이 완료되었습니다.";
+        renderLeads();
+      }
+
+      loginForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        loginStatus.textContent = "로그인 중입니다.";
+
+        const form = new FormData(loginForm);
+        try {
+          const payload = await apiFetch("/api/admin/login", {
+            method: "POST",
+            body: JSON.stringify({
+              username: form.get("username"),
+              password: form.get("password"),
+            }),
+          });
+          state.token = payload.token;
+          state.user = payload.user;
+          window.localStorage.setItem(tokenStorageKey, state.token);
+          loginStatus.textContent = "";
+          await loadLeads();
+        } catch (error) {
+          loginStatus.textContent = getMessage(error.code, "로그인에 실패했습니다.");
+        }
+      });
+
+      document.querySelector("#refreshLeads").addEventListener("click", loadLeads);
+      document.querySelector("#downloadCsv").addEventListener("click", downloadCsv);
+      document.querySelector("#logoutButton").addEventListener("click", async () => {
+        try {
+          if (state.token) await apiFetch("/api/admin/logout", { method: "POST" });
+        } catch (error) {
+          // 이미 만료된 세션이어도 화면에서는 로그아웃 처리합니다.
+        }
+        clearSession("로그아웃되었습니다.");
+      });
+
+      search.addEventListener("input", renderLeads);
+      searchButton.addEventListener("click", renderLeads);
+      filterStart.addEventListener("change", renderLeads);
+      filterEnd.addEventListener("change", renderLeads);
+      assigneeFilter.addEventListener("change", renderLeads);
+      pageSize.addEventListener("change", renderLeads);
+      resetFilters.addEventListener("click", () => {
+        search.value = "";
+        filterStart.value = "";
+        filterEnd.value = "";
+        assigneeFilter.value = "";
+        activeStatusFilter = "all";
+        periodButtons.forEach((button) => button.classList.toggle("is-active", button.dataset.period === "all"));
+        renderLeads();
+      });
+      periodButtons.forEach((button) => button.addEventListener("click", () => setPeriod(button.dataset.period)));
+      saveTodayMemo.addEventListener("click", saveTodayMemoText);
+      todayMemoInput.addEventListener("keydown", (event) => {
+        if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "s") {
+          event.preventDefault();
+          saveTodayMemoText();
+        }
+      });
+      prevCalendarMonth.addEventListener("click", () => {
+        calendarCursor = new Date(calendarCursor.getFullYear(), calendarCursor.getMonth() - 1, 1);
+        loadAdminCalendar();
+      });
+      nextCalendarMonth.addEventListener("click", () => {
+        calendarCursor = new Date(calendarCursor.getFullYear(), calendarCursor.getMonth() + 1, 1);
+        loadAdminCalendar();
+      });
+      statusSummary.addEventListener("click", (event) => {
+        const button = event.target.closest("[data-status-filter]");
+        if (!button) return;
+        activeStatusFilter = button.dataset.statusFilter;
+        renderLeads();
+      });
+      bulkAssignButton.addEventListener("click", assignSelectedLeads);
+      leadHead.addEventListener("change", (event) => {
+        const selectAll = event.target.closest("#selectAllLeads");
+        if (!selectAll) return;
+        rows.querySelectorAll(".lead-select").forEach((checkbox) => {
+          checkbox.checked = selectAll.checked;
+        });
+      });
+      rows.addEventListener("click", (event) => {
+        const button = event.target.closest("[data-action='status']");
+        if (!button) return;
+
+        updateLeadMeta(button.dataset.leadId, { progressStatus: button.dataset.status });
+        renderLeads();
+      });
+      rows.addEventListener("input", (event) => {
+        const field = event.target.closest("[data-meta-field]");
+        if (!field || field.dataset.metaField === "assignedAdminId") return;
+
+        updateLeadMeta(field.dataset.leadId, { [field.dataset.metaField]: field.value });
+      });
+      rows.addEventListener("change", (event) => {
+        const statusSelect = event.target.closest("[data-status-select]");
+        if (statusSelect) {
+          updateLeadMeta(statusSelect.dataset.leadId, { progressStatus: statusSelect.value });
+          renderLeads();
+          return;
+        }
+
+        const field = event.target.closest("[data-meta-field='assignedAdminId']");
+        if (!field) return;
+
+        updateLeadMeta(field.dataset.leadId, { assignedAdminId: field.value });
+        renderLeads();
+      });
+      userRows.addEventListener("click", (event) => {
+        const button = event.target.closest("[data-user-action]");
+        if (!button) return;
+
+        updateUser(button.dataset.userId, { status: button.dataset.userAction });
+      });
+
+      loadSession();
     </script>
-</head>
-
-<body>
-    <p>보안을 위해 관리자 주소가 변경되었습니다. 잠시 후 새로운 주소로 이동합니다.</p>
-    <p><a href="ricar_mgr_7468_gate.html">여기를 클릭하여 이동</a></p>
-</body>
-
+  </body>
 </html>

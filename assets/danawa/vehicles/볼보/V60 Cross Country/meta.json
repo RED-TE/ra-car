@@ -1,0 +1,73 @@
+{
+  "brand": "볼보",
+  "brand_id": "459",
+  "model_id": "4421",
+  "name": "V60 Cross Country",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4421",
+  "photo_code": "4421/53691",
+  "default_image_url": "https://autoimg.danawa.com/photo/4421/model_360.png",
+  "default_image_path": "vehicles\\볼보\\V60 Cross Country\\model_360.png",
+  "colors": [
+    {
+      "name": "크리스탈 화이트",
+      "code": "C11",
+      "swatch": "#ffffff",
+      "image_url": "https://autoimg.danawa.com/photo/4421/53691/color_11_360.png",
+      "path": "vehicles\\볼보\\V60 Cross Country\\colors\\01_크리스탈 화이트.png"
+    },
+    {
+      "name": "오닉스 블랙",
+      "code": "C12",
+      "swatch": "#000000",
+      "image_url": "https://autoimg.danawa.com/photo/4421/53691/color_12_360.png",
+      "path": "vehicles\\볼보\\V60 Cross Country\\colors\\02_오닉스 블랙.png"
+    },
+    {
+      "name": "데님 블루",
+      "code": "C13",
+      "swatch": "#445262",
+      "image_url": "https://autoimg.danawa.com/photo/4421/53691/color_13_360.png",
+      "path": "vehicles\\볼보\\V60 Cross Country\\colors\\03_데님 블루.png"
+    },
+    {
+      "name": "베이퍼 그레이",
+      "code": "C14",
+      "swatch": "#a6a7aa",
+      "image_url": "https://autoimg.danawa.com/photo/4421/53691/color_14_360.png",
+      "path": "vehicles\\볼보\\V60 Cross Country\\colors\\04_베이퍼 그레이.png"
+    },
+    {
+      "name": "오로라 실버",
+      "code": "C15",
+      "swatch": "#c8c8ca",
+      "image_url": "https://autoimg.danawa.com/photo/4421/53691/color_15_360.png",
+      "path": "vehicles\\볼보\\V60 Cross Country\\colors\\05_오로라 실버.png"
+    }
+  ],
+  "gallery": [
+    {
+      "name": "V60 크로스 컨트리",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4421&Tab=image&No=123543",
+      "image_url": "https://autoimg.danawa.com/gallery/4421/20240514_4421 (8).jpg",
+      "path": "vehicles\\볼보\\V60 Cross Country\\gallery\\01_V60 크로스 컨트리.jpg"
+    },
+    {
+      "name": "V60 크로스 컨트리",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4421&Tab=image&No=123544",
+      "image_url": "https://autoimg.danawa.com/gallery/4421/20240514_4421 (7).jpg",
+      "path": "vehicles\\볼보\\V60 Cross Country\\gallery\\02_V60 크로스 컨트리.jpg"
+    },
+    {
+      "name": "V60 크로스 컨트리",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4421&Tab=image&No=123545",
+      "image_url": "https://autoimg.danawa.com/gallery/4421/20240514_4421 (5).jpg",
+      "path": "vehicles\\볼보\\V60 Cross Country\\gallery\\03_V60 크로스 컨트리.jpg"
+    },
+    {
+      "name": "V60 크로스 컨트리",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4421&Tab=image&No=123546",
+      "image_url": "https://autoimg.danawa.com/gallery/4421/20240514_4421 (4).jpg",
+      "path": "vehicles\\볼보\\V60 Cross Country\\gallery\\04_V60 크로스 컨트리.jpg"
+    }
+  ]
+}

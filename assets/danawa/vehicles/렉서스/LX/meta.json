@@ -1,0 +1,80 @@
+{
+  "brand": "렉서스",
+  "brand_id": "486",
+  "model_id": "4700",
+  "name": "LX",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4700",
+  "photo_code": "4700/53575",
+  "default_image_url": "https://autoimg.danawa.com/photo/4700/model_360.png",
+  "default_image_path": "vehicles\\렉서스\\LX\\model_360.png",
+  "colors": [
+    {
+      "name": "MANGANESE LUSTER",
+      "code": "C11",
+      "swatch": "#767674",
+      "image_url": "https://autoimg.danawa.com/photo/4700/53575/color_11_360.png",
+      "path": "vehicles\\렉서스\\LX\\colors\\01_MANGANESE LUSTER.png"
+    },
+    {
+      "name": "SONIC QUARTZ",
+      "code": "C12",
+      "swatch": "#d2d5da",
+      "image_url": "https://autoimg.danawa.com/photo/4700/53575/color_12_360.png",
+      "path": "vehicles\\렉서스\\LX\\colors\\02_SONIC QUARTZ.png"
+    },
+    {
+      "name": "SONIC TITANIUM",
+      "code": "C13",
+      "swatch": "#92918f",
+      "image_url": "https://autoimg.danawa.com/photo/4700/53575/color_13_360.png",
+      "path": "vehicles\\렉서스\\LX\\colors\\03_SONIC TITANIUM.png"
+    },
+    {
+      "name": "TERRANE KHAKI",
+      "code": "C14",
+      "swatch": "#585745",
+      "image_url": "https://autoimg.danawa.com/photo/4700/53575/color_14_360.png",
+      "path": "vehicles\\렉서스\\LX\\colors\\04_TERRANE KHAKI.png"
+    },
+    {
+      "name": "GRAPHITE BLACK",
+      "code": "C15",
+      "swatch": "#232428",
+      "image_url": "https://autoimg.danawa.com/photo/4700/53575/color_15_360.png",
+      "path": "vehicles\\렉서스\\LX\\colors\\05_GRAPHITE BLACK.png"
+    },
+    {
+      "name": "MOON DESERT",
+      "code": "C16",
+      "swatch": "#ada08f",
+      "image_url": "https://autoimg.danawa.com/photo/4700/53575/color_16_360.png",
+      "path": "vehicles\\렉서스\\LX\\colors\\06_MOON DESERT.png"
+    }
+  ],
+  "gallery": [
+    {
+      "name": "LX 700h",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4700&Tab=image&No=136668",
+      "image_url": "https://autoimg.danawa.com/gallery/4700/20250324_4700 (9).jpg",
+      "path": "vehicles\\렉서스\\LX\\gallery\\01_LX 700h.jpg"
+    },
+    {
+      "name": "LX 700h",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4700&Tab=image&No=136669",
+      "image_url": "https://autoimg.danawa.com/gallery/4700/20250324_4700 (10).jpg",
+      "path": "vehicles\\렉서스\\LX\\gallery\\02_LX 700h.jpg"
+    },
+    {
+      "name": "LX 700h",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4700&Tab=image&No=136670",
+      "image_url": "https://autoimg.danawa.com/gallery/4700/20250324_4700 (11).jpg",
+      "path": "vehicles\\렉서스\\LX\\gallery\\03_LX 700h.jpg"
+    },
+    {
+      "name": "LX 700h",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4700&Tab=image&No=136671",
+      "image_url": "https://autoimg.danawa.com/gallery/4700/20250324_4700 (12).jpg",
+      "path": "vehicles\\렉서스\\LX\\gallery\\04_LX 700h.jpg"
+    }
+  ]
+}

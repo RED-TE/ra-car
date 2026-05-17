@@ -1,0 +1,37 @@
+{
+  "brand": "르노",
+  "brand_id": "321",
+  "model_id": "4112",
+  "name": "메간 E-테크 일렉트릭",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4112",
+  "photo_code": "4112/",
+  "default_image_url": "https://autoimg.danawa.com/photo/4112/model_360.png",
+  "default_image_path": "vehicles\\르노\\메간 E-테크 일렉트릭\\model_360.png",
+  "colors": [],
+  "gallery": [
+    {
+      "name": "2022 l 메간 E-테크 일렉트릭",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4112&Tab=image&No=87077",
+      "image_url": "https://autoimg.danawa.com/gallery/4112/20210910 (1).jpg",
+      "path": "vehicles\\르노\\메간 E-테크 일렉트릭\\gallery\\01_2022 l 메간 E-테크 일렉트릭.jpg"
+    },
+    {
+      "name": "2022 l 메간 E-테크 일렉트릭",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4112&Tab=image&No=87078",
+      "image_url": "https://autoimg.danawa.com/gallery/4112/20210910 (2).jpg",
+      "path": "vehicles\\르노\\메간 E-테크 일렉트릭\\gallery\\02_2022 l 메간 E-테크 일렉트릭.jpg"
+    },
+    {
+      "name": "2022 l 메간 E-테크 일렉트릭",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4112&Tab=image&No=87079",
+      "image_url": "https://autoimg.danawa.com/gallery/4112/20210910 (3).jpg",
+      "path": "vehicles\\르노\\메간 E-테크 일렉트릭\\gallery\\03_2022 l 메간 E-테크 일렉트릭.jpg"
+    },
+    {
+      "name": "2022 l 메간 E-테크 일렉트릭",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4112&Tab=image&No=87080",
+      "image_url": "https://autoimg.danawa.com/gallery/4112/20210910 (4).jpg",
+      "path": "vehicles\\르노\\메간 E-테크 일렉트릭\\gallery\\04_2022 l 메간 E-테크 일렉트릭.jpg"
+    }
+  ]
+}

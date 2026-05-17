@@ -1,0 +1,87 @@
+{
+  "brand": "랜드로버",
+  "brand_id": "399",
+  "model_id": "4064",
+  "name": "Discovery",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4064",
+  "photo_code": "4064/53725",
+  "default_image_url": "https://autoimg.danawa.com/photo/4064/53725/color_15_360.png",
+  "default_image_path": "vehicles\\랜드로버\\Discovery\\model_360.png",
+  "colors": [
+    {
+      "name": "Fuji White",
+      "code": "C11",
+      "swatch": "#d3d8d8",
+      "image_url": "https://autoimg.danawa.com/photo/4064/53725/color_11_360.png",
+      "path": "vehicles\\랜드로버\\Discovery\\colors\\01_Fuji White.png"
+    },
+    {
+      "name": "Santorini Black",
+      "code": "C12",
+      "swatch": "#191a17",
+      "image_url": "https://autoimg.danawa.com/photo/4064/53725/color_12_360.png",
+      "path": "vehicles\\랜드로버\\Discovery\\colors\\02_Santorini Black.png"
+    },
+    {
+      "name": "Eiger Grey",
+      "code": "C13",
+      "swatch": "#7f7f7f",
+      "image_url": "https://autoimg.danawa.com/photo/4064/53725/color_13_360.png",
+      "path": "vehicles\\랜드로버\\Discovery\\colors\\03_Eiger Grey.png"
+    },
+    {
+      "name": "Lantau Bronze",
+      "code": "C14",
+      "swatch": "#8f8c82",
+      "image_url": "https://autoimg.danawa.com/photo/4064/53725/color_14_360.png",
+      "path": "vehicles\\랜드로버\\Discovery\\colors\\04_Lantau Bronze.png"
+    },
+    {
+      "name": "Varesine Blue",
+      "code": "C15",
+      "swatch": "#3b424c",
+      "image_url": "https://autoimg.danawa.com/photo/4064/53725/color_15_360.png",
+      "path": "vehicles\\랜드로버\\Discovery\\colors\\05_Varesine Blue.png"
+    },
+    {
+      "name": "Charente Grey",
+      "code": "C16",
+      "swatch": "#4e4948",
+      "image_url": "https://autoimg.danawa.com/photo/4064/53725/color_16_360.png",
+      "path": "vehicles\\랜드로버\\Discovery\\colors\\06_Charente Grey.png"
+    },
+    {
+      "name": "Carpathian Grey",
+      "code": "C17",
+      "swatch": "#31312f",
+      "image_url": "https://autoimg.danawa.com/photo/4064/53725/color_17_360.png",
+      "path": "vehicles\\랜드로버\\Discovery\\colors\\07_Carpathian Grey.png"
+    }
+  ],
+  "gallery": [
+    {
+      "name": "디스커버리 템페스트",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4064&Tab=image&No=137957",
+      "image_url": "https://autoimg.danawa.com/gallery/4064/20250515_4064 (1).jpg",
+      "path": "vehicles\\랜드로버\\Discovery\\gallery\\01_디스커버리 템페스트.jpg"
+    },
+    {
+      "name": "디스커버리 템페스트",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4064&Tab=image&No=137958",
+      "image_url": "https://autoimg.danawa.com/gallery/4064/20250515_4064 (2).jpg",
+      "path": "vehicles\\랜드로버\\Discovery\\gallery\\02_디스커버리 템페스트.jpg"
+    },
+    {
+      "name": "디스커버리 템페스트",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4064&Tab=image&No=137959",
+      "image_url": "https://autoimg.danawa.com/gallery/4064/20250515_4064 (3).jpg",
+      "path": "vehicles\\랜드로버\\Discovery\\gallery\\03_디스커버리 템페스트.jpg"
+    },
+    {
+      "name": "디스커버리 템페스트",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4064&Tab=image&No=137960",
+      "image_url": "https://autoimg.danawa.com/gallery/4064/20250515_4064 (4).jpg",
+      "path": "vehicles\\랜드로버\\Discovery\\gallery\\04_디스커버리 템페스트.jpg"
+    }
+  ]
+}

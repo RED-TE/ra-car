@@ -1,0 +1,37 @@
+{
+  "brand": "폴스타",
+  "brand_id": "458",
+  "model_id": "4375",
+  "name": "Polestar 3",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4375",
+  "photo_code": "4375/50135",
+  "default_image_url": "https://autoimg.danawa.com/photo/4375/model_360.png",
+  "default_image_path": "vehicles\\폴스타\\Polestar 3\\model_360.png",
+  "colors": [],
+  "gallery": [
+    {
+      "name": "폴스타 3",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4375&Tab=image&No=126351",
+      "image_url": "https://autoimg.danawa.com/gallery/4375/20240703_4375 (1).jpg",
+      "path": "vehicles\\폴스타\\Polestar 3\\gallery\\01_폴스타 3.jpg"
+    },
+    {
+      "name": "폴스타 3",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4375&Tab=image&No=126352",
+      "image_url": "https://autoimg.danawa.com/gallery/4375/20240703_4375 (2).jpg",
+      "path": "vehicles\\폴스타\\Polestar 3\\gallery\\02_폴스타 3.jpg"
+    },
+    {
+      "name": "폴스타 3",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4375&Tab=image&No=126353",
+      "image_url": "https://autoimg.danawa.com/gallery/4375/20240703_4375 (3).jpg",
+      "path": "vehicles\\폴스타\\Polestar 3\\gallery\\03_폴스타 3.jpg"
+    },
+    {
+      "name": "폴스타 3",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4375&Tab=image&No=126354",
+      "image_url": "https://autoimg.danawa.com/gallery/4375/20240703_4375 (4).jpg",
+      "path": "vehicles\\폴스타\\Polestar 3\\gallery\\04_폴스타 3.jpg"
+    }
+  ]
+}

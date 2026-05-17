@@ -1,0 +1,115 @@
+{
+  "brand": "포르쉐",
+  "brand_id": "381",
+  "model_id": "4506",
+  "name": "Cayenne",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4506",
+  "photo_code": "4506/53124",
+  "default_image_url": "https://autoimg.danawa.com/photo/4506/model_360.png",
+  "default_image_path": "vehicles\\포르쉐\\Cayenne\\model_360.png",
+  "colors": [
+    {
+      "name": "화이트",
+      "code": "C11",
+      "swatch": "#efefef",
+      "image_url": "https://autoimg.danawa.com/photo/4506/53124/color_11_360.png",
+      "path": "vehicles\\포르쉐\\Cayenne\\colors\\01_화이트.png"
+    },
+    {
+      "name": "크로마이트 블랙 메탈릭",
+      "code": "C14",
+      "swatch": "#171a21",
+      "image_url": "https://autoimg.danawa.com/photo/4506/53124/color_14_360.png",
+      "path": "vehicles\\포르쉐\\Cayenne\\colors\\02_크로마이트 블랙 메탈릭.png"
+    },
+    {
+      "name": "카라라 화이트 메탈릭",
+      "code": "C13",
+      "swatch": "#eff5f9",
+      "image_url": "https://autoimg.danawa.com/photo/4506/53124/color_13_360.png",
+      "path": "vehicles\\포르쉐\\Cayenne\\colors\\03_카라라 화이트 메탈릭.png"
+    },
+    {
+      "name": "돌로마이트 실버 메탈릭",
+      "code": "C17",
+      "swatch": "#c3cdd3",
+      "image_url": "https://autoimg.danawa.com/photo/4506/53124/color_17_360.png",
+      "path": "vehicles\\포르쉐\\Cayenne\\colors\\04_돌로마이트 실버 메탈릭.png"
+    },
+    {
+      "name": "쿼차이트 그레이 메탈릭",
+      "code": "C18",
+      "swatch": "#4d4d4b",
+      "image_url": "https://autoimg.danawa.com/photo/4506/53124/color_18_360.png",
+      "path": "vehicles\\포르쉐\\Cayenne\\colors\\05_쿼차이트 그레이 메탈릭.png"
+    },
+    {
+      "name": "카민 레드",
+      "code": "C20",
+      "swatch": "#990033",
+      "image_url": "https://autoimg.danawa.com/photo/4506/53124/color_20_360.png",
+      "path": "vehicles\\포르쉐\\Cayenne\\colors\\06_카민 레드.png"
+    },
+    {
+      "name": "캐시미어 베이지 메탈릭",
+      "code": "C22",
+      "swatch": "#a39a89",
+      "image_url": "https://autoimg.danawa.com/photo/4506/53124/color_22_360.png",
+      "path": "vehicles\\포르쉐\\Cayenne\\colors\\07_캐시미어 베이지 메탈릭.png"
+    },
+    {
+      "name": "아크틱 그레이",
+      "code": "C19",
+      "swatch": "#6a6c70",
+      "image_url": "https://autoimg.danawa.com/photo/4506/53124/color_19_360.png",
+      "path": "vehicles\\포르쉐\\Cayenne\\colors\\08_아크틱 그레이.png"
+    },
+    {
+      "name": "몬테고 블루 메탈릭",
+      "code": "C15",
+      "swatch": "#293f4d",
+      "image_url": "https://autoimg.danawa.com/photo/4506/53124/color_15_360.png",
+      "path": "vehicles\\포르쉐\\Cayenne\\colors\\09_몬테고 블루 메탈릭.png"
+    },
+    {
+      "name": "알가르브 블루 메탈릭",
+      "code": "C16",
+      "swatch": "#2f3743",
+      "image_url": "https://autoimg.danawa.com/photo/4506/53124/color_16_360.png",
+      "path": "vehicles\\포르쉐\\Cayenne\\colors\\10_알가르브 블루 메탈릭.png"
+    },
+    {
+      "name": "크레용",
+      "code": "C21",
+      "swatch": "#c7c7bf",
+      "image_url": "https://autoimg.danawa.com/photo/4506/53124/color_21_360.png",
+      "path": "vehicles\\포르쉐\\Cayenne\\colors\\11_크레용.png"
+    }
+  ],
+  "gallery": [
+    {
+      "name": "카이엔 S E-하이브리드 블랙 에디션",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4506&Tab=image&No=139053",
+      "image_url": "https://autoimg.danawa.com/gallery/4506/20250711_4506 (1).jpg",
+      "path": "vehicles\\포르쉐\\Cayenne\\gallery\\01_카이엔 S E-하이브리드 블랙 에디션.jpg"
+    },
+    {
+      "name": "카이엔 S E-하이브리드 블랙 에디션",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4506&Tab=image&No=139054",
+      "image_url": "https://autoimg.danawa.com/gallery/4506/20250711_4506 (3).jpg",
+      "path": "vehicles\\포르쉐\\Cayenne\\gallery\\02_카이엔 S E-하이브리드 블랙 에디션.jpg"
+    },
+    {
+      "name": "카이엔 S E-하이브리드 블랙 에디션",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4506&Tab=image&No=139055",
+      "image_url": "https://autoimg.danawa.com/gallery/4506/20250711_4506 (4).jpg",
+      "path": "vehicles\\포르쉐\\Cayenne\\gallery\\03_카이엔 S E-하이브리드 블랙 에디션.jpg"
+    },
+    {
+      "name": "카이엔 S E-하이브리드 블랙 에디션",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4506&Tab=image&No=139056",
+      "image_url": "https://autoimg.danawa.com/gallery/4506/20250711_4506 (2).jpg",
+      "path": "vehicles\\포르쉐\\Cayenne\\gallery\\04_카이엔 S E-하이브리드 블랙 에디션.jpg"
+    }
+  ]
+}

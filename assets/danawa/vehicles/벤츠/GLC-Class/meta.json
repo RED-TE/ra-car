@@ -1,0 +1,37 @@
+{
+  "brand": "벤츠",
+  "brand_id": "349",
+  "model_id": "4373",
+  "name": "GLC-Class",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4373",
+  "photo_code": "4373/53424",
+  "default_image_url": "https://autoimg.danawa.com/photo/4373/model_360.png",
+  "default_image_path": "vehicles\\벤츠\\GLC-Class\\model_360.png",
+  "colors": [],
+  "gallery": [
+    {
+      "name": "AMG GLC53 4MATIC+ 쿠페",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4373&Tab=image&No=143286",
+      "image_url": "https://autoimg.danawa.com/gallery/4373/20260225_4373 (1).jpg",
+      "path": "vehicles\\벤츠\\GLC-Class\\gallery\\01_AMG GLC53 4MATIC+ 쿠페.jpg"
+    },
+    {
+      "name": "AMG GLC53 4MATIC+",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4373&Tab=image&No=143287",
+      "image_url": "https://autoimg.danawa.com/gallery/4373/20260225_4373 (2).jpg",
+      "path": "vehicles\\벤츠\\GLC-Class\\gallery\\02_AMG GLC53 4MATIC+.jpg"
+    },
+    {
+      "name": "AMG GLC53 4MATIC+",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4373&Tab=image&No=143288",
+      "image_url": "https://autoimg.danawa.com/gallery/4373/20260225_4373 (3).jpg",
+      "path": "vehicles\\벤츠\\GLC-Class\\gallery\\03_AMG GLC53 4MATIC+.jpg"
+    },
+    {
+      "name": "AMG GLC53 4MATIC+",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4373&Tab=image&No=143289",
+      "image_url": "https://autoimg.danawa.com/gallery/4373/20260225_4373 (4).jpg",
+      "path": "vehicles\\벤츠\\GLC-Class\\gallery\\04_AMG GLC53 4MATIC+.jpg"
+    }
+  ]
+}

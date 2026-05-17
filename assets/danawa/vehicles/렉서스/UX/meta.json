@@ -1,0 +1,115 @@
+{
+  "brand": "렉서스",
+  "brand_id": "486",
+  "model_id": "3688",
+  "name": "UX",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3688",
+  "photo_code": "3688/53601",
+  "default_image_url": "https://autoimg.danawa.com/photo/3688/model_360.png",
+  "default_image_path": "vehicles\\렉서스\\UX\\model_360.png",
+  "colors": [
+    {
+      "name": "Sonic Copper",
+      "code": "C24",
+      "swatch": "#cb7662",
+      "image_url": "https://autoimg.danawa.com/photo/3688/53601/color_24_360.png",
+      "path": "vehicles\\렉서스\\UX\\colors\\01_Sonic Copper.png"
+    },
+    {
+      "name": "Madder Red",
+      "code": "C18",
+      "swatch": "#cd1a1d",
+      "image_url": "https://autoimg.danawa.com/photo/3688/53601/color_18_360.png",
+      "path": "vehicles\\렉서스\\UX\\colors\\02_Madder Red.png"
+    },
+    {
+      "name": "Sonic Quartz",
+      "code": "C13",
+      "swatch": "#eeeeee",
+      "image_url": "https://autoimg.danawa.com/photo/3688/53601/color_13_360.png",
+      "path": "vehicles\\렉서스\\UX\\colors\\03_Sonic Quartz.png"
+    },
+    {
+      "name": "Sonic Titanium",
+      "code": "C14",
+      "swatch": "#c2c1bc",
+      "image_url": "https://autoimg.danawa.com/photo/3688/53601/color_14_360.png",
+      "path": "vehicles\\렉서스\\UX\\colors\\04_Sonic Titanium.png"
+    },
+    {
+      "name": "Sonic Iridium",
+      "code": "C23",
+      "swatch": "#9f9fa7",
+      "image_url": "https://autoimg.danawa.com/photo/3688/53601/color_23_360.png",
+      "path": "vehicles\\렉서스\\UX\\colors\\05_Sonic Iridium.png"
+    },
+    {
+      "name": "Graphite Black Glass Flake",
+      "code": "C16",
+      "swatch": "#252525",
+      "image_url": "https://autoimg.danawa.com/photo/3688/53601/color_16_360.png",
+      "path": "vehicles\\렉서스\\UX\\colors\\06_Graphite Black Glass Flake.png"
+    },
+    {
+      "name": "Sonic Chome",
+      "code": "C19",
+      "swatch": "#1e1f21",
+      "image_url": "https://autoimg.danawa.com/photo/3688/53601/color_19_360.png",
+      "path": "vehicles\\렉서스\\UX\\colors\\07_Sonic Chome.png"
+    },
+    {
+      "name": "Terrane Khaki Mica Metallic",
+      "code": "C20",
+      "swatch": "#2f341e",
+      "image_url": "https://autoimg.danawa.com/photo/3688/53601/color_20_360.png",
+      "path": "vehicles\\렉서스\\UX\\colors\\08_Terrane Khaki Mica Metallic.png"
+    },
+    {
+      "name": "Celestial Blue Glass Flake",
+      "code": "C12",
+      "swatch": "#133572",
+      "image_url": "https://autoimg.danawa.com/photo/3688/53601/color_12_360.png",
+      "path": "vehicles\\렉서스\\UX\\colors\\09_Celestial Blue Glass Flake.png"
+    },
+    {
+      "name": "Heat Blue Contrast Layering(F-Sport전용)",
+      "code": "C21",
+      "swatch": "#112469",
+      "image_url": "https://autoimg.danawa.com/photo/3688/53601/color_21_360.png",
+      "path": "vehicles\\렉서스\\UX\\colors\\10_Heat Blue Contrast Layering(F-Sport전용).png"
+    },
+    {
+      "name": "White Nova Glass Fake(F-Sport전용)",
+      "code": "C22",
+      "swatch": "#e9eaef",
+      "image_url": "https://autoimg.danawa.com/photo/3688/53601/color_22_360.png",
+      "path": "vehicles\\렉서스\\UX\\colors\\11_White Nova Glass Fake(F-Sport전용).png"
+    }
+  ],
+  "gallery": [
+    {
+      "name": "2024ㅣ렉서스 UX 250h",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3688&Tab=image&No=115587",
+      "image_url": "https://autoimg.danawa.com/gallery/3688/20231121_3688 (1).jpg",
+      "path": "vehicles\\렉서스\\UX\\gallery\\01_2024ㅣ렉서스 UX 250h.jpg"
+    },
+    {
+      "name": "2024ㅣ렉서스 UX 250h",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3688&Tab=image&No=115588",
+      "image_url": "https://autoimg.danawa.com/gallery/3688/20231121_3688 (2).jpg",
+      "path": "vehicles\\렉서스\\UX\\gallery\\02_2024ㅣ렉서스 UX 250h.jpg"
+    },
+    {
+      "name": "2024ㅣ렉서스 UX 250h",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3688&Tab=image&No=115589",
+      "image_url": "https://autoimg.danawa.com/gallery/3688/20231121_3688 (3).jpg",
+      "path": "vehicles\\렉서스\\UX\\gallery\\03_2024ㅣ렉서스 UX 250h.jpg"
+    },
+    {
+      "name": "2024ㅣ렉서스 UX 250h",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3688&Tab=image&No=115590",
+      "image_url": "https://autoimg.danawa.com/gallery/3688/20231121_3688 (4).jpg",
+      "path": "vehicles\\렉서스\\UX\\gallery\\04_2024ㅣ렉서스 UX 250h.jpg"
+    }
+  ]
+}

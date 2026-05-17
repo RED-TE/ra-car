@@ -1,0 +1,94 @@
+{
+  "brand": "현대",
+  "brand_id": "303",
+  "model_id": "4435",
+  "name": "싼타페",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4435",
+  "photo_code": "4435/53355",
+  "default_image_url": "https://autoimg.danawa.com/photo/4435/model_360.png",
+  "default_image_path": "vehicles\\현대\\싼타페\\model_360.png",
+  "colors": [
+    {
+      "name": "크리미 화이트 펄(WW2)",
+      "code": "C08",
+      "swatch": "#eeedee",
+      "image_url": "https://autoimg.danawa.com/photo/4435/53355/color_08_360.png",
+      "path": "vehicles\\현대\\싼타페\\colors\\01_크리미 화이트 펄(WW2).png"
+    },
+    {
+      "name": "크리미 화이트 매트(WWM)",
+      "code": "C09",
+      "swatch": "#ecebeb",
+      "image_url": "https://autoimg.danawa.com/photo/4435/53355/color_09_360.png",
+      "path": "vehicles\\현대\\싼타페\\colors\\02_크리미 화이트 매트(WWM).png"
+    },
+    {
+      "name": "얼씨 브래스 메탈릭 매트(YBM)",
+      "code": "C10",
+      "swatch": "#83624f",
+      "image_url": "https://autoimg.danawa.com/photo/4435/53355/color_10_360.png",
+      "path": "vehicles\\현대\\싼타페\\colors\\03_얼씨 브래스 메탈릭 매트(YBM).png"
+    },
+    {
+      "name": "사이버 세이지 펄(RS2)",
+      "code": "C11",
+      "swatch": "#d5d6d1",
+      "image_url": "https://autoimg.danawa.com/photo/4435/53355/color_11_360.png",
+      "path": "vehicles\\현대\\싼타페\\colors\\04_사이버 세이지 펄(RS2).png"
+    },
+    {
+      "name": "페블 블루 펄(PB2)",
+      "code": "C12",
+      "swatch": "#707378",
+      "image_url": "https://autoimg.danawa.com/photo/4435/53355/color_12_360.png",
+      "path": "vehicles\\현대\\싼타페\\colors\\05_페블 블루 펄(PB2).png"
+    },
+    {
+      "name": "오카도 그린 펄(RN2)",
+      "code": "C13",
+      "swatch": "#8e855c",
+      "image_url": "https://autoimg.danawa.com/photo/4435/53355/color_13_360.png",
+      "path": "vehicles\\현대\\싼타페\\colors\\06_오카도 그린 펄(RN2).png"
+    },
+    {
+      "name": "에코트로닉 그레이 펄(PE2)",
+      "code": "C15",
+      "swatch": "#40403b",
+      "image_url": "https://autoimg.danawa.com/photo/4435/53355/color_15_360.png",
+      "path": "vehicles\\현대\\싼타페\\colors\\07_에코트로닉 그레이 펄(PE2).png"
+    },
+    {
+      "name": "어비스 블랙 펄(A2B)",
+      "code": "C16",
+      "swatch": "#1f1a17",
+      "image_url": "https://autoimg.danawa.com/photo/4435/53355/color_16_360.png",
+      "path": "vehicles\\현대\\싼타페\\colors\\08_어비스 블랙 펄(A2B).png"
+    }
+  ],
+  "gallery": [
+    {
+      "name": "2026ㅣ디 올 뉴 싼타페 블랙 익스테리어",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4435&Tab=image&No=139601",
+      "image_url": "https://autoimg.danawa.com/gallery/4435/20250807_4435 (1).jpg",
+      "path": "vehicles\\현대\\싼타페\\gallery\\01_2026ㅣ디 올 뉴 싼타페 블랙 익스테리어.jpg"
+    },
+    {
+      "name": "디 올 뉴 싼타페 하이브리드",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4435&Tab=image&No=132928",
+      "image_url": "https://autoimg.danawa.com/gallery/4435/20241211_4435 (1).jpg",
+      "path": "vehicles\\현대\\싼타페\\gallery\\02_디 올 뉴 싼타페 하이브리드.jpg"
+    },
+    {
+      "name": "디 올 뉴 싼타페 하이브리드",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4435&Tab=image&No=132929",
+      "image_url": "https://autoimg.danawa.com/gallery/4435/20241211_4435 (2).jpg",
+      "path": "vehicles\\현대\\싼타페\\gallery\\03_디 올 뉴 싼타페 하이브리드.jpg"
+    },
+    {
+      "name": "디 올 뉴 싼타페 하이브리드",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4435&Tab=image&No=132930",
+      "image_url": "https://autoimg.danawa.com/gallery/4435/20241211_4435 (3).jpg",
+      "path": "vehicles\\현대\\싼타페\\gallery\\04_디 올 뉴 싼타페 하이브리드.jpg"
+    }
+  ]
+}

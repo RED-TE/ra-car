@@ -1,0 +1,150 @@
+{
+  "brand": "포르쉐",
+  "brand_id": "381",
+  "model_id": "3336",
+  "name": "718 Boxster",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3336",
+  "photo_code": "3336/52761",
+  "default_image_url": "https://autoimg.danawa.com/photo/3336/model_360.png",
+  "default_image_path": "vehicles\\포르쉐\\718 Boxster\\model_360.png",
+  "colors": [
+    {
+      "name": "화이트",
+      "code": "C11",
+      "swatch": "#efefef",
+      "image_url": "https://autoimg.danawa.com/photo/3336/52761/color_11_360.png",
+      "path": "vehicles\\포르쉐\\718 Boxster\\colors\\01_화이트.png"
+    },
+    {
+      "name": "블랙",
+      "code": "C12",
+      "swatch": "#000000",
+      "image_url": "https://autoimg.danawa.com/photo/3336/52761/color_12_360.png",
+      "path": "vehicles\\포르쉐\\718 Boxster\\colors\\02_블랙.png"
+    },
+    {
+      "name": "가드 레드",
+      "code": "C13",
+      "swatch": "#cc0033",
+      "image_url": "https://autoimg.danawa.com/photo/3336/52761/color_13_360.png",
+      "path": "vehicles\\포르쉐\\718 Boxster\\colors\\03_가드 레드.png"
+    },
+    {
+      "name": "레이싱 옐로",
+      "code": "C14",
+      "swatch": "#ffcc00",
+      "image_url": "https://autoimg.danawa.com/photo/3336/52761/color_14_360.png",
+      "path": "vehicles\\포르쉐\\718 Boxster\\colors\\04_레이싱 옐로.png"
+    },
+    {
+      "name": "제트 블랙 메탈릭",
+      "code": "C15",
+      "swatch": "#000000",
+      "image_url": "https://autoimg.danawa.com/photo/3336/52761/color_15_360.png",
+      "path": "vehicles\\포르쉐\\718 Boxster\\colors\\05_제트 블랙 메탈릭.png"
+    },
+    {
+      "name": "바나듐 그레이 메탈릭",
+      "code": "C16",
+      "swatch": "#2e2f36",
+      "image_url": "https://autoimg.danawa.com/photo/3336/52761/color_16_360.png",
+      "path": "vehicles\\포르쉐\\718 Boxster\\colors\\06_바나듐 그레이 메탈릭.png"
+    },
+    {
+      "name": "GT 실버 메탈릭",
+      "code": "C17",
+      "swatch": "#cccccc",
+      "image_url": "https://autoimg.danawa.com/photo/3336/52761/color_17_360.png",
+      "path": "vehicles\\포르쉐\\718 Boxster\\colors\\07_GT 실버 메탈릭.png"
+    },
+    {
+      "name": "아게이트 그레이 메탈릭",
+      "code": "C18",
+      "swatch": "#333333",
+      "image_url": "https://autoimg.danawa.com/photo/3336/52761/color_18_360.png",
+      "path": "vehicles\\포르쉐\\718 Boxster\\colors\\08_아게이트 그레이 메탈릭.png"
+    },
+    {
+      "name": "젠션 블루 메탈릭",
+      "code": "C19",
+      "swatch": "#00194b",
+      "image_url": "https://autoimg.danawa.com/photo/3336/52761/color_19_360.png",
+      "path": "vehicles\\포르쉐\\718 Boxster\\colors\\09_젠션 블루 메탈릭.png"
+    },
+    {
+      "name": "어벤추린 그린 메탈릭",
+      "code": "C20",
+      "swatch": "#252927",
+      "image_url": "https://autoimg.danawa.com/photo/3336/52761/color_20_360.png",
+      "path": "vehicles\\포르쉐\\718 Boxster\\colors\\10_어벤추린 그린 메탈릭.png"
+    },
+    {
+      "name": "아이스 그레이 메탈릭",
+      "code": "C21",
+      "swatch": "#dfe2e9",
+      "image_url": "https://autoimg.danawa.com/photo/3336/52761/color_21_360.png",
+      "path": "vehicles\\포르쉐\\718 Boxster\\colors\\11_아이스 그레이 메탈릭.png"
+    },
+    {
+      "name": "카민 레드",
+      "code": "C22",
+      "swatch": "#990033",
+      "image_url": "https://autoimg.danawa.com/photo/3336/52761/color_22_360.png",
+      "path": "vehicles\\포르쉐\\718 Boxster\\colors\\12_카민 레드.png"
+    },
+    {
+      "name": "아크틱 그레이",
+      "code": "C23",
+      "swatch": "#6a6c70",
+      "image_url": "https://autoimg.danawa.com/photo/3336/52761/color_23_360.png",
+      "path": "vehicles\\포르쉐\\718 Boxster\\colors\\13_아크틱 그레이.png"
+    },
+    {
+      "name": "루비 스타 네오",
+      "code": "C24",
+      "swatch": "#aa1059",
+      "image_url": "https://autoimg.danawa.com/photo/3336/52761/color_24_360.png",
+      "path": "vehicles\\포르쉐\\718 Boxster\\colors\\14_루비 스타 네오.png"
+    },
+    {
+      "name": "샤크 블루",
+      "code": "C25",
+      "swatch": "#006dd1",
+      "image_url": "https://autoimg.danawa.com/photo/3336/52761/color_25_360.png",
+      "path": "vehicles\\포르쉐\\718 Boxster\\colors\\15_샤크 블루.png"
+    },
+    {
+      "name": "크레용",
+      "code": "C26",
+      "swatch": "#c7c7bf",
+      "image_url": "https://autoimg.danawa.com/photo/3336/52761/color_26_360.png",
+      "path": "vehicles\\포르쉐\\718 Boxster\\colors\\16_크레용.png"
+    }
+  ],
+  "gallery": [
+    {
+      "name": "포르쉐 718 박스터 GTS",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3336&Tab=image&No=97185",
+      "image_url": "https://autoimg.danawa.com/gallery/3336/20220804_3336 (1).jpg",
+      "path": "vehicles\\포르쉐\\718 Boxster\\gallery\\01_포르쉐 718 박스터 GTS.jpg"
+    },
+    {
+      "name": "포르쉐 718 박스터 GTS",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3336&Tab=image&No=97186",
+      "image_url": "https://autoimg.danawa.com/gallery/3336/20220804_3336 (2).jpg",
+      "path": "vehicles\\포르쉐\\718 Boxster\\gallery\\02_포르쉐 718 박스터 GTS.jpg"
+    },
+    {
+      "name": "포르쉐 718 박스터 GTS",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3336&Tab=image&No=97187",
+      "image_url": "https://autoimg.danawa.com/gallery/3336/20220804_3336 (3).jpg",
+      "path": "vehicles\\포르쉐\\718 Boxster\\gallery\\03_포르쉐 718 박스터 GTS.jpg"
+    },
+    {
+      "name": "포르쉐 718 박스터 GTS",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3336&Tab=image&No=97188",
+      "image_url": "https://autoimg.danawa.com/gallery/3336/20220804_3336 (4).jpg",
+      "path": "vehicles\\포르쉐\\718 Boxster\\gallery\\04_포르쉐 718 박스터 GTS.jpg"
+    }
+  ]
+}

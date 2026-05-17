@@ -1,0 +1,94 @@
+{
+  "brand": "현대",
+  "brand_id": "303",
+  "model_id": "4510",
+  "name": "코나 일렉트릭",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4510",
+  "photo_code": "4510/53270",
+  "default_image_url": "https://autoimg.danawa.com/photo/4510/model_360.png",
+  "default_image_path": "vehicles\\현대\\코나 일렉트릭\\model_360.png",
+  "colors": [
+    {
+      "name": "어비스 블랙 펄(A2B)",
+      "code": "C11",
+      "swatch": "#1c1d1b",
+      "image_url": "https://autoimg.danawa.com/photo/4510/53270/color_11_360.png",
+      "path": "vehicles\\현대\\코나 일렉트릭\\colors\\01_어비스 블랙 펄(A2B).png"
+    },
+    {
+      "name": "아틀라스 화이트(SAW)",
+      "code": "C12",
+      "swatch": "#e9ebeb",
+      "image_url": "https://autoimg.danawa.com/photo/4510/53270/color_12_360.png",
+      "path": "vehicles\\현대\\코나 일렉트릭\\colors\\02_아틀라스 화이트(SAW).png"
+    },
+    {
+      "name": "사이버 그레이 메탈릭(C5G)",
+      "code": "C13",
+      "swatch": "#a7adae",
+      "image_url": "https://autoimg.danawa.com/photo/4510/53270/color_13_360.png",
+      "path": "vehicles\\현대\\코나 일렉트릭\\colors\\03_사이버 그레이 메탈릭(C5G).png"
+    },
+    {
+      "name": "에코트로닉 그레이 펄(PE2)",
+      "code": "C14",
+      "swatch": "#444649",
+      "image_url": "https://autoimg.danawa.com/photo/4510/53270/color_14_360.png",
+      "path": "vehicles\\현대\\코나 일렉트릭\\colors\\04_에코트로닉 그레이 펄(PE2).png"
+    },
+    {
+      "name": "얼티메이트 레드 메탈릭(R2P)",
+      "code": "C15",
+      "swatch": "#962a27",
+      "image_url": "https://autoimg.danawa.com/photo/4510/53270/color_15_360.png",
+      "path": "vehicles\\현대\\코나 일렉트릭\\colors\\05_얼티메이트 레드 메탈릭(R2P).png"
+    },
+    {
+      "name": "네오테릭 옐로우(YYY)",
+      "code": "C16",
+      "swatch": "#b9ca32",
+      "image_url": "https://autoimg.danawa.com/photo/4510/53270/color_16_360.png",
+      "path": "vehicles\\현대\\코나 일렉트릭\\colors\\06_네오테릭 옐로우(YYY).png"
+    },
+    {
+      "name": "미라지 그린(RRR)",
+      "code": "C17",
+      "swatch": "#6e848a",
+      "image_url": "https://autoimg.danawa.com/photo/4510/53270/color_17_360.png",
+      "path": "vehicles\\현대\\코나 일렉트릭\\colors\\07_미라지 그린(RRR).png"
+    },
+    {
+      "name": "메타블루 펄(PM2)",
+      "code": "C18",
+      "swatch": "#6f89b7",
+      "image_url": "https://autoimg.danawa.com/photo/4510/53270/color_18_360.png",
+      "path": "vehicles\\현대\\코나 일렉트릭\\colors\\08_메타블루 펄(PM2).png"
+    }
+  ],
+  "gallery": [
+    {
+      "name": "2025ㅣ디 올 뉴 코나 일렉트릭",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4510&Tab=image&No=137869",
+      "image_url": "https://autoimg.danawa.com/gallery/4510/20250513_4510 (1).jpg",
+      "path": "vehicles\\현대\\코나 일렉트릭\\gallery\\01_2025ㅣ디 올 뉴 코나 일렉트릭.jpg"
+    },
+    {
+      "name": "2025ㅣ디 올 뉴 코나 일렉트릭",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4510&Tab=image&No=137870",
+      "image_url": "https://autoimg.danawa.com/gallery/4510/20250513_4510 (2).jpg",
+      "path": "vehicles\\현대\\코나 일렉트릭\\gallery\\02_2025ㅣ디 올 뉴 코나 일렉트릭.jpg"
+    },
+    {
+      "name": "디 올 뉴 코나 일렉트릭",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4510&Tab=image&No=122857",
+      "image_url": "https://autoimg.danawa.com/gallery/4510/20240510_4510 (1).jpg",
+      "path": "vehicles\\현대\\코나 일렉트릭\\gallery\\03_디 올 뉴 코나 일렉트릭.jpg"
+    },
+    {
+      "name": "디 올 뉴 코나 일렉트릭",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4510&Tab=image&No=122858",
+      "image_url": "https://autoimg.danawa.com/gallery/4510/20240510_4510 (2).jpg",
+      "path": "vehicles\\현대\\코나 일렉트릭\\gallery\\04_디 올 뉴 코나 일렉트릭.jpg"
+    }
+  ]
+}

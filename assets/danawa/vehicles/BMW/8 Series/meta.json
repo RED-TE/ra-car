@@ -1,0 +1,37 @@
+{
+  "brand": "BMW",
+  "brand_id": "362",
+  "model_id": "4171",
+  "name": "8 Series",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4171",
+  "photo_code": "4171/53551",
+  "default_image_url": "https://autoimg.danawa.com/photo/4171/model_360.png",
+  "default_image_path": "vehicles\\BMW\\8 Series\\model_360.png",
+  "colors": [],
+  "gallery": [
+    {
+      "name": "2022 l M850i xDrive 쿠페",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4171&Tab=image&No=100116",
+      "image_url": "https://autoimg.danawa.com/gallery/4171/20221014_4171 (1).jpg",
+      "path": "vehicles\\BMW\\8 Series\\gallery\\01_2022 l M850i xDrive 쿠페.jpg"
+    },
+    {
+      "name": "2022 l M850i xDrive 쿠페",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4171&Tab=image&No=100117",
+      "image_url": "https://autoimg.danawa.com/gallery/4171/20221014_4171 (2).jpg",
+      "path": "vehicles\\BMW\\8 Series\\gallery\\02_2022 l M850i xDrive 쿠페.jpg"
+    },
+    {
+      "name": "2022 l M850i xDrive 쿠페",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4171&Tab=image&No=100118",
+      "image_url": "https://autoimg.danawa.com/gallery/4171/20221014_4171 (3).jpg",
+      "path": "vehicles\\BMW\\8 Series\\gallery\\03_2022 l M850i xDrive 쿠페.jpg"
+    },
+    {
+      "name": "2022 l M850i xDrive 쿠페",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4171&Tab=image&No=100119",
+      "image_url": "https://autoimg.danawa.com/gallery/4171/20221014_4171 (4).jpg",
+      "path": "vehicles\\BMW\\8 Series\\gallery\\04_2022 l M850i xDrive 쿠페.jpg"
+    }
+  ]
+}

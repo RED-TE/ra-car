@@ -1,0 +1,80 @@
+{
+  "brand": "BMW",
+  "brand_id": "362",
+  "model_id": "4192",
+  "name": "X7",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4192",
+  "photo_code": "4192/53511",
+  "default_image_url": "https://autoimg.danawa.com/photo/4192/53511/color_13_360.png",
+  "default_image_path": "vehicles\\BMW\\X7\\model_360.png",
+  "colors": [
+    {
+      "name": "Mineral White Metallic (A96)",
+      "code": "C11",
+      "swatch": "#eaeaea",
+      "image_url": "https://autoimg.danawa.com/photo/4192/53511/color_11_360.png",
+      "path": "vehicles\\BMW\\X7\\colors\\01_Mineral White Metallic (A96).png"
+    },
+    {
+      "name": "Black Sapphire Metallic (475)",
+      "code": "C12",
+      "swatch": "#111111",
+      "image_url": "https://autoimg.danawa.com/photo/4192/53511/color_12_360.png",
+      "path": "vehicles\\BMW\\X7\\colors\\02_Black Sapphire Metallic (475).png"
+    },
+    {
+      "name": "Skyscraper Grey Metallic (C4W)",
+      "code": "C13",
+      "swatch": "#808883",
+      "image_url": "https://autoimg.danawa.com/photo/4192/53511/color_13_360.png",
+      "path": "vehicles\\BMW\\X7\\colors\\03_Skyscraper Grey Metallic (C4W).png"
+    },
+    {
+      "name": "Manhattan Metallic (C3D)",
+      "code": "C14",
+      "swatch": "#494539",
+      "image_url": "https://autoimg.danawa.com/photo/4192/53511/color_14_360.png",
+      "path": "vehicles\\BMW\\X7\\colors\\04_Manhattan Metallic (C3D).png"
+    },
+    {
+      "name": "Blue Ridge Mountain Metallic (C35)",
+      "code": "C15",
+      "swatch": "#56686a",
+      "image_url": "https://autoimg.danawa.com/photo/4192/53511/color_15_360.png",
+      "path": "vehicles\\BMW\\X7\\colors\\05_Blue Ridge Mountain Metallic (C35).png"
+    },
+    {
+      "name": "M Brooklyn Grey Metallic (C4P)",
+      "code": "C16",
+      "swatch": "#858e8f",
+      "image_url": "https://autoimg.danawa.com/photo/4192/53511/color_16_360.png",
+      "path": "vehicles\\BMW\\X7\\colors\\06_M Brooklyn Grey Metallic (C4P).png"
+    }
+  ],
+  "gallery": [
+    {
+      "name": "2023 l X7 xDrive40i 퍼스트 에디션",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4192&Tab=image&No=105970",
+      "image_url": "https://autoimg.danawa.com/gallery/4192/20230228_4192 (1).jpg",
+      "path": "vehicles\\BMW\\X7\\gallery\\01_2023 l X7 xDrive40i 퍼스트 에디션.jpg"
+    },
+    {
+      "name": "2023 l X7 xDrive40i 퍼스트 에디션",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4192&Tab=image&No=105971",
+      "image_url": "https://autoimg.danawa.com/gallery/4192/20230228_4192 (2).jpg",
+      "path": "vehicles\\BMW\\X7\\gallery\\02_2023 l X7 xDrive40i 퍼스트 에디션.jpg"
+    },
+    {
+      "name": "2023 l X7 xDrive40i 퍼스트 에디션",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4192&Tab=image&No=105972",
+      "image_url": "https://autoimg.danawa.com/gallery/4192/20230228_4192 (3).jpg",
+      "path": "vehicles\\BMW\\X7\\gallery\\03_2023 l X7 xDrive40i 퍼스트 에디션.jpg"
+    },
+    {
+      "name": "2023 l X7 xDrive40i 퍼스트 에디션",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4192&Tab=image&No=105973",
+      "image_url": "https://autoimg.danawa.com/gallery/4192/20230228_4192 (4).jpg",
+      "path": "vehicles\\BMW\\X7\\gallery\\04_2023 l X7 xDrive40i 퍼스트 에디션.jpg"
+    }
+  ]
+}

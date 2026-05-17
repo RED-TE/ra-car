@@ -1,0 +1,37 @@
+{
+  "brand": "벤츠",
+  "brand_id": "349",
+  "model_id": "4507",
+  "name": "GLS-Class",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4507",
+  "photo_code": "4507/53523",
+  "default_image_url": "https://autoimg.danawa.com/photo/4507/model_360.png",
+  "default_image_path": "vehicles\\벤츠\\GLS-Class\\model_360.png",
+  "colors": [],
+  "gallery": [
+    {
+      "name": "AMG GLS63 4MATIC+ 마누팍투어 아틱 실버 에디션",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4507&Tab=image&No=138406",
+      "image_url": "https://autoimg.danawa.com/gallery/4507/20250604_4507 (1).jpg",
+      "path": "vehicles\\벤츠\\GLS-Class\\gallery\\01_AMG GLS63 4MATIC+ 마누팍투어 아틱 실버 에디션.jpg"
+    },
+    {
+      "name": "AMG GLS63 4MATIC+ 마누팍투어 아틱 실버 에디션",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4507&Tab=image&No=138407",
+      "image_url": "https://autoimg.danawa.com/gallery/4507/20250604_4507 (2).jpg",
+      "path": "vehicles\\벤츠\\GLS-Class\\gallery\\02_AMG GLS63 4MATIC+ 마누팍투어 아틱 실버 에디션.jpg"
+    },
+    {
+      "name": "AMG GLS63 4MATIC+ 마누팍투어 아틱 실버 에디션",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4507&Tab=image&No=138408",
+      "image_url": "https://autoimg.danawa.com/gallery/4507/20250604_4507 (3).jpg",
+      "path": "vehicles\\벤츠\\GLS-Class\\gallery\\03_AMG GLS63 4MATIC+ 마누팍투어 아틱 실버 에디션.jpg"
+    },
+    {
+      "name": "AMG GLS63 4MATIC+ 마누팍투어 아틱 실버 에디션",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4507&Tab=image&No=138409",
+      "image_url": "https://autoimg.danawa.com/gallery/4507/20250604_4507 (4).jpg",
+      "path": "vehicles\\벤츠\\GLS-Class\\gallery\\04_AMG GLS63 4MATIC+ 마누팍투어 아틱 실버 에디션.jpg"
+    }
+  ]
+}

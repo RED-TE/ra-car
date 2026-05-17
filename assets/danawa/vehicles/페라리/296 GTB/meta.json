@@ -1,0 +1,37 @@
+{
+  "brand": "페라리",
+  "brand_id": "436",
+  "model_id": "4079",
+  "name": "296 GTB",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4079",
+  "photo_code": "4079/49497",
+  "default_image_url": "https://autoimg.danawa.com/photo/4079/model_360.png",
+  "default_image_path": "vehicles\\페라리\\296 GTB\\model_360.png",
+  "colors": [],
+  "gallery": [
+    {
+      "name": "2022 l 296 GTB",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4079&Tab=image&No=85303",
+      "image_url": "https://autoimg.danawa.com/gallery/4079/20210625 (1).jpg",
+      "path": "vehicles\\페라리\\296 GTB\\gallery\\01_2022 l 296 GTB.jpg"
+    },
+    {
+      "name": "2022 l 296 GTB",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4079&Tab=image&No=85304",
+      "image_url": "https://autoimg.danawa.com/gallery/4079/20210625 (2).jpg",
+      "path": "vehicles\\페라리\\296 GTB\\gallery\\02_2022 l 296 GTB.jpg"
+    },
+    {
+      "name": "2022 l 296 GTB",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4079&Tab=image&No=85305",
+      "image_url": "https://autoimg.danawa.com/gallery/4079/20210625 (3).jpg",
+      "path": "vehicles\\페라리\\296 GTB\\gallery\\03_2022 l 296 GTB.jpg"
+    },
+    {
+      "name": "2022 l 296 GTB",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4079&Tab=image&No=85306",
+      "image_url": "https://autoimg.danawa.com/gallery/4079/20210625 (4).jpg",
+      "path": "vehicles\\페라리\\296 GTB\\gallery\\04_2022 l 296 GTB.jpg"
+    }
+  ]
+}

@@ -1,0 +1,59 @@
+{
+  "brand": "렉서스",
+  "brand_id": "486",
+  "model_id": "4635",
+  "name": "LM",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4635",
+  "photo_code": "4635/53477",
+  "default_image_url": "https://autoimg.danawa.com/photo/4635/model_360.png",
+  "default_image_path": "vehicles\\렉서스\\LM\\model_360.png",
+  "colors": [
+    {
+      "name": "SONIC TITANIUM",
+      "code": "C11",
+      "swatch": "#92918f",
+      "image_url": "https://autoimg.danawa.com/photo/4635/53477/color_11_360.png",
+      "path": "vehicles\\렉서스\\LM\\colors\\01_SONIC TITANIUM.png"
+    },
+    {
+      "name": "SONIC QUARTZ",
+      "code": "C12",
+      "swatch": "#d2d5da",
+      "image_url": "https://autoimg.danawa.com/photo/4635/53477/color_12_360.png",
+      "path": "vehicles\\렉서스\\LM\\colors\\02_SONIC QUARTZ.png"
+    },
+    {
+      "name": "GRAPHITE BLACK GLASS FLAKE",
+      "code": "C13",
+      "swatch": "#232428",
+      "image_url": "https://autoimg.danawa.com/photo/4635/53477/color_13_360.png",
+      "path": "vehicles\\렉서스\\LM\\colors\\03_GRAPHITE BLACK GLASS FLAKE.png"
+    }
+  ],
+  "gallery": [
+    {
+      "name": "The All New LM",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4635&Tab=image&No=127418",
+      "image_url": "https://autoimg.danawa.com/gallery/4635/20240729_4635 (1).jpg",
+      "path": "vehicles\\렉서스\\LM\\gallery\\01_The All New LM.jpg"
+    },
+    {
+      "name": "The All New LM",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4635&Tab=image&No=127419",
+      "image_url": "https://autoimg.danawa.com/gallery/4635/20240729_4635 (2).jpg",
+      "path": "vehicles\\렉서스\\LM\\gallery\\02_The All New LM.jpg"
+    },
+    {
+      "name": "The All New LM",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4635&Tab=image&No=127420",
+      "image_url": "https://autoimg.danawa.com/gallery/4635/20240729_4635 (3).jpg",
+      "path": "vehicles\\렉서스\\LM\\gallery\\03_The All New LM.jpg"
+    },
+    {
+      "name": "The All New LM",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4635&Tab=image&No=127421",
+      "image_url": "https://autoimg.danawa.com/gallery/4635/20240729_4635 (4).jpg",
+      "path": "vehicles\\렉서스\\LM\\gallery\\04_The All New LM.jpg"
+    }
+  ]
+}

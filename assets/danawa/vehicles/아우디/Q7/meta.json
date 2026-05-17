@@ -1,0 +1,122 @@
+{
+  "brand": "아우디",
+  "brand_id": "371",
+  "model_id": "4698",
+  "name": "Q7",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4698",
+  "photo_code": "4698/53572",
+  "default_image_url": "https://autoimg.danawa.com/photo/4698/model_360.png",
+  "default_image_path": "vehicles\\아우디\\Q7\\model_360.png",
+  "colors": [
+    {
+      "name": "Waitomo Blue Metallic",
+      "code": "C11",
+      "swatch": "#151f34",
+      "image_url": "https://autoimg.danawa.com/photo/4698/53572/color_11_360.png",
+      "path": "vehicles\\아우디\\Q7\\colors\\01_Waitomo Blue Metallic.png"
+    },
+    {
+      "name": "Satellite Silver Metallic",
+      "code": "C12",
+      "swatch": "#d3dddd",
+      "image_url": "https://autoimg.danawa.com/photo/4698/53572/color_12_360.png",
+      "path": "vehicles\\아우디\\Q7\\colors\\02_Satellite Silver Metallic.png"
+    },
+    {
+      "name": "Glacier White Metallic",
+      "code": "C13",
+      "swatch": "#e5e9ea",
+      "image_url": "https://autoimg.danawa.com/photo/4698/53572/color_13_360.png",
+      "path": "vehicles\\아우디\\Q7\\colors\\03_Glacier White Metallic.png"
+    },
+    {
+      "name": "Mythos Black Metallic",
+      "code": "C14",
+      "swatch": "#252525",
+      "image_url": "https://autoimg.danawa.com/photo/4698/53572/color_14_360.png",
+      "path": "vehicles\\아우디\\Q7\\colors\\04_Mythos Black Metallic.png"
+    },
+    {
+      "name": "Carrara White",
+      "code": "C15",
+      "swatch": "#dbdcd4",
+      "image_url": "https://autoimg.danawa.com/photo/4698/53572/color_15_360.png",
+      "path": "vehicles\\아우디\\Q7\\colors\\05_Carrara White.png"
+    },
+    {
+      "name": "Samurai Gray Metallic",
+      "code": "C16",
+      "swatch": "#505250",
+      "image_url": "https://autoimg.danawa.com/photo/4698/53572/color_16_360.png",
+      "path": "vehicles\\아우디\\Q7\\colors\\06_Samurai Gray Metallic.png"
+    },
+    {
+      "name": "Tamarind Brown Metallic",
+      "code": "C17",
+      "swatch": "#1e1a19",
+      "image_url": "https://autoimg.danawa.com/photo/4698/53572/color_17_360.png",
+      "path": "vehicles\\아우디\\Q7\\colors\\07_Tamarind Brown Metallic.png"
+    },
+    {
+      "name": "Vicugna Beige Metallic",
+      "code": "C18",
+      "swatch": "#bfbcb1",
+      "image_url": "https://autoimg.danawa.com/photo/4698/53572/color_18_360.png",
+      "path": "vehicles\\아우디\\Q7\\colors\\08_Vicugna Beige Metallic.png"
+    },
+    {
+      "name": "Chili Red Metallic",
+      "code": "C19",
+      "swatch": "#890b20",
+      "image_url": "https://autoimg.danawa.com/photo/4698/53572/color_19_360.png",
+      "path": "vehicles\\아우디\\Q7\\colors\\09_Chili Red Metallic.png"
+    },
+    {
+      "name": "Daytona Gray Pearl",
+      "code": "C20",
+      "swatch": "#5d5f65",
+      "image_url": "https://autoimg.danawa.com/photo/4698/53572/color_20_360.png",
+      "path": "vehicles\\아우디\\Q7\\colors\\10_Daytona Gray Pearl.png"
+    },
+    {
+      "name": "Ascari Blue Metallic",
+      "code": "C21",
+      "swatch": "#2659a6",
+      "image_url": "https://autoimg.danawa.com/photo/4698/53572/color_21_360.png",
+      "path": "vehicles\\아우디\\Q7\\colors\\11_Ascari Blue Metallic.png"
+    },
+    {
+      "name": "Sakhir Gold Metallic",
+      "code": "C22",
+      "swatch": "#bca988",
+      "image_url": "https://autoimg.danawa.com/photo/4698/53572/color_22_360.png",
+      "path": "vehicles\\아우디\\Q7\\colors\\12_Sakhir Gold Metallic.png"
+    }
+  ],
+  "gallery": [
+    {
+      "name": "더 뉴 아우디 Q7",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4698&Tab=image&No=133554",
+      "image_url": "https://autoimg.danawa.com/gallery/4698/20241218_4698 (1).jpg",
+      "path": "vehicles\\아우디\\Q7\\gallery\\01_더 뉴 아우디 Q7.jpg"
+    },
+    {
+      "name": "더 뉴 아우디 Q7",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4698&Tab=image&No=133555",
+      "image_url": "https://autoimg.danawa.com/gallery/4698/20241218_4698 (2).jpg",
+      "path": "vehicles\\아우디\\Q7\\gallery\\02_더 뉴 아우디 Q7.jpg"
+    },
+    {
+      "name": "더 뉴 아우디 SQ7",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4698&Tab=image&No=133556",
+      "image_url": "https://autoimg.danawa.com/gallery/4698/20241218_4698 (3).jpg",
+      "path": "vehicles\\아우디\\Q7\\gallery\\03_더 뉴 아우디 SQ7.jpg"
+    },
+    {
+      "name": "더 뉴 아우디 SQ7",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4698&Tab=image&No=133557",
+      "image_url": "https://autoimg.danawa.com/gallery/4698/20241218_4698 (4).jpg",
+      "path": "vehicles\\아우디\\Q7\\gallery\\04_더 뉴 아우디 SQ7.jpg"
+    }
+  ]
+}

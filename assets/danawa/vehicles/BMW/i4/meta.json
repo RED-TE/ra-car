@@ -1,0 +1,37 @@
+{
+  "brand": "BMW",
+  "brand_id": "362",
+  "model_id": "4639",
+  "name": "i4",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4639",
+  "photo_code": "4639/53647",
+  "default_image_url": "https://autoimg.danawa.com/photo/4639/model_360.png",
+  "default_image_path": "vehicles\\BMW\\i4\\model_360.png",
+  "colors": [],
+  "gallery": [
+    {
+      "name": "i4 M50 xDrive",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4639&Tab=image&No=137926",
+      "image_url": "https://autoimg.danawa.com/gallery/4639/20250515_4639 (1).jpg",
+      "path": "vehicles\\BMW\\i4\\gallery\\01_i4 M50 xDrive.jpg"
+    },
+    {
+      "name": "i4 M50 xDrive",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4639&Tab=image&No=137927",
+      "image_url": "https://autoimg.danawa.com/gallery/4639/20250515_4639 (2).jpg",
+      "path": "vehicles\\BMW\\i4\\gallery\\02_i4 M50 xDrive.jpg"
+    },
+    {
+      "name": "i4 M50 xDrive",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4639&Tab=image&No=137928",
+      "image_url": "https://autoimg.danawa.com/gallery/4639/20250515_4639 (3).jpg",
+      "path": "vehicles\\BMW\\i4\\gallery\\03_i4 M50 xDrive.jpg"
+    },
+    {
+      "name": "i4 M50 xDrive",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4639&Tab=image&No=137929",
+      "image_url": "https://autoimg.danawa.com/gallery/4639/20250515_4639 (4).jpg",
+      "path": "vehicles\\BMW\\i4\\gallery\\04_i4 M50 xDrive.jpg"
+    }
+  ]
+}

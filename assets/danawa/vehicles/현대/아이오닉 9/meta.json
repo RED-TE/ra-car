@@ -1,0 +1,87 @@
+{
+  "brand": "현대",
+  "brand_id": "303",
+  "model_id": "4088",
+  "name": "아이오닉 9",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4088",
+  "photo_code": "4088/53701",
+  "default_image_url": "https://autoimg.danawa.com/photo/4088/model_360.png",
+  "default_image_path": "vehicles\\현대\\아이오닉 9\\model_360.png",
+  "colors": [
+    {
+      "name": "셀라돈 그레이 매트(Y2T)-캘리그래피 전용",
+      "code": "C08",
+      "swatch": "#b8c2c2",
+      "image_url": "https://autoimg.danawa.com/photo/4088/53701/color_08_360.png",
+      "path": "vehicles\\현대\\아이오닉 9\\colors\\01_셀라돈 그레이 매트(Y2T)-캘리그래피 전용.png"
+    },
+    {
+      "name": "녹턴 그레이 매트(T9M)",
+      "code": "C09",
+      "swatch": "#374247",
+      "image_url": "https://autoimg.danawa.com/photo/4088/53701/color_09_360.png",
+      "path": "vehicles\\현대\\아이오닉 9\\colors\\02_녹턴 그레이 매트(T9M).png"
+    },
+    {
+      "name": "세레니티 화이트 펄(W6H)",
+      "code": "C10",
+      "swatch": "#e1e3e3",
+      "image_url": "https://autoimg.danawa.com/photo/4088/53701/color_10_360.png",
+      "path": "vehicles\\현대\\아이오닉 9\\colors\\03_세레니티 화이트 펄(W6H).png"
+    },
+    {
+      "name": "어비스 블랙 펄(A2B)",
+      "code": "C11",
+      "swatch": "#181718",
+      "image_url": "https://autoimg.danawa.com/photo/4088/53701/color_11_360.png",
+      "path": "vehicles\\현대\\아이오닉 9\\colors\\04_어비스 블랙 펄(A2B).png"
+    },
+    {
+      "name": "녹턴 그레이 메탈릭(T2G)",
+      "code": "C12",
+      "swatch": "#13191d",
+      "image_url": "https://autoimg.danawa.com/photo/4088/53701/color_12_360.png",
+      "path": "vehicles\\현대\\아이오닉 9\\colors\\05_녹턴 그레이 메탈릭(T2G).png"
+    },
+    {
+      "name": "셀라돈 그레이 메탈릭(Y2G)",
+      "code": "C15",
+      "swatch": "#7c8b8b",
+      "image_url": "https://autoimg.danawa.com/photo/4088/53701/color_15_360.png",
+      "path": "vehicles\\현대\\아이오닉 9\\colors\\06_셀라돈 그레이 메탈릭(Y2G).png"
+    },
+    {
+      "name": "이오노스피어 그린 펄(NH5)",
+      "code": "C16",
+      "swatch": "#264835",
+      "image_url": "https://autoimg.danawa.com/photo/4088/53701/color_16_360.png",
+      "path": "vehicles\\현대\\아이오닉 9\\colors\\07_이오노스피어 그린 펄(NH5).png"
+    }
+  ],
+  "gallery": [
+    {
+      "name": "2027ㅣ아이오닉 9 블랙잉크",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4088&Tab=image&No=143446",
+      "image_url": "https://autoimg.danawa.com/gallery/4088/20260305_4088 (1).jpg",
+      "path": "vehicles\\현대\\아이오닉 9\\gallery\\01_2027ㅣ아이오닉 9 블랙잉크.jpg"
+    },
+    {
+      "name": "2027ㅣ아이오닉 9 블랙잉크",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4088&Tab=image&No=143447",
+      "image_url": "https://autoimg.danawa.com/gallery/4088/20260305_4088 (2).jpg",
+      "path": "vehicles\\현대\\아이오닉 9\\gallery\\02_2027ㅣ아이오닉 9 블랙잉크.jpg"
+    },
+    {
+      "name": "2027ㅣ아이오닉 9 내장",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4088&Tab=image&No=143448",
+      "image_url": "https://autoimg.danawa.com/gallery/4088/20260305_4088 (3).jpg",
+      "path": "vehicles\\현대\\아이오닉 9\\gallery\\03_2027ㅣ아이오닉 9 내장.jpg"
+    },
+    {
+      "name": "아이오닉 9",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4088&Tab=image&No=135114",
+      "image_url": "https://autoimg.danawa.com/gallery/4088/20250213_4088 (1).jpg",
+      "path": "vehicles\\현대\\아이오닉 9\\gallery\\04_아이오닉 9.jpg"
+    }
+  ]
+}

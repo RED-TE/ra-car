@@ -1,0 +1,37 @@
+{
+  "brand": "페라리",
+  "brand_id": "436",
+  "model_id": "4788",
+  "name": "Amalfi Spyder",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4788",
+  "photo_code": "4788/",
+  "default_image_url": "https://autoimg.danawa.com/photo/4788/model_360.png",
+  "default_image_path": "vehicles\\페라리\\Amalfi Spyder\\model_360.png",
+  "colors": [],
+  "gallery": [
+    {
+      "name": "아말피 스파이더",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4788&Tab=image&No=143697",
+      "image_url": "https://autoimg.danawa.com/gallery/4788/20260316_4788 (1).jpg",
+      "path": "vehicles\\페라리\\Amalfi Spyder\\gallery\\01_아말피 스파이더.jpg"
+    },
+    {
+      "name": "아말피 스파이더",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4788&Tab=image&No=143698",
+      "image_url": "https://autoimg.danawa.com/gallery/4788/20260316_4788 (2).jpg",
+      "path": "vehicles\\페라리\\Amalfi Spyder\\gallery\\02_아말피 스파이더.jpg"
+    },
+    {
+      "name": "아말피 스파이더",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4788&Tab=image&No=143699",
+      "image_url": "https://autoimg.danawa.com/gallery/4788/20260316_4788 (3).jpg",
+      "path": "vehicles\\페라리\\Amalfi Spyder\\gallery\\03_아말피 스파이더.jpg"
+    },
+    {
+      "name": "아말피 스파이더",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4788&Tab=image&No=143700",
+      "image_url": "https://autoimg.danawa.com/gallery/4788/20260316_4788 (4).jpg",
+      "path": "vehicles\\페라리\\Amalfi Spyder\\gallery\\04_아말피 스파이더.jpg"
+    }
+  ]
+}

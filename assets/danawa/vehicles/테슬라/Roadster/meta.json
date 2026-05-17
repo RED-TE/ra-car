@@ -1,0 +1,37 @@
+{
+  "brand": "테슬라",
+  "brand_id": "611",
+  "model_id": "4193",
+  "name": "Roadster",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4193",
+  "photo_code": "4193/49690",
+  "default_image_url": "https://autoimg.danawa.com/photo/4193/model_360.png",
+  "default_image_path": "vehicles\\테슬라\\Roadster\\model_360.png",
+  "colors": [],
+  "gallery": [
+    {
+      "name": "2022 l 로드스터",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4193&Tab=image&No=92000",
+      "image_url": "https://autoimg.danawa.com/gallery/4193/20220419_4193 (1).jpg",
+      "path": "vehicles\\테슬라\\Roadster\\gallery\\01_2022 l 로드스터.jpg"
+    },
+    {
+      "name": "2022 l 로드스터",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4193&Tab=image&No=92001",
+      "image_url": "https://autoimg.danawa.com/gallery/4193/20220419_4193 (2).jpg",
+      "path": "vehicles\\테슬라\\Roadster\\gallery\\02_2022 l 로드스터.jpg"
+    },
+    {
+      "name": "2022 l 로드스터",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4193&Tab=image&No=92002",
+      "image_url": "https://autoimg.danawa.com/gallery/4193/20220419_4193 (3).jpg",
+      "path": "vehicles\\테슬라\\Roadster\\gallery\\03_2022 l 로드스터.jpg"
+    },
+    {
+      "name": "2022 l 로드스터",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4193&Tab=image&No=92003",
+      "image_url": "https://autoimg.danawa.com/gallery/4193/20220419_4193 (4).jpg",
+      "path": "vehicles\\테슬라\\Roadster\\gallery\\04_2022 l 로드스터.jpg"
+    }
+  ]
+}

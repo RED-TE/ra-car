@@ -1,0 +1,37 @@
+{
+  "brand": "테슬라",
+  "brand_id": "611",
+  "model_id": "3825",
+  "name": "Cybertruck",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3825",
+  "photo_code": "3825/44980",
+  "default_image_url": "https://autoimg.danawa.com/photo/3825/model_360.png",
+  "default_image_path": "vehicles\\테슬라\\Cybertruck\\model_360.png",
+  "colors": [],
+  "gallery": [
+    {
+      "name": "사이버트럭",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3825&Tab=image&No=143266",
+      "image_url": "https://autoimg.danawa.com/gallery/3825/20260225_3825 (1).jpg",
+      "path": "vehicles\\테슬라\\Cybertruck\\gallery\\01_사이버트럭.jpg"
+    },
+    {
+      "name": "사이버트럭",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3825&Tab=image&No=143267",
+      "image_url": "https://autoimg.danawa.com/gallery/3825/20260225_3825 (2).jpg",
+      "path": "vehicles\\테슬라\\Cybertruck\\gallery\\02_사이버트럭.jpg"
+    },
+    {
+      "name": "사이버트럭",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3825&Tab=image&No=143268",
+      "image_url": "https://autoimg.danawa.com/gallery/3825/20260225_3825 (3).jpg",
+      "path": "vehicles\\테슬라\\Cybertruck\\gallery\\03_사이버트럭.jpg"
+    },
+    {
+      "name": "사이버트럭",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3825&Tab=image&No=143269",
+      "image_url": "https://autoimg.danawa.com/gallery/3825/20260225_3825 (4).jpg",
+      "path": "vehicles\\테슬라\\Cybertruck\\gallery\\04_사이버트럭.jpg"
+    }
+  ]
+}

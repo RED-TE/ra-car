@@ -1,0 +1,80 @@
+{
+  "brand": "KGM",
+  "brand_id": "326",
+  "model_id": "4666",
+  "name": "무쏘 EV",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4666",
+  "photo_code": "4666/53071",
+  "default_image_url": "https://autoimg.danawa.com/photo/4666/model_360.png",
+  "default_image_path": "vehicles\\KGM\\무쏘 EV\\model_360.png",
+  "colors": [
+    {
+      "name": "그랜드 화이트(WAA)",
+      "code": "C11",
+      "swatch": "#f7f7f7",
+      "image_url": "https://autoimg.danawa.com/photo/4666/53071/color_11_360.png",
+      "path": "vehicles\\KGM\\무쏘 EV\\colors\\01_그랜드 화이트(WAA).png"
+    },
+    {
+      "name": "블레이징 골드(DAA)",
+      "code": "C12",
+      "swatch": "#e1c368",
+      "image_url": "https://autoimg.danawa.com/photo/4666/53071/color_12_360.png",
+      "path": "vehicles\\KGM\\무쏘 EV\\colors\\02_블레이징 골드(DAA).png"
+    },
+    {
+      "name": "아마조니아 그린(GAM)",
+      "code": "C13",
+      "swatch": "#293325",
+      "image_url": "https://autoimg.danawa.com/photo/4666/53071/color_13_360.png",
+      "path": "vehicles\\KGM\\무쏘 EV\\colors\\03_아마조니아 그린(GAM).png"
+    },
+    {
+      "name": "울트라 마린(BBE)",
+      "code": "C14",
+      "swatch": "#002e72",
+      "image_url": "https://autoimg.danawa.com/photo/4666/53071/color_14_360.png",
+      "path": "vehicles\\KGM\\무쏘 EV\\colors\\04_울트라 마린(BBE).png"
+    },
+    {
+      "name": "마블 그레이(ACM)",
+      "code": "C15",
+      "swatch": "#111822",
+      "image_url": "https://autoimg.danawa.com/photo/4666/53071/color_15_360.png",
+      "path": "vehicles\\KGM\\무쏘 EV\\colors\\05_마블 그레이(ACM).png"
+    },
+    {
+      "name": "스페이스 블랙(LAK)",
+      "code": "C16",
+      "swatch": "#161616",
+      "image_url": "https://autoimg.danawa.com/photo/4666/53071/color_16_360.png",
+      "path": "vehicles\\KGM\\무쏘 EV\\colors\\06_스페이스 블랙(LAK).png"
+    }
+  ],
+  "gallery": [
+    {
+      "name": "무쏘 EV 블랙 엣지 2WD",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4666&Tab=image&No=140933",
+      "image_url": "https://autoimg.danawa.com/gallery/4666/20250929_4666 (1).jpg",
+      "path": "vehicles\\KGM\\무쏘 EV\\gallery\\01_무쏘 EV 블랙 엣지 2WD.jpg"
+    },
+    {
+      "name": "무쏘 EV 블랙 엣지 2WD",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4666&Tab=image&No=140934",
+      "image_url": "https://autoimg.danawa.com/gallery/4666/20250929_4666 (2).jpg",
+      "path": "vehicles\\KGM\\무쏘 EV\\gallery\\02_무쏘 EV 블랙 엣지 2WD.jpg"
+    },
+    {
+      "name": "무쏘 EV 블랙 엣지 2WD",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4666&Tab=image&No=140935",
+      "image_url": "https://autoimg.danawa.com/gallery/4666/20250929_4666 (3).jpg",
+      "path": "vehicles\\KGM\\무쏘 EV\\gallery\\03_무쏘 EV 블랙 엣지 2WD.jpg"
+    },
+    {
+      "name": "무쏘 EV 블랙 엣지 2WD",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4666&Tab=image&No=140936",
+      "image_url": "https://autoimg.danawa.com/gallery/4666/20250929_4666 (4).jpg",
+      "path": "vehicles\\KGM\\무쏘 EV\\gallery\\04_무쏘 EV 블랙 엣지 2WD.jpg"
+    }
+  ]
+}

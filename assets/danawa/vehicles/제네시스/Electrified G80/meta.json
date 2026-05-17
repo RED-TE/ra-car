@@ -1,0 +1,94 @@
+{
+  "brand": "제네시스",
+  "brand_id": "304",
+  "model_id": "4660",
+  "name": "Electrified G80",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4660",
+  "photo_code": "4660/53700",
+  "default_image_url": "https://autoimg.danawa.com/photo/4660/model_360.png",
+  "default_image_path": "vehicles\\제네시스\\Electrified G80\\model_360.png",
+  "colors": [
+    {
+      "name": "마티라 블루(NEB)-유료",
+      "code": "C09",
+      "swatch": "#003952",
+      "image_url": "https://autoimg.danawa.com/photo/4660/53700/color_09_360.png",
+      "path": "vehicles\\제네시스\\Electrified G80\\colors\\01_마티라 블루(NEB)-유료.png"
+    },
+    {
+      "name": "마칼루 그레이(MPE)-유료(무광)",
+      "code": "C10",
+      "swatch": "#2e343b",
+      "image_url": "https://autoimg.danawa.com/photo/4660/53700/color_10_360.png",
+      "path": "vehicles\\제네시스\\Electrified G80\\colors\\02_마칼루 그레이(MPE)-유료(무광).png"
+    },
+    {
+      "name": "우유니 화이트(UYH)",
+      "code": "C11",
+      "swatch": "#f7f7f7",
+      "image_url": "https://autoimg.danawa.com/photo/4660/53700/color_11_360.png",
+      "path": "vehicles\\제네시스\\Electrified G80\\colors\\03_우유니 화이트(UYH).png"
+    },
+    {
+      "name": "세빌 실버(SSS)",
+      "code": "C19",
+      "swatch": "#858585",
+      "image_url": "https://autoimg.danawa.com/photo/4660/53700/color_19_360.png",
+      "path": "vehicles\\제네시스\\Electrified G80\\colors\\04_세빌 실버(SSS).png"
+    },
+    {
+      "name": "마칼루 그레이(NCM)",
+      "code": "C13",
+      "swatch": "#252a31",
+      "image_url": "https://autoimg.danawa.com/photo/4660/53700/color_13_360.png",
+      "path": "vehicles\\제네시스\\Electrified G80\\colors\\05_마칼루 그레이(NCM).png"
+    },
+    {
+      "name": "비크 블랙(PH3)",
+      "code": "C14",
+      "swatch": "#071013",
+      "image_url": "https://autoimg.danawa.com/photo/4660/53700/color_14_360.png",
+      "path": "vehicles\\제네시스\\Electrified G80\\colors\\06_비크 블랙(PH3).png"
+    },
+    {
+      "name": "태즈먼 블루(URA)",
+      "code": "C16",
+      "swatch": "#003047",
+      "image_url": "https://autoimg.danawa.com/photo/4660/53700/color_16_360.png",
+      "path": "vehicles\\제네시스\\Electrified G80\\colors\\07_태즈먼 블루(URA).png"
+    },
+    {
+      "name": "카프리 블루(NRB)",
+      "code": "C17",
+      "swatch": "#001536",
+      "image_url": "https://autoimg.danawa.com/photo/4660/53700/color_17_360.png",
+      "path": "vehicles\\제네시스\\Electrified G80\\colors\\08_카프리 블루(NRB).png"
+    }
+  ],
+  "gallery": [
+    {
+      "name": "Electrified G80 F L",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4660&Tab=image&No=130639",
+      "image_url": "https://autoimg.danawa.com/gallery/4660/20241028_4660 (9).jpg",
+      "path": "vehicles\\제네시스\\Electrified G80\\gallery\\01_Electrified G80 F L.jpg"
+    },
+    {
+      "name": "Electrified G80 F L",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4660&Tab=image&No=130640",
+      "image_url": "https://autoimg.danawa.com/gallery/4660/20241028_4660 (8).jpg",
+      "path": "vehicles\\제네시스\\Electrified G80\\gallery\\02_Electrified G80 F L.jpg"
+    },
+    {
+      "name": "Electrified G80 F L",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4660&Tab=image&No=130641",
+      "image_url": "https://autoimg.danawa.com/gallery/4660/20241028_4660 (7).jpg",
+      "path": "vehicles\\제네시스\\Electrified G80\\gallery\\03_Electrified G80 F L.jpg"
+    },
+    {
+      "name": "Electrified G80 F L",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4660&Tab=image&No=130642",
+      "image_url": "https://autoimg.danawa.com/gallery/4660/20241028_4660 (6).jpg",
+      "path": "vehicles\\제네시스\\Electrified G80\\gallery\\04_Electrified G80 F L.jpg"
+    }
+  ]
+}

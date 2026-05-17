@@ -1,0 +1,396 @@
+{
+  "brand_id": "611",
+  "brand": "테슬라",
+  "source_url": "https://auto.danawa.com/auto/?Work=brand&Brand=611",
+  "logo_url": "https://autoimg.danawa.com/photo/brand/611_90.png",
+  "logo_path": "brands\\테슬라\\logo.png",
+  "models": [
+    {
+      "brand": "테슬라",
+      "brand_id": "611",
+      "model_id": "4610",
+      "name": "Model 3",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4610",
+      "photo_code": "4610/53634",
+      "default_image_url": "https://autoimg.danawa.com/photo/4610/53634/color_07_360.png",
+      "default_image_path": "vehicles\\테슬라\\Model 3\\model_360.png",
+      "colors": [
+        {
+          "name": "Pearl White Multi-Coat",
+          "code": "C11",
+          "swatch": "#f0f1f3",
+          "image_url": "https://autoimg.danawa.com/photo/4610/53634/color_11_360.png",
+          "path": "vehicles\\테슬라\\Model 3\\colors\\01_Pearl White Multi-Coat.png"
+        },
+        {
+          "name": "Diamond Black",
+          "code": "C10",
+          "swatch": "#161616",
+          "image_url": "https://autoimg.danawa.com/photo/4610/53634/color_10_360.png",
+          "path": "vehicles\\테슬라\\Model 3\\colors\\02_Diamond Black.png"
+        },
+        {
+          "name": "Marine Blue",
+          "code": "C09",
+          "swatch": "#082350",
+          "image_url": "https://autoimg.danawa.com/photo/4610/53634/color_09_360.png",
+          "path": "vehicles\\테슬라\\Model 3\\colors\\03_Marine Blue.png"
+        },
+        {
+          "name": "Stealth Grey",
+          "code": "C08",
+          "swatch": "#2a2930",
+          "image_url": "https://autoimg.danawa.com/photo/4610/53634/color_08_360.png",
+          "path": "vehicles\\테슬라\\Model 3\\colors\\04_Stealth Grey.png"
+        },
+        {
+          "name": "Ultra Red",
+          "code": "C07",
+          "swatch": "#ab0014",
+          "image_url": "https://autoimg.danawa.com/photo/4610/53634/color_07_360.png",
+          "path": "vehicles\\테슬라\\Model 3\\colors\\05_Ultra Red.png"
+        },
+        {
+          "name": "Quicksilver",
+          "code": "C06",
+          "swatch": "#ababab",
+          "image_url": "https://autoimg.danawa.com/photo/4610/53634/color_06_360.png",
+          "path": "vehicles\\테슬라\\Model 3\\colors\\06_Quicksilver.png"
+        }
+      ],
+      "gallery": [
+        {
+          "name": "모델 3",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4610&Tab=image&No=143233",
+          "image_url": "https://autoimg.danawa.com/gallery/4610/20260225_4610 (1).jpg",
+          "path": "vehicles\\테슬라\\Model 3\\gallery\\01_모델 3.jpg"
+        },
+        {
+          "name": "모델 3",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4610&Tab=image&No=143234",
+          "image_url": "https://autoimg.danawa.com/gallery/4610/20260225_4610 (2).jpg",
+          "path": "vehicles\\테슬라\\Model 3\\gallery\\02_모델 3.jpg"
+        },
+        {
+          "name": "모델 3",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4610&Tab=image&No=143235",
+          "image_url": "https://autoimg.danawa.com/gallery/4610/20260225_4610 (3).jpg",
+          "path": "vehicles\\테슬라\\Model 3\\gallery\\03_모델 3.jpg"
+        },
+        {
+          "name": "모델 3",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4610&Tab=image&No=143236",
+          "image_url": "https://autoimg.danawa.com/gallery/4610/20260225_4610 (4).jpg",
+          "path": "vehicles\\테슬라\\Model 3\\gallery\\04_모델 3.jpg"
+        }
+      ]
+    },
+    {
+      "brand": "테슬라",
+      "brand_id": "611",
+      "model_id": "4043",
+      "name": "Model S",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4043",
+      "photo_code": "4043/52949",
+      "default_image_url": "https://autoimg.danawa.com/photo/4043/model_360.png",
+      "default_image_path": "vehicles\\테슬라\\Model S\\model_360.png",
+      "colors": [
+        {
+          "name": "Stealth Grey",
+          "code": "C06",
+          "swatch": "#2a2930",
+          "image_url": "https://autoimg.danawa.com/photo/4043/52949/color_06_360.png",
+          "path": "vehicles\\테슬라\\Model S\\colors\\01_Stealth Grey.png"
+        },
+        {
+          "name": "Pearl White Multi-Coat",
+          "code": "C11",
+          "swatch": "#f0f1f3",
+          "image_url": "https://autoimg.danawa.com/photo/4043/52949/color_11_360.png",
+          "path": "vehicles\\테슬라\\Model S\\colors\\02_Pearl White Multi-Coat.png"
+        },
+        {
+          "name": "Diamond Black",
+          "code": "C10",
+          "swatch": "#161616",
+          "image_url": "https://autoimg.danawa.com/photo/4043/52949/color_10_360.png",
+          "path": "vehicles\\테슬라\\Model S\\colors\\03_Diamond Black.png"
+        },
+        {
+          "name": "Ultra Red",
+          "code": "C07",
+          "swatch": "#ab0014",
+          "image_url": "https://autoimg.danawa.com/photo/4043/52949/color_07_360.png",
+          "path": "vehicles\\테슬라\\Model S\\colors\\04_Ultra Red.png"
+        },
+        {
+          "name": "Frost Blue Metallic",
+          "code": "C08",
+          "swatch": "#49678b",
+          "image_url": "https://autoimg.danawa.com/photo/4043/52949/color_08_360.png",
+          "path": "vehicles\\테슬라\\Model S\\colors\\05_Frost Blue Metallic.png"
+        }
+      ],
+      "gallery": [
+        {
+          "name": "모델 S",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4043&Tab=image&No=141269",
+          "image_url": "https://autoimg.danawa.com/gallery/4043/20251027_4043 (1).jpg",
+          "path": "vehicles\\테슬라\\Model S\\gallery\\01_모델 S.jpg"
+        },
+        {
+          "name": "모델 S",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4043&Tab=image&No=141270",
+          "image_url": "https://autoimg.danawa.com/gallery/4043/20251027_4043 (2).jpg",
+          "path": "vehicles\\테슬라\\Model S\\gallery\\02_모델 S.jpg"
+        },
+        {
+          "name": "모델 S",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4043&Tab=image&No=141271",
+          "image_url": "https://autoimg.danawa.com/gallery/4043/20251027_4043 (3).jpg",
+          "path": "vehicles\\테슬라\\Model S\\gallery\\03_모델 S.jpg"
+        },
+        {
+          "name": "모델 S",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4043&Tab=image&No=138683",
+          "image_url": "https://autoimg.danawa.com/gallery/4043/20250617_4043 (1).jpg",
+          "path": "vehicles\\테슬라\\Model S\\gallery\\04_모델 S.jpg"
+        }
+      ]
+    },
+    {
+      "brand": "테슬라",
+      "brand_id": "611",
+      "model_id": "4193",
+      "name": "Roadster",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4193",
+      "photo_code": "4193/49690",
+      "default_image_url": "https://autoimg.danawa.com/photo/4193/model_360.png",
+      "default_image_path": "vehicles\\테슬라\\Roadster\\model_360.png",
+      "colors": [],
+      "gallery": [
+        {
+          "name": "2022 l 로드스터",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4193&Tab=image&No=92000",
+          "image_url": "https://autoimg.danawa.com/gallery/4193/20220419_4193 (1).jpg",
+          "path": "vehicles\\테슬라\\Roadster\\gallery\\01_2022 l 로드스터.jpg"
+        },
+        {
+          "name": "2022 l 로드스터",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4193&Tab=image&No=92001",
+          "image_url": "https://autoimg.danawa.com/gallery/4193/20220419_4193 (2).jpg",
+          "path": "vehicles\\테슬라\\Roadster\\gallery\\02_2022 l 로드스터.jpg"
+        },
+        {
+          "name": "2022 l 로드스터",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4193&Tab=image&No=92002",
+          "image_url": "https://autoimg.danawa.com/gallery/4193/20220419_4193 (3).jpg",
+          "path": "vehicles\\테슬라\\Roadster\\gallery\\03_2022 l 로드스터.jpg"
+        },
+        {
+          "name": "2022 l 로드스터",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4193&Tab=image&No=92003",
+          "image_url": "https://autoimg.danawa.com/gallery/4193/20220419_4193 (4).jpg",
+          "path": "vehicles\\테슬라\\Roadster\\gallery\\04_2022 l 로드스터.jpg"
+        }
+      ]
+    },
+    {
+      "brand": "테슬라",
+      "brand_id": "611",
+      "model_id": "4667",
+      "name": "Model Y",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4667",
+      "photo_code": "4667/53635",
+      "default_image_url": "https://autoimg.danawa.com/photo/4667/53635/color_07_360.png",
+      "default_image_path": "vehicles\\테슬라\\Model Y\\model_360.png",
+      "colors": [
+        {
+          "name": "Stealth Grey",
+          "code": "C11",
+          "swatch": "#2a2930",
+          "image_url": "https://autoimg.danawa.com/photo/4667/53635/color_11_360.png",
+          "path": "vehicles\\테슬라\\Model Y\\colors\\01_Stealth Grey.png"
+        },
+        {
+          "name": "Pearl White Multi-Coat",
+          "code": "C10",
+          "swatch": "#f0f1f3",
+          "image_url": "https://autoimg.danawa.com/photo/4667/53635/color_10_360.png",
+          "path": "vehicles\\테슬라\\Model Y\\colors\\02_Pearl White Multi-Coat.png"
+        },
+        {
+          "name": "Diamond Black",
+          "code": "C06",
+          "swatch": "#161616",
+          "image_url": "https://autoimg.danawa.com/photo/4667/53635/color_06_360.png",
+          "path": "vehicles\\테슬라\\Model Y\\colors\\03_Diamond Black.png"
+        },
+        {
+          "name": "Glacier Blue",
+          "code": "C09",
+          "swatch": "#486992",
+          "image_url": "https://autoimg.danawa.com/photo/4667/53635/color_09_360.png",
+          "path": "vehicles\\테슬라\\Model Y\\colors\\04_Glacier Blue.png"
+        },
+        {
+          "name": "Ultra Red",
+          "code": "C08",
+          "swatch": "#ab0014",
+          "image_url": "https://autoimg.danawa.com/photo/4667/53635/color_08_360.png",
+          "path": "vehicles\\테슬라\\Model Y\\colors\\05_Ultra Red.png"
+        },
+        {
+          "name": "Quicksilver",
+          "code": "C07",
+          "swatch": "#ababab",
+          "image_url": "https://autoimg.danawa.com/photo/4667/53635/color_07_360.png",
+          "path": "vehicles\\테슬라\\Model Y\\colors\\06_Quicksilver.png"
+        },
+        {
+          "name": "Cosmic Silver",
+          "code": "C05",
+          "swatch": "#b0ada8",
+          "image_url": "https://autoimg.danawa.com/photo/4667/53635/color_05_360.png",
+          "path": "vehicles\\테슬라\\Model Y\\colors\\07_Cosmic Silver.png"
+        }
+      ],
+      "gallery": [
+        {
+          "name": "모델 Y L",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4667&Tab=image&No=144842",
+          "image_url": "https://autoimg.danawa.com/gallery/4667/20260423_4667 (1).jpg",
+          "path": "vehicles\\테슬라\\Model Y\\gallery\\01_모델 Y L.jpg"
+        },
+        {
+          "name": "모델 Y L",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4667&Tab=image&No=144843",
+          "image_url": "https://autoimg.danawa.com/gallery/4667/20260423_4667 (2).jpg",
+          "path": "vehicles\\테슬라\\Model Y\\gallery\\02_모델 Y L.jpg"
+        },
+        {
+          "name": "모델 Y L",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4667&Tab=image&No=144844",
+          "image_url": "https://autoimg.danawa.com/gallery/4667/20260423_4667 (3).jpg",
+          "path": "vehicles\\테슬라\\Model Y\\gallery\\03_모델 Y L.jpg"
+        },
+        {
+          "name": "모델 Y L",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4667&Tab=image&No=144845",
+          "image_url": "https://autoimg.danawa.com/gallery/4667/20260423_4667 (4).jpg",
+          "path": "vehicles\\테슬라\\Model Y\\gallery\\04_모델 Y L.jpg"
+        }
+      ]
+    },
+    {
+      "brand": "테슬라",
+      "brand_id": "611",
+      "model_id": "4027",
+      "name": "Model X",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4027",
+      "photo_code": "4027/52950",
+      "default_image_url": "https://autoimg.danawa.com/photo/4027/52950/color_08_360.png",
+      "default_image_path": "vehicles\\테슬라\\Model X\\model_360.png",
+      "colors": [
+        {
+          "name": "Stealth Grey",
+          "code": "C06",
+          "swatch": "#2a2930",
+          "image_url": "https://autoimg.danawa.com/photo/4027/52950/color_06_360.png",
+          "path": "vehicles\\테슬라\\Model X\\colors\\01_Stealth Grey.png"
+        },
+        {
+          "name": "Pearl White Multi-Coat",
+          "code": "C11",
+          "swatch": "#f0f1f3",
+          "image_url": "https://autoimg.danawa.com/photo/4027/52950/color_11_360.png",
+          "path": "vehicles\\테슬라\\Model X\\colors\\02_Pearl White Multi-Coat.png"
+        },
+        {
+          "name": "Diamond Black",
+          "code": "C10",
+          "swatch": "#161616",
+          "image_url": "https://autoimg.danawa.com/photo/4027/52950/color_10_360.png",
+          "path": "vehicles\\테슬라\\Model X\\colors\\03_Diamond Black.png"
+        },
+        {
+          "name": "Ultra Red",
+          "code": "C07",
+          "swatch": "#ab0014",
+          "image_url": "https://autoimg.danawa.com/photo/4027/52950/color_07_360.png",
+          "path": "vehicles\\테슬라\\Model X\\colors\\04_Ultra Red.png"
+        },
+        {
+          "name": "Frost Blue Metallic",
+          "code": "C08",
+          "swatch": "#49678b",
+          "image_url": "https://autoimg.danawa.com/photo/4027/52950/color_08_360.png",
+          "path": "vehicles\\테슬라\\Model X\\colors\\05_Frost Blue Metallic.png"
+        }
+      ],
+      "gallery": [
+        {
+          "name": "모델 X",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4027&Tab=image&No=141272",
+          "image_url": "https://autoimg.danawa.com/gallery/4027/20251027_4027 (1).jpg",
+          "path": "vehicles\\테슬라\\Model X\\gallery\\01_모델 X.jpg"
+        },
+        {
+          "name": "모델 X",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4027&Tab=image&No=141273",
+          "image_url": "https://autoimg.danawa.com/gallery/4027/20251027_4027 (2).jpg",
+          "path": "vehicles\\테슬라\\Model X\\gallery\\02_모델 X.jpg"
+        },
+        {
+          "name": "모델 X",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4027&Tab=image&No=141274",
+          "image_url": "https://autoimg.danawa.com/gallery/4027/20251027_4027 (3).jpg",
+          "path": "vehicles\\테슬라\\Model X\\gallery\\03_모델 X.jpg"
+        },
+        {
+          "name": "모델 X",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4027&Tab=image&No=138711",
+          "image_url": "https://autoimg.danawa.com/gallery/4027/20250617_4027 (1).jpg",
+          "path": "vehicles\\테슬라\\Model X\\gallery\\04_모델 X.jpg"
+        }
+      ]
+    },
+    {
+      "brand": "테슬라",
+      "brand_id": "611",
+      "model_id": "3825",
+      "name": "Cybertruck",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3825",
+      "photo_code": "3825/44980",
+      "default_image_url": "https://autoimg.danawa.com/photo/3825/model_360.png",
+      "default_image_path": "vehicles\\테슬라\\Cybertruck\\model_360.png",
+      "colors": [],
+      "gallery": [
+        {
+          "name": "사이버트럭",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3825&Tab=image&No=143266",
+          "image_url": "https://autoimg.danawa.com/gallery/3825/20260225_3825 (1).jpg",
+          "path": "vehicles\\테슬라\\Cybertruck\\gallery\\01_사이버트럭.jpg"
+        },
+        {
+          "name": "사이버트럭",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3825&Tab=image&No=143267",
+          "image_url": "https://autoimg.danawa.com/gallery/3825/20260225_3825 (2).jpg",
+          "path": "vehicles\\테슬라\\Cybertruck\\gallery\\02_사이버트럭.jpg"
+        },
+        {
+          "name": "사이버트럭",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3825&Tab=image&No=143268",
+          "image_url": "https://autoimg.danawa.com/gallery/3825/20260225_3825 (3).jpg",
+          "path": "vehicles\\테슬라\\Cybertruck\\gallery\\03_사이버트럭.jpg"
+        },
+        {
+          "name": "사이버트럭",
+          "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3825&Tab=image&No=143269",
+          "image_url": "https://autoimg.danawa.com/gallery/3825/20260225_3825 (4).jpg",
+          "path": "vehicles\\테슬라\\Cybertruck\\gallery\\04_사이버트럭.jpg"
+        }
+      ]
+    }
+  ]
+}

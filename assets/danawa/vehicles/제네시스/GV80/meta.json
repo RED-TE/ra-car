@@ -1,0 +1,129 @@
+{
+  "brand": "제네시스",
+  "brand_id": "304",
+  "model_id": "4465",
+  "name": "GV80",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4465",
+  "photo_code": "4465/53406",
+  "default_image_url": "https://autoimg.danawa.com/photo/4465/53406/color_12_360.png",
+  "default_image_path": "vehicles\\제네시스\\GV80\\model_360.png",
+  "colors": [
+    {
+      "name": "마테호른 화이트(FT7)-무광",
+      "code": "C07",
+      "swatch": "#ebedf3",
+      "image_url": "https://autoimg.danawa.com/photo/4465/53406/color_07_360.png",
+      "path": "vehicles\\제네시스\\GV80\\colors\\01_마테호른 화이트(FT7)-무광.png"
+    },
+    {
+      "name": "마칼루 그레이(MPE)-무광",
+      "code": "C08",
+      "swatch": "#515151",
+      "image_url": "https://autoimg.danawa.com/photo/4465/53406/color_08_360.png",
+      "path": "vehicles\\제네시스\\GV80\\colors\\02_마칼루 그레이(MPE)-무광.png"
+    },
+    {
+      "name": "스토르 그린(MKG)-무광",
+      "code": "C09",
+      "swatch": "#43443a",
+      "image_url": "https://autoimg.danawa.com/photo/4465/53406/color_09_360.png",
+      "path": "vehicles\\제네시스\\GV80\\colors\\03_스토르 그린(MKG)-무광.png"
+    },
+    {
+      "name": "세레스 블루(MSA)-무광",
+      "code": "C10",
+      "swatch": "#3c4453",
+      "image_url": "https://autoimg.danawa.com/photo/4465/53406/color_10_360.png",
+      "path": "vehicles\\제네시스\\GV80\\colors\\04_세레스 블루(MSA)-무광.png"
+    },
+    {
+      "name": "우유니 화이트(UYH)",
+      "code": "C11",
+      "swatch": "#e8e8e8",
+      "image_url": "https://autoimg.danawa.com/photo/4465/53406/color_11_360.png",
+      "path": "vehicles\\제네시스\\GV80\\colors\\05_우유니 화이트(UYH).png"
+    },
+    {
+      "name": "세빌 실버(SSS)",
+      "code": "C12",
+      "swatch": "#808080",
+      "image_url": "https://autoimg.danawa.com/photo/4465/53406/color_12_360.png",
+      "path": "vehicles\\제네시스\\GV80\\colors\\06_세빌 실버(SSS).png"
+    },
+    {
+      "name": "마칼루 그레이(NCM)",
+      "code": "C13",
+      "swatch": "#424242",
+      "image_url": "https://autoimg.danawa.com/photo/4465/53406/color_13_360.png",
+      "path": "vehicles\\제네시스\\GV80\\colors\\07_마칼루 그레이(NCM).png"
+    },
+    {
+      "name": "비크 블랙(PH3)",
+      "code": "C14",
+      "swatch": "#1d1d1d",
+      "image_url": "https://autoimg.danawa.com/photo/4465/53406/color_14_360.png",
+      "path": "vehicles\\제네시스\\GV80\\colors\\08_비크 블랙(PH3).png"
+    },
+    {
+      "name": "스토르 그린(KGN)",
+      "code": "C15",
+      "swatch": "#3c3d34",
+      "image_url": "https://autoimg.danawa.com/photo/4465/53406/color_15_360.png",
+      "path": "vehicles\\제네시스\\GV80\\colors\\09_스토르 그린(KGN).png"
+    },
+    {
+      "name": "카프리 블루(NRB)",
+      "code": "C16",
+      "swatch": "#20283f",
+      "image_url": "https://autoimg.danawa.com/photo/4465/53406/color_16_360.png",
+      "path": "vehicles\\제네시스\\GV80\\colors\\10_카프리 블루(NRB).png"
+    },
+    {
+      "name": "마우나 레드(RJK)",
+      "code": "C17",
+      "swatch": "#7a1b27",
+      "image_url": "https://autoimg.danawa.com/photo/4465/53406/color_17_360.png",
+      "path": "vehicles\\제네시스\\GV80\\colors\\11_마우나 레드(RJK).png"
+    },
+    {
+      "name": "세레스 블루(ASA)",
+      "code": "C18",
+      "swatch": "#3c4453",
+      "image_url": "https://autoimg.danawa.com/photo/4465/53406/color_18_360.png",
+      "path": "vehicles\\제네시스\\GV80\\colors\\12_세레스 블루(ASA).png"
+    },
+    {
+      "name": "베링 블루(GBE)",
+      "code": "C19",
+      "swatch": "#596169",
+      "image_url": "https://autoimg.danawa.com/photo/4465/53406/color_19_360.png",
+      "path": "vehicles\\제네시스\\GV80\\colors\\13_베링 블루(GBE).png"
+    }
+  ],
+  "gallery": [
+    {
+      "name": "2026ㅣGV80, GV80 쿠페",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4465&Tab=image&No=140059",
+      "image_url": "https://autoimg.danawa.com/gallery/4465/20250910_4465 (3).jpg",
+      "path": "vehicles\\제네시스\\GV80\\gallery\\01_2026ㅣGV80, GV80 쿠페.jpg"
+    },
+    {
+      "name": "2026ㅣGV80",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4465&Tab=image&No=140060",
+      "image_url": "https://autoimg.danawa.com/gallery/4465/20250910_4465 (2).jpg",
+      "path": "vehicles\\제네시스\\GV80\\gallery\\02_2026ㅣGV80.jpg"
+    },
+    {
+      "name": "2026ㅣGV80",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4465&Tab=image&No=140061",
+      "image_url": "https://autoimg.danawa.com/gallery/4465/20250910_4465 (4).jpg",
+      "path": "vehicles\\제네시스\\GV80\\gallery\\03_2026ㅣGV80.jpg"
+    },
+    {
+      "name": "2026ㅣGV80 쿠페",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4465&Tab=image&No=140062",
+      "image_url": "https://autoimg.danawa.com/gallery/4465/20250910_4465 (1).jpg",
+      "path": "vehicles\\제네시스\\GV80\\gallery\\04_2026ㅣGV80 쿠페.jpg"
+    }
+  ]
+}

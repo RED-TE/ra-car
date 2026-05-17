@@ -1,0 +1,37 @@
+{
+  "brand": "벤츠",
+  "brand_id": "349",
+  "model_id": "4381",
+  "name": "EQS SUV",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4381",
+  "photo_code": "4381/53739",
+  "default_image_url": "https://autoimg.danawa.com/photo/4381/model_360.png",
+  "default_image_path": "vehicles\\벤츠\\EQS SUV\\model_360.png",
+  "colors": [],
+  "gallery": [
+    {
+      "name": "2023 l EQS450 4MATIC SUV",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4381&Tab=image&No=107959",
+      "image_url": "https://autoimg.danawa.com/gallery/4381/20230425_4381 (1).jpg",
+      "path": "vehicles\\벤츠\\EQS SUV\\gallery\\01_2023 l EQS450 4MATIC SUV.jpg"
+    },
+    {
+      "name": "2023 l EQS450 4MATIC SUV",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4381&Tab=image&No=107960",
+      "image_url": "https://autoimg.danawa.com/gallery/4381/20230425_4381 (2).jpg",
+      "path": "vehicles\\벤츠\\EQS SUV\\gallery\\02_2023 l EQS450 4MATIC SUV.jpg"
+    },
+    {
+      "name": "2023 l EQS450 4MATIC SUV",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4381&Tab=image&No=107961",
+      "image_url": "https://autoimg.danawa.com/gallery/4381/20230425_4381 (3).jpg",
+      "path": "vehicles\\벤츠\\EQS SUV\\gallery\\03_2023 l EQS450 4MATIC SUV.jpg"
+    },
+    {
+      "name": "2023 l EQS450 4MATIC SUV",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4381&Tab=image&No=107962",
+      "image_url": "https://autoimg.danawa.com/gallery/4381/20230425_4381 (4).jpg",
+      "path": "vehicles\\벤츠\\EQS SUV\\gallery\\04_2023 l EQS450 4MATIC SUV.jpg"
+    }
+  ]
+}

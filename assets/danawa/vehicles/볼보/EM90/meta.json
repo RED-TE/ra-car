@@ -1,0 +1,37 @@
+{
+  "brand": "볼보",
+  "brand_id": "459",
+  "model_id": "4588",
+  "name": "EM90",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4588",
+  "photo_code": "4588/",
+  "default_image_url": "https://autoimg.danawa.com/photo/4588/model_360.png",
+  "default_image_path": "vehicles\\볼보\\EM90\\model_360.png",
+  "colors": [],
+  "gallery": [
+    {
+      "name": "EM90",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4588&Tab=image&No=115056",
+      "image_url": "https://autoimg.danawa.com/gallery/4588/20231115_4588(1).jpg",
+      "path": "vehicles\\볼보\\EM90\\gallery\\01_EM90.jpg"
+    },
+    {
+      "name": "EM90",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4588&Tab=image&No=115057",
+      "image_url": "https://autoimg.danawa.com/gallery/4588/20231115_4588(2).jpg",
+      "path": "vehicles\\볼보\\EM90\\gallery\\02_EM90.jpg"
+    },
+    {
+      "name": "EM90",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4588&Tab=image&No=115058",
+      "image_url": "https://autoimg.danawa.com/gallery/4588/20231115_4588(3).jpg",
+      "path": "vehicles\\볼보\\EM90\\gallery\\03_EM90.jpg"
+    },
+    {
+      "name": "EM90",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4588&Tab=image&No=115059",
+      "image_url": "https://autoimg.danawa.com/gallery/4588/20231115_4588(4).jpg",
+      "path": "vehicles\\볼보\\EM90\\gallery\\04_EM90.jpg"
+    }
+  ]
+}

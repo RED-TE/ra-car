@@ -1,0 +1,37 @@
+{
+  "brand": "벤츠",
+  "brand_id": "349",
+  "model_id": "4718",
+  "name": "All New CLA-Class",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4718",
+  "photo_code": "4718/",
+  "default_image_url": "https://autoimg.danawa.com/photo/4718/model_360.png",
+  "default_image_path": "vehicles\\벤츠\\All New CLA-Class\\model_360.png",
+  "colors": [],
+  "gallery": [
+    {
+      "name": "CLA 패밀리",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4718&Tab=image&No=139218",
+      "image_url": "https://autoimg.danawa.com/gallery/4718/20250724_4718 (1).jpg",
+      "path": "vehicles\\벤츠\\All New CLA-Class\\gallery\\01_CLA 패밀리.jpg"
+    },
+    {
+      "name": "CLA 슈팅 브레이크",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4718&Tab=image&No=139219",
+      "image_url": "https://autoimg.danawa.com/gallery/4718/20250724_4718 (2).jpg",
+      "path": "vehicles\\벤츠\\All New CLA-Class\\gallery\\02_CLA 슈팅 브레이크.jpg"
+    },
+    {
+      "name": "CLA 슈팅 브레이크",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4718&Tab=image&No=139220",
+      "image_url": "https://autoimg.danawa.com/gallery/4718/20250724_4718 (3).jpg",
+      "path": "vehicles\\벤츠\\All New CLA-Class\\gallery\\03_CLA 슈팅 브레이크.jpg"
+    },
+    {
+      "name": "CLA 슈팅 브레이크",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4718&Tab=image&No=139221",
+      "image_url": "https://autoimg.danawa.com/gallery/4718/20250724_4718 (4).jpg",
+      "path": "vehicles\\벤츠\\All New CLA-Class\\gallery\\04_CLA 슈팅 브레이크.jpg"
+    }
+  ]
+}

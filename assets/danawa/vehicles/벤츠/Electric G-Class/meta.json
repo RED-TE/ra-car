@@ -1,0 +1,37 @@
+{
+  "brand": "벤츠",
+  "brand_id": "349",
+  "model_id": "4638",
+  "name": "Electric G-Class",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4638",
+  "photo_code": "4638/53615",
+  "default_image_url": "https://autoimg.danawa.com/photo/4638/model_360.png",
+  "default_image_path": "vehicles\\벤츠\\Electric G-Class\\model_360.png",
+  "colors": [],
+  "gallery": [
+    {
+      "name": "G580 with EQ 테크놀로지",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4638&Tab=image&No=132663",
+      "image_url": "https://autoimg.danawa.com/gallery/4638/20241121_4638 (1).jpg",
+      "path": "vehicles\\벤츠\\Electric G-Class\\gallery\\01_G580 with EQ 테크놀로지.jpg"
+    },
+    {
+      "name": "G580 with EQ 테크놀로지",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4638&Tab=image&No=132664",
+      "image_url": "https://autoimg.danawa.com/gallery/4638/20241121_4638 (2).jpg",
+      "path": "vehicles\\벤츠\\Electric G-Class\\gallery\\02_G580 with EQ 테크놀로지.jpg"
+    },
+    {
+      "name": "G580 with EQ 테크놀로지",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4638&Tab=image&No=132665",
+      "image_url": "https://autoimg.danawa.com/gallery/4638/20241121_4638 (3).jpg",
+      "path": "vehicles\\벤츠\\Electric G-Class\\gallery\\03_G580 with EQ 테크놀로지.jpg"
+    },
+    {
+      "name": "G580 with EQ 테크놀로지",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4638&Tab=image&No=132666",
+      "image_url": "https://autoimg.danawa.com/gallery/4638/20241121_4638 (4).jpg",
+      "path": "vehicles\\벤츠\\Electric G-Class\\gallery\\04_G580 with EQ 테크놀로지.jpg"
+    }
+  ]
+}

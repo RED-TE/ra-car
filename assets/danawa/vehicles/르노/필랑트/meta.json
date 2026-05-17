@@ -1,0 +1,73 @@
+{
+  "brand": "르노",
+  "brand_id": "321",
+  "model_id": "4772",
+  "name": "필랑트",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4772",
+  "photo_code": "4772/53621",
+  "default_image_url": "https://autoimg.danawa.com/photo/4772/53621/color_08_360.png",
+  "default_image_path": "vehicles\\르노\\필랑트\\model_360.png",
+  "colors": [
+    {
+      "name": "새틴 유니버스 화이트",
+      "code": "C08",
+      "swatch": "#e4e6e8",
+      "image_url": "https://autoimg.danawa.com/photo/4772/53621/color_08_360.png",
+      "path": "vehicles\\르노\\필랑트\\colors\\01_새틴 유니버스 화이트.png"
+    },
+    {
+      "name": "새틴 포레스트 블랙",
+      "code": "C09",
+      "swatch": "#1f2527",
+      "image_url": "https://autoimg.danawa.com/photo/4772/53621/color_09_360.png",
+      "path": "vehicles\\르노\\필랑트\\colors\\02_새틴 포레스트 블랙.png"
+    },
+    {
+      "name": "클라우드 펄",
+      "code": "C10",
+      "swatch": "#f2f3f4",
+      "image_url": "https://autoimg.danawa.com/photo/4772/53621/color_10_360.png",
+      "path": "vehicles\\르노\\필랑트\\colors\\03_클라우드 펄.png"
+    },
+    {
+      "name": "어반 그레이",
+      "code": "C11",
+      "swatch": "#707070",
+      "image_url": "https://autoimg.danawa.com/photo/4772/53621/color_11_360.png",
+      "path": "vehicles\\르노\\필랑트\\colors\\04_어반 그레이.png"
+    },
+    {
+      "name": "메탈릭 블랙",
+      "code": "C12",
+      "swatch": "#150f10",
+      "image_url": "https://autoimg.danawa.com/photo/4772/53621/color_12_360.png",
+      "path": "vehicles\\르노\\필랑트\\colors\\05_메탈릭 블랙.png"
+    }
+  ],
+  "gallery": [
+    {
+      "name": "필랑트",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4772&Tab=image&No=144955",
+      "image_url": "https://autoimg.danawa.com/gallery/4772/20260429_4772 (1).jpg",
+      "path": "vehicles\\르노\\필랑트\\gallery\\01_필랑트.jpg"
+    },
+    {
+      "name": "필랑트",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4772&Tab=image&No=144956",
+      "image_url": "https://autoimg.danawa.com/gallery/4772/20260429_4772 (2).jpg",
+      "path": "vehicles\\르노\\필랑트\\gallery\\02_필랑트.jpg"
+    },
+    {
+      "name": "필랑트",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4772&Tab=image&No=144957",
+      "image_url": "https://autoimg.danawa.com/gallery/4772/20260429_4772 (3).jpg",
+      "path": "vehicles\\르노\\필랑트\\gallery\\03_필랑트.jpg"
+    },
+    {
+      "name": "필랑트",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4772&Tab=image&No=144958",
+      "image_url": "https://autoimg.danawa.com/gallery/4772/20260429_4772 (4).jpg",
+      "path": "vehicles\\르노\\필랑트\\gallery\\04_필랑트.jpg"
+    }
+  ]
+}

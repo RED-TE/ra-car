@@ -1,0 +1,101 @@
+{
+  "brand": "제네시스",
+  "brand_id": "304",
+  "model_id": "4705",
+  "name": "Electrified GV70",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4705",
+  "photo_code": "4705/53716",
+  "default_image_url": "https://autoimg.danawa.com/photo/4705/model_360.png",
+  "default_image_path": "vehicles\\제네시스\\Electrified GV70\\model_360.png",
+  "colors": [
+    {
+      "name": "마테호른 화이트(FT7)-유료(무광)",
+      "code": "C07",
+      "swatch": "#f2f2f2",
+      "image_url": "https://autoimg.danawa.com/photo/4705/53716/color_07_360.png",
+      "path": "vehicles\\제네시스\\Electrified GV70\\colors\\01_마테호른 화이트(FT7)-유료(무광).png"
+    },
+    {
+      "name": "마칼루 그레이(MPE)-유료(무광)",
+      "code": "C08",
+      "swatch": "#2c3138",
+      "image_url": "https://autoimg.danawa.com/photo/4705/53716/color_08_360.png",
+      "path": "vehicles\\제네시스\\Electrified GV70\\colors\\02_마칼루 그레이(MPE)-유료(무광).png"
+    },
+    {
+      "name": "세레스 블루(MSA)-유료(무광)",
+      "code": "C10",
+      "swatch": "#384453",
+      "image_url": "https://autoimg.danawa.com/photo/4705/53716/color_10_360.png",
+      "path": "vehicles\\제네시스\\Electrified GV70\\colors\\03_세레스 블루(MSA)-유료(무광).png"
+    },
+    {
+      "name": "우유니 화이트(UYH)",
+      "code": "C11",
+      "swatch": "#f8f8f8",
+      "image_url": "https://autoimg.danawa.com/photo/4705/53716/color_11_360.png",
+      "path": "vehicles\\제네시스\\Electrified GV70\\colors\\04_우유니 화이트(UYH).png"
+    },
+    {
+      "name": "세빌 실버(SSS)",
+      "code": "C12",
+      "swatch": "#8a8a8a",
+      "image_url": "https://autoimg.danawa.com/photo/4705/53716/color_12_360.png",
+      "path": "vehicles\\제네시스\\Electrified GV70\\colors\\05_세빌 실버(SSS).png"
+    },
+    {
+      "name": "마칼루 그레이(NCM)",
+      "code": "C13",
+      "swatch": "#282e35",
+      "image_url": "https://autoimg.danawa.com/photo/4705/53716/color_13_360.png",
+      "path": "vehicles\\제네시스\\Electrified GV70\\colors\\06_마칼루 그레이(NCM).png"
+    },
+    {
+      "name": "비크 블랙(PH3)",
+      "code": "C14",
+      "swatch": "#161516",
+      "image_url": "https://autoimg.danawa.com/photo/4705/53716/color_14_360.png",
+      "path": "vehicles\\제네시스\\Electrified GV70\\colors\\07_비크 블랙(PH3).png"
+    },
+    {
+      "name": "트롬소 그린(PBG)",
+      "code": "C19",
+      "swatch": "#1a2e39",
+      "image_url": "https://autoimg.danawa.com/photo/4705/53716/color_19_360.png",
+      "path": "vehicles\\제네시스\\Electrified GV70\\colors\\08_트롬소 그린(PBG).png"
+    },
+    {
+      "name": "세레스 블루(ASA)",
+      "code": "C16",
+      "swatch": "#2c3847",
+      "image_url": "https://autoimg.danawa.com/photo/4705/53716/color_16_360.png",
+      "path": "vehicles\\제네시스\\Electrified GV70\\colors\\09_세레스 블루(ASA).png"
+    }
+  ],
+  "gallery": [
+    {
+      "name": "2027ㅣElectrified GV70",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4705&Tab=image&No=143720",
+      "image_url": "https://autoimg.danawa.com/gallery/4705/20260319_4705 (1).jpg",
+      "path": "vehicles\\제네시스\\Electrified GV70\\gallery\\01_2027ㅣElectrified GV70.jpg"
+    },
+    {
+      "name": "Electrified GV70 F L",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4705&Tab=image&No=136368",
+      "image_url": "https://autoimg.danawa.com/gallery/4705/20250319_4705 (1).jpg",
+      "path": "vehicles\\제네시스\\Electrified GV70\\gallery\\02_Electrified GV70 F L.jpg"
+    },
+    {
+      "name": "Electrified GV70 F L",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4705&Tab=image&No=136369",
+      "image_url": "https://autoimg.danawa.com/gallery/4705/20250319_4705 (2).jpg",
+      "path": "vehicles\\제네시스\\Electrified GV70\\gallery\\03_Electrified GV70 F L.jpg"
+    },
+    {
+      "name": "Electrified GV70 F L",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4705&Tab=image&No=136370",
+      "image_url": "https://autoimg.danawa.com/gallery/4705/20250319_4705 (3).jpg",
+      "path": "vehicles\\제네시스\\Electrified GV70\\gallery\\04_Electrified GV70 F L.jpg"
+    }
+  ]
+}

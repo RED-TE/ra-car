@@ -1,0 +1,80 @@
+{
+  "brand": "BMW",
+  "brand_id": "362",
+  "model_id": "4708",
+  "name": "iX",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4708",
+  "photo_code": "4708/53354",
+  "default_image_url": "https://autoimg.danawa.com/photo/4708/53354/color_13_360.png",
+  "default_image_path": "vehicles\\BMW\\iX\\model_360.png",
+  "colors": [
+    {
+      "name": "미네랄 화이트 메탈릭 (A96)",
+      "code": "C11",
+      "swatch": "#e2e1df",
+      "image_url": "https://autoimg.danawa.com/photo/4708/53354/color_11_360.png",
+      "path": "vehicles\\BMW\\iX\\colors\\01_미네랄 화이트 메탈릭 (A96).png"
+    },
+    {
+      "name": "블랙 사파이어 메탈릭 (475)",
+      "code": "C12",
+      "swatch": "#1d1d1d",
+      "image_url": "https://autoimg.danawa.com/photo/4708/53354/color_12_360.png",
+      "path": "vehicles\\BMW\\iX\\colors\\02_블랙 사파이어 메탈릭 (475).png"
+    },
+    {
+      "name": "아틱 레이스 블루 메탈릭 (C4F)",
+      "code": "C13",
+      "swatch": "#647e8d",
+      "image_url": "https://autoimg.danawa.com/photo/4708/53354/color_13_360.png",
+      "path": "vehicles\\BMW\\iX\\colors\\03_아틱 레이스 블루 메탈릭 (C4F).png"
+    },
+    {
+      "name": "스톰 베이 메탈릭 (C3N)",
+      "code": "C14",
+      "swatch": "#67717a",
+      "image_url": "https://autoimg.danawa.com/photo/4708/53354/color_14_360.png",
+      "path": "vehicles\\BMW\\iX\\colors\\04_스톰 베이 메탈릭 (C3N).png"
+    },
+    {
+      "name": "듄 그레이 메탈릭 (C7A)",
+      "code": "C15",
+      "swatch": "#acaa9e",
+      "image_url": "https://autoimg.danawa.com/photo/4708/53354/color_15_360.png",
+      "path": "vehicles\\BMW\\iX\\colors\\05_듄 그레이 메탈릭 (C7A).png"
+    },
+    {
+      "name": "아벤츄린 레드 메탈릭 (C7A)",
+      "code": "C16",
+      "swatch": "#65181e",
+      "image_url": "https://autoimg.danawa.com/photo/4708/53354/color_16_360.png",
+      "path": "vehicles\\BMW\\iX\\colors\\06_아벤츄린 레드 메탈릭 (C7A).png"
+    }
+  ],
+  "gallery": [
+    {
+      "name": "iX xDrive60 M 스포츠 프로",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4708&Tab=image&No=142461",
+      "image_url": "https://autoimg.danawa.com/gallery/4708/20251223_4708 (1).jpg",
+      "path": "vehicles\\BMW\\iX\\gallery\\01_iX xDrive60 M 스포츠 프로.jpg"
+    },
+    {
+      "name": "iX xDrive60 M 스포츠 프로",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4708&Tab=image&No=142462",
+      "image_url": "https://autoimg.danawa.com/gallery/4708/20251223_4708 (2).jpg",
+      "path": "vehicles\\BMW\\iX\\gallery\\02_iX xDrive60 M 스포츠 프로.jpg"
+    },
+    {
+      "name": "iX xDrive60 M 스포츠 프로",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4708&Tab=image&No=142463",
+      "image_url": "https://autoimg.danawa.com/gallery/4708/20251223_4708 (3).jpg",
+      "path": "vehicles\\BMW\\iX\\gallery\\03_iX xDrive60 M 스포츠 프로.jpg"
+    },
+    {
+      "name": "iX xDrive60 M 스포츠 프로",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4708&Tab=image&No=142464",
+      "image_url": "https://autoimg.danawa.com/gallery/4708/20251223_4708 (4).jpg",
+      "path": "vehicles\\BMW\\iX\\gallery\\04_iX xDrive60 M 스포츠 프로.jpg"
+    }
+  ]
+}

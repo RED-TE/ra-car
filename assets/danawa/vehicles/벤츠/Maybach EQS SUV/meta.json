@@ -1,0 +1,37 @@
+{
+  "brand": "벤츠",
+  "brand_id": "349",
+  "model_id": "4511",
+  "name": "Maybach EQS SUV",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4511",
+  "photo_code": "4511/53740",
+  "default_image_url": "https://autoimg.danawa.com/photo/4511/model_360.png",
+  "default_image_path": "vehicles\\벤츠\\Maybach EQS SUV\\model_360.png",
+  "colors": [],
+  "gallery": [
+    {
+      "name": "2024 l 메르세데스-마이바흐 EQS680 SUV",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4511&Tab=image&No=118849",
+      "image_url": "https://autoimg.danawa.com/gallery/4511/20240322_4511 (1).jpg",
+      "path": "vehicles\\벤츠\\Maybach EQS SUV\\gallery\\01_2024 l 메르세데스-마이바흐 EQS680 SUV.jpg"
+    },
+    {
+      "name": "2024 l 메르세데스-마이바흐 EQS680 SUV",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4511&Tab=image&No=118850",
+      "image_url": "https://autoimg.danawa.com/gallery/4511/20240322_4511 (2).jpg",
+      "path": "vehicles\\벤츠\\Maybach EQS SUV\\gallery\\02_2024 l 메르세데스-마이바흐 EQS680 SUV.jpg"
+    },
+    {
+      "name": "2024 l 메르세데스-마이바흐 EQS680 SUV",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4511&Tab=image&No=118851",
+      "image_url": "https://autoimg.danawa.com/gallery/4511/20240322_4511 (3).jpg",
+      "path": "vehicles\\벤츠\\Maybach EQS SUV\\gallery\\03_2024 l 메르세데스-마이바흐 EQS680 SUV.jpg"
+    },
+    {
+      "name": "2024 l 메르세데스-마이바흐 EQS680 SUV",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4511&Tab=image&No=118852",
+      "image_url": "https://autoimg.danawa.com/gallery/4511/20240322_4511 (4).jpg",
+      "path": "vehicles\\벤츠\\Maybach EQS SUV\\gallery\\04_2024 l 메르세데스-마이바흐 EQS680 SUV.jpg"
+    }
+  ]
+}

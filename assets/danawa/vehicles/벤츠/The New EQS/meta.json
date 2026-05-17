@@ -1,0 +1,37 @@
+{
+  "brand": "벤츠",
+  "brand_id": "349",
+  "model_id": "4795",
+  "name": "The New EQS",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4795",
+  "photo_code": "4795/",
+  "default_image_url": "https://autoimg.danawa.com/photo/4795/model_360.png",
+  "default_image_path": "vehicles\\벤츠\\The New EQS\\model_360.png",
+  "colors": [],
+  "gallery": [
+    {
+      "name": "EQS580 4MATIC",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4795&Tab=image&No=144466",
+      "image_url": "https://autoimg.danawa.com/gallery/4795/20260414_4795 (1).jpg",
+      "path": "vehicles\\벤츠\\The New EQS\\gallery\\01_EQS580 4MATIC.jpg"
+    },
+    {
+      "name": "EQS580 4MATIC",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4795&Tab=image&No=144467",
+      "image_url": "https://autoimg.danawa.com/gallery/4795/20260414_4795 (2).jpg",
+      "path": "vehicles\\벤츠\\The New EQS\\gallery\\02_EQS580 4MATIC.jpg"
+    },
+    {
+      "name": "EQS580 4MATIC",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4795&Tab=image&No=144468",
+      "image_url": "https://autoimg.danawa.com/gallery/4795/20260414_4795 (3).jpg",
+      "path": "vehicles\\벤츠\\The New EQS\\gallery\\03_EQS580 4MATIC.jpg"
+    },
+    {
+      "name": "EQS580 4MATIC",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4795&Tab=image&No=144469",
+      "image_url": "https://autoimg.danawa.com/gallery/4795/20260414_4795 (4).jpg",
+      "path": "vehicles\\벤츠\\The New EQS\\gallery\\04_EQS580 4MATIC.jpg"
+    }
+  ]
+}

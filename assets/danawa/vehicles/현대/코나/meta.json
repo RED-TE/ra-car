@@ -1,0 +1,129 @@
+{
+  "brand": "현대",
+  "brand_id": "303",
+  "model_id": "4361",
+  "name": "코나",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4361",
+  "photo_code": "4361/53730",
+  "default_image_url": "https://autoimg.danawa.com/photo/4361/model_360.png",
+  "default_image_path": "vehicles\\현대\\코나\\model_360.png",
+  "colors": [
+    {
+      "name": "아틀라스 화이트(SAW)",
+      "code": "C11",
+      "swatch": "#e9ebeb",
+      "image_url": "https://autoimg.danawa.com/photo/4361/53730/color_11_360.png",
+      "path": "vehicles\\현대\\코나\\colors\\01_아틀라스 화이트(SAW).png"
+    },
+    {
+      "name": "사이버 그레이 메탈릭(C5G)",
+      "code": "C12",
+      "swatch": "#a7adae",
+      "image_url": "https://autoimg.danawa.com/photo/4361/53730/color_12_360.png",
+      "path": "vehicles\\현대\\코나\\colors\\02_사이버 그레이 메탈릭(C5G).png"
+    },
+    {
+      "name": "에코트로닉 그레이 펄(PE2)",
+      "code": "C13",
+      "swatch": "#444649",
+      "image_url": "https://autoimg.danawa.com/photo/4361/53730/color_13_360.png",
+      "path": "vehicles\\현대\\코나\\colors\\03_에코트로닉 그레이 펄(PE2).png"
+    },
+    {
+      "name": "네오테릭 옐로우(YYY)",
+      "code": "C14",
+      "swatch": "#b9ca32",
+      "image_url": "https://autoimg.danawa.com/photo/4361/53730/color_14_360.png",
+      "path": "vehicles\\현대\\코나\\colors\\04_네오테릭 옐로우(YYY).png"
+    },
+    {
+      "name": "미라지 그린(RRR)",
+      "code": "C15",
+      "swatch": "#6e848a",
+      "image_url": "https://autoimg.danawa.com/photo/4361/53730/color_15_360.png",
+      "path": "vehicles\\현대\\코나\\colors\\05_미라지 그린(RRR).png"
+    },
+    {
+      "name": "얼티메이트 레드 메탈릭(R2P)",
+      "code": "C16",
+      "swatch": "#962a27",
+      "image_url": "https://autoimg.danawa.com/photo/4361/53730/color_16_360.png",
+      "path": "vehicles\\현대\\코나\\colors\\06_얼티메이트 레드 메탈릭(R2P).png"
+    },
+    {
+      "name": "어비스 블랙 펄(A2B)",
+      "code": "C17",
+      "swatch": "#1c1d1b",
+      "image_url": "https://autoimg.danawa.com/photo/4361/53730/color_17_360.png",
+      "path": "vehicles\\현대\\코나\\colors\\07_어비스 블랙 펄(A2B).png"
+    },
+    {
+      "name": "아틀라스 화이트(SAW) 어비스 블랙 펄(A2B)",
+      "code": "C18",
+      "swatch": "#e9ebeb",
+      "image_url": "https://autoimg.danawa.com/photo/4361/53730/color_18_360.png",
+      "path": "vehicles\\현대\\코나\\colors\\08_아틀라스 화이트(SAW) 어비스 블랙 펄(A2B).png"
+    },
+    {
+      "name": "사이버 그레이 메탈릭(C5G) 어비스 블랙 펄(A2B)",
+      "code": "C19",
+      "swatch": "#a7adae",
+      "image_url": "https://autoimg.danawa.com/photo/4361/53730/color_19_360.png",
+      "path": "vehicles\\현대\\코나\\colors\\09_사이버 그레이 메탈릭(C5G) 어비스 블랙 펄(A2B).png"
+    },
+    {
+      "name": "에코트로닉 그레이 펄(PE2) 어비스 블랙 펄(A2B)",
+      "code": "C20",
+      "swatch": "#444649",
+      "image_url": "https://autoimg.danawa.com/photo/4361/53730/color_20_360.png",
+      "path": "vehicles\\현대\\코나\\colors\\10_에코트로닉 그레이 펄(PE2) 어비스 블랙 펄(A2B).png"
+    },
+    {
+      "name": "네오테릭 옐로우(YYY) 어비스 블랙 펄(A2B)",
+      "code": "C21",
+      "swatch": "#b9ca32",
+      "image_url": "https://autoimg.danawa.com/photo/4361/53730/color_21_360.png",
+      "path": "vehicles\\현대\\코나\\colors\\11_네오테릭 옐로우(YYY) 어비스 블랙 펄(A2B).png"
+    },
+    {
+      "name": "미라지 그린(RRR) 어비스 블랙 펄(A2B)",
+      "code": "C22",
+      "swatch": "#6e848a",
+      "image_url": "https://autoimg.danawa.com/photo/4361/53730/color_22_360.png",
+      "path": "vehicles\\현대\\코나\\colors\\12_미라지 그린(RRR) 어비스 블랙 펄(A2B).png"
+    },
+    {
+      "name": "얼티메이트 레드 메탈릭(R2P) 어비스 블랙 펄(A2B)",
+      "code": "C23",
+      "swatch": "#962a27",
+      "image_url": "https://autoimg.danawa.com/photo/4361/53730/color_23_360.png",
+      "path": "vehicles\\현대\\코나\\colors\\13_얼티메이트 레드 메탈릭(R2P) 어비스 블랙 펄(A2B).png"
+    }
+  ],
+  "gallery": [
+    {
+      "name": "2027ㅣ디 올 뉴 코나 블랙 익스테리어",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4361&Tab=image&No=144070",
+      "image_url": "https://autoimg.danawa.com/gallery/4361/20260407_4361 (1).jpg",
+      "path": "vehicles\\현대\\코나\\gallery\\01_2027ㅣ디 올 뉴 코나 블랙 익스테리어.jpg"
+    },
+    {
+      "name": "2025ㅣ디 올 뉴 코나 블랙 익스테리어",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4361&Tab=image&No=139603",
+      "image_url": "https://autoimg.danawa.com/gallery/4361/20250807_4361 (1).jpg",
+      "path": "vehicles\\현대\\코나\\gallery\\02_2025ㅣ디 올 뉴 코나 블랙 익스테리어.jpg"
+    },
+    {
+      "name": "2025ㅣ디 올 뉴 코나",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4361&Tab=image&No=137325",
+      "image_url": "https://autoimg.danawa.com/gallery/4361/20250423_4361 (1).jpg",
+      "path": "vehicles\\현대\\코나\\gallery\\03_2025ㅣ디 올 뉴 코나.jpg"
+    },
+    {
+      "name": "2025ㅣ디 올 뉴 코나 내장",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4361&Tab=image&No=137326",
+      "image_url": "https://autoimg.danawa.com/gallery/4361/20250423_4361 (2).jpg",
+      "path": "vehicles\\현대\\코나\\gallery\\04_2025ㅣ디 올 뉴 코나 내장.jpg"
+    }
+  ]
+}

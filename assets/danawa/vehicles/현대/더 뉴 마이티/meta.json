@@ -1,0 +1,25 @@
+{
+  "brand": "현대",
+  "brand_id": "303",
+  "model_id": "4804",
+  "name": "더 뉴 마이티",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4804",
+  "photo_code": "4804/53785",
+  "default_image_url": "https://autoimg.danawa.com/photo/4804/model_360.png",
+  "default_image_path": "vehicles\\현대\\더 뉴 마이티\\model_360.png",
+  "colors": [],
+  "gallery": [
+    {
+      "name": "더 뉴 마이티",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4804&Tab=image&No=145043",
+      "image_url": "https://autoimg.danawa.com/gallery/4804/20260507_3500 (2).jpg",
+      "path": "vehicles\\현대\\더 뉴 마이티\\gallery\\01_더 뉴 마이티.jpg"
+    },
+    {
+      "name": "더 뉴 마이티",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4804&Tab=image&No=145044",
+      "image_url": "https://autoimg.danawa.com/gallery/4804/20260507_3500 (1).jpg",
+      "path": "vehicles\\현대\\더 뉴 마이티\\gallery\\02_더 뉴 마이티.jpg"
+    }
+  ]
+}

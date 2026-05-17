@@ -1,0 +1,73 @@
+{
+  "brand": "BMW",
+  "brand_id": "362",
+  "model_id": "4614",
+  "name": "4 Series",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4614",
+  "photo_code": "4614/53460",
+  "default_image_url": "https://autoimg.danawa.com/photo/4614/53460/color_12_360.png",
+  "default_image_path": "vehicles\\BMW\\4 Series\\model_360.png",
+  "colors": [
+    {
+      "name": "알파인 화이트",
+      "code": "C11",
+      "swatch": "#eaeaea",
+      "image_url": "https://autoimg.danawa.com/photo/4614/53460/color_11_360.png",
+      "path": "vehicles\\BMW\\4 Series\\colors\\01_알파인 화이트.png"
+    },
+    {
+      "name": "케이프 요크 그린 메탈릭",
+      "code": "C12",
+      "swatch": "#3c4f49",
+      "image_url": "https://autoimg.danawa.com/photo/4614/53460/color_12_360.png",
+      "path": "vehicles\\BMW\\4 Series\\colors\\02_케이프 요크 그린 메탈릭.png"
+    },
+    {
+      "name": "블랙 사파이어 메탈릭",
+      "code": "C13",
+      "swatch": "#111111",
+      "image_url": "https://autoimg.danawa.com/photo/4614/53460/color_13_360.png",
+      "path": "vehicles\\BMW\\4 Series\\colors\\03_블랙 사파이어 메탈릭.png"
+    },
+    {
+      "name": "M 포티마오 블루 메탈릭",
+      "code": "C14",
+      "swatch": "#1f3366",
+      "image_url": "https://autoimg.danawa.com/photo/4614/53460/color_14_360.png",
+      "path": "vehicles\\BMW\\4 Series\\colors\\04_M 포티마오 블루 메탈릭.png"
+    },
+    {
+      "name": "M 브루클린 그레이 메탈릭",
+      "code": "C15",
+      "swatch": "#858e8f",
+      "image_url": "https://autoimg.danawa.com/photo/4614/53460/color_15_360.png",
+      "path": "vehicles\\BMW\\4 Series\\colors\\05_M 브루클린 그레이 메탈릭.png"
+    }
+  ],
+  "gallery": [
+    {
+      "name": "2025 M440i xDrive 쿠페",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4614&Tab=image&No=128323",
+      "image_url": "https://autoimg.danawa.com/gallery/4614/20240827_4614 (1).jpg",
+      "path": "vehicles\\BMW\\4 Series\\gallery\\01_2025 M440i xDrive 쿠페.jpg"
+    },
+    {
+      "name": "2025 M440i xDrive 쿠페",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4614&Tab=image&No=128324",
+      "image_url": "https://autoimg.danawa.com/gallery/4614/20240827_4614 (2).jpg",
+      "path": "vehicles\\BMW\\4 Series\\gallery\\02_2025 M440i xDrive 쿠페.jpg"
+    },
+    {
+      "name": "2025 M440i xDrive 쿠페",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4614&Tab=image&No=128325",
+      "image_url": "https://autoimg.danawa.com/gallery/4614/20240827_4614 (3).jpg",
+      "path": "vehicles\\BMW\\4 Series\\gallery\\03_2025 M440i xDrive 쿠페.jpg"
+    },
+    {
+      "name": "2025 M440i xDrive 쿠페",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4614&Tab=image&No=128326",
+      "image_url": "https://autoimg.danawa.com/gallery/4614/20240827_4614 (4).jpg",
+      "path": "vehicles\\BMW\\4 Series\\gallery\\04_2025 M440i xDrive 쿠페.jpg"
+    }
+  ]
+}

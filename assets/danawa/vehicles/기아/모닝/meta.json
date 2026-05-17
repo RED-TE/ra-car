@@ -1,0 +1,87 @@
+{
+  "brand": "기아",
+  "brand_id": "307",
+  "model_id": "4554",
+  "name": "모닝",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4554",
+  "photo_code": "4554/52374",
+  "default_image_url": "https://autoimg.danawa.com/photo/4554/52374/color_13_360.png",
+  "default_image_path": "vehicles\\기아\\모닝\\model_360.png",
+  "colors": [
+    {
+      "name": "클리어 화이트 (UD)",
+      "code": "C11",
+      "swatch": "#e0dfe4",
+      "image_url": "https://autoimg.danawa.com/photo/4554/52374/color_11_360.png",
+      "path": "vehicles\\기아\\모닝\\colors\\01_클리어 화이트 (UD).png"
+    },
+    {
+      "name": "밀키 베이지 (M9Y)",
+      "code": "C12",
+      "swatch": "#ccc8c2",
+      "image_url": "https://autoimg.danawa.com/photo/4554/52374/color_12_360.png",
+      "path": "vehicles\\기아\\모닝\\colors\\02_밀키 베이지 (M9Y).png"
+    },
+    {
+      "name": "어드벤쳐러스 그린 (A2G)",
+      "code": "C13",
+      "swatch": "#4c5d55",
+      "image_url": "https://autoimg.danawa.com/photo/4554/52374/color_13_360.png",
+      "path": "vehicles\\기아\\모닝\\colors\\03_어드벤쳐러스 그린 (A2G).png"
+    },
+    {
+      "name": "스파클링 실버 (KCS)",
+      "code": "C14",
+      "swatch": "#a5a4a9",
+      "image_url": "https://autoimg.danawa.com/photo/4554/52374/color_14_360.png",
+      "path": "vehicles\\기아\\모닝\\colors\\04_스파클링 실버 (KCS).png"
+    },
+    {
+      "name": "시그널 레드 (BEG)",
+      "code": "C15",
+      "swatch": "#9d2321",
+      "image_url": "https://autoimg.danawa.com/photo/4554/52374/color_15_360.png",
+      "path": "vehicles\\기아\\모닝\\colors\\05_시그널 레드 (BEG).png"
+    },
+    {
+      "name": "아스트로 그레이 (M7G)",
+      "code": "C16",
+      "swatch": "#52534e",
+      "image_url": "https://autoimg.danawa.com/photo/4554/52374/color_16_360.png",
+      "path": "vehicles\\기아\\모닝\\colors\\06_아스트로 그레이 (M7G).png"
+    },
+    {
+      "name": "오로라 블랙 펄 (ABP)",
+      "code": "C17",
+      "swatch": "#181415",
+      "image_url": "https://autoimg.danawa.com/photo/4554/52374/color_17_360.png",
+      "path": "vehicles\\기아\\모닝\\colors\\07_오로라 블랙 펄 (ABP).png"
+    }
+  ],
+  "gallery": [
+    {
+      "name": "2024 l 모닝 GT-line",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4554&Tab=image&No=125256",
+      "image_url": "https://autoimg.danawa.com/gallery/4554/20240611_4554 (1).jpg",
+      "path": "vehicles\\기아\\모닝\\gallery\\01_2024 l 모닝 GT-line.jpg"
+    },
+    {
+      "name": "2024 l 모닝 GT-line",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4554&Tab=image&No=125257",
+      "image_url": "https://autoimg.danawa.com/gallery/4554/20240611_4554 (2).jpg",
+      "path": "vehicles\\기아\\모닝\\gallery\\02_2024 l 모닝 GT-line.jpg"
+    },
+    {
+      "name": "2024 l 모닝 GT-line",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4554&Tab=image&No=125258",
+      "image_url": "https://autoimg.danawa.com/gallery/4554/20240611_4554 (3).jpg",
+      "path": "vehicles\\기아\\모닝\\gallery\\03_2024 l 모닝 GT-line.jpg"
+    },
+    {
+      "name": "2024 l 모닝 GT-line",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4554&Tab=image&No=125259",
+      "image_url": "https://autoimg.danawa.com/gallery/4554/20240611_4554 (4).jpg",
+      "path": "vehicles\\기아\\모닝\\gallery\\04_2024 l 모닝 GT-line.jpg"
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "brand": "BMW",
+  "brand_id": "362",
+  "model_id": "4073",
+  "name": "X4 M",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4073",
+  "photo_code": "4073/52636",
+  "default_image_url": "https://autoimg.danawa.com/photo/4073/model_360.png",
+  "default_image_path": "vehicles\\BMW\\X4 M\\model_360.png",
+  "colors": [],
+  "gallery": [
+    {
+      "name": "2022 l X4 M 컴페티션",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4073&Tab=image&No=88105",
+      "image_url": "https://autoimg.danawa.com/gallery/4073/20211112_4073 (1).jpg",
+      "path": "vehicles\\BMW\\X4 M\\gallery\\01_2022 l X4 M 컴페티션.jpg"
+    },
+    {
+      "name": "2022 l X4 M 컴페티션",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4073&Tab=image&No=88106",
+      "image_url": "https://autoimg.danawa.com/gallery/4073/20211112_4073 (2).jpg",
+      "path": "vehicles\\BMW\\X4 M\\gallery\\02_2022 l X4 M 컴페티션.jpg"
+    },
+    {
+      "name": "2022 l X4 M 컴페티션",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4073&Tab=image&No=88107",
+      "image_url": "https://autoimg.danawa.com/gallery/4073/20211112_4073 (3).jpg",
+      "path": "vehicles\\BMW\\X4 M\\gallery\\03_2022 l X4 M 컴페티션.jpg"
+    },
+    {
+      "name": "2022 l X4 M 컴페티션",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4073&Tab=image&No=88108",
+      "image_url": "https://autoimg.danawa.com/gallery/4073/20211112_4073 (4).jpg",
+      "path": "vehicles\\BMW\\X4 M\\gallery\\04_2022 l X4 M 컴페티션.jpg"
+    }
+  ]
+}

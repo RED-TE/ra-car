@@ -1,0 +1,37 @@
+{
+  "brand": "랜드로버",
+  "brand_id": "399",
+  "model_id": "4548",
+  "name": "Discovery Sport",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4548",
+  "photo_code": "4548/53728",
+  "default_image_url": "https://autoimg.danawa.com/photo/4548/model_360.png",
+  "default_image_path": "vehicles\\랜드로버\\Discovery Sport\\model_360.png",
+  "colors": [],
+  "gallery": [
+    {
+      "name": "2026 디스커버리 스포츠 메트로폴리탄",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4548&Tab=image&No=138648",
+      "image_url": "https://autoimg.danawa.com/gallery/4548/20250617_4548 (1).jpg",
+      "path": "vehicles\\랜드로버\\Discovery Sport\\gallery\\01_2026 디스커버리 스포츠 메트로폴리탄.jpg"
+    },
+    {
+      "name": "2026 디스커버리 스포츠 랜드마크",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4548&Tab=image&No=138649",
+      "image_url": "https://autoimg.danawa.com/gallery/4548/20250617_4548 (2).jpg",
+      "path": "vehicles\\랜드로버\\Discovery Sport\\gallery\\02_2026 디스커버리 스포츠 랜드마크.jpg"
+    },
+    {
+      "name": "2026 디스커버리 스포츠 랜드마크",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4548&Tab=image&No=138650",
+      "image_url": "https://autoimg.danawa.com/gallery/4548/20250617_4548 (3).jpg",
+      "path": "vehicles\\랜드로버\\Discovery Sport\\gallery\\03_2026 디스커버리 스포츠 랜드마크.jpg"
+    },
+    {
+      "name": "2026 디스커버리 스포츠 랜드마크",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4548&Tab=image&No=138651",
+      "image_url": "https://autoimg.danawa.com/gallery/4548/20250617_4548 (4).jpg",
+      "path": "vehicles\\랜드로버\\Discovery Sport\\gallery\\04_2026 디스커버리 스포츠 랜드마크.jpg"
+    }
+  ]
+}

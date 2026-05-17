@@ -1,0 +1,80 @@
+{
+  "brand": "현대",
+  "brand_id": "303",
+  "model_id": "4677",
+  "name": "디 올 뉴 넥쏘",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4677",
+  "photo_code": "4677/52013",
+  "default_image_url": "https://autoimg.danawa.com/photo/4677/model_360.png",
+  "default_image_path": "vehicles\\현대\\디 올 뉴 넥쏘\\model_360.png",
+  "colors": [
+    {
+      "name": "오션 인디고 매트(NBK)",
+      "code": "C10",
+      "swatch": "#373e50",
+      "image_url": "https://autoimg.danawa.com/photo/4677/52013/color_10_360.png",
+      "path": "vehicles\\현대\\디 올 뉴 넥쏘\\colors\\01_오션 인디고 매트(NBK).png"
+    },
+    {
+      "name": "크리미 화이트 펄(TW3)",
+      "code": "C11",
+      "swatch": "#eaeeeb",
+      "image_url": "https://autoimg.danawa.com/photo/4677/52013/color_11_360.png",
+      "path": "vehicles\\현대\\디 올 뉴 넥쏘\\colors\\02_크리미 화이트 펄(TW3).png"
+    },
+    {
+      "name": "팬텀 블랙 펄(TCM)",
+      "code": "C12",
+      "swatch": "#221f1e",
+      "image_url": "https://autoimg.danawa.com/photo/4677/52013/color_12_360.png",
+      "path": "vehicles\\현대\\디 올 뉴 넥쏘\\colors\\03_팬텀 블랙 펄(TCM).png"
+    },
+    {
+      "name": "아마존 그레이 메탈릭(A5G)",
+      "code": "C13",
+      "swatch": "#4a534b",
+      "image_url": "https://autoimg.danawa.com/photo/4677/52013/color_13_360.png",
+      "path": "vehicles\\현대\\디 올 뉴 넥쏘\\colors\\04_아마존 그레이 메탈릭(A5G).png"
+    },
+    {
+      "name": "에코트로닉 그레이 펄(PE2)",
+      "code": "C14",
+      "swatch": "#4a4c48",
+      "image_url": "https://autoimg.danawa.com/photo/4677/52013/color_14_360.png",
+      "path": "vehicles\\현대\\디 올 뉴 넥쏘\\colors\\05_에코트로닉 그레이 펄(PE2).png"
+    },
+    {
+      "name": "고요 카퍼 펄(VC2)",
+      "code": "C15",
+      "swatch": "#989385",
+      "image_url": "https://autoimg.danawa.com/photo/4677/52013/color_15_360.png",
+      "path": "vehicles\\현대\\디 올 뉴 넥쏘\\colors\\06_고요 카퍼 펄(VC2).png"
+    }
+  ],
+  "gallery": [
+    {
+      "name": "디 올 뉴 넥쏘",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4677&Tab=image&No=139702",
+      "image_url": "https://autoimg.danawa.com/gallery/4677/20250820_4677 (1).jpg",
+      "path": "vehicles\\현대\\디 올 뉴 넥쏘\\gallery\\01_디 올 뉴 넥쏘.jpg"
+    },
+    {
+      "name": "디 올 뉴 넥쏘",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4677&Tab=image&No=138975",
+      "image_url": "https://autoimg.danawa.com/gallery/4677/20250707_4677 (1).jpg",
+      "path": "vehicles\\현대\\디 올 뉴 넥쏘\\gallery\\02_디 올 뉴 넥쏘.jpg"
+    },
+    {
+      "name": "디 올 뉴 넥쏘",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4677&Tab=image&No=138976",
+      "image_url": "https://autoimg.danawa.com/gallery/4677/20250707_4677 (2).jpg",
+      "path": "vehicles\\현대\\디 올 뉴 넥쏘\\gallery\\03_디 올 뉴 넥쏘.jpg"
+    },
+    {
+      "name": "디 올 뉴 넥쏘",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4677&Tab=image&No=138977",
+      "image_url": "https://autoimg.danawa.com/gallery/4677/20250707_4677 (3).jpg",
+      "path": "vehicles\\현대\\디 올 뉴 넥쏘\\gallery\\04_디 올 뉴 넥쏘.jpg"
+    }
+  ]
+}

@@ -1,0 +1,37 @@
+{
+  "brand": "기아",
+  "brand_id": "307",
+  "model_id": "4499",
+  "name": "EV5",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4499",
+  "photo_code": "4499/53638",
+  "default_image_url": "https://autoimg.danawa.com/photo/4499/model_360.png",
+  "default_image_path": "vehicles\\기아\\EV5\\model_360.png",
+  "colors": [],
+  "gallery": [
+    {
+      "name": "EV4 GT & EV3 GT & EV5 GT",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4499&Tab=image&No=142975",
+      "image_url": "https://autoimg.danawa.com/gallery/4499/20260204_4499 (1).jpg",
+      "path": "vehicles\\기아\\EV5\\gallery\\01_EV4 GT & EV3 GT & EV5 GT.jpg"
+    },
+    {
+      "name": "EV5 스탠다드",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4499&Tab=image&No=142921",
+      "image_url": "https://autoimg.danawa.com/gallery/4499/20260122_4499 (1).jpg",
+      "path": "vehicles\\기아\\EV5\\gallery\\02_EV5 스탠다드.jpg"
+    },
+    {
+      "name": "EV5 스탠다드",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4499&Tab=image&No=142922",
+      "image_url": "https://autoimg.danawa.com/gallery/4499/20260122_4499 (2).jpg",
+      "path": "vehicles\\기아\\EV5\\gallery\\03_EV5 스탠다드.jpg"
+    },
+    {
+      "name": "EV5",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4499&Tab=image&No=141111",
+      "image_url": "https://autoimg.danawa.com/gallery/4499/20251022_4499 (1).jpg",
+      "path": "vehicles\\기아\\EV5\\gallery\\04_EV5.jpg"
+    }
+  ]
+}

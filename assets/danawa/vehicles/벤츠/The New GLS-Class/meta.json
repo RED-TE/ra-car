@@ -1,0 +1,37 @@
+{
+  "brand": "벤츠",
+  "brand_id": "349",
+  "model_id": "4793",
+  "name": "The New GLS-Class",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4793",
+  "photo_code": "4793/",
+  "default_image_url": "https://autoimg.danawa.com/photo/4793/model_360.png",
+  "default_image_path": "vehicles\\벤츠\\The New GLS-Class\\model_360.png",
+  "colors": [],
+  "gallery": [
+    {
+      "name": "더 뉴 GLS",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4793&Tab=image&No=144139",
+      "image_url": "https://autoimg.danawa.com/gallery/4793/20260408_4793 (1).jpg",
+      "path": "vehicles\\벤츠\\The New GLS-Class\\gallery\\01_더 뉴 GLS.jpg"
+    },
+    {
+      "name": "더 뉴 GLS",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4793&Tab=image&No=144140",
+      "image_url": "https://autoimg.danawa.com/gallery/4793/20260408_4793 (2).jpg",
+      "path": "vehicles\\벤츠\\The New GLS-Class\\gallery\\02_더 뉴 GLS.jpg"
+    },
+    {
+      "name": "더 뉴 GLS",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4793&Tab=image&No=144141",
+      "image_url": "https://autoimg.danawa.com/gallery/4793/20260408_4793 (3).jpg",
+      "path": "vehicles\\벤츠\\The New GLS-Class\\gallery\\03_더 뉴 GLS.jpg"
+    },
+    {
+      "name": "더 뉴 GLS",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4793&Tab=image&No=144142",
+      "image_url": "https://autoimg.danawa.com/gallery/4793/20260408_4793 (4).jpg",
+      "path": "vehicles\\벤츠\\The New GLS-Class\\gallery\\04_더 뉴 GLS.jpg"
+    }
+  ]
+}

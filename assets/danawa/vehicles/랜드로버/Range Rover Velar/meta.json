@@ -1,0 +1,37 @@
+{
+  "brand": "랜드로버",
+  "brand_id": "399",
+  "model_id": "4472",
+  "name": "Range Rover Velar",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4472",
+  "photo_code": "4472/53686",
+  "default_image_url": "https://autoimg.danawa.com/photo/4472/model_360.png",
+  "default_image_path": "vehicles\\랜드로버\\Range Rover Velar\\model_360.png",
+  "colors": [],
+  "gallery": [
+    {
+      "name": "2027 레인지로버 벨라 벨그라비아 에디션",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4472&Tab=image&No=142745",
+      "image_url": "https://autoimg.danawa.com/gallery/4472/20260114_4472 (1).jpg",
+      "path": "vehicles\\랜드로버\\Range Rover Velar\\gallery\\01_2027 레인지로버 벨라 벨그라비아 에디션.jpg"
+    },
+    {
+      "name": "2027 레인지로버 벨라 벨그라비아 에디션",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4472&Tab=image&No=142746",
+      "image_url": "https://autoimg.danawa.com/gallery/4472/20260114_4472 (2).jpg",
+      "path": "vehicles\\랜드로버\\Range Rover Velar\\gallery\\02_2027 레인지로버 벨라 벨그라비아 에디션.jpg"
+    },
+    {
+      "name": "2027 레인지로버 벨라 벨그라비아 에디션",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4472&Tab=image&No=142747",
+      "image_url": "https://autoimg.danawa.com/gallery/4472/20260114_4472 (3).jpg",
+      "path": "vehicles\\랜드로버\\Range Rover Velar\\gallery\\03_2027 레인지로버 벨라 벨그라비아 에디션.jpg"
+    },
+    {
+      "name": "2027 레인지로버 벨라 벨그라비아 에디션",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4472&Tab=image&No=142748",
+      "image_url": "https://autoimg.danawa.com/gallery/4472/20260114_4472 (4).jpg",
+      "path": "vehicles\\랜드로버\\Range Rover Velar\\gallery\\04_2027 레인지로버 벨라 벨그라비아 에디션.jpg"
+    }
+  ]
+}

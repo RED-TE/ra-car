@@ -1,0 +1,87 @@
+{
+  "brand": "기아",
+  "brand_id": "307",
+  "model_id": "4714",
+  "name": "PV5",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4714",
+  "photo_code": "4714/53291",
+  "default_image_url": "https://autoimg.danawa.com/photo/4714/53291/color_16_360.png",
+  "default_image_path": "vehicles\\기아\\PV5\\model_360.png",
+  "colors": [
+    {
+      "name": "클리어 화이트(UD)",
+      "code": "C11",
+      "swatch": "#f3f3f3",
+      "image_url": "https://autoimg.danawa.com/photo/4714/53291/color_11_360.png",
+      "path": "vehicles\\기아\\PV5\\colors\\01_클리어 화이트(UD).png"
+    },
+    {
+      "name": "스틸 그레이(KLG)",
+      "code": "C12",
+      "swatch": "#7b7a7e",
+      "image_url": "https://autoimg.danawa.com/photo/4714/53291/color_12_360.png",
+      "path": "vehicles\\기아\\PV5\\colors\\02_스틸 그레이(KLG).png"
+    },
+    {
+      "name": "오로라 블랙펄(ABP)",
+      "code": "C13",
+      "swatch": "#171514",
+      "image_url": "https://autoimg.danawa.com/photo/4714/53291/color_13_360.png",
+      "path": "vehicles\\기아\\PV5\\colors\\03_오로라 블랙펄(ABP).png"
+    },
+    {
+      "name": "프로스트 블루(EBB)",
+      "code": "C14",
+      "swatch": "#5f7381",
+      "image_url": "https://autoimg.danawa.com/photo/4714/53291/color_14_360.png",
+      "path": "vehicles\\기아\\PV5\\colors\\04_프로스트 블루(EBB).png"
+    },
+    {
+      "name": "시티스케이프 그린(CGE)",
+      "code": "C15",
+      "swatch": "#404f4c",
+      "image_url": "https://autoimg.danawa.com/photo/4714/53291/color_15_360.png",
+      "path": "vehicles\\기아\\PV5\\colors\\05_시티스케이프 그린(CGE).png"
+    },
+    {
+      "name": "소프트 민트(SML)",
+      "code": "C16",
+      "swatch": "#767d7f",
+      "image_url": "https://autoimg.danawa.com/photo/4714/53291/color_16_360.png",
+      "path": "vehicles\\기아\\PV5\\colors\\06_소프트 민트(SML).png"
+    },
+    {
+      "name": "레이크하우스 그레이(LHG)",
+      "code": "C17",
+      "swatch": "#252c31",
+      "image_url": "https://autoimg.danawa.com/photo/4714/53291/color_17_360.png",
+      "path": "vehicles\\기아\\PV5\\colors\\07_레이크하우스 그레이(LHG).png"
+    }
+  ],
+  "gallery": [
+    {
+      "name": "PV5 오픈베드 & PV5 WAV",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4714&Tab=image&No=144240",
+      "image_url": "https://autoimg.danawa.com/gallery/4714/20260408_4714 (1).jpg",
+      "path": "vehicles\\기아\\PV5\\gallery\\01_PV5 오픈베드 & PV5 WAV.jpg"
+    },
+    {
+      "name": "PV5 오픈베드",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4714&Tab=image&No=144241",
+      "image_url": "https://autoimg.danawa.com/gallery/4714/20260408_4714 (2).jpg",
+      "path": "vehicles\\기아\\PV5\\gallery\\02_PV5 오픈베드.jpg"
+    },
+    {
+      "name": "PV5 오픈베드",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4714&Tab=image&No=144242",
+      "image_url": "https://autoimg.danawa.com/gallery/4714/20260408_4714 (3).jpg",
+      "path": "vehicles\\기아\\PV5\\gallery\\03_PV5 오픈베드.jpg"
+    },
+    {
+      "name": "PV5 WAV",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4714&Tab=image&No=144243",
+      "image_url": "https://autoimg.danawa.com/gallery/4714/20260408_4714 (4).jpg",
+      "path": "vehicles\\기아\\PV5\\gallery\\04_PV5 WAV.jpg"
+    }
+  ]
+}

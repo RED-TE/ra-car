@@ -1,0 +1,115 @@
+{
+  "brand": "제네시스",
+  "brand_id": "304",
+  "model_id": "4609",
+  "name": "GV70",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4609",
+  "photo_code": "4609/53474",
+  "default_image_url": "https://autoimg.danawa.com/photo/4609/model_360.png",
+  "default_image_path": "vehicles\\제네시스\\GV70\\model_360.png",
+  "colors": [
+    {
+      "name": "마테호른 화이트(FT7)-무광",
+      "code": "C07",
+      "swatch": "#e4e3e5",
+      "image_url": "https://autoimg.danawa.com/photo/4609/53474/color_07_360.png",
+      "path": "vehicles\\제네시스\\GV70\\colors\\01_마테호른 화이트(FT7)-무광.png"
+    },
+    {
+      "name": "마칼루 그레이(MPE)-무광",
+      "code": "C08",
+      "swatch": "#39393c",
+      "image_url": "https://autoimg.danawa.com/photo/4609/53474/color_08_360.png",
+      "path": "vehicles\\제네시스\\GV70\\colors\\02_마칼루 그레이(MPE)-무광.png"
+    },
+    {
+      "name": "우유니 화이트(UYH)",
+      "code": "C11",
+      "swatch": "#f2f2f7",
+      "image_url": "https://autoimg.danawa.com/photo/4609/53474/color_11_360.png",
+      "path": "vehicles\\제네시스\\GV70\\colors\\03_우유니 화이트(UYH).png"
+    },
+    {
+      "name": "세빌 실버(SSS)",
+      "code": "C12",
+      "swatch": "#6f7477",
+      "image_url": "https://autoimg.danawa.com/photo/4609/53474/color_12_360.png",
+      "path": "vehicles\\제네시스\\GV70\\colors\\04_세빌 실버(SSS).png"
+    },
+    {
+      "name": "마칼루 그레이(NCM)",
+      "code": "C13",
+      "swatch": "#2b2b2b",
+      "image_url": "https://autoimg.danawa.com/photo/4609/53474/color_13_360.png",
+      "path": "vehicles\\제네시스\\GV70\\colors\\05_마칼루 그레이(NCM).png"
+    },
+    {
+      "name": "비크 블랙(PH3)",
+      "code": "C14",
+      "swatch": "#0d1314",
+      "image_url": "https://autoimg.danawa.com/photo/4609/53474/color_14_360.png",
+      "path": "vehicles\\제네시스\\GV70\\colors\\06_비크 블랙(PH3).png"
+    },
+    {
+      "name": "스토르 그린(KGN)",
+      "code": "C15",
+      "swatch": "#193a2f",
+      "image_url": "https://autoimg.danawa.com/photo/4609/53474/color_15_360.png",
+      "path": "vehicles\\제네시스\\GV70\\colors\\07_스토르 그린(KGN).png"
+    },
+    {
+      "name": "베링 블루(GBE)",
+      "code": "C19",
+      "swatch": "#555f64",
+      "image_url": "https://autoimg.danawa.com/photo/4609/53474/color_19_360.png",
+      "path": "vehicles\\제네시스\\GV70\\colors\\08_베링 블루(GBE).png"
+    },
+    {
+      "name": "세레스 블루(ASA)",
+      "code": "C16",
+      "swatch": "#656e78",
+      "image_url": "https://autoimg.danawa.com/photo/4609/53474/color_16_360.png",
+      "path": "vehicles\\제네시스\\GV70\\colors\\09_세레스 블루(ASA).png"
+    },
+    {
+      "name": "카프리 블루(NRB)",
+      "code": "C17",
+      "swatch": "#001435",
+      "image_url": "https://autoimg.danawa.com/photo/4609/53474/color_17_360.png",
+      "path": "vehicles\\제네시스\\GV70\\colors\\10_카프리 블루(NRB).png"
+    },
+    {
+      "name": "마우나 레드(RJK)",
+      "code": "C18",
+      "swatch": "#7f0d0d",
+      "image_url": "https://autoimg.danawa.com/photo/4609/53474/color_18_360.png",
+      "path": "vehicles\\제네시스\\GV70\\colors\\11_마우나 레드(RJK).png"
+    }
+  ],
+  "gallery": [
+    {
+      "name": "GV70 그래파이트 에디션",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4609&Tab=image&No=144066",
+      "image_url": "https://autoimg.danawa.com/gallery/4609/20260402_4609 (1).jpg",
+      "path": "vehicles\\제네시스\\GV70\\gallery\\01_GV70 그래파이트 에디션.jpg"
+    },
+    {
+      "name": "GV70 그래파이트 에디션",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4609&Tab=image&No=144067",
+      "image_url": "https://autoimg.danawa.com/gallery/4609/20260402_4609 (2).jpg",
+      "path": "vehicles\\제네시스\\GV70\\gallery\\02_GV70 그래파이트 에디션.jpg"
+    },
+    {
+      "name": "GV70 그래파이트 에디션",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4609&Tab=image&No=144068",
+      "image_url": "https://autoimg.danawa.com/gallery/4609/20260402_4609 (3).jpg",
+      "path": "vehicles\\제네시스\\GV70\\gallery\\03_GV70 그래파이트 에디션.jpg"
+    },
+    {
+      "name": "2026ㅣGV70",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4609&Tab=image&No=141094",
+      "image_url": "https://autoimg.danawa.com/gallery/4609/20251020_4609 (1).jpg",
+      "path": "vehicles\\제네시스\\GV70\\gallery\\04_2026ㅣGV70.jpg"
+    }
+  ]
+}

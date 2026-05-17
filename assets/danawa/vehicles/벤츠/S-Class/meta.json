@@ -1,0 +1,122 @@
+{
+  "brand": "벤츠",
+  "brand_id": "349",
+  "model_id": "3992",
+  "name": "S-Class",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3992",
+  "photo_code": "3992/53427",
+  "default_image_url": "https://autoimg.danawa.com/photo/3992/53427/color_11_360.png",
+  "default_image_path": "vehicles\\벤츠\\S-Class\\model_360.png",
+  "colors": [
+    {
+      "name": "옵시디안 블랙 (197U)",
+      "code": "C11",
+      "swatch": "#0c0c0c",
+      "image_url": "https://autoimg.danawa.com/photo/3992/53427/color_11_360.png",
+      "path": "vehicles\\벤츠\\S-Class\\colors\\01_옵시디안 블랙 (197U).png"
+    },
+    {
+      "name": "블랙 (040U)",
+      "code": "C12",
+      "swatch": "#020202",
+      "image_url": "https://autoimg.danawa.com/photo/3992/53427/color_12_360.png",
+      "path": "vehicles\\벤츠\\S-Class\\colors\\02_블랙 (040U).png"
+    },
+    {
+      "name": "노틱 블루 (595U)",
+      "code": "C13",
+      "swatch": "#060f27",
+      "image_url": "https://autoimg.danawa.com/photo/3992/53427/color_13_360.png",
+      "path": "vehicles\\벤츠\\S-Class\\colors\\03_노틱 블루 (595U).png"
+    },
+    {
+      "name": "그라파이트 그레이 (831U)",
+      "code": "C14",
+      "swatch": "#3e4147",
+      "image_url": "https://autoimg.danawa.com/photo/3992/53427/color_14_360.png",
+      "path": "vehicles\\벤츠\\S-Class\\colors\\04_그라파이트 그레이 (831U).png"
+    },
+    {
+      "name": "하이 테크 실버 (922U)",
+      "code": "C15",
+      "swatch": "#b5b8ba",
+      "image_url": "https://autoimg.danawa.com/photo/3992/53427/color_15_360.png",
+      "path": "vehicles\\벤츠\\S-Class\\colors\\05_하이 테크 실버 (922U).png"
+    },
+    {
+      "name": "에메랄드 그린 (989U)",
+      "code": "C16",
+      "swatch": "#122d26",
+      "image_url": "https://autoimg.danawa.com/photo/3992/53427/color_16_360.png",
+      "path": "vehicles\\벤츠\\S-Class\\colors\\06_에메랄드 그린 (989U).png"
+    },
+    {
+      "name": "셀레나이트 그레이 (992U)",
+      "code": "C17",
+      "swatch": "#3a393e",
+      "image_url": "https://autoimg.danawa.com/photo/3992/53427/color_17_360.png",
+      "path": "vehicles\\벤츠\\S-Class\\colors\\07_셀레나이트 그레이 (992U).png"
+    },
+    {
+      "name": "베르데 실버 (188U)",
+      "code": "C18",
+      "swatch": "#6d8385",
+      "image_url": "https://autoimg.danawa.com/photo/3992/53427/color_18_360.png",
+      "path": "vehicles\\벤츠\\S-Class\\colors\\08_베르데 실버 (188U).png"
+    },
+    {
+      "name": "벨벳 브라운 (771U)",
+      "code": "C19",
+      "swatch": "#786c63",
+      "image_url": "https://autoimg.danawa.com/photo/3992/53427/color_19_360.png",
+      "path": "vehicles\\벤츠\\S-Class\\colors\\09_벨벳 브라운 (771U).png"
+    },
+    {
+      "name": "MANUFAKTUR 오팔라이트 화이트 마그노 (659U) - 유료",
+      "code": "C20",
+      "swatch": "#c5c5c5",
+      "image_url": "https://autoimg.danawa.com/photo/3992/53427/color_20_360.png",
+      "path": "vehicles\\벤츠\\S-Class\\colors\\10_MANUFAKTUR 오팔라이트 화이트 마그노 (659U) - 유료.png"
+    },
+    {
+      "name": "MANUFAKTUR 루벨라이트 레드 (660U) - 유료",
+      "code": "C21",
+      "swatch": "#27070c",
+      "image_url": "https://autoimg.danawa.com/photo/3992/53427/color_21_360.png",
+      "path": "vehicles\\벤츠\\S-Class\\colors\\11_MANUFAKTUR 루벨라이트 레드 (660U) - 유료.png"
+    },
+    {
+      "name": "MANUFAKTUR 오팔라이트 화이트 브라이트 (885U) - 유료",
+      "code": "C23",
+      "swatch": "#b7b7b7",
+      "image_url": "https://autoimg.danawa.com/photo/3992/53427/color_23_360.png",
+      "path": "vehicles\\벤츠\\S-Class\\colors\\12_MANUFAKTUR 오팔라이트 화이트 브라이트 (885U) - 유료.png"
+    }
+  ],
+  "gallery": [
+    {
+      "name": "메르세데스-AMG S63 E 퍼포먼스",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3992&Tab=image&No=138853",
+      "image_url": "https://autoimg.danawa.com/gallery/3992/20250630_3992 (1).jpg",
+      "path": "vehicles\\벤츠\\S-Class\\gallery\\01_메르세데스-AMG S63 E 퍼포먼스.jpg"
+    },
+    {
+      "name": "메르세데스-AMG S63 E 퍼포먼스",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3992&Tab=image&No=138854",
+      "image_url": "https://autoimg.danawa.com/gallery/3992/20250630_3992 (2).jpg",
+      "path": "vehicles\\벤츠\\S-Class\\gallery\\02_메르세데스-AMG S63 E 퍼포먼스.jpg"
+    },
+    {
+      "name": "메르세데스-AMG S63 E 퍼포먼스",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3992&Tab=image&No=138855",
+      "image_url": "https://autoimg.danawa.com/gallery/3992/20250630_3992 (3).jpg",
+      "path": "vehicles\\벤츠\\S-Class\\gallery\\03_메르세데스-AMG S63 E 퍼포먼스.jpg"
+    },
+    {
+      "name": "메르세데스-AMG S63 E 퍼포먼스",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=3992&Tab=image&No=138856",
+      "image_url": "https://autoimg.danawa.com/gallery/3992/20250630_3992 (4).jpg",
+      "path": "vehicles\\벤츠\\S-Class\\gallery\\04_메르세데스-AMG S63 E 퍼포먼스.jpg"
+    }
+  ]
+}

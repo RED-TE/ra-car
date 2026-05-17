@@ -1,0 +1,37 @@
+{
+  "brand": "벤츠",
+  "brand_id": "349",
+  "model_id": "4566",
+  "name": "The New AMG GT",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4566",
+  "photo_code": "4566/53616",
+  "default_image_url": "https://autoimg.danawa.com/photo/4566/model_360.png",
+  "default_image_path": "vehicles\\벤츠\\The New AMG GT\\model_360.png",
+  "colors": [],
+  "gallery": [
+    {
+      "name": "더 뉴 메르세데스-AMG GT 55 4MATIC+",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4566&Tab=image&No=138385",
+      "image_url": "https://autoimg.danawa.com/gallery/4566/20250604_4566 (1).jpg",
+      "path": "vehicles\\벤츠\\The New AMG GT\\gallery\\01_더 뉴 메르세데스-AMG GT 55 4MATIC+.jpg"
+    },
+    {
+      "name": "더 뉴 메르세데스-AMG GT 55 4MATIC+",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4566&Tab=image&No=138386",
+      "image_url": "https://autoimg.danawa.com/gallery/4566/20250604_4566 (2).jpg",
+      "path": "vehicles\\벤츠\\The New AMG GT\\gallery\\02_더 뉴 메르세데스-AMG GT 55 4MATIC+.jpg"
+    },
+    {
+      "name": "더 뉴 메르세데스-AMG GT 55 4MATIC+",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4566&Tab=image&No=138387",
+      "image_url": "https://autoimg.danawa.com/gallery/4566/20250604_4566 (3).jpg",
+      "path": "vehicles\\벤츠\\The New AMG GT\\gallery\\03_더 뉴 메르세데스-AMG GT 55 4MATIC+.jpg"
+    },
+    {
+      "name": "더 뉴 메르세데스-AMG GT 55 4MATIC+",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4566&Tab=image&No=138388",
+      "image_url": "https://autoimg.danawa.com/gallery/4566/20250604_4566 (4).jpg",
+      "path": "vehicles\\벤츠\\The New AMG GT\\gallery\\04_더 뉴 메르세데스-AMG GT 55 4MATIC+.jpg"
+    }
+  ]
+}

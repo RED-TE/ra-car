@@ -1,0 +1,115 @@
+{
+  "brand": "렉서스",
+  "brand_id": "486",
+  "model_id": "4093",
+  "name": "ES",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4093",
+  "photo_code": "4093/52238",
+  "default_image_url": "https://autoimg.danawa.com/photo/4093/model_360.png",
+  "default_image_path": "vehicles\\렉서스\\ES\\model_360.png",
+  "colors": [
+    {
+      "name": "SONIC IRIDIUM",
+      "code": "C11",
+      "swatch": "#f1f3f2",
+      "image_url": "https://autoimg.danawa.com/photo/4093/52238/color_11_360.png",
+      "path": "vehicles\\렉서스\\ES\\colors\\01_SONIC IRIDIUM.png"
+    },
+    {
+      "name": "SONIC CHROME",
+      "code": "C12",
+      "swatch": "#171717",
+      "image_url": "https://autoimg.danawa.com/photo/4093/52238/color_12_360.png",
+      "path": "vehicles\\렉서스\\ES\\colors\\02_SONIC CHROME.png"
+    },
+    {
+      "name": "SONIC QUARTZ",
+      "code": "C13",
+      "swatch": "#eeeeee",
+      "image_url": "https://autoimg.danawa.com/photo/4093/52238/color_13_360.png",
+      "path": "vehicles\\렉서스\\ES\\colors\\03_SONIC QUARTZ.png"
+    },
+    {
+      "name": "SONIC TITANIUM",
+      "code": "C14",
+      "swatch": "#a1a29d",
+      "image_url": "https://autoimg.danawa.com/photo/4093/52238/color_14_360.png",
+      "path": "vehicles\\렉서스\\ES\\colors\\04_SONIC TITANIUM.png"
+    },
+    {
+      "name": "GRAPHITE BLACK GLASS FLAKE",
+      "code": "C16",
+      "swatch": "#313237",
+      "image_url": "https://autoimg.danawa.com/photo/4093/52238/color_16_360.png",
+      "path": "vehicles\\렉서스\\ES\\colors\\05_GRAPHITE BLACK GLASS FLAKE.png"
+    },
+    {
+      "name": "RED MICA CRYSTAL SHINE",
+      "code": "C17",
+      "swatch": "#931721",
+      "image_url": "https://autoimg.danawa.com/photo/4093/52238/color_17_360.png",
+      "path": "vehicles\\렉서스\\ES\\colors\\06_RED MICA CRYSTAL SHINE.png"
+    },
+    {
+      "name": "ICE ECRU MICA METALLIC",
+      "code": "C18",
+      "swatch": "#c5c2bb",
+      "image_url": "https://autoimg.danawa.com/photo/4093/52238/color_18_360.png",
+      "path": "vehicles\\렉서스\\ES\\colors\\07_ICE ECRU MICA METALLIC.png"
+    },
+    {
+      "name": "SUNLIGHT GREEN MICA METALLIC",
+      "code": "C19",
+      "swatch": "#768171",
+      "image_url": "https://autoimg.danawa.com/photo/4093/52238/color_19_360.png",
+      "path": "vehicles\\렉서스\\ES\\colors\\08_SUNLIGHT GREEN MICA METALLIC.png"
+    },
+    {
+      "name": "DEEP BLUE MICA",
+      "code": "C20",
+      "swatch": "#313f6c",
+      "image_url": "https://autoimg.danawa.com/photo/4093/52238/color_20_360.png",
+      "path": "vehicles\\렉서스\\ES\\colors\\09_DEEP BLUE MICA.png"
+    },
+    {
+      "name": "(F-SPORT) HEAT BLUE CONTRAST LAYERING",
+      "code": "C21",
+      "swatch": "#1c4e97",
+      "image_url": "https://autoimg.danawa.com/photo/4093/52238/color_21_360.png",
+      "path": "vehicles\\렉서스\\ES\\colors\\10_(F-SPORT) HEAT BLUE CONTRAST LAYERING.png"
+    },
+    {
+      "name": "(F-SPORT) WHITE NOVA GLASS FLAKE",
+      "code": "C22",
+      "swatch": "#f1f3f2",
+      "image_url": "https://autoimg.danawa.com/photo/4093/52238/color_22_360.png",
+      "path": "vehicles\\렉서스\\ES\\colors\\11_(F-SPORT) WHITE NOVA GLASS FLAKE.png"
+    }
+  ],
+  "gallery": [
+    {
+      "name": "2025ㅣES 300h",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4093&Tab=image&No=126888",
+      "image_url": "https://autoimg.danawa.com/gallery/4093/20240715_4093 (1).jpg",
+      "path": "vehicles\\렉서스\\ES\\gallery\\01_2025ㅣES 300h.jpg"
+    },
+    {
+      "name": "2025ㅣES 300h",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4093&Tab=image&No=126889",
+      "image_url": "https://autoimg.danawa.com/gallery/4093/20240715_4093 (2).jpg",
+      "path": "vehicles\\렉서스\\ES\\gallery\\02_2025ㅣES 300h.jpg"
+    },
+    {
+      "name": "2025ㅣES 300h",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4093&Tab=image&No=126890",
+      "image_url": "https://autoimg.danawa.com/gallery/4093/20240715_4093 (3).jpg",
+      "path": "vehicles\\렉서스\\ES\\gallery\\03_2025ㅣES 300h.jpg"
+    },
+    {
+      "name": "2025ㅣES 300h",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4093&Tab=image&No=126891",
+      "image_url": "https://autoimg.danawa.com/gallery/4093/20240715_4093 (4).jpg",
+      "path": "vehicles\\렉서스\\ES\\gallery\\04_2025ㅣES 300h.jpg"
+    }
+  ]
+}

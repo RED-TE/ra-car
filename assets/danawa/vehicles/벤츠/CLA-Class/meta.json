@@ -1,0 +1,101 @@
+{
+  "brand": "벤츠",
+  "brand_id": "349",
+  "model_id": "4461",
+  "name": "CLA-Class",
+  "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4461",
+  "photo_code": "4461/53413",
+  "default_image_url": "https://autoimg.danawa.com/photo/4461/53413/color_19_360.png",
+  "default_image_path": "vehicles\\벤츠\\CLA-Class\\model_360.png",
+  "colors": [
+    {
+      "name": "폴라 화이트 (149U)",
+      "code": "C11",
+      "swatch": "#ced3c8",
+      "image_url": "https://autoimg.danawa.com/photo/4461/53413/color_11_360.png",
+      "path": "vehicles\\벤츠\\CLA-Class\\colors\\01_폴라 화이트 (149U).png"
+    },
+    {
+      "name": "나이트 블랙 (696U)",
+      "code": "C12",
+      "swatch": "#070707",
+      "image_url": "https://autoimg.danawa.com/photo/4461/53413/color_12_360.png",
+      "path": "vehicles\\벤츠\\CLA-Class\\colors\\02_나이트 블랙 (696U).png"
+    },
+    {
+      "name": "코스모스 블랙 (191U) - 유료",
+      "code": "C14",
+      "swatch": "#0c0e14",
+      "image_url": "https://autoimg.danawa.com/photo/4461/53413/color_14_360.png",
+      "path": "vehicles\\벤츠\\CLA-Class\\colors\\03_코스모스 블랙 (191U) - 유료.png"
+    },
+    {
+      "name": "하이테크 실버 (922U) - 유료",
+      "code": "C15",
+      "swatch": "#97979a",
+      "image_url": "https://autoimg.danawa.com/photo/4461/53413/color_15_360.png",
+      "path": "vehicles\\벤츠\\CLA-Class\\colors\\04_하이테크 실버 (922U) - 유료.png"
+    },
+    {
+      "name": "마운틴 그레이 (787U) - 유료",
+      "code": "C16",
+      "swatch": "#3b3e46",
+      "image_url": "https://autoimg.danawa.com/photo/4461/53413/color_16_360.png",
+      "path": "vehicles\\벤츠\\CLA-Class\\colors\\05_마운틴 그레이 (787U) - 유료.png"
+    },
+    {
+      "name": "하이퍼 블루 (888U) - 유료",
+      "code": "C18",
+      "swatch": "#2480a0",
+      "image_url": "https://autoimg.danawa.com/photo/4461/53413/color_18_360.png",
+      "path": "vehicles\\벤츠\\CLA-Class\\colors\\06_하이퍼 블루 (888U) - 유료.png"
+    },
+    {
+      "name": "스펙트럴 블루 (970U) - 유료",
+      "code": "C19",
+      "swatch": "#1b568d",
+      "image_url": "https://autoimg.danawa.com/photo/4461/53413/color_19_360.png",
+      "path": "vehicles\\벤츠\\CLA-Class\\colors\\07_스펙트럴 블루 (970U) - 유료.png"
+    },
+    {
+      "name": "MANUFAKTUR 마운틴 그레이 (662U) - 유료",
+      "code": "C20",
+      "swatch": "#3f434b",
+      "image_url": "https://autoimg.danawa.com/photo/4461/53413/color_20_360.png",
+      "path": "vehicles\\벤츠\\CLA-Class\\colors\\08_MANUFAKTUR 마운틴 그레이 (662U) - 유료.png"
+    },
+    {
+      "name": "MANUFAKTUR 파타고니아 레드 (993U) - 유료",
+      "code": "C21",
+      "swatch": "#ba0f2b",
+      "image_url": "https://autoimg.danawa.com/photo/4461/53413/color_21_360.png",
+      "path": "vehicles\\벤츠\\CLA-Class\\colors\\09_MANUFAKTUR 파타고니아 레드 (993U) - 유료.png"
+    }
+  ],
+  "gallery": [
+    {
+      "name": "메르세데스-AMG CLA45 S 4MATIC+ 파이널 에디션",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4461&Tab=image&No=138880",
+      "image_url": "https://autoimg.danawa.com/gallery/4461/20250702_4461 (1).jpg",
+      "path": "vehicles\\벤츠\\CLA-Class\\gallery\\01_메르세데스-AMG CLA45 S 4MATIC+ 파이널 에디션.jpg"
+    },
+    {
+      "name": "메르세데스-AMG CLA45 S 4MATIC+ 파이널 에디션",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4461&Tab=image&No=138881",
+      "image_url": "https://autoimg.danawa.com/gallery/4461/20250702_4461 (2).jpg",
+      "path": "vehicles\\벤츠\\CLA-Class\\gallery\\02_메르세데스-AMG CLA45 S 4MATIC+ 파이널 에디션.jpg"
+    },
+    {
+      "name": "메르세데스-AMG CLA45 S 4MATIC+ 파이널 에디션",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4461&Tab=image&No=138882",
+      "image_url": "https://autoimg.danawa.com/gallery/4461/20250702_4461 (3).jpg",
+      "path": "vehicles\\벤츠\\CLA-Class\\gallery\\03_메르세데스-AMG CLA45 S 4MATIC+ 파이널 에디션.jpg"
+    },
+    {
+      "name": "메르세데스-AMG CLA45 S 4MATIC+ 파이널 에디션",
+      "source_url": "https://auto.danawa.com/auto/?Work=model&Model=4461&Tab=image&No=138883",
+      "image_url": "https://autoimg.danawa.com/gallery/4461/20250702_4461 (4).jpg",
+      "path": "vehicles\\벤츠\\CLA-Class\\gallery\\04_메르세데스-AMG CLA45 S 4MATIC+ 파이널 에디션.jpg"
+    }
+  ]
+}
