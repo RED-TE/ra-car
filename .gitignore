@@ -8,6 +8,7 @@ server-error.log
 data/admin-bootstrap.txt
 data/admin-calendar.json
 data/admin-users.json
+data/firebase-migration-result.json
 data/lead-meta.json
 data/leads.jsonl
 
