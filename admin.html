@@ -7,7 +7,7 @@
     <title>관리자 | RE:CAR</title>
     <link rel="icon" type="image/png" href="./assets/recar-favicon-20260518.png" />
     <link rel="apple-touch-icon" href="./assets/recar-favicon-20260518.png" />
-    <link rel="stylesheet" href="./styles.css?v=20260518-admin-cards" />
+    <link rel="stylesheet" href="./styles.css?v=20260518-admincrm" />
   </head>
   <body class="admin-page">
     <header class="simple-header">
@@ -24,7 +24,7 @@
 
         <div class="auth-grid is-login-only">
           <form id="loginForm" class="auth-card">
-            <h2>로그인</h2>
+            <h2>관리자 로그인</h2>
             <label>
               아이디
               <input name="username" type="text" autocomplete="username" placeholder="아이디" required />
@@ -33,13 +33,13 @@
               비밀번호
               <input name="password" type="password" autocomplete="current-password" placeholder="비밀번호" required />
             </label>
-            <button class="auth-submit" type="submit">관리자 로그인</button>
+            <button class="auth-submit" type="submit">로그인</button>
             <button id="showRegisterButton" class="auth-submit secondary" type="button">회원가입 신청</button>
             <p id="loginStatus" class="auth-status" role="status"></p>
           </form>
 
           <form id="registerForm" class="auth-card" hidden>
-            <h2>회원가입 신청</h2>
+            <h2>관리자 회원가입 신청</h2>
             <label>
               이름
               <input name="name" type="text" autocomplete="name" placeholder="예: 홍길동" required />
@@ -85,9 +85,9 @@
         <section class="admin-content">
           <section class="admin-topbar" id="dashboard">
             <div>
-              <p class="eyebrow">Lead Dashboard</p>
-              <h1>DB 관리</h1>
-              <p id="heroDescription">Firebase에 저장된 문의 DB와 관리자 권한을 확인합니다.</p>
+              <p class="eyebrow" id="viewEyebrow">Lead Dashboard</p>
+              <h1 id="viewTitle">HOME</h1>
+              <p id="heroDescription">오늘 바로 처리해야 할 문의부터 확인합니다.</p>
             </div>
             <div class="admin-session">
               <span id="sessionLabel">로그인됨</span>
@@ -96,6 +96,11 @@
                 <button id="downloadCsv" type="button">CSV 다운로드</button>
               </div>
             </div>
+          </section>
+
+          <section id="actionHome" class="admin-action-home" aria-label="오늘 처리할 DB">
+            <div class="home-action-grid" id="homeActionCards"></div>
+            <div class="home-priority-grid" id="homePriorityRows"></div>
           </section>
 
           <section id="requestPanel" class="user-panel super-only" hidden>
@@ -118,7 +123,7 @@
               <div>
                 <p class="eyebrow">Role Management</p>
                 <h2>등급 관리</h2>
-                <p>SD는 같은 그룹 AD의 DB를 보고 배정할 수 있고, AD는 본인 DB만 확인합니다.</p>
+                <p>SD는 같은 그룹의 AD DB를 보고 배정할 수 있고, AD는 본인 DB만 확인합니다.</p>
               </div>
             </div>
             <div class="db-bulk-actions">
@@ -129,7 +134,7 @@
             <div id="adminUserRows" class="user-list"></div>
           </section>
 
-          <section class="admin-today-panel" id="calendar" aria-label="오늘 할 일과 일정">
+          <section class="admin-today-panel" id="calendar" aria-label="오늘 할 일과 일정" hidden>
             <article class="today-memo-card">
               <div class="today-card-head">
                 <div>
@@ -141,7 +146,7 @@
               <textarea id="todayMemoInput" placeholder="예: 5월 20일 김고객 연락&#10;5월 22일 카니발 출고 일정 확인"></textarea>
               <div class="today-memo-actions">
                 <button id="saveTodayMemo" type="button">메모 저장</button>
-                <p id="calendarStatus" role="status">날짜가 들어간 메모는 달력 일정으로 자동 저장됩니다.</p>
+                <p id="calendarStatus" role="status">날짜가 들어간 메모는 달력 일정으로 함께 표시됩니다.</p>
               </div>
             </article>
 
@@ -167,7 +172,7 @@
             </article>
           </section>
 
-          <section class="db-board" id="db">
+          <section class="db-board" id="db" hidden>
             <div class="date-quickbar" aria-label="기간 선택">
               <strong>기간 선택</strong>
               <button class="is-active" type="button" data-period="all">전체</button>
@@ -197,17 +202,20 @@
               </label>
               <label>
                 통합조회
-                <input id="leadSearch" type="search" placeholder="고객명, 휴대폰번호, 희망차량, 특이사항" />
+                <input id="leadSearch" type="search" placeholder="고객명, 전화번호, 차량, 요청사항" />
               </label>
               <button id="resetFilters" type="button">초기화</button>
               <button id="searchButton" type="button">검색</button>
             </div>
 
             <div class="db-list-head">
-              <h2>DB 리스트 <span>(총 <strong id="leadCount">0</strong>)</span></h2>
+              <div>
+                <h2>DB 카드 <span>(총 <strong id="leadCount">0</strong>)</span></h2>
+                <p id="dbListHint">미배정 DB가 항상 먼저 표시됩니다.</p>
+              </div>
               <select id="pageSize" aria-label="목록 개수">
                 <option value="10">10개씩 보기</option>
-                <option value="20">20개씩 보기</option>
+                <option value="20" selected>20개씩 보기</option>
                 <option value="50">50개씩 보기</option>
                 <option value="all">전체 보기</option>
               </select>
@@ -217,16 +225,11 @@
               <select id="bulkAssigneeSelect" aria-label="담당자 선택">
                 <option value="">담당자 선택</option>
               </select>
-              <button id="bulkAssignButton" type="button">DB이동</button>
+              <button id="bulkAssignButton" type="button">선택 DB 배정</button>
+              <button id="showTestLeadsButton" type="button">테스트 DB 보기</button>
               <p id="adminStatus" class="admin-status">Firebase 문의 데이터를 불러오는 중입니다.</p>
             </div>
 
-            <div class="lead-table-wrap">
-              <table class="lead-table">
-                <thead id="leadHead"></thead>
-                <tbody id="leadRows"></tbody>
-              </table>
-            </div>
             <div id="leadCards" class="lead-card-list" aria-live="polite"></div>
           </section>
         </section>
@@ -251,16 +254,21 @@
       const auth = firebase.auth();
       const db = firebase.firestore();
       const serverTimestamp = firebase.firestore.FieldValue.serverTimestamp;
-      const progressOptions = ["선택", "부재", "상담", "심사", "출고", "발주", "부결"];
+      const progressOptions = ["선택", "미배정", "부재", "재연락 예정", "상담", "심사", "발주", "출고", "부결"];
       const statusClasses = {
         선택: "is-gray",
+        미배정: "is-unassigned",
         부재: "is-gray",
+        "재연락 예정": "is-yellow",
         상담: "is-blue",
         심사: "is-purple",
-        출고: "is-green",
         발주: "is-orange",
+        출고: "is-green",
         부결: "is-red",
       };
+      const kakaoUrl = "https://open.kakao.com/o/s7SanMki";
+      const finalStatuses = new Set(["출고", "부결"]);
+      const textSaveTimers = new Map();
 
       const state = {
         authUser: null,
@@ -269,7 +277,10 @@
         requests: [],
         groups: [],
         leads: [],
-        view: "db",
+        view: "dashboard",
+        smartFilter: "all",
+        activeStatusFilter: "all",
+        showTests: false,
       };
 
       const $ = (selector) => document.querySelector(selector);
@@ -281,6 +292,9 @@
       const registerStatus = $("#registerStatus");
       const requestPanel = $("#requestPanel");
       const rolePanel = $("#rolePanel");
+      const actionHome = $("#actionHome");
+      const calendarPanel = $("#calendar");
+      const dbBoard = $("#db");
       const pendingCount = $("#pendingCount");
       const requestRows = $("#requestRows");
       const adminUserRows = $("#adminUserRows");
@@ -288,10 +302,11 @@
       const sidebarUserRole = $("#sidebarUserRole");
       const sessionLabel = $("#sessionLabel");
       const heroDescription = $("#heroDescription");
-      const rows = $("#leadRows");
+      const viewTitle = $("#viewTitle");
+      const viewEyebrow = $("#viewEyebrow");
+      const homeActionCards = $("#homeActionCards");
+      const homePriorityRows = $("#homePriorityRows");
       const leadCards = $("#leadCards");
-      const leadHead = $("#leadHead");
-      const leadTable = $(".lead-table");
       const leadCount = $("#leadCount");
       const statusSummary = $("#statusSummary");
       const adminStatus = $("#adminStatus");
@@ -309,9 +324,7 @@
       const todayScheduleList = $("#todayScheduleList");
       const calendarGrid = $("#calendarGrid");
       const calendarMonthLabel = $("#calendarMonthLabel");
-      let activeStatusFilter = "all";
       let calendarCursor = new Date();
-      let saveTimer = null;
 
       function usernameToEmail(username) {
         const clean = String(username || "").trim().toLowerCase().replace(/[^a-z0-9._-]/g, "");
@@ -322,10 +335,29 @@
         return String(username || "").trim().toLowerCase().replace(/[^a-z0-9._-]/g, "").slice(0, 40);
       }
 
+      function normalizePhone(phone) {
+        return String(phone || "").replace(/\D/g, "");
+      }
+
       function roleLabel(role) {
         if (role === "super") return "최고 관리자";
         if (role === "sd") return "SD";
         return "AD";
+      }
+
+      function displayUserName(user) {
+        if (!user) return "관리자";
+        if (user.username === "jhxox666" && user.role === "super") return "최고 관리자";
+        const raw = String(user.name || user.username || "관리자");
+        if (raw.includes("??") || raw.includes("�")) return user.username || roleLabel(user.role);
+        return raw;
+      }
+
+      function displayAssigneeName(lead) {
+        if (lead.assignedAdminUsername === "jhxox666") return "최고 관리자";
+        const raw = String(lead.assignedAdminName || "");
+        if (raw.includes("??") || raw.includes("�")) return lead.assignedAdminUsername || "";
+        return raw;
       }
 
       function isSuper() {
@@ -349,75 +381,139 @@
           .replaceAll("'", "&#039;");
       }
 
-      function formatDate(value) {
-        if (!value) return "-";
+      function ymd(date) {
+        return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
+      }
+
+      function addDays(date, days) {
+        const next = new Date(date);
+        next.setDate(next.getDate() + days);
+        return next;
+      }
+
+      function dateFromValue(value) {
+        if (!value) return null;
         const raw = value.toDate ? value.toDate() : new Date(value);
-        if (Number.isNaN(raw.getTime())) return "-";
+        return Number.isNaN(raw.getTime()) ? null : raw;
+      }
+
+      function formatDate(value) {
+        const raw = dateFromValue(value);
+        if (!raw) return "-";
         return new Intl.DateTimeFormat("ko-KR", { dateStyle: "short", timeStyle: "short" }).format(raw);
       }
 
       function formatWon(value) {
+        if (typeof value === "string" && value.trim()) return value;
         const number = Number(value);
         if (!Number.isFinite(number) || number <= 0) return "";
         return `${number.toLocaleString("ko-KR")}원`;
       }
 
       function isTimeDealLead(lead) {
-        return lead.campaign === "time-deal" || lead.leadSource === "타임특가" || lead.campaignLabel === "타임특가";
+        const text = [lead.campaign, lead.leadSource, lead.campaignLabel, lead.inquiryType].join(" ");
+        return /time-deal|타임특가/i.test(text) || Number(lead.timeDealMonthlyPayment || 0) > 0;
       }
 
-      function renderLeadSource(lead) {
-        if (!isTimeDealLead(lead)) return "";
-
-        const original = formatWon(lead.timeDealOriginalMonthlyPayment);
-        const sale = formatWon(lead.timeDealMonthlyPayment);
-        const discount = formatWon(lead.timeDealDiscount);
-        const notes = [];
-
-        if (original && sale) notes.push(`기존 월 ${original} / 특가 월 ${sale}`);
-        if (discount) notes.push(`추가 할인 ${discount}`);
-
-        return `
-          <span class="lead-source-badge is-time-deal">타임특가 문의</span>
-          ${notes.length ? `<small class="lead-source-note">${escapeHtml(notes.join(" · "))}</small>` : ""}
-        `;
+      function inferInquiryType(lead) {
+        if (isTimeDealLead(lead)) return "타임특가";
+        if (/심사|승인|신용/i.test([lead.requestNote, lead.vehicle, lead.inquiryType].join(" "))) return "심사문의";
+        return "일반문의";
       }
 
-      function ymd(date) {
-        return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
+      function inferContractType(lead) {
+        const text = [lead.contractType, lead.useType, lead.requestNote, lead.vehicle].join(" ");
+        if (/리스/i.test(text)) return "리스";
+        if (/할부/i.test(text)) return "할부";
+        if (/렌트|장기렌트/i.test(text)) return "장기렌트";
+        return "미정";
       }
 
-      function showAuth(message = "") {
-        authSection.hidden = false;
-        adminShell.hidden = true;
-        loginStatus.textContent = message;
+      function isLikelyTestLead(lead) {
+        if (lead.isTestLead === true) return true;
+        const text = [lead.customerName, lead.vehicle, lead.requestNote, lead.adminMemo, lead.source].join(" ");
+        return /테스트|test|firebase 검증|스크립트 캐시|api firebase|캐시 제거/i.test(text);
       }
 
-      function showDashboard() {
-        authSection.hidden = true;
-        adminShell.hidden = false;
-        sidebarUserName.textContent = state.user.name || state.user.username || "관리자";
-        sidebarUserRole.textContent = roleLabel(state.user.role);
-        sessionLabel.textContent = `${state.user.name || state.user.username} · ${roleLabel(state.user.role)}`;
-        heroDescription.textContent = isSuper()
-          ? "전체 문의 DB와 가입 신청, 관리자 등급을 관리합니다."
-          : isSd()
-            ? "나와 같은 그룹의 AD DB를 확인하고 담당자를 배정합니다."
-            : "내게 배정된 문의 DB만 확인합니다.";
+      function normalizeLead(lead) {
+        const assignedAdminId = lead.assignedAdminId || "";
+        let progressStatus = progressOptions.includes(lead.progressStatus) ? lead.progressStatus : "";
+        if (!progressStatus) progressStatus = assignedAdminId ? "선택" : "미배정";
 
-        document.querySelectorAll(".super-only").forEach((node) => {
-          node.hidden = !isSuper();
-        });
+        return {
+          ...lead,
+          progressStatus,
+          adminMemo: lead.adminMemo || "",
+          dbManager: lead.dbManager || "",
+          assignedAdminId,
+          assignedAdminName: lead.assignedAdminName || "",
+          assignedAdminUsername: lead.assignedAdminUsername || "",
+          groupId: lead.groupId || "",
+          normalizedPhone: lead.normalizedPhone || normalizePhone(lead.phone),
+          followUpDate: lead.followUpDate || "",
+          leadSource: lead.leadSource || "",
+          campaign: lead.campaign || "",
+          campaignLabel: lead.campaignLabel || "",
+          statusTimeline: Array.isArray(lead.statusTimeline) ? lead.statusTimeline : [],
+          activityLog: Array.isArray(lead.activityLog) ? lead.activityLog : [],
+          contactHistory: Array.isArray(lead.contactHistory) ? lead.contactHistory : [],
+          timeDealOriginalMonthlyPayment: lead.timeDealOriginalMonthlyPayment || null,
+          timeDealMonthlyPayment: lead.timeDealMonthlyPayment || null,
+          timeDealDiscount: lead.timeDealDiscount || null,
+          isTestLead: isLikelyTestLead(lead),
+        };
       }
 
-      async function getAdminDoc(uid) {
-        const snap = await db.collection("admins").doc(uid).get();
-        return snap.exists ? { id: snap.id, ...snap.data() } : null;
+      function canSeeLead(lead) {
+        if (isSuper()) return true;
+        if (isSd()) return Boolean(lead.groupId && lead.groupId === state.user.groupId);
+        return lead.assignedAdminId === state.authUser.uid;
+      }
+
+      function assignableUsers() {
+        const approved = state.users.filter((user) => user.status === "approved" && ["sd", "ad", "super"].includes(user.role));
+        if (isSuper()) return approved;
+        if (isSd()) return approved.filter((user) => user.groupId === state.user.groupId && user.role === "ad");
+        return [];
+      }
+
+      function isUnassigned(lead) {
+        return !lead.assignedAdminId || lead.progressStatus === "미배정";
+      }
+
+      function isTodayContact(lead) {
+        return lead.followUpDate === ymd(new Date());
+      }
+
+      function isScheduledContact(lead) {
+        return Boolean(lead.followUpDate && lead.followUpDate > ymd(new Date()));
+      }
+
+      function daysSince(value) {
+        const date = dateFromValue(value);
+        if (!date) return 0;
+        return Math.floor((Date.now() - date.getTime()) / 86400000);
+      }
+
+      function isLongNoResponse(lead) {
+        return lead.progressStatus === "부결" || (["부재", "재연락 예정", "선택"].includes(lead.progressStatus) && daysSince(lead.updatedAt || lead.createdAt) >= 7);
+      }
+
+      function operationalLeads(includeTests = state.showTests) {
+        return state.leads.filter((lead) => includeTests ? lead.isTestLead : !lead.isTestLead);
+      }
+
+      function getDuplicateCount(lead) {
+        if (!lead.normalizedPhone) return 0;
+        return state.leads.filter((item) => item.normalizedPhone && item.normalizedPhone === lead.normalizedPhone).length;
+      }
+
+      function getAdminDoc(uid) {
+        return db.collection("admins").doc(uid).get().then((snap) => snap.exists ? { id: snap.id, ...snap.data() } : null);
       }
 
       async function bootstrapSuperIfNeeded(user, username) {
         if (normalizeUsername(username) !== "jhxox666") return null;
-
         const existing = await getAdminDoc(user.uid);
         if (existing) return existing;
 
@@ -436,6 +532,58 @@
         return getAdminDoc(user.uid);
       }
 
+      function showAuth(message = "") {
+        authSection.hidden = false;
+        adminShell.hidden = true;
+        loginStatus.textContent = message;
+      }
+
+      function showDashboardShell() {
+        authSection.hidden = true;
+        adminShell.hidden = false;
+        sidebarUserName.textContent = displayUserName(state.user);
+        sidebarUserRole.textContent = roleLabel(state.user.role);
+        sessionLabel.textContent = `${displayUserName(state.user)} · ${roleLabel(state.user.role)}`;
+        document.querySelectorAll(".super-only").forEach((node) => {
+          node.hidden = !isSuper();
+        });
+        $("#downloadCsv").hidden = !isSuper();
+        showAdminView(state.view || "dashboard", false);
+      }
+
+      function showAdminView(view, shouldRender = true) {
+        state.view = view;
+        if (view === "myDb") state.smartFilter = "mine";
+        if (view === "dashboard") state.smartFilter = "all";
+        if (view === "db" && state.smartFilter === "mine") state.smartFilter = "all";
+
+        const isDashboard = view === "dashboard";
+        actionHome.hidden = !isDashboard;
+        dbBoard.hidden = !(view === "db" || view === "myDb");
+        calendarPanel.hidden = view !== "calendar";
+        requestPanel.hidden = !(isSuper() && view === "requests");
+        rolePanel.hidden = !(isSuper() && view === "roles");
+
+        const titles = {
+          dashboard: ["Lead Dashboard", "HOME", "오늘 바로 처리해야 할 DB를 먼저 보여드립니다."],
+          myDb: ["My Leads", "나의 DB", "내가 담당하는 문의만 확인합니다."],
+          db: ["Lead Management", "DB 관리", "미배정 DB를 먼저 배정하고 진행상황을 관리합니다."],
+          calendar: ["Calendar", "달력메모장", "오늘 연락할 고객과 메모 일정을 확인합니다."],
+          roles: ["Role Management", "등급 관리", "SD/AD 권한과 그룹을 관리합니다."],
+          requests: ["Join Requests", "가입 신청", "관리자 가입 신청을 승인하거나 거절합니다."],
+        };
+        const [eyebrow, title, desc] = titles[view] || titles.dashboard;
+        viewEyebrow.textContent = eyebrow;
+        viewTitle.textContent = title;
+        heroDescription.textContent = desc;
+
+        document.querySelectorAll("[data-admin-nav]").forEach((item) => {
+          item.classList.toggle("is-active", item.dataset.adminNav === view);
+        });
+
+        if (shouldRender) renderAll();
+      }
+
       async function loadCurrentUser(user, usernameForBootstrap = "") {
         const admin = (await getAdminDoc(user.uid)) || (await bootstrapSuperIfNeeded(user, usernameForBootstrap));
         if (!admin || admin.status !== "approved") {
@@ -447,7 +595,7 @@
 
         state.authUser = user;
         state.user = admin;
-        showDashboard();
+        showDashboardShell();
         await loadAllData();
       }
 
@@ -459,10 +607,10 @@
             ? db.collection("admins").where("groupId", "==", state.user.groupId || "")
             : db.collection("admins").where(firebase.firestore.FieldPath.documentId(), "==", state.authUser.uid);
         const leadQuery = isSuper()
-          ? db.collection("leads").orderBy("createdAt", "desc").limit(500)
+          ? db.collection("leads").orderBy("createdAt", "desc").limit(700)
           : isSd()
-            ? db.collection("leads").where("groupId", "==", state.user.groupId || "").limit(500)
-            : db.collection("leads").where("assignedAdminId", "==", state.authUser.uid).limit(500);
+            ? db.collection("leads").where("groupId", "==", state.user.groupId || "").limit(700)
+            : db.collection("leads").where("assignedAdminId", "==", state.authUser.uid).limit(700);
 
         const [userSnap, requestSnap, groupSnap, leadSnap] = await Promise.all([
           userQuery.get(),
@@ -481,42 +629,11 @@
         adminStatus.textContent = "Firebase DB를 표시합니다.";
       }
 
-      function normalizeLead(lead) {
-        return {
-          ...lead,
-          progressStatus: progressOptions.includes(lead.progressStatus) ? lead.progressStatus : "선택",
-          adminMemo: lead.adminMemo || "",
-          dbManager: lead.dbManager || "",
-          assignedAdminId: lead.assignedAdminId || "",
-          assignedAdminName: lead.assignedAdminName || "",
-          assignedAdminUsername: lead.assignedAdminUsername || "",
-          groupId: lead.groupId || "",
-          leadSource: lead.leadSource || "",
-          campaign: lead.campaign || "",
-          campaignLabel: lead.campaignLabel || "",
-          timeDealOriginalMonthlyPayment: lead.timeDealOriginalMonthlyPayment || null,
-          timeDealMonthlyPayment: lead.timeDealMonthlyPayment || null,
-          timeDealDiscount: lead.timeDealDiscount || null,
-        };
-      }
-
-      function canSeeLead(lead) {
-        if (isSuper()) return true;
-        if (isSd()) return lead.groupId && lead.groupId === state.user.groupId;
-        return lead.assignedAdminId === state.authUser.uid;
-      }
-
-      function assignableUsers() {
-        const approved = state.users.filter((user) => user.status === "approved" && ["sd", "ad", "super"].includes(user.role));
-        if (isSuper()) return approved;
-        if (isSd()) return approved.filter((user) => user.groupId === state.user.groupId && user.role === "ad");
-        return [];
-      }
-
       function renderAll() {
         renderRequests();
         renderRoles();
         renderSelectors();
+        renderHomeActions();
         renderStatusSummary();
         renderLeads();
         renderCalendar();
@@ -526,56 +643,49 @@
         if (!isSuper()) return;
         const pending = state.requests.filter((request) => request.status === "pending");
         pendingCount.textContent = pending.length;
-
         if (!state.requests.length) {
           requestRows.innerHTML = `<p class="empty-state">가입 신청이 없습니다.</p>`;
           return;
         }
 
-        requestRows.innerHTML = state.requests
-          .map((request) => `
-            <article class="user-card">
-              <div>
-                <strong>${escapeHtml(request.name || request.username)}</strong>
-                <span>${escapeHtml(request.username)} · ${escapeHtml(request.status === "approved" ? "승인됨" : request.status === "rejected" ? "거절됨" : "승인 대기")}</span>
-                <small>신청일 ${escapeHtml(formatDate(request.createdAt))}</small>
-              </div>
-              <div class="user-actions">
-                ${request.status !== "approved" ? `<button type="button" data-request-action="approved" data-uid="${escapeHtml(request.uid)}">승인</button>` : ""}
-                ${request.status !== "rejected" ? `<button type="button" data-request-action="rejected" data-uid="${escapeHtml(request.uid)}">거절</button>` : ""}
-              </div>
-            </article>
-          `)
-          .join("");
+        requestRows.innerHTML = state.requests.map((request) => `
+          <article class="user-card">
+            <div>
+              <strong>${escapeHtml(request.name || request.username)}</strong>
+              <span>${escapeHtml(request.username)} · ${escapeHtml(request.status === "approved" ? "승인됨" : request.status === "rejected" ? "거절됨" : "승인 대기")}</span>
+              <small>신청일 ${escapeHtml(formatDate(request.createdAt))}</small>
+            </div>
+            <div class="user-actions">
+              ${request.status !== "approved" ? `<button type="button" data-request-action="approved" data-uid="${escapeHtml(request.uid)}">승인</button>` : ""}
+              ${request.status !== "rejected" ? `<button type="button" data-request-action="rejected" data-uid="${escapeHtml(request.uid)}">거절</button>` : ""}
+            </div>
+          </article>
+        `).join("");
       }
 
       function renderRoles() {
         if (!isSuper()) return;
-        const groupOptions = `<option value="">그룹 없음</option>${state.groups
-          .map((group) => `<option value="${escapeHtml(group.id)}">${escapeHtml(group.name)}</option>`)
-          .join("")}`;
+        const groupOptions = `<option value="">그룹 없음</option>${state.groups.map((group) => `<option value="${escapeHtml(group.id)}">${escapeHtml(group.name)}</option>`).join("")}`;
+        const approved = state.users.filter((user) => user.status === "approved");
 
-        adminUserRows.innerHTML = state.users
-          .filter((user) => user.status === "approved")
-          .map((user) => `
-            <article class="user-card">
-              <div>
-                <strong>${escapeHtml(user.name || user.username)}</strong>
-                <span>${escapeHtml(user.username)} · ${escapeHtml(roleLabel(user.role))}</span>
-              </div>
-              <div class="user-actions">
-                <select data-role-user="${escapeHtml(user.id)}" ${user.id === state.authUser.uid ? "disabled" : ""}>
-                  <option value="ad"${user.role === "ad" ? " selected" : ""}>AD</option>
-                  <option value="sd"${user.role === "sd" ? " selected" : ""}>SD</option>
-                  <option value="super"${user.role === "super" ? " selected" : ""}>최고</option>
-                </select>
-                <select data-group-user="${escapeHtml(user.id)}">
-                  ${groupOptions}
-                </select>
-              </div>
-            </article>
-          `)
-          .join("");
+        adminUserRows.innerHTML = approved.length ? approved.map((user) => `
+          <article class="user-card">
+            <div>
+              <strong>${escapeHtml(displayUserName(user))}</strong>
+              <span>${escapeHtml(user.username)} · ${escapeHtml(roleLabel(user.role))}</span>
+            </div>
+            <div class="user-actions">
+              <select data-role-user="${escapeHtml(user.id)}" ${user.id === state.authUser.uid ? "disabled" : ""}>
+                <option value="ad"${user.role === "ad" ? " selected" : ""}>AD</option>
+                <option value="sd"${user.role === "sd" ? " selected" : ""}>SD</option>
+                <option value="super"${user.role === "super" ? " selected" : ""}>최고</option>
+              </select>
+              <select data-group-user="${escapeHtml(user.id)}">
+                ${groupOptions}
+              </select>
+            </div>
+          </article>
+        `).join("") : `<p class="empty-state">승인된 관리자가 없습니다.</p>`;
 
         adminUserRows.querySelectorAll("[data-group-user]").forEach((select) => {
           const user = state.users.find((item) => item.id === select.dataset.groupUser);
@@ -585,12 +695,70 @@
 
       function renderSelectors() {
         const users = assignableUsers();
-        const options = users.map((user) => `<option value="${escapeHtml(user.id)}">${escapeHtml(user.name || user.username)}</option>`).join("");
+        const options = users.map((user) => `<option value="${escapeHtml(user.id)}">${escapeHtml(displayUserName(user))}</option>`).join("");
         assigneeFilter.innerHTML = `<option value="">전체</option>${options}`;
         bulkAssigneeSelect.innerHTML = `<option value="">담당자 선택</option>${options}`;
         assigneeFilter.disabled = !canAssignDb();
         bulkAssigneeSelect.disabled = !canAssignDb();
         $("#bulkAssignButton").disabled = !canAssignDb();
+        $("#showTestLeadsButton").hidden = !isSuper();
+      }
+
+      function countBy(predicate) {
+        return operationalLeads(false).filter(predicate).length;
+      }
+
+      function renderHomeActions() {
+        const cards = [
+          ["unassigned", "미배정 DB", countBy(isUnassigned), "담당자 배정이 필요한 문의입니다."],
+          ["todayContact", "오늘 연락할 DB", countBy(isTodayContact), "오늘 재연락 날짜가 잡힌 DB입니다."],
+          ["scheduled", "재연락 예정 DB", countBy(isScheduledContact), "앞으로 다시 연락할 고객입니다."],
+          ["timeDeal", "신규 타임특가 문의", countBy(isTimeDealLead), "타임특가 버튼으로 들어온 문의입니다."],
+          ["inProgress", "내 진행 중 DB", countBy((lead) => !finalStatuses.has(lead.progressStatus) && !isUnassigned(lead) && (isSuper() || lead.assignedAdminId === state.authUser?.uid || isSd())), "상담부터 발주 전까지 놓치면 안 되는 DB입니다."],
+          ["stale", "부결/장기미응답 DB", countBy(isLongNoResponse), "부결 또는 7일 이상 반응이 없는 DB입니다."],
+        ];
+
+        homeActionCards.innerHTML = cards.map(([filter, title, count, desc], index) => `
+          <button class="home-action-card ${filter === "unassigned" ? "is-primary" : ""}" type="button" data-smart-filter="${filter}">
+            <span>0${index + 1}</span>
+            <strong>${escapeHtml(title)}</strong>
+            <em>${escapeHtml(count)}건</em>
+            <small>${escapeHtml(desc)}</small>
+          </button>
+        `).join("");
+
+        const unassigned = operationalLeads(false).filter(isUnassigned).slice(0, 5);
+        const today = operationalLeads(false).filter(isTodayContact).slice(0, 5);
+        homePriorityRows.innerHTML = `
+          ${renderPriorityColumn("미배정 DB 상단 고정", "담당자를 먼저 배정해야 합니다.", unassigned, "unassigned")}
+          ${renderPriorityColumn("오늘 연락할 DB", "오늘 재연락 약속이 있는 고객입니다.", today, "todayContact")}
+        `;
+      }
+
+      function renderPriorityColumn(title, desc, leads, filter) {
+        return `
+          <article class="home-priority-card">
+            <div>
+              <h2>${escapeHtml(title)}</h2>
+              <p>${escapeHtml(desc)}</p>
+            </div>
+            <div class="priority-lead-list">
+              ${leads.length ? leads.map((lead) => `
+                <button type="button" data-smart-filter="${escapeHtml(filter)}">
+                  <strong>${escapeHtml(lead.customerName || "이름 미입력")}</strong>
+                  <span>${escapeHtml(lead.vehicle || "희망차량 미입력")}</span>
+                  <em>${escapeHtml(lead.phone || "-")}</em>
+                </button>
+              `).join("") : `<p class="empty-state">표시할 DB가 없습니다.</p>`}
+            </div>
+          </article>
+        `;
+      }
+
+      function baseForCurrentView() {
+        let leads = operationalLeads(state.smartFilter === "test");
+        if (state.view === "myDb" || state.smartFilter === "mine") leads = leads.filter((lead) => lead.assignedAdminId === state.authUser?.uid);
+        return leads;
       }
 
       function filteredLeads() {
@@ -598,9 +766,24 @@
         const startDate = filterStart.value ? new Date(`${filterStart.value}T00:00:00`) : null;
         const endDate = filterEnd.value ? new Date(`${filterEnd.value}T23:59:59`) : null;
         const assigneeId = assigneeFilter.value;
+        let leads = baseForCurrentView();
 
-        return state.leads.filter((lead) => {
-          const createdAt = lead.createdAt?.toDate ? lead.createdAt.toDate() : new Date(lead.createdAt || 0);
+        const smartPredicates = {
+          all: () => true,
+          mine: (lead) => lead.assignedAdminId === state.authUser?.uid,
+          unassigned: isUnassigned,
+          todayContact: isTodayContact,
+          scheduled: isScheduledContact,
+          timeDeal: isTimeDealLead,
+          inProgress: (lead) => !finalStatuses.has(lead.progressStatus) && !isUnassigned(lead),
+          stale: isLongNoResponse,
+          test: (lead) => lead.isTestLead,
+        };
+        const smartPredicate = smartPredicates[state.smartFilter] || smartPredicates.all;
+        leads = leads.filter(smartPredicate);
+
+        return leads.filter((lead) => {
+          const createdAt = dateFromValue(lead.createdAt) || new Date(0);
           const text = [
             lead.customerName,
             lead.phone,
@@ -610,7 +793,6 @@
             lead.adminMemo,
             lead.dbManager,
             lead.assignedAdminName,
-            lead.source,
             lead.leadSource,
             lead.campaign,
             lead.campaignLabel,
@@ -619,19 +801,33 @@
             && (!startDate || createdAt >= startDate)
             && (!endDate || createdAt <= endDate)
             && (!assigneeId || lead.assignedAdminId === assigneeId)
-            && (activeStatusFilter === "all" || lead.progressStatus === activeStatusFilter);
-        });
+            && (state.activeStatusFilter === "all" || lead.progressStatus === state.activeStatusFilter);
+        }).sort(prioritySort);
+      }
+
+      function prioritySort(a, b) {
+        const rank = (lead) => {
+          if (isUnassigned(lead)) return 0;
+          if (isTodayContact(lead)) return 1;
+          if (lead.progressStatus === "재연락 예정") return 2;
+          if (!finalStatuses.has(lead.progressStatus)) return 3;
+          return 4;
+        };
+        const rankDiff = rank(a) - rank(b);
+        if (rankDiff) return rankDiff;
+        return (dateFromValue(b.createdAt)?.getTime() || 0) - (dateFromValue(a.createdAt)?.getTime() || 0);
       }
 
       function renderStatusSummary() {
-        const counts = state.leads.reduce((acc, lead) => {
+        const base = baseForCurrentView();
+        const counts = base.reduce((acc, lead) => {
           acc.all += 1;
           acc[lead.progressStatus] = (acc[lead.progressStatus] || 0) + 1;
           return acc;
         }, { all: 0 });
         const cards = [{ key: "all", label: "전체", className: "is-dark" }, ...progressOptions.map((status) => ({ key: status, label: status, className: statusClasses[status] || "is-gray" }))];
         statusSummary.innerHTML = cards.map((card) => `
-          <button class="status-card ${card.className}${activeStatusFilter === card.key ? " is-active" : ""}" type="button" data-status-filter="${escapeHtml(card.key)}">
+          <button class="status-card ${card.className}${state.activeStatusFilter === card.key ? " is-active" : ""}" type="button" data-status-filter="${escapeHtml(card.key)}">
             <span>${escapeHtml(card.label)}</span>
             <strong>${escapeHtml(counts[card.key] || 0)}건</strong>
           </button>
@@ -639,132 +835,241 @@
       }
 
       function renderLeads() {
-        leadTable.classList.toggle("is-super", canAssignDb());
-        leadHead.innerHTML = `
-          <tr>
-            <th><input id="selectAllLeads" type="checkbox" aria-label="전체 선택" /></th>
-            <th>접수일</th>
-            <th>고객명</th>
-            <th>휴대폰번호</th>
-            <th>희망차량</th>
-            <th>특이사항</th>
-            <th>진행상황</th>
-            ${canAssignDb() ? "<th>DB 배정</th>" : ""}
-            <th>담당자 메모</th>
-            <th>DB담당자</th>
-          </tr>
-        `;
-
         const leads = filteredLeads();
         leadCount.textContent = leads.length;
-        const visible = pageSize.value === "all" ? leads : leads.slice(0, Number(pageSize.value || 10));
-        const colspan = canAssignDb() ? 10 : 9;
+        const visible = pageSize.value === "all" ? leads : leads.slice(0, Number(pageSize.value || 20));
 
         if (!visible.length) {
-          rows.innerHTML = `<tr><td colspan="${colspan}">표시할 문의 DB가 없습니다.</td></tr>`;
           leadCards.innerHTML = `<p class="empty-state">표시할 문의 DB가 없습니다.</p>`;
           return;
         }
 
-        rows.innerHTML = visible.map((lead) => `
-          <tr>
-            <td><input class="lead-select" type="checkbox" value="${escapeHtml(lead.id)}" /></td>
-            <td>${escapeHtml(formatDate(lead.createdAt))}</td>
-            <td><input class="db-manager-input" data-lead-field="customerName" data-lead-id="${escapeHtml(lead.id)}" value="${escapeHtml(lead.customerName || "")}" /></td>
-            <td><a href="tel:${escapeHtml(lead.phone || "")}">${escapeHtml(lead.phone || "-")}</a></td>
-            <td><div class="lead-vehicle-cell"><strong>${escapeHtml(lead.vehicle || "-")}</strong>${renderLeadSource(lead)}</div></td>
-            <td>${escapeHtml(lead.requestNote || "-")}</td>
-            <td>
-              <select class="status-select${lead.progressStatus !== "선택" ? " has-value" : ""}" data-lead-field="progressStatus" data-lead-id="${escapeHtml(lead.id)}">
-                ${progressOptions.map((option) => `<option value="${escapeHtml(option)}"${lead.progressStatus === option ? " selected" : ""}>${escapeHtml(option)}</option>`).join("")}
-              </select>
-            </td>
-            ${canAssignDb() ? `<td>${renderAssignSelect(lead)}</td>` : ""}
-            <td><textarea class="admin-memo-input" data-lead-field="adminMemo" data-lead-id="${escapeHtml(lead.id)}" placeholder="상담 메모를 입력하세요">${escapeHtml(lead.adminMemo)}</textarea></td>
-            <td><input class="db-manager-input" data-lead-field="dbManager" data-lead-id="${escapeHtml(lead.id)}" value="${escapeHtml(lead.dbManager)}" placeholder="이름" /></td>
-          </tr>
-        `).join("");
-
-        leadCards.innerHTML = visible.map((lead) => renderLeadCard(lead)).join("");
+        leadCards.innerHTML = visible.map(renderLeadCard).join("");
       }
 
       function renderLeadCard(lead) {
-        const assignee = lead.assignedAdminName ? `${escapeHtml(lead.assignedAdminName)} 배정` : "미배정";
+        const duplicateCount = getDuplicateCount(lead);
+        const statusClass = statusClasses[lead.progressStatus] || "is-gray";
+        const inquiryType = inferInquiryType(lead);
+        const contractType = inferContractType(lead);
+        const monthly = formatWon(lead.timeDealMonthlyPayment || lead.monthlyPayment || lead.estimatedMonthlyPayment || lead.monthlyAmount);
+        const initialCost = formatWon(lead.initialCost || lead.deposit || lead.prepay || lead.depositAmount) || "미정";
+        const phone = lead.phone || "";
+        const telHref = phone ? `tel:${normalizePhone(phone)}` : "#";
+        const needsFollowDate = lead.progressStatus === "부재" && !lead.followUpDate;
+
         return `
-          <article class="lead-card">
-            <div class="lead-card-check">
-              <input class="lead-select" type="checkbox" value="${escapeHtml(lead.id)}" aria-label="${escapeHtml(lead.customerName || "고객")} 선택" />
-              <span class="lead-card-status ${statusClasses[lead.progressStatus] || "is-gray"}">${escapeHtml(lead.progressStatus || "선택")}</span>
+          <article class="lead-card ${isUnassigned(lead) ? "is-unassigned-card" : ""}${lead.isTestLead ? " is-test-card" : ""}">
+            <div class="lead-card-top">
+              <label class="lead-check">
+                <input class="lead-select" type="checkbox" value="${escapeHtml(lead.id)}" />
+                <span></span>
+              </label>
+              <div class="lead-main-id">
+                <input class="lead-name-input" data-lead-field="customerName" data-lead-id="${escapeHtml(lead.id)}" value="${escapeHtml(lead.customerName || "")}" placeholder="고객명" />
+                <a href="${escapeHtml(telHref)}" data-lead-action="phone" data-lead-id="${escapeHtml(lead.id)}">${escapeHtml(phone || "연락처 없음")}</a>
+                <small>${escapeHtml(formatDate(lead.createdAt))}</small>
+              </div>
+              <div class="lead-badge-row">
+                <span class="lead-card-status ${statusClass}">${escapeHtml(lead.progressStatus)}</span>
+                <span class="lead-type-badge">${escapeHtml(inquiryType)}</span>
+                ${displayAssigneeName(lead) ? `<span class="lead-assignee-badge">${escapeHtml(displayAssigneeName(lead))}</span>` : `<span class="lead-assignee-badge is-empty">미배정</span>`}
+                ${duplicateCount > 1 ? `<span class="lead-duplicate-badge">중복 ${duplicateCount}건</span>` : ""}
+                ${lead.isTestLead ? `<span class="lead-test-badge">테스트</span>` : ""}
+              </div>
             </div>
 
-            <div class="lead-card-identity">
-              <strong>${escapeHtml(lead.customerName || "이름 미입력")}</strong>
-              <a href="tel:${escapeHtml(lead.phone || "")}">${escapeHtml(lead.phone || "연락처 없음")}</a>
-              <small>${escapeHtml(formatDate(lead.createdAt))}</small>
+            <div class="lead-card-body-grid">
+              ${renderInfoItem("희망차량", lead.vehicle || "-")}
+              ${renderInfoItem("계약유형", contractType)}
+              ${renderInfoItem("예상 월납입금", monthly || "상담 후 확인")}
+              ${renderInfoItem("초기비용", initialCost)}
+              ${renderInfoItem("요청사항", lead.requestNote || "요청사항 없음", "is-wide")}
+              ${renderTimeDealInfo(lead)}
             </div>
 
-            <div class="lead-card-detail">
-              <span>희망차량</span>
-              <strong>${escapeHtml(lead.vehicle || "-")}</strong>
-              ${renderLeadSource(lead)}
-              <p>${escapeHtml(lead.requestNote || "요청사항 없음")}</p>
-            </div>
+            ${needsFollowDate ? `<p class="lead-warning">부재 상태는 재연락 날짜를 지정해야 놓치지 않습니다.</p>` : ""}
 
-            <div class="lead-card-control">
+            <div class="lead-card-control-grid">
               <label>
-                진행상황
-                <select class="status-select${lead.progressStatus !== "선택" ? " has-value" : ""}" data-lead-field="progressStatus" data-lead-id="${escapeHtml(lead.id)}">
+                상태 변경
+                <select class="status-select ${lead.progressStatus !== "선택" ? "has-value" : ""}" data-lead-field="progressStatus" data-lead-id="${escapeHtml(lead.id)}">
                   ${progressOptions.map((option) => `<option value="${escapeHtml(option)}"${lead.progressStatus === option ? " selected" : ""}>${escapeHtml(option)}</option>`).join("")}
                 </select>
               </label>
-              ${
-                canAssignDb()
-                  ? `<label>DB 배정${renderAssignSelect(lead)}</label>`
-                  : `<label>배정상태<span class="lead-card-assignee">${assignee}</span></label>`
-              }
-              <label class="lead-card-memo">
-                담당자 메모
-                <textarea class="admin-memo-input" data-lead-field="adminMemo" data-lead-id="${escapeHtml(lead.id)}" placeholder="상담 메모를 입력하세요">${escapeHtml(lead.adminMemo)}</textarea>
+              <label>
+                담당자 배정
+                ${canAssignDb() ? renderAssignSelect(lead) : `<span class="readonly-pill">${escapeHtml(displayAssigneeName(lead) || "미배정")}</span>`}
               </label>
               <label>
-                DB담당자
-                <input class="db-manager-input" data-lead-field="dbManager" data-lead-id="${escapeHtml(lead.id)}" value="${escapeHtml(lead.dbManager)}" placeholder="이름" />
+                재연락 날짜
+                <input type="date" data-lead-field="followUpDate" data-lead-id="${escapeHtml(lead.id)}" value="${escapeHtml(lead.followUpDate || "")}" />
+              </label>
+              <label>
+                DB 담당자
+                <input data-lead-field="dbManager" data-lead-id="${escapeHtml(lead.id)}" value="${escapeHtml(lead.dbManager || "")}" placeholder="이름" />
+              </label>
+              <label class="lead-card-memo">
+                담당자 메모
+                <textarea data-lead-field="adminMemo" data-lead-id="${escapeHtml(lead.id)}" placeholder="상담 내용, 다음 액션, 고객 성향을 남겨주세요.">${escapeHtml(lead.adminMemo)}</textarea>
               </label>
             </div>
+
+            <div class="lead-card-actions">
+              <button type="button" data-lead-action="follow-today" data-lead-id="${escapeHtml(lead.id)}">오늘 다시 연락</button>
+              <button type="button" data-lead-action="follow-tomorrow" data-lead-id="${escapeHtml(lead.id)}">내일 다시 연락</button>
+              <a class="lead-action-link" href="${escapeHtml(telHref)}" data-lead-action="phone" data-lead-id="${escapeHtml(lead.id)}">전화 클릭</a>
+              <a class="lead-action-link" href="${kakaoUrl}" target="_blank" rel="noopener" data-lead-action="kakao" data-lead-id="${escapeHtml(lead.id)}">카카오톡 클릭</a>
+              ${isSuper() ? `<button class="is-danger" type="button" data-lead-action="delete" data-lead-id="${escapeHtml(lead.id)}">${lead.isTestLead ? "테스트 삭제" : "DB 삭제"}</button>` : ""}
+            </div>
+
+            ${renderTimeline(lead)}
           </article>
         `;
       }
 
+      function renderInfoItem(label, value, className = "") {
+        return `
+          <div class="lead-info-item ${className}">
+            <span>${escapeHtml(label)}</span>
+            <strong>${escapeHtml(value)}</strong>
+          </div>
+        `;
+      }
+
+      function renderTimeDealInfo(lead) {
+        if (!isTimeDealLead(lead)) return renderInfoItem("타임특가 가격 정보", "해당 없음");
+        const original = formatWon(lead.timeDealOriginalMonthlyPayment);
+        const sale = formatWon(lead.timeDealMonthlyPayment);
+        const discount = formatWon(lead.timeDealDiscount);
+        const totalSupport = formatWon(Number(lead.timeDealDiscount || 0) * 60);
+        return `
+          <div class="lead-info-item is-deal">
+            <span>타임특가 가격 정보</span>
+            <strong>${original ? `기존 ${original}` : "기존가 확인 중"} → ${sale || "할인가 확인 중"}</strong>
+            <small>${totalSupport ? `5년 총 지원 ${totalSupport}` : ""}${discount ? ` · 월 ${discount} 인하 기준` : ""}</small>
+          </div>
+        `;
+      }
+
       function renderAssignSelect(lead) {
-        const options = assignableUsers().map((user) => `<option value="${escapeHtml(user.id)}"${lead.assignedAdminId === user.id ? " selected" : ""}>${escapeHtml(user.name || user.username)}</option>`).join("");
+        const options = assignableUsers().map((user) => `<option value="${escapeHtml(user.id)}"${lead.assignedAdminId === user.id ? " selected" : ""}>${escapeHtml(displayUserName(user))}</option>`).join("");
         return `
           <select class="assignment-select" data-lead-field="assignedAdminId" data-lead-id="${escapeHtml(lead.id)}">
             <option value="">미배정</option>
             ${options}
           </select>
-          <small>${lead.assignedAdminName ? `${escapeHtml(lead.assignedAdminName)}에게 배정됨` : "아직 배정 전"}</small>
         `;
       }
 
-      async function updateLead(leadId, changes) {
+      function renderTimeline(lead) {
+        const logs = [
+          ...(lead.statusTimeline || []).map((item) => ({ ...item, kind: "상태" })),
+          ...(lead.activityLog || []).map((item) => ({ ...item, kind: "활동" })),
+          ...(lead.contactHistory || []).map((item) => ({ ...item, kind: "연락" })),
+        ].filter(Boolean).slice(-5).reverse();
+        if (!logs.length) return "";
+        return `
+          <details class="lead-timeline">
+            <summary>변경 이력 ${logs.length}건</summary>
+            <ul>
+              ${logs.map((log) => `<li><span>${escapeHtml(log.kind)}</span><strong>${escapeHtml(log.message || `${log.from || ""} → ${log.to || ""}`)}</strong><em>${escapeHtml(log.byName || log.by || "")}</em></li>`).join("")}
+            </ul>
+          </details>
+        `;
+      }
+
+      function permittedChanges(changes) {
+        if (isSuper()) return { ...changes };
+        if (isSd()) {
+          const allowed = ["customerName", "progressStatus", "adminMemo", "dbManager", "assignedAdminId", "followUpDate", "lastContactAction", "lastContactActionAt", "lastContactActionBy", "statusTimeline", "activityLog", "contactHistory"];
+          return Object.fromEntries(Object.entries(changes).filter(([key]) => allowed.includes(key)));
+        }
+        const allowed = ["customerName", "progressStatus", "adminMemo", "dbManager", "followUpDate", "lastContactAction", "lastContactActionAt", "lastContactActionBy", "statusTimeline", "activityLog", "contactHistory"];
+        return Object.fromEntries(Object.entries(changes).filter(([key]) => allowed.includes(key)));
+      }
+
+      async function updateLead(leadId, rawChanges, options = {}) {
         const lead = state.leads.find((item) => item.id === leadId);
         if (!lead) return;
 
-        if (changes.assignedAdminId !== undefined) {
+        const changes = permittedChanges(rawChanges);
+        if (!Object.keys(changes).length) return;
+
+        const nowIso = new Date().toISOString();
+        const actor = displayUserName(state.user);
+        const previousStatus = lead.progressStatus;
+        const previousAssignee = displayAssigneeName(lead) || "미배정";
+
+        if (Object.prototype.hasOwnProperty.call(changes, "assignedAdminId")) {
+          if (!canAssignDb()) return;
           const user = state.users.find((item) => item.id === changes.assignedAdminId);
-          changes.assignedAdminName = user?.name || "";
+          changes.assignedAdminName = user ? displayUserName(user) : "";
           changes.assignedAdminUsername = user?.username || "";
           changes.groupId = user?.groupId || "";
+          if (changes.assignedAdminId && lead.progressStatus === "미배정" && !changes.progressStatus) changes.progressStatus = "선택";
+          if (!changes.assignedAdminId) changes.progressStatus = "미배정";
+          changes.activityLog = [
+            ...(lead.activityLog || []),
+            {
+              at: nowIso,
+              by: state.authUser.uid,
+              byName: actor,
+              message: `담당자 변경: ${previousAssignee} → ${changes.assignedAdminName || "미배정"}`,
+            },
+          ].slice(-50);
+        }
+
+        if (Object.prototype.hasOwnProperty.call(changes, "progressStatus") && changes.progressStatus !== previousStatus) {
+          changes.statusTimeline = [
+            ...(lead.statusTimeline || []),
+            {
+              at: nowIso,
+              by: state.authUser.uid,
+              byName: actor,
+              from: previousStatus,
+              to: changes.progressStatus,
+              message: `${previousStatus} → ${changes.progressStatus}`,
+            },
+          ].slice(-50);
         }
 
         Object.assign(lead, changes);
-        renderStatusSummary();
+        const payload = {
+          ...changes,
+          updatedAt: serverTimestamp(),
+          updatedBy: state.authUser.uid,
+          updatedByName: actor,
+        };
 
-        window.clearTimeout(saveTimer);
-        saveTimer = window.setTimeout(async () => {
-          await db.collection("leads").doc(leadId).set({ ...changes, updatedAt: serverTimestamp(), updatedBy: state.authUser.uid }, { merge: true });
-          adminStatus.textContent = "변경사항이 저장되었습니다.";
-        }, 450);
+        await db.collection("leads").doc(leadId).set(payload, { merge: true });
+        adminStatus.textContent = "변경사항이 저장되었습니다.";
+        if (!options.silent) renderAll();
+      }
+
+      function queueLeadTextUpdate(leadId, changes) {
+        const lead = state.leads.find((item) => item.id === leadId);
+        if (lead) Object.assign(lead, changes);
+        window.clearTimeout(textSaveTimers.get(leadId));
+        const timer = window.setTimeout(() => updateLead(leadId, changes, { silent: true }), 550);
+        textSaveTimers.set(leadId, timer);
+      }
+
+      async function recordContactAction(leadId, action) {
+        const lead = state.leads.find((item) => item.id === leadId);
+        if (!lead) return;
+        const label = action === "kakao" ? "카카오톡 클릭" : "전화 클릭";
+        const nowIso = new Date().toISOString();
+        const actor = state.user?.name || state.user?.username || "관리자";
+        await updateLead(leadId, {
+          lastContactAction: label,
+          lastContactActionAt: nowIso,
+          lastContactActionBy: state.authUser.uid,
+          contactHistory: [
+            ...(lead.contactHistory || []),
+            { at: nowIso, by: state.authUser.uid, byName: actor, message: label },
+          ].slice(-50),
+        }, { silent: true });
       }
 
       function extractMemoEvents(text) {
@@ -773,8 +1078,10 @@
         const pattern = /(\d{1,2})월\s*(\d{1,2})일\s*([^\n]+)/g;
         let match;
         while ((match = pattern.exec(text))) {
-          const dateKey = `${year}-${String(match[1]).padStart(2, "0")}-${String(match[2]).padStart(2, "0")}`;
-          events.push({ dateKey, text: match[3].trim() });
+          events.push({
+            dateKey: `${year}-${String(match[1]).padStart(2, "0")}-${String(match[2]).padStart(2, "0")}`,
+            text: match[3].trim(),
+          });
         }
         return events;
       }
@@ -806,8 +1113,9 @@
       function renderCalendar(events = extractMemoEvents(todayMemoInput.value)) {
         const todayKey = ymd(new Date());
         const todayEvents = events.filter((event) => event.dateKey === todayKey);
-        todayScheduleList.innerHTML = todayEvents.length
-          ? todayEvents.map((event) => `<li><strong>${escapeHtml(event.text)}</strong><span>${escapeHtml(event.dateKey)}</span></li>`).join("")
+        const todayFollowUps = operationalLeads(false).filter(isTodayContact);
+        todayScheduleList.innerHTML = [...todayEvents.map((event) => ({ text: event.text, meta: event.dateKey })), ...todayFollowUps.map((lead) => ({ text: `${lead.customerName || "고객"} 재연락`, meta: `${lead.vehicle || "-"} · ${lead.phone || "-"}` }))].length
+          ? [...todayEvents.map((event) => ({ text: event.text, meta: event.dateKey })), ...todayFollowUps.map((lead) => ({ text: `${lead.customerName || "고객"} 재연락`, meta: `${lead.vehicle || "-"} · ${lead.phone || "-"}` }))].map((event) => `<li><strong>${escapeHtml(event.text)}</strong><span>${escapeHtml(event.meta)}</span></li>`).join("")
           : `<li class="is-empty">오늘 등록된 일정이 없습니다.</li>`;
 
         const year = calendarCursor.getFullYear();
@@ -821,14 +1129,15 @@
         calendarGrid.innerHTML = days.map((day) => {
           if (!day) return `<span></span>`;
           const key = `${year}-${String(month + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
-          const hasEvent = events.some((event) => event.dateKey === key);
+          const hasEvent = events.some((event) => event.dateKey === key) || operationalLeads(false).some((lead) => lead.followUpDate === key);
           return `<button type="button" class="${key === todayKey ? "is-today" : ""}${hasEvent ? " has-event" : ""}">${day}</button>`;
         }).join("");
       }
 
       function downloadCsv() {
-        const header = ["접수일", "고객명", "휴대폰번호", "희망차량", "진행상황", "담당자", "메모"];
-        const body = filteredLeads().map((lead) => [formatDate(lead.createdAt), lead.customerName, lead.phone, lead.vehicle, lead.progressStatus, lead.assignedAdminName, lead.adminMemo]);
+        if (!isSuper()) return;
+        const header = ["접수일", "고객명", "전화번호", "희망차량", "문의유형", "진행상황", "담당자", "재연락일", "메모"];
+        const body = filteredLeads().map((lead) => [formatDate(lead.createdAt), lead.customerName, lead.phone, lead.vehicle, inferInquiryType(lead), lead.progressStatus, displayAssigneeName(lead), lead.followUpDate, lead.adminMemo]);
         const csv = [header, ...body].map((row) => row.map((cell) => `"${String(cell || "").replaceAll('"', '""')}"`).join(",")).join("\n");
         const blob = new Blob(["\ufeff", csv], { type: "text/csv;charset=utf-8" });
         const url = URL.createObjectURL(blob);
@@ -845,6 +1154,7 @@
         const form = new FormData(loginForm);
         const username = normalizeUsername(form.get("username"));
         const password = String(form.get("password") || "");
+
         try {
           let credential;
           try {
@@ -859,7 +1169,7 @@
           await loadCurrentUser(credential.user, username);
           loginStatus.textContent = "";
         } catch (error) {
-          loginStatus.textContent = "아이디 또는 비밀번호를 확인해주세요. Firebase Authentication의 이메일/비밀번호 로그인이 켜져 있어야 합니다.";
+          loginStatus.textContent = "아이디 또는 비밀번호를 확인해 주세요. Firebase Authentication의 이메일/비밀번호 로그인이 켜져 있어야 합니다.";
         }
       });
 
@@ -872,7 +1182,7 @@
         const name = String(form.get("name") || "").trim();
 
         if (username.length < 3 || password.length < 6 || !name) {
-          registerStatus.textContent = "이름, 아이디, 비밀번호를 확인해주세요.";
+          registerStatus.textContent = "이름, 아이디, 비밀번호를 확인해 주세요.";
           return;
         }
 
@@ -909,6 +1219,31 @@
       $("#refreshLeads").addEventListener("click", loadAllData);
       $("#downloadCsv").addEventListener("click", downloadCsv);
 
+      document.querySelectorAll("[data-admin-nav]").forEach((link) => {
+        link.addEventListener("click", (event) => {
+          event.preventDefault();
+          const view = link.dataset.adminNav;
+          if ((view === "roles" || view === "requests") && !isSuper()) return;
+          showAdminView(view);
+        });
+      });
+
+      homeActionCards.addEventListener("click", (event) => {
+        const button = event.target.closest("[data-smart-filter]");
+        if (!button) return;
+        state.smartFilter = button.dataset.smartFilter;
+        state.activeStatusFilter = "all";
+        showAdminView(state.smartFilter === "mine" ? "myDb" : "db");
+      });
+
+      homePriorityRows.addEventListener("click", (event) => {
+        const button = event.target.closest("[data-smart-filter]");
+        if (!button) return;
+        state.smartFilter = button.dataset.smartFilter;
+        state.activeStatusFilter = "all";
+        showAdminView("db");
+      });
+
       requestRows.addEventListener("click", async (event) => {
         const button = event.target.closest("[data-request-action]");
         if (!button || !isSuper()) return;
@@ -923,12 +1258,8 @@
         const roleUser = event.target.closest("[data-role-user]");
         const groupUser = event.target.closest("[data-group-user]");
         if (!isSuper()) return;
-        if (roleUser) {
-          await db.collection("admins").doc(roleUser.dataset.roleUser).set({ role: roleUser.value, updatedAt: serverTimestamp() }, { merge: true });
-        }
-        if (groupUser) {
-          await db.collection("admins").doc(groupUser.dataset.groupUser).set({ groupId: groupUser.value, updatedAt: serverTimestamp() }, { merge: true });
-        }
+        if (roleUser) await db.collection("admins").doc(roleUser.dataset.roleUser).set({ role: roleUser.value, updatedAt: serverTimestamp() }, { merge: true });
+        if (groupUser) await db.collection("admins").doc(groupUser.dataset.groupUser).set({ groupId: groupUser.value, updatedAt: serverTimestamp() }, { merge: true });
         roleStatus.textContent = "권한 정보가 저장되었습니다.";
         await loadAllData();
       });
@@ -938,7 +1269,7 @@
         if (!name || !isSuper()) return;
         await db.collection("groups").add({ name, createdAt: serverTimestamp(), createdBy: state.authUser.uid });
         groupNameInput.value = "";
-        roleStatus.textContent = "그룹이 추가되었습니다.";
+        roleStatus.textContent = "그룹을 추가했습니다.";
         await loadAllData();
       });
 
@@ -946,19 +1277,50 @@
         const field = event.target.dataset.leadField;
         const leadId = event.target.dataset.leadId;
         if (!field || !leadId) return;
-        updateLead(leadId, { [field]: event.target.value });
+        if (["adminMemo", "customerName", "dbManager"].includes(field)) {
+          queueLeadTextUpdate(leadId, { [field]: event.target.value });
+        }
       }
 
       function handleLeadChange(event) {
         const field = event.target.dataset.leadField;
         const leadId = event.target.dataset.leadId;
         if (!field || !leadId) return;
-        updateLead(leadId, { [field]: event.target.value });
+        if (["progressStatus", "assignedAdminId", "followUpDate"].includes(field)) {
+          updateLead(leadId, { [field]: event.target.value });
+        }
       }
 
-      [rows, leadCards].forEach((container) => {
-        container.addEventListener("input", handleLeadInput);
-        container.addEventListener("change", handleLeadChange);
+      leadCards.addEventListener("input", handleLeadInput);
+      leadCards.addEventListener("change", handleLeadChange);
+      leadCards.addEventListener("click", async (event) => {
+        const control = event.target.closest("[data-lead-action]");
+        if (!control) return;
+        const action = control.dataset.leadAction;
+        const leadId = control.dataset.leadId;
+
+        if (action === "follow-today" || action === "follow-tomorrow") {
+          event.preventDefault();
+          const date = action === "follow-today" ? new Date() : addDays(new Date(), 1);
+          await updateLead(leadId, { followUpDate: ymd(date), progressStatus: "재연락 예정" });
+          return;
+        }
+
+        if (action === "phone" || action === "kakao") {
+          event.preventDefault();
+          await recordContactAction(leadId, action);
+          if (action === "kakao") window.open(kakaoUrl, "_blank", "noopener");
+          if (action === "phone" && control.getAttribute("href") && control.getAttribute("href") !== "#") window.location.href = control.getAttribute("href");
+          return;
+        }
+
+        if (action === "delete" && isSuper()) {
+          event.preventDefault();
+          if (!window.confirm("이 DB를 삭제할까요? 삭제 후에는 복구가 어렵습니다.")) return;
+          await db.collection("leads").doc(leadId).delete();
+          state.leads = state.leads.filter((lead) => lead.id !== leadId);
+          renderAll();
+        }
       });
 
       $("#bulkAssignButton").addEventListener("click", async () => {
@@ -966,26 +1328,64 @@
         if (!assignedAdminId || !canAssignDb()) return;
         const selected = [...document.querySelectorAll(".lead-select:checked")].map((input) => input.value);
         for (const leadId of selected) {
-          const user = state.users.find((item) => item.id === assignedAdminId);
-          await db.collection("leads").doc(leadId).set({
-            assignedAdminId,
-            assignedAdminName: user?.name || "",
-            assignedAdminUsername: user?.username || "",
-            groupId: user?.groupId || "",
-            updatedAt: serverTimestamp(),
-          }, { merge: true });
+          await updateLead(leadId, { assignedAdminId }, { silent: true });
         }
-        await loadAllData();
+        renderAll();
+      });
+
+      $("#showTestLeadsButton").addEventListener("click", () => {
+        state.showTests = !state.showTests;
+        state.smartFilter = state.showTests ? "test" : "all";
+        $("#showTestLeadsButton").textContent = state.showTests ? "운영 DB 보기" : "테스트 DB 보기";
+        renderAll();
       });
 
       document.addEventListener("click", (event) => {
         const statusButton = event.target.closest("[data-status-filter]");
         if (statusButton) {
-          activeStatusFilter = statusButton.dataset.statusFilter;
+          state.activeStatusFilter = statusButton.dataset.statusFilter;
           renderStatusSummary();
           renderLeads();
         }
+
+        const periodButton = event.target.closest("[data-period]");
+        if (periodButton) {
+          document.querySelectorAll("[data-period]").forEach((button) => button.classList.remove("is-active"));
+          periodButton.classList.add("is-active");
+          applyPeriod(periodButton.dataset.period);
+        }
       });
+
+      function applyPeriod(period) {
+        const now = new Date();
+        const today = ymd(now);
+        filterStart.value = "";
+        filterEnd.value = "";
+        if (period === "today") {
+          filterStart.value = today;
+          filterEnd.value = today;
+        }
+        if (period === "yesterday") {
+          const yesterday = ymd(addDays(now, -1));
+          filterStart.value = yesterday;
+          filterEnd.value = yesterday;
+        }
+        if (period === "14days") {
+          filterStart.value = ymd(addDays(now, -13));
+          filterEnd.value = today;
+        }
+        if (period === "thisMonth") {
+          filterStart.value = `${now.getFullYear()}-${String(now.getMonth() + 1).padStart(2, "0")}-01`;
+          filterEnd.value = today;
+        }
+        if (period === "lastMonth") {
+          const first = new Date(now.getFullYear(), now.getMonth() - 1, 1);
+          const last = new Date(now.getFullYear(), now.getMonth(), 0);
+          filterStart.value = ymd(first);
+          filterEnd.value = ymd(last);
+        }
+        renderLeads();
+      }
 
       [leadSearch, filterStart, filterEnd, assigneeFilter, pageSize].forEach((element) => {
         element.addEventListener("input", renderLeads);
@@ -997,7 +1397,8 @@
         filterStart.value = "";
         filterEnd.value = "";
         assigneeFilter.value = "";
-        activeStatusFilter = "all";
+        state.activeStatusFilter = "all";
+        state.smartFilter = state.view === "myDb" ? "mine" : "all";
         renderAll();
       });
 

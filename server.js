@@ -14,7 +14,7 @@ const vehiclePricingPath = path.join(dataDir, "vehicle-pricing.json");
 const adminBootstrapPath = path.join(dataDir, "admin-bootstrap.txt");
 const portArgIndex = process.argv.indexOf("--port");
 const port = Number(process.env.PORT || (portArgIndex > -1 ? process.argv[portArgIndex + 1] : 5173));
-const progressStatuses = new Set(["선택", "부재", "상담", "심사", "출고", "발주", "부결"]);
+const progressStatuses = new Set(["선택", "미배정", "부재", "재연락 예정", "상담", "심사", "발주", "출고", "부결"]);
 const recarApiBase = "https://api.recarplan.com";
 const vehicleDetailCache = new Map();
 const quoteCache = new Map();
@@ -2071,7 +2071,7 @@ async function handleLeadMetaUpdate(request, response, url, leadId) {
 
     meta[id] = {
       ...current,
-      progressStatus: progressStatuses.has(input.progressStatus) ? input.progressStatus : current.progressStatus || "선택",
+      progressStatus: progressStatuses.has(input.progressStatus) ? input.progressStatus : current.progressStatus || "미배정",
       adminMemo: typeof input.adminMemo === "string" ? sanitizeMemo(input.adminMemo, 1000) : current.adminMemo || "",
       dbManager: typeof input.dbManager === "string" ? sanitizeText(input.dbManager, 40) : current.dbManager || "",
       adminUpdatedAt: new Date().toISOString(),
@@ -2192,7 +2192,7 @@ async function saveLeadToFirebase(lead) {
     updatedAtIso: now,
     storage: "firebase",
     status: "new",
-    progressStatus: "선택",
+    progressStatus: "미배정",
     adminMemo: "",
     assignedAdminId: "",
     dbManager: "",

@@ -68,8 +68,16 @@ service cloud.firestore {
         'progressStatus',
         'adminMemo',
         'dbManager',
+        'followUpDate',
+        'lastContactAction',
+        'lastContactActionAt',
+        'lastContactActionBy',
+        'statusTimeline',
+        'activityLog',
+        'contactHistory',
         'updatedAt',
-        'updatedBy'
+        'updatedBy',
+        'updatedByName'
       ]);
     }
 
@@ -83,8 +91,16 @@ service cloud.firestore {
         'assignedAdminName',
         'assignedAdminUsername',
         'groupId',
+        'followUpDate',
+        'lastContactAction',
+        'lastContactActionAt',
+        'lastContactActionBy',
+        'statusTimeline',
+        'activityLog',
+        'contactHistory',
         'updatedAt',
-        'updatedBy'
+        'updatedBy',
+        'updatedByName'
       ]);
     }
 

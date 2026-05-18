@@ -279,7 +279,7 @@ async function sendLeadToFirebase(lead) {
   const cleanLead = {
     ...lead,
     storage: "firebase-client",
-    progressStatus: "선택",
+    progressStatus: "미배정",
     assignedAdminId: "",
     assignedAdminName: "",
     assignedAdminUsername: "",
@@ -977,6 +977,7 @@ function renderVehicleCard(vehicle) {
   const monthly = formatWon(vehicle.monthlyPayment);
   const originalMonthly = vehicle.timeDealOriginalMonthlyPayment ? formatWon(vehicle.timeDealOriginalMonthlyPayment) : "";
   const dealDiscount = Number(vehicle.timeDealDiscount || 0);
+  const timeDealSupportTotal = dealDiscount * (Number(vehicleConditions.term) || 60);
   const isTimeDeal = Boolean(vehicle.timeDealOriginalMonthlyPayment && dealDiscount);
   const trim = vehicle.trim || "대표 트림";
   const quoteVehicleName = `${name} ${trim}`.trim();
@@ -1009,7 +1010,7 @@ function renderVehicleCard(vehicle) {
         ${meta.length ? `<div class="vehicle-meta">${meta.map((item) => `<span>${escapeHtml(item)}</span>`).join("")}</div>` : ""}
         ${
           originalMonthly
-            ? `<div class="time-deal-price-label">타임특가 추가 할인 ${escapeHtml(formatWon(dealDiscount))}</div>
+            ? `<div class="time-deal-price-label">5년 총 지원 혜택 ${escapeHtml(formatWon(timeDealSupportTotal))}<small>월 ${escapeHtml(formatWon(dealDiscount))} 인하 기준</small></div>
         <div class="price is-time-deal"><del>월 ${escapeHtml(originalMonthly)}</del><span><small>월</small> ${escapeHtml(monthly)}</span></div>`
             : `<div class="price"><small>월</small> ${escapeHtml(monthly)}</div>`
         }
