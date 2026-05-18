@@ -1043,7 +1043,7 @@ function renderFallbackVehicles() {
   if (!vehicleGrid) return;
 
   const decoratedVehicles = decorateFallbackVehiclesForTimeDeals(curatedFallbackVehicles);
-  const items = vehicleMode === "all" ? decoratedVehicles : decoratedVehicles.filter((vehicle) => vehicle.categories?.includes(defaultVehicleFilter));
+  const items = decoratedVehicles;
   vehicleGrid.setAttribute("aria-busy", "false");
   vehicleGrid.innerHTML = items.map(renderVehicleCard).join("");
   refreshVehicleCards();
