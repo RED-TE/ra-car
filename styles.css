@@ -2450,8 +2450,20 @@ h2 {
 
 .user-actions {
   display: flex;
+  flex-wrap: wrap;
   gap: 8px;
   flex: 0 0 auto;
+}
+
+.user-actions select,
+.db-bulk-actions input {
+  min-height: 38px;
+  padding: 0 12px;
+  color: #101820;
+  background: #fff;
+  border: 1px solid #d9e0e8;
+  border-radius: 6px;
+  font-weight: 700;
 }
 
 .user-actions button {

@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>관리자 페이지 | RE:CAR</title>
+    <title>관리자 | RE:CAR</title>
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body class="admin-page">
@@ -31,7 +31,27 @@
               <input name="password" type="password" autocomplete="current-password" placeholder="비밀번호" required />
             </label>
             <button class="auth-submit" type="submit">관리자 로그인</button>
+            <button id="showRegisterButton" class="auth-submit secondary" type="button">회원가입 신청</button>
             <p id="loginStatus" class="auth-status" role="status"></p>
+          </form>
+
+          <form id="registerForm" class="auth-card" hidden>
+            <h2>회원가입 신청</h2>
+            <label>
+              이름
+              <input name="name" type="text" autocomplete="name" placeholder="예: 홍길동" required />
+            </label>
+            <label>
+              아이디
+              <input name="username" type="text" autocomplete="username" placeholder="영문, 숫자 3자 이상" required />
+            </label>
+            <label>
+              비밀번호
+              <input name="password" type="password" autocomplete="new-password" placeholder="6자 이상" required />
+            </label>
+            <button class="auth-submit" type="submit">승인 요청하기</button>
+            <button id="hideRegisterButton" class="auth-submit secondary" type="button">로그인으로 돌아가기</button>
+            <p id="registerStatus" class="auth-status" role="status"></p>
           </form>
         </div>
       </section>
@@ -45,15 +65,16 @@
 
           <nav class="admin-side-nav">
             <p>CORE</p>
-            <a class="is-active" href="#dashboard">HOME</a>
+            <a class="is-active" href="#dashboard" data-admin-nav="dashboard">HOME</a>
 
             <p>MANAGEMENT</p>
-            <a class="is-active" href="#db">DB 관리</a>
-            <a href="#db">전체 OPEN DB</a>
-            <a href="#db">계약완료 DB</a>
-            <a href="#db">달력메모장</a>
+            <a href="#db" data-admin-nav="myDb">나의 DB</a>
+            <a href="#db" data-admin-nav="db">DB 관리</a>
+            <a href="#calendar" data-admin-nav="calendar">달력메모장</a>
 
-            <p>SETTINGS</p>
+            <p class="super-only" hidden>SETTINGS</p>
+            <a class="super-only" href="#roles" data-admin-nav="roles" hidden>등급 관리</a>
+            <a class="super-only" href="#requests" data-admin-nav="requests" hidden>가입 신청</a>
             <button id="logoutButton" type="button">로그아웃</button>
           </nav>
         </aside>
@@ -63,7 +84,7 @@
             <div>
               <p class="eyebrow">Lead Dashboard</p>
               <h1>DB 관리</h1>
-              <p id="heroDescription">배정된 문의의 진행상황, 상담 메모, DB 담당자를 관리합니다.</p>
+              <p id="heroDescription">Firebase에 저장된 문의 DB와 관리자 권한을 확인합니다.</p>
             </div>
             <div class="admin-session">
               <span id="sessionLabel">로그인됨</span>
@@ -74,22 +95,38 @@
             </div>
           </section>
 
-          <section id="userPanel" class="user-panel" hidden>
+          <section id="requestPanel" class="user-panel super-only" hidden>
             <div class="user-panel-head">
               <div>
-                <p class="eyebrow">Account Approval</p>
-                <h2>관리자 가입 신청</h2>
-                <p>승인된 관리자에게만 문의 DB를 배정할 수 있습니다.</p>
+                <p class="eyebrow">Join Requests</p>
+                <h2>가입 신청</h2>
+                <p>신청자를 승인한 뒤 등급과 그룹을 부여합니다.</p>
               </div>
               <div class="user-summary">
                 <strong id="pendingCount">0</strong>
                 <span>승인 대기</span>
               </div>
             </div>
-            <div id="userRows" class="user-list"></div>
+            <div id="requestRows" class="user-list"></div>
           </section>
 
-          <section class="admin-today-panel" aria-label="오늘 할 일과 일정">
+          <section id="rolePanel" class="user-panel super-only" hidden>
+            <div class="user-panel-head">
+              <div>
+                <p class="eyebrow">Role Management</p>
+                <h2>등급 관리</h2>
+                <p>SD는 같은 그룹 AD의 DB를 보고 배정할 수 있고, AD는 본인 DB만 확인합니다.</p>
+              </div>
+            </div>
+            <div class="db-bulk-actions">
+              <input id="groupNameInput" type="text" placeholder="새 그룹명" />
+              <button id="createGroupButton" type="button">그룹 추가</button>
+              <p id="roleStatus" class="admin-status"></p>
+            </div>
+            <div id="adminUserRows" class="user-list"></div>
+          </section>
+
+          <section class="admin-today-panel" id="calendar" aria-label="오늘 할 일과 일정">
             <article class="today-memo-card">
               <div class="today-card-head">
                 <div>
@@ -98,7 +135,7 @@
                 </div>
                 <span id="todayDateLabel">오늘</span>
               </div>
-              <textarea id="todayMemoInput" placeholder="예: 오늘 김테스트 쏘렌토 조건 확인&#10;5월 20일 김테스트 재연락&#10;5월 22일 출고 일정 확인"></textarea>
+              <textarea id="todayMemoInput" placeholder="예: 5월 20일 김고객 연락&#10;5월 22일 카니발 출고 일정 확인"></textarea>
               <div class="today-memo-actions">
                 <button id="saveTodayMemo" type="button">메모 저장</button>
                 <p id="calendarStatus" role="status">날짜가 들어간 메모는 달력 일정으로 자동 저장됩니다.</p>
@@ -178,7 +215,7 @@
                 <option value="">담당자 선택</option>
               </select>
               <button id="bulkAssignButton" type="button">DB이동</button>
-              <p id="adminStatus" class="admin-status">문의 데이터를 불러오는 중입니다.</p>
+              <p id="adminStatus" class="admin-status">Firebase 문의 데이터를 불러오는 중입니다.</p>
             </div>
 
             <div class="lead-table-wrap">
@@ -192,83 +229,110 @@
       </section>
     </main>
 
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-auth.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/8.6.8/firebase-firestore.js"></script>
     <script>
-      const tokenStorageKey = "recarAdminToken";
-      const apiBase = window.location.protocol === "file:" ? "http://localhost:5173" : "";
+      const firebaseConfig = {
+        apiKey: "AIzaSyDwBr5ftgJID4cGt45N23eVCTiLWt5M2PE",
+        authDomain: "recarauto-88950.firebaseapp.com",
+        projectId: "recarauto-88950",
+        storageBucket: "recarauto-88950.firebasestorage.app",
+        messagingSenderId: "851749593786",
+        appId: "1:851749593786:web:f114ba96d32dafcf261883",
+        measurementId: "G-CT2RF1RFNQ",
+      };
+
+      firebase.initializeApp(firebaseConfig);
+      const auth = firebase.auth();
+      const db = firebase.firestore();
+      const serverTimestamp = firebase.firestore.FieldValue.serverTimestamp;
       const progressOptions = ["선택", "부재", "상담", "심사", "출고", "발주", "부결"];
-      const saveTimers = {};
+      const statusClasses = {
+        선택: "is-gray",
+        부재: "is-gray",
+        상담: "is-blue",
+        심사: "is-purple",
+        출고: "is-green",
+        발주: "is-orange",
+        부결: "is-red",
+      };
 
       const state = {
-        token: window.localStorage.getItem(tokenStorageKey) || "",
+        authUser: null,
         user: null,
         users: [],
+        requests: [],
+        groups: [],
         leads: [],
+        view: "db",
       };
 
-      const authSection = document.querySelector("#authSection");
-      const adminShell = document.querySelector("#adminShell");
-      const loginForm = document.querySelector("#loginForm");
-      const loginStatus = document.querySelector("#loginStatus");
-      const userPanel = document.querySelector("#userPanel");
-      const userRows = document.querySelector("#userRows");
-      const pendingCount = document.querySelector("#pendingCount");
-      const sessionLabel = document.querySelector("#sessionLabel");
-      const sidebarUserName = document.querySelector("#sidebarUserName");
-      const sidebarUserRole = document.querySelector("#sidebarUserRole");
-      const heroDescription = document.querySelector("#heroDescription");
-      const leadTable = document.querySelector(".lead-table");
-      const leadHead = document.querySelector("#leadHead");
-      const rows = document.querySelector("#leadRows");
-      const search = document.querySelector("#leadSearch");
-      const status = document.querySelector("#adminStatus");
-      const count = document.querySelector("#leadCount");
-      const statusSummary = document.querySelector("#statusSummary");
-      const filterStart = document.querySelector("#filterStart");
-      const filterEnd = document.querySelector("#filterEnd");
-      const assigneeFilter = document.querySelector("#assigneeFilter");
-      const resetFilters = document.querySelector("#resetFilters");
-      const searchButton = document.querySelector("#searchButton");
-      const pageSize = document.querySelector("#pageSize");
-      const bulkAssigneeSelect = document.querySelector("#bulkAssigneeSelect");
-      const bulkAssignButton = document.querySelector("#bulkAssignButton");
-      const periodButtons = [...document.querySelectorAll("[data-period]")];
-      const todayMemoInput = document.querySelector("#todayMemoInput");
-      const saveTodayMemo = document.querySelector("#saveTodayMemo");
-      const calendarStatus = document.querySelector("#calendarStatus");
-      const todayDateLabel = document.querySelector("#todayDateLabel");
-      const todayScheduleList = document.querySelector("#todayScheduleList");
-      const calendarMonthLabel = document.querySelector("#calendarMonthLabel");
-      const calendarGrid = document.querySelector("#calendarGrid");
-      const prevCalendarMonth = document.querySelector("#prevCalendarMonth");
-      const nextCalendarMonth = document.querySelector("#nextCalendarMonth");
+      const $ = (selector) => document.querySelector(selector);
+      const authSection = $("#authSection");
+      const adminShell = $("#adminShell");
+      const loginForm = $("#loginForm");
+      const registerForm = $("#registerForm");
+      const loginStatus = $("#loginStatus");
+      const registerStatus = $("#registerStatus");
+      const requestPanel = $("#requestPanel");
+      const rolePanel = $("#rolePanel");
+      const pendingCount = $("#pendingCount");
+      const requestRows = $("#requestRows");
+      const adminUserRows = $("#adminUserRows");
+      const sidebarUserName = $("#sidebarUserName");
+      const sidebarUserRole = $("#sidebarUserRole");
+      const sessionLabel = $("#sessionLabel");
+      const heroDescription = $("#heroDescription");
+      const rows = $("#leadRows");
+      const leadHead = $("#leadHead");
+      const leadTable = $(".lead-table");
+      const leadCount = $("#leadCount");
+      const statusSummary = $("#statusSummary");
+      const adminStatus = $("#adminStatus");
+      const leadSearch = $("#leadSearch");
+      const filterStart = $("#filterStart");
+      const filterEnd = $("#filterEnd");
+      const assigneeFilter = $("#assigneeFilter");
+      const bulkAssigneeSelect = $("#bulkAssigneeSelect");
+      const pageSize = $("#pageSize");
+      const groupNameInput = $("#groupNameInput");
+      const roleStatus = $("#roleStatus");
+      const todayMemoInput = $("#todayMemoInput");
+      const todayDateLabel = $("#todayDateLabel");
+      const calendarStatus = $("#calendarStatus");
+      const todayScheduleList = $("#todayScheduleList");
+      const calendarGrid = $("#calendarGrid");
+      const calendarMonthLabel = $("#calendarMonthLabel");
       let activeStatusFilter = "all";
       let calendarCursor = new Date();
-      let calendarState = {
-        memo: "",
-        events: [],
-        monthEvents: {},
-        monthNotes: {},
-      };
+      let saveTimer = null;
 
-      const errorMessages = {
-        invalid_username: "아이디는 영문, 숫자 기준 3자 이상으로 입력해주세요.",
-        weak_password: "비밀번호는 6자 이상으로 입력해주세요.",
-        name_required: "이름을 입력해주세요.",
-        username_exists: "이미 사용 중인 아이디입니다.",
-        invalid_login: "아이디 또는 비밀번호를 확인해주세요.",
-        approval_pending: "회원가입 신청이 접수되었습니다. 총관리자 승인 후 로그인할 수 있습니다.",
-        account_not_approved: "승인되지 않은 계정입니다. 총관리자에게 확인해주세요.",
-        admin_login_required: "관리자 로그인이 필요합니다.",
-        super_admin_required: "총관리자 권한이 필요합니다.",
-        lead_not_assigned: "이 문의는 현재 계정에 배정되지 않았습니다.",
-      };
+      function usernameToEmail(username) {
+        const clean = String(username || "").trim().toLowerCase().replace(/[^a-z0-9._-]/g, "");
+        return clean.includes("@") ? clean : `${clean}@recarplan.admin`;
+      }
 
-      function isSuperAdmin() {
+      function normalizeUsername(username) {
+        return String(username || "").trim().toLowerCase().replace(/[^a-z0-9._-]/g, "").slice(0, 40);
+      }
+
+      function roleLabel(role) {
+        if (role === "super") return "최고 관리자";
+        if (role === "sd") return "SD";
+        return "AD";
+      }
+
+      function isSuper() {
         return state.user?.role === "super";
       }
 
-      function getMessage(error, fallback = "처리 중 문제가 발생했습니다.") {
-        return errorMessages[error] || fallback;
+      function isSd() {
+        return state.user?.role === "sd";
+      }
+
+      function canAssignDb() {
+        return isSuper() || isSd();
       }
 
       function escapeHtml(value) {
@@ -280,62 +344,109 @@
           .replaceAll("'", "&#039;");
       }
 
-      function escapeCsv(value) {
-        return `"${String(value || "").replaceAll('"', '""')}"`;
-      }
-
       function formatDate(value) {
         if (!value) return "-";
-        const date = new Date(value);
-        if (Number.isNaN(date.getTime())) return value;
-
-        return new Intl.DateTimeFormat("ko-KR", {
-          dateStyle: "short",
-          timeStyle: "short",
-        }).format(date);
+        const raw = value.toDate ? value.toDate() : new Date(value);
+        if (Number.isNaN(raw.getTime())) return "-";
+        return new Intl.DateTimeFormat("ko-KR", { dateStyle: "short", timeStyle: "short" }).format(raw);
       }
 
-      async function apiFetch(path, options = {}) {
-        const headers = {
-          ...(options.body ? { "Content-Type": "application/json" } : {}),
-          ...(state.token ? { Authorization: `Bearer ${state.token}` } : {}),
-          ...(options.headers || {}),
-        };
-
-        const response = await fetch(`${apiBase}${path}`, {
-          cache: "no-store",
-          ...options,
-          headers,
-        });
-        const payload = await response.json().catch(() => ({}));
-
-        if (!response.ok || payload.ok === false) {
-          const error = new Error(payload.error || "request_failed");
-          error.code = payload.error || "request_failed";
-          error.status = response.status;
-          throw error;
-        }
-
-        return payload;
+      function ymd(date) {
+        return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
       }
 
       function showAuth(message = "") {
         authSection.hidden = false;
         adminShell.hidden = true;
-        if (message) loginStatus.textContent = message;
+        loginStatus.textContent = message;
       }
 
       function showDashboard() {
         authSection.hidden = true;
         adminShell.hidden = false;
-        const roleLabel = isSuperAdmin() ? "최고" : "일반";
-        sessionLabel.textContent = `${state.user?.name || state.user?.username || "관리자"} · ${roleLabel}`;
-        sidebarUserName.textContent = state.user?.name || state.user?.username || "관리자";
-        sidebarUserRole.textContent = roleLabel === "최고" ? "최고 관리자" : "일반 관리자";
-        heroDescription.textContent = isSuperAdmin()
-          ? "전체 문의 DB를 확인하고, 승인된 관리자에게 필요한 DB만 배정합니다."
-          : "총관리자가 배정한 문의 DB만 확인하고 상담 진행상황을 관리합니다.";
-        userPanel.hidden = !isSuperAdmin();
+        sidebarUserName.textContent = state.user.name || state.user.username || "관리자";
+        sidebarUserRole.textContent = roleLabel(state.user.role);
+        sessionLabel.textContent = `${state.user.name || state.user.username} · ${roleLabel(state.user.role)}`;
+        heroDescription.textContent = isSuper()
+          ? "전체 문의 DB와 가입 신청, 관리자 등급을 관리합니다."
+          : isSd()
+            ? "나와 같은 그룹의 AD DB를 확인하고 담당자를 배정합니다."
+            : "내게 배정된 문의 DB만 확인합니다.";
+
+        document.querySelectorAll(".super-only").forEach((node) => {
+          node.hidden = !isSuper();
+        });
+      }
+
+      async function getAdminDoc(uid) {
+        const snap = await db.collection("admins").doc(uid).get();
+        return snap.exists ? { id: snap.id, ...snap.data() } : null;
+      }
+
+      async function bootstrapSuperIfNeeded(user, username) {
+        if (normalizeUsername(username) !== "jhxox666") return null;
+
+        const existing = await getAdminDoc(user.uid);
+        if (existing) return existing;
+
+        const doc = {
+          uid: user.uid,
+          username: "jhxox666",
+          email: user.email,
+          name: "최고 관리자",
+          role: "super",
+          status: "approved",
+          groupId: "",
+          createdAt: serverTimestamp(),
+          approvedAt: serverTimestamp(),
+        };
+        await db.collection("admins").doc(user.uid).set(doc);
+        return getAdminDoc(user.uid);
+      }
+
+      async function loadCurrentUser(user, usernameForBootstrap = "") {
+        const admin = (await getAdminDoc(user.uid)) || (await bootstrapSuperIfNeeded(user, usernameForBootstrap));
+        if (!admin || admin.status !== "approved") {
+          state.authUser = user;
+          state.user = admin;
+          showAuth(admin?.status === "pending" ? "승인 대기 중입니다. 최고관리자 승인 후 접속할 수 있습니다." : "승인된 관리자 계정이 아닙니다.");
+          return;
+        }
+
+        state.authUser = user;
+        state.user = admin;
+        showDashboard();
+        await loadAllData();
+      }
+
+      async function loadAllData() {
+        adminStatus.textContent = "Firebase 데이터를 불러오는 중입니다.";
+        const userQuery = isSuper()
+          ? db.collection("admins").orderBy("createdAt", "desc")
+          : isSd()
+            ? db.collection("admins").where("groupId", "==", state.user.groupId || "")
+            : db.collection("admins").where(firebase.firestore.FieldPath.documentId(), "==", state.authUser.uid);
+        const leadQuery = isSuper()
+          ? db.collection("leads").orderBy("createdAt", "desc").limit(500)
+          : isSd()
+            ? db.collection("leads").where("groupId", "==", state.user.groupId || "").limit(500)
+            : db.collection("leads").where("assignedAdminId", "==", state.authUser.uid).limit(500);
+
+        const [userSnap, requestSnap, groupSnap, leadSnap] = await Promise.all([
+          userQuery.get(),
+          isSuper() ? db.collection("adminRequests").orderBy("createdAt", "desc").get() : Promise.resolve({ docs: [] }),
+          db.collection("groups").orderBy("createdAt", "desc").get().catch(() => ({ docs: [] })),
+          leadQuery.get(),
+        ]);
+
+        state.users = userSnap.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+        state.requests = requestSnap.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+        state.groups = groupSnap.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+        state.leads = leadSnap.docs.map((doc) => normalizeLead({ id: doc.id, ...doc.data() })).filter(canSeeLead);
+
+        renderAll();
+        await loadTodayMemo();
+        adminStatus.textContent = "Firebase DB를 표시합니다.";
       }
 
       function normalizeLead(lead) {
@@ -347,145 +458,137 @@
           assignedAdminId: lead.assignedAdminId || "",
           assignedAdminName: lead.assignedAdminName || "",
           assignedAdminUsername: lead.assignedAdminUsername || "",
+          groupId: lead.groupId || "",
         };
       }
 
-      function getAssignableUsers() {
-        return state.users.filter((user) => user.status === "approved" && ["admin", "super"].includes(user.role));
+      function canSeeLead(lead) {
+        if (isSuper()) return true;
+        if (isSd()) return lead.groupId && lead.groupId === state.user.groupId;
+        return lead.assignedAdminId === state.authUser.uid;
       }
 
-      function getFilteredLeads() {
-        const keyword = search.value.trim().toLowerCase();
+      function assignableUsers() {
+        const approved = state.users.filter((user) => user.status === "approved" && ["sd", "ad", "super"].includes(user.role));
+        if (isSuper()) return approved;
+        if (isSd()) return approved.filter((user) => user.groupId === state.user.groupId && user.role === "ad");
+        return [];
+      }
+
+      function renderAll() {
+        renderRequests();
+        renderRoles();
+        renderSelectors();
+        renderStatusSummary();
+        renderLeads();
+        renderCalendar();
+      }
+
+      function renderRequests() {
+        if (!isSuper()) return;
+        const pending = state.requests.filter((request) => request.status === "pending");
+        pendingCount.textContent = pending.length;
+
+        if (!state.requests.length) {
+          requestRows.innerHTML = `<p class="empty-state">가입 신청이 없습니다.</p>`;
+          return;
+        }
+
+        requestRows.innerHTML = state.requests
+          .map((request) => `
+            <article class="user-card">
+              <div>
+                <strong>${escapeHtml(request.name || request.username)}</strong>
+                <span>${escapeHtml(request.username)} · ${escapeHtml(request.status === "approved" ? "승인됨" : request.status === "rejected" ? "거절됨" : "승인 대기")}</span>
+                <small>신청일 ${escapeHtml(formatDate(request.createdAt))}</small>
+              </div>
+              <div class="user-actions">
+                ${request.status !== "approved" ? `<button type="button" data-request-action="approved" data-uid="${escapeHtml(request.uid)}">승인</button>` : ""}
+                ${request.status !== "rejected" ? `<button type="button" data-request-action="rejected" data-uid="${escapeHtml(request.uid)}">거절</button>` : ""}
+              </div>
+            </article>
+          `)
+          .join("");
+      }
+
+      function renderRoles() {
+        if (!isSuper()) return;
+        const groupOptions = `<option value="">그룹 없음</option>${state.groups
+          .map((group) => `<option value="${escapeHtml(group.id)}">${escapeHtml(group.name)}</option>`)
+          .join("")}`;
+
+        adminUserRows.innerHTML = state.users
+          .filter((user) => user.status === "approved")
+          .map((user) => `
+            <article class="user-card">
+              <div>
+                <strong>${escapeHtml(user.name || user.username)}</strong>
+                <span>${escapeHtml(user.username)} · ${escapeHtml(roleLabel(user.role))}</span>
+              </div>
+              <div class="user-actions">
+                <select data-role-user="${escapeHtml(user.id)}" ${user.id === state.authUser.uid ? "disabled" : ""}>
+                  <option value="ad"${user.role === "ad" ? " selected" : ""}>AD</option>
+                  <option value="sd"${user.role === "sd" ? " selected" : ""}>SD</option>
+                  <option value="super"${user.role === "super" ? " selected" : ""}>최고</option>
+                </select>
+                <select data-group-user="${escapeHtml(user.id)}">
+                  ${groupOptions}
+                </select>
+              </div>
+            </article>
+          `)
+          .join("");
+
+        adminUserRows.querySelectorAll("[data-group-user]").forEach((select) => {
+          const user = state.users.find((item) => item.id === select.dataset.groupUser);
+          select.value = user?.groupId || "";
+        });
+      }
+
+      function renderSelectors() {
+        const users = assignableUsers();
+        const options = users.map((user) => `<option value="${escapeHtml(user.id)}">${escapeHtml(user.name || user.username)}</option>`).join("");
+        assigneeFilter.innerHTML = `<option value="">전체</option>${options}`;
+        bulkAssigneeSelect.innerHTML = `<option value="">담당자 선택</option>${options}`;
+        assigneeFilter.disabled = !canAssignDb();
+        bulkAssigneeSelect.disabled = !canAssignDb();
+        $("#bulkAssignButton").disabled = !canAssignDb();
+      }
+
+      function filteredLeads() {
+        const keyword = leadSearch.value.trim().toLowerCase();
         const startDate = filterStart.value ? new Date(`${filterStart.value}T00:00:00`) : null;
         const endDate = filterEnd.value ? new Date(`${filterEnd.value}T23:59:59`) : null;
         const assigneeId = assigneeFilter.value;
 
         return state.leads.filter((lead) => {
-          const createdAt = lead.createdAt ? new Date(lead.createdAt) : null;
-          const matchesKeyword =
-            !keyword ||
-            [
-              lead.vehicle,
-              lead.customerName,
-              lead.phone,
-              lead.requestNote,
-              lead.source,
-              lead.progressStatus,
-              lead.adminMemo,
-              lead.dbManager,
-              lead.assignedAdminName,
-              lead.assignedAdminUsername,
-            ]
-              .join(" ")
-              .toLowerCase()
-              .includes(keyword);
-          const matchesStart = !startDate || (createdAt && createdAt >= startDate);
-          const matchesEnd = !endDate || (createdAt && createdAt <= endDate);
-          const matchesAssignee = !assigneeId || lead.assignedAdminId === assigneeId;
-          const matchesStatus = activeStatusFilter === "all" || lead.progressStatus === activeStatusFilter;
-
-          return matchesKeyword && matchesStart && matchesEnd && matchesAssignee && matchesStatus;
+          const createdAt = lead.createdAt?.toDate ? lead.createdAt.toDate() : new Date(lead.createdAt || 0);
+          const text = [lead.customerName, lead.phone, lead.vehicle, lead.requestNote, lead.progressStatus, lead.adminMemo, lead.dbManager, lead.assignedAdminName].join(" ").toLowerCase();
+          return (!keyword || text.includes(keyword))
+            && (!startDate || createdAt >= startDate)
+            && (!endDate || createdAt <= endDate)
+            && (!assigneeId || lead.assignedAdminId === assigneeId)
+            && (activeStatusFilter === "all" || lead.progressStatus === activeStatusFilter);
         });
       }
 
-      function renderUsers() {
-        if (!isSuperAdmin()) return;
-
-        const users = state.users.filter((user) => user.id !== state.user.id);
-        const pendingUsers = users.filter((user) => user.status === "pending");
-        pendingCount.textContent = pendingUsers.length;
-
-        if (!users.length) {
-          userRows.innerHTML = `<p class="empty-state">아직 가입 신청이 없습니다.</p>`;
-          return;
-        }
-
-        userRows.innerHTML = users
-          .map((user) => {
-            const statusLabel = user.status === "approved" ? "승인됨" : user.status === "rejected" ? "거절됨" : "승인 대기";
-            const approveButton =
-              user.status !== "approved"
-                ? `<button type="button" data-user-action="approved" data-user-id="${escapeHtml(user.id)}">승인</button>`
-                : "";
-            const rejectButton =
-              user.status !== "rejected"
-                ? `<button type="button" data-user-action="rejected" data-user-id="${escapeHtml(user.id)}">거절</button>`
-                : "";
-
-            return `
-              <article class="user-card">
-                <div>
-                  <strong>${escapeHtml(user.name || user.username)}</strong>
-                  <span>${escapeHtml(user.username)} · ${escapeHtml(statusLabel)}</span>
-                  <small>신청일 ${escapeHtml(formatDate(user.createdAt))}</small>
-                </div>
-                <div class="user-actions">${approveButton}${rejectButton}</div>
-              </article>
-            `;
-          })
-          .join("");
-      }
-
-      function renderAdminSelectors() {
-        const users = getAssignableUsers();
-        const assigneeValue = assigneeFilter.value;
-        const bulkValue = bulkAssigneeSelect.value;
-        const options = users
-          .map((user) => `<option value="${escapeHtml(user.id)}">${escapeHtml(user.name || user.username)}</option>`)
-          .join("");
-
-        assigneeFilter.innerHTML = `<option value="">전체</option>${options}`;
-        bulkAssigneeSelect.innerHTML = `<option value="">담당자 선택</option>${options}`;
-        assigneeFilter.value = users.some((user) => user.id === assigneeValue) ? assigneeValue : "";
-        bulkAssigneeSelect.value = users.some((user) => user.id === bulkValue) ? bulkValue : "";
-
-        const canAssign = isSuperAdmin();
-        assigneeFilter.disabled = !canAssign;
-        bulkAssigneeSelect.disabled = !canAssign;
-        bulkAssignButton.disabled = !canAssign;
-      }
-
       function renderStatusSummary() {
-        const counts = state.leads.reduce(
-          (acc, lead) => {
-            acc.all += 1;
-            acc[lead.progressStatus] = (acc[lead.progressStatus] || 0) + 1;
-            return acc;
-          },
-          { all: 0 },
-        );
-        const cards = [
-          { key: "all", label: "전체", className: "is-dark" },
-          { key: "선택", label: "선택", className: "is-gray" },
-          { key: "부재", label: "부재", className: "is-gray" },
-          { key: "상담", label: "상담중", className: "is-blue" },
-          { key: "심사", label: "심사", className: "is-purple" },
-          { key: "발주", label: "발주", className: "is-orange" },
-          { key: "출고", label: "출고", className: "is-green" },
-          { key: "부결", label: "부결", className: "is-red" },
-        ];
-
-        statusSummary.innerHTML = cards
-          .map((card) => {
-            const active = activeStatusFilter === card.key ? " is-active" : "";
-            return `
-              <button class="status-card ${card.className}${active}" type="button" data-status-filter="${escapeHtml(card.key)}">
-                <span>${escapeHtml(card.label)}</span>
-                <strong>${escapeHtml(counts[card.key] || 0)}건</strong>
-              </button>
-            `;
-          })
-          .join("");
+        const counts = state.leads.reduce((acc, lead) => {
+          acc.all += 1;
+          acc[lead.progressStatus] = (acc[lead.progressStatus] || 0) + 1;
+          return acc;
+        }, { all: 0 });
+        const cards = [{ key: "all", label: "전체", className: "is-dark" }, ...progressOptions.map((status) => ({ key: status, label: status, className: statusClasses[status] || "is-gray" }))];
+        statusSummary.innerHTML = cards.map((card) => `
+          <button class="status-card ${card.className}${activeStatusFilter === card.key ? " is-active" : ""}" type="button" data-status-filter="${escapeHtml(card.key)}">
+            <span>${escapeHtml(card.label)}</span>
+            <strong>${escapeHtml(counts[card.key] || 0)}건</strong>
+          </button>
+        `).join("");
       }
 
-      function getVisibleLeads(leads) {
-        if (pageSize.value === "all") return leads;
-        const limit = Number(pageSize.value || 10);
-        return leads.slice(0, limit);
-      }
-
-      function renderTableHead() {
-        leadTable.classList.toggle("is-super", isSuperAdmin());
+      function renderLeads() {
+        leadTable.classList.toggle("is-super", canAssignDb());
         leadHead.innerHTML = `
           <tr>
             <th><input id="selectAllLeads" type="checkbox" aria-label="전체 선택" /></th>
@@ -495,557 +598,323 @@
             <th>희망차량</th>
             <th>특이사항</th>
             <th>진행상황</th>
-            ${isSuperAdmin() ? "<th>DB 배정</th>" : ""}
+            ${canAssignDb() ? "<th>DB 배정</th>" : ""}
             <th>담당자 메모</th>
             <th>DB담당자</th>
           </tr>
         `;
+
+        const leads = filteredLeads();
+        leadCount.textContent = leads.length;
+        const visible = pageSize.value === "all" ? leads : leads.slice(0, Number(pageSize.value || 10));
+        const colspan = canAssignDb() ? 10 : 9;
+
+        if (!visible.length) {
+          rows.innerHTML = `<tr><td colspan="${colspan}">표시할 문의 DB가 없습니다.</td></tr>`;
+          return;
+        }
+
+        rows.innerHTML = visible.map((lead) => `
+          <tr>
+            <td><input class="lead-select" type="checkbox" value="${escapeHtml(lead.id)}" /></td>
+            <td>${escapeHtml(formatDate(lead.createdAt))}</td>
+            <td><input class="db-manager-input" data-lead-field="customerName" data-lead-id="${escapeHtml(lead.id)}" value="${escapeHtml(lead.customerName || "")}" /></td>
+            <td><a href="tel:${escapeHtml(lead.phone || "")}">${escapeHtml(lead.phone || "-")}</a></td>
+            <td><strong>${escapeHtml(lead.vehicle || "-")}</strong></td>
+            <td>${escapeHtml(lead.requestNote || "-")}</td>
+            <td>
+              <select class="status-select${lead.progressStatus !== "선택" ? " has-value" : ""}" data-lead-field="progressStatus" data-lead-id="${escapeHtml(lead.id)}">
+                ${progressOptions.map((option) => `<option value="${escapeHtml(option)}"${lead.progressStatus === option ? " selected" : ""}>${escapeHtml(option)}</option>`).join("")}
+              </select>
+            </td>
+            ${canAssignDb() ? `<td>${renderAssignSelect(lead)}</td>` : ""}
+            <td><textarea class="admin-memo-input" data-lead-field="adminMemo" data-lead-id="${escapeHtml(lead.id)}" placeholder="상담 메모를 입력하세요">${escapeHtml(lead.adminMemo)}</textarea></td>
+            <td><input class="db-manager-input" data-lead-field="dbManager" data-lead-id="${escapeHtml(lead.id)}" value="${escapeHtml(lead.dbManager)}" placeholder="이름" /></td>
+          </tr>
+        `).join("");
       }
 
-      function renderStatusButtons(lead) {
-        const currentStatus = progressOptions.includes(lead.progressStatus) ? lead.progressStatus : "선택";
-        const valueClass = currentStatus === "선택" ? "" : " has-value";
-
+      function renderAssignSelect(lead) {
+        const options = assignableUsers().map((user) => `<option value="${escapeHtml(user.id)}"${lead.assignedAdminId === user.id ? " selected" : ""}>${escapeHtml(user.name || user.username)}</option>`).join("");
         return `
-          <select class="status-select${valueClass}" data-status-select data-lead-id="${escapeHtml(lead.id)}" aria-label="진행상황 선택">
-            ${progressOptions
-              .map((option) => {
-                const selected = currentStatus === option ? " selected" : "";
-                return `<option value="${escapeHtml(option)}"${selected}>${escapeHtml(option)}</option>`;
-              })
-              .join("")}
-          </select>
-        `;
-      }
-
-      function renderAssignmentSelect(lead) {
-        const users = getAssignableUsers();
-        const selectedUser = state.users.find((user) => user.id === lead.assignedAdminId);
-        const extraSelected =
-          selectedUser && !users.some((user) => user.id === selectedUser.id)
-            ? `<option value="${escapeHtml(selectedUser.id)}" selected>${escapeHtml(selectedUser.name || selectedUser.username)}</option>`
-            : "";
-
-        return `
-          <select class="assignment-select" data-meta-field="assignedAdminId" data-lead-id="${escapeHtml(lead.id)}">
+          <select class="assignment-select" data-lead-field="assignedAdminId" data-lead-id="${escapeHtml(lead.id)}">
             <option value="">미배정</option>
-            ${extraSelected}
-            ${users
-              .map((user) => {
-                const selected = user.id === lead.assignedAdminId ? " selected" : "";
-                return `<option value="${escapeHtml(user.id)}"${selected}>${escapeHtml(user.name || user.username)}</option>`;
-              })
-              .join("")}
+            ${options}
           </select>
           <small>${lead.assignedAdminName ? `${escapeHtml(lead.assignedAdminName)}에게 배정됨` : "아직 배정 전"}</small>
         `;
       }
 
-      function renderLeads() {
-        renderTableHead();
-        renderUsers();
-        renderAdminSelectors();
-        renderStatusSummary();
-
-        const leads = getFilteredLeads();
-        count.textContent = leads.length;
-
-        if (!leads.length) {
-          const colspan = isSuperAdmin() ? 10 : 9;
-          rows.innerHTML = `<tr><td colspan="${colspan}">표시할 문의 DB가 없습니다.</td></tr>`;
-          return;
-        }
-
-        rows.innerHTML = getVisibleLeads(leads)
-          .map((lead) => {
-            const requestNote = lead.requestNote ? escapeHtml(lead.requestNote) : "-";
-            const assignmentCell = isSuperAdmin() ? `<td>${renderAssignmentSelect(lead)}</td>` : "";
-
-            return `
-              <tr>
-                <td><input class="lead-select" type="checkbox" value="${escapeHtml(lead.id)}" aria-label="${escapeHtml(lead.customerName || "문의")} 선택" /></td>
-                <td>${escapeHtml(formatDate(lead.createdAt))}</td>
-                <td><strong>${escapeHtml(lead.customerName || "-")}</strong><small>${escapeHtml(lead.source || "")}</small></td>
-                <td><a href="tel:${escapeHtml(lead.phone || "")}">${escapeHtml(lead.phone || "-")}</a></td>
-                <td><strong>${escapeHtml(lead.vehicle || "-")}</strong></td>
-                <td>${requestNote}</td>
-                <td><div class="status-control">${renderStatusButtons(lead)}</div></td>
-                ${assignmentCell}
-                <td class="memo-cell">
-                  <textarea class="admin-memo-input" data-meta-field="adminMemo" data-lead-id="${escapeHtml(lead.id)}" placeholder="상담 내용, 부재 사유, 금융사 피드백 등을 기록하세요.">${escapeHtml(lead.adminMemo)}</textarea>
-                </td>
-                <td>
-                  <input class="db-manager-input" data-meta-field="dbManager" data-lead-id="${escapeHtml(lead.id)}" type="text" value="${escapeHtml(lead.dbManager)}" placeholder="이름" />
-                </td>
-              </tr>
-            `;
-          })
-          .join("");
-      }
-
-      function findLead(leadId) {
-        return state.leads.find((lead) => lead.id === leadId);
-      }
-
-      function updateLeadMeta(leadId, changes) {
-        const lead = findLead(leadId);
+      async function updateLead(leadId, changes) {
+        const lead = state.leads.find((item) => item.id === leadId);
         if (!lead) return;
+
+        if (changes.assignedAdminId !== undefined) {
+          const user = state.users.find((item) => item.id === changes.assignedAdminId);
+          changes.assignedAdminName = user?.name || "";
+          changes.assignedAdminUsername = user?.username || "";
+          changes.groupId = user?.groupId || "";
+        }
 
         Object.assign(lead, changes);
-        if (Object.prototype.hasOwnProperty.call(changes, "assignedAdminId")) {
-          const assignedUser = state.users.find((user) => user.id === changes.assignedAdminId);
-          lead.assignedAdminName = assignedUser ? assignedUser.name : "";
-          lead.assignedAdminUsername = assignedUser ? assignedUser.username : "";
-        }
+        renderStatusSummary();
 
-        queueMetaSave(leadId);
+        window.clearTimeout(saveTimer);
+        saveTimer = window.setTimeout(async () => {
+          await db.collection("leads").doc(leadId).set({ ...changes, updatedAt: serverTimestamp(), updatedBy: state.authUser.uid }, { merge: true });
+          adminStatus.textContent = "변경사항이 저장되었습니다.";
+        }, 450);
       }
 
-      function queueMetaSave(leadId) {
-        window.clearTimeout(saveTimers[leadId]);
-        status.textContent = "변경 내용을 저장하는 중입니다.";
-        saveTimers[leadId] = window.setTimeout(() => saveLeadMeta(leadId), 450);
+      function extractMemoEvents(text) {
+        const year = new Date().getFullYear();
+        const events = [];
+        const pattern = /(\d{1,2})월\s*(\d{1,2})일\s*([^\n]+)/g;
+        let match;
+        while ((match = pattern.exec(text))) {
+          const dateKey = `${year}-${String(match[1]).padStart(2, "0")}-${String(match[2]).padStart(2, "0")}`;
+          events.push({ dateKey, text: match[3].trim() });
+        }
+        return events;
       }
 
-      async function saveLeadMeta(leadId) {
-        const lead = findLead(leadId);
-        if (!lead) return;
-
-        const meta = {
-          progressStatus: lead.progressStatus,
-          adminMemo: lead.adminMemo,
-          dbManager: lead.dbManager,
-        };
-
-        if (isSuperAdmin()) {
-          meta.assignedAdminId = lead.assignedAdminId || "";
-        }
-
-        try {
-          await apiFetch(`/api/leads/${encodeURIComponent(leadId)}/meta`, {
-            method: "PATCH",
-            body: JSON.stringify(meta),
-          });
-          status.textContent = "변경 내용이 저장되었습니다.";
-        } catch (error) {
-          status.textContent = getMessage(error.code, "저장에 실패했습니다. 권한 또는 서버 상태를 확인해주세요.");
-          if (error.status === 401) clearSession();
-        }
+      async function loadTodayMemo() {
+        if (!state.authUser) return;
+        const todayKey = ymd(new Date());
+        todayDateLabel.textContent = todayKey;
+        const doc = await db.collection("adminMemos").doc(`${state.authUser.uid}_${todayKey}`).get().catch(() => null);
+        todayMemoInput.value = doc?.exists ? doc.data().memo || "" : "";
+        renderCalendar();
       }
 
-      async function loadLeads() {
-        status.textContent = "문의 데이터를 불러오는 중입니다.";
-
-        try {
-          const payload = await apiFetch("/api/leads");
-          state.user = payload.user || state.user;
-          state.users = payload.users || [];
-          state.leads = (payload.leads || []).map(normalizeLead);
-          showDashboard();
-          status.textContent = isSuperAdmin()
-            ? "전체 문의 DB를 표시합니다."
-            : "배정받은 문의 DB만 표시합니다.";
-          renderLeads();
-          await loadAdminCalendar();
-        } catch (error) {
-          state.leads = [];
-          renderLeads();
-          status.textContent = getMessage(error.code, "문의 데이터를 불러오지 못했습니다.");
-          if (error.status === 401) clearSession();
-        }
+      async function saveMemo() {
+        const todayKey = ymd(new Date());
+        const memo = todayMemoInput.value.trim();
+        const events = extractMemoEvents(memo);
+        await db.collection("adminMemos").doc(`${state.authUser.uid}_${todayKey}`).set({
+          uid: state.authUser.uid,
+          dateKey: todayKey,
+          memo,
+          events,
+          updatedAt: serverTimestamp(),
+        }, { merge: true });
+        calendarStatus.textContent = "메모와 날짜 일정이 저장되었습니다.";
+        renderCalendar(events);
       }
 
-      async function loadSession() {
-        if (!state.token) {
-          showAuth();
-          return;
-        }
+      function renderCalendar(events = extractMemoEvents(todayMemoInput.value)) {
+        const todayKey = ymd(new Date());
+        const todayEvents = events.filter((event) => event.dateKey === todayKey);
+        todayScheduleList.innerHTML = todayEvents.length
+          ? todayEvents.map((event) => `<li><strong>${escapeHtml(event.text)}</strong><span>${escapeHtml(event.dateKey)}</span></li>`).join("")
+          : `<li class="is-empty">오늘 등록된 일정이 없습니다.</li>`;
 
-        try {
-          const payload = await apiFetch("/api/admin/session");
-          state.user = payload.user;
-          showDashboard();
-          await loadLeads();
-        } catch (error) {
-          clearSession(getMessage(error.code, "다시 로그인해주세요."));
-        }
-      }
-
-      function clearSession(message = "") {
-        state.token = "";
-        state.user = null;
-        state.users = [];
-        state.leads = [];
-        window.localStorage.removeItem(tokenStorageKey);
-        showAuth(message);
-      }
-
-      async function updateUser(userId, changes) {
-        try {
-          await apiFetch(`/api/admin/users/${encodeURIComponent(userId)}`, {
-            method: "PATCH",
-            body: JSON.stringify(changes),
-          });
-          status.textContent = "관리자 계정 상태가 변경되었습니다.";
-          await loadLeads();
-        } catch (error) {
-          status.textContent = getMessage(error.code, "관리자 계정 변경에 실패했습니다.");
-        }
+        const year = calendarCursor.getFullYear();
+        const month = calendarCursor.getMonth();
+        calendarMonthLabel.textContent = `${year}.${String(month + 1).padStart(2, "0")}`;
+        const first = new Date(year, month, 1);
+        const last = new Date(year, month + 1, 0);
+        const days = [];
+        for (let i = 0; i < first.getDay(); i += 1) days.push("");
+        for (let day = 1; day <= last.getDate(); day += 1) days.push(day);
+        calendarGrid.innerHTML = days.map((day) => {
+          if (!day) return `<span></span>`;
+          const key = `${year}-${String(month + 1).padStart(2, "0")}-${String(day).padStart(2, "0")}`;
+          const hasEvent = events.some((event) => event.dateKey === key);
+          return `<button type="button" class="${key === todayKey ? "is-today" : ""}${hasEvent ? " has-event" : ""}">${day}</button>`;
+        }).join("");
       }
 
       function downloadCsv() {
-        const leads = getFilteredLeads();
-        const header = ["접수일", "이름", "희망 차량", "연락처", "요청사항", "진행상황", "배정 관리자", "담당자 메모", "DB담당자"];
-        const lines = leads.map((lead) => [
-          lead.createdAt,
-          lead.customerName,
-          lead.vehicle,
-          lead.phone,
-          lead.requestNote,
-          lead.progressStatus,
-          lead.assignedAdminName,
-          lead.adminMemo,
-          lead.dbManager,
-        ]);
-        const csv = [header, ...lines].map((line) => line.map(escapeCsv).join(",")).join("\n");
-        const blob = new Blob([`\ufeff${csv}`], { type: "text/csv;charset=utf-8" });
+        const header = ["접수일", "고객명", "휴대폰번호", "희망차량", "진행상황", "담당자", "메모"];
+        const body = filteredLeads().map((lead) => [formatDate(lead.createdAt), lead.customerName, lead.phone, lead.vehicle, lead.progressStatus, lead.assignedAdminName, lead.adminMemo]);
+        const csv = [header, ...body].map((row) => row.map((cell) => `"${String(cell || "").replaceAll('"', '""')}"`).join(",")).join("\n");
+        const blob = new Blob(["\ufeff", csv], { type: "text/csv;charset=utf-8" });
         const url = URL.createObjectURL(blob);
         const link = document.createElement("a");
         link.href = url;
-        link.download = "recar-leads.csv";
+        link.download = `recar-leads-${ymd(new Date())}.csv`;
         link.click();
         URL.revokeObjectURL(url);
-      }
-
-      function toDateInput(date) {
-        const localDate = new Date(date.getTime() - date.getTimezoneOffset() * 60000);
-        return localDate.toISOString().slice(0, 10);
-      }
-
-      function getMonthKey(date) {
-        return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}`;
-      }
-
-      function getTodayKey() {
-        return toDateInput(new Date());
-      }
-
-      function getDateLabel(dateKey) {
-        const date = new Date(`${dateKey}T00:00:00`);
-        if (Number.isNaN(date.getTime())) return dateKey;
-        return new Intl.DateTimeFormat("ko-KR", {
-          month: "long",
-          day: "numeric",
-          weekday: "short",
-        }).format(date);
-      }
-
-      function setCalendarStatus(message, tone = "") {
-        calendarStatus.textContent = message;
-        calendarStatus.dataset.tone = tone;
-      }
-
-      function renderTodaySchedule() {
-        const todayMemo = String(calendarState.memo || "").trim();
-        const todayEvents = Array.isArray(calendarState.events) ? calendarState.events : [];
-        const items = [];
-
-        if (todayMemo) {
-          const shortMemo = todayMemo.split("\n").filter(Boolean).slice(0, 2).join(" / ");
-          items.push(`<li><strong>오늘 메모</strong><span>${escapeHtml(shortMemo.slice(0, 120))}</span></li>`);
-        }
-
-        todayEvents.forEach((event) => {
-          items.push(`<li><strong>${escapeHtml(event.title || "일정")}</strong><span>${escapeHtml(event.createdByName || "메모에서 자동 등록")}</span></li>`);
-        });
-
-        todayScheduleList.innerHTML = items.length
-          ? items.join("")
-          : `<li class="is-empty"><strong>오늘 일정 없음</strong><span>오늘 처리할 메모를 남겨두면 이곳에서 바로 확인할 수 있습니다.</span></li>`;
-      }
-
-      function renderMiniCalendar() {
-        const year = calendarCursor.getFullYear();
-        const month = calendarCursor.getMonth();
-        const monthKey = getMonthKey(calendarCursor);
-        const todayKey = getTodayKey();
-        const firstDay = new Date(year, month, 1).getDay();
-        const lastDate = new Date(year, month + 1, 0).getDate();
-        const cells = [];
-
-        calendarMonthLabel.textContent = new Intl.DateTimeFormat("ko-KR", {
-          year: "numeric",
-          month: "long",
-        }).format(calendarCursor);
-
-        for (let index = 0; index < firstDay; index += 1) {
-          cells.push(`<span class="calendar-cell is-empty"></span>`);
-        }
-
-        for (let day = 1; day <= lastDate; day += 1) {
-          const dateKey = `${monthKey}-${String(day).padStart(2, "0")}`;
-          const events = calendarState.monthEvents?.[dateKey] || [];
-          const note = calendarState.monthNotes?.[dateKey]?.memo || "";
-          const chips = [
-            note ? "메모" : "",
-            ...events.map((event) => event.title || "일정"),
-          ].filter(Boolean);
-          const classes = [
-            "calendar-cell",
-            dateKey === todayKey ? "is-today" : "",
-            chips.length ? "has-event" : "",
-          ]
-            .filter(Boolean)
-            .join(" ");
-
-          cells.push(`
-            <span class="${classes}">
-              <strong>${day}</strong>
-              ${chips.slice(0, 2).map((chip) => `<em>${escapeHtml(chip)}</em>`).join("")}
-            </span>
-          `);
-        }
-
-        calendarGrid.innerHTML = cells.join("");
-      }
-
-      function renderAdminCalendar(payload = {}) {
-        calendarState = {
-          memo: payload.memo || "",
-          events: payload.events || [],
-          monthEvents: payload.monthEvents || {},
-          monthNotes: payload.monthNotes || {},
-        };
-        todayMemoInput.value = calendarState.memo;
-        todayDateLabel.textContent = getDateLabel(payload.date || getTodayKey());
-        renderTodaySchedule();
-        renderMiniCalendar();
-      }
-
-      async function loadAdminCalendar() {
-        if (!state.token) return;
-
-        try {
-          const dateKey = getTodayKey();
-          const monthKey = getMonthKey(calendarCursor);
-          const payload = await apiFetch(`/api/admin/calendar?date=${encodeURIComponent(dateKey)}&month=${encodeURIComponent(monthKey)}`);
-          renderAdminCalendar(payload);
-          setCalendarStatus("날짜가 들어간 메모는 달력 일정으로 자동 저장됩니다.");
-        } catch (error) {
-          setCalendarStatus("메모와 일정을 불러오지 못했습니다.", "error");
-        }
-      }
-
-      async function saveTodayMemoText() {
-        if (!state.token) return;
-
-        saveTodayMemo.disabled = true;
-        setCalendarStatus("메모를 저장하는 중입니다.");
-
-        try {
-          const dateKey = getTodayKey();
-          const monthKey = getMonthKey(calendarCursor);
-          const payload = await apiFetch("/api/admin/calendar", {
-            method: "PUT",
-            body: JSON.stringify({
-              date: dateKey,
-              month: monthKey,
-              memo: todayMemoInput.value,
-            }),
-          });
-          renderAdminCalendar(payload);
-          setCalendarStatus("저장되었습니다. 날짜가 언급된 내용은 달력 일정에 반영됐습니다.", "success");
-        } catch (error) {
-          setCalendarStatus("메모 저장에 실패했습니다.", "error");
-        } finally {
-          saveTodayMemo.disabled = false;
-        }
-      }
-
-      function setPeriod(period) {
-        const today = new Date();
-        let start = "";
-        let end = "";
-
-        if (period === "today") {
-          start = toDateInput(today);
-          end = start;
-        }
-
-        if (period === "yesterday") {
-          const yesterday = new Date(today);
-          yesterday.setDate(today.getDate() - 1);
-          start = toDateInput(yesterday);
-          end = start;
-        }
-
-        if (period === "14days") {
-          const past = new Date(today);
-          past.setDate(today.getDate() - 13);
-          start = toDateInput(past);
-          end = toDateInput(today);
-        }
-
-        if (period === "lastMonth") {
-          start = toDateInput(new Date(today.getFullYear(), today.getMonth() - 1, 1));
-          end = toDateInput(new Date(today.getFullYear(), today.getMonth(), 0));
-        }
-
-        if (period === "thisMonth") {
-          start = toDateInput(new Date(today.getFullYear(), today.getMonth(), 1));
-          end = toDateInput(today);
-        }
-
-        filterStart.value = start;
-        filterEnd.value = end;
-        periodButtons.forEach((button) => button.classList.toggle("is-active", button.dataset.period === period));
-        renderLeads();
-      }
-
-      async function assignSelectedLeads() {
-        if (!isSuperAdmin()) {
-          status.textContent = "최고 관리자만 DB를 이동할 수 있습니다.";
-          return;
-        }
-
-        const assigneeId = bulkAssigneeSelect.value;
-        const selectedIds = [...rows.querySelectorAll(".lead-select:checked")].map((checkbox) => checkbox.value);
-
-        if (!selectedIds.length) {
-          status.textContent = "이동할 DB를 선택해주세요.";
-          return;
-        }
-
-        if (!assigneeId) {
-          status.textContent = "배정할 담당자를 선택해주세요.";
-          return;
-        }
-
-        status.textContent = "선택한 DB를 이동하는 중입니다.";
-        for (const leadId of selectedIds) {
-          updateLeadMeta(leadId, { assignedAdminId: assigneeId });
-          window.clearTimeout(saveTimers[leadId]);
-          await saveLeadMeta(leadId);
-        }
-
-        status.textContent = "선택한 DB 이동이 완료되었습니다.";
-        renderLeads();
       }
 
       loginForm.addEventListener("submit", async (event) => {
         event.preventDefault();
         loginStatus.textContent = "로그인 중입니다.";
-
         const form = new FormData(loginForm);
+        const username = normalizeUsername(form.get("username"));
+        const password = String(form.get("password") || "");
         try {
-          const payload = await apiFetch("/api/admin/login", {
-            method: "POST",
-            body: JSON.stringify({
-              username: form.get("username"),
-              password: form.get("password"),
-            }),
-          });
-          state.token = payload.token;
-          state.user = payload.user;
-          window.localStorage.setItem(tokenStorageKey, state.token);
+          let credential;
+          try {
+            credential = await auth.signInWithEmailAndPassword(usernameToEmail(username), password);
+          } catch (error) {
+            if (username === "jhxox666" && error.code === "auth/user-not-found") {
+              credential = await auth.createUserWithEmailAndPassword(usernameToEmail(username), password);
+            } else {
+              throw error;
+            }
+          }
+          await loadCurrentUser(credential.user, username);
           loginStatus.textContent = "";
-          await loadLeads();
         } catch (error) {
-          loginStatus.textContent = getMessage(error.code, "로그인에 실패했습니다.");
+          loginStatus.textContent = "아이디 또는 비밀번호를 확인해주세요. Firebase Authentication의 이메일/비밀번호 로그인이 켜져 있어야 합니다.";
         }
       });
 
-      document.querySelector("#refreshLeads").addEventListener("click", loadLeads);
-      document.querySelector("#downloadCsv").addEventListener("click", downloadCsv);
-      document.querySelector("#logoutButton").addEventListener("click", async () => {
+      registerForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        registerStatus.textContent = "가입 신청 중입니다.";
+        const form = new FormData(registerForm);
+        const username = normalizeUsername(form.get("username"));
+        const password = String(form.get("password") || "");
+        const name = String(form.get("name") || "").trim();
+
+        if (username.length < 3 || password.length < 6 || !name) {
+          registerStatus.textContent = "이름, 아이디, 비밀번호를 확인해주세요.";
+          return;
+        }
+
         try {
-          if (state.token) await apiFetch("/api/admin/logout", { method: "POST" });
+          const credential = await auth.createUserWithEmailAndPassword(usernameToEmail(username), password);
+          const payload = {
+            uid: credential.user.uid,
+            username,
+            email: credential.user.email,
+            name,
+            role: "ad",
+            status: "pending",
+            groupId: "",
+            createdAt: serverTimestamp(),
+          };
+          await db.collection("admins").doc(credential.user.uid).set(payload);
+          await db.collection("adminRequests").doc(credential.user.uid).set(payload);
+          registerStatus.textContent = "가입 신청이 접수되었습니다. 최고관리자 승인 후 로그인할 수 있습니다.";
+          await auth.signOut();
         } catch (error) {
-          // 이미 만료된 세션이어도 화면에서는 로그아웃 처리합니다.
+          registerStatus.textContent = "가입 신청에 실패했습니다. 이미 사용 중인 아이디일 수 있습니다.";
         }
-        clearSession("로그아웃되었습니다.");
       });
 
-      search.addEventListener("input", renderLeads);
-      searchButton.addEventListener("click", renderLeads);
-      filterStart.addEventListener("change", renderLeads);
-      filterEnd.addEventListener("change", renderLeads);
-      assigneeFilter.addEventListener("change", renderLeads);
-      pageSize.addEventListener("change", renderLeads);
-      resetFilters.addEventListener("click", () => {
-        search.value = "";
+      $("#showRegisterButton").addEventListener("click", () => {
+        registerForm.hidden = false;
+      });
+
+      $("#hideRegisterButton").addEventListener("click", () => {
+        registerForm.hidden = true;
+      });
+
+      $("#logoutButton").addEventListener("click", () => auth.signOut());
+      $("#refreshLeads").addEventListener("click", loadAllData);
+      $("#downloadCsv").addEventListener("click", downloadCsv);
+
+      requestRows.addEventListener("click", async (event) => {
+        const button = event.target.closest("[data-request-action]");
+        if (!button || !isSuper()) return;
+        const uid = button.dataset.uid;
+        const status = button.dataset.requestAction;
+        await db.collection("admins").doc(uid).set({ status, approvedAt: status === "approved" ? serverTimestamp() : null, rejectedAt: status === "rejected" ? serverTimestamp() : null }, { merge: true });
+        await db.collection("adminRequests").doc(uid).set({ status, updatedAt: serverTimestamp() }, { merge: true });
+        await loadAllData();
+      });
+
+      adminUserRows.addEventListener("change", async (event) => {
+        const roleUser = event.target.closest("[data-role-user]");
+        const groupUser = event.target.closest("[data-group-user]");
+        if (!isSuper()) return;
+        if (roleUser) {
+          await db.collection("admins").doc(roleUser.dataset.roleUser).set({ role: roleUser.value, updatedAt: serverTimestamp() }, { merge: true });
+        }
+        if (groupUser) {
+          await db.collection("admins").doc(groupUser.dataset.groupUser).set({ groupId: groupUser.value, updatedAt: serverTimestamp() }, { merge: true });
+        }
+        roleStatus.textContent = "권한 정보가 저장되었습니다.";
+        await loadAllData();
+      });
+
+      $("#createGroupButton").addEventListener("click", async () => {
+        const name = groupNameInput.value.trim();
+        if (!name || !isSuper()) return;
+        await db.collection("groups").add({ name, createdAt: serverTimestamp(), createdBy: state.authUser.uid });
+        groupNameInput.value = "";
+        roleStatus.textContent = "그룹이 추가되었습니다.";
+        await loadAllData();
+      });
+
+      rows.addEventListener("input", (event) => {
+        const field = event.target.dataset.leadField;
+        const leadId = event.target.dataset.leadId;
+        if (!field || !leadId) return;
+        updateLead(leadId, { [field]: event.target.value });
+      });
+
+      rows.addEventListener("change", (event) => {
+        const field = event.target.dataset.leadField;
+        const leadId = event.target.dataset.leadId;
+        if (!field || !leadId) return;
+        updateLead(leadId, { [field]: event.target.value });
+      });
+
+      $("#bulkAssignButton").addEventListener("click", async () => {
+        const assignedAdminId = bulkAssigneeSelect.value;
+        if (!assignedAdminId || !canAssignDb()) return;
+        const selected = [...document.querySelectorAll(".lead-select:checked")].map((input) => input.value);
+        for (const leadId of selected) {
+          const user = state.users.find((item) => item.id === assignedAdminId);
+          await db.collection("leads").doc(leadId).set({
+            assignedAdminId,
+            assignedAdminName: user?.name || "",
+            assignedAdminUsername: user?.username || "",
+            groupId: user?.groupId || "",
+            updatedAt: serverTimestamp(),
+          }, { merge: true });
+        }
+        await loadAllData();
+      });
+
+      document.addEventListener("click", (event) => {
+        const statusButton = event.target.closest("[data-status-filter]");
+        if (statusButton) {
+          activeStatusFilter = statusButton.dataset.statusFilter;
+          renderStatusSummary();
+          renderLeads();
+        }
+      });
+
+      [leadSearch, filterStart, filterEnd, assigneeFilter, pageSize].forEach((element) => {
+        element.addEventListener("input", renderLeads);
+        element.addEventListener("change", renderLeads);
+      });
+
+      $("#resetFilters").addEventListener("click", () => {
+        leadSearch.value = "";
         filterStart.value = "";
         filterEnd.value = "";
         assigneeFilter.value = "";
         activeStatusFilter = "all";
-        periodButtons.forEach((button) => button.classList.toggle("is-active", button.dataset.period === "all"));
-        renderLeads();
+        renderAll();
       });
-      periodButtons.forEach((button) => button.addEventListener("click", () => setPeriod(button.dataset.period)));
-      saveTodayMemo.addEventListener("click", saveTodayMemoText);
-      todayMemoInput.addEventListener("keydown", (event) => {
-        if ((event.ctrlKey || event.metaKey) && event.key.toLowerCase() === "s") {
-          event.preventDefault();
-          saveTodayMemoText();
-        }
-      });
-      prevCalendarMonth.addEventListener("click", () => {
+
+      $("#searchButton").addEventListener("click", renderLeads);
+      $("#saveTodayMemo").addEventListener("click", saveMemo);
+      $("#prevCalendarMonth").addEventListener("click", () => {
         calendarCursor = new Date(calendarCursor.getFullYear(), calendarCursor.getMonth() - 1, 1);
-        loadAdminCalendar();
+        renderCalendar();
       });
-      nextCalendarMonth.addEventListener("click", () => {
+      $("#nextCalendarMonth").addEventListener("click", () => {
         calendarCursor = new Date(calendarCursor.getFullYear(), calendarCursor.getMonth() + 1, 1);
-        loadAdminCalendar();
+        renderCalendar();
       });
-      statusSummary.addEventListener("click", (event) => {
-        const button = event.target.closest("[data-status-filter]");
-        if (!button) return;
-        activeStatusFilter = button.dataset.statusFilter;
-        renderLeads();
-      });
-      bulkAssignButton.addEventListener("click", assignSelectedLeads);
-      leadHead.addEventListener("change", (event) => {
-        const selectAll = event.target.closest("#selectAllLeads");
-        if (!selectAll) return;
-        rows.querySelectorAll(".lead-select").forEach((checkbox) => {
-          checkbox.checked = selectAll.checked;
-        });
-      });
-      rows.addEventListener("click", (event) => {
-        const button = event.target.closest("[data-action='status']");
-        if (!button) return;
 
-        updateLeadMeta(button.dataset.leadId, { progressStatus: button.dataset.status });
-        renderLeads();
-      });
-      rows.addEventListener("input", (event) => {
-        const field = event.target.closest("[data-meta-field]");
-        if (!field || field.dataset.metaField === "assignedAdminId") return;
-
-        updateLeadMeta(field.dataset.leadId, { [field.dataset.metaField]: field.value });
-      });
-      rows.addEventListener("change", (event) => {
-        const statusSelect = event.target.closest("[data-status-select]");
-        if (statusSelect) {
-          updateLeadMeta(statusSelect.dataset.leadId, { progressStatus: statusSelect.value });
-          renderLeads();
+      auth.onAuthStateChanged((user) => {
+        if (!user) {
+          state.authUser = null;
+          state.user = null;
+          showAuth();
           return;
         }
-
-        const field = event.target.closest("[data-meta-field='assignedAdminId']");
-        if (!field) return;
-
-        updateLeadMeta(field.dataset.leadId, { assignedAdminId: field.value });
-        renderLeads();
+        loadCurrentUser(user).catch(() => showAuth("관리자 권한을 확인하지 못했습니다."));
       });
-      userRows.addEventListener("click", (event) => {
-        const button = event.target.closest("[data-user-action]");
-        if (!button) return;
-
-        updateUser(button.dataset.userId, { status: button.dataset.userAction });
-      });
-
-      loadSession();
     </script>
   </body>
 </html>

@@ -172,6 +172,45 @@ function requestJson(url, options = {}) {
   });
 }
 
+const firebaseConfig = {
+  apiKey: "AIzaSyDwBr5ftgJID4cGt45N23eVCTiLWt5M2PE",
+  authDomain: "recarauto-88950.firebaseapp.com",
+  projectId: "recarauto-88950",
+  storageBucket: "recarauto-88950.firebasestorage.app",
+  messagingSenderId: "851749593786",
+  appId: "1:851749593786:web:f114ba96d32dafcf261883",
+  measurementId: "G-CT2RF1RFNQ",
+};
+
+function loadScript(src) {
+  return new Promise((resolve, reject) => {
+    if ([...document.scripts].some((script) => script.src === src)) {
+      resolve();
+      return;
+    }
+
+    const script = document.createElement("script");
+    script.src = src;
+    script.async = true;
+    script.onload = resolve;
+    script.onerror = reject;
+    document.head.appendChild(script);
+  });
+}
+
+async function getFirebaseDb() {
+  if (!window.firebase?.firestore) {
+    await loadScript("https://www.gstatic.com/firebasejs/8.6.8/firebase-app.js");
+    await loadScript("https://www.gstatic.com/firebasejs/8.6.8/firebase-firestore.js");
+  }
+
+  if (!window.firebase.apps.length) {
+    window.firebase.initializeApp(firebaseConfig);
+  }
+
+  return window.firebase.firestore();
+}
+
 async function sendLeadToServer(lead) {
   if (window.location.protocol === "file:") {
     return { stored: "browser" };
@@ -192,14 +231,48 @@ async function sendLeadToServer(lead) {
   return response.data;
 }
 
+async function sendLeadToFirebase(lead) {
+  const db = await getFirebaseDb();
+  const cleanLead = {
+    ...lead,
+    storage: "firebase-client",
+    progressStatus: "선택",
+    assignedAdminId: "",
+    assignedAdminName: "",
+    assignedAdminUsername: "",
+    groupId: "",
+    adminMemo: "",
+    dbManager: "",
+  };
+
+  await db.collection("leads").doc(lead.id).set(cleanLead, { merge: false });
+
+  return { stored: "firebase", id: lead.id };
+}
+
 async function submitLead(lead) {
   saveLocalLead(lead);
 
-  const serverResult = await sendLeadToServer(lead);
-  if (serverResult?.firebase?.stored) {
+  let serverResult = null;
+  try {
+    serverResult = await sendLeadToServer(lead);
+  } catch (error) {
+    serverResult = null;
+  }
+
+  if (serverResult?.firebase?.stored || serverResult?.stored === "firebase") {
     return {
       stored: "firebase",
       firebase: serverResult.firebase,
+      server: serverResult,
+    };
+  }
+
+  if (!serverResult || window.location.hostname === "recarplan.com") {
+    const firebaseResult = await sendLeadToFirebase(lead);
+    return {
+      stored: "firebase",
+      firebase: firebaseResult,
       server: serverResult,
     };
   }

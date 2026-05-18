@@ -2,6 +2,39 @@ rules_version = '2';
 
 service cloud.firestore {
   match /databases/{database}/documents {
+    function signedIn() {
+      return request.auth != null;
+    }
+
+    function adminDoc() {
+      return get(/databases/$(database)/documents/admins/$(request.auth.uid));
+    }
+
+    function isApprovedAdmin() {
+      return signedIn()
+        && exists(/databases/$(database)/documents/admins/$(request.auth.uid))
+        && adminDoc().data.status == 'approved';
+    }
+
+    function isSuper() {
+      return isApprovedAdmin() && adminDoc().data.role == 'super';
+    }
+
+    function isSd() {
+      return isApprovedAdmin() && adminDoc().data.role == 'sd';
+    }
+
+    function isAd() {
+      return isApprovedAdmin() && adminDoc().data.role == 'ad';
+    }
+
+    function sameGroup(groupId) {
+      return isApprovedAdmin()
+        && groupId is string
+        && groupId != ''
+        && adminDoc().data.groupId == groupId;
+    }
+
     function isValidLeadId(leadId) {
       return leadId.matches('^RECAR-[0-9]{8}-[A-Z0-9]{4}$');
     }
@@ -29,11 +62,93 @@ service cloud.firestore {
         && request.resource.data.termsConsent == true;
     }
 
+    function adLeadUpdateOnly() {
+      return request.resource.data.diff(resource.data).affectedKeys().hasOnly([
+        'customerName',
+        'progressStatus',
+        'adminMemo',
+        'dbManager',
+        'updatedAt',
+        'updatedBy'
+      ]);
+    }
+
+    function managerLeadUpdateOnly() {
+      return request.resource.data.diff(resource.data).affectedKeys().hasOnly([
+        'customerName',
+        'progressStatus',
+        'adminMemo',
+        'dbManager',
+        'assignedAdminId',
+        'assignedAdminName',
+        'assignedAdminUsername',
+        'groupId',
+        'updatedAt',
+        'updatedBy'
+      ]);
+    }
+
     match /leads/{leadId} {
-      allow write: if !exists(/databases/$(database)/documents/leads/$(leadId))
+      allow create: if !exists(/databases/$(database)/documents/leads/$(leadId))
         && isValidLeadId(leadId)
         && isValidLeadCreate(leadId);
-      allow read, update, delete: if false;
+
+      allow read: if isSuper()
+        || (isSd() && sameGroup(resource.data.groupId))
+        || (isAd() && resource.data.assignedAdminId == request.auth.uid);
+
+      allow update: if isSuper()
+        || (isSd() && sameGroup(resource.data.groupId) && managerLeadUpdateOnly())
+        || (isAd() && resource.data.assignedAdminId == request.auth.uid && adLeadUpdateOnly());
+
+      allow delete: if isSuper();
+    }
+
+    match /admins/{uid} {
+      allow create: if signedIn()
+        && request.auth.uid == uid
+        && (
+          (
+            request.resource.data.role == 'ad'
+            && request.resource.data.status == 'pending'
+          )
+          ||
+          (
+            request.auth.token.email == 'jhxox666@recarplan.admin'
+            && request.resource.data.role == 'super'
+            && request.resource.data.status == 'approved'
+          )
+        );
+
+      allow read: if isSuper()
+        || request.auth.uid == uid
+        || (isSd() && sameGroup(resource.data.groupId));
+
+      allow update: if isSuper();
+      allow delete: if false;
+    }
+
+    match /adminRequests/{uid} {
+      allow create: if signedIn()
+        && request.auth.uid == uid
+        && request.resource.data.role == 'ad'
+        && request.resource.data.status == 'pending';
+
+      allow read: if isSuper() || request.auth.uid == uid;
+      allow update: if isSuper();
+      allow delete: if isSuper();
+    }
+
+    match /groups/{groupId} {
+      allow read: if isApprovedAdmin();
+      allow create, update, delete: if isSuper();
+    }
+
+    match /adminMemos/{memoId} {
+      allow read, write: if isApprovedAdmin()
+        && request.resource.data.uid == request.auth.uid;
+      allow read: if isApprovedAdmin()
+        && resource.data.uid == request.auth.uid;
     }
 
     match /{document=**} {
