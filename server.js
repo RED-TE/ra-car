@@ -45,6 +45,9 @@ const publicStaticFiles = new Set([
   "/terms.html",
   "/admin.html",
   "/inquiry/index.html",
+  "/data/vehicle-static-catalog.json",
+  "/data/vehicles-incomplete-report.json",
+  "/data/vehicles-incomplete-report.csv",
   "/styles.css",
   "/script.js",
 ]);
@@ -2210,7 +2213,7 @@ async function saveLeadToFirebase(lead) {
 function serveStatic(request, response, url) {
   const pathname = decodeURIComponent(url.pathname);
 
-  if (pathname.startsWith("/data/")) {
+  if (pathname.startsWith("/data/") && !isPublicStaticPath(pathname)) {
     response.writeHead(404);
     response.end("Not found");
     return;

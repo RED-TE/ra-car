@@ -1,0 +1,24 @@
+{
+  "generatedAt": "2026-05-18T07:12:08.115Z",
+  "incompleteCount": 2,
+  "items": [
+    {
+      "id": "pricing-세닉",
+      "brand": "",
+      "name": "세닉",
+      "monthlyPayment": 1011060,
+      "reason": "브랜드 정보 없음 / 차량 이미지 없음",
+      "matchedImage": "",
+      "source": "spreadsheet-price"
+    },
+    {
+      "id": "pricing-트랙스크로스오버",
+      "brand": "",
+      "name": "트랙스 크로스오버",
+      "monthlyPayment": 370500,
+      "reason": "브랜드 정보 없음 / 차량 이미지 없음",
+      "matchedImage": "",
+      "source": "spreadsheet-price"
+    }
+  ]
+}

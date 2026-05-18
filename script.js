@@ -1052,8 +1052,39 @@ function renderFallbackVehicles() {
   updateTimeDealTimer();
 }
 
+async function renderStaticVehicleCatalog() {
+  if (!vehicleGrid || vehicleMode !== "all") return false;
+
+  try {
+    const response = await requestJson("./data/vehicle-static-catalog.json");
+    const payload = response.data;
+    const items = Array.isArray(payload?.items)
+      ? payload.items.filter((vehicle) => vehicle?.imageUrl && vehicle?.monthlyPayment)
+      : [];
+
+    if (!response.ok || !items.length) {
+      throw new Error("static_vehicle_catalog_empty");
+    }
+
+    if (vehicleError) vehicleError.hidden = true;
+    vehicleGrid.setAttribute("aria-busy", "false");
+    vehicleGrid.innerHTML = items.map(renderVehicleCard).join("");
+    refreshVehicleCards();
+    setVehicleFilter(activeVehicleFilter);
+    return true;
+  } catch (error) {
+    console.warn("static_vehicle_catalog_failed", error);
+    return false;
+  }
+}
+
 async function loadVehicles() {
   if (!vehicleGrid) return;
+
+  if (vehicleMode === "all") {
+    const didRenderStaticCatalog = await renderStaticVehicleCatalog();
+    if (didRenderStaticCatalog) return;
+  }
 
   try {
     const params = new URLSearchParams({
@@ -1079,6 +1110,8 @@ async function loadVehicles() {
     refreshVehicleCards();
     setVehicleFilter(activeVehicleFilter);
   } catch (error) {
+    const didRenderStaticCatalog = await renderStaticVehicleCatalog();
+    if (didRenderStaticCatalog) return;
     renderFallbackVehicles();
   }
 }
