@@ -932,6 +932,8 @@ function renderVehicleCard(vehicle) {
     .map(([key, value]) => `data-rank-${escapeHtml(key)}="${escapeHtml(value)}"`)
     .join(" ");
   const monthly = formatWon(vehicle.monthlyPayment);
+  const originalMonthly = vehicle.timeDealOriginalMonthlyPayment ? formatWon(vehicle.timeDealOriginalMonthlyPayment) : "";
+  const dealDiscount = Number(vehicle.timeDealDiscount || 0);
   const trim = vehicle.trim || "대표 트림";
   const year = vehicle.year ? `${vehicle.year}년식` : "연식 확인";
   const subtitle = vehicle.subtitle || [vehicle.fuel, year].filter(Boolean).join(" · ");
@@ -950,7 +952,12 @@ function renderVehicleCard(vehicle) {
         <h3><span>${escapeHtml(vehicle.brandLabel || vehicle.brand || "브랜드")}</span>${escapeHtml(vehicle.name || "차량")}</h3>
         <p class="vehicle-specs">${escapeHtml(trim)}${subtitle ? ` · ${escapeHtml(subtitle)}` : ""}</p>
         ${meta.length ? `<div class="vehicle-meta">${meta.map((item) => `<span>${escapeHtml(item)}</span>`).join("")}</div>` : ""}
-        <div class="price"><small>월</small> ${escapeHtml(monthly)}</div>
+        ${
+          originalMonthly
+            ? `<div class="time-deal-price-label">타임특가 추가 할인 ${escapeHtml(formatWon(dealDiscount))}</div>
+        <div class="price is-time-deal"><del>월 ${escapeHtml(originalMonthly)}</del><span><small>월</small> ${escapeHtml(monthly)}</span></div>`
+            : `<div class="price"><small>월</small> ${escapeHtml(monthly)}</div>`
+        }
         <p class="price-note">표시 금액은 평균 참고가입니다. 실제 진행 전 전문가가 조건을 한 번 더 확인해 가능한 최저 조건으로 안내드립니다.</p>
         <div class="vehicle-actions">
           <a class="vehicle-quote-button" href="#quote" data-vehicle="${escapeHtml(`${name} ${trim}`.trim())}">문의하기</a>
@@ -993,23 +1000,40 @@ function seededShuffle(items, seed) {
   return result;
 }
 
+function getStableTimeDealDiscount(id, seed) {
+  const key = `${id || "vehicle"}-${seed || 0}`;
+  let hash = 0;
+  for (const char of key) {
+    hash = (hash * 31 + char.charCodeAt(0)) >>> 0;
+  }
+  return 10000 + (hash % 11) * 500;
+}
+
 function decorateFallbackVehiclesForTimeDeals(vehicles) {
   const { seed } = getTimeDealWindow();
-  const dealIds = new Set(
-    seededShuffle(
-      vehicles.filter((vehicle) => vehicle.imageUrl || vehicle.fallbackImageUrl),
-      seed,
-    )
-      .slice(0, 6)
-      .map((vehicle) => vehicle.id),
+  const dealIds = seededShuffle(
+    vehicles.filter((vehicle) => vehicle.imageUrl || vehicle.fallbackImageUrl),
+    seed,
   );
+  const dealIdSet = new Set(dealIds.slice(0, 6).map((vehicle) => vehicle.id));
 
   return vehicles.map((vehicle) => {
     const categories = new Set(vehicle.categories || []);
     const categoryRanks = { ...(vehicle.categoryRanks || {}) };
-    if (dealIds.has(vehicle.id)) {
+    if (dealIdSet.has(vehicle.id)) {
+      const discount = getStableTimeDealDiscount(vehicle.id, seed);
+      const originalMonthlyPayment = Number(vehicle.monthlyPayment || 0);
       categories.add("time");
-      categoryRanks.time = [...dealIds].indexOf(vehicle.id) + 1;
+      categoryRanks.time = dealIds.findIndex((dealVehicle) => dealVehicle.id === vehicle.id) + 1;
+
+      return {
+        ...vehicle,
+        monthlyPayment: Math.max(0, originalMonthlyPayment - discount),
+        timeDealOriginalMonthlyPayment: originalMonthlyPayment,
+        timeDealDiscount: discount,
+        categories: [...categories],
+        categoryRanks,
+      };
     } else {
       categories.delete("time");
       delete categoryRanks.time;
@@ -1027,7 +1051,8 @@ function formatTimeLeft(ms) {
   const safeMs = Math.max(0, ms);
   const hours = Math.floor(safeMs / (60 * 60 * 1000));
   const minutes = Math.floor((safeMs % (60 * 60 * 1000)) / (60 * 1000));
-  return `${String(hours).padStart(2, "0")}시간 ${String(minutes).padStart(2, "0")}분`;
+  const seconds = Math.floor((safeMs % (60 * 1000)) / 1000);
+  return `${String(hours).padStart(2, "0")}시간 ${String(minutes).padStart(2, "0")}분 ${String(seconds).padStart(2, "0")}초`;
 }
 
 function updateTimeDealTimer() {
@@ -1110,7 +1135,8 @@ async function loadVehicles() {
 
     if (vehicleError) vehicleError.hidden = true;
     vehicleGrid.setAttribute("aria-busy", "false");
-    vehicleGrid.innerHTML = payload.items.map(renderVehicleCard).join("");
+    const items = vehicleMode === "home" ? decorateFallbackVehiclesForTimeDeals(payload.items) : payload.items;
+    vehicleGrid.innerHTML = items.map(renderVehicleCard).join("");
     refreshVehicleCards();
     setVehicleFilter(activeVehicleFilter);
   } catch (error) {
@@ -1552,7 +1578,7 @@ applyQuoteFromUrl();
 loadVehicles();
 updateTimeDealTimer();
 if (vehicleMode === "home") {
-  window.setInterval(updateTimeDealTimer, 60 * 1000);
+  window.setInterval(updateTimeDealTimer, 1000);
 }
 
 if (window.lucide) {
