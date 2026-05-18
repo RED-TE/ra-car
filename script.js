@@ -138,12 +138,46 @@ function saveLocalLead(lead) {
   window.sessionStorage.setItem("recarLastLeadId", lead.id);
 }
 
+function requestJson(url, options = {}) {
+  if (typeof window.fetch === "function") {
+    return window.fetch(url, options).then(async (response) => ({
+      ok: response.ok,
+      status: response.status,
+      data: await response.json(),
+    }));
+  }
+
+  return new Promise((resolve, reject) => {
+    const request = new XMLHttpRequest();
+    request.open(options.method || "GET", url, true);
+    Object.entries(options.headers || {}).forEach(([key, value]) => {
+      request.setRequestHeader(key, value);
+    });
+    request.onload = () => {
+      let data = null;
+      try {
+        data = request.responseText ? JSON.parse(request.responseText) : null;
+      } catch (error) {
+        reject(error);
+        return;
+      }
+      resolve({
+        ok: request.status >= 200 && request.status < 300,
+        status: request.status,
+        data,
+      });
+    };
+    request.onerror = () => reject(new Error("network_request_failed"));
+    request.send(options.body || null);
+  });
+}
+
 async function sendLeadToServer(lead) {
   if (window.location.protocol === "file:") {
     return { stored: "browser" };
   }
 
-  const response = await fetch("/api/leads", {
+  const response = await requestJson("/api/leads", {
     method: "POST",
     headers: {
       "Content-Type": "application/json",
@@ -155,7 +189,7 @@ async function sendLeadToServer(lead) {
     throw new Error("lead_request_failed");
   }
 
-  return response.json();
+  return response.data;
 }
 
 async function submitLead(lead) {
@@ -422,8 +456,8 @@ async function loadVehicles() {
     if (vehicleMode === "all") {
       params.set("mode", "all");
     }
-    const response = await fetch(`${getAppApiBase()}/api/recar/vehicles?${params.toString()}`, { cache: "no-store" });
-    const payload = await response.json();
+    const response = await requestJson(`${getAppApiBase()}/api/recar/vehicles?${params.toString()}`);
+    const payload = response.data;
 
     if (!response.ok || !payload.ok || !Array.isArray(payload.items) || !payload.items.length) {
       throw new Error(payload.error || "vehicle_load_failed");
@@ -697,8 +731,8 @@ async function showVehicleDetail(vehicleId) {
       deposit_pct: String(vehicleConditions.depositPct),
       mileage_limit: String(vehicleConditions.mileageLimit),
     });
-    const response = await fetch(`${getAppApiBase()}/api/recar/vehicles/${encodeURIComponent(vehicleId)}?${params.toString()}`, { cache: "no-store" });
-    const payload = await response.json();
+    const response = await requestJson(`${getAppApiBase()}/api/recar/vehicles/${encodeURIComponent(vehicleId)}?${params.toString()}`);
+    const payload = response.data;
 
     if (!response.ok || !payload.ok || !payload.vehicle) {
       throw new Error(payload.error || "vehicle_detail_failed");
