@@ -538,6 +538,297 @@ function getAppApiBase() {
   return window.location.protocol === "file:" ? "http://localhost:5173" : "";
 }
 
+const curatedFallbackVehicles = [
+  {
+    id: "curated-sorento",
+    brand: "기아",
+    brandLabel: "기아",
+    name: "쏘렌토",
+    trim: "최저등급",
+    fuel: "가솔린",
+    year: 2025,
+    monthlyPayment: 518000,
+    imageUrl: "./assets/danawa/vehicles/기아/쏘렌토/model_360.png",
+    fallbackImageUrl: "./assets/vehicle-suv.jpg",
+    categories: ["all", "suv", "domestic"],
+    categoryRanks: { all: 1, suv: 1, domestic: 1 },
+    badge: "장기렌트",
+    trimCount: 5,
+  },
+  {
+    id: "curated-carnival",
+    brand: "기아",
+    brandLabel: "기아",
+    name: "카니발",
+    trim: "최저등급",
+    fuel: "가솔린",
+    year: 2025,
+    monthlyPayment: 540140,
+    imageUrl: "./assets/danawa/vehicles/기아/카니발/model_360.png",
+    fallbackImageUrl: "./assets/hero-family-suv.png",
+    categories: ["all", "suv", "domestic"],
+    categoryRanks: { all: 2, suv: 2, domestic: 2 },
+    badge: "패밀리",
+    trimCount: 5,
+  },
+  {
+    id: "curated-sportage",
+    brand: "기아",
+    brandLabel: "기아",
+    name: "스포티지",
+    trim: "최저등급",
+    fuel: "가솔린",
+    year: 2025,
+    monthlyPayment: 440300,
+    imageUrl: "./assets/danawa/vehicles/기아/스포티지/model_360.png",
+    fallbackImageUrl: "./assets/vehicle-suv.jpg",
+    categories: ["all", "suv", "domestic"],
+    categoryRanks: { all: 3, suv: 3, domestic: 3 },
+    badge: "장기렌트",
+    trimCount: 4,
+  },
+  {
+    id: "curated-x7",
+    brand: "BMW",
+    brandLabel: "BMW",
+    name: "X7",
+    trim: "최저등급",
+    fuel: "가솔린",
+    year: 2025,
+    monthlyPayment: 1751500,
+    imageUrl: "./assets/danawa/vehicles/BMW/X7/model_360.png",
+    fallbackImageUrl: "./assets/hero-bmw.png",
+    categories: ["all", "suv", "imported"],
+    categoryRanks: { all: 4, suv: 4, imported: 5 },
+    badge: "리스",
+    trimCount: 4,
+  },
+  {
+    id: "curated-niro",
+    brand: "기아",
+    brandLabel: "기아",
+    name: "니로",
+    trim: "하이브리드",
+    fuel: "하이브리드",
+    year: 2025,
+    monthlyPayment: 465400,
+    imageUrl: "./assets/danawa/vehicles/기아/더 뉴 니로/model_360.png",
+    fallbackImageUrl: "./assets/vehicle-suv.jpg",
+    categories: ["all", "suv", "domestic"],
+    categoryRanks: { all: 5, suv: 5, domestic: 4 },
+    badge: "장기렌트",
+    trimCount: 4,
+  },
+  {
+    id: "curated-tucson",
+    brand: "현대",
+    brandLabel: "현대",
+    name: "투싼",
+    trim: "최저등급",
+    fuel: "가솔린",
+    year: 2025,
+    monthlyPayment: 435030,
+    imageUrl: "./assets/danawa/vehicles/현대/투싼/model_360.png",
+    fallbackImageUrl: "./assets/vehicle-suv.jpg",
+    categories: ["all", "suv", "domestic"],
+    categoryRanks: { all: 6, suv: 6, domestic: 5 },
+    badge: "장기렌트",
+    trimCount: 4,
+  },
+  {
+    id: "curated-grandeur",
+    brand: "현대",
+    brandLabel: "현대",
+    name: "그랜저",
+    trim: "최저등급",
+    fuel: "가솔린",
+    year: 2025,
+    monthlyPayment: 621500,
+    imageUrl: "./assets/danawa/vehicles/현대/그랜저/model_360.png",
+    fallbackImageUrl: "./assets/vehicle-sedan.jpg",
+    categories: ["all", "sedan", "domestic"],
+    categoryRanks: { all: 7, sedan: 1, domestic: 6 },
+    badge: "장기렌트",
+    trimCount: 5,
+  },
+  {
+    id: "curated-g90",
+    brand: "제네시스",
+    brandLabel: "제네시스",
+    name: "G90",
+    trim: "최저등급",
+    fuel: "가솔린",
+    year: 2025,
+    monthlyPayment: 1445100,
+    imageUrl: "./assets/danawa/vehicles/제네시스/G90/model_360.png",
+    fallbackImageUrl: "./assets/vehicle-sedan.jpg",
+    categories: ["all", "sedan", "domestic"],
+    categoryRanks: { all: 8, sedan: 2, domestic: 7 },
+    badge: "의전",
+    trimCount: 4,
+  },
+  {
+    id: "curated-g80",
+    brand: "제네시스",
+    brandLabel: "제네시스",
+    name: "G80",
+    trim: "최저등급",
+    fuel: "가솔린",
+    year: 2025,
+    monthlyPayment: 826800,
+    imageUrl: "./assets/danawa/vehicles/제네시스/G80/model_360.png",
+    fallbackImageUrl: "./assets/vehicle-sedan.jpg",
+    categories: ["all", "sedan", "domestic"],
+    categoryRanks: { all: 9, sedan: 3, domestic: 8 },
+    badge: "장기렌트",
+    trimCount: 4,
+  },
+  {
+    id: "curated-s-class",
+    brand: "Mercedes-Benz",
+    brandLabel: "Mercedes-Benz",
+    name: "S-Class",
+    trim: "최저등급",
+    fuel: "디젤",
+    year: 2026,
+    monthlyPayment: 1775900,
+    imageUrl: "./assets/danawa/vehicles/벤츠/S-Class/model_360.png",
+    fallbackImageUrl: "./assets/vehicle-premium.jpg",
+    categories: ["all", "sedan", "imported"],
+    categoryRanks: { all: 10, sedan: 4, imported: 6 },
+    badge: "리스",
+    trimCount: 3,
+  },
+  {
+    id: "curated-7-series",
+    brand: "BMW",
+    brandLabel: "BMW",
+    name: "7 Series",
+    trim: "최저등급",
+    fuel: "가솔린",
+    year: 2025,
+    monthlyPayment: 1926800,
+    imageUrl: "./assets/danawa/vehicles/BMW/7 Series/model_360.png",
+    fallbackImageUrl: "./assets/hero-bmw.png",
+    categories: ["all", "sedan", "imported"],
+    categoryRanks: { all: 11, sedan: 5, imported: 7 },
+    badge: "리스",
+    trimCount: 4,
+  },
+  {
+    id: "curated-k8",
+    brand: "기아",
+    brandLabel: "기아",
+    name: "K8",
+    trim: "최저등급",
+    fuel: "가솔린",
+    year: 2025,
+    monthlyPayment: 587050,
+    imageUrl: "./assets/danawa/vehicles/기아/K8/model_360.png",
+    fallbackImageUrl: "./assets/vehicle-sedan.jpg",
+    categories: ["all", "sedan", "domestic"],
+    categoryRanks: { all: 12, sedan: 6, domestic: 9 },
+    badge: "장기렌트",
+    trimCount: 4,
+  },
+  {
+    id: "curated-e-class",
+    brand: "Mercedes-Benz",
+    brandLabel: "Mercedes-Benz",
+    name: "E-Class",
+    trim: "최저등급",
+    fuel: "가솔린",
+    year: 2025,
+    monthlyPayment: 811600,
+    imageUrl: "./assets/danawa/vehicles/벤츠/E-Class/model_360.png",
+    fallbackImageUrl: "./assets/vehicle-premium.jpg",
+    categories: ["all", "imported"],
+    categoryRanks: { all: 13, imported: 1 },
+    badge: "리스",
+    trimCount: 4,
+  },
+  {
+    id: "curated-5-series",
+    brand: "BMW",
+    brandLabel: "BMW",
+    name: "5 Series",
+    trim: "최저등급",
+    fuel: "가솔린",
+    year: 2025,
+    monthlyPayment: 793000,
+    imageUrl: "./assets/danawa/vehicles/BMW/5 Series/model_360.png",
+    fallbackImageUrl: "./assets/hero-bmw.png",
+    categories: ["all", "imported"],
+    categoryRanks: { all: 14, imported: 2 },
+    badge: "리스",
+    trimCount: 5,
+  },
+  {
+    id: "curated-model-y",
+    brand: "Tesla",
+    brandLabel: "Tesla",
+    name: "Model Y",
+    trim: "최저등급",
+    fuel: "전기",
+    year: 2025,
+    monthlyPayment: 794020,
+    imageUrl: "./assets/danawa/vehicles/테슬라/Model Y/model_360.png",
+    fallbackImageUrl: "./assets/hero-tesla.png",
+    categories: ["all", "imported"],
+    categoryRanks: { all: 15, imported: 3 },
+    badge: "장기렌트",
+    trimCount: 3,
+  },
+  {
+    id: "curated-x5",
+    brand: "BMW",
+    brandLabel: "BMW",
+    name: "X5",
+    trim: "최저등급",
+    fuel: "가솔린",
+    year: 2025,
+    monthlyPayment: 1349100,
+    imageUrl: "./assets/danawa/vehicles/BMW/X5/model_360.png",
+    fallbackImageUrl: "./assets/hero-bmw.png",
+    categories: ["all", "imported"],
+    categoryRanks: { all: 16, imported: 4 },
+    badge: "리스",
+    trimCount: 4,
+  },
+  {
+    id: "curated-gle",
+    brand: "Mercedes-Benz",
+    brandLabel: "Mercedes-Benz",
+    name: "GLE",
+    trim: "최저등급",
+    fuel: "가솔린",
+    year: 2025,
+    monthlyPayment: 1360800,
+    imageUrl: "./assets/danawa/vehicles/벤츠/GLE-Class/model_360.png",
+    fallbackImageUrl: "./assets/vehicle-premium.jpg",
+    categories: ["all", "imported"],
+    categoryRanks: { all: 17, imported: 5 },
+    badge: "리스",
+    trimCount: 4,
+  },
+  {
+    id: "curated-a6",
+    brand: "Audi",
+    brandLabel: "Audi",
+    name: "A6",
+    trim: "최저등급",
+    fuel: "가솔린",
+    year: 2025,
+    monthlyPayment: 906400,
+    imageUrl: "./assets/danawa/vehicles/아우디/A6/model_360.png",
+    fallbackImageUrl: "./assets/vehicle-premium.jpg",
+    categories: ["all", "imported"],
+    categoryRanks: { all: 18, imported: 6 },
+    badge: "리스",
+    trimCount: 3,
+  },
+];
+
 function escapeHtml(value) {
   return String(value ?? "")
     .replaceAll("&", "&amp;")
@@ -678,15 +969,86 @@ function renderVehicleError() {
   }
 }
 
+function getTimeDealWindow() {
+  const duration = 48 * 60 * 60 * 1000;
+  const startedAt = Math.floor(Date.now() / duration) * duration;
+
+  return {
+    seed: Math.floor(startedAt / duration),
+    endsAt: startedAt + duration,
+  };
+}
+
+function seededShuffle(items, seed) {
+  const result = [...items];
+  let value = seed || 1;
+
+  for (let index = result.length - 1; index > 0; index -= 1) {
+    value = (value * 9301 + 49297) % 233280;
+    const swapIndex = value % (index + 1);
+    [result[index], result[swapIndex]] = [result[swapIndex], result[index]];
+  }
+
+  return result;
+}
+
+function decorateFallbackVehiclesForTimeDeals(vehicles) {
+  const { seed } = getTimeDealWindow();
+  const dealIds = new Set(
+    seededShuffle(
+      vehicles.filter((vehicle) => vehicle.imageUrl || vehicle.fallbackImageUrl),
+      seed,
+    )
+      .slice(0, 6)
+      .map((vehicle) => vehicle.id),
+  );
+
+  return vehicles.map((vehicle) => {
+    const categories = new Set(vehicle.categories || []);
+    const categoryRanks = { ...(vehicle.categoryRanks || {}) };
+    if (dealIds.has(vehicle.id)) {
+      categories.add("time");
+      categoryRanks.time = [...dealIds].indexOf(vehicle.id) + 1;
+    } else {
+      categories.delete("time");
+      delete categoryRanks.time;
+    }
+
+    return {
+      ...vehicle,
+      categories: [...categories],
+      categoryRanks,
+    };
+  });
+}
+
+function formatTimeLeft(ms) {
+  const safeMs = Math.max(0, ms);
+  const hours = Math.floor(safeMs / (60 * 60 * 1000));
+  const minutes = Math.floor((safeMs % (60 * 60 * 1000)) / (60 * 1000));
+  return `${String(hours).padStart(2, "0")}시간 ${String(minutes).padStart(2, "0")}분`;
+}
+
+function updateTimeDealTimer() {
+  const condition = document.querySelector(".vehicle-condition");
+  if (!condition || vehicleMode !== "home") return;
+
+  const { endsAt } = getTimeDealWindow();
+  const left = endsAt - Date.now();
+  condition.innerHTML = `60개월 · 선납금 0% · 연 10,000km 기준입니다. <strong class="time-deal-timer">타임특가 갱신까지 ${formatTimeLeft(left)}</strong>`;
+}
+
 function renderFallbackVehicles() {
   if (vehicleError) vehicleError.hidden = true;
   if (!vehicleGrid) return;
 
-  const items = vehicleMode === "all" ? fallbackVehicles : fallbackVehicles.filter((vehicle) => vehicle.categories?.includes(defaultVehicleFilter));
+  const decoratedVehicles = decorateFallbackVehiclesForTimeDeals(curatedFallbackVehicles);
+  const items = vehicleMode === "all" ? decoratedVehicles : decoratedVehicles.filter((vehicle) => vehicle.categories?.includes(defaultVehicleFilter));
   vehicleGrid.setAttribute("aria-busy", "false");
   vehicleGrid.innerHTML = items.map(renderVehicleCard).join("");
   refreshVehicleCards();
   setVehicleFilter(activeVehicleFilter);
+  updateTimeDealTimer();
 }
 
 async function loadVehicles() {
@@ -1150,6 +1512,10 @@ setFloatingContactState();
 updateActiveNavigation();
 applyQuoteFromUrl();
 loadVehicles();
+updateTimeDealTimer();
+if (vehicleMode === "home") {
+  window.setInterval(updateTimeDealTimer, 60 * 1000);
+}
 
 if (window.lucide) {
   window.lucide.createIcons();

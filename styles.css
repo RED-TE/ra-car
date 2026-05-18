@@ -776,6 +776,20 @@ h2 {
   font-weight: 750;
 }
 
+.time-deal-timer {
+  display: inline-flex;
+  align-items: center;
+  min-height: 30px;
+  margin-left: 8px;
+  padding: 0 12px;
+  color: #071426;
+  background: #f4d98a;
+  border-radius: 999px;
+  font-size: 13px;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
 .vehicle-error {
   margin: 0 0 20px;
   padding: 18px 20px;
