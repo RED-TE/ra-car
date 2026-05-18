@@ -4643,6 +4643,420 @@ h2 {
   background: #07111f;
 }
 
+.corporate-inquiry-page {
+  color: #07111f;
+  background: #fff;
+}
+
+.corporate-inquiry-header {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 40;
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  height: 78px;
+  padding: 0 48px;
+  color: #fff;
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.58), rgba(0, 0, 0, 0));
+}
+
+.corporate-inquiry-header nav {
+  display: flex;
+  gap: 34px;
+  align-items: center;
+  font-size: 15px;
+  font-weight: 800;
+}
+
+.corporate-inquiry-header nav:last-child {
+  justify-content: flex-end;
+}
+
+.corporate-inquiry-header a {
+  color: inherit;
+}
+
+.corporate-inquiry-brand {
+  display: grid;
+  place-items: center;
+}
+
+.corporate-inquiry-brand img {
+  width: 142px;
+  filter: brightness(0) invert(1);
+}
+
+.corporate-inquiry-hero {
+  position: relative;
+  display: grid;
+  align-items: end;
+  min-height: 100vh;
+  padding: 140px 48px 52px;
+  color: #fff;
+  background:
+    linear-gradient(90deg, rgba(2, 7, 13, 0.82), rgba(2, 7, 13, 0.42) 48%, rgba(2, 7, 13, 0.08)),
+    linear-gradient(180deg, rgba(2, 7, 13, 0.1), rgba(2, 7, 13, 0.74)),
+    url("/assets/hero-executive.png") center / cover;
+}
+
+.corporate-hero-content {
+  width: min(1240px, 100%);
+  margin: 0 auto 92px;
+}
+
+.corporate-hero-content p {
+  margin: 0 0 18px;
+  color: #f0c568;
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 0.12em;
+}
+
+.corporate-hero-content h1 {
+  max-width: 900px;
+  margin: 0;
+  font-size: clamp(48px, 5.7vw, 92px);
+  line-height: 1.04;
+  letter-spacing: 0;
+}
+
+.corporate-hero-content span {
+  display: block;
+  max-width: 680px;
+  margin-top: 28px;
+  color: rgba(255, 255, 255, 0.82);
+  font-size: clamp(17px, 1.3vw, 21px);
+  line-height: 1.72;
+}
+
+.corporate-hero-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 36px;
+}
+
+.corporate-hero-actions a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 162px;
+  min-height: 52px;
+  padding: 0 24px;
+  border: 1px solid rgba(255, 255, 255, 0.72);
+  color: #fff;
+  font-size: 15px;
+  font-weight: 850;
+}
+
+.corporate-hero-actions a:first-child {
+  color: #07111f;
+  background: #fff;
+  border-color: #fff;
+}
+
+.corporate-hero-index {
+  position: absolute;
+  right: 48px;
+  bottom: 44px;
+  left: 48px;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  width: min(1240px, calc(100% - 96px));
+  margin: 0 auto;
+  border-top: 1px solid rgba(255, 255, 255, 0.38);
+}
+
+.corporate-hero-index div {
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  min-height: 64px;
+  border-right: 1px solid rgba(255, 255, 255, 0.22);
+}
+
+.corporate-hero-index div:last-child {
+  border-right: 0;
+}
+
+.corporate-hero-index strong {
+  color: rgba(255, 255, 255, 0.58);
+  font-size: 14px;
+  font-weight: 900;
+}
+
+.corporate-hero-index span {
+  color: #fff;
+  font-size: 15px;
+  font-weight: 850;
+}
+
+.corporate-inquiry-intro {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: 18px 72px;
+  width: min(1240px, calc(100% - 96px));
+  margin: 0 auto;
+  padding: 96px 0 76px;
+  border-bottom: 1px solid rgba(7, 17, 31, 0.14);
+}
+
+.corporate-inquiry-intro p {
+  grid-row: span 2;
+  margin: 12px 0 0;
+  color: #1554ff;
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+}
+
+.corporate-inquiry-intro h2 {
+  max-width: 860px;
+  margin: 0;
+  font-size: clamp(36px, 4.1vw, 64px);
+  line-height: 1.12;
+}
+
+.corporate-inquiry-intro span {
+  max-width: 780px;
+  color: #596575;
+  font-size: 18px;
+  line-height: 1.78;
+}
+
+.corporate-inquiry-form-section {
+  width: min(1240px, calc(100% - 96px));
+  margin: 0 auto;
+  padding: 76px 0 86px;
+}
+
+.corporate-form-title {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr);
+  gap: 10px 72px;
+  margin-bottom: 36px;
+}
+
+.corporate-form-title p {
+  grid-row: span 2;
+  margin: 9px 0 0;
+  color: #1554ff;
+  font-size: 13px;
+  font-weight: 900;
+  letter-spacing: 0.08em;
+}
+
+.corporate-form-title h2 {
+  margin: 0;
+  font-size: clamp(36px, 3.8vw, 56px);
+}
+
+.corporate-form-title span {
+  color: #626d7a;
+  font-size: 17px;
+}
+
+.corporate-inquiry-form {
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+.corporate-form-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 28px 22px;
+}
+
+.corporate-form-grid label {
+  color: #07111f;
+  font-size: 15px;
+  font-weight: 850;
+}
+
+.corporate-form-grid label small {
+  margin-left: 6px;
+  color: #7b8492;
+  font-size: 12px;
+}
+
+.corporate-form-grid .wide {
+  grid-column: 1 / -1;
+}
+
+.corporate-inquiry-form input,
+.corporate-inquiry-form textarea {
+  margin-top: 12px;
+  border: 0;
+  border-bottom: 1px solid rgba(7, 17, 31, 0.24);
+  border-radius: 0;
+  background: #f4f6f8;
+}
+
+.corporate-inquiry-form textarea {
+  min-height: 114px;
+}
+
+.corporate-inquiry-form input:focus,
+.corporate-inquiry-form textarea:focus {
+  border-color: #07111f;
+  box-shadow: inset 0 -1px 0 #07111f;
+}
+
+.corporate-model-strip {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 22px;
+}
+
+.corporate-model-strip button {
+  min-height: 40px;
+  padding: 0 16px;
+  color: #07111f;
+  border: 1px solid rgba(7, 17, 31, 0.15);
+  border-radius: 0;
+  background: #fff;
+  font-size: 13px;
+  font-weight: 850;
+  cursor: pointer;
+}
+
+.corporate-model-strip button:hover {
+  color: #fff;
+  background: #07111f;
+}
+
+.corporate-agreement {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+  margin-top: 34px;
+  padding: 24px 0;
+  border-top: 1px solid rgba(7, 17, 31, 0.12);
+  border-bottom: 1px solid rgba(7, 17, 31, 0.12);
+}
+
+.corporate-agreement label {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  color: #07111f;
+  font-size: 15px;
+  font-weight: 850;
+}
+
+.corporate-agreement input {
+  width: 18px;
+  height: 18px;
+  margin: 0;
+}
+
+.corporate-agreement details {
+  margin: 8px 0 0 28px;
+  color: #616b78;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+.corporate-agreement summary {
+  color: #1554ff;
+  font-weight: 850;
+  cursor: pointer;
+}
+
+.corporate-agreement p {
+  margin: 8px 0 0;
+}
+
+.corporate-submit {
+  display: flex;
+  gap: 24px;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 30px;
+}
+
+.corporate-submit p {
+  margin: 0;
+  color: #5f6978;
+  font-size: 14px;
+  font-weight: 750;
+}
+
+.corporate-submit .submit-button {
+  width: min(320px, 100%);
+  margin: 0;
+  border-radius: 0;
+  background: #07111f;
+}
+
+.corporate-inquiry-proof {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  width: min(1240px, calc(100% - 96px));
+  margin: 0 auto 96px;
+  border-top: 1px solid rgba(7, 17, 31, 0.16);
+  border-bottom: 1px solid rgba(7, 17, 31, 0.16);
+}
+
+.corporate-inquiry-proof article {
+  min-height: 188px;
+  padding: 30px 30px 34px 0;
+  border-right: 1px solid rgba(7, 17, 31, 0.12);
+}
+
+.corporate-inquiry-proof article + article {
+  padding-left: 30px;
+}
+
+.corporate-inquiry-proof article:last-child {
+  border-right: 0;
+}
+
+.corporate-inquiry-proof p {
+  margin: 0 0 26px;
+  color: #1554ff;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.corporate-inquiry-proof h3 {
+  margin: 0;
+  font-size: 26px;
+}
+
+.corporate-inquiry-proof span {
+  display: block;
+  margin-top: 14px;
+  color: #5d6878;
+  font-size: 15px;
+  line-height: 1.7;
+}
+
+.corporate-sticky-cta {
+  position: fixed;
+  right: 28px;
+  bottom: 28px;
+  z-index: 50;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 132px;
+  min-height: 48px;
+  padding: 0 20px;
+  color: #fff;
+  background: #07111f;
+  box-shadow: 0 18px 44px rgba(7, 17, 31, 0.22);
+  font-size: 14px;
+  font-weight: 850;
+}
+
 .hero-dots {
   position: absolute;
   left: 50%;
@@ -4926,6 +5340,148 @@ h2 {
 
   .premium-inquiry-proof article:last-child {
     border-bottom: 0;
+  }
+
+  .corporate-inquiry-header {
+    position: sticky;
+    height: 66px;
+    grid-template-columns: auto 1fr;
+    padding: 0 20px;
+    color: #07111f;
+    background: rgba(255, 255, 255, 0.96);
+    border-bottom: 1px solid rgba(7, 17, 31, 0.08);
+  }
+
+  .corporate-inquiry-header nav:first-child {
+    display: none;
+  }
+
+  .corporate-inquiry-header nav:last-child {
+    gap: 16px;
+    justify-self: end;
+    font-size: 13px;
+  }
+
+  .corporate-inquiry-brand img {
+    width: 116px;
+    filter: none;
+  }
+
+  .corporate-inquiry-hero {
+    min-height: calc(100vh - 66px);
+    padding: 86px 22px 26px;
+    background:
+      linear-gradient(180deg, rgba(2, 7, 13, 0.24), rgba(2, 7, 13, 0.82)),
+      url("/assets/hero-executive.png") center / cover;
+  }
+
+  .corporate-hero-content {
+    margin-bottom: 112px;
+  }
+
+  .corporate-hero-content h1 {
+    font-size: clamp(38px, 11vw, 58px);
+  }
+
+  .corporate-hero-content span {
+    font-size: 16px;
+  }
+
+  .corporate-hero-actions a {
+    min-width: 0;
+    flex: 1 1 150px;
+  }
+
+  .corporate-hero-index {
+    right: 22px;
+    bottom: 20px;
+    left: 22px;
+    grid-template-columns: 1fr;
+    width: auto;
+  }
+
+  .corporate-hero-index div {
+    min-height: 44px;
+    border-right: 0;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+  }
+
+  .corporate-hero-index div:last-child {
+    border-bottom: 0;
+  }
+
+  .corporate-inquiry-intro,
+  .corporate-form-title {
+    grid-template-columns: 1fr;
+    gap: 12px;
+    width: min(100% - 36px, 720px);
+  }
+
+  .corporate-inquiry-intro {
+    padding: 64px 0 52px;
+  }
+
+  .corporate-inquiry-intro p,
+  .corporate-form-title p {
+    grid-row: auto;
+    margin-top: 0;
+  }
+
+  .corporate-inquiry-intro h2,
+  .corporate-form-title h2 {
+    font-size: clamp(31px, 8.4vw, 44px);
+  }
+
+  .corporate-inquiry-intro span,
+  .corporate-form-title span {
+    font-size: 16px;
+    line-height: 1.72;
+  }
+
+  .corporate-inquiry-form-section {
+    width: min(100% - 36px, 720px);
+    padding: 52px 0 62px;
+  }
+
+  .corporate-form-grid {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .corporate-agreement {
+    grid-template-columns: 1fr;
+  }
+
+  .corporate-submit {
+    align-items: stretch;
+    flex-direction: column;
+  }
+
+  .corporate-submit .submit-button {
+    width: 100%;
+  }
+
+  .corporate-inquiry-proof {
+    grid-template-columns: 1fr;
+    width: min(100% - 36px, 720px);
+    margin-bottom: 96px;
+  }
+
+  .corporate-inquiry-proof article,
+  .corporate-inquiry-proof article + article {
+    min-height: auto;
+    padding: 26px 0;
+    border-right: 0;
+    border-bottom: 1px solid rgba(7, 17, 31, 0.12);
+  }
+
+  .corporate-inquiry-proof article:last-child {
+    border-bottom: 0;
+  }
+
+  .corporate-sticky-cta {
+    right: 18px;
+    bottom: 18px;
   }
 
   .site-header {
