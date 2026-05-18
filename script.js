@@ -995,7 +995,9 @@ function renderVehicleCard(vehicle) {
   const subtitle = vehicle.subtitle || [vehicle.fuel, year].filter(Boolean).join(" · ");
   const meta = [vehicle.trimCount ? `트림 ${vehicle.trimCount}종` : ""].filter(Boolean);
   const quoteBadge = vehicle.calculation?.isSpreadsheetPrice ? "기준가격" : vehicle.calculation?.isEstimated ? "예상견적" : vehicle.usedQuoteFallback ? "대표견적" : "최저견적";
-  const badges = [vehicle.badge || vehicle.fuel, vehicle.instantDeliveryAvailable ? "즉시출고" : "", quoteBadge]
+  const approvalBadge = vehicle.approvalLevel || (["기아", "현대", "Kia", "Hyundai"].includes(vehicle.brandLabel || vehicle.brand) ? "승인 쉬움" : "승인 확인");
+  const businessBadge = vehicle.businessRecommended ? "사업자 추천" : "";
+  const badges = [approvalBadge, vehicle.instantDeliveryAvailable ? "즉시출고" : "", businessBadge, quoteBadge]
     .filter(Boolean)
     .slice(0, 3);
   return `
