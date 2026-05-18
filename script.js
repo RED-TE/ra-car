@@ -951,6 +951,7 @@ function renderVehicleCard(vehicle) {
         <p class="vehicle-specs">${escapeHtml(trim)}${subtitle ? ` · ${escapeHtml(subtitle)}` : ""}</p>
         ${meta.length ? `<div class="vehicle-meta">${meta.map((item) => `<span>${escapeHtml(item)}</span>`).join("")}</div>` : ""}
         <div class="price"><small>월</small> ${escapeHtml(monthly)}</div>
+        <p class="price-note">표시 금액은 평균 참고가입니다. 실제 진행 전 전문가가 조건을 한 번 더 확인해 가능한 최저 조건으로 안내드립니다.</p>
         <div class="vehicle-actions">
           <a class="vehicle-quote-button" href="#quote" data-vehicle="${escapeHtml(`${name} ${trim}`.trim())}">문의하기</a>
         </div>
@@ -1035,7 +1036,7 @@ function updateTimeDealTimer() {
 
   const { endsAt } = getTimeDealWindow();
   const left = endsAt - Date.now();
-  condition.innerHTML = `60개월 · 선납금 0% · 연 10,000km 기준입니다. <strong class="time-deal-timer">타임특가 갱신까지 ${formatTimeLeft(left)}</strong>`;
+  condition.innerHTML = `표시 금액은 60개월 · 선납금 0% · 연 10,000km 기준의 평균 참고가입니다. 실제 진행 전 조건을 다시 확인해 가능한 최저가로 안내드립니다. <strong class="time-deal-timer">타임특가 갱신까지 ${formatTimeLeft(left)}</strong>`;
 }
 
 function renderFallbackVehicles() {

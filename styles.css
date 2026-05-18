@@ -988,6 +988,14 @@ h2 {
   font-weight: 700;
 }
 
+.price-note {
+  margin: 8px 0 0;
+  color: #6a7380;
+  font-size: 12px;
+  font-weight: 650;
+  line-height: 1.55;
+}
+
 .vehicle-actions {
   display: flex;
   align-items: center;
