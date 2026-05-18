@@ -371,6 +371,169 @@ let currentDetailVehicle = null;
 let currentTrimId = "";
 let currentOptionIds = new Set();
 
+const fallbackVehicles = [
+  {
+    id: "fallback-sorento",
+    brand: "기아",
+    brandLabel: "기아",
+    name: "쏘렌토",
+    trim: "하이브리드",
+    fuel: "가솔린",
+    year: 2025,
+    monthlyPayment: 397300,
+    imageUrl: "./assets/danawa/vehicles/기아/쏘렌토/model_360.png",
+    fallbackImageUrl: "./assets/vehicle-suv.jpg",
+    categories: ["all", "time", "suv", "domestic"],
+    categoryRanks: { all: 1, time: 1, suv: 1, domestic: 1 },
+    badge: "가솔린",
+    trimCount: 5,
+  },
+  {
+    id: "fallback-carnival",
+    brand: "기아",
+    brandLabel: "기아",
+    name: "카니발",
+    trim: "프레스티지",
+    fuel: "가솔린",
+    year: 2025,
+    monthlyPayment: 440200,
+    imageUrl: "./assets/danawa/vehicles/기아/카니발/model_360.png",
+    fallbackImageUrl: "./assets/hero-family-suv.png",
+    categories: ["all", "time", "suv", "domestic"],
+    categoryRanks: { all: 2, time: 2, suv: 2, domestic: 2 },
+    badge: "패밀리",
+    trimCount: 5,
+  },
+  {
+    id: "fallback-s-class",
+    brand: "Mercedes-Benz",
+    brandLabel: "Mercedes-Benz",
+    name: "S-Class",
+    trim: "S350d 4MATIC",
+    fuel: "디젤",
+    year: 2026,
+    monthlyPayment: 1857300,
+    imageUrl: "./assets/danawa/vehicles/벤츠/S-Class/model_360.png",
+    fallbackImageUrl: "./assets/vehicle-premium.jpg",
+    categories: ["all", "time", "sedan", "imported"],
+    categoryRanks: { all: 3, time: 3, sedan: 5, imported: 1 },
+    badge: "의전",
+    trimCount: 3,
+  },
+  {
+    id: "fallback-x6",
+    brand: "BMW",
+    brandLabel: "BMW",
+    name: "X6",
+    trim: "xDrive",
+    fuel: "가솔린",
+    year: 2025,
+    monthlyPayment: 1269000,
+    imageUrl: "./assets/danawa/vehicles/BMW/X6/model_360.png",
+    fallbackImageUrl: "./assets/hero-bmw.png",
+    categories: ["all", "time", "suv", "imported"],
+    categoryRanks: { all: 4, time: 4, suv: 5, imported: 2 },
+    badge: "수입",
+    trimCount: 4,
+  },
+  {
+    id: "fallback-sportage",
+    brand: "기아",
+    brandLabel: "기아",
+    name: "스포티지",
+    trim: "시그니처",
+    fuel: "가솔린",
+    year: 2025,
+    monthlyPayment: 347800,
+    imageUrl: "./assets/danawa/vehicles/기아/스포티지/model_360.png",
+    fallbackImageUrl: "./assets/vehicle-suv.jpg",
+    categories: ["all", "time", "suv", "domestic"],
+    categoryRanks: { all: 5, time: 5, suv: 3, domestic: 3 },
+    badge: "가솔린",
+    trimCount: 4,
+  },
+  {
+    id: "fallback-grandeur",
+    brand: "현대",
+    brandLabel: "현대",
+    name: "그랜저",
+    trim: "프리미엄",
+    fuel: "하이브리드",
+    year: 2025,
+    monthlyPayment: 459000,
+    imageUrl: "./assets/danawa/vehicles/현대/그랜저/model_360.png",
+    fallbackImageUrl: "./assets/vehicle-sedan.jpg",
+    categories: ["all", "sedan", "domestic"],
+    categoryRanks: { all: 6, sedan: 1, domestic: 4 },
+    badge: "세단",
+    trimCount: 5,
+  },
+  {
+    id: "fallback-g80",
+    brand: "제네시스",
+    brandLabel: "제네시스",
+    name: "G80",
+    trim: "2.5 터보",
+    fuel: "가솔린",
+    year: 2025,
+    monthlyPayment: 684000,
+    imageUrl: "./assets/danawa/vehicles/제네시스/G80/model_360.png",
+    fallbackImageUrl: "./assets/vehicle-sedan.jpg",
+    categories: ["all", "sedan", "domestic"],
+    categoryRanks: { all: 7, sedan: 2, domestic: 5 },
+    badge: "프리미엄",
+    trimCount: 4,
+  },
+  {
+    id: "fallback-k8",
+    brand: "기아",
+    brandLabel: "기아",
+    name: "K8",
+    trim: "노블레스",
+    fuel: "하이브리드",
+    year: 2025,
+    monthlyPayment: 432000,
+    imageUrl: "./assets/danawa/vehicles/기아/K8/model_360.png",
+    fallbackImageUrl: "./assets/vehicle-sedan.jpg",
+    categories: ["all", "sedan", "domestic"],
+    categoryRanks: { all: 8, sedan: 3, domestic: 6 },
+    badge: "세단",
+    trimCount: 4,
+  },
+  {
+    id: "fallback-5-series",
+    brand: "BMW",
+    brandLabel: "BMW",
+    name: "5 Series",
+    trim: "530i",
+    fuel: "가솔린",
+    year: 2025,
+    monthlyPayment: 819000,
+    imageUrl: "./assets/danawa/vehicles/BMW/5 Series/model_360.png",
+    fallbackImageUrl: "./assets/hero-bmw.png",
+    categories: ["all", "sedan", "imported"],
+    categoryRanks: { all: 9, sedan: 4, imported: 3 },
+    badge: "수입",
+    trimCount: 5,
+  },
+  {
+    id: "fallback-model-y",
+    brand: "Tesla",
+    brandLabel: "Tesla",
+    name: "Model Y",
+    trim: "Long Range",
+    fuel: "전기",
+    year: 2025,
+    monthlyPayment: 699000,
+    imageUrl: "./assets/danawa/vehicles/테슬라/Model Y/model_360.png",
+    fallbackImageUrl: "./assets/hero-tesla.png",
+    categories: ["all", "suv", "imported"],
+    categoryRanks: { all: 10, suv: 4, imported: 4 },
+    badge: "전기차",
+    trimCount: 3,
+  },
+];
+
 function getAppApiBase() {
   return window.location.protocol === "file:" ? "http://localhost:5173" : "";
 }
@@ -515,6 +678,17 @@ function renderVehicleError() {
   }
 }
 
+function renderFallbackVehicles() {
+  if (vehicleError) vehicleError.hidden = true;
+  if (!vehicleGrid) return;
+
+  const items = vehicleMode === "all" ? fallbackVehicles : fallbackVehicles.filter((vehicle) => vehicle.categories?.includes(defaultVehicleFilter));
+  vehicleGrid.setAttribute("aria-busy", "false");
+  vehicleGrid.innerHTML = items.map(renderVehicleCard).join("");
+  refreshVehicleCards();
+  setVehicleFilter(activeVehicleFilter);
+}
+
 async function loadVehicles() {
   if (!vehicleGrid) return;
 
@@ -542,7 +716,7 @@ async function loadVehicles() {
     refreshVehicleCards();
     setVehicleFilter(activeVehicleFilter);
   } catch (error) {
-    renderVehicleError();
+    renderFallbackVehicles();
   }
 }
 
