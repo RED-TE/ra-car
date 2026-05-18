@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>관리자 | RE:CAR</title>
-    <link rel="stylesheet" href="./styles.css?v=20260518-timelead" />
+    <link rel="stylesheet" href="./styles.css?v=20260518-admin-cards" />
   </head>
   <body class="admin-page">
     <header class="simple-header">
@@ -224,6 +224,7 @@
                 <tbody id="leadRows"></tbody>
               </table>
             </div>
+            <div id="leadCards" class="lead-card-list" aria-live="polite"></div>
           </section>
         </section>
       </section>
@@ -285,6 +286,7 @@
       const sessionLabel = $("#sessionLabel");
       const heroDescription = $("#heroDescription");
       const rows = $("#leadRows");
+      const leadCards = $("#leadCards");
       const leadHead = $("#leadHead");
       const leadTable = $(".lead-table");
       const leadCount = $("#leadCount");
@@ -657,6 +659,7 @@
 
         if (!visible.length) {
           rows.innerHTML = `<tr><td colspan="${colspan}">표시할 문의 DB가 없습니다.</td></tr>`;
+          leadCards.innerHTML = `<p class="empty-state">표시할 문의 DB가 없습니다.</p>`;
           return;
         }
 
@@ -678,6 +681,55 @@
             <td><input class="db-manager-input" data-lead-field="dbManager" data-lead-id="${escapeHtml(lead.id)}" value="${escapeHtml(lead.dbManager)}" placeholder="이름" /></td>
           </tr>
         `).join("");
+
+        leadCards.innerHTML = visible.map((lead) => renderLeadCard(lead)).join("");
+      }
+
+      function renderLeadCard(lead) {
+        const assignee = lead.assignedAdminName ? `${escapeHtml(lead.assignedAdminName)} 배정` : "미배정";
+        return `
+          <article class="lead-card">
+            <div class="lead-card-check">
+              <input class="lead-select" type="checkbox" value="${escapeHtml(lead.id)}" aria-label="${escapeHtml(lead.customerName || "고객")} 선택" />
+              <span class="lead-card-status ${statusClasses[lead.progressStatus] || "is-gray"}">${escapeHtml(lead.progressStatus || "선택")}</span>
+            </div>
+
+            <div class="lead-card-identity">
+              <strong>${escapeHtml(lead.customerName || "이름 미입력")}</strong>
+              <a href="tel:${escapeHtml(lead.phone || "")}">${escapeHtml(lead.phone || "연락처 없음")}</a>
+              <small>${escapeHtml(formatDate(lead.createdAt))}</small>
+            </div>
+
+            <div class="lead-card-detail">
+              <span>희망차량</span>
+              <strong>${escapeHtml(lead.vehicle || "-")}</strong>
+              ${renderLeadSource(lead)}
+              <p>${escapeHtml(lead.requestNote || "요청사항 없음")}</p>
+            </div>
+
+            <div class="lead-card-control">
+              <label>
+                진행상황
+                <select class="status-select${lead.progressStatus !== "선택" ? " has-value" : ""}" data-lead-field="progressStatus" data-lead-id="${escapeHtml(lead.id)}">
+                  ${progressOptions.map((option) => `<option value="${escapeHtml(option)}"${lead.progressStatus === option ? " selected" : ""}>${escapeHtml(option)}</option>`).join("")}
+                </select>
+              </label>
+              ${
+                canAssignDb()
+                  ? `<label>DB 배정${renderAssignSelect(lead)}</label>`
+                  : `<label>배정상태<span class="lead-card-assignee">${assignee}</span></label>`
+              }
+              <label class="lead-card-memo">
+                담당자 메모
+                <textarea class="admin-memo-input" data-lead-field="adminMemo" data-lead-id="${escapeHtml(lead.id)}" placeholder="상담 메모를 입력하세요">${escapeHtml(lead.adminMemo)}</textarea>
+              </label>
+              <label>
+                DB담당자
+                <input class="db-manager-input" data-lead-field="dbManager" data-lead-id="${escapeHtml(lead.id)}" value="${escapeHtml(lead.dbManager)}" placeholder="이름" />
+              </label>
+            </div>
+          </article>
+        `;
       }
 
       function renderAssignSelect(lead) {
@@ -887,18 +939,23 @@
         await loadAllData();
       });
 
-      rows.addEventListener("input", (event) => {
+      function handleLeadInput(event) {
         const field = event.target.dataset.leadField;
         const leadId = event.target.dataset.leadId;
         if (!field || !leadId) return;
         updateLead(leadId, { [field]: event.target.value });
-      });
+      }
 
-      rows.addEventListener("change", (event) => {
+      function handleLeadChange(event) {
         const field = event.target.dataset.leadField;
         const leadId = event.target.dataset.leadId;
         if (!field || !leadId) return;
         updateLead(leadId, { [field]: event.target.value });
+      }
+
+      [rows, leadCards].forEach((container) => {
+        container.addEventListener("input", handleLeadInput);
+        container.addEventListener("change", handleLeadChange);
       });
 
       $("#bulkAssignButton").addEventListener("click", async () => {
