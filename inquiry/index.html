@@ -5,13 +5,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="RE:CAR 장기렌트·리스 문의 랜딩페이지. 차량명과 연락처만 남기면 가능한 조건을 비교해 안내드립니다."
+      content="RE:CAR 장기렌트·리스 1분 문의. 차량명과 연락처를 남기면 실제 진행 전 조건을 한 번 더 확인해 안내드립니다."
     />
     <link rel="canonical" href="https://recarplan.com/inquiry" />
-    <title>RE:CAR 문의하기</title>
+    <title>RE:CAR 1분 견적 문의</title>
     <link rel="stylesheet" href="/styles.css" />
   </head>
-  <body class="inquiry-page">
+  <body class="inquiry-page inquiry-conversion-page">
     <header class="inquiry-header">
       <a class="inquiry-brand" href="/" aria-label="RE:CAR 홈">
         <img src="/assets/recar-logo-transparent.png" alt="RE:CAR" />
@@ -23,84 +23,133 @@
     </header>
 
     <main>
-      <section class="inquiry-hero" aria-label="RE:CAR 문의 랜딩">
-        <div class="inquiry-hero-inner">
-          <p class="eyebrow">RE:CAR CONSULTING</p>
-          <h1>조건만 먼저 확인해도 괜찮습니다.</h1>
+      <section class="inquiry-conversion-hero" aria-label="RE:CAR 1분 문의">
+        <div class="inquiry-conversion-copy">
+          <p class="eyebrow">RE:CAR QUICK ESTIMATE</p>
+          <h1>차량명만 남겨도 조건 확인이 시작됩니다.</h1>
           <p class="inquiry-lead">
-            차량, 연락처, 이름만 남기면 장기렌트와 리스 조건을 비교해 안내드립니다.
-            상담비는 없고, 원치 않으면 진행하지 않아도 됩니다.
+            상담비는 없고, 결정은 조건을 확인한 뒤 하시면 됩니다.
+            여러 금융사 조건을 비교하고 실제 진행 전 전문가가 한 번 더 확인해 가능한 최저 조건으로 안내드립니다.
           </p>
-          <div class="inquiry-actions">
-            <a class="primary-button navy" href="/?focus=vehicle#quote">1분 문의하기</a>
-            <a class="primary-button light-outline" href="/vehicles.html">차량 먼저 보기</a>
-          </div>
-          <ul class="inquiry-proof" aria-label="상담 안내">
+          <ul class="inquiry-trust-list" aria-label="상담 장점">
             <li>
-              <strong>상담비 0원</strong>
-              <span>조건 확인만 가능합니다.</span>
+              <strong>부담 없는 확인</strong>
+              <span>구매 강요 없이 가능한 월 납입료부터 안내</span>
             </li>
             <li>
-              <strong>비교 견적</strong>
-              <span>여러 조건 중 맞는 방향을 봅니다.</span>
+              <strong>추가 마진 없이 비교</strong>
+              <span>진행 전 조건을 재확인해 맞는 견적만 정리</span>
             </li>
             <li>
-              <strong>목적 외 사용 없음</strong>
-              <span>문의 상담에 필요한 정보만 확인합니다.</span>
+              <strong>카톡 상담 가능</strong>
+              <span>전화가 부담스러우면 카카오톡으로 안내</span>
             </li>
           </ul>
+          <div class="inquiry-hot-models" aria-label="빠른 차량 선택">
+            <button type="button" data-inquiry-vehicle="쏘렌토">쏘렌토</button>
+            <button type="button" data-inquiry-vehicle="카니발">카니발</button>
+            <button type="button" data-inquiry-vehicle="스포티지">스포티지</button>
+            <button type="button" data-inquiry-vehicle="S-Class">S-Class</button>
+            <button type="button" data-inquiry-vehicle="BMW X6">BMW X6</button>
+            <button type="button" data-inquiry-vehicle="테슬라">테슬라</button>
+          </div>
         </div>
+
+        <form class="quote-form inquiry-form-card" aria-label="1분 견적 문의">
+          <div class="inquiry-form-head">
+            <p>1분 문의</p>
+            <h2>가능한 조건을 먼저 확인해드릴게요.</h2>
+            <span>차량, 연락처, 이름만 있으면 접수됩니다.</span>
+          </div>
+
+          <div class="form-grid inquiry-form-grid">
+            <label>
+              차량
+              <input id="vehicleWish" name="vehicle" type="text" placeholder="예: 쏘렌토 하이브리드" autocomplete="off" />
+            </label>
+            <label>
+              연락처
+              <input id="contactPhone" name="phone" type="tel" placeholder="010-0000-0000" inputmode="tel" autocomplete="tel" />
+            </label>
+            <label>
+              이름
+              <input id="customerName" name="customerName" type="text" placeholder="예: 홍길동" autocomplete="name" />
+            </label>
+            <label class="full">
+              요청사항 <span>선택사항</span>
+              <textarea id="requestNote" name="requestNote" placeholder="예: 월 납입료 중심으로 보고 싶어요 / 문자로 먼저 안내해주세요"></textarea>
+            </label>
+          </div>
+
+          <div class="inquiry-consent-area">
+            <label class="consent-row">
+              <input id="privacyConsent" type="checkbox" />
+              <span>
+                <strong>개인정보 수집·이용 동의</strong>
+                <small>견적 상담과 연락을 위해서만 사용합니다.</small>
+              </span>
+            </label>
+            <details>
+              <summary>내용 보기</summary>
+              <p>
+                수집 항목은 차량, 연락처, 이름, 요청사항이며 보유 기간은 상담 완료 후 관계 법령에 따른 기간까지입니다.
+                동의하지 않으면 문의 접수가 불가합니다.
+              </p>
+            </details>
+            <label class="consent-row">
+              <input id="termsConsent" type="checkbox" />
+              <span>
+                <strong>상담 유의사항 확인</strong>
+                <small>표시 금액은 평균 참고가이며 최종 조건은 상담 후 확정됩니다.</small>
+              </span>
+            </label>
+            <details>
+              <summary>내용 보기</summary>
+              <p>
+                월 납입료와 출고 가능 여부는 금융사 심사, 차량 재고, 프로모션에 따라 달라질 수 있습니다.
+                실제 진행 전 조건을 한 번 더 확인해 안내드립니다.
+              </p>
+            </details>
+          </div>
+
+          <button class="submit-button" type="submit">
+            <span>조건 확인 요청하기</span>
+            <i data-lucide="send"></i>
+          </button>
+          <p class="inquiry-form-note">상담비 0원 · 원치 않으면 진행하지 않아도 됩니다 · 개인정보는 상담 목적 외 사용하지 않습니다</p>
+          <p class="form-status" hidden></p>
+        </form>
       </section>
 
-      <section class="inquiry-flow" aria-label="문의 진행 방식">
-        <div class="section-heading center">
-          <p class="eyebrow">HOW IT WORKS</p>
-          <h2>부담 없이 남기고, 필요한 조건만 확인합니다.</h2>
-        </div>
-        <div class="inquiry-flow-grid">
-          <article>
-            <span>01</span>
-            <h3>차량과 연락처 입력</h3>
-            <p>희망 차량이 정확하지 않아도 괜찮습니다. 예산이나 용도만 적어도 상담이 가능합니다.</p>
-          </article>
-          <article>
-            <span>02</span>
-            <h3>조건 비교</h3>
-            <p>렌트와 리스, 선납금, 기간, 주행거리 기준을 맞춰 가능한 방향을 먼저 확인합니다.</p>
-          </article>
-          <article>
-            <span>03</span>
-            <h3>편한 방식으로 상담</h3>
-            <p>전화나 카카오톡 중 편한 방식으로 안내드립니다. 결정은 조건 확인 후 하시면 됩니다.</p>
-          </article>
-        </div>
-      </section>
-
-      <section class="inquiry-models" aria-label="자주 문의하는 차량">
-        <div class="section-heading center">
-          <p class="eyebrow">POPULAR REQUEST</p>
-          <h2>자주 문의하는 차량</h2>
-        </div>
-        <div class="inquiry-chip-grid">
-          <a href="/?vehicle=%EC%8F%98%EB%A0%8C%ED%86%A0&focus=vehicle#quote">쏘렌토</a>
-          <a href="/?vehicle=%EC%B9%B4%EB%8B%88%EB%B0%9C&focus=vehicle#quote">카니발</a>
-          <a href="/?vehicle=%EC%8A%A4%ED%8F%AC%ED%8B%B0%EC%A7%80&focus=vehicle#quote">스포티지</a>
-          <a href="/?vehicle=S-Class&focus=vehicle#quote">S-Class</a>
-          <a href="/?vehicle=BMW%20X6&focus=vehicle#quote">BMW X6</a>
-          <a href="/?vehicle=%ED%85%8C%EC%8A%AC%EB%9D%BC&focus=vehicle#quote">테슬라</a>
-        </div>
-      </section>
-
-      <section class="inquiry-final">
-        <div>
-          <p class="eyebrow">READY</p>
-          <h2>차량명만 적어도 시작할 수 있습니다.</h2>
-          <p>가능한 조건을 확인한 뒤, 필요한 내용만 안내드리겠습니다.</p>
-        </div>
-        <a class="primary-button navy" href="/?focus=vehicle#quote">문의 페이지로 이동</a>
+      <section class="inquiry-reason-strip" aria-label="리카 상담 신뢰 요소">
+        <article>
+          <strong>여러 조건 비교</strong>
+          <span>렌트·리스, 기간, 선납금, 주행거리 기준을 맞춰 비교합니다.</span>
+        </article>
+        <article>
+          <strong>전문가 재확인</strong>
+          <span>사이트 금액만 전달하지 않고 실제 진행 전 최저 조건을 다시 확인합니다.</span>
+        </article>
+        <article>
+          <strong>출고까지 관리</strong>
+          <span>상담, 심사, 발주, 출고 흐름을 담당자가 끝까지 챙깁니다.</span>
+        </article>
       </section>
     </main>
 
-    <a class="inquiry-sticky-cta" href="/?focus=vehicle#quote">1분 문의하기</a>
+    <a class="inquiry-sticky-cta" href="#vehicleWish">조건 확인 요청하기</a>
+
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <script src="/script.js?v=20260518-inquiry-conversion"></script>
+    <script>
+      document.querySelectorAll("[data-inquiry-vehicle]").forEach((button) => {
+        button.addEventListener("click", () => {
+          const input = document.querySelector("#vehicleWish");
+          if (!input) return;
+          input.value = button.dataset.inquiryVehicle || "";
+          input.focus();
+        });
+      });
+    </script>
   </body>
 </html>
