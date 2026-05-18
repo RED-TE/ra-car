@@ -770,24 +770,86 @@ h2 {
 }
 
 .vehicle-condition {
-  margin: -22px 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 9px;
+  max-width: 980px;
+  margin: -22px auto 0;
   color: var(--muted);
   font-size: 14px;
   font-weight: 750;
 }
 
+.vehicle-condition-item {
+  display: inline-flex;
+  align-items: center;
+  min-height: 34px;
+  padding: 0 14px;
+  border: 1px solid rgba(13, 17, 23, 0.12);
+  border-radius: 999px;
+  background: #fff;
+  color: #303a49;
+  box-shadow: 0 8px 22px rgba(13, 17, 23, 0.05);
+  line-height: 1;
+  white-space: nowrap;
+}
+
+.vehicle-condition-item strong {
+  margin-right: 8px;
+  color: #1554ff;
+  font-weight: 950;
+}
+
+.condition-confirm {
+  color: #fff;
+  background: #071426;
+  border-color: #071426;
+  box-shadow: 0 12px 28px rgba(7, 20, 38, 0.18);
+}
+
+.condition-confirm strong {
+  color: #f4d98a;
+}
+
 .time-deal-timer {
   display: inline-flex;
   align-items: center;
-  min-height: 30px;
-  margin-left: 8px;
-  padding: 0 12px;
+  min-height: 36px;
+  padding: 0 15px;
   color: #071426;
   background: #f4d98a;
+  border: 1px solid rgba(7, 20, 38, 0.16);
   border-radius: 999px;
-  font-size: 13px;
+  box-shadow: 0 12px 26px rgba(244, 217, 138, 0.45);
+  font-size: 14px;
   font-weight: 900;
+  line-height: 1;
   white-space: nowrap;
+}
+
+.time-deal-timer span {
+  margin-right: 8px;
+  color: rgba(7, 20, 38, 0.72);
+  font-size: 12px;
+  font-weight: 950;
+}
+
+@media (max-width: 620px) {
+  .vehicle-condition {
+    gap: 7px;
+    margin-top: -14px;
+  }
+
+  .vehicle-condition-item,
+  .time-deal-timer {
+    width: min(100%, 360px);
+    justify-content: center;
+    min-height: 38px;
+    padding: 9px 12px;
+    line-height: 1.35;
+    white-space: normal;
+  }
 }
 
 .vehicle-error {

@@ -1036,7 +1036,11 @@ function updateTimeDealTimer() {
 
   const { endsAt } = getTimeDealWindow();
   const left = endsAt - Date.now();
-  condition.innerHTML = `표시 금액은 60개월 · 선납금 0% · 연 10,000km 기준의 평균 참고가입니다. 실제 진행 전 조건을 다시 확인해 가능한 최저가로 안내드립니다. <strong class="time-deal-timer">타임특가 갱신까지 ${formatTimeLeft(left)}</strong>`;
+  condition.innerHTML = `
+    <span class="vehicle-condition-item condition-basis"><strong>기준</strong> 60개월 · 선납금 0% · 연 10,000km 평균 참고가</span>
+    <span class="vehicle-condition-item condition-confirm"><strong>확인</strong> 실제 진행 전 조건 재확인 후 가능한 최저가 안내</span>
+    <strong class="time-deal-timer"><span>타임특가 갱신까지</span> ${formatTimeLeft(left)}</strong>
+  `;
 }
 
 function renderFallbackVehicles() {
