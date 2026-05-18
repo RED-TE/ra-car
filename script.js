@@ -86,6 +86,15 @@ sections.forEach((section) => observer.observe(section));
 const quoteForm = document.querySelector(".quote-form");
 const privacyConsentInput = document.querySelector("#privacyConsent");
 const termsConsentInput = document.querySelector("#termsConsent");
+const defaultLeadContext = {
+  leadSource: "",
+  campaign: "",
+  campaignLabel: "",
+  timeDealOriginalMonthlyPayment: null,
+  timeDealMonthlyPayment: null,
+  timeDealDiscount: null,
+};
+let pendingLeadContext = { ...defaultLeadContext };
 
 function makeLeadId() {
   const date = new Date();
@@ -115,7 +124,35 @@ function setFormStatus(message, type = "success") {
   status.classList.toggle("is-error", type === "error");
 }
 
+function parseContextNumber(value) {
+  const number = Number(value);
+  return Number.isFinite(number) && number > 0 ? number : null;
+}
+
+function normalizeLeadContext(context = {}) {
+  return {
+    ...defaultLeadContext,
+    leadSource: context.leadSource || "",
+    campaign: context.campaign || "",
+    campaignLabel: context.campaignLabel || "",
+    timeDealOriginalMonthlyPayment: parseContextNumber(context.timeDealOriginalMonthlyPayment),
+    timeDealMonthlyPayment: parseContextNumber(context.timeDealMonthlyPayment),
+    timeDealDiscount: parseContextNumber(context.timeDealDiscount),
+  };
+}
+
+function setPendingLeadContext(context = {}) {
+  pendingLeadContext = normalizeLeadContext(context);
+  if (quoteForm) {
+    quoteForm.dataset.leadCampaign = pendingLeadContext.campaign || "";
+    quoteForm.dataset.leadSource = pendingLeadContext.leadSource || "";
+  }
+}
+
 function getLeadPayload() {
+  const leadContext = normalizeLeadContext(pendingLeadContext);
+  const contextSource = leadContext.campaignLabel || leadContext.leadSource;
+
   return {
     id: makeLeadId(),
     createdAt: new Date().toISOString(),
@@ -130,7 +167,13 @@ function getLeadPayload() {
     termsAcceptedAt: termsConsentInput?.checked ? new Date().toISOString() : "",
     termsVersion: "2026-05-10",
     page: window.location.href,
-    source: document.querySelector(".hero-slide.is-active h1")?.textContent.trim() || "RE:CAR",
+    source: contextSource || document.querySelector(".hero-slide.is-active h1")?.textContent.trim() || "RE:CAR",
+    leadSource: leadContext.leadSource,
+    campaign: leadContext.campaign,
+    campaignLabel: leadContext.campaignLabel,
+    timeDealOriginalMonthlyPayment: leadContext.timeDealOriginalMonthlyPayment,
+    timeDealMonthlyPayment: leadContext.timeDealMonthlyPayment,
+    timeDealDiscount: leadContext.timeDealDiscount,
   };
 }
 
@@ -934,7 +977,19 @@ function renderVehicleCard(vehicle) {
   const monthly = formatWon(vehicle.monthlyPayment);
   const originalMonthly = vehicle.timeDealOriginalMonthlyPayment ? formatWon(vehicle.timeDealOriginalMonthlyPayment) : "";
   const dealDiscount = Number(vehicle.timeDealDiscount || 0);
+  const isTimeDeal = Boolean(vehicle.timeDealOriginalMonthlyPayment && dealDiscount);
   const trim = vehicle.trim || "대표 트림";
+  const quoteVehicleName = `${name} ${trim}`.trim();
+  const timeDealAttributes = isTimeDeal
+    ? [
+      'data-campaign="time-deal"',
+      'data-lead-source="타임특가"',
+      'data-campaign-label="타임특가"',
+      `data-original-monthly="${escapeHtml(vehicle.timeDealOriginalMonthlyPayment)}"`,
+      `data-sale-monthly="${escapeHtml(vehicle.monthlyPayment)}"`,
+      `data-discount="${escapeHtml(dealDiscount)}"`,
+    ].join(" ")
+    : "";
   const year = vehicle.year ? `${vehicle.year}년식` : "연식 확인";
   const subtitle = vehicle.subtitle || [vehicle.fuel, year].filter(Boolean).join(" · ");
   const meta = [vehicle.trimCount ? `트림 ${vehicle.trimCount}종` : ""].filter(Boolean);
@@ -960,7 +1015,7 @@ function renderVehicleCard(vehicle) {
         }
         <p class="price-note">표시 금액은 평균 참고가입니다. 실제 진행 전 전문가가 조건을 한 번 더 확인해 가능한 최저 조건으로 안내드립니다.</p>
         <div class="vehicle-actions">
-          <a class="vehicle-quote-button" href="#quote" data-vehicle="${escapeHtml(`${name} ${trim}`.trim())}">문의하기</a>
+          <a class="vehicle-quote-button" href="#quote" data-vehicle="${escapeHtml(quoteVehicleName)}" ${timeDealAttributes}>문의하기</a>
         </div>
       </div>
     </article>
@@ -1417,7 +1472,9 @@ async function showVehicleDetail(vehicleId) {
   }
 }
 
-function moveToQuote(vehicleName, focusTarget = "contact") {
+function moveToQuote(vehicleName, focusTarget = "contact", context = {}) {
+  const leadContext = normalizeLeadContext(context);
+
   if (!quoteSection) {
     const url = new URL("./index.html", window.location.href);
     if (vehicleName) {
@@ -1426,10 +1483,26 @@ function moveToQuote(vehicleName, focusTarget = "contact") {
     if (focusTarget === "vehicle") {
       url.searchParams.set("focus", "vehicle");
     }
+    if (leadContext.campaign) {
+      url.searchParams.set("campaign", leadContext.campaign);
+      url.searchParams.set("leadSource", leadContext.leadSource);
+      url.searchParams.set("campaignLabel", leadContext.campaignLabel);
+    }
+    if (leadContext.timeDealOriginalMonthlyPayment) {
+      url.searchParams.set("originalMonthly", String(leadContext.timeDealOriginalMonthlyPayment));
+    }
+    if (leadContext.timeDealMonthlyPayment) {
+      url.searchParams.set("saleMonthly", String(leadContext.timeDealMonthlyPayment));
+    }
+    if (leadContext.timeDealDiscount) {
+      url.searchParams.set("discount", String(leadContext.timeDealDiscount));
+    }
     url.hash = "quote";
     window.location.href = url.toString();
     return;
   }
+
+  setPendingLeadContext(leadContext);
 
   if (vehicleWishInput && vehicleName) {
     vehicleWishInput.value = vehicleName;
@@ -1447,6 +1520,15 @@ function applyQuoteFromUrl() {
   if (!quoteSection) return;
 
   const params = new URLSearchParams(window.location.search);
+  setPendingLeadContext({
+    campaign: params.get("campaign") || "",
+    leadSource: params.get("leadSource") || "",
+    campaignLabel: params.get("campaignLabel") || "",
+    timeDealOriginalMonthlyPayment: params.get("originalMonthly"),
+    timeDealMonthlyPayment: params.get("saleMonthly"),
+    timeDealDiscount: params.get("discount"),
+  });
+
   const vehicleName = params.get("vehicle");
   if (vehicleName && vehicleWishInput) {
     vehicleWishInput.value = vehicleName;
@@ -1473,7 +1555,14 @@ vehicleGrid?.addEventListener("click", (event) => {
   const quoteButton = event.target.closest(".vehicle-quote-button");
   if (quoteButton) {
     event.preventDefault();
-    moveToQuote(quoteButton.dataset.vehicle || "");
+    moveToQuote(quoteButton.dataset.vehicle || "", "contact", {
+      campaign: quoteButton.dataset.campaign || "",
+      leadSource: quoteButton.dataset.leadSource || "",
+      campaignLabel: quoteButton.dataset.campaignLabel || "",
+      timeDealOriginalMonthlyPayment: quoteButton.dataset.originalMonthly,
+      timeDealMonthlyPayment: quoteButton.dataset.saleMonthly,
+      timeDealDiscount: quoteButton.dataset.discount,
+    });
     return;
   }
 

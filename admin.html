@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>관리자 | RE:CAR</title>
-    <link rel="stylesheet" href="./styles.css" />
+    <link rel="stylesheet" href="./styles.css?v=20260518-timelead" />
   </head>
   <body class="admin-page">
     <header class="simple-header">
@@ -351,6 +351,33 @@
         return new Intl.DateTimeFormat("ko-KR", { dateStyle: "short", timeStyle: "short" }).format(raw);
       }
 
+      function formatWon(value) {
+        const number = Number(value);
+        if (!Number.isFinite(number) || number <= 0) return "";
+        return `${number.toLocaleString("ko-KR")}원`;
+      }
+
+      function isTimeDealLead(lead) {
+        return lead.campaign === "time-deal" || lead.leadSource === "타임특가" || lead.campaignLabel === "타임특가";
+      }
+
+      function renderLeadSource(lead) {
+        if (!isTimeDealLead(lead)) return "";
+
+        const original = formatWon(lead.timeDealOriginalMonthlyPayment);
+        const sale = formatWon(lead.timeDealMonthlyPayment);
+        const discount = formatWon(lead.timeDealDiscount);
+        const notes = [];
+
+        if (original && sale) notes.push(`기존 월 ${original} / 특가 월 ${sale}`);
+        if (discount) notes.push(`추가 할인 ${discount}`);
+
+        return `
+          <span class="lead-source-badge is-time-deal">타임특가 문의</span>
+          ${notes.length ? `<small class="lead-source-note">${escapeHtml(notes.join(" · "))}</small>` : ""}
+        `;
+      }
+
       function ymd(date) {
         return `${date.getFullYear()}-${String(date.getMonth() + 1).padStart(2, "0")}-${String(date.getDate()).padStart(2, "0")}`;
       }
@@ -459,6 +486,12 @@
           assignedAdminName: lead.assignedAdminName || "",
           assignedAdminUsername: lead.assignedAdminUsername || "",
           groupId: lead.groupId || "",
+          leadSource: lead.leadSource || "",
+          campaign: lead.campaign || "",
+          campaignLabel: lead.campaignLabel || "",
+          timeDealOriginalMonthlyPayment: lead.timeDealOriginalMonthlyPayment || null,
+          timeDealMonthlyPayment: lead.timeDealMonthlyPayment || null,
+          timeDealDiscount: lead.timeDealDiscount || null,
         };
       }
 
@@ -563,7 +596,20 @@
 
         return state.leads.filter((lead) => {
           const createdAt = lead.createdAt?.toDate ? lead.createdAt.toDate() : new Date(lead.createdAt || 0);
-          const text = [lead.customerName, lead.phone, lead.vehicle, lead.requestNote, lead.progressStatus, lead.adminMemo, lead.dbManager, lead.assignedAdminName].join(" ").toLowerCase();
+          const text = [
+            lead.customerName,
+            lead.phone,
+            lead.vehicle,
+            lead.requestNote,
+            lead.progressStatus,
+            lead.adminMemo,
+            lead.dbManager,
+            lead.assignedAdminName,
+            lead.source,
+            lead.leadSource,
+            lead.campaign,
+            lead.campaignLabel,
+          ].join(" ").toLowerCase();
           return (!keyword || text.includes(keyword))
             && (!startDate || createdAt >= startDate)
             && (!endDate || createdAt <= endDate)
@@ -620,7 +666,7 @@
             <td>${escapeHtml(formatDate(lead.createdAt))}</td>
             <td><input class="db-manager-input" data-lead-field="customerName" data-lead-id="${escapeHtml(lead.id)}" value="${escapeHtml(lead.customerName || "")}" /></td>
             <td><a href="tel:${escapeHtml(lead.phone || "")}">${escapeHtml(lead.phone || "-")}</a></td>
-            <td><strong>${escapeHtml(lead.vehicle || "-")}</strong></td>
+            <td><div class="lead-vehicle-cell"><strong>${escapeHtml(lead.vehicle || "-")}</strong>${renderLeadSource(lead)}</div></td>
             <td>${escapeHtml(lead.requestNote || "-")}</td>
             <td>
               <select class="status-select${lead.progressStatus !== "선택" ? " has-value" : ""}" data-lead-field="progressStatus" data-lead-id="${escapeHtml(lead.id)}">
