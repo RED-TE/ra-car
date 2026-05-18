@@ -44,6 +44,7 @@ const publicStaticFiles = new Set([
   "/privacy.html",
   "/terms.html",
   "/admin.html",
+  "/inquiry/index.html",
   "/styles.css",
   "/script.js",
 ]);
@@ -2215,7 +2216,10 @@ function serveStatic(request, response, url) {
     return;
   }
 
-  const requestedPath = pathname === "/" ? "/index.html" : pathname;
+  let requestedPath = pathname === "/" ? "/index.html" : pathname;
+  if (requestedPath === "/inquiry" || requestedPath === "/inquiry/") {
+    requestedPath = "/inquiry/index.html";
+  }
   if (!isPublicStaticPath(requestedPath)) {
     response.writeHead(404, {
       "Content-Type": "text/plain; charset=utf-8",
