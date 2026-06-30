@@ -6,6 +6,14 @@ const dots = [...document.querySelectorAll(".hero-dot")];
 let activeSlide = 0;
 let slideTimer;
 
+function ensureSlideImage(index) {
+  const image = slides[index]?.querySelector("img[data-src]");
+  if (!image || image.getAttribute("src")) return;
+
+  image.src = image.dataset.src;
+  image.removeAttribute("data-src");
+}
+
 function setHeaderState() {
   if (!header) return;
   header.classList.toggle("is-scrolled", window.scrollY > 40);
@@ -15,6 +23,7 @@ function showSlide(index) {
   if (!slides.length) return;
 
   activeSlide = (index + slides.length) % slides.length;
+  ensureSlideImage(activeSlide);
 
   slides.forEach((slide, slideIndex) => {
     slide.classList.toggle("is-active", slideIndex === activeSlide);
@@ -47,7 +56,8 @@ function setActiveNavigation(sectionId) {
   });
 
   mobileNavLinks.forEach((link) => {
-    link.classList.toggle("is-active", link.getAttribute("href") === `#${sectionId}`);
+    const target = link.dataset.navTarget || link.getAttribute("href")?.replace("#", "");
+    link.classList.toggle("is-active", target === sectionId);
   });
 }
 
@@ -87,9 +97,9 @@ const quoteForm = document.querySelector(".quote-form");
 const privacyConsentInput = document.querySelector("#privacyConsent");
 const termsConsentInput = document.querySelector("#termsConsent");
 const defaultLeadContext = {
-  leadSource: "",
-  campaign: "",
-  campaignLabel: "",
+  leadSource: quoteForm?.dataset.defaultLeadSource || "",
+  campaign: quoteForm?.dataset.defaultCampaign || "",
+  campaignLabel: quoteForm?.dataset.defaultCampaignLabel || "",
   timeDealOriginalMonthlyPayment: null,
   timeDealMonthlyPayment: null,
   timeDealDiscount: null,
@@ -132,9 +142,9 @@ function parseContextNumber(value) {
 function normalizeLeadContext(context = {}) {
   return {
     ...defaultLeadContext,
-    leadSource: context.leadSource || "",
-    campaign: context.campaign || "",
-    campaignLabel: context.campaignLabel || "",
+    leadSource: context.leadSource || defaultLeadContext.leadSource,
+    campaign: context.campaign || defaultLeadContext.campaign,
+    campaignLabel: context.campaignLabel || defaultLeadContext.campaignLabel,
     timeDealOriginalMonthlyPayment: parseContextNumber(context.timeDealOriginalMonthlyPayment),
     timeDealMonthlyPayment: parseContextNumber(context.timeDealMonthlyPayment),
     timeDealDiscount: parseContextNumber(context.timeDealDiscount),
@@ -341,6 +351,12 @@ quoteForm?.addEventListener("submit", (event) => {
     return;
   }
 
+  if (!isValidPhone(lead.phone)) {
+    setFormStatus("연락처 형식을 확인해 주세요. 예: 010-0000-0000", "error");
+    contactPhoneInput?.focus();
+    return;
+  }
+
   if (!lead.customerName) {
     setFormStatus("상담 받으실 분의 이름을 입력해 주세요.", "error");
     customerNameInput?.focus();
@@ -356,12 +372,6 @@ quoteForm?.addEventListener("submit", (event) => {
   if (!lead.termsConsent) {
     setFormStatus("상담 유의사항 확인에 동의하지 않으면 문의 접수가 불가합니다.", "error");
     termsConsentInput?.focus();
-    return;
-  }
-
-  if (!isValidPhone(lead.phone)) {
-    setFormStatus("연락처 형식을 확인해 주세요. 예: 010-0000-0000", "error");
-    contactPhoneInput?.focus();
     return;
   }
 
@@ -401,6 +411,7 @@ const vehicleGrid = document.querySelector(".vehicle-grid");
 const vehicleError = document.querySelector("#vehicleError");
 const vehicleDetailPanel = document.querySelector("#vehicleDetailPanel");
 const floatingContact = document.querySelector(".floating-contact");
+const inquiryStickyCta = document.querySelector(".inquiry-sticky-cta");
 const vehicleMode = vehicleGrid?.dataset.vehicleMode || "home";
 const defaultVehicleFilter = vehicleGrid?.dataset.defaultFilter || (vehicleMode === "all" ? "all" : "time");
 const vehicleConditions = {
@@ -413,6 +424,28 @@ let vehicleCards = [...document.querySelectorAll(".vehicle-card[data-category]")
 let currentDetailVehicle = null;
 let currentTrimId = "";
 let currentOptionIds = new Set();
+
+function getHashTarget() {
+  const id = decodeURIComponent(window.location.hash.replace(/^#/, ""));
+  if (!id) return null;
+  return document.getElementById(id);
+}
+
+function scrollToHashTarget(behavior = "auto") {
+  const target = getHashTarget();
+  if (!target) return;
+  target.scrollIntoView({ behavior, block: "start" });
+}
+
+function stabilizeHashScroll() {
+  if (!window.location.hash) return;
+
+  window.requestAnimationFrame(() => {
+    scrollToHashTarget();
+    window.setTimeout(() => scrollToHashTarget(), 160);
+    window.setTimeout(() => scrollToHashTarget(), 720);
+  });
+}
 
 const fallbackVehicles = [
   {
@@ -934,7 +967,7 @@ function setVehicleFilter(filter) {
   vehicleGrid?.classList.toggle("is-filtered", filter !== defaultVehicleFilter);
 }
 
-function renderImageMarkup(vehicle) {
+function renderImageMarkup(vehicle, index = 0) {
   const label = escapeHtml(buildVehicleName(vehicle));
   const imageUrl = vehicle.imageUrl || vehicle.fallbackImageUrl;
 
@@ -943,7 +976,9 @@ function renderImageMarkup(vehicle) {
   }
 
   const fallback = vehicle.fallbackImageUrl && vehicle.fallbackImageUrl !== imageUrl ? ` data-fallback-src="${escapeHtml(vehicle.fallbackImageUrl)}"` : "";
-  return `<div class="vehicle-image-wrap"><img src="${escapeHtml(imageUrl)}" alt="${label}" loading="eager" decoding="async" fetchpriority="high"${fallback} /></div>`;
+  const loading = index < 2 && vehicleMode === "all" ? "eager" : "lazy";
+  const priority = loading === "eager" ? ' fetchpriority="high"' : "";
+  return `<div class="vehicle-image-wrap"><img src="${escapeHtml(imageUrl)}" alt="${label}" loading="${loading}" decoding="async"${priority}${fallback} /></div>`;
 }
 
 function renderOptionChips(options = [], limit = 4) {
@@ -967,7 +1002,7 @@ function renderOptionChips(options = [], limit = 4) {
   `;
 }
 
-function renderVehicleCard(vehicle) {
+function renderVehicleCard(vehicle, index = 0) {
   const name = buildVehicleName(vehicle);
   const category = (vehicle.categories || [defaultVehicleFilter]).join(" ");
   const ranks = vehicle.categoryRanks || {};
@@ -1000,7 +1035,7 @@ function renderVehicleCard(vehicle) {
     .slice(0, 3);
   return `
     <article class="vehicle-card" data-category="${escapeHtml(category)}" data-vehicle-id="${escapeHtml(vehicle.id)}" ${rankAttributes}>
-      ${renderImageMarkup(vehicle)}
+      ${renderImageMarkup(vehicle, index)}
       <div class="vehicle-body">
         <div class="badge-row">
           ${badges.map((badge) => `<span>${escapeHtml(badge)}</span>`).join("")}
@@ -1016,7 +1051,7 @@ function renderVehicleCard(vehicle) {
         }
         <p class="price-note">표시 금액은 평균 참고가입니다. 실제 진행 전 전문가가 조건을 한 번 더 확인해 가능한 최저 조건으로 안내드립니다.</p>
         <div class="vehicle-actions">
-          <a class="vehicle-quote-button" href="#quote" data-vehicle="${escapeHtml(quoteVehicleName)}" ${timeDealAttributes}>문의하기</a>
+          <a class="vehicle-quote-button" href="#quote" data-vehicle="${escapeHtml(quoteVehicleName)}" ${timeDealAttributes}>이 조건 받아보기</a>
         </div>
       </div>
     </article>
@@ -1071,7 +1106,7 @@ function decorateFallbackVehiclesForTimeDeals(vehicles) {
     vehicles.filter((vehicle) => vehicle.imageUrl || vehicle.fallbackImageUrl),
     seed,
   );
-  const dealIdSet = new Set(dealIds.slice(0, 6).map((vehicle) => vehicle.id));
+  const dealIdSet = new Set(dealIds.slice(0, 3).map((vehicle) => vehicle.id));
 
   return vehicles.map((vehicle) => {
     const categories = new Set(vehicle.categories || []);
@@ -1131,7 +1166,7 @@ function renderFallbackVehicles() {
   const decoratedVehicles = decorateFallbackVehiclesForTimeDeals(curatedFallbackVehicles);
   const items = decoratedVehicles;
   vehicleGrid.setAttribute("aria-busy", "false");
-  vehicleGrid.innerHTML = items.map(renderVehicleCard).join("");
+  vehicleGrid.innerHTML = items.map((item, index) => renderVehicleCard(item, index)).join("");
   refreshVehicleCards();
   setVehicleFilter(activeVehicleFilter);
   updateTimeDealTimer();
@@ -1153,7 +1188,7 @@ async function renderStaticVehicleCatalog() {
 
     if (vehicleError) vehicleError.hidden = true;
     vehicleGrid.setAttribute("aria-busy", "false");
-    vehicleGrid.innerHTML = items.map(renderVehicleCard).join("");
+    vehicleGrid.innerHTML = items.map((item, index) => renderVehicleCard(item, index)).join("");
     refreshVehicleCards();
     setVehicleFilter(activeVehicleFilter);
     return true;
@@ -1192,7 +1227,7 @@ async function loadVehicles() {
     if (vehicleError) vehicleError.hidden = true;
     vehicleGrid.setAttribute("aria-busy", "false");
     const items = vehicleMode === "home" ? decorateFallbackVehiclesForTimeDeals(payload.items) : payload.items;
-    vehicleGrid.innerHTML = items.map(renderVehicleCard).join("");
+    vehicleGrid.innerHTML = items.map((item, index) => renderVehicleCard(item, index)).join("");
     refreshVehicleCards();
     setVehicleFilter(activeVehicleFilter);
   } catch (error) {
@@ -1509,11 +1544,24 @@ function moveToQuote(vehicleName, focusTarget = "contact", context = {}) {
     vehicleWishInput.value = vehicleName;
   }
 
-  quoteSection?.scrollIntoView({ behavior: "smooth", block: "start" });
+  if (window.history?.replaceState) {
+    const url = new URL(window.location.href);
+    url.hash = "quote";
+    window.history.replaceState(null, "", url.toString());
+  }
+
+  const quoteTop = quoteSection.getBoundingClientRect().top + window.scrollY - 64;
+  const scrollTarget = Math.max(quoteTop, 0);
+  window.scrollTo({ top: scrollTarget, behavior: "smooth" });
+  document.scrollingElement?.scrollTo({ top: scrollTarget, behavior: "smooth" });
 
   window.setTimeout(() => {
     const target = focusTarget === "vehicle" ? vehicleWishInput : contactPhoneInput;
-    target?.focus();
+    try {
+      target?.focus({ preventScroll: true });
+    } catch {
+      target?.focus();
+    }
   }, 520);
 }
 
@@ -1661,14 +1709,33 @@ window.addEventListener(
 );
 showSlide(0);
 startSlider();
+window.setTimeout(() => ensureSlideImage((activeSlide + 1) % slides.length), 2200);
 setHeaderState();
 setFloatingContactState();
 updateActiveNavigation();
 applyQuoteFromUrl();
-loadVehicles();
+loadVehicles().then(stabilizeHashScroll);
 updateTimeDealTimer();
 if (vehicleMode === "home") {
   window.setInterval(updateTimeDealTimer, 1000);
+}
+
+window.addEventListener("hashchange", () => {
+  window.setTimeout(stabilizeHashScroll, 50);
+});
+
+if (inquiryStickyCta && quoteSection && "IntersectionObserver" in window) {
+  const inquiryCtaObserver = new IntersectionObserver(
+    (entries) => {
+      const isQuoteVisible = entries.some((entry) => entry.isIntersecting);
+      inquiryStickyCta.classList.toggle("is-hidden", isQuoteVisible);
+    },
+    {
+      rootMargin: "-18% 0px -26% 0px",
+      threshold: 0.05,
+    },
+  );
+  inquiryCtaObserver.observe(quoteSection);
 }
 
 if (window.lucide) {
