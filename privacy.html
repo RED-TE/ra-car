@@ -1,66 +1,378 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ko">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>개인정보 수집·이용 동의 | RE:CAR</title>
-    <link rel="stylesheet" href="./styles.css" />
-  </head>
-  <body class="legal-page">
-    <header class="simple-header">
-      <a class="simple-brand" href="./index.html">RE:CAR</a>
-      <a class="simple-link" href="./index.html#quote">견적 문의</a>
-    </header>
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>개인정보처리방침 | RE:CAR</title>
+<meta name="description" content="RE:CAR(리카) 개인정보처리방침. 신차 장기렌트·리스·할부·일시불 조건 확인 및 신청 서비스의 개인정보 수집·이용·보관·제3자 제공에 관한 안내입니다." />
+<meta name="robots" content="index,follow" />
+<meta property="og:title" content="개인정보처리방침 | RE:CAR" />
+<meta property="og:description" content="RE:CAR 개인정보 수집·이용·보관·제3자 제공에 관한 안내" />
+<meta property="og:type" content="website" />
+<link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+<style>
+  :root{
+    --ink:#141b26;
+    --ink-soft:#3a4553;
+    --muted:#6b7684;
+    --line:#e6e9ee;
+    --line-soft:#f0f2f5;
+    --surface:#ffffff;
+    --surface-alt:#f7f8fa;
+    --accent:#1b3a5b;      /* deep automotive navy */
+    --accent-soft:#eaf0f6;
+    --warn-bg:#fbf6ec;
+    --warn-line:#e4cf9e;
+    --warn-ink:#6b4e12;
+    --maxw:1080px;
+    --font:'Pretendard','Pretendard Variable',-apple-system,BlinkMacSystemFont,'Apple SD Gothic Neo','Malgun Gothic','맑은 고딕',system-ui,sans-serif;
+  }
+  *{box-sizing:border-box}
+  html{scroll-behavior:smooth}
+  @media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+  body{
+    margin:0;font-family:var(--font);color:var(--ink);background:var(--surface);
+    line-height:1.72;font-size:16px;-webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;word-break:keep-all;
+  }
+  a{color:var(--accent);text-underline-offset:2px}
+  a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:2px;border-radius:3px}
+  .skip{position:absolute;left:-999px;top:0;background:var(--accent);color:#fff;padding:10px 16px;z-index:50}
+  .skip:focus{left:12px;top:12px}
 
-    <main class="legal-main">
-      <section class="legal-hero">
-        <p class="eyebrow">Privacy Consent</p>
-        <h1>개인정보 수집·이용 동의</h1>
-        <p>리카오토플랜은 장기렌트·리스 견적 상담과 문의 응대를 위해 필요한 정보만 수집합니다.</p>
-      </section>
+  /* Header */
+  header.site{border-bottom:1px solid var(--line);background:var(--surface)}
+  .head-inner{max-width:var(--maxw);margin:0 auto;padding:26px 24px 30px}
+  .brand{display:flex;align-items:baseline;gap:12px;flex-wrap:wrap}
+  .brand .logo{font-weight:800;letter-spacing:-0.03em;font-size:22px;color:var(--accent)}
+  .brand .logo span{color:var(--ink)}
+  .brand .kr{font-size:13px;color:var(--muted);font-weight:600}
+  h1.doc{font-size:clamp(24px,3.4vw,34px);letter-spacing:-0.02em;margin:18px 0 6px;font-weight:800}
+  .doc-sub{color:var(--muted);font-size:14px;margin:0}
 
-      <section class="legal-card">
-        <h2>필수 동의 항목</h2>
-        <div class="policy-table" role="table" aria-label="개인정보 수집 이용 필수 동의 항목">
-          <div role="row">
-            <strong role="rowheader">수집 항목</strong>
-            <span role="cell">차량, 연락처, 이름, 요청사항</span>
-          </div>
-          <div role="row">
-            <strong role="rowheader">이용 목적</strong>
-            <span role="cell">차량 견적 상담, 출고 가능 여부 확인, 장기렌트·리스 조건 안내, 문의 응대</span>
-          </div>
-          <div role="row">
-            <strong role="rowheader">보유 및 이용 기간</strong>
-            <span role="cell">상담 종료 후 3개월까지 보관 후 지체 없이 파기합니다. 단, 관련 법령에 따라 보존이 필요한 경우 해당 기간 동안 보관할 수 있습니다.</span>
-          </div>
-          <div role="row">
-            <strong role="rowheader">동의 거부권</strong>
-            <span role="cell">개인정보 수집·이용 동의를 거부할 수 있습니다. 다만 동의하지 않을 경우 견적 상담 및 문의 응대가 제한될 수 있습니다.</span>
-          </div>
-        </div>
-      </section>
+  /* Summary callout */
+  .summary{
+    max-width:var(--maxw);margin:22px auto 0;padding:0 24px;
+  }
+  .summary-card{
+    background:var(--warn-bg);border:1px solid var(--warn-line);border-radius:12px;
+    padding:18px 20px;
+  }
+  .summary-card h2{margin:0 0 8px;font-size:15px;color:var(--warn-ink);font-weight:800;letter-spacing:-0.01em}
+  .summary-card ul{margin:0;padding-left:18px}
+  .summary-card li{color:var(--warn-ink);font-size:14px;margin:4px 0}
 
-      <section class="legal-card">
-        <h2>제3자 제공 및 마케팅 안내</h2>
-        <p>수집한 개인정보는 고객 동의 없이 제3자에게 임의 제공하지 않습니다. 광고성 정보 수신 동의는 별도로 받지 않으며, 본 문의는 견적 상담과 문의 응대 목적으로만 사용합니다.</p>
-      </section>
+  /* Layout */
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:30px 24px 80px;display:grid;grid-template-columns:236px 1fr;gap:44px}
+  nav.toc{position:sticky;top:24px;align-self:start;max-height:calc(100vh - 48px);overflow:auto}
+  nav.toc p{font-size:12px;font-weight:800;letter-spacing:0.04em;color:var(--muted);text-transform:uppercase;margin:0 0 10px}
+  nav.toc ol{list-style:none;margin:0;padding:0;counter-reset:t}
+  nav.toc li{counter-increment:t;margin:1px 0}
+  nav.toc a{display:flex;gap:9px;padding:6px 8px;border-radius:7px;font-size:13.5px;color:var(--ink-soft);text-decoration:none;line-height:1.4}
+  nav.toc a:hover{background:var(--surface-alt);color:var(--ink)}
+  nav.toc a::before{content:counter(t,decimal-leading-zero);color:var(--muted);font-variant-numeric:tabular-nums;font-weight:700;flex:none}
 
-      <section class="legal-card">
-        <h2>개인정보 파기 및 권리 행사</h2>
-        <p>고객은 개인정보 열람, 정정, 삭제, 처리정지를 요청할 수 있습니다. 삭제 또는 동의 철회가 필요한 경우 아래 연락처로 요청해 주세요.</p>
-        <ul class="legal-list">
-          <li>개인정보 처리자: 리카오토플랜</li>
-          <li>대표자: 조용철</li>
-          <li>연락처: <a href="tel:01065731038">010-6573-1038</a></li>
-          <li>이메일: <a href="mailto:jhxox666@gmail.com">jhxox666@gmail.com</a></li>
-        </ul>
-      </section>
+  main{min-width:0}
+  section{padding-top:8px;margin-bottom:34px;scroll-margin-top:20px}
+  section > h2{
+    font-size:19px;letter-spacing:-0.01em;font-weight:800;margin:0 0 14px;padding-bottom:12px;
+    border-bottom:1px solid var(--line);display:flex;gap:12px;align-items:baseline
+  }
+  section > h2 .num{
+    color:var(--accent);font-variant-numeric:tabular-nums;font-size:15px;font-weight:800;flex:none;
+    min-width:26px
+  }
+  h3{font-size:15px;font-weight:800;margin:22px 0 8px;color:var(--ink)}
+  p{margin:10px 0}
+  ul.body,ol.body{margin:10px 0;padding-left:20px}
+  ul.body li,ol.body li{margin:5px 0}
+  .note{font-size:13.5px;color:var(--muted);margin:8px 0}
+  .ph{background:var(--accent-soft);color:var(--accent);border-radius:4px;padding:1px 6px;font-weight:700;font-size:0.92em}
 
-      <section class="legal-card">
-        <h2>시행일</h2>
-        <p>본 개인정보 수집·이용 동의 고지는 2026년 5월 10일부터 적용됩니다.</p>
-      </section>
-    </main>
-  </body>
+  .callout{background:var(--surface-alt);border:1px solid var(--line);border-left:3px solid var(--accent);border-radius:8px;padding:14px 16px;margin:14px 0}
+  .callout h4{margin:0 0 6px;font-size:14px;font-weight:800;color:var(--accent)}
+  .callout p{margin:6px 0;font-size:14px}
+
+  table{width:100%;border-collapse:collapse;margin:14px 0;font-size:13.6px;display:block;overflow-x:auto}
+  table thead th{background:var(--surface-alt);text-align:left;font-weight:800;color:var(--ink);white-space:nowrap}
+  table th,table td{border:1px solid var(--line);padding:9px 12px;vertical-align:top;min-width:110px}
+  table td{color:var(--ink-soft)}
+
+  footer.site{border-top:1px solid var(--line);background:var(--surface-alt)}
+  .foot-inner{max-width:var(--maxw);margin:0 auto;padding:28px 24px 46px}
+  .eff{display:inline-block;background:var(--surface);border:1px solid var(--line);border-radius:8px;padding:12px 16px;font-size:14px;font-weight:700}
+  .eff strong{color:var(--accent)}
+  .disclaimer{margin-top:18px;font-size:12.5px;color:var(--muted);line-height:1.7}
+  .biz{margin-top:16px;font-size:13px;color:var(--muted)}
+  .biz b{color:var(--ink-soft)}
+
+  @media (max-width:860px){
+    .wrap{grid-template-columns:1fr;gap:0;padding-top:22px}
+    nav.toc{display:none}
+  }
+</style>
+</head>
+<body>
+<a class="skip" href="#main">본문 바로가기</a>
+
+<header class="site">
+  <div class="head-inner">
+    <div class="brand">
+      <span class="logo">RE:<span>CAR</span></span>
+      <span class="kr">리카 · 신차 장기렌트 · 리스 · 할부 · 일시불 조건 확인 서비스</span>
+    </div>
+    <h1 class="doc">개인정보처리방침</h1>
+    <p class="doc-sub">RE:CAR(이하 “회사”)는 「개인정보 보호법」 등 관련 법령을 준수하며, 이용자의 개인정보를 보호하기 위해 다음과 같이 개인정보처리방침을 수립·공개합니다.</p>
+  </div>
+</header>
+
+<div class="summary">
+  <div class="summary-card">
+    <h2>먼저 확인해 주세요</h2>
+    <ul>
+      <li>회원가입 또는 예상 월 납입료(견적) 확인만으로는 금융사 심사나 신용조회가 시작되지 않습니다.</li>
+      <li>실제 금융사 심사·신용조회·제3자 제공이 필요한 경우에는 차량 신청 단계에서 <b>별도 동의</b> 절차를 통해 안내합니다.</li>
+      <li>회원가입만으로 개인정보가 금융사나 제휴사에 제공되지 않습니다.</li>
+    </ul>
+  </div>
+</div>
+
+<div class="wrap">
+  <nav class="toc" aria-label="목차">
+    <p>목차</p>
+    <ol>
+      <li><a href="#s1">총칙</a></li>
+      <li><a href="#s2">수집하는 개인정보 항목</a></li>
+      <li><a href="#s3">수집 및 이용 목적</a></li>
+      <li><a href="#s4">보유 및 이용 기간</a></li>
+      <li><a href="#s5">개인정보의 제3자 제공</a></li>
+      <li><a href="#s6">개인정보 처리업무의 위탁</a></li>
+      <li><a href="#s7">파기 절차 및 방법</a></li>
+      <li><a href="#s8">이용자·법정대리인의 권리</a></li>
+      <li><a href="#s9">안전성 확보조치</a></li>
+      <li><a href="#s10">자동 수집 장치 및 거부</a></li>
+      <li><a href="#s11">모바일 앱 접근권한</a></li>
+      <li><a href="#s12">개인정보 보호책임자</a></li>
+      <li><a href="#s13">권익침해 구제방법</a></li>
+      <li><a href="#s14">처리방침의 변경</a></li>
+      <li><a href="#s15">시행일자</a></li>
+    </ol>
+  </nav>
+
+  <main id="main">
+
+    <section id="s1">
+      <h2><span class="num">01</span>총칙</h2>
+      <p>RE:CAR는 신차 <b>장기렌트·리스·할부·일시불 조건 확인</b>, 예상 월 납입료 안내, 신청 정보 입력, 서류 제출, 담당자 조건 확인, 계약·출고 진행 관리를 제공하는 서비스입니다. 이용자가 차량과 조건을 선택하면 예상 월 납입료를 안내하고, 신청 이후 담당자가 이용 가능한 조건을 확인하여 다음 절차를 안내합니다.</p>
+      <p>회사는 개인정보를 처리함에 있어 이용자의 권익을 보호하고 관련 법령을 준수합니다. 본 방침에서 사용하는 용어는 관련 법령 및 일반적인 서비스 관행에 따릅니다.</p>
+      <div class="callout">
+        <h4>서비스 단계와 개인정보</h4>
+        <p>회사는 개인정보를 <b>① 회원가입·로그인 단계</b>와 <b>② 차량 조건 확인·신청 진행 단계</b>로 구분하여 수집합니다. 각 단계에서 실제로 수집하는 항목만을 수집하며, 목적에 필요하지 않은 정보는 수집하지 않습니다.</p>
+      </div>
+    </section>
+
+    <section id="s2">
+      <h2><span class="num">02</span>수집하는 개인정보 항목</h2>
+
+      <h3>2-1. 회원가입 및 로그인 단계</h3>
+      <p>회사는 소셜 로그인(카카오 로그인)을 통해 회원가입 및 로그인을 처리하며, 다음 항목을 수집합니다.</p>
+      <ul class="body">
+        <li>소셜 로그인 식별자(회원 식별자)</li>
+        <li>이메일(카카오로부터 제공받는 경우)</li>
+        <li>닉네임 또는 프로필 정보(이용자가 제공하거나 소셜 로그인 제공자가 제공하는 경우)</li>
+        <li>서비스 이용 기록, 접속 로그, 기기 정보, 앱 버전, IP 주소(서비스 이용 과정에서 자동 생성·수집)</li>
+      </ul>
+      <div class="callout">
+        <h4>카카오 로그인으로 제공받는 항목</h4>
+        <p>카카오 로그인 이용 시 회사는 회원 식별 및 로그인 처리를 위해 카카오로부터 <b>회원 식별자, 이메일, 닉네임 또는 프로필 정보</b>를 제공받을 수 있습니다. 제공받는 항목은 이용자가 카카오 동의 화면에서 동의한 항목에 한합니다.</p>
+      </div>
+
+      <h3>2-2. 차량 조건 확인 및 신청 진행 단계</h3>
+      <p>이용자가 차량 조건을 확인하고 신청을 진행하는 경우, 아래 정보를 <b>이용자가 직접 입력</b>하는 방식으로 수집합니다.</p>
+      <ul class="body">
+        <li>이름</li>
+        <li>휴대전화번호</li>
+        <li>지역</li>
+        <li>신청 차량 정보</li>
+        <li>견적 조건(계약기간, 주행거리, 선납금, 보증금, 선택 옵션 등)</li>
+        <li>신청 진행 상태</li>
+        <li>제출 서류 정보</li>
+        <li>상담 및 문의 내용</li>
+      </ul>
+      <p class="note">회사는 주민등록번호, 운전면허번호, 계좌번호, 신용정보 등 민감·금융 정보를 현재 수집하지 않습니다. 향후 계약 진행 등 특정 목적을 위해 해당 정보가 필요한 경우, 이용자로부터 <b>별도의 동의</b>를 받아 수집할 수 있습니다.</p>
+    </section>
+
+    <section id="s3">
+      <h2><span class="num">03</span>개인정보의 수집 및 이용 목적</h2>
+      <p>회사는 수집한 개인정보를 다음 목적을 위해 이용하며, 목적이 변경되는 경우 관련 법령에 따라 별도 동의를 받는 등 필요한 조치를 이행합니다.</p>
+      <ul class="body">
+        <li>회원 가입 및 로그인</li>
+        <li>본인 식별 및 계정 관리</li>
+        <li>차량 예상 월 납입료 확인</li>
+        <li>차량 조건 확인 및 신청 진행</li>
+        <li>상담 및 고객 문의 대응</li>
+        <li>서류 제출 및 신청 상태 관리</li>
+        <li>계약 및 출고 진행 안내</li>
+        <li>서비스 품질 개선 및 통계 분석</li>
+        <li>부정 이용 방지 및 보안 관리</li>
+        <li>법령상 의무 이행 및 분쟁 대응</li>
+      </ul>
+    </section>
+
+    <section id="s4">
+      <h2><span class="num">04</span>개인정보의 보유 및 이용 기간</h2>
+      <p>회사는 개인정보의 수집 및 이용 목적이 달성되거나 회원 탈퇴 시 지체 없이 파기합니다. 다만 관계 법령에 따라 보관이 필요한 정보는 해당 기간 동안 별도로 보관할 수 있습니다.</p>
+
+      <h3>회원 탈퇴 시</h3>
+      <ul class="body">
+        <li>회원 탈퇴 시 계정 이용은 즉시 중단되며, 서비스 제공 목적이 달성된 개인정보는 지체 없이 파기됩니다.</li>
+        <li>다만 분쟁 대응, 부정 이용 방지, 탈퇴 이력 확인을 위해 필요한 <b>최소한의 정보</b>는 탈퇴 후 <b>최대 1년간 별도로 보관</b>될 수 있습니다.</li>
+        <li>법령상 보관 의무가 있는 거래, 계약, 정산, 소비자 불만 또는 분쟁 처리 기록은 해당 법령에서 정한 기간 동안 별도로 보관될 수 있습니다.</li>
+      </ul>
+
+      <h3>관계 법령에 따른 보관</h3>
+      <table>
+        <thead>
+          <tr><th>보관 항목</th><th>근거 법령</th><th>보관 기간</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>계약 또는 청약철회 등에 관한 기록</td><td>전자상거래 등에서의 소비자보호에 관한 법률</td><td>관련 법령에서 정한 기간</td></tr>
+          <tr><td>대금결제 및 재화 등의 공급에 관한 기록</td><td>전자상거래 등에서의 소비자보호에 관한 법률</td><td>관련 법령에서 정한 기간</td></tr>
+          <tr><td>소비자의 불만 또는 분쟁 처리에 관한 기록</td><td>전자상거래 등에서의 소비자보호에 관한 법률</td><td>관련 법령에서 정한 기간</td></tr>
+          <tr><td>웹사이트 방문(접속) 기록</td><td>통신비밀보호법</td><td>관련 법령에서 정한 기간</td></tr>
+        </tbody>
+      </table>
+      <p class="note">각 항목의 구체적인 보관 기간은 최신 법령 및 법무 검토를 거쳐 확정·표기합니다.</p>
+    </section>
+
+    <section id="s5">
+      <h2><span class="num">05</span>개인정보의 제3자 제공</h2>
+      <p>회사는 이용자의 개인정보를 본 방침에서 고지한 범위 내에서 이용하며, 이용자의 사전 동의 없이 외부에 제공하지 않습니다.</p>
+      <p>다만 차량 조건 확인, 상담, 계약 진행을 위하여 제휴 렌트사, 리스사, 금융사, 차량 판매·상담 협력사 등에 개인정보를 제공할 필요가 있는 경우, 회사는 <b>제공받는 자, 제공 목적, 제공 항목, 보유 및 이용 기간</b>을 명확히 안내하고 이용자로부터 <b>별도의 동의</b>를 받은 후 제공합니다.</p>
+      <div class="callout">
+        <h4>오해가 없도록 안내드립니다</h4>
+        <p>회원가입만으로 금융사 또는 제휴사에 개인정보가 제공되지 않으며, 회원가입 또는 예상 견적 확인만으로 신용조회가 시작되지 않습니다. 실제 제공 대상·항목은 <b>차량 신청 진행 과정에서 이용자에게 개별 안내하고 동의를 받은 후</b>에만 제공됩니다.</p>
+      </div>
+      <p class="note">구체적인 제3자 제공 대상 및 항목이 확정되는 경우, 본 방침에 표로 업데이트하여 공개합니다.</p>
+    </section>
+
+    <section id="s6">
+      <h2><span class="num">06</span>개인정보 처리업무의 위탁</h2>
+      <p>회사는 원활한 서비스 제공을 위해 개인정보 처리업무를 외부에 위탁할 수 있으며, 위탁이 발생하는 경우 수탁자와 위탁업무의 내용을 본 개인정보처리방침을 통해 공개합니다. 회사는 위탁계약 시 개인정보가 안전하게 관리될 수 있도록 필요한 사항을 규정하고 관리·감독합니다.</p>
+      <p class="note">아래는 위탁 발생 시 기재 예시이며, <span class="ph">실제 이용 중인 수탁자에 한해 기재하고 미사용 항목은 삭제합니다.</span></p>
+      <table>
+        <thead>
+          <tr><th>수탁자</th><th>위탁업무 내용</th></tr>
+        </thead>
+        <tbody>
+          <tr><td><span class="ph">[클라우드 인프라 제공사]</span></td><td>서비스 서버 운영 및 데이터 보관</td></tr>
+          <tr><td><span class="ph">[문자/알림톡 발송사]</span></td><td>알림 메시지(문자·알림톡) 발송</td></tr>
+          <tr><td><span class="ph">[이메일 발송사]</span></td><td>이메일 발송</td></tr>
+          <tr><td><span class="ph">[푸시 알림 서비스]</span></td><td>앱 푸시 알림 발송</td></tr>
+          <tr><td><span class="ph">[고객 상담 도구]</span></td><td>고객 상담 및 문의 응대</td></tr>
+          <tr><td><span class="ph">[분석 도구]</span></td><td>서비스 이용 통계 및 분석</td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="s7">
+      <h2><span class="num">07</span>개인정보의 파기 절차 및 방법</h2>
+      <h3>파기 절차</h3>
+      <p>회사는 보유기간이 경과하거나 처리 목적이 달성된 개인정보를 내부 방침 및 관련 법령에 따라 지체 없이 파기합니다. 법령에 따라 별도 보관이 필요한 정보는 다른 개인정보와 분리하여 보관하며, 보관 기간이 경과하면 파기합니다.</p>
+      <h3>파기 방법</h3>
+      <ul class="body">
+        <li>전자적 파일 형태의 정보는 복구·재생이 불가능한 방법으로 영구 삭제합니다.</li>
+        <li>종이 문서에 기록된 정보는 분쇄하거나 소각하여 파기합니다.</li>
+      </ul>
+    </section>
+
+    <section id="s8">
+      <h2><span class="num">08</span>이용자와 법정대리인의 권리 및 행사 방법</h2>
+      <ul class="body">
+        <li>이용자는 언제든지 자신의 개인정보에 대한 <b>열람, 정정, 삭제, 처리정지</b>를 요구할 수 있습니다.</li>
+        <li>이용자는 회원 탈퇴를 통해 개인정보 수집·이용에 대한 동의를 철회할 수 있습니다.</li>
+        <li>권리 행사는 개인정보 보호책임자 또는 문의처를 통해 요청할 수 있으며, 회사는 관련 법령에 따라 지체 없이 조치합니다.</li>
+        <li>본 서비스는 계약 체결이 가능한 이용자를 대상으로 하며, 회사는 원칙적으로 만 14세 미만 아동의 개인정보를 수집하지 않습니다.</li>
+      </ul>
+    </section>
+
+    <section id="s9">
+      <h2><span class="num">09</span>개인정보의 안전성 확보조치</h2>
+      <p>회사는 개인정보의 안전성 확보를 위해 다음과 같은 조치를 취하고 있습니다.</p>
+      <ul class="body">
+        <li><b>관리적 조치</b>: 내부관리계획 수립·시행, 개인정보 취급자 최소화 및 접근 권한 관리, 정기 교육</li>
+        <li><b>기술적 조치</b>: 접근통제 및 접근권한 관리, 개인정보의 암호화, 보안 프로그램 설치·주기적 갱신, 접속기록의 보관</li>
+        <li><b>물리적 조치</b>: 전산실·자료보관실 등에 대한 접근통제</li>
+      </ul>
+    </section>
+
+    <section id="s10">
+      <h2><span class="num">10</span>자동 수집 장치의 설치·운영 및 거부에 관한 사항</h2>
+      <p>서비스 이용 과정에서 IP 주소, 쿠키, 접속 로그, 기기 정보, 앱 버전, 서비스 이용 기록이 자동으로 생성되어 수집될 수 있습니다.</p>
+      <p>이용자는 웹 브라우저 설정을 통해 쿠키 저장을 허용하거나 거부할 수 있습니다. 다만 쿠키 저장을 거부하는 경우 일부 서비스 이용에 제한이 있을 수 있습니다.</p>
+    </section>
+
+    <section id="s11">
+      <h2><span class="num">11</span>모바일 앱 접근권한 안내</h2>
+      <p>RE:CAR 앱은 서비스 제공을 위해 다음 접근권한을 요청할 수 있습니다.</p>
+      <ul class="body">
+        <li><b>카메라(선택)</b>: 서류 촬영 또는 이미지 첨부 시 사용</li>
+        <li><b>사진/파일(선택)</b>: 제출 서류 또는 이미지 첨부 시 사용</li>
+        <li><b>알림(선택)</b>: 신청 진행 상태 및 서비스 안내 알림 제공 시 사용</li>
+      </ul>
+      <p class="note">선택 접근권한은 동의하지 않아도 해당 기능을 제외한 서비스 이용이 가능합니다. 접근권한은 단말기 설정에서 언제든지 변경할 수 있습니다.</p>
+    </section>
+
+    <section id="s12">
+      <h2><span class="num">12</span>개인정보 보호책임자 및 문의처</h2>
+      <p>회사는 개인정보 처리에 관한 업무를 총괄하여 책임지고, 개인정보 처리와 관련한 이용자의 문의·불만·피해구제를 처리하기 위해 개인정보 보호책임자를 지정하고 있습니다.</p>
+      <table>
+        <tbody>
+          <tr><th>성명</th><td><span class="ph">[이름 입력 필요]</span></td></tr>
+          <tr><th>직책</th><td><span class="ph">[직책 입력 필요]</span></td></tr>
+          <tr><th>이메일</th><td><span class="ph">[privacy@recarplan.com 또는 contact@recarplan.com]</span></td></tr>
+          <tr><th>문의처</th><td><span class="ph">[전화번호 또는 고객센터 이메일 입력 필요]</span></td></tr>
+        </tbody>
+      </table>
+    </section>
+
+    <section id="s13">
+      <h2><span class="num">13</span>권익침해 구제방법</h2>
+      <p>이용자는 개인정보 침해로 인한 구제를 받기 위하여 아래 기관에 분쟁 해결이나 상담 등을 신청할 수 있습니다.</p>
+      <ul class="body">
+        <li>개인정보분쟁조정위원회: (국번없이) 1833-6972 / kopico.go.kr</li>
+        <li>개인정보침해신고센터(한국인터넷진흥원): (국번없이) 118 / privacy.kisa.or.kr</li>
+        <li>대검찰청 사이버수사과: (국번없이) 1301 / spo.go.kr</li>
+        <li>경찰청 사이버수사국: (국번없이) 182 / ecrm.cyber.go.kr</li>
+      </ul>
+      <p class="note">위 기관 연락처는 배포 전 최신 정보로 확인 후 게시합니다.</p>
+    </section>
+
+    <section id="s14">
+      <h2><span class="num">14</span>개인정보처리방침의 변경</h2>
+      <p>본 개인정보처리방침은 법령, 정책 또는 서비스 내용의 변경에 따라 개정될 수 있습니다. 개정 시 변경 사항을 서비스 내 공지 또는 본 페이지를 통해 사전에 안내합니다. 다만 이용자 권리에 중대한 영향을 미치는 변경의 경우 최소 <span class="ph">[7일]</span> 전에 공지합니다.</p>
+    </section>
+
+    <section id="s15">
+      <h2><span class="num">15</span>시행일자</h2>
+      <p class="eff">본 개인정보처리방침은 <strong><span class="ph">[YYYY년 MM월 DD일]</span></strong>부터 시행됩니다.</p>
+      <p class="note" style="margin-top:12px">공고일자: <span class="ph">[YYYY년 MM월 DD일]</span> · 시행일자: <span class="ph">[YYYY년 MM월 DD일]</span></p>
+    </section>
+
+  </main>
+</div>
+
+<footer class="site">
+  <div class="foot-inner">
+    <div class="biz">
+      <b>상호</b> RE:CAR(리카) &nbsp;·&nbsp;
+      <b>대표자</b> <span class="ph">[대표자명 입력 필요]</span> &nbsp;·&nbsp;
+      <b>사업자등록번호</b> <span class="ph">[번호 입력 필요]</span> &nbsp;·&nbsp;
+      <b>주소</b> <span class="ph">[주소 입력 필요]</span> &nbsp;·&nbsp;
+      <b>문의</b> <span class="ph">[대표 이메일 입력 필요]</span>
+    </div>
+    <p class="disclaimer">본 문서는 개인정보처리방침 초안이며, 실제 배포 전 「개인정보 보호법」 및 관련 법령에 따른 법무 검토가 필요합니다. 대괄호로 표시된 항목은 배포 전 실제 정보로 교체해야 합니다.</p>
+  </div>
+</footer>
+</body>
 </html>
