@@ -18,7 +18,7 @@
     <title>RE:CAR 조용한 빠른견적</title>
     <link rel="icon" type="image/png" href="../assets/recar-favicon-20260518.png" />
     <link rel="apple-touch-icon" href="../assets/recar-favicon-20260518.png" />
-    <link rel="stylesheet" href="../styles.css?v=20260702-inquiry-dark" />
+    <link rel="stylesheet" href="../styles.css?v=20260702-inquiry-flow" />
   </head>
   <body class="recar-quiet-inquiry-page">
     <header class="quiet-inquiry-header" aria-label="RE:CAR 상담 페이지 상단">
@@ -47,7 +47,7 @@
           id="quote"
           data-default-campaign="inq-quiet-dark"
           data-default-lead-source="INQ 조용한 빠른견적"
-          data-default-campaign-label="차종 이름 연락처 조용한 상담"
+          data-default-campaign-label="차종 연락처 이름 조용한 상담"
         >
           <div class="quiet-form-head">
             <h2>내 조건에 맞는 차량 가능 여부 확인</h2>
@@ -60,45 +60,55 @@
               <small>정확하지 않아도 괜찮습니다. 생각 중인 차종만 편하게 적어주세요.</small>
             </label>
             <input id="vehicleWish" name="vehicleWish" type="text" placeholder="예: 카니발, 쏘렌토, G80, E클래스" autocomplete="off" required />
-            <button class="quiet-next-button" type="button" data-next-step="customer">
+            <button class="quiet-next-button" type="button" data-next-step="phone">
               <span>다음</span>
               <i data-lucide="arrow-right" aria-hidden="true"></i>
             </button>
             <p class="quiet-helper">입력은 30초 이내로 끝납니다.</p>
           </div>
 
-          <div class="quiet-step" data-step="customer" data-step-index="2" hidden>
-            <label for="customerName">
-              <strong>상담받으실 분을 알려주세요.</strong>
-              <small>담당 어드바이저가 가능한 조건만 정리해서 연락드립니다.</small>
+          <div class="quiet-step" data-step="phone" data-step-index="2" hidden>
+            <label for="contactPhone">
+              <strong>연락받으실 번호를 남겨주세요.</strong>
+              <small>전화가 어려우면 문자로 먼저 안내드립니다.</small>
             </label>
-            <div class="quiet-two-fields">
-              <input id="customerName" name="customerName" type="text" autocomplete="name" placeholder="이름" required />
-              <input id="contactPhone" name="contactPhone" type="tel" inputmode="tel" autocomplete="tel" placeholder="010-0000-0000" required />
+            <input id="contactPhone" name="contactPhone" type="tel" inputmode="tel" autocomplete="tel" placeholder="010-0000-0000" required />
+            <div class="quiet-step-actions">
+              <button class="quiet-back-button" type="button" data-prev-step="vehicle">
+                <i data-lucide="arrow-left" aria-hidden="true"></i>
+                <span>이전</span>
+              </button>
+              <button class="quiet-next-button" type="button" data-next-step="name">
+                <span>이름 입력</span>
+                <i data-lucide="arrow-right" aria-hidden="true"></i>
+              </button>
             </div>
-            <button class="quiet-next-button" type="button" data-next-step="terms">
-              <span>약관 확인</span>
-              <i data-lucide="arrow-right" aria-hidden="true"></i>
-            </button>
-            <p class="quiet-helper">전화가 어려우면 문자로 먼저 안내드립니다.</p>
+            <p class="quiet-helper">잘못 입력했다면 이전 버튼으로 바로 고칠 수 있습니다.</p>
           </div>
 
-          <div class="quiet-step quiet-terms-step" data-step="terms" data-step-index="3" hidden>
-            <div class="quiet-terms-title">
-              <strong>마지막 확인만 해주세요.</strong>
+          <div class="quiet-step quiet-final-step" data-step="name" data-step-index="3" hidden>
+            <label for="customerName">
+              <strong>마지막으로 이름을 입력해주세요.</strong>
               <small>입력 정보는 차량 상담 및 조건 안내 목적으로만 사용됩니다.</small>
-            </div>
+            </label>
+            <input id="customerName" name="customerName" type="text" autocomplete="name" placeholder="이름" required />
             <label class="quiet-consent-row">
               <input id="privacyConsent" name="privacyConsent" type="checkbox" required />
-              <span>개인정보 수집·이용에 동의합니다. <a href="../privacy.html" target="_blank" rel="noopener noreferrer">보기</a></span>
+              <span>
+                개인정보 수집·이용 및 상담 안내에 동의합니다.
+                <a href="https://recarplan.com/privacy" target="_blank" rel="noopener noreferrer">개인정보 처리방침</a>
+              </span>
             </label>
-            <label class="quiet-consent-row">
-              <input id="termsConsent" name="termsConsent" type="checkbox" required />
-              <span>상담 유의사항을 확인했습니다. <a href="../terms.html" target="_blank" rel="noopener noreferrer">보기</a></span>
-            </label>
-            <button class="submit-button quiet-submit-button" type="submit">
-              <span>상담 신청 완료</span>
-            </button>
+            <input id="termsConsent" name="termsConsent" type="checkbox" checked hidden />
+            <div class="quiet-step-actions">
+              <button class="quiet-back-button" type="button" data-prev-step="phone">
+                <i data-lucide="arrow-left" aria-hidden="true"></i>
+                <span>이전</span>
+              </button>
+              <button class="submit-button quiet-submit-button" type="submit">
+                <span>상담 신청 완료</span>
+              </button>
+            </div>
           </div>
 
           <p class="form-status" aria-live="polite" hidden>문의가 접수되었습니다. 가능한 조건을 확인해 연락드리겠습니다.</p>
@@ -223,6 +233,12 @@
             const currentStep = button.closest(".quiet-step");
             if (!currentStep || !validateStep(currentStep)) return;
             showStep(button.dataset.nextStep);
+          });
+        });
+
+        form.querySelectorAll("[data-prev-step]").forEach((button) => {
+          button.addEventListener("click", () => {
+            showStep(button.dataset.prevStep);
           });
         });
 
