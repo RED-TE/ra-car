@@ -74,13 +74,13 @@
             </label>
             <input id="contactPhone" name="contactPhone" type="tel" inputmode="tel" autocomplete="tel" placeholder="예 : 010-1234-5678" required />
             <div class="quiet-step-actions">
-              <button class="quiet-back-button" type="button" data-prev-step="vehicle">
-                <i data-lucide="arrow-left" aria-hidden="true"></i>
-                <span>이전</span>
-              </button>
               <button class="quiet-next-button" type="button" data-next-step="name">
                 <span>다음</span>
                 <i data-lucide="arrow-right" aria-hidden="true"></i>
+              </button>
+              <button class="quiet-back-button" type="button" data-prev-step="vehicle">
+                <i data-lucide="arrow-left" aria-hidden="true"></i>
+                <span>이전</span>
               </button>
             </div>
           </div>
@@ -100,12 +100,12 @@
             </label>
             <input id="termsConsent" name="termsConsent" type="checkbox" checked hidden />
             <div class="quiet-step-actions">
+              <button class="submit-button quiet-submit-button" type="submit">
+                <span>상담 신청 완료</span>
+              </button>
               <button class="quiet-back-button" type="button" data-prev-step="phone">
                 <i data-lucide="arrow-left" aria-hidden="true"></i>
                 <span>이전</span>
-              </button>
-              <button class="submit-button quiet-submit-button" type="submit">
-                <span>상담 신청 완료</span>
               </button>
             </div>
           </div>

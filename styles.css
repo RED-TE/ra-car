@@ -11435,7 +11435,7 @@ body.inquiry-conversion-page {
 
 .quiet-step-actions {
   display: grid;
-  grid-template-columns: minmax(112px, 0.34fr) minmax(0, 1fr);
+  grid-template-columns: 1fr;
   gap: 12px;
   align-items: center;
   margin-top: 10px;
