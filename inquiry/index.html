@@ -5,136 +5,231 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta
       name="description"
-      content="RE:CAR 장기렌트·리스 간편 상담. 차종, 이름, 연락처만 입력하면 가능한 조건을 빠르게 안내합니다."
+      content="RE:CAR 장기렌트·리스 간편 상담. 원하는 차종과 연락처만 남기면 현재 가능한 조건을 확인해드립니다."
     />
     <meta property="og:type" content="website" />
     <meta property="og:site_name" content="RE:CAR" />
     <meta property="og:url" content="https://recarplan.com/inquiry/" />
-    <meta property="og:title" content="RE:CAR 간편 견적 상담" />
-    <meta property="og:description" content="차종, 이름, 연락처만 남기면 장기렌트·리스 조건을 비교해드립니다." />
+    <meta property="og:title" content="RE:CAR 조용한 빠른견적" />
+    <meta property="og:description" content="부담스러운 상담보다, 필요한 조건만 먼저 확인합니다." />
     <meta property="og:image" content="https://recarplan.com/assets/recar-og-20260518.png" />
     <meta name="twitter:card" content="summary_large_image" />
     <link rel="canonical" href="https://recarplan.com/inquiry/" />
-    <title>RE:CAR 간편 견적 상담</title>
+    <title>RE:CAR 조용한 빠른견적</title>
     <link rel="icon" type="image/png" href="../assets/recar-favicon-20260518.png" />
     <link rel="apple-touch-icon" href="../assets/recar-favicon-20260518.png" />
-    <link rel="stylesheet" href="../styles.css?v=20260518-admincrm" />
+    <link rel="stylesheet" href="../styles.css?v=20260702-inquiry-dark" />
   </head>
-  <body class="simple-inquiry-page">
-    <main class="simple-inquiry-shell">
-      <section class="simple-inquiry-card" id="quote" aria-labelledby="simple-inquiry-title">
-        <div class="simple-inquiry-brand">
-          <strong>RE:CAR</strong>
-        </div>
+  <body class="recar-quiet-inquiry-page">
+    <header class="quiet-inquiry-header" aria-label="RE:CAR 상담 페이지 상단">
+      <a class="quiet-inquiry-logo" href="../index.html" aria-label="RE:CAR 메인으로 이동">
+        <img src="../assets/recar-logo-transparent.png" alt="RE:CAR" />
+      </a>
+      <nav class="quiet-inquiry-nav" aria-label="상담 페이지 이동">
+        <a href="#process">Process</a>
+        <a href="#quote">Consultation</a>
+        <a href="../vehicles.html">Inventory</a>
+      </nav>
+      <a class="quiet-header-cta" href="#quote">상담 시작</a>
+    </header>
 
-        <div class="simple-inquiry-copy">
-          <span>1분 간편 상담</span>
-          <h1 id="simple-inquiry-title">안심할 수 있는<br />빠른견적</h1>
-          <p>간편하게 원하시는 차종만 남겨주시면 24시간 안에 담당 어드바이저가 연락드립니다.</p>
-        </div>
+    <main class="quiet-inquiry-main">
+      <div class="quiet-bg-car" aria-hidden="true"></div>
+      <section class="quiet-inquiry-hero" aria-labelledby="simple-inquiry-title">
+        <p class="quiet-kicker">상담 신청은 30초면 충분합니다.</p>
+        <h1 id="simple-inquiry-title">지금 조건에 맞는 차량 제안,<br />조용히 확인해보세요.</h1>
+        <p class="quiet-hero-copy">
+          공개된 가격표만 보고 결정하지 마세요. 원하는 차종을 남겨주시면 현재 가능한 조건을 기준으로 맞춤 상담을 도와드립니다.
+        </p>
 
         <form
-          class="quote-form simple-lead-form"
-          data-default-campaign="inq-simple"
-          data-default-lead-source="INQ 초간단 랜딩"
-          data-default-campaign-label="차종 이름 연락처 간편 상담"
+          class="quote-form quiet-inquiry-form"
+          id="quote"
+          data-default-campaign="inq-quiet-dark"
+          data-default-lead-source="INQ 조용한 빠른견적"
+          data-default-campaign-label="차종 이름 연락처 조용한 상담"
         >
-          <div class="simple-step is-active" data-step="vehicle">
-            <label>
-              <span>STEP 01</span>
-              희망 차종
-              <input id="vehicleWish" name="vehicleWish" type="text" placeholder="예: 쏘렌토, GV80, Model Y" autocomplete="off" required />
-            </label>
-            <button class="simple-next-button" type="button" data-next-step="name">입력하기</button>
+          <div class="quiet-form-head">
+            <h2>내 조건에 맞는 차량 가능 여부 확인</h2>
+            <span class="quiet-step-counter" aria-live="polite">1 / 3</span>
           </div>
 
-          <div class="simple-step" data-step="name" hidden>
-            <label>
-              <span>STEP 02</span>
-              이름
-              <input id="customerName" name="customerName" type="text" autocomplete="name" placeholder="이름을 입력하세요" required />
+          <div class="quiet-step is-active" data-step="vehicle" data-step-index="1">
+            <label for="vehicleWish">
+              <strong>어떤 차량을 보고 계신가요?</strong>
+              <small>정확하지 않아도 괜찮습니다. 생각 중인 차종만 편하게 적어주세요.</small>
             </label>
-            <button class="simple-next-button" type="button" data-next-step="phone">연락처 입력하기</button>
+            <input id="vehicleWish" name="vehicleWish" type="text" placeholder="예: 카니발, 쏘렌토, G80, E클래스" autocomplete="off" required />
+            <button class="quiet-next-button" type="button" data-next-step="customer">
+              <span>다음</span>
+              <i data-lucide="arrow-right" aria-hidden="true"></i>
+            </button>
+            <p class="quiet-helper">입력은 30초 이내로 끝납니다.</p>
           </div>
 
-          <div class="simple-step" data-step="phone" hidden>
-            <label>
-              <span>STEP 03</span>
-              연락처
+          <div class="quiet-step" data-step="customer" data-step-index="2" hidden>
+            <label for="customerName">
+              <strong>상담받으실 분을 알려주세요.</strong>
+              <small>담당 어드바이저가 가능한 조건만 정리해서 연락드립니다.</small>
+            </label>
+            <div class="quiet-two-fields">
+              <input id="customerName" name="customerName" type="text" autocomplete="name" placeholder="이름" required />
               <input id="contactPhone" name="contactPhone" type="tel" inputmode="tel" autocomplete="tel" placeholder="010-0000-0000" required />
-            </label>
-            <button class="simple-next-button" type="button" data-next-step="terms">약관 동의하기</button>
+            </div>
+            <button class="quiet-next-button" type="button" data-next-step="terms">
+              <span>약관 확인</span>
+              <i data-lucide="arrow-right" aria-hidden="true"></i>
+            </button>
+            <p class="quiet-helper">전화가 어려우면 문자로 먼저 안내드립니다.</p>
           </div>
 
-          <div class="simple-step simple-terms-step" data-step="terms" hidden>
-            <span class="simple-step-label">STEP 04</span>
-            <strong>약관 동의</strong>
-            <label class="simple-consent-row">
+          <div class="quiet-step quiet-terms-step" data-step="terms" data-step-index="3" hidden>
+            <div class="quiet-terms-title">
+              <strong>마지막 확인만 해주세요.</strong>
+              <small>입력 정보는 차량 상담 및 조건 안내 목적으로만 사용됩니다.</small>
+            </div>
+            <label class="quiet-consent-row">
               <input id="privacyConsent" name="privacyConsent" type="checkbox" required />
-              <span>개인정보 수집·이용에 동의합니다.</span>
+              <span>개인정보 수집·이용에 동의합니다. <a href="../privacy.html" target="_blank" rel="noopener noreferrer">보기</a></span>
             </label>
-            <label class="simple-consent-row">
+            <label class="quiet-consent-row">
               <input id="termsConsent" name="termsConsent" type="checkbox" required />
-              <span>상담 유의사항을 확인했습니다.</span>
+              <span>상담 유의사항을 확인했습니다. <a href="../terms.html" target="_blank" rel="noopener noreferrer">보기</a></span>
             </label>
-            <p>수집 항목: 차종, 이름, 연락처 / 이용 목적: 장기렌트·리스 견적 상담</p>
-            <button class="submit-button simple-submit-button" type="submit">
+            <button class="submit-button quiet-submit-button" type="submit">
               <span>상담 신청 완료</span>
             </button>
           </div>
 
           <p class="form-status" aria-live="polite" hidden>문의가 접수되었습니다. 가능한 조건을 확인해 연락드리겠습니다.</p>
+          <p class="quiet-form-quote">"부담스러운 상담보다, 필요한 조건만 먼저 확인합니다."</p>
         </form>
+
+        <div class="quiet-trust-grid" id="process" aria-label="RE:CAR 상담 특징">
+          <article>
+            <i data-lucide="car" aria-hidden="true"></i>
+            <strong>원하는 차종 기준 맞춤 상담</strong>
+          </article>
+          <article>
+            <i data-lucide="gauge" aria-hidden="true"></i>
+            <strong>불필요한 절차 없이 간단 접수</strong>
+          </article>
+          <article>
+            <i data-lucide="shield-check" aria-hidden="true"></i>
+            <strong>입력 정보는 상담 목적 외 사용하지 않음</strong>
+          </article>
+        </div>
       </section>
     </main>
 
+    <footer class="quiet-inquiry-footer" aria-label="사업자 정보">
+      <div class="quiet-footer-brand">
+        <strong>RE:CAR</strong>
+        <p>리카오토플랜은 장기렌트·리스 조건을 비교하고 고객에게 맞는 상담을 안내합니다.</p>
+      </div>
+      <dl class="quiet-business-info">
+        <div>
+          <dt>상호</dt>
+          <dd>리카오토플랜</dd>
+        </div>
+        <div>
+          <dt>대표자</dt>
+          <dd>조용철</dd>
+        </div>
+        <div>
+          <dt>사업자등록번호</dt>
+          <dd>325-60-00844</dd>
+        </div>
+        <div>
+          <dt>주소</dt>
+          <dd>경기도 부천시 원미구 신흥로 40, 709호(심곡동, 디오스빌)</dd>
+        </div>
+        <div>
+          <dt>연락처</dt>
+          <dd><a href="tel:01065731038">010-6573-1038</a></dd>
+        </div>
+        <div>
+          <dt>이메일</dt>
+          <dd><a href="mailto:jhxox666@gmail.com">jhxox666@gmail.com</a></dd>
+        </div>
+      </dl>
+      <nav class="quiet-footer-links" aria-label="하단 링크">
+        <a href="../privacy.html">개인정보 처리방침</a>
+        <a href="../terms.html">상담 유의사항</a>
+        <a href="../index.html">메인으로</a>
+      </nav>
+      <p class="quiet-copyright">Copyright © RE:CAR. All rights reserved.</p>
+    </footer>
+
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
     <script src="../script.js?v=20260518-admincrm"></script>
     <script>
       (() => {
-        const form = document.querySelector(".simple-lead-form");
+        const form = document.querySelector(".quiet-inquiry-form");
         if (!form) return;
 
-        const steps = [...form.querySelectorAll(".simple-step")];
+        const steps = [...form.querySelectorAll(".quiet-step")];
+        const counter = form.querySelector(".quiet-step-counter");
         const stepMap = new Map(steps.map((step) => [step.dataset.step, step]));
 
-        function revealStep(stepName) {
-          const step = stepMap.get(stepName);
-          if (!step) return;
-
-          step.hidden = false;
-          step.classList.add("is-active");
-          step.scrollIntoView({ behavior: "smooth", block: "nearest" });
-
-          window.setTimeout(() => {
-            const field = step.querySelector("input:not([type='checkbox'])");
-            field?.focus();
-          }, 180);
+        function setStatus(message) {
+          const status = form.querySelector(".form-status");
+          if (!status) return;
+          status.textContent = message;
+          status.hidden = false;
+          status.classList.add("is-error");
         }
 
-        function getStepField(step) {
-          return step.querySelector("input:not([type='checkbox'])");
+        function clearStatus() {
+          const status = form.querySelector(".form-status");
+          if (!status) return;
+          status.hidden = true;
+          status.classList.remove("is-error");
+        }
+
+        function showStep(stepName) {
+          const nextStep = stepMap.get(stepName);
+          if (!nextStep) return;
+
+          steps.forEach((step) => {
+            const isTarget = step === nextStep;
+            step.hidden = !isTarget;
+            step.classList.toggle("is-active", isTarget);
+          });
+
+          if (counter) counter.textContent = `${nextStep.dataset.stepIndex} / ${steps.length}`;
+          clearStatus();
+
+          window.setTimeout(() => {
+            const field = nextStep.querySelector("input:not([type='checkbox'])");
+            field?.focus({ preventScroll: true });
+          }, 120);
+        }
+
+        function validateStep(step) {
+          const fields = [...step.querySelectorAll("input[required]:not([type='checkbox'])")];
+          const emptyField = fields.find((field) => !field.value.trim());
+          if (!emptyField) return true;
+
+          setStatus("필수 정보를 먼저 입력해 주세요.");
+          emptyField.focus();
+          step.classList.add("is-shaking");
+          window.setTimeout(() => step.classList.remove("is-shaking"), 320);
+          return false;
         }
 
         form.querySelectorAll("[data-next-step]").forEach((button) => {
           button.addEventListener("click", () => {
-            const currentStep = button.closest(".simple-step");
-            const field = getStepField(currentStep);
-
-            if (field && !field.value.trim()) {
-              field.focus();
-              currentStep.classList.add("is-shaking");
-              window.setTimeout(() => currentStep.classList.remove("is-shaking"), 320);
-              return;
-            }
-
-            revealStep(button.dataset.nextStep);
+            const currentStep = button.closest(".quiet-step");
+            if (!currentStep || !validateStep(currentStep)) return;
+            showStep(button.dataset.nextStep);
           });
         });
 
         form.addEventListener("keydown", (event) => {
           if (event.key !== "Enter") return;
 
-          const step = event.target.closest(".simple-step");
+          const step = event.target.closest(".quiet-step");
           const button = step?.querySelector("[data-next-step]");
           if (!button) return;
 
