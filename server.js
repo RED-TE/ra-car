@@ -44,6 +44,10 @@ const publicStaticFiles = new Set([
   "/privacy.html",
   "/terms.html",
   "/admin.html",
+  "/crew/index.html",
+  "/crew/crew.css",
+  "/crew/login.html",
+  "/crew/login.css",
   "/inquiry/index.html",
   "/data/vehicle-static-catalog.json",
   "/data/vehicles-incomplete-report.json",
@@ -2228,6 +2232,12 @@ function serveStatic(request, response, url) {
   let requestedPath = pathname === "/" ? "/index.html" : pathname;
   if (requestedPath === "/inquiry" || requestedPath === "/inquiry/") {
     requestedPath = "/inquiry/index.html";
+  }
+  if (requestedPath === "/crew" || requestedPath === "/crew/") {
+    requestedPath = "/crew/index.html";
+  }
+  if (requestedPath === "/crew/login" || requestedPath === "/crew/login/") {
+    requestedPath = "/crew/login.html";
   }
   if (!isPublicStaticPath(requestedPath)) {
     response.writeHead(404, {

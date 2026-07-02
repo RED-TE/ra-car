@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="RE:CAR 크루 대시보드 로그인" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="RE:CAR Crew" />
+    <meta property="og:title" content="RE:CAR 크루 로그인" />
+    <meta property="og:description" content="추천만 하면 관리와 영업은 RE:CAR가 진행하는 크루 운영 콘솔" />
+    <title>RE:CAR 크루 로그인</title>
+    <link rel="icon" type="image/png" href="../assets/recar-favicon-20260518.png" />
+    <link rel="apple-touch-icon" href="../assets/recar-favicon-20260518.png" />
+    <link rel="stylesheet" href="./login.css?v=20260702-crew-login" />
+  </head>
+  <body class="crew-login-page">
+    <header class="login-header">
+      <a class="brand-link" href="../index.html" aria-label="RE:CAR 홈">
+        <strong>RE:CAR</strong>
+        <span>크루 대시보드</span>
+      </a>
+      <a class="header-apply" href="#crew-apply">크루 신청하기</a>
+    </header>
+
+    <main class="login-shell">
+      <section class="login-hero" aria-label="크루 로그인">
+        <div class="hero-copy">
+          <span class="eyebrow">RE:CAR CREW</span>
+          <h1>추천만 하세요.<br />관리·영업은<br />우리가 합니다.</h1>
+          <p>
+            앱 다운로드 후 추천인 코드만 입력하면 끝.<br />이후 절차는 RE:CAR 운영팀이 진행합니다.
+          </p>
+
+          <div class="income-strip" aria-label="크루 수익 안내">
+            <div>
+              <span>1건 수익</span>
+              <strong>20만~45만원</strong>
+            </div>
+            <div>
+              <span>평균 월 수익</span>
+              <strong>350만원</strong>
+            </div>
+          </div>
+        </div>
+
+        <form class="login-card" id="crewLoginForm">
+          <div class="card-label">Crew Login</div>
+          <h2>크루 아이디로 시작</h2>
+          <p>로그인한 크루 기준으로 추천, 심사, 계약, 인도 현황이 표시됩니다.</p>
+
+          <label class="primary-field" for="crewId">
+            <span>아이디</span>
+            <input id="crewId" name="crewId" type="text" placeholder="크루 아이디 입력" autocomplete="username" required />
+          </label>
+
+          <label class="sub-field" for="crewCode">
+            <span>추천코드</span>
+            <input id="crewCode" name="crewCode" type="text" placeholder="선택 입력" autocomplete="off" />
+          </label>
+
+          <button class="login-button" type="submit">대시보드 로그인</button>
+
+          <div class="login-note">
+            <span>추천인 입력 이후 절차는 운영팀이 확인합니다.</span>
+            <strong>심사 · 계약 · 인도 · 정산</strong>
+          </div>
+
+          <a class="apply-link" id="crew-apply" href="mailto:crew@recar.co.kr?subject=RE:CAR%20%ED%81%AC%EB%A3%A8%20%EC%8B%A0%EC%B2%AD">
+            크루 신청하기
+          </a>
+        </form>
+      </section>
+
+      <section class="preview-panel" aria-label="크루 진행 현황 미리보기">
+        <div class="preview-top">
+          <span>오늘 진행</span>
+          <strong>추천부터 정산까지 한 화면</strong>
+        </div>
+        <div class="mini-dashboard">
+          <div class="mini-card">
+            <span>추천인 수</span>
+            <strong>12</strong>
+          </div>
+          <div class="mini-card">
+            <span>계약 수</span>
+            <strong>49</strong>
+          </div>
+          <div class="mini-card">
+            <span>인도 수</span>
+            <strong>36</strong>
+          </div>
+        </div>
+        <div class="flow-list">
+          <div class="flow-row is-done">
+            <b></b>
+            <span>추천인 코드 입력</span>
+            <strong>완료</strong>
+          </div>
+          <div class="flow-row is-live">
+            <b></b>
+            <span>운영팀 상담 및 심사</span>
+            <strong>진행중</strong>
+          </div>
+          <div class="flow-row">
+            <b></b>
+            <span>계약 · 인도 · 정산</span>
+            <strong>대기</strong>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script>
+      const loginForm = document.querySelector("#crewLoginForm");
+      loginForm.addEventListener("submit", (event) => {
+        event.preventDefault();
+        const formData = new FormData(loginForm);
+        const crewId = String(formData.get("crewId") || "").trim();
+
+        if (!crewId) return;
+
+        localStorage.setItem("recarCrewId", crewId);
+        window.location.href = `./index.html?crew=${encodeURIComponent(crewId)}`;
+      });
+    </script>
+  </body>
+</html>

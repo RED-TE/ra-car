@@ -1,0 +1,739 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="RE:CAR 크루 정산 및 운영 현황 대시보드" />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="RE:CAR Crew" />
+    <meta property="og:title" content="RE:CAR 크루 대시보드" />
+    <meta property="og:description" content="크루 심사, 계약, 인도, 정산, 최근 활동 내역을 확인하는 운영 콘솔" />
+    <title>RE:CAR 크루 대시보드</title>
+    <link rel="icon" type="image/png" href="../assets/recar-favicon-20260518.png" />
+    <link rel="apple-touch-icon" href="../assets/recar-favicon-20260518.png" />
+    <link rel="preconnect" href="https://unpkg.com" />
+    <link rel="stylesheet" href="./crew.css?v=20260702-account-stats-modal" />
+  </head>
+  <body class="crew-console-page">
+    <aside class="crew-sidebar" aria-label="크루 콘솔 메뉴">
+      <a class="crew-side-item is-active" href="#" aria-label="크루">
+        <i data-lucide="users-round"></i>
+        <span>크루</span>
+      </a>
+      <a class="crew-side-item" href="#" aria-label="고객센터">
+        <i data-lucide="headphones"></i>
+        <span>고객센터</span>
+      </a>
+      <a class="crew-side-item" href="#crewProfile" aria-label="내정보">
+        <i data-lucide="circle-user-round"></i>
+        <span>내정보</span>
+      </a>
+      <a class="crew-side-item" href="#crewAnalyticsDetail" aria-label="통계">
+        <i data-lucide="activity"></i>
+        <span>통계</span>
+      </a>
+    </aside>
+
+    <header class="crew-topbar">
+      <div class="crew-topbar-brand">
+        <strong>RE:CAR</strong>
+        <span>크루 대시보드</span>
+      </div>
+      <div class="crew-topbar-meta" aria-label="계정 상태">
+        <span>오늘 <strong>49건 남음</strong></span>
+        <span><b class="status-dot"></b><strong>98%</strong></span>
+        <span>총 크루 <strong>282명</strong></span>
+        <div class="crew-account-menu" id="crewProfile">
+          <button class="crew-account-button" type="button" aria-expanded="false" aria-controls="crewAccountDropdown">
+            <i data-lucide="circle-user-round"></i>
+            조종철님의 계정
+            <i data-lucide="chevron-down"></i>
+          </button>
+          <div class="crew-account-dropdown" id="crewAccountDropdown">
+            <div class="account-profile-row">
+              <span class="account-avatar">조</span>
+              <div>
+                <strong>조종철</strong>
+                <small>RE:CAR 크루 · RC-24H9F</small>
+              </div>
+            </div>
+            <a class="account-dropdown-link" href="#crewProfile">
+              <i data-lucide="circle-user-round"></i>
+              내정보
+            </a>
+            <button class="account-copy-link" type="button" data-copy-url="https://recar.co.kr/?ref=RC-24H9F">
+              <span>
+                <i data-lucide="link"></i>
+                추천인 본인링크
+              </span>
+              <strong>복사</strong>
+            </button>
+            <small class="account-copy-status" aria-live="polite">추천 링크를 바로 복사할 수 있습니다.</small>
+          </div>
+        </div>
+        <span class="crew-alert-badge">2</span>
+      </div>
+    </header>
+
+    <main class="crew-console-main">
+      <div class="crew-console-content">
+        <nav class="crew-dashboard-tabs" aria-label="대시보드 전환">
+          <a class="is-active" href="#">크루 대시보드</a>
+          <a href="#">요청 대시보드</a>
+        </nav>
+
+        <section class="crew-summary-grid" aria-label="크루 요약">
+          <article class="crew-stat-card">
+            <div class="stat-card-head">
+              <span class="icon-box blue"><i data-lucide="send"></i></span>
+              <p>추천인 수</p>
+            </div>
+            <strong>12<span>명</span></strong>
+            <div class="inline-metrics">
+              <span><b>8</b> 앱 추천</span>
+              <span><b>4</b> 코드 유입</span>
+            </div>
+            <small>앱 추천코드 기준 추천 수</small>
+          </article>
+
+          <article class="crew-stat-card">
+            <div class="stat-card-head">
+              <span class="icon-box violet"><i data-lucide="users-round"></i></span>
+              <p>심사 수</p>
+            </div>
+            <strong>282</strong>
+            <div class="soft-badge">진행중 198명</div>
+            <small>이번 달 신규 심사 18명</small>
+          </article>
+
+          <article class="crew-stat-card">
+            <div class="stat-card-head">
+              <span class="icon-box violet"><i data-lucide="file-check-2"></i></span>
+              <p>계약 수</p>
+            </div>
+            <strong>49</strong>
+            <div class="soft-badge">계약 대기 7건</div>
+            <small>이번 달 계약 확정 기준</small>
+          </article>
+
+          <article class="crew-stat-card">
+            <div class="stat-card-head">
+              <span class="icon-box green"><i data-lucide="truck"></i></span>
+              <p>인도 수</p>
+            </div>
+            <strong>36</strong>
+            <div class="soft-badge green">이번 주 9대 인도</div>
+            <small>고객 인도 완료 기준</small>
+          </article>
+        </section>
+
+        <section class="crew-middle-grid" aria-label="최근 활동과 정산금액">
+          <article class="crew-panel recent-panel">
+            <header class="panel-header">
+              <div>
+                <h2>최근 활동 수 5건</h2>
+                <span class="neutral-badge">심사 및 계약 진행 단계 업데이트</span>
+              </div>
+              <a href="#">전체 보기 <i data-lucide="chevron-right"></i></a>
+            </header>
+
+            <div class="request-list">
+              <a class="request-row" href="#">
+                <div class="request-primary">
+                  <strong>드림모터스</strong>
+                  <span>추천코드 RC-24H9F · 2분 전</span>
+                </div>
+                <span class="state-badge processing">심사중</span>
+                <span class="request-count">1명</span>
+                <span class="row-metric success-text"><b>심사</b> 단계</span>
+                <span class="row-metric fail-text"><b>D+0</b> 경과</span>
+                <span class="row-metric wait-text"><b>대기</b> 계약</span>
+                <i data-lucide="chevron-right"></i>
+              </a>
+              <a class="request-row" href="#">
+                <div class="request-primary">
+                  <strong>카플러스</strong>
+                  <span>추천코드 RC-9MQ2A · 18분 전</span>
+                </div>
+                <span class="state-badge waiting">서류대기</span>
+                <span class="request-count">3명</span>
+                <span class="row-metric success-text"><b>서류</b> 단계</span>
+                <span class="row-metric fail-text"><b>D+1</b> 경과</span>
+                <span class="row-metric wait-text"><b>대기</b> 보완</span>
+                <i data-lucide="chevron-right"></i>
+              </a>
+              <a class="request-row" href="#">
+                <div class="request-primary">
+                  <strong>제이오토</strong>
+                  <span>추천코드 RC-71KDL · 42분 전</span>
+                </div>
+                <span class="state-badge success">계약완료</span>
+                <span class="request-count">2명</span>
+                <span class="row-metric success-text"><b>계약</b> 단계</span>
+                <span class="row-metric fail-text"><b>D+2</b> 경과</span>
+                <span class="row-metric wait-text"><b>정산</b> 예정</span>
+                <i data-lucide="chevron-right"></i>
+              </a>
+              <a class="request-row" href="#">
+                <div class="request-primary">
+                  <strong>민준렌트</strong>
+                  <span>추천코드 RC-5MD8P · 1시간 전</span>
+                </div>
+                <span class="state-badge success">인도완료</span>
+                <span class="request-count">4명</span>
+                <span class="row-metric success-text"><b>인도</b> 단계</span>
+                <span class="row-metric fail-text"><b>D+5</b> 경과</span>
+                <span class="row-metric wait-text"><b>정산</b> 가능</span>
+                <i data-lucide="chevron-right"></i>
+              </a>
+              <a class="request-row" href="#">
+                <div class="request-primary">
+                  <strong>오토앤유</strong>
+                  <span>추천코드 RC-0XZ6B · 2시간 전</span>
+                </div>
+                <span class="state-badge processing">계약중</span>
+                <span class="request-count">1명</span>
+                <span class="row-metric success-text"><b>계약</b> 단계</span>
+                <span class="row-metric fail-text"><b>D+3</b> 경과</span>
+                <span class="row-metric wait-text"><b>대기</b> 서명</span>
+                <i data-lucide="chevron-right"></i>
+              </a>
+            </div>
+          </article>
+
+          <article class="crew-panel favorite-panel settlement-panel">
+            <header class="panel-header">
+              <div>
+                <h2>정산금액</h2>
+                <span class="section-line" id="settlementPeriodLabel">이번달 정산금액</span>
+              </div>
+              <div class="settlement-header-tools">
+                <div class="settlement-period-control" aria-label="정산 기준월 선택">
+                  <button class="settlement-period-button" type="button" data-settlement-shift="-1" aria-label="이전 정산월">
+                    <i data-lucide="chevron-left"></i>
+                  </button>
+                  <label class="settlement-month-label" for="settlementMonth">
+                    <span>정산 기준월</span>
+                    <input id="settlementMonth" type="month" min="2026-04" max="2026-07" value="2026-07" />
+                  </label>
+                  <button class="settlement-period-button" type="button" data-settlement-shift="1" aria-label="다음 정산월">
+                    <i data-lucide="chevron-right"></i>
+                  </button>
+                </div>
+                <div class="settlement-help-wrap">
+                  <button class="settlement-help" type="button" aria-expanded="false" aria-describedby="settlementHelpText">
+                    계약이 되었는데 산정이 안되었어요
+                    <i data-lucide="help-circle"></i>
+                  </button>
+                  <div class="settlement-help-popover" id="settlementHelpText" role="tooltip">
+                    계약 기준이 아닌 인도 기준으로 익월 정산됩니다. 전산 반영은 최대 24시간 소요될 수 있으며,
+                    이후에도 반영되지 않으면 고객센터로 문의해주세요.
+                  </div>
+                </div>
+              </div>
+            </header>
+
+            <div class="settlement-summary">
+              <span class="favorite-icon amber"><i data-lucide="wallet-cards"></i></span>
+              <strong id="settlementAmount">₩18,420,000</strong>
+              <small id="settlementDetail">확정 14,920,000원 · 예정 3,500,000원</small>
+            </div>
+
+            <div class="settlement-breakdown">
+              <span><b id="settlementTargetCount">12건</b> 정산 대상</span>
+              <span><b id="settlementReviewCount">4건</b> 검토중</span>
+            </div>
+
+            <a class="settlement-request-button" href="#">
+              정산요청
+              <i data-lucide="chevron-right"></i>
+            </a>
+          </article>
+        </section>
+
+        <section class="crew-panel chart-panel" aria-label="날짜별 크루 지표">
+          <header class="chart-header">
+            <div>
+              <h2>날짜별 크루 지표 <i data-lucide="info"></i></h2>
+              <div class="chart-legend">
+                <span><b class="blue"></b> 선택 지표 <strong id="chartMetricName">추천인 수</strong></span>
+                <span><b class="green"></b> 월 합계 <strong id="chartMetricTotal">182명</strong></span>
+                <span><b class="orange"></b> 최고 일자 <strong id="chartMetricPeak">7월 29일 · 28명</strong></span>
+                <span><b class="gray"></b> 조회 단위 <strong>일별</strong></span>
+              </div>
+            </div>
+            <div class="chart-date-controls" aria-label="조회 월 선택">
+              <button type="button" aria-label="이전 달"><i data-lucide="chevron-left"></i></button>
+              <span class="date-pill">2026년 7월</span>
+              <button type="button" aria-label="다음 달"><i data-lucide="chevron-right"></i></button>
+            </div>
+          </header>
+
+          <div class="chart-filter-row" aria-label="크루 지표 필터">
+            <button class="metric-filter is-active" type="button" data-metric="referrals">
+              <span>추천인 수</span>
+              <strong>182명</strong>
+            </button>
+            <button class="metric-filter" type="button" data-metric="reviews">
+              <span>심사</span>
+              <strong>475건</strong>
+            </button>
+            <button class="metric-filter" type="button" data-metric="contracts">
+              <span>계약</span>
+              <strong>201건</strong>
+            </button>
+            <button class="metric-filter" type="button" data-metric="deliveries">
+              <span>인도</span>
+              <strong>115건</strong>
+            </button>
+          </div>
+
+          <div class="activity-chart-wrap">
+            <svg class="activity-chart" viewBox="0 0 1000 330" role="img" aria-label="날짜별 추천인 수, 심사, 계약, 인도 추이 그래프">
+              <defs>
+                <linearGradient id="crewAreaGradient" x1="0" x2="0" y1="0" y2="1">
+                  <stop offset="0%" stop-color="#5D5BFF" stop-opacity="0.22" />
+                  <stop offset="100%" stop-color="#5D5BFF" stop-opacity="0.03" />
+                </linearGradient>
+              </defs>
+              <g class="grid-lines">
+                <line x1="58" y1="34" x2="970" y2="34" />
+                <line x1="58" y1="94" x2="970" y2="94" />
+                <line x1="58" y1="154" x2="970" y2="154" />
+                <line x1="58" y1="214" x2="970" y2="214" />
+                <line x1="58" y1="274" x2="970" y2="274" />
+              </g>
+              <g class="y-labels">
+                <text x="24" y="38">60</text>
+                <text x="24" y="98">45</text>
+                <text x="24" y="158">30</text>
+                <text x="24" y="218">15</text>
+                <text x="38" y="278">0</text>
+              </g>
+              <path class="chart-area" id="metricAreaPath" d="" />
+              <path class="chart-line success-line" id="metricLinePath" d="" />
+              <g class="chart-dots" id="metricDots"></g>
+              <g class="x-labels">
+                <text x="58" y="312">7/1</text>
+                <text x="140" y="312">7/4</text>
+                <text x="222" y="312">7/7</text>
+                <text x="304" y="312">7/10</text>
+                <text x="386" y="312">7/13</text>
+                <text x="468" y="312">7/16</text>
+                <text x="550" y="312">7/19</text>
+                <text x="632" y="312">7/22</text>
+                <text x="714" y="312">7/25</text>
+                <text x="796" y="312">7/27</text>
+                <text x="878" y="312">7/29</text>
+                <text x="950" y="312">7/31</text>
+              </g>
+            </svg>
+          </div>
+        </section>
+
+        <section class="crew-panel analytics-detail-panel" id="crewAnalyticsDetail" aria-label="날짜별 크루 지표 상세">
+          <header class="analytics-detail-header">
+            <div>
+              <span class="section-line">상세 통계</span>
+              <h2>날짜별 크루 지표 크게 보기</h2>
+              <p>추천인 수, 심사, 계약, 인도 흐름을 일자별로 확인합니다.</p>
+            </div>
+            <div class="analytics-detail-actions">
+              <span class="date-pill">2026년 7월</span>
+              <button type="button" class="ghost-pill-button">CSV 다운로드</button>
+              <button type="button" class="analytics-close-button" aria-label="상세 통계 닫기">
+                <i data-lucide="x"></i>
+              </button>
+            </div>
+          </header>
+
+          <div class="analytics-detail-grid">
+            <article class="analytics-main-chart">
+              <div class="detail-card-head">
+                <strong>일자별 전체 추이</strong>
+                <span>7월 1일 - 7월 31일</span>
+              </div>
+              <svg class="analytics-wide-chart" viewBox="0 0 980 360" role="img" aria-label="날짜별 추천인 수, 심사, 계약, 인도 상세 그래프">
+                <g class="grid-lines">
+                  <line x1="58" y1="42" x2="948" y2="42" />
+                  <line x1="58" y1="102" x2="948" y2="102" />
+                  <line x1="58" y1="162" x2="948" y2="162" />
+                  <line x1="58" y1="222" x2="948" y2="222" />
+                  <line x1="58" y1="282" x2="948" y2="282" />
+                </g>
+                <g class="y-labels">
+                  <text x="24" y="46">60</text>
+                  <text x="24" y="106">45</text>
+                  <text x="24" y="166">30</text>
+                  <text x="24" y="226">15</text>
+                  <text x="38" y="286">0</text>
+                </g>
+                <path class="detail-line referrals" d="M58 254 L138 262 L220 238 L300 246 L382 234 L462 210 L544 222 L624 190 L706 210 L786 182 L868 202 L948 170" />
+                <path class="detail-line reviews" d="M58 154 L138 170 L220 142 L300 158 L382 130 L462 114 L544 126 L624 102 L706 118 L786 90 L868 106 L948 74" />
+                <path class="detail-line contracts" d="M58 246 L138 234 L220 242 L300 226 L382 218 L462 230 L544 206 L624 198 L706 210 L786 190 L868 202 L948 178" />
+                <path class="detail-line deliveries" d="M58 266 L138 262 L220 254 L300 258 L382 250 L462 242 L544 246 L624 234 L706 238 L786 230 L868 226 L948 218" />
+                <g class="x-labels">
+                  <text x="58" y="326">7/1</text>
+                  <text x="138" y="326">7/4</text>
+                  <text x="220" y="326">7/7</text>
+                  <text x="300" y="326">7/10</text>
+                  <text x="382" y="326">7/13</text>
+                  <text x="462" y="326">7/16</text>
+                  <text x="544" y="326">7/19</text>
+                  <text x="624" y="326">7/22</text>
+                  <text x="706" y="326">7/25</text>
+                  <text x="786" y="326">7/27</text>
+                  <text x="868" y="326">7/29</text>
+                  <text x="948" y="326">7/31</text>
+                </g>
+              </svg>
+            </article>
+
+            <aside class="analytics-side-summary">
+              <div>
+                <span>추천 → 계약 전환</span>
+                <strong>38.6%</strong>
+                <small>전월 대비 +4.2%</small>
+              </div>
+              <div>
+                <span>계약 → 인도 전환</span>
+                <strong>57.2%</strong>
+                <small>115건 인도 완료</small>
+              </div>
+              <div>
+                <span>평균 정산 예상</span>
+                <strong>₩3,480,000</strong>
+                <small>크루 1인 기준</small>
+              </div>
+            </aside>
+          </div>
+
+          <div class="analytics-table-wrap">
+            <table class="analytics-table">
+              <thead>
+                <tr>
+                  <th>일자</th>
+                  <th>추천인 수</th>
+                  <th>심사</th>
+                  <th>계약</th>
+                  <th>인도</th>
+                  <th>계약 전환율</th>
+                  <th>정산 예정</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>7월 31일</td>
+                  <td>28명</td>
+                  <td>52건</td>
+                  <td>26건</td>
+                  <td>16건</td>
+                  <td><span class="table-badge green">42.8%</span></td>
+                  <td>₩2,880,000</td>
+                </tr>
+                <tr>
+                  <td>7월 29일</td>
+                  <td>20명</td>
+                  <td>44건</td>
+                  <td>20건</td>
+                  <td>14건</td>
+                  <td><span class="table-badge blue">36.4%</span></td>
+                  <td>₩2,430,000</td>
+                </tr>
+                <tr>
+                  <td>7월 27일</td>
+                  <td>25명</td>
+                  <td>48건</td>
+                  <td>23건</td>
+                  <td>13건</td>
+                  <td><span class="table-badge green">41.1%</span></td>
+                  <td>₩2,760,000</td>
+                </tr>
+                <tr>
+                  <td>7월 25일</td>
+                  <td>17명</td>
+                  <td>41건</td>
+                  <td>18건</td>
+                  <td>11건</td>
+                  <td><span class="table-badge blue">35.0%</span></td>
+                  <td>₩1,980,000</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </main>
+
+    <a class="crew-floating-help" href="#" aria-label="크루 빠른 문의">
+      <i data-lucide="message-circle"></i>
+    </a>
+
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <script>
+      if (window.lucide) {
+        window.lucide.createIcons();
+      }
+
+      const settlementHelpWrap = document.querySelector(".settlement-help-wrap");
+      const settlementHelpButton = document.querySelector(".settlement-help");
+      const accountMenu = document.querySelector(".crew-account-menu");
+      const accountButton = document.querySelector(".crew-account-button");
+      const accountCopyButton = document.querySelector(".account-copy-link");
+      const accountCopyStatus = document.querySelector(".account-copy-status");
+
+      function fallbackCopyText(text) {
+        const textarea = document.createElement("textarea");
+        textarea.value = text;
+        textarea.setAttribute("readonly", "");
+        textarea.style.position = "fixed";
+        textarea.style.left = "-9999px";
+        document.body.appendChild(textarea);
+        textarea.select();
+        document.execCommand("copy");
+        textarea.remove();
+      }
+
+      accountButton?.addEventListener("click", () => {
+        const isOpen = accountMenu.classList.toggle("is-open");
+        accountButton.setAttribute("aria-expanded", String(isOpen));
+      });
+
+      accountCopyButton?.addEventListener("click", async () => {
+        const copyUrl = accountCopyButton.dataset.copyUrl || "";
+
+        try {
+          if (navigator.clipboard?.writeText) {
+            await navigator.clipboard.writeText(copyUrl);
+          } else {
+            fallbackCopyText(copyUrl);
+          }
+          accountCopyStatus.textContent = "추천인 본인링크가 복사되었습니다.";
+          accountCopyStatus.classList.add("is-copied");
+          accountCopyButton.querySelector("strong").textContent = "복사됨";
+        } catch (error) {
+          fallbackCopyText(copyUrl);
+          accountCopyStatus.textContent = "추천인 본인링크가 복사되었습니다.";
+          accountCopyStatus.classList.add("is-copied");
+          accountCopyButton.querySelector("strong").textContent = "복사됨";
+        }
+      });
+
+      document.querySelectorAll(".crew-side-item").forEach((sideItem) => {
+        sideItem.addEventListener("click", () => {
+          document.querySelectorAll(".crew-side-item").forEach((item) => item.classList.remove("is-active"));
+          sideItem.classList.add("is-active");
+        });
+      });
+
+      const analyticsDetailSection = document.querySelector("#crewAnalyticsDetail");
+      const analyticsNavItem = document.querySelector('.crew-side-item[href="#crewAnalyticsDetail"]');
+      const analyticsCloseButton = document.querySelector(".analytics-close-button");
+
+      function openAnalyticsDetail() {
+        document.body.classList.add("is-analytics-open");
+        document.querySelectorAll(".crew-side-item").forEach((item) => item.classList.remove("is-active"));
+        analyticsNavItem?.classList.add("is-active");
+      }
+
+      function closeAnalyticsDetail() {
+        document.body.classList.remove("is-analytics-open");
+      }
+
+      analyticsNavItem?.addEventListener("click", (event) => {
+        event.preventDefault();
+        openAnalyticsDetail();
+      });
+
+      analyticsCloseButton?.addEventListener("click", closeAnalyticsDetail);
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape") {
+          closeAnalyticsDetail();
+        }
+      });
+
+      if (window.location.hash === "#crewAnalyticsDetail") {
+        requestAnimationFrame(openAnalyticsDetail);
+      }
+
+      settlementHelpButton?.addEventListener("click", () => {
+        const isOpen = settlementHelpWrap.classList.toggle("is-open");
+        settlementHelpButton.setAttribute("aria-expanded", String(isOpen));
+      });
+
+      document.addEventListener("click", (event) => {
+        if (!accountMenu?.contains(event.target)) {
+          accountMenu?.classList.remove("is-open");
+          accountButton?.setAttribute("aria-expanded", "false");
+        }
+
+        if (!settlementHelpWrap?.contains(event.target)) {
+          settlementHelpWrap?.classList.remove("is-open");
+          settlementHelpButton?.setAttribute("aria-expanded", "false");
+        }
+      });
+
+      const settlementMonthlyData = {
+        "2026-07": {
+          label: "이번달 정산금액",
+          amount: 18420000,
+          confirmed: 14920000,
+          pending: 3500000,
+          target: 12,
+          review: 4,
+        },
+        "2026-06": {
+          label: "2026년 6월 정산금액",
+          amount: 16880000,
+          confirmed: 13700000,
+          pending: 3180000,
+          target: 10,
+          review: 3,
+        },
+        "2026-05": {
+          label: "2026년 5월 정산금액",
+          amount: 20250000,
+          confirmed: 18050000,
+          pending: 2200000,
+          target: 15,
+          review: 2,
+        },
+        "2026-04": {
+          label: "2026년 4월 정산금액",
+          amount: 14260000,
+          confirmed: 11860000,
+          pending: 2400000,
+          target: 9,
+          review: 5,
+        },
+      };
+
+      const settlementMonthInput = document.querySelector("#settlementMonth");
+      const settlementPeriodLabel = document.querySelector("#settlementPeriodLabel");
+      const settlementAmount = document.querySelector("#settlementAmount");
+      const settlementDetail = document.querySelector("#settlementDetail");
+      const settlementTargetCount = document.querySelector("#settlementTargetCount");
+      const settlementReviewCount = document.querySelector("#settlementReviewCount");
+      const settlementPeriodButtons = document.querySelectorAll("[data-settlement-shift]");
+      const settlementMonthKeys = Object.keys(settlementMonthlyData).sort();
+      const wonFormatter = new Intl.NumberFormat("ko-KR");
+
+      function renderSettlementMonth(monthKey) {
+        const settlement = settlementMonthlyData[monthKey] || settlementMonthlyData["2026-07"];
+        const activeMonth = settlementMonthlyData[monthKey] ? monthKey : "2026-07";
+
+        if (settlementMonthInput) settlementMonthInput.value = activeMonth;
+        if (settlementPeriodLabel) settlementPeriodLabel.textContent = settlement.label;
+        if (settlementAmount) settlementAmount.textContent = `₩${wonFormatter.format(settlement.amount)}`;
+        if (settlementDetail) {
+          settlementDetail.textContent = `확정 ${wonFormatter.format(settlement.confirmed)}원 · 예정 ${wonFormatter.format(settlement.pending)}원`;
+        }
+        if (settlementTargetCount) settlementTargetCount.textContent = `${settlement.target}건`;
+        if (settlementReviewCount) settlementReviewCount.textContent = `${settlement.review}건`;
+
+        settlementPeriodButtons.forEach((button) => {
+          const shift = Number(button.dataset.settlementShift || 0);
+          const currentIndex = settlementMonthKeys.indexOf(activeMonth);
+          button.disabled = currentIndex + shift < 0 || currentIndex + shift >= settlementMonthKeys.length;
+        });
+      }
+
+      settlementMonthInput?.addEventListener("change", () => renderSettlementMonth(settlementMonthInput.value));
+
+      settlementPeriodButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          const currentIndex = settlementMonthKeys.indexOf(settlementMonthInput.value);
+          const nextIndex = currentIndex + Number(button.dataset.settlementShift || 0);
+
+          if (nextIndex >= 0 && nextIndex < settlementMonthKeys.length) {
+            renderSettlementMonth(settlementMonthKeys[nextIndex]);
+          }
+        });
+      });
+
+      renderSettlementMonth(settlementMonthInput?.value || "2026-07");
+
+      const metricData = {
+        referrals: {
+          name: "추천인 수",
+          unit: "명",
+          values: [7, 5, 11, 9, 12, 18, 15, 22, 17, 25, 20, 28],
+          total: 182,
+        },
+        reviews: {
+          name: "심사",
+          unit: "건",
+          values: [32, 28, 35, 31, 38, 42, 39, 45, 41, 48, 44, 52],
+          total: 475,
+        },
+        contracts: {
+          name: "계약",
+          unit: "건",
+          values: [9, 12, 10, 14, 16, 13, 19, 21, 18, 23, 20, 26],
+          total: 201,
+        },
+        deliveries: {
+          name: "인도",
+          unit: "건",
+          values: [4, 5, 7, 6, 8, 10, 9, 12, 11, 13, 14, 16],
+          total: 115,
+        },
+      };
+
+      const chartDates = ["7월 1일", "7월 4일", "7월 7일", "7월 10일", "7월 13일", "7월 16일", "7월 19일", "7월 22일", "7월 25일", "7월 27일", "7월 29일", "7월 31일"];
+      const chartBounds = { left: 58, right: 970, top: 34, bottom: 274, max: 60 };
+      const metricAreaPath = document.querySelector("#metricAreaPath");
+      const metricLinePath = document.querySelector("#metricLinePath");
+      const metricDots = document.querySelector("#metricDots");
+      const chartMetricName = document.querySelector("#chartMetricName");
+      const chartMetricTotal = document.querySelector("#chartMetricTotal");
+      const chartMetricPeak = document.querySelector("#chartMetricPeak");
+
+      function getMetricPoints(values) {
+        const xStep = (chartBounds.right - chartBounds.left) / (values.length - 1);
+        return values.map((value, index) => {
+          const x = chartBounds.left + xStep * index;
+          const y = chartBounds.bottom - (value / chartBounds.max) * (chartBounds.bottom - chartBounds.top);
+          return { x, y, value };
+        });
+      }
+
+      function makeLinePath(points) {
+        return points.map((point, index) => `${index === 0 ? "M" : "L"}${point.x.toFixed(1)} ${point.y.toFixed(1)}`).join(" ");
+      }
+
+      function renderMetricChart(metricKey) {
+        const metric = metricData[metricKey];
+        const points = getMetricPoints(metric.values);
+        const linePath = makeLinePath(points);
+        const peakIndex = metric.values.indexOf(Math.max(...metric.values));
+
+        metricLinePath.setAttribute("d", linePath);
+        metricAreaPath.setAttribute(
+          "d",
+          `${linePath} L${chartBounds.right} ${chartBounds.bottom} L${chartBounds.left} ${chartBounds.bottom} Z`,
+        );
+        metricDots.innerHTML = points
+          .map((point) => `<circle cx="${point.x.toFixed(1)}" cy="${point.y.toFixed(1)}" r="3.5"><title>${point.value}${metric.unit}</title></circle>`)
+          .join("");
+
+        chartMetricName.textContent = metric.name;
+        chartMetricTotal.textContent = `${metric.total}${metric.unit}`;
+        chartMetricPeak.textContent = `${chartDates[peakIndex]} · ${metric.values[peakIndex]}${metric.unit}`;
+
+        document.querySelectorAll(".metric-filter").forEach((button) => {
+          const isActive = button.dataset.metric === metricKey;
+          button.classList.toggle("is-active", isActive);
+          button.setAttribute("aria-pressed", String(isActive));
+        });
+      }
+
+      document.querySelectorAll(".metric-filter").forEach((button) => {
+        button.addEventListener("click", () => renderMetricChart(button.dataset.metric));
+      });
+
+      renderMetricChart("referrals");
+    </script>
+  </body>
+</html>
