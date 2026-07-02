@@ -728,6 +728,17 @@ svg i[data-lucide] {
   border-top: 1px solid var(--crew-border-soft);
 }
 
+.crew-empty-row {
+  display: flex;
+  align-items: center;
+  min-height: 58px;
+  padding: 0 18px;
+  color: var(--crew-muted);
+  font-size: 12px;
+  font-weight: 800;
+  border-bottom: 1px solid #f4f4f6;
+}
+
 .request-row {
   display: grid;
   grid-template-columns: minmax(116px, 1.2fr) 64px 42px 52px 52px 52px 18px;

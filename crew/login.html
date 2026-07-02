@@ -11,7 +11,8 @@
     <title>RE:CAR 크루 로그인</title>
     <link rel="icon" type="image/png" href="../assets/recar-favicon-20260518.png" />
     <link rel="apple-touch-icon" href="../assets/recar-favicon-20260518.png" />
-    <link rel="stylesheet" href="./login.css?v=20260702-crew-login" />
+    <link rel="preconnect" href="https://api.recarplan.com" crossorigin />
+    <link rel="stylesheet" href="./login.css?v=20260703-live-login" />
   </head>
   <body class="crew-login-page">
     <header class="login-header">
@@ -53,12 +54,13 @@
             <input id="crewId" name="crewId" type="text" placeholder="크루 아이디 입력" autocomplete="username" required />
           </label>
 
-          <label class="sub-field" for="crewCode">
-            <span>추천코드</span>
-            <input id="crewCode" name="crewCode" type="text" placeholder="선택 입력" autocomplete="off" />
+          <label class="sub-field" for="crewPassword">
+            <span>비밀번호</span>
+            <input id="crewPassword" name="password" type="password" placeholder="비밀번호 입력" autocomplete="current-password" required />
           </label>
 
           <button class="login-button" type="submit">대시보드 로그인</button>
+          <div class="login-error" id="loginError" role="alert" hidden></div>
 
           <div class="login-note">
             <span>추천인 입력 이후 절차는 운영팀이 확인합니다.</span>
@@ -79,15 +81,15 @@
         <div class="mini-dashboard">
           <div class="mini-card">
             <span>추천인 수</span>
-            <strong>12</strong>
+            <strong>로그인 후</strong>
           </div>
           <div class="mini-card">
             <span>계약 수</span>
-            <strong>49</strong>
+            <strong>확인</strong>
           </div>
           <div class="mini-card">
             <span>인도 수</span>
-            <strong>36</strong>
+            <strong>가능</strong>
           </div>
         </div>
         <div class="flow-list">
@@ -111,16 +113,59 @@
     </main>
 
     <script>
+      const API_BASE_URL = "https://api.recarplan.com";
+      const TOKEN_KEY = "recar_friends_access_token";
       const loginForm = document.querySelector("#crewLoginForm");
-      loginForm.addEventListener("submit", (event) => {
+      const loginButton = document.querySelector(".login-button");
+      const loginError = document.querySelector("#loginError");
+
+      function showError(message) {
+        loginError.textContent = message;
+        loginError.hidden = false;
+      }
+
+      async function parseError(response) {
+        try {
+          const body = await response.json();
+          return body.message || body.detail || "로그인 정보를 확인해 주세요.";
+        } catch {
+          return "로그인 정보를 확인해 주세요.";
+        }
+      }
+
+      loginForm.addEventListener("submit", async (event) => {
         event.preventDefault();
         const formData = new FormData(loginForm);
         const crewId = String(formData.get("crewId") || "").trim();
+        const password = String(formData.get("password") || "");
 
-        if (!crewId) return;
+        if (!crewId || !password) return;
 
-        localStorage.setItem("recarCrewId", crewId);
-        window.location.href = `./index.html?crew=${encodeURIComponent(crewId)}`;
+        loginError.hidden = true;
+        loginButton.disabled = true;
+        loginButton.textContent = "로그인 중";
+
+        try {
+          const response = await fetch(`${API_BASE_URL}/api/v1/friends/login`, {
+            method: "POST",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({ login_id: crewId, password }),
+          });
+
+          if (!response.ok) throw new Error(await parseError(response));
+
+          const result = await response.json();
+          localStorage.setItem(TOKEN_KEY, result.access_token);
+          window.location.href = "./index.html";
+        } catch (error) {
+          showError(error instanceof Error ? error.message : "로그인 정보를 확인해 주세요.");
+        } finally {
+          loginButton.disabled = false;
+          loginButton.textContent = "대시보드 로그인";
+        }
       });
     </script>
   </body>

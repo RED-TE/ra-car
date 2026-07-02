@@ -12,7 +12,8 @@
     <link rel="icon" type="image/png" href="../assets/recar-favicon-20260518.png" />
     <link rel="apple-touch-icon" href="../assets/recar-favicon-20260518.png" />
     <link rel="preconnect" href="https://unpkg.com" />
-    <link rel="stylesheet" href="./crew.css?v=20260702-account-stats-modal" />
+    <link rel="preconnect" href="https://api.recarplan.com" crossorigin />
+    <link rel="stylesheet" href="./crew.css?v=20260703-live-metrics" />
   </head>
   <body class="crew-console-page">
     <aside class="crew-sidebar" aria-label="크루 콘솔 메뉴">
@@ -40,28 +41,28 @@
         <span>크루 대시보드</span>
       </div>
       <div class="crew-topbar-meta" aria-label="계정 상태">
-        <span>오늘 <strong>49건 남음</strong></span>
-        <span><b class="status-dot"></b><strong>98%</strong></span>
-        <span>총 크루 <strong>282명</strong></span>
+        <span>오늘 <strong id="crewWaitingCount">0건 대기</strong></span>
+        <span><b class="status-dot"></b><strong id="crewConversionRate">0%</strong></span>
+        <span>총 크루 <strong id="crewTotalReferrals">0명</strong></span>
         <div class="crew-account-menu" id="crewProfile">
           <button class="crew-account-button" type="button" aria-expanded="false" aria-controls="crewAccountDropdown">
             <i data-lucide="circle-user-round"></i>
-            조종철님의 계정
+            <span id="crewAccountLabel">크루님의 계정</span>
             <i data-lucide="chevron-down"></i>
           </button>
           <div class="crew-account-dropdown" id="crewAccountDropdown">
             <div class="account-profile-row">
-              <span class="account-avatar">조</span>
+              <span class="account-avatar" id="crewAccountAvatar">크</span>
               <div>
-                <strong>조종철</strong>
-                <small>RE:CAR 크루 · RC-24H9F</small>
+                <strong id="crewAccountName">크루</strong>
+                <small id="crewAccountCode">RE:CAR 크루 · -</small>
               </div>
             </div>
             <a class="account-dropdown-link" href="#crewProfile">
               <i data-lucide="circle-user-round"></i>
               내정보
             </a>
-            <button class="account-copy-link" type="button" data-copy-url="https://recar.co.kr/?ref=RC-24H9F">
+            <button class="account-copy-link" type="button" data-copy-url="">
               <span>
                 <i data-lucide="link"></i>
                 추천인 본인링크
@@ -71,7 +72,7 @@
             <small class="account-copy-status" aria-live="polite">추천 링크를 바로 복사할 수 있습니다.</small>
           </div>
         </div>
-        <span class="crew-alert-badge">2</span>
+        <span class="crew-alert-badge" id="crewAlertCount">0</span>
       </div>
     </header>
 
@@ -88,10 +89,10 @@
               <span class="icon-box blue"><i data-lucide="send"></i></span>
               <p>추천인 수</p>
             </div>
-            <strong>12<span>명</span></strong>
+            <strong><span id="referralCount">0</span><span>명</span></strong>
             <div class="inline-metrics">
-              <span><b>8</b> 앱 추천</span>
-              <span><b>4</b> 코드 유입</span>
+              <span><b id="appReferralCount">0</b> 앱 추천</span>
+              <span><b id="codeReferralCount">0</b> 코드 유입</span>
             </div>
             <small>앱 추천코드 기준 추천 수</small>
           </article>
@@ -101,9 +102,9 @@
               <span class="icon-box violet"><i data-lucide="users-round"></i></span>
               <p>심사 수</p>
             </div>
-            <strong>282</strong>
-            <div class="soft-badge">진행중 198명</div>
-            <small>이번 달 신규 심사 18명</small>
+            <strong id="reviewCount">0</strong>
+            <div class="soft-badge">진행중 <span id="reviewInProgressCount">0</span>명</div>
+            <small>이번 달 신규 심사 <span id="monthlyNewReviews">0</span>명</small>
           </article>
 
           <article class="crew-stat-card">
@@ -111,9 +112,9 @@
               <span class="icon-box violet"><i data-lucide="file-check-2"></i></span>
               <p>계약 수</p>
             </div>
-            <strong>49</strong>
-            <div class="soft-badge">계약 대기 7건</div>
-            <small>이번 달 계약 확정 기준</small>
+            <strong id="contractCount">0</strong>
+            <div class="soft-badge">계약 대기 <span id="contractPendingCount">0</span>건</div>
+            <small>이번 달 계약 <span id="monthlyContractCount">0</span>건</small>
           </article>
 
           <article class="crew-stat-card">
@@ -121,9 +122,9 @@
               <span class="icon-box green"><i data-lucide="truck"></i></span>
               <p>인도 수</p>
             </div>
-            <strong>36</strong>
-            <div class="soft-badge green">이번 주 9대 인도</div>
-            <small>고객 인도 완료 기준</small>
+            <strong id="deliveryCount">0</strong>
+            <div class="soft-badge green">최근 <span id="weeklyDeliveryCount">0</span>대 인도</div>
+            <small>이번 달 인도 <span id="monthlyDeliveryCount">0</span>건</small>
           </article>
         </section>
 
@@ -131,73 +132,14 @@
           <article class="crew-panel recent-panel">
             <header class="panel-header">
               <div>
-                <h2>최근 활동 수 5건</h2>
+                <h2 id="recentActivityTitle">최근 활동 수 0건</h2>
                 <span class="neutral-badge">심사 및 계약 진행 단계 업데이트</span>
               </div>
               <a href="#">전체 보기 <i data-lucide="chevron-right"></i></a>
             </header>
 
-            <div class="request-list">
-              <a class="request-row" href="#">
-                <div class="request-primary">
-                  <strong>드림모터스</strong>
-                  <span>추천코드 RC-24H9F · 2분 전</span>
-                </div>
-                <span class="state-badge processing">심사중</span>
-                <span class="request-count">1명</span>
-                <span class="row-metric success-text"><b>심사</b> 단계</span>
-                <span class="row-metric fail-text"><b>D+0</b> 경과</span>
-                <span class="row-metric wait-text"><b>대기</b> 계약</span>
-                <i data-lucide="chevron-right"></i>
-              </a>
-              <a class="request-row" href="#">
-                <div class="request-primary">
-                  <strong>카플러스</strong>
-                  <span>추천코드 RC-9MQ2A · 18분 전</span>
-                </div>
-                <span class="state-badge waiting">서류대기</span>
-                <span class="request-count">3명</span>
-                <span class="row-metric success-text"><b>서류</b> 단계</span>
-                <span class="row-metric fail-text"><b>D+1</b> 경과</span>
-                <span class="row-metric wait-text"><b>대기</b> 보완</span>
-                <i data-lucide="chevron-right"></i>
-              </a>
-              <a class="request-row" href="#">
-                <div class="request-primary">
-                  <strong>제이오토</strong>
-                  <span>추천코드 RC-71KDL · 42분 전</span>
-                </div>
-                <span class="state-badge success">계약완료</span>
-                <span class="request-count">2명</span>
-                <span class="row-metric success-text"><b>계약</b> 단계</span>
-                <span class="row-metric fail-text"><b>D+2</b> 경과</span>
-                <span class="row-metric wait-text"><b>정산</b> 예정</span>
-                <i data-lucide="chevron-right"></i>
-              </a>
-              <a class="request-row" href="#">
-                <div class="request-primary">
-                  <strong>민준렌트</strong>
-                  <span>추천코드 RC-5MD8P · 1시간 전</span>
-                </div>
-                <span class="state-badge success">인도완료</span>
-                <span class="request-count">4명</span>
-                <span class="row-metric success-text"><b>인도</b> 단계</span>
-                <span class="row-metric fail-text"><b>D+5</b> 경과</span>
-                <span class="row-metric wait-text"><b>정산</b> 가능</span>
-                <i data-lucide="chevron-right"></i>
-              </a>
-              <a class="request-row" href="#">
-                <div class="request-primary">
-                  <strong>오토앤유</strong>
-                  <span>추천코드 RC-0XZ6B · 2시간 전</span>
-                </div>
-                <span class="state-badge processing">계약중</span>
-                <span class="request-count">1명</span>
-                <span class="row-metric success-text"><b>계약</b> 단계</span>
-                <span class="row-metric fail-text"><b>D+3</b> 경과</span>
-                <span class="row-metric wait-text"><b>대기</b> 서명</span>
-                <i data-lucide="chevron-right"></i>
-              </a>
+            <div class="request-list" id="recentActivityList">
+              <div class="crew-empty-row">실제 활동을 불러오는 중입니다.</div>
             </div>
           </article>
 
@@ -213,8 +155,8 @@
                     <i data-lucide="chevron-left"></i>
                   </button>
                   <label class="settlement-month-label" for="settlementMonth">
-                    <span>정산 기준월</span>
-                    <input id="settlementMonth" type="month" min="2026-04" max="2026-07" value="2026-07" />
+                  <span>정산 기준월</span>
+                  <input id="settlementMonth" type="month" />
                   </label>
                   <button class="settlement-period-button" type="button" data-settlement-shift="1" aria-label="다음 정산월">
                     <i data-lucide="chevron-right"></i>
@@ -235,13 +177,13 @@
 
             <div class="settlement-summary">
               <span class="favorite-icon amber"><i data-lucide="wallet-cards"></i></span>
-              <strong id="settlementAmount">₩18,420,000</strong>
-              <small id="settlementDetail">확정 14,920,000원 · 예정 3,500,000원</small>
+              <strong id="settlementAmount">₩0</strong>
+              <small id="settlementDetail">확정 0원 · 예정 0원</small>
             </div>
 
             <div class="settlement-breakdown">
-              <span><b id="settlementTargetCount">12건</b> 정산 대상</span>
-              <span><b id="settlementReviewCount">4건</b> 검토중</span>
+              <span><b id="settlementTargetCount">0건</b> 정산 대상</span>
+              <span><b id="settlementReviewCount">0건</b> 검토중</span>
             </div>
 
             <a class="settlement-request-button" href="#">
@@ -264,7 +206,7 @@
             </div>
             <div class="chart-date-controls" aria-label="조회 월 선택">
               <button type="button" aria-label="이전 달"><i data-lucide="chevron-left"></i></button>
-              <span class="date-pill">2026년 7월</span>
+              <span class="date-pill" id="chartMonthLabel">조회월</span>
               <button type="button" aria-label="다음 달"><i data-lucide="chevron-right"></i></button>
             </div>
           </header>
@@ -272,19 +214,19 @@
           <div class="chart-filter-row" aria-label="크루 지표 필터">
             <button class="metric-filter is-active" type="button" data-metric="referrals">
               <span>추천인 수</span>
-              <strong>182명</strong>
+              <strong>0명</strong>
             </button>
             <button class="metric-filter" type="button" data-metric="reviews">
               <span>심사</span>
-              <strong>475건</strong>
+              <strong>0건</strong>
             </button>
             <button class="metric-filter" type="button" data-metric="contracts">
               <span>계약</span>
-              <strong>201건</strong>
+              <strong>0건</strong>
             </button>
             <button class="metric-filter" type="button" data-metric="deliveries">
               <span>인도</span>
-              <strong>115건</strong>
+              <strong>0건</strong>
             </button>
           </div>
 
@@ -339,7 +281,7 @@
               <p>추천인 수, 심사, 계약, 인도 흐름을 일자별로 확인합니다.</p>
             </div>
             <div class="analytics-detail-actions">
-              <span class="date-pill">2026년 7월</span>
+              <span class="date-pill" id="analyticsMonthLabel">조회월</span>
               <button type="button" class="ghost-pill-button">CSV 다운로드</button>
               <button type="button" class="analytics-close-button" aria-label="상세 통계 닫기">
                 <i data-lucide="x"></i>
@@ -351,7 +293,7 @@
             <article class="analytics-main-chart">
               <div class="detail-card-head">
                 <strong>일자별 전체 추이</strong>
-                <span>7월 1일 - 7월 31일</span>
+                <span id="analyticsRangeLabel">조회 기간</span>
               </div>
               <svg class="analytics-wide-chart" viewBox="0 0 980 360" role="img" aria-label="날짜별 추천인 수, 심사, 계약, 인도 상세 그래프">
                 <g class="grid-lines">
@@ -368,10 +310,10 @@
                   <text x="24" y="226">15</text>
                   <text x="38" y="286">0</text>
                 </g>
-                <path class="detail-line referrals" d="M58 254 L138 262 L220 238 L300 246 L382 234 L462 210 L544 222 L624 190 L706 210 L786 182 L868 202 L948 170" />
-                <path class="detail-line reviews" d="M58 154 L138 170 L220 142 L300 158 L382 130 L462 114 L544 126 L624 102 L706 118 L786 90 L868 106 L948 74" />
-                <path class="detail-line contracts" d="M58 246 L138 234 L220 242 L300 226 L382 218 L462 230 L544 206 L624 198 L706 210 L786 190 L868 202 L948 178" />
-                <path class="detail-line deliveries" d="M58 266 L138 262 L220 254 L300 258 L382 250 L462 242 L544 246 L624 234 L706 238 L786 230 L868 226 L948 218" />
+                <path class="detail-line referrals" d="" />
+                <path class="detail-line reviews" d="" />
+                <path class="detail-line contracts" d="" />
+                <path class="detail-line deliveries" d="" />
                 <g class="x-labels">
                   <text x="58" y="326">7/1</text>
                   <text x="138" y="326">7/4</text>
@@ -392,18 +334,18 @@
             <aside class="analytics-side-summary">
               <div>
                 <span>추천 → 계약 전환</span>
-                <strong>38.6%</strong>
-                <small>전월 대비 +4.2%</small>
+                <strong id="referralContractRate">0%</strong>
+                <small>실제 계약 수 기준</small>
               </div>
               <div>
                 <span>계약 → 인도 전환</span>
-                <strong>57.2%</strong>
-                <small>115건 인도 완료</small>
+                <strong id="contractDeliveryRate">0%</strong>
+                <small id="contractDeliveryDetail">0건 인도 완료</small>
               </div>
               <div>
                 <span>평균 정산 예상</span>
-                <strong>₩3,480,000</strong>
-                <small>크루 1인 기준</small>
+                <strong id="averageSettlementAmount">₩0</strong>
+                <small>인도 1건 기준</small>
               </div>
             </aside>
           </div>
@@ -421,42 +363,9 @@
                   <th>정산 예정</th>
                 </tr>
               </thead>
-              <tbody>
+              <tbody id="analyticsTableBody">
                 <tr>
-                  <td>7월 31일</td>
-                  <td>28명</td>
-                  <td>52건</td>
-                  <td>26건</td>
-                  <td>16건</td>
-                  <td><span class="table-badge green">42.8%</span></td>
-                  <td>₩2,880,000</td>
-                </tr>
-                <tr>
-                  <td>7월 29일</td>
-                  <td>20명</td>
-                  <td>44건</td>
-                  <td>20건</td>
-                  <td>14건</td>
-                  <td><span class="table-badge blue">36.4%</span></td>
-                  <td>₩2,430,000</td>
-                </tr>
-                <tr>
-                  <td>7월 27일</td>
-                  <td>25명</td>
-                  <td>48건</td>
-                  <td>23건</td>
-                  <td>13건</td>
-                  <td><span class="table-badge green">41.1%</span></td>
-                  <td>₩2,760,000</td>
-                </tr>
-                <tr>
-                  <td>7월 25일</td>
-                  <td>17명</td>
-                  <td>41건</td>
-                  <td>18건</td>
-                  <td>11건</td>
-                  <td><span class="table-badge blue">35.0%</span></td>
-                  <td>₩1,980,000</td>
+                  <td colspan="7">실제 지표를 불러오는 중입니다.</td>
                 </tr>
               </tbody>
             </table>
@@ -475,12 +384,15 @@
         window.lucide.createIcons();
       }
 
+      const API_BASE_URL = "https://api.recarplan.com";
+      const TOKEN_KEY = "recar_friends_access_token";
       const settlementHelpWrap = document.querySelector(".settlement-help-wrap");
       const settlementHelpButton = document.querySelector(".settlement-help");
       const accountMenu = document.querySelector(".crew-account-menu");
       const accountButton = document.querySelector(".crew-account-button");
       const accountCopyButton = document.querySelector(".account-copy-link");
       const accountCopyStatus = document.querySelector(".account-copy-status");
+      const wonFormatter = new Intl.NumberFormat("ko-KR");
 
       function fallbackCopyText(text) {
         const textarea = document.createElement("textarea");
@@ -574,41 +486,6 @@
         }
       });
 
-      const settlementMonthlyData = {
-        "2026-07": {
-          label: "이번달 정산금액",
-          amount: 18420000,
-          confirmed: 14920000,
-          pending: 3500000,
-          target: 12,
-          review: 4,
-        },
-        "2026-06": {
-          label: "2026년 6월 정산금액",
-          amount: 16880000,
-          confirmed: 13700000,
-          pending: 3180000,
-          target: 10,
-          review: 3,
-        },
-        "2026-05": {
-          label: "2026년 5월 정산금액",
-          amount: 20250000,
-          confirmed: 18050000,
-          pending: 2200000,
-          target: 15,
-          review: 2,
-        },
-        "2026-04": {
-          label: "2026년 4월 정산금액",
-          amount: 14260000,
-          confirmed: 11860000,
-          pending: 2400000,
-          target: 9,
-          review: 5,
-        },
-      };
-
       const settlementMonthInput = document.querySelector("#settlementMonth");
       const settlementPeriodLabel = document.querySelector("#settlementPeriodLabel");
       const settlementAmount = document.querySelector("#settlementAmount");
@@ -616,82 +493,280 @@
       const settlementTargetCount = document.querySelector("#settlementTargetCount");
       const settlementReviewCount = document.querySelector("#settlementReviewCount");
       const settlementPeriodButtons = document.querySelectorAll("[data-settlement-shift]");
-      const settlementMonthKeys = Object.keys(settlementMonthlyData).sort();
-      const wonFormatter = new Intl.NumberFormat("ko-KR");
-
-      function renderSettlementMonth(monthKey) {
-        const settlement = settlementMonthlyData[monthKey] || settlementMonthlyData["2026-07"];
-        const activeMonth = settlementMonthlyData[monthKey] ? monthKey : "2026-07";
-
-        if (settlementMonthInput) settlementMonthInput.value = activeMonth;
-        if (settlementPeriodLabel) settlementPeriodLabel.textContent = settlement.label;
-        if (settlementAmount) settlementAmount.textContent = `₩${wonFormatter.format(settlement.amount)}`;
-        if (settlementDetail) {
-          settlementDetail.textContent = `확정 ${wonFormatter.format(settlement.confirmed)}원 · 예정 ${wonFormatter.format(settlement.pending)}원`;
-        }
-        if (settlementTargetCount) settlementTargetCount.textContent = `${settlement.target}건`;
-        if (settlementReviewCount) settlementReviewCount.textContent = `${settlement.review}건`;
-
-        settlementPeriodButtons.forEach((button) => {
-          const shift = Number(button.dataset.settlementShift || 0);
-          const currentIndex = settlementMonthKeys.indexOf(activeMonth);
-          button.disabled = currentIndex + shift < 0 || currentIndex + shift >= settlementMonthKeys.length;
-        });
-      }
-
-      settlementMonthInput?.addEventListener("change", () => renderSettlementMonth(settlementMonthInput.value));
-
-      settlementPeriodButtons.forEach((button) => {
-        button.addEventListener("click", () => {
-          const currentIndex = settlementMonthKeys.indexOf(settlementMonthInput.value);
-          const nextIndex = currentIndex + Number(button.dataset.settlementShift || 0);
-
-          if (nextIndex >= 0 && nextIndex < settlementMonthKeys.length) {
-            renderSettlementMonth(settlementMonthKeys[nextIndex]);
-          }
-        });
-      });
-
-      renderSettlementMonth(settlementMonthInput?.value || "2026-07");
-
-      const metricData = {
-        referrals: {
-          name: "추천인 수",
-          unit: "명",
-          values: [7, 5, 11, 9, 12, 18, 15, 22, 17, 25, 20, 28],
-          total: 182,
-        },
-        reviews: {
-          name: "심사",
-          unit: "건",
-          values: [32, 28, 35, 31, 38, 42, 39, 45, 41, 48, 44, 52],
-          total: 475,
-        },
-        contracts: {
-          name: "계약",
-          unit: "건",
-          values: [9, 12, 10, 14, 16, 13, 19, 21, 18, 23, 20, 26],
-          total: 201,
-        },
-        deliveries: {
-          name: "인도",
-          unit: "건",
-          values: [4, 5, 7, 6, 8, 10, 9, 12, 11, 13, 14, 16],
-          total: 115,
-        },
-      };
-
-      const chartDates = ["7월 1일", "7월 4일", "7월 7일", "7월 10일", "7월 13일", "7월 16일", "7월 19일", "7월 22일", "7월 25일", "7월 27일", "7월 29일", "7월 31일"];
-      const chartBounds = { left: 58, right: 970, top: 34, bottom: 274, max: 60 };
+      const chartBounds = { left: 58, right: 970, top: 34, bottom: 274, max: 5 };
+      const detailBounds = { left: 58, right: 948, top: 42, bottom: 282, max: 5 };
       const metricAreaPath = document.querySelector("#metricAreaPath");
       const metricLinePath = document.querySelector("#metricLinePath");
       const metricDots = document.querySelector("#metricDots");
       const chartMetricName = document.querySelector("#chartMetricName");
       const chartMetricTotal = document.querySelector("#chartMetricTotal");
       const chartMetricPeak = document.querySelector("#chartMetricPeak");
+      const recentActivityList = document.querySelector("#recentActivityList");
+      const analyticsTableBody = document.querySelector("#analyticsTableBody");
+      const chartDates = [];
+      let metricData = emptyMetricData([]);
+
+      function safeNumber(value) {
+        const next = Number(value);
+        return Number.isFinite(next) ? next : 0;
+      }
+
+      function setText(selector, value) {
+        const element = document.querySelector(selector);
+        if (element) element.textContent = value;
+      }
+
+      function escapeHtml(value) {
+        return String(value ?? "")
+          .replaceAll("&", "&amp;")
+          .replaceAll("<", "&lt;")
+          .replaceAll(">", "&gt;")
+          .replaceAll('"', "&quot;")
+          .replaceAll("'", "&#039;");
+      }
+
+      function numberText(value) {
+        return wonFormatter.format(safeNumber(value));
+      }
+
+      function moneyText(value) {
+        return `₩${wonFormatter.format(safeNumber(value))}`;
+      }
+
+      function percentText(value) {
+        const numeric = safeNumber(value);
+        const percent = numeric <= 1 ? numeric * 100 : numeric;
+        return `${Math.round(percent * 10) / 10}%`;
+      }
+
+      function currentMonthRows() {
+        const today = new Date();
+        const first = new Date(today.getFullYear(), today.getMonth(), 1);
+        const last = new Date(today.getFullYear(), today.getMonth() + 1, 0);
+        const rows = [];
+        for (let day = 1; day <= last.getDate(); day += 1) {
+          const date = new Date(first.getFullYear(), first.getMonth(), day);
+          rows.push({
+            date: date.toISOString().slice(0, 10),
+            label: `${date.getMonth() + 1}/${date.getDate()}`,
+            referrals: 0,
+            reviews: 0,
+            contracts: 0,
+            deliveries: 0,
+            settlement_amount: 0,
+          });
+        }
+        return rows;
+      }
+
+      function emptyMetricData(rows) {
+        const labels = rows.map((row) => row.label);
+        return {
+          referrals: { name: "추천인 수", unit: "명", values: rows.map((row) => safeNumber(row.referrals)), total: 0, labels },
+          reviews: { name: "심사", unit: "건", values: rows.map((row) => safeNumber(row.reviews)), total: 0, labels },
+          contracts: { name: "계약", unit: "건", values: rows.map((row) => safeNumber(row.contracts)), total: 0, labels },
+          deliveries: { name: "인도", unit: "건", values: rows.map((row) => safeNumber(row.deliveries)), total: 0, labels },
+        };
+      }
+
+      function normalizeCrewMetrics(dashboard) {
+        const source = dashboard.crew_metrics;
+        const rows = Array.isArray(source?.daily) && source.daily.length ? source.daily : currentMonthRows();
+        const metrics = source
+          ? source
+          : {
+              referral_count: dashboard.total_referrals,
+              registered_only_count: 0,
+              app_referral_count: dashboard.signup_count,
+              code_click_count: dashboard.click_count,
+              unique_code_click_count: dashboard.unique_click_count,
+              review_count: dashboard.condition_request_count,
+              review_in_progress_count: Math.max(safeNumber(dashboard.condition_request_count) - safeNumber(dashboard.contract_count), 0),
+              monthly_new_reviews: 0,
+              contract_count: dashboard.contract_count,
+              contract_pending_count: dashboard.metrics?.contracts_pending,
+              monthly_contract_count: 0,
+              delivery_count: dashboard.metrics?.contracts_delivered ?? dashboard.contracted_count,
+              weekly_delivery_count: 0,
+              monthly_delivery_count: 0,
+              settlement_target_count: dashboard.metrics?.contracts_delivered,
+              settlement_review_count: dashboard.metrics?.contracts_pending,
+              conversion_rate: dashboard.metrics?.conversion_rate,
+              period: undefined,
+            };
+
+        return {
+          referral_count: safeNumber(metrics.referral_count),
+          registered_only_count: safeNumber(metrics.registered_only_count),
+          app_referral_count: safeNumber(metrics.app_referral_count),
+          code_click_count: safeNumber(metrics.code_click_count),
+          unique_code_click_count: safeNumber(metrics.unique_code_click_count),
+          review_count: safeNumber(metrics.review_count),
+          review_in_progress_count: safeNumber(metrics.review_in_progress_count),
+          monthly_new_reviews: safeNumber(metrics.monthly_new_reviews),
+          contract_count: safeNumber(metrics.contract_count),
+          contract_pending_count: safeNumber(metrics.contract_pending_count),
+          monthly_contract_count: safeNumber(metrics.monthly_contract_count),
+          delivery_count: safeNumber(metrics.delivery_count),
+          weekly_delivery_count: safeNumber(metrics.weekly_delivery_count),
+          monthly_delivery_count: safeNumber(metrics.monthly_delivery_count),
+          settlement_target_count: safeNumber(metrics.settlement_target_count),
+          settlement_review_count: safeNumber(metrics.settlement_review_count),
+          conversion_rate: safeNumber(metrics.conversion_rate),
+          period: metrics.period || {},
+          daily: rows.map((row) => ({
+            date: row.date,
+            label: row.label,
+            referrals: safeNumber(row.referrals),
+            reviews: safeNumber(row.reviews),
+            contracts: safeNumber(row.contracts),
+            deliveries: safeNumber(row.deliveries),
+            settlement_amount: safeNumber(row.settlement_amount),
+          })),
+        };
+      }
+
+      async function apiJson(path, token, options = {}) {
+        const response = await fetch(`${API_BASE_URL}${path}`, {
+          ...options,
+          headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            ...(token ? { Authorization: `Bearer ${token}` } : {}),
+            ...(options.headers || {}),
+          },
+        });
+        if (!response.ok) {
+          let message = "요청을 처리할 수 없습니다.";
+          try {
+            const body = await response.json();
+            message = body.message || body.detail || message;
+          } catch {}
+          throw new Error(message);
+        }
+        return response.json();
+      }
+
+      function longDateLabel(row) {
+        const date = new Date(row.date);
+        return Number.isNaN(date.getTime()) ? row.label : `${date.getMonth() + 1}월 ${date.getDate()}일`;
+      }
+
+      function monthLabel(value) {
+        const date = value ? new Date(value) : new Date();
+        if (Number.isNaN(date.getTime())) return "조회월";
+        return `${date.getFullYear()}년 ${date.getMonth() + 1}월`;
+      }
+
+      function renderAccount(status, dashboard) {
+        const name = status?.name || "크루";
+        const code = dashboard.referral_code || dashboard.referral?.code || "-";
+        const link = dashboard.referral_link || dashboard.referral?.link || `https://recarplan.com/crew/?ref=${encodeURIComponent(code)}`;
+        setText("#crewAccountLabel", `${name}님의 계정`);
+        setText("#crewAccountAvatar", name.slice(0, 1) || "크");
+        setText("#crewAccountName", name);
+        setText("#crewAccountCode", `RE:CAR 크루 · ${code}`);
+        accountCopyButton.dataset.copyUrl = link;
+      }
+
+      function renderSummary(metrics, dashboard) {
+        setText("#crewWaitingCount", `${numberText(metrics.contract_pending_count)}건 대기`);
+        setText("#crewConversionRate", percentText(metrics.conversion_rate));
+        setText("#crewTotalReferrals", `${numberText(metrics.referral_count)}명`);
+        setText("#crewAlertCount", String(Math.min((dashboard.recent_events || []).length, 9)));
+        setText("#referralCount", numberText(metrics.referral_count));
+        setText("#appReferralCount", numberText(metrics.app_referral_count));
+        setText("#codeReferralCount", numberText(metrics.unique_code_click_count));
+        setText("#reviewCount", numberText(metrics.review_count));
+        setText("#reviewInProgressCount", numberText(metrics.review_in_progress_count));
+        setText("#monthlyNewReviews", numberText(metrics.monthly_new_reviews));
+        setText("#contractCount", numberText(metrics.contract_count));
+        setText("#contractPendingCount", numberText(metrics.contract_pending_count));
+        setText("#monthlyContractCount", numberText(metrics.monthly_contract_count));
+        setText("#deliveryCount", numberText(metrics.delivery_count));
+        setText("#weeklyDeliveryCount", numberText(metrics.weekly_delivery_count));
+        setText("#monthlyDeliveryCount", numberText(metrics.monthly_delivery_count));
+      }
+
+      function eventTypeLabel(type) {
+        if (type === "CONTRACT_DELIVERED") return "인도";
+        if (type === "CONTRACT_PENDING") return "계약";
+        if (type === "CONDITION_REQUEST") return "심사";
+        return "추천";
+      }
+
+      function eventStatusLabel(status) {
+        if (status === "AVAILABLE" || status === "PAID") return "정산가능";
+        if (status === "CONFIRMED") return "확정";
+        if (status === "PENDING") return "검토중";
+        return "진행중";
+      }
+
+      function eventBadgeClass(status) {
+        if (status === "AVAILABLE" || status === "PAID" || status === "CONFIRMED") return "success";
+        if (status === "PENDING") return "processing";
+        return "waiting";
+      }
+
+      function renderRecent(dashboard) {
+        const events = (dashboard.recent_events || []).slice(0, 5);
+        const code = dashboard.referral_code || dashboard.referral?.code || "-";
+        setText("#recentActivityTitle", `최근 활동 수 ${numberText(events.length)}건`);
+        if (!recentActivityList) return;
+        if (!events.length) {
+          recentActivityList.innerHTML = '<div class="crew-empty-row">아직 표시할 실제 활동이 없습니다.</div>';
+          return;
+        }
+        recentActivityList.innerHTML = events
+          .map((event) => {
+            const stage = eventTypeLabel(event.type);
+            const badge = eventStatusLabel(event.status);
+            const name = escapeHtml(event.customer_name_masked || "추천 고객");
+            const codeText = escapeHtml(code);
+            const occurredAt = escapeHtml(event.occurred_at ? longDateLabel({ date: event.occurred_at, label: "" }) : "-");
+            const badgeText = escapeHtml(badge);
+            const stageText = escapeHtml(stage);
+            return `
+              <a class="request-row" href="#">
+                <div class="request-primary">
+                  <strong>${name}</strong>
+                  <span>추천코드 ${codeText} · ${occurredAt}</span>
+                </div>
+                <span class="state-badge ${eventBadgeClass(event.status)}">${badgeText}</span>
+                <span class="request-count">1명</span>
+                <span class="row-metric success-text"><b>${stageText}</b> 단계</span>
+                <span class="row-metric fail-text"><b>${moneyText(event.amount || 0)}</b></span>
+                <span class="row-metric wait-text"><b>${badgeText}</b></span>
+                <i data-lucide="chevron-right"></i>
+              </a>`;
+          })
+          .join("");
+        window.lucide?.createIcons();
+      }
+
+      function renderSettlement(metrics, dashboard) {
+        const payable = safeNumber(dashboard.amounts?.payable ?? dashboard.settlement?.payable_amount);
+        const pending = safeNumber(dashboard.settlement?.pending_month_amount);
+        const reviewed = safeNumber(dashboard.amounts?.reviewed);
+        const monthStart = metrics.period?.month_start || new Date().toISOString().slice(0, 10);
+        const monthKey = monthStart.slice(0, 7);
+        if (settlementMonthInput) {
+          settlementMonthInput.value = monthKey;
+          settlementMonthInput.min = monthKey;
+          settlementMonthInput.max = monthKey;
+        }
+        if (settlementPeriodLabel) settlementPeriodLabel.textContent = `${monthLabel(monthStart)} 정산금액`;
+        if (settlementAmount) settlementAmount.textContent = moneyText(payable + pending);
+        if (settlementDetail) settlementDetail.textContent = `확정 ${wonFormatter.format(payable + reviewed)}원 · 예정 ${wonFormatter.format(pending)}원`;
+        if (settlementTargetCount) settlementTargetCount.textContent = `${numberText(metrics.settlement_target_count)}건`;
+        if (settlementReviewCount) settlementReviewCount.textContent = `${numberText(metrics.settlement_review_count)}건`;
+        settlementPeriodButtons.forEach((button) => {
+          button.disabled = true;
+        });
+      }
 
       function getMetricPoints(values) {
-        const xStep = (chartBounds.right - chartBounds.left) / (values.length - 1);
+        const xStep = values.length > 1 ? (chartBounds.right - chartBounds.left) / (values.length - 1) : 0;
         return values.map((value, index) => {
           const x = chartBounds.left + xStep * index;
           const y = chartBounds.bottom - (value / chartBounds.max) * (chartBounds.bottom - chartBounds.top);
@@ -703,8 +778,46 @@
         return points.map((point, index) => `${index === 0 ? "M" : "L"}${point.x.toFixed(1)} ${point.y.toFixed(1)}`).join(" ");
       }
 
+      function maxChartValue(series) {
+        const max = Math.max(...Object.values(series).flatMap((metric) => metric.values), 0);
+        return Math.max(5, Math.ceil(max / 5) * 5);
+      }
+
+      function updateAxisLabels(rows, maxValue) {
+        const yValues = [maxValue, Math.round(maxValue * 0.75), Math.round(maxValue * 0.5), Math.round(maxValue * 0.25), 0];
+        document.querySelectorAll(".y-labels").forEach((group) => {
+          group.querySelectorAll("text").forEach((node, index) => {
+            node.textContent = String(yValues[index] ?? 0);
+          });
+        });
+        const shown = rows.filter((_, index) => index === 0 || index === rows.length - 1 || index % Math.max(Math.ceil(rows.length / 10), 1) === 0);
+        const xLabels = shown
+          .map((row, index) => {
+            const x = 58 + ((index / Math.max(shown.length - 1, 1)) * (970 - 58));
+            return `<text x="${x.toFixed(0)}" y="312">${row.label}</text>`;
+          })
+          .join("");
+        const detailLabels = shown
+          .map((row, index) => {
+            const x = 58 + ((index / Math.max(shown.length - 1, 1)) * (948 - 58));
+            return `<text x="${x.toFixed(0)}" y="326">${row.label}</text>`;
+          })
+          .join("");
+        document.querySelector(".activity-chart .x-labels").innerHTML = xLabels;
+        document.querySelector(".analytics-wide-chart .x-labels").innerHTML = detailLabels;
+      }
+
+      function buildMetricData(rows) {
+        const next = emptyMetricData(rows);
+        Object.keys(next).forEach((key) => {
+          next[key].total = next[key].values.reduce((acc, value) => acc + value, 0);
+        });
+        return next;
+      }
+
       function renderMetricChart(metricKey) {
         const metric = metricData[metricKey];
+        if (!metric) return;
         const points = getMetricPoints(metric.values);
         const linePath = makeLinePath(points);
         const peakIndex = metric.values.indexOf(Math.max(...metric.values));
@@ -720,7 +833,7 @@
 
         chartMetricName.textContent = metric.name;
         chartMetricTotal.textContent = `${metric.total}${metric.unit}`;
-        chartMetricPeak.textContent = `${chartDates[peakIndex]} · ${metric.values[peakIndex]}${metric.unit}`;
+        chartMetricPeak.textContent = `${chartDates[peakIndex] || "-"} · ${safeNumber(metric.values[peakIndex])}${metric.unit}`;
 
         document.querySelectorAll(".metric-filter").forEach((button) => {
           const isActive = button.dataset.metric === metricKey;
@@ -729,11 +842,124 @@
         });
       }
 
+      function detailPoints(values) {
+        const xStep = values.length > 1 ? (detailBounds.right - detailBounds.left) / (values.length - 1) : 0;
+        return values.map((value, index) => ({
+          x: detailBounds.left + xStep * index,
+          y: detailBounds.bottom - (value / detailBounds.max) * (detailBounds.bottom - detailBounds.top),
+        }));
+      }
+
+      function renderCharts(metrics) {
+        const rows = metrics.daily.length ? metrics.daily : currentMonthRows();
+        metricData = buildMetricData(rows);
+        chartDates.splice(0, chartDates.length, ...rows.map(longDateLabel));
+        const maxValue = maxChartValue(metricData);
+        chartBounds.max = maxValue;
+        detailBounds.max = maxValue;
+        updateAxisLabels(rows, maxValue);
+        document.querySelectorAll(".metric-filter").forEach((button) => {
+          const metric = metricData[button.dataset.metric];
+          if (metric) button.querySelector("strong").textContent = `${numberText(metric.total)}${metric.unit}`;
+        });
+        const firstDay = rows[0]?.date || metrics.period?.month_start;
+        const lastDay = rows[rows.length - 1]?.date || metrics.period?.month_end;
+        setText("#chartMonthLabel", monthLabel(firstDay));
+        setText("#analyticsMonthLabel", monthLabel(firstDay));
+        if (firstDay && lastDay) setText("#analyticsRangeLabel", `${longDateLabel({ date: firstDay, label: "" })} - ${longDateLabel({ date: lastDay, label: "" })}`);
+        document.querySelector(".detail-line.referrals").setAttribute("d", makeLinePath(detailPoints(metricData.referrals.values)));
+        document.querySelector(".detail-line.reviews").setAttribute("d", makeLinePath(detailPoints(metricData.reviews.values)));
+        document.querySelector(".detail-line.contracts").setAttribute("d", makeLinePath(detailPoints(metricData.contracts.values)));
+        document.querySelector(".detail-line.deliveries").setAttribute("d", makeLinePath(detailPoints(metricData.deliveries.values)));
+        renderMetricChart("referrals");
+      }
+
+      function renderAnalytics(metrics, dashboard) {
+        const referralContractRate = metrics.referral_count ? metrics.contract_count / metrics.referral_count : 0;
+        const contractDeliveryRate = metrics.contract_count ? metrics.delivery_count / metrics.contract_count : 0;
+        const avgSettlement = metrics.delivery_count ? Math.round(safeNumber(dashboard.settlement?.pending_month_amount) / metrics.delivery_count) : 0;
+        setText("#referralContractRate", percentText(referralContractRate));
+        setText("#contractDeliveryRate", percentText(contractDeliveryRate));
+        setText("#contractDeliveryDetail", `${numberText(metrics.delivery_count)}건 인도 완료`);
+        setText("#averageSettlementAmount", moneyText(avgSettlement));
+        if (!analyticsTableBody) return;
+        const rows = metrics.daily.slice(-4).reverse();
+        analyticsTableBody.innerHTML = rows.length
+          ? rows
+              .map((row) => {
+                const conversion = row.referrals ? Math.round((row.contracts / row.referrals) * 1000) / 10 : 0;
+                return `
+                  <tr>
+                    <td>${longDateLabel(row)}</td>
+                    <td>${numberText(row.referrals)}명</td>
+                    <td>${numberText(row.reviews)}건</td>
+                    <td>${numberText(row.contracts)}건</td>
+                    <td>${numberText(row.deliveries)}건</td>
+                    <td><span class="table-badge ${conversion >= 40 ? "green" : "blue"}">${conversion}%</span></td>
+                    <td>${moneyText(row.settlement_amount)}</td>
+                  </tr>`;
+              })
+              .join("")
+          : '<tr><td colspan="7">표시할 실제 지표가 없습니다.</td></tr>';
+      }
+
+      function renderDashboard(status, dashboard) {
+        const metrics = normalizeCrewMetrics(dashboard);
+        renderAccount(status, dashboard);
+        renderSummary(metrics, dashboard);
+        renderRecent(dashboard);
+        renderSettlement(metrics, dashboard);
+        renderCharts(metrics);
+        renderAnalytics(metrics, dashboard);
+      }
+
+      async function loadCrewDashboard() {
+        const token = localStorage.getItem(TOKEN_KEY);
+        if (!token) {
+          window.location.replace("./login.html");
+          return;
+        }
+        try {
+          const status = await apiJson("/api/v1/friends/status", token);
+          if (!status?.applied || status.status !== "APPROVED") {
+            window.location.replace("./login.html");
+            return;
+          }
+          const dashboard = await apiJson("/api/v1/friends/dashboard", token);
+          renderDashboard(status, dashboard);
+        } catch (error) {
+          localStorage.removeItem(TOKEN_KEY);
+          window.location.replace("./login.html");
+        }
+      }
+
       document.querySelectorAll(".metric-filter").forEach((button) => {
         button.addEventListener("click", () => renderMetricChart(button.dataset.metric));
       });
 
-      renderMetricChart("referrals");
+      document.querySelector(".ghost-pill-button")?.addEventListener("click", () => {
+        const rows = [["일자", "추천인 수", "심사", "계약", "인도"]];
+        const labels = metricData.referrals.labels || [];
+        labels.forEach((label, index) => {
+          rows.push([
+            label,
+            String(metricData.referrals.values[index] || 0),
+            String(metricData.reviews.values[index] || 0),
+            String(metricData.contracts.values[index] || 0),
+            String(metricData.deliveries.values[index] || 0),
+          ]);
+        });
+        const csv = rows.map((row) => row.map((cell) => `"${String(cell).replaceAll('"', '""')}"`).join(",")).join("\n");
+        const blob = new Blob([`\uFEFF${csv}`], { type: "text/csv;charset=utf-8" });
+        const url = URL.createObjectURL(blob);
+        const anchor = document.createElement("a");
+        anchor.href = url;
+        anchor.download = "recar-crew-metrics.csv";
+        anchor.click();
+        URL.revokeObjectURL(url);
+      });
+
+      loadCrewDashboard();
     </script>
   </body>
 </html>
