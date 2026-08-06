@@ -17,7 +17,7 @@
     <link rel="canonical" href="https://recarplan.com/crew/knowledge/" />
     <link rel="icon" type="image/png" href="/assets/recar-favicon-20260518.png" />
     <link rel="apple-touch-icon" href="/assets/recar-favicon-20260518.png" />
-    <link rel="stylesheet" href="/crew/knowledge/knowledge.css?v=20260806" />
+    <link rel="stylesheet" href="/crew/knowledge/knowledge.css?v=20260806-economy" />
     <title>RE:CAR 크루 콘텐츠 가이드</title>
   </head>
   <body>
@@ -35,6 +35,8 @@
       <nav class="desktop-nav" aria-label="주요 지식 메뉴">
         <a href="#recar">RE:CAR</a>
         <a href="#ways">이용 방식</a>
+        <a href="#economy">경제 관점</a>
+        <a href="#crew-work">크루 활동</a>
         <a href="#terms">용어</a>
         <a href="#facts">팩트 카드</a>
         <a href="#phrases">표현 검수</a>
@@ -94,8 +96,8 @@
         <div class="hero-index" aria-label="가이드 핵심 범위">
           <span>서비스 차이</span>
           <span>상품 구조</span>
+          <span>경제·크루 활동</span>
           <span>콘텐츠 팩트</span>
-          <span>표현 검수</span>
         </div>
       </section>
 
@@ -432,11 +434,133 @@
         </div>
       </section>
 
+      <section class="scene economy-scene" id="economy" aria-labelledby="economyTitle">
+        <div class="scene-inner split-scene">
+          <div class="scene-copy">
+            <p class="eyebrow">09 · Money Lens</p>
+            <h2 id="economyTitle">차량은 투자보다<br />현금흐름으로 봅니다.</h2>
+            <p class="scene-summary">
+              재테크 관점은 더 벌어준다는 약속이 아니라, 초기자금·매달 지출·만기 비용을 내 자금계획에 맞추는 일입니다.
+            </p>
+            <ul class="key-points">
+              <li><i data-lucide="sigma" aria-hidden="true"></i> 계약 전체의 총이용비용</li>
+              <li><i data-lucide="chart-spline" aria-hidden="true"></i> 감당 가능한 월 고정지출</li>
+              <li><i data-lucide="split" aria-hidden="true"></i> 자금의 다른 사용 기회</li>
+            </ul>
+            <button class="secondary-button" type="button" data-open-economy-detail>
+              경제 관점 자세히
+              <i data-lucide="arrow-up-right" aria-hidden="true"></i>
+            </button>
+          </div>
+
+          <div class="economy-board" aria-label="차량 비용을 보는 세 가지 경제 관점">
+            <div class="economy-tabs" role="group" aria-label="경제 관점 선택">
+              <button class="is-active" type="button" data-economy-mode="cashflow" aria-pressed="true">현금흐름</button>
+              <button type="button" data-economy-mode="total" aria-pressed="false">총이용비용</button>
+              <button type="button" data-economy-mode="opportunity" aria-pressed="false">기회비용</button>
+            </div>
+            <div class="economy-flow">
+              <div class="economy-node">
+                <span>시작</span>
+                <i data-lucide="wallet" aria-hidden="true"></i>
+                <strong data-economy-start>초기 납입금</strong>
+              </div>
+              <i class="economy-arrow" data-lucide="arrow-right" aria-hidden="true"></i>
+              <div class="economy-node is-main">
+                <span>매월</span>
+                <i data-lucide="calendar-sync" aria-hidden="true"></i>
+                <strong data-economy-monthly>고정 지출</strong>
+              </div>
+              <i class="economy-arrow" data-lucide="arrow-right" aria-hidden="true"></i>
+              <div class="economy-node">
+                <span>종료</span>
+                <i data-lucide="flag" aria-hidden="true"></i>
+                <strong data-economy-ending>만기 정산</strong>
+              </div>
+            </div>
+            <div class="economy-costs" aria-label="함께 계산할 비용">
+              <span><i data-lucide="percent" aria-hidden="true"></i> 금융비용</span>
+              <span><i data-lucide="shield-check" aria-hidden="true"></i> 보험·세금</span>
+              <span><i data-lucide="wrench" aria-hidden="true"></i> 정비·만기</span>
+            </div>
+            <p class="economy-caption" data-economy-caption>
+              먼저 내는 돈, 매월 나가는 돈, 계약이 끝날 때 드는 돈을 한 흐름으로 봅니다.
+            </p>
+            <p class="economy-notice">
+              <i data-lucide="info" aria-hidden="true"></i>
+              차량 이용 방식은 투자 수익률을 보장하는 상품이 아닙니다.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="scene crew-work-scene" id="crew-work" aria-labelledby="crewWorkTitle">
+        <div class="scene-inner split-scene">
+          <div class="scene-copy">
+            <p class="eyebrow">10 · Crew Side Work</p>
+            <h2 id="crewWorkTitle">크루 부업은<br />콘텐츠로 시작합니다.</h2>
+            <p class="scene-summary">
+              익숙한 채널에서 정확한 차량 정보를 알리고 공식 문의로 연결하면, 상담부터 인도까지는 RE:CAR 운영팀이 이어갑니다.
+            </p>
+            <ul class="key-points">
+              <li><i data-lucide="clock-3" aria-hidden="true"></i> 본업과 병행하는 유연한 활동</li>
+              <li><i data-lucide="library-big" aria-hidden="true"></i> 쌓일수록 단단해지는 콘텐츠 경험</li>
+              <li><i data-lucide="headset" aria-hidden="true"></i> 상담·심사·계약은 운영팀 진행</li>
+            </ul>
+            <button class="secondary-button" type="button" data-open-crew-work-detail>
+              크루 부업 자세히
+              <i data-lucide="arrow-up-right" aria-hidden="true"></i>
+            </button>
+          </div>
+
+          <div class="crew-work-board" aria-label="RE:CAR 크루 활동 흐름">
+            <div class="crew-work-badges" aria-label="크루 활동 특징">
+              <span>자율 채널</span>
+              <span>본업 병행</span>
+              <span>운영팀 지원</span>
+            </div>
+            <ol class="crew-work-flow">
+              <li>
+                <span>01</span>
+                <i data-lucide="clapperboard" aria-hidden="true"></i>
+                <div>
+                  <strong>콘텐츠로 알리기</strong>
+                  <p>블로그·릴스·쇼츠에 정확한 정보를 담습니다.</p>
+                </div>
+              </li>
+              <li>
+                <span>02</span>
+                <i data-lucide="messages-square" aria-hidden="true"></i>
+                <div>
+                  <strong>공식 문의 연결</strong>
+                  <p>운영팀이 상담·심사·계약 절차를 진행합니다.</p>
+                </div>
+              </li>
+              <li>
+                <span>03</span>
+                <i data-lucide="badge-check" aria-hidden="true"></i>
+                <div>
+                  <strong>인도 후 실적 확인</strong>
+                  <p>유효한 인도 실적을 최신 정책에 따라 확인합니다.</p>
+                </div>
+              </li>
+            </ol>
+            <div class="crew-work-reality">
+              <i data-lucide="shield-alert" aria-hidden="true"></i>
+              <div>
+                <strong>고정 월급이나 수익 보장형 활동이 아닙니다.</strong>
+                <p>실제 정산은 유효 실적·인도 결과·취소 여부와 운영정책에 따라 달라집니다.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       <section class="scene terms-scene" id="terms" aria-labelledby="termsTitle">
         <div class="scene-inner">
           <div class="scene-heading-row">
             <div>
-              <p class="eyebrow">09 · Easy Glossary</p>
+              <p class="eyebrow">11 · Easy Glossary</p>
               <h2 id="termsTitle">어려운 말은<br />한 줄로 먼저 이해하세요.</h2>
             </div>
             <p>보증금·선납금·잔존가치처럼 자주 헷갈리는 말부터 정리했습니다.</p>
@@ -463,7 +587,7 @@
         <div class="scene-inner">
           <div class="scene-heading-row">
             <div>
-              <p class="eyebrow">10 · Customer Starting Point</p>
+              <p class="eyebrow">12 · Customer Starting Point</p>
               <h2 id="customersTitle">정답 대신,<br />비교 방향부터 잡습니다.</h2>
             </div>
             <p>고객 상황에 따라 첫 비교 지점이 달라집니다. 확정 추천이 아닙니다.</p>
@@ -492,7 +616,7 @@
         <div class="scene-inner">
           <div class="scene-heading-row">
             <div>
-              <p class="eyebrow">11 · Fact Library</p>
+              <p class="eyebrow">13 · Fact Library</p>
               <h2 id="factsTitle">콘텐츠의 재료는<br />정확한 팩트부터 봅니다.</h2>
             </div>
             <p>핵심 사실과 함께 밝혀야 할 조건, 안전한 표현을 정리했습니다.</p>
@@ -506,6 +630,8 @@
             <button type="button" data-fact-filter="quote" aria-pressed="false">견적</button>
             <button type="button" data-fact-filter="end" aria-pressed="false">계약 종료</button>
             <button type="button" data-fact-filter="business" aria-pressed="false">사업자</button>
+            <button type="button" data-fact-filter="economy" aria-pressed="false">경제·재테크</button>
+            <button type="button" data-fact-filter="crew" aria-pressed="false">크루 부업</button>
             <button type="button" data-fact-filter="advertising" aria-pressed="false">광고 표현</button>
           </div>
           <div class="fact-grid" data-fact-grid aria-live="polite"></div>
@@ -521,14 +647,14 @@
       <section class="scene phrase-scene" id="phrases" aria-labelledby="phrasesTitle">
         <div class="scene-inner split-scene">
           <div class="scene-copy">
-            <p class="eyebrow">12 · Safe Expression</p>
+            <p class="eyebrow">14 · Safe Expression</p>
             <h2 id="phrasesTitle">과장된 한 문장을<br />정확하게 바꿉니다.</h2>
             <p class="scene-summary">과장 표현과 권장 표현을 한 문장씩 비교합니다.</p>
           </div>
           <div class="phrase-console">
             <div class="phrase-progress">
               <span>표현 검수</span>
-              <strong><span data-phrase-index>1</span> / <span data-phrase-total>14</span></strong>
+              <strong><span data-phrase-index>1</span> / <span data-phrase-total>18</span></strong>
             </div>
             <button class="phrase-card" type="button" data-phrase-card aria-pressed="false">
               <span class="phrase-state bad" data-phrase-state>사용하면 안 돼요</span>
@@ -555,7 +681,7 @@
         <div class="scene-inner">
           <div class="scene-heading-row">
             <div>
-              <p class="eyebrow">13 · Official Sources</p>
+              <p class="eyebrow">15 · Official Sources</p>
               <h2 id="sourcesTitle">기억이 아니라<br />공식 자료로 확인합니다.</h2>
             </div>
             <p>마지막 검토일 <strong data-review-date>2026-08-06</strong> · 상품별 실제 약관과 계약서가 우선합니다.</p>
@@ -606,7 +732,7 @@
     <footer class="site-footer">
       <div>
         <strong>RE:CAR Crew Knowledge Guide</strong>
-        <p>이 페이지는 콘텐츠 제작 전 사실 확인용 가이드입니다. 금융·보험·세무 자문이나 개별 계약의 확정 조건이 아닙니다.</p>
+        <p>이 페이지는 콘텐츠 제작 전 사실 확인용 가이드입니다. 금융·보험·세무 자문이나 개별 계약·수익의 확정 조건이 아닙니다.</p>
       </div>
       <a href="#top">맨 위로 <i data-lucide="arrow-up" aria-hidden="true"></i></a>
     </footer>
@@ -656,7 +782,7 @@
         <label class="search-field global-search">
           <i data-lucide="search" aria-hidden="true"></i>
           <span class="sr-only">가이드 검색어</span>
-          <input type="search" placeholder="예: 중도해지, 보험, 사업자" data-global-search />
+          <input type="search" placeholder="예: 중도해지, 재테크, 크루 부업" data-global-search />
         </label>
         <div class="search-results" data-search-results aria-live="polite"></div>
       </div>
@@ -665,6 +791,6 @@
     <div class="toast" role="status" aria-live="polite" data-toast hidden></div>
 
     <script src="/crew/knowledge/lucide.min.js?v=0.468.0" defer></script>
-    <script type="module" src="/crew/knowledge/knowledge.js?v=20260806"></script>
+    <script type="module" src="/crew/knowledge/knowledge.js?v=20260806-economy"></script>
   </body>
 </html>

@@ -16,6 +16,8 @@ const categoryLabels = {
   advertising: "광고 표현",
   business: "사업자",
   compare: "비교",
+  crew: "크루 부업",
+  economy: "경제·재테크",
   end: "계약 종료",
   insurance: "보험",
   lease: "리스",
@@ -91,6 +93,27 @@ const endingMessages = {
   purchase: "인수: 잔존가치와 취득 관련 비용을 포함한 총액을 확인합니다.",
   extend: "연장: 가능한 상품인지, 연장 기간과 재산정 조건을 확인합니다.",
   replace: "차량 교체: 기존 계약 정산과 새 계약 조건을 각각 확인합니다.",
+};
+
+const economyDetails = {
+  cashflow: {
+    start: "초기 납입금",
+    monthly: "고정 지출",
+    ending: "만기 정산",
+    caption: "먼저 내는 돈, 매월 나가는 돈, 계약이 끝날 때 드는 돈을 한 흐름으로 봅니다.",
+  },
+  total: {
+    start: "보증금·선납금",
+    monthly: "납입·보험·정비",
+    ending: "인수·반납 비용",
+    caption: "표시 월 금액이 아니라 계약기간 동안 실제로 빠져나가는 비용을 같은 조건으로 더해 봅니다.",
+  },
+  opportunity: {
+    start: "차량에 묶이는 돈",
+    monthly: "다른 목적과 균형",
+    ending: "남는 자금 여력",
+    caption: "차량에 쓴 돈으로 포기하는 저축·투자·사업운영·비상자금의 가치와 위험을 함께 봅니다.",
+  },
 };
 
 const insuranceDetails = {
@@ -179,6 +202,7 @@ function closeDialog(dialog) {
 }
 
 function factDetail(fact, kicker = "FACT CARD") {
+  const factSources = sourceChips(fact.sourceIds);
   openDetail({
     kicker,
     title: fact.title,
@@ -201,8 +225,12 @@ function factDetail(fact, kicker = "FACT CARD") {
       </section>
       <section class="detail-section">
         <h3>근거 확인</h3>
-        <p>일반적인 구조를 설명한 자료입니다. 실제 계약서와 상품별 약관이 우선합니다.</p>
-        ${sourceChips(fact.sourceIds)}
+        <p>${
+          factSources
+            ? "일반적인 구조를 설명한 자료입니다. 실제 계약서와 상품별 약관이 우선합니다."
+            : "RE:CAR의 현재 운영 화면과 최신 운영정책을 기준으로 확인합니다."
+        }</p>
+        ${factSources}
       </section>
     `,
   });
@@ -425,6 +453,104 @@ function openEndingDetail() {
   });
 }
 
+function openEconomyDetail() {
+  openDetail({
+    kicker: "ECONOMY & MONEY",
+    title: "차량 이용을 보는 경제 관점",
+    body: `
+      <div class="detail-hero">
+        <strong>재테크의 출발은 수익 약속이 아니라 지출 구조를 이해하는 일입니다.</strong>
+        <p>차량은 이용하는 동안 현금이 나가는 자산이므로 월 납입금, 유동성, 만기 비용을 함께 봅니다.</p>
+      </div>
+      <section class="detail-section">
+        <h3>세 가지 관점</h3>
+        <div class="detail-pair">
+          <div><span>현금흐름</span><p>초기 납입금과 매월 고정지출이 내 소득·비상자금 계획에서 감당 가능한지 확인합니다.</p></div>
+          <div><span>총이용비용</span><p>초기비용, 월 납입, 보험·세금·정비, 만기 인수·반납 비용에서 반환금을 구분해 봅니다.</p></div>
+        </div>
+        <div class="detail-pair">
+          <div><span>기회비용</span><p>차량에 쓴 자금을 저축·투자·사업운영·부채상환에 썼을 때의 가치와 위험을 비교합니다.</p></div>
+          <div><span>감가·잔존가치</span><p>차량의 미래가치는 시간·주행거리·사고·시장 상황에 따라 달라지며 확정 수익이 아닙니다.</p></div>
+        </div>
+      </section>
+      <section class="detail-section">
+        <h3>비교용 개념식</h3>
+        <div class="detail-formula">
+          <span>총이용비용</span>
+          <strong>초기비용 + 월 지출 합계 + 유지·만기 비용 - 실제 반환금</strong>
+        </div>
+        <p>비교 기간과 주행거리, 보험·정비 범위, 만기 선택을 같게 맞춘 뒤 계산합니다. 세금 효과나 투자수익은 개인 상황과 위험이 달라 별도로 검토합니다.</p>
+      </section>
+      <section class="detail-section">
+        <h3>콘텐츠 표현</h3>
+        <div class="expression-box safe"><span>사용 권장</span><p>초기자금·월 지출·만기 비용과 자금의 다른 사용 기회를 함께 비교하세요.</p></div>
+        <div class="expression-box unsafe"><span>사용 금지</span><p>렌트·리스가 현금 구매보다 무조건 재테크에 유리하고 투자수익도 보장됩니다.</p></div>
+      </section>
+      <section class="detail-section">
+        <h3>공식 근거</h3>
+        ${sourceChips(["bokTerms", "leaseTerms", "rentalTerms", "leaseGuide", "kbReturn"])}
+      </section>
+    `,
+  });
+}
+
+function openCrewWorkDetail() {
+  openDetail({
+    kicker: "CREW SIDE WORK",
+    title: "RE:CAR 크루 활동 이해",
+    body: `
+      <div class="detail-hero">
+        <strong>콘텐츠 경험을 고객의 합리적인 차량 선택과 연결하는 유연한 활동입니다.</strong>
+        <p>크루는 정확한 정보를 알리고, 상담·심사·계약·인도는 RE:CAR 운영팀이 이어갑니다.</p>
+      </div>
+      <section class="detail-section">
+        <h3>활동 흐름</h3>
+        ${listHtml([
+          "블로그·릴스·쇼츠 등 익숙한 채널에서 공개 가이드 기준으로 콘텐츠를 만듭니다.",
+          "관심 고객을 개인정보를 직접 받지 않는 공식 문의 절차로 연결합니다.",
+          "RE:CAR 운영팀이 상담·견적·심사·계약·인도 과정을 확인합니다.",
+          "유효한 차량 인도 실적은 최신 운영정책에 따라 정산 여부를 확인합니다.",
+        ])}
+      </section>
+      <section class="detail-section">
+        <h3>부업으로서의 장점과 현실</h3>
+        <div class="detail-pair">
+          <div>
+            <span>이런 점이 매력적이에요</span>
+            ${listHtml(["정해진 출퇴근 없이 본업과 병행 가능", "자동차 지식과 콘텐츠 제작 경험이 축적", "상담·심사·계약 실무는 운영팀이 진행"])}
+          </div>
+          <div>
+            <span>이건 꼭 알아두세요</span>
+            ${listHtml(["고정 급여·최소 수익을 보장하지 않음", "문의나 클릭만으로 정산이 확정되지 않음", "취소·인도 결과·운영정책에 따라 실적이 달라짐"])}
+          </div>
+        </div>
+      </section>
+      <section class="detail-section">
+        <h3>정산 기준</h3>
+        <p>현재 운영 화면은 계약 시점이 아닌 차량 인도 완료를 기준으로 익월 정산하는 흐름입니다. 전산 반영에는 시간이 걸릴 수 있으며, 최종 대상·금액·지급 시점은 최신 운영정책과 실제 대시보드가 우선합니다.</p>
+        <p>건당 또는 평균 수익을 콘텐츠에 표시하려면 기준일, 대상 기간, 표본 수, 산정 조건, 취소·세전 여부를 함께 검증해야 합니다. 이 공개 가이드는 특정 금액을 수익으로 보장하지 않습니다.</p>
+      </section>
+      <section class="detail-section">
+        <h3>세금과 광고 표시</h3>
+        ${listHtml([
+          "활동의 지속성과 형태에 따라 사업소득 또는 기타소득 등으로 구분될 수 있습니다.",
+          "지급 자료와 활동 관련 증빙을 보관하고 본인 상황은 국세청 또는 세무전문가에게 확인합니다.",
+          "수익이나 혜택 가능성이 있다면 콘텐츠 시작 부분에 경제적 이해관계를 눈에 띄게 표시합니다.",
+        ])}
+      </section>
+      <section class="detail-section">
+        <h3>콘텐츠 표현</h3>
+        <div class="expression-box safe"><span>사용 권장</span><p>본업과 병행할 수 있는 콘텐츠 활동이며 수익은 유효 실적과 최신 운영정책에 따라 달라집니다.</p></div>
+        <div class="expression-box unsafe"><span>사용 금지</span><p>가입만 하면 누구나 매달 고정수익, 문의만 연결해도 즉시 지급됩니다.</p></div>
+      </section>
+      <section class="detail-section">
+        <h3>확인 자료</h3>
+        ${sourceChips(["ntsCreator", "endorsementAd", "sideJobSafety", "adLaw"])}
+      </section>
+    `,
+  });
+}
+
 function openPriceChecklist() {
   openDetail({
     kicker: "CONTENT CHECK",
@@ -580,6 +706,21 @@ function updateInsurance(mode) {
     .map((point) => `<li><i data-lucide="check" aria-hidden="true"></i>${escapeHtml(point)}</li>`)
     .join("");
   refreshIcons();
+}
+
+function updateEconomyMode(mode) {
+  const detail = economyDetails[mode];
+  if (!detail) return;
+
+  qsa("[data-economy-mode]").forEach((button) => {
+    const active = button.dataset.economyMode === mode;
+    button.classList.toggle("is-active", active);
+    button.setAttribute("aria-pressed", String(active));
+  });
+  qs("[data-economy-start]").textContent = detail.start;
+  qs("[data-economy-monthly]").textContent = detail.monthly;
+  qs("[data-economy-ending]").textContent = detail.ending;
+  qs("[data-economy-caption]").textContent = detail.caption;
 }
 
 function matchingTerms() {
@@ -1019,6 +1160,8 @@ function bindEvents() {
     if (target.matches("[data-open-money-detail]")) openMoneyDetail();
     if (target.matches("[data-open-insurance-detail]")) openInsuranceDetail();
     if (target.matches("[data-open-ending-detail]")) openEndingDetail();
+    if (target.matches("[data-open-economy-detail]")) openEconomyDetail();
+    if (target.matches("[data-open-crew-work-detail]")) openCrewWorkDetail();
     if (target.matches("[data-open-price-checklist]")) openPriceChecklist();
     if (target.matches("[data-open-all-sources]")) openSourceLibrary();
     if (target.matches("[data-open-all-faq]")) openFaqLibrary();
@@ -1028,6 +1171,7 @@ function bindEvents() {
     if (target.matches("[data-factor]")) selectFactor(target.dataset.factor);
     if (target.matches("[data-money-mode]")) updateMoneyMode(target.dataset.moneyMode);
     if (target.matches("[data-insurance-mode]")) updateInsurance(target.dataset.insuranceMode);
+    if (target.matches("[data-economy-mode]")) updateEconomyMode(target.dataset.economyMode);
     if (target.matches("[data-ending-choice]")) {
       qsa("[data-ending-choice]").forEach((button) => button.classList.toggle("is-active", button === target));
       qs("[data-ending-message]").textContent = endingMessages[target.dataset.endingChoice];
@@ -1162,6 +1306,7 @@ function initialize() {
   updateRecarMode("recar");
   updateMoneyMode("deposit");
   updateInsurance("rent");
+  updateEconomyMode("cashflow");
   bindEvents();
   refreshIcons();
 }

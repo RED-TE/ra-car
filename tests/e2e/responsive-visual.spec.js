@@ -67,7 +67,10 @@ test("mobile menu and section search stay available", async ({ page }) => {
   await expect(page.getByRole("button", { name: "가이드 검색", exact: true })).toBeVisible();
   await page.getByRole("button", { name: "메뉴 열기", exact: true }).click();
   await expect(page.locator("#mobileMenu")).toBeVisible();
-  await expect(page.locator("[data-mobile-menu-links] a")).toHaveCount(13);
+  await expect(page.locator("[data-mobile-menu-links] a")).toHaveCount(15);
+  const lastMenuLink = page.locator("[data-mobile-menu-links] a").last();
+  await lastMenuLink.scrollIntoViewIfNeeded();
+  await expect(lastMenuLink).toBeVisible();
   await page.getByRole("button", { name: "메뉴 닫기", exact: true }).click();
   await expect(page.locator("#mobileMenu")).toBeHidden();
 });
@@ -83,10 +86,12 @@ test("core sections and mobile full page are captured", async ({ page }) => {
     ["04-rental-guide", "#rent"],
     ["05-lease-guide", "#lease"],
     ["06-monthly-payment", "#payment"],
-    ["07-glossary", "#terms"],
-    ["08-customer-types", "#customers"],
-    ["09-fact-library", "#facts"],
-    ["10-safe-expression", "#phrases"],
+    ["07-economy-lens", "#economy"],
+    ["08-crew-side-work", "#crew-work"],
+    ["09-glossary", "#terms"],
+    ["10-customer-types", "#customers"],
+    ["11-fact-library", "#facts"],
+    ["12-safe-expression", "#phrases"],
   ];
 
   for (const [name, selector] of captures) {
@@ -103,6 +108,6 @@ test("core sections and mobile full page are captured", async ({ page }) => {
   await page.screenshot({
     animations: "disabled",
     fullPage: true,
-    path: path.join(artifactDir, "11-mobile-full-390x844.png"),
+    path: path.join(artifactDir, "13-mobile-full-390x844.png"),
   });
 });

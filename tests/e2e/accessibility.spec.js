@@ -28,7 +28,7 @@ test("keyboard focus, dialogs, and reduced motion remain usable", async ({ page 
   await expect(page.locator(".skip-link")).toBeFocused();
 
   await page.getByRole("button", { name: "가이드 검색", exact: true }).click();
-  await expect(page.getByPlaceholder("예: 중도해지, 보험, 사업자")).toBeFocused();
+  await expect(page.getByPlaceholder("예: 중도해지, 재테크, 크루 부업")).toBeFocused();
   await page.keyboard.press("Escape");
   await expect(page.locator("#searchDialog")).not.toHaveAttribute("open", "");
 

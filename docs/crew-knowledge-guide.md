@@ -2,7 +2,7 @@
 
 ## Purpose
 
-`/crew/knowledge/` is a public visual knowledge guide for RE:CAR creators. It explains RE:CAR, long-term rental, automobile lease, customer starting points, contract conditions, and safe advertising language. It does not provide CRM, referral tracking, scripts, AI generation, settlement, or personalized recommendations.
+`/crew/knowledge/` is a public visual knowledge guide for RE:CAR creators. It explains RE:CAR, long-term rental, automobile lease, customer starting points, contract conditions, vehicle-use economics, crew side-work structure, and safe advertising language. It does not provide CRM, personal referral tracking, scripts, AI generation, settlement requests, or personalized recommendations.
 
 The development-only route is `/crew/knowledge/preview/`. The server returns 404 for this route when `NODE_ENV=production`.
 
@@ -31,6 +31,20 @@ Approved direction:
 
 The public page does not expose personalized referral codes or consultation links.
 
+## Economy and crew-income language
+
+The economy scene frames vehicle choice as cash-flow and total-use-cost planning. It must not describe rent or lease as an investment product, guarantee returns, or assume that using the same money elsewhere will always produce profit.
+
+The crew side-work scene may explain the repository-backed flow:
+
+1. The crew publishes accurate content and connects an official inquiry.
+2. The RE:CAR operations team handles consultation, screening, contract, and delivery.
+3. A valid delivered result is reviewed under the latest operating and settlement policy.
+
+Public content must not promise a fixed wage, a minimum monthly income, or immediate payment for a click or inquiry. Per-case or average income figures require a verified reference date, population, period, calculation conditions, cancellation treatment, and tax basis before publication. The public guide deliberately does not display a personal code or a guaranteed income amount.
+
+Crew content that can generate compensation should disclose the economic relationship clearly. Income classification and tax filing depend on the actual activity, so the guide directs users to National Tax Service guidance or a tax professional.
+
 ## Source review
 
 - Last content review: 2026-08-06
@@ -38,7 +52,11 @@ The public page does not expose personalized referral codes or consultation link
 - Rental standard terms: Korea Fair Trade Commission
 - Lease disclosures and glossary: Credit Finance Association
 - Business vehicle tax guidance: National Tax Service
+- Economic terminology: Bank of Korea
+- Creator income and tax guidance: National Tax Service
 - Financial advertising guidance: Financial Services Commission
+- Endorsement and economic-relationship disclosure: Korea Fair Trade Commission
+- High-income side-job advertising caution: Korea Consumer Agency
 - Product examples: official KB Capital and Lotte Rental pages
 
 Source URLs are maintained in `crew/knowledge/knowledge-data.js`.
