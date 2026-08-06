@@ -25,3 +25,7 @@ step*-*.png
 verify-*.png
 launch-final-*.png
 page-preview.pdf
+artifacts/
+playwright-report/
+test-results/
+knowledge-server.*.log

@@ -1,0 +1,16 @@
+{
+  "compilerOptions": {
+    "allowJs": true,
+    "checkJs": false,
+    "lib": ["ES2022", "DOM", "DOM.Iterable"],
+    "module": "ES2022",
+    "moduleDetection": "force",
+    "noEmit": true,
+    "skipLibCheck": true,
+    "target": "ES2022"
+  },
+  "include": [
+    "crew/knowledge/knowledge.js",
+    "crew/knowledge/knowledge-data.js"
+  ]
+}

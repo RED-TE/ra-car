@@ -48,6 +48,11 @@ const publicStaticFiles = new Set([
   "/crew/crew.css",
   "/crew/login.html",
   "/crew/login.css",
+  "/crew/knowledge/index.html",
+  "/crew/knowledge/knowledge.css",
+  "/crew/knowledge/knowledge.js",
+  "/crew/knowledge/knowledge-data.js",
+  "/crew/knowledge/lucide.min.js",
   "/inquiry/index.html",
   "/data/vehicle-static-catalog.json",
   "/data/vehicles-incomplete-report.json",
@@ -2238,6 +2243,24 @@ function serveStatic(request, response, url) {
   }
   if (requestedPath === "/crew/login" || requestedPath === "/crew/login/") {
     requestedPath = "/crew/login.html";
+  }
+  if (requestedPath === "/crew/knowledge" || requestedPath === "/crew/knowledge/") {
+    requestedPath = "/crew/knowledge/index.html";
+  }
+  if (requestedPath === "/crew/content-guide" || requestedPath === "/crew/content-guide/") {
+    requestedPath = "/crew/knowledge/index.html";
+  }
+  if (requestedPath === "/crew/knowledge/preview" || requestedPath === "/crew/knowledge/preview/") {
+    if (process.env.NODE_ENV === "production") {
+      response.writeHead(404, {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Cache-Control": "no-store",
+        ...getSecurityHeaders(),
+      });
+      response.end("Not found");
+      return;
+    }
+    requestedPath = "/crew/knowledge/index.html";
   }
   if (!isPublicStaticPath(requestedPath)) {
     response.writeHead(404, {
