@@ -13,7 +13,7 @@ import {
 } from "./knowledge-data.js";
 
 const categoryLabels = {
-  advertising: "광고 표현",
+  advertising: "광고 이해",
   business: "사업자",
   compare: "비교",
   crew: "크루 부업",
@@ -35,8 +35,8 @@ const customerGroups = {
 
 const productDetails = {
   rent: {
-    kicker: "LONG-TERM RENTAL",
-    title: "장기렌트 완전 이해",
+    kicker: "장기렌트",
+    title: "장기렌트는 어떤 방식인가요?",
     lead: "렌터카 회사의 차량을 일정 기간 빌려 타고 월 대여료를 내는 방식입니다.",
     structure: [
       "차량 소유자와 명의는 렌터카 회사입니다.",
@@ -56,14 +56,14 @@ const productDetails = {
     ],
     customer: "보험료와 차량 관리 편의를 함께 보고 싶은 고객이 먼저 비교할 수 있습니다.",
     ending: "반납·인수·연장 가능 여부와 인수 가격 산정 기준은 계약 전에 확인합니다.",
-    safe: "보험과 세금이 포함되는 일반적인 구조라 차량 관리가 간편할 수 있어요.",
+    safe: "보험과 세금이 포함되는 일반적인 구조라 차량 관리가 간편할 수 있습니다.",
     unsafe: "장기렌트는 보험료도 없고 사고가 나도 돈이 들지 않습니다.",
     sourceIds: ["rentalLaw", "rentalTerms", "kbRental", "lotteInsurance", "kbReturn"],
   },
   lease: {
-    kicker: "AUTOMOBILE LEASE",
-    title: "자동차 리스 완전 이해",
-    lead: "리스사가 취득한 차량을 약정 기간 이용하고 월 리스료를 내는 금융 방식입니다.",
+    kicker: "자동차 리스",
+    title: "자동차 리스는 어떤 방식인가요?",
+    lead: "금융회사가 구입한 차량을 정해진 기간 이용하고 월 리스료를 내는 방식입니다.",
     structure: [
       "차량 소유자는 리스사이며 등록 명의는 상품 구조를 확인합니다.",
       "일반 번호판을 사용하는 구조가 일반적입니다.",
@@ -90,8 +90,8 @@ const productDetails = {
 
 const endingMessages = {
   return: "반납: 초과주행·사고·파손·원상복구 기준을 확인합니다.",
-  purchase: "인수: 잔존가치와 취득 관련 비용을 포함한 총액을 확인합니다.",
-  extend: "연장: 가능한 상품인지, 연장 기간과 재산정 조건을 확인합니다.",
+  purchase: "인수: 계약이 끝날 때 차를 가져오는 데 필요한 전체 금액을 확인합니다.",
+  extend: "연장: 더 이용할 수 있는 상품인지, 기간과 새 월 금액을 확인합니다.",
   replace: "차량 교체: 기존 계약 정산과 새 계약 조건을 각각 확인합니다.",
 };
 
@@ -201,7 +201,7 @@ function closeDialog(dialog) {
   if (dialog?.open) dialog.close();
 }
 
-function factDetail(fact, kicker = "FACT CARD") {
+function factDetail(fact, kicker = "항목별 설명") {
   const factSources = sourceChips(fact.sourceIds);
   openDetail({
     kicker,
@@ -212,16 +212,16 @@ function factDetail(fact, kicker = "FACT CARD") {
         <p>${escapeHtml(fact.body)}</p>
       </div>
       <section class="detail-section">
-        <h3>콘텐츠에서 놓치기 쉬운 조건</h3>
+        <h3>함께 확인할 조건</h3>
         <div class="detail-pair">
           <div><span>흔한 오해</span><p>${escapeHtml(fact.misconception)}</p></div>
-          <div><span>함께 밝힐 조건</span><p>${escapeHtml(fact.condition)}</p></div>
+          <div><span>같이 볼 내용</span><p>${escapeHtml(fact.condition)}</p></div>
         </div>
       </section>
       <section class="detail-section">
-        <h3>표현 검수</h3>
-        <div class="expression-box safe"><span>사용 권장</span><p>${escapeHtml(fact.safe)}</p></div>
-        <div class="expression-box unsafe"><span>사용 금지</span><p>${escapeHtml(fact.unsafe)}</p></div>
+        <h3>사실과 오해</h3>
+        <div class="expression-box safe"><span>사실</span><p>${escapeHtml(fact.safe)}</p></div>
+        <div class="expression-box unsafe"><span>오해</span><p>${escapeHtml(fact.unsafe)}</p></div>
       </section>
       <section class="detail-section">
         <h3>근거 확인</h3>
@@ -238,7 +238,7 @@ function factDetail(fact, kicker = "FACT CARD") {
 
 function termDetail(term) {
   openDetail({
-    kicker: "EASY GLOSSARY",
+    kicker: "용어",
     title: term.name,
     body: `
       <div class="detail-hero">
@@ -250,8 +250,8 @@ function termDetail(term) {
         <p>${escapeHtml(term.confused)}</p>
       </section>
       <section class="detail-section">
-        <h3>콘텐츠 안전 문장</h3>
-        <div class="expression-box safe"><span>사용 권장</span><p>${escapeHtml(term.safe)}</p></div>
+        <h3>한 줄로 이해하기</h3>
+        <div class="expression-box safe"><span>쉬운 설명</span><p>${escapeHtml(term.safe)}</p></div>
       </section>
       <section class="detail-section">
         <h3>근거 확인</h3>
@@ -263,7 +263,7 @@ function termDetail(term) {
 
 function customerDetail(profile) {
   openDetail({
-    kicker: "CUSTOMER STARTING POINT",
+    kicker: "상황별로 보기",
     title: profile.label,
     body: `
       <div class="detail-hero">
@@ -275,13 +275,13 @@ function customerDetail(profile) {
         ${listHtml([profile.check, "보험료·심사 결과·실제 견적은 고객별로 달라질 수 있습니다.", "이 출발점은 확정 추천이 아닙니다."])}
       </section>
       <section class="detail-section">
-        <h3>콘텐츠 표현</h3>
+        <h3>사실과 오해</h3>
         <div class="expression-box safe">
-          <span>사용 권장</span>
+          <span>사실</span>
           <p>${escapeHtml(profile.label)}이라면 ${escapeHtml(profile.start)} 조건부터 비교해볼 수 있습니다.</p>
         </div>
         <div class="expression-box unsafe">
-          <span>사용 금지</span>
+          <span>오해</span>
           <p>${escapeHtml(profile.label)}에게는 이 상품이 무조건 가장 저렴합니다.</p>
         </div>
       </section>
@@ -297,14 +297,14 @@ function openProductDetail(type) {
     body: `
       <div class="detail-hero">
         <strong>${escapeHtml(product.lead)}</strong>
-        <p>일반적인 구조이며 렌터카사·리스사·금융사와 상품별 실제 조건이 다를 수 있습니다.</p>
+        <p>일반적인 설명이며 회사와 상품에 따라 실제 조건은 달라질 수 있습니다.</p>
       </div>
       <section class="detail-section"><h3>기본 구조</h3>${listHtml(product.structure)}</section>
       <section class="detail-section">
         <h3>편한 점과 확인할 점</h3>
         <div class="detail-pair">
-          <div><span>이런 점이 편해요</span>${listHtml(product.comfort)}</div>
-          <div><span>이건 꼭 확인하세요</span>${listHtml(product.caution)}</div>
+          <div><span>장점</span>${listHtml(product.comfort)}</div>
+          <div><span>확인할 내용</span>${listHtml(product.caution)}</div>
         </div>
       </section>
       <section class="detail-section">
@@ -315,9 +315,9 @@ function openProductDetail(type) {
         </div>
       </section>
       <section class="detail-section">
-        <h3>콘텐츠 표현</h3>
-        <div class="expression-box safe"><span>사용 권장</span><p>${escapeHtml(product.safe)}</p></div>
-        <div class="expression-box unsafe"><span>사용 금지</span><p>${escapeHtml(product.unsafe)}</p></div>
+        <h3>사실과 오해</h3>
+        <div class="expression-box safe"><span>사실</span><p>${escapeHtml(product.safe)}</p></div>
+        <div class="expression-box unsafe"><span>오해</span><p>${escapeHtml(product.unsafe)}</p></div>
       </section>
       <section class="detail-section"><h3>공식 근거</h3>${sourceChips(product.sourceIds)}</section>
     `,
@@ -326,44 +326,44 @@ function openProductDetail(type) {
 
 function openRecarDetail() {
   openDetail({
-    kicker: "WHY RE:CAR",
-    title: "RE:CAR가 비교하는 방식",
+    kicker: "RE:CAR",
+    title: "RE:CAR는 무엇을 하나요?",
     body: `
       <div class="detail-hero">
         <strong>월 납입금 하나가 아니라 그 숫자를 만든 조건을 비교합니다.</strong>
-        <p>차량·기간·주행거리·초기비용 기준을 맞춘 뒤 여러 금융사의 조건을 확인합니다.</p>
+        <p>차량·기간·주행거리·처음 내는 돈을 같은 조건으로 맞춘 뒤 여러 회사의 견적을 확인합니다.</p>
       </div>
       <section class="detail-section">
-        <h3>기존 영업 구조와의 차이</h3>
+        <h3>기존 방식과 다른 점</h3>
         <div class="detail-pair">
           <div>
             <span>기존 방식</span>
-            <p>영업 과정의 수수료·마진과 서로 다른 조건이 견적에 섞일 수 있습니다.</p>
+            <p>영업 과정의 추가 비용과 서로 다른 조건이 견적에 함께 들어갈 수 있습니다.</p>
           </div>
           <div>
             <span>RE:CAR 방식</span>
-            <p>영업사원별 임의 추가 수수료 없이 동일한 RE:CAR 기준으로 여러 금융사 조건을 비교합니다.</p>
+            <p>영업사원별 임의 추가 수수료 없이 같은 RE:CAR 기준으로 여러 회사의 조건을 비교합니다.</p>
           </div>
         </div>
       </section>
       <section class="detail-section">
-        <h3>확인 가능한 흐름</h3>
-        ${listHtml(["견적 조건 정리", "금융사 심사와 결과 확인", "계약·발주·출고 진행상태 확인", "앱과 전화상담을 통한 안내"])}
+        <h3>진행 순서</h3>
+        ${listHtml(["원하는 차량과 이용 조건 정리", "금융회사 심사와 결과 확인", "계약부터 차량 출고까지 진행상태 확인", "앱과 전화상담을 통한 안내"])}
       </section>
       <section class="detail-section">
-        <h3>가격 표현 원칙</h3>
+        <h3>가격 비교</h3>
         <div class="expression-box safe">
-          <span>사용 권장</span>
-          <p>RE:CAR는 같은 기준으로 여러 금융사의 조건을 비교합니다.</p>
+          <span>사실</span>
+          <p>RE:CAR는 같은 기준으로 여러 회사의 조건을 비교합니다.</p>
         </div>
         <div class="expression-box unsafe">
-          <span>사용 금지</span>
+          <span>오해</span>
           <p>모든 수수료 0원, 마진 0원, 전국 무조건 최저가.</p>
         </div>
       </section>
       <section class="detail-section">
         <h3>운영 기준</h3>
-        <p>홈페이지 표시 금액에는 RE:CAR의 내부 표시 기준이 반영될 수 있습니다. 콘텐츠에서는 상담 후 제공되는 실제 금융사 견적과 계약서를 최종 기준으로 안내합니다.</p>
+        <p>홈페이지의 참고 금액과 실제 계약 금액은 다를 수 있습니다. 최종 조건은 상담 후 받은 공식 견적과 계약서를 기준으로 확인합니다.</p>
         ${sourceChips(["financeAd", "adLaw"])}
       </section>
     `,
@@ -372,12 +372,12 @@ function openRecarDetail() {
 
 function openMoneyDetail() {
   openDetail({
-    kicker: "UPFRONT PAYMENT",
-    title: "보증금·선납금·잔존가치",
+    kicker: "처음 내는 돈",
+    title: "보증금과 선납금은 무엇이 다른가요?",
     body: `
       <div class="detail-hero">
-        <strong>월 금액이 내려가도 돈의 성격과 총부담은 다릅니다.</strong>
-        <p>초기 납입금, 월 납입금, 만기 정산을 한 줄로 연결해 확인합니다.</p>
+        <strong>둘 다 월 납입금을 낮출 수 있지만 돈의 쓰임은 다릅니다.</strong>
+        <p>처음 내는 돈, 매달 내는 돈, 계약이 끝날 때 돌려받거나 추가로 내는 돈을 함께 봅니다.</p>
       </div>
       <section class="detail-section">
         <h3>세 가지 돈의 흐름</h3>
@@ -391,7 +391,7 @@ function openMoneyDetail() {
         </div>
       </section>
       <section class="detail-section">
-        <h3>콘텐츠 체크</h3>
+        <h3>함께 확인할 내용</h3>
         ${listHtml(["초기 납입금의 이름과 비율", "반환 여부와 반환 시 공제 조건", "월 납입금과 총 납입액", "만기 인수금액과 취득 관련 비용"])}
         ${sourceChips(["leaseTerms", "rentalTerms", "leaseGlossary"])}
       </section>
@@ -401,25 +401,25 @@ function openMoneyDetail() {
 
 function openInsuranceDetail() {
   openDetail({
-    kicker: "INSURANCE & ACCIDENT",
+    kicker: "보험과 사고",
     title: "보험과 사고 처리",
     body: `
       <div class="detail-hero">
-        <strong>보험 포함 여부보다 운전자 범위와 자기부담을 먼저 확인합니다.</strong>
-        <p>장기렌트와 리스는 보험을 구성하는 주체가 달라질 수 있습니다.</p>
+        <strong>누가 보험에 가입하고, 사고 때 누가 얼마를 부담하는지 확인합니다.</strong>
+        <p>장기렌트와 리스는 보험에 가입하는 사람이 다를 수 있습니다.</p>
       </div>
       <section class="detail-section">
         <h3>장기렌트</h3>
-        ${listHtml(["렌터카사 보험이 계약에 포함되는 구조가 일반적입니다.", "등록된 운전자 연령·범위를 확인합니다.", "사고 시 면책금과 휴차료 등 약관 기준을 확인합니다."])}
+        ${listHtml(["렌터카 회사의 보험이 월 대여료에 포함되는 경우가 많습니다.", "보험이 인정하는 운전자와 나이 범위를 확인합니다.", "사고 때 고객이 내는 금액과 추가 비용을 확인합니다."])}
       </section>
       <section class="detail-section">
         <h3>리스</h3>
-        ${listHtml(["이용자가 개인 자동차보험을 별도로 가입하는 구조가 많습니다.", "개인 보험경력을 유지할 수 있으나 실제 인수 조건을 확인합니다.", "리스료와 별도 보험료를 합쳐 비교합니다."])}
+        ${listHtml(["이용자가 개인 자동차보험에 따로 가입하는 경우가 많습니다.", "개인 보험경력을 이어갈 수 있는지 보험사에 확인합니다.", "월 리스료와 별도 보험료를 합쳐 비교합니다."])}
       </section>
       <section class="detail-section">
-        <h3>콘텐츠에서 확인할 말</h3>
-        <div class="expression-box safe"><span>사용 권장</span><p>운전자 범위와 사고 면책금은 상품 약관에서 확인하세요.</p></div>
-        <div class="expression-box unsafe"><span>사용 금지</span><p>보험이 포함돼서 사고가 나도 비용이 전혀 없습니다.</p></div>
+        <h3>사실과 오해</h3>
+        <div class="expression-box safe"><span>사실</span><p>운전자 범위와 사고 면책금은 상품 약관에서 확인하세요.</p></div>
+        <div class="expression-box unsafe"><span>오해</span><p>보험이 포함돼서 사고가 나도 비용이 전혀 없습니다.</p></div>
         ${sourceChips(["autoInsuranceLaw", "lotteInsurance", "kbRental", "kbLease"])}
       </section>
     `,
@@ -428,12 +428,12 @@ function openInsuranceDetail() {
 
 function openEndingDetail() {
   openDetail({
-    kicker: "CONTRACT END",
-    title: "만기와 중도해지",
+    kicker: "계약 종료",
+    title: "계약이 끝날 때 무엇을 하나요?",
     body: `
       <div class="detail-hero">
         <strong>반납할지 인수할지는 계약 시작 전에 조건을 확인합니다.</strong>
-        <p>중간에 끝내는 비용과 만기에 끝내는 정산 기준은 서로 다릅니다.</p>
+        <p>계약기간을 다 채우고 끝내는 것과 중간에 그만두는 것은 비용 계산이 다릅니다.</p>
       </div>
       <section class="detail-section">
         <h3>만기 전 확인</h3>
@@ -444,9 +444,9 @@ function openEndingDetail() {
         ${listHtml(["중도해지금 산식과 적용 기간", "승계 가능 여부와 수수료", "미납금·과태료·정산비용", "차량 회수와 원상복구 기준"])}
       </section>
       <section class="detail-section">
-        <h3>안전한 표현</h3>
-        <div class="expression-box safe"><span>사용 권장</span><p>만기 선택과 중도해지 비용은 계약서의 산식과 조건을 확인하세요.</p></div>
-        <div class="expression-box unsafe"><span>사용 금지</span><p>마음이 바뀌면 언제든 비용 없이 반납할 수 있습니다.</p></div>
+        <h3>사실과 오해</h3>
+        <div class="expression-box safe"><span>사실</span><p>만기 선택과 중도해지 비용은 계약서의 산식과 조건을 확인하세요.</p></div>
+        <div class="expression-box unsafe"><span>오해</span><p>마음이 바뀌면 언제든 비용 없이 반납할 수 있습니다.</p></div>
         ${sourceChips(["rentalTerms", "leaseTerms", "kbReturn", "leaseGuide"])}
       </section>
     `,
@@ -455,36 +455,36 @@ function openEndingDetail() {
 
 function openEconomyDetail() {
   openDetail({
-    kicker: "ECONOMY & MONEY",
-    title: "차량 이용을 보는 경제 관점",
+    kicker: "전체 비용",
+    title: "차량에 실제로 드는 돈은 얼마인가요?",
     body: `
       <div class="detail-hero">
-        <strong>재테크의 출발은 수익 약속이 아니라 지출 구조를 이해하는 일입니다.</strong>
-        <p>차량은 이용하는 동안 현금이 나가는 자산이므로 월 납입금, 유동성, 만기 비용을 함께 봅니다.</p>
+        <strong>월 납입금만 보지 않고 계약 처음부터 끝까지 드는 돈을 봅니다.</strong>
+        <p>처음 내는 돈, 매달 내는 돈, 보험·세금·정비와 계약 종료 비용을 함께 더해 봅니다.</p>
       </div>
       <section class="detail-section">
         <h3>세 가지 관점</h3>
         <div class="detail-pair">
-          <div><span>현금흐름</span><p>초기 납입금과 매월 고정지출이 내 소득·비상자금 계획에서 감당 가능한지 확인합니다.</p></div>
-          <div><span>총이용비용</span><p>초기비용, 월 납입, 보험·세금·정비, 만기 인수·반납 비용에서 반환금을 구분해 봅니다.</p></div>
+          <div><span>돈이 나가는 순서</span><p>처음 내는 돈과 매달 내는 돈을 내 소득과 비상자금으로 감당할 수 있는지 봅니다.</p></div>
+          <div><span>계약 전체 비용</span><p>처음 내는 돈, 월 납입, 보험·세금·정비, 인수·반납 비용과 돌려받는 돈을 구분해 봅니다.</p></div>
         </div>
         <div class="detail-pair">
-          <div><span>기회비용</span><p>차량에 쓴 자금을 저축·투자·사업운영·부채상환에 썼을 때의 가치와 위험을 비교합니다.</p></div>
-          <div><span>감가·잔존가치</span><p>차량의 미래가치는 시간·주행거리·사고·시장 상황에 따라 달라지며 확정 수익이 아닙니다.</p></div>
+          <div><span>남겨 둘 자금</span><p>차량에 쓰지 않은 돈을 저축·투자·사업운영·빚 상환 등에 사용할 수도 있습니다.</p></div>
+          <div><span>나중의 차값</span><p>차량의 미래 가치는 시간·주행거리·사고·시장 상황에 따라 달라집니다.</p></div>
         </div>
       </section>
       <section class="detail-section">
-        <h3>비교용 개념식</h3>
+        <h3>비용 계산</h3>
         <div class="detail-formula">
-          <span>총이용비용</span>
-          <strong>초기비용 + 월 지출 합계 + 유지·만기 비용 - 실제 반환금</strong>
+          <span>계약 전체 비용</span>
+          <strong>처음 내는 돈 + 매달 내는 돈 + 유지·종료 비용 - 돌려받는 돈</strong>
         </div>
         <p>비교 기간과 주행거리, 보험·정비 범위, 만기 선택을 같게 맞춘 뒤 계산합니다. 세금 효과나 투자수익은 개인 상황과 위험이 달라 별도로 검토합니다.</p>
       </section>
       <section class="detail-section">
-        <h3>콘텐츠 표현</h3>
-        <div class="expression-box safe"><span>사용 권장</span><p>초기자금·월 지출·만기 비용과 자금의 다른 사용 기회를 함께 비교하세요.</p></div>
-        <div class="expression-box unsafe"><span>사용 금지</span><p>렌트·리스가 현금 구매보다 무조건 재테크에 유리하고 투자수익도 보장됩니다.</p></div>
+        <h3>사실과 오해</h3>
+        <div class="expression-box safe"><span>사실</span><p>초기자금·월 지출·만기 비용과 자금의 다른 사용 기회를 함께 비교하세요.</p></div>
+        <div class="expression-box unsafe"><span>오해</span><p>렌트·리스가 현금 구매보다 무조건 재테크에 유리하고 투자수익도 보장됩니다.</p></div>
       </section>
       <section class="detail-section">
         <h3>공식 근거</h3>
@@ -496,52 +496,52 @@ function openEconomyDetail() {
 
 function openCrewWorkDetail() {
   openDetail({
-    kicker: "CREW SIDE WORK",
-    title: "RE:CAR 크루 활동 이해",
+    kicker: "크루 활동",
+    title: "RE:CAR 크루는 무슨 일을 하나요?",
     body: `
       <div class="detail-hero">
-        <strong>콘텐츠 경험을 고객의 합리적인 차량 선택과 연결하는 유연한 활동입니다.</strong>
-        <p>크루는 정확한 정보를 알리고, 상담·심사·계약·인도는 RE:CAR 운영팀이 이어갑니다.</p>
+        <strong>크루는 차량 정보를 알리고 관심 있는 사람을 공식 문의로 연결합니다.</strong>
+        <p>이후 상담·심사·계약·차량 인도는 RE:CAR 운영팀이 진행합니다.</p>
       </div>
       <section class="detail-section">
         <h3>활동 흐름</h3>
         ${listHtml([
-          "블로그·릴스·쇼츠 등 익숙한 채널에서 공개 가이드 기준으로 콘텐츠를 만듭니다.",
+          "블로그·릴스·쇼츠 등 익숙한 채널에서 차량 정보를 알립니다.",
           "관심 고객을 개인정보를 직접 받지 않는 공식 문의 절차로 연결합니다.",
           "RE:CAR 운영팀이 상담·견적·심사·계약·인도 과정을 확인합니다.",
           "유효한 차량 인도 실적은 최신 운영정책에 따라 정산 여부를 확인합니다.",
         ])}
       </section>
       <section class="detail-section">
-        <h3>부업으로서의 장점과 현실</h3>
+        <h3>활동 특징과 정산 조건</h3>
         <div class="detail-pair">
           <div>
-            <span>이런 점이 매력적이에요</span>
-            ${listHtml(["정해진 출퇴근 없이 본업과 병행 가능", "자동차 지식과 콘텐츠 제작 경험이 축적", "상담·심사·계약 실무는 운영팀이 진행"])}
+            <span>활동 특징</span>
+            ${listHtml(["정해진 출퇴근 없이 본업과 병행 가능", "차량 정보 콘텐츠 제작 경험", "상담·심사·계약 실무는 운영팀이 진행"])}
           </div>
           <div>
-            <span>이건 꼭 알아두세요</span>
+            <span>정산 조건</span>
             ${listHtml(["고정 급여·최소 수익을 보장하지 않음", "문의나 클릭만으로 정산이 확정되지 않음", "취소·인도 결과·운영정책에 따라 실적이 달라짐"])}
           </div>
         </div>
       </section>
       <section class="detail-section">
         <h3>정산 기준</h3>
-        <p>현재 운영 화면은 계약 시점이 아닌 차량 인도 완료를 기준으로 익월 정산하는 흐름입니다. 전산 반영에는 시간이 걸릴 수 있으며, 최종 대상·금액·지급 시점은 최신 운영정책과 실제 대시보드가 우선합니다.</p>
-        <p>건당 또는 평균 수익을 콘텐츠에 표시하려면 기준일, 대상 기간, 표본 수, 산정 조건, 취소·세전 여부를 함께 검증해야 합니다. 이 공개 가이드는 특정 금액을 수익으로 보장하지 않습니다.</p>
+        <p>정산은 계약 시점이 아니라 차량 인도 완료를 기준으로 익월에 진행됩니다. 전산 반영에는 시간이 걸릴 수 있으며, 대상·금액·지급 시점은 최신 운영정책과 실제 대시보드에서 확인합니다.</p>
+        <p>실제 정산 금액은 대상 기간, 산정 조건, 취소 여부와 세전·세후 기준에 따라 달라질 수 있습니다. 이 안내서는 특정 금액을 수익으로 보장하지 않습니다.</p>
       </section>
       <section class="detail-section">
         <h3>세금과 광고 표시</h3>
         ${listHtml([
           "활동의 지속성과 형태에 따라 사업소득 또는 기타소득 등으로 구분될 수 있습니다.",
           "지급 자료와 활동 관련 증빙을 보관하고 본인 상황은 국세청 또는 세무전문가에게 확인합니다.",
-          "수익이나 혜택 가능성이 있다면 콘텐츠 시작 부분에 경제적 이해관계를 눈에 띄게 표시합니다.",
+          "활동에 따른 수익이나 혜택이 있는 홍보물에는 경제적 이해관계 표시가 필요할 수 있습니다.",
         ])}
       </section>
       <section class="detail-section">
-        <h3>콘텐츠 표현</h3>
-        <div class="expression-box safe"><span>사용 권장</span><p>본업과 병행할 수 있는 콘텐츠 활동이며 수익은 유효 실적과 최신 운영정책에 따라 달라집니다.</p></div>
-        <div class="expression-box unsafe"><span>사용 금지</span><p>가입만 하면 누구나 매달 고정수익, 문의만 연결해도 즉시 지급됩니다.</p></div>
+        <h3>사실과 오해</h3>
+        <div class="expression-box safe"><span>사실</span><p>본업과 병행할 수 있는 콘텐츠 활동이며 수익은 유효 실적과 최신 운영정책에 따라 달라집니다.</p></div>
+        <div class="expression-box unsafe"><span>오해</span><p>가입만 하면 누구나 매달 고정수익, 문의만 연결해도 즉시 지급됩니다.</p></div>
       </section>
       <section class="detail-section">
         <h3>확인 자료</h3>
@@ -553,15 +553,15 @@ function openCrewWorkDetail() {
 
 function openPriceChecklist() {
   openDetail({
-    kicker: "CONTENT CHECK",
-    title: "가격 표현 전 8가지 확인",
+    kicker: "월 납입금",
+    title: "월 납입금을 볼 때 8가지 조건",
     body: `
       <div class="detail-hero">
         <strong>숫자는 조건과 함께 보여줄 때 정확해집니다.</strong>
         <p>월 납입금만 강조하면 실제 부담을 오해하게 만들 수 있습니다.</p>
       </div>
       <section class="detail-section">
-        <h3>함께 밝힐 조건</h3>
+        <h3>함께 확인할 조건</h3>
         ${listHtml([
           "차량·트림·옵션",
           "계약 기간과 연간 약정 주행거리",
@@ -574,9 +574,9 @@ function openPriceChecklist() {
         ])}
       </section>
       <section class="detail-section">
-        <h3>표현 검수</h3>
-        <div class="expression-box safe"><span>사용 권장</span><p>48개월·연 2만 km·보증금 20% 기준 예시이며 실제 견적은 심사와 시점에 따라 달라질 수 있습니다.</p></div>
-        <div class="expression-box unsafe"><span>사용 금지</span><p>누구나 이 가격, 무조건 승인, 전국 최저가.</p></div>
+        <h3>예시로 구분하기</h3>
+        <div class="expression-box safe"><span>조건이 보이는 예시</span><p>48개월·연 2만 km·보증금 20% 기준 예시이며 실제 견적은 심사와 시점에 따라 달라질 수 있습니다.</p></div>
+        <div class="expression-box unsafe"><span>조건이 빠진 예시</span><p>누구나 이 가격, 무조건 승인, 전국 최저가.</p></div>
         ${sourceChips(["financeAd", "adLaw"])}
       </section>
     `,
@@ -617,6 +617,9 @@ function updateConditions() {
   const term = qs("[data-term-choices] .is-active")?.dataset.term ?? "48";
   const mileage = qs("[data-mileage-choices] .is-active")?.dataset.mileage ?? "20000";
   const mileageLabel = Number(mileage).toLocaleString("ko-KR");
+  qs("[data-quote-term]").textContent = `${term}개월`;
+  qs("[data-quote-mileage]").textContent =
+    Number(mileage) % 10000 === 0 ? `${Number(mileage) / 10000}만 km` : `${mileageLabel} km`;
   qs("[data-condition-message]").textContent =
     `${term}개월 · 연 ${mileageLabel} km는 월 부담뿐 아니라 실제 이용기간과 초과주행 위험을 함께 확인해야 합니다.`;
 }
@@ -642,7 +645,6 @@ function updateMode(modeId) {
   qs("[data-mode-label]").textContent = mode.label;
   qs("[data-mode-short]").textContent = mode.short;
   qs("[data-mode-end]").textContent = `만기: ${mode.end}`;
-  qs("[data-css-car]").dataset.activeMode = modeId;
 }
 
 function updateRecarMode(mode) {
@@ -765,12 +767,12 @@ function renderTerms() {
 function openTermLibrary() {
   const matches = matchingTerms();
   openDetail({
-    kicker: "EASY GLOSSARY",
+    kicker: "용어",
     title: state.termQuery ? `"${state.termQuery}" 용어 검색` : "전체 핵심 용어",
     body: `
       <div class="detail-hero">
         <strong>${matches.length}개 용어</strong>
-        <p>한 줄 뜻을 먼저 보고 필요한 용어만 자세히 확인하세요.</p>
+        <p>용어마다 한 줄 뜻과 상세 설명이 있습니다.</p>
       </div>
       <div class="library-list">
         ${matches
@@ -852,7 +854,7 @@ function renderFacts() {
             <strong>${escapeHtml(fact.title)}</strong>
             <p>${escapeHtml(fact.summary)}</p>
           </span>
-          <span class="card-link">팩트 확인 <i data-lucide="arrow-up-right" aria-hidden="true"></i></span>
+          <span class="card-link">내용 보기 <i data-lucide="arrow-up-right" aria-hidden="true"></i></span>
         </button>
       `,
     )
@@ -868,12 +870,12 @@ function openFactLibrary() {
   const label =
     state.factFilter === "featured" ? "핵심" : categoryLabels[state.factFilter] ?? state.factFilter;
   openDetail({
-    kicker: "FACT LIBRARY",
-    title: `${label} 팩트 ${matches.length}개`,
+    kicker: "항목별 더 알아보기",
+    title: `${label} 설명 ${matches.length}개`,
     body: `
       <div class="detail-hero">
         <strong>사실과 조건을 함께 확인합니다.</strong>
-        <p>카드를 열면 흔한 오해, 안전 문장, 공식 근거까지 볼 수 있습니다.</p>
+        <p>카드를 열면 쉬운 설명과 흔한 오해, 공식 근거까지 볼 수 있습니다.</p>
       </div>
       <div class="library-list">
         ${matches
@@ -896,11 +898,11 @@ function renderPhrase() {
   qs("[data-phrase-index]").textContent = state.phraseIndex + 1;
   qs("[data-phrase-total]").textContent = phrasePairs.length;
   qs("[data-phrase-text]").textContent = state.phraseSafe ? pair.good : pair.bad;
-  qs("[data-phrase-state]").textContent = state.phraseSafe ? "이렇게 바꿔주세요" : "사용하면 안 돼요";
+  qs("[data-phrase-state]").textContent = state.phraseSafe ? "사실" : "오해";
   qs("[data-phrase-state]").className = `phrase-state ${state.phraseSafe ? "safe" : "bad"}`;
   qs("[data-phrase-card]").classList.toggle("is-safe", state.phraseSafe);
   qs("[data-phrase-card]").setAttribute("aria-pressed", String(state.phraseSafe));
-  qs("[data-phrase-toggle]").textContent = state.phraseSafe ? "금지 문장 보기" : "안전 문장 보기";
+  qs("[data-phrase-toggle]").textContent = state.phraseSafe ? "오해 보기" : "사실 보기";
 }
 
 function renderSources() {
@@ -937,11 +939,11 @@ function renderFaqs() {
 
 function openSourceLibrary() {
   openDetail({
-    kicker: "OFFICIAL SOURCES",
+    kicker: "확인 자료",
     title: `공식 자료 ${Object.keys(sources).length}개`,
     body: `
       <div class="detail-hero">
-        <strong>기억보다 원문을 먼저 확인합니다.</strong>
+        <strong>정확한 내용은 공식 자료에서 다시 확인할 수 있습니다.</strong>
         <p>마지막 검토일 ${escapeHtml(REVIEW_DATE)} · 상품별 실제 약관과 계약서가 우선합니다.</p>
       </div>
       <div class="library-list">
@@ -966,7 +968,7 @@ function openFaqLibrary() {
     title: `자주 확인하는 질문 ${faqs.length}개`,
     body: `
       <div class="detail-hero">
-        <strong>짧은 답을 먼저 확인하세요.</strong>
+        <strong>질문별 답변을 정리했습니다.</strong>
         <p>개별 상품의 최종 답은 실제 견적서·상품설명서·계약서가 우선합니다.</p>
       </div>
       <div class="faq-list drawer-faq-list">

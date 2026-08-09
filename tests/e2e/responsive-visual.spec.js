@@ -19,7 +19,7 @@ test.beforeAll(() => {
 for (const viewport of viewports) {
   test(`layout has no horizontal page overflow at ${viewport.width}x${viewport.height}`, async ({ page }) => {
     await page.setViewportSize(viewport);
-    await page.goto("/crew/knowledge/preview/");
+    await page.goto("/crew/guide/preview/");
 
     const metrics = await page.locator("html").evaluate((root) => ({
       clientWidth: root.clientWidth,
@@ -47,7 +47,7 @@ for (const viewport of viewports) {
 
 test("200 percent page zoom keeps content inside the viewport", async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
-  await page.goto("/crew/knowledge/preview/");
+  await page.goto("/crew/guide/preview/");
   await page.locator("html").evaluate((root) => {
     root.style.zoom = "2";
   });
@@ -57,12 +57,12 @@ test("200 percent page zoom keeps content inside the viewport", async ({ page })
     scrollWidth: root.scrollWidth,
   }));
   expect(metrics.scrollWidth).toBeLessThanOrEqual(metrics.clientWidth + 1);
-  await expect(page.getByRole("heading", { name: "RE:CAR 크루 콘텐츠 가이드" })).toBeVisible();
+  await expect(page.getByRole("heading", { name: "RE:CAR 크루 안내서" })).toBeVisible();
 });
 
 test("mobile menu and section search stay available", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto("/crew/knowledge/preview/");
+  await page.goto("/crew/guide/preview/");
 
   await expect(page.getByRole("button", { name: "가이드 검색", exact: true })).toBeVisible();
   await page.getByRole("button", { name: "메뉴 열기", exact: true }).click();
@@ -77,7 +77,7 @@ test("mobile menu and section search stay available", async ({ page }) => {
 
 test("core sections and mobile full page are captured", async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 900 });
-  await page.goto("/crew/knowledge/preview/");
+  await page.goto("/crew/guide/preview/");
 
   const captures = [
     ["01-hero", "#top"],
@@ -86,12 +86,16 @@ test("core sections and mobile full page are captured", async ({ page }) => {
     ["04-rental-guide", "#rent"],
     ["05-lease-guide", "#lease"],
     ["06-monthly-payment", "#payment"],
-    ["07-economy-lens", "#economy"],
-    ["08-crew-side-work", "#crew-work"],
-    ["09-glossary", "#terms"],
-    ["10-customer-types", "#customers"],
-    ["11-fact-library", "#facts"],
-    ["12-safe-expression", "#phrases"],
+    ["07-deposit-prepayment", "#money"],
+    ["08-insurance-guide", "#insurance"],
+    ["09-contract-ending", "#ending"],
+    ["10-economy-lens", "#economy"],
+    ["11-crew-side-work", "#crew-work"],
+    ["12-glossary", "#terms"],
+    ["13-customer-types", "#customers"],
+    ["14-fact-library", "#facts"],
+    ["15-safe-expression", "#phrases"],
+    ["16-official-sources", "#sources"],
   ];
 
   for (const [name, selector] of captures) {
@@ -104,10 +108,28 @@ test("core sections and mobile full page are captured", async ({ page }) => {
   }
 
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.goto("/crew/knowledge/preview/");
+  await page.goto("/crew/guide/preview/");
+  for (const image of await page.locator('img[loading="lazy"]').all()) {
+    await image.scrollIntoViewIfNeeded();
+  }
+  await page.evaluate(() => window.scrollTo({ top: 0, behavior: "instant" }));
+  await page.waitForTimeout(200);
+  await page.locator("#top").screenshot({
+    animations: "disabled",
+    path: path.join(artifactDir, "17-mobile-hero-390x844.png"),
+  });
+  await page.locator("#payment").evaluate((section) => {
+    document.documentElement.style.scrollBehavior = "auto";
+    window.scrollTo(0, section.offsetTop - 80);
+  });
+  await page.waitForTimeout(100);
+  await page.screenshot({
+    animations: "disabled",
+    path: path.join(artifactDir, "18-mobile-payment-390x844.png"),
+  });
   await page.screenshot({
     animations: "disabled",
     fullPage: true,
-    path: path.join(artifactDir, "13-mobile-full-390x844.png"),
+    path: path.join(artifactDir, "19-mobile-full-390x844.png"),
   });
 });

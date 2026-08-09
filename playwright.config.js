@@ -12,7 +12,7 @@ module.exports = defineConfig({
   reporter: [["list"]],
   webServer: {
     command: "node server.js --port 4175",
-    url: "http://127.0.0.1:4175/crew/knowledge/preview/",
+    url: "http://127.0.0.1:4175/crew/guide/preview/",
     reuseExistingServer: false,
     timeout: 120000,
   },

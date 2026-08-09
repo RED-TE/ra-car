@@ -2,9 +2,9 @@
 
 ## Purpose
 
-`/crew/knowledge/` is a public visual knowledge guide for RE:CAR creators. It explains RE:CAR, long-term rental, automobile lease, customer starting points, contract conditions, vehicle-use economics, crew side-work structure, and safe advertising language. It does not provide CRM, personal referral tracking, scripts, AI generation, settlement requests, or personalized recommendations.
+`/crew/guide/` is a public visual knowledge guide for RE:CAR creators. It explains RE:CAR, long-term rental, automobile lease, customer starting points, contract conditions, vehicle-use economics, crew side-work structure, and safe advertising language. It does not provide CRM, personal referral tracking, scripts, AI generation, settlement requests, or personalized recommendations.
 
-The development-only route is `/crew/knowledge/preview/`. The server returns 404 for this route when `NODE_ENV=production`.
+The development-only route is `/crew/guide/preview/`. The server returns 404 for this route when `NODE_ENV=production`.
 
 ## Content hierarchy
 
@@ -59,7 +59,7 @@ Crew content that can generate compensation should disclose the economic relatio
 - High-income side-job advertising caution: Korea Consumer Agency
 - Product examples: official KB Capital and Lotte Rental pages
 
-Source URLs are maintained in `crew/knowledge/knowledge-data.js`.
+Source URLs are maintained in `crew/guide/knowledge-data.js`.
 
 ## Maintenance
 

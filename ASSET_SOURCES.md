@@ -16,7 +16,7 @@
 
 ### Interface icons
 
-- Asset: `crew/knowledge/lucide.min.js`
+- Asset: `crew/guide/lucide.min.js`
 - Package: Lucide 0.468.0
 - Source: https://www.npmjs.com/package/lucide
 - License: ISC

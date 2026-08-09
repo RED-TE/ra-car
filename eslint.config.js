@@ -10,11 +10,11 @@ module.exports = [
       "node_modules/**",
       "playwright-report/**",
       "test-results/**",
-      "crew/knowledge/lucide.min.js",
+      "crew/guide/lucide.min.js",
     ],
   },
   {
-    files: ["crew/knowledge/knowledge.js", "crew/knowledge/knowledge-data.js"],
+    files: ["crew/guide/knowledge.js", "crew/guide/knowledge-data.js"],
     languageOptions: {
       ecmaVersion: 2022,
       sourceType: "module",

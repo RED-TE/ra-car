@@ -61,23 +61,26 @@ test("development serves public aliases and the preview route", async () => {
   const server = await startServer("development");
   try {
     const routes = [
+      "/crew/guide",
+      "/crew/guide/",
       "/crew/knowledge",
       "/crew/knowledge/",
       "/crew/content-guide/",
+      "/crew/guide/preview/",
       "/crew/knowledge/preview/",
     ];
 
     for (const pathname of routes) {
       const response = await fetch(`${server.baseUrl}${pathname}`);
       assert.equal(response.status, 200, pathname);
-      assert.match(await response.text(), /RE:CAR 크루 콘텐츠 가이드/, pathname);
+      assert.match(await response.text(), /RE:CAR 크루 안내서/, pathname);
     }
 
     for (const pathname of [
-      "/crew/knowledge/knowledge.css",
-      "/crew/knowledge/knowledge.js",
-      "/crew/knowledge/knowledge-data.js",
-      "/crew/knowledge/lucide.min.js",
+      "/crew/guide/knowledge.css",
+      "/crew/guide/knowledge.js",
+      "/crew/guide/knowledge-data.js",
+      "/crew/guide/lucide.min.js",
       "/assets/crew-knowledge/hero-car-1600.webp",
     ]) {
       const response = await fetch(`${server.baseUrl}${pathname}`);
@@ -91,8 +94,8 @@ test("development serves public aliases and the preview route", async () => {
 test("production keeps the public route and returns 404 for preview", async () => {
   const server = await startServer("production");
   try {
-    const publicResponse = await fetch(`${server.baseUrl}/crew/knowledge/`);
-    const previewResponse = await fetch(`${server.baseUrl}/crew/knowledge/preview/`);
+    const publicResponse = await fetch(`${server.baseUrl}/crew/guide/`);
+    const previewResponse = await fetch(`${server.baseUrl}/crew/guide/preview/`);
     assert.equal(publicResponse.status, 200);
     assert.equal(previewResponse.status, 404);
   } finally {
@@ -104,7 +107,7 @@ test("private data and unknown knowledge files stay blocked", async () => {
   const server = await startServer("development");
   try {
     const privateData = await fetch(`${server.baseUrl}/data/leads.jsonl`);
-    const unknownFile = await fetch(`${server.baseUrl}/crew/knowledge/missing.js`);
+    const unknownFile = await fetch(`${server.baseUrl}/crew/guide/missing.js`);
     assert.equal(privateData.status, 404);
     assert.equal(unknownFile.status, 404);
   } finally {

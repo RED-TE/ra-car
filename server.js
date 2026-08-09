@@ -48,11 +48,12 @@ const publicStaticFiles = new Set([
   "/crew/crew.css",
   "/crew/login.html",
   "/crew/login.css",
+  "/crew/guide/index.html",
+  "/crew/guide/knowledge.css",
+  "/crew/guide/knowledge.js",
+  "/crew/guide/knowledge-data.js",
+  "/crew/guide/lucide.min.js",
   "/crew/knowledge/index.html",
-  "/crew/knowledge/knowledge.css",
-  "/crew/knowledge/knowledge.js",
-  "/crew/knowledge/knowledge-data.js",
-  "/crew/knowledge/lucide.min.js",
   "/inquiry/index.html",
   "/data/vehicle-static-catalog.json",
   "/data/vehicles-incomplete-report.json",
@@ -2247,10 +2248,18 @@ function serveStatic(request, response, url) {
   if (requestedPath === "/crew/knowledge" || requestedPath === "/crew/knowledge/") {
     requestedPath = "/crew/knowledge/index.html";
   }
-  if (requestedPath === "/crew/content-guide" || requestedPath === "/crew/content-guide/") {
-    requestedPath = "/crew/knowledge/index.html";
+  if (requestedPath === "/crew/guide" || requestedPath === "/crew/guide/") {
+    requestedPath = "/crew/guide/index.html";
   }
-  if (requestedPath === "/crew/knowledge/preview" || requestedPath === "/crew/knowledge/preview/") {
+  if (requestedPath === "/crew/content-guide" || requestedPath === "/crew/content-guide/") {
+    requestedPath = "/crew/guide/index.html";
+  }
+  if (
+    requestedPath === "/crew/guide/preview" ||
+    requestedPath === "/crew/guide/preview/" ||
+    requestedPath === "/crew/knowledge/preview" ||
+    requestedPath === "/crew/knowledge/preview/"
+  ) {
     if (process.env.NODE_ENV === "production") {
       response.writeHead(404, {
         "Content-Type": "text/plain; charset=utf-8",
@@ -2260,7 +2269,7 @@ function serveStatic(request, response, url) {
       response.end("Not found");
       return;
     }
-    requestedPath = "/crew/knowledge/index.html";
+    requestedPath = "/crew/guide/index.html";
   }
   if (!isPublicStaticPath(requestedPath)) {
     response.writeHead(404, {

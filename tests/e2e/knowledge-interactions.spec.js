@@ -11,7 +11,7 @@ function trackConsoleErrors(page) {
 
 test("core comparison controls update the visible structure", async ({ page }) => {
   const errors = trackConsoleErrors(page);
-  await page.goto("/crew/knowledge/preview/");
+  await page.goto("/crew/guide/preview/");
 
   await page.getByRole("button", { name: "기존 방식", exact: true }).click();
   await expect(page.locator("[data-flow-fee]")).toBeVisible();
@@ -23,7 +23,7 @@ test("core comparison controls update the visible structure", async ({ page }) =
   await expect(page.locator("[data-finance-stack] span:visible")).toHaveCount(3);
 
   await page.locator("[data-mode='lease']").click();
-  await expect(page.locator("[data-mode-owner]")).toHaveText("리스사");
+  await expect(page.locator("[data-mode-owner]")).toHaveText("리스 회사(금융사)");
   await expect(page.locator("[data-mode-plate]")).toContainText("일반 번호판");
   await expect(page.locator("[data-mode-insurance]")).toContainText("개인 별도");
 
@@ -35,10 +35,12 @@ test("core comparison controls update the visible structure", async ({ page }) =
   await expect(page.locator("[data-mode-payment]")).toContainText("월 금융 납부 없음");
 
   await page.locator("[data-factor='mileage']").click();
-  await expect(page.locator("[data-gauge-label]")).toHaveText("연간 주행거리");
+  await expect(page.locator("[data-gauge-label]")).toHaveText("기간과 주행거리");
   await page.locator("[data-term='60']").click();
   await page.locator("[data-mileage='30000']").click();
   await expect(page.locator("[data-condition-message]")).toContainText("60개월 · 연 30,000 km");
+  await expect(page.locator("[data-quote-term]")).toHaveText("60개월");
+  await expect(page.locator("[data-quote-mileage]")).toHaveText("3만 km");
 
   await page.locator("[data-money-mode='prepayment']").click();
   await expect(page.locator("[data-money-center]")).toHaveText("월 이용료에 반영");
@@ -49,7 +51,7 @@ test("core comparison controls update the visible structure", async ({ page }) =
   await expect(page.locator("[data-insurance-owner]")).toHaveText("이용자 개인 보험");
 
   await page.locator("[data-ending-choice='purchase']").click();
-  await expect(page.locator("[data-ending-message]")).toContainText("잔존가치");
+  await expect(page.locator("[data-ending-message]")).toContainText("필요한 전체 금액");
 
   await page.locator("[data-economy-mode='total']").click();
   await expect(page.locator("[data-economy-start]")).toHaveText("보증금·선납금");
@@ -59,9 +61,9 @@ test("core comparison controls update the visible structure", async ({ page }) =
   expect(errors).toEqual([]);
 });
 
-test("searches, filters, FAQ, and safe-expression controls work", async ({ page }) => {
+test("searches, filters, FAQ, and explanation controls work", async ({ page }) => {
   const errors = trackConsoleErrors(page);
-  await page.goto("/crew/knowledge/preview/");
+  await page.goto("/crew/guide/preview/");
 
   const termSearch = page.getByPlaceholder("예: 보증금, 잔존가치, 중도해지");
   await termSearch.fill("잔존가치");
@@ -81,13 +83,13 @@ test("searches, filters, FAQ, and safe-expression controls work", async ({ page 
   await page.locator("[data-fact-filter='economy']").click();
   await expect(page.locator("[data-fact-grid]")).toContainText("총이용비용");
   await page.locator("[data-fact-filter='crew']").click();
-  await expect(page.locator("[data-fact-grid]")).toContainText("유연한 크루 활동");
+  await expect(page.locator("[data-fact-grid]")).toContainText("본업과 병행하는 크루 활동");
 
   const badPhrase = await page.locator("[data-phrase-text]").innerText();
   await page.locator("[data-phrase-toggle]").click();
   const safePhrase = await page.locator("[data-phrase-text]").innerText();
   expect(safePhrase).not.toBe(badPhrase);
-  await expect(page.locator("[data-phrase-state]")).toHaveText("이렇게 바꿔주세요");
+  await expect(page.locator("[data-phrase-state]")).toHaveText("사실");
 
   await page.locator("[data-faq-list] details").first().locator("summary").click();
   await expect(page.locator("[data-faq-list] details").first()).toHaveAttribute("open", "");
@@ -107,26 +109,26 @@ test("searches, filters, FAQ, and safe-expression controls work", async ({ page 
 
 test("deep information opens in focused dialogs", async ({ page }) => {
   const errors = trackConsoleErrors(page);
-  await page.goto("/crew/knowledge/preview/");
+  await page.goto("/crew/guide/preview/");
 
-  await page.getByRole("button", { name: "장기렌트 전체 보기", exact: true }).click();
+  await page.getByRole("button", { name: "장기렌트 상세", exact: true }).click();
   await expect(page.locator("#detailDialog")).toHaveAttribute("open", "");
-  await expect(page.locator("[data-dialog-title]")).toHaveText("장기렌트 완전 이해");
+  await expect(page.locator("[data-dialog-title]")).toHaveText("장기렌트는 어떤 방식인가요?");
   await expect(page.locator("#detailDialog .detail-section")).toHaveCount(5);
   await page.getByRole("button", { name: "상세 정보 닫기", exact: true }).click();
 
-  await page.getByRole("button", { name: "표로 자세히 보기", exact: true }).click();
+  await page.getByRole("button", { name: "비교표 보기", exact: true }).click();
   await expect(page.locator("#compareDialog")).toHaveAttribute("open", "");
   await expect(page.locator(".compare-table tbody tr")).toHaveCount(14);
   await page.getByRole("button", { name: "비교표 닫기", exact: true }).click();
 
-  await page.getByRole("button", { name: "경제 관점 자세히", exact: true }).click();
-  await expect(page.locator("[data-dialog-title]")).toHaveText("차량 이용을 보는 경제 관점");
-  await expect(page.locator("#detailDialog")).toContainText("기회비용");
+  await page.getByRole("button", { name: "전체 비용 상세", exact: true }).click();
+  await expect(page.locator("[data-dialog-title]")).toHaveText("차량에 실제로 드는 돈은 얼마인가요?");
+  await expect(page.locator("#detailDialog")).toContainText("남겨 둘 자금");
   await page.getByRole("button", { name: "상세 정보 닫기", exact: true }).click();
 
-  await page.getByRole("button", { name: "크루 부업 자세히", exact: true }).click();
-  await expect(page.locator("[data-dialog-title]")).toHaveText("RE:CAR 크루 활동 이해");
+  await page.getByRole("button", { name: "크루 활동 상세", exact: true }).click();
+  await expect(page.locator("[data-dialog-title]")).toHaveText("RE:CAR 크루는 무슨 일을 하나요?");
   await expect(page.locator("#detailDialog")).toContainText("고정 급여·최소 수익을 보장하지 않음");
   await expect(page.locator("#detailDialog")).toContainText("경제적 이해관계");
   await page.getByRole("button", { name: "상세 정보 닫기", exact: true }).click();
@@ -147,16 +149,18 @@ test("deep information opens in focused dialogs", async ({ page }) => {
 
 test("images and internal links resolve without broken resources", async ({ page, request }) => {
   const errors = trackConsoleErrors(page);
-  await page.goto("/crew/knowledge/preview/");
+  await page.goto("/crew/guide/preview/");
 
-  const imageState = await page.locator("img").evaluateAll((images) =>
-    images.map((image) => ({
-      complete: image.complete,
-      naturalWidth: image.naturalWidth,
-      source: image.currentSrc || image.src,
-    })),
-  );
-  expect(imageState.every((image) => image.complete && image.naturalWidth > 0)).toBeTruthy();
+  for (const image of await page.locator("img").all()) {
+    await image.scrollIntoViewIfNeeded();
+  }
+  await expect
+    .poll(async () =>
+      page.locator("img").evaluateAll((images) =>
+        images.every((image) => image.complete && image.naturalWidth > 0),
+      ),
+    )
+    .toBeTruthy();
 
   const internalLinks = await page.locator("a[href]").evaluateAll((anchors) =>
     [...new Set(

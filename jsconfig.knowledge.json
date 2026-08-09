@@ -10,7 +10,7 @@
     "target": "ES2022"
   },
   "include": [
-    "crew/knowledge/knowledge.js",
-    "crew/knowledge/knowledge-data.js"
+    "crew/guide/knowledge.js",
+    "crew/guide/knowledge-data.js"
   ]
 }

@@ -7,7 +7,7 @@ for (const viewport of [
 ]) {
   test(`axe has no accessibility violations on ${viewport.name}`, async ({ page }) => {
     await page.setViewportSize(viewport);
-    await page.goto("/crew/knowledge/preview/");
+    await page.goto("/crew/guide/preview/");
     const results = await new AxeBuilder({ page }).analyze();
     expect(
       results.violations.map((violation) => ({
@@ -22,7 +22,7 @@ for (const viewport of [
 test("keyboard focus, dialogs, and reduced motion remain usable", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await page.emulateMedia({ reducedMotion: "reduce" });
-  await page.goto("/crew/knowledge/preview/");
+  await page.goto("/crew/guide/preview/");
 
   await page.keyboard.press("Tab");
   await expect(page.locator(".skip-link")).toBeFocused();
