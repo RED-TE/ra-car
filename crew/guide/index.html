@@ -17,7 +17,7 @@
     <link rel="canonical" href="https://recarplan.com/crew/guide/" />
     <link rel="icon" type="image/png" href="/assets/recar-favicon-20260518.png" />
     <link rel="apple-touch-icon" href="/assets/recar-favicon-20260518.png" />
-    <link rel="stylesheet" href="/crew/guide/knowledge.css?v=20260810-route" />
+    <link rel="stylesheet" href="/crew/guide/knowledge.css?v=20260810-reward" />
     <title>RE:CAR 크루 안내서</title>
   </head>
   <body>
@@ -37,6 +37,7 @@
         <a href="#rent">렌트·리스</a>
         <a href="#payment">비용·계약</a>
         <a href="#crew-work">크루 활동</a>
+        <a href="#rewards">보상</a>
         <a href="#terms">용어</a>
         <a href="#facts">더 알아보기</a>
       </nav>
@@ -95,7 +96,7 @@
           <a href="#recar"><span>01</span><strong>RE:CAR</strong><small>조건 비교</small></a>
           <a href="#rent"><span>02</span><strong>렌트·리스</strong><small>차이 이해</small></a>
           <a href="#payment"><span>03</span><strong>비용·계약</strong><small>확인 항목</small></a>
-          <a href="#crew-work"><span>04</span><strong>크루 활동</strong><small>역할과 정산</small></a>
+          <a href="#crew-work"><span>04</span><strong>크루 활동</strong><small>역할과 보상</small></a>
         </div>
       </section>
 
@@ -688,11 +689,83 @@
         </div>
       </section>
 
+      <section class="scene rewards-scene" id="rewards" aria-labelledby="rewardsTitle">
+        <div class="scene-inner">
+          <div class="center-heading">
+            <p class="eyebrow">11 · 크루 보상</p>
+            <h2 id="rewardsTitle">계약 차량과 조건에 따라<br />보상이 달라집니다.</h2>
+            <p>차량가 구간을 기본으로 상품·기간·금융사 기준과 계약 결과를 함께 확인합니다.</p>
+          </div>
+
+          <div class="reward-layout">
+            <section class="reward-calculation" aria-labelledby="rewardCalculationTitle">
+              <div class="reward-panel-heading">
+                <span><i data-lucide="badge-dollar-sign" aria-hidden="true"></i>CONTRACT REWARD</span>
+                <h3 id="rewardCalculationTitle">계약별 보상 산정 구조</h3>
+              </div>
+              <div class="reward-factor-grid" aria-label="계약 보상 산정 요소">
+                <div class="reward-factor">
+                  <span class="reward-factor-icon"><i data-lucide="car-front" aria-hidden="true"></i></span>
+                  <small>기본 기준</small>
+                  <strong>차량가 구간</strong>
+                  <p>차종·트림의 계약 기준가</p>
+                </div>
+                <div class="reward-factor">
+                  <span class="reward-factor-icon"><i data-lucide="calendar-range" aria-hidden="true"></i></span>
+                  <small>계약 구성</small>
+                  <strong>상품·기간</strong>
+                  <p>렌트·리스와 이용기간</p>
+                </div>
+                <div class="reward-factor">
+                  <span class="reward-factor-icon"><i data-lucide="landmark" aria-hidden="true"></i></span>
+                  <small>적용 기준</small>
+                  <strong>금융사 조건</strong>
+                  <p>계약 시점의 운영 기준</p>
+                </div>
+              </div>
+              <div class="reward-result">
+                <span><i data-lucide="badge-check" aria-hidden="true"></i>계약 결과 확인</span>
+                <i data-lucide="arrow-right" aria-hidden="true"></i>
+                <strong>계약별 보상 확정</strong>
+              </div>
+              <p class="reward-note">실제 보상 금액은 차량가와 계약 조건, 취소 여부 및 최신 운영 기준을 반영해 계약별로 확인합니다.</p>
+              <button class="text-button" type="button" data-open-reward-detail>
+                보상 기준 상세
+                <i data-lucide="arrow-up-right" aria-hidden="true"></i>
+              </button>
+            </section>
+
+            <section class="reward-milestone" aria-labelledby="rewardMilestoneTitle">
+              <div class="milestone-copy">
+                <span class="milestone-kicker"><i data-lucide="trophy" aria-hidden="true"></i>MILESTONE REWARD</span>
+                <div class="milestone-count"><strong>100</strong><span>CONTRACTS</span></div>
+                <h3 id="rewardMilestoneTitle">누적 계약 100대 달성 시</h3>
+                <p class="milestone-benefit">Tesla Model Y<br /><strong>1년 이용 지원</strong></p>
+              </div>
+              <figure class="milestone-vehicle">
+                <img
+                  src="/assets/crew-knowledge/tesla-model-y-reward.png"
+                  alt="누적 계약 100대 달성 혜택으로 제공되는 Tesla Model Y"
+                  width="360"
+                  height="165"
+                  loading="lazy"
+                />
+                <figcaption>TESLA MODEL Y</figcaption>
+              </figure>
+              <p class="milestone-note">
+                <i data-lucide="info" aria-hidden="true"></i>
+                차량 사양·보험·주행거리 등 세부 이용 조건은 혜택 제공 시 운영팀이 안내합니다.
+              </p>
+            </section>
+          </div>
+        </div>
+      </section>
+
       <section class="scene terms-scene" id="terms" aria-labelledby="termsTitle">
         <div class="scene-inner">
           <div class="scene-heading-row">
             <div>
-            <p class="eyebrow">11 · 헷갈리는 용어</p>
+            <p class="eyebrow">12 · 헷갈리는 용어</p>
               <h2 id="termsTitle">어려운 용어를<br />한 줄로 정리했습니다.</h2>
             </div>
             <p>보증금·선납금·잔존가치 등 용어별 뜻과 차이를 확인할 수 있습니다.</p>
@@ -719,7 +792,7 @@
         <div class="scene-inner">
           <div class="scene-heading-row">
             <div>
-              <p class="eyebrow">12 · 상황별로 보기</p>
+              <p class="eyebrow">13 · 상황별로 보기</p>
               <h2 id="customersTitle">상황에 따라<br />먼저 볼 조건이 다릅니다.</h2>
             </div>
             <p>보험료, 주행거리, 사업용 여부와 차량 보유 계획에 따라 먼저 살펴볼 조건이 달라집니다.</p>
@@ -748,7 +821,7 @@
         <div class="scene-inner">
           <div class="scene-heading-row">
             <div>
-              <p class="eyebrow">13 · 항목별 더 알아보기</p>
+              <p class="eyebrow">14 · 항목별 더 알아보기</p>
               <h2 id="factsTitle">항목별 설명을<br />모았습니다.</h2>
             </div>
             <p>항목별 설명, 흔한 오해와 확인할 조건을 정리했습니다.</p>
@@ -779,7 +852,7 @@
       <section class="scene phrase-scene" id="phrases" aria-labelledby="phrasesTitle">
         <div class="scene-inner split-scene">
           <div class="scene-copy">
-            <p class="eyebrow">14 · 흔한 오해</p>
+            <p class="eyebrow">15 · 흔한 오해</p>
             <h2 id="phrasesTitle">사실과 오해를<br />구분했습니다.</h2>
             <p class="scene-summary">사실과 오해를 한 문장씩 비교합니다.</p>
           </div>
@@ -813,7 +886,7 @@
         <div class="scene-inner">
           <div class="scene-heading-row">
             <div>
-              <p class="eyebrow">15 · 확인 자료</p>
+              <p class="eyebrow">16 · 확인 자료</p>
               <h2 id="sourcesTitle">공식 자료로<br />다시 확인합니다.</h2>
             </div>
             <p>마지막 검토일 <strong data-review-date>2026-08-07</strong> · 상품별 실제 약관과 계약서가 우선합니다.</p>
@@ -923,6 +996,6 @@
     <div class="toast" role="status" aria-live="polite" data-toast hidden></div>
 
     <script src="/crew/guide/lucide.min.js?v=0.468.0" defer></script>
-    <script type="module" src="/crew/guide/knowledge.js?v=20260810-route"></script>
+    <script type="module" src="/crew/guide/knowledge.js?v=20260810-reward"></script>
   </body>
 </html>

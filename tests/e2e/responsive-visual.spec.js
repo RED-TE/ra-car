@@ -67,7 +67,7 @@ test("mobile menu and section search stay available", async ({ page }) => {
   await expect(page.getByRole("button", { name: "가이드 검색", exact: true })).toBeVisible();
   await page.getByRole("button", { name: "메뉴 열기", exact: true }).click();
   await expect(page.locator("#mobileMenu")).toBeVisible();
-  await expect(page.locator("[data-mobile-menu-links] a")).toHaveCount(15);
+  await expect(page.locator("[data-mobile-menu-links] a")).toHaveCount(16);
   const lastMenuLink = page.locator("[data-mobile-menu-links] a").last();
   await lastMenuLink.scrollIntoViewIfNeeded();
   await expect(lastMenuLink).toBeVisible();
@@ -91,11 +91,12 @@ test("core sections and mobile full page are captured", async ({ page }) => {
     ["09-contract-ending", "#ending"],
     ["10-economy-lens", "#economy"],
     ["11-crew-side-work", "#crew-work"],
-    ["12-glossary", "#terms"],
-    ["13-customer-types", "#customers"],
-    ["14-fact-library", "#facts"],
-    ["15-safe-expression", "#phrases"],
-    ["16-official-sources", "#sources"],
+    ["12-crew-rewards", "#rewards"],
+    ["13-glossary", "#terms"],
+    ["14-customer-types", "#customers"],
+    ["15-fact-library", "#facts"],
+    ["16-safe-expression", "#phrases"],
+    ["17-official-sources", "#sources"],
   ];
 
   for (const [name, selector] of captures) {
@@ -139,6 +140,14 @@ test("core sections and mobile full page are captured", async ({ page }) => {
     path: path.join(artifactDir, "18b-mobile-existing-five-step-390x844.png"),
   });
   await page.locator("[data-recar-mode='recar']").click();
+  await page.locator("#rewards").evaluate((section) => {
+    document.documentElement.style.scrollBehavior = "auto";
+    window.scrollTo(0, section.offsetTop - 80);
+  });
+  await page.screenshot({
+    animations: "disabled",
+    path: path.join(artifactDir, "18c-mobile-crew-rewards-390x844.png"),
+  });
   await page.locator("#payment").evaluate((section) => {
     document.documentElement.style.scrollBehavior = "auto";
     window.scrollTo(0, section.offsetTop - 80);

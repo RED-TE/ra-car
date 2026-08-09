@@ -551,6 +551,53 @@ function openCrewWorkDetail() {
   });
 }
 
+function openRewardDetail() {
+  openDetail({
+    kicker: "크루 보상",
+    title: "계약별 보상과 100대 혜택",
+    body: `
+      <div class="detail-hero">
+        <strong>계약별 보상은 차량가 구간과 실제 계약 조건을 함께 반영해 확인합니다.</strong>
+        <p>누적 계약 100대 달성 시에는 Tesla Model Y 1년 이용을 지원합니다.</p>
+      </div>
+      <section class="detail-section">
+        <h3>계약별 보상 산정 요소</h3>
+        <div class="detail-formula">
+          <span>계약별 보상</span>
+          <strong>차량가 구간 + 상품·기간 + 금융사 조건 + 계약 결과</strong>
+        </div>
+        ${listHtml([
+          "차종과 트림의 계약 기준가가 속한 차량가 구간을 확인합니다.",
+          "장기렌트·리스 상품, 이용기간과 계약 시점의 금융사 조건을 함께 반영합니다.",
+          "취소 여부와 계약 결과를 확인한 뒤 최신 운영 기준에 따라 보상을 확정합니다.",
+        ])}
+      </section>
+      <section class="detail-section">
+        <h3>누적 100대 계약 마일스톤</h3>
+        <div class="detail-pair">
+          <div>
+            <span>달성 기준</span>
+            <p>누적 계약 100대</p>
+          </div>
+          <div>
+            <span>달성 혜택</span>
+            <p>Tesla Model Y 1년 이용 지원</p>
+          </div>
+        </div>
+        <p>차량 사양, 보험, 주행거리, 이용 시작일과 그 밖의 세부 조건은 혜택 제공 시 RE:CAR 운영팀이 안내합니다.</p>
+      </section>
+      <section class="detail-section">
+        <h3>확인할 내용</h3>
+        ${listHtml([
+          "화면의 산정 요소는 보상 구조를 이해하기 위한 안내입니다.",
+          "실제 계약별 금액과 지급 시점은 최신 운영 기준에서 확인합니다.",
+          "100대 혜택의 세부 이용 조건은 마일스톤 달성 확인 후 안내됩니다.",
+        ])}
+      </section>
+    `,
+  });
+}
+
 function openPriceChecklist() {
   openDetail({
     kicker: "월 납입금",
@@ -1153,6 +1200,7 @@ function bindEvents() {
     if (target.matches("[data-open-ending-detail]")) openEndingDetail();
     if (target.matches("[data-open-economy-detail]")) openEconomyDetail();
     if (target.matches("[data-open-crew-work-detail]")) openCrewWorkDetail();
+    if (target.matches("[data-open-reward-detail]")) openRewardDetail();
     if (target.matches("[data-open-price-checklist]")) openPriceChecklist();
     if (target.matches("[data-open-all-sources]")) openSourceLibrary();
     if (target.matches("[data-open-all-faq]")) openFaqLibrary();

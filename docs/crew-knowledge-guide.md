@@ -41,6 +41,8 @@ The crew side-work scene may explain the repository-backed flow:
 2. The RE:CAR operations team handles consultation, screening, contract, and delivery.
 3. A valid delivered result is reviewed under the latest operating and settlement policy.
 
+The public reward section explains that per-contract compensation reflects the vehicle-price band, product and term, finance-company conditions, contract result, and the latest operating policy. It also presents the current milestone benefit: one year of Tesla Model Y use support after 100 cumulative contracts. Exact vehicle specifications, insurance, mileage, and use conditions are provided by operations when the benefit is awarded.
+
 Public content must not promise a fixed wage, a minimum monthly income, or immediate payment for a click or inquiry. Per-case or average income figures require a verified reference date, population, period, calculation conditions, cancellation treatment, and tax basis before publication. The public guide deliberately does not display a personal code or a guaranteed income amount.
 
 Crew content that can generate compensation should disclose the economic relationship clearly. Income classification and tax filing depend on the actual activity, so the guide directs users to National Tax Service guidance or a tax professional.

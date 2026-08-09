@@ -2159,6 +2159,257 @@ summary:focus-visible {
   font-size: 12px;
 }
 
+.rewards-scene {
+  background: #fff;
+}
+
+.reward-layout {
+  display: grid;
+  grid-template-columns: minmax(0, 0.96fr) minmax(0, 1.04fr);
+  gap: 24px;
+  margin-top: 38px;
+}
+
+.reward-calculation,
+.reward-milestone {
+  min-height: 480px;
+  border-radius: var(--radius);
+}
+
+.reward-calculation {
+  padding: 28px;
+  border: 1px solid var(--line);
+  background: var(--soft);
+}
+
+.reward-panel-heading {
+  display: grid;
+  gap: 8px;
+}
+
+.reward-panel-heading > span,
+.milestone-kicker {
+  display: inline-flex;
+  min-height: 30px;
+  width: max-content;
+  align-items: center;
+  gap: 7px;
+  padding: 0 10px;
+  border-radius: 4px;
+  background: var(--blue-soft);
+  color: var(--blue-dark);
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.reward-panel-heading svg,
+.milestone-kicker svg {
+  width: 16px;
+  height: 16px;
+}
+
+.reward-panel-heading h3 {
+  font-size: 24px;
+}
+
+.reward-factor-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  margin-top: 24px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  background: #fff;
+}
+
+.reward-factor {
+  display: grid;
+  min-width: 0;
+  min-height: 166px;
+  align-content: center;
+  justify-items: start;
+  gap: 3px;
+  padding: 18px 14px;
+  border-right: 1px solid var(--line);
+}
+
+.reward-factor:last-child {
+  border-right: 0;
+}
+
+.reward-factor-icon {
+  display: grid;
+  width: 42px;
+  height: 42px;
+  place-items: center;
+  margin-bottom: 8px;
+  border-radius: 6px;
+  background: var(--blue-soft);
+  color: var(--blue);
+}
+
+.reward-factor-icon svg {
+  width: 22px;
+  height: 22px;
+}
+
+.reward-factor small {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.reward-factor strong {
+  font-size: 15px;
+}
+
+.reward-factor p {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.reward-result {
+  display: grid;
+  min-height: 68px;
+  grid-template-columns: 1fr 24px 1fr;
+  align-items: center;
+  gap: 8px;
+  margin-top: 18px;
+  padding: 12px 16px;
+  border-radius: 6px;
+  background: var(--dark);
+  color: #fff;
+}
+
+.reward-result span,
+.reward-result strong {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  font-size: 13px;
+}
+
+.reward-result > svg {
+  width: 18px;
+  height: 18px;
+  color: #8fb4ff;
+}
+
+.reward-result span svg {
+  width: 18px;
+  height: 18px;
+  color: #66d4ad;
+}
+
+.reward-note {
+  margin-top: 14px;
+  color: var(--muted);
+  font-size: 13px;
+}
+
+.reward-calculation .text-button {
+  min-height: 38px;
+  margin-top: 8px;
+}
+
+.reward-milestone {
+  overflow: hidden;
+  border: 1px solid #26354d;
+  background: var(--dark);
+  color: #fff;
+  box-shadow: 0 24px 60px rgba(16, 24, 40, 0.16);
+}
+
+.milestone-copy {
+  padding: 28px 28px 0;
+}
+
+.milestone-kicker {
+  background: #123c36;
+  color: #8aebc8;
+}
+
+.milestone-count {
+  display: flex;
+  align-items: flex-end;
+  gap: 10px;
+  margin-top: 14px;
+}
+
+.milestone-count strong {
+  font-size: 58px;
+  line-height: 0.94;
+}
+
+.milestone-count span {
+  color: #8fb4ff;
+  font-size: 12px;
+  font-weight: 900;
+}
+
+.milestone-copy h3 {
+  margin-top: 13px;
+  color: #b8c3d2;
+  font-size: 15px;
+}
+
+.milestone-benefit {
+  margin-top: 4px;
+  font-size: 28px;
+  font-weight: 800;
+  line-height: 1.24;
+}
+
+.milestone-benefit strong {
+  color: #66d4ad;
+}
+
+.milestone-vehicle {
+  position: relative;
+  min-height: 178px;
+  margin: 8px 0 0;
+  border-top: 1px solid #26354d;
+  border-bottom: 1px solid #26354d;
+  background: #101a2a;
+}
+
+.milestone-vehicle img {
+  position: absolute;
+  right: 18px;
+  bottom: 8px;
+  width: min(76%, 430px);
+  height: auto;
+  filter: drop-shadow(0 18px 16px rgba(0, 0, 0, 0.36));
+}
+
+.milestone-vehicle figcaption {
+  position: absolute;
+  bottom: 14px;
+  left: 22px;
+  color: #8fb4ff;
+  font-size: 11px;
+  font-weight: 900;
+  writing-mode: vertical-rl;
+}
+
+.milestone-note {
+  display: flex;
+  min-height: 58px;
+  align-items: flex-start;
+  gap: 8px;
+  padding: 13px 18px;
+  color: #b8c3d2;
+  font-size: 12px;
+}
+
+.milestone-note svg {
+  width: 17px;
+  height: 17px;
+  flex: 0 0 17px;
+  margin-top: 2px;
+  color: #fdb022;
+}
+
 .terms-scene,
 .facts-scene {
   min-height: 800px;
@@ -3344,6 +3595,18 @@ dialog::backdrop {
     transform: rotate(90deg);
   }
 
+  .reward-layout {
+    grid-template-columns: 1fr;
+  }
+
+  .reward-milestone {
+    grid-row: 1;
+  }
+
+  .reward-calculation {
+    grid-row: 2;
+  }
+
   .scene-heading-row {
     grid-template-columns: 1fr;
     gap: 20px;
@@ -3824,6 +4087,86 @@ dialog::backdrop {
 
   .crew-work-reality {
     padding: 14px 12px;
+  }
+
+  .reward-layout {
+    gap: 16px;
+    margin-top: 28px;
+  }
+
+  .reward-calculation {
+    min-height: auto;
+    padding: 18px;
+  }
+
+  .reward-panel-heading h3 {
+    font-size: 21px;
+  }
+
+  .reward-factor-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .reward-factor {
+    min-height: 94px;
+    grid-template-columns: 46px minmax(0, 1fr);
+    align-items: center;
+    align-content: center;
+    gap: 1px 12px;
+    padding: 13px 12px;
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .reward-factor:last-child {
+    border-bottom: 0;
+  }
+
+  .reward-factor-icon {
+    grid-row: 1 / 4;
+    grid-column: 1;
+    margin-bottom: 0;
+  }
+
+  .reward-factor small,
+  .reward-factor strong,
+  .reward-factor p {
+    grid-column: 2;
+  }
+
+  .reward-result {
+    min-height: 76px;
+    padding: 10px 12px;
+  }
+
+  .reward-result span,
+  .reward-result strong {
+    font-size: 12px;
+  }
+
+  .reward-milestone {
+    min-height: 500px;
+  }
+
+  .milestone-copy {
+    padding: 22px 20px 0;
+  }
+
+  .milestone-count strong {
+    font-size: 52px;
+  }
+
+  .milestone-benefit {
+    font-size: 26px;
+  }
+
+  .milestone-vehicle {
+    min-height: 174px;
+  }
+
+  .milestone-vehicle img {
+    right: 4px;
+    width: 82%;
   }
 
   .term-grid,

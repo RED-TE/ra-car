@@ -135,6 +135,11 @@ test("deep information opens in focused dialogs", async ({ page }) => {
   await expect(page.locator("#detailDialog")).toContainText("경제적 이해관계");
   await page.getByRole("button", { name: "상세 정보 닫기", exact: true }).click();
 
+  await page.getByRole("button", { name: "보상 기준 상세", exact: true }).click();
+  await expect(page.locator("[data-dialog-title]")).toHaveText("계약별 보상과 100대 혜택");
+  await expect(page.locator("#detailDialog")).toContainText("Tesla Model Y 1년 이용 지원");
+  await page.getByRole("button", { name: "상세 정보 닫기", exact: true }).click();
+
   await page.locator("[data-toggle-all-terms]").click();
   await expect(page.locator("[data-dialog-title]")).toHaveText("전체 핵심 용어");
   await expect(page.locator("#detailDialog .library-list button")).toHaveCount(24);
@@ -145,7 +150,7 @@ test("deep information opens in focused dialogs", async ({ page }) => {
   await page.getByRole("button", { name: "상세 정보 닫기", exact: true }).click();
 
   await page.locator("[data-open-all-faq]").click();
-  await expect(page.locator("#detailDialog .drawer-faq-list details")).toHaveCount(21);
+  await expect(page.locator("#detailDialog .drawer-faq-list details")).toHaveCount(23);
   expect(errors).toEqual([]);
 });
 
