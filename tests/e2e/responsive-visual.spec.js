@@ -107,6 +107,13 @@ test("core sections and mobile full page are captured", async ({ page }) => {
     });
   }
 
+  await page.locator("[data-recar-mode='old']").click();
+  await page.locator("#recar").screenshot({
+    animations: "disabled",
+    path: path.join(artifactDir, "02b-existing-five-step-1440x900.png"),
+  });
+  await page.locator("[data-recar-mode='recar']").click();
+
   await page.setViewportSize({ width: 390, height: 844 });
   await page.goto("/crew/guide/preview/");
   for (const image of await page.locator('img[loading="lazy"]').all()) {
@@ -118,6 +125,20 @@ test("core sections and mobile full page are captured", async ({ page }) => {
     animations: "disabled",
     path: path.join(artifactDir, "17-mobile-hero-390x844.png"),
   });
+  await page.locator("[data-route-panel='recar']").evaluate((panel) => {
+    document.documentElement.style.scrollBehavior = "auto";
+    window.scrollTo(0, panel.getBoundingClientRect().top + window.scrollY - 90);
+  });
+  await page.screenshot({
+    animations: "disabled",
+    path: path.join(artifactDir, "18a-mobile-recar-direct-390x844.png"),
+  });
+  await page.locator("[data-recar-mode='old']").click();
+  await page.screenshot({
+    animations: "disabled",
+    path: path.join(artifactDir, "18b-mobile-existing-five-step-390x844.png"),
+  });
+  await page.locator("[data-recar-mode='recar']").click();
   await page.locator("#payment").evaluate((section) => {
     document.documentElement.style.scrollBehavior = "auto";
     window.scrollTo(0, section.offsetTop - 80);

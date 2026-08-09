@@ -655,23 +655,12 @@ function updateRecarMode(mode) {
     button.setAttribute("aria-pressed", String(active));
   });
 
-  const bridge = qs("[data-flow-bridge]");
-  const fee = qs("[data-flow-fee]");
-  const stack = qs("[data-finance-stack]");
-  const icon = qs("[data-lucide]", bridge);
-  const label = qs("span", bridge);
-
-  icon.setAttribute("data-lucide", isRecar ? "scale" : "user-round");
-  label.textContent = isRecar ? "RE:CAR 동일 기준" : "개별 영업 과정";
-  fee.hidden = isRecar;
-  stack.classList.toggle("is-single", !isRecar);
-  qsa("span", stack).forEach((item, index) => {
-    item.hidden = !isRecar && index > 0;
+  qsa("[data-route-panel]").forEach((panel) => {
+    panel.hidden = panel.dataset.routePanel !== mode;
   });
   qs("[data-recar-caption]").textContent = isRecar
-    ? "영업사원별 임의 추가 수수료 없이 RE:CAR의 동일한 기준으로 여러 조건을 비교합니다."
-    : "같은 금융사 상품이어도 영업 과정과 서로 다른 조건이 더해지면 고객 견적은 달라질 수 있습니다.";
-  refreshIcons();
+    ? "고객 조건을 RE:CAR가 바로 정리해 여러 금융사의 견적을 같은 기준으로 비교합니다."
+    : "고객 문의가 유통업체, 영업사원, 대리점·딜러를 차례로 거쳐 금융사에 전달되는 구조입니다.";
 }
 
 function updateMoneyMode(mode) {

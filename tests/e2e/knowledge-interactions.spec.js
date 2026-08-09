@@ -13,14 +13,16 @@ test("core comparison controls update the visible structure", async ({ page }) =
   const errors = trackConsoleErrors(page);
   await page.goto("/crew/guide/preview/");
 
-  await page.getByRole("button", { name: "기존 방식", exact: true }).click();
-  await expect(page.locator("[data-flow-fee]")).toBeVisible();
-  await expect(page.locator("[data-finance-stack] span:visible")).toHaveCount(1);
-  await expect(page.locator("[data-recar-caption]")).toContainText("영업 과정");
+  await page.getByRole("button", { name: "기존 5단계", exact: true }).click();
+  await expect(page.locator("[data-route-panel='old']")).toBeVisible();
+  await expect(page.locator("[data-route-panel='old'] .route-step")).toHaveCount(5);
+  await expect(page.locator("[data-recar-caption]")).toContainText("유통업체, 영업사원, 대리점·딜러");
 
   await page.locator("[data-recar-mode='recar']").click();
-  await expect(page.locator("[data-flow-fee]")).toBeHidden();
-  await expect(page.locator("[data-finance-stack] span:visible")).toHaveCount(3);
+  await expect(page.locator("[data-route-panel='old']")).toBeHidden();
+  await expect(page.locator("[data-route-panel='recar']")).toBeVisible();
+  await expect(page.locator("[data-route-panel='recar'] .route-step")).toHaveCount(3);
+  await expect(page.locator("[data-recar-caption]")).toContainText("바로 정리");
 
   await page.locator("[data-mode='lease']").click();
   await expect(page.locator("[data-mode-owner]")).toHaveText("리스 회사(금융사)");

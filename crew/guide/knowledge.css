@@ -615,7 +615,11 @@ summary:focus-visible {
 .segmented-control button,
 .insurance-tabs button,
 .money-toggle button {
+  display: inline-flex;
   min-height: 44px;
+  align-items: center;
+  justify-content: center;
+  gap: 7px;
   padding: 0 16px;
   border: 0;
   border-radius: 5px;
@@ -625,6 +629,11 @@ summary:focus-visible {
   cursor: pointer;
 }
 
+.segmented-control button svg {
+  width: 17px;
+  height: 17px;
+}
+
 .segmented-control button.is-active,
 .insurance-tabs button[aria-selected="true"],
 .money-toggle button.is-active {
@@ -632,113 +641,233 @@ summary:focus-visible {
   color: #fff;
 }
 
-.flow-stage {
-  position: relative;
-  display: grid;
-  grid-template-columns: 112px 1fr 174px 1fr 180px;
-  min-height: 360px;
-  align-items: center;
-  gap: 12px;
-  padding: 40px 8px 54px;
-}
-
-.flow-node {
-  display: grid;
-  min-height: 122px;
-  place-items: center;
-  align-content: center;
-  gap: 10px;
-  border: 1px solid var(--line);
+.route-panel {
+  min-height: 396px;
+  margin-top: 14px;
+  padding: 24px;
+  border: 1px solid #cbd8ee;
   border-radius: var(--radius);
   background: #fff;
-  text-align: center;
-  font-size: 13px;
-  font-weight: 850;
 }
 
-.flow-node svg {
-  width: 30px;
-  height: 30px;
-  color: var(--blue);
-}
-
-.bridge-node {
-  border-color: #b8cdfb;
-  background: var(--blue-soft);
-}
-
-.flow-line {
-  height: 2px;
-  background: var(--blue);
-}
-
-.finance-stack {
-  display: grid;
-  gap: 8px;
-}
-
-.finance-stack span {
-  display: flex;
-  min-height: 46px;
-  align-items: center;
-  justify-content: center;
-  border: 1px solid #b8cdfb;
-  border-radius: var(--radius);
-  background: #fff;
-  color: var(--blue-dark);
-  font-size: 13px;
-  font-weight: 850;
-}
-
-.finance-stack.is-single span:not(:first-child) {
+.route-panel[hidden] {
   display: none;
 }
 
-.flow-fee {
-  position: absolute;
-  top: 46px;
-  left: 42%;
-  z-index: 2;
+.route-panel--old {
+  border-color: #f2d3bd;
+  background: #fffaf6;
+}
+
+.route-panel-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--line);
+}
+
+.route-panel-heading strong {
+  font-size: 16px;
+  text-align: right;
+}
+
+.route-kicker {
   display: inline-flex;
-  min-height: 44px;
+  min-height: 32px;
+  flex: 0 0 auto;
   align-items: center;
   gap: 7px;
-  padding: 0 12px;
-  border: 1px solid #f7b4bf;
-  border-radius: var(--radius);
-  background: var(--red-soft);
-  color: var(--red);
+  padding: 0 10px;
+  border-radius: 4px;
+  background: var(--blue-soft);
+  color: var(--blue-dark);
   font-size: 12px;
-  font-weight: 850;
+  font-weight: 900;
 }
 
-.flow-fee[hidden] {
-  display: none;
+.route-panel--old .route-kicker {
+  background: var(--amber-soft);
+  color: var(--amber);
 }
 
-.flow-fee svg {
+.route-kicker svg {
   width: 16px;
   height: 16px;
 }
 
-.condition-output {
-  position: absolute;
-  inset: auto 18px 12px 18px;
+.route-track {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
+  align-items: stretch;
+  margin-top: 22px;
 }
 
-.condition-output span {
-  display: flex;
-  min-height: 38px;
-  align-items: center;
-  justify-content: center;
+.route-track--old {
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 17px;
+}
+
+.route-track--direct {
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.16fr) minmax(0, 1fr);
+  gap: 28px;
+}
+
+.route-step {
+  position: relative;
+  display: grid;
+  min-width: 0;
+  min-height: 154px;
+  place-items: center;
+  align-content: center;
+  gap: 7px;
+  padding: 15px 7px;
+  border: 1px solid #d5deeb;
   border-radius: var(--radius);
-  background: var(--dark);
-  color: #fff;
+  background: #f8fafc;
+  text-align: center;
+}
+
+.route-step:not(:last-child)::after {
+  position: absolute;
+  top: 50%;
+  left: calc(100% + 1px);
+  width: 16px;
+  border-top: 2px solid #9ba8ba;
+  content: "";
+}
+
+.route-step:not(:last-child)::before {
+  position: absolute;
+  top: calc(50% - 4px);
+  left: calc(100% + 11px);
+  z-index: 1;
+  width: 7px;
+  height: 7px;
+  border-top: 2px solid #9ba8ba;
+  border-right: 2px solid #9ba8ba;
+  content: "";
+  transform: rotate(45deg);
+}
+
+.route-track--direct .route-step:not(:last-child)::after {
+  width: 27px;
+  border-color: var(--blue);
+}
+
+.route-track--direct .route-step:not(:last-child)::before {
+  left: calc(100% + 20px);
+  border-color: var(--blue);
+}
+
+.route-number {
+  color: #475467;
   font-size: 12px;
-  font-weight: 800;
+  font-weight: 900;
+}
+
+.route-icon {
+  display: grid;
+  width: 46px;
+  height: 46px;
+  place-items: center;
+  border: 1px solid #cbd8ee;
+  border-radius: 6px;
+  background: #fff;
+  color: var(--blue);
+}
+
+.route-panel--old .route-icon {
+  border-color: #f1c7a9;
+  background: var(--amber-soft);
+  color: var(--amber);
+}
+
+.route-icon svg {
+  width: 24px;
+  height: 24px;
+}
+
+.route-step strong {
+  overflow: hidden;
+  max-width: 100%;
+  font-size: 14px;
+  line-height: 1.35;
+}
+
+.route-step small {
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.35;
+}
+
+.route-step--recar {
+  border-color: var(--blue);
+  background: var(--blue);
+  box-shadow: 0 14px 30px rgba(21, 94, 239, 0.2);
+  color: #fff;
+}
+
+.route-step--recar .route-number,
+.route-step--recar small {
+  color: #fff;
+}
+
+.route-step--recar .route-icon {
+  border-color: rgba(255, 255, 255, 0.38);
+  background: rgba(255, 255, 255, 0.14);
+  color: #fff;
+}
+
+.route-finance-chips {
+  display: flex;
+  gap: 5px;
+}
+
+.route-finance-chips b {
+  display: grid;
+  width: 24px;
+  height: 24px;
+  place-items: center;
+  border-radius: 4px;
+  background: var(--blue-soft);
+  color: var(--blue-dark);
+  font-size: 12px;
+}
+
+.route-metrics {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 18px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.route-metrics > span {
+  display: grid;
+  min-height: 56px;
+  align-content: center;
+  gap: 1px;
+  padding: 8px 12px;
+  border-right: 1px solid var(--line);
+}
+
+.route-metrics > span:last-child {
+  border-right: 0;
+}
+
+.route-metrics small {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.route-metrics strong {
+  color: var(--blue-dark);
+  font-size: 13px;
+}
+
+.route-metrics--old strong {
+  color: var(--amber);
 }
 
 .visual-caption {
@@ -3023,10 +3152,6 @@ dialog::backdrop {
     gap: 42px;
   }
 
-  .flow-stage {
-    grid-template-columns: 96px 1fr 150px 1fr 152px;
-  }
-
   .payment-lab {
     grid-template-columns: 1fr;
   }
@@ -3146,10 +3271,6 @@ dialog::backdrop {
   .scene-summary,
   .center-heading > p:last-child {
     font-size: 17px;
-  }
-
-  .flow-stage {
-    grid-template-columns: 90px 1fr 135px 1fr 138px;
   }
 
   .vehicle-stage {
@@ -3340,47 +3461,74 @@ dialog::backdrop {
     grid-template-columns: 1fr 1fr;
   }
 
-  .flow-stage {
-    grid-template-columns: 1fr;
+  .route-panel {
+    min-height: auto;
+    padding: 18px;
+  }
+
+  .route-panel-heading {
+    display: grid;
+    justify-items: start;
     gap: 10px;
-    min-height: 520px;
-    padding: 20px 0 112px;
   }
 
-  .flow-node {
-    min-height: 78px;
+  .route-panel-heading strong {
+    text-align: left;
   }
 
-  .flow-line {
-    width: 2px;
-    height: 20px;
-    margin: 0 auto;
-  }
-
-  .finance-stack {
-    grid-template-columns: repeat(3, 1fr);
-  }
-
-  .finance-stack span {
-    min-height: 42px;
-  }
-
-  .finance-stack.is-single {
+  .route-track--old,
+  .route-track--direct {
     grid-template-columns: 1fr;
+    gap: 24px;
   }
 
-  .flow-fee {
-    top: 113px;
-    left: 50%;
-    transform: translateX(-50%);
+  .route-step {
+    min-height: 92px;
+    grid-template-columns: 52px minmax(0, 1fr);
+    place-items: initial;
+    align-content: center;
+    align-items: center;
+    gap: 2px 12px;
+    padding: 14px 42px 14px 14px;
+    text-align: left;
   }
 
-  .condition-output {
-    grid-template-columns: 1fr;
+  .route-number {
+    position: absolute;
+    top: 10px;
+    right: 12px;
   }
 
-  .condition-output span {
-    min-height: 32px;
+  .route-icon {
+    grid-row: 1 / 4;
+    grid-column: 1;
+  }
+
+  .route-step strong,
+  .route-step small,
+  .route-finance-chips {
+    grid-column: 2;
+  }
+
+  .route-step:not(:last-child)::after,
+  .route-track--direct .route-step:not(:last-child)::after {
+    top: 100%;
+    left: 36px;
+    width: 0;
+    height: 24px;
+    border-top: 0;
+    border-left: 2px solid #9ba8ba;
+  }
+
+  .route-track--direct .route-step:not(:last-child)::after {
+    border-left-color: var(--blue);
+  }
+
+  .route-step:not(:last-child)::before,
+  .route-track--direct .route-step:not(:last-child)::before {
+    top: calc(100% + 15px);
+    left: 32px;
+    transform: rotate(135deg);
   }
 
   .mode-switcher {
