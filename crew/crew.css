@@ -225,6 +225,10 @@ svg i[data-lucide] {
   color: var(--crew-blue);
 }
 
+.crew-guide-side-item {
+  display: none;
+}
+
 .crew-topbar {
   position: fixed;
   top: 0;
@@ -275,6 +279,35 @@ svg i[data-lucide] {
 .crew-topbar-meta strong {
   color: #1f242b;
   font-weight: 850;
+}
+
+.crew-guide-link {
+  display: inline-flex;
+  min-height: 38px;
+  align-items: center;
+  gap: 7px;
+  padding: 0 12px;
+  color: #fff;
+  font-size: 13px;
+  font-weight: 850;
+  background: var(--crew-blue);
+  border: 1px solid var(--crew-blue);
+  border-radius: 8px;
+  transition:
+    background-color 160ms ease,
+    border-color 160ms ease,
+    box-shadow 160ms ease;
+}
+
+.crew-guide-link:hover {
+  background: #413ee4;
+  border-color: #413ee4;
+  box-shadow: 0 6px 16px rgba(93, 91, 255, 0.2);
+}
+
+.crew-guide-link svg {
+  width: 17px;
+  height: 17px;
 }
 
 .status-dot {
@@ -1659,6 +1692,12 @@ svg i[data-lucide] {
     margin: 0;
   }
 
+  .crew-guide-side-item {
+    display: grid;
+    color: var(--crew-blue);
+    background: var(--crew-blue-soft);
+  }
+
   .crew-topbar {
     left: 0;
     padding: 0 14px;
@@ -1673,7 +1712,8 @@ svg i[data-lucide] {
   }
 
   .crew-topbar-meta > span:not(.crew-alert-badge),
-  .crew-account-button {
+  .crew-account-button,
+  .crew-guide-link {
     display: none;
   }
 
