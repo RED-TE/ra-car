@@ -48,6 +48,9 @@ const publicStaticFiles = new Set([
   "/crew/crew.css",
   "/crew/login.html",
   "/crew/login.css",
+  "/crew/start/index.html",
+  "/crew/start/start.css",
+  "/crew/start/start.js",
   "/crew/guide/index.html",
   "/crew/guide/knowledge.css",
   "/crew/guide/knowledge.js",
@@ -2245,6 +2248,9 @@ function serveStatic(request, response, url) {
   if (requestedPath === "/crew/login" || requestedPath === "/crew/login/") {
     requestedPath = "/crew/login.html";
   }
+  if (requestedPath === "/crew/start" || requestedPath === "/crew/start/") {
+    requestedPath = "/crew/start/index.html";
+  }
   if (requestedPath === "/crew/knowledge" || requestedPath === "/crew/knowledge/") {
     requestedPath = "/crew/knowledge/index.html";
   }
@@ -2253,6 +2259,21 @@ function serveStatic(request, response, url) {
   }
   if (requestedPath === "/crew/content-guide" || requestedPath === "/crew/content-guide/") {
     requestedPath = "/crew/guide/index.html";
+  }
+  if (
+    requestedPath === "/crew/start/preview" ||
+    requestedPath === "/crew/start/preview/"
+  ) {
+    if (process.env.NODE_ENV === "production") {
+      response.writeHead(404, {
+        "Content-Type": "text/plain; charset=utf-8",
+        "Cache-Control": "no-store",
+        ...getSecurityHeaders(),
+      });
+      response.end("Not found");
+      return;
+    }
+    requestedPath = "/crew/start/index.html";
   }
   if (
     requestedPath === "/crew/guide/preview" ||
