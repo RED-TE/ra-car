@@ -66,8 +66,6 @@ test("development serves public aliases and the preview route", async () => {
       "/crew/knowledge",
       "/crew/knowledge/",
       "/crew/content-guide/",
-      "/crew/start/",
-      "/crew/start/preview/",
       "/crew/guide/preview/",
       "/crew/knowledge/preview/",
     ];
@@ -75,31 +73,21 @@ test("development serves public aliases and the preview route", async () => {
     for (const pathname of routes) {
       const response = await fetch(`${server.baseUrl}${pathname}`);
       assert.equal(response.status, 200, pathname);
-      const html = await response.text();
-      if (pathname.startsWith("/crew/start")) {
-        assert.match(html, /RE:CAR 크루 스타터 가이드/, pathname);
-      } else {
-        assert.match(html, /RE:CAR 크루 안내서/, pathname);
-      }
+      assert.match(await response.text(), /RE:CAR 크루 안내서/, pathname);
     }
 
     const crewResponse = await fetch(`${server.baseUrl}/crew/`);
     assert.equal(crewResponse.status, 200);
-    assert.doesNotMatch(await crewResponse.text(), /crew-guide-link/);
+    assert.match(await crewResponse.text(), /https:\/\/recarplan\.vercel\.app\/crew\/login/);
 
     const guideResponse = await fetch(`${server.baseUrl}/crew/guide/`);
-    assert.match(await guideResponse.text(), /href="\/crew\/start\/"/);
-
-    const startResponse = await fetch(`${server.baseUrl}/crew/start/`);
-    assert.match(await startResponse.text(), /href="\/crew\/guide\/"/);
+    assert.match(await guideResponse.text(), /href="\/crew\/"/);
 
     for (const pathname of [
       "/crew/guide/knowledge.css",
       "/crew/guide/knowledge.js",
       "/crew/guide/knowledge-data.js",
       "/crew/guide/lucide.min.js",
-      "/crew/start/start.css",
-      "/crew/start/start.js",
       "/assets/crew-knowledge/hero-car-1600.webp",
     ]) {
       const response = await fetch(`${server.baseUrl}${pathname}`);
@@ -115,12 +103,10 @@ test("production keeps the public route and returns 404 for preview", async () =
   try {
     const publicResponse = await fetch(`${server.baseUrl}/crew/guide/`);
     const previewResponse = await fetch(`${server.baseUrl}/crew/guide/preview/`);
-    const startResponse = await fetch(`${server.baseUrl}/crew/start/`);
-    const startPreviewResponse = await fetch(`${server.baseUrl}/crew/start/preview/`);
+    const removedStartResponse = await fetch(`${server.baseUrl}/crew/start/`);
     assert.equal(publicResponse.status, 200);
     assert.equal(previewResponse.status, 404);
-    assert.equal(startResponse.status, 200);
-    assert.equal(startPreviewResponse.status, 404);
+    assert.equal(removedStartResponse.status, 404);
   } finally {
     await server.stop();
   }

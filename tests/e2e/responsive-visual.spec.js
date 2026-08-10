@@ -75,20 +75,18 @@ test("mobile menu and section search stay available", async ({ page }) => {
   await expect(page.locator("#mobileMenu")).toBeHidden();
 });
 
-test("crew starter and guide link to each other without touching the dashboard", async ({ page }) => {
+test("guide links to the canonical crew entry", async ({ page, request }) => {
   await page.setViewportSize({ width: 390, height: 844 });
 
   await page.goto("/crew/guide/preview/");
   await expect(page.getByRole("link", { name: "크루 페이지 열기", exact: true })).toHaveAttribute(
     "href",
-    "/crew/start/",
+    "/crew/",
   );
 
-  await page.goto("/crew/start/preview/");
-  const guideLink = page.getByRole("link", { name: "크루 안내서", exact: true }).first();
-  await expect(guideLink).toBeVisible();
-  await expect(guideLink).toHaveAttribute("href", "/crew/guide/");
-  await expect(page.locator("html")).toHaveJSProperty("scrollWidth", 390);
+  const crewEntry = await request.get("/crew/");
+  expect(crewEntry.status()).toBe(200);
+  expect(await crewEntry.text()).toContain("https://recarplan.vercel.app/crew/login");
 });
 
 test("core sections and mobile full page are captured", async ({ page }) => {
