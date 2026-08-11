@@ -54,6 +54,7 @@ const publicStaticFiles = new Set([
   "/crew/guide/knowledge-data.js",
   "/crew/guide/lucide.min.js",
   "/crew/knowledge/index.html",
+  "/download/index.html",
   "/inquiry/index.html",
   "/data/vehicle-static-catalog.json",
   "/data/vehicles-incomplete-report.json",
@@ -1993,6 +1994,7 @@ async function handleLeadCreate(request, response) {
       leadSource: sanitizeText(input.leadSource, 80),
       campaign: sanitizeText(input.campaign, 80),
       campaignLabel: sanitizeText(input.campaignLabel, 80),
+      referralCode: sanitizeText(input.referralCode, 32).toUpperCase(),
       timeDealOriginalMonthlyPayment: Number(input.timeDealOriginalMonthlyPayment) || null,
       timeDealMonthlyPayment: Number(input.timeDealMonthlyPayment) || null,
       timeDealDiscount: Number(input.timeDealDiscount) || null,
@@ -2238,6 +2240,9 @@ function serveStatic(request, response, url) {
   let requestedPath = pathname === "/" ? "/index.html" : pathname;
   if (requestedPath === "/inquiry" || requestedPath === "/inquiry/") {
     requestedPath = "/inquiry/index.html";
+  }
+  if (requestedPath === "/download" || requestedPath === "/download/") {
+    requestedPath = "/download/index.html";
   }
   if (requestedPath === "/crew" || requestedPath === "/crew/") {
     requestedPath = "/crew/index.html";

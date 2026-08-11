@@ -83,6 +83,10 @@ test("development serves public aliases and the preview route", async () => {
     const guideResponse = await fetch(`${server.baseUrl}/crew/guide/`);
     assert.match(await guideResponse.text(), /href="\/crew\/"/);
 
+    const downloadResponse = await fetch(`${server.baseUrl}/download?ref=RC-QA1234`);
+    assert.equal(downloadResponse.status, 200);
+    assert.match(await downloadResponse.text(), /window\.location\.replace/);
+
     for (const pathname of [
       "/crew/guide/knowledge.css",
       "/crew/guide/knowledge.js",

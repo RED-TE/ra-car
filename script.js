@@ -96,6 +96,12 @@ sections.forEach((section) => observer.observe(section));
 const quoteForm = document.querySelector(".quote-form");
 const privacyConsentInput = document.querySelector("#privacyConsent");
 const termsConsentInput = document.querySelector("#termsConsent");
+const referralNotice = document.querySelector("[data-referral-notice]");
+const referralCodeOutput = document.querySelector("[data-referral-code]");
+const referralCopyButton = document.querySelector("[data-referral-copy]");
+const referralCloseButton = document.querySelector("[data-referral-close]");
+const referralStorageKey = "recar_referral_code";
+let activeReferralCode = "";
 const defaultLeadContext = {
   leadSource: quoteForm?.dataset.defaultLeadSource || "",
   campaign: quoteForm?.dataset.defaultCampaign || "",
@@ -119,6 +125,104 @@ function makeLeadId() {
 
 function normalizePhone(value) {
   return value.replace(/[^\d]/g, "");
+}
+
+function normalizeReferralCode(value) {
+  const code = String(value || "").trim().toUpperCase();
+  return /^[A-Z0-9][A-Z0-9-]{2,31}$/.test(code) ? code : "";
+}
+
+function readStoredReferralCode() {
+  try {
+    return normalizeReferralCode(window.localStorage.getItem(referralStorageKey));
+  } catch {
+    return "";
+  }
+}
+
+function writeStoredReferralCode(code) {
+  try {
+    window.localStorage.setItem(referralStorageKey, code);
+  } catch {
+    // Referral attribution still works for the current page when storage is blocked.
+  }
+}
+
+function trackReferralVisit(code) {
+  const sessionKey = `recar_referral_tracked_${code}`;
+  try {
+    if (window.sessionStorage.getItem(sessionKey)) return;
+    window.sessionStorage.setItem(sessionKey, "1");
+  } catch {
+    // The server also deduplicates repeated visits by code and hashed IP.
+  }
+
+  const source = /iPhone|iPad|iPod/i.test(navigator.userAgent)
+    ? "ios-web"
+    : /Android/i.test(navigator.userAgent)
+      ? "android-web"
+      : "homepage";
+  const trackUrl = new URL("https://api.recarplan.com/api/v1/friends/track");
+  trackUrl.searchParams.set("code", code);
+  trackUrl.searchParams.set("source", source);
+  window.fetch(trackUrl.toString(), {
+    method: "GET",
+    mode: "no-cors",
+    credentials: "omit",
+    keepalive: true,
+  }).catch(() => {});
+}
+
+function setReferralNotice(code) {
+  if (!referralNotice || !referralCodeOutput || !code) return;
+
+  let dismissed = false;
+  try {
+    dismissed = window.sessionStorage.getItem("recar_referral_notice_dismissed") === code;
+  } catch {
+    dismissed = false;
+  }
+  if (dismissed) return;
+
+  referralCodeOutput.textContent = code;
+  referralNotice.hidden = false;
+  referralNotice.classList.add("is-visible");
+}
+
+async function copyReferralCode() {
+  if (!activeReferralCode || !referralCopyButton) return;
+
+  try {
+    await navigator.clipboard.writeText(activeReferralCode);
+  } catch {
+    const helper = document.createElement("textarea");
+    helper.value = activeReferralCode;
+    helper.setAttribute("readonly", "");
+    helper.style.position = "fixed";
+    helper.style.opacity = "0";
+    document.body.appendChild(helper);
+    helper.select();
+    document.execCommand("copy");
+    helper.remove();
+  }
+
+  referralCopyButton.classList.add("is-copied");
+  referralCopyButton.setAttribute("aria-label", "추천 코드 복사됨");
+  window.setTimeout(() => {
+    referralCopyButton.classList.remove("is-copied");
+    referralCopyButton.setAttribute("aria-label", "추천 코드 복사");
+  }, 1800);
+}
+
+function initializeReferral() {
+  const params = new URLSearchParams(window.location.search);
+  const queryCode = normalizeReferralCode(params.get("ref"));
+  activeReferralCode = queryCode || readStoredReferralCode();
+  if (!activeReferralCode) return;
+
+  writeStoredReferralCode(activeReferralCode);
+  setReferralNotice(activeReferralCode);
+  if (queryCode) trackReferralVisit(queryCode);
 }
 
 function isValidPhone(value) {
@@ -181,6 +285,7 @@ function getLeadPayload() {
     leadSource: leadContext.leadSource,
     campaign: leadContext.campaign,
     campaignLabel: leadContext.campaignLabel,
+    referralCode: activeReferralCode || readStoredReferralCode(),
     timeDealOriginalMonthlyPayment: leadContext.timeDealOriginalMonthlyPayment,
     timeDealMonthlyPayment: leadContext.timeDealMonthlyPayment,
     timeDealDiscount: leadContext.timeDealDiscount,
@@ -1588,6 +1693,18 @@ function applyQuoteFromUrl() {
   }
 }
 
+referralCopyButton?.addEventListener("click", copyReferralCode);
+referralCloseButton?.addEventListener("click", () => {
+  if (!referralNotice) return;
+  referralNotice.classList.remove("is-visible");
+  referralNotice.hidden = true;
+  try {
+    window.sessionStorage.setItem("recar_referral_notice_dismissed", activeReferralCode);
+  } catch {
+    // Dismissal only lasts for the current page when storage is blocked.
+  }
+});
+
 function setFloatingContactState() {
   if (!floatingContact) return;
   const revealPoint = Math.max(420, window.innerHeight * 0.72);
@@ -1713,6 +1830,7 @@ window.setTimeout(() => ensureSlideImage((activeSlide + 1) % slides.length), 220
 setHeaderState();
 setFloatingContactState();
 updateActiveNavigation();
+initializeReferral();
 applyQuoteFromUrl();
 loadVehicles().then(stabilizeHashScroll);
 updateTimeDealTimer();

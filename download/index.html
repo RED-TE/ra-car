@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex" />
+    <meta http-equiv="refresh" content="2;url=/" />
+    <title>RE:CAR 추천 코드 연결</title>
+    <script>
+      window.location.replace(`/${window.location.search}${window.location.hash}`);
+    </script>
+    <style>
+      * { box-sizing: border-box; }
+      body {
+        display: grid;
+        min-height: 100vh;
+        margin: 0;
+        place-items: center;
+        color: #0d1117;
+        background: #f5f7fa;
+        font-family: "Pretendard", "Noto Sans KR", system-ui, sans-serif;
+      }
+      main { text-align: center; }
+      img { width: 132px; height: auto; }
+      p { margin: 18px 0 0; color: #5f6773; font-size: 14px; }
+      a { color: #1554ff; font-weight: 700; }
+    </style>
+  </head>
+  <body>
+    <main>
+      <img src="/assets/recar-logo-transparent.png" alt="RE:CAR" />
+      <p>추천 코드를 연결하고 있습니다. <a href="/">홈으로 이동</a></p>
+    </main>
+  </body>
+</html>

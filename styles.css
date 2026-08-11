@@ -8529,6 +8529,161 @@ body.inquiry-conversion-page {
   }
 }
 
+.referral-notice {
+  position: fixed;
+  top: 102px;
+  right: 24px;
+  z-index: 49;
+  display: grid;
+  grid-template-columns: 40px minmax(0, 1fr) auto 32px;
+  align-items: center;
+  gap: 12px;
+  width: min(620px, calc(100vw - 48px));
+  min-height: 76px;
+  padding: 12px 12px 12px 14px;
+  color: #0d1117;
+  background: rgba(255, 255, 255, 0.97);
+  border: 1px solid rgba(13, 17, 23, 0.12);
+  border-radius: 8px;
+  box-shadow: 0 18px 48px rgba(7, 17, 31, 0.2);
+  opacity: 0;
+  transform: translateY(-8px);
+  transition: opacity 180ms ease, transform 180ms ease;
+}
+
+.referral-notice[hidden] {
+  display: none;
+}
+
+.referral-notice.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.referral-notice-icon {
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  color: #1554ff;
+  background: #edf2ff;
+  border-radius: 50%;
+}
+
+.referral-notice-icon svg,
+.referral-code-button svg,
+.referral-notice-close svg {
+  width: 18px;
+  height: 18px;
+  stroke-width: 2;
+}
+
+.referral-notice-copy {
+  display: grid;
+  min-width: 0;
+}
+
+.referral-notice-copy strong {
+  font-size: 15px;
+  font-weight: 800;
+  line-height: 1.35;
+}
+
+.referral-notice-copy span {
+  margin-top: 2px;
+  color: #606a78;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.referral-code-button,
+.referral-notice-close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0;
+  border: 0;
+  cursor: pointer;
+}
+
+.referral-code-button {
+  gap: 8px;
+  min-width: 128px;
+  min-height: 42px;
+  padding: 0 13px;
+  color: #fff;
+  background: #1554ff;
+  border-radius: 6px;
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+  font-size: 14px;
+  font-weight: 800;
+  letter-spacing: 0;
+}
+
+.referral-code-button.is-copied {
+  background: #087f5b;
+}
+
+.referral-code-button.is-copied svg {
+  display: none;
+}
+
+.referral-code-button.is-copied::after {
+  content: "복사됨";
+}
+
+.referral-notice-close {
+  width: 32px;
+  height: 32px;
+  color: #647080;
+  background: transparent;
+  border-radius: 50%;
+}
+
+@media (max-width: 760px) {
+  .referral-notice {
+    top: 78px;
+    right: 12px;
+    left: 12px;
+    grid-template-columns: 36px minmax(0, 1fr) 32px;
+    gap: 10px;
+    width: auto;
+    min-height: 72px;
+    padding: 10px;
+  }
+
+  .referral-notice-icon {
+    width: 36px;
+    height: 36px;
+  }
+
+  .referral-notice-copy strong {
+    font-size: 14px;
+  }
+
+  .referral-notice-copy span {
+    font-size: 12px;
+  }
+
+  .referral-code-button {
+    grid-column: 2 / 4;
+    width: 100%;
+    min-width: 0;
+    min-height: 38px;
+  }
+
+  .referral-notice-close {
+    grid-column: 3;
+    grid-row: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .referral-notice {
+    transition: none;
+  }
+}
+
 .recar-zero-like {
   background: #dff1ff;
 }
