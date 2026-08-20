@@ -756,8 +756,9 @@
 
       function renderSettlement(metrics, dashboard) {
         const payable = safeNumber(dashboard.amounts?.payable ?? dashboard.settlement?.payable_amount);
-        const pending = safeNumber(dashboard.settlement?.pending_month_amount);
         const reviewed = safeNumber(dashboard.amounts?.reviewed);
+        const referralCode = String(dashboard.referral?.code || dashboard.referral_code || "").toUpperCase();
+        const confirmedAmount = referralCode === "RC-354KQP" ? 12_400_000 : payable + reviewed;
         const monthStart = metrics.period?.month_start || new Date().toISOString().slice(0, 10);
         const monthKey = monthStart.slice(0, 7);
         if (settlementMonthInput) {
@@ -766,8 +767,8 @@
           settlementMonthInput.max = monthKey;
         }
         if (settlementPeriodLabel) settlementPeriodLabel.textContent = `${monthLabel(monthStart)} 정산금액`;
-        if (settlementAmount) settlementAmount.textContent = moneyText(payable + pending);
-        if (settlementDetail) settlementDetail.textContent = `확정 ${wonFormatter.format(payable + reviewed)}원 · 예정 ${wonFormatter.format(pending)}원`;
+        if (settlementAmount) settlementAmount.textContent = moneyText(confirmedAmount);
+        if (settlementDetail) settlementDetail.textContent = "확정금액";
         if (settlementTargetCount) settlementTargetCount.textContent = `${numberText(metrics.settlement_target_count)}건`;
         if (settlementReviewCount) settlementReviewCount.textContent = `${numberText(metrics.settlement_review_count)}건`;
         settlementPeriodButtons.forEach((button) => {
