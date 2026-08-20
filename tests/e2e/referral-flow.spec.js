@@ -14,6 +14,9 @@ test("referral link stores, displays, tracks, and copies the code", async ({ con
   await page.goto(`/?ref=${referralCode.toLowerCase()}`);
 
   await expect(page.locator("[data-referral-notice]")).toBeVisible();
+  await expect(page.locator("[data-referral-details]")).toBeHidden();
+  await page.getByRole("button", { name: "추천 코드 확인", exact: true }).click();
+  await expect(page.locator("[data-referral-details]")).toBeVisible();
   await expect(page.locator("[data-referral-code]")).toHaveText(referralCode);
   expect(await page.evaluate(() => localStorage.getItem("recar_referral_code"))).toBe(referralCode);
   expect(trackedUrls).toHaveLength(1);
@@ -71,5 +74,19 @@ test("legacy download referral link reaches the working referral page", async ({
 
   await expect(page).toHaveURL(new RegExp(`\\/\\?ref=${referralCode}$`));
   await expect(page.locator("[data-referral-notice]")).toBeVisible();
+  await page.getByRole("button", { name: "추천 코드 확인", exact: true }).click();
+  await expect(page.locator("[data-referral-code]")).toHaveText(referralCode);
+});
+
+test("legacy crew referral link reaches the homepage with its code", async ({ page }) => {
+  await page.route(trackPattern, (route) =>
+    route.fulfill({ status: 200, contentType: "application/json", body: '{"recorded":true}' }),
+  );
+
+  await page.goto(`/crew?ref=${referralCode}`);
+
+  await expect(page).toHaveURL(new RegExp(`\\/\\?ref=${referralCode}$`));
+  await expect(page.locator("[data-referral-notice]")).toBeVisible();
+  await page.getByRole("button", { name: "추천 코드 확인", exact: true }).click();
   await expect(page.locator("[data-referral-code]")).toHaveText(referralCode);
 });

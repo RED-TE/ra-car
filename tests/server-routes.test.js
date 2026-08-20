@@ -78,7 +78,11 @@ test("development serves public aliases and the preview route", async () => {
 
     const crewResponse = await fetch(`${server.baseUrl}/crew/`);
     assert.equal(crewResponse.status, 200);
-    assert.match(await crewResponse.text(), /https:\/\/recarplan\.vercel\.app\/crew\/login/);
+    const crewHtml = await crewResponse.text();
+    assert.match(crewHtml, /https:\/\/recarplan\.com\/crew/);
+    assert.match(crewHtml, /params\.get\("ref"\)/);
+    assert.match(crewHtml, /target\.searchParams\.set\("ref", referralCode\)/);
+    assert.doesNotMatch(crewHtml, /vercel\.app/);
 
     const guideResponse = await fetch(`${server.baseUrl}/crew/guide/`);
     assert.match(await guideResponse.text(), /href="\/crew\/"/);

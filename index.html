@@ -45,20 +45,33 @@
     </header>
 
     <aside class="referral-notice" data-referral-notice hidden aria-live="polite">
-      <div class="referral-notice-icon" aria-hidden="true">
-        <i data-lucide="ticket-check"></i>
-      </div>
-      <div class="referral-notice-copy">
-        <strong>추천 코드가 있습니다.</strong>
-        <span>앱 가입 시 아래 코드를 입력해 주세요.</span>
-      </div>
-      <button class="referral-code-button" type="button" data-referral-copy aria-label="추천 코드 복사">
-        <span data-referral-code></span>
-        <i data-lucide="copy"></i>
+      <button
+        class="referral-notice-trigger"
+        type="button"
+        data-referral-toggle
+        aria-expanded="false"
+        aria-controls="referralNoticeDetails"
+        aria-label="추천 코드 확인"
+      >
+        <span class="referral-notice-icon" aria-hidden="true">
+          <i data-lucide="ticket-check"></i>
+        </span>
+        <span class="referral-notice-summary">
+          <strong>추천 코드 적용됨</strong>
+          <span>눌러서 확인</span>
+        </span>
+        <i class="referral-notice-chevron" data-lucide="chevron-down" aria-hidden="true"></i>
       </button>
-      <button class="referral-notice-close" type="button" data-referral-close aria-label="추천 코드 안내 닫기">
-        <i data-lucide="x"></i>
-      </button>
+      <div class="referral-notice-details" id="referralNoticeDetails" data-referral-details hidden>
+        <span class="referral-notice-guide">앱 가입 시 추천인 코드에 입력해 주세요.</span>
+        <button class="referral-code-button" type="button" data-referral-copy aria-label="추천 코드 복사">
+          <span data-referral-code></span>
+          <i data-lucide="copy"></i>
+        </button>
+        <button class="referral-notice-close" type="button" data-referral-close aria-label="추천 코드 알림 닫기" title="알림 닫기">
+          <i data-lucide="x"></i>
+        </button>
+      </div>
     </aside>
 
     <main>

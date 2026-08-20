@@ -4,19 +4,27 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="robots" content="noindex" />
-    <meta http-equiv="refresh" content="0; url=https://recarplan.vercel.app/crew/login" />
-    <link rel="canonical" href="https://recarplan.com/crew/" />
+    <meta http-equiv="refresh" content="0; url=https://recarplan.com/" />
+    <link rel="canonical" href="https://recarplan.com/crew" />
     <link rel="icon" type="image/png" href="/assets/recar-favicon-20260518.png" />
     <title>RE:CAR 크루 로그인</title>
     <script>
-      const target = new URL("https://recarplan.vercel.app/crew/login");
-      target.search = window.location.search;
-      target.hash = window.location.hash;
+      const params = new URLSearchParams(window.location.search);
+      const referralCode = params.get("ref")?.trim().toUpperCase();
+      const canonicalOrigin = window.location.hostname === "recarplan.com" ? "https://recarplan.com" : window.location.origin;
+      const target = new URL(referralCode ? "/" : "/crew", canonicalOrigin);
+      if (referralCode) {
+        target.searchParams.set("ref", referralCode);
+      } else if (params.get("action") === "apply" || params.get("mode") === "apply") {
+        target.hash = "apply";
+      } else {
+        target.hash = window.location.hash;
+      }
       window.location.replace(target.href);
     </script>
   </head>
   <body>
-    <p>RE:CAR 크루 로그인 페이지로 이동합니다.</p>
-    <a href="https://recarplan.vercel.app/crew/login">크루 로그인 열기</a>
+    <p>RE:CAR 페이지로 이동합니다.</p>
+    <a href="https://recarplan.com/">RE:CAR 열기</a>
   </body>
 </html>

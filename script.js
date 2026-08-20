@@ -97,6 +97,8 @@ const quoteForm = document.querySelector(".quote-form");
 const privacyConsentInput = document.querySelector("#privacyConsent");
 const termsConsentInput = document.querySelector("#termsConsent");
 const referralNotice = document.querySelector("[data-referral-notice]");
+const referralToggleButton = document.querySelector("[data-referral-toggle]");
+const referralDetails = document.querySelector("[data-referral-details]");
 const referralCodeOutput = document.querySelector("[data-referral-code]");
 const referralCopyButton = document.querySelector("[data-referral-copy]");
 const referralCloseButton = document.querySelector("[data-referral-close]");
@@ -173,6 +175,15 @@ function trackReferralVisit(code) {
   }).catch(() => {});
 }
 
+function setReferralNoticeExpanded(expanded) {
+  if (!referralNotice || !referralToggleButton || !referralDetails) return;
+
+  referralNotice.classList.toggle("is-expanded", expanded);
+  referralToggleButton.setAttribute("aria-expanded", String(expanded));
+  referralToggleButton.setAttribute("aria-label", expanded ? "추천 코드 접기" : "추천 코드 확인");
+  referralDetails.hidden = !expanded;
+}
+
 function setReferralNotice(code) {
   if (!referralNotice || !referralCodeOutput || !code) return;
 
@@ -185,6 +196,7 @@ function setReferralNotice(code) {
   if (dismissed) return;
 
   referralCodeOutput.textContent = code;
+  setReferralNoticeExpanded(false);
   referralNotice.hidden = false;
   referralNotice.classList.add("is-visible");
 }
@@ -1693,16 +1705,28 @@ function applyQuoteFromUrl() {
   }
 }
 
+referralToggleButton?.addEventListener("click", () => {
+  const expanded = referralToggleButton.getAttribute("aria-expanded") === "true";
+  setReferralNoticeExpanded(!expanded);
+});
 referralCopyButton?.addEventListener("click", copyReferralCode);
 referralCloseButton?.addEventListener("click", () => {
   if (!referralNotice) return;
   referralNotice.classList.remove("is-visible");
+  setReferralNoticeExpanded(false);
   referralNotice.hidden = true;
   try {
     window.sessionStorage.setItem("recar_referral_notice_dismissed", activeReferralCode);
   } catch {
     // Dismissal only lasts for the current page when storage is blocked.
   }
+});
+document.addEventListener("click", (event) => {
+  if (!referralNotice?.classList.contains("is-expanded") || referralNotice.contains(event.target)) return;
+  setReferralNoticeExpanded(false);
+});
+document.addEventListener("keydown", (event) => {
+  if (event.key === "Escape") setReferralNoticeExpanded(false);
 });
 
 function setFloatingContactState() {
