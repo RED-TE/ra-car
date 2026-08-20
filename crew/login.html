@@ -12,103 +12,125 @@
     <link rel="icon" type="image/png" href="../assets/recar-favicon-20260518.png" />
     <link rel="apple-touch-icon" href="../assets/recar-favicon-20260518.png" />
     <link rel="preconnect" href="https://api.recarplan.com" crossorigin />
-    <link rel="stylesheet" href="./login.css?v=20260703-live-login" />
+    <link rel="stylesheet" href="./login.css?v=20260821-clip-landing" />
   </head>
   <body class="crew-login-page">
-    <header class="login-header">
-      <a class="brand-link" href="../index.html" aria-label="RE:CAR 홈">
-        <strong>RE:CAR</strong>
-        <span>크루 대시보드</span>
+    <header class="crew-login-nav">
+      <a class="crew-login-brand" href="https://recarplan.com/" aria-label="RE:CAR 홈">
+        <span></span>
+        RE:CAR crew
       </a>
-      <a class="header-apply" href="#crew-apply">크루 신청하기</a>
+      <nav aria-label="크루 링크">
+        <a href="https://recarplan.com/crew/guide/">크루 가이드</a>
+        <a class="crew-login-nav-action" href="mailto:friends@recarplan.com?subject=RE%3ACAR%20%ED%81%AC%EB%A3%A8%20%EC%8B%A0%EC%B2%AD">크루 신청</a>
+        <a href="mailto:friends@recarplan.com">문의</a>
+      </nav>
     </header>
 
-    <main class="login-shell">
-      <section class="login-hero" aria-label="크루 로그인">
-        <div class="hero-copy">
-          <span class="eyebrow">RE:CAR CREW</span>
-          <h1>추천만 하세요.<br />관리·영업은<br />우리가 합니다.</h1>
-          <p>
-            앱 다운로드 후 추천인 코드만 입력하면 끝.<br />이후 절차는 RE:CAR 운영팀이 진행합니다.
-          </p>
-
-          <div class="income-strip" aria-label="크루 수익 안내">
-            <div>
-              <span>1건 수익</span>
-              <strong>20만~45만원</strong>
-            </div>
-            <div>
-              <span>평균 월 수익</span>
-              <strong>350만원</strong>
-            </div>
-          </div>
+    <main>
+      <section class="crew-login-hero" aria-label="크루 로그인">
+        <div class="crew-login-pattern left" aria-hidden="true">
+          <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+        </div>
+        <div class="crew-login-pattern right" aria-hidden="true">
+          <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+          <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
         </div>
 
-        <form class="login-card" id="crewLoginForm">
-          <div class="card-label">Crew Login</div>
-          <h2>크루 아이디로 시작</h2>
-          <p>로그인한 크루 기준으로 추천, 심사, 계약, 인도 현황이 표시됩니다.</p>
+        <div class="crew-login-copy">
+          <p class="crew-login-eyebrow">RE:CAR 크루</p>
+          <h1>추천부터 계약까지,<br />내 실적을 한눈에</h1>
+          <p>
+            내 링크로 들어온 상담, 심사, 계약 진행 현황을 한 화면에서 확인하세요.<br />
+            정산 확정 금액도 같이 정리됩니다.
+          </p>
+        </div>
 
-          <label class="primary-field" for="crewId">
-            <span>아이디</span>
-            <input id="crewId" name="crewId" type="text" placeholder="크루 아이디 입력" autocomplete="username" required />
-          </label>
+        <div id="crew-login-box" class="crew-login-form-anchor">
+          <form class="crew-panel crew-auth-panel" id="crewLoginForm">
+            <h2>크루 로그인</h2>
+            <p>승인된 계정으로 접속하면 추천 현황과 정산 정보를 확인할 수 있습니다.</p>
+            <div class="crew-auth-grid">
+              <label class="crew-field" for="crewId">
+                아이디
+                <input id="crewId" name="crewId" type="text" autocomplete="username" required />
+              </label>
+              <label class="crew-field" for="crewPassword">
+                비밀번호
+                <input id="crewPassword" name="password" type="password" autocomplete="current-password" required />
+              </label>
+              <div class="login-error crew-form-error" id="loginError" role="alert" hidden></div>
+              <div class="crew-auth-grid two">
+                <button class="crew-primary-button login-button" type="submit">로그인</button>
+                <a class="crew-secondary-button" href="mailto:friends@recarplan.com?subject=RE%3ACAR%20%ED%81%AC%EB%A3%A8%20%EC%8B%A0%EC%B2%AD">크루 신청</a>
+                <a class="crew-guide-button" href="https://recarplan.com/crew/guide/">크루 가이드 보기 <span aria-hidden="true">›</span></a>
+              </div>
+            </div>
+          </form>
+        </div>
 
-          <label class="sub-field" for="crewPassword">
-            <span>비밀번호</span>
-            <input id="crewPassword" name="password" type="password" placeholder="비밀번호 입력" autocomplete="current-password" required />
-          </label>
-
-          <button class="login-button" type="submit">대시보드 로그인</button>
-          <div class="login-error" id="loginError" role="alert" hidden></div>
-
-          <div class="login-note">
-            <span>추천인 입력 이후 절차는 운영팀이 확인합니다.</span>
-            <strong>심사 · 계약 · 인도 · 정산</strong>
-          </div>
-
-          <a class="apply-link" id="crew-apply" href="mailto:crew@recar.co.kr?subject=RE:CAR%20%ED%81%AC%EB%A3%A8%20%EC%8B%A0%EC%B2%AD">
-            크루 신청하기
-          </a>
-        </form>
+        <figure class="crew-dashboard-preview">
+          <img
+            class="crew-dashboard-preview-image"
+            src="../assets/crew-dashboard-preview-actual.png?v=20260821-redacted"
+            alt="추천 현황, 계약 진행과 정산 확정 금액이 표시된 실제 RE:CAR 크루 대시보드 화면"
+            width="1280"
+            height="720"
+          />
+        </figure>
       </section>
 
-      <section class="preview-panel" aria-label="크루 진행 현황 미리보기">
-        <div class="preview-top">
-          <span>오늘 진행</span>
-          <strong>추천부터 정산까지 한 화면</strong>
+      <section class="crew-login-section">
+        <div class="crew-login-section-copy">
+          <span>추천 흐름</span>
+          <h2>누가 어디까지 왔는지<br class="mobile-break" /> 바로 보입니다</h2>
+          <p>링크 방문, 상담 접수, 심사 요청, 계약 진행 상태를 순서대로 확인할 수 있습니다. 따로 엑셀을 맞춰보지 않아도 흐름이 끊기지 않습니다.</p>
         </div>
-        <div class="mini-dashboard">
-          <div class="mini-card">
-            <span>추천인 수</span>
-            <strong>로그인 후</strong>
-          </div>
-          <div class="mini-card">
-            <span>계약 수</span>
-            <strong>확인</strong>
-          </div>
-          <div class="mini-card">
-            <span>인도 수</span>
-            <strong>가능</strong>
-          </div>
+        <div class="crew-flow-preview">
+          <div><small>김** 고객</small><strong>심사중</strong><span>보완 안내 대기</span></div>
+          <div><small>박** 고객</small><strong>계약중</strong><span>계약 URL 발송 완료</span></div>
+          <div><small>이** 고객</small><strong>인도완료</strong><span>정산 반영 예정</span></div>
         </div>
-        <div class="flow-list">
-          <div class="flow-row is-done">
-            <b></b>
-            <span>추천인 코드 입력</span>
-            <strong>완료</strong>
+      </section>
+
+      <section class="crew-login-section reverse">
+        <div class="crew-settlement-preview">
+          <div class="settlement-preview-main">
+            <small>이번 달 확정금액</small>
+            <strong>12,400,000원</strong>
+            <span>정산 기준일 2026.08</span>
           </div>
-          <div class="flow-row is-live">
-            <b></b>
-            <span>운영팀 상담 및 심사</span>
-            <strong>진행중</strong>
-          </div>
-          <div class="flow-row">
-            <b></b>
-            <span>계약 · 인도 · 정산</span>
-            <strong>대기</strong>
+          <div class="settlement-preview-bars" aria-label="정산 진행 단계">
+            <span><b></b>심사</span>
+            <span><b></b>계약</span>
+            <span><b></b>인도</span>
           </div>
         </div>
+        <div class="crew-login-section-copy">
+          <span>정산</span>
+          <h2>확정된 금액만 정확하게</h2>
+          <p>인도 완료 기준으로 확정된 정산 금액을 보여줍니다. 정산 기준월과 진행 상태도 같은 화면에서 확인할 수 있습니다.</p>
+        </div>
+      </section>
+
+      <section class="crew-login-toolkit">
+        <div>
+          <h2>크루가 자주 보는 정보만<br class="mobile-break" /> 모았습니다</h2>
+          <p>현장에서 필요한 숫자와 진행 상태를 빠르게 확인할 수 있게 정리했습니다.</p>
+        </div>
+        <div class="crew-login-feature-grid">
+          <article><strong>추천 링크</strong><p>본인 링크와 코드 사용량을 따로 확인합니다.</p></article>
+          <article><strong>심사 흐름</strong><p>접수, 보완, 승인 상태가 날짜별로 남습니다.</p></article>
+          <article><strong>계약 / 인도</strong><p>계약 대기와 인도 완료 건을 한눈에 구분합니다.</p></article>
+          <article><strong>정산</strong><p>확정 금액과 정산 기준월을 바로 확인합니다.</p></article>
+        </div>
+      </section>
+
+      <section class="crew-login-bottom">
+        <h2>승인된 크루라면 바로 시작하세요</h2>
+        <p>아직 계정이 없다면 신청서를 남겨주세요. 운영팀 확인 후 안내드립니다.</p>
+        <a href="#crew-login-box">로그인하기</a>
       </section>
     </main>
 
@@ -164,7 +186,7 @@
           showError(error instanceof Error ? error.message : "로그인 정보를 확인해 주세요.");
         } finally {
           loginButton.disabled = false;
-          loginButton.textContent = "대시보드 로그인";
+          loginButton.textContent = "로그인";
         }
       });
     </script>
