@@ -371,20 +371,6 @@ input {
   font-weight: 900;
 }
 
-.dashboard-preview-frame {
-  overflow: hidden;
-  margin-top: 18px;
-  background: #f5f6f8;
-  border: 1px solid var(--line);
-  border-radius: 16px;
-}
-
-.dashboard-preview-frame img {
-  display: block;
-  width: 100%;
-  height: auto;
-}
-
 .mini-dashboard {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
