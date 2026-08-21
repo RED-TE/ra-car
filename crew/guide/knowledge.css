@@ -664,6 +664,212 @@ summary:focus-visible {
   gap: 58px;
 }
 
+.recar-value-band {
+  padding-top: 40px;
+  border-top: 1px solid var(--line);
+}
+
+.recar-value-heading {
+  display: grid;
+  grid-template-columns: minmax(0, 0.82fr) minmax(420px, 1.18fr);
+  align-items: end;
+  gap: 64px;
+}
+
+.recar-value-heading .eyebrow {
+  margin-bottom: 12px;
+}
+
+.recar-value-heading h3 {
+  margin: 0;
+  font-size: 32px;
+  font-weight: 900;
+  line-height: 1.2;
+}
+
+.recar-value-heading > p {
+  max-width: 610px;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+.recar-value-flow {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(250px, 0.86fr) minmax(0, 1fr);
+  align-items: stretch;
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.recar-value-card,
+.recar-value-core {
+  min-width: 0;
+  min-height: 272px;
+  padding: 24px;
+  border-radius: var(--radius);
+}
+
+.recar-value-card {
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--blue);
+  background: #fbfcfe;
+}
+
+.recar-value-card--crew {
+  border-top-color: var(--green);
+}
+
+.recar-value-illustration {
+  display: block;
+  width: 70px;
+  height: 70px;
+  margin-bottom: 20px;
+  border: 1px solid #d6e2f4;
+  border-radius: 8px;
+  background-color: #f2f6fd;
+  background-image: url("/assets/crew-knowledge/recar-flow-icons-3d.png?v=20260821");
+  background-repeat: no-repeat;
+  background-size: 300% 200%;
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.92),
+    0 8px 18px rgba(24, 43, 77, 0.1);
+}
+
+.recar-value-illustration.is-customer {
+  background-position: 0 0;
+}
+
+.recar-value-illustration.is-seller {
+  background-color: var(--green-soft);
+  background-position: 100% 0;
+  border-color: #bee5d8;
+}
+
+.recar-value-illustration.is-direct {
+  margin: 22px auto 14px;
+  background-color: #fff;
+  background-position: 100% 100%;
+  border-color: rgba(255, 255, 255, 0.8);
+}
+
+.recar-value-card > small {
+  color: var(--blue);
+  font-size: 11px;
+  font-weight: 900;
+}
+
+.recar-value-card--crew > small {
+  color: var(--green);
+}
+
+.recar-value-card h4 {
+  margin: 8px 0 0;
+  font-size: 20px;
+  font-weight: 900;
+  line-height: 1.35;
+  word-break: keep-all;
+}
+
+.recar-value-card p {
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.65;
+}
+
+.recar-value-core {
+  display: grid;
+  align-content: center;
+  justify-items: center;
+  background: var(--dark);
+  color: #fff;
+  text-align: center;
+  box-shadow: 0 16px 32px rgba(11, 23, 45, 0.16);
+}
+
+.recar-value-core-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 7px;
+  color: #9ec0ff;
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.recar-value-core-label svg {
+  width: 16px;
+  height: 16px;
+}
+
+.recar-value-core > strong {
+  font-size: 18px;
+  font-weight: 900;
+}
+
+.recar-value-core > p {
+  margin-top: 5px;
+  color: #c8d5e8;
+  font-size: 12px;
+}
+
+.recar-value-core > b {
+  margin-top: 17px;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255, 255, 255, 0.16);
+  color: #fff;
+  font-size: 13px;
+}
+
+.recar-transparency-list {
+  display: grid;
+  grid-template-columns: minmax(240px, 1.25fr) repeat(3, minmax(0, 1fr));
+  margin-top: 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background: #fff;
+}
+
+.recar-transparency-list > strong,
+.recar-transparency-list > span {
+  display: flex;
+  min-height: 58px;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 16px;
+  border-right: 1px solid var(--line);
+  font-size: 13px;
+  word-break: keep-all;
+}
+
+.recar-transparency-list > span:last-child {
+  border-right: 0;
+}
+
+.recar-transparency-list svg {
+  flex: 0 0 auto;
+  width: 17px;
+  height: 17px;
+  color: var(--blue);
+}
+
+.recar-transparency-list > strong {
+  color: var(--blue-dark);
+  font-weight: 900;
+}
+
+.recar-transparency-list > span {
+  color: #44536a;
+  font-weight: 750;
+}
+
+.recar-value-note {
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 12px;
+  line-height: 1.6;
+}
+
 .recar-advantage-band {
   padding-top: 40px;
   border-top: 1px solid var(--line);
@@ -3645,6 +3851,7 @@ dialog::backdrop {
     gap: 42px;
   }
 
+  .recar-value-heading,
   .recar-advantage-heading {
     grid-template-columns: minmax(0, 0.9fr) minmax(360px, 1.1fr);
     gap: 42px;
@@ -3757,14 +3964,40 @@ dialog::backdrop {
     gap: 42px;
   }
 
+  .recar-value-heading,
   .recar-advantage-heading {
     grid-template-columns: 1fr;
     align-items: start;
     gap: 18px;
   }
 
+  .recar-value-heading > p,
   .recar-advantage-heading > p {
     max-width: 680px;
+  }
+
+  .recar-value-flow {
+    grid-template-columns: 1fr;
+  }
+
+  .recar-value-card,
+  .recar-value-core {
+    min-height: 238px;
+  }
+
+  .recar-transparency-list {
+    grid-template-columns: 1fr;
+  }
+
+  .recar-transparency-list > strong,
+  .recar-transparency-list > span {
+    min-height: 52px;
+    border-right: 0;
+    border-bottom: 1px solid var(--line);
+  }
+
+  .recar-transparency-list > span:last-child {
+    border-bottom: 0;
   }
 
   .product-layout.reverse .scene-copy,
@@ -3997,12 +4230,58 @@ dialog::backdrop {
     padding-top: 32px;
   }
 
+  .recar-value-band {
+    padding-top: 32px;
+  }
+
+  .recar-value-heading h3,
   .recar-advantage-heading h3 {
     font-size: 27px;
   }
 
+  .recar-value-heading > p,
   .recar-advantage-heading > p {
     font-size: 15px;
+  }
+
+  .recar-value-flow {
+    gap: 10px;
+    margin-top: 22px;
+  }
+
+  .recar-value-card {
+    display: grid;
+    min-height: 174px;
+    grid-template-columns: 70px minmax(0, 1fr);
+    grid-template-rows: auto auto 1fr;
+    align-items: start;
+    gap: 0 14px;
+    padding: 18px;
+  }
+
+  .recar-value-card .recar-value-illustration {
+    grid-row: 1 / 4;
+    margin-bottom: 0;
+  }
+
+  .recar-value-card > small,
+  .recar-value-card h4,
+  .recar-value-card p {
+    grid-column: 2;
+  }
+
+  .recar-value-card h4 {
+    margin-top: 4px;
+    font-size: 18px;
+  }
+
+  .recar-value-card p {
+    margin-top: 8px;
+    font-size: 13px;
+  }
+
+  .recar-value-core {
+    min-height: 250px;
   }
 
   .recar-advantage-grid {

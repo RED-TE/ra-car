@@ -706,8 +706,8 @@ function updateRecarMode(mode) {
     panel.hidden = panel.dataset.routePanel !== mode;
   });
   qs("[data-recar-caption]").textContent = isRecar
-    ? "고객 조건을 RE:CAR가 바로 정리해 여러 금융사의 견적을 같은 기준으로 비교합니다."
-    : "고객 문의가 유통업체, 영업사원, 대리점·딜러를 차례로 거쳐 금융사에 전달되는 구조입니다.";
+    ? "고객 조건을 RE:CAR가 바로 정리해 제휴 금융사·렌터카사의 견적을 같은 기준으로 비교합니다."
+    : "고객 문의가 여러 유통업체와 판매 단계를 거쳐 금융사에 전달되면, 정보 전달과 중간 비용 구조가 복잡해질 수 있습니다.";
 }
 
 function updateMoneyMode(mode) {
