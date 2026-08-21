@@ -659,6 +659,137 @@ summary:focus-visible {
   background: #fff;
 }
 
+.recar-scene-layout {
+  display: grid;
+  gap: 58px;
+}
+
+.recar-advantage-band {
+  padding-top: 40px;
+  border-top: 1px solid var(--line);
+}
+
+.recar-advantage-heading {
+  display: grid;
+  grid-template-columns: minmax(0, 0.82fr) minmax(420px, 1.18fr);
+  align-items: end;
+  gap: 64px;
+}
+
+.recar-advantage-heading .eyebrow {
+  margin-bottom: 12px;
+}
+
+.recar-advantage-heading h3 {
+  margin: 0;
+  font-size: 32px;
+  font-weight: 900;
+  line-height: 1.2;
+}
+
+.recar-advantage-heading > p {
+  max-width: 590px;
+  color: var(--muted);
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+.recar-advantage-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 12px;
+  margin-top: 28px;
+}
+
+.recar-advantage-item {
+  min-width: 0;
+  min-height: 230px;
+  padding: 22px;
+  background: #fbfcfe;
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--blue);
+  border-radius: var(--radius);
+}
+
+.recar-advantage-item:nth-child(2) {
+  border-top-color: #12a77b;
+}
+
+.recar-advantage-item:nth-child(3) {
+  border-top-color: #f79009;
+}
+
+.recar-advantage-item:nth-child(4) {
+  border-top-color: #0e94b8;
+}
+
+.recar-advantage-icon {
+  display: grid;
+  width: 58px;
+  height: 58px;
+  place-items: center;
+  margin-bottom: 24px;
+  background: var(--blue-soft);
+  border: 1px solid #ccdaf9;
+  border-radius: var(--radius);
+}
+
+.recar-advantage-icon.is-green {
+  background: var(--green-soft);
+  border-color: #bee5d8;
+}
+
+.recar-advantage-icon.is-amber {
+  background: var(--amber-soft);
+  border-color: #f1d6ae;
+}
+
+.recar-advantage-icon.is-cyan {
+  background: #e9f7fb;
+  border-color: #bee3ed;
+}
+
+.recar-advantage-icon img {
+  width: 42px;
+  height: 42px;
+}
+
+.recar-advantage-item > small {
+  display: block;
+  color: var(--blue);
+  font-size: 11px;
+  font-weight: 900;
+  letter-spacing: 0;
+}
+
+.recar-advantage-item:nth-child(2) > small {
+  color: var(--green);
+}
+
+.recar-advantage-item:nth-child(3) > small {
+  color: var(--amber);
+}
+
+.recar-advantage-item:nth-child(4) > small {
+  color: #087f9b;
+}
+
+.recar-advantage-item h4 {
+  margin: 8px 0 0;
+  color: var(--ink);
+  font-size: 18px;
+  font-weight: 900;
+  line-height: 1.35;
+  word-break: keep-all;
+}
+
+.recar-advantage-item p {
+  margin-top: 12px;
+  color: var(--muted);
+  font-size: 14px;
+  line-height: 1.65;
+}
+
 .recar-visual {
   padding: 22px;
   border: 1px solid var(--line);
@@ -3470,6 +3601,15 @@ dialog::backdrop {
     gap: 42px;
   }
 
+  .recar-advantage-heading {
+    grid-template-columns: minmax(0, 0.9fr) minmax(360px, 1.1fr);
+    gap: 42px;
+  }
+
+  .recar-advantage-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
   .payment-lab {
     grid-template-columns: 1fr;
   }
@@ -3571,6 +3711,16 @@ dialog::backdrop {
   .product-layout.reverse {
     grid-template-columns: 1fr;
     gap: 42px;
+  }
+
+  .recar-advantage-heading {
+    grid-template-columns: 1fr;
+    align-items: start;
+    gap: 18px;
+  }
+
+  .recar-advantage-heading > p {
+    max-width: 680px;
   }
 
   .product-layout.reverse .scene-copy,
@@ -3793,6 +3943,59 @@ dialog::backdrop {
 
   .recar-visual {
     padding: 14px;
+  }
+
+  .recar-scene-layout {
+    gap: 46px;
+  }
+
+  .recar-advantage-band {
+    padding-top: 32px;
+  }
+
+  .recar-advantage-heading h3 {
+    font-size: 27px;
+  }
+
+  .recar-advantage-heading > p {
+    font-size: 15px;
+  }
+
+  .recar-advantage-grid {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin-top: 22px;
+  }
+
+  .recar-advantage-item {
+    display: grid;
+    min-height: 154px;
+    grid-template-columns: 58px minmax(0, 1fr);
+    grid-template-rows: auto auto 1fr;
+    align-items: start;
+    column-gap: 14px;
+    padding: 18px;
+  }
+
+  .recar-advantage-icon {
+    grid-row: 1 / 4;
+    margin-bottom: 0;
+  }
+
+  .recar-advantage-item > small,
+  .recar-advantage-item h4,
+  .recar-advantage-item p {
+    grid-column: 2;
+  }
+
+  .recar-advantage-item h4 {
+    margin-top: 4px;
+    font-size: 17px;
+  }
+
+  .recar-advantage-item p {
+    margin-top: 8px;
+    font-size: 13px;
   }
 
   .segmented-control,
