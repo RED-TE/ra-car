@@ -87,6 +87,18 @@ test("development serves public aliases and the preview route", async () => {
     const guideResponse = await fetch(`${server.baseUrl}/crew/guide/`);
     assert.match(await guideResponse.text(), /href="\/crew\/"/);
 
+    const robotsResponse = await fetch(`${server.baseUrl}/robots.txt`);
+    assert.equal(robotsResponse.status, 200);
+    assert.match(robotsResponse.headers.get("content-type"), /^text\/plain/);
+    assert.match(await robotsResponse.text(), /Sitemap: https:\/\/recarplan\.com\/sitemap\.xml/);
+
+    const sitemapResponse = await fetch(`${server.baseUrl}/sitemap.xml`);
+    assert.equal(sitemapResponse.status, 200);
+    assert.match(sitemapResponse.headers.get("content-type"), /^application\/xml/);
+    const sitemapXml = await sitemapResponse.text();
+    assert.match(sitemapXml, /<loc>https:\/\/recarplan\.com\/<\/loc>/);
+    assert.match(sitemapXml, /<loc>https:\/\/recarplan\.com\/crew\/guide\/<\/loc>/);
+
     const downloadResponse = await fetch(`${server.baseUrl}/download?ref=RC-QA1234`);
     assert.equal(downloadResponse.status, 200);
     assert.match(await downloadResponse.text(), /window\.location\.replace/);
