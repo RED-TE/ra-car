@@ -44,6 +44,7 @@ if (carBuildSection) {
   const completionText = carBuildSection.querySelector("[data-build-complete]");
   const buildSteps = [...carBuildSection.querySelectorAll(".car-build-steps li")];
   const flowStages = [...carBuildSection.querySelectorAll("[data-flow-stage]")];
+  const flowTimeline = [...carBuildSection.querySelectorAll(".crew-flow-timeline li")];
   const labels = ["추천 링크 전달", "휴대폰 문의 접수", "RE:CAR 상담·계약", "차량 출고·보상"];
 
   const clamp = (value, min = 0, max = 1) => Math.min(Math.max(value, min), max);
@@ -51,14 +52,37 @@ if (carBuildSection) {
   const renderBuild = (progress) => {
     if (progressBar) progressBar.style.width = `${Math.round(progress * 100)}%`;
 
-    const activeStep = Math.min(labels.length - 1, Math.floor(progress * labels.length));
-    buildSteps.forEach((step, index) => step.classList.toggle("is-active", index <= activeStep));
+    const scenePosition = clamp((progress - 0.06) / 0.88) * (labels.length - 1);
+    const activeStep = Math.min(labels.length - 1, Math.round(scenePosition));
+    buildSteps.forEach((step, index) => {
+      step.classList.toggle("is-active", index <= activeStep);
+      step.classList.toggle("is-current", index === activeStep);
+    });
     flowStages.forEach((stage, index) => {
+      const distance = index - scenePosition;
+      const absoluteDistance = Math.abs(distance);
+      const isCurrent = index === activeStep;
+      const opacity = isCurrent ? 1 : 0;
+      const sceneX = distance * 132;
+      const sceneY = Math.min(absoluteDistance, 1) * 16;
+      const sceneScale = 1 - Math.min(absoluteDistance * 0.08, 0.16);
+
+      stage.style.setProperty("--scene-opacity", opacity.toFixed(3));
+      stage.style.setProperty("--scene-x", `${sceneX.toFixed(1)}px`);
+      stage.style.setProperty("--scene-y", `${sceneY.toFixed(1)}px`);
+      stage.style.setProperty("--scene-scale", sceneScale.toFixed(3));
+      stage.style.setProperty("--scene-blur", "0px");
+      stage.style.zIndex = String(isCurrent ? labels.length + 1 : labels.length - Math.round(absoluteDistance));
       stage.classList.toggle("is-active", index <= activeStep);
-      stage.classList.toggle("is-current", index === activeStep);
+      stage.classList.toggle("is-current", isCurrent);
+    });
+    flowTimeline.forEach((step, index) => {
+      step.classList.toggle("is-active", index <= activeStep);
+      step.classList.toggle("is-current", index === activeStep);
     });
     if (progressLabel) progressLabel.textContent = labels[activeStep];
     if (completionText) completionText.classList.toggle("is-visible", progress >= 0.9);
+    carBuildSection.dataset.flowStep = String(activeStep);
     carBuildSection.style.setProperty("--build-progress", String(progress));
   };
 
