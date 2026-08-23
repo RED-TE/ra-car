@@ -13,7 +13,7 @@
     <link rel="icon" type="image/png" href="../../assets/recar-favicon-20260518.png" />
     <link rel="apple-touch-icon" href="../../assets/recar-favicon-20260518.png" />
     <link rel="preload" href="../../assets/crew-njob/hero-njob.png?v=20260822-cute" as="image" fetchpriority="high" />
-    <link rel="stylesheet" href="./njob.css?v=20260823-cinematic-3" />
+    <link rel="stylesheet" href="./njob.css?v=20260823-5" />
   </head>
   <body>
     <a class="skip-link" href="#main">본문으로 바로가기</a>
@@ -112,58 +112,36 @@
               <span>RE:CAR 진행률</span>
               <strong data-build-label>추천 링크 전달</strong>
             </div>
-            <div class="crew-flow-canvas">
-              <span class="crew-flow-halo" aria-hidden="true"></span>
-              <span class="crew-flow-beam" aria-hidden="true"></span>
-              <ol class="crew-flow-scenes" aria-hidden="true">
-                <li class="crew-flow-scene is-active is-current" data-flow-stage>
-                  <div class="crew-flow-scene-copy">
-                    <span>STEP 01 · 추천</span>
-                    <strong>링크 하나만<br />전달하세요</strong>
-                    <p>차량이 필요한 사람에게<br />크루 전용 링크를 보냅니다.</p>
-                  </div>
-                  <div class="crew-flow-art" style="--sprite-index: 0">
-                    <img src="../../assets/crew-njob/scroll-flow/crew-to-car-flow.png" alt="" width="2172" height="724" />
-                  </div>
-                </li>
-                <li class="crew-flow-scene" data-flow-stage>
-                  <div class="crew-flow-scene-copy">
-                    <span>STEP 02 · 접수</span>
-                    <strong>휴대폰에서<br />바로 문의 접수</strong>
-                    <p>앱 설치 없이 상담 정보를 남기면<br />RE:CAR로 연결됩니다.</p>
-                  </div>
-                  <div class="crew-flow-art" style="--sprite-index: 1">
-                    <img src="../../assets/crew-njob/scroll-flow/crew-to-car-flow.png" alt="" width="2172" height="724" />
-                  </div>
-                </li>
-                <li class="crew-flow-scene" data-flow-stage>
-                  <div class="crew-flow-scene-copy">
-                    <span>STEP 03 · RE:CAR</span>
-                    <strong>상담부터 계약까지<br />운영팀이 진행</strong>
-                    <p>견적 비교, 조건 안내, 심사와 계약을<br />전담 운영팀이 이어갑니다.</p>
-                  </div>
-                  <div class="crew-flow-art" style="--sprite-index: 2">
-                    <img src="../../assets/crew-njob/scroll-flow/crew-to-car-flow.png" alt="" width="2172" height="724" />
-                  </div>
-                </li>
-                <li class="crew-flow-scene crew-flow-scene-vehicle" data-flow-stage>
-                  <div class="crew-flow-scene-copy">
-                    <span>STEP 04 · 완료</span>
-                    <strong>차량 출고 후<br />보상까지 반영</strong>
-                    <p>계약과 인도가 완료되면<br />기준에 따라 크루 보상이 반영됩니다.</p>
-                  </div>
-                  <div class="crew-flow-art" style="--sprite-index: 3">
-                    <img src="../../assets/crew-njob/scroll-flow/crew-to-car-flow.png" alt="" width="2172" height="724" />
-                  </div>
-                </li>
-              </ol>
-              <ol class="crew-flow-timeline" aria-hidden="true">
-                <li class="is-active is-current"><span>01</span><strong>추천</strong></li>
-                <li><span>02</span><strong>접수</strong></li>
-                <li><span>03</span><strong>RE:CAR</strong></li>
-                <li><span>04</span><strong>출고</strong></li>
-              </ol>
-            </div>
+            <ol class="crew-flow-objects" aria-hidden="true">
+              <li class="is-active" data-flow-stage>
+                <div class="crew-flow-art" style="--sprite-index: 0">
+                  <img src="../../assets/crew-njob/scroll-flow/crew-to-car-flow.png" alt="" width="2172" height="724" />
+                </div>
+                <span>추천</span>
+                <strong>링크만 전달</strong>
+              </li>
+              <li data-flow-stage>
+                <div class="crew-flow-art" style="--sprite-index: 1">
+                  <img src="../../assets/crew-njob/scroll-flow/crew-to-car-flow.png" alt="" width="2172" height="724" />
+                </div>
+                <span>접수</span>
+                <strong>휴대폰으로 문의</strong>
+              </li>
+              <li data-flow-stage>
+                <div class="crew-flow-art" style="--sprite-index: 2">
+                  <img src="../../assets/crew-njob/scroll-flow/crew-to-car-flow.png" alt="" width="2172" height="724" />
+                </div>
+                <span>RE:CAR</span>
+                <strong>상담·비교·계약</strong>
+              </li>
+              <li data-flow-stage>
+                <div class="crew-flow-art" style="--sprite-index: 3">
+                  <img src="../../assets/crew-njob/scroll-flow/crew-to-car-flow.png" alt="" width="2172" height="724" />
+                </div>
+                <span>완료</span>
+                <strong>차량 출고</strong>
+              </li>
+            </ol>
             <div class="car-build-progress" aria-hidden="true"><span data-build-progress></span></div>
             <p class="car-build-complete" data-build-complete>크루는 링크만 전달하고, 나머지는 RE:CAR가 이어갑니다.</p>
           </div>
@@ -546,6 +524,6 @@
     <a class="mobile-apply" href="../login.html?action=apply">크루 N잡 시작하기 <i data-lucide="arrow-right" aria-hidden="true"></i></a>
 
     <script src="../guide/lucide.min.js"></script>
-    <script src="./njob.js?v=20260823-cinematic-3"></script>
+    <script src="./njob.js?v=20260823-6"></script>
   </body>
 </html>
