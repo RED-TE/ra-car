@@ -148,6 +148,10 @@ input {
   text-align: left;
 }
 
+.crew-login-form-anchor.is-apply {
+  width: min(760px, 100%);
+}
+
 .crew-panel {
   min-width: 0;
   background: var(--crew-panel);
@@ -212,6 +216,49 @@ input {
 .crew-field input:focus {
   border-color: rgba(93, 91, 255, 0.45);
   box-shadow: 0 0 0 3px rgba(93, 91, 255, 0.1);
+}
+
+.crew-field-optional {
+  color: #8a8f98;
+  font-weight: 750;
+}
+
+.crew-inline-field {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px;
+}
+
+.crew-inline-field .crew-secondary-button {
+  min-width: 104px;
+  border-radius: 10px;
+}
+
+.crew-checkbox {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  min-height: 44px;
+  padding: 10px 0;
+  color: #444b56;
+  font-size: 12px;
+  font-weight: 800;
+  line-height: 1.55;
+  cursor: pointer;
+}
+
+.crew-checkbox input {
+  flex: 0 0 auto;
+  width: 18px;
+  height: 18px;
+  margin: 0;
+  accent-color: #2764ff;
+}
+
+.crew-checkbox a {
+  color: #4f5cff;
+  text-decoration: underline;
+  text-underline-offset: 2px;
 }
 
 .crew-primary-button,
@@ -279,6 +326,63 @@ input {
 
 .crew-form-error[hidden] {
   display: none;
+}
+
+.crew-form-success {
+  padding: 12px 14px;
+  color: #087a38;
+  font-size: 12px;
+  font-weight: 850;
+  line-height: 1.55;
+  background: #ecfbf2;
+  border: 1px solid #bceecf;
+  border-radius: 12px;
+}
+
+.crew-form-note {
+  padding: 13px 14px;
+  color: #626a76;
+  font-size: 12px;
+  font-weight: 750;
+  line-height: 1.6;
+  background: #f7f8fb;
+  border: 1px solid #e7e9ee;
+  border-radius: 12px;
+}
+
+.crew-apply-submit {
+  width: 100%;
+  border-radius: 12px;
+}
+
+.crew-back-link {
+  display: block;
+  min-height: 44px;
+  padding: 12px;
+  color: #5d6470;
+  font-size: 12px;
+  font-weight: 800;
+  text-align: center;
+}
+
+.crew-apply-complete {
+  padding: 34px 10px 12px;
+  text-align: center;
+}
+
+.crew-apply-complete strong {
+  display: block;
+  color: #171a1f;
+  font-size: 21px;
+  font-weight: 950;
+}
+
+.crew-apply-complete p {
+  margin: 10px 0 22px;
+  color: #68707c;
+  font-size: 13px;
+  font-weight: 750;
+  line-height: 1.6;
 }
 
 .crew-login-pattern {
