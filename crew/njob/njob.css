@@ -32,25 +32,6 @@ body {
   word-break: keep-all;
 }
 
-h1,
-h2,
-h3,
-.hero-bubble > div > strong,
-.worry-copy strong,
-.recommend-audiences strong,
-.steps-list strong,
-.faq-list summary span {
-  text-wrap: balance;
-}
-
-p,
-small,
-.hero-milestone,
-.steps-note,
-.answer-flow-note {
-  text-wrap: pretty;
-}
-
 body,
 button,
 a,
@@ -445,9 +426,7 @@ summary:focus-visible {
 }
 
 .hero-earning-item strong {
-  overflow-wrap: normal;
-  word-break: keep-all;
-  text-wrap: balance;
+  overflow-wrap: anywhere;
   font-size: 17px;
   line-height: 1.35;
   font-weight: 950;
@@ -929,13 +908,9 @@ summary:focus-visible {
 }
 
 .hero-bubble strong {
-  max-width: 720px;
+  max-width: 660px;
   font-size: 26px;
   line-height: 1.3;
-}
-
-.reward-title-line {
-  display: block;
 }
 
 .hero-bubble p {
@@ -996,8 +971,7 @@ summary:focus-visible {
 }
 
 .hero-vehicle-list strong {
-  overflow-wrap: normal;
-  word-break: keep-all;
+  overflow-wrap: anywhere;
   color: var(--ink);
   font-size: 12px;
   line-height: 1.35;
