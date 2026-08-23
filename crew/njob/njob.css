@@ -317,12 +317,39 @@ summary:focus-visible {
   line-height: 1.23;
 }
 
-.overview-copy > p:last-child {
+.overview-description {
   max-width: 650px;
   margin: 0;
   color: #c8d3e5;
   font-size: 17px;
   line-height: 1.8;
+}
+
+.overview-download-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 48px;
+  margin-top: 28px;
+  padding: 0 20px;
+  color: var(--white);
+  font-size: 15px;
+  font-weight: 850;
+  border: 1px solid rgba(255, 255, 255, 0.42);
+  border-radius: 6px;
+  transition:
+    background 160ms ease,
+    border-color 160ms ease;
+}
+
+.overview-download-link:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: rgba(255, 255, 255, 0.75);
+}
+
+.overview-download-link:focus-visible {
+  outline: 3px solid rgba(116, 167, 255, 0.55);
+  outline-offset: 3px;
 }
 
 .crew-overview .eyebrow {
@@ -1767,9 +1794,14 @@ summary:focus-visible {
     line-height: 1.28;
   }
 
-  .overview-copy > p:last-child {
+  .overview-description {
     font-size: 15px;
     line-height: 1.75;
+  }
+
+  .overview-download-link {
+    width: 100%;
+    justify-content: center;
   }
 
   .reward-preview {
