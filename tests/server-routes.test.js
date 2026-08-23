@@ -1,10 +1,19 @@
 const assert = require("node:assert/strict");
+const fs = require("node:fs");
 const net = require("node:net");
 const path = require("node:path");
 const { spawn } = require("node:child_process");
 const { test } = require("node:test");
 
 const rootDir = path.resolve(__dirname, "..");
+
+function htmlFilesUnder(directory) {
+  return fs.readdirSync(directory, { withFileTypes: true }).flatMap((entry) => {
+    const filePath = path.join(directory, entry.name);
+    if (entry.isDirectory()) return htmlFilesUnder(filePath);
+    return entry.isFile() && entry.name.endsWith(".html") ? [filePath] : [];
+  });
+}
 
 async function availablePort() {
   return new Promise((resolve, reject) => {
@@ -142,4 +151,33 @@ test("private data and unknown knowledge files stay blocked", async () => {
   } finally {
     await server.stop();
   }
+});
+
+test("crew application CTAs always open the application form", async () => {
+  const loginHtml = fs.readFileSync(path.join(rootDir, "crew/login.html"), "utf8");
+  const applicationLinks = htmlFilesUnder(path.join(rootDir, "crew")).flatMap((filePath) => {
+    const html = fs.readFileSync(filePath, "utf8");
+    return [...html.matchAll(/<a\b[^>]*href="([^"]+)"[^>]*>[\s\S]*?<\/a>/g)]
+      .filter((match) => /크루 (?:N잡 )?(?:신청|시작하기)/.test(match[0]))
+      .map((match) => ({ filePath, href: match[1] }));
+  });
+
+  assert.ok(applicationLinks.length >= 6, "expected every crew application CTA to be covered");
+  for (const { filePath, href } of applicationLinks) {
+    const context = `${path.relative(rootDir, filePath)}: ${href}`;
+    assert.match(href, /(?:^|\/)login\.html\?action=apply$/, context);
+    assert.doesNotMatch(href, /^mailto:/, context);
+  }
+
+  assert.match(loginHtml, /id="crewApplyPanel"/);
+  assert.match(loginHtml, /id="crewApplyForm"/);
+  assert.match(loginHtml, /name="name"/);
+  assert.match(loginHtml, /name="phone"[^>]*type="tel"[^>]*inputmode="numeric"|type="tel"[^>]*inputmode="numeric"/);
+  assert.match(loginHtml, /name="snsAccount"/);
+  assert.match(loginHtml, /name="loginId"/);
+  assert.match(loginHtml, /name="password"/);
+  assert.match(loginHtml, /get\("action"\) === "apply"/);
+  assert.match(loginHtml, /loginForm\.hidden = true/);
+  assert.match(loginHtml, /applyPanel\.hidden = false/);
+  assert.match(loginHtml, /\/api\/v1\/friends\/apply/);
 });
