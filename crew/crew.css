@@ -425,6 +425,18 @@ svg i[data-lucide] {
   color: #0f8d43;
 }
 
+.account-commission-disclosure {
+  margin: 2px 0 0;
+  padding: 10px;
+  color: #555e6b;
+  font-size: 10px;
+  font-weight: 720;
+  line-height: 1.55;
+  background: #f7f8fb;
+  border: 1px solid #e8eaf0;
+  border-radius: 9px;
+}
+
 .crew-alert-badge {
   display: grid;
   place-items: center;

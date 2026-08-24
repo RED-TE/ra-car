@@ -631,6 +631,34 @@ input {
   line-height: 1.35;
 }
 
+.crew-commission-disclosure {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+  width: min(1080px, calc(100% - 40px));
+  margin: -48px auto 76px;
+  padding: 20px 24px;
+  color: #4f5865;
+  background: #f7f8fa;
+  border: 1px solid #e3e6eb;
+  border-radius: 10px;
+}
+
+.crew-commission-disclosure strong {
+  color: #252a31;
+  font-size: 13px;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.crew-commission-disclosure p {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.7;
+}
+
 .crew-login-bottom {
   position: relative;
   width: min(980px, calc(100% - 40px));
@@ -759,6 +787,14 @@ input {
     gap: 28px;
     margin-bottom: 56px;
     padding: 30px 22px;
+  }
+
+  .crew-commission-disclosure {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    width: calc(100% - 28px);
+    margin: -28px auto 52px;
+    padding: 18px;
   }
 
   .crew-login-reward-items {

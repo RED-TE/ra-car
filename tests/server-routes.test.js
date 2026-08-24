@@ -210,3 +210,23 @@ test("crew surfaces expose the same quick guide PDF", () => {
   const pdfPath = path.join(rootDir, "assets/crew-docs/recar-crew-quick-guide.pdf");
   assert.ok(fs.statSync(pdfPath).size > 1_000_000, "quick guide PDF is unexpectedly small");
 });
+
+test("crew referral surfaces disclose commission relationships", () => {
+  const surfaces = [
+    "crew/index.html",
+    "crew/login.html",
+    "crew/njob/index.html",
+    "crew/guide/index.html",
+  ];
+
+  for (const relativePath of surfaces) {
+    const html = fs.readFileSync(path.join(rootDir, relativePath), "utf8");
+    assert.match(html, /RE:CAR 크루 활동의 일환으로/, `${relativePath}: crew relationship disclosure is missing`);
+    assert.match(html, /수수료가 지급될 수 있습니다/, `${relativePath}: commission disclosure is missing`);
+  }
+
+  for (const relativePath of ["crew/login.html", "crew/njob/index.html", "crew/guide/index.html"]) {
+    const html = fs.readFileSync(path.join(rootDir, relativePath), "utf8");
+    assert.match(html, /고객에게 별도 수수료를 청구하는 구조/, `${relativePath}: customer fee clarification is missing`);
+  }
+});
