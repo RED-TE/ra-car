@@ -13,7 +13,7 @@
     <link rel="icon" type="image/png" href="../assets/recar-favicon-20260518.png" />
     <link rel="apple-touch-icon" href="../assets/recar-favicon-20260518.png" />
     <link rel="preconnect" href="https://api.recarplan.com" crossorigin />
-    <link rel="stylesheet" href="./login.css?v=20260821-clip-landing" />
+    <link rel="stylesheet" href="./login.css?v=20260824-njob-explain" />
   </head>
   <body class="crew-login-page">
     <header class="crew-login-nav">
@@ -23,7 +23,7 @@
       </a>
       <nav aria-label="크루 링크">
         <a href="https://recarplan.com/crew/guide/">크루 가이드</a>
-        <a class="crew-login-nav-action" href="mailto:friends@recarplan.com?subject=RE%3ACAR%20%ED%81%AC%EB%A3%A8%20%EC%8B%A0%EC%B2%AD">크루 신청</a>
+        <a class="crew-login-nav-action" href="./login.html?action=apply">크루 신청</a>
         <a href="mailto:friends@recarplan.com">문의</a>
       </nav>
     </header>
@@ -40,11 +40,11 @@
         </div>
 
         <div class="crew-login-copy">
-          <p class="crew-login-eyebrow">RE:CAR 크루</p>
-          <h1>추천부터 계약까지,<br />내 실적을 한눈에</h1>
+          <p class="crew-login-eyebrow">추천만으로 시작하는 N잡</p>
+          <h1>추천은 가볍게,<br />부업은 RE:CAR로</h1>
           <p>
-            내 링크로 들어온 상담, 심사, 계약 진행 현황을 한 화면에서 확인하세요.<br />
-            정산 확정 금액도 같이 정리됩니다.
+            주변에 차량이 필요한 사람이 떠올랐다면 내 링크만 전달하세요.<br />
+            상담·심사·계약은 RE:CAR가 진행하고, 나는 실적과 정산만 편하게 확인하면 됩니다.
           </p>
         </div>
 
@@ -64,11 +64,76 @@
               <div class="login-error crew-form-error" id="loginError" role="alert" hidden></div>
               <div class="crew-auth-grid two">
                 <button class="crew-primary-button login-button" type="submit">로그인</button>
-                <a class="crew-secondary-button" href="mailto:friends@recarplan.com?subject=RE%3ACAR%20%ED%81%AC%EB%A3%A8%20%EC%8B%A0%EC%B2%AD">크루 신청</a>
+                <a class="crew-secondary-button" href="./login.html?action=apply">크루 신청</a>
                 <a class="crew-guide-button" href="https://recarplan.com/crew/guide/">크루 가이드 보기 <span aria-hidden="true">›</span></a>
+                <a class="crew-guide-button" href="../assets/crew-docs/recar-crew-quick-guide.pdf" download>빠르게 리카 알아보기 <span aria-hidden="true">↓</span></a>
               </div>
             </div>
           </form>
+
+          <section class="crew-panel crew-auth-panel crew-apply-panel" id="crewApplyPanel" hidden>
+            <h2>크루 신청</h2>
+            <p>신청 접수 후 운영팀 확인과 심사를 거쳐 크루 계정 이용 가능 여부를 안내합니다.</p>
+            <form class="crew-auth-grid" id="crewApplyForm">
+              <div class="crew-auth-grid two">
+                <label class="crew-field" for="crewApplyName">
+                  이름
+                  <input id="crewApplyName" name="name" type="text" autocomplete="name" maxlength="100" required />
+                </label>
+                <label class="crew-field" for="crewApplyPhone">
+                  연락처
+                  <input id="crewApplyPhone" name="phone" type="tel" inputmode="numeric" autocomplete="tel" maxlength="30" required />
+                </label>
+              </div>
+
+              <label class="crew-field" for="crewApplySns">
+                사용하는 SNS 계정 <span class="crew-field-optional">(선택)</span>
+                <input id="crewApplySns" name="snsAccount" type="text" maxlength="500" placeholder="예: 인스타그램 @recar_crew, 블로그 주소" />
+              </label>
+              <label class="crew-checkbox" for="crewApplySnsNone">
+                <input id="crewApplySnsNone" name="snsNone" type="checkbox" />
+                <span>사용하는 SNS 계정이 없습니다.</span>
+              </label>
+
+              <label class="crew-field" for="crewApplyLoginId">
+                아이디
+                <span class="crew-inline-field">
+                  <input id="crewApplyLoginId" name="loginId" type="text" autocomplete="username" minlength="4" maxlength="50" required />
+                  <button class="crew-secondary-button" id="checkLoginIdButton" type="button">중복확인</button>
+                </span>
+              </label>
+              <div class="crew-form-success" id="loginIdSuccess" role="status" hidden>사용 가능한 아이디입니다.</div>
+
+              <div class="crew-auth-grid two">
+                <label class="crew-field" for="crewApplyPassword">
+                  비밀번호
+                  <input id="crewApplyPassword" name="password" type="password" autocomplete="new-password" minlength="8" maxlength="100" required />
+                </label>
+                <label class="crew-field" for="crewApplyPasswordConfirm">
+                  비밀번호 확인
+                  <input id="crewApplyPasswordConfirm" name="passwordConfirm" type="password" autocomplete="new-password" minlength="8" maxlength="100" required />
+                </label>
+              </div>
+
+              <label class="crew-checkbox" for="crewApplyTerms">
+                <input id="crewApplyTerms" name="termsAgreed" type="checkbox" required />
+                <span>
+                  RE:CAR 크루 이용약관 및 활동 동의서 v1.3에 동의합니다.
+                  <a href="../friends/recar-friends-terms-v1.3.pdf" target="_blank" rel="noopener noreferrer">약관 보기</a>
+                </span>
+              </label>
+              <div class="crew-form-note">신청 연락처로 운영팀 확인 전화가 진행되며, 심사 결과는 승인, 보완, 부적합 상태로 안내됩니다.</div>
+              <div class="login-error crew-form-error" id="applyError" role="alert" hidden></div>
+              <button class="crew-primary-button crew-apply-submit" id="crewApplyButton" type="submit">크루 신청하기</button>
+              <a class="crew-guide-button" href="../assets/crew-docs/recar-crew-quick-guide.pdf" download>빠르게 리카 알아보기 <span aria-hidden="true">↓</span></a>
+              <a class="crew-back-link" href="./login.html">이미 계정이 있나요? 로그인으로 돌아가기</a>
+            </form>
+            <div class="crew-apply-complete" id="crewApplyComplete" role="status" hidden>
+              <strong>크루 신청이 접수됐습니다.</strong>
+              <p>운영팀 확인 후 신청하신 연락처로 안내드리겠습니다.</p>
+              <a class="crew-secondary-button" href="./login.html">로그인 화면으로</a>
+            </div>
+          </section>
         </div>
 
         <figure class="crew-dashboard-preview">
@@ -82,49 +147,53 @@
         </figure>
       </section>
 
-      <section class="crew-login-section">
-        <div class="crew-login-section-copy">
-          <span>추천 흐름</span>
-          <h2>누가 어디까지 왔는지<br class="mobile-break" /> 바로 보입니다</h2>
-          <p>링크 방문, 상담 접수, 심사 요청, 계약 진행 상태를 순서대로 확인할 수 있습니다. 따로 엑셀을 맞춰보지 않아도 흐름이 끊기지 않습니다.</p>
-        </div>
-        <div class="crew-flow-preview">
-          <div><small>김** 고객</small><strong>심사중</strong><span>보완 안내 대기</span></div>
-          <div><small>박** 고객</small><strong>계약중</strong><span>계약 URL 발송 완료</span></div>
-          <div><small>이** 고객</small><strong>인도완료</strong><span>정산 반영 예정</span></div>
+      <section class="crew-login-njob" aria-labelledby="crewNjobTitle">
+        <header class="crew-login-njob-heading">
+          <span>추천만으로 시작하는 N잡</span>
+          <h2 id="crewNjobTitle">차량이 필요한 사람에게<br />내 링크만 전달하세요</h2>
+          <p>복잡한 영업은 필요 없습니다. 상담부터 심사·계약·차량 인도까지 RE:CAR 운영팀이 이어갑니다.</p>
+        </header>
+
+        <div class="crew-login-njob-grid">
+          <article>
+            <img src="../assets/crew-njob/custom-icons/activity-link-send.png" alt="" width="512" height="512" loading="lazy" />
+            <small>LINK</small>
+            <h3>추천 코드나<br />전용 링크만 전달</h3>
+            <p>내 차부터 가족, 친구, 직장 동료까지 차량이 필요한 분에게 편하게 안내합니다.</p>
+          </article>
+          <article>
+            <img src="../assets/crew-njob/custom-icons/activity-recar-support.png" alt="" width="512" height="512" loading="lazy" />
+            <small>RE:CAR SUPPORT</small>
+            <h3>상담과 계약은<br />운영팀이 진행</h3>
+            <p>차량 비교, 조건 안내, 심사와 계약 절차는 RE:CAR가 맡아 끝까지 이어갑니다.</p>
+          </article>
+          <article>
+            <img src="../assets/crew-njob/custom-icons/benefit-followup.png" alt="" width="512" height="512" loading="lazy" />
+            <small>DASHBOARD</small>
+            <h3>진행과 정산은<br />한 화면에서 확인</h3>
+            <p>추천한 상담이 어디까지 진행됐는지 확인하고, 확정된 정산 내역을 관리합니다.</p>
+          </article>
         </div>
       </section>
 
-      <section class="crew-login-section reverse">
-        <div class="crew-settlement-preview">
-          <div class="settlement-preview-main">
-            <small>이번 달 확정금액</small>
-            <strong>12,400,000원</strong>
-            <span>정산 기준일 2026.08</span>
-          </div>
-          <div class="settlement-preview-bars" aria-label="정산 진행 단계">
-            <span><b></b>심사</span>
-            <span><b></b>계약</span>
-            <span><b></b>인도</span>
-          </div>
+      <section class="crew-login-reward" aria-labelledby="crewRewardTitle">
+        <div class="crew-login-reward-copy">
+          <span>크루 보상</span>
+          <h2 id="crewRewardTitle">계약마다 건별 보상,<br />누적 성과에는 차량 혜택까지</h2>
+          <p>계약 1건당 최대 45만원을 정산하며, 누적 계약 100대 달성 시 예시 차량 중 1대를 1년간 이용하는 혜택을 제공합니다.</p>
+          <small>실제 보상과 지급 시점, 차량 모델·색상·사양은 계약 및 운영 정책에 따라 달라질 수 있습니다.</small>
         </div>
-        <div class="crew-login-section-copy">
-          <span>정산</span>
-          <h2>확정된 금액만 정확하게</h2>
-          <p>인도 완료 기준으로 확정된 정산 금액을 보여줍니다. 정산 기준월과 진행 상태도 같은 화면에서 확인할 수 있습니다.</p>
-        </div>
-      </section>
-
-      <section class="crew-login-toolkit">
-        <div>
-          <h2>크루가 자주 보는 정보만<br class="mobile-break" /> 모았습니다</h2>
-          <p>현장에서 필요한 숫자와 진행 상태를 빠르게 확인할 수 있게 정리했습니다.</p>
-        </div>
-        <div class="crew-login-feature-grid">
-          <article><strong>추천 링크</strong><p>본인 링크와 코드 사용량을 따로 확인합니다.</p></article>
-          <article><strong>심사 흐름</strong><p>접수, 보완, 승인 상태가 날짜별로 남습니다.</p></article>
-          <article><strong>계약 / 인도</strong><p>계약 대기와 인도 완료 건을 한눈에 구분합니다.</p></article>
-          <article><strong>정산</strong><p>확정 금액과 정산 기준월을 바로 확인합니다.</p></article>
+        <div class="crew-login-reward-items">
+          <article>
+            <img src="../assets/crew-njob/custom-icons/benefit-reward.png" alt="" width="512" height="512" loading="lazy" />
+            <span>계약 1건당</span>
+            <strong>최대 45만원</strong>
+          </article>
+          <article>
+            <img src="../assets/crew-njob/custom-icons/benefit-milestone.png" alt="" width="512" height="512" loading="lazy" />
+            <span>누적 계약 100대 달성 시</span>
+            <strong>차량 1년 이용 혜택</strong>
+          </article>
         </div>
       </section>
 
@@ -141,6 +210,26 @@
       const loginForm = document.querySelector("#crewLoginForm");
       const loginButton = document.querySelector(".login-button");
       const loginError = document.querySelector("#loginError");
+      const applyPanel = document.querySelector("#crewApplyPanel");
+      const applyForm = document.querySelector("#crewApplyForm");
+      const applyButton = document.querySelector("#crewApplyButton");
+      const applyError = document.querySelector("#applyError");
+      const applyComplete = document.querySelector("#crewApplyComplete");
+      const formAnchor = document.querySelector("#crew-login-box");
+      const loginIdInput = document.querySelector("#crewApplyLoginId");
+      const loginIdCheckButton = document.querySelector("#checkLoginIdButton");
+      const loginIdSuccess = document.querySelector("#loginIdSuccess");
+      const snsInput = document.querySelector("#crewApplySns");
+      const snsNoneInput = document.querySelector("#crewApplySnsNone");
+      let checkedLoginId = "";
+      let loginIdAvailable = false;
+
+      if (new URLSearchParams(window.location.search).get("action") === "apply") {
+        loginForm.hidden = true;
+        applyPanel.hidden = false;
+        formAnchor.classList.add("is-apply");
+        document.title = "RE:CAR 크루 신청";
+      }
 
       function showError(message) {
         loginError.textContent = message;
@@ -188,6 +277,131 @@
         } finally {
           loginButton.disabled = false;
           loginButton.textContent = "로그인";
+        }
+      });
+
+      function showApplyError(message) {
+        applyError.textContent = message;
+        applyError.hidden = false;
+      }
+
+      async function parseApplyError(response, fallback) {
+        try {
+          const body = await response.json();
+          return body?.error?.detail || body?.error?.message || body?.message || body?.detail?.message || body?.detail || fallback;
+        } catch {
+          return fallback;
+        }
+      }
+
+      function resetLoginIdCheck() {
+        checkedLoginId = "";
+        loginIdAvailable = false;
+        loginIdSuccess.hidden = true;
+      }
+
+      loginIdInput.addEventListener("input", resetLoginIdCheck);
+
+      snsNoneInput.addEventListener("change", () => {
+        snsInput.disabled = snsNoneInput.checked;
+        if (snsNoneInput.checked) snsInput.value = "";
+      });
+
+      loginIdCheckButton.addEventListener("click", async () => {
+        const loginId = loginIdInput.value.trim().toLowerCase();
+        if (loginId.length < 4) {
+          showApplyError("아이디는 4자 이상 입력해 주세요.");
+          return;
+        }
+
+        applyError.hidden = true;
+        loginIdCheckButton.disabled = true;
+        loginIdCheckButton.textContent = "확인 중";
+        resetLoginIdCheck();
+
+        try {
+          const response = await fetch(`${API_BASE_URL}/api/v1/friends/login-id/check?login_id=${encodeURIComponent(loginId)}`, {
+            headers: { Accept: "application/json" },
+          });
+          if (!response.ok) throw new Error(await parseApplyError(response, "아이디 중복 확인에 실패했습니다."));
+          const result = await response.json();
+          checkedLoginId = String(result.login_id || loginId).trim().toLowerCase();
+          loginIdAvailable = result.available === true;
+          if (!loginIdAvailable) {
+            showApplyError("이미 사용 중인 아이디입니다.");
+            return;
+          }
+          loginIdSuccess.hidden = false;
+        } catch (error) {
+          showApplyError(error instanceof Error ? error.message : "아이디 중복 확인에 실패했습니다.");
+        } finally {
+          loginIdCheckButton.disabled = false;
+          loginIdCheckButton.textContent = "중복확인";
+        }
+      });
+
+      applyForm.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        const formData = new FormData(applyForm);
+        const name = String(formData.get("name") || "").trim();
+        const phone = String(formData.get("phone") || "").trim();
+        const snsNone = formData.get("snsNone") === "on";
+        const snsAccount = snsNone ? "없음" : String(formData.get("snsAccount") || "").trim();
+        const loginId = String(formData.get("loginId") || "").trim().toLowerCase();
+        const password = String(formData.get("password") || "");
+        const passwordConfirm = String(formData.get("passwordConfirm") || "");
+        const termsAgreed = formData.get("termsAgreed") === "on";
+
+        if (password !== passwordConfirm) {
+          showApplyError("비밀번호 확인이 일치하지 않습니다.");
+          return;
+        }
+        if (password.length < 8) {
+          showApplyError("비밀번호는 8자 이상 입력해 주세요.");
+          return;
+        }
+        if (!termsAgreed) {
+          showApplyError("RE:CAR 크루 이용약관 및 활동 동의서에 동의해 주세요.");
+          return;
+        }
+        if (!loginIdAvailable || checkedLoginId !== loginId) {
+          showApplyError("아이디 중복 확인을 완료해 주세요.");
+          return;
+        }
+
+        applyError.hidden = true;
+        applyButton.disabled = true;
+        applyButton.textContent = "신청 중";
+
+        try {
+          const response = await fetch(`${API_BASE_URL}/api/v1/friends/apply`, {
+            method: "POST",
+            headers: {
+              Accept: "application/json",
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              name,
+              phone,
+              sns_url: snsAccount || null,
+              activity_channel: snsNone ? "없음" : snsAccount ? "SNS" : undefined,
+              activity_description: snsAccount
+                ? `크루 계정 이용 신청 / 사용하는 SNS 계정: ${snsAccount}`
+                : "크루 계정 이용 신청",
+              login_id: loginId,
+              password,
+              terms_agreed: true,
+            }),
+          });
+
+          if (!response.ok) throw new Error(await parseApplyError(response, "신청을 접수하지 못했습니다. 입력값을 확인해 주세요."));
+          applyForm.hidden = true;
+          applyComplete.hidden = false;
+        } catch (error) {
+          showApplyError(error instanceof Error ? error.message : "신청을 접수하지 못했습니다. 입력값을 확인해 주세요.");
+        } finally {
+          applyButton.disabled = false;
+          applyButton.textContent = "크루 신청하기";
         }
       });
     </script>

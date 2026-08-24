@@ -505,6 +505,18 @@ summary:focus-visible {
   color: var(--ink);
 }
 
+.quick-guide-download {
+  margin-left: 10px;
+  color: #fff;
+  background: rgba(7, 17, 31, 0.32);
+  border-color: rgba(255, 255, 255, 0.72);
+}
+
+.quick-guide-download:hover {
+  background: rgba(7, 17, 31, 0.58);
+  border-color: #fff;
+}
+
 .primary-button svg,
 .secondary-button svg,
 .text-button svg {
@@ -4175,6 +4187,11 @@ dialog::backdrop {
   .hero .primary-button {
     width: 100%;
     margin-top: 24px;
+  }
+
+  .hero .quick-guide-download {
+    margin-top: 10px;
+    margin-left: 0;
   }
 
   .hero-index {
