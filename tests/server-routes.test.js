@@ -181,6 +181,9 @@ test("crew application CTAs always open the application form", async () => {
   assert.match(loginHtml, /name="snsAccount"/);
   assert.match(loginHtml, /name="loginId"/);
   assert.match(loginHtml, /name="password"/);
+  assert.match(loginHtml, /placeholder="이메일 또는 원하는 아이디"/);
+  assert.doesNotMatch(loginHtml, /LOGIN_ID_PATTERN/);
+  assert.doesNotMatch(loginHtml, /pattern="\[a-zA-Z0-9\._-\]\+"/);
   assert.match(loginHtml, /get\("action"\) === "apply"/);
   assert.match(loginHtml, /loginForm\.hidden = true/);
   assert.match(loginHtml, /applyPanel\.hidden = false/);
