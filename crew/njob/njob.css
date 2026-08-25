@@ -1485,6 +1485,12 @@ summary:focus-visible {
   line-height: 1.7;
 }
 
+.footer-inner .footer-commission-disclosure {
+  max-width: 780px;
+  color: #e1e6ed;
+  font-size: 12px;
+}
+
 .footer-inner nav {
   display: flex;
   align-items: flex-start;

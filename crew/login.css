@@ -370,6 +370,68 @@ input {
   text-align: center;
 }
 
+.crew-apply-status-badge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 30px;
+  padding: 0 12px;
+  margin-bottom: 14px;
+  color: #7a4b00;
+  font-size: 12px;
+  font-weight: 900;
+  background: #fff7dc;
+  border: 1px solid #f0d98a;
+  border-radius: 999px;
+}
+
+.crew-consent-group {
+  display: grid;
+  gap: 0;
+  padding: 0;
+  margin: 0;
+  border: 1px solid #e4e7ec;
+  border-radius: 12px;
+  background: #fff;
+  overflow: hidden;
+}
+
+.crew-consent-group legend {
+  width: 100%;
+  padding: 14px 16px 0;
+  color: #171a1f;
+  font-size: 13px;
+  font-weight: 900;
+}
+
+.crew-consent-group > p {
+  padding: 5px 16px 13px;
+  margin: 0;
+  color: #707784;
+  font-size: 12px;
+  line-height: 1.5;
+}
+
+.crew-consent-group .crew-checkbox {
+  padding: 13px 16px;
+  border-top: 1px solid #eef0f3;
+}
+
+.crew-consent-group .crew-checkbox:first-of-type {
+  border-top-color: #e4e7ec;
+}
+
+.crew-consent-group .crew-checkbox span {
+  min-width: 0;
+  line-height: 1.55;
+}
+
+.crew-consent-group .crew-checkbox a {
+  color: #1f67ed;
+  font-size: 12px;
+  font-weight: 850;
+  white-space: nowrap;
+}
+
 .crew-apply-complete strong {
   display: block;
   color: #171a1f;
@@ -631,6 +693,34 @@ input {
   line-height: 1.35;
 }
 
+.crew-commission-disclosure {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: 20px;
+  align-items: start;
+  width: min(1080px, calc(100% - 40px));
+  margin: -48px auto 76px;
+  padding: 20px 24px;
+  color: #4f5865;
+  background: #f7f8fa;
+  border: 1px solid #e3e6eb;
+  border-radius: 10px;
+}
+
+.crew-commission-disclosure strong {
+  color: #252a31;
+  font-size: 13px;
+  font-weight: 900;
+  white-space: nowrap;
+}
+
+.crew-commission-disclosure p {
+  margin: 0;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.7;
+}
+
 .crew-login-bottom {
   position: relative;
   width: min(980px, calc(100% - 40px));
@@ -759,6 +849,14 @@ input {
     gap: 28px;
     margin-bottom: 56px;
     padding: 30px 22px;
+  }
+
+  .crew-commission-disclosure {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    width: calc(100% - 28px);
+    margin: -28px auto 52px;
+    padding: 18px;
   }
 
   .crew-login-reward-items {

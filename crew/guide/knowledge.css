@@ -3459,6 +3459,13 @@ button.customer-card {
   font-size: 14px;
 }
 
+.site-footer .footer-commission-disclosure {
+  max-width: 820px;
+  color: #d7dee8;
+  font-size: 12px;
+  line-height: 1.7;
+}
+
 .site-footer > a {
   display: inline-flex;
   min-height: 44px;
