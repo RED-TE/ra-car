@@ -82,7 +82,19 @@
                 </label>
                 <label class="crew-field" for="crewApplyPhone">
                   연락처
-                  <input id="crewApplyPhone" name="phone" type="tel" inputmode="numeric" autocomplete="tel" maxlength="30" required />
+                  <input
+                    id="crewApplyPhone"
+                    name="phone"
+                    type="tel"
+                    inputmode="numeric"
+                    autocomplete="tel"
+                    minlength="9"
+                    maxlength="14"
+                    pattern="[0-9 -]{9,14}"
+                    title="숫자와 하이픈(-)으로 올바른 연락처를 입력해 주세요."
+                    placeholder="010-0000-0000"
+                    required
+                  />
                 </label>
               </div>
 
@@ -98,7 +110,18 @@
               <label class="crew-field" for="crewApplyLoginId">
                 아이디
                 <span class="crew-inline-field">
-                  <input id="crewApplyLoginId" name="loginId" type="text" autocomplete="username" minlength="4" maxlength="50" required />
+                  <input
+                    id="crewApplyLoginId"
+                    name="loginId"
+                    type="text"
+                    autocomplete="username"
+                    minlength="4"
+                    maxlength="50"
+                    pattern="[a-zA-Z0-9._-]+"
+                    title="영문, 숫자, 마침표(.), 밑줄(_), 하이픈(-)만 사용할 수 있습니다."
+                    placeholder="영문, 숫자, ., _, -만 사용"
+                    required
+                  />
                   <button class="crew-secondary-button" id="checkLoginIdButton" type="button">중복확인</button>
                 </span>
               </label>
@@ -115,13 +138,45 @@
                 </label>
               </div>
 
-              <label class="crew-checkbox" for="crewApplyTerms">
-                <input id="crewApplyTerms" name="termsAgreed" type="checkbox" required />
-                <span>
-                  RE:CAR 크루 이용약관 및 활동 동의서 v1.3에 동의합니다.
-                  <a href="../friends/recar-friends-terms-v1.3.pdf" target="_blank" rel="noopener noreferrer">약관 보기</a>
-                </span>
-              </label>
+              <fieldset class="crew-consent-group">
+                <legend>필수 동의</legend>
+                <p>아래 내용을 확인한 뒤 항목별로 동의해 주세요.</p>
+                <label class="crew-checkbox" for="crewApplyTerms">
+                  <input id="crewApplyTerms" name="termsAgreed" type="checkbox" required />
+                  <span>
+                    RE:CAR 크루 이용약관에 동의합니다.
+                    <a href="./friends/recar-friends-terms-v1.3.pdf#page=1" target="_blank" rel="noopener noreferrer">내용 보기</a>
+                  </span>
+                </label>
+                <label class="crew-checkbox" for="crewApplyPrivacy">
+                  <input id="crewApplyPrivacy" name="privacyAgreed" type="checkbox" required />
+                  <span>
+                    개인정보 수집 및 이용에 동의합니다.
+                    <a href="./friends/recar-friends-terms-v1.3.pdf#page=8" target="_blank" rel="noopener noreferrer">내용 보기</a>
+                  </span>
+                </label>
+                <label class="crew-checkbox" for="crewApplySettlementPolicy">
+                  <input id="crewApplySettlementPolicy" name="settlementPolicyAgreed" type="checkbox" required />
+                  <span>
+                    보상 및 정산 정책에 동의합니다.
+                    <a href="./friends/recar-friends-terms-v1.3.pdf#page=6" target="_blank" rel="noopener noreferrer">내용 보기</a>
+                  </span>
+                </label>
+                <label class="crew-checkbox" for="crewApplyAdDisclosure">
+                  <input id="crewApplyAdDisclosure" name="adDisclosureAgreed" type="checkbox" required />
+                  <span>
+                    추천 활동 시 수수료를 받을 수 있다는 사실을 표시할 의무를 확인했습니다.
+                    <a href="./friends/recar-friends-terms-v1.3.pdf#page=7" target="_blank" rel="noopener noreferrer">내용 보기</a>
+                  </span>
+                </label>
+                <label class="crew-checkbox" for="crewApplyAdvertisingGuide">
+                  <input id="crewApplyAdvertisingGuide" name="advertisingGuideAgreed" type="checkbox" required />
+                  <span>
+                    광고 금지 표현 및 준법 활동 가이드를 확인했습니다.
+                    <a href="./friends/recar-friends-terms-v1.3.pdf#page=7" target="_blank" rel="noopener noreferrer">내용 보기</a>
+                  </span>
+                </label>
+              </fieldset>
               <div class="crew-form-note">신청 연락처로 운영팀 확인 전화가 진행되며, 심사 결과는 승인, 보완, 부적합 상태로 안내됩니다.</div>
               <div class="login-error crew-form-error" id="applyError" role="alert" hidden></div>
               <button class="crew-primary-button crew-apply-submit" id="crewApplyButton" type="submit">크루 신청하기</button>
@@ -129,8 +184,13 @@
               <a class="crew-back-link" href="./login.html">이미 계정이 있나요? 로그인으로 돌아가기</a>
             </form>
             <div class="crew-apply-complete" id="crewApplyComplete" role="status" hidden>
+              <span class="crew-apply-status-badge">승인 대기</span>
               <strong>크루 신청이 접수됐습니다.</strong>
-              <p>운영팀 확인 후 신청하신 연락처로 안내드리겠습니다.</p>
+              <p>
+                신청 아이디 <b id="crewApplyCompleteLoginId"></b>로 접수했습니다.<br />
+                운영팀 확인 후 신청하신 연락처로 안내드리겠습니다.
+              </p>
+              <div class="crew-form-note">추천 코드와 전용 주소는 관리자 승인 후 발급되며, 승인 전에는 외부에 공개되지 않습니다.</div>
               <a class="crew-secondary-button" href="./login.html">로그인 화면으로</a>
             </div>
           </section>
@@ -215,6 +275,7 @@
     <script>
       const API_BASE_URL = "https://api.recarplan.com";
       const TOKEN_KEY = "recar_friends_access_token";
+      const LOGIN_ID_PATTERN = /^[a-zA-Z0-9._-]+$/;
       const loginForm = document.querySelector("#crewLoginForm");
       const loginButton = document.querySelector(".login-button");
       const loginError = document.querySelector("#loginError");
@@ -223,6 +284,7 @@
       const applyButton = document.querySelector("#crewApplyButton");
       const applyError = document.querySelector("#applyError");
       const applyComplete = document.querySelector("#crewApplyComplete");
+      const applyCompleteLoginId = document.querySelector("#crewApplyCompleteLoginId");
       const formAnchor = document.querySelector("#crew-login-box");
       const loginIdInput = document.querySelector("#crewApplyLoginId");
       const loginIdCheckButton = document.querySelector("#checkLoginIdButton");
@@ -296,6 +358,10 @@
       async function parseApplyError(response, fallback) {
         try {
           const body = await response.json();
+          const invalidField = body?.error?.fields?.[0]?.field;
+          if (invalidField === "login_id") {
+            return "아이디는 영문, 숫자, 마침표(.), 밑줄(_), 하이픈(-)만 사용할 수 있습니다.";
+          }
           return body?.error?.detail || body?.error?.message || body?.message || body?.detail?.message || body?.detail || fallback;
         } catch {
           return fallback;
@@ -319,6 +385,10 @@
         const loginId = loginIdInput.value.trim().toLowerCase();
         if (loginId.length < 4) {
           showApplyError("아이디는 4자 이상 입력해 주세요.");
+          return;
+        }
+        if (!LOGIN_ID_PATTERN.test(loginId)) {
+          showApplyError("아이디는 영문, 숫자, 마침표(.), 밑줄(_), 하이픈(-)만 사용할 수 있습니다.");
           return;
         }
 
@@ -359,6 +429,16 @@
         const password = String(formData.get("password") || "");
         const passwordConfirm = String(formData.get("passwordConfirm") || "");
         const termsAgreed = formData.get("termsAgreed") === "on";
+        const privacyAgreed = formData.get("privacyAgreed") === "on";
+        const settlementPolicyAgreed = formData.get("settlementPolicyAgreed") === "on";
+        const adDisclosureAgreed = formData.get("adDisclosureAgreed") === "on";
+        const advertisingGuideAgreed = formData.get("advertisingGuideAgreed") === "on";
+        const phoneDigits = phone.replace(/\D/g, "");
+
+        if (!phoneDigits.startsWith("0") || phoneDigits.length < 9 || phoneDigits.length > 11) {
+          showApplyError("연락 가능한 국내 전화번호를 정확히 입력해 주세요.");
+          return;
+        }
 
         if (password !== passwordConfirm) {
           showApplyError("비밀번호 확인이 일치하지 않습니다.");
@@ -368,8 +448,12 @@
           showApplyError("비밀번호는 8자 이상 입력해 주세요.");
           return;
         }
-        if (!termsAgreed) {
-          showApplyError("RE:CAR 크루 이용약관 및 활동 동의서에 동의해 주세요.");
+        if (!LOGIN_ID_PATTERN.test(loginId)) {
+          showApplyError("아이디는 영문, 숫자, 마침표(.), 밑줄(_), 하이픈(-)만 사용할 수 있습니다.");
+          return;
+        }
+        if (!termsAgreed || !privacyAgreed || !settlementPolicyAgreed || !adDisclosureAgreed || !advertisingGuideAgreed) {
+          showApplyError("필수 동의 항목을 각각 확인하고 모두 동의해 주세요.");
           return;
         }
         if (!loginIdAvailable || checkedLoginId !== loginId) {
@@ -398,11 +482,17 @@
                 : "크루 계정 이용 신청",
               login_id: loginId,
               password,
-              terms_agreed: true,
+              terms_agreed: termsAgreed,
+              privacy_agreed: privacyAgreed,
+              settlement_policy_agreed: settlementPolicyAgreed,
+              ad_disclosure_agreed: adDisclosureAgreed,
+              advertising_guide_agreed: advertisingGuideAgreed,
             }),
           });
 
           if (!response.ok) throw new Error(await parseApplyError(response, "신청을 접수하지 못했습니다. 입력값을 확인해 주세요."));
+          const result = await response.json();
+          applyCompleteLoginId.textContent = result.login_id || loginId;
           applyForm.hidden = true;
           applyComplete.hidden = false;
         } catch (error) {
