@@ -117,9 +117,7 @@
                     autocomplete="username"
                     minlength="4"
                     maxlength="50"
-                    pattern="[a-zA-Z0-9._-]+"
-                    title="영문, 숫자, 마침표(.), 밑줄(_), 하이픈(-)만 사용할 수 있습니다."
-                    placeholder="영문, 숫자, ., _, -만 사용"
+                    placeholder="이메일 또는 원하는 아이디"
                     required
                   />
                   <button class="crew-secondary-button" id="checkLoginIdButton" type="button">중복확인</button>
@@ -275,7 +273,6 @@
     <script>
       const API_BASE_URL = "https://api.recarplan.com";
       const TOKEN_KEY = "recar_friends_access_token";
-      const LOGIN_ID_PATTERN = /^[a-zA-Z0-9._-]+$/;
       const loginForm = document.querySelector("#crewLoginForm");
       const loginButton = document.querySelector(".login-button");
       const loginError = document.querySelector("#loginError");
@@ -360,7 +357,7 @@
           const body = await response.json();
           const invalidField = body?.error?.fields?.[0]?.field;
           if (invalidField === "login_id") {
-            return "아이디는 영문, 숫자, 마침표(.), 밑줄(_), 하이픈(-)만 사용할 수 있습니다.";
+            return "아이디는 4~50자로 입력해 주세요.";
           }
           return body?.error?.detail || body?.error?.message || body?.message || body?.detail?.message || body?.detail || fallback;
         } catch {
@@ -383,12 +380,8 @@
 
       loginIdCheckButton.addEventListener("click", async () => {
         const loginId = loginIdInput.value.trim().toLowerCase();
-        if (loginId.length < 4) {
-          showApplyError("아이디는 4자 이상 입력해 주세요.");
-          return;
-        }
-        if (!LOGIN_ID_PATTERN.test(loginId)) {
-          showApplyError("아이디는 영문, 숫자, 마침표(.), 밑줄(_), 하이픈(-)만 사용할 수 있습니다.");
+        if (loginId.length < 4 || loginId.length > 50) {
+          showApplyError("아이디는 4~50자로 입력해 주세요.");
           return;
         }
 
@@ -448,8 +441,8 @@
           showApplyError("비밀번호는 8자 이상 입력해 주세요.");
           return;
         }
-        if (!LOGIN_ID_PATTERN.test(loginId)) {
-          showApplyError("아이디는 영문, 숫자, 마침표(.), 밑줄(_), 하이픈(-)만 사용할 수 있습니다.");
+        if (loginId.length < 4 || loginId.length > 50) {
+          showApplyError("아이디는 4~50자로 입력해 주세요.");
           return;
         }
         if (!termsAgreed || !privacyAgreed || !settlementPolicyAgreed || !adDisclosureAgreed || !advertisingGuideAgreed) {
