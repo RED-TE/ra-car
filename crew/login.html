@@ -13,7 +13,7 @@
     <link rel="icon" type="image/png" href="../assets/recar-favicon-20260518.png" />
     <link rel="apple-touch-icon" href="../assets/recar-favicon-20260518.png" />
     <link rel="preconnect" href="https://api.recarplan.com" crossorigin />
-    <link rel="stylesheet" href="./login.css?v=20260824-njob-explain" />
+    <link rel="stylesheet" href="./login.css?v=20260826-agree-all" />
   </head>
   <body class="crew-login-page">
     <header class="crew-login-nav">
@@ -139,6 +139,13 @@
               <fieldset class="crew-consent-group">
                 <legend>필수 동의</legend>
                 <p>아래 내용을 확인한 뒤 항목별로 동의해 주세요.</p>
+                <label class="crew-checkbox crew-consent-all" for="crewApplyConsentAll">
+                  <input id="crewApplyConsentAll" type="checkbox" aria-controls="crewApplyTerms crewApplyPrivacy crewApplySettlementPolicy crewApplyAdDisclosure crewApplyAdvertisingGuide" />
+                  <span>
+                    <strong>필수 항목 모두 동의</strong>
+                    <small>아래 5개 필수 항목을 한 번에 선택합니다.</small>
+                  </span>
+                </label>
                 <label class="crew-checkbox" for="crewApplyTerms">
                   <input id="crewApplyTerms" name="termsAgreed" type="checkbox" required />
                   <span>
@@ -288,8 +295,38 @@
       const loginIdSuccess = document.querySelector("#loginIdSuccess");
       const snsInput = document.querySelector("#crewApplySns");
       const snsNoneInput = document.querySelector("#crewApplySnsNone");
+      const consentAllInput = document.querySelector("#crewApplyConsentAll");
+      const requiredConsentInputs = [
+        "#crewApplyTerms",
+        "#crewApplyPrivacy",
+        "#crewApplySettlementPolicy",
+        "#crewApplyAdDisclosure",
+        "#crewApplyAdvertisingGuide",
+      ].map((selector) => document.querySelector(selector));
       let checkedLoginId = "";
       let loginIdAvailable = false;
+
+      function syncConsentAllState() {
+        const checkedCount = requiredConsentInputs.filter((input) => input.checked).length;
+        const allChecked = checkedCount === requiredConsentInputs.length;
+        const partiallyChecked = checkedCount > 0 && !allChecked;
+
+        consentAllInput.checked = allChecked;
+        consentAllInput.indeterminate = partiallyChecked;
+        consentAllInput.setAttribute("aria-checked", partiallyChecked ? "mixed" : String(allChecked));
+        consentAllInput.closest(".crew-consent-all").classList.toggle("is-partial", partiallyChecked);
+      }
+
+      consentAllInput.addEventListener("change", () => {
+        requiredConsentInputs.forEach((input) => {
+          input.checked = consentAllInput.checked;
+        });
+        syncConsentAllState();
+      });
+
+      requiredConsentInputs.forEach((input) => {
+        input.addEventListener("change", syncConsentAllState);
+      });
 
       if (new URLSearchParams(window.location.search).get("action") === "apply") {
         loginForm.hidden = true;

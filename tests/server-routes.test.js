@@ -188,6 +188,23 @@ test("crew application CTAs always open the application form", async () => {
   assert.match(loginHtml, /loginForm\.hidden = true/);
   assert.match(loginHtml, /applyPanel\.hidden = false/);
   assert.match(loginHtml, /\/api\/v1\/friends\/apply/);
+
+  const requiredConsentIds = [
+    "crewApplyTerms",
+    "crewApplyPrivacy",
+    "crewApplySettlementPolicy",
+    "crewApplyAdDisclosure",
+    "crewApplyAdvertisingGuide",
+  ];
+  const consentAllControls = loginHtml.match(/id="crewApplyConsentAll"[^>]*aria-controls="([^"]+)"/);
+  assert.ok(consentAllControls, "required consent select-all control is missing");
+  assert.deepEqual(consentAllControls[1].split(/\s+/), requiredConsentIds);
+  for (const consentId of requiredConsentIds) {
+    assert.match(loginHtml, new RegExp(`id="${consentId}"[^>]*required`), `${consentId}: required consent is missing`);
+  }
+  assert.match(loginHtml, /consentAllInput\.addEventListener\("change"/);
+  assert.match(loginHtml, /input\.checked = consentAllInput\.checked/);
+  assert.match(loginHtml, /consentAllInput\.indeterminate = partiallyChecked/);
 });
 
 test("crew surfaces expose the same quick guide PDF", () => {
