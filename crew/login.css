@@ -98,6 +98,134 @@ input {
   cursor: pointer;
 }
 
+body.has-crew-service-notice {
+  overflow: hidden;
+}
+
+.crew-service-notice {
+  position: fixed;
+  inset: 0;
+  z-index: 50;
+  display: grid;
+  place-items: center;
+  padding: 20px;
+  background: rgba(16, 21, 29, 0.56);
+  backdrop-filter: blur(3px);
+}
+
+.crew-service-notice[hidden] {
+  display: none;
+}
+
+.crew-service-notice-card {
+  position: relative;
+  width: min(420px, 100%);
+  padding: 30px 28px 24px;
+  text-align: left;
+  background: #fff;
+  border: 1px solid #e4e8ef;
+  border-radius: 14px;
+  box-shadow: 0 30px 80px rgba(11, 18, 32, 0.25);
+}
+
+.crew-service-notice-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  display: grid;
+  place-items: center;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  color: #4b535f;
+  font-size: 24px;
+  line-height: 1;
+  background: #f5f6f8;
+  border: 0;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+.crew-service-notice-close:hover,
+.crew-service-notice-close:focus-visible {
+  color: #171a1f;
+  background: #eceef2;
+}
+
+.crew-service-notice-badge {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  padding: 0 10px;
+  margin-bottom: 14px;
+  color: #1458d4;
+  font-size: 11px;
+  font-weight: 900;
+  background: #edf4ff;
+  border-radius: 999px;
+}
+
+.crew-service-notice h2 {
+  margin: 0;
+  color: #171a1f;
+  font-size: 26px;
+  font-weight: 950;
+  line-height: 1.25;
+}
+
+.crew-service-notice-card > div:not(.crew-service-notice-actions) {
+  margin-top: 18px;
+  color: #646c78;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.7;
+}
+
+.crew-service-notice-card p {
+  margin: 0;
+}
+
+.crew-service-notice-card p + p {
+  margin-top: 12px;
+  padding: 13px 14px;
+  color: #344054;
+  background: #f4f7fb;
+  border-radius: 8px;
+}
+
+.crew-service-notice-card strong {
+  color: #1458d4;
+  font-weight: 900;
+}
+
+.crew-service-notice-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-top: 22px;
+}
+
+.crew-service-notice-actions button {
+  min-height: 46px;
+  padding: 0 14px;
+  font-size: 13px;
+  font-weight: 900;
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.crew-service-notice-dismiss {
+  color: #4f5763;
+  background: #fff;
+  border: 1px solid #d9dee7;
+}
+
+.crew-service-notice-confirm {
+  color: #fff;
+  background: #171a1f;
+  border: 1px solid #171a1f;
+}
+
 .crew-login-hero {
   position: relative;
   width: min(1160px, 100%);

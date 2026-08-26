@@ -205,6 +205,12 @@ test("crew application CTAs always open the application form", async () => {
   assert.match(loginHtml, /consentAllInput\.addEventListener\("change"/);
   assert.match(loginHtml, /input\.checked = consentAllInput\.checked/);
   assert.match(loginHtml, /consentAllInput\.indeterminate = partiallyChecked/);
+  assert.match(loginHtml, /id="crewServiceNotice"[^>]*role="dialog"[^>]*aria-modal="true"/);
+  assert.match(loginHtml, /크루 가입 신청이[\s\S]*정상화되었습니다/);
+  assert.match(loginHtml, /일부 가입 신청이 원활하지 않았습니다/);
+  assert.match(loginHtml, /id="crewServiceNoticeDismiss"[^>]*>다시 보지 않기</);
+  assert.match(loginHtml, /id="crewServiceNoticeClose"[^>]*aria-label="가입 신청 정상화 안내 닫기"/);
+  assert.match(loginHtml, /localStorage\.setItem\(SERVICE_NOTICE_KEY, "dismissed"\)/);
 });
 
 test("crew surfaces expose the same quick guide PDF", () => {
