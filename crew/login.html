@@ -13,7 +13,7 @@
     <link rel="icon" type="image/png" href="../assets/recar-favicon-20260518.png" />
     <link rel="apple-touch-icon" href="../assets/recar-favicon-20260518.png" />
     <link rel="preconnect" href="https://api.recarplan.com" crossorigin />
-    <link rel="stylesheet" href="./login.css?v=20260824-njob-explain" />
+    <link rel="stylesheet" href="./login.css?v=20260826-service-notice" />
   </head>
   <body class="crew-login-page">
     <header class="crew-login-nav">
@@ -27,6 +27,22 @@
         <a href="mailto:friends@recarplan.com">문의</a>
       </nav>
     </header>
+
+    <div class="crew-service-notice" id="crewServiceNotice" role="dialog" aria-modal="true" aria-labelledby="crewServiceNoticeTitle" aria-describedby="crewServiceNoticeDescription" hidden>
+      <div class="crew-service-notice-card">
+        <button class="crew-service-notice-close" id="crewServiceNoticeClose" type="button" aria-label="가입 신청 정상화 안내 닫기">×</button>
+        <span class="crew-service-notice-badge">서비스 안내</span>
+        <h2 id="crewServiceNoticeTitle">크루 가입 신청이<br />정상화되었습니다</h2>
+        <div id="crewServiceNoticeDescription">
+          <p>최근 예상보다 많은 신청이 몰리면서 일부 가입 신청이 원활하지 않았습니다. 불편을 드려 죄송합니다.</p>
+          <p><strong>현재는 정상적으로 신청할 수 있습니다.</strong><br />신청이 완료되지 않았던 분은 다시 접수해 주세요.</p>
+        </div>
+        <div class="crew-service-notice-actions">
+          <button class="crew-service-notice-dismiss" id="crewServiceNoticeDismiss" type="button">다시 보지 않기</button>
+          <button class="crew-service-notice-confirm" id="crewServiceNoticeConfirm" type="button">확인</button>
+        </div>
+      </div>
+    </div>
 
     <main>
       <section class="crew-login-hero" aria-label="크루 로그인">
@@ -139,6 +155,13 @@
               <fieldset class="crew-consent-group">
                 <legend>필수 동의</legend>
                 <p>아래 내용을 확인한 뒤 항목별로 동의해 주세요.</p>
+                <label class="crew-checkbox crew-consent-all" for="crewApplyConsentAll">
+                  <input id="crewApplyConsentAll" type="checkbox" aria-controls="crewApplyTerms crewApplyPrivacy crewApplySettlementPolicy crewApplyAdDisclosure crewApplyAdvertisingGuide" />
+                  <span>
+                    <strong>필수 항목 모두 동의</strong>
+                    <small>아래 5개 필수 항목을 한 번에 선택합니다.</small>
+                  </span>
+                </label>
                 <label class="crew-checkbox" for="crewApplyTerms">
                   <input id="crewApplyTerms" name="termsAgreed" type="checkbox" required />
                   <span>
@@ -273,6 +296,11 @@
     <script>
       const API_BASE_URL = "https://api.recarplan.com";
       const TOKEN_KEY = "recar_friends_access_token";
+      const SERVICE_NOTICE_KEY = "recar_crew_service_notice_20260826";
+      const serviceNotice = document.querySelector("#crewServiceNotice");
+      const serviceNoticeClose = document.querySelector("#crewServiceNoticeClose");
+      const serviceNoticeDismiss = document.querySelector("#crewServiceNoticeDismiss");
+      const serviceNoticeConfirm = document.querySelector("#crewServiceNoticeConfirm");
       const loginForm = document.querySelector("#crewLoginForm");
       const loginButton = document.querySelector(".login-button");
       const loginError = document.querySelector("#loginError");
@@ -288,8 +316,72 @@
       const loginIdSuccess = document.querySelector("#loginIdSuccess");
       const snsInput = document.querySelector("#crewApplySns");
       const snsNoneInput = document.querySelector("#crewApplySnsNone");
+      const consentAllInput = document.querySelector("#crewApplyConsentAll");
+      const requiredConsentInputs = [
+        "#crewApplyTerms",
+        "#crewApplyPrivacy",
+        "#crewApplySettlementPolicy",
+        "#crewApplyAdDisclosure",
+        "#crewApplyAdvertisingGuide",
+      ].map((selector) => document.querySelector(selector));
       let checkedLoginId = "";
       let loginIdAvailable = false;
+
+      function closeServiceNotice() {
+        serviceNotice.hidden = true;
+        document.body.classList.remove("has-crew-service-notice");
+      }
+
+      function hasDismissedServiceNotice() {
+        try {
+          return localStorage.getItem(SERVICE_NOTICE_KEY) === "dismissed";
+        } catch {
+          return false;
+        }
+      }
+
+      if (!hasDismissedServiceNotice()) {
+        serviceNotice.hidden = false;
+        document.body.classList.add("has-crew-service-notice");
+        serviceNoticeClose.focus();
+      }
+
+      serviceNoticeClose.addEventListener("click", closeServiceNotice);
+      serviceNoticeConfirm.addEventListener("click", closeServiceNotice);
+      serviceNoticeDismiss.addEventListener("click", () => {
+        try {
+          localStorage.setItem(SERVICE_NOTICE_KEY, "dismissed");
+        } catch {
+          // Storage can be unavailable in private browsing; closing still works.
+        }
+        closeServiceNotice();
+      });
+
+      document.addEventListener("keydown", (event) => {
+        if (event.key === "Escape" && !serviceNotice.hidden) closeServiceNotice();
+      });
+
+      function syncConsentAllState() {
+        const checkedCount = requiredConsentInputs.filter((input) => input.checked).length;
+        const allChecked = checkedCount === requiredConsentInputs.length;
+        const partiallyChecked = checkedCount > 0 && !allChecked;
+
+        consentAllInput.checked = allChecked;
+        consentAllInput.indeterminate = partiallyChecked;
+        consentAllInput.setAttribute("aria-checked", partiallyChecked ? "mixed" : String(allChecked));
+        consentAllInput.closest(".crew-consent-all").classList.toggle("is-partial", partiallyChecked);
+      }
+
+      consentAllInput.addEventListener("change", () => {
+        requiredConsentInputs.forEach((input) => {
+          input.checked = consentAllInput.checked;
+        });
+        syncConsentAllState();
+      });
+
+      requiredConsentInputs.forEach((input) => {
+        input.addEventListener("change", syncConsentAllState);
+      });
 
       if (new URLSearchParams(window.location.search).get("action") === "apply") {
         loginForm.hidden = true;
