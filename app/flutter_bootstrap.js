@@ -37,8 +37,11 @@ _flutter.buildConfig = {"engineRevision":"3452d735bd38224ef2db85ca763d862d6326b1
 
 
 async function startRecar() {
+  let shouldReload = false;
+
   if ('serviceWorker' in navigator) {
     try {
+      const hadController = navigator.serviceWorker.controller !== null;
       const registrations = await navigator.serviceWorker.getRegistrations();
       const flutterRegistrations = registrations.filter((registration) => {
         const worker = registration.active || registration.waiting || registration.installing;
@@ -47,9 +50,30 @@ async function startRecar() {
       await Promise.all(
         flutterRegistrations.map((registration) => registration.unregister()),
       );
+      shouldReload = hadController && flutterRegistrations.length > 0;
     } catch (_) {
       // Cache cleanup must never block the app from starting.
     }
+  }
+
+  if ('caches' in window) {
+    try {
+      const cacheNames = await caches.keys();
+      const flutterCacheNames = cacheNames.filter((name) =>
+        name.startsWith('flutter-'),
+      );
+      await Promise.all(flutterCacheNames.map((name) => caches.delete(name)));
+    } catch (_) {
+      // Cache cleanup must never block the app from starting.
+    }
+  }
+
+  const resetKey = 'recar-sw-reset';
+  const currentUrl = new URL(window.location.href);
+  if (shouldReload && !currentUrl.searchParams.has(resetKey)) {
+    currentUrl.searchParams.set(resetKey, '1');
+    window.location.replace(currentUrl.toString());
+    return;
   }
 
   await _flutter.loader.load();
