@@ -1,11 +1,11 @@
 {
-    "name": "recar_app",
-    "short_name": "recar_app",
+    "name": "RE:CAR",
+    "short_name": "RE:CAR",
     "start_url": ".",
     "display": "standalone",
-    "background_color": "#0175C2",
-    "theme_color": "#0175C2",
-    "description": "A new Flutter project.",
+    "background_color": "#FFFFFF",
+    "theme_color": "#FFFFFF",
+    "description": "차량 탐색부터 견적 비교와 계약 진행 확인까지 제공하는 RE:CAR 서비스",
     "orientation": "portrait-primary",
     "prefer_related_applications": false,
     "icons": [
