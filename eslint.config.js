@@ -14,7 +14,7 @@ module.exports = [
     ],
   },
   {
-    files: ["crew/guide/knowledge.js", "crew/guide/knowledge-data.js"],
+    files: ["crew/guide/knowledge.js", "crew/guide/knowledge-data.js", "home.js"],
     languageOptions: {
       ecmaVersion: 2022,
       sourceType: "module",

@@ -459,6 +459,7 @@ quoteForm?.addEventListener("submit", (event) => {
   const button = event.currentTarget.querySelector(".submit-button");
   const buttonText = event.currentTarget.querySelector(".submit-button span");
   if (!button || !buttonText) return;
+  if (button.disabled) return;
 
   const lead = getLeadPayload();
 
@@ -494,6 +495,7 @@ quoteForm?.addEventListener("submit", (event) => {
 
   const original = buttonText.textContent;
   button.disabled = true;
+  event.currentTarget.setAttribute("aria-busy", "true");
   buttonText.textContent = "확인 중";
   event.currentTarget.classList.add("is-submitted");
 
@@ -511,6 +513,7 @@ quoteForm?.addEventListener("submit", (event) => {
       buttonText.textContent = "다시 시도";
     })
     .finally(() => {
+      quoteForm.setAttribute("aria-busy", "false");
       window.setTimeout(() => {
         button.disabled = false;
         buttonText.textContent = original;
@@ -1317,6 +1320,9 @@ async function renderStaticVehicleCatalog() {
 
 async function loadVehicles() {
   if (!vehicleGrid) return;
+  if (document.body.classList.contains("public-home") && window.recarHome) {
+    return window.recarHome.loadCatalog(requestJson);
+  }
 
   if (vehicleMode === "all") {
     const didRenderStaticCatalog = await renderStaticVehicleCatalog();

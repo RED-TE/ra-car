@@ -39,6 +39,7 @@ const mimeTypes = {
   ".txt": "text/plain; charset=utf-8",
   ".webp": "image/webp",
   ".xml": "application/xml; charset=utf-8",
+  ".woff2": "font/woff2",
 };
 
 const publicStaticFiles = new Set([
@@ -68,6 +69,11 @@ const publicStaticFiles = new Set([
   "/data/vehicles-incomplete-report.csv",
   "/styles.css",
   "/script.js",
+  "/home.css",
+  "/home.js",
+  "/assets/home-fonts/Pretendard-Regular.woff2",
+  "/assets/home-fonts/Pretendard-SemiBold.woff2",
+  "/assets/home-fonts/Pretendard-ExtraBold.woff2",
 ]);
 const publicAssetExtensions = new Set([".avif", ".gif", ".jpg", ".jpeg", ".png", ".svg", ".webp"]);
 
