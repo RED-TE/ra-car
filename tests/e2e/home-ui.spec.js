@@ -86,6 +86,25 @@ test("hero, car rail, guide filters and vehicle inquiry entry work", async ({ pa
   await expect(page.locator("#rentGuide")).toHaveAttribute("open", "");
 });
 
+test("persistent inquiry entry follows desktop and mobile without covering focused fields", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 1000 });
+  await ready(page);
+  const desktopButton = page.locator(".persistent-quote-button");
+  await expect(desktopButton).toBeVisible();
+  await expect(desktopButton).toHaveAttribute("href", "#quote");
+  expect((await desktopButton.boundingBox()).y).toBeGreaterThan(900);
+  await desktopButton.click();
+  await expect(page).toHaveURL(/#quote$/);
+  await page.locator("#contactPhone").focus();
+  await expect(desktopButton).toBeHidden();
+
+  await page.setViewportSize({ width: 390, height: 844 });
+  await page.locator("#contactPhone").blur();
+  await expect(desktopButton).toBeHidden();
+  await expect(page.locator(".mobile-consult")).toBeVisible();
+  await expect(page.locator(".mobile-consult")).toHaveAttribute("href", "#quote");
+});
+
 test("mobile menu closes with Escape, outside click and navigation; focus is restored", async ({ page }) => {
   await page.setViewportSize({ width: 390, height: 844 });
   await ready(page);

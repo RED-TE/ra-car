@@ -253,6 +253,13 @@
 .public-home .footer-contact svg { width:16px; height:16px; }
 .public-home .footer-notice { grid-column:1/-1; display:flex; flex-wrap:wrap; gap:14px; padding-top:20px; border-top:1px solid #e0e3e8; font-size:12px; color:#667085; }
 .public-home .footer-notice a { color:#344054; }
+.public-home .persistent-quote-button { position:fixed; left:50%; bottom:24px; z-index:42; transform:translateX(-50%); display:flex; align-items:center; justify-content:center; gap:13px; min-width:248px; min-height:58px; padding:8px 18px; border:1px solid #174de0; border-radius:29px; background:var(--accent); color:#fff; box-shadow:0 10px 28px #0d47cc38; }
+.public-home .persistent-quote-button > svg { width:22px; height:22px; flex:none; }
+.public-home .persistent-quote-button > svg:last-child { width:18px; height:18px; }
+.public-home .persistent-quote-button span { display:grid; gap:1px; font-size:16px; font-weight:700; line-height:1.25; }
+.public-home .persistent-quote-button small { font-size:11px; font-weight:500; color:#dce8ff; }
+.public-home .persistent-quote-button:hover { background:#1046d8; }
+.public-home:has(.quote-form :focus) .persistent-quote-button { display:none; }
 .public-home .home-floating { position:fixed; right:20px; bottom:34px; z-index:30; background:#fff; border:1px solid #b7cafb; border-radius:18px; box-shadow:0 8px 24px #22355716; width:106px; overflow:hidden; }
 .public-home .home-floating a { display:flex; align-items:center; justify-content:center; flex-direction:column; gap:7px; padding:13px 8px; font-size:13px; font-weight:650; }
 .public-home .home-floating a:first-child { color:var(--accent); }
@@ -402,6 +409,7 @@
   .public-home .business-info dt { min-width:70px; }
   .public-home .business-info dd { min-width:0; word-break:keep-all; overflow-wrap:anywhere; }
   .public-home .footer-notice { gap:12px; font-size:11px; line-height:1.7; }
+  .public-home .persistent-quote-button { display:none; }
   .public-home .home-floating { display:none; }
   .public-home .mobile-bottom { display:grid; grid-template-columns:repeat(5,minmax(0,1fr)); position:fixed; bottom:0; left:0; right:0; height:calc(76px + env(safe-area-inset-bottom)); padding:10px 8px calc(8px + env(safe-area-inset-bottom)); width:100%; border:1px solid #e7e7e7; border-radius:24px 24px 0 0; background:#fff; z-index:45; box-shadow:0 -2px 6px #00000005; }
   .public-home .mobile-bottom a { display:flex; align-items:center; justify-content:center; flex-direction:column; gap:4px; padding:0; font-size:11px; font-weight:500; color:#61656c; }
