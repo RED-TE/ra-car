@@ -59,6 +59,7 @@ const publicStaticFiles = new Set([
   "/crew/guide/knowledge-data.js",
   "/crew/guide/lucide.min.js",
   "/crew/knowledge/index.html",
+  "/friends/index.html",
   "/assets/crew-docs/recar-crew-quick-guide.pdf",
   "/download/index.html",
   "/inquiry/index.html",
@@ -2249,6 +2250,9 @@ function serveStatic(request, response, url) {
   }
   if (requestedPath === "/download" || requestedPath === "/download/") {
     requestedPath = "/download/index.html";
+  }
+  if (requestedPath === "/friends" || requestedPath === "/friends/") {
+    requestedPath = "/friends/index.html";
   }
   if (requestedPath === "/crew" || requestedPath === "/crew/") {
     requestedPath = "/crew/index.html";

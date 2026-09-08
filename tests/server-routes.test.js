@@ -90,8 +90,15 @@ test("development serves public aliases and the preview route", async () => {
     const crewHtml = await crewResponse.text();
     assert.match(crewHtml, /https:\/\/recarplan\.com\/crew/);
     assert.match(crewHtml, /params\.get\("ref"\)/);
+    assert.match(crewHtml, /new URL\("\/app\/", window\.location\.origin\)/);
     assert.match(crewHtml, /target\.searchParams\.set\("ref", referralCode\)/);
     assert.doesNotMatch(crewHtml, /vercel\.app/);
+
+    const friendsResponse = await fetch(`${server.baseUrl}/friends/?ref=RC-QA1234`);
+    assert.equal(friendsResponse.status, 200);
+    const friendsHtml = await friendsResponse.text();
+    assert.match(friendsHtml, /new URL\("\/app\/", window\.location\.origin\)/);
+    assert.match(friendsHtml, /target\.search = window\.location\.search/);
 
     const guideResponse = await fetch(`${server.baseUrl}/crew/guide/`);
     assert.match(await guideResponse.text(), /href="\/crew\/"/);
@@ -132,13 +139,15 @@ test("development serves public aliases and the preview route", async () => {
   }
 });
 
-test("production keeps the public route and returns 404 for preview", async () => {
+test("production keeps public routes and returns 404 for preview", async () => {
   const server = await startServer("production");
   try {
     const publicResponse = await fetch(`${server.baseUrl}/crew/guide/`);
+    const friendsResponse = await fetch(`${server.baseUrl}/friends/?ref=RC-QA1234`);
     const previewResponse = await fetch(`${server.baseUrl}/crew/guide/preview/`);
     const removedStartResponse = await fetch(`${server.baseUrl}/crew/start/`);
     assert.equal(publicResponse.status, 200);
+    assert.equal(friendsResponse.status, 200);
     assert.equal(previewResponse.status, 404);
     assert.equal(removedStartResponse.status, 404);
   } finally {

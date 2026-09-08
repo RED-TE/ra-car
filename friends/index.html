@@ -1,0 +1,21 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>RE:CAR로 이동 중</title>
+    <script>
+      const target = new URL("/app/", window.location.origin);
+      target.search = window.location.search;
+      window.location.replace(target.href);
+    </script>
+  </head>
+  <body>
+    <p>RE:CAR 앱으로 이동 중입니다.</p>
+    <p><a id="continueLink" href="/app/">계속하기</a></p>
+    <script>
+      document.getElementById("continueLink").href = target.href;
+    </script>
+  </body>
+</html>
