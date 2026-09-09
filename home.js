@@ -244,6 +244,7 @@
 
   const restoreQuoteForm = () => {
     if (form.parentNode !== formHome) formHome.insertBefore(form, formAnchor.nextSibling);
+    delete form.dataset.entryPoint;
     document.body.classList.remove("quick-quote-open");
   };
   const closeQuickQuote = () => {
@@ -260,6 +261,7 @@
     window.clearTimeout(quickQuoteTimer);
     quickQuoteTimer = window.setTimeout(() => {
       launcher.classList.remove("is-launching");
+      form.dataset.entryPoint = "하단 간편 문의";
       quickQuoteMount.append(form);
       document.body.classList.add("quick-quote-open");
       quickQuoteDialog.classList.remove("is-closing");

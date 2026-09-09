@@ -269,6 +269,7 @@
       const kakaoUrl = "https://open.kakao.com/o/s7SanMki";
       const finalStatuses = new Set(["출고", "부결"]);
       const textSaveTimers = new Map();
+      let stopLeadSubscription = null;
 
       const state = {
         authUser: null,
@@ -454,6 +455,7 @@
           leadSource: lead.leadSource || "",
           campaign: lead.campaign || "",
           campaignLabel: lead.campaignLabel || "",
+          entryPoint: lead.entryPoint || "",
           statusTimeline: Array.isArray(lead.statusTimeline) ? lead.statusTimeline : [],
           activityLog: Array.isArray(lead.activityLog) ? lead.activityLog : [],
           contactHistory: Array.isArray(lead.contactHistory) ? lead.contactHistory : [],
@@ -626,7 +628,29 @@
 
         renderAll();
         await loadTodayMemo();
-        adminStatus.textContent = "Firebase DB를 표시합니다.";
+        startLeadSubscription(leadQuery);
+        adminStatus.textContent = "Firebase DB와 실시간 연결되었습니다.";
+      }
+
+      function startLeadSubscription(leadQuery) {
+        stopLeadSubscription?.();
+        stopLeadSubscription = leadQuery.onSnapshot((snapshot) => {
+          const knownIds = new Set(state.leads.map((lead) => lead.id));
+          const additions = snapshot.docs
+            .map((doc) => normalizeLead({ id: doc.id, ...doc.data() }))
+            .filter(canSeeLead)
+            .filter((lead) => !knownIds.has(lead.id));
+
+          if (!additions.length) return;
+          state.leads = [...additions, ...state.leads];
+          renderHomeActions();
+          renderStatusSummary();
+          renderLeads();
+          renderCalendar();
+          adminStatus.textContent = `새 문의 ${additions.length}건이 실시간으로 추가되었습니다.`;
+        }, () => {
+          adminStatus.textContent = "실시간 연결이 끊겼습니다. 새로고침을 눌러 다시 연결해 주세요.";
+        });
       }
 
       function renderAll() {
@@ -796,6 +820,7 @@
             lead.leadSource,
             lead.campaign,
             lead.campaignLabel,
+            lead.entryPoint,
           ].join(" ").toLowerCase();
           return (!keyword || text.includes(keyword))
             && (!startDate || createdAt >= startDate)
@@ -885,6 +910,7 @@
               ${renderInfoItem("예상 월납입금", monthly || "상담 후 확인")}
               ${renderInfoItem("초기비용", initialCost)}
               ${renderInfoItem("요청사항", lead.requestNote || "요청사항 없음", "is-wide")}
+              ${renderInfoItem("접수경로", lead.entryPoint || lead.campaignLabel || lead.leadSource || lead.source || "홈페이지")}
               ${renderTimeDealInfo(lead)}
             </div>
 
@@ -1136,8 +1162,8 @@
 
       function downloadCsv() {
         if (!isSuper()) return;
-        const header = ["접수일", "고객명", "전화번호", "희망차량", "문의유형", "진행상황", "담당자", "재연락일", "메모"];
-        const body = filteredLeads().map((lead) => [formatDate(lead.createdAt), lead.customerName, lead.phone, lead.vehicle, inferInquiryType(lead), lead.progressStatus, displayAssigneeName(lead), lead.followUpDate, lead.adminMemo]);
+        const header = ["접수일", "고객명", "전화번호", "희망차량", "문의유형", "접수경로", "진행상황", "담당자", "재연락일", "메모"];
+        const body = filteredLeads().map((lead) => [formatDate(lead.createdAt), lead.customerName, lead.phone, lead.vehicle, inferInquiryType(lead), lead.entryPoint || lead.campaignLabel || lead.leadSource || lead.source || "홈페이지", lead.progressStatus, displayAssigneeName(lead), lead.followUpDate, lead.adminMemo]);
         const csv = [header, ...body].map((row) => row.map((cell) => `"${String(cell || "").replaceAll('"', '""')}"`).join(",")).join("\n");
         const blob = new Blob(["\ufeff", csv], { type: "text/csv;charset=utf-8" });
         const url = URL.createObjectURL(blob);
@@ -1415,6 +1441,8 @@
 
       auth.onAuthStateChanged((user) => {
         if (!user) {
+          stopLeadSubscription?.();
+          stopLeadSubscription = null;
           state.authUser = null;
           state.user = null;
           showAuth();

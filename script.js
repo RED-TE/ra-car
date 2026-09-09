@@ -294,6 +294,7 @@ function getLeadPayload() {
     termsVersion: "2026-05-10",
     page: window.location.href,
     source: contextSource || document.querySelector(".hero-slide.is-active h1")?.textContent.trim() || "RE:CAR",
+    entryPoint: quoteForm?.dataset.entryPoint || "홈페이지 상담 폼",
     leadSource: leadContext.leadSource,
     campaign: leadContext.campaign,
     campaignLabel: leadContext.campaignLabel,
@@ -438,7 +439,7 @@ async function submitLead(lead) {
     };
   }
 
-  if (!serverResult || window.location.hostname === "recarplan.com") {
+  if (window.location.protocol !== "file:") {
     const firebaseResult = await sendLeadToFirebase(lead);
     return {
       stored: "firebase",

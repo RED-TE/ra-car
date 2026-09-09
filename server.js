@@ -2004,6 +2004,7 @@ async function handleLeadCreate(request, response) {
       termsVersion: sanitizeText(input.termsVersion, 20) || "2026-05-10",
       page: sanitizeText(input.page, 240),
       source: sanitizeText(input.source, 80),
+      entryPoint: sanitizeText(input.entryPoint, 80),
       leadSource: sanitizeText(input.leadSource, 80),
       campaign: sanitizeText(input.campaign, 80),
       campaignLabel: sanitizeText(input.campaignLabel, 80),

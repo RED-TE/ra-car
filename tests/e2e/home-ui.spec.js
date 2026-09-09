@@ -101,7 +101,9 @@ test("persistent inquiry entry follows desktop and mobile without covering focus
   await expect(page.locator("#contactPhone")).toBeFocused();
   await expect(desktopButton).toBeHidden();
   await fillForm(page);
+  const popupRequest = page.waitForRequest("**/api/leads");
   await quickDialog.getByRole("button", { name: "조건 확인하기", exact: true }).click();
+  expect((await popupRequest).postDataJSON()).toMatchObject({ entryPoint: "하단 간편 문의" });
   await expect(quickDialog.locator(".form-status")).toContainText("문의가 접수되었습니다");
   await quickDialog.getByRole("button", { name: "문의 창 닫기" }).click();
   await expect(quickDialog).toBeHidden();
@@ -177,7 +179,32 @@ test("submission waits for real response, blocks duplicate events, retains refer
   resolveResponse();
   await expect(page.locator(".form-status")).toBeVisible();
   await expect(page.locator(".form-status")).toContainText("문의가 접수되었습니다");
-  expect(payload).toMatchObject({ referralCode: "RC-LOCALQA", privacyConsent: true, termsConsent: true, campaign: "local-test", leadSource: "local-qa" });
+  expect(payload).toMatchObject({ referralCode: "RC-LOCALQA", privacyConsent: true, termsConsent: true, campaign: "local-test", leadSource: "local-qa", entryPoint: "홈페이지 상담 폼" });
+});
+
+test("a server-only inquiry is mirrored to the Firebase collection used by admin", async ({ page }) => {
+  await page.addInitScript(() => {
+    window.__adminLeadWrites = [];
+    const firestore = () => ({
+      collection: (name) => ({
+        doc: (id) => ({
+          set: (data) => {
+            window.__adminLeadWrites.push({ name, id, data });
+            return Promise.resolve();
+          },
+        }),
+      }),
+    });
+    window.firebase = { apps: [{}], firestore, initializeApp: () => {} };
+  });
+  await page.route("**/api/leads", route => route.fulfill({ status: 201, json: { ok: true, stored: "server", firebase: { stored: false } } }));
+  await ready(page);
+  await fillForm(page);
+  await page.getByRole("button", { name: "조건 확인하기", exact: true }).click();
+  await expect.poll(() => page.evaluate(() => window.__adminLeadWrites.length)).toBe(1);
+  const write = await page.evaluate(() => window.__adminLeadWrites[0]);
+  expect(write.name).toBe("leads");
+  expect(write.data).toMatchObject({ progressStatus: "미배정", entryPoint: "홈페이지 상담 폼" });
 });
 
 test("failed inquiry stays failed until a successful retry response", async ({ page }) => {
