@@ -77,15 +77,14 @@
 .public-home .quick-grid a { display:flex; flex-direction:column; align-items:center; gap:14px; text-align:center; font-weight:600; font-size:16px; }
 .public-home .quick-art { display:block; width:100%; max-width:120px; aspect-ratio:1; border-radius:20px; background-color:#fff; background-repeat:no-repeat; background-position:center; background-size:90%; transition:transform .2s; }
 .public-home .quick-grid a:hover .quick-art { transform:translateY(-4px); }
-.public-home .quick-car { background-image:url('./assets/crew-knowledge/vehicle-cutout.png'); }
-.public-home .quick-suv { background-image:url('./assets/danawa/vehicles/기아/쏘렌토/model_360.png'); }
-.public-home .quick-compare,.public-home .quick-business,.public-home .quick-service,.public-home .quick-faq,.public-home .quick-crew,.public-home .quick-quote { background-image:url('./assets/crew-knowledge/recar-flow-icons-3d.png'); background-size:300% 200%; }
-.public-home .quick-compare { background-position:50% 100%; }
-.public-home .quick-business { background-position:100% 0; }
-.public-home .quick-service { background-position:0 100%; }
-.public-home .quick-faq { background-position:50% 0; }
-.public-home .quick-crew { background-position:100% 100%; }
-.public-home .quick-quote { background-position:0 0; }
+.public-home .quick-car { background-image:url('./assets/home-icons/quick-all-vehicles.webp'); }
+.public-home .quick-suv { background-image:url('./assets/home-icons/quick-suv.webp'); }
+.public-home .quick-compare { background-image:url('./assets/home-icons/guide-rent-lease.webp'); }
+.public-home .quick-business { background-image:url('./assets/home-icons/guide-business.webp'); }
+.public-home .quick-service { background-image:url('./assets/home-icons/quick-service.webp'); }
+.public-home .quick-faq { background-image:url('./assets/home-icons/quick-faq.webp'); }
+.public-home .quick-crew { background-image:url('./assets/home-icons/quick-crew.webp'); }
+.public-home .quick-quote { background-image:url('./assets/home-icons/quick-quote.webp'); }
 .public-home .home-service-links { display:grid; grid-template-columns:1fr 1fr; gap:30px; padding-block:60px 0; }
 .public-home .service-link { border:1px solid #dce5f4; background:#edf3fc; min-height:228px; border-radius:22px; display:flex; align-items:center; justify-content:space-between; gap:12px; padding:32px; }
 .public-home .service-link h2 { font-size:23px; font-weight:750; line-height:1.4; word-break:keep-all; }
@@ -94,9 +93,9 @@
 .public-home .service-link svg { width:17px; height:17px; }
 .public-home .kakao-service { background:white; border-color:#e2e2e2; }
 .public-home .kakao-service div > span { background:#f9e853; padding:7px 12px; border-radius:6px; color:#292519; }
-.public-home .service-art { flex:none; width:150px; height:150px; background-image:url('./assets/crew-knowledge/recar-flow-icons-3d.png'); background-size:300% 200%; }
-.public-home .art-manager { background-position:100% 0; }
-.public-home .art-bank { background-position:50% 100%; }
+.public-home .service-art { flex:none; width:150px; height:150px; background-repeat:no-repeat; background-position:center; background-size:contain; }
+.public-home .art-manager { background-image:url('./assets/home-icons/quick-service.webp'); }
+.public-home .art-bank { background-image:url('./assets/home-icons/quick-quote.webp'); }
 .public-home .home-catalog { padding-block:68px; }
 .public-home .home-section-heading { display:flex; align-items:center; justify-content:space-between; gap:24px; margin-bottom:32px; }
 .public-home .home-section-heading h2 { font-size:38px; line-height:1.5; font-weight:750; word-break:keep-all; }
@@ -179,11 +178,11 @@
 .public-home .guide-banner p { margin-top:10px; font-size:18px; }
 .public-home .guide-topics { display:flex; gap:24px; }
 .public-home .guide-topics span { display:flex; flex-direction:column; gap:12px; align-items:center; font-size:14px; }
-.public-home .guide-topics svg { width:82px; height:82px; padding:23px; border-radius:50%; background:#fff; color:#465365; border:1px solid #e9ebef; }
+.public-home .guide-topics img { width:82px; height:82px; padding:6px; object-fit:contain; border-radius:18px; background:#fff; border:1px solid #e9ebef; }
 .public-home .guide-filter { margin:32px 0 28px; }
 .public-home .home-guide-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:28px; }
 .public-home .guide-card { display:flex; align-items:center; gap:16px; min-width:0; padding:12px; border:1px solid #dfdfdf; border-radius:8px; min-height:170px; }
-.public-home .guide-card img { width:164px; height:142px; object-fit:cover; border-radius:6px; flex:none; }
+.public-home .guide-card img { width:164px; height:142px; object-fit:contain; padding:8px; border-radius:8px; background:#f4f7fc; flex:none; }
 .public-home .guide-card > div { min-width:0; }
 .public-home .guide-card h3 { font-size:17px; font-weight:550; line-height:1.55; margin:8px 0; word-break:keep-all; }
 .public-home .guide-card p { color:#767676; font-size:14px; }
@@ -193,7 +192,7 @@
 .public-home .home-steps { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:24px; }
 .public-home .home-steps article { background:#fff; border:1px solid #ececec; padding:28px; border-radius:8px; min-height:235px; position:relative; }
 .public-home .home-steps article > span { color:#667085; font-size:16px; font-weight:700; }
-.public-home .home-steps svg { display:block; width:32px; height:32px; color:var(--accent); margin:20px 0; }
+.public-home .home-steps .step-icon { display:block; width:84px; height:84px; object-fit:contain; margin:8px 0 12px; }
 .public-home .home-steps h3 { font-size:20px; font-weight:650; margin-bottom:8px; }
 .public-home .home-steps p { font-size:15px; color:#667085; line-height:1.6; word-break:keep-all; }
 .public-home .home-business { display:flex; gap:24px; justify-content:space-between; align-items:center; padding-block:56px; border-bottom:1px solid var(--home-line); }
@@ -270,7 +269,7 @@
 .public-home .referral-notice { bottom:24px; left:20px; top:auto; right:auto; max-width:calc(100% - 150px); z-index:35; }
 @media(min-width:1600px) { .public-home .site-header { padding-inline:40px; } .public-home .home-desktop-nav { max-width:800px; } }
 @media(max-width:1320px) { .public-home .site-header { gap:18px; } .public-home .home-desktop-nav { font-size:15px; gap:14px; } .public-home .home-search { flex-basis:300px; } .public-home .header-consult { flex-basis:140px; } .public-home .catalog-arrow.prev { left:-28px; } .public-home .catalog-arrow.next { right:-28px; } .public-home .catalog-basis { gap:0; } .public-home .catalog-basis span { font-size:13px; gap:10px; padding-right:14px; } .public-home .catalog-basis b { padding-inline:14px; } .public-home .quick-grid { gap:24px; } }
-@media(max-width:1050px) { .public-home .home-desktop-nav { gap:12px; font-size:14px; } .public-home .header-consult { display:none; } .public-home .home-search { flex-basis:250px; } .public-home .service-link { padding:24px; } .public-home .service-art { width:110px; height:110px; } .public-home .service-link h2 { font-size:20px; } .public-home .quick-grid { gap:20px; } .public-home .quick-grid a { font-size:14px; } .public-home .home-vehicle { width:calc((100% - 56px)/3); min-width:calc((100% - 56px)/3); } .public-home .catalog-basis { display:grid; grid-template-columns:1fr 1fr; } .public-home .catalog-basis b { padding-block:12px; width:112px; text-align:center; } .public-home .guide-banner { padding:32px; } .public-home .guide-topics { gap:16px; } .public-home .guide-topics svg { width:64px; height:64px; padding:17px; } .public-home .guide-card img { width:125px; } .public-home .home-steps { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+@media(max-width:1050px) { .public-home .home-desktop-nav { gap:12px; font-size:14px; } .public-home .header-consult { display:none; } .public-home .home-search { flex-basis:250px; } .public-home .service-link { padding:24px; } .public-home .service-art { width:110px; height:110px; } .public-home .service-link h2 { font-size:20px; } .public-home .quick-grid { gap:20px; } .public-home .quick-grid a { font-size:14px; } .public-home .home-vehicle { width:calc((100% - 56px)/3); min-width:calc((100% - 56px)/3); } .public-home .catalog-basis { display:grid; grid-template-columns:1fr 1fr; } .public-home .catalog-basis b { padding-block:12px; width:112px; text-align:center; } .public-home .guide-banner { padding:32px; } .public-home .guide-topics { gap:16px; } .public-home .guide-topics img { width:64px; height:64px; padding:6px; } .public-home .guide-card img { width:125px; } .public-home .home-steps { grid-template-columns:repeat(2,minmax(0,1fr)); } }
 @media(max-width:800px) { .public-home .home-container { width:calc(100% - 40px); } .public-home .site-header { height:60px; padding:0 20px; gap:16px; } .public-home main { padding-top:60px; } .public-home main section { scroll-margin-top:80px; } .public-home .site-header .brand { flex-basis:105px; } .public-home .site-header .brand img { width:105px; height:32px; } .public-home .home-desktop-nav { display:none; } .public-home .home-menu-toggle { display:inline-flex; border:0; width:44px; height:44px; } .public-home .home-search { margin-left:auto; } .public-home .home-promotions { padding-top:28px; } .public-home .promotion-slide { width:600px; height:370px; } .public-home .promotion-stage { height:370px; } .public-home .promotion-copy { left:34px; top:32px; } .public-home .promotion-copy h2 { font-size:32px; } .public-home .promotion-copy p { font-size:20px; } .public-home .promotion-caption { left:34px; } .public-home .home-shortcuts { padding-block:32px; } .public-home .quick-grid { grid-template-columns:repeat(4,minmax(0,1fr)); gap:26px 20px; } .public-home .quick-art { max-width:100px; } .public-home .home-service-links { padding-top:40px; gap:16px; } .public-home .service-link { min-height:200px; } .public-home .service-link p { font-size:14px; } .public-home .service-art { width:90px; height:90px; } .public-home .home-section-heading h2 { font-size:30px; } .public-home .brand-row > strong { width:90px; } .public-home .home-vehicle { width:calc((100% - 28px)/2); min-width:calc((100% - 28px)/2); } .public-home .catalog-arrow { display:none; } .public-home .guide-topics { display:none; } .public-home .home-guide-grid { gap:16px; } .public-home .guide-card { align-items:flex-start; } .public-home .guide-card img { width:100px; height:132px; } .public-home .guide-card h3 { font-size:15px; } .public-home .guide-card p { font-size:12px; } .public-home .collection-card { min-width:calc((100% - 28px)/2); width:calc((100% - 28px)/2); } .public-home .home-floating { right:14px; width:88px; } .public-home .home-business h2 { font-size:25px; } .public-home .home-business p { font-size:14px; } }
 @media(max-width:1050px) { .public-home .site-footer { grid-template-columns:180px minmax(0,1fr); } .public-home .footer-contact { grid-column:2; } }
 @media(max-width:600px) {

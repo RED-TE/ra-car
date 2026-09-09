@@ -25,7 +25,7 @@ async function fillForm(page) {
 
 test("home assets load, reference proportions and actual catalog prices are preserved", async ({ page, request }) => {
   await page.setViewportSize({ width: 1440, height: 1000 });
-  for (const file of ["/home.css", "/home.js", "/assets/home-fonts/Pretendard-Regular.woff2"]) expect((await request.get(file)).status()).toBe(200);
+  for (const file of ["/home.css", "/home.js", "/assets/home-fonts/Pretendard-Regular.woff2", "/assets/home-icons/quick-quote.webp", "/assets/home-icons/guide-rent-lease.webp"]) expect((await request.get(file)).status()).toBe(200);
   await ready(page);
   expect((await page.locator(".site-header").boundingBox()).height).toBe(86);
   expect((await page.locator('.promotion-slide[data-position="center"]').boundingBox()).width).toBe(750);
