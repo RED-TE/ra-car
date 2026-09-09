@@ -180,7 +180,7 @@ function setReferralNoticeExpanded(expanded) {
 
   referralNotice.classList.toggle("is-expanded", expanded);
   referralToggleButton.setAttribute("aria-expanded", String(expanded));
-  referralToggleButton.setAttribute("aria-label", expanded ? "추천 코드 접기" : "추천 코드 확인");
+  referralToggleButton.setAttribute("aria-label", expanded ? "추천 프로모션 혜택 접기" : "추천 프로모션 혜택 보기");
   referralDetails.hidden = !expanded;
 }
 

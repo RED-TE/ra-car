@@ -8674,6 +8674,49 @@ body.inquiry-conversion-page {
   line-height: 1.45;
 }
 
+.referral-benefit-title {
+  color: #172033;
+  font-size: 13px;
+  font-weight: 850;
+  line-height: 1.4;
+}
+
+.referral-benefit-list {
+  display: grid;
+  gap: 5px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.referral-benefit-list li {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-height: 30px;
+  color: #344054;
+  font-size: 12px;
+  font-weight: 750;
+}
+
+.referral-benefit-list svg {
+  width: 24px;
+  height: 24px;
+  padding: 5px;
+  color: #1554ff;
+  background: #edf2ff;
+  border-radius: 6px;
+  stroke-width: 2;
+}
+
+.referral-code-guide {
+  padding-top: 8px;
+  color: #596575;
+  border-top: 1px solid #edf0f4;
+  font-size: 11px;
+  line-height: 1.45;
+}
+
 .referral-code-button,
 .referral-notice-close {
   display: inline-flex;

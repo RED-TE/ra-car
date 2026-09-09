@@ -63,6 +63,25 @@ test("home assets load, reference proportions and actual catalog prices are pres
   expect(await page.evaluate(() => localStorage.getItem("recar_referral_code"))).toBeNull();
 });
 
+test("referral links apply the code and reveal the promotion gifts", async ({ page }) => {
+  await ready(page, "/?ref=RC-GIFT123");
+  const notice = page.locator("[data-referral-notice]");
+  const details = page.locator("[data-referral-details]");
+
+  await expect(notice).toBeVisible();
+  await expect(notice).toContainText("추천 프로모션 적용");
+  await expect(details).toBeHidden();
+  expect(await page.evaluate(() => localStorage.getItem("recar_referral_code"))).toBe("RC-GIFT123");
+
+  await page.getByRole("button", { name: "추천 프로모션 혜택 보기" }).click();
+  await expect(details).toBeVisible();
+  await expect(details).toContainText("캠핑 웨건");
+  await expect(details).toContainText("코일매트");
+  await expect(details).toContainText("아이스 아메리카노 2잔");
+  await expect(details).toContainText("추천 코드는 문의에 자동 적용됩니다.");
+  await expect(page.locator("[data-referral-code]")).toHaveText("RC-GIFT123");
+});
+
 test("full vehicle page uses the same margin-adjusted static catalog", async ({ page }) => {
   await page.goto("/vehicles.html");
   const firstVehicle = page.locator(".vehicle-card:not(.is-skeleton)").first();
