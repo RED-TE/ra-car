@@ -31,6 +31,93 @@
     const src = safeImage(item.imageUrl);
     return src ? `<img src="${escape(src)}" alt="${escape([brandOf(item), item.name].join(" "))}" width="360" height="240" loading="lazy" />` : '<span class="image-missing">이미지 준비 중</span>';
   };
+  const timeDealWindowMs = 12 * 60 * 60 * 1000;
+  const koreaOffsetMs = 9 * 60 * 60 * 1000;
+  let activeTimeDealSlot = null;
+  let timeDealTimerId = 0;
+
+  function hashText(value) {
+    let hash = 2166136261;
+    for (const char of String(value)) hash = Math.imul(hash ^ char.charCodeAt(0), 16777619) >>> 0;
+    return hash;
+  }
+
+  function getTimeDealWindow(now = Date.now()) {
+    const slot = Math.floor((now + koreaOffsetMs) / timeDealWindowMs);
+    return { slot, endsAt: ((slot + 1) * timeDealWindowMs) - koreaOffsetMs };
+  }
+
+  function getTimeDealCost(item) {
+    const beforeLift = Number(item.monthlyPaymentBeforeLift);
+    if (Number.isFinite(beforeLift) && beforeLift > 0) return beforeLift;
+    const regular = Number(item.monthlyPayment);
+    const lift = Number(item.calculation?.displayMonthlyLift);
+    return Number.isFinite(regular) && Number.isFinite(lift) && regular > lift ? regular - lift : 0;
+  }
+
+  function getTimeDealMargin(item, slot) {
+    return 10000 + (hashText(`${item.id}:${slot}`) % 101) * 100;
+  }
+
+  function getTimeDealItems(items, slot) {
+    const unique = new Map();
+    items.forEach(item => {
+      const key = `${brandOf(item)}:${item.name}`;
+      if (!unique.has(key) && getTimeDealCost(item) > 0 && Number(item.monthlyPayment) > 0 && safeImage(item.imageUrl)) unique.set(key, item);
+    });
+    const available = [...unique.values()];
+    const preferred = available.filter(item => Number(item.categoryRanks?.all) <= 72);
+    const pool = (preferred.length >= 12 ? preferred : available).sort((a, b) => hashText(a.id) - hashText(b.id));
+    if (!pool.length) return [];
+    const start = (slot * 3) % pool.length;
+    return Array.from({ length: Math.min(3, pool.length) }, (_, index) => pool[(start + index) % pool.length]);
+  }
+
+  function formatTimeDealLeft(ms) {
+    const seconds = Math.max(0, Math.floor(ms / 1000));
+    const hours = Math.floor(seconds / 3600);
+    const minutes = Math.floor((seconds % 3600) / 60);
+    return [hours, minutes, seconds % 60].map(value => String(value).padStart(2, "0")).join(":");
+  }
+
+  function timeDealCard(item, slot) {
+    const regular = Math.round(Number(item.monthlyPayment));
+    const cost = Math.round(getTimeDealCost(item));
+    const margin = getTimeDealMargin(item, slot);
+    const sale = cost + margin;
+    const discount = regular - sale;
+    const inquiryName = `${brandOf(item)} ${item.name} 타임특가`;
+    if (discount <= 0) return "";
+    return `<article class="time-deal-card" data-vehicle-id="${escape(item.id)}" data-base-monthly="${regular}" data-cost-monthly="${cost}" data-deal-margin="${margin}" data-sale-monthly="${sale}">
+      <div class="time-deal-image">${imageOf(item)}<span>12시간 한정</span></div>
+      <div class="time-deal-copy"><div class="time-deal-meta"><span>${escape(productLabel(item))}</span><b>무보증</b></div>
+        <h3><small>${escape(brandOf(item))}</small>${escape(item.name)}</h3>
+        <div class="time-deal-prices"><del><span>기본가</span> 월 ${regular.toLocaleString("ko-KR")}원</del><strong><span>타임특가</span> 월 ${sale.toLocaleString("ko-KR")}<small>원</small></strong><em>월 ${discount.toLocaleString("ko-KR")}원 절약</em></div>
+        <a href="#quote" data-home-quote="${escape(inquiryName)}" data-campaign="time-deal" data-lead-source="타임특가" data-campaign-label="12시간 타임특가" data-original-monthly="${regular}" data-sale-monthly="${sale}" data-discount="${discount}">타임특가 견적 받기 <span aria-hidden="true">→</span></a>
+      </div>
+    </article>`;
+  }
+
+  function updateTimeDealClock() {
+    const timer = $("#timeDealTimer");
+    if (!timer) return;
+    const windowState = getTimeDealWindow();
+    if (activeTimeDealSlot !== null && activeTimeDealSlot !== windowState.slot && state.items.length) renderTimeDeals();
+    timer.textContent = formatTimeDealLeft(windowState.endsAt - Date.now());
+  }
+
+  function renderTimeDeals() {
+    const dealGrid = $("#timeDealGrid");
+    if (!dealGrid) return;
+    const { slot } = getTimeDealWindow();
+    activeTimeDealSlot = slot;
+    const cards = getTimeDealItems(state.items, slot).map(item => timeDealCard(item, slot)).filter(Boolean);
+    dealGrid.dataset.dealSlot = String(slot);
+    dealGrid.innerHTML = cards.length ? cards.join("") : '<p class="time-deal-loading">현재 확인 가능한 타임특가 차량이 없습니다.</p>';
+    dealGrid.setAttribute("aria-busy", "false");
+    updateTimeDealClock();
+    if (!timeDealTimerId) timeDealTimerId = window.setInterval(updateTimeDealClock, 1000);
+  }
 
   function card(item) {
     const price = priceOf(item);
@@ -132,6 +219,7 @@
       renderBrands();
       renderCatalog();
       renderCollection();
+      renderTimeDeals();
     } catch {
       state.items = [];
       grid.innerHTML = "";
@@ -140,6 +228,8 @@
       $("#catalogCount").textContent = "";
       $("#catalogDate").textContent = "정보 확인 필요";
       $("#suvCollection").innerHTML = '<p>차량 정보를 불러오지 못했습니다. 차량 목록에서 다시 불러오기를 눌러주세요.</p>';
+      $("#timeDealGrid").innerHTML = '<p class="time-deal-loading">타임특가 차량을 불러오지 못했습니다.</p>';
+      $("#timeDealGrid").setAttribute("aria-busy", "false");
       arrows();
     } finally { state.loading = false; }
   }
@@ -155,7 +245,17 @@
     if (reset) { state.market = "all"; state.brand = "all"; state.body = "all"; state.product = "all"; state.query = ""; $("#homeSearch").value = ""; $("#catalogProduct").value = "all"; }
     if (market || brand || body || reset) renderCatalog();
     const quote = event.target.closest("[data-home-quote]");
-    if (quote) { event.preventDefault(); window.moveToQuote(quote.dataset.homeQuote); }
+    if (quote) {
+      event.preventDefault();
+      window.moveToQuote(quote.dataset.homeQuote, "contact", {
+        campaign: quote.dataset.campaign || "",
+        leadSource: quote.dataset.leadSource || "",
+        campaignLabel: quote.dataset.campaignLabel || "",
+        timeDealOriginalMonthlyPayment: quote.dataset.originalMonthly,
+        timeDealMonthlyPayment: quote.dataset.saleMonthly,
+        timeDealDiscount: quote.dataset.discount,
+      });
+    }
     const guide = event.target.closest('.guide-card[href^="#"]');
     if (guide) {
       const target = $(guide.getAttribute("href"));
@@ -318,5 +418,5 @@
       if (status.classList.contains("is-error") && form.contains(document.activeElement) && document.activeElement.tagName === "INPUT") document.activeElement.setAttribute("aria-invalid", "true");
     }, 0);
   });
-  window.recarHome = { loadCatalog };
+  window.recarHome = { loadCatalog, renderTimeDeals };
 })();

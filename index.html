@@ -79,7 +79,7 @@
       }
     </script>
     <link rel="stylesheet" href="./styles.css?v=20260820-referral-compact" />
-    <link rel="stylesheet" href="./home.css?v=20260909-section-motion" />
+    <link rel="stylesheet" href="./home.css?v=20260909-time-deal-v1" />
   </head>
   <body class="public-home">
     <a class="home-skip" href="#special">차량 목록으로 바로가기</a>
@@ -169,6 +169,16 @@
             <a href="/crew/"><span class="quick-art quick-crew" aria-hidden="true"></span><span>크루</span></a>
             <a href="#quote" class="quote-focus-button is-attention" data-vehicle="조건 비교 상담"><span class="quick-art quick-quote" aria-hidden="true"></span><span>견적 상담</span></a>
       </div></section>
+      <section class="home-time-deals" aria-labelledby="timeDealTitle" data-window-hours="12">
+        <div class="home-container">
+          <header class="time-deal-heading">
+            <div><span class="time-deal-kicker"><i data-lucide="clock-3" aria-hidden="true"></i> 12시간 한정</span><h2 id="timeDealTitle">타임특가</h2><p>기본 안내가보다 낮은 한정 조건을 확인하세요.</p></div>
+            <div class="time-deal-clock"><span>다음 특가까지</span><strong id="timeDealTimer">--:--:--</strong></div>
+          </header>
+          <div class="time-deal-grid" id="timeDealGrid" aria-live="polite" aria-busy="true"><p class="time-deal-loading">타임특가 차량을 확인하고 있습니다.</p></div>
+          <p class="time-deal-note">60개월 · 무보증 · 연 10,000km 기준이며 실제 견적은 금융사 심사와 차량 조건에 따라 달라질 수 있습니다.</p>
+        </div>
+      </section>
       <section class="home-service-links home-container" aria-label="상담 채널">
         <a href="https://open.kakao.com/o/s7SanMki" target="_blank" rel="noopener noreferrer" class="service-link kakao-service"><div><h2>리카 담당자에게 바로 문의</h2><p>궁금한 차량과 조건을<br>카카오톡으로 편하게 물어보세요.</p><span>카카오톡 상담 <i data-lucide="arrow-up-right" aria-hidden="true"></i></span></div><span class="service-art art-manager" aria-hidden="true"></span></a>
         <a class="service-link quote-focus-button" href="#quote" data-vehicle="조건 비교 상담"><div><h2>내 조건에 맞는 견적 비교</h2><p>월 납입료부터 계약 조건까지<br>한 번에 확인해 보세요.</p><span>간편 견적 문의 <i data-lucide="arrow-right" aria-hidden="true"></i></span></div><span class="service-art art-bank" aria-hidden="true"></span></a>
@@ -347,7 +357,7 @@
     <aside class="home-floating" aria-label="빠른 도구"><a class="floating-kakao" href="https://open.kakao.com/o/s7SanMki" target="_blank" rel="noopener noreferrer" aria-label="카카오톡 상담" title="카카오톡 상담"><i data-lucide="message-circle" aria-hidden="true"></i></a><button type="button" data-back-top aria-label="맨 위로" title="맨 위로"><i data-lucide="chevron-up" aria-hidden="true"></i></button></aside>
     <nav class="mobile-bottom" aria-label="모바일 빠른 메뉴"><a href="#home"><i data-lucide="house" aria-hidden="true"></i><span>홈</span></a><a href="#special"><i data-lucide="search" aria-hidden="true"></i><span>차량검색</span></a><a class="mobile-consult" href="#quote"><i data-lucide="message-square-text" aria-hidden="true"></i><span>상담신청</span></a><a href="#compare"><i data-lucide="book-open" aria-hidden="true"></i><span>이용가이드</span></a><a href="/crew/"><i data-lucide="users" aria-hidden="true"></i><span>크루</span></a></nav>
     <script src="./crew/guide/lucide.min.js"></script>
-    <script src="./home.js?v=20260909-condition-copy"></script>
+    <script src="./home.js?v=20260909-time-deal-v1"></script>
     <script src="./script.js?v=20260909-condition-copy"></script>
   </body>
 </html>

@@ -123,6 +123,49 @@ test("hero, car rail, guide filters and vehicle inquiry entry work", async ({ pa
   await expect(page.locator("#rentGuide")).toHaveAttribute("open", "");
 });
 
+test("12-hour time deals rotate and use cost plus a 10,000 to 20,000 won margin", async ({ page }) => {
+  const start = Date.parse("2026-09-09T00:00:00+09:00");
+  await page.addInitScript(now => { Date.now = () => now; }, start);
+  await page.setViewportSize({ width: 1440, height: 1000 });
+  await ready(page);
+
+  const deals = page.locator(".time-deal-card");
+  await expect(deals).toHaveCount(3);
+  const firstWindowIds = await deals.evaluateAll(cards => cards.map(card => card.dataset.vehicleId));
+  const dealData = await deals.evaluateAll(cards => cards.map(card => ({ ...card.dataset })));
+  for (const deal of dealData) {
+    const item = catalog.items.find(candidate => candidate.id === deal.vehicleId);
+    const margin = Number(deal.dealMargin);
+    expect(Number(deal.baseMonthly)).toBe(item.monthlyPayment);
+    expect(Number(deal.costMonthly)).toBe(item.monthlyPaymentBeforeLift);
+    expect(margin).toBeGreaterThanOrEqual(10000);
+    expect(margin).toBeLessThanOrEqual(20000);
+    expect(Number(deal.saleMonthly)).toBe(item.monthlyPaymentBeforeLift + margin);
+    expect(Number(deal.saleMonthly)).toBeLessThan(item.monthlyPayment);
+  }
+  await expect(deals.first().locator("del")).toContainText("기본가");
+  expect(await deals.first().locator("del").evaluate(node => getComputedStyle(node).textDecorationLine)).toContain("line-through");
+  await expect(deals.first()).toContainText("타임특가");
+
+  await deals.first().getByRole("link", { name: /타임특가 견적 받기/ }).click();
+  await expect(page.locator(".quote-form")).toHaveAttribute("data-lead-campaign", "time-deal");
+  await expect(page.locator("#vehicleWish")).toHaveValue(/타임특가/);
+  await fillForm(page);
+  const dealRequest = page.waitForRequest("**/api/leads");
+  await page.getByRole("button", { name: "조건 확인하기", exact: true }).click();
+  expect((await dealRequest).postDataJSON()).toMatchObject({
+    campaign: "time-deal",
+    campaignLabel: "12시간 타임특가",
+    timeDealOriginalMonthlyPayment: Number(dealData[0].baseMonthly),
+    timeDealMonthlyPayment: Number(dealData[0].saleMonthly),
+    timeDealDiscount: Number(dealData[0].baseMonthly) - Number(dealData[0].saleMonthly),
+  });
+
+  await page.evaluate(now => { Date.now = () => now; window.recarHome.renderTimeDeals(); }, start + (12 * 60 * 60 * 1000));
+  const secondWindowIds = await deals.evaluateAll(cards => cards.map(card => card.dataset.vehicleId));
+  expect(secondWindowIds).not.toEqual(firstWindowIds);
+});
+
 test("SUV collection uses distinct representative SUV models", async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 1000 });
   await ready(page);
@@ -328,7 +371,7 @@ test("six target widths and narrow reflow keep prices and form controls accessib
     await page.setViewportSize({ width, height: 1000 });
     await ready(page);
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= document.documentElement.clientWidth)).toBe(true);
-    const clipped = await page.locator(".home-car-price, .home-car-name, .submit-button").evaluateAll(elements =>
+    const clipped = await page.locator(".home-car-price, .home-car-name, .time-deal-prices strong, .submit-button").evaluateAll(elements =>
       elements.filter(el => el.scrollWidth > el.clientWidth + 1).map(el => el.textContent));
     expect(clipped).toEqual([]);
     await page.locator("#contactPhone").focus();
