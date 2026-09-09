@@ -117,6 +117,20 @@ test("SUV collection uses distinct representative SUV models", async ({ page }) 
   await expect(floating.getByRole("link", { name: "견적 상담" })).toHaveCount(0);
 });
 
+test("section bands and priority icon motion respect user preferences", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 1000 });
+  await page.emulateMedia({ reducedMotion: "no-preference" });
+  await ready(page);
+
+  const priorityIcons = page.locator(".quick-grid .is-attention .quick-art");
+  await expect(priorityIcons).toHaveCount(3);
+  expect(await priorityIcons.first().evaluate(node => getComputedStyle(node).animationName)).toBe("home-icon-bounce");
+  expect(await page.locator(".home-catalog").evaluate(node => getComputedStyle(node, "::before").backgroundColor)).toBe("rgb(250, 251, 252)");
+
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  expect(await priorityIcons.first().evaluate(node => getComputedStyle(node).animationName)).toBe("none");
+});
+
 test("persistent inquiry entry follows desktop and mobile without covering focused fields", async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 1000 });
   await page.emulateMedia({ reducedMotion: "reduce" });

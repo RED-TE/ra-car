@@ -72,11 +72,16 @@
 .public-home .promotion-count b { color:var(--home-ink); }
 .public-home [data-slide-pause] { margin-left:6px; width:32px; height:32px; border-color:transparent; }
 .public-home [data-slide-pause] svg { width:16px; height:16px; }
-.public-home .home-shortcuts { background:#f7f7f7; padding:50px 0 42px; }
+.public-home .home-shortcuts { background:#f7f7f7; padding:50px 0 42px; border-block:1px solid #e8ebf0; }
 .public-home .quick-grid { display:grid; grid-template-columns:repeat(8,minmax(0,1fr)); gap:30px; }
 .public-home .quick-grid a { display:flex; flex-direction:column; align-items:center; gap:14px; text-align:center; font-weight:600; font-size:16px; }
 .public-home .quick-art { display:block; width:100%; max-width:120px; aspect-ratio:1; border-radius:20px; background-color:#fff; background-repeat:no-repeat; background-position:center; background-size:90%; transition:transform .2s; }
 .public-home .quick-grid a:hover .quick-art { transform:translateY(-4px); }
+.public-home .quick-grid a.is-attention .quick-art { animation:home-icon-bounce 3.8s cubic-bezier(.28,.7,.32,1) infinite; will-change:transform; }
+.public-home .quick-grid a.is-attention:nth-child(3) .quick-art { animation-delay:.45s; }
+.public-home .quick-grid a.is-attention:nth-child(8) .quick-art { animation-delay:.9s; }
+.public-home .quick-grid a.is-attention:hover .quick-art { animation:none; transform:translateY(-4px); }
+@keyframes home-icon-bounce { 0%,68%,100% { transform:translateY(0); } 76% { transform:translateY(-7px); } 82% { transform:translateY(0); } 88% { transform:translateY(-3px); } 93% { transform:translateY(0); } }
 .public-home .quick-car { background-image:url('./assets/home-icons/quick-all-vehicles.webp'); }
 .public-home .quick-suv { background-image:url('./assets/home-icons/quick-suv.webp'); }
 .public-home .quick-compare { background-image:url('./assets/home-icons/guide-rent-lease.webp'); }
@@ -85,7 +90,10 @@
 .public-home .quick-faq { background-image:url('./assets/home-icons/quick-faq.webp'); }
 .public-home .quick-crew { background-image:url('./assets/home-icons/quick-crew.webp'); }
 .public-home .quick-quote { background-image:url('./assets/home-icons/quick-quote.webp'); }
-.public-home .home-service-links { display:grid; grid-template-columns:1fr 1fr; gap:30px; padding-block:60px 0; }
+.public-home .home-service-links { position:relative; display:grid; grid-template-columns:1fr 1fr; gap:30px; padding-block:60px 0; }
+.public-home .home-service-links::before,
+.public-home .home-guides::before,
+.public-home .home-business::before { content:""; position:absolute; top:0; left:50%; width:100vw; height:1px; transform:translateX(-50%); background:#e8ebf0; }
 .public-home .service-link { border:1px solid #dce5f4; background:#edf3fc; min-height:228px; border-radius:22px; display:flex; align-items:center; justify-content:space-between; gap:12px; padding:32px; }
 .public-home .service-link h2 { font-size:23px; font-weight:750; line-height:1.4; word-break:keep-all; }
 .public-home .service-link p { margin-top:8px; font-size:16px; line-height:1.55; }
@@ -96,7 +104,9 @@
 .public-home .service-art { flex:none; width:150px; height:150px; background-repeat:no-repeat; background-position:center; background-size:contain; }
 .public-home .art-manager { background-image:url('./assets/home-icons/quick-service.webp'); }
 .public-home .art-bank { background-image:url('./assets/home-icons/quick-quote.webp'); }
-.public-home .home-catalog { padding-block:68px; }
+.public-home .home-catalog { position:relative; isolation:isolate; padding-block:68px; }
+.public-home .home-catalog::before,
+.public-home .home-faq::before { content:""; position:absolute; z-index:-1; inset-block:0; left:50%; width:100vw; transform:translateX(-50%); border-block:1px solid #e8ebf0; background:#fafbfc; }
 .public-home .home-section-heading { display:flex; align-items:center; justify-content:space-between; gap:24px; margin-bottom:32px; }
 .public-home .home-section-heading h2 { font-size:38px; line-height:1.5; font-weight:750; word-break:keep-all; }
 .public-home .home-section-heading p { margin-top:6px; font-size:17px; color:var(--home-muted); }
@@ -172,7 +182,7 @@
 .public-home .collection-note { margin-top:18px; font-size:13px; color:#dadcde; text-align:right; }
 .public-home .home-collection .home-button { border-color:#777; color:white; }
 .public-home .home-collection .home-button:hover { background:#3b3f45; }
-.public-home .home-guides { padding-block:88px; }
+.public-home .home-guides { position:relative; padding-block:88px; }
 .public-home .guide-banner { display:flex; align-items:center; justify-content:space-between; gap:24px; background:#f7f7f7; border-radius:24px; padding:40px 48px; min-height:200px; }
 .public-home .guide-banner h2 { font-size:28px; font-weight:650; color:var(--accent); }
 .public-home .guide-banner p { margin-top:10px; font-size:18px; }
@@ -188,19 +198,19 @@
 .public-home .guide-card p { color:#767676; font-size:14px; }
 .public-home .guide-card:hover { border-color:#a4bdf1; }
 .public-home .guide-label { display:inline-block; padding:3px 10px; border-radius:15px; background:#edf3ff; color:#496da8; font-size:13px; }
-.public-home .home-benefits { padding:72px 0; background:#f7f7f7; }
+.public-home .home-benefits { padding:72px 0; border-block:1px solid #e5e9ef; background:#f5f7fa; }
 .public-home .home-steps { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:24px; }
 .public-home .home-steps article { background:#fff; border:1px solid #ececec; padding:28px; border-radius:8px; min-height:235px; position:relative; }
 .public-home .home-steps article > span { color:#667085; font-size:16px; font-weight:700; }
 .public-home .home-steps .step-icon { display:block; width:84px; height:84px; object-fit:contain; margin:8px 0 12px; }
 .public-home .home-steps h3 { font-size:20px; font-weight:650; margin-bottom:8px; }
 .public-home .home-steps p { font-size:15px; color:#667085; line-height:1.6; word-break:keep-all; }
-.public-home .home-business { display:flex; gap:24px; justify-content:space-between; align-items:center; padding-block:56px; border-bottom:1px solid var(--home-line); }
+.public-home .home-business { position:relative; display:flex; gap:24px; justify-content:space-between; align-items:center; padding-block:56px; border-bottom:1px solid var(--home-line); }
 .public-home .home-business h2 { font-size:28px; margin:6px 0; }
 .public-home .home-business p { max-width:650px; font-size:16px; color:#667085; }
 .public-home .home-business div > p:first-child { font-size:13px; font-weight:700; color:var(--accent); }
 .public-home .home-business .home-button { flex:none; }
-.public-home .home-faq { padding-block:76px; }
+.public-home .home-faq { position:relative; isolation:isolate; padding-block:76px; }
 .public-home .faq-list { display:block; margin:0; border-top:1px solid var(--home-line); }
 .public-home .faq-list details { border:0; border-bottom:1px solid var(--home-line); border-radius:0; padding:0; background:white; scroll-margin-top:110px; }
 .public-home .faq-list summary { font-size:18px; font-weight:550; padding:23px 44px 23px 12px; cursor:pointer; list-style:none; position:relative; }
