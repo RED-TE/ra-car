@@ -16,7 +16,7 @@ test("core comparison controls update the visible structure", async ({ page }) =
   await page.getByRole("button", { name: "기존 5단계", exact: true }).click();
   await expect(page.locator("[data-route-panel='old']")).toBeVisible();
   await expect(page.locator("[data-route-panel='old'] .route-step")).toHaveCount(5);
-  await expect(page.locator("[data-recar-caption]")).toContainText("유통업체, 영업사원, 대리점·딜러");
+  await expect(page.locator("[data-recar-caption]")).toContainText("유통업체와 판매 단계를 거쳐 금융사");
 
   await page.locator("[data-recar-mode='recar']").click();
   await expect(page.locator("[data-route-panel='old']")).toBeHidden();

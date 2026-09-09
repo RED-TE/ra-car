@@ -23,6 +23,21 @@ async function fillForm(page) {
   await page.locator("#termsConsent").check();
 }
 
+test("vehicle data keeps models, brands and body types aligned", async () => {
+  const trailblazer = catalog.items.find(item => item.id === "static-쉐보레트레일블레이저");
+  expect(trailblazer).toMatchObject({ brand: "쉐보레", name: "트레일블레이저" });
+  expect(trailblazer.categories).toContain("suv");
+  expect(trailblazer.imageUrl).toContain("쉐보레/트레일블레이저/model_360.png");
+
+  const shootingBrake = catalog.items.find(item => item.id === "static-제네시스g70슈팅브레이크");
+  expect(shootingBrake).toMatchObject({ brand: "제네시스", name: "G70 슈팅브레이크" });
+  expect(shootingBrake.imageUrl).toContain("제네시스/G70/model_360.png");
+
+  const cla = catalog.items.find(item => item.id === "static-mercedesbenzcla");
+  expect(cla.name).toBe("CLA-Class");
+  expect(cla.imageUrl).toContain("벤츠/CLA-Class/model_360.png");
+});
+
 test("home assets load, reference proportions and actual catalog prices are preserved", async ({ page, request }) => {
   await page.setViewportSize({ width: 1440, height: 1000 });
   for (const file of ["/home.css", "/home.js", "/assets/home-fonts/Pretendard-Regular.woff2", "/assets/home-icons/quick-quote.webp", "/assets/home-icons/guide-rent-lease.webp"]) expect((await request.get(file)).status()).toBe(200);
@@ -84,6 +99,22 @@ test("hero, car rail, guide filters and vehicle inquiry entry work", async ({ pa
   await page.locator('[data-guide="compare"]').click();
   await page.locator('.guide-card[href="#rentGuide"]').click();
   await expect(page.locator("#rentGuide")).toHaveAttribute("open", "");
+});
+
+test("SUV collection uses distinct representative SUV models", async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 1000 });
+  await ready(page);
+  const titles = await page.locator("#suvCollection h3").allTextContents();
+  expect(titles).toHaveLength(12);
+  expect(new Set(titles).size).toBe(titles.length);
+  expect(titles).not.toContain("기아 레이");
+  expect(titles).toContain("쉐보레 트레일블레이저");
+  expect(titles).toContain("현대 디 올 뉴 팰리세이드");
+
+  const floating = page.locator(".home-floating");
+  expect((await floating.boundingBox()).width).toBeLessThanOrEqual(52);
+  await expect(floating.getByRole("link", { name: "카카오톡 상담" })).toHaveCount(1);
+  await expect(floating.getByRole("link", { name: "견적 상담" })).toHaveCount(0);
 });
 
 test("persistent inquiry entry follows desktop and mobile without covering focused fields", async ({ page }) => {

@@ -12,7 +12,7 @@
   "categoryCounts": {
     "all": 136,
     "sedan": 38,
-    "suv": 66,
+    "suv": 67,
     "domestic": 80,
     "imported": 56
   },
@@ -348,7 +348,7 @@
       "id": "static-현대캐스퍼ev",
       "brand": "현대",
       "brandLabel": "현대",
-      "name": "캐스퍼",
+      "name": "캐스퍼 일렉트릭",
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
@@ -457,7 +457,7 @@
       "id": "static-기아셀토스hybrid",
       "brand": "기아",
       "brandLabel": "기아",
-      "name": "셀토스",
+      "name": "셀토스 하이브리드",
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
@@ -637,24 +637,26 @@
       }
     },
     {
-      "id": "static-기아트레일블레이저",
-      "brand": "기아",
-      "brandLabel": "기아",
-      "name": "레이",
+      "id": "static-쉐보레트레일블레이저",
+      "brand": "쉐보레",
+      "brandLabel": "쉐보레",
+      "name": "트레일블레이저",
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
       "monthlyPayment": 448460,
       "monthlyPaymentBeforeLift": 427460,
-      "imageUrl": "./assets/danawa/vehicles/기아/레이/model_360.png",
+      "imageUrl": "./assets/danawa/vehicles/쉐보레/트레일블레이저/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-suv.jpg",
       "categories": [
         "all",
-        "domestic"
+        "domestic",
+        "suv"
       ],
       "categoryRanks": {
         "all": 18,
-        "domestic": 18
+        "domestic": 18,
+        "suv": 5
       },
       "badge": "장기렌트",
       "trimCount": null,
@@ -666,16 +668,16 @@
         "product": "rent"
       },
       "asset": {
-        "colorCount": 7,
-        "galleryCount": 4,
-        "sourceUrl": "https://auto.danawa.com/auto/?Work=model&Model=4689"
+        "colorCount": 0,
+        "galleryCount": 0,
+        "sourceUrl": ""
       }
     },
     {
       "id": "static-기아스포티지hybrid",
       "brand": "기아",
       "brandLabel": "기아",
-      "name": "스포티지",
+      "name": "스포티지 하이브리드",
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
@@ -786,7 +788,7 @@
       "id": "static-현대코나hybrid",
       "brand": "현대",
       "brandLabel": "현대",
-      "name": "코나",
+      "name": "코나 하이브리드",
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
@@ -860,7 +862,7 @@
       "id": "static-현대투싼hybrid",
       "brand": "현대",
       "brandLabel": "현대",
-      "name": "투싼",
+      "name": "투싼 하이브리드",
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
@@ -971,7 +973,7 @@
       "id": "static-kgm토레스hybrid",
       "brand": "KGM",
       "brandLabel": "KGM",
-      "name": "토레스",
+      "name": "토레스 하이브리드",
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
@@ -1119,7 +1121,7 @@
       "id": "static-기아쏘렌토hybrid",
       "brand": "기아",
       "brandLabel": "기아",
-      "name": "쏘렌토",
+      "name": "쏘렌토 하이브리드",
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
@@ -1193,7 +1195,7 @@
       "id": "static-현대싼타페hybrid",
       "brand": "현대",
       "brandLabel": "현대",
-      "name": "싼타페",
+      "name": "싼타페 하이브리드",
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
@@ -1300,7 +1302,7 @@
       "id": "static-기아카니발hybrid",
       "brand": "기아",
       "brandLabel": "기아",
-      "name": "카니발",
+      "name": "카니발 하이브리드",
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
@@ -1555,7 +1557,7 @@
       "id": "static-현대코나ev",
       "brand": "현대",
       "brandLabel": "현대",
-      "name": "코나",
+      "name": "코나 일렉트릭",
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
@@ -2138,17 +2140,17 @@
       }
     },
     {
-      "id": "static-기아g70슈팅브레이크",
-      "brand": "기아",
-      "brandLabel": "기아",
-      "name": "레이",
+      "id": "static-제네시스g70슈팅브레이크",
+      "brand": "제네시스",
+      "brandLabel": "제네시스",
+      "name": "G70 슈팅브레이크",
       "trim": "최저등급",
       "fuel": "리스",
       "year": 2026,
       "monthlyPayment": 675900,
       "monthlyPaymentBeforeLift": 652400,
-      "imageUrl": "./assets/danawa/vehicles/기아/레이/model_360.png",
-      "fallbackImageUrl": "./assets/vehicle-suv.jpg",
+      "imageUrl": "./assets/danawa/vehicles/제네시스/G70/model_360.png",
+      "fallbackImageUrl": "./assets/vehicle-premium.jpg",
       "categories": [
         "all",
         "domestic"
@@ -2167,9 +2169,9 @@
         "product": "lease"
       },
       "asset": {
-        "colorCount": 7,
+        "colorCount": 10,
         "galleryCount": 4,
-        "sourceUrl": "https://auto.danawa.com/auto/?Work=model&Model=4689"
+        "sourceUrl": "https://auto.danawa.com/auto/?Work=model&Model=3995"
       }
     },
     {
@@ -2949,13 +2951,13 @@
       "id": "static-mercedesbenzcla",
       "brand": "Mercedes-Benz",
       "brandLabel": "Mercedes-Benz",
-      "name": "A-Class",
+      "name": "CLA-Class",
       "trim": "최저등급",
       "fuel": "리스",
       "year": 2026,
       "monthlyPayment": 818300,
       "monthlyPaymentBeforeLift": 793300,
-      "imageUrl": "./assets/danawa/vehicles/벤츠/A-Class/model_360.png",
+      "imageUrl": "./assets/danawa/vehicles/벤츠/CLA-Class/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-premium.jpg",
       "categories": [
         "all",
@@ -2977,9 +2979,9 @@
         "product": "lease"
       },
       "asset": {
-        "colorCount": 7,
+        "colorCount": 9,
         "galleryCount": 4,
-        "sourceUrl": "https://auto.danawa.com/auto/?Work=model&Model=4427"
+        "sourceUrl": "https://auto.danawa.com/auto/?Work=model&Model=4461"
       }
     },
     {

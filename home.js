@@ -11,7 +11,7 @@
   const grid = $(".vehicle-grid");
   const state = { items: [], market: "domestic", brand: "all", body: "all", product: "all", query: "", sort: "default", loading: false };
   const domestic = ["현대", "기아", "제네시스", "르노", "KGM", "쉐보레"];
-  const logoBrands = new Set(["현대", "기아", "제네시스", "르노", "KGM", "테슬라", "벤츠", "BMW", "아우디", "볼보", "렉서스", "랜드로버", "미니", "폴스타", "포르쉐", "페라리"]);
+  const logoBrands = new Set(["현대", "기아", "제네시스", "르노", "KGM", "쉐보레", "테슬라", "벤츠", "BMW", "아우디", "볼보", "렉서스", "랜드로버", "미니", "폴스타", "포르쉐", "페라리"]);
   const brandNames = { Renault: "르노", "Mercedes-Benz": "벤츠", Volvo: "볼보", Tesla: "테슬라", Lexus: "렉서스", Audi: "아우디" };
   const brandOf = (item) => brandNames[item.brandLabel || item.brand] || item.brandLabel || item.brand || "";
   const productOf = (item) => item.calculation?.product || (item.fuel === "리스" ? "lease" : "rent");
@@ -89,7 +89,22 @@
   }
 
   function renderCollection() {
-    const items = state.items.filter(item => item.categories?.includes("suv")).slice(0, 12);
+    const featuredIds = [
+      "static-기아셀토스",
+      "static-쉐보레트레일블레이저",
+      "static-기아스포티지",
+      "static-현대투싼",
+      "static-기아쏘렌토",
+      "static-현대싼타페",
+      "static-현대팰리세이드",
+      "static-제네시스gv70",
+      "static-제네시스gv80",
+      "static-teslamodely",
+      "static-volvoxc40",
+      "static-bmwx3"
+    ];
+    const byId = new Map(state.items.filter(item => item.categories?.includes("suv")).map(item => [item.id, item]));
+    const items = featuredIds.map(id => byId.get(id)).filter(Boolean);
     $("#suvCollection").innerHTML = items.length ? items.map(item => `<a class="collection-card" href="#quote" data-home-quote="${escape(nameOf(item))}"><h3>${escape(brandOf(item))} ${escape(item.name)}</h3><p>${escape(item.trim || "세부 조건 상담")}</p><strong>${priceOf(item) ? `<small>월 </small>${priceOf(item)}<small> 원</small>` : '상담 문의'}</strong>${imageOf(item)}<span>견적 문의</span></a>`).join("") : '<p>등록된 SUV 차량이 없습니다. 전체 차량에서 확인해 주세요.</p>';
   }
 
@@ -104,7 +119,7 @@
       // The existing public catalog is already priced. Never derive a new quote in this view.
       let response;
       try {
-        response = await request("./data/vehicle-static-catalog.json?v=20260518-price-down10");
+        response = await request("./data/vehicle-static-catalog.json?v=20260909-catalog-polish");
       } catch { response = null; }
       if (!response?.ok || !Array.isArray(response.data?.items)) {
         response = await request("/api/recar/vehicles?term=60&deposit_pct=0&mileage_limit=10000&page=1&size=100&mode=all");

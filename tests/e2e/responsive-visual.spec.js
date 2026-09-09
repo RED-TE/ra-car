@@ -86,7 +86,9 @@ test("guide links to the canonical crew entry", async ({ page, request }) => {
 
   const crewEntry = await request.get("/crew/");
   expect(crewEntry.status()).toBe(200);
-  expect(await crewEntry.text()).toContain("https://recarplan.vercel.app/crew/login");
+  const crewHtml = await crewEntry.text();
+  expect(crewHtml).toContain("https://recarplan.com/crew");
+  expect(crewHtml).not.toContain("recarplan.vercel.app");
 });
 
 test("core sections and mobile full page are captured", async ({ page }) => {
