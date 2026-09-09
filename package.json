@@ -5,7 +5,7 @@
   "description": "RE:CAR long-term rental and lease homepage",
   "scripts": {
     "start": "node server.js",
-    "check": "node --check server.js && node --check script.js && node --check home.js && node --check crew/guide/knowledge.js && node --check crew/guide/knowledge-data.js",
+    "check": "node --check server.js && node --check script.js && node --check home.js && node --check lib/vehicle-margin.js && node --check tools/update-static-vehicle-margin.cjs && node --check crew/guide/knowledge.js && node --check crew/guide/knowledge-data.js",
     "lint": "eslint home.js crew/guide/knowledge.js crew/guide/knowledge-data.js tests playwright.config.js",
     "typecheck": "tsc -p jsconfig.knowledge.json",
     "test": "node --test tests/server-routes.test.js",

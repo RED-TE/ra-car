@@ -1,6 +1,7 @@
 const { test, expect } = require("@playwright/test");
 const AxeBuilder = require("@axe-core/playwright").default;
 const catalog = require("../../data/vehicle-static-catalog.json");
+const { getStableVehicleMargin, vehicleMarginMax, vehicleMarginMin } = require("../../lib/vehicle-margin");
 
 test.beforeEach(async ({ page }) => {
   // No test can create a production inquiry, even if the legacy Firebase fallback runs.
@@ -24,6 +25,14 @@ async function fillForm(page) {
 }
 
 test("vehicle data keeps models, brands and body types aligned", async () => {
+  for (const item of catalog.items) {
+    const margin = item.calculation.displayMonthlyLift;
+    expect(margin).toBeGreaterThanOrEqual(vehicleMarginMin);
+    expect(margin).toBeLessThanOrEqual(vehicleMarginMax);
+    expect(margin).toBe(getStableVehicleMargin(item.id));
+    expect(item.monthlyPayment - item.monthlyPaymentBeforeLift).toBe(margin);
+  }
+
   const trailblazer = catalog.items.find(item => item.id === "static-쉐보레트레일블레이저");
   expect(trailblazer).toMatchObject({ brand: "쉐보레", name: "트레일블레이저" });
   expect(trailblazer.categories).toContain("suv");
@@ -50,6 +59,13 @@ test("home assets load, reference proportions and actual catalog prices are pres
   await expect(page.locator(".catalog-basis")).toContainText("선납금 0% · 보증금 0%");
   await expect(page.locator(".catalog-basis")).toContainText("10,000km");
   expect(await page.evaluate(() => localStorage.getItem("recar_referral_code"))).toBeNull();
+});
+
+test("full vehicle page uses the same margin-adjusted static catalog", async ({ page }) => {
+  await page.goto("/vehicles.html");
+  const firstVehicle = page.locator(".vehicle-card:not(.is-skeleton)").first();
+  await expect(firstVehicle).toBeVisible();
+  await expect(firstVehicle).toContainText(catalog.items[0].monthlyPayment.toLocaleString("ko-KR"));
 });
 
 test("manufacturer, body, product, search, sorting and empty-state reset work", async ({ page }) => {

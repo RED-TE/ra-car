@@ -3,6 +3,7 @@ const http = require("node:http");
 const path = require("node:path");
 const crypto = require("node:crypto");
 const { URL } = require("node:url");
+const { applyVehicleMargin, getStableVehicleMargin } = require("./lib/vehicle-margin");
 
 const rootDir = __dirname;
 const dataDir = path.join(rootDir, "data");
@@ -21,8 +22,6 @@ const quoteCache = new Map();
 let vehiclePricingCache = null;
 const apiCacheTtlMs = 5 * 60 * 1000;
 const defaultVehicleMileageLimit = 10000;
-const monthlyDisplayLiftMin = 20000;
-const monthlyDisplayLiftMax = 25000;
 const firebaseProjectId = process.env.FIREBASE_PROJECT_ID || "";
 const firebaseApiKey = process.env.FIREBASE_API_KEY || "";
 
@@ -491,25 +490,6 @@ function numberOrNull(value) {
   return Number.isFinite(number) ? number : null;
 }
 
-function getStableMonthlyDisplayLift(seed) {
-  const key = String(seed || "recar-vehicle");
-  const hash = crypto.createHash("sha1").update(key).digest();
-  const step = 100;
-  const range = Math.floor((monthlyDisplayLiftMax - monthlyDisplayLiftMin) / step) + 1;
-  return monthlyDisplayLiftMin + (hash.readUInt32BE(0) % range) * step;
-}
-
-function applyMonthlyDisplayLift(quote, lift) {
-  if (!quote || !Number.isFinite(Number(quote.monthlyPayment))) return quote;
-
-  return {
-    ...quote,
-    monthlyPayment: Math.round(Number(quote.monthlyPayment) + lift),
-    displayMonthlyLift: lift,
-    monthlyPaymentBeforeLift: quote.monthlyPayment,
-  };
-}
-
 function toAbsoluteRecarAsset(assetPath) {
   if (!assetPath) return "";
   if (/^https?:\/\//i.test(assetPath)) return assetPath;
@@ -671,8 +651,8 @@ function createManualVehicle({ id, brand, name, trim, year, segment, fuel, categ
     deposit_pct: String(conditions.deposit_pct ?? conditions.depositPct ?? 0),
     mileage_limit: String(conditions.mileage_limit ?? conditions.mileageLimit ?? defaultVehicleMileageLimit),
   };
-  const monthlyDisplayLift = getStableMonthlyDisplayLift(id || name);
-  const spreadsheetQuote = applyMonthlyDisplayLift(buildSpreadsheetPricingQuote({ name, conditions: queryConditions }), monthlyDisplayLift);
+  const vehicleMargin = getStableVehicleMargin(id || name);
+  const spreadsheetQuote = applyVehicleMargin(buildSpreadsheetPricingQuote({ name, conditions: queryConditions }), vehicleMargin);
   const monthlyPayment = spreadsheetQuote?.monthlyPayment ?? null;
   const normalizedConditions = {
     term: Number(queryConditions.term),
@@ -716,7 +696,7 @@ function createManualVehicle({ id, brand, name, trim, year, segment, fuel, categ
       isSpreadsheetPrice: Boolean(spreadsheetQuote),
       spreadsheetPricing: spreadsheetQuote?.spreadsheetPricing || null,
       quoteSource: spreadsheetQuote?.source || "",
-      displayMonthlyLift: monthlyDisplayLift,
+      displayMonthlyLift: vehicleMargin,
       method: spreadsheetQuote
         ? "엑셀 가격표를 우선 적용하고, 요청 주행거리는 1만km 기준 금액 차이를 선형 보정해 계산합니다."
         : "상담 후 금융사 조건을 확인합니다.",
@@ -1361,8 +1341,8 @@ function createPricingOnlyVehicle(entry, conditions) {
   const segment = inferSpreadsheetVehicleSegment(entry.name);
   const fuel = inferSpreadsheetVehicleFuel(entry.name, brand);
   const vehicleId = makePricingVehicleId(entry);
-  const monthlyDisplayLift = getStableMonthlyDisplayLift(vehicleId);
-  const quote = applyMonthlyDisplayLift(buildSpreadsheetPricingQuote({ name: entry.name, conditions, entry }), monthlyDisplayLift);
+  const vehicleMargin = getStableVehicleMargin(vehicleId);
+  const quote = applyVehicleMargin(buildSpreadsheetPricingQuote({ name: entry.name, conditions, entry }), vehicleMargin);
   if (!quote) return null;
 
   const isImported = brand && !["Hyundai", "Kia", "Genesis", "Renault", "KGM"].includes(brand);
@@ -1414,7 +1394,7 @@ function createPricingOnlyVehicle(entry, conditions) {
       isSpreadsheetPrice: true,
       spreadsheetPricing: quote.spreadsheetPricing,
       quoteSource: quote.source,
-      displayMonthlyLift: monthlyDisplayLift,
+      displayMonthlyLift: vehicleMargin,
       baseMonthlyPaymentBeforeLift: quote.monthlyPaymentBeforeLift ?? null,
       method: "엑셀 가격표를 우선 적용하고, 요청 주행거리는 1만km 기준 금액 차이를 선형 보정해 계산합니다.",
     },
@@ -1548,7 +1528,7 @@ function normalizeVehicle(vehicle, detail, quoteResult, conditions) {
   );
   const year = numberOrNull(source.year || vehicle?.year);
   const vehicleSeed = source.id || vehicle?.id || `${brand}:${name}`;
-  const monthlyDisplayLift = getStableMonthlyDisplayLift(vehicleSeed);
+  const vehicleMargin = getStableVehicleMargin(vehicleSeed);
   const imageUrl = toAbsoluteRecarAsset(
     source.image_url ||
       source.imageUrl ||
@@ -1583,9 +1563,9 @@ function normalizeVehicle(vehicle, detail, quoteResult, conditions) {
         }
       : null;
   const rawBestQuote = spreadsheetQuote || enrichQuoteWithFallbacks(quoteResult?.bestQuote || sourceListQuote || estimatedQuote, estimatedQuote);
-  const bestQuote = applyMonthlyDisplayLift(rawBestQuote, monthlyDisplayLift);
+  const bestQuote = applyVehicleMargin(rawBestQuote, vehicleMargin);
   const apiQuoteList = quoteResult?.quotes?.length
-    ? quoteResult.quotes.map((quote) => applyMonthlyDisplayLift(enrichQuoteWithFallbacks(quote, estimatedQuote), monthlyDisplayLift))
+    ? quoteResult.quotes.map((quote) => applyVehicleMargin(enrichQuoteWithFallbacks(quote, estimatedQuote), vehicleMargin))
     : [];
   const quoteList = spreadsheetQuote
     ? [bestQuote, ...apiQuoteList].slice(0, 8)
@@ -1650,7 +1630,7 @@ function normalizeVehicle(vehicle, detail, quoteResult, conditions) {
       isSpreadsheetPrice: Boolean(spreadsheetQuote),
       spreadsheetPricing: spreadsheetQuote?.spreadsheetPricing || null,
       quoteSource: bestQuote?.source || "",
-      displayMonthlyLift: monthlyDisplayLift,
+      displayMonthlyLift: vehicleMargin,
       baseMonthlyPaymentBeforeLift: bestQuote?.monthlyPaymentBeforeLift ?? null,
       method: bestQuote?.source === "spreadsheet"
         ? "사용자가 제공한 엑셀 가격표의 1만km 기준 월납을 우선 적용하고, 요청 주행거리는 1만km당 선형 가산 방식으로 보정합니다."

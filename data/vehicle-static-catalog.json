@@ -25,7 +25,7 @@
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
-      "monthlyPayment": 289350,
+      "monthlyPayment": 298850,
       "monthlyPaymentBeforeLift": 261850,
       "imageUrl": "./assets/danawa/vehicles/기아/모닝/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-suv.jpg",
@@ -45,7 +45,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 27500,
+        "displayMonthlyLift": 37000,
         "product": "rent"
       },
       "asset": {
@@ -62,7 +62,7 @@
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
-      "monthlyPayment": 299320,
+      "monthlyPayment": 308820,
       "monthlyPaymentBeforeLift": 276820,
       "imageUrl": "./assets/danawa/vehicles/현대/캐스퍼/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-suv.jpg",
@@ -82,7 +82,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 22500,
+        "displayMonthlyLift": 32000,
         "product": "rent"
       },
       "asset": {
@@ -99,7 +99,7 @@
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
-      "monthlyPayment": 300060,
+      "monthlyPayment": 305360,
       "monthlyPaymentBeforeLift": 272560,
       "imageUrl": "./assets/danawa/vehicles/기아/레이/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-suv.jpg",
@@ -117,7 +117,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 27500,
+        "displayMonthlyLift": 32800,
         "product": "rent"
       },
       "asset": {
@@ -134,7 +134,7 @@
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
-      "monthlyPayment": 339250,
+      "monthlyPayment": 353350,
       "monthlyPaymentBeforeLift": 317750,
       "imageUrl": "./assets/danawa/vehicles/현대/아반떼/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-sedan.jpg",
@@ -154,7 +154,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 21500,
+        "displayMonthlyLift": 35600,
         "product": "rent"
       },
       "asset": {
@@ -171,7 +171,7 @@
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
-      "monthlyPayment": 354690,
+      "monthlyPayment": 371690,
       "monthlyPaymentBeforeLift": 333190,
       "imageUrl": "./assets/danawa/vehicles/기아/레이 EV/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-suv.jpg",
@@ -189,7 +189,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 21500,
+        "displayMonthlyLift": 38500,
         "product": "rent"
       },
       "asset": {
@@ -206,7 +206,7 @@
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
-      "monthlyPayment": 363710,
+      "monthlyPayment": 366510,
       "monthlyPaymentBeforeLift": 336210,
       "imageUrl": "./assets/danawa/vehicles/현대/베뉴/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-suv.jpg",
@@ -224,7 +224,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 27500,
+        "displayMonthlyLift": 30300,
         "product": "rent"
       },
       "asset": {
@@ -241,7 +241,7 @@
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
-      "monthlyPayment": 383540,
+      "monthlyPayment": 391940,
       "monthlyPaymentBeforeLift": 359040,
       "imageUrl": "./assets/danawa/vehicles/KGM/티볼리/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-suv.jpg",
@@ -261,7 +261,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 24500,
+        "displayMonthlyLift": 32900,
         "product": "rent"
       },
       "asset": {
@@ -278,7 +278,7 @@
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
-      "monthlyPayment": 385420,
+      "monthlyPayment": 396120,
       "monthlyPaymentBeforeLift": 364920,
       "imageUrl": "./assets/danawa/vehicles/현대/코나/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-suv.jpg",
@@ -298,7 +298,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 20500,
+        "displayMonthlyLift": 31200,
         "product": "rent"
       },
       "asset": {
@@ -315,7 +315,7 @@
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
-      "monthlyPayment": 386960,
+      "monthlyPayment": 405160,
       "monthlyPaymentBeforeLift": 366960,
       "imageUrl": "./assets/danawa/vehicles/기아/셀토스/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-suv.jpg",
@@ -335,7 +335,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 20000,
+        "displayMonthlyLift": 38200,
         "product": "rent"
       },
       "asset": {
@@ -352,7 +352,7 @@
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
-      "monthlyPayment": 387998,
+      "monthlyPayment": 397498,
       "monthlyPaymentBeforeLift": 363498,
       "imageUrl": "./assets/danawa/vehicles/현대/캐스퍼/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-suv.jpg",
@@ -372,7 +372,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 24500,
+        "displayMonthlyLift": 34000,
         "product": "rent"
       },
       "asset": {
@@ -389,7 +389,7 @@
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
-      "monthlyPayment": 396890,
+      "monthlyPayment": 404190,
       "monthlyPaymentBeforeLift": 373890,
       "imageUrl": "./assets/danawa/vehicles/현대/아반떼/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-sedan.jpg",
@@ -409,7 +409,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 23000,
+        "displayMonthlyLift": 30300,
         "product": "rent"
       },
       "asset": {
@@ -426,7 +426,7 @@
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
-      "monthlyPayment": 427900,
+      "monthlyPayment": 439700,
       "monthlyPaymentBeforeLift": 402900,
       "imageUrl": "./assets/danawa/vehicles/르노/아르카나/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-suv.jpg",
@@ -444,7 +444,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 25000,
+        "displayMonthlyLift": 36800,
         "product": "rent"
       },
       "asset": {
@@ -461,7 +461,7 @@
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
-      "monthlyPayment": 428850,
+      "monthlyPayment": 442950,
       "monthlyPaymentBeforeLift": 405350,
       "imageUrl": "./assets/danawa/vehicles/기아/셀토스/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-suv.jpg",
@@ -481,7 +481,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 23500,
+        "displayMonthlyLift": 37600,
         "product": "rent"
       },
       "asset": {
@@ -498,7 +498,7 @@
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
-      "monthlyPayment": 429930,
+      "monthlyPayment": 435830,
       "monthlyPaymentBeforeLift": 404930,
       "imageUrl": "./assets/danawa/vehicles/기아/K5/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-sedan.jpg",
@@ -518,7 +518,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 25000,
+        "displayMonthlyLift": 30900,
         "product": "rent"
       },
       "asset": {
@@ -535,7 +535,7 @@
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
-      "monthlyPayment": 431200,
+      "monthlyPayment": 443300,
       "monthlyPaymentBeforeLift": 406200,
       "imageUrl": "./assets/danawa/vehicles/기아/스포티지/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-suv.jpg",
@@ -555,7 +555,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 25000,
+        "displayMonthlyLift": 37100,
         "product": "rent"
       },
       "asset": {
@@ -572,7 +572,7 @@
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
-      "monthlyPayment": 432730,
+      "monthlyPayment": 439330,
       "monthlyPaymentBeforeLift": 403230,
       "imageUrl": "./assets/danawa/vehicles/현대/투싼/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-suv.jpg",
@@ -592,7 +592,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 29500,
+        "displayMonthlyLift": 36100,
         "product": "rent"
       },
       "asset": {
@@ -609,7 +609,7 @@
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
-      "monthlyPayment": 433780,
+      "monthlyPayment": 444480,
       "monthlyPaymentBeforeLift": 407280,
       "imageUrl": "./assets/danawa/vehicles/기아/EV4/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-suv.jpg",
@@ -627,7 +627,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 26500,
+        "displayMonthlyLift": 37200,
         "product": "rent"
       },
       "asset": {
@@ -644,7 +644,7 @@
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
-      "monthlyPayment": 448460,
+      "monthlyPayment": 464660,
       "monthlyPaymentBeforeLift": 427460,
       "imageUrl": "./assets/danawa/vehicles/쉐보레/트레일블레이저/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-suv.jpg",
@@ -664,7 +664,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 21000,
+        "displayMonthlyLift": 37200,
         "product": "rent"
       },
       "asset": {
@@ -681,7 +681,7 @@
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
-      "monthlyPayment": 457050,
+      "monthlyPayment": 463250,
       "monthlyPaymentBeforeLift": 429550,
       "imageUrl": "./assets/danawa/vehicles/기아/스포티지/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-suv.jpg",
@@ -701,7 +701,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 27500,
+        "displayMonthlyLift": 33700,
         "product": "rent"
       },
       "asset": {
@@ -718,7 +718,7 @@
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
-      "monthlyPayment": 461200,
+      "monthlyPayment": 464400,
       "monthlyPaymentBeforeLift": 432700,
       "imageUrl": "./assets/danawa/vehicles/기아/더 뉴 니로/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-suv.jpg",
@@ -738,7 +738,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 28500,
+        "displayMonthlyLift": 31700,
         "product": "rent"
       },
       "asset": {
@@ -755,7 +755,7 @@
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
-      "monthlyPayment": 463700,
+      "monthlyPayment": 475600,
       "monthlyPaymentBeforeLift": 441200,
       "imageUrl": "./assets/danawa/vehicles/현대/쏘나타 디 엣지/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-sedan.jpg",
@@ -775,7 +775,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 22500,
+        "displayMonthlyLift": 34400,
         "product": "rent"
       },
       "asset": {
@@ -792,7 +792,7 @@
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
-      "monthlyPayment": 464100,
+      "monthlyPayment": 470500,
       "monthlyPaymentBeforeLift": 439100,
       "imageUrl": "./assets/danawa/vehicles/현대/코나/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-suv.jpg",
@@ -812,7 +812,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 25000,
+        "displayMonthlyLift": 31400,
         "product": "rent"
       },
       "asset": {
@@ -829,7 +829,7 @@
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
-      "monthlyPayment": 471260,
+      "monthlyPayment": 472160,
       "monthlyPaymentBeforeLift": 441760,
       "imageUrl": "./assets/danawa/vehicles/KGM/토레스/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-suv.jpg",
@@ -849,7 +849,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 29500,
+        "displayMonthlyLift": 30400,
         "product": "rent"
       },
       "asset": {
@@ -866,7 +866,7 @@
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
-      "monthlyPayment": 471470,
+      "monthlyPayment": 474470,
       "monthlyPaymentBeforeLift": 442970,
       "imageUrl": "./assets/danawa/vehicles/현대/투싼/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-suv.jpg",
@@ -886,7 +886,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 28500,
+        "displayMonthlyLift": 31500,
         "product": "rent"
       },
       "asset": {
@@ -903,7 +903,7 @@
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
-      "monthlyPayment": 485150,
+      "monthlyPayment": 495050,
       "monthlyPaymentBeforeLift": 463650,
       "imageUrl": "./assets/danawa/vehicles/기아/K5/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-sedan.jpg",
@@ -923,7 +923,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 21500,
+        "displayMonthlyLift": 31400,
         "product": "rent"
       },
       "asset": {
@@ -940,7 +940,7 @@
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
-      "monthlyPayment": 490320,
+      "monthlyPayment": 502020,
       "monthlyPaymentBeforeLift": 464320,
       "imageUrl": "./assets/danawa/vehicles/기아/EV3/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-suv.jpg",
@@ -960,7 +960,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 26000,
+        "displayMonthlyLift": 37700,
         "product": "rent"
       },
       "asset": {
@@ -977,7 +977,7 @@
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
-      "monthlyPayment": 504800,
+      "monthlyPayment": 513600,
       "monthlyPaymentBeforeLift": 474800,
       "imageUrl": "./assets/danawa/vehicles/KGM/토레스/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-suv.jpg",
@@ -997,7 +997,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 30000,
+        "displayMonthlyLift": 38800,
         "product": "rent"
       },
       "asset": {
@@ -1014,7 +1014,7 @@
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
-      "monthlyPayment": 507280,
+      "monthlyPayment": 517280,
       "monthlyPaymentBeforeLift": 483280,
       "imageUrl": "./assets/danawa/vehicles/현대/쏘나타 디 엣지/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-sedan.jpg",
@@ -1034,7 +1034,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 24000,
+        "displayMonthlyLift": 34000,
         "product": "rent"
       },
       "asset": {
@@ -1051,7 +1051,7 @@
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
-      "monthlyPayment": 507900,
+      "monthlyPayment": 517600,
       "monthlyPaymentBeforeLift": 482900,
       "imageUrl": "./assets/danawa/vehicles/기아/쏘렌토/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-suv.jpg",
@@ -1071,7 +1071,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 25000,
+        "displayMonthlyLift": 34700,
         "product": "rent"
       },
       "asset": {
@@ -1088,7 +1088,7 @@
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
-      "monthlyPayment": 519430,
+      "monthlyPayment": 535230,
       "monthlyPaymentBeforeLift": 496430,
       "imageUrl": "./assets/danawa/vehicles/현대/싼타페/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-suv.jpg",
@@ -1108,7 +1108,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 23000,
+        "displayMonthlyLift": 38800,
         "product": "rent"
       },
       "asset": {
@@ -1125,7 +1125,7 @@
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
-      "monthlyPayment": 521030,
+      "monthlyPayment": 525430,
       "monthlyPaymentBeforeLift": 492030,
       "imageUrl": "./assets/danawa/vehicles/기아/쏘렌토/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-suv.jpg",
@@ -1145,7 +1145,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 29000,
+        "displayMonthlyLift": 33400,
         "product": "rent"
       },
       "asset": {
@@ -1162,7 +1162,7 @@
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
-      "monthlyPayment": 532940,
+      "monthlyPayment": 542640,
       "monthlyPaymentBeforeLift": 506440,
       "imageUrl": "./assets/danawa/vehicles/기아/카니발/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-suv.jpg",
@@ -1182,7 +1182,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 26500,
+        "displayMonthlyLift": 36200,
         "product": "rent"
       },
       "asset": {
@@ -1199,7 +1199,7 @@
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
-      "monthlyPayment": 542830,
+      "monthlyPayment": 561630,
       "monthlyPaymentBeforeLift": 522830,
       "imageUrl": "./assets/danawa/vehicles/현대/싼타페/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-suv.jpg",
@@ -1219,7 +1219,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 20000,
+        "displayMonthlyLift": 38800,
         "product": "rent"
       },
       "asset": {
@@ -1236,7 +1236,7 @@
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
-      "monthlyPayment": 546110,
+      "monthlyPayment": 549410,
       "monthlyPaymentBeforeLift": 517110,
       "imageUrl": "./assets/danawa/vehicles/KGM/액티언/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-suv.jpg",
@@ -1254,7 +1254,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 29000,
+        "displayMonthlyLift": 32300,
         "product": "rent"
       },
       "asset": {
@@ -1271,7 +1271,7 @@
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
-      "monthlyPayment": 552400,
+      "monthlyPayment": 563900,
       "monthlyPaymentBeforeLift": 528900,
       "imageUrl": "./assets/danawa/vehicles/르노/아르카나/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-suv.jpg",
@@ -1289,7 +1289,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 23500,
+        "displayMonthlyLift": 35000,
         "product": "rent"
       },
       "asset": {
@@ -1306,7 +1306,7 @@
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
-      "monthlyPayment": 561900,
+      "monthlyPayment": 564400,
       "monthlyPaymentBeforeLift": 532400,
       "imageUrl": "./assets/danawa/vehicles/기아/카니발/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-suv.jpg",
@@ -1326,7 +1326,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 29500,
+        "displayMonthlyLift": 32000,
         "product": "rent"
       },
       "asset": {
@@ -1343,7 +1343,7 @@
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
-      "monthlyPayment": 567280,
+      "monthlyPayment": 575480,
       "monthlyPaymentBeforeLift": 544280,
       "imageUrl": "./assets/danawa/vehicles/기아/K8/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-sedan.jpg",
@@ -1363,7 +1363,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 23000,
+        "displayMonthlyLift": 31200,
         "product": "rent"
       },
       "asset": {
@@ -1380,7 +1380,7 @@
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
-      "monthlyPayment": 567300,
+      "monthlyPayment": 570900,
       "monthlyPaymentBeforeLift": 540300,
       "imageUrl": "./assets/danawa/vehicles/기아/EV5/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-suv.jpg",
@@ -1400,7 +1400,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 27000,
+        "displayMonthlyLift": 30600,
         "product": "rent"
       },
       "asset": {
@@ -1417,7 +1417,7 @@
       "trim": "최저등급",
       "fuel": "리스",
       "year": 2026,
-      "monthlyPayment": 568800,
+      "monthlyPayment": 583500,
       "monthlyPaymentBeforeLift": 548300,
       "imageUrl": "./assets/danawa/vehicles/벤츠/A-Class/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-premium.jpg",
@@ -1437,7 +1437,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 20500,
+        "displayMonthlyLift": 35200,
         "product": "lease"
       },
       "asset": {
@@ -1454,7 +1454,7 @@
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
-      "monthlyPayment": 569430,
+      "monthlyPayment": 576130,
       "monthlyPaymentBeforeLift": 542430,
       "imageUrl": "./assets/danawa/vehicles/KGM/액티언/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-suv.jpg",
@@ -1472,7 +1472,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 27000,
+        "displayMonthlyLift": 33700,
         "product": "rent"
       },
       "asset": {
@@ -1489,7 +1489,7 @@
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
-      "monthlyPayment": 571450,
+      "monthlyPayment": 576550,
       "monthlyPaymentBeforeLift": 546450,
       "imageUrl": "./assets/danawa/vehicles/르노/그랑 콜레오스/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-suv.jpg",
@@ -1507,7 +1507,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 25000,
+        "displayMonthlyLift": 30100,
         "product": "rent"
       },
       "asset": {
@@ -1524,7 +1524,7 @@
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
-      "monthlyPayment": 580350,
+      "monthlyPayment": 586450,
       "monthlyPaymentBeforeLift": 553850,
       "imageUrl": "./assets/danawa/vehicles/기아/K8/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-sedan.jpg",
@@ -1544,7 +1544,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 26500,
+        "displayMonthlyLift": 32600,
         "product": "rent"
       },
       "asset": {
@@ -1561,7 +1561,7 @@
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
-      "monthlyPayment": 593000,
+      "monthlyPayment": 603500,
       "monthlyPaymentBeforeLift": 568000,
       "imageUrl": "./assets/danawa/vehicles/현대/코나/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-suv.jpg",
@@ -1581,7 +1581,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 25000,
+        "displayMonthlyLift": 35500,
         "product": "rent"
       },
       "asset": {
@@ -1598,7 +1598,7 @@
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
-      "monthlyPayment": 596800,
+      "monthlyPayment": 607000,
       "monthlyPaymentBeforeLift": 575300,
       "imageUrl": "./assets/danawa/vehicles/현대/스타리아/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-suv.jpg",
@@ -1618,7 +1618,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 21500,
+        "displayMonthlyLift": 31700,
         "product": "rent"
       },
       "asset": {
@@ -1635,7 +1635,7 @@
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
-      "monthlyPayment": 597340,
+      "monthlyPayment": 608440,
       "monthlyPaymentBeforeLift": 576840,
       "imageUrl": "./assets/danawa/vehicles/현대/스타리아/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-suv.jpg",
@@ -1655,7 +1655,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 20500,
+        "displayMonthlyLift": 31600,
         "product": "rent"
       },
       "asset": {
@@ -1672,7 +1672,7 @@
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
-      "monthlyPayment": 597410,
+      "monthlyPayment": 609510,
       "monthlyPaymentBeforeLift": 569910,
       "imageUrl": "./assets/danawa/vehicles/기아/EV6/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-suv.jpg",
@@ -1692,7 +1692,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 27500,
+        "displayMonthlyLift": 39600,
         "product": "rent"
       },
       "asset": {
@@ -1709,7 +1709,7 @@
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
-      "monthlyPayment": 600180,
+      "monthlyPayment": 603980,
       "monthlyPaymentBeforeLift": 570680,
       "imageUrl": "./assets/danawa/vehicles/르노/그랑 콜레오스/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-suv.jpg",
@@ -1727,7 +1727,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 29500,
+        "displayMonthlyLift": 33300,
         "product": "rent"
       },
       "asset": {
@@ -1744,7 +1744,7 @@
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
-      "monthlyPayment": 608900,
+      "monthlyPayment": 625100,
       "monthlyPaymentBeforeLift": 587400,
       "imageUrl": "./assets/danawa/vehicles/현대/그랜저/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-sedan.jpg",
@@ -1764,7 +1764,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 21500,
+        "displayMonthlyLift": 37700,
         "product": "rent"
       },
       "asset": {
@@ -1781,7 +1781,7 @@
       "trim": "최저등급",
       "fuel": "리스",
       "year": 2026,
-      "monthlyPayment": 612300,
+      "monthlyPayment": 624200,
       "monthlyPaymentBeforeLift": 587300,
       "imageUrl": "./assets/danawa/vehicles/BMW/1 Series/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-premium.jpg",
@@ -1801,7 +1801,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 25000,
+        "displayMonthlyLift": 36900,
         "product": "lease"
       },
       "asset": {
@@ -1818,7 +1818,7 @@
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
-      "monthlyPayment": 620590,
+      "monthlyPayment": 622390,
       "monthlyPaymentBeforeLift": 590590,
       "imageUrl": "./assets/danawa/vehicles/현대/그랜저/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-sedan.jpg",
@@ -1838,7 +1838,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 30000,
+        "displayMonthlyLift": 31800,
         "product": "rent"
       },
       "asset": {
@@ -1855,7 +1855,7 @@
       "trim": "최저등급",
       "fuel": "리스",
       "year": 2026,
-      "monthlyPayment": 623763,
+      "monthlyPayment": 631763,
       "monthlyPaymentBeforeLift": 598263,
       "imageUrl": "./assets/danawa/vehicles/BMW/2 Series/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-premium.jpg",
@@ -1875,7 +1875,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 25500,
+        "displayMonthlyLift": 33500,
         "product": "lease"
       },
       "asset": {
@@ -1892,7 +1892,7 @@
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
-      "monthlyPayment": 626130,
+      "monthlyPayment": 635730,
       "monthlyPaymentBeforeLift": 603130,
       "imageUrl": "./assets/danawa/vehicles/현대/디 올 뉴 팰리세이드/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-suv.jpg",
@@ -1912,7 +1912,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 23000,
+        "displayMonthlyLift": 32600,
         "product": "rent"
       },
       "asset": {
@@ -1929,7 +1929,7 @@
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
-      "monthlyPayment": 656900,
+      "monthlyPayment": 660900,
       "monthlyPaymentBeforeLift": 629900,
       "imageUrl": "./assets/danawa/vehicles/현대/아이오닉 5/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-suv.jpg",
@@ -1949,7 +1949,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 27000,
+        "displayMonthlyLift": 31000,
         "product": "rent"
       },
       "asset": {
@@ -1966,7 +1966,7 @@
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
-      "monthlyPayment": 662440,
+      "monthlyPayment": 677940,
       "monthlyPaymentBeforeLift": 641940,
       "imageUrl": "./assets/danawa/vehicles/기아/PV5/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-suv.jpg",
@@ -1984,7 +1984,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 20500,
+        "displayMonthlyLift": 36000,
         "product": "rent"
       },
       "asset": {
@@ -2001,7 +2001,7 @@
       "trim": "최저등급",
       "fuel": "리스",
       "year": 2026,
-      "monthlyPayment": 664300,
+      "monthlyPayment": 669100,
       "monthlyPaymentBeforeLift": 638800,
       "imageUrl": "./assets/danawa/vehicles/볼보/EX30/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-suv.jpg",
@@ -2021,7 +2021,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 25500,
+        "displayMonthlyLift": 30300,
         "product": "lease"
       },
       "asset": {
@@ -2038,7 +2038,7 @@
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
-      "monthlyPayment": 665700,
+      "monthlyPayment": 671300,
       "monthlyPaymentBeforeLift": 638200,
       "imageUrl": "./assets/danawa/vehicles/현대/더 뉴 아이오닉 6/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-suv.jpg",
@@ -2056,7 +2056,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 27500,
+        "displayMonthlyLift": 33100,
         "product": "rent"
       },
       "asset": {
@@ -2073,7 +2073,7 @@
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
-      "monthlyPayment": 666800,
+      "monthlyPayment": 673200,
       "monthlyPaymentBeforeLift": 641300,
       "imageUrl": "./assets/danawa/vehicles/KGM/렉스턴 뉴 아레나/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-suv.jpg",
@@ -2093,7 +2093,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 25500,
+        "displayMonthlyLift": 31900,
         "product": "rent"
       },
       "asset": {
@@ -2110,7 +2110,7 @@
       "trim": "최저등급",
       "fuel": "리스",
       "year": 2026,
-      "monthlyPayment": 672800,
+      "monthlyPayment": 679500,
       "monthlyPaymentBeforeLift": 646800,
       "imageUrl": "./assets/danawa/vehicles/BMW/3 Series/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-premium.jpg",
@@ -2130,7 +2130,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 26000,
+        "displayMonthlyLift": 32700,
         "product": "lease"
       },
       "asset": {
@@ -2147,7 +2147,7 @@
       "trim": "최저등급",
       "fuel": "리스",
       "year": 2026,
-      "monthlyPayment": 675900,
+      "monthlyPayment": 684300,
       "monthlyPaymentBeforeLift": 652400,
       "imageUrl": "./assets/danawa/vehicles/제네시스/G70/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-premium.jpg",
@@ -2165,7 +2165,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 23500,
+        "displayMonthlyLift": 31900,
         "product": "lease"
       },
       "asset": {
@@ -2182,7 +2182,7 @@
       "trim": "최저등급",
       "fuel": "리스",
       "year": 2026,
-      "monthlyPayment": 676800,
+      "monthlyPayment": 689700,
       "monthlyPaymentBeforeLift": 651800,
       "imageUrl": "./assets/danawa/vehicles/BMW/iX1/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-suv.jpg",
@@ -2202,7 +2202,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 25000,
+        "displayMonthlyLift": 37900,
         "product": "lease"
       },
       "asset": {
@@ -2219,7 +2219,7 @@
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
-      "monthlyPayment": 676900,
+      "monthlyPayment": 685100,
       "monthlyPaymentBeforeLift": 647900,
       "imageUrl": "./assets/danawa/vehicles/현대/디 올 뉴 팰리세이드/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-suv.jpg",
@@ -2239,7 +2239,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 29000,
+        "displayMonthlyLift": 37200,
         "product": "rent"
       },
       "asset": {
@@ -2256,7 +2256,7 @@
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
-      "monthlyPayment": 683100,
+      "monthlyPayment": 694000,
       "monthlyPaymentBeforeLift": 658100,
       "imageUrl": "./assets/danawa/vehicles/현대/스타리아/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-suv.jpg",
@@ -2276,7 +2276,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 25000,
+        "displayMonthlyLift": 35900,
         "product": "rent"
       },
       "asset": {
@@ -2293,7 +2293,7 @@
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
-      "monthlyPayment": 692370,
+      "monthlyPayment": 704470,
       "monthlyPaymentBeforeLift": 667370,
       "imageUrl": "./assets/danawa/vehicles/테슬라/Model 3/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-premium.jpg",
@@ -2313,7 +2313,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 25000,
+        "displayMonthlyLift": 37100,
         "product": "rent"
       },
       "asset": {
@@ -2330,7 +2330,7 @@
       "trim": "최저등급",
       "fuel": "리스",
       "year": 2026,
-      "monthlyPayment": 696500,
+      "monthlyPayment": 706100,
       "monthlyPaymentBeforeLift": 671500,
       "imageUrl": "./assets/danawa/vehicles/BMW/X1/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-suv.jpg",
@@ -2350,7 +2350,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 25000,
+        "displayMonthlyLift": 34600,
         "product": "lease"
       },
       "asset": {
@@ -2367,7 +2367,7 @@
       "trim": "최저등급",
       "fuel": "리스",
       "year": 2026,
-      "monthlyPayment": 708100,
+      "monthlyPayment": 716900,
       "monthlyPaymentBeforeLift": 683600,
       "imageUrl": "./assets/danawa/vehicles/렉서스/UX/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-premium.jpg",
@@ -2385,7 +2385,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 24500,
+        "displayMonthlyLift": 33300,
         "product": "lease"
       },
       "asset": {
@@ -2402,7 +2402,7 @@
       "trim": "최저등급",
       "fuel": "리스",
       "year": 2026,
-      "monthlyPayment": 708700,
+      "monthlyPayment": 717400,
       "monthlyPaymentBeforeLift": 683200,
       "imageUrl": "./assets/danawa/vehicles/BMW/iX2/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-suv.jpg",
@@ -2422,7 +2422,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 25500,
+        "displayMonthlyLift": 34200,
         "product": "lease"
       },
       "asset": {
@@ -2439,7 +2439,7 @@
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
-      "monthlyPayment": 721100,
+      "monthlyPayment": 725300,
       "monthlyPaymentBeforeLift": 691100,
       "imageUrl": "./assets/danawa/vehicles/제네시스/G70/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-sedan.jpg",
@@ -2459,7 +2459,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 30000,
+        "displayMonthlyLift": 34200,
         "product": "rent"
       },
       "asset": {
@@ -2476,7 +2476,7 @@
       "trim": "최저등급",
       "fuel": "리스",
       "year": 2026,
-      "monthlyPayment": 724400,
+      "monthlyPayment": 729100,
       "monthlyPaymentBeforeLift": 696400,
       "imageUrl": "./assets/danawa/vehicles/볼보/XC40/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-suv.jpg",
@@ -2496,7 +2496,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 28000,
+        "displayMonthlyLift": 32700,
         "product": "lease"
       },
       "asset": {
@@ -2513,7 +2513,7 @@
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
-      "monthlyPayment": 725100,
+      "monthlyPayment": 736600,
       "monthlyPaymentBeforeLift": 702100,
       "imageUrl": "./assets/danawa/vehicles/현대/스타리아/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-suv.jpg",
@@ -2533,7 +2533,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 23000,
+        "displayMonthlyLift": 34500,
         "product": "rent"
       },
       "asset": {
@@ -2550,7 +2550,7 @@
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
-      "monthlyPayment": 737500,
+      "monthlyPayment": 753300,
       "monthlyPaymentBeforeLift": 717000,
       "imageUrl": "./assets/danawa/vehicles/르노/필랑트/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-suv.jpg",
@@ -2568,7 +2568,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 20500,
+        "displayMonthlyLift": 36300,
         "product": "rent"
       },
       "asset": {
@@ -2585,7 +2585,7 @@
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
-      "monthlyPayment": 741340,
+      "monthlyPayment": 754240,
       "monthlyPaymentBeforeLift": 719840,
       "imageUrl": "./assets/danawa/vehicles/제네시스/GV70/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-suv.jpg",
@@ -2605,7 +2605,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 21500,
+        "displayMonthlyLift": 34400,
         "product": "rent"
       },
       "asset": {
@@ -2622,7 +2622,7 @@
       "trim": "최저등급",
       "fuel": "리스",
       "year": 2026,
-      "monthlyPayment": 782900,
+      "monthlyPayment": 793700,
       "monthlyPaymentBeforeLift": 759900,
       "imageUrl": "./assets/danawa/vehicles/벤츠/C-Class/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-premium.jpg",
@@ -2642,7 +2642,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 23000,
+        "displayMonthlyLift": 33800,
         "product": "lease"
       },
       "asset": {
@@ -2659,7 +2659,7 @@
       "trim": "최저등급",
       "fuel": "리스",
       "year": 2026,
-      "monthlyPayment": 785800,
+      "monthlyPayment": 789000,
       "monthlyPaymentBeforeLift": 758800,
       "imageUrl": "./assets/danawa/vehicles/BMW/5 Series/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-premium.jpg",
@@ -2679,7 +2679,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 27000,
+        "displayMonthlyLift": 30200,
         "product": "lease"
       },
       "asset": {
@@ -2696,7 +2696,7 @@
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
-      "monthlyPayment": 787720,
+      "monthlyPayment": 789220,
       "monthlyPaymentBeforeLift": 759220,
       "imageUrl": "./assets/danawa/vehicles/테슬라/Model Y/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-suv.jpg",
@@ -2716,7 +2716,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 28500,
+        "displayMonthlyLift": 30000,
         "product": "rent"
       },
       "asset": {
@@ -2733,7 +2733,7 @@
       "trim": "최저등급",
       "fuel": "리스",
       "year": 2026,
-      "monthlyPayment": 791600,
+      "monthlyPayment": 803300,
       "monthlyPaymentBeforeLift": 766100,
       "imageUrl": "./assets/danawa/vehicles/BMW/X2/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-suv.jpg",
@@ -2753,7 +2753,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 25500,
+        "displayMonthlyLift": 37200,
         "product": "lease"
       },
       "asset": {
@@ -2770,7 +2770,7 @@
       "trim": "최저등급",
       "fuel": "리스",
       "year": 2026,
-      "monthlyPayment": 801201,
+      "monthlyPayment": 811601,
       "monthlyPaymentBeforeLift": 774701,
       "imageUrl": "./assets/danawa/vehicles/BMW/4 Series/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-premium.jpg",
@@ -2790,7 +2790,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 26500,
+        "displayMonthlyLift": 36900,
         "product": "lease"
       },
       "asset": {
@@ -2807,7 +2807,7 @@
       "trim": "최저등급",
       "fuel": "리스",
       "year": 2026,
-      "monthlyPayment": 801700,
+      "monthlyPayment": 810900,
       "monthlyPaymentBeforeLift": 776200,
       "imageUrl": "./assets/danawa/vehicles/벤츠/E-Class/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-premium.jpg",
@@ -2827,7 +2827,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 25500,
+        "displayMonthlyLift": 34700,
         "product": "lease"
       },
       "asset": {
@@ -2844,7 +2844,7 @@
       "trim": "최저등급",
       "fuel": "리스",
       "year": 2026,
-      "monthlyPayment": 804400,
+      "monthlyPayment": 818300,
       "monthlyPaymentBeforeLift": 778400,
       "imageUrl": "./assets/danawa/vehicles/BMW/X3/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-suv.jpg",
@@ -2864,7 +2864,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 26000,
+        "displayMonthlyLift": 39900,
         "product": "lease"
       },
       "asset": {
@@ -2881,7 +2881,7 @@
       "trim": "최저등급",
       "fuel": "리스",
       "year": 2026,
-      "monthlyPayment": 804562,
+      "monthlyPayment": 819262,
       "monthlyPaymentBeforeLift": 782062,
       "imageUrl": "./assets/danawa/vehicles/볼보/EX30 CC/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-suv.jpg",
@@ -2901,7 +2901,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 22500,
+        "displayMonthlyLift": 37200,
         "product": "lease"
       },
       "asset": {
@@ -2918,7 +2918,7 @@
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
-      "monthlyPayment": 815200,
+      "monthlyPayment": 830000,
       "monthlyPaymentBeforeLift": 790700,
       "imageUrl": "./assets/danawa/vehicles/제네시스/G80/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-sedan.jpg",
@@ -2938,7 +2938,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 24500,
+        "displayMonthlyLift": 39300,
         "product": "rent"
       },
       "asset": {
@@ -2955,7 +2955,7 @@
       "trim": "최저등급",
       "fuel": "리스",
       "year": 2026,
-      "monthlyPayment": 818300,
+      "monthlyPayment": 828600,
       "monthlyPaymentBeforeLift": 793300,
       "imageUrl": "./assets/danawa/vehicles/벤츠/CLA-Class/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-premium.jpg",
@@ -2975,7 +2975,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 25000,
+        "displayMonthlyLift": 35300,
         "product": "lease"
       },
       "asset": {
@@ -2992,7 +2992,7 @@
       "trim": "최저등급",
       "fuel": "리스",
       "year": 2026,
-      "monthlyPayment": 830900,
+      "monthlyPayment": 839500,
       "monthlyPaymentBeforeLift": 804900,
       "imageUrl": "./assets/danawa/vehicles/렉서스/ES/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-premium.jpg",
@@ -3010,7 +3010,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 26000,
+        "displayMonthlyLift": 34600,
         "product": "lease"
       },
       "asset": {
@@ -3027,7 +3027,7 @@
       "trim": "최저등급",
       "fuel": "리스",
       "year": 2026,
-      "monthlyPayment": 834300,
+      "monthlyPayment": 842900,
       "monthlyPaymentBeforeLift": 808300,
       "imageUrl": "./assets/danawa/vehicles/벤츠/GLB-Class/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-suv.jpg",
@@ -3047,7 +3047,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 26000,
+        "displayMonthlyLift": 34600,
         "product": "lease"
       },
       "asset": {
@@ -3064,7 +3064,7 @@
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
-      "monthlyPayment": 839800,
+      "monthlyPayment": 849800,
       "monthlyPaymentBeforeLift": 810800,
       "imageUrl": "./assets/danawa/vehicles/기아/EV9/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-suv.jpg",
@@ -3084,7 +3084,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 29000,
+        "displayMonthlyLift": 39000,
         "product": "rent"
       },
       "asset": {
@@ -3101,7 +3101,7 @@
       "trim": "최저등급",
       "fuel": "리스",
       "year": 2026,
-      "monthlyPayment": 852700,
+      "monthlyPayment": 865300,
       "monthlyPaymentBeforeLift": 828700,
       "imageUrl": "./assets/danawa/vehicles/벤츠/EQA/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-premium.jpg",
@@ -3119,7 +3119,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 24000,
+        "displayMonthlyLift": 36600,
         "product": "lease"
       },
       "asset": {
@@ -3136,7 +3136,7 @@
       "trim": "최저등급",
       "fuel": "리스",
       "year": 2026,
-      "monthlyPayment": 874366,
+      "monthlyPayment": 886166,
       "monthlyPaymentBeforeLift": 848866,
       "imageUrl": "./assets/danawa/vehicles/벤츠/GLA-Class/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-suv.jpg",
@@ -3158,7 +3158,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 25500,
+        "displayMonthlyLift": 37300,
         "product": "lease"
       },
       "asset": {
@@ -3175,7 +3175,7 @@
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
-      "monthlyPayment": 881530,
+      "monthlyPayment": 894130,
       "monthlyPaymentBeforeLift": 856030,
       "imageUrl": "./assets/danawa/vehicles/기아/카니발/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-suv.jpg",
@@ -3195,7 +3195,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 25500,
+        "displayMonthlyLift": 38100,
         "product": "rent"
       },
       "asset": {
@@ -3212,7 +3212,7 @@
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
-      "monthlyPayment": 887000,
+      "monthlyPayment": 897100,
       "monthlyPaymentBeforeLift": 860000,
       "imageUrl": "./assets/danawa/vehicles/제네시스/GV60/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-suv.jpg",
@@ -3232,7 +3232,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 27000,
+        "displayMonthlyLift": 37100,
         "product": "rent"
       },
       "asset": {
@@ -3249,7 +3249,7 @@
       "trim": "최저등급",
       "fuel": "리스",
       "year": 2026,
-      "monthlyPayment": 894200,
+      "monthlyPayment": 907200,
       "monthlyPaymentBeforeLift": 869200,
       "imageUrl": "./assets/danawa/vehicles/BMW/i4/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-premium.jpg",
@@ -3269,7 +3269,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 25000,
+        "displayMonthlyLift": 38000,
         "product": "lease"
       },
       "asset": {
@@ -3286,7 +3286,7 @@
       "trim": "최저등급",
       "fuel": "리스",
       "year": 2026,
-      "monthlyPayment": 899700,
+      "monthlyPayment": 913300,
       "monthlyPaymentBeforeLift": 878700,
       "imageUrl": "./assets/danawa/vehicles/렉서스/NX/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-premium.jpg",
@@ -3304,7 +3304,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 21000,
+        "displayMonthlyLift": 34600,
         "product": "lease"
       },
       "asset": {
@@ -3321,7 +3321,7 @@
       "trim": "최저등급",
       "fuel": "리스",
       "year": 2026,
-      "monthlyPayment": 900500,
+      "monthlyPayment": 905200,
       "monthlyPaymentBeforeLift": 872500,
       "imageUrl": "./assets/danawa/vehicles/아우디/A6/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-premium.jpg",
@@ -3341,7 +3341,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 28000,
+        "displayMonthlyLift": 32700,
         "product": "lease"
       },
       "asset": {
@@ -3358,7 +3358,7 @@
       "trim": "최저등급",
       "fuel": "리스",
       "year": 2026,
-      "monthlyPayment": 908500,
+      "monthlyPayment": 917900,
       "monthlyPaymentBeforeLift": 881000,
       "imageUrl": "./assets/danawa/vehicles/볼보/XC60/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-suv.jpg",
@@ -3378,7 +3378,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 27500,
+        "displayMonthlyLift": 36900,
         "product": "lease"
       },
       "asset": {
@@ -3395,7 +3395,7 @@
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
-      "monthlyPayment": 909500,
+      "monthlyPayment": 915300,
       "monthlyPaymentBeforeLift": 880500,
       "imageUrl": "./assets/danawa/vehicles/현대/아이오닉 9/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-suv.jpg",
@@ -3415,7 +3415,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 29000,
+        "displayMonthlyLift": 34800,
         "product": "rent"
       },
       "asset": {
@@ -3432,7 +3432,7 @@
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
-      "monthlyPayment": 910020,
+      "monthlyPayment": 913520,
       "monthlyPaymentBeforeLift": 883520,
       "imageUrl": "./assets/danawa/vehicles/제네시스/GV80/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-suv.jpg",
@@ -3452,7 +3452,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 26500,
+        "displayMonthlyLift": 30000,
         "product": "rent"
       },
       "asset": {
@@ -3469,7 +3469,7 @@
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
-      "monthlyPayment": 915257,
+      "monthlyPayment": 918357,
       "monthlyPaymentBeforeLift": 886757,
       "imageUrl": "./assets/danawa/vehicles/기아/카니발/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-suv.jpg",
@@ -3489,7 +3489,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 28500,
+        "displayMonthlyLift": 31600,
         "product": "rent"
       },
       "asset": {
@@ -3506,7 +3506,7 @@
       "trim": "최저등급",
       "fuel": "리스",
       "year": 2026,
-      "monthlyPayment": 936900,
+      "monthlyPayment": 948800,
       "monthlyPaymentBeforeLift": 916400,
       "imageUrl": "./assets/danawa/vehicles/볼보/S90/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-premium.jpg",
@@ -3524,7 +3524,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 20500,
+        "displayMonthlyLift": 32400,
         "product": "lease"
       },
       "asset": {
@@ -3541,7 +3541,7 @@
       "trim": "최저등급",
       "fuel": "리스",
       "year": 2026,
-      "monthlyPayment": 948500,
+      "monthlyPayment": 953600,
       "monthlyPaymentBeforeLift": 921500,
       "imageUrl": "./assets/danawa/vehicles/벤츠/CLE/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-premium.jpg",
@@ -3559,7 +3559,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 27000,
+        "displayMonthlyLift": 32100,
         "product": "lease"
       },
       "asset": {
@@ -3576,7 +3576,7 @@
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
-      "monthlyPayment": 956100,
+      "monthlyPayment": 964000,
       "monthlyPaymentBeforeLift": 929100,
       "imageUrl": "./assets/danawa/vehicles/기아/K9/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-sedan.jpg",
@@ -3596,7 +3596,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 27000,
+        "displayMonthlyLift": 34900,
         "product": "rent"
       },
       "asset": {
@@ -3613,7 +3613,7 @@
       "trim": "최저등급",
       "fuel": "리스",
       "year": 2026,
-      "monthlyPayment": 967500,
+      "monthlyPayment": 978900,
       "monthlyPaymentBeforeLift": 942000,
       "imageUrl": "./assets/danawa/vehicles/BMW/i5/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-premium.jpg",
@@ -3633,7 +3633,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 25500,
+        "displayMonthlyLift": 36900,
         "product": "lease"
       },
       "asset": {
@@ -3650,7 +3650,7 @@
       "trim": "최저등급",
       "fuel": "리스",
       "year": 2026,
-      "monthlyPayment": 976700,
+      "monthlyPayment": 991300,
       "monthlyPaymentBeforeLift": 952200,
       "imageUrl": "./assets/danawa/vehicles/벤츠/EQB/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-premium.jpg",
@@ -3668,7 +3668,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 24500,
+        "displayMonthlyLift": 39100,
         "product": "lease"
       },
       "asset": {
@@ -3685,7 +3685,7 @@
       "trim": "최저등급",
       "fuel": "리스",
       "year": 2026,
-      "monthlyPayment": 985000,
+      "monthlyPayment": 993700,
       "monthlyPaymentBeforeLift": 958500,
       "imageUrl": "./assets/danawa/vehicles/벤츠/GLC-Class/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-suv.jpg",
@@ -3707,7 +3707,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 26500,
+        "displayMonthlyLift": 35200,
         "product": "lease"
       },
       "asset": {
@@ -3724,7 +3724,7 @@
       "trim": "최저등급",
       "fuel": "리스",
       "year": 2026,
-      "monthlyPayment": 994800,
+      "monthlyPayment": 1008500,
       "monthlyPaymentBeforeLift": 968800,
       "imageUrl": "./assets/danawa/vehicles/BMW/Z4/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-premium.jpg",
@@ -3742,7 +3742,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 26000,
+        "displayMonthlyLift": 39700,
         "product": "lease"
       },
       "asset": {
@@ -3759,7 +3759,7 @@
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
-      "monthlyPayment": 1039240,
+      "monthlyPayment": 1042140,
       "monthlyPaymentBeforeLift": 1010240,
       "imageUrl": "./assets/danawa/vehicles/테슬라/Model Y/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-suv.jpg",
@@ -3779,7 +3779,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 29000,
+        "displayMonthlyLift": 31900,
         "product": "rent"
       },
       "asset": {
@@ -3796,7 +3796,7 @@
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
-      "monthlyPayment": 1046440,
+      "monthlyPayment": 1061540,
       "monthlyPaymentBeforeLift": 1023440,
       "imageUrl": "./assets/danawa/vehicles/제네시스/GV80/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-suv.jpg",
@@ -3816,7 +3816,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 23000,
+        "displayMonthlyLift": 38100,
         "product": "rent"
       },
       "asset": {
@@ -3833,7 +3833,7 @@
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
-      "monthlyPayment": 1062000,
+      "monthlyPayment": 1079700,
       "monthlyPaymentBeforeLift": 1042000,
       "imageUrl": "./assets/danawa/vehicles/제네시스/GV70/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-suv.jpg",
@@ -3853,7 +3853,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 20000,
+        "displayMonthlyLift": 37700,
         "product": "rent"
       },
       "asset": {
@@ -3870,7 +3870,7 @@
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
-      "monthlyPayment": 1119500,
+      "monthlyPayment": 1134600,
       "monthlyPaymentBeforeLift": 1095000,
       "imageUrl": "./assets/danawa/vehicles/제네시스/G80/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-sedan.jpg",
@@ -3890,7 +3890,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 24500,
+        "displayMonthlyLift": 39600,
         "product": "rent"
       },
       "asset": {
@@ -3907,7 +3907,7 @@
       "trim": "최저등급",
       "fuel": "리스",
       "year": 2026,
-      "monthlyPayment": 1144600,
+      "monthlyPayment": 1157700,
       "monthlyPaymentBeforeLift": 1124600,
       "imageUrl": "./assets/danawa/vehicles/렉서스/RX/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-premium.jpg",
@@ -3925,7 +3925,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 20000,
+        "displayMonthlyLift": 33100,
         "product": "lease"
       },
       "asset": {
@@ -3942,7 +3942,7 @@
       "trim": "최저등급",
       "fuel": "리스",
       "year": 2026,
-      "monthlyPayment": 1170000,
+      "monthlyPayment": 1188000,
       "monthlyPaymentBeforeLift": 1148500,
       "imageUrl": "./assets/danawa/vehicles/볼보/XC90/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-suv.jpg",
@@ -3962,7 +3962,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 21500,
+        "displayMonthlyLift": 39500,
         "product": "lease"
       },
       "asset": {
@@ -3979,7 +3979,7 @@
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
-      "monthlyPayment": 1191000,
+      "monthlyPayment": 1197600,
       "monthlyPaymentBeforeLift": 1165000,
       "imageUrl": "./assets/danawa/vehicles/제네시스/G80/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-sedan.jpg",
@@ -3999,7 +3999,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 26000,
+        "displayMonthlyLift": 32600,
         "product": "rent"
       },
       "asset": {
@@ -4016,7 +4016,7 @@
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
-      "monthlyPayment": 1220920,
+      "monthlyPayment": 1230920,
       "monthlyPaymentBeforeLift": 1195920,
       "imageUrl": "./assets/danawa/vehicles/제네시스/GV80/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-suv.jpg",
@@ -4036,7 +4036,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 25000,
+        "displayMonthlyLift": 35000,
         "product": "rent"
       },
       "asset": {
@@ -4053,7 +4053,7 @@
       "trim": "최저등급",
       "fuel": "리스",
       "year": 2026,
-      "monthlyPayment": 1252300,
+      "monthlyPayment": 1259900,
       "monthlyPaymentBeforeLift": 1229300,
       "imageUrl": "./assets/danawa/vehicles/BMW/M2/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-premium.jpg",
@@ -4071,7 +4071,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 23000,
+        "displayMonthlyLift": 30600,
         "product": "lease"
       },
       "asset": {
@@ -4088,7 +4088,7 @@
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
-      "monthlyPayment": 1272400,
+      "monthlyPayment": 1278700,
       "monthlyPaymentBeforeLift": 1243400,
       "imageUrl": "./assets/danawa/vehicles/제네시스/GV80/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-suv.jpg",
@@ -4108,7 +4108,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 29000,
+        "displayMonthlyLift": 35300,
         "product": "rent"
       },
       "asset": {
@@ -4125,7 +4125,7 @@
       "trim": "최저등급",
       "fuel": "리스",
       "year": 2026,
-      "monthlyPayment": 1339500,
+      "monthlyPayment": 1347800,
       "monthlyPaymentBeforeLift": 1312500,
       "imageUrl": "./assets/danawa/vehicles/BMW/X5/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-suv.jpg",
@@ -4145,7 +4145,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 27000,
+        "displayMonthlyLift": 35300,
         "product": "lease"
       },
       "asset": {
@@ -4162,7 +4162,7 @@
       "trim": "최저등급",
       "fuel": "리스",
       "year": 2026,
-      "monthlyPayment": 1351200,
+      "monthlyPayment": 1355800,
       "monthlyPaymentBeforeLift": 1323700,
       "imageUrl": "./assets/danawa/vehicles/벤츠/GLE-Class/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-suv.jpg",
@@ -4184,7 +4184,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 27500,
+        "displayMonthlyLift": 32100,
         "product": "lease"
       },
       "asset": {
@@ -4201,7 +4201,7 @@
       "trim": "최저등급",
       "fuel": "리스",
       "year": 2026,
-      "monthlyPayment": 1430200,
+      "monthlyPayment": 1439700,
       "monthlyPaymentBeforeLift": 1402700,
       "imageUrl": "./assets/danawa/vehicles/BMW/X6/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-suv.jpg",
@@ -4221,7 +4221,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 27500,
+        "displayMonthlyLift": 37000,
         "product": "lease"
       },
       "asset": {
@@ -4238,7 +4238,7 @@
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
-      "monthlyPayment": 1435400,
+      "monthlyPayment": 1437700,
       "monthlyPaymentBeforeLift": 1405900,
       "imageUrl": "./assets/danawa/vehicles/제네시스/G90/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-sedan.jpg",
@@ -4258,7 +4258,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 29500,
+        "displayMonthlyLift": 31800,
         "product": "rent"
       },
       "asset": {
@@ -4275,7 +4275,7 @@
       "trim": "최저등급",
       "fuel": "리스",
       "year": 2026,
-      "monthlyPayment": 1452300,
+      "monthlyPayment": 1462300,
       "monthlyPaymentBeforeLift": 1424800,
       "imageUrl": "./assets/danawa/vehicles/BMW/iX/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-premium.jpg",
@@ -4293,7 +4293,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 27500,
+        "displayMonthlyLift": 37500,
         "product": "lease"
       },
       "asset": {
@@ -4310,7 +4310,7 @@
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
-      "monthlyPayment": 1475800,
+      "monthlyPayment": 1491100,
       "monthlyPaymentBeforeLift": 1455800,
       "imageUrl": "./assets/danawa/vehicles/기아/EV6/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-suv.jpg",
@@ -4330,7 +4330,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 20000,
+        "displayMonthlyLift": 35300,
         "product": "rent"
       },
       "asset": {
@@ -4347,7 +4347,7 @@
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
-      "monthlyPayment": 1507500,
+      "monthlyPayment": 1518100,
       "monthlyPaymentBeforeLift": 1485000,
       "imageUrl": "./assets/danawa/vehicles/현대/아이오닉 6 N/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-suv.jpg",
@@ -4365,7 +4365,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 22500,
+        "displayMonthlyLift": 33100,
         "product": "rent"
       },
       "asset": {
@@ -4382,7 +4382,7 @@
       "trim": "최저등급",
       "fuel": "리스",
       "year": 2026,
-      "monthlyPayment": 1598130,
+      "monthlyPayment": 1605230,
       "monthlyPaymentBeforeLift": 1572130,
       "imageUrl": "./assets/danawa/vehicles/벤츠/EQE/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-premium.jpg",
@@ -4400,7 +4400,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 26000,
+        "displayMonthlyLift": 33100,
         "product": "lease"
       },
       "asset": {
@@ -4417,7 +4417,7 @@
       "trim": "최저등급",
       "fuel": "리스",
       "year": 2026,
-      "monthlyPayment": 1738700,
+      "monthlyPayment": 1751600,
       "monthlyPaymentBeforeLift": 1713700,
       "imageUrl": "./assets/danawa/vehicles/아우디/Q8/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-premium.jpg",
@@ -4435,7 +4435,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 25000,
+        "displayMonthlyLift": 37900,
         "product": "lease"
       },
       "asset": {
@@ -4452,7 +4452,7 @@
       "trim": "최저등급",
       "fuel": "리스",
       "year": 2026,
-      "monthlyPayment": 1741300,
+      "monthlyPayment": 1743300,
       "monthlyPaymentBeforeLift": 1713300,
       "imageUrl": "./assets/danawa/vehicles/BMW/X7/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-suv.jpg",
@@ -4472,7 +4472,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 28000,
+        "displayMonthlyLift": 30000,
         "product": "lease"
       },
       "asset": {
@@ -4489,7 +4489,7 @@
       "trim": "최저등급",
       "fuel": "리스",
       "year": 2026,
-      "monthlyPayment": 1759100,
+      "monthlyPayment": 1767500,
       "monthlyPaymentBeforeLift": 1737100,
       "imageUrl": "./assets/danawa/vehicles/벤츠/S-Class/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-premium.jpg",
@@ -4509,7 +4509,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 22000,
+        "displayMonthlyLift": 30400,
         "product": "lease"
       },
       "asset": {
@@ -4526,7 +4526,7 @@
       "trim": "최저등급",
       "fuel": "리스",
       "year": 2026,
-      "monthlyPayment": 1760617,
+      "monthlyPayment": 1776517,
       "monthlyPaymentBeforeLift": 1736617,
       "imageUrl": "./assets/danawa/vehicles/BMW/M4/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-premium.jpg",
@@ -4544,7 +4544,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 24000,
+        "displayMonthlyLift": 39900,
         "product": "lease"
       },
       "asset": {
@@ -4561,7 +4561,7 @@
       "trim": "최저등급",
       "fuel": "리스",
       "year": 2026,
-      "monthlyPayment": 1773300,
+      "monthlyPayment": 1782300,
       "monthlyPaymentBeforeLift": 1749800,
       "imageUrl": "./assets/danawa/vehicles/BMW/M3/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-premium.jpg",
@@ -4579,7 +4579,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 23500,
+        "displayMonthlyLift": 32500,
         "product": "lease"
       },
       "asset": {
@@ -4596,7 +4596,7 @@
       "trim": "최저등급",
       "fuel": "리스",
       "year": 2026,
-      "monthlyPayment": 1795100,
+      "monthlyPayment": 1805800,
       "monthlyPaymentBeforeLift": 1767100,
       "imageUrl": "./assets/danawa/vehicles/테슬라/Model X/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-premium.jpg",
@@ -4614,7 +4614,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 28000,
+        "displayMonthlyLift": 38700,
         "product": "lease"
       },
       "asset": {
@@ -4631,7 +4631,7 @@
       "trim": "최저등급",
       "fuel": "리스",
       "year": 2026,
-      "monthlyPayment": 1915100,
+      "monthlyPayment": 1921200,
       "monthlyPaymentBeforeLift": 1887100,
       "imageUrl": "./assets/danawa/vehicles/BMW/7 Series/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-premium.jpg",
@@ -4651,7 +4651,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 28000,
+        "displayMonthlyLift": 34100,
         "product": "lease"
       },
       "asset": {
@@ -4668,7 +4668,7 @@
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
-      "monthlyPayment": 1923500,
+      "monthlyPayment": 1942500,
       "monthlyPaymentBeforeLift": 1903000,
       "imageUrl": "./assets/danawa/vehicles/제네시스/GV60/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-suv.jpg",
@@ -4688,7 +4688,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 20500,
+        "displayMonthlyLift": 39500,
         "product": "rent"
       },
       "asset": {
@@ -4705,7 +4705,7 @@
       "trim": "최저등급",
       "fuel": "리스",
       "year": 2026,
-      "monthlyPayment": 1997700,
+      "monthlyPayment": 2002400,
       "monthlyPaymentBeforeLift": 1971200,
       "imageUrl": "./assets/danawa/vehicles/BMW/i7/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-premium.jpg",
@@ -4725,7 +4725,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 26500,
+        "displayMonthlyLift": 31200,
         "product": "lease"
       },
       "asset": {
@@ -4742,7 +4742,7 @@
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
-      "monthlyPayment": 2021000,
+      "monthlyPayment": 2038600,
       "monthlyPaymentBeforeLift": 2000000,
       "imageUrl": "./assets/danawa/vehicles/제네시스/G90/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-sedan.jpg",
@@ -4762,7 +4762,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 21000,
+        "displayMonthlyLift": 38600,
         "product": "rent"
       },
       "asset": {
@@ -4779,7 +4779,7 @@
       "trim": "최저등급",
       "fuel": "장기렌트",
       "year": 2026,
-      "monthlyPayment": 2027500,
+      "monthlyPayment": 2038500,
       "monthlyPaymentBeforeLift": 2000000,
       "imageUrl": "./assets/danawa/vehicles/제네시스/G90/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-sedan.jpg",
@@ -4799,7 +4799,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 27500,
+        "displayMonthlyLift": 38500,
         "product": "rent"
       },
       "asset": {
@@ -4816,7 +4816,7 @@
       "trim": "최저등급",
       "fuel": "리스",
       "year": 2026,
-      "monthlyPayment": 2088100,
+      "monthlyPayment": 2091000,
       "monthlyPaymentBeforeLift": 2058600,
       "imageUrl": "./assets/danawa/vehicles/벤츠/SL-Class/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-premium.jpg",
@@ -4834,7 +4834,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 29500,
+        "displayMonthlyLift": 32400,
         "product": "lease"
       },
       "asset": {
@@ -4851,7 +4851,7 @@
       "trim": "최저등급",
       "fuel": "리스",
       "year": 2026,
-      "monthlyPayment": 2268900,
+      "monthlyPayment": 2279700,
       "monthlyPaymentBeforeLift": 2244400,
       "imageUrl": "./assets/danawa/vehicles/BMW/M5/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-premium.jpg",
@@ -4869,7 +4869,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 24500,
+        "displayMonthlyLift": 35300,
         "product": "lease"
       },
       "asset": {
@@ -4886,7 +4886,7 @@
       "trim": "최저등급",
       "fuel": "리스",
       "year": 2026,
-      "monthlyPayment": 2311600,
+      "monthlyPayment": 2324000,
       "monthlyPaymentBeforeLift": 2290100,
       "imageUrl": "./assets/danawa/vehicles/테슬라/Cybertruck/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-premium.jpg",
@@ -4904,7 +4904,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 21500,
+        "displayMonthlyLift": 33900,
         "product": "lease"
       },
       "asset": {
@@ -4921,7 +4921,7 @@
       "trim": "최저등급",
       "fuel": "리스",
       "year": 2026,
-      "monthlyPayment": 2400700,
+      "monthlyPayment": 2413900,
       "monthlyPaymentBeforeLift": 2377200,
       "imageUrl": "./assets/danawa/vehicles/BMW/X6 M/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-suv.jpg",
@@ -4941,7 +4941,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 23500,
+        "displayMonthlyLift": 36700,
         "product": "lease"
       },
       "asset": {
@@ -4958,7 +4958,7 @@
       "trim": "최저등급",
       "fuel": "리스",
       "year": 2026,
-      "monthlyPayment": 2569700,
+      "monthlyPayment": 2579100,
       "monthlyPaymentBeforeLift": 2540700,
       "imageUrl": "./assets/danawa/vehicles/BMW/X5 M/model_360.png",
       "fallbackImageUrl": "./assets/vehicle-suv.jpg",
@@ -4978,7 +4978,7 @@
       "calculation": {
         "isSpreadsheetPrice": true,
         "basis": "최저등급 · 무옵션 · 선납 0% · 보증 0% · 연 1만km",
-        "displayMonthlyLift": 29000,
+        "displayMonthlyLift": 38400,
         "product": "lease"
       },
       "asset": {
@@ -4988,5 +4988,5 @@
       }
     }
   ],
-  "displayAdjustment": "2026-05-18: prior display monthly values reduced by 10,000 KRW"
+  "displayAdjustment": "Deterministic per-model margin of 30,000-40,000 KRW applied to base monthly prices"
 }

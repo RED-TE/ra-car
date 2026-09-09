@@ -4,6 +4,7 @@ const net = require("node:net");
 const path = require("node:path");
 const { spawn } = require("node:child_process");
 const { test } = require("node:test");
+const { getStableVehicleMargin, vehicleMarginMax, vehicleMarginMin } = require("../lib/vehicle-margin");
 
 const rootDir = path.resolve(__dirname, "..");
 
@@ -162,6 +163,39 @@ test("private data and unknown knowledge files stay blocked", async () => {
     const unknownFile = await fetch(`${server.baseUrl}/crew/guide/missing.js`);
     assert.equal(privateData.status, 404);
     assert.equal(unknownFile.status, 404);
+  } finally {
+    await server.stop();
+  }
+});
+
+test("vehicle margin stays fixed per model across every quote condition", async () => {
+  const server = await startServer("development");
+  try {
+    const modelId = "pricing-모닝";
+    const conditions = [
+      "term=36&deposit_pct=0&mileage_limit=10000",
+      "term=48&deposit_pct=20&mileage_limit=20000",
+      "term=60&deposit_pct=30&mileage_limit=40000",
+    ];
+    const vehicles = [];
+
+    for (const query of conditions) {
+      const response = await fetch(`${server.baseUrl}/api/recar/vehicles/${encodeURIComponent(modelId)}?${query}`);
+      assert.equal(response.status, 200);
+      vehicles.push((await response.json()).vehicle);
+    }
+
+    const expectedMargin = getStableVehicleMargin(modelId);
+    assert.ok(expectedMargin >= vehicleMarginMin && expectedMargin <= vehicleMarginMax);
+    assert.equal(new Set(vehicles.map((vehicle) => vehicle.calculation.displayMonthlyLift)).size, 1);
+
+    for (const vehicle of vehicles) {
+      assert.equal(vehicle.calculation.displayMonthlyLift, expectedMargin);
+      assert.equal(vehicle.monthlyPayment - vehicle.calculation.baseMonthlyPaymentBeforeLift, expectedMargin);
+      for (const quote of vehicle.quotes) {
+        assert.equal(quote.monthlyPayment - quote.monthlyPaymentBeforeLift, expectedMargin);
+      }
+    }
   } finally {
     await server.stop();
   }

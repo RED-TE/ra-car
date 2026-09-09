@@ -1297,7 +1297,7 @@ async function renderStaticVehicleCatalog() {
   if (!vehicleGrid || vehicleMode !== "all") return false;
 
   try {
-    const response = await requestJson("./data/vehicle-static-catalog.json?v=20260518-price-down10");
+    const response = await requestJson("./data/vehicle-static-catalog.json?v=20260909-margin-v1");
     const payload = response.data;
     const items = Array.isArray(payload?.items)
       ? payload.items.filter((vehicle) => vehicle?.imageUrl && vehicle?.monthlyPayment)

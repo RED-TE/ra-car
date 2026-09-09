@@ -119,7 +119,7 @@
       // The existing public catalog is already priced. Never derive a new quote in this view.
       let response;
       try {
-        response = await request("./data/vehicle-static-catalog.json?v=20260909-catalog-polish");
+        response = await request("./data/vehicle-static-catalog.json?v=20260909-margin-v1");
       } catch { response = null; }
       if (!response?.ok || !Array.isArray(response.data?.items)) {
         response = await request("/api/recar/vehicles?term=60&deposit_pct=0&mileage_limit=10000&page=1&size=100&mode=all");
