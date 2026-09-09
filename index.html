@@ -79,7 +79,7 @@
       }
     </script>
     <link rel="stylesheet" href="./styles.css?v=20260820-referral-compact" />
-    <link rel="stylesheet" href="./home.css?v=20260908" />
+    <link rel="stylesheet" href="./home.css?v=20260909-quick-quote" />
   </head>
   <body class="public-home">
     <a class="home-skip" href="#special">차량 목록으로 바로가기</a>
@@ -332,13 +332,22 @@
         <a href="./admin.html">관리자</a>
       </p>
     </footer>
-
-
-    <a class="persistent-quote-button" href="#quote"><i data-lucide="message-square-text" aria-hidden="true"></i><span><small>상담비 없이</small>간편 견적 문의</span><i data-lucide="chevron-right" aria-hidden="true"></i></a>
+    <dialog class="quick-quote-dialog" id="quickQuoteDialog" aria-labelledby="quickQuoteTitle" aria-describedby="quickQuoteDescription">
+      <header class="quick-quote-header">
+        <div>
+          <span>상담비 없이</span>
+          <h2 id="quickQuoteTitle">간편 견적 문의</h2>
+          <p id="quickQuoteDescription">차량과 연락처를 남기면 확인 후 안내드립니다.</p>
+        </div>
+        <button class="quick-quote-close icon-button" type="button" data-close-quick-quote aria-label="문의 창 닫기" title="닫기"><i data-lucide="x" aria-hidden="true"></i></button>
+      </header>
+      <div class="quick-quote-body" data-quick-quote-mount></div>
+    </dialog>
+    <button class="persistent-quote-button" type="button" aria-haspopup="dialog" aria-controls="quickQuoteDialog"><i data-lucide="message-square-text" aria-hidden="true"></i><span><small>상담비 없이</small>간편 견적 문의</span><i data-lucide="chevron-right" aria-hidden="true"></i></button>
     <aside class="home-floating" aria-label="빠른 상담"><a href="#quote"><i data-lucide="message-circle" aria-hidden="true"></i><span>견적 상담</span></a><a href="https://open.kakao.com/o/s7SanMki" target="_blank" rel="noopener noreferrer">카카오톡</a><button type="button" data-back-top aria-label="맨 위로" title="맨 위로"><i data-lucide="chevron-up" aria-hidden="true"></i></button></aside>
     <nav class="mobile-bottom" aria-label="모바일 빠른 메뉴"><a href="#home"><i data-lucide="house" aria-hidden="true"></i><span>홈</span></a><a href="#special"><i data-lucide="search" aria-hidden="true"></i><span>차량검색</span></a><a class="mobile-consult" href="#quote"><i data-lucide="message-square-text" aria-hidden="true"></i><span>상담신청</span></a><a href="#compare"><i data-lucide="book-open" aria-hidden="true"></i><span>이용가이드</span></a><a href="/crew/"><i data-lucide="users" aria-hidden="true"></i><span>크루</span></a></nav>
     <script src="./crew/guide/lucide.min.js"></script>
-    <script src="./home.js?v=20260908"></script>
+    <script src="./home.js?v=20260909-quick-quote"></script>
     <script src="./script.js?v=20260908-home-ui"></script>
   </body>
 </html>

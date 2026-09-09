@@ -232,6 +232,63 @@
 
   const form = $(".quote-form");
   const status = $(".form-status");
+  const quickQuoteDialog = $("#quickQuoteDialog");
+  const quickQuoteMount = $("[data-quick-quote-mount]");
+  const persistentQuoteButton = $(".persistent-quote-button");
+  const mobileQuoteButton = $(".mobile-consult");
+  const formHome = form.parentNode;
+  const formAnchor = document.createComment("quote-form-home");
+  let quickQuoteLauncher = null;
+  let quickQuoteTimer = 0;
+  formHome.insertBefore(formAnchor, form);
+
+  const restoreQuoteForm = () => {
+    if (form.parentNode !== formHome) formHome.insertBefore(form, formAnchor.nextSibling);
+    document.body.classList.remove("quick-quote-open");
+  };
+  const closeQuickQuote = () => {
+    if (!quickQuoteDialog.open || quickQuoteDialog.classList.contains("is-closing")) return;
+    quickQuoteDialog.classList.remove("is-opening");
+    quickQuoteDialog.classList.add("is-closing");
+    window.clearTimeout(quickQuoteTimer);
+    quickQuoteTimer = window.setTimeout(() => quickQuoteDialog.close(), reducedMotion.matches ? 0 : 160);
+  };
+  const openQuickQuote = (launcher) => {
+    if (quickQuoteDialog.open) return;
+    quickQuoteLauncher = launcher;
+    launcher.classList.add("is-launching");
+    window.clearTimeout(quickQuoteTimer);
+    quickQuoteTimer = window.setTimeout(() => {
+      launcher.classList.remove("is-launching");
+      quickQuoteMount.append(form);
+      document.body.classList.add("quick-quote-open");
+      quickQuoteDialog.classList.remove("is-closing");
+      quickQuoteDialog.showModal();
+      quickQuoteDialog.classList.add("is-opening");
+      window.setTimeout(() => $("#contactPhone")?.focus(), reducedMotion.matches ? 0 : 220);
+    }, reducedMotion.matches ? 0 : 220);
+  };
+  persistentQuoteButton.addEventListener("click", () => openQuickQuote(persistentQuoteButton));
+  mobileQuoteButton.addEventListener("click", event => {
+    event.preventDefault();
+    openQuickQuote(mobileQuoteButton);
+  });
+  $("[data-close-quick-quote]").addEventListener("click", closeQuickQuote);
+  quickQuoteDialog.addEventListener("cancel", event => {
+    event.preventDefault();
+    closeQuickQuote();
+  });
+  quickQuoteDialog.addEventListener("click", event => {
+    const rect = quickQuoteDialog.getBoundingClientRect();
+    const outside = event.clientX < rect.left || event.clientX > rect.right || event.clientY < rect.top || event.clientY > rect.bottom;
+    if (event.target === quickQuoteDialog && outside) closeQuickQuote();
+  });
+  quickQuoteDialog.addEventListener("close", () => {
+    quickQuoteDialog.classList.remove("is-opening", "is-closing");
+    restoreQuoteForm();
+    quickQuoteLauncher?.focus();
+    quickQuoteLauncher = null;
+  });
   status.id = "homeFormStatus";
   form.querySelectorAll("input[required]").forEach(input => {
     input.setAttribute("aria-describedby", status.id);

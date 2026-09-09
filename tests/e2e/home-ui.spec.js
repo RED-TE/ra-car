@@ -88,21 +88,32 @@ test("hero, car rail, guide filters and vehicle inquiry entry work", async ({ pa
 
 test("persistent inquiry entry follows desktop and mobile without covering focused fields", async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 1000 });
+  await page.emulateMedia({ reducedMotion: "reduce" });
   await ready(page);
   const desktopButton = page.locator(".persistent-quote-button");
+  const quickDialog = page.locator("#quickQuoteDialog");
   await expect(desktopButton).toBeVisible();
-  await expect(desktopButton).toHaveAttribute("href", "#quote");
+  await expect(desktopButton).toHaveAttribute("aria-haspopup", "dialog");
   expect((await desktopButton.boundingBox()).y).toBeGreaterThan(900);
   await desktopButton.click();
-  await expect(page).toHaveURL(/#quote$/);
-  await page.locator("#contactPhone").focus();
+  await expect(quickDialog).toBeVisible();
+  await expect(quickDialog.locator(".quote-form")).toBeVisible();
+  await expect(page.locator("#contactPhone")).toBeFocused();
   await expect(desktopButton).toBeHidden();
+  await fillForm(page);
+  await quickDialog.getByRole("button", { name: "조건 확인하기", exact: true }).click();
+  await expect(quickDialog.locator(".form-status")).toContainText("문의가 접수되었습니다");
+  await quickDialog.getByRole("button", { name: "문의 창 닫기" }).click();
+  await expect(quickDialog).toBeHidden();
+  await expect(page.locator("#quote > .home-container > .quote-form")).toBeAttached();
 
   await page.setViewportSize({ width: 390, height: 844 });
-  await page.locator("#contactPhone").blur();
   await expect(desktopButton).toBeHidden();
   await expect(page.locator(".mobile-consult")).toBeVisible();
   await expect(page.locator(".mobile-consult")).toHaveAttribute("href", "#quote");
+  await page.locator(".mobile-consult").click();
+  await expect(quickDialog).toBeVisible();
+  await expect(page.locator("#contactPhone")).toBeFocused();
 });
 
 test("mobile menu closes with Escape, outside click and navigation; focus is restored", async ({ page }) => {

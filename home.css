@@ -252,13 +252,34 @@
 .public-home .footer-contact svg { width:16px; height:16px; }
 .public-home .footer-notice { grid-column:1/-1; display:flex; flex-wrap:wrap; gap:14px; padding-top:20px; border-top:1px solid #e0e3e8; font-size:12px; color:#667085; }
 .public-home .footer-notice a { color:#344054; }
-.public-home .persistent-quote-button { position:fixed; left:50%; bottom:24px; z-index:42; transform:translateX(-50%); display:flex; align-items:center; justify-content:center; gap:13px; min-width:248px; min-height:58px; padding:8px 18px; border:1px solid #174de0; border-radius:29px; background:var(--accent); color:#fff; box-shadow:0 10px 28px #0d47cc38; }
+.public-home .persistent-quote-button { position:fixed; left:50%; bottom:24px; z-index:42; transform:translateX(-50%); display:flex; align-items:center; justify-content:center; gap:13px; min-width:248px; min-height:58px; padding:8px 18px; border:1px solid #174de0; border-radius:29px; background:var(--accent); color:#fff; box-shadow:0 10px 28px #0d47cc38; font:inherit; cursor:pointer; transition:min-width .22s cubic-bezier(.2,.8,.2,1),min-height .22s cubic-bezier(.2,.8,.2,1),border-radius .22s ease,transform .22s ease,opacity .16s ease,background-color .16s ease; }
 .public-home .persistent-quote-button > svg { width:22px; height:22px; flex:none; }
 .public-home .persistent-quote-button > svg:last-child { width:18px; height:18px; }
 .public-home .persistent-quote-button span { display:grid; gap:1px; font-size:16px; font-weight:700; line-height:1.25; }
 .public-home .persistent-quote-button small { font-size:11px; font-weight:500; color:#dce8ff; }
 .public-home .persistent-quote-button:hover { background:#1046d8; }
+.public-home .persistent-quote-button.is-launching { min-width:340px; min-height:66px; border-radius:20px; transform:translateX(-50%) scale(1.035); }
+.public-home.quick-quote-open .persistent-quote-button { opacity:0; pointer-events:none; transform:translateX(-50%) scale(.96); }
 .public-home:has(.quote-form :focus) .persistent-quote-button { display:none; }
+.public-home .quick-quote-dialog { width:min(700px,calc(100% - 32px)); max-width:none; max-height:calc(100dvh - 40px); margin:auto; padding:0; overflow:auto; border:1px solid #dfe4ec; border-radius:20px; background:#fff; color:#171a21; box-shadow:0 28px 80px #14264d38; opacity:0; transform:translateY(24px) scale(.94); }
+.public-home .quick-quote-dialog[open] { opacity:1; transform:translateY(0) scale(1); }
+.public-home .quick-quote-dialog.is-opening { animation:quick-quote-open .28s cubic-bezier(.2,.8,.2,1) both; }
+.public-home .quick-quote-dialog.is-closing { animation:quick-quote-close .16s ease both; }
+.public-home .quick-quote-dialog::backdrop { background:#10182870; backdrop-filter:blur(3px); animation:quick-quote-backdrop .2s ease both; }
+.public-home .quick-quote-header { position:sticky; top:0; z-index:2; display:flex; align-items:flex-start; justify-content:space-between; gap:20px; padding:26px 28px 20px; border-bottom:1px solid #e8ebf0; background:#fff; }
+.public-home .quick-quote-header span { display:block; margin-bottom:4px; color:var(--accent); font-size:12px; font-weight:700; }
+.public-home .quick-quote-header h2 { font-size:25px; line-height:1.35; }
+.public-home .quick-quote-header p { margin-top:6px; color:#667085; font-size:14px; }
+.public-home .quick-quote-close { flex:none; width:40px; height:40px; border:1px solid #e2e6ed; background:#fff; }
+.public-home .quick-quote-close svg { width:20px; height:20px; }
+.public-home .quick-quote-body .quote-form { grid-template-columns:repeat(2,minmax(0,1fr)); gap:16px; padding:24px 28px 28px; }
+.public-home .quick-quote-body .quote-form > label:first-child { grid-column:1/-1; }
+.public-home .quick-quote-body .quote-form textarea { height:76px; min-height:76px; }
+.public-home .quick-quote-body .consent-item { padding:8px 0; }
+.public-home .quick-quote-body .quote-form .submit-button { width:100%; }
+@keyframes quick-quote-open { from { opacity:0; transform:translateY(24px) scale(.94); } to { opacity:1; transform:translateY(0) scale(1); } }
+@keyframes quick-quote-close { from { opacity:1; transform:translateY(0) scale(1); } to { opacity:0; transform:translateY(18px) scale(.97); } }
+@keyframes quick-quote-backdrop { from { opacity:0; } to { opacity:1; } }
 .public-home .home-floating { position:fixed; right:20px; bottom:34px; z-index:30; background:#fff; border:1px solid #b7cafb; border-radius:18px; box-shadow:0 8px 24px #22355716; width:106px; overflow:hidden; }
 .public-home .home-floating a { display:flex; align-items:center; justify-content:center; flex-direction:column; gap:7px; padding:13px 8px; font-size:13px; font-weight:650; }
 .public-home .home-floating a:first-child { color:var(--accent); }
@@ -417,6 +438,11 @@
   .public-home .mobile-bottom .mobile-consult { position:relative; padding-top:26px; color:#22262a; font-weight:700; }
   .public-home .mobile-consult svg { position:absolute; top:-30px; width:60px !important; height:60px !important; padding:17px; border-radius:50%; background:var(--accent); color:white; box-shadow:0 3px 10px #1554ff22; }
   .public-home .referral-notice { max-width:calc(100% - 32px); left:16px; bottom:102px; }
+  .public-home .quick-quote-dialog { width:calc(100% - 16px); max-height:calc(100dvh - 16px); border-radius:20px; }
+  .public-home .quick-quote-header { padding:20px 18px 16px; }
+  .public-home .quick-quote-header h2 { font-size:22px; }
+  .public-home .quick-quote-header p { max-width:250px; font-size:12px; line-height:1.5; }
+  .public-home .quick-quote-body .quote-form { grid-template-columns:1fr; gap:14px; padding:18px 18px 24px; }
   .public-home:has(.quote-form :focus) .mobile-bottom { position:static; display:none; }
 }
 @media(prefers-reduced-motion:reduce) { html:has(.public-home) { scroll-behavior:auto; } .public-home *, .public-home *::before,.public-home *::after { animation:none !important; transition:none !important; scroll-behavior:auto !important; } }
