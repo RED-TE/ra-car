@@ -55,6 +55,8 @@ test("home assets load, reference proportions and actual catalog prices are pres
   expect((await page.locator('.promotion-slide[data-position="center"]').boundingBox()).width).toBe(750);
   expect((await page.locator("#special").boundingBox()).width).toBe(1200);
   await expect(page.locator(".home-vehicle").first()).toContainText(catalog.items[0].monthlyPayment.toLocaleString("ko-KR"));
+  await expect(page.locator(".home-car-trim").first()).toHaveText("기본 조건 · 장기렌트 · 무보증");
+  await expect(page.locator(".home-vehicle").first()).not.toContainText("최저등급");
   await expect(page.locator(".catalog-basis")).toContainText("60개월");
   await expect(page.locator(".catalog-basis")).toContainText("선납금 0% · 보증금 0%");
   await expect(page.locator(".catalog-basis")).toContainText("10,000km");
@@ -66,6 +68,10 @@ test("full vehicle page uses the same margin-adjusted static catalog", async ({ 
   const firstVehicle = page.locator(".vehicle-card:not(.is-skeleton)").first();
   await expect(firstVehicle).toBeVisible();
   await expect(firstVehicle).toContainText(catalog.items[0].monthlyPayment.toLocaleString("ko-KR"));
+  await expect(firstVehicle.locator(".vehicle-specs")).toHaveText("기본 조건 · 장기렌트 · 무보증");
+
+  const leaseVehicle = catalog.items.find(item => item.calculation?.product === "lease");
+  await expect(page.locator(`[data-vehicle-id="${leaseVehicle.id}"] .vehicle-specs`)).toHaveText("기본 조건 · 리스 · 무보증");
 });
 
 test("manufacturer, body, product, search, sorting and empty-state reset work", async ({ page }) => {
@@ -126,6 +132,7 @@ test("SUV collection uses distinct representative SUV models", async ({ page }) 
   expect(titles).not.toContain("기아 레이");
   expect(titles).toContain("쉐보레 트레일블레이저");
   expect(titles).toContain("현대 디 올 뉴 팰리세이드");
+  await expect(page.locator("#suvCollection .collection-card p").first()).toHaveText("기본 조건 · 장기렌트 · 무보증");
 
   const floating = page.locator(".home-floating");
   expect((await floating.boundingBox()).width).toBeLessThanOrEqual(52);

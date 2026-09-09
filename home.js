@@ -16,6 +16,7 @@
   const brandOf = (item) => brandNames[item.brandLabel || item.brand] || item.brandLabel || item.brand || "";
   const productOf = (item) => item.calculation?.product || (item.fuel === "리스" ? "lease" : "rent");
   const productLabel = (item) => productOf(item) === "lease" ? "리스" : "장기렌트";
+  const conditionSummary = (item) => `기본 조건 · ${productLabel(item)} · 무보증`;
   const nameOf = (item) => [brandOf(item), item.name, item.trim].filter(Boolean).join(" ");
   const logo = (brand) => logoBrands.has(brand) ? `<img src="./assets/danawa/brands/${encodeURIComponent(brand)}/logo.png" alt="${escape(brand)}" width="40" height="26" loading="lazy" />` : `<b>${escape(brand.slice(0, 3))}</b>`;
   const safeImage = (value) => {
@@ -38,9 +39,9 @@
       <a class="home-vehicle-link" href="#quote" data-home-quote="${escape(nameOf(item))}">
         <div class="home-car-image">${imageOf(item)}</div>
         <div class="home-car-copy"><div class="home-car-title">${logo(brandOf(item))}<h3>${escape(item.name)}</h3></div>
-        <p class="home-car-trim">${escape(item.trim || "세부 조건 상담")}</p>
+        <p class="home-car-trim">${escape(conditionSummary(item))}</p>
         <div class="home-car-price">${price ? `<span>월</span><strong>${price}</strong><small>원</small>` : '<strong>상담 문의</strong>'}</div>
-        <p class="home-car-type">${productLabel(item)} · ${escape(quoteClass)}</p></div>
+        <p class="home-car-type">${escape(quoteClass)}</p></div>
       </a><a class="vehicle-quote-button" href="#quote" data-vehicle="${escape(nameOf(item))}">이 조건 견적 문의</a>
     </article>`;
   }
@@ -105,7 +106,7 @@
     ];
     const byId = new Map(state.items.filter(item => item.categories?.includes("suv")).map(item => [item.id, item]));
     const items = featuredIds.map(id => byId.get(id)).filter(Boolean);
-    $("#suvCollection").innerHTML = items.length ? items.map(item => `<a class="collection-card" href="#quote" data-home-quote="${escape(nameOf(item))}"><h3>${escape(brandOf(item))} ${escape(item.name)}</h3><p>${escape(item.trim || "세부 조건 상담")}</p><strong>${priceOf(item) ? `<small>월 </small>${priceOf(item)}<small> 원</small>` : '상담 문의'}</strong>${imageOf(item)}<span>견적 문의</span></a>`).join("") : '<p>등록된 SUV 차량이 없습니다. 전체 차량에서 확인해 주세요.</p>';
+    $("#suvCollection").innerHTML = items.length ? items.map(item => `<a class="collection-card" href="#quote" data-home-quote="${escape(nameOf(item))}"><h3>${escape(brandOf(item))} ${escape(item.name)}</h3><p>${escape(conditionSummary(item))}</p><strong>${priceOf(item) ? `<small>월 </small>${priceOf(item)}<small> 원</small>` : '상담 문의'}</strong>${imageOf(item)}<span>견적 문의</span></a>`).join("") : '<p>등록된 SUV 차량이 없습니다. 전체 차량에서 확인해 주세요.</p>';
   }
 
   async function loadCatalog(request) {

@@ -1123,6 +1123,11 @@ function renderOptionChips(options = [], limit = 4) {
   `;
 }
 
+function getVehicleConditionSummary(vehicle) {
+  const isLease = vehicle.calculation?.product === "lease" || vehicle.fuel === "리스" || vehicle.badge === "리스";
+  return `기본 조건 · ${isLease ? "리스" : "장기렌트"} · 무보증`;
+}
+
 function renderVehicleCard(vehicle, index = 0) {
   const name = buildVehicleName(vehicle);
   const category = (vehicle.categories || [defaultVehicleFilter]).join(" ");
@@ -1147,8 +1152,6 @@ function renderVehicleCard(vehicle, index = 0) {
       `data-discount="${escapeHtml(dealDiscount)}"`,
     ].join(" ")
     : "";
-  const year = vehicle.year ? `${vehicle.year}년식` : "연식 확인";
-  const subtitle = vehicle.subtitle || [vehicle.fuel, year].filter(Boolean).join(" · ");
   const meta = [vehicle.trimCount ? `트림 ${vehicle.trimCount}종` : ""].filter(Boolean);
   const quoteBadge = vehicle.calculation?.isSpreadsheetPrice ? "기준가격" : vehicle.calculation?.isEstimated ? "예상견적" : vehicle.usedQuoteFallback ? "대표견적" : "최저견적";
   const badges = [vehicle.badge || vehicle.fuel, vehicle.instantDeliveryAvailable ? "즉시출고" : "", quoteBadge]
@@ -1162,7 +1165,7 @@ function renderVehicleCard(vehicle, index = 0) {
           ${badges.map((badge) => `<span>${escapeHtml(badge)}</span>`).join("")}
         </div>
         <h3><span>${escapeHtml(vehicle.brandLabel || vehicle.brand || "브랜드")}</span>${escapeHtml(vehicle.name || "차량")}</h3>
-        <p class="vehicle-specs">${escapeHtml(trim)}${subtitle ? ` · ${escapeHtml(subtitle)}` : ""}</p>
+        <p class="vehicle-specs">${escapeHtml(getVehicleConditionSummary(vehicle))}</p>
         ${meta.length ? `<div class="vehicle-meta">${meta.map((item) => `<span>${escapeHtml(item)}</span>`).join("")}</div>` : ""}
         ${
           originalMonthly
