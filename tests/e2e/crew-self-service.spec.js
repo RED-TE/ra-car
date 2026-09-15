@@ -14,7 +14,7 @@ const dashboard = {
   vehicle_benefit: { target_contracts: 100, eligible_contracts: 2, remaining_contracts: 98 },
 };
 
-async function mockCrewApi(page) {
+async function mockCrewApi(page, dashboardOverrides = {}) {
   const saved = { profile: null, inquiries: [] };
   await page.addInitScript(() => localStorage.setItem("recar_friends_access_token", "qa-token"));
   await page.route("https://api.recarplan.com/api/v1/friends/**", async (route) => {
@@ -23,7 +23,7 @@ async function mockCrewApi(page) {
     let data;
     let status = 200;
     if (request.method() === "GET" && path.endsWith("/status")) data = initialStatus;
-    else if (request.method() === "GET" && path.endsWith("/dashboard")) data = dashboard;
+    else if (request.method() === "GET" && path.endsWith("/dashboard")) data = { ...dashboard, ...dashboardOverrides };
     else if (request.method() === "PATCH" && path.endsWith("/profile")) {
       saved.profile = request.postDataJSON();
       data = { ...initialStatus, ...saved.profile };
@@ -41,6 +41,27 @@ async function mockCrewApi(page) {
   });
   return saved;
 }
+
+test("link visits stay separate from customer referrals", async ({ page }) => {
+  await mockCrewApi(page, {
+    recent_events: [
+      { type: "DOWNLOAD", status: "ANALYTICS", amount: 0, occurred_at: "2026-09-15T15:17:50Z", customer_name_masked: null },
+      { type: "CONTRACT_PENDING", status: "PENDING", amount: 250000, occurred_at: "2026-09-15T10:00:00Z", customer_name_masked: "김**" },
+    ],
+  });
+  await page.goto("/crew/index.html");
+  const rows = page.locator("#recentActivityList .request-row");
+  await expect(rows.first()).toContainText("추천 링크 방문");
+  await expect(rows.first()).toContainText("1회");
+  await expect(rows.first()).toContainText("문의 전");
+  await expect(rows.first()).not.toContainText("추천 고객");
+  await expect(rows.first()).not.toContainText("1명");
+  await expect(rows.nth(1)).toContainText("김**");
+  await expect(rows.nth(1)).toContainText("1명");
+  await expect(page.locator("#crewAlertCount")).toHaveText("1");
+  await page.locator('.crew-sidebar a[href="#crewSupport"]').click();
+  await expect(page.locator("#crewSupportContact")).toHaveText("내 등록 연락처: 010-1111-2222");
+});
 
 for (const [label, viewport] of [["desktop", { width: 1440, height: 900 }], ["mobile", { width: 390, height: 844 }]]) {
   test(`crew self-service and support on ${label}`, async ({ context, page }, testInfo) => {
