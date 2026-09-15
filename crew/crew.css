@@ -249,7 +249,23 @@ svg i[data-lucide] {
 .crew-topbar-brand {
   gap: 10px;
   min-width: 230px;
+  color: inherit;
+  text-decoration: none;
 }
+
+.crew-homepage-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  min-height: 32px;
+  padding: 0 10px;
+  color: #333b48;
+  text-decoration: none;
+  border: 1px solid var(--crew-border);
+  border-radius: 6px;
+}
+
+.crew-homepage-link svg { width: 14px; height: 14px; }
 
 .crew-topbar-brand strong {
   font-size: 22px;
@@ -1903,6 +1919,9 @@ svg i[data-lucide] {
   .crew-topbar-brand strong {
     font-size: 18px;
   }
+
+  .crew-topbar-brand { min-width: 0; }
+  .crew-homepage-link { padding: 0 8px; }
 
   .crew-topbar-brand span:last-child {
     font-size: 14px;
