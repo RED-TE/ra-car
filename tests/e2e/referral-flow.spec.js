@@ -15,7 +15,7 @@ test("referral link stores, displays, tracks, and copies the code", async ({ con
 
   await expect(page.locator("[data-referral-notice]")).toBeVisible();
   await expect(page.locator("[data-referral-details]")).toBeHidden();
-  await page.getByRole("button", { name: "추천 코드 확인", exact: true }).click();
+  await page.getByRole("button", { name: "추천 프로모션 혜택 보기", exact: true }).click();
   await expect(page.locator("[data-referral-details]")).toBeVisible();
   await expect(page.locator("[data-referral-code]")).toHaveText(referralCode);
   expect(await page.evaluate(() => localStorage.getItem("recar_referral_code"))).toBe(referralCode);
@@ -74,7 +74,7 @@ test("legacy download referral link reaches the working referral page", async ({
 
   await expect(page).toHaveURL(new RegExp(`\\/\\?ref=${referralCode}$`));
   await expect(page.locator("[data-referral-notice]")).toBeVisible();
-  await page.getByRole("button", { name: "추천 코드 확인", exact: true }).click();
+  await page.getByRole("button", { name: "추천 프로모션 혜택 보기", exact: true }).click();
   await expect(page.locator("[data-referral-code]")).toHaveText(referralCode);
 });
 
