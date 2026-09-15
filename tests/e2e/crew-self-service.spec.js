@@ -43,22 +43,23 @@ async function mockCrewApi(page) {
 }
 
 for (const [label, viewport] of [["desktop", { width: 1440, height: 900 }], ["mobile", { width: 390, height: 844 }]]) {
-  test(`crew self-service and support on ${label}`, async ({ page }, testInfo) => {
+  test(`crew self-service and support on ${label}`, async ({ context, page }, testInfo) => {
     await page.setViewportSize(viewport);
+    await context.grantPermissions(["clipboard-read", "clipboard-write"]);
     const saved = await mockCrewApi(page);
     await page.goto("/crew/index.html#crewProfile");
     await expect(page.getByRole("heading", { name: "내정보" })).toBeVisible();
     await expect(page.locator("#crewProfileLoginId")).toHaveText("crew_qa");
-    await expect(page.locator("#crewProfileLink")).toHaveValue("https://recarplan.com/?ref=RC-QACREW");
+    await expect(page.locator("#crewProfileLink")).toHaveValue("https://recarplan.com/r/RC-QACREW");
     await page.screenshot({ path: testInfo.outputPath(`${label}-profile.png`) });
-    await page.getByRole("button", { name: "추천 링크 복사" }).click();
-    await expect(page.locator("#crewCopyStatus")).toHaveText("복사했습니다.");
+    await page.getByRole("button", { name: "고지 포함 추천 공유문 복사" }).click();
+    await expect(page.locator("#crewCopyStatus")).toHaveText("수수료 안내를 포함한 공유문을 복사했습니다.");
     await page.locator('#crewProfileForm [name="phone"]').fill("010-2222-3333");
     await page.getByRole("button", { name: "변경 저장" }).click();
     await expect(page.locator("#crewProfileSaveStatus")).toContainText("저장했습니다");
     expect(saved.profile.phone).toBe("010-2222-3333");
 
-    await page.getByRole("link", { name: "고객센터", exact: true }).click();
+    await page.locator('.crew-sidebar a[href="#crewSupport"]').click();
     await expect(page.getByRole("heading", { name: "고객센터" })).toBeVisible();
     await expect(page.locator('#crewSupport a[href="tel:01065731038"]')).toBeVisible();
     await page.screenshot({ path: testInfo.outputPath(`${label}-support.png`) });
