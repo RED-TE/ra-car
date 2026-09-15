@@ -30,6 +30,18 @@ test("individual crew link serves the homepage and attributes an inquiry", async
   expect(lead).toMatchObject({ referralCode: code, referralEntryPath: `/r/${code}`, entryPoint: "크루 전용 링크" });
 });
 
+test("a later different referral cannot inherit an earlier crew entry path", async ({ page }) => {
+  await page.route("https://api.recarplan.com/api/v1/friends/track**", route =>
+    route.fulfill({ status: 200, contentType: "application/json", body: '{"recorded":true}' }),
+  );
+  await page.goto(`/r/${code}`);
+  await page.goto("/?ref=RC-OTHER1");
+  expect(await page.evaluate(() => ({
+    code: localStorage.getItem("recar_referral_code"),
+    path: sessionStorage.getItem("recar_referral_entry_path"),
+  }))).toEqual({ code: "RC-OTHER1", path: null });
+});
+
 test("crew login has a usable first visit at mobile and desktop", async ({ page }) => {
   await page.goto("/crew/login.html");
   await expect(page.locator("#crewId")).toBeVisible();

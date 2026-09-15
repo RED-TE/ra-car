@@ -241,6 +241,12 @@ function initializeReferral() {
     } catch {
       // The referral code remains available on the current page.
     }
+  } else if (queryCode) {
+    try {
+      window.sessionStorage.removeItem(referralEntryPathKey);
+    } catch {
+      // Query attribution still takes precedence over stored route attribution.
+    }
   }
   setReferralNotice(activeReferralCode);
   if (routeCode || queryCode) trackReferralVisit(activeReferralCode);
@@ -292,6 +298,9 @@ function getLeadPayload() {
     referralEntryPath = window.sessionStorage.getItem(referralEntryPathKey) || "";
   } catch {
     // The code itself still travels with the inquiry.
+  }
+  if (normalizeReferralCode(referralEntryPath.match(/^\/r\/(RC-[A-Z0-9]{4,16})\/?$/i)?.[1]) !== (activeReferralCode || readStoredReferralCode())) {
+    referralEntryPath = "";
   }
 
   return {
