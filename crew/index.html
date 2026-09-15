@@ -13,7 +13,6 @@
     <link rel="canonical" href="https://recarplan.com/crew" />
     <link rel="icon" type="image/png" href="../assets/recar-favicon-20260518.png" />
     <link rel="apple-touch-icon" href="../assets/recar-favicon-20260518.png" />
-    <link rel="preconnect" href="https://unpkg.com" />
     <link rel="preconnect" href="https://api.recarplan.com" crossorigin />
     <link rel="stylesheet" href="./crew.css?v=20260703-live-metrics" />
     <script>
@@ -32,7 +31,7 @@
         <i data-lucide="users-round"></i>
         <span>크루</span>
       </a>
-      <a class="crew-side-item" href="#" aria-label="고객센터">
+      <a class="crew-side-item" href="#crewSupport" aria-label="고객센터">
         <i data-lucide="headphones"></i>
         <span>고객센터</span>
       </a>
@@ -55,7 +54,7 @@
         <span>오늘 <strong id="crewWaitingCount">0건 대기</strong></span>
         <span><b class="status-dot"></b><strong id="crewConversionRate">0%</strong></span>
         <span>총 크루 <strong id="crewTotalReferrals">0명</strong></span>
-        <div class="crew-account-menu" id="crewProfile">
+        <div class="crew-account-menu" id="crewAccountMenu">
           <button class="crew-account-button" type="button" aria-expanded="false" aria-controls="crewAccountDropdown">
             <i data-lucide="circle-user-round"></i>
             <span id="crewAccountLabel">크루님의 계정</span>
@@ -144,6 +143,19 @@
             <div class="soft-badge green">최근 <span id="weeklyDeliveryCount">0</span>대 인도</div>
             <small>이번 달 인도 <span id="monthlyDeliveryCount">0</span>건</small>
           </article>
+        </section>
+
+        <section class="crew-benefit-strip" aria-label="차량 1년 이용 혜택 진행도">
+          <span class="crew-benefit-icon"><i data-lucide="car-front" aria-hidden="true"></i></span>
+          <div class="crew-benefit-copy">
+            <h2>차량 1년 이용 혜택</h2>
+            <p>유효 계약 <strong id="crewBenefitCount">집계 중</strong> / 100대 <span id="crewBenefitRemaining"></span></p>
+          </div>
+          <div class="crew-benefit-track-wrap">
+            <progress id="crewBenefitProgress" max="100" value="0" aria-label="차량 1년 이용 혜택 진행도"></progress>
+            <small>취소·보상 제외 계약은 진행도에 포함되지 않습니다.</small>
+          </div>
+          <a href="./guide/#rewards" aria-label="차량 이용 혜택 기준 보기"><i data-lucide="arrow-up-right" aria-hidden="true"></i></a>
         </section>
 
         <section class="crew-middle-grid" aria-label="최근 활동과 정산금액">
@@ -389,14 +401,66 @@
             </table>
           </div>
         </section>
+
+        <section class="crew-workspace-panel" id="crewProfile" aria-label="내정보" hidden>
+          <header class="crew-workspace-header">
+            <div><span class="section-line">크루 계정</span><h2>내정보</h2></div>
+            <button class="crew-workspace-close" type="button" aria-label="내정보 닫기"><i data-lucide="x"></i></button>
+          </header>
+          <div class="crew-workspace-body">
+            <div class="crew-workspace-section">
+              <h3>계정과 추천 링크</h3>
+              <dl class="crew-profile-facts">
+                <div><dt>아이디</dt><dd id="crewProfileLoginId">-</dd></div>
+                <div><dt>승인 상태</dt><dd id="crewProfileStatus">-</dd></div>
+              </dl>
+              <div class="crew-copy-field"><label for="crewProfileCode">추천 코드</label><div><input id="crewProfileCode" readonly value="" /><button type="button" data-copy-field="crewProfileCode" aria-label="추천 코드 복사"><i data-lucide="copy"></i></button></div></div>
+              <div class="crew-copy-field"><label for="crewProfileLink">추천 링크</label><div><input id="crewProfileLink" readonly value="" /><button type="button" data-copy-field="crewProfileLink" aria-label="추천 링크 복사"><i data-lucide="copy"></i></button></div></div>
+              <p class="crew-form-status" id="crewCopyStatus" role="status" aria-live="polite"></p>
+            </div>
+            <form class="crew-workspace-section crew-profile-form" id="crewProfileForm">
+              <h3>연락처와 활동 정보</h3>
+              <div class="crew-form-grid">
+                <label>이름<input name="name" required maxlength="100" autocomplete="name" /></label>
+                <label>연락처<input name="phone" required maxlength="30" autocomplete="tel" inputmode="tel" /></label>
+                <label>활동 채널<input name="activity_channel" maxlength="40" placeholder="예: 블로그, 인스타그램" /></label>
+                <label>SNS 링크<input name="sns_url" maxlength="500" type="text" placeholder="활동 계정 또는 URL" /></label>
+              </div>
+              <label>활동 소개<textarea name="activity_description" required maxlength="2000" rows="4"></textarea></label>
+              <div class="crew-form-actions"><p class="crew-form-status" id="crewProfileSaveStatus" role="status" aria-live="polite"></p><button type="submit" class="crew-primary-button"><i data-lucide="save"></i> 변경 저장</button></div>
+            </form>
+          </div>
+        </section>
+
+        <section class="crew-workspace-panel" id="crewSupport" aria-label="크루 고객센터" hidden>
+          <header class="crew-workspace-header">
+            <div><span class="section-line">크루 지원</span><h2>고객센터</h2></div>
+            <button class="crew-workspace-close" type="button" aria-label="고객센터 닫기"><i data-lucide="x"></i></button>
+          </header>
+          <div class="crew-workspace-body">
+            <div class="crew-workspace-section crew-support-intro">
+              <div><h3>문의 남기기</h3><p>남겨주신 문의는 RE:CAR 운영팀이 확인하고 등록된 연락처로 안내드립니다.</p><small id="crewSupportContact">연락처를 불러오는 중입니다.</small></div>
+              <a href="tel:01065731038"><i data-lucide="phone"></i> 급한 문의 010-6573-1038</a>
+            </div>
+            <form class="crew-workspace-section" id="crewSupportForm">
+              <div class="crew-form-grid">
+                <label>문의 유형<select name="category"><option value="FRIENDS">크루 활동·정산</option><option value="REVIEW">심사</option><option value="CONTRACT">계약·인도</option><option value="ETC">기타</option></select></label>
+                <label>연락 편한 시간<input name="preferred_contact_time" maxlength="100" placeholder="선택 사항" /></label>
+              </div>
+              <label>문의 내용<textarea name="message" required minlength="10" maxlength="2000" rows="5" placeholder="확인이 필요한 내용을 적어주세요."></textarea></label>
+              <div class="crew-form-actions"><p class="crew-form-status" id="crewSupportSaveStatus" role="status" aria-live="polite"></p><button type="submit" class="crew-primary-button"><i data-lucide="send"></i> 문의 남기기</button></div>
+            </form>
+            <div class="crew-workspace-section"><h3>내 문의</h3><div id="crewSupportHistory" class="crew-support-history" aria-live="polite">문의 내역을 불러오는 중입니다.</div></div>
+          </div>
+        </section>
       </div>
     </main>
 
-    <a class="crew-floating-help" href="#" aria-label="크루 빠른 문의">
+    <a class="crew-floating-help" href="#crewSupport" aria-label="크루 빠른 문의">
       <i data-lucide="message-circle"></i>
     </a>
 
-    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js"></script>
+    <script src="./guide/lucide.min.js"></script>
     <script>
       if (window.lucide) {
         window.lucide.createIcons();
@@ -404,6 +468,11 @@
 
       const API_BASE_URL = "https://api.recarplan.com";
       const TOKEN_KEY = "recar_friends_access_token";
+      const profileForm = document.querySelector("#crewProfileForm");
+      const supportForm = document.querySelector("#crewSupportForm");
+      const profilePanel = document.querySelector("#crewProfile");
+      const supportPanel = document.querySelector("#crewSupport");
+      let crewSession = null;
       const settlementHelpWrap = document.querySelector(".settlement-help-wrap");
       const settlementHelpButton = document.querySelector(".settlement-help");
       const accountMenu = document.querySelector(".crew-account-menu");
@@ -431,6 +500,7 @@
 
       accountCopyButton?.addEventListener("click", async () => {
         const copyUrl = accountCopyButton.dataset.copyUrl || "";
+        if (!copyUrl) return;
 
         try {
           if (navigator.clipboard?.writeText) {
@@ -460,10 +530,52 @@
       const analyticsNavItem = document.querySelector('.crew-side-item[href="#crewAnalyticsDetail"]');
       const analyticsCloseButton = document.querySelector(".analytics-close-button");
 
+      function setActiveSideItem(hash) {
+        document.querySelectorAll(".crew-side-item").forEach((item) => {
+          item.classList.toggle("is-active", item.getAttribute("href") === hash);
+        });
+      }
+
+      function closeCrewWorkspace() {
+        profilePanel.hidden = true;
+        supportPanel.hidden = true;
+        document.body.classList.remove("is-crew-workspace-open");
+        if (window.location.hash === "#crewProfile" || window.location.hash === "#crewSupport") {
+          history.replaceState(null, "", window.location.pathname + window.location.search);
+        }
+        setActiveSideItem("#");
+      }
+
+      function syncCrewWorkspace() {
+        const hash = window.location.hash;
+        if (hash === "#crewProfile" || hash === "#crewSupport") {
+          closeAnalyticsDetail();
+          profilePanel.hidden = hash !== "#crewProfile";
+          supportPanel.hidden = hash !== "#crewSupport";
+          document.body.classList.add("is-crew-workspace-open");
+          setActiveSideItem(hash);
+          accountMenu?.classList.remove("is-open");
+          accountButton?.setAttribute("aria-expanded", "false");
+          if (hash === "#crewSupport" && crewSession) void loadCrewSupportHistory();
+        } else {
+          profilePanel.hidden = true;
+          supportPanel.hidden = true;
+          document.body.classList.remove("is-crew-workspace-open");
+        }
+      }
+
+      window.addEventListener("hashchange", syncCrewWorkspace);
+      document.querySelectorAll(".crew-workspace-close").forEach((button) => {
+        button.addEventListener("click", closeCrewWorkspace);
+      });
+
       function openAnalyticsDetail() {
+        profilePanel.hidden = true;
+        supportPanel.hidden = true;
+        document.body.classList.remove("is-crew-workspace-open");
         document.body.classList.add("is-analytics-open");
-        document.querySelectorAll(".crew-side-item").forEach((item) => item.classList.remove("is-active"));
-        analyticsNavItem?.classList.add("is-active");
+        setActiveSideItem("#crewAnalyticsDetail");
+        history.replaceState(null, "", "#crewAnalyticsDetail");
       }
 
       function closeAnalyticsDetail() {
@@ -475,16 +587,23 @@
         openAnalyticsDetail();
       });
 
-      analyticsCloseButton?.addEventListener("click", closeAnalyticsDetail);
+      analyticsCloseButton?.addEventListener("click", () => {
+        closeAnalyticsDetail();
+        history.replaceState(null, "", window.location.pathname + window.location.search);
+        setActiveSideItem("#");
+      });
 
       document.addEventListener("keydown", (event) => {
         if (event.key === "Escape") {
           closeAnalyticsDetail();
+          closeCrewWorkspace();
         }
       });
 
       if (window.location.hash === "#crewAnalyticsDetail") {
         requestAnimationFrame(openAnalyticsDetail);
+      } else {
+        syncCrewWorkspace();
       }
 
       settlementHelpButton?.addEventListener("click", () => {
@@ -679,12 +798,44 @@
       function renderAccount(status, dashboard) {
         const name = status?.name || "크루";
         const code = dashboard.referral_code || dashboard.referral?.code || "-";
-        const link = dashboard.referral_link || dashboard.referral?.link || `https://recarplan.com/crew/?ref=${encodeURIComponent(code)}`;
+        const link = dashboard.referral_link || dashboard.referral?.link || (code !== "-" ? `https://recarplan.com/?ref=${encodeURIComponent(code)}` : "");
         setText("#crewAccountLabel", `${name}님의 계정`);
         setText("#crewAccountAvatar", name.slice(0, 1) || "크");
         setText("#crewAccountName", name);
         setText("#crewAccountCode", `RE:CAR 크루 · ${code}`);
         accountCopyButton.dataset.copyUrl = link;
+        accountCopyButton.disabled = !link;
+        document.querySelector("#crewProfileCode").value = code === "-" ? "" : code;
+        document.querySelector("#crewProfileLink").value = link;
+        document.querySelectorAll("[data-copy-field]").forEach((button) => {
+          button.disabled = !document.getElementById(button.dataset.copyField)?.value;
+        });
+      }
+
+      function renderProfile(status) {
+        document.querySelector("#crewProfileLoginId").textContent = status?.login_id || "-";
+        document.querySelector("#crewProfileStatus").textContent = status?.status === "APPROVED" ? "승인" : "확인 중";
+        for (const field of ["name", "phone", "sns_url", "activity_channel", "activity_description"]) {
+          profileForm.elements.namedItem(field).value = status?.[field] || "";
+        }
+        document.querySelector("#crewSupportContact").textContent = status?.phone
+          ? `운영팀 연락처: ${status.phone}` : "등록된 연락처를 확인해 주세요.";
+      }
+
+      function renderVehicleBenefit(dashboard) {
+        const benefit = dashboard.vehicle_benefit;
+        if (!benefit || !Number.isFinite(Number(benefit.eligible_contracts))) {
+          setText("#crewBenefitCount", "집계 준비 중");
+          return;
+        }
+        const target = safeNumber(benefit.target_contracts) || 100;
+        const eligible = safeNumber(benefit.eligible_contracts);
+        const remaining = Math.max(target - eligible, 0);
+        setText("#crewBenefitCount", `${numberText(eligible)}대`);
+        setText("#crewBenefitRemaining", remaining ? `· ${numberText(remaining)}대 남음` : "· 목표 달성");
+        const progress = document.querySelector("#crewBenefitProgress");
+        progress.max = target;
+        progress.value = Math.min(eligible, target);
       }
 
       function renderSummary(metrics, dashboard) {
@@ -925,12 +1076,98 @@
       function renderDashboard(status, dashboard) {
         const metrics = normalizeCrewMetrics(dashboard);
         renderAccount(status, dashboard);
+        renderProfile(status);
+        renderVehicleBenefit(dashboard);
         renderSummary(metrics, dashboard);
         renderRecent(dashboard);
         renderSettlement(metrics, dashboard);
         renderCharts(metrics);
         renderAnalytics(metrics, dashboard);
       }
+
+      document.querySelectorAll("[data-copy-field]").forEach((button) => {
+        button.addEventListener("click", async () => {
+          const value = document.getElementById(button.dataset.copyField)?.value || "";
+          if (!value) return;
+          try {
+            if (navigator.clipboard?.writeText) await navigator.clipboard.writeText(value);
+            else fallbackCopyText(value);
+            setText("#crewCopyStatus", "복사했습니다.");
+          } catch {
+            fallbackCopyText(value);
+            setText("#crewCopyStatus", "복사했습니다.");
+          }
+        });
+      });
+
+      profileForm?.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        if (!crewSession) return;
+        const button = profileForm.querySelector('[type="submit"]');
+        button.disabled = true;
+        setText("#crewProfileSaveStatus", "저장 중입니다.");
+        const values = new FormData(profileForm);
+        const body = Object.fromEntries(
+          ["name", "phone", "sns_url", "activity_channel", "activity_description"]
+            .map((field) => [field, String(values.get(field) || "").trim()]),
+        );
+        try {
+          const updated = await apiJson("/api/v1/friends/profile", crewSession.token, {
+            method: "PATCH", body: JSON.stringify(body),
+          });
+          crewSession.status = updated;
+          renderProfile(updated);
+          renderAccount(updated, crewSession.dashboard);
+          setText("#crewProfileSaveStatus", "변경한 정보를 저장했습니다.");
+        } catch (error) {
+          setText("#crewProfileSaveStatus", error.message || "저장하지 못했습니다. 다시 시도해 주세요.");
+        } finally {
+          button.disabled = false;
+        }
+      });
+
+      async function loadCrewSupportHistory() {
+        if (!crewSession) return;
+        const historyPanel = document.querySelector("#crewSupportHistory");
+        historyPanel.textContent = "문의 내역을 불러오는 중입니다.";
+        try {
+          const result = await apiJson("/api/v1/friends/support/requests", crewSession.token);
+          const items = Array.isArray(result.items) ? result.items : [];
+          const labels = { NEW: "접수", IN_PROGRESS: "처리 중", CONTACTED: "연락 완료", RESOLVED: "해결", CANCELLED: "취소" };
+          historyPanel.innerHTML = items.length ? items.map((item) => {
+            const date = item.created_at ? new Date(item.created_at).toLocaleDateString("ko-KR") : "-";
+            return `<div class="crew-support-item"><span>${escapeHtml(date)}</span><p>${escapeHtml(item.message)}</p><strong>${escapeHtml(labels[item.status] || item.status)}</strong></div>`;
+          }).join("") : '<p class="crew-support-empty">남긴 문의가 없습니다.</p>';
+        } catch (error) {
+          historyPanel.textContent = error.message || "문의 내역을 불러오지 못했습니다.";
+        }
+      }
+
+      supportForm?.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        if (!crewSession) return;
+        const button = supportForm.querySelector('[type="submit"]');
+        button.disabled = true;
+        setText("#crewSupportSaveStatus", "문의를 접수하는 중입니다.");
+        const values = new FormData(supportForm);
+        try {
+          await apiJson("/api/v1/friends/support/requests", crewSession.token, {
+            method: "POST",
+            body: JSON.stringify({
+              category: String(values.get("category") || "FRIENDS"),
+              message: String(values.get("message") || "").trim(),
+              preferred_contact_time: String(values.get("preferred_contact_time") || "").trim(),
+            }),
+          });
+          supportForm.elements.namedItem("message").value = "";
+          setText("#crewSupportSaveStatus", "접수됐습니다. 운영팀이 확인 후 연락드리겠습니다.");
+          await loadCrewSupportHistory();
+        } catch (error) {
+          setText("#crewSupportSaveStatus", error.message || "접수하지 못했습니다. 다시 시도해 주세요.");
+        } finally {
+          button.disabled = false;
+        }
+      });
 
       async function loadCrewDashboard() {
         const token = localStorage.getItem(TOKEN_KEY);
@@ -945,7 +1182,9 @@
             return;
           }
           const dashboard = await apiJson("/api/v1/friends/dashboard", token);
+          crewSession = { token, status, dashboard };
           renderDashboard(status, dashboard);
+          if (window.location.hash === "#crewSupport") void loadCrewSupportHistory();
         } catch (error) {
           localStorage.removeItem(TOKEN_KEY);
           window.location.replace("./login.html");
