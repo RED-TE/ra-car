@@ -64,6 +64,28 @@ test("link visits stay separate from customer referrals", async ({ page }) => {
 });
 
 for (const [label, viewport] of [["desktop", { width: 1440, height: 900 }], ["mobile", { width: 390, height: 844 }]]) {
+  test(`crew header stays in crew and separates homepage on ${label}`, async ({ page }) => {
+    await page.setViewportSize(viewport);
+    await page.goto("/crew/login.html");
+    const loginBrand = page.getByRole("link", { name: "크루 로그인" });
+    await expect(loginBrand).toHaveAttribute("href", "./login.html");
+    await expect(page.locator(".crew-login-home-link")).toBeVisible();
+    await expect(page.locator(".crew-login-home-link")).toHaveAttribute("href", "https://recarplan.com/");
+    await loginBrand.click();
+    await expect(page).toHaveURL(/\/crew\/login\.html$/);
+
+    await mockCrewApi(page);
+    await page.goto("/crew/index.html#crewSupport");
+    const dashboardBrand = page.locator(".crew-topbar-brand");
+    await expect(dashboardBrand).toBeVisible();
+    await expect(page.locator(".crew-homepage-link")).toBeVisible();
+    await expect(page.locator(".crew-homepage-link")).toHaveAttribute("href", "https://recarplan.com/");
+    await dashboardBrand.click();
+    await expect(page).toHaveURL(/\/crew\/index\.html#$/);
+    await expect(page.getByRole("heading", { name: "고객센터" })).not.toBeVisible();
+    expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(viewport.width);
+  });
+
   test(`crew self-service and support on ${label}`, async ({ context, page }, testInfo) => {
     await page.setViewportSize(viewport);
     await context.grantPermissions(["clipboard-read", "clipboard-write"]);
