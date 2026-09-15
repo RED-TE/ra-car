@@ -86,6 +86,12 @@ input {
   font-weight: 850;
 }
 
+.crew-login-home-link {
+  padding: 7px 10px;
+  border: 1px solid #d8dee7;
+  border-radius: 6px;
+}
+
 .crew-login-nav-action {
   padding: 0;
   color: inherit;
@@ -890,9 +896,9 @@ input {
   }
 
   .crew-login-nav nav {
-    gap: 0;
+    gap: 8px;
   }
-  .crew-login-nav nav a:not(.crew-login-nav-action) { display: none; }
+  .crew-login-nav nav a:not(.crew-login-nav-action):not(.crew-login-home-link) { display: none; }
   .crew-login-nav-action { color: #384ac1; }
 
   .crew-login-hero {
