@@ -13,7 +13,7 @@
     <link rel="icon" type="image/png" href="../assets/recar-favicon-20260518.png" />
     <link rel="apple-touch-icon" href="../assets/recar-favicon-20260518.png" />
     <link rel="preconnect" href="https://api.recarplan.com" crossorigin />
-    <link rel="stylesheet" href="./login.css?v=20260915-crew-trust" />
+    <link rel="stylesheet" href="./login.css?v=20260915-crew-promotion" />
   </head>
   <body class="crew-login-page">
     <header class="crew-login-nav">
@@ -26,6 +26,23 @@
         <a href="tel:01065731038">문의 010-6573-1038</a>
       </nav>
     </header>
+
+    <aside class="crew-promotion-notice" id="crewPromotionNotice" aria-labelledby="crewPromotionTitle">
+      <button class="crew-promotion-close" id="crewPromotionClose" type="button" aria-label="프로모션 알림 닫기" title="닫기">
+        <i data-lucide="x" aria-hidden="true"></i>
+      </button>
+      <div class="crew-promotion-body">
+        <div class="crew-promotion-copy">
+          <span class="crew-promotion-kicker">누적 유효 계약 100대 달성 혜택</span>
+          <h2 id="crewPromotionTitle">Tesla Model Y<br />1년 이용 지원</h2>
+        </div>
+        <img src="../assets/crew-knowledge/tesla-model-y-reward.png" alt="" width="360" height="165" />
+      </div>
+      <div class="crew-promotion-footer">
+        <small>취소·보상 제외 건은 집계되지 않습니다. 세부 이용 조건은 달성 시 안내됩니다.</small>
+        <a href="./guide/#rewards">혜택 기준 보기 <i data-lucide="arrow-up-right" aria-hidden="true"></i></a>
+      </div>
+    </aside>
 
     <main>
       <section class="crew-login-hero" aria-label="크루 로그인">
@@ -238,8 +255,8 @@
         <div class="crew-login-reward-copy">
           <span>크루 보상</span>
           <h2 id="crewRewardTitle">계약마다 건별 보상,<br />누적 성과에는 차량 혜택까지</h2>
-          <p>유효 계약 1건당 20~45만원을 정산하며, 누적 유효 계약 100대 달성 시 예시 차량 중 1대를 1년간 이용하는 혜택을 제공합니다.</p>
-          <small>실제 보상과 지급 시점, 차량 모델·색상·사양은 계약 및 운영 정책에 따라 달라질 수 있습니다.</small>
+          <p>유효 계약 1건당 20~45만원을 정산하며, 누적 유효 계약 100대 달성 시 Tesla Model Y 1년 이용을 지원합니다.</p>
+          <small>취소·보상 제외 건은 100대 집계에서 제외됩니다. 차량 사양·보험·주행거리와 세부 이용 조건은 달성 시 운영팀이 안내합니다.</small>
         </div>
         <div class="crew-login-reward-items">
           <article>
@@ -250,7 +267,7 @@
           <article>
             <img src="../assets/crew-njob/custom-icons/benefit-milestone.png" alt="" width="512" height="512" loading="lazy" />
             <span>누적 계약 100대 달성 시</span>
-            <strong>차량 1년 이용 혜택</strong>
+            <strong>Tesla Model Y 1년 이용 지원</strong>
           </article>
         </div>
       </section>
@@ -270,7 +287,20 @@
       </section>
     </main>
 
+    <script src="./guide/lucide.min.js"></script>
     <script>
+      window.lucide?.createIcons({ attrs: { "stroke-width": 2 } });
+      const promotionNotice = document.querySelector("#crewPromotionNotice");
+      try {
+        promotionNotice.hidden = sessionStorage.getItem("recar_crew_100_promotion_dismissed") === "1";
+      } catch { /* Storage may be unavailable in private browsing. */ }
+      document.querySelector("#crewPromotionClose").addEventListener("click", () => {
+        promotionNotice.hidden = true;
+        try {
+          sessionStorage.setItem("recar_crew_100_promotion_dismissed", "1");
+        } catch { /* The current visit can still dismiss the notice. */ }
+      });
+
       const API_BASE_URL = "https://api.recarplan.com";
       const TOKEN_KEY = "recar_friends_access_token";
       const loginForm = document.querySelector("#crewLoginForm");

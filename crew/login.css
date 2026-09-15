@@ -94,6 +94,94 @@ input {
   cursor: pointer;
 }
 
+.crew-promotion-notice {
+  position: fixed;
+  z-index: 8;
+  right: 22px;
+  bottom: 22px;
+  width: min(350px, calc(100vw - 28px));
+  padding: 18px;
+  color: #20242a;
+  background: #fff;
+  border: 1px solid #dce4ef;
+  border-radius: 8px;
+  box-shadow: 0 16px 42px rgba(28, 35, 52, 0.16);
+  text-align: left;
+}
+
+.crew-promotion-notice[hidden] { display: none; }
+
+.crew-promotion-close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: grid;
+  place-items: center;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  color: #596576;
+  background: transparent;
+  border: 0;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.crew-promotion-close:hover,
+.crew-promotion-close:focus-visible { background: #eef2f8; }
+.crew-promotion-close svg,
+.crew-promotion-footer svg { width: 16px; height: 16px; }
+
+.crew-promotion-body { display: flex; align-items: center; gap: 5px; }
+.crew-promotion-copy { min-width: 0; flex: 1; }
+.crew-promotion-kicker {
+  display: block;
+  margin-bottom: 7px;
+  color: #385cc4;
+  font-size: 11px;
+  font-weight: 850;
+}
+.crew-promotion-copy h2 {
+  margin: 0;
+  color: #171a1f;
+  font-size: 18px;
+  font-weight: 900;
+  line-height: 1.25;
+}
+.crew-promotion-body img {
+  width: 112px;
+  height: auto;
+  flex: none;
+  object-fit: contain;
+}
+.crew-promotion-footer {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 10px;
+  margin-top: 13px;
+  padding-top: 11px;
+  border-top: 1px solid #e8edf4;
+}
+.crew-promotion-footer small {
+  max-width: 205px;
+  color: #687485;
+  font-size: 10px;
+  line-height: 1.4;
+}
+.crew-promotion-footer a {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  flex: none;
+  color: #3159c9;
+  font-size: 11px;
+  font-weight: 850;
+  white-space: nowrap;
+}
+.crew-promotion-footer a:hover,
+.crew-promotion-footer a:focus-visible { text-decoration: underline; }
+
 .crew-login-hero {
   position: relative;
   width: 100%;
@@ -782,6 +870,21 @@ input {
 }
 
 @media (max-width: 760px) {
+  .crew-promotion-notice {
+    position: relative;
+    right: auto;
+    bottom: auto;
+    width: calc(100% - 28px);
+    max-width: 350px;
+    margin: 12px auto;
+    padding: 12px 14px;
+    box-shadow: 0 8px 24px rgba(28, 35, 52, 0.08);
+  }
+  .crew-promotion-body img { width: 90px; }
+  .crew-promotion-copy h2 { font-size: 17px; }
+  .crew-promotion-footer { margin-top: 8px; padding-top: 8px; }
+  .crew-promotion-footer small { max-width: 175px; }
+
   .crew-login-nav {
     width: calc(100% - 28px);
   }
