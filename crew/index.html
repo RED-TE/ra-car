@@ -869,7 +869,7 @@
           profileForm.elements.namedItem(field).value = status?.[field] || "";
         }
         document.querySelector("#crewSupportContact").textContent = status?.phone
-          ? `운영팀 연락처: ${status.phone}` : "등록된 연락처를 확인해 주세요.";
+          ? `내 등록 연락처: ${status.phone}` : "등록된 연락처를 확인해 주세요.";
       }
 
       function renderVehicleBenefit(dashboard) {
@@ -892,7 +892,7 @@
         setText("#crewWaitingCount", `${numberText(metrics.contract_pending_count)}건 대기`);
         setText("#crewConversionRate", percentText(metrics.conversion_rate));
         setText("#crewTotalReferrals", `${numberText(metrics.referral_count)}명`);
-        setText("#crewAlertCount", String(Math.min((dashboard.recent_events || []).length, 9)));
+        setText("#crewAlertCount", String(Math.min((dashboard.recent_events || []).filter((event) => event.type !== "DOWNLOAD").length, 9)));
         setText("#referralCount", numberText(metrics.referral_count));
         setText("#appReferralCount", numberText(metrics.app_referral_count));
         setText("#codeReferralCount", numberText(metrics.unique_code_click_count));
@@ -908,6 +908,7 @@
       }
 
       function eventTypeLabel(type) {
+        if (type === "DOWNLOAD") return "링크 방문";
         if (type === "CONTRACT_DELIVERED") return "인도";
         if (type === "CONTRACT_PENDING") return "계약";
         if (type === "CONDITION_REQUEST") return "심사";
@@ -915,6 +916,7 @@
       }
 
       function eventStatusLabel(status) {
+        if (status === "ANALYTICS") return "방문";
         if (status === "AVAILABLE" || status === "PAID") return "정산가능";
         if (status === "CONFIRMED") return "확정";
         if (status === "PENDING") return "검토중";
@@ -938,9 +940,10 @@
         }
         recentActivityList.innerHTML = events
           .map((event) => {
+            const isVisit = event.type === "DOWNLOAD";
             const stage = eventTypeLabel(event.type);
             const badge = eventStatusLabel(event.status);
-            const name = escapeHtml(event.customer_name_masked || "추천 고객");
+            const name = escapeHtml(isVisit ? "추천 링크 방문" : event.customer_name_masked || "추천 고객");
             const codeText = escapeHtml(code);
             const occurredAt = escapeHtml(event.occurred_at ? longDateLabel({ date: event.occurred_at, label: "" }) : "-");
             const badgeText = escapeHtml(badge);
@@ -952,10 +955,10 @@
                   <span>추천코드 ${codeText} · ${occurredAt}</span>
                 </div>
                 <span class="state-badge ${eventBadgeClass(event.status)}">${badgeText}</span>
-                <span class="request-count">1명</span>
-                <span class="row-metric success-text"><b>${stageText}</b> 단계</span>
-                <span class="row-metric fail-text"><b>${moneyText(event.amount || 0)}</b></span>
-                <span class="row-metric wait-text"><b>${badgeText}</b></span>
+                <span class="request-count">${isVisit ? "1회" : "1명"}</span>
+                <span class="row-metric success-text"><b>${stageText}</b>${isVisit ? "" : " 단계"}</span>
+                <span class="row-metric fail-text"><b>${isVisit ? "-" : moneyText(event.amount || 0)}</b></span>
+                <span class="row-metric wait-text"><b>${isVisit ? "문의 전" : badgeText}</b></span>
                 <i data-lucide="chevron-right"></i>
               </a>`;
           })
