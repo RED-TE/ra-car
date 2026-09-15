@@ -91,8 +91,7 @@ test("development serves public aliases and the preview route", async () => {
     const crewHtml = await crewResponse.text();
     assert.match(crewHtml, /https:\/\/recarplan\.com\/crew/);
     assert.match(crewHtml, /params\.get\("ref"\)/);
-    assert.match(crewHtml, /new URL\("\/app\/", window\.location\.origin\)/);
-    assert.match(crewHtml, /target\.searchParams\.set\("ref", referralCode\)/);
+    assert.match(crewHtml, /new URL\(`\/r\/\$\{referralCode\}`/);
     assert.doesNotMatch(crewHtml, /vercel\.app/);
 
     const friendsResponse = await fetch(`${server.baseUrl}/friends/?ref=RC-QA1234`);
@@ -163,6 +162,21 @@ test("private data and unknown knowledge files stay blocked", async () => {
     const unknownFile = await fetch(`${server.baseUrl}/crew/guide/missing.js`);
     assert.equal(privateData.status, 404);
     assert.equal(unknownFile.status, 404);
+  } finally {
+    await server.stop();
+  }
+});
+
+test("individual crew links serve the real homepage without opening arbitrary paths", async () => {
+  const server = await startServer("production");
+  try {
+    const response = await fetch(`${server.baseUrl}/r/RC-QA1234`);
+    assert.equal(response.status, 200);
+    const html = await response.text();
+    assert.match(html, /<base href="\/">/);
+    assert.match(html, /RE:CAR 리카/);
+    assert.equal((await fetch(`${server.baseUrl}/r/not-a-code`)).status, 404);
+    assert.equal((await fetch(`${server.baseUrl}/r/RC-QA1234/other`)).status, 404);
   } finally {
     await server.stop();
   }
@@ -248,12 +262,10 @@ test("crew application CTAs always open the application form", async () => {
   assert.match(loginHtml, /consentAllInput\.addEventListener\("change"/);
   assert.match(loginHtml, /input\.checked = consentAllInput\.checked/);
   assert.match(loginHtml, /consentAllInput\.indeterminate = partiallyChecked/);
-  assert.match(loginHtml, /id="crewServiceNotice"[^>]*role="dialog"[^>]*aria-modal="true"/);
-  assert.match(loginHtml, /크루 가입 신청이[\s\S]*정상화되었습니다/);
-  assert.match(loginHtml, /일부 가입 신청이 원활하지 않았습니다/);
-  assert.match(loginHtml, /id="crewServiceNoticeDismiss"[^>]*>다시 보지 않기</);
-  assert.match(loginHtml, /id="crewServiceNoticeClose"[^>]*aria-label="가입 신청 정상화 안내 닫기"/);
-  assert.match(loginHtml, /localStorage\.setItem\(SERVICE_NOTICE_KEY, "dismissed"\)/);
+  assert.doesNotMatch(loginHtml, /id="crewServiceNotice"|SERVICE_NOTICE_KEY/);
+  assert.match(loginHtml, /id="crewId"/);
+  assert.match(loginHtml, /승인 후 전용 링크 발급/);
+  assert.match(loginHtml, /계약·인도 완료 건당 20~45만원/);
 });
 
 test("crew surfaces expose the same quick guide PDF", () => {

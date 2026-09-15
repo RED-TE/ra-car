@@ -2224,6 +2224,7 @@ async function saveLeadToFirebase(lead) {
 
 function serveStatic(request, response, url) {
   const pathname = decodeURIComponent(url.pathname);
+  const isCrewReferralPath = /^\/r\/RC-[A-Z0-9]{4,16}\/?$/i.test(pathname);
 
   if (pathname.startsWith("/data/") && !isPublicStaticPath(pathname)) {
     response.writeHead(404);
@@ -2232,6 +2233,9 @@ function serveStatic(request, response, url) {
   }
 
   let requestedPath = pathname === "/" ? "/index.html" : pathname;
+  if (isCrewReferralPath) {
+    requestedPath = "/index.html";
+  }
   if (requestedPath === "/inquiry" || requestedPath === "/inquiry/") {
     requestedPath = "/inquiry/index.html";
   }
@@ -2310,7 +2314,9 @@ function serveStatic(request, response, url) {
       "Content-Type": mimeTypes[path.extname(filePath).toLowerCase()] || "application/octet-stream",
       ...getSecurityHeaders(),
     });
-    response.end(content);
+    response.end(isCrewReferralPath
+      ? content.toString("utf8").replace("<head>", '<head>\n    <base href="/">')
+      : content);
   });
 }
 

@@ -103,6 +103,7 @@ const referralCodeOutput = document.querySelector("[data-referral-code]");
 const referralCopyButton = document.querySelector("[data-referral-copy]");
 const referralCloseButton = document.querySelector("[data-referral-close]");
 const referralStorageKey = "recar_referral_code";
+const referralEntryPathKey = "recar_referral_entry_path";
 let activeReferralCode = "";
 const defaultLeadContext = {
   leadSource: quoteForm?.dataset.defaultLeadSource || "",
@@ -229,12 +230,20 @@ async function copyReferralCode() {
 function initializeReferral() {
   const params = new URLSearchParams(window.location.search);
   const queryCode = normalizeReferralCode(params.get("ref"));
-  activeReferralCode = queryCode || readStoredReferralCode();
+  const routeCode = normalizeReferralCode(window.location.pathname.match(/^\/r\/(RC-[A-Z0-9]{4,16})\/?$/i)?.[1]);
+  activeReferralCode = routeCode || queryCode || readStoredReferralCode();
   if (!activeReferralCode) return;
 
   writeStoredReferralCode(activeReferralCode);
+  if (routeCode) {
+    try {
+      window.sessionStorage.setItem(referralEntryPathKey, window.location.pathname);
+    } catch {
+      // The referral code remains available on the current page.
+    }
+  }
   setReferralNotice(activeReferralCode);
-  if (queryCode) trackReferralVisit(queryCode);
+  if (routeCode || queryCode) trackReferralVisit(activeReferralCode);
 }
 
 function isValidPhone(value) {
@@ -278,6 +287,12 @@ function setPendingLeadContext(context = {}) {
 function getLeadPayload() {
   const leadContext = normalizeLeadContext(pendingLeadContext);
   const contextSource = leadContext.campaignLabel || leadContext.leadSource;
+  let referralEntryPath = "";
+  try {
+    referralEntryPath = window.sessionStorage.getItem(referralEntryPathKey) || "";
+  } catch {
+    // The code itself still travels with the inquiry.
+  }
 
   return {
     id: makeLeadId(),
@@ -294,11 +309,12 @@ function getLeadPayload() {
     termsVersion: "2026-05-10",
     page: window.location.href,
     source: contextSource || document.querySelector(".hero-slide.is-active h1")?.textContent.trim() || "RE:CAR",
-    entryPoint: quoteForm?.dataset.entryPoint || "홈페이지 상담 폼",
+    entryPoint: referralEntryPath ? "크루 전용 링크" : quoteForm?.dataset.entryPoint || "홈페이지 상담 폼",
     leadSource: leadContext.leadSource,
     campaign: leadContext.campaign,
     campaignLabel: leadContext.campaignLabel,
     referralCode: activeReferralCode || readStoredReferralCode(),
+    referralEntryPath,
     timeDealOriginalMonthlyPayment: leadContext.timeDealOriginalMonthlyPayment,
     timeDealMonthlyPayment: leadContext.timeDealMonthlyPayment,
     timeDealDiscount: leadContext.timeDealDiscount,

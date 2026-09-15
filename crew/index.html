@@ -14,14 +14,14 @@
     <link rel="icon" type="image/png" href="../assets/recar-favicon-20260518.png" />
     <link rel="apple-touch-icon" href="../assets/recar-favicon-20260518.png" />
     <link rel="preconnect" href="https://api.recarplan.com" crossorigin />
-    <link rel="stylesheet" href="./crew.css?v=20260703-live-metrics" />
+    <link rel="stylesheet" href="./crew.css?v=20260915-share-workspace" />
     <script>
       const params = new URLSearchParams(window.location.search);
       const referralCode = params.get("ref")?.trim().toUpperCase();
       if (referralCode) {
-        const target = new URL("/app/", window.location.origin);
-        target.searchParams.set("ref", referralCode);
-        window.location.replace(target.href);
+        if (/^RC-[A-Z0-9]{4,16}$/.test(referralCode)) {
+          window.location.replace(new URL(`/r/${referralCode}`, window.location.origin).href);
+        }
       }
     </script>
   </head>
@@ -79,11 +79,11 @@
             <button class="account-copy-link" type="button" data-copy-url="">
               <span>
                 <i data-lucide="link"></i>
-                추천인 본인링크
+                추천 공유문
               </span>
               <strong>복사</strong>
             </button>
-            <small class="account-copy-status" aria-live="polite">추천 링크를 바로 복사할 수 있습니다.</small>
+            <small class="account-copy-status" aria-live="polite">수수료 안내를 포함해 복사합니다.</small>
             <p class="account-commission-disclosure">
               수수료 고지: 이 추천 링크를 통한 계약·인도 시 RE:CAR 크루 활동의 일환으로 크루에게 수수료가 지급될 수 있습니다.
             </p>
@@ -97,8 +97,31 @@
       <div class="crew-console-content">
         <nav class="crew-dashboard-tabs" aria-label="대시보드 전환">
           <a class="is-active" href="#">크루 대시보드</a>
-          <a href="#">요청 대시보드</a>
+          <a href="#crewSupport">고객센터</a>
         </nav>
+        <div class="crew-load-error" id="crewLoadError" role="alert" hidden>
+          <span>크루 정보를 불러오지 못했습니다. 연결을 확인한 뒤 다시 시도해 주세요.</span>
+          <button type="button" id="crewLoadRetry"><i data-lucide="refresh-cw" aria-hidden="true"></i> 다시 시도</button>
+        </div>
+
+        <section class="crew-share-workspace" aria-label="추천 링크 공유">
+          <div class="crew-share-main">
+            <span class="section-line">내 추천 주소</span>
+            <h2>추천은 링크 하나로</h2>
+            <p>홈페이지 문의는 추천코드로 확인되며, 실적은 운영팀 검토 후 반영됩니다.</p>
+            <div class="crew-share-controls">
+              <label for="crewShareLink" class="sr-only">내 추천 주소</label>
+              <input id="crewShareLink" readonly placeholder="주소를 불러오는 중입니다" />
+              <button class="crew-primary-button" id="crewShareCopy" type="button" disabled><i data-lucide="copy" aria-hidden="true"></i> 공유문 복사</button>
+              <a id="crewShareOpen" href="#" target="_blank" rel="noopener noreferrer" aria-label="추천 주소 열기" title="추천 주소 열기"><i data-lucide="arrow-up-right" aria-hidden="true"></i></a>
+            </div>
+            <p class="crew-form-status" id="crewShareStatus" role="status" aria-live="polite"></p>
+          </div>
+          <div class="crew-share-side">
+            <div class="crew-share-counts"><span>기록된 방문 <strong id="crewShareVisits">-</strong></span><span>확인된 추천 <strong id="crewShareReferrals">-</strong></span></div>
+            <p id="crewShareDisclosure">RE:CAR 크루 활동의 일환으로 제공하는 링크입니다. 계약·인도 시 크루에게 수수료가 지급될 수 있습니다.</p>
+          </div>
+        </section>
 
         <section class="crew-summary-grid" aria-label="크루 요약">
           <article class="crew-stat-card">
@@ -165,7 +188,7 @@
                 <h2 id="recentActivityTitle">최근 활동 수 0건</h2>
                 <span class="neutral-badge">심사 및 계약 진행 단계 업데이트</span>
               </div>
-              <a href="#">전체 보기 <i data-lucide="chevron-right"></i></a>
+              <a href="#crewAnalyticsDetail">전체 보기 <i data-lucide="chevron-right"></i></a>
             </header>
 
             <div class="request-list" id="recentActivityList">
@@ -216,8 +239,8 @@
               <span><b id="settlementReviewCount">0건</b> 검토중</span>
             </div>
 
-            <a class="settlement-request-button" href="#">
-              정산요청
+            <a class="settlement-request-button" href="#crewSupport">
+              정산 문의
               <i data-lucide="chevron-right"></i>
             </a>
           </article>
@@ -415,7 +438,7 @@
                 <div><dt>승인 상태</dt><dd id="crewProfileStatus">-</dd></div>
               </dl>
               <div class="crew-copy-field"><label for="crewProfileCode">추천 코드</label><div><input id="crewProfileCode" readonly value="" /><button type="button" data-copy-field="crewProfileCode" aria-label="추천 코드 복사"><i data-lucide="copy"></i></button></div></div>
-              <div class="crew-copy-field"><label for="crewProfileLink">추천 링크</label><div><input id="crewProfileLink" readonly value="" /><button type="button" data-copy-field="crewProfileLink" aria-label="추천 링크 복사"><i data-lucide="copy"></i></button></div></div>
+              <div class="crew-copy-field"><label for="crewProfileLink">추천 링크</label><div><input id="crewProfileLink" readonly value="" /><button type="button" data-copy-field="crewProfileLink" aria-label="고지 포함 추천 공유문 복사"><i data-lucide="copy"></i></button></div></div>
               <p class="crew-form-status" id="crewCopyStatus" role="status" aria-live="polite"></p>
             </div>
             <form class="crew-workspace-section crew-profile-form" id="crewProfileForm">
@@ -479,6 +502,8 @@
       const accountButton = document.querySelector(".crew-account-button");
       const accountCopyButton = document.querySelector(".account-copy-link");
       const accountCopyStatus = document.querySelector(".account-copy-status");
+      const shareCopyButton = document.querySelector("#crewShareCopy");
+      const shareLinkInput = document.querySelector("#crewShareLink");
       const wonFormatter = new Intl.NumberFormat("ko-KR");
 
       function fallbackCopyText(text) {
@@ -489,8 +514,23 @@
         textarea.style.left = "-9999px";
         document.body.appendChild(textarea);
         textarea.select();
-        document.execCommand("copy");
+        const copied = document.execCommand("copy");
         textarea.remove();
+        if (!copied) throw new Error("복사 권한을 확인해 주세요.");
+      }
+
+      function shareMessage(link) {
+        return `RE:CAR 크루 활동의 일환으로 제공하는 추천 링크입니다. 이 링크를 통한 계약과 차량 인도가 완료되면 저에게 수수료가 지급될 수 있습니다. 고객에게 별도 수수료는 청구되지 않습니다.\n차량 조건 비교와 상담: ${link}`;
+      }
+
+      async function copyText(value) {
+        if (navigator.clipboard?.writeText) {
+          try {
+            await navigator.clipboard.writeText(value);
+            return;
+          } catch {}
+        }
+        fallbackCopyText(value);
       }
 
       accountButton?.addEventListener("click", () => {
@@ -499,23 +539,25 @@
       });
 
       accountCopyButton?.addEventListener("click", async () => {
-        const copyUrl = accountCopyButton.dataset.copyUrl || "";
-        if (!copyUrl) return;
-
+        const link = accountCopyButton.dataset.copyUrl || "";
+        if (!link) return;
         try {
-          if (navigator.clipboard?.writeText) {
-            await navigator.clipboard.writeText(copyUrl);
-          } else {
-            fallbackCopyText(copyUrl);
-          }
-          accountCopyStatus.textContent = "추천인 본인링크가 복사되었습니다.";
+          await copyText(shareMessage(link));
+          accountCopyStatus.textContent = "수수료 안내를 포함한 공유문을 복사했습니다.";
           accountCopyStatus.classList.add("is-copied");
           accountCopyButton.querySelector("strong").textContent = "복사됨";
-        } catch (error) {
-          fallbackCopyText(copyUrl);
-          accountCopyStatus.textContent = "추천인 본인링크가 복사되었습니다.";
-          accountCopyStatus.classList.add("is-copied");
-          accountCopyButton.querySelector("strong").textContent = "복사됨";
+        } catch {
+          accountCopyStatus.textContent = "복사하지 못했습니다. 브라우저 권한을 확인해 주세요.";
+        }
+      });
+
+      shareCopyButton?.addEventListener("click", async () => {
+        if (!shareLinkInput.value) return;
+        try {
+          await copyText(shareMessage(shareLinkInput.value));
+          setText("#crewShareStatus", "수수료 안내를 포함한 공유문을 복사했습니다.");
+        } catch {
+          setText("#crewShareStatus", "복사하지 못했습니다. 브라우저 권한을 확인해 주세요.");
         }
       });
 
@@ -779,7 +821,9 @@
             const body = await response.json();
             message = body.message || body.detail || message;
           } catch {}
-          throw new Error(message);
+          const error = new Error(message);
+          error.status = response.status;
+          throw error;
         }
         return response.json();
       }
@@ -797,14 +841,20 @@
 
       function renderAccount(status, dashboard) {
         const name = status?.name || "크루";
-        const code = dashboard.referral_code || dashboard.referral?.code || "-";
-        const link = dashboard.referral_link || dashboard.referral?.link || (code !== "-" ? `https://recarplan.com/?ref=${encodeURIComponent(code)}` : "");
+        const rawCode = String(dashboard.referral_code || dashboard.referral?.code || "").trim().toUpperCase();
+        const code = /^RC-[A-Z0-9]{4,16}$/.test(rawCode) ? rawCode : "-";
+        const link = code === "-" ? "" : `https://recarplan.com/r/${encodeURIComponent(code)}`;
         setText("#crewAccountLabel", `${name}님의 계정`);
         setText("#crewAccountAvatar", name.slice(0, 1) || "크");
         setText("#crewAccountName", name);
         setText("#crewAccountCode", `RE:CAR 크루 · ${code}`);
         accountCopyButton.dataset.copyUrl = link;
         accountCopyButton.disabled = !link;
+        shareLinkInput.value = link;
+        shareCopyButton.disabled = !link;
+        document.querySelector("#crewShareOpen").href = link || "#";
+        document.querySelector("#crewShareOpen").setAttribute("aria-disabled", String(!link));
+        setText("#crewShareStatus", link ? "" : "승인 후 추천 주소가 발급됩니다.");
         document.querySelector("#crewProfileCode").value = code === "-" ? "" : code;
         document.querySelector("#crewProfileLink").value = link;
         document.querySelectorAll("[data-copy-field]").forEach((button) => {
@@ -914,10 +964,7 @@
       }
 
       function renderSettlement(metrics, dashboard) {
-        const payable = safeNumber(dashboard.amounts?.payable ?? dashboard.settlement?.payable_amount);
-        const reviewed = safeNumber(dashboard.amounts?.reviewed);
-        const referralCode = String(dashboard.referral?.code || dashboard.referral_code || "").toUpperCase();
-        const confirmedAmount = referralCode === "RC-354KQP" ? 12_400_000 : payable + reviewed;
+        const confirmedAmount = dashboard.settlement?.pending_month_amount;
         const monthStart = metrics.period?.month_start || new Date().toISOString().slice(0, 10);
         const monthKey = monthStart.slice(0, 7);
         if (settlementMonthInput) {
@@ -926,8 +973,8 @@
           settlementMonthInput.max = monthKey;
         }
         if (settlementPeriodLabel) settlementPeriodLabel.textContent = `${monthLabel(monthStart)} 정산금액`;
-        if (settlementAmount) settlementAmount.textContent = moneyText(confirmedAmount);
-        if (settlementDetail) settlementDetail.textContent = "확정금액";
+        if (settlementAmount) settlementAmount.textContent = confirmedAmount == null ? "집계 중" : moneyText(confirmedAmount);
+        if (settlementDetail) settlementDetail.textContent = "해당 월 정산 가능액";
         if (settlementTargetCount) settlementTargetCount.textContent = `${numberText(metrics.settlement_target_count)}건`;
         if (settlementReviewCount) settlementReviewCount.textContent = `${numberText(metrics.settlement_review_count)}건`;
         settlementPeriodButtons.forEach((button) => {
@@ -1076,6 +1123,8 @@
       function renderDashboard(status, dashboard) {
         const metrics = normalizeCrewMetrics(dashboard);
         renderAccount(status, dashboard);
+        setText("#crewShareVisits", dashboard.click_count == null ? "-" : numberText(dashboard.click_count));
+        setText("#crewShareReferrals", dashboard.total_referrals == null ? "-" : numberText(dashboard.total_referrals));
         renderProfile(status);
         renderVehicleBenefit(dashboard);
         renderSummary(metrics, dashboard);
@@ -1090,12 +1139,10 @@
           const value = document.getElementById(button.dataset.copyField)?.value || "";
           if (!value) return;
           try {
-            if (navigator.clipboard?.writeText) await navigator.clipboard.writeText(value);
-            else fallbackCopyText(value);
-            setText("#crewCopyStatus", "복사했습니다.");
+            await copyText(button.dataset.copyField === "crewProfileLink" ? shareMessage(value) : value);
+            setText("#crewCopyStatus", button.dataset.copyField === "crewProfileLink" ? "수수료 안내를 포함한 공유문을 복사했습니다." : "코드를 복사했습니다.");
           } catch {
-            fallbackCopyText(value);
-            setText("#crewCopyStatus", "복사했습니다.");
+            setText("#crewCopyStatus", "복사하지 못했습니다. 브라우저 권한을 확인해 주세요.");
           }
         });
       });
@@ -1176,6 +1223,7 @@
           return;
         }
         try {
+          document.querySelector("#crewLoadError").hidden = true;
           const status = await apiJson("/api/v1/friends/status", token);
           if (!status?.applied || status.status !== "APPROVED") {
             window.location.replace("./login.html");
@@ -1186,10 +1234,16 @@
           renderDashboard(status, dashboard);
           if (window.location.hash === "#crewSupport") void loadCrewSupportHistory();
         } catch (error) {
-          localStorage.removeItem(TOKEN_KEY);
-          window.location.replace("./login.html");
+          if (error.status === 401 || error.status === 403) {
+            localStorage.removeItem(TOKEN_KEY);
+            window.location.replace("./login.html");
+          } else {
+            document.querySelector("#crewLoadError").hidden = false;
+          }
         }
       }
+
+      document.querySelector("#crewLoadRetry")?.addEventListener("click", loadCrewDashboard);
 
       document.querySelectorAll(".metric-filter").forEach((button) => {
         button.addEventListener("click", () => renderMetricChart(button.dataset.metric));
