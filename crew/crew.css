@@ -554,8 +554,8 @@ svg i[data-lucide] {
 .icon-box {
   display: inline-grid;
   place-items: center;
-  width: 27px;
-  height: 27px;
+  width: 30px;
+  height: 30px;
   color: var(--crew-blue);
   background: var(--crew-blue-soft);
   border-radius: 8px;
@@ -564,6 +564,13 @@ svg i[data-lucide] {
 .icon-box svg {
   width: 16px;
   height: 16px;
+}
+
+.crew-kpi-icon {
+  display: block;
+  width: 25px;
+  height: 25px;
+  object-fit: contain;
 }
 
 .icon-box.violet {
@@ -1723,6 +1730,13 @@ svg i[data-lucide] {
   color: #148444;
   background: var(--crew-green-soft);
   border-radius: 8px;
+}
+
+.crew-benefit-icon img {
+  display: block;
+  width: 31px;
+  height: 31px;
+  object-fit: contain;
 }
 
 .crew-benefit-copy h2,
