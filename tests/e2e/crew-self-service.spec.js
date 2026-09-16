@@ -103,6 +103,18 @@ test("generated KPI artwork loads without changing the dashboard labels", async 
   await expect(page.locator(".crew-benefit-strip")).toContainText("차량 1년 이용 혜택");
   await page.locator(".crew-summary-grid").screenshot({ path: testInfo.outputPath("crew-kpi-icons.png") });
   await page.locator(".crew-benefit-strip").screenshot({ path: testInfo.outputPath("crew-benefit-icon.png") });
+
+  await page.setViewportSize({ width: 320, height: 800 });
+  await page.goto("/crew/index.html");
+  expect(await icons.evaluateAll((images) => images.every((image) => image.complete && image.naturalWidth >= 120))).toBe(true);
+  await expect(page.locator(".crew-benefit-strip")).toContainText("차량 1년 이용 혜택");
+  const mobileBounds = await page.locator(".crew-summary-grid, .crew-benefit-strip").evaluateAll((sections) =>
+    sections.map((section) => {
+      const bounds = section.getBoundingClientRect();
+      return { left: bounds.left, right: bounds.right };
+    }),
+  );
+  expect(mobileBounds.every(({ left, right }) => left >= 0 && right <= 320)).toBe(true);
 });
 
 for (const [label, viewport] of [["desktop", { width: 1440, height: 900 }], ["mobile", { width: 390, height: 844 }]]) {
