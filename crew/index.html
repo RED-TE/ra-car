@@ -14,7 +14,7 @@
     <link rel="icon" type="image/png" href="../assets/recar-favicon-20260518.png" />
     <link rel="apple-touch-icon" href="../assets/recar-favicon-20260518.png" />
     <link rel="preconnect" href="https://api.recarplan.com" crossorigin />
-    <link rel="stylesheet" href="./crew.css?v=20260916-account-menu" />
+    <link rel="stylesheet" href="./crew.css?v=20260916-crew-kpi-icons" />
     <script>
       const params = new URLSearchParams(window.location.search);
       const referralCode = params.get("ref")?.trim().toUpperCase();
@@ -127,7 +127,7 @@
         <section class="crew-summary-grid" aria-label="크루 요약">
           <article class="crew-stat-card">
             <div class="stat-card-head">
-              <span class="icon-box blue"><i data-lucide="send"></i></span>
+              <span class="icon-box blue"><img class="crew-kpi-icon" src="../assets/crew-icons/referral-3d.png" alt="" aria-hidden="true" /></span>
               <p>추천인 수</p>
             </div>
             <strong><span id="referralCount">0</span><span>명</span></strong>
@@ -140,7 +140,7 @@
 
           <article class="crew-stat-card">
             <div class="stat-card-head">
-              <span class="icon-box violet"><i data-lucide="users-round"></i></span>
+              <span class="icon-box violet"><img class="crew-kpi-icon" src="../assets/crew-icons/review-3d.png" alt="" aria-hidden="true" /></span>
               <p>심사 수</p>
             </div>
             <strong id="reviewCount">0</strong>
@@ -150,7 +150,7 @@
 
           <article class="crew-stat-card">
             <div class="stat-card-head">
-              <span class="icon-box violet"><i data-lucide="file-check-2"></i></span>
+              <span class="icon-box violet"><img class="crew-kpi-icon" src="../assets/crew-icons/contract-3d.png" alt="" aria-hidden="true" /></span>
               <p>계약 수</p>
             </div>
             <strong id="contractCount">0</strong>
@@ -160,7 +160,7 @@
 
           <article class="crew-stat-card">
             <div class="stat-card-head">
-              <span class="icon-box green"><i data-lucide="truck"></i></span>
+              <span class="icon-box green"><img class="crew-kpi-icon" src="../assets/crew-icons/delivery-3d.png" alt="" aria-hidden="true" /></span>
               <p>인도 수</p>
             </div>
             <strong id="deliveryCount">0</strong>
@@ -170,7 +170,7 @@
         </section>
 
         <section class="crew-benefit-strip" aria-label="차량 1년 이용 혜택 진행도">
-          <span class="crew-benefit-icon"><i data-lucide="car-front" aria-hidden="true"></i></span>
+          <span class="crew-benefit-icon"><img src="../assets/crew-icons/vehicle-benefit-3d.png" alt="" aria-hidden="true" /></span>
           <div class="crew-benefit-copy">
             <h2>차량 1년 이용 혜택</h2>
             <p>유효 계약 <strong id="crewBenefitCount">집계 중</strong> / 100대 <span id="crewBenefitRemaining"></span></p>
