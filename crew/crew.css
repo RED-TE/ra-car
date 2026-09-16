@@ -335,12 +335,15 @@ svg i[data-lucide] {
 .crew-account-dropdown {
   position: absolute;
   top: calc(100% + 8px);
-  right: 0;
+  right: max(0px, calc(820px - 100vw));
   z-index: 50;
   display: grid;
+  grid-template-columns: minmax(0, 1fr);
   gap: 8px;
   width: 276px;
+  max-width: calc(100vw - 24px);
   padding: 12px;
+  white-space: normal;
   background: #fff;
   border: 1px solid var(--crew-border);
   border-radius: 14px;
@@ -361,7 +364,7 @@ svg i[data-lucide] {
 
 .account-profile-row {
   display: grid;
-  grid-template-columns: 36px 1fr;
+  grid-template-columns: 36px minmax(0, 1fr);
   align-items: center;
   gap: 10px;
   padding: 8px;
@@ -396,6 +399,7 @@ svg i[data-lucide] {
   color: var(--crew-muted);
   font-size: 11px;
   font-weight: 750;
+  overflow-wrap: anywhere;
 }
 
 .account-dropdown-link,
@@ -412,6 +416,10 @@ svg i[data-lucide] {
   background: #fff;
   border: 1px solid var(--crew-border);
   border-radius: 10px;
+}
+
+.account-dropdown-link {
+  justify-content: flex-start;
 }
 
 .account-copy-link {
@@ -448,6 +456,7 @@ svg i[data-lucide] {
   font-size: 10px;
   font-weight: 720;
   line-height: 1.55;
+  overflow-wrap: anywhere;
   background: #f7f8fb;
   border: 1px solid #e8eaf0;
   border-radius: 9px;
