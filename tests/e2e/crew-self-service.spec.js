@@ -89,6 +89,22 @@ test("account menu keeps every action and disclosure inside its width", async ({
   }
 });
 
+test("generated KPI artwork loads without changing the dashboard labels", async ({ page }, testInfo) => {
+  await page.setViewportSize({ width: 1280, height: 800 });
+  await mockCrewApi(page);
+  await page.goto("/crew/index.html");
+  const icons = page.locator(".crew-kpi-icon, .crew-benefit-icon img");
+  await expect(icons).toHaveCount(5);
+  expect(await icons.evaluateAll((images) => images.every((image) => image.complete && image.naturalWidth >= 120))).toBe(true);
+  await expect(page.locator(".crew-summary-grid")).toContainText("추천인 수");
+  await expect(page.locator(".crew-summary-grid")).toContainText("심사 수");
+  await expect(page.locator(".crew-summary-grid")).toContainText("계약 수");
+  await expect(page.locator(".crew-summary-grid")).toContainText("인도 수");
+  await expect(page.locator(".crew-benefit-strip")).toContainText("차량 1년 이용 혜택");
+  await page.locator(".crew-summary-grid").screenshot({ path: testInfo.outputPath("crew-kpi-icons.png") });
+  await page.locator(".crew-benefit-strip").screenshot({ path: testInfo.outputPath("crew-benefit-icon.png") });
+});
+
 for (const [label, viewport] of [["desktop", { width: 1440, height: 900 }], ["mobile", { width: 390, height: 844 }]]) {
   test(`crew header stays in crew and separates homepage on ${label}`, async ({ page }) => {
     await page.setViewportSize(viewport);
