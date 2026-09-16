@@ -63,6 +63,32 @@ test("link visits stay separate from customer referrals", async ({ page }) => {
   await expect(page.locator("#crewSupportContact")).toHaveText("내 등록 연락처: 010-1111-2222");
 });
 
+test("account menu keeps every action and disclosure inside its width", async ({ page }, testInfo) => {
+  await mockCrewApi(page);
+  for (const width of [1280, 800, 761]) {
+    await page.setViewportSize({ width, height: 800 });
+    await page.goto("/crew/index.html");
+    await page.locator(".crew-account-button").click();
+    await expect(page.locator("#crewAccountDropdown")).toBeVisible();
+    const layout = await page.locator("#crewAccountDropdown").evaluate((menu) => {
+      const bounds = menu.getBoundingClientRect();
+      return {
+        whiteSpace: getComputedStyle(menu).whiteSpace,
+        menuLeft: bounds.left,
+        menuRight: bounds.right,
+        childRights: [...menu.children].map((child) => child.getBoundingClientRect().right),
+        linkAlignment: getComputedStyle(menu.querySelector(".account-dropdown-link")).justifyContent,
+      };
+    });
+    expect(layout.whiteSpace).toBe("normal");
+    expect(layout.linkAlignment).toBe("flex-start");
+    expect(layout.menuLeft).toBeGreaterThanOrEqual(0);
+    expect(layout.menuRight).toBeLessThanOrEqual(width);
+    expect(Math.max(...layout.childRights)).toBeLessThanOrEqual(layout.menuRight);
+    await page.locator("#crewAccountDropdown").screenshot({ path: testInfo.outputPath(`account-menu-${width}.png`) });
+  }
+});
+
 for (const [label, viewport] of [["desktop", { width: 1440, height: 900 }], ["mobile", { width: 390, height: 844 }]]) {
   test(`crew header stays in crew and separates homepage on ${label}`, async ({ page }) => {
     await page.setViewportSize(viewport);
