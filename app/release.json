@@ -1,0 +1,23 @@
+{
+  "source_repository": "RECAREA/recar_app",
+  "source_commit": "d2916d622c47068e2e2f74681ea1d8980de61f35",
+  "source_pr": 111,
+  "build_id": "d2916d622c47",
+  "target": "https://recarplan.com/app/",
+  "base_path": "/app/",
+  "api_base_url": "https://api.recarplan.com",
+  "homepage_base_commit": "1bf50c93b93b350a9c70e55124d167076a144c67",
+  "local_validation": {
+    "flutter_focused_tests_passed": 147,
+    "homepage_tests_passed": 9,
+    "analyzer_errors": 0,
+    "analyzer_warnings": 0,
+    "analyzer_infos": 52
+  },
+  "sha256": {
+    "index.html": "a9f66350ae967ebacc10202b40354f214cb63710b202f24ebc8beffc24f34870",
+    "flutter_bootstrap.js": "e9b1d2a3310b54c7f58e8702b752088c5f6653f3fabc2eb20aedc6708004111e",
+    "main.dart.js": "7ca25b4005885ac5ac15bb39bc46448cf1c39ccac3fa17730f8e0d8ceb5f8ad7",
+    "assets/AssetManifest.bin.json": "1b06da862e989e0ce7edda54e99304850aa0aa542e5672daa0f91358dec238ff"
+  }
+}
