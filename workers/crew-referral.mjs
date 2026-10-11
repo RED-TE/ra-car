@@ -1,6 +1,4 @@
 const REFERRAL_PATH = /^\/r\/RC-[A-Z0-9]{4,16}\/?$/i;
-const HOMEPAGE_URL = "https://recarplan.com/index.html";
-
 export default {
   async fetch(request) {
     if (request.method !== "GET" && request.method !== "HEAD") {
@@ -12,18 +10,7 @@ export default {
       return new Response("Not found", { status: 404 });
     }
 
-    const response = await fetch(new Request(HOMEPAGE_URL, {
-      method: request.method,
-      headers: { Accept: "text/html" },
-    }));
-    if (!response.ok || request.method === "HEAD") return response;
-
-    return new HTMLRewriter()
-      .on("head", {
-        element(head) {
-          head.prepend('<base href="https://recarplan.com/">', { html: true });
-        },
-      })
-      .transform(response);
+    const code = url.pathname.split("/")[2].toUpperCase();
+    return new Response(null, { status: 302, headers: { Location: `https://recarplan.com/app/?ref=${encodeURIComponent(code)}`, "Cache-Control": "no-store" } });
   },
 };

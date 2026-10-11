@@ -57,7 +57,9 @@ test("link visits stay separate from customer referrals", async ({ page }) => {
   await expect(rows.first()).not.toContainText("추천 고객");
   await expect(rows.first()).not.toContainText("1명");
   await expect(rows.nth(1)).toContainText("김**");
-  await expect(rows.nth(1)).toContainText("1명");
+  await expect(rows.nth(1)).toContainText("계약");
+  await expect(rows.nth(1)).not.toContainText("문의 전");
+  await expect(rows.nth(1)).not.toContainText("추천 링크 방문");
   await expect(page.locator("#crewAlertCount")).toHaveText("1");
   await page.locator('.crew-sidebar a[href="#crewSupport"]').click();
   await expect(page.locator("#crewSupportContact")).toHaveText("내 등록 연락처: 010-1111-2222");
@@ -147,7 +149,7 @@ for (const [label, viewport] of [["desktop", { width: 1440, height: 900 }], ["mo
     await page.goto("/crew/index.html#crewProfile");
     await expect(page.getByRole("heading", { name: "내정보" })).toBeVisible();
     await expect(page.locator("#crewProfileLoginId")).toHaveText("crew_qa");
-    await expect(page.locator("#crewProfileLink")).toHaveValue("https://recarplan.com/r/RC-QACREW");
+    await expect(page.locator("#crewProfileLink")).toHaveValue("https://recarplan.com/app/?ref=RC-QACREW");
     await page.screenshot({ path: testInfo.outputPath(`${label}-profile.png`) });
     await page.getByRole("button", { name: "고지 포함 추천 공유문 복사" }).click();
     await expect(page.locator("#crewCopyStatus")).toHaveText("수수료 안내를 포함한 공유문을 복사했습니다.");

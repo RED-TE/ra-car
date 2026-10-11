@@ -1,16 +1,17 @@
 # Individual crew referral paths
 
-`crew-referral.mjs` serves the public homepage at `/r/RC-<code>` without
-changing the visitor's URL. The homepage script reads the path, sends the
-code with inquiries, and records a visit through the existing friends API.
+`crew-referral.mjs` redirects legacy `/r/RC-<code>` links to
+`https://recarplan.com/app/?ref=RC-<code>`. It returns a temporary, non-cached
+302 redirect so existing shared links keep their referral code while using
+the web app rather than a second copy of the homepage.
 
-Deploy the homepage `script.js` and the crew sharing UI before attaching
-this Worker to the Cloudflare route `recarplan.com/r/*`. Otherwise the page
-will load but the deployed script will not recognize the path. Keep the
-existing `/crew`, `/_next/*`, and friends-proxy routes unchanged.
+Verify the deployed `/app/` build handles `ref` before publishing this Worker
+to `recarplan.com/r/*`. The current app source uses `WebReferralService` for
+capture and attribution. Updating this Worker does not deploy or rebuild the
+Flutter app. Keep unrelated `/_next/*` and friends-proxy routes unchanged.
 
-After deployment, verify a valid path returns the same homepage and an
-invalid path returns 404. Submit only a non-production test inquiry and
-confirm `referralCode` and `referralEntryPath` in the scoped admin COM lead
-view. SQL crew rewards are not automatically created from Firestore leads;
-they remain subject to the existing review and settlement workflow.
+After approved deployment, verify GET and HEAD return the expected Location,
+invalid codes return 404, and unsupported methods return 405. In a dedicated
+test environment, verify the web app captures the code and attributes an
+inquiry to the correct crew account. A redirect check alone does not prove
+inquiry attribution or reward eligibility; those need separate verification.
