@@ -1,0 +1,45 @@
+html { font-family: Pretendard, "Apple SD Gothic Neo", "Noto Sans KR", system-ui, sans-serif; }
+body, button, input, select, textarea { font-family: inherit; letter-spacing: 0; }
+h1, h2, h3, p, small { word-break: keep-all; overflow-wrap: anywhere; }
+a:focus-visible, button:focus-visible { outline: 2px solid #175ec0; outline-offset: 4px; }
+.crew-login-page small, .crew-console-page small { font-size: 13px; line-height: 1.65; }
+.crew-login-njob-heading > span { color: #14733c; }
+.crew-login-njob-grid article:nth-child(2) > small { color: #146349; }
+.crew-login-njob-grid article:nth-child(3) > small { color: #805000; }
+.crew-promotion-footer { align-items: flex-start; flex-wrap: wrap; }
+.crew-promotion-footer small { max-width: none; flex: 1 1 180px; }
+.crew-share-main .section-line { color: #175ec0; }
+.crew-share-side p, .crew-share-main > p:not(.crew-form-status), .crew-share-counts span { font-size: 13px; line-height: 1.65; }
+.inline-metrics span, .crew-benefit-track-wrap > small, .request-primary > span, .request-count,
+.success-text, .settlement-month-label > span, #chartMonthLabel { color: #526174; }
+.request-primary > span, .request-count, .settlement-month-label > span, .state-badge, .soft-badge { font-size: 13px; }
+.soft-badge.green, .state-badge.success, .success-text > b { color: #14733c; }
+.state-badge.waiting { color: #805000; }
+.fail-text > b { color: #c72d3a; }
+.wait-text > b, .recommend-audiences li:nth-child(3) small { color: #805000; }
+.worry-copy small, .steps-section .eyebrow { color: #175ec0; }
+.support-list article.reverse .support-copy > span { background: #14733c; }
+.crew-login-hero { padding-top: 38px; }
+.is-apply-page .crew-login-copy, .is-apply-page .crew-dashboard-preview, .is-apply-page .crew-promotion-notice,
+.is-apply-page .crew-login-njob, .is-apply-page .crew-login-reward, .is-apply-page .crew-login-bottom { display: none; }
+.is-apply-page .crew-login-form-anchor { margin-top: 0; }
+.hero-bubble > div > small, .reward-section small, .recommend-note { color: #526174; font-size: 14px; line-height: 1.7; }
+.hero-milestone p, .hero-earning-item span, .worry-copy small, .steps-list small { font-size: 13px; line-height: 1.6; }
+.term-card { display: grid; grid-template-columns: 44px minmax(0, 1fr); min-height: 0; padding: 18px 20px; justify-content: flex-start; gap: 6px 12px; border-radius: 8px; }
+.term-card > .card-icon { grid-row: 1 / span 2; width: 44px; height: 44px; }
+.term-card > span:not(.card-icon) { grid-column: 2; }
+.term-card .card-link { margin-top: 4px; }
+.scene { min-height: 0; padding-top: 64px; padding-bottom: 64px; }
+@media (max-width: 760px) {
+  .crew-login-hero { padding: 24px 20px 36px; }
+  .crew-login-trust-line { margin-top: 14px; gap: 6px; }
+  .crew-login-copy > p:nth-of-type(2) { margin-bottom: 14px; line-height: 1.65; }
+  .crew-login-njob, .crew-login-reward, .crew-login-bottom { padding-top: 36px; padding-bottom: 36px; }
+  .hero-bubble > div > small, .reward-section small, .recommend-note { font-size: 13px; }
+  .crew-overview, .worry-section, .recommend-section, .answer-section, .activity-section, .support-section, .steps-section, .reward-section { padding-top: 56px; padding-bottom: 56px; }
+  .scene, .hero + .scene { min-height: 0; padding-top: 40px; padding-bottom: 40px; }
+  .term-card { min-height: 0; padding: 16px; }
+  .term-card strong { font-size: 18px; }
+  .term-card p { margin-top: 0; font-size: 15px; }
+  .term-grid { gap: 10px; }
+}

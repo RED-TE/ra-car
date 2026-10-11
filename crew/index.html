@@ -14,13 +14,15 @@
     <link rel="icon" type="image/png" href="../assets/recar-favicon-20260518.png" />
     <link rel="apple-touch-icon" href="../assets/recar-favicon-20260518.png" />
     <link rel="preconnect" href="https://api.recarplan.com" crossorigin />
-    <link rel="stylesheet" href="./crew.css?v=20260916-crew-kpi-icons" />
+    <link rel="stylesheet" href="./crew.css?v=20261012-crew-audit" />
+    <link rel="stylesheet" href="./readability.css?v=20261012" />
     <script>
       const params = new URLSearchParams(window.location.search);
+      if (params.get("action") === "apply") window.location.replace("./login.html?action=apply");
       const referralCode = params.get("ref")?.trim().toUpperCase();
       if (referralCode) {
         if (/^RC-[A-Z0-9]{4,16}$/.test(referralCode)) {
-          window.location.replace(new URL(`/r/${referralCode}`, window.location.origin).href);
+          window.location.replace(new URL(`/app/?ref=${encodeURIComponent(referralCode)}`, window.location.origin).href);
         }
       }
     </script>
@@ -53,7 +55,7 @@
       <div class="crew-topbar-meta" aria-label="계정 상태">
         <span>오늘 <strong id="crewWaitingCount">0건 대기</strong></span>
         <span><b class="status-dot"></b><strong id="crewConversionRate">0%</strong></span>
-        <span>총 크루 <strong id="crewTotalReferrals">0명</strong></span>
+        <span>추천 고객 <strong id="crewTotalReferrals">조회 중</strong></span>
         <a class="crew-homepage-link" href="https://recarplan.com/"><i data-lucide="house" aria-hidden="true"></i>홈페이지 보기</a>
         <div class="crew-account-menu" id="crewAccountMenu">
           <button class="crew-account-button" type="button" aria-expanded="false" aria-controls="crewAccountDropdown">
@@ -88,6 +90,7 @@
             <p class="account-commission-disclosure">
               수수료 고지: 이 추천 링크를 통한 계약·인도 시 RE:CAR 크루 활동의 일환으로 크루에게 수수료가 지급될 수 있습니다.
             </p>
+            <button class="account-dropdown-link crew-logout" type="button"><i data-lucide="log-out" aria-hidden="true"></i>로그아웃</button>
           </div>
         </div>
         <span class="crew-alert-badge" id="crewAlertCount">0</span>
@@ -123,6 +126,8 @@
             <p id="crewShareDisclosure">RE:CAR 크루 활동의 일환으로 제공하는 링크입니다. 계약·인도 시 크루에게 수수료가 지급될 수 있습니다.</p>
           </div>
         </section>
+
+        <div class="crew-dashboard-actions"><button type="button" class="crew-secondary-button" id="crewGroupPurchase" disabled><i data-lucide="car-front" aria-hidden="true"></i>차량 공동구매 신청하기</button><a class="crew-text-button" href="./guide/">크루 가이드 <i data-lucide="arrow-up-right" aria-hidden="true"></i></a></div>
 
         <section class="crew-summary-grid" aria-label="크루 요약">
           <article class="crew-stat-card">
@@ -189,7 +194,7 @@
                 <h2 id="recentActivityTitle">최근 활동 수 0건</h2>
                 <span class="neutral-badge">심사 및 계약 진행 단계 업데이트</span>
               </div>
-              <a href="#crewAnalyticsDetail">전체 보기 <i data-lucide="chevron-right"></i></a>
+              <button class="crew-text-button" type="button" id="crewActivityAll">전체 보기 <i data-lucide="chevron-right" aria-hidden="true"></i></button>
             </header>
 
             <div class="request-list" id="recentActivityList">
@@ -253,18 +258,19 @@
               <h2>날짜별 크루 지표 <i data-lucide="info"></i></h2>
               <div class="chart-legend">
                 <span><b class="blue"></b> 선택 지표 <strong id="chartMetricName">추천인 수</strong></span>
-                <span><b class="green"></b> 월 합계 <strong id="chartMetricTotal">182명</strong></span>
-                <span><b class="orange"></b> 최고 일자 <strong id="chartMetricPeak">7월 29일 · 28명</strong></span>
+                <span><b class="green"></b> 월 합계 <strong id="chartMetricTotal">조회 중</strong></span>
+                <span><b class="orange"></b> 최고 일자 <strong id="chartMetricPeak">조회 중</strong></span>
                 <span><b class="gray"></b> 조회 단위 <strong>일별</strong></span>
               </div>
             </div>
             <div class="chart-date-controls" aria-label="조회 월 선택">
-              <button type="button" aria-label="이전 달"><i data-lucide="chevron-left"></i></button>
+              <button type="button" data-month-shift="-1" aria-label="이전 달"><i data-lucide="chevron-left"></i></button>
               <span class="date-pill" id="chartMonthLabel">조회월</span>
-              <button type="button" aria-label="다음 달"><i data-lucide="chevron-right"></i></button>
+              <button type="button" data-month-shift="1" aria-label="다음 달"><i data-lucide="chevron-right"></i></button>
             </div>
           </header>
 
+          <p class="crew-form-status crew-period-status" id="crewPeriodStatus" role="status"></p>
           <div class="chart-filter-row" aria-label="크루 지표 필터">
             <button class="metric-filter is-active" type="button" data-metric="referrals">
               <span>추천인 수</span>
@@ -441,6 +447,7 @@
               <div class="crew-copy-field"><label for="crewProfileCode">추천 코드</label><div><input id="crewProfileCode" readonly value="" /><button type="button" data-copy-field="crewProfileCode" aria-label="추천 코드 복사"><i data-lucide="copy"></i></button></div></div>
               <div class="crew-copy-field"><label for="crewProfileLink">추천 링크</label><div><input id="crewProfileLink" readonly value="" /><button type="button" data-copy-field="crewProfileLink" aria-label="고지 포함 추천 공유문 복사"><i data-lucide="copy"></i></button></div></div>
               <p class="crew-form-status" id="crewCopyStatus" role="status" aria-live="polite"></p>
+              <button class="crew-secondary-button crew-logout" type="button"><i data-lucide="log-out" aria-hidden="true"></i>로그아웃</button>
             </div>
             <form class="crew-workspace-section crew-profile-form" id="crewProfileForm">
               <h3>연락처와 활동 정보</h3>
@@ -480,23 +487,33 @@
       </div>
     </main>
 
+    <dialog class="crew-activity-dialog" id="crewActivityDialog" aria-labelledby="crewActivityDialogTitle">
+      <header><h2 id="crewActivityDialogTitle">추천 진행 내역</h2><button type="button" id="crewActivityClose" aria-label="활동 내역 닫기"><i data-lucide="x" aria-hidden="true"></i></button></header>
+      <div id="crewActivityDetail"></div>
+    </dialog>
+
     <a class="crew-floating-help" href="#crewSupport" aria-label="크루 빠른 문의">
       <i data-lucide="message-circle"></i>
     </a>
 
     <script src="./guide/lucide.min.js"></script>
+    <script src="./session.js?v=20261012"></script>
     <script>
       if (window.lucide) {
         window.lucide.createIcons();
       }
 
-      const API_BASE_URL = "https://api.recarplan.com";
-      const TOKEN_KEY = "recar_friends_access_token";
+      const Crew = window.RecarCrew;
+      const TOKEN_KEY = Crew.TOKEN_KEY;
       const profileForm = document.querySelector("#crewProfileForm");
       const supportForm = document.querySelector("#crewSupportForm");
       const profilePanel = document.querySelector("#crewProfile");
       const supportPanel = document.querySelector("#crewSupport");
       let crewSession = null;
+      let selectedMonth = Crew.dateKey().slice(0, 7);
+      let monthLoading = false;
+      const activityDialog = document.querySelector("#crewActivityDialog");
+      let activityTrigger = null;
       const settlementHelpWrap = document.querySelector(".settlement-help-wrap");
       const settlementHelpButton = document.querySelector(".settlement-help");
       const accountMenu = document.querySelector(".crew-account-menu");
@@ -506,6 +523,29 @@
       const shareCopyButton = document.querySelector("#crewShareCopy");
       const shareLinkInput = document.querySelector("#crewShareLink");
       const wonFormatter = new Intl.NumberFormat("ko-KR");
+
+      function logout() {
+        localStorage.removeItem(TOKEN_KEY);
+        crewSession = null;
+        document.querySelector(".crew-console-main").hidden = true;
+        window.location.replace("./login.html?status=LOGGED_OUT");
+      }
+      document.querySelectorAll(".crew-logout").forEach(button => button.addEventListener("click", logout));
+      window.addEventListener("pageshow", event => {
+        if (event.persisted) {
+          document.querySelector(".crew-console-main").hidden = true;
+          void loadCrewDashboard();
+        }
+      });
+      window.addEventListener("storage", event => { if (event.key === TOKEN_KEY && !event.newValue) logout(); });
+      document.querySelector("#crewGroupPurchase").addEventListener("click", () => {
+        window.location.hash = "crewSupport";
+        syncCrewWorkspace();
+        supportForm.elements.namedItem("category").value = "ETC";
+        supportForm.elements.namedItem("message").value = "[차량 공동구매 신청]\n희망 차량: \n예상 대수: \n상담 요청사항: ";
+        supportForm.elements.namedItem("message").focus();
+        setText("#crewSupportSaveStatus", "희망 차량과 대수를 적어 접수해 주세요. 등록된 이름·연락처와 함께 운영팀에 전달됩니다.");
+      });
 
       function fallbackCopyText(text) {
         const textarea = document.createElement("textarea");
@@ -719,26 +759,6 @@
         return `${Math.round(percent * 10) / 10}%`;
       }
 
-      function currentMonthRows() {
-        const today = new Date();
-        const first = new Date(today.getFullYear(), today.getMonth(), 1);
-        const last = new Date(today.getFullYear(), today.getMonth() + 1, 0);
-        const rows = [];
-        for (let day = 1; day <= last.getDate(); day += 1) {
-          const date = new Date(first.getFullYear(), first.getMonth(), day);
-          rows.push({
-            date: date.toISOString().slice(0, 10),
-            label: `${date.getMonth() + 1}/${date.getDate()}`,
-            referrals: 0,
-            reviews: 0,
-            contracts: 0,
-            deliveries: 0,
-            settlement_amount: 0,
-          });
-        }
-        return rows;
-      }
-
       function emptyMetricData(rows) {
         const labels = rows.map((row) => row.label);
         return {
@@ -751,7 +771,7 @@
 
       function normalizeCrewMetrics(dashboard) {
         const source = dashboard.crew_metrics;
-        const rows = Array.isArray(source?.daily) && source.daily.length ? source.daily : currentMonthRows();
+        const rows = Array.isArray(source?.daily) ? source.daily : [];
         const metrics = source
           ? source
           : {
@@ -794,7 +814,7 @@
           settlement_review_count: safeNumber(metrics.settlement_review_count),
           conversion_rate: safeNumber(metrics.conversion_rate),
           period: metrics.period || {},
-          daily: rows.map((row) => ({
+          daily: rows.filter(row => typeof row.date === "string" && row.date.slice(0, 10) <= Crew.dateKey()).map((row) => ({
             date: row.date,
             label: row.label,
             referrals: safeNumber(row.referrals),
@@ -807,7 +827,7 @@
       }
 
       async function apiJson(path, token, options = {}) {
-        const response = await fetch(`${API_BASE_URL}${path}`, {
+        const response = await Crew.request(path, {
           ...options,
           headers: {
             Accept: "application/json",
@@ -817,11 +837,7 @@
           },
         });
         if (!response.ok) {
-          let message = "요청을 처리할 수 없습니다.";
-          try {
-            const body = await response.json();
-            message = body.message || body.detail || message;
-          } catch {}
+          const message = await Crew.errorMessage(response, "요청을 처리할 수 없습니다.");
           const error = new Error(message);
           error.status = response.status;
           throw error;
@@ -830,21 +846,25 @@
       }
 
       function longDateLabel(row) {
-        const date = new Date(row.date);
-        return Number.isNaN(date.getTime()) ? row.label : `${date.getMonth() + 1}월 ${date.getDate()}일`;
+        const raw = String(row.date || "");
+        let key = raw.slice(0, 10);
+        if (raw.includes("T")) {
+          const timestamp = new Date(/(?:Z|[+-]\d{2}:?\d{2})$/i.test(raw) ? raw : `${raw}Z`);
+          if (!Number.isNaN(timestamp.getTime())) key = Crew.dateKey(timestamp);
+        }
+        return /^\d{4}-\d{2}-\d{2}$/.test(key) ? `${Number(key.slice(5, 7))}월 ${Number(key.slice(8, 10))}일` : row.label || "-";
       }
 
       function monthLabel(value) {
-        const date = value ? new Date(value) : new Date();
-        if (Number.isNaN(date.getTime())) return "조회월";
-        return `${date.getFullYear()}년 ${date.getMonth() + 1}월`;
+        const key = String(value || selectedMonth);
+        return /^\d{4}-\d{2}/.test(key) ? `${key.slice(0, 4)}년 ${Number(key.slice(5, 7))}월` : "조회월";
       }
 
       function renderAccount(status, dashboard) {
         const name = status?.name || "크루";
         const rawCode = String(dashboard.referral_code || dashboard.referral?.code || "").trim().toUpperCase();
         const code = /^RC-[A-Z0-9]{4,16}$/.test(rawCode) ? rawCode : "-";
-        const link = code === "-" ? "" : `https://recarplan.com/r/${encodeURIComponent(code)}`;
+        const link = Crew.referralUrl(code);
         setText("#crewAccountLabel", `${name}님의 계정`);
         setText("#crewAccountAvatar", name.slice(0, 1) || "크");
         setText("#crewAccountName", name);
@@ -918,7 +938,9 @@
 
       function eventStatusLabel(status) {
         if (status === "ANALYTICS") return "방문";
-        if (status === "AVAILABLE" || status === "PAID") return "정산가능";
+        if (status === "AVAILABLE") return "정산가능";
+        if (status === "PAID") return "지급완료";
+        if (status === "WITHDRAW_REQUESTED") return "출금 신청";
         if (status === "CONFIRMED") return "확정";
         if (status === "PENDING") return "검토중";
         return "진행중";
@@ -932,7 +954,6 @@
 
       function renderRecent(dashboard) {
         const events = (dashboard.recent_events || []).slice(0, 5);
-        const code = dashboard.referral_code || dashboard.referral?.code || "-";
         setText("#recentActivityTitle", `최근 활동 수 ${numberText(events.length)}건`);
         if (!recentActivityList) return;
         if (!events.length) {
@@ -940,41 +961,76 @@
           return;
         }
         recentActivityList.innerHTML = events
-          .map((event) => {
+          .map((event, index) => {
             const isVisit = event.type === "DOWNLOAD";
             const stage = eventTypeLabel(event.type);
             const badge = eventStatusLabel(event.status);
             const name = escapeHtml(isVisit ? "추천 링크 방문" : event.customer_name_masked || "추천 고객");
-            const codeText = escapeHtml(code);
             const occurredAt = escapeHtml(event.occurred_at ? longDateLabel({ date: event.occurred_at, label: "" }) : "-");
             const badgeText = escapeHtml(badge);
             const stageText = escapeHtml(stage);
             return `
-              <a class="request-row" href="#">
+              <button class="request-row" type="button" data-activity-index="${index}" aria-label="${name} ${stageText} 내역 보기">
                 <div class="request-primary">
                   <strong>${name}</strong>
-                  <span>추천코드 ${codeText} · ${occurredAt}</span>
+                  <span>${isVisit ? "1회 · 문의 전" : stageText} · <time datetime="${escapeHtml(event.occurred_at || "")}">${occurredAt}</time></span>
                 </div>
                 <span class="state-badge ${eventBadgeClass(event.status)}">${badgeText}</span>
-                <span class="request-count">${isVisit ? "1회" : "1명"}</span>
-                <span class="row-metric success-text"><b>${stageText}</b>${isVisit ? "" : " 단계"}</span>
-                <span class="row-metric fail-text"><b>${isVisit ? "-" : moneyText(event.amount || 0)}</b></span>
-                <span class="row-metric wait-text"><b>${isVisit ? "문의 전" : badgeText}</b></span>
-                <i data-lucide="chevron-right"></i>
-              </a>`;
+                <strong class="request-amount">${isVisit ? "-" : event.amount == null ? "확인 중" : moneyText(event.amount)}</strong>
+                <i data-lucide="chevron-right" aria-hidden="true"></i>
+              </button>`;
           })
           .join("");
         window.lucide?.createIcons();
       }
 
+      function showActivityDetail(item, trigger) {
+        activityTrigger = trigger;
+        const stageLabels = { REGISTERED: "추천 접수", CONDITION_REQUESTED: "조건 확인", CONTRACT_PENDING: "계약 진행", CONTRACTED: "계약 완료", DELIVERY_COMPLETED: "인도 완료" };
+        const fields = [
+          ["고객", item.customer_name_masked || (item.type === "DOWNLOAD" ? "추천 링크 방문" : "추천 고객")],
+          ["진행 단계", item.type ? eventTypeLabel(item.type) : stageLabels[item.stage] || item.stage || "확인 중"],
+          ["기준일", longDateLabel({ date: item.occurred_at || item.created_at, label: "-" })],
+          ["보상 상태", eventStatusLabel(item.reward_status || item.status)],
+          ["보상 금액", item.amount == null && item.reward_amount == null ? "확인 중" : moneyText(item.amount ?? item.reward_amount)],
+        ];
+        setText("#crewActivityDialogTitle", "추천 진행 상세");
+        document.querySelector("#crewActivityDetail").innerHTML = `<dl class="crew-activity-facts">${fields.map(([label, value]) => `<div><dt>${escapeHtml(label)}</dt><dd>${escapeHtml(value)}</dd></div>`).join("")}</dl><p class="crew-form-note">보상은 운영팀 검토와 유효 계약·인도 확인 후 확정됩니다.</p>`;
+        if (!activityDialog.open) activityDialog.showModal();
+      }
+      recentActivityList.addEventListener("click", event => {
+        const button = event.target.closest("[data-activity-index]");
+        if (button && crewSession) showActivityDetail(crewSession.dashboard.recent_events[Number(button.dataset.activityIndex)], button);
+      });
+      document.querySelector("#crewActivityAll").addEventListener("click", event => {
+        if (!crewSession) return;
+        activityTrigger = event.currentTarget;
+        const items = crewSession.dashboard.referrals?.length ? crewSession.dashboard.referrals : crewSession.dashboard.recent_events || [];
+        setText("#crewActivityDialogTitle", "전체 추천 진행 내역");
+        const content = document.querySelector("#crewActivityDetail");
+        content.replaceChildren();
+        if (!items.length) content.textContent = "아직 표시할 추천 진행 내역이 없습니다.";
+        items.forEach(item => {
+          const button = document.createElement("button");
+          button.type = "button";
+          button.className = "crew-activity-item";
+          button.textContent = `${item.customer_name_masked || (item.type === "DOWNLOAD" ? "추천 링크 방문" : "추천 고객")} · ${longDateLabel({ date: item.created_at || item.occurred_at })} · ${eventStatusLabel(item.reward_status || item.status)}`;
+          button.addEventListener("click", () => showActivityDetail(item, event.currentTarget));
+          content.appendChild(button);
+        });
+        activityDialog.showModal();
+      });
+      document.querySelector("#crewActivityClose").addEventListener("click", () => activityDialog.close());
+      activityDialog.addEventListener("close", () => activityTrigger?.focus());
+
       function renderSettlement(metrics, dashboard) {
         const confirmedAmount = dashboard.settlement?.pending_month_amount;
-        const monthStart = metrics.period?.month_start || new Date().toISOString().slice(0, 10);
+        const monthStart = metrics.period?.month_start || `${selectedMonth}-01`;
         const monthKey = monthStart.slice(0, 7);
         if (settlementMonthInput) {
           settlementMonthInput.value = monthKey;
-          settlementMonthInput.min = monthKey;
-          settlementMonthInput.max = monthKey;
+          settlementMonthInput.min = "2000-01";
+          settlementMonthInput.max = Crew.dateKey().slice(0, 7);
         }
         if (settlementPeriodLabel) settlementPeriodLabel.textContent = `${monthLabel(monthStart)} 정산금액`;
         if (settlementAmount) settlementAmount.textContent = confirmedAmount == null ? "집계 중" : moneyText(confirmedAmount);
@@ -982,7 +1038,7 @@
         if (settlementTargetCount) settlementTargetCount.textContent = `${numberText(metrics.settlement_target_count)}건`;
         if (settlementReviewCount) settlementReviewCount.textContent = `${numberText(metrics.settlement_review_count)}건`;
         settlementPeriodButtons.forEach((button) => {
-          button.disabled = true;
+          button.disabled = monthLoading || (button.dataset.settlementShift === "1" && selectedMonth >= Crew.dateKey().slice(0, 7));
         });
       }
 
@@ -1053,8 +1109,8 @@
           .join("");
 
         chartMetricName.textContent = metric.name;
-        chartMetricTotal.textContent = `${metric.total}${metric.unit}`;
-        chartMetricPeak.textContent = `${chartDates[peakIndex] || "-"} · ${safeNumber(metric.values[peakIndex])}${metric.unit}`;
+        chartMetricTotal.textContent = metric.values.length ? `${metric.total}${metric.unit}` : "미제공";
+        chartMetricPeak.textContent = metric.values.length ? `${chartDates[peakIndex] || "-"} · ${safeNumber(metric.values[peakIndex])}${metric.unit}` : "미제공";
 
         document.querySelectorAll(".metric-filter").forEach((button) => {
           const isActive = button.dataset.metric === metricKey;
@@ -1072,7 +1128,7 @@
       }
 
       function renderCharts(metrics) {
-        const rows = metrics.daily.length ? metrics.daily : currentMonthRows();
+        const rows = metrics.daily;
         metricData = buildMetricData(rows);
         chartDates.splice(0, chartDates.length, ...rows.map(longDateLabel));
         const maxValue = maxChartValue(metricData);
@@ -1081,12 +1137,14 @@
         updateAxisLabels(rows, maxValue);
         document.querySelectorAll(".metric-filter").forEach((button) => {
           const metric = metricData[button.dataset.metric];
-          if (metric) button.querySelector("strong").textContent = `${numberText(metric.total)}${metric.unit}`;
+          if (metric) button.querySelector("strong").textContent = rows.length ? `${numberText(metric.total)}${metric.unit}` : "미제공";
         });
-        const firstDay = rows[0]?.date || metrics.period?.month_start;
+        const firstDay = rows[0]?.date || metrics.period?.month_start || `${selectedMonth}-01`;
         const lastDay = rows[rows.length - 1]?.date || metrics.period?.month_end;
         setText("#chartMonthLabel", monthLabel(firstDay));
         setText("#analyticsMonthLabel", monthLabel(firstDay));
+        document.querySelectorAll(".activity-chart, .analytics-wide-chart").forEach(chart => { chart.toggleAttribute("hidden", !rows.length); });
+        setText("#crewPeriodStatus", rows.length ? "" : "이 기간의 일별 지표를 제공받지 못했습니다. 전체 실적과는 별도로 확인해 주세요.");
         if (firstDay && lastDay) setText("#analyticsRangeLabel", `${longDateLabel({ date: firstDay, label: "" })} - ${longDateLabel({ date: lastDay, label: "" })}`);
         document.querySelector(".detail-line.referrals").setAttribute("d", makeLinePath(detailPoints(metricData.referrals.values)));
         document.querySelector(".detail-line.reviews").setAttribute("d", makeLinePath(detailPoints(metricData.reviews.values)));
@@ -1104,7 +1162,7 @@
         setText("#contractDeliveryDetail", `${numberText(metrics.delivery_count)}건 인도 완료`);
         setText("#averageSettlementAmount", moneyText(avgSettlement));
         if (!analyticsTableBody) return;
-        const rows = metrics.daily.slice(-4).reverse();
+        const rows = [...metrics.daily].sort((a, b) => b.date.localeCompare(a.date));
         analyticsTableBody.innerHTML = rows.length
           ? rows
               .map((row) => {
@@ -1125,6 +1183,10 @@
       }
 
       function renderDashboard(status, dashboard) {
+        document.querySelector(".crew-console-main").hidden = false;
+        document.body.dataset.loadState = "ready";
+        document.querySelectorAll(".ghost-pill-button, #crewActivityAll, #crewGroupPurchase").forEach(button => { button.disabled = false; });
+        settlementMonthInput.disabled = false;
         const metrics = normalizeCrewMetrics(dashboard);
         renderAccount(status, dashboard);
         setText("#crewShareVisits", dashboard.click_count == null ? "-" : numberText(dashboard.click_count));
@@ -1136,7 +1198,43 @@
         renderSettlement(metrics, dashboard);
         renderCharts(metrics);
         renderAnalytics(metrics, dashboard);
+        document.querySelectorAll("[data-month-shift]").forEach(button => { button.disabled = monthLoading || (button.dataset.monthShift === "1" && selectedMonth >= Crew.dateKey().slice(0, 7)); });
       }
+
+      async function selectMonth(month) {
+        if (!crewSession || monthLoading) return;
+        if (!/^\d{4}-(0[1-9]|1[0-2])$/.test(month) || month < "2000-01" || month > Crew.dateKey().slice(0, 7)) {
+          settlementMonthInput.value = selectedMonth;
+          setText("#crewPeriodStatus", "조회 월은 2000년 1월부터 이번 달까지 선택해 주세요. 기존 조회 결과를 유지합니다.");
+          return;
+        }
+        monthLoading = true;
+        setText("#crewPeriodStatus", "선택한 기간을 조회하는 중입니다.");
+        document.querySelectorAll("[data-month-shift], [data-settlement-shift]").forEach(button => { button.disabled = true; });
+        settlementMonthInput.disabled = true;
+        try {
+          const dashboard = await apiJson(`/api/v1/friends/dashboard?month=${encodeURIComponent(month)}`, crewSession.token);
+          if (dashboard.crew_metrics?.period?.month_start?.slice(0, 7) !== month) throw new Error("선택한 기간을 조회할 수 없습니다. 운영팀에 문의해 주세요.");
+          selectedMonth = month;
+          crewSession.dashboard = dashboard;
+          renderDashboard(crewSession.status, dashboard);
+        } catch (error) {
+          if (error.status === 401) { logout(); return; }
+          setText("#crewPeriodStatus", `${error.message} 기존 조회 결과를 유지합니다.`);
+        } finally {
+          monthLoading = false;
+          settlementMonthInput.disabled = false;
+          settlementMonthInput.value = selectedMonth;
+          document.querySelectorAll("[data-month-shift], [data-settlement-shift]").forEach(button => { button.disabled = Number(button.dataset.monthShift || button.dataset.settlementShift) === 1 && selectedMonth >= Crew.dateKey().slice(0, 7); });
+        }
+      }
+      function shiftMonth(delta) {
+        const [year, month] = selectedMonth.split("-").map(Number);
+        const date = new Date(Date.UTC(year, month - 1 + delta, 1));
+        void selectMonth(`${date.getUTCFullYear()}-${String(date.getUTCMonth() + 1).padStart(2, "0")}`);
+      }
+      document.querySelectorAll("[data-month-shift], [data-settlement-shift]").forEach(button => button.addEventListener("click", () => shiftMonth(Number(button.dataset.monthShift || button.dataset.settlementShift))));
+      settlementMonthInput.addEventListener("change", () => { void selectMonth(settlementMonthInput.value); });
 
       document.querySelectorAll("[data-copy-field]").forEach((button) => {
         button.addEventListener("click", async () => {
@@ -1186,7 +1284,7 @@
           const items = Array.isArray(result.items) ? result.items : [];
           const labels = { NEW: "접수", IN_PROGRESS: "처리 중", CONTACTED: "연락 완료", RESOLVED: "해결", CANCELLED: "취소" };
           historyPanel.innerHTML = items.length ? items.map((item) => {
-            const date = item.created_at ? new Date(item.created_at).toLocaleDateString("ko-KR") : "-";
+            const date = item.created_at ? longDateLabel({ date: item.created_at }) : "-";
             return `<div class="crew-support-item"><span>${escapeHtml(date)}</span><p>${escapeHtml(item.message)}</p><strong>${escapeHtml(labels[item.status] || item.status)}</strong></div>`;
           }).join("") : '<p class="crew-support-empty">남긴 문의가 없습니다.</p>';
         } catch (error) {
@@ -1221,8 +1319,10 @@
       });
 
       async function loadCrewDashboard() {
+        if (params.get("action") === "apply" || referralCode) return;
         const token = localStorage.getItem(TOKEN_KEY);
         if (!token) {
+          document.querySelector(".crew-console-main").hidden = true;
           window.location.replace("./login.html");
           return;
         }
@@ -1230,19 +1330,32 @@
           document.querySelector("#crewLoadError").hidden = true;
           const status = await apiJson("/api/v1/friends/status", token);
           if (!status?.applied || status.status !== "APPROVED") {
-            window.location.replace("./login.html");
+            document.querySelector(".crew-console-main").hidden = true;
+            const state = Crew.notices[status?.status] ? status.status : "NOT_APPLIED";
+            window.location.replace(`./login.html?status=${state}`);
             return;
           }
           const dashboard = await apiJson("/api/v1/friends/dashboard", token);
+          selectedMonth = dashboard.crew_metrics?.period?.month_start?.slice(0, 7) || Crew.dateKey().slice(0, 7);
           crewSession = { token, status, dashboard };
           renderDashboard(status, dashboard);
           if (window.location.hash === "#crewSupport") void loadCrewSupportHistory();
         } catch (error) {
           if (error.status === 401 || error.status === 403) {
             localStorage.removeItem(TOKEN_KEY);
-            window.location.replace("./login.html");
+            document.querySelector(".crew-console-main").hidden = true;
+            window.location.replace("./login.html?status=EXPIRED");
           } else {
             document.querySelector("#crewLoadError").hidden = false;
+            document.body.dataset.loadState = "error";
+            if (!crewSession) {
+              document.querySelectorAll(".crew-summary-grid [id], #settlementAmount, #crewTotalReferrals, #chartMetricTotal, #chartMetricPeak").forEach(element => { element.textContent = "조회 불가"; });
+              recentActivityList.textContent = "활동 내역을 조회하지 못했습니다.";
+              analyticsTableBody.innerHTML = '<tr><td colspan="7">통계를 조회하지 못했습니다.</td></tr>';
+              document.querySelectorAll(".activity-chart, .analytics-wide-chart").forEach(chart => { chart.setAttribute("hidden", ""); });
+              document.querySelectorAll("[data-month-shift], [data-settlement-shift], .ghost-pill-button, #crewActivityAll, #crewGroupPurchase").forEach(button => { button.disabled = true; });
+              settlementMonthInput.disabled = true;
+            }
           }
         }
       }
@@ -1275,6 +1388,8 @@
         URL.revokeObjectURL(url);
       });
 
+      document.body.dataset.loadState = "loading";
+      document.querySelectorAll(".crew-summary-grid [id], #settlementAmount").forEach(element => { element.textContent = "조회 중"; });
       loadCrewDashboard();
     </script>
   </body>

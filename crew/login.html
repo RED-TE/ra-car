@@ -13,7 +13,8 @@
     <link rel="icon" type="image/png" href="../assets/recar-favicon-20260518.png" />
     <link rel="apple-touch-icon" href="../assets/recar-favicon-20260518.png" />
     <link rel="preconnect" href="https://api.recarplan.com" crossorigin />
-    <link rel="stylesheet" href="./login.css?v=20260916-crew-navigation" />
+    <link rel="stylesheet" href="./login.css?v=20261012-crew-audit" />
+    <link rel="stylesheet" href="./readability.css?v=20261012" />
   </head>
   <body class="crew-login-page">
     <header class="crew-login-nav">
@@ -63,6 +64,7 @@
           <form class="crew-panel crew-auth-panel" id="crewLoginForm">
             <h2>크루 로그인</h2>
             <p>승인된 크루 계정으로 접속하세요.</p>
+            <p class="crew-session-notice" id="crewSessionNotice" role="status" hidden></p>
             <div class="crew-auth-grid">
               <label class="crew-field" for="crewId">
                 아이디
@@ -182,14 +184,14 @@
                   <input id="crewApplyAdDisclosure" name="adDisclosureAgreed" type="checkbox" required />
                   <span>
                     추천 활동 시 수수료를 받을 수 있다는 사실을 표시할 의무를 확인했습니다.
-                    <a href="./friends/recar-friends-terms-v1.3.pdf#page=7" target="_blank" rel="noopener noreferrer">내용 보기</a>
+                    <a href="./friends/recar-friends-terms-v1.3.pdf#page=15" target="_blank" rel="noopener noreferrer">내용 보기</a>
                   </span>
                 </label>
                 <label class="crew-checkbox" for="crewApplyAdvertisingGuide">
                   <input id="crewApplyAdvertisingGuide" name="advertisingGuideAgreed" type="checkbox" required />
                   <span>
                     광고 금지 표현 및 준법 활동 가이드를 확인했습니다.
-                    <a href="./friends/recar-friends-terms-v1.3.pdf#page=7" target="_blank" rel="noopener noreferrer">내용 보기</a>
+                    <a href="./friends/recar-friends-terms-v1.3.pdf#page=15" target="_blank" rel="noopener noreferrer">내용 보기</a>
                   </span>
                 </label>
               </fieldset>
@@ -199,7 +201,7 @@
               <a class="crew-guide-button" href="../assets/crew-docs/recar-crew-quick-guide.pdf" download>빠르게 리카 알아보기 <span aria-hidden="true">↓</span></a>
               <a class="crew-back-link" href="./login.html">이미 계정이 있나요? 로그인으로 돌아가기</a>
             </form>
-            <div class="crew-apply-complete" id="crewApplyComplete" role="status" hidden>
+            <div class="crew-apply-complete" id="crewApplyComplete" role="status" tabindex="-1" hidden>
               <span class="crew-apply-status-badge">승인 대기</span>
               <strong>크루 신청이 접수됐습니다.</strong>
               <p>
@@ -289,6 +291,7 @@
     </main>
 
     <script src="./guide/lucide.min.js"></script>
+    <script src="./session.js?v=20261012"></script>
     <script>
       window.lucide?.createIcons({ attrs: { "stroke-width": 2 } });
       const promotionNotice = document.querySelector("#crewPromotionNotice");
@@ -302,8 +305,8 @@
         } catch { /* The current visit can still dismiss the notice. */ }
       });
 
-      const API_BASE_URL = "https://api.recarplan.com";
-      const TOKEN_KEY = "recar_friends_access_token";
+      const Crew = window.RecarCrew;
+      const TOKEN_KEY = Crew.TOKEN_KEY;
       const loginForm = document.querySelector("#crewLoginForm");
       const loginButton = document.querySelector(".login-button");
       const loginError = document.querySelector("#loginError");
@@ -329,6 +332,31 @@
       ].map((selector) => document.querySelector(selector));
       let checkedLoginId = "";
       let loginIdAvailable = false;
+      let applicationSubmitted = false;
+      const isApply = new URLSearchParams(window.location.search).get("action") === "apply";
+      document.body.classList.toggle("is-apply-page", isApply);
+      const sessionNotice = document.querySelector("#crewSessionNotice");
+
+      function showSessionNotice(status) {
+        const message = Crew.notices[status];
+        if (!message) return;
+        sessionNotice.textContent = message;
+        sessionNotice.hidden = false;
+      }
+      showSessionNotice(new URLSearchParams(window.location.search).get("status"));
+
+      async function resumeSession() {
+        const token = localStorage.getItem(TOKEN_KEY);
+        if (!token || isApply) return;
+        try {
+          const response = await Crew.request("/api/v1/friends/status", { headers: { Authorization: `Bearer ${token}`, Accept: "application/json" } });
+          if (response.status === 401) { localStorage.removeItem(TOKEN_KEY); showSessionNotice("EXPIRED"); return; }
+          if (!response.ok) throw new Error(await Crew.errorMessage(response, "계정 상태를 확인하지 못했습니다."));
+          const status = await response.json();
+          if (status.applied && status.status === "APPROVED") window.location.replace("./index.html");
+          else showSessionNotice(status.applied ? status.status : "NOT_APPLIED");
+        } catch (error) { showError(error.message); }
+      }
 
       function syncConsentAllState() {
         const checkedCount = requiredConsentInputs.filter((input) => input.checked).length;
@@ -352,7 +380,7 @@
         input.addEventListener("change", syncConsentAllState);
       });
 
-      if (new URLSearchParams(window.location.search).get("action") === "apply") {
+      if (isApply) {
         loginForm.hidden = true;
         applyPanel.hidden = false;
         formAnchor.classList.add("is-apply");
@@ -365,12 +393,7 @@
       }
 
       async function parseError(response) {
-        try {
-          const body = await response.json();
-          return body.message || body.detail || "로그인 정보를 확인해 주세요.";
-        } catch {
-          return "로그인 정보를 확인해 주세요.";
-        }
+        return Crew.errorMessage(response, "아이디와 비밀번호를 확인해 주세요.");
       }
 
       loginForm.addEventListener("submit", async (event) => {
@@ -386,7 +409,7 @@
         loginButton.textContent = "로그인 중";
 
         try {
-          const response = await fetch(`${API_BASE_URL}/api/v1/friends/login`, {
+          const response = await Crew.request("/api/v1/friends/login", {
             method: "POST",
             headers: {
               Accept: "application/json",
@@ -398,6 +421,7 @@
           if (!response.ok) throw new Error(await parseError(response));
 
           const result = await response.json();
+          if (typeof result.access_token !== "string" || !result.access_token) throw new Error("로그인을 완료하지 못했습니다. 다시 시도해 주세요.");
           localStorage.setItem(TOKEN_KEY, result.access_token);
           window.location.href = "./index.html";
         } catch (error) {
@@ -420,7 +444,8 @@
           if (invalidField === "login_id") {
             return "아이디는 4~50자로 입력해 주세요.";
           }
-          return body?.error?.detail || body?.error?.message || body?.message || body?.detail?.message || body?.detail || fallback;
+          const messages = [body?.error?.message, body?.error?.detail, body?.message, body?.detail?.message, body?.detail];
+          return messages.find(message => typeof message === "string" && message.trim()) || (response.status >= 500 ? "서비스에 일시적인 문제가 있습니다. 잠시 후 다시 시도해 주세요." : fallback);
         } catch {
           return fallback;
         }
@@ -452,7 +477,7 @@
         resetLoginIdCheck();
 
         try {
-          const response = await fetch(`${API_BASE_URL}/api/v1/friends/login-id/check?login_id=${encodeURIComponent(loginId)}`, {
+          const response = await Crew.request(`/api/v1/friends/login-id/check?login_id=${encodeURIComponent(loginId)}`, {
             headers: { Accept: "application/json" },
           });
           if (!response.ok) throw new Error(await parseApplyError(response, "아이디 중복 확인에 실패했습니다."));
@@ -474,6 +499,7 @@
 
       applyForm.addEventListener("submit", async (event) => {
         event.preventDefault();
+        if (applicationSubmitted || applyButton.disabled) return;
         const formData = new FormData(applyForm);
         const name = String(formData.get("name") || "").trim();
         const phone = String(formData.get("phone") || "").trim();
@@ -520,7 +546,7 @@
         applyButton.textContent = "신청 중";
 
         try {
-          const response = await fetch(`${API_BASE_URL}/api/v1/friends/apply`, {
+          const response = await Crew.request("/api/v1/friends/apply", {
             method: "POST",
             headers: {
               Accept: "application/json",
@@ -546,16 +572,21 @@
 
           if (!response.ok) throw new Error(await parseApplyError(response, "신청을 접수하지 못했습니다. 입력값을 확인해 주세요."));
           const result = await response.json();
+          applicationSubmitted = true;
           applyCompleteLoginId.textContent = result.login_id || loginId;
           applyForm.hidden = true;
           applyComplete.hidden = false;
+          applyComplete.focus();
+          applyComplete.scrollIntoView({ block: "center", behavior: "auto" });
+          applyForm.reset();
         } catch (error) {
           showApplyError(error instanceof Error ? error.message : "신청을 접수하지 못했습니다. 입력값을 확인해 주세요.");
         } finally {
-          applyButton.disabled = false;
+          applyButton.disabled = applicationSubmitted;
           applyButton.textContent = "크루 신청하기";
         }
       });
+      void resumeSession();
     </script>
   </body>
 </html>

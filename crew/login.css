@@ -2,10 +2,10 @@
   --crew-panel: #ffffff;
   --crew-border: #e8e8ec;
   --crew-text: #20242a;
-  --crew-muted: #8a8f98;
-  --crew-blue: #5d5bff;
-  --crew-blue-soft: #f0f0ff;
-  --crew-green: #1db954;
+  --crew-muted: #5e6976;
+  --crew-blue: #1767d8;
+  --crew-blue-soft: #edf4ff;
+  --crew-green: #14733c;
   --crew-red-soft: #fff1f2;
   font-family:
     Pretendard,
@@ -23,6 +23,10 @@
 * {
   box-sizing: border-box;
 }
+
+[hidden] { display: none !important; }
+.crew-session-notice { padding: 12px 14px; border: 1px solid #b7d1f0; border-radius: 6px; color: #184c80; background: #edf4ff; line-height: 1.65; }
+.crew-apply-complete:focus { outline: 2px solid var(--crew-blue); outline-offset: 5px; }
 
 html {
   min-width: 320px;
@@ -172,7 +176,7 @@ input {
 .crew-promotion-footer small {
   max-width: 205px;
   color: #687485;
-  font-size: 10px;
+  font-size: 13px;
   line-height: 1.4;
 }
 .crew-promotion-footer a {
@@ -181,7 +185,7 @@ input {
   gap: 2px;
   flex: none;
   color: #3159c9;
-  font-size: 11px;
+  font-size: 13px;
   font-weight: 850;
   white-space: nowrap;
 }
@@ -347,7 +351,7 @@ input {
 }
 
 .crew-field-optional {
-  color: #8a8f98;
+  color: #5e6976;
   font-weight: 750;
 }
 
@@ -649,7 +653,7 @@ input {
 .crew-login-reward-copy > span {
   display: block;
   margin-bottom: 14px;
-  color: #18a85b;
+  color: #14733c;
   font-size: 13px;
   font-weight: 950;
 }
@@ -722,7 +726,7 @@ input {
 }
 
 .crew-login-njob-grid article:nth-child(3) small {
-  color: #c27800;
+  color: #805000;
 }
 
 .crew-login-njob-grid h3 {

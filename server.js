@@ -39,6 +39,8 @@ const mimeTypes = {
   ".webp": "image/webp",
   ".xml": "application/xml; charset=utf-8",
   ".woff2": "font/woff2",
+  ".ttf": "font/ttf",
+  ".wasm": "application/wasm",
 };
 
 const publicStaticFiles = new Set([
@@ -53,6 +55,12 @@ const publicStaticFiles = new Set([
   "/crew/crew.css",
   "/crew/login.html",
   "/crew/login.css",
+  "/crew/session.js",
+  "/crew/readability.css",
+  "/crew/njob/index.html",
+  "/crew/njob/njob.css",
+  "/crew/njob/njob.js",
+  "/crew/friends/recar-friends-terms-v1.3.pdf",
   "/crew/guide/index.html",
   "/crew/guide/knowledge.css",
   "/crew/guide/knowledge.js",
@@ -78,6 +86,7 @@ const publicAssetExtensions = new Set([".avif", ".gif", ".jpg", ".jpeg", ".png",
 
 function isPublicStaticPath(requestedPath) {
   if (publicStaticFiles.has(requestedPath)) return true;
+  if (requestedPath.startsWith("/app/")) return [".html", ".js", ".json", ".wasm", ".png", ".webp", ".ttf", ".woff2"].includes(path.extname(requestedPath).toLowerCase());
   if (!requestedPath.startsWith("/assets/")) return false;
   return publicAssetExtensions.has(path.extname(requestedPath).toLowerCase());
 }
@@ -2234,7 +2243,10 @@ function serveStatic(request, response, url) {
 
   let requestedPath = pathname === "/" ? "/index.html" : pathname;
   if (isCrewReferralPath) {
-    requestedPath = "/index.html";
+    const code = pathname.split("/")[2].toUpperCase();
+    response.writeHead(302, { Location: `/app/?ref=${encodeURIComponent(code)}`, "Cache-Control": "no-store" });
+    response.end();
+    return;
   }
   if (requestedPath === "/inquiry" || requestedPath === "/inquiry/") {
     requestedPath = "/inquiry/index.html";
@@ -2242,11 +2254,20 @@ function serveStatic(request, response, url) {
   if (requestedPath === "/download" || requestedPath === "/download/") {
     requestedPath = "/download/index.html";
   }
+  if (requestedPath === "/app" || requestedPath === "/app/") requestedPath = "/app/index.html";
+  if (requestedPath === "/crew/njob" || requestedPath === "/crew/njob/") requestedPath = "/crew/njob/index.html";
   if (requestedPath === "/friends" || requestedPath === "/friends/") {
     requestedPath = "/friends/index.html";
   }
   if (requestedPath === "/crew" || requestedPath === "/crew/") {
-    requestedPath = "/crew/index.html";
+    if (url.searchParams.get("action") === "apply") {
+      response.writeHead(302, { Location: "/crew/login.html?action=apply", "Cache-Control": "no-store" });
+      response.end();
+      return;
+    }
+    response.writeHead(302, { Location: `/crew/index.html${url.search}`, "Cache-Control": "no-store" });
+    response.end();
+    return;
   }
   if (requestedPath === "/crew/login" || requestedPath === "/crew/login/") {
     requestedPath = "/crew/login.html";
@@ -2277,6 +2298,7 @@ function serveStatic(request, response, url) {
     }
     requestedPath = "/crew/guide/index.html";
   }
+  requestedPath = path.posix.normalize(requestedPath);
   if (!isPublicStaticPath(requestedPath)) {
     response.writeHead(404, {
       "Content-Type": "text/plain; charset=utf-8",

@@ -91,7 +91,7 @@ test("development serves public aliases and the preview route", async () => {
     const crewHtml = await crewResponse.text();
     assert.match(crewHtml, /https:\/\/recarplan\.com\/crew/);
     assert.match(crewHtml, /params\.get\("ref"\)/);
-    assert.match(crewHtml, /new URL\(`\/r\/\$\{referralCode\}`/);
+    assert.match(crewHtml, /new URL\(`\/app\/\?ref=/);
     assert.doesNotMatch(crewHtml, /vercel\.app/);
 
     const friendsResponse = await fetch(`${server.baseUrl}/friends/?ref=RC-QA1234`);
@@ -167,14 +167,15 @@ test("private data and unknown knowledge files stay blocked", async () => {
   }
 });
 
-test("individual crew links serve the real homepage without opening arbitrary paths", async () => {
+test("legacy crew links redirect to the app and preserve referral codes", async () => {
   const server = await startServer("production");
   try {
-    const response = await fetch(`${server.baseUrl}/r/RC-QA1234`);
-    assert.equal(response.status, 200);
-    const html = await response.text();
-    assert.match(html, /<base href="\/">/);
-    assert.match(html, /RE:CAR 리카/);
+    const response = await fetch(`${server.baseUrl}/r/RC-QA1234`, { redirect: "manual" });
+    assert.equal(response.status, 302);
+    assert.equal(response.headers.get("location"), "/app/?ref=RC-QA1234");
+    const destination = await fetch(`${server.baseUrl}${response.headers.get("location")}`);
+    assert.equal(destination.status, 200);
+    assert.match(await destination.text(), /<base href="\/app\/">/);
     assert.equal((await fetch(`${server.baseUrl}/r/not-a-code`)).status, 404);
     assert.equal((await fetch(`${server.baseUrl}/r/RC-QA1234/other`)).status, 404);
   } finally {

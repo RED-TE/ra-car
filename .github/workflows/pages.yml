@@ -25,13 +25,36 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Check public site
+        run: npm run build
+
+      - name: Install test browser
+        run: npx playwright install --with-deps chromium
+
+      - name: Verify Crew before publishing
+        run: npm run test:crew
+
       - name: Configure Pages
         uses: actions/configure-pages@v5
+
+      - name: Stage public site without test dependencies
+        run: |
+          mkdir -p "$RUNNER_TEMP/recar-public"
+          tar --exclude='./node_modules' --exclude='./test-results' --exclude='./playwright-report' --exclude='./artifacts' --exclude='./.git' -cf - . | tar -xf - -C "$RUNNER_TEMP/recar-public"
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: .
+          path: ${{ runner.temp }}/recar-public
 
       - name: Deploy to GitHub Pages
         id: deployment

@@ -2,7 +2,7 @@ const { test, expect } = require("@playwright/test");
 
 const code = "RC-QA1234";
 
-test("individual crew link serves the homepage and attributes an inquiry", async ({ page }) => {
+test("legacy homepage query still attributes an inquiry", async ({ page }) => {
   let lead = null;
   await page.route("https://api.recarplan.com/api/v1/friends/track**", route =>
     route.fulfill({ status: 200, contentType: "application/json", body: '{"recorded":true}' }),
@@ -12,8 +12,7 @@ test("individual crew link serves the homepage and attributes an inquiry", async
     await route.fulfill({ status: 201, contentType: "application/json", body: '{"ok":true,"stored":"firebase","firebase":{"stored":true}}' });
   });
 
-  await page.goto(`/r/${code}`);
-  await expect(page).toHaveURL(new RegExp(`/r/${code}$`));
+  await page.goto(`/?ref=${code}`);
   await expect(page.locator("[data-referral-notice]")).toBeVisible();
   await expect(page.locator("[data-referral-code]")).toHaveText(code);
   await expect(page.locator("#vehicleWish")).toBeVisible();
@@ -27,14 +26,14 @@ test("individual crew link serves the homepage and attributes an inquiry", async
   await page.getByRole("button", { name: "조건 확인하기", exact: true }).click();
 
   await expect(page.locator(".form-status")).toContainText("문의가 접수되었습니다");
-  expect(lead).toMatchObject({ referralCode: code, referralEntryPath: `/r/${code}`, entryPoint: "크루 전용 링크" });
+  expect(lead).toMatchObject({ referralCode: code, referralEntryPath: "" });
 });
 
 test("a later different referral cannot inherit an earlier crew entry path", async ({ page }) => {
   await page.route("https://api.recarplan.com/api/v1/friends/track**", route =>
     route.fulfill({ status: 200, contentType: "application/json", body: '{"recorded":true}' }),
   );
-  await page.goto(`/r/${code}`);
+  await page.goto(`/?ref=${code}`);
   await page.goto("/?ref=RC-OTHER1");
   expect(await page.evaluate(() => ({
     code: localStorage.getItem("recar_referral_code"),
@@ -61,12 +60,12 @@ test("crew dashboard copies the disclosure and uses an individual link", async (
   await page.route("**/api/v1/friends/dashboard", route => route.fulfill({ status: 200, contentType: "application/json", body: JSON.stringify({ referral_code: code, referral_link: `https://recarplan.com/app/?ref=${code}`, click_count: 8, total_referrals: 3, settlement: { pending_month_amount: 350000 }, recent_events: [] }) }));
 
   await page.goto("/crew/index.html");
-  await expect(page.locator("#crewShareLink")).toHaveValue(`https://recarplan.com/r/${code}`);
+  await expect(page.locator("#crewShareLink")).toHaveValue(`https://recarplan.com/app/?ref=${code}`);
   await expect(page.locator("#crewShareVisits")).toHaveText("8");
   await expect(page.locator("#crewShareReferrals")).toHaveText("3");
   await page.locator("#crewShareCopy").click();
   const copied = await page.evaluate(() => navigator.clipboard.readText());
-  expect(copied).toContain(`https://recarplan.com/r/${code}`);
+  expect(copied).toContain(`https://recarplan.com/app/?ref=${code}`);
   expect(copied).toContain("크루 활동의 일환");
   expect(copied).toContain("수수료가 지급될 수 있습니다");
   await page.screenshot({ path: "test-results/crew-dashboard-after-desktop.png" });
@@ -92,5 +91,5 @@ test("transient crew API failure leaves the session intact and offers retry", as
   expect(await page.evaluate(() => localStorage.getItem("recar_friends_access_token"))).toBe("qa-token");
   await page.locator("#crewLoadRetry").click();
   await expect(page.locator("#crewLoadError")).toBeHidden();
-  await expect(page.locator("#crewShareLink")).toHaveValue(`https://recarplan.com/r/${code}`);
+  await expect(page.locator("#crewShareLink")).toHaveValue(`https://recarplan.com/app/?ref=${code}`);
 });
