@@ -1,23 +1,24 @@
 {
   "source_repository": "RECAREA/recar_app",
-  "source_commit": "038a178cfe7e915a6eb2f6438fbb44ece7556ef3",
-  "build_id": "038a178c",
+  "source_commit": "432f6d4d06b1fd0509901a10d046ccddf155911a",
+  "build_id": "home-pick-collection-20261012",
   "target": "https://recarplan.com/app/",
   "base_path": "/app/",
   "api_base_url": "https://api.recarplan.com",
-  "homepage_base_commit": "e73c9e54fe2a75d5b99a5a787e14a57d47ebee0f",
-  "local_validation": {
-    "flutter_tests_passed": 695,
-    "flutter_tests_skipped": 23,
-    "analyzer_errors": 0,
-    "analyzer_warnings": 0,
-    "analyzer_infos": 277
+  "homepage_base_commit": "18d4d0e3927ff77a8bd9dd2c3e80c5456f105ff5",
+  "previous_build_id": "038a178c",
+  "validation": {
+    "flutter_home_tests_passed": 40,
+    "admin_tests_passed": 130,
+    "server_tests_passed": 46,
+    "homepage_tests_passed": 9,
+    "changed_flutter_analyze": "no issues",
+    "chrome_live_api": "three ordered vehicles, detail navigation and selection retained"
   },
   "sha256": {
-    "index.html": "a10f879e669163bed068336d8d0bdddc0298b27740430c42f991e758e607eda9",
-    "flutter_bootstrap.js": "2fc8fd708aac804c262057d90d25e050d9345e4aa66bcc10a5d2302cdc7f2cd1",
-    "main.dart.js": "6627ad0d2a799de1b6d1e644bad7bf76dd2bee7342cb461ee2dfd261b7d550a1",
-    "assets/AssetManifest.bin.json": "1b06da862e989e0ce7edda54e99304850aa0aa542e5672daa0f91358dec238ff"
-  },
-  "source_pr": 116
+    "index.html": "dbdd4adecbea8e3a3712d8fd9cc6db5a5a08aae4313372cf2d9a8fff8ffb9557",
+    "flutter_bootstrap.js": "7f95f048b40d97a512d2e0beaa6e09e84e61426b113de53686a88b84b6072136",
+    "main.dart.js": "d575b6021c202779ab0964baeeb352903c066935ffacfdc61ee52dfcd1e2d239",
+    "assets/AssetManifest.bin.json": "78c7c636b44d70931f0129b5ef08d299b82c3ed0a86937adcd4d13bc11152169"
+  }
 }
