@@ -38,7 +38,7 @@ _flutter.buildConfig = {"engineRevision":"3452d735bd38224ef2db85ca763d862d6326b1
 
 async function startRecar() {
   const compatibleBuild = _flutter.buildConfig.builds[0];
-  compatibleBuild.mainJsPath = 'main.dart.js?build=429f34a3';
+  compatibleBuild.mainJsPath = 'main.dart.js?build=038a178c';
 
   let shouldReload = false;
 
