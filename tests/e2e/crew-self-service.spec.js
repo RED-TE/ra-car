@@ -14,7 +14,7 @@ const dashboard = {
   vehicle_benefit: { target_contracts: 100, eligible_contracts: 2, remaining_contracts: 98 },
 };
 
-async function mockCrewApi(page, dashboardOverrides = {}) {
+async function mockCrewApi(page, dashboardOverrides = {}, statusOverrides = {}) {
   const saved = { profile: null, inquiries: [] };
   await page.addInitScript(() => localStorage.setItem("recar_friends_access_token", "qa-token"));
   await page.route("https://api.recarplan.com/api/v1/friends/**", async (route) => {
@@ -22,7 +22,7 @@ async function mockCrewApi(page, dashboardOverrides = {}) {
     const path = new URL(request.url()).pathname;
     let data;
     let status = 200;
-    if (request.method() === "GET" && path.endsWith("/status")) data = initialStatus;
+    if (request.method() === "GET" && path.endsWith("/status")) data = { ...initialStatus, ...statusOverrides };
     else if (request.method() === "GET" && path.endsWith("/dashboard")) data = { ...dashboard, ...dashboardOverrides };
     else if (request.method() === "PATCH" && path.endsWith("/profile")) {
       saved.profile = request.postDataJSON();
@@ -66,8 +66,8 @@ test("link visits stay separate from customer referrals", async ({ page }) => {
 });
 
 test("account menu keeps every action and disclosure inside its width", async ({ page }, testInfo) => {
-  await mockCrewApi(page);
-  for (const width of [1280, 800, 761]) {
+  await mockCrewApi(page, {}, { name: "긴 이름을 사용하는 리카 크루 검증 계정" });
+  for (const width of [1440, 1280, 1180, 1024, 820, 800, 768, 761]) {
     await page.setViewportSize({ width, height: 800 });
     await page.goto("/crew/index.html");
     await page.locator(".crew-account-button").click();
@@ -80,6 +80,10 @@ test("account menu keeps every action and disclosure inside its width", async ({
         menuRight: bounds.right,
         childRights: [...menu.children].map((child) => child.getBoundingClientRect().right),
         linkAlignment: getComputedStyle(menu.querySelector(".account-dropdown-link")).justifyContent,
+        pageWidth: document.documentElement.scrollWidth,
+        headerBounds: [...document.querySelectorAll(".crew-topbar > *, .crew-topbar-meta > *")]
+          .filter((item) => getComputedStyle(item).display !== "none")
+          .map((item) => ({ left: item.getBoundingClientRect().left, right: item.getBoundingClientRect().right })),
       };
     });
     expect(layout.whiteSpace).toBe("normal");
@@ -87,6 +91,8 @@ test("account menu keeps every action and disclosure inside its width", async ({
     expect(layout.menuLeft).toBeGreaterThanOrEqual(0);
     expect(layout.menuRight).toBeLessThanOrEqual(width);
     expect(Math.max(...layout.childRights)).toBeLessThanOrEqual(layout.menuRight);
+    expect(layout.pageWidth).toBeLessThanOrEqual(width);
+    expect(layout.headerBounds.every(({ left, right }) => left >= 0 && right <= width)).toBe(true);
     await page.locator("#crewAccountDropdown").screenshot({ path: testInfo.outputPath(`account-menu-${width}.png`) });
   }
 });
