@@ -3,8 +3,17 @@ const assert = require("node:assert/strict");
 const { readFileSync } = require("node:fs");
 const { runInNewContext } = require("node:vm");
 const { createServer } = require("node:http");
+const { createHash } = require("node:crypto");
 
 const source = readFileSync(require.resolve("../crew/session.js"), "utf8");
+
+test("Crew entry pages invalidate the browser cache when the session script changes", () => {
+  const version = createHash("sha256").update(source).digest("hex").slice(0, 12);
+  for (const file of ["../crew/login.html", "../crew/index.html"]) {
+    const html = readFileSync(require.resolve(file), "utf8");
+    assert.ok(html.includes(`src="./session.js?v=${version}"`), `${file} must use the current session content hash`);
+  }
+});
 
 function harness(fetch) {
   const timers = new Map();
