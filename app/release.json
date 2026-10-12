@@ -1,11 +1,11 @@
 {
   "source_repository": "RECAREA/recar_app",
-  "source_commit": "432f6d4d06b1fd0509901a10d046ccddf155911a",
-  "build_id": "home-pick-collection-20261012",
+  "source_commit": "4b0498df0e63aa2c8bbae66e59e1c9a31037e7b0",
+  "build_id": "garage-docs-readability-20261012",
   "target": "https://recarplan.com/app/",
   "base_path": "/app/",
   "api_base_url": "https://api.recarplan.com",
-  "homepage_base_commit": "18d4d0e3927ff77a8bd9dd2c3e80c5456f105ff5",
+  "homepage_base_commit": "3e0798051eee1063e7d7085920a4afa07a7c128f",
   "previous_build_id": "038a178c",
   "validation": {
     "flutter_home_tests_passed": 40,
@@ -13,12 +13,15 @@
     "server_tests_passed": 46,
     "homepage_tests_passed": 9,
     "changed_flutter_analyze": "no issues",
-    "chrome_live_api": "three ordered vehicles, detail navigation and selection retained"
+    "chrome_live_api": "three ordered vehicles, detail navigation and selection retained",
+    "garage_documents_flutter_tests_passed": 143,
+    "document_geometry_matrix_passed": 52,
+    "native_documents": "iOS Simulator, isolated offline QA app, synthetic data"
   },
   "sha256": {
-    "index.html": "dbdd4adecbea8e3a3712d8fd9cc6db5a5a08aae4313372cf2d9a8fff8ffb9557",
-    "flutter_bootstrap.js": "7f95f048b40d97a512d2e0beaa6e09e84e61426b113de53686a88b84b6072136",
-    "main.dart.js": "d575b6021c202779ab0964baeeb352903c066935ffacfdc61ee52dfcd1e2d239",
+    "index.html": "db2aa384570ebdef652ad6804e2b143dee37bd6a49438a89deeda25987ca8a64",
+    "flutter_bootstrap.js": "e16195a1a9f43213aea5c1f84dfdc8605c7d0c5ebed5379344c561999147ea1e",
+    "main.dart.js": "151303049f30bf9440a89cc1f350848fc45194f1be83941306627d489a4ef660",
     "assets/AssetManifest.bin.json": "78c7c636b44d70931f0129b5ef08d299b82c3ed0a86937adcd4d13bc11152169"
   }
 }
