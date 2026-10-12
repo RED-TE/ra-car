@@ -1,23 +1,27 @@
 {
   "source_repository": "RECAREA/recar_app",
-  "source_commit": "038a178cfe7e915a6eb2f6438fbb44ece7556ef3",
-  "build_id": "038a178c",
+  "source_commit": "4b0498df0e63aa2c8bbae66e59e1c9a31037e7b0",
+  "build_id": "garage-docs-readability-20261012",
   "target": "https://recarplan.com/app/",
   "base_path": "/app/",
   "api_base_url": "https://api.recarplan.com",
-  "homepage_base_commit": "e73c9e54fe2a75d5b99a5a787e14a57d47ebee0f",
-  "local_validation": {
-    "flutter_tests_passed": 695,
-    "flutter_tests_skipped": 23,
-    "analyzer_errors": 0,
-    "analyzer_warnings": 0,
-    "analyzer_infos": 277
+  "homepage_base_commit": "3e0798051eee1063e7d7085920a4afa07a7c128f",
+  "previous_build_id": "038a178c",
+  "validation": {
+    "flutter_home_tests_passed": 40,
+    "admin_tests_passed": 130,
+    "server_tests_passed": 46,
+    "homepage_tests_passed": 9,
+    "changed_flutter_analyze": "no issues",
+    "chrome_live_api": "three ordered vehicles, detail navigation and selection retained",
+    "garage_documents_flutter_tests_passed": 143,
+    "document_geometry_matrix_passed": 52,
+    "native_documents": "iOS Simulator, isolated offline QA app, synthetic data"
   },
   "sha256": {
-    "index.html": "a10f879e669163bed068336d8d0bdddc0298b27740430c42f991e758e607eda9",
-    "flutter_bootstrap.js": "2fc8fd708aac804c262057d90d25e050d9345e4aa66bcc10a5d2302cdc7f2cd1",
-    "main.dart.js": "6627ad0d2a799de1b6d1e644bad7bf76dd2bee7342cb461ee2dfd261b7d550a1",
-    "assets/AssetManifest.bin.json": "1b06da862e989e0ce7edda54e99304850aa0aa542e5672daa0f91358dec238ff"
-  },
-  "source_pr": 116
+    "index.html": "db2aa384570ebdef652ad6804e2b143dee37bd6a49438a89deeda25987ca8a64",
+    "flutter_bootstrap.js": "e16195a1a9f43213aea5c1f84dfdc8605c7d0c5ebed5379344c561999147ea1e",
+    "main.dart.js": "151303049f30bf9440a89cc1f350848fc45194f1be83941306627d489a4ef660",
+    "assets/AssetManifest.bin.json": "78c7c636b44d70931f0129b5ef08d299b82c3ed0a86937adcd4d13bc11152169"
+  }
 }
