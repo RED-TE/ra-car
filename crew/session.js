@@ -15,9 +15,12 @@
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 15000);
     try {
-      return await fetch(`${API_BASE}${path}`, { ...options, signal: controller.signal });
+      const response = await fetch(`${API_BASE}${path}`, { ...options, signal: controller.signal });
+      // Keep the timeout until the JSON body has arrived without consuming the caller's response.
+      await response.clone().text();
+      return response;
     } catch (error) {
-      if (error.name === "AbortError") throw new Error("응답이 지연되고 있습니다. 잠시 후 다시 시도해 주세요.");
+      if (controller.signal.aborted || error?.name === "AbortError") throw new Error("응답이 지연되고 있습니다. 잠시 후 다시 시도해 주세요.");
       throw new Error("서버에 연결하지 못했습니다. 연결을 확인한 뒤 다시 시도해 주세요.");
     } finally {
       clearTimeout(timeout);
