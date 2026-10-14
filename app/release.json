@@ -7,6 +7,12 @@
   "api_base_url": "https://api.recarplan.com",
   "homepage_base_commit": "3e0798051eee1063e7d7085920a4afa07a7c128f",
   "previous_build_id": "038a178c",
+  "web_startup_id": "web-startup-20261015",
+  "web_startup_changes": [
+    "parallel preload of existing main code, manifests and used fonts",
+    "unused SUIT family omitted from startup manifest; original files retained",
+    "legacy service worker migration scoped to /app/; no origin cache deletion"
+  ],
   "validation": {
     "flutter_home_tests_passed": 40,
     "admin_tests_passed": 130,
@@ -19,9 +25,10 @@
     "native_documents": "iOS Simulator, isolated offline QA app, synthetic data"
   },
   "sha256": {
-    "index.html": "db2aa384570ebdef652ad6804e2b143dee37bd6a49438a89deeda25987ca8a64",
-    "flutter_bootstrap.js": "e16195a1a9f43213aea5c1f84dfdc8605c7d0c5ebed5379344c561999147ea1e",
+    "index.html": "fdecd356669cf8d3d852213734a600004349345ca4a0a453ff2261937540e356",
+    "flutter_bootstrap.js": "f12561deb9c17563d033a05c64fb5c024211c9634371914fa1781f43b27a058a",
     "main.dart.js": "151303049f30bf9440a89cc1f350848fc45194f1be83941306627d489a4ef660",
+    "assets/FontManifest.json": "1585301ec2c22b999d3cc03103c085fb566bd80291c606bd1a9322eec5d5acf2",
     "assets/AssetManifest.bin.json": "78c7c636b44d70931f0129b5ef08d299b82c3ed0a86937adcd4d13bc11152169"
   }
 }

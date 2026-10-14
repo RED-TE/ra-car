@@ -156,6 +156,27 @@ test("production keeps public routes and returns 404 for preview", async () => {
   }
 });
 
+test("app preloaded fonts are served as fonts rather than blocked by the web preview", async () => {
+  const server = await startServer("development");
+  try {
+    const response = await fetch(`${server.baseUrl}/app/`);
+    const html = await response.text();
+    const manifest = await (await fetch(`${server.baseUrl}/app/assets/FontManifest.json`)).json();
+    for (const family of manifest) {
+      for (const font of family.fonts) {
+        const pathname = `/app/assets/${font.asset}`;
+        const asset = await fetch(`${server.baseUrl}${pathname}`);
+        assert.equal(asset.status, 200, pathname);
+        assert.match(asset.headers.get("content-type"), /^font\//, pathname);
+        assert.ok((await asset.arrayBuffer()).byteLength > 1000, pathname);
+      }
+    }
+    assert.match(html, /main\.dart\.js\?build=garage-docs-readability-20261012" as="script"/);
+  } finally {
+    await server.stop();
+  }
+});
+
 test("private data and unknown knowledge files stay blocked", async () => {
   const server = await startServer("development");
   try {

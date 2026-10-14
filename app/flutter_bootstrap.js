@@ -39,44 +39,42 @@ _flutter.buildConfig = {"engineRevision":"3452d735bd38224ef2db85ca763d862d6326b1
 async function startRecar() {
   const compatibleBuild = _flutter.buildConfig.builds[0];
   compatibleBuild.mainJsPath = 'main.dart.js?build=garage-docs-readability-20261012';
+  const appScope = new URL('./', document.baseURI).href;
+  const isLegacyAppWorker = (worker) => worker &&
+    new URL(worker.scriptURL).pathname === new URL('flutter_service_worker.js', appScope).pathname;
 
-  let shouldReload = false;
-
-  if ('serviceWorker' in navigator) {
+  async function removeLegacyAppWorker() {
+    if (!('serviceWorker' in navigator)) return false;
     try {
-      const hadController = navigator.serviceWorker.controller !== null;
-      const registrations = await navigator.serviceWorker.getRegistrations();
-      const flutterRegistrations = registrations.filter((registration) => {
-        const worker = registration.active || registration.waiting || registration.installing;
-        return worker && worker.scriptURL.endsWith('/flutter_service_worker.js');
-      });
-      await Promise.all(
-        flutterRegistrations.map((registration) => registration.unregister()),
-      );
-      shouldReload = hadController && flutterRegistrations.length > 0;
+      const registration = await navigator.serviceWorker.getRegistration(appScope);
+      if (!registration || registration.scope !== appScope) return false;
+      const worker = registration.active || registration.waiting || registration.installing;
+      if (!isLegacyAppWorker(worker)) return false;
+      return await registration.unregister();
     } catch (_) {
-      // Cache cleanup must never block the app from starting.
+      return false;
     }
   }
 
-  if ('caches' in window) {
-    try {
-      const cacheNames = await caches.keys();
-      const flutterCacheNames = cacheNames.filter((name) =>
-        name.startsWith('flutter-'),
-      );
-      await Promise.all(flutterCacheNames.map((name) => caches.delete(name)));
-    } catch (_) {
-      // Cache cleanup must never block the app from starting.
+  const controlledByLegacyWorker = 'serviceWorker' in navigator &&
+    isLegacyAppWorker(navigator.serviceWorker.controller);
+  if (controlledByLegacyWorker) {
+    // Only a controlled legacy app needs migration before loading versioned code.
+    let timeout;
+    const removed = await Promise.race([
+      removeLegacyAppWorker(),
+      new Promise((resolve) => { timeout = setTimeout(() => resolve(false), 1500); }),
+    ]);
+    clearTimeout(timeout);
+    const currentUrl = new URL(window.location.href);
+    if (removed && !currentUrl.searchParams.has('recar-sw-reset')) {
+      currentUrl.searchParams.set('recar-sw-reset', '1');
+      window.location.replace(currentUrl.toString());
+      return;
     }
-  }
-
-  const resetKey = 'recar-sw-reset';
-  const currentUrl = new URL(window.location.href);
-  if (shouldReload && !currentUrl.searchParams.has(resetKey)) {
-    currentUrl.searchParams.set(resetKey, '1');
-    window.location.replace(currentUrl.toString());
-    return;
+  } else {
+    // An inactive old registration must not delay first paint on normal visits.
+    void removeLegacyAppWorker();
   }
 
   await _flutter.loader.load();
