@@ -15,6 +15,13 @@ test("Crew entry pages invalidate the browser cache when the session script chan
   }
 });
 
+test("Crew application invalidates the terms helper cache when its content changes", () => {
+  const helper = readFileSync(require.resolve("../crew/terms.js"), "utf8");
+  const version = createHash("sha256").update(helper).digest("hex").slice(0, 12);
+  const login = readFileSync(require.resolve("../crew/login.html"), "utf8");
+  assert.ok(login.includes(`src="./terms.js?v=${version}"`));
+});
+
 function harness(fetch) {
   const timers = new Map();
   const window = {};

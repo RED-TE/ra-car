@@ -16,6 +16,7 @@
     <link rel="preconnect" href="https://api.recarplan.com" crossorigin />
     <link rel="stylesheet" href="./crew.css?v=20261012-crew-audit" />
     <link rel="stylesheet" href="./readability.css?v=20261012" />
+    <link rel="stylesheet" href="./trust.css?v=20261014" />
     <script>
       const params = new URLSearchParams(window.location.search);
       if (params.get("action") === "apply") window.location.replace("./login.html?action=apply");
@@ -75,7 +76,7 @@
               <i data-lucide="circle-user-round"></i>
               내정보
             </a>
-            <a class="account-dropdown-link" href="../assets/crew-docs/recar-crew-quick-guide.pdf" download>
+            <a class="account-dropdown-link" href="../assets/crew-docs/recar-crew-quick-guide-20261014.pdf" download>
               <i data-lucide="file-down"></i>
               빠르게 리카 알아보기
             </a>
@@ -88,7 +89,7 @@
             </button>
             <small class="account-copy-status" aria-live="polite">수수료 안내를 포함해 복사합니다.</small>
             <p class="account-commission-disclosure">
-              수수료 고지: 이 추천 링크를 통한 계약·인도 시 RE:CAR 크루 활동의 일환으로 크루에게 수수료가 지급될 수 있습니다.
+              수수료 고지: RE:CAR 크루 활동의 일환으로, 이 추천 링크를 통한 계약·차량 인도 완료 등 유효 실적에 대해 크루에게 수수료를 지급합니다.
             </p>
             <button class="account-dropdown-link crew-logout" type="button"><i data-lucide="log-out" aria-hidden="true"></i>로그아웃</button>
           </div>
@@ -123,7 +124,7 @@
           </div>
           <div class="crew-share-side">
             <div class="crew-share-counts"><span>기록된 방문 <strong id="crewShareVisits">-</strong></span><span>확인된 추천 <strong id="crewShareReferrals">-</strong></span></div>
-            <p id="crewShareDisclosure">RE:CAR 크루 활동의 일환으로 제공하는 링크입니다. 계약·인도 시 크루에게 수수료가 지급될 수 있습니다.</p>
+            <p id="crewShareDisclosure">RE:CAR 크루 활동의 일환으로 제공하는 링크입니다. 계약·차량 인도 완료 등 유효 실적에 대해 크루에게 수수료를 지급합니다.</p>
           </div>
         </section>
 
@@ -484,6 +485,9 @@
             <div class="crew-workspace-section"><h3>내 문의</h3><div id="crewSupportHistory" class="crew-support-history" aria-live="polite">문의 내역을 불러오는 중입니다.</div></div>
           </div>
         </section>
+        <footer class="crew-operator-footer">
+          <div><strong>RE:CAR 크루</strong><p>크루 가입 계약·보상 지급 운영자: 조홍철</p><nav aria-label="운영 정보"><a href="./policy.html#settlement">보상·정산·제외 기준</a><a href="./policy.html#privacy">개인정보 안내</a><a href="./friends/recar-friends-terms-v1.3.pdf" target="_blank" rel="noopener">가입 약관 v1.3</a><a href="mailto:friends@recarplan.com">운영팀 문의</a></nav></div>
+        </footer>
       </div>
     </main>
 
@@ -561,7 +565,7 @@
       }
 
       function shareMessage(link) {
-        return `RE:CAR 크루 활동의 일환으로 제공하는 추천 링크입니다. 이 링크를 통한 계약과 차량 인도가 완료되면 저에게 수수료가 지급될 수 있습니다. 고객에게 별도 수수료는 청구되지 않습니다.\n차량 조건 비교와 상담: ${link}`;
+        return `이 게시물은 RE:CAR 크루 활동의 일환입니다. 이 추천 링크를 통한 계약·차량 인도 완료 등 유효 실적에 대해 RE:CAR로부터 수수료를 지급받습니다. 고객에게 크루 추천 수수료를 별도로 청구하지 않습니다.\n차량 조건 비교와 상담: ${link}`;
       }
 
       async function copyText(value) {

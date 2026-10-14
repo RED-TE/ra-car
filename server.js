@@ -56,7 +56,13 @@ const publicStaticFiles = new Set([
   "/crew/login.html",
   "/crew/login.css",
   "/crew/session.js",
+  "/crew/terms.js",
+  "/crew/friends/recar-friends-terms-v1.4-preview.pdf",
+  "/crew/friends/recar-friends-terms-v1.4.pdf",
   "/crew/readability.css",
+  "/crew/trust.css",
+  "/crew/welcome.html",
+  "/crew/policy.html",
   "/crew/njob/index.html",
   "/crew/njob/njob.css",
   "/crew/njob/njob.js",
@@ -69,6 +75,7 @@ const publicStaticFiles = new Set([
   "/crew/knowledge/index.html",
   "/friends/index.html",
   "/assets/crew-docs/recar-crew-quick-guide.pdf",
+  "/assets/crew-docs/recar-crew-quick-guide-20261014.pdf",
   "/download/index.html",
   "/inquiry/index.html",
   "/data/vehicle-static-catalog.json",
@@ -2265,7 +2272,7 @@ function serveStatic(request, response, url) {
       response.end();
       return;
     }
-    response.writeHead(302, { Location: `/crew/index.html${url.search}`, "Cache-Control": "no-store" });
+    response.writeHead(302, { Location: `/crew/welcome.html${url.search}`, "Cache-Control": "no-store" });
     response.end();
     return;
   }

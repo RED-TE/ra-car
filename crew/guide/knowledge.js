@@ -10,7 +10,7 @@ import {
   sections,
   sources,
   terms,
-} from "./knowledge-data.js";
+} from "./knowledge-data.js?v=20261014";
 
 const categoryLabels = {
   advertising: "광고 이해",
@@ -558,7 +558,7 @@ function openRewardDetail() {
     body: `
       <div class="detail-hero">
         <strong>계약별 보상은 차량가 구간과 실제 계약 조건을 함께 반영해 확인합니다.</strong>
-        <p>누적 계약 100대 달성 시에는 Tesla Model Y 1년 이용을 지원합니다.</p>
+        <p>누적 유효 계약 100대 달성 시 BMW·Tesla·벤츠·제네시스 중 선택 가능한 차량 1년 이용을 지원합니다.</p>
       </div>
       <section class="detail-section">
         <h3>계약별 보상 산정 요소</h3>
@@ -577,14 +577,14 @@ function openRewardDetail() {
         <div class="detail-pair">
           <div>
             <span>달성 기준</span>
-            <p>누적 계약 100대</p>
+            <p>누적 유효 계약 100대 · 취소·보상 제외 건 제외</p>
           </div>
           <div>
             <span>달성 혜택</span>
-            <p>Tesla Model Y 1년 이용 지원</p>
+            <p>BMW·Tesla·벤츠·제네시스 중 선택 · 차량 1년 이용 지원</p>
           </div>
         </div>
-        <p>차량 사양, 보험, 주행거리, 이용 시작일과 그 밖의 세부 조건은 혜택 제공 시 RE:CAR 운영팀이 안내합니다.</p>
+        <p>소유권 이전이 아닌 이용 지원입니다. 실제 모델·사양, 보험, 주행거리, 이용 시작일과 그 밖의 조건은 달성 확인 후 RE:CAR 운영팀이 안내합니다.</p>
       </section>
       <section class="detail-section">
         <h3>확인할 내용</h3>
@@ -593,6 +593,7 @@ function openRewardDetail() {
           "실제 계약별 금액과 지급 시점은 최신 운영 기준에서 확인합니다.",
           "100대 혜택의 세부 이용 조건은 마일스톤 달성 확인 후 안내됩니다.",
         ])}
+        <p><a href="/crew/policy.html#settlement">보상 구간·지급 일정·출금·제외 기준 확인</a></p>
       </section>
     `,
   });

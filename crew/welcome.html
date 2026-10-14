@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="description" content="RE:CAR 크루는 차량이 필요한 사람에게 추천 링크를 전달하는 부업입니다. 운영팀이 상담과 계약을 진행하며 유효 실적에 따라 보상을 정산합니다." />
+    <title>RE:CAR 크루 | 추천으로 시작하는 차량 부업</title>
+    <link rel="canonical" href="https://recarplan.com/crew/" />
+    <link rel="icon" href="../assets/recar-favicon-20260518.png" />
+    <link rel="stylesheet" href="./trust.css?v=20261014" />
+    <script>
+      const params = new URLSearchParams(window.location.search);
+      const referralCode = params.get("ref")?.trim().toUpperCase();
+      if (params.get("action") === "apply") {
+        window.location.replace("./login.html?action=apply");
+      } else if (/^RC-[A-Z0-9]{4,16}$/.test(referralCode || "")) {
+        window.location.replace(new URL(`/app/?ref=${encodeURIComponent(referralCode)}`, window.location.origin).href);
+      } else {
+        try {
+          if (localStorage.getItem("recar_friends_access_token")) window.location.replace("./index.html");
+        } catch { /* The public introduction remains available when storage is blocked. */ }
+      }
+    </script>
+  </head>
+  <body class="crew-public-page">
+    <a class="crew-public-skip" href="#main">본문으로 바로가기</a>
+    <header class="crew-public-header">
+      <div class="crew-public-inner">
+        <a class="crew-public-brand" href="./welcome.html">RE:CAR <span>크루</span></a>
+        <nav class="crew-public-nav" aria-label="크루 메뉴">
+          <a href="./policy.html">보상·운영 안내</a>
+          <a href="./login.html">로그인</a>
+          <a class="crew-public-button" href="./login.html?action=apply">크루 신청</a>
+        </nav>
+      </div>
+    </header>
+    <main id="main">
+      <section class="crew-public-hero" aria-labelledby="welcomeTitle">
+        <img src="../assets/crew-njob/hero-njob.png" width="1587" height="991" alt="" fetchpriority="high" />
+        <div class="crew-public-inner">
+          <h1 id="welcomeTitle"><span>추천으로 시작하는 차량 부업</span>RE:CAR 크루</h1>
+          <p>차량이 필요한 사람에게 내 링크를 전달하세요.<br />상담부터 계약·차량 인도까지 리카가 이어갑니다.</p>
+          <div class="crew-public-actions">
+            <a class="crew-public-button" href="./login.html?action=apply">크루 신청</a>
+            <a class="crew-public-button secondary" href="./njob/">N잡 자세히 보기</a>
+          </div>
+          <small>추천만으로 보상이 확정되지는 않습니다. 계약·인도 완료 후 유효 실적을 확인하며, 고정 급여나 수익을 보장하는 활동이 아닙니다.</small>
+        </div>
+      </section>
+      <section class="crew-public-band">
+        <div class="crew-public-inner">
+          <p class="crew-public-kicker">크루의 역할은 연결까지</p>
+          <h2>추천은 내가, 진행은 리카가.</h2>
+          <ol class="crew-public-steps">
+            <li><img src="../assets/crew-njob/custom-icons/activity-link-send.png" alt="" width="512" height="512" /><small>01 · 추천</small><h3>내 링크 전달</h3><p>승인 후 발급된 링크를 차량이 필요한 분에게 안내합니다. 추천 수수료가 발생하는 관계도 함께 알립니다.</p></li>
+            <li><img src="../assets/crew-njob/custom-icons/activity-recar-support.png" alt="" width="512" height="512" /><small>02 · 진행</small><h3>리카가 상담·계약</h3><p>견적 비교와 조건 안내, 심사·계약·인도 절차를 운영팀이 진행합니다. 최종 승인은 제휴사의 심사 기준에 따릅니다.</p></li>
+            <li><img src="../assets/crew-njob/custom-icons/benefit-reward.png" alt="" width="512" height="512" /><small>03 · 확인</small><h3>실적 확인·정산</h3><p>대시보드에서 추천 고객의 진행 상태와 정산 내역을 확인합니다. 취소·중복·자기 추천은 보상 대상에서 제외됩니다.</p></li>
+          </ol>
+        </div>
+      </section>
+      <section class="crew-public-band mint" id="rewards">
+        <div class="crew-public-inner">
+          <p class="crew-public-kicker">금액과 조건을 함께 확인하세요</p>
+          <h2>건별 보상에, 누적 성과 혜택까지.</h2>
+          <div class="crew-public-rewards">
+            <div>
+              <h3>유효 계약 1대당 20~45만원</h3>
+              <table class="crew-reward-table"><caption>계약 보상 프로모션 · 차량가 기준</caption><thead><tr><th scope="col">차량가 구간</th><th scope="col">건별 보상</th></tr></thead><tbody><tr><th scope="row">4,000만원 미만</th><td>20만원</td></tr><tr><th scope="row">4,000만원 이상~8,000만원 미만</th><td>35만원</td></tr><tr><th scope="row">8,000만원 이상</th><td>45만원</td></tr></tbody></table>
+              <p class="crew-policy-note">계약 성사·차량 인도 완료 및 운영팀의 유효 실적 확인 후 확정됩니다. 위 금액은 세전이며, 모든 계약에 최대 금액이 적용되는 것은 아닙니다.</p>
+            </div>
+            <div>
+              <h3>누적 유효 계약 100대<br />차량 1년 이용 혜택</h3>
+              <p>BMW·Tesla·벤츠·제네시스 중 선택할 수 있습니다.</p>
+              <ul><li>소유권 이전이 아닌 1년 이용 지원입니다.</li><li>취소·보상 제외 건은 누적 실적에서 제외됩니다.</li><li>모델·사양·보험·주행거리와 실제 제공 조건은 달성 확인 후 안내합니다.</li></ul>
+              <a href="./njob/#rewardPreviewTitle">예시 차량 보기</a>
+            </div>
+          </div>
+          <p class="crew-policy-note">최소 출금 신청 금액은 30만원입니다. 승인된 출금 신청은 약관 기준 다음 달 25일에 지급하며, 휴일에는 다음 영업일로 조정됩니다. 프로모션·제외 기준·세금·취소 처리는 <a href="./policy.html#settlement">보상·정산 안내</a>에서 확인하세요.</p>
+        </div>
+      </section>
+      <section class="crew-public-band">
+        <div class="crew-public-inner">
+          <p class="crew-public-kicker">신청 전에 확인할 내용</p>
+          <h2>시작은 간단하게, 기준은 분명하게.</h2>
+          <div class="crew-public-faq">
+            <details open><summary>신청하면 바로 링크를 받을 수 있나요?</summary><p>이름·연락처·로그인 정보를 입력해 신청하면 운영팀이 확인합니다. 승인 후 추천 코드와 링크가 발급됩니다. 신청만으로 계약·보상이나 승인이 보장되는 것은 아닙니다.</p></details>
+            <details><summary>고객에게 별도 수수료가 붙나요?</summary><p>크루가 고객에게 추천 수수료를 별도로 청구하는 구조가 아닙니다. 고객의 차량 계약 비용은 견적서와 계약서로 확인합니다. 조회 시점의 비교 견적을 안내하며 미래의 최저가를 보장하지 않습니다.</p></details>
+            <details><summary>가족·친구에게 추천해도 되나요?</summary><p>차량이 필요한 가족·친구·직장 동료에게 안내할 수 있습니다. 수수료 관계를 명확히 밝히고 상대방 동의 없이 연락처나 개인정보를 보내지 마세요. 자신의 계약을 자신의 코드로 연결하는 자기 추천은 보상 제외 대상입니다.</p></details>
+            <details><summary>수익은 언제 확인할 수 있나요?</summary><p>승인된 계정의 대시보드에서 진행 상태와 정산 내역을 확인합니다. 상담·심사 중인 금액은 지급 확정액과 다릅니다. 계약 취소·해지 등으로 실적이 제외되거나 이미 지급된 보상이 환수될 수 있습니다.</p></details>
+          </div>
+          <div class="crew-public-actions"><a class="crew-public-button" href="./login.html?action=apply">크루 신청</a><a class="crew-public-button secondary" href="./guide/">상세 가이드</a><a href="../assets/crew-docs/recar-crew-quick-guide-20261014.pdf" download>빠르게 리카 알아보기 PDF</a></div>
+        </div>
+      </section>
+    </main>
+    <footer class="crew-operator-footer">
+      <div><strong>RE:CAR 크루</strong><p>크루 가입 계약·보상 지급 운영자: 조홍철</p><p>문의 <a href="mailto:friends@recarplan.com">friends@recarplan.com</a> · <a href="tel:01065731038">010-6573-1038</a></p><nav aria-label="운영 정보"><a href="./policy.html">운영자·보상·개인정보 안내</a><a href="./friends/recar-friends-terms-v1.3.pdf" target="_blank" rel="noopener">가입 약관 v1.3</a><a href="./index.html">내 대시보드</a><a href="https://recarplan.com/">리카 홈페이지</a></nav><p>경제적 이해관계 안내: 추천 링크를 통한 계약·인도 완료 등 유효 실적에 대해 RE:CAR 크루에게 수수료를 지급하는 활동입니다. 고객에게 크루 추천 수수료를 별도로 청구하지 않습니다.</p></div>
+    </footer>
+  </body>
+</html>

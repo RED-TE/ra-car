@@ -15,6 +15,7 @@
     <link rel="preconnect" href="https://api.recarplan.com" crossorigin />
     <link rel="stylesheet" href="./login.css?v=20261012-crew-audit" />
     <link rel="stylesheet" href="./readability.css?v=20261012" />
+    <link rel="stylesheet" href="./trust.css?v=20261014" />
   </head>
   <body class="crew-login-page">
     <header class="crew-login-nav">
@@ -36,7 +37,8 @@
       <div class="crew-promotion-body">
         <div class="crew-promotion-copy">
           <span class="crew-promotion-kicker">누적 유효 계약 100대 달성 혜택</span>
-          <h2 id="crewPromotionTitle">Tesla Model Y<br />1년 이용 지원</h2>
+          <h2 id="crewPromotionTitle">4개 브랜드 중 선택<br />차량 1년 이용 지원</h2>
+          <p>BMW·Tesla·벤츠·제네시스 · 사진은 예시입니다.</p>
         </div>
         <img src="../assets/crew-knowledge/tesla-model-y-reward.png" alt="" width="360" height="165" />
       </div>
@@ -79,7 +81,7 @@
                 <button class="crew-primary-button login-button" type="submit">로그인</button>
                 <a class="crew-secondary-button" href="./login.html?action=apply">크루 신청</a>
                 <a class="crew-guide-button" href="https://recarplan.com/crew/guide/">크루 가이드 보기 <span aria-hidden="true">›</span></a>
-                <a class="crew-guide-button" href="../assets/crew-docs/recar-crew-quick-guide.pdf" download>빠르게 리카 알아보기 <span aria-hidden="true">↓</span></a>
+                <a class="crew-guide-button" href="../assets/crew-docs/recar-crew-quick-guide-20261014.pdf" download>빠르게 리카 알아보기 <span aria-hidden="true">↓</span></a>
               </div>
             </div>
           </form>
@@ -151,7 +153,9 @@
 
               <fieldset class="crew-consent-group">
                 <legend>필수 동의</legend>
-                <p>아래 내용을 확인한 뒤 항목별로 동의해 주세요.</p>
+                <p id="crewTermsVersion" role="status">가입 약관 정보를 확인하는 중입니다.</p>
+                <button class="crew-guide-button" type="button" id="crewTermsRetry" hidden>약관 정보 다시 확인</button>
+                <p class="crew-policy-note">크루 가입 계약·보상 지급 운영자는 조홍철입니다. <a href="./policy.html">운영자·보상·개인정보 안내</a>를 먼저 확인해 주세요.</p>
                 <label class="crew-checkbox crew-consent-all" for="crewApplyConsentAll">
                   <input id="crewApplyConsentAll" type="checkbox" aria-controls="crewApplyTerms crewApplyPrivacy crewApplySettlementPolicy crewApplyAdDisclosure crewApplyAdvertisingGuide" />
                   <span>
@@ -198,7 +202,7 @@
               <div class="crew-form-note">신청 연락처로 운영팀 확인 전화가 진행되며, 심사 결과는 승인, 보완, 부적합 상태로 안내됩니다.</div>
               <div class="login-error crew-form-error" id="applyError" role="alert" hidden></div>
               <button class="crew-primary-button crew-apply-submit" id="crewApplyButton" type="submit">크루 신청하기</button>
-              <a class="crew-guide-button" href="../assets/crew-docs/recar-crew-quick-guide.pdf" download>빠르게 리카 알아보기 <span aria-hidden="true">↓</span></a>
+              <a class="crew-guide-button" href="../assets/crew-docs/recar-crew-quick-guide-20261014.pdf" download>빠르게 리카 알아보기 <span aria-hidden="true">↓</span></a>
               <a class="crew-back-link" href="./login.html">이미 계정이 있나요? 로그인으로 돌아가기</a>
             </form>
             <div class="crew-apply-complete" id="crewApplyComplete" role="status" tabindex="-1" hidden>
@@ -258,7 +262,7 @@
         <div class="crew-login-reward-copy">
           <span>크루 보상</span>
           <h2 id="crewRewardTitle">계약마다 건별 보상,<br />누적 성과에는 차량 혜택까지</h2>
-          <p>유효 계약 1건당 20~45만원을 정산하며, 누적 유효 계약 100대 달성 시 Tesla Model Y 1년 이용을 지원합니다.</p>
+          <p>유효 계약 1건당 20~45만원을 정산하며, 누적 유효 계약 100대 달성 시 BMW·Tesla·벤츠·제네시스 중 선택 가능한 차량 1년 이용을 지원합니다.</p>
           <small>취소·보상 제외 건은 100대 집계에서 제외됩니다. 차량 사양·보험·주행거리와 세부 이용 조건은 달성 시 운영팀이 안내합니다.</small>
         </div>
         <div class="crew-login-reward-items">
@@ -270,7 +274,7 @@
           <article>
             <img src="../assets/crew-njob/custom-icons/benefit-milestone.png" alt="" width="512" height="512" loading="lazy" />
             <span>누적 계약 100대 달성 시</span>
-            <strong>Tesla Model Y 1년 이용 지원</strong>
+            <strong>4개 브랜드 중 선택 · 차량 1년 이용 지원</strong>
           </article>
         </div>
       </section>
@@ -278,8 +282,8 @@
       <aside class="crew-commission-disclosure" aria-label="크루 수수료 안내">
         <strong>경제적 이해관계 안내</strong>
         <p>
-          이 페이지와 추천 링크는 RE:CAR 크루 활동의 일환으로 운영됩니다. 해당 링크를 통해 계약이 성사되고 차량이 인도되면
-          크루에게 수수료가 지급될 수 있습니다. 이는 크루가 고객에게 별도 수수료를 청구하는 구조가 아닙니다.
+          이 페이지와 추천 링크는 RE:CAR 크루 활동의 일환으로 운영됩니다. 추천 링크를 통한 계약·차량 인도 완료 등 유효 실적에 대해
+          크루에게 수수료를 지급합니다. 고객에게 크루 추천 수수료를 별도로 청구하지 않습니다.
         </p>
       </aside>
 
@@ -290,8 +294,13 @@
       </section>
     </main>
 
+    <footer class="crew-operator-footer">
+      <div><strong>RE:CAR 크루</strong><p>크루 가입 계약·보상 지급 운영자: 조홍철</p><p>문의 <a href="mailto:friends@recarplan.com">friends@recarplan.com</a> · <a href="tel:01065731038">010-6573-1038</a></p><nav aria-label="운영 정보"><a href="./welcome.html">크루 소개</a><a href="./policy.html">운영자·보상·개인정보 안내</a><a href="./friends/recar-friends-terms-v1.3.pdf" target="_blank" rel="noopener">가입 약관 v1.3</a></nav></div>
+    </footer>
+
     <script src="./guide/lucide.min.js"></script>
     <script src="./session.js?v=74dcbbc7cd72"></script>
+    <script src="./terms.js?v=e7148c79b08a"></script>
     <script>
       window.lucide?.createIcons({ attrs: { "stroke-width": 2 } });
       const promotionNotice = document.querySelector("#crewPromotionNotice");
@@ -334,6 +343,8 @@
       let loginIdAvailable = false;
       let applicationSubmitted = false;
       const isApply = new URLSearchParams(window.location.search).get("action") === "apply";
+      let applicationTerms = null;
+      let termsReady = false;
       document.body.classList.toggle("is-apply-page", isApply);
       const sessionNotice = document.querySelector("#crewSessionNotice");
 
@@ -380,11 +391,48 @@
         input.addEventListener("change", syncConsentAllState);
       });
 
+      function displayApplicationTerms(terms) {
+        const changed = !window.RecarCrewTerms.same(applicationTerms, terms);
+        applicationTerms = terms;
+        const date = terms.effective_date ? ` · ${terms.effective_date} 운영 게시일부터 신규 가입에 적용` : "";
+        document.querySelector("#crewTermsVersion").textContent = `아래 내용을 확인한 뒤 항목별로 동의해 주세요. 가입 약관 ${terms.version}${date}`;
+        const keys = ["terms", "privacy", "settlement", "disclosure", "advertising"];
+        requiredConsentInputs.forEach((input, index) => {
+          input.closest("label").querySelector("a").href = `${terms.document_url}#page=${terms.sections[keys[index]]}`;
+          if (changed) input.checked = false;
+        });
+        syncConsentAllState();
+        termsReady = true;
+        return changed;
+      }
+
+      async function prepareApplicationTerms() {
+        termsReady = false;
+        applyButton.disabled = true;
+        consentAllInput.disabled = true;
+        requiredConsentInputs.forEach(input => { input.disabled = true; });
+        document.querySelector("#crewTermsRetry").hidden = true;
+        try {
+          displayApplicationTerms(await window.RecarCrewTerms.load());
+          applyError.hidden = true;
+        } catch (error) {
+          document.querySelector("#crewTermsVersion").textContent = "가입 약관 확인이 필요합니다. 입력한 정보는 유지됩니다.";
+          document.querySelector("#crewTermsRetry").hidden = false;
+          showApplyError(error.message);
+        } finally {
+          applyButton.disabled = !termsReady || applicationSubmitted;
+          consentAllInput.disabled = !termsReady;
+          requiredConsentInputs.forEach(input => { input.disabled = !termsReady; });
+        }
+      }
+      document.querySelector("#crewTermsRetry").addEventListener("click", prepareApplicationTerms);
+
       if (isApply) {
         loginForm.hidden = true;
         applyPanel.hidden = false;
         formAnchor.classList.add("is-apply");
         document.title = "RE:CAR 크루 신청";
+        void prepareApplicationTerms();
       }
 
       function showError(message) {
@@ -546,6 +594,11 @@
         applyButton.textContent = "신청 중";
 
         try {
+          const latestTerms = await window.RecarCrewTerms.load();
+          if (!window.RecarCrewTerms.same(applicationTerms, latestTerms)) {
+            displayApplicationTerms(latestTerms);
+            throw new Error("가입 약관이 변경되었습니다. 신청 정보는 유지됩니다. 새 약관을 확인한 뒤 다시 동의해 주세요.");
+          }
           const response = await Crew.request("/api/v1/friends/apply", {
             method: "POST",
             headers: {
@@ -567,6 +620,8 @@
               settlement_policy_agreed: settlementPolicyAgreed,
               ad_disclosure_agreed: adDisclosureAgreed,
               advertising_guide_agreed: advertisingGuideAgreed,
+              terms_version: applicationTerms.version,
+              terms_document_sha256: applicationTerms.document_sha256,
             }),
           });
 
@@ -580,6 +635,7 @@
           applyComplete.scrollIntoView({ block: "center", behavior: "auto" });
           applyForm.reset();
         } catch (error) {
+          document.querySelector("#crewTermsRetry").hidden = false;
           showApplyError(error instanceof Error ? error.message : "신청을 접수하지 못했습니다. 입력값을 확인해 주세요.");
         } finally {
           applyButton.disabled = applicationSubmitted;
