@@ -49,7 +49,7 @@ jobs:
       - name: Stage public site without test dependencies
         run: |
           mkdir -p "$RUNNER_TEMP/recar-public"
-          tar --exclude='./node_modules' --exclude='./test-results' --exclude='./playwright-report' --exclude='./artifacts' --exclude='./.git' -cf - . | tar -xf - -C "$RUNNER_TEMP/recar-public"
+          tar --exclude='./node_modules' --exclude='./test-results' --exclude='./playwright-report' --exclude='./artifacts' --exclude='./.git' --exclude='./.github' --exclude='./docs' --exclude='./tools' --exclude='./tests' --exclude='./crew/friends/recar-friends-terms-v1.4-preview.pdf' -cf - . | tar -xf - -C "$RUNNER_TEMP/recar-public"
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3

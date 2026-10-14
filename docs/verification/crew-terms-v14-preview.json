@@ -1,0 +1,26 @@
+{
+  "state": "UNPUBLISHED_PREVIEW",
+  "version": "v1.4",
+  "publication_effective_at": null,
+  "active_document_created": false,
+  "new_applications_only": true,
+  "approved_changes": [
+    "operator_jo_hong_cheol",
+    "100_valid_contracts_four_brand_one_year_use",
+    "actual_publication_new_applications_only"
+  ],
+  "preview_path": "crew/friends/recar-friends-terms-v1.4-preview.pdf",
+  "preview_sha256": "9309648d4f38b92b4d9a049aa0b6baeb8eed82f3332cde07dc6e1aefd911fe15",
+  "preview_pages": 17,
+  "source_path": "crew/friends/recar-friends-terms-v1.3.pdf",
+  "source_sha256": "48c3f29502436d7c844cea8f22a388d2c1aae3831b716dfd9c589b488f361d96",
+  "original_pages_preserved": 16,
+  "original_page_content_streams_and_text_unchanged": true,
+  "sections": {
+    "terms": 1,
+    "privacy": 9,
+    "settlement": 7,
+    "disclosure": 16,
+    "advertising": 16
+  }
+}

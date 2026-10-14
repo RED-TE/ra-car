@@ -1,0 +1,61 @@
+{
+  "date": "2026-10-14",
+  "user_approved_policy": "Keep v1.3 clauses; reflect only confirmed operator Jo Hong Cheol, four-brand one-year vehicle use after 100 valid contracts, and actual production publication for new applications only",
+  "formal_v14_document": {
+    "state": "PREPARED_UNPUBLISHED_AWAITING_RELEASE_APPROVAL",
+    "created": true,
+    "scope_approved_by_user": "확정한 내용만 반영 승인",
+    "path": "crew/friends/recar-friends-terms-v1.4-preview.pdf",
+    "sha256": "9309648d4f38b92b4d9a049aa0b6baeb8eed82f3332cde07dc6e1aefd911fe15",
+    "pages": 17,
+    "composition": "One approved change sheet followed by all 16 unchanged v1.3 pages",
+    "manifest": "crew-terms-v14-preview.json",
+    "effective_at": null,
+    "active_final_document_created": false,
+    "other_legal_clauses_modified": false,
+    "independent_legal_review": "not performed"
+  },
+  "prepared_code": {
+    "document": ["tools/build-crew-terms-preview.py", "crew/friends/recar-friends-terms-v1.4-preview.pdf", "docs/verification/crew-terms-v14-preview.json"],
+    "website": ["crew/terms.js", "crew/login.html", "server.js", "tests/e2e/crew-terms.spec.js", "tests/crew-session.test.js", "package.json", "eslint.config.js"],
+    "server": ["server/app/services/crew_terms.py", "server/app/api/v1/endpoints/friends.py", "server/app/services/friends_service.py", "server/app/core/config.py", "server/.env.example", "server/tests/test_crew_terms.py"],
+    "default_published_version": "v1.3",
+    "activation_requires": ["FRIENDS_TERMS_VERSION=v1.4", "actual timezone-aware publication timestamp", "SHA-256 of the immutable final public document"],
+    "existing_consent_overwrite_prevented": true,
+    "new_consent_audit_fields": ["terms_version", "document_url", "document_sha256", "effective_at", "agreed_at", "five agreement flags"],
+    "sensitive_request_fields_saved_in_consent_audit": false,
+    "database_migration_required": false
+  },
+  "verification": {
+    "server_focused_tests": {"passed": 73, "failed": 0, "warnings": 56, "database": "separate temporary test databases"},
+    "browser_regression_tests": {"passed": 75, "failed": 0, "real_prepared_pdf_integrity_and_five_section_links_verified": true, "publication_and_api_mocked": true, "operational_publication_verified": false},
+    "website_static_tests": {"passed": 20, "failed": 0},
+    "website_lint_typecheck_syntax_and_build": "passed",
+    "pdf_manifest_check": "passed",
+    "pdf_visual_review": "New change sheet reviewed after rendering; no clipped or overlapping text",
+    "original_page_render_comparison": {"resolution_dpi": 120, "pages_compared": 16, "pages_with_pixel_differences": 0},
+    "original_page_content_stream_and_extracted_text_comparison": "16/16 unchanged",
+    "consent_link_pages": {"terms": 1, "privacy": 9, "settlement": 7, "disclosure": 16, "advertising": 16},
+    "local_browser_observation_previous_turn": "Existing API fallback showed v1.3, submit enabled, no form error; no input or submission performed",
+    "initial_sandbox_test_attempt": "Local socket binding was denied; build and browser suite subsequently passed with approved local-test permissions",
+    "real_production_signup_or_approval": "not performed",
+    "original_v13_pdf_sha256": "48c3f29502436d7c844cea8f22a388d2c1aae3831b716dfd9c589b488f361d96"
+  },
+  "release": {
+    "pushed": false, "merged": false, "deployed": false, "ci": "not run",
+    "production_terms_activated": false,
+    "working_trees": "modified, not committed",
+    "website_base_head": "e1a39ecc35829aa88b5135f0da3d60c57cac81e2",
+    "server_base_head": "84433b09c32aa95f04a1c21332e1e518738992f7",
+    "branch": "codex/crew-trust-improvements-20261014",
+    "new_commit": null
+  },
+  "remaining_gates": [
+    "Explicit approval is required for commit/push, merge and production deployment.",
+    "Finalize the same one-page change sheet with the real publication timestamp before creating an immutable active v1.4 document; never activate the preview.",
+    "Revalidate final 17-page layout, section links, HTTP 200 and final document SHA-256 before enabling v1.4 metadata.",
+    "At publication, distinguish current new-applicant v1.4 links from historical v1.3 references across public Crew footers, policy and guide; historical originals remain available.",
+    "Real production signup, administrator approval and dashboard verification remain separate human-authorized checks.",
+    "Existing v1.3 privacy and electronic-consent wording was preserved, not legally reviewed or declared sufficient for the current implementation."
+  ]
+}

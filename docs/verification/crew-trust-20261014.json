@@ -1,0 +1,65 @@
+{
+  "date": "2026-10-14",
+  "terms_followup_report": "crew-terms-20261014.json",
+  "scope": "Crew public introduction, application readability, Njob reward conditions, guide, information PDF and consumer entry routing",
+  "user_confirmed": {
+    "crew_contract_and_reward_operator": "조홍철",
+    "valid_contract_milestone": 100,
+    "vehicle_use_years": 1,
+    "vehicle_brand_choices": ["BMW", "Tesla", "벤츠", "제네시스"]
+  },
+  "repositories": {
+    "public_website": {
+      "repository": "RED-TE/ra-car",
+      "branch": "codex/crew-trust-improvements-20261014",
+      "base_head": "e1a39ecc35829aa88b5135f0da3d60c57cac81e2",
+      "path": "/private/tmp/recar-crew-trust-fixes-20261014",
+      "changes": ["crew/welcome.html", "crew/policy.html", "crew/trust.css", "crew/login.html", "crew/index.html", "crew/njob/index.html", "crew/guide/index.html", "crew/guide/knowledge.js", "crew/guide/knowledge-data.js", "server.js", "assets/crew-docs/recar-crew-quick-guide-20261014.pdf", "tools/build-crew-quick-guide.py", "tests/server-routes.test.js", "tests/e2e/crew-trust.spec.js", "tests/e2e/crew-promotion.spec.js", "tests/e2e/crew-referral-path.spec.js", "tests/e2e/knowledge-interactions.spec.js"]
+    },
+    "admin_entry": {
+      "repository": "RECAREA/recar_app",
+      "branch": "codex/crew-trust-improvements-20261014",
+      "base_head": "84433b09c32aa95f04a1c21332e1e518738992f7",
+      "path": "/Users/johongcheol/.codex/worktrees/crew-trust-20261014/recar_app",
+      "changes": ["admin/src/app/crew/page.tsx", "admin/src/app/crew/login/page.tsx", "admin/src/lib/crew-entry.ts", "admin/tests/crew-entry.test.mjs"]
+    }
+  },
+  "verification": {
+    "website_build": "pass",
+    "website_node_tests": { "passed": 18, "failed": 0 },
+    "crew_browser_tests": { "passed": 68, "failed": 0, "production_requests": false },
+    "admin_unit_tests": { "passed": 129, "failed": 0 },
+    "admin_typecheck": "pass",
+    "admin_production_build": "pass",
+    "compiled_admin_redirect_checks": { "passed": 7, "followed_production_redirects": false },
+    "responsive_widths_px": [360, 390, 768, 1440],
+    "new_surface_wcag_a_aa_violations": 0,
+    "pdf_pages_rendered_and_reviewed": 4,
+    "pdf_korean_text_extractable": true,
+    "diff_whitespace_check": "pass",
+    "original_user_dirty_worktree_modified": false
+  },
+  "preserved_files_sha256": {
+    "crew/friends/recar-friends-terms-v1.3.pdf": "48c3f29502436d7c844cea8f22a388d2c1aae3831b716dfd9c589b488f361d96",
+    "assets/crew-docs/recar-crew-quick-guide.pdf": "6f391a80d8c51f5878a8711e3c2dcb5526287e5e1ed3215525acd7987ba14731"
+  },
+  "release_state": {
+    "new_commit": null,
+    "working_trees": "modified, only current-task changes",
+    "pushed": false,
+    "merged": false,
+    "ci": "not run; branches not pushed",
+    "production_deployed": false,
+    "database_or_consent_records_modified": false,
+    "flutter_modified": false,
+    "real_application_approval_payment_verified_this_turn": false
+  },
+  "remaining_gates": [
+    "Obtain explicit approval before production deployment.",
+    "Approved v1.4 scope is prepared as an unpublished 17-page preview. Actual publication time and deployment are pending; active consent remains v1.3. See crew-terms-20261014.json. Preserve historical documents and consent records.",
+    "Do not publish the main service business number/address as the Crew operator identity without explicit confirmation.",
+    "Read-only npm audit --omit=dev found existing admin dependencies: 1 critical, 3 high, 1 moderate. Exploitability has not been established. Dependencies were not silently changed in this visual/content patch.",
+    "Review overlap with the existing open PR121 before merging any consumer entry-route changes.",
+    "Production signup, administrator approval, actual settlement and real-device validation are separate release checks, not covered by mocked browser tests."
+  ]
+}

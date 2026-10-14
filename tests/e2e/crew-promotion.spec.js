@@ -4,7 +4,8 @@ test("crew login shows the 100-contract vehicle promotion and remembers dismissa
   await page.goto("/crew/login.html");
   const notice = page.locator("#crewPromotionNotice");
   await expect(notice).toBeVisible();
-  await expect(notice).toContainText("Tesla Model Y");
+  await expect(notice).toContainText("BMW·Tesla·벤츠·제네시스");
+  await expect(notice).toContainText("4개 브랜드 중 선택");
   await expect(notice).toContainText("100대");
   await expect(notice).toContainText("취소·보상 제외 건은 집계되지 않습니다");
   const benefitLink = notice.getByRole("link", { name: /혜택 기준 보기/ });

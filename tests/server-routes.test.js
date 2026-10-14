@@ -1,4 +1,5 @@
 const assert = require("node:assert/strict");
+const { createHash } = require("node:crypto");
 const fs = require("node:fs");
 const net = require("node:net");
 const path = require("node:path");
@@ -271,10 +272,12 @@ test("crew application CTAs always open the application form", async () => {
 
 test("crew surfaces expose the same quick guide PDF", () => {
   const surfaces = [
-    ["crew/index.html", "../assets/crew-docs/recar-crew-quick-guide.pdf"],
-    ["crew/login.html", "../assets/crew-docs/recar-crew-quick-guide.pdf"],
-    ["crew/njob/index.html", "../../assets/crew-docs/recar-crew-quick-guide.pdf"],
-    ["crew/guide/index.html", "/assets/crew-docs/recar-crew-quick-guide.pdf"],
+    ["crew/index.html", "../assets/crew-docs/recar-crew-quick-guide-20261014.pdf"],
+    ["crew/login.html", "../assets/crew-docs/recar-crew-quick-guide-20261014.pdf"],
+    ["crew/njob/index.html", "../../assets/crew-docs/recar-crew-quick-guide-20261014.pdf"],
+    ["crew/guide/index.html", "/assets/crew-docs/recar-crew-quick-guide-20261014.pdf"],
+    ["crew/welcome.html", "../assets/crew-docs/recar-crew-quick-guide-20261014.pdf"],
+    ["crew/policy.html", "../assets/crew-docs/recar-crew-quick-guide-20261014.pdf"],
   ];
 
   for (const [relativePath, expectedHref] of surfaces) {
@@ -289,8 +292,11 @@ test("crew surfaces expose the same quick guide PDF", () => {
     }
   }
 
-  const pdfPath = path.join(rootDir, "assets/crew-docs/recar-crew-quick-guide.pdf");
-  assert.ok(fs.statSync(pdfPath).size > 1_000_000, "quick guide PDF is unexpectedly small");
+  const pdfPath = path.join(rootDir, "assets/crew-docs/recar-crew-quick-guide-20261014.pdf");
+  const pdf = fs.readFileSync(pdfPath);
+  assert.ok(pdf.length > 10_000, "quick guide PDF is truncated");
+  assert.equal(pdf.subarray(0, 5).toString(), "%PDF-");
+  assert.ok(pdf.subarray(-100).toString().includes("%%EOF"), "quick guide PDF is incomplete");
 });
 
 test("crew referral surfaces disclose commission relationships", () => {
@@ -304,11 +310,48 @@ test("crew referral surfaces disclose commission relationships", () => {
   for (const relativePath of surfaces) {
     const html = fs.readFileSync(path.join(rootDir, relativePath), "utf8");
     assert.match(html, /RE:CAR 크루 활동의 일환으로/, `${relativePath}: crew relationship disclosure is missing`);
-    assert.match(html, /수수료가 지급될 수 있습니다/, `${relativePath}: commission disclosure is missing`);
+    assert.match(html, /수수료를 지급(?:합니다|받습니다)/, `${relativePath}: commission disclosure is missing`);
   }
 
   for (const relativePath of ["crew/login.html", "crew/njob/index.html", "crew/guide/index.html"]) {
     const html = fs.readFileSync(path.join(rootDir, relativePath), "utf8");
-    assert.match(html, /고객에게 별도 수수료를 청구하는 구조/, `${relativePath}: customer fee clarification is missing`);
+    assert.match(html, /고객에게 크루 추천 수수료를 별도로 청구하지 않습니다/, `${relativePath}: customer fee clarification is missing`);
   }
+});
+
+test("trust update preserves the original guide and consent PDF bytes", () => {
+  for (const [file, expected] of [
+    ["crew/friends/recar-friends-terms-v1.3.pdf", "48c3f29502436d7c844cea8f22a388d2c1aae3831b716dfd9c589b488f361d96"],
+    ["assets/crew-docs/recar-crew-quick-guide.pdf", "6f391a80d8c51f5878a8711e3c2dcb5526287e5e1ed3215525acd7987ba14731"],
+  ]) assert.equal(createHash("sha256").update(fs.readFileSync(path.join(rootDir, file))).digest("hex"), expected, file);
+});
+
+test("approved terms addendum stays an unpublished preview with a matching digest", () => {
+  const manifest = JSON.parse(fs.readFileSync(path.join(rootDir, "docs/verification/crew-terms-v14-preview.json"), "utf8"));
+  const preview = fs.readFileSync(path.join(rootDir, manifest.preview_path));
+  assert.equal(manifest.state, "UNPUBLISHED_PREVIEW");
+  assert.equal(manifest.publication_effective_at, null);
+  assert.equal(manifest.original_pages_preserved, 16);
+  assert.equal(manifest.original_page_content_streams_and_text_unchanged, true);
+  assert.equal(manifest.preview_pages, 17);
+  assert.deepEqual(manifest.sections, { terms: 1, privacy: 9, settlement: 7, disclosure: 16, advertising: 16 });
+  assert.equal(createHash("sha256").update(preview).digest("hex"), manifest.preview_sha256);
+  assert.equal(fs.existsSync(path.join(rootDir, "crew/friends/recar-friends-terms-v1.4.pdf")), false);
+});
+
+test("trust information and versioned guide are public without exposing source files", async () => {
+  const server = await startServer("production");
+  try {
+    for (const file of ["/crew/welcome.html", "/crew/policy.html", "/crew/trust.css", "/assets/crew-docs/recar-crew-quick-guide-20261014.pdf", "/crew/friends/recar-friends-terms-v1.4-preview.pdf"]) {
+      assert.equal((await fetch(`${server.baseUrl}${file}`)).status, 200, file);
+    }
+    assert.equal((await fetch(`${server.baseUrl}/tools/build-crew-quick-guide.py`)).status, 404);
+    assert.equal((await fetch(`${server.baseUrl}/tools/build-crew-terms-preview.py`)).status, 404);
+    assert.equal((await fetch(`${server.baseUrl}/docs/verification/crew-terms-v14-preview.json`)).status, 404);
+    assert.equal((await fetch(`${server.baseUrl}/crew/friends/recar-friends-terms-v1.4.pdf`)).status, 404);
+    const root = await fetch(`${server.baseUrl}/crew`, { redirect: "manual" });
+    assert.equal(root.headers.get("location"), "/crew/welcome.html");
+    const apply = await fetch(`${server.baseUrl}/crew/?action=apply&ref=RC-QA1234`, { redirect: "manual" });
+    assert.equal(apply.headers.get("location"), "/crew/login.html?action=apply");
+  } finally { await server.stop(); }
 });

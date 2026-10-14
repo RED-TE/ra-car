@@ -67,7 +67,9 @@ test("crew dashboard copies the disclosure and uses an individual link", async (
   const copied = await page.evaluate(() => navigator.clipboard.readText());
   expect(copied).toContain(`https://recarplan.com/app/?ref=${code}`);
   expect(copied).toContain("크루 활동의 일환");
-  expect(copied).toContain("수수료가 지급될 수 있습니다");
+  expect(copied).toContain("RE:CAR로부터 수수료를 지급받습니다");
+  expect(copied).toContain("계약·차량 인도 완료 등 유효 실적");
+  expect(copied).toContain("크루 추천 수수료를 별도로 청구하지 않습니다");
   await page.screenshot({ path: "test-results/crew-dashboard-after-desktop.png" });
   await page.setViewportSize({ width: 390, height: 844 });
   await expect(page.locator("#crewShareCopy")).toBeVisible();
