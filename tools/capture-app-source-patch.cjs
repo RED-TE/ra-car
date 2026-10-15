@@ -6,7 +6,7 @@ const root = path.resolve(__dirname, "..");
 const config = require("../web_app/source.json");
 const [sourceRepo, modifiedRoot] = process.argv.slice(2);
 if (!sourceRepo || !modifiedRoot) throw new Error("Pass source repository and modified extraction root");
-const files = ["app/lib/main.dart", "app/lib/services/application_api.dart", "app/lib/screens/application_documents_screen.dart", "app/lib/screens/quote_result_screen.dart", "app/pubspec.yaml", "app/pubspec.lock"];
+const files = ["app/lib/main.dart", "app/lib/services/application_api.dart", "app/lib/screens/application_documents_screen.dart", "app/lib/screens/quote_result_screen.dart", "app/lib/services/vehicle_api.dart", "app/lib/services/vehicle_cache.dart", "app/lib/services/quote_api.dart", "app/lib/screens/home_screen.dart", "app/lib/screens/recommendation_screen.dart", "app/lib/screens/vehicle_list_screen.dart", "app/lib/screens/vehicle_detail_screen.dart", "app/pubspec.yaml", "app/pubspec.lock"];
 const temporary = fs.mkdtempSync(path.join(os.tmpdir(), "recar-patch-input-"));
 let patch = "";
 for (const [index, file] of files.entries()) {

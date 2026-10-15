@@ -35,7 +35,7 @@ function stage(appRoot) {
     build_id: config.buildId, target: "https://recarplan.com/app/", base_path: config.basePath,
     api_base_url: "https://api.recarplan.com", flutter_version: "3.41.1",
     native_app_modified: false,
-    validation: "See docs/app-web-speed-documents-20261015.md; local evidence is not deployment proof",
+    validation: "See docs/app-web-new3-catalog-20261015.md and docs/app-web-speed-documents-20261015.md; local evidence is not deployment proof",
     sha256: Object.fromEntries(files.map(file => [file, hash(path.join(target, file))])),
   };
   fs.writeFileSync(path.join(target, "release.json"), JSON.stringify(metadata, null, 2) + "\n");

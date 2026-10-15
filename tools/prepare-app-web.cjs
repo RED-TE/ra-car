@@ -26,6 +26,8 @@ function prepare(sourceRepo, buildRoot) {
   for (const file of fs.readdirSync(path.join(root, "web_app/test"))) {
     if (file.endsWith(".dart")) fs.copyFileSync(path.join(root, "web_app/test", file), path.join(appRoot, "test", file));
   }
+  const fixtures = path.join(root, "web_app/test/fixtures");
+  if (fs.existsSync(fixtures)) fs.cpSync(fixtures, path.join(appRoot, "test/fixtures"), { recursive: true });
   let html = fs.readFileSync(path.join(root, "app/index.html"), "utf8");
   html = html.replace('<base href="/app/">', '<base href="$FLUTTER_BASE_HREF">')
     .replace(/\?build=[A-Za-z0-9._-]+/g, "?build=__RECAR_BUILD_ID__")

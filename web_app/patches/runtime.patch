@@ -454,6 +454,697 @@
        ),
      );
    }
+--- a/app/lib/services/vehicle_api.dart
++++ b/app/lib/services/vehicle_api.dart
+@@ -181,14 +181,12 @@
+     }
+ 
+     final future = ApiClient.dio
+-        .get(
+-          '/api/v1/vehicles/',
+-          queryParameters: queryParameters,
+-        )
++        .get('/api/v1/vehicles/', queryParameters: queryParameters)
+         .timeout(const Duration(seconds: 16))
+         .then((response) {
+-      final result =
+-          VehicleListResponse.fromJson(response.data as Map<String, dynamic>);
++      final result = VehicleListResponse.fromJson(
++        response.data as Map<String, dynamic>,
++      );
+       VehicleCache.setList(cacheKey, result);
+       return result;
+     });
+@@ -198,7 +196,56 @@
+       return await future;
+     } finally {
+       _listInflight.remove(cacheKey);
++    }
++  }
++
++  /// Read every advertised page; never return a silently truncated catalog.
++  static Future<List<VehicleListItem>> fetchCatalog({
++    String? query,
++    int term = 60,
++    int depositPct = 0,
++    int guaranteePct = 0,
++    int mileageLimit = 10000,
++    String? productType,
++    String sort = 'monthly_price_asc',
++    bool forceRefresh = false,
++  }) async {
++    final items = <VehicleListItem>[];
++    final ids = <String>{};
++    int? expectedTotal;
++    int? expectedPages;
++    for (var page = 1;; page++) {
++      final result = await fetchVehicles(
++        query: query,
++        term: term,
++        depositPct: depositPct,
++        guaranteePct: guaranteePct,
++        mileageLimit: mileageLimit,
++        productType: productType,
++        sort: sort,
++        page: page,
++        size: 100,
++        forceRefresh: forceRefresh,
++      );
++      expectedTotal ??= result.total;
++      expectedPages ??= result.pages;
++      if (result.page != page ||
++          result.total != expectedTotal ||
++          result.pages != expectedPages ||
++          result.pages > 100 ||
++          (result.total > 0 && (result.pages < page || result.items.isEmpty))) {
++        throw StateError('Catalog pagination changed or is incomplete');
++      }
++      for (final item in result.items) {
++        if (!ids.add(item.id)) throw StateError('Duplicate catalog vehicle ID');
++        items.add(item);
++      }
++      if (page >= result.pages) break;
+     }
++    if (items.length != expectedTotal) {
++      throw StateError('Incomplete vehicle catalog');
++    }
++    return items;
+   }
+ 
+   /// 차량 상세 조회.
+@@ -209,7 +256,7 @@
+     String vehicleId, {
+     bool forceRefresh = false,
+   }) async {
+-    if (_isMissingDetailCached(vehicleId)) {
++    if (!forceRefresh && _isMissingDetailCached(vehicleId)) {
+       throw VehicleNotFoundException(vehicleId);
+     }
+ 
+@@ -224,8 +271,9 @@
+ 
+     try {
+       final response = await ApiClient.dio.get('/api/v1/vehicles/$vehicleId');
+-      final result =
+-          VehicleDetail.fromJson(response.data as Map<String, dynamic>);
++      final result = VehicleDetail.fromJson(
++        response.data as Map<String, dynamic>,
++      );
+       _missingDetailCache.remove(vehicleId);
+       VehicleCache.setDetail(vehicleId, result);
+       return result;
+@@ -304,8 +352,10 @@
+       final status = e.response?.statusCode;
+       if (status == 404) {
+         // ignore: avoid_print
+-        print('[QuoteFallback] GET quotes empty/404 → POST instant '
+-            '($cacheKey) status=404');
++        print(
++          '[QuoteFallback] GET quotes empty/404 → POST instant '
++          '($cacheKey) status=404',
++        );
+         // 404는 캐시에 저장하지 않음 (추후 데이터가 생길 수 있음)
+         return const <VehicleQuote>[];
+       }
+--- a/app/lib/services/vehicle_cache.dart
++++ b/app/lib/services/vehicle_cache.dart
+@@ -10,7 +10,13 @@
+ 
+   static final Map<String, _CacheEntry<VehicleListResponse>> _listCache = {};
+   static final Map<String, _CacheEntry<VehicleDetail>> _detailCache = {};
++  static final Map<String, _CacheEntry<VehicleListItem>> _catalogItems = {};
+ 
++  static VehicleListItem? getCatalogItem(String id) {
++    final entry = _catalogItems[id];
++    return entry != null && !entry.isExpired ? entry.value : null;
++  }
++
+   // ── 목록 캐시 ────────────────────────────────────────────────
+   static VehicleListResponse? getList(String cacheKey) {
+     final entry = _listCache[cacheKey];
+@@ -24,6 +30,13 @@
+   }
+ 
+   static void setList(String cacheKey, VehicleListResponse response) {
++    for (final item in response.items) {
++      _catalogItems[item.id] = _CacheEntry(
++        key: item.id,
++        value: item,
++        cachedAt: DateTime.now(),
++      );
++    }
+     _listCache[cacheKey] = _CacheEntry(
+       key: cacheKey,
+       value: response,
+@@ -31,7 +44,10 @@
+     );
+   }
+ 
+-  static void invalidateList() => _listCache.clear();
++  static void invalidateList() {
++    _listCache.clear();
++    _catalogItems.clear();
++  }
+ 
+   // ── 상세 캐시 ────────────────────────────────────────────────
+   static VehicleDetail? getDetail(String vehicleId) {
+@@ -51,7 +67,7 @@
+   static void invalidateDetail(String vehicleId) =>
+       _detailCache.remove(vehicleId);
+   static void invalidateAll() {
+-    _listCache.clear();
++    invalidateList();
+     _detailCache.clear();
+   }
+ }
+--- a/app/lib/services/quote_api.dart
++++ b/app/lib/services/quote_api.dart
+@@ -3,6 +3,10 @@
+ import '../models/quote_selection.dart';
+ import 'api_client.dart';
+ 
++class QuoteConditionsUnverified implements Exception {
++  const QuoteConditionsUnverified();
++}
++
+ class QuoteApi {
+   static const selectionPriceUnavailableMessage = '현재 선택 조건의 가격을 확인하고 있어요.';
+ 
+@@ -10,6 +14,7 @@
+   /// amount. These codes mean that the server could not produce a price for
+   /// the exact current selection.
+   static bool isSelectionPriceUnavailable(Object? error) {
++    if (error is QuoteConditionsUnverified) return true;
+     if (error is! DioException) return false;
+     final code = ApiClient.extractErrorCode(error);
+     return code == 'PRICE_UNAVAILABLE' ||
+@@ -18,6 +23,85 @@
+         code == 'SELECTION_PRICING_UNAVAILABLE';
+   }
+ 
++  static void validateSelectionResponse(
++    Map<String, dynamic> data, {
++    required String vehicleId,
++    required QuoteSelection selection,
++    required String productType,
++    required int term,
++    required int mileageLimit,
++    required int deposit,
++    required int guarantee,
++    int? prepaymentPct,
++    int? guaranteePct,
++  }) {
++    final proof = data['price_provenance'];
++    final market = proof is Map ? proof['market_price'] : null;
++    final applied = market is Map ? market['applied_conditions'] : null;
++    final prepayMatches = prepaymentPct != null
++        ? data['prepayment_pct'] == prepaymentPct
++        : data['deposit'] == deposit;
++    final guaranteeMatches = guaranteePct != null
++        ? data['guarantee_pct'] == guaranteePct
++        : data['guarantee'] == guarantee;
++    final normalized = data['normalized_selection'];
++    if (data['vehicle_id'] != vehicleId ||
++        data['vehicle_trim_id'] != selection.vehicleTrimId ||
++        data['selection_contract_version'] != QuoteSelection.contractVersion ||
++        normalized is! Map ||
++        QuoteSelection.fromJson(Map<String, dynamic>.from(normalized)) !=
++            selection ||
++        data['term'] != term ||
++        data['mileage_limit'] != mileageLimit ||
++        !prepayMatches ||
++        !guaranteeMatches ||
++        proof is! Map ||
++        proof['version'] != 'price_provenance_v1' ||
++        proof['request_conditions_verified'] != true ||
++        proof['processed_product_type'] != productType ||
++        market is! Map ||
++        market['product_type'] != productType ||
++        applied is! Map ||
++        applied['term_months'] != term ||
++        applied['annual_km'] != mileageLimit ||
++        applied['prepayment_pct'] !=
++            (prepaymentPct ?? data['prepayment_pct'])) {
++      throw const QuoteConditionsUnverified();
++    }
++    final zeroPrepay =
++        prepaymentPct == null ? deposit == 0 : prepaymentPct == 0;
++    final zeroGuarantee =
++        guaranteePct == null ? guarantee == 0 : guaranteePct == 0;
++    // The web supports colors/options too; those are not the initial Sales AI scope.
++    final initialAiScope = zeroPrepay && zeroGuarantee &&
++        selection.selectedOptionIds.isEmpty &&
++        selection.exteriorColorId == null && selection.interiorColorId == null &&
++        selection.inventoryItemId == null;
++    if (initialAiScope) {
++      final matches = market['condition_match'];
++      final unsupported = proof['unsupported_reasons'];
++      final unknown = market['unknown_reasons'];
++      if (proof['sales_ai_eligible'] != true ||
++          market['match_status'] != 'EXACT' ||
++          !const [
++            'EXACT',
++            'NORMALIZED_EXACT',
++          ].contains(market['vehicle_match']) ||
++          matches is! Map ||
++          !const [
++            'term_months',
++            'annual_km',
++            'prepayment_pct',
++          ].every((key) => matches[key] == 'EXACT') ||
++          unsupported is! List ||
++          unsupported.isNotEmpty ||
++          unknown is! List ||
++          unknown.isNotEmpty) {
++        throw const QuoteConditionsUnverified();
++      }
++    }
++  }
++
+   /// 즉시 견적 생성.
+   ///
+   /// - 캐시 금지: 항상 서버에서 최신 금리/프로모션 적용
+@@ -40,7 +124,8 @@
+         productType.trim().toUpperCase() == 'LEASE' ? 'LEASE' : 'RENTAL';
+     // ignore: avoid_print
+     print(
+-        '[QuoteApi] POST instant: vehicle=$vehicleId term=$term deposit=$deposit product=$normalizedProductType referral=$referralCode');
++      '[QuoteApi] POST instant: vehicle=$vehicleId term=$term deposit=$deposit product=$normalizedProductType referral=$referralCode',
++    );
+ 
+     try {
+       final response = await ApiClient.dio.post(
+@@ -68,7 +153,27 @@
+             'referral_code': referralCode.trim().toUpperCase(),
+         },
+       );
+-      return QuoteEnvelope.fromJson(response.data as Map<String, dynamic>);
++      final json = response.data as Map<String, dynamic>;
++      if (selection != null) {
++        validateSelectionResponse(
++          Map<String, dynamic>.from(json['data'] as Map),
++          vehicleId: vehicleId,
++          selection: selection,
++          productType: normalizedProductType,
++          term: term,
++          mileageLimit: mileageLimit,
++          deposit: deposit,
++          guarantee: guarantee,
++          prepaymentPct: prepaymentPct,
++          guaranteePct: guaranteePct,
++        );
++      }
++      final envelope = QuoteEnvelope.fromJson(json);
++      if (selection != null &&
++          (!envelope.data.hasSelectionPricingProof || envelope.data.monthlyPayment <= 0)) {
++        throw const QuoteConditionsUnverified();
++      }
++      return envelope;
+     } on DioException catch (error) {
+       // ignore: avoid_print
+       print(
+--- a/app/lib/screens/home_screen.dart
++++ b/app/lib/screens/home_screen.dart
+@@ -14,6 +14,7 @@
+ import '../services/event_service.dart';
+ import '../services/recent_viewed_service.dart';
+ import '../services/vehicle_api.dart';
++import '../services/vehicle_cache.dart';
+ import '../theme/app_colors.dart';
+ import '../theme/app_radius.dart';
+ import '../theme/app_spacing.dart';
+@@ -352,18 +353,15 @@
+     // These requests are independent. Running them together keeps the
+     // skeleton visible for the shortest possible time without layout jumps.
+     // 리카픽 기준(SUV·경차·수입차 등)과 차종별 금액을 홈에서 고르므로
+-    // 월 납입료 낮은 순으로 한 페이지(서버 상한 100대)를 받아 둔다.
+-    final vehiclesFuture = VehicleApi.fetchVehicles(
+-      term: 60,
+-      depositPct: 0,
+-      mileageLimit: 10000,
+-      size: 100,
+-    )
+-        .timeout(const Duration(seconds: 12))
+-        .then((r) => _HomeVehicleResult(r.items, failed: false))
+-        .catchError(
+-          (_) => const _HomeVehicleResult(<VehicleListItem>[], failed: true),
+-        );
++    // Keep server monthly ordering while including the complete catalog.
++    final vehiclesFuture =
++        VehicleApi.fetchCatalog(term: 60, depositPct: 0, mileageLimit: 10000)
++            .timeout(const Duration(seconds: 12))
++            .then((items) => _HomeVehicleResult(items, failed: false))
++            .catchError(
++              (_) =>
++                  const _HomeVehicleResult(<VehicleListItem>[], failed: true),
++            );
+     final applicationFuture = _loadApplicationId(
+       expectedUserId,
+     ).timeout(const Duration(seconds: 8), onTimeout: () => null);
+@@ -411,6 +409,7 @@
+ 
+   Future<void> _reload() async {
+     if (!mounted) return;
++    VehicleCache.invalidateList();
+     final future = _load();
+     setState(() {
+       _future = future;
+--- a/app/lib/screens/recommendation_screen.dart
++++ b/app/lib/screens/recommendation_screen.dart
+@@ -312,25 +312,12 @@
+ 
+   Future<List<_RecommendationResult>> _loadRecommendations() async {
+     try {
+-      final page1 = await VehicleApi.fetchVehicles(
++      final allItems = await VehicleApi.fetchCatalog(
+         term: 60,
+         depositPct: 0,
+         mileageLimit: _data.annualMileage,
+-        page: 1,
+-        size: 100,
+         forceRefresh: true,
+       );
+-      final allItems = [...page1.items];
+-      if (page1.pages > 1) {
+-        final page2 = await VehicleApi.fetchVehicles(
+-          term: 60,
+-          depositPct: 0,
+-          mileageLimit: _data.annualMileage,
+-          page: 2,
+-          size: 100,
+-        );
+-        allItems.addAll(page2.items);
+-      }
+       final orderedProfiles = _orderedProfiles(_luxuryPropensity(_data));
+       final preferredSegments = _preferredSegments(_data.vehicleTypes);
+       final usedVehicleIds = <String>{};
+--- a/app/lib/screens/vehicle_list_screen.dart
++++ b/app/lib/screens/vehicle_list_screen.dart
+@@ -511,11 +511,8 @@
+   }
+ 
+   // 카테고리 칩 → 신규 category 파라미터(key). 서버가 이 값으로 필터 + 대표월납 정렬.
+-  // 칩이 category를 몰기 때문에, 아래 구(舊) origin/segment/fuel/vehicle_class/special
+-  // 필터는 칩 매핑을 하지 않고 홈 숏컷(_activeFilter)만 반영한다(이중 필터 방지).
++  // Origin tabs use the canonical origin filter; special/body filters use categories.
+   static const Map<String, String> _chipCategoryKey = {
+-    '국산': 'DOMESTIC',
+-    '수입': 'IMPORTED',
+     '특가': 'SPECIAL_OFFER',
+   };
+ 
+@@ -554,7 +551,11 @@
+   // 정렬: 기본은 서버 '월 납입료 낮은 순'. 앱은 서버 순서를 신뢰(클라 재정렬 없음).
+   String _serverSortParam() => vehicleListSortToServerParam(_selectedSort);
+ 
+-  String? _serverOriginFilter() => _activeFilter?.origin;
++  String? _serverOriginFilter() {
++    if (_selectedChip == '국산') return 'domestic';
++    if (_selectedChip == '수입') return 'imported';
++    return _activeFilter?.origin;
++  }
+ 
+   String? _serverSegmentFilter() => _activeFilter?.segment;
+ 
+@@ -565,18 +566,13 @@
+   bool _serverSpecialOnly() => _activeFilter?.specialOnly ?? false;
+ 
+   String? _serverProductTypeFilter() {
+-    final origin = _serverOriginFilter();
+-    if (origin == 'imported') return 'LEASE';
+-    if (origin == 'domestic') return 'RENTAL';
+-
+-    final brand = _selectedBrand;
+-    if (brand == null || brand.isEmpty) return null;
+-    if (isImportedBrand(brand)) return 'LEASE';
+-    if (isDomesticBrand(brand)) return 'RENTAL';
++    // Brand/origin does not determine product availability (domestic LEASE exists).
+     return null;
+   }
+ 
+   bool _initialIsLongRentForVehicle(VehicleListItem vehicle) {
++    final available = vehicle.availableProductTypes;
++    if (available.length == 1) return available.single == 'RENTAL';
+     // 서버가 실 견적 데이터 기준으로 내려준 대표 상품을 우선 사용.
+     final displayed = vehicle.displayedProductType?.trim().toUpperCase();
+     if (displayed == 'LEASE') return false;
+--- a/app/lib/screens/vehicle_detail_screen.dart
++++ b/app/lib/screens/vehicle_detail_screen.dart
+@@ -17,6 +17,7 @@
+ import '../services/auth_session.dart';
+ import '../services/recent_viewed_service.dart';
+ import '../services/vehicle_api.dart';
++import '../services/vehicle_cache.dart';
+ import '../services/quote_api.dart';
+ import '../theme/app_layout.dart';
+ import '../theme/app_spacing.dart';
+@@ -371,12 +372,24 @@
+     return vehicle != null && isImportedBrand(vehicle.brand);
+   }
+ 
+-  bool get _effectiveIsLongRent => _isImportedVehicle ? false : _isLongRent;
++  List<String> _availableProductTypes = const [];
+ 
++  bool get _isLeaseOnlyVehicle => _availableProductTypes.isNotEmpty
++      ? !_availableProductTypes.contains('RENTAL')
++      : _isImportedVehicle;
++  bool get _leaseAllowed =>
++      _availableProductTypes.isEmpty ||
++      _availableProductTypes.contains('LEASE');
++
++  bool get _effectiveIsLongRent => _isLeaseOnlyVehicle ? false : _isLongRent;
++
+   String get _effectiveProductType => _effectiveIsLongRent ? 'RENTAL' : 'LEASE';
+ 
+   void _changeProduct(bool isLongRent) {
+-    final nextIsLongRent = _isImportedVehicle ? false : isLongRent;
++    if (isLongRent && _isLeaseOnlyVehicle || !isLongRent && !_leaseAllowed) {
++      return;
++    }
++    final nextIsLongRent = isLongRent;
+     if (_isLongRent == nextIsLongRent &&
+         _effectiveIsLongRent == nextIsLongRent) {
+       return;
+@@ -402,6 +415,17 @@
+         widget.vehicleId,
+         forceRefresh: true,
+       );
++      var catalogItem = VehicleCache.getCatalogItem(v.id);
++      if (catalogItem == null) {
++        final catalog = await VehicleApi.fetchCatalog(query: v.modelName);
++        for (final item in catalog) {
++          if (item.id == v.id) catalogItem = item;
++        }
++      }
++      if (catalogItem == null || catalogItem.availableProductTypes.isEmpty) {
++        throw StateError('Vehicle product availability is not confirmed');
++      }
++      _availableProductTypes = catalogItem.availableProductTypes;
+       if (!mounted) return;
+       final selectableTrims = _selectableVehicleTrims(v);
+       String? initialTrimId;
+@@ -433,9 +457,11 @@
+           }
+         }
+       }
+-      final resolvedIsLongRent = isImportedBrand(v.brand)
+-          ? false
+-          : (widget.initialIsLongRent ?? _isLongRent);
++      final preferredRent = widget.initialIsLongRent ??
++          (catalogItem.displayedProductType != 'LEASE');
++      final resolvedIsLongRent = preferredRent
++          ? _availableProductTypes.contains('RENTAL')
++          : !_availableProductTypes.contains('LEASE');
+       // ── Danawa 등급/색상 초기화 ────────────────────────────────────────
+       String? initialDanawaTrimName;
+       DanawaGrade? initialDanawaGrade;
+@@ -4239,13 +4265,13 @@
+           label: '이용상품',
+           value: _effectiveIsLongRent ? '장기렌트' : '리스',
+           isLast: true,
+-          child: _isImportedVehicle
++          child: _isLeaseOnlyVehicle
+               ? Row(
+                   children: [
+                     Expanded(
+                       child: _inlineProductCard(
+                         title: '리스',
+-                        description: '일반 번호판 가능\n수입차 기본 상품',
++                        description: '일반 번호판\n리스 제공 차량',
+                         selected: true,
+                         onTap: () => _changeProduct(false),
+                       ),
+@@ -4257,7 +4283,7 @@
+                         description: '보험·자동차세 포함\n하·허·호 번호판',
+                         selected: false,
+                         dimmed: true,
+-                        onTap: _showImportedRentalSheet,
++                        onTap: _showUnavailableProductSheet,
+                       ),
+                     ),
+                   ],
+@@ -4278,10 +4304,12 @@
+                         title: '리스',
+                         description: '일반 번호판\n보험료·자동차세 별도',
+                         selected: !_effectiveIsLongRent,
+-                        dimmed: _leaseDataUnavailable,
+-                        onTap: _leaseDataUnavailable
+-                            ? _showLeaseUnavailableSheet
+-                            : () => _changeProduct(false),
++                        dimmed: _leaseDataUnavailable || !_leaseAllowed,
++                        onTap: !_leaseAllowed
++                            ? _showUnavailableProductSheet
++                            : _leaseDataUnavailable
++                                ? _showLeaseUnavailableSheet
++                                : () => _changeProduct(false),
+                       ),
+                     ),
+                   ],
+@@ -4440,6 +4468,18 @@
+     );
+   }
+ 
++  void _showUnavailableProductSheet() {
++    showModalBottomSheet<void>(
++      context: context,
++      builder: (_) => const SafeArea(
++        child: Padding(
++          padding: EdgeInsets.all(24),
++          child: Text('현재 이 차량에서 제공하지 않는 상품이에요. 제공 중인 상품으로 조건을 확인해 주세요.'),
++        ),
++      ),
++    );
++  }
++
+   void _showImportedRentalSheet() {
+     showModalBottomSheet(
+       context: context,
+@@ -5224,13 +5264,13 @@
+ 
+   // ── 이용상품 ─────────────────────────────────────────────────────────────
+   Widget _buildProductRow() {
+-    if (_isImportedVehicle) {
++    if (_isLeaseOnlyVehicle) {
+       return Row(
+         children: [
+           Expanded(
+             child: _ProductCard(
+               title: '리스',
+-              desc: '수입차는 리스 기준으로\n조건을 확인해요',
++              desc: '이 차량은 리스 기준으로\n조건을 확인해요',
+               isSelected: true,
+               onTap: () => _changeProduct(false),
+             ),
+@@ -5242,7 +5282,7 @@
+               desc: '보험·자동차세 포함\n하·허·호 번호판',
+               isSelected: false,
+               disabled: true,
+-              onTap: _showImportedRentalSheet,
++              onTap: _showUnavailableProductSheet,
+             ),
+           ),
+         ],
+@@ -5265,10 +5305,12 @@
+             title: '리스',
+             desc: '계약 조건과 차량 이용 방식을\n함께 확인해요',
+             isSelected: !_effectiveIsLongRent,
+-            disabled: _leaseDataUnavailable,
+-            onTap: _leaseDataUnavailable
+-                ? _showLeaseUnavailableSheet
+-                : () => _changeProduct(false),
++            disabled: _leaseDataUnavailable || !_leaseAllowed,
++            onTap: !_leaseAllowed
++                ? _showUnavailableProductSheet
++                : _leaseDataUnavailable
++                    ? _showLeaseUnavailableSheet
++                    : () => _changeProduct(false),
+           ),
+         ),
+       ],
+@@ -6732,7 +6774,7 @@
+               color: _kBg,
+               borderRadius: BorderRadius.circular(10),
+             ),
+-            child: _isImportedVehicle
++            child: _isLeaseOnlyVehicle
+                 ? Row(
+                     children: [
+                       _DetailTab(
+@@ -6744,7 +6786,7 @@
+                         label: '장기렌트',
+                         selected: false,
+                         disabled: true,
+-                        onTap: _showImportedRentalSheet,
++                        onTap: _showUnavailableProductSheet,
+                       ),
+                     ],
+                   )
+@@ -6758,7 +6800,10 @@
+                       _DetailTab(
+                         label: '리스',
+                         selected: !_effectiveIsLongRent,
+-                        onTap: () => _changeProduct(false),
++                        disabled: !_leaseAllowed,
++                        onTap: !_leaseAllowed
++                            ? _showUnavailableProductSheet
++                            : () => _changeProduct(false),
+                       ),
+                     ],
+                   ),
+@@ -10481,15 +10526,17 @@
+ }
+ 
+ String? _assetForVehicle(VehicleDetail v) {
+-  return resolveVehicleAsset(
++  final asset = resolveVehicleAsset(
+     brand: v.brand,
+     modelName: v.modelName,
+     thumbnailUrl: v.thumbnailUrl,
+   );
++  return asset == kVehiclePlaceholderAsset && _networkImageForVehicle(v) != null
++      ? null : asset;
+ }
+ 
+ String? _networkImageForVehicle(VehicleDetail v) {
+-  return v.imageUrl ?? resolveVehicleNetworkImage(thumbnailUrl: v.thumbnailUrl);
++  return v.imageUrl ?? resolveHostedVehicleImageUrl(v.thumbnailUrl);
+ }
+ 
+ // ────────────────────────────────────────────────────────────────────────────
+@@ -10831,17 +10878,23 @@
+         color: row.isRecar ? _kBlue : _kBg,
+         borderRadius: BorderRadius.circular(6),
+       ),
+-      child: Text(row.name,
+-          style: TextStyle(
+-              fontSize: 14,
+-              fontWeight: FontWeight.w800,
+-              color: row.isRecar ? Colors.white : _kTextSecondary)),
+-    );
+-    final description = Text(row.isRecar ? '리카 기준 견적' : '금융사 견적',
++      child: Text(
++        row.name,
+         style: TextStyle(
+-            fontSize: 16,
+-            fontWeight: row.isRecar ? FontWeight.w600 : FontWeight.w500,
+-            color: row.isRecar ? _kTextPrimary : _kTextSecondary));
++          fontSize: 14,
++          fontWeight: FontWeight.w800,
++          color: row.isRecar ? Colors.white : _kTextSecondary,
++        ),
++      ),
++    );
++    final description = Text(
++      row.isRecar ? '리카 기준 견적' : '금융사 견적',
++      style: TextStyle(
++        fontSize: 16,
++        fontWeight: row.isRecar ? FontWeight.w600 : FontWeight.w500,
++        color: row.isRecar ? _kTextPrimary : _kTextSecondary,
++      ),
++    );
+     const amountStyle = TextStyle(
+         fontSize: 18,
+         fontWeight: FontWeight.w800,
 --- a/app/pubspec.yaml
 +++ b/app/pubspec.yaml
 @@ -16,6 +16,7 @@
