@@ -178,6 +178,24 @@ test("app preloaded fonts are served as fonts rather than blocked by the web pre
   }
 });
 
+test("main and inquiry serve the published app build and keep test fixtures private", async () => {
+  const server = await startServer("production");
+  try {
+    const release = require("../app/release.json");
+    for (const entry of ["/", "/inquiry", "/inquiry/", "/app/"]) {
+      const response = await fetch(`${server.baseUrl}${entry}?ref=RC-QA1234`);
+      assert.equal(response.status, 200, entry);
+      const html = await response.text();
+      assert.match(html, /<base href="\/app\/">/, entry);
+      assert.ok(html.includes(`flutter_bootstrap.js?build=${release.build_id}`), entry);
+      assert.doesNotMatch(html, /home\.js|\.\.\/script\.js|quote-form/, entry);
+    }
+    assert.equal((await fetch(`${server.baseUrl}/tests/fixtures/legacy-home.html`)).status, 404);
+  } finally {
+    await server.stop();
+  }
+});
+
 test("private data and unknown knowledge files stay blocked", async () => {
   const server = await startServer("development");
   try {

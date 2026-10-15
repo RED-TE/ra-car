@@ -1,6 +1,7 @@
 const fs = require("node:fs");
 const path = require("node:path");
 const crypto = require("node:crypto");
+const { syncAppEntrypoints } = require("./sync-app-entrypoints.cjs");
 const root = path.resolve(__dirname, "..");
 const config = require("../web_app/source.json");
 const hash = file => crypto.createHash("sha256").update(fs.readFileSync(file)).digest("hex");
@@ -39,6 +40,7 @@ function stage(appRoot) {
     sha256: Object.fromEntries(files.map(file => [file, hash(path.join(target, file))])),
   };
   fs.writeFileSync(path.join(target, "release.json"), JSON.stringify(metadata, null, 2) + "\n");
+  syncAppEntrypoints(root);
   return metadata;
 }
 if (require.main === module) console.log(JSON.stringify(stage(process.argv[2]), null, 2));

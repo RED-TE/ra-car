@@ -43,6 +43,9 @@ jobs:
       - name: Verify Crew before publishing
         run: npm run test:crew
 
+      - name: Verify main and inquiry app entries before publishing
+        run: npm run test:app-entries
+
       - name: Configure Pages
         uses: actions/configure-pages@v5
 
