@@ -1,34 +1,19 @@
 {
   "source_repository": "RECAREA/recar_app",
   "source_commit": "4b0498df0e63aa2c8bbae66e59e1c9a31037e7b0",
-  "build_id": "garage-docs-readability-20261012",
+  "web_source_patch_sha256": "b97444710ec333adb023ec895240d0c85579b16127471fc79462245124ec5744",
+  "build_id": "web-documents-fast-20261015",
   "target": "https://recarplan.com/app/",
   "base_path": "/app/",
   "api_base_url": "https://api.recarplan.com",
-  "homepage_base_commit": "3e0798051eee1063e7d7085920a4afa07a7c128f",
-  "previous_build_id": "038a178c",
-  "web_startup_id": "web-startup-20261015",
-  "web_startup_changes": [
-    "parallel preload of existing main code, manifests and used fonts",
-    "unused SUIT family omitted from startup manifest; original files retained",
-    "legacy service worker migration scoped to /app/; no origin cache deletion"
-  ],
-  "validation": {
-    "flutter_home_tests_passed": 40,
-    "admin_tests_passed": 130,
-    "server_tests_passed": 46,
-    "homepage_tests_passed": 9,
-    "changed_flutter_analyze": "no issues",
-    "chrome_live_api": "three ordered vehicles, detail navigation and selection retained",
-    "garage_documents_flutter_tests_passed": 143,
-    "document_geometry_matrix_passed": 52,
-    "native_documents": "iOS Simulator, isolated offline QA app, synthetic data"
-  },
+  "flutter_version": "3.41.1",
+  "native_app_modified": false,
+  "validation": "See docs/app-web-speed-documents-20261015.md; local evidence is not deployment proof",
   "sha256": {
-    "index.html": "fdecd356669cf8d3d852213734a600004349345ca4a0a453ff2261937540e356",
-    "flutter_bootstrap.js": "f12561deb9c17563d033a05c64fb5c024211c9634371914fa1781f43b27a058a",
-    "main.dart.js": "151303049f30bf9440a89cc1f350848fc45194f1be83941306627d489a4ef660",
-    "assets/FontManifest.json": "1585301ec2c22b999d3cc03103c085fb566bd80291c606bd1a9322eec5d5acf2",
-    "assets/AssetManifest.bin.json": "78c7c636b44d70931f0129b5ef08d299b82c3ed0a86937adcd4d13bc11152169"
+    "index.html": "b1d87e432338189901165a008a78f2a13992f6851b0370a3530f8de56bea8704",
+    "flutter_bootstrap.js": "6fe507652e045c6dd9576751abc38d453cbfb9c1a1abf56429bb33e894d9108f",
+    "main.dart.js": "a7a851fc6a3b7ee338eab92a6f17c864b9ff094ed7a17fec7ee880d5f4ea44ce",
+    "assets/FontManifest.json": "e2d22b7e9de65becff9e0cacd83496d37c01d8e9ca62087cee6616ecadee7db7",
+    "assets/AssetManifest.bin.json": "3fe1b79853172d2381069a61b70e4dab41c5076bef1855c99981d4681f55a8cf"
   }
 }

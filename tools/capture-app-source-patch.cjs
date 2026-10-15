@@ -1,0 +1,23 @@
+const fs = require("node:fs");
+const os = require("node:os");
+const path = require("node:path");
+const { execFileSync } = require("node:child_process");
+const root = path.resolve(__dirname, "..");
+const config = require("../web_app/source.json");
+const [sourceRepo, modifiedRoot] = process.argv.slice(2);
+if (!sourceRepo || !modifiedRoot) throw new Error("Pass source repository and modified extraction root");
+const files = ["app/lib/main.dart", "app/lib/services/application_api.dart", "app/lib/screens/application_documents_screen.dart", "app/lib/screens/quote_result_screen.dart", "app/pubspec.yaml", "app/pubspec.lock"];
+const temporary = fs.mkdtempSync(path.join(os.tmpdir(), "recar-patch-input-"));
+let patch = "";
+for (const [index, file] of files.entries()) {
+  const baseline = path.join(temporary, String(index));
+  fs.writeFileSync(baseline, execFileSync("git", ["-C", sourceRepo, "show", `${config.commit}:${file}`]));
+  try {
+    patch += execFileSync("diff", ["-u", "--label", `a/${file}`, "--label", `b/${file}`, baseline, path.join(modifiedRoot, file)], { encoding: "utf8" });
+  } catch (error) {
+    if (error.status !== 1) throw error;
+    patch += error.stdout;
+  }
+}
+fs.writeFileSync(path.join(root, "web_app/patches/runtime.patch"), patch);
+console.log({ patchBytes: Buffer.byteLength(patch), files });

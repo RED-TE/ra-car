@@ -73,6 +73,18 @@
 .public-home [data-slide-pause] { margin-left:6px; width:32px; height:32px; border-color:transparent; }
 .public-home [data-slide-pause] svg { width:16px; height:16px; }
 .public-home .home-shortcuts { background:#f7f7f7; padding:50px 0 42px; border-block:1px solid #e8ebf0; }
+.public-home .home-app-entry { background:#f4f7fc; border-block:1px solid #e3e9f1; }
+.public-home .app-entry-inner { display:flex; align-items:center; justify-content:space-between; gap:24px; padding-block:24px; }
+.public-home .app-entry-inner h2 { margin:0 0 8px; font-size:20px; line-height:1.5; word-break:keep-all; }
+.public-home .app-entry-inner p { margin:0; font-size:14px; color:#526174; word-break:keep-all; }
+.public-home .app-entry-actions { display:flex; gap:8px; flex-shrink:0; }
+.public-home .app-entry-actions a { min-height:48px; white-space:nowrap; font-size:14px; }
+@media(max-width:800px) {
+  .public-home .app-entry-inner { align-items:flex-start; flex-direction:column; gap:16px; padding-block:20px; }
+  .public-home .app-entry-inner h2 { font-size:18px; }
+  .public-home .app-entry-actions { width:100%; flex-wrap:wrap; }
+  .public-home .app-entry-actions a:first-child { flex:1; }
+}
 .public-home .quick-grid { display:grid; grid-template-columns:repeat(8,minmax(0,1fr)); gap:30px; }
 .public-home .quick-grid a { display:flex; flex-direction:column; align-items:center; gap:14px; text-align:center; font-weight:600; font-size:16px; }
 .public-home .quick-art { display:block; width:100%; max-width:120px; aspect-ratio:1; border-radius:20px; background-color:#fff; background-repeat:no-repeat; background-position:center; background-size:90%; transition:transform .2s; }

@@ -1,5 +1,7 @@
 # /app startup performance patch
 
+Historical wrapper-only patch (`15d207cbe8db`). Superseded by [the source-level web performance and document patch](app-web-speed-documents-20261015.md). The unchanged-Dart/font statements below apply only to that earlier patch.
+
 ## Scope
 
 - Base: RED-TE/ra-car main `6d15fe032ebfef9e744e59a12a67eb44d635e416`.

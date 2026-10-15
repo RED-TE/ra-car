@@ -76,14 +76,17 @@ test("blocked or failing worker storage cannot keep startup spinning", async () 
   }
 });
 
-test("preloads match the unchanged compiled app and preserve all used fonts", () => {
+test("preloads match the web-only build and retain the full variable font", () => {
   const html = fs.readFileSync(path.join(root, "app/index.html"), "utf8");
   const manifest = JSON.parse(fs.readFileSync(path.join(root, "app/assets/FontManifest.json"), "utf8"));
   const compiled = fs.readFileSync(path.join(root, "app/main.dart.js"), "utf8");
   assert.equal(manifest.some((family) => family.family === "SUIT"), compiled.includes("SUIT"),
     "a future SUIT build must restore its manifest before publishing");
   const pretendard = manifest.find((family) => family.family === "Pretendard");
-  assert.deepEqual(pretendard.fonts.map((font) => font.weight), [400, 500, 600, 700, 800]);
+  assert.equal(pretendard.fonts.length, 1);
+  assert.ok(pretendard.fonts[0].asset.endsWith("PretendardVariable.ttf"));
+  const entry = "서류 제출까지 직접 신청하기".replace(/[^\x00-\x7f]/g, char => `\\u${char.charCodeAt(0).toString(16).padStart(4, "0")}`);
+  assert.ok(compiled.includes(entry));
   for (const font of pretendard.fonts) {
     assert.ok(html.includes(`href="assets/${font.asset}" as="fetch" crossorigin`));
     assert.ok(fs.existsSync(path.join(root, "app/assets", font.asset)));
@@ -92,6 +95,18 @@ test("preloads match the unchanged compiled app and preserve all used fonts", ()
   assert.ok(html.includes(`href="${main}" as="script"`));
   assert.ok(manifest.some((family) => family.family === "MaterialIcons"));
   assert.ok(manifest.some((family) => family.family.includes("CupertinoIcons")));
+});
+
+test("web source and native app stay separately pinned", () => {
+  const config = require("../web_app/source.json");
+  const release = require("../app/release.json");
+  const crypto = require("node:crypto");
+  assert.equal(release.source_commit, config.commit);
+  assert.equal(release.build_id, config.buildId);
+  assert.equal(release.native_app_modified, false);
+  const patch = fs.readFileSync(path.join(root, "web_app/patches/runtime.patch"));
+  assert.equal(release.web_source_patch_sha256, crypto.createHash("sha256").update(patch).digest("hex"));
+  assert.ok(fs.readFileSync(path.join(root, ".github/workflows/pages.yml"), "utf8").includes("--exclude='./web_app'"));
 });
 
 test("font optimization is repeatable and preserves any newly used family", () => {

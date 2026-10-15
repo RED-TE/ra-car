@@ -4,6 +4,12 @@
 
   const $ = (selector) => document.querySelector(selector);
   const $$ = (selector) => [...document.querySelectorAll(selector)];
+  const appEntry = new URL("/app/", location.href);
+  const campaignKeys = /^(ref|utm_(source|medium|campaign|term|content|id)|gclid|fbclid|msclkid|n_keyword|n_campaign_type|NaPm)$/;
+  for (const [key, value] of new URLSearchParams(location.search)) {
+    if (campaignKeys.test(key) && value.length <= 2048) appEntry.searchParams.set(key, value);
+  }
+  $$('[data-app-entry]').forEach(link => { link.href = appEntry.pathname + appEntry.search; });
   const escape = (value) => String(value ?? "").replace(/[&<>"']/g, (char) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[char]);
   const reducedMotion = matchMedia("(prefers-reduced-motion: reduce)");
   const mobile = matchMedia("(max-width: 600px)");

@@ -171,7 +171,8 @@ test("app preloaded fonts are served as fonts rather than blocked by the web pre
         assert.ok((await asset.arrayBuffer()).byteLength > 1000, pathname);
       }
     }
-    assert.match(html, /main\.dart\.js\?build=garage-docs-readability-20261012" as="script"/);
+    const release = require("../app/release.json");
+    assert.ok(html.includes(`main.dart.js?build=${release.build_id}" as="script"`));
   } finally {
     await server.stop();
   }

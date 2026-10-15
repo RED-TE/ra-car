@@ -1,6 +1,6 @@
 import fs from "node:fs";
 
-export async function measureAppLoading(task, output) {
+export async function measureAppLoading(task, output, { beforePort = 3350, afterPort = 3351 } = {}) {
   const page = task.page("p1");
   const injection = await page.cdp("Page.addScriptToEvaluateOnNewDocument", {
     source: 'window.addEventListener("flutter-first-frame", () => { window.__recarFirstFrame = performance.now(); }, { once: true });',
@@ -13,7 +13,7 @@ export async function measureAppLoading(task, output) {
   const samples = [];
   try {
     for (let round = 1; round <= 3; round += 1) {
-      for (const [version, port] of [["before", 3350], ["after", 3351]]) {
+      for (const [version, port] of [["before", beforePort], ["after", afterPort]]) {
         await page.goto(`http://127.0.0.1:${port}/app/`);
         await page.waitForFunction(() => window.__recarFirstFrame > 0, undefined, { timeout: 90000 });
         await page.waitForFunction(() => performance.getEntriesByType("resource").some((entry) => entry.name.includes("/api/v1/home-pick")), undefined, { timeout: 60000 });
@@ -24,7 +24,7 @@ export async function measureAppLoading(task, output) {
           const home = resources.find((entry) => entry.name.includes("/api/v1/home-pick"));
           return {
             firstFrameMs: Math.round(window.__recarFirstFrame),
-            homeDataReadyMs: Math.round(home.responseEnd),
+            homeRequestCompleteMs: Math.round(home.responseEnd),
             mainStartMs: Math.round(core.startTime),
             fontBytes: fonts.reduce((sum, entry) => sum + entry.transferSize, 0),
             fontRequests: fonts.length,
@@ -46,7 +46,7 @@ export async function measureAppLoading(task, output) {
     const group = samples.filter((sample) => sample.version === version);
     return [version, {
       firstFrameMs: median(group.map((sample) => sample.firstFrameMs)),
-      homeDataReadyMs: median(group.map((sample) => sample.homeDataReadyMs)),
+      homeRequestCompleteMs: median(group.map((sample) => sample.homeRequestCompleteMs)),
       fontBytes: median(group.map((sample) => sample.fontBytes)),
     }];
   }));
