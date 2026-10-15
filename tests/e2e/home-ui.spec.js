@@ -2,8 +2,10 @@ const { test, expect } = require("@playwright/test");
 const AxeBuilder = require("@axe-core/playwright").default;
 const catalog = require("../../data/vehicle-static-catalog.json");
 const { getStableVehicleMargin, vehicleMarginMax, vehicleMarginMin } = require("../../lib/vehicle-margin");
+const { legacyHomeFixture } = require("./helpers/legacy-home.cjs");
 
 test.beforeEach(async ({ page }) => {
+  await legacyHomeFixture(page);
   // No test can create a production inquiry, even if the legacy Firebase fallback runs.
   await page.route("**/api/v1/friends/track**", route => route.fulfill({ status: 204 }));
   await page.route("**/firestore.googleapis.com/**", route => route.abort());

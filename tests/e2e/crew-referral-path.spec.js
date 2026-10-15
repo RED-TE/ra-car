@@ -1,8 +1,10 @@
 const { test, expect } = require("@playwright/test");
+const { legacyHomeFixture } = require("./helpers/legacy-home.cjs");
 
 const code = "RC-QA1234";
 
 test("legacy homepage query still attributes an inquiry", async ({ page }) => {
+  await legacyHomeFixture(page);
   let lead = null;
   await page.route("https://api.recarplan.com/api/v1/friends/track**", route =>
     route.fulfill({ status: 200, contentType: "application/json", body: '{"recorded":true}' }),
@@ -30,6 +32,7 @@ test("legacy homepage query still attributes an inquiry", async ({ page }) => {
 });
 
 test("a later different referral cannot inherit an earlier crew entry path", async ({ page }) => {
+  await legacyHomeFixture(page);
   await page.route("https://api.recarplan.com/api/v1/friends/track**", route =>
     route.fulfill({ status: 200, contentType: "application/json", body: '{"recorded":true}' }),
   );

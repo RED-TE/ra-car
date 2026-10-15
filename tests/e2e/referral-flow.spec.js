@@ -1,4 +1,10 @@
 const { expect, test } = require("@playwright/test");
+const { legacyHomeFixture } = require("./helpers/legacy-home.cjs");
+
+test.beforeEach(async ({ page }) => {
+  await legacyHomeFixture(page);
+  await page.route("**/api/v1/friends/track**", route => route.fulfill({ status: 204 }));
+});
 
 const referralCode = "RC-QA1234";
 const trackPattern = "https://api.recarplan.com/api/v1/friends/track**";
