@@ -1,1 +1,3 @@
 *.pdf binary
+# A unified patch uses one context space on otherwise blank lines.
+web_app/patches/*.patch whitespace=-blank-at-eol

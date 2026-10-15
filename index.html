@@ -79,7 +79,7 @@
       }
     </script>
     <link rel="stylesheet" href="./styles.css?v=20260909-referral-benefits" />
-    <link rel="stylesheet" href="./home.css?v=20260909-time-deal-v1" />
+    <link rel="stylesheet" href="./home.css?v=20261015-app-entry" />
   </head>
   <body class="public-home">
     <a class="home-skip" href="#special">차량 목록으로 바로가기</a>
@@ -94,7 +94,7 @@
     </header>
     <dialog class="home-menu" id="homeMenu" aria-labelledby="menuTitle">
       <div class="home-menu-heading"><h2 id="menuTitle">전체 서비스</h2><button class="icon-button" type="button" data-close-menu aria-label="메뉴 닫기"><i data-lucide="x" aria-hidden="true"></i></button></div>
-      <nav aria-label="전체 서비스"><a href="#home">홈</a><a href="#special">전체 차량</a><a href="#ready">SUV 찾기</a><a href="#compare">렌트·리스 비교</a><a href="#business">법인 차량</a><a href="#benefits">리카 서비스</a><a href="#faq">자주 묻는 질문</a><a href="/crew/">크루</a></nav>
+      <nav aria-label="전체 서비스"><a href="#home">홈</a><a href="#special">전체 차량</a><a href="/app/" data-app-entry>직접 견적·서류 신청</a><a href="#ready">SUV 찾기</a><a href="#compare">렌트·리스 비교</a><a href="#business">법인 차량</a><a href="#benefits">리카 서비스</a><a href="#faq">자주 묻는 질문</a><a href="/crew/">크루</a></nav>
       <a class="menu-phone" href="tel:01065731038">고객센터<strong>010-6573-1038</strong></a><a class="home-button filled" href="#quote">빠른 상담 신청</a>
     </dialog>
     <aside class="referral-notice" data-referral-notice hidden aria-live="polite">
@@ -165,6 +165,12 @@
           </article>
         </div>
         <div class="promotion-controls"><button class="icon-button" type="button" data-slide-prev aria-label="이전 배너" title="이전 배너"><i data-lucide="chevron-left" aria-hidden="true"></i></button><span class="promotion-count" aria-live="polite"><b>1</b> / 4</span><button class="icon-button" type="button" data-slide-next aria-label="다음 배너" title="다음 배너"><i data-lucide="chevron-right" aria-hidden="true"></i></button><button class="icon-button" type="button" data-slide-pause aria-label="배너 자동 재생 일시정지" title="자동 재생 일시정지"><i data-lucide="pause" aria-hidden="true"></i></button></div>
+      </section>
+      <section class="home-app-entry" aria-label="견적 진행 방법">
+        <div class="home-container app-entry-inner">
+          <div><h2>견적부터 서류 제출까지, 원하는 방식으로</h2><p>브라우저에서 직접 진행하거나 담당자에게 상담받으세요.</p></div>
+          <div class="app-entry-actions"><a class="home-button filled" href="/app/" data-app-entry>직접 견적·서류 신청 <i data-lucide="arrow-right" aria-hidden="true"></i></a><a class="home-button quote-focus-button" href="#quote" data-vehicle="조건 비교 상담">상담받기</a></div>
+        </div>
       </section>
       <section class="home-shortcuts" aria-label="주요 서비스"><div class="home-container quick-grid">
             <a href="#special"><span class="quick-art quick-car" aria-hidden="true"></span><span>전체 차량</span></a>
@@ -364,7 +370,7 @@
     <aside class="home-floating" aria-label="빠른 도구"><a class="floating-kakao" href="https://open.kakao.com/o/s7SanMki" target="_blank" rel="noopener noreferrer" aria-label="카카오톡 상담" title="카카오톡 상담"><i data-lucide="message-circle" aria-hidden="true"></i></a><button type="button" data-back-top aria-label="맨 위로" title="맨 위로"><i data-lucide="chevron-up" aria-hidden="true"></i></button></aside>
     <nav class="mobile-bottom" aria-label="모바일 빠른 메뉴"><a href="#home"><i data-lucide="house" aria-hidden="true"></i><span>홈</span></a><a href="#special"><i data-lucide="search" aria-hidden="true"></i><span>차량검색</span></a><a class="mobile-consult" href="#quote"><i data-lucide="message-square-text" aria-hidden="true"></i><span>상담신청</span></a><a href="#compare"><i data-lucide="book-open" aria-hidden="true"></i><span>이용가이드</span></a><a href="/crew/"><i data-lucide="users" aria-hidden="true"></i><span>크루</span></a></nav>
     <script src="./crew/guide/lucide.min.js"></script>
-    <script src="./home.js?v=20260909-time-deal-v1"></script>
+    <script src="./home.js?v=20261015-app-entry"></script>
     <script src="./script.js?v=20260915-crew-referral-path"></script>
   </body>
 </html>

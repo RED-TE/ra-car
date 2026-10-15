@@ -78,11 +78,11 @@ test("legacy download referral link reaches the working referral page", async ({
   await expect(page.locator("[data-referral-code]")).toHaveText(referralCode);
 });
 
-test("legacy crew referral link reaches the public crew page with its code", async ({ page }) => {
+test("legacy crew referral link reaches the web app with its code", async ({ page }) => {
   await page.goto(`/crew?ref=${referralCode}`);
 
-  await expect(page).toHaveURL(new RegExp(`\\/r\\/${referralCode}$`));
-  await expect(page.locator("[data-referral-notice]")).toBeVisible();
+  await expect(page).toHaveURL(new RegExp(`\\/app\\/\\?ref=${referralCode}$`));
+  await expect(page.locator("base")).toHaveAttribute("href", "/app/");
 });
 
 test("legacy friends referral link reaches the app with its code", async ({ page }) => {

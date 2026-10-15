@@ -1,0 +1,55 @@
+{
+  "checkedAt": "2026-10-15T05:33:32.145Z",
+  "results": [
+    {
+      "filter": {
+        "query": "GV80 Hybrid",
+        "product_type": "RENTAL"
+      },
+      "total": 2,
+      "items": [
+        {
+          "vehicleId": "7fdb7a64-9387-4a4d-9454-0dacf34e63b5",
+          "model": "GV80 Hybrid",
+          "availableProductTypes": [
+            "RENTAL"
+          ]
+        },
+        {
+          "vehicleId": "a2d21c66-302a-4120-9e19-bfde197b22f9",
+          "model": "GV80 Hybrid 블랙",
+          "availableProductTypes": [
+            "RENTAL"
+          ]
+        }
+      ]
+    },
+    {
+      "filter": {
+        "query": "스타리아 라운지 리무진 Hybrid",
+        "brand": "Hyundai",
+        "category": "DOMESTIC",
+        "product_type": "LEASE"
+      },
+      "total": 0,
+      "items": []
+    },
+    {
+      "filter": {
+        "query": "스타리아 라운지 리무진 Hybrid",
+        "product_type": "RENTAL"
+      },
+      "total": 0,
+      "items": []
+    }
+  ],
+  "categoryAssignmentIssue": {
+    "observed": true,
+    "new3CategoriesEmpty": true,
+    "categoryDomesticWithStariaLeaseTotal": 0,
+    "originDomesticWithStariaLeaseTotal": 1,
+    "brandHyundaiWithStariaLeaseTotal": 1,
+    "webMitigation": "Use origin=domestic/imported for origin tabs; do not infer product from brand",
+    "remaining": "Authoritative server-side body category assignments"
+  }
+}

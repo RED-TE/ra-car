@@ -40,6 +40,7 @@ const mimeTypes = {
   ".xml": "application/xml; charset=utf-8",
   ".woff2": "font/woff2",
   ".ttf": "font/ttf",
+  ".otf": "font/otf",
   ".wasm": "application/wasm",
 };
 
@@ -93,7 +94,7 @@ const publicAssetExtensions = new Set([".avif", ".gif", ".jpg", ".jpeg", ".png",
 
 function isPublicStaticPath(requestedPath) {
   if (publicStaticFiles.has(requestedPath)) return true;
-  if (requestedPath.startsWith("/app/")) return [".html", ".js", ".json", ".wasm", ".png", ".webp", ".ttf", ".woff2"].includes(path.extname(requestedPath).toLowerCase());
+  if (requestedPath.startsWith("/app/")) return [".html", ".js", ".json", ".wasm", ".png", ".webp", ".ttf", ".otf", ".woff2"].includes(path.extname(requestedPath).toLowerCase());
   if (!requestedPath.startsWith("/assets/")) return false;
   return publicAssetExtensions.has(path.extname(requestedPath).toLowerCase());
 }

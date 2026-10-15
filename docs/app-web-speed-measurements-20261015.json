@@ -1,0 +1,1297 @@
+{
+  "measuredAt": "2026-10-15T05:10:50.499Z",
+  "environment": "same desktop browser, cold HTTP cache, local gzip server, 5 Mbps download, 150 ms latency, real production API; not deployed performance",
+  "samples": [
+    {
+      "version": "before",
+      "round": 1,
+      "firstFrameMs": 16301,
+      "homeRequestCompleteMs": 19789,
+      "mainStartMs": 357,
+      "fontBytes": 6576815,
+      "fontRequests": 12,
+      "coreRequests": 1,
+      "resources": [
+        {
+          "name": "http://127.0.0.1:3350/app/flutter_bootstrap.js?build=garage-docs-readability-20261012",
+          "start": 172,
+          "end": 335,
+          "bytes": 4545
+        },
+        {
+          "name": "http://127.0.0.1:3350/app/manifest.json",
+          "start": 185,
+          "end": 339,
+          "bytes": 692
+        },
+        {
+          "name": "https://www.gstatic.com/flutter-canvaskit/3452d735bd38224ef2db85ca763d862d6326b17f/chromium/canvaskit.wasm",
+          "start": 354,
+          "end": 5447,
+          "bytes": 0
+        },
+        {
+          "name": "https://www.gstatic.com/flutter-canvaskit/3452d735bd38224ef2db85ca763d862d6326b17f/chromium/canvaskit.js",
+          "start": 356,
+          "end": 683,
+          "bytes": 0
+        },
+        {
+          "name": "http://127.0.0.1:3350/app/main.dart.js?build=garage-docs-readability-20261012",
+          "start": 357,
+          "end": 5012,
+          "bytes": 1369691
+        },
+        {
+          "name": "http://127.0.0.1:3350/app/icons/Icon-192.png",
+          "start": 360,
+          "end": 630,
+          "bytes": 18015
+        },
+        {
+          "name": "http://127.0.0.1:3350/app/assets/FontManifest.json",
+          "start": 5195,
+          "end": 5351,
+          "bytes": 544
+        },
+        {
+          "name": "http://127.0.0.1:3350/app/assets/fonts/MaterialIcons-Regular.otf",
+          "start": 5363,
+          "end": 5763,
+          "bytes": 20190
+        },
+        {
+          "name": "http://127.0.0.1:3350/app/assets/assets/fonts/suit/SUIT-Regular.otf",
+          "start": 5363,
+          "end": 10374,
+          "bytes": 239462
+        },
+        {
+          "name": "http://127.0.0.1:3350/app/assets/assets/fonts/suit/SUIT-Bold.otf",
+          "start": 5364,
+          "end": 7929,
+          "bytes": 242768
+        },
+        {
+          "name": "http://127.0.0.1:3350/app/assets/assets/fonts/suit/SUIT-SemiBold.otf",
+          "start": 5364,
+          "end": 7930,
+          "bytes": 242123
+        },
+        {
+          "name": "http://127.0.0.1:3350/app/assets/assets/fonts/suit/SUIT-ExtraBold.otf",
+          "start": 5364,
+          "end": 7945,
+          "bytes": 243693
+        },
+        {
+          "name": "http://127.0.0.1:3350/app/assets/assets/fonts/suit/SUIT-Medium.otf",
+          "start": 5364,
+          "end": 10392,
+          "bytes": 241515
+        },
+        {
+          "name": "http://127.0.0.1:3350/app/assets/assets/fonts/pretendard/Pretendard-Medium.otf",
+          "start": 5364,
+          "end": 14783,
+          "bytes": 1065665
+        },
+        {
+          "name": "http://127.0.0.1:3350/app/assets/assets/fonts/pretendard/Pretendard-Regular.otf",
+          "start": 5364,
+          "end": 15714,
+          "bytes": 1052254
+        },
+        {
+          "name": "http://127.0.0.1:3350/app/assets/assets/fonts/pretendard/Pretendard-Bold.otf",
+          "start": 5364,
+          "end": 14845,
+          "bytes": 1075277
+        },
+        {
+          "name": "http://127.0.0.1:3350/app/assets/assets/fonts/pretendard/Pretendard-ExtraBold.otf",
+          "start": 5364,
+          "end": 15035,
+          "bytes": 1077593
+        },
+        {
+          "name": "http://127.0.0.1:3350/app/assets/assets/fonts/pretendard/Pretendard-SemiBold.otf",
+          "start": 5364,
+          "end": 16188,
+          "bytes": 1074952
+        },
+        {
+          "name": "http://127.0.0.1:3350/app/assets/packages/cupertino_icons/assets/CupertinoIcons.ttf",
+          "start": 5364,
+          "end": 10557,
+          "bytes": 1323
+        },
+        {
+          "name": "https://fonts.gstatic.com/s/roboto/v32/KFOmCnqEu92Fr1Me4GZLCzYlKw.woff2",
+          "start": 5365,
+          "end": 6238,
+          "bytes": 63764
+        },
+        {
+          "name": "http://127.0.0.1:3350/app/version.json?cachebuster=1792040965011",
+          "start": 16286,
+          "end": 16444,
+          "bytes": 391
+        },
+        {
+          "name": "https://api.recarplan.com/api/v1/app/update-check?platform=android&version=1.0.2&build_number=121",
+          "start": 16456,
+          "end": 17111,
+          "bytes": 0
+        },
+        {
+          "name": "http://127.0.0.1:3350/app/version.json?cachebuster=1792040966225",
+          "start": 17507,
+          "end": 17666,
+          "bytes": 391
+        },
+        {
+          "name": "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js",
+          "start": 17672,
+          "end": 17900,
+          "bytes": 0
+        },
+        {
+          "name": "https://www.gstatic.com/firebasejs/12.13.0/firebase-analytics.js",
+          "start": 17673,
+          "end": 17874,
+          "bytes": 0
+        },
+        {
+          "name": "https://www.gstatic.com/firebasejs/12.13.0/firebase-messaging.js",
+          "start": 17675,
+          "end": 17872,
+          "bytes": 0
+        },
+        {
+          "name": "http://127.0.0.1:3350/app/assets/AssetManifest.bin.json",
+          "start": 18590,
+          "end": 18808,
+          "bytes": 38618
+        },
+        {
+          "name": "https://firebase.googleapis.com/v1alpha/projects/-/apps/1:986741988510:ios:c51af7cebe4e20064aaf8f/webConfig",
+          "start": 18676,
+          "end": 18930,
+          "bytes": 0
+        },
+        {
+          "name": "https://api.recarplan.com/api/v1/analytics/events",
+          "start": 18680,
+          "end": 18969,
+          "bytes": 0
+        },
+        {
+          "name": "https://api.recarplan.com/api/v1/events",
+          "start": 18682,
+          "end": 19787,
+          "bytes": 0
+        },
+        {
+          "name": "https://api.recarplan.com/api/v1/home-pick",
+          "start": 18682,
+          "end": 19789,
+          "bytes": 0
+        },
+        {
+          "name": "http://127.0.0.1:3350/app/assets/assets/brands/logo_Hyundai.png",
+          "start": 18837,
+          "end": 19031,
+          "bytes": 6037
+        },
+        {
+          "name": "http://127.0.0.1:3350/app/assets/assets/brands/logo_Kia.png",
+          "start": 18838,
+          "end": 19033,
+          "bytes": 5482
+        },
+        {
+          "name": "http://127.0.0.1:3350/app/assets/assets/brands/logo_Genesis.png",
+          "start": 18839,
+          "end": 19012,
+          "bytes": 2679
+        },
+        {
+          "name": "http://127.0.0.1:3350/app/assets/assets/brands/logo_Benz.png",
+          "start": 18839,
+          "end": 19036,
+          "bytes": 5491
+        },
+        {
+          "name": "http://127.0.0.1:3350/app/assets/assets/brands/logo_BMW.png",
+          "start": 18840,
+          "end": 19038,
+          "bytes": 5233
+        },
+        {
+          "name": "http://127.0.0.1:3350/app/assets/assets/brands/logo_Audi.png",
+          "start": 18840,
+          "end": 19019,
+          "bytes": 2481
+        },
+        {
+          "name": "http://127.0.0.1:3350/app/assets/assets/brands/logo_Volvo.png",
+          "start": 18841,
+          "end": 19173,
+          "bytes": 2546
+        },
+        {
+          "name": "http://127.0.0.1:3350/app/assets/assets/brands/logo_Lexus.png",
+          "start": 18841,
+          "end": 19184,
+          "bytes": 4520
+        },
+        {
+          "name": "http://127.0.0.1:3350/app/assets/assets/brands/logo_Tesla.png",
+          "start": 18841,
+          "end": 19197,
+          "bytes": 3041
+        },
+        {
+          "name": "https://www.googletagmanager.com/gtag/js?l=dataLayer&id=undefined",
+          "start": 18931,
+          "end": 19554,
+          "bytes": 0
+        }
+      ]
+    },
+    {
+      "version": "after",
+      "round": 1,
+      "firstFrameMs": 11942,
+      "homeRequestCompleteMs": 13118,
+      "mainStartMs": 184,
+      "fontBytes": 3000370,
+      "fontRequests": 3,
+      "coreRequests": 1,
+      "resources": [
+        {
+          "name": "http://127.0.0.1:3357/app/main.dart.js?build=web-documents-fast-20261015",
+          "start": 184,
+          "end": 8498,
+          "bytes": 1381009
+        },
+        {
+          "name": "http://127.0.0.1:3357/app/assets/FontManifest.json",
+          "start": 185,
+          "end": 356,
+          "bytes": 461
+        },
+        {
+          "name": "http://127.0.0.1:3357/app/assets/AssetManifest.bin.json",
+          "start": 185,
+          "end": 941,
+          "bytes": 38388
+        },
+        {
+          "name": "http://127.0.0.1:3357/app/assets/assets/fonts/pretendard/PretendardVariable.ttf",
+          "start": 185,
+          "end": 11746,
+          "bytes": 2978857
+        },
+        {
+          "name": "http://127.0.0.1:3357/app/flutter_bootstrap.js?build=web-documents-fast-20261015",
+          "start": 185,
+          "end": 486,
+          "bytes": 4610
+        },
+        {
+          "name": "http://127.0.0.1:3357/app/manifest.json",
+          "start": 186,
+          "end": 416,
+          "bytes": 692
+        },
+        {
+          "name": "https://www.gstatic.com/flutter-canvaskit/3452d735bd38224ef2db85ca763d862d6326b17f/chromium/canvaskit.wasm",
+          "start": 495,
+          "end": 9542,
+          "bytes": 0
+        },
+        {
+          "name": "https://www.gstatic.com/flutter-canvaskit/3452d735bd38224ef2db85ca763d862d6326b17f/chromium/canvaskit.js",
+          "start": 495,
+          "end": 1070,
+          "bytes": 0
+        },
+        {
+          "name": "http://127.0.0.1:3357/app/assets/fonts/MaterialIcons-Regular.otf",
+          "start": 8667,
+          "end": 8987,
+          "bytes": 20190
+        },
+        {
+          "name": "http://127.0.0.1:3357/app/assets/packages/cupertino_icons/assets/CupertinoIcons.ttf",
+          "start": 8667,
+          "end": 8829,
+          "bytes": 1323
+        },
+        {
+          "name": "https://fonts.gstatic.com/s/roboto/v32/KFOmCnqEu92Fr1Me4GZLCzYlKw.woff2",
+          "start": 8667,
+          "end": 9199,
+          "bytes": 63764
+        },
+        {
+          "name": "http://127.0.0.1:3357/app/favicon.png",
+          "start": 8672,
+          "end": 8853,
+          "bytes": 1780
+        },
+        {
+          "name": "http://127.0.0.1:3357/app/icons/Icon-192.png",
+          "start": 8672,
+          "end": 8975,
+          "bytes": 18015
+        },
+        {
+          "name": "http://127.0.0.1:3357/app/assets/assets/brands/logo_Hyundai.png",
+          "start": 12017,
+          "end": 12213,
+          "bytes": 6037
+        },
+        {
+          "name": "http://127.0.0.1:3357/app/assets/assets/brands/logo_Kia.png",
+          "start": 12017,
+          "end": 12215,
+          "bytes": 5482
+        },
+        {
+          "name": "http://127.0.0.1:3357/app/assets/assets/brands/logo_Genesis.png",
+          "start": 12017,
+          "end": 12194,
+          "bytes": 2679
+        },
+        {
+          "name": "http://127.0.0.1:3357/app/assets/assets/brands/logo_Benz.png",
+          "start": 12017,
+          "end": 12218,
+          "bytes": 5491
+        },
+        {
+          "name": "http://127.0.0.1:3357/app/assets/assets/brands/logo_BMW.png",
+          "start": 12018,
+          "end": 12220,
+          "bytes": 5233
+        },
+        {
+          "name": "http://127.0.0.1:3357/app/assets/assets/brands/logo_Audi.png",
+          "start": 12018,
+          "end": 12203,
+          "bytes": 2481
+        },
+        {
+          "name": "http://127.0.0.1:3357/app/assets/assets/brands/logo_Volvo.png",
+          "start": 12018,
+          "end": 12351,
+          "bytes": 2546
+        },
+        {
+          "name": "http://127.0.0.1:3357/app/assets/assets/brands/logo_Lexus.png",
+          "start": 12018,
+          "end": 12362,
+          "bytes": 4520
+        },
+        {
+          "name": "http://127.0.0.1:3357/app/assets/assets/brands/logo_Tesla.png",
+          "start": 12018,
+          "end": 12372,
+          "bytes": 3041
+        },
+        {
+          "name": "https://api.recarplan.com/api/v1/analytics/events",
+          "start": 12023,
+          "end": 13132,
+          "bytes": 0
+        },
+        {
+          "name": "https://api.recarplan.com/api/v1/events",
+          "start": 12026,
+          "end": 13135,
+          "bytes": 0
+        },
+        {
+          "name": "https://api.recarplan.com/api/v1/home-pick",
+          "start": 12026,
+          "end": 13118,
+          "bytes": 0
+        }
+      ]
+    },
+    {
+      "version": "before",
+      "round": 2,
+      "firstFrameMs": 17387,
+      "homeRequestCompleteMs": 22264,
+      "mainStartMs": 380,
+      "fontBytes": 6576815,
+      "fontRequests": 12,
+      "coreRequests": 1,
+      "resources": [
+        {
+          "name": "http://127.0.0.1:3350/app/flutter_bootstrap.js?build=garage-docs-readability-20261012",
+          "start": 172,
+          "end": 369,
+          "bytes": 4545
+        },
+        {
+          "name": "http://127.0.0.1:3350/app/manifest.json",
+          "start": 178,
+          "end": 345,
+          "bytes": 692
+        },
+        {
+          "name": "http://127.0.0.1:3350/app/icons/Icon-192.png",
+          "start": 379,
+          "end": 794,
+          "bytes": 18015
+        },
+        {
+          "name": "https://www.gstatic.com/flutter-canvaskit/3452d735bd38224ef2db85ca763d862d6326b17f/chromium/canvaskit.wasm",
+          "start": 379,
+          "end": 6635,
+          "bytes": 0
+        },
+        {
+          "name": "https://www.gstatic.com/flutter-canvaskit/3452d735bd38224ef2db85ca763d862d6326b17f/chromium/canvaskit.js",
+          "start": 379,
+          "end": 909,
+          "bytes": 0
+        },
+        {
+          "name": "http://127.0.0.1:3350/app/main.dart.js?build=garage-docs-readability-20261012",
+          "start": 380,
+          "end": 6208,
+          "bytes": 1369691
+        },
+        {
+          "name": "http://127.0.0.1:3350/app/assets/FontManifest.json",
+          "start": 6363,
+          "end": 6518,
+          "bytes": 544
+        },
+        {
+          "name": "http://127.0.0.1:3350/app/assets/assets/fonts/suit/SUIT-Regular.otf",
+          "start": 6522,
+          "end": 9081,
+          "bytes": 239462
+        },
+        {
+          "name": "http://127.0.0.1:3350/app/assets/fonts/MaterialIcons-Regular.otf",
+          "start": 6522,
+          "end": 9405,
+          "bytes": 20190
+        },
+        {
+          "name": "http://127.0.0.1:3350/app/assets/assets/fonts/suit/SUIT-Medium.otf",
+          "start": 6522,
+          "end": 9096,
+          "bytes": 241515
+        },
+        {
+          "name": "http://127.0.0.1:3350/app/assets/assets/fonts/suit/SUIT-SemiBold.otf",
+          "start": 6522,
+          "end": 9105,
+          "bytes": 242123
+        },
+        {
+          "name": "http://127.0.0.1:3350/app/assets/assets/fonts/suit/SUIT-Bold.otf",
+          "start": 6522,
+          "end": 9107,
+          "bytes": 242768
+        },
+        {
+          "name": "http://127.0.0.1:3350/app/assets/assets/fonts/suit/SUIT-ExtraBold.otf",
+          "start": 6522,
+          "end": 9115,
+          "bytes": 243693
+        },
+        {
+          "name": "http://127.0.0.1:3350/app/assets/assets/fonts/pretendard/Pretendard-Regular.otf",
+          "start": 6522,
+          "end": 15088,
+          "bytes": 1052254
+        },
+        {
+          "name": "http://127.0.0.1:3350/app/assets/assets/fonts/pretendard/Pretendard-Medium.otf",
+          "start": 6522,
+          "end": 17195,
+          "bytes": 1065665
+        },
+        {
+          "name": "http://127.0.0.1:3350/app/assets/assets/fonts/pretendard/Pretendard-Bold.otf",
+          "start": 6522,
+          "end": 17277,
+          "bytes": 1075277
+        },
+        {
+          "name": "http://127.0.0.1:3350/app/assets/assets/fonts/pretendard/Pretendard-SemiBold.otf",
+          "start": 6522,
+          "end": 17279,
+          "bytes": 1074952
+        },
+        {
+          "name": "http://127.0.0.1:3350/app/assets/packages/cupertino_icons/assets/CupertinoIcons.ttf",
+          "start": 6522,
+          "end": 9278,
+          "bytes": 1323
+        },
+        {
+          "name": "http://127.0.0.1:3350/app/assets/assets/fonts/pretendard/Pretendard-ExtraBold.otf",
+          "start": 6522,
+          "end": 17320,
+          "bytes": 1077593
+        },
+        {
+          "name": "https://fonts.gstatic.com/s/roboto/v32/KFOmCnqEu92Fr1Me4GZLCzYlKw.woff2",
+          "start": 6522,
+          "end": 7406,
+          "bytes": 63764
+        },
+        {
+          "name": "http://127.0.0.1:3350/app/version.json?cachebuster=1792040999141",
+          "start": 17381,
+          "end": 17538,
+          "bytes": 391
+        },
+        {
+          "name": "https://api.recarplan.com/api/v1/app/update-check?platform=android&version=1.0.2&build_number=121",
+          "start": 17543,
+          "end": 17918,
+          "bytes": 0
+        },
+        {
+          "name": "http://127.0.0.1:3350/app/version.json?cachebuster=1792041000413",
+          "start": 18661,
+          "end": 18818,
+          "bytes": 391
+        },
+        {
+          "name": "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js",
+          "start": 18822,
+          "end": 19048,
+          "bytes": 0
+        },
+        {
+          "name": "https://www.gstatic.com/firebasejs/12.13.0/firebase-analytics.js",
+          "start": 18823,
+          "end": 19027,
+          "bytes": 0
+        },
+        {
+          "name": "https://www.gstatic.com/firebasejs/12.13.0/firebase-messaging.js",
+          "start": 18824,
+          "end": 19020,
+          "bytes": 0
+        },
+        {
+          "name": "http://127.0.0.1:3350/app/assets/AssetManifest.bin.json",
+          "start": 19791,
+          "end": 20006,
+          "bytes": 38618
+        },
+        {
+          "name": "https://firebase.googleapis.com/v1alpha/projects/-/apps/1:986741988510:ios:c51af7cebe4e20064aaf8f/webConfig",
+          "start": 19855,
+          "end": 20094,
+          "bytes": 0
+        },
+        {
+          "name": "https://api.recarplan.com/api/v1/analytics/events",
+          "start": 19857,
+          "end": 22231,
+          "bytes": 0
+        },
+        {
+          "name": "https://api.recarplan.com/api/v1/events",
+          "start": 19858,
+          "end": 22238,
+          "bytes": 0
+        },
+        {
+          "name": "https://api.recarplan.com/api/v1/home-pick",
+          "start": 19858,
+          "end": 22264,
+          "bytes": 0
+        },
+        {
+          "name": "http://127.0.0.1:3350/app/assets/assets/brands/logo_Hyundai.png",
+          "start": 20033,
+          "end": 20229,
+          "bytes": 6037
+        },
+        {
+          "name": "http://127.0.0.1:3350/app/assets/assets/brands/logo_Kia.png",
+          "start": 20034,
+          "end": 20231,
+          "bytes": 5482
+        },
+        {
+          "name": "http://127.0.0.1:3350/app/assets/assets/brands/logo_Genesis.png",
+          "start": 20034,
+          "end": 20210,
+          "bytes": 2679
+        },
+        {
+          "name": "http://127.0.0.1:3350/app/assets/assets/brands/logo_Benz.png",
+          "start": 20034,
+          "end": 20233,
+          "bytes": 5491
+        },
+        {
+          "name": "http://127.0.0.1:3350/app/assets/assets/brands/logo_BMW.png",
+          "start": 20034,
+          "end": 20236,
+          "bytes": 5233
+        },
+        {
+          "name": "http://127.0.0.1:3350/app/assets/assets/brands/logo_Audi.png",
+          "start": 20035,
+          "end": 20219,
+          "bytes": 2481
+        },
+        {
+          "name": "http://127.0.0.1:3350/app/assets/assets/brands/logo_Volvo.png",
+          "start": 20035,
+          "end": 20371,
+          "bytes": 2546
+        },
+        {
+          "name": "http://127.0.0.1:3350/app/assets/assets/brands/logo_Lexus.png",
+          "start": 20035,
+          "end": 20387,
+          "bytes": 4520
+        },
+        {
+          "name": "http://127.0.0.1:3350/app/assets/assets/brands/logo_Tesla.png",
+          "start": 20035,
+          "end": 20398,
+          "bytes": 3041
+        },
+        {
+          "name": "http://127.0.0.1:3350/app/assets/assets/images/icon3d_persona_parent.png",
+          "start": 20036,
+          "end": 21448,
+          "bytes": 120137
+        },
+        {
+          "name": "http://127.0.0.1:3350/app/assets/assets/images/guide_lease_rent_bg.png",
+          "start": 20036,
+          "end": 21693,
+          "bytes": 149727
+        },
+        {
+          "name": "https://www.googletagmanager.com/gtag/js?l=dataLayer&id=undefined",
+          "start": 20097,
+          "end": 20472,
+          "bytes": 0
+        }
+      ]
+    },
+    {
+      "version": "after",
+      "round": 2,
+      "firstFrameMs": 11770,
+      "homeRequestCompleteMs": 12725,
+      "mainStartMs": 192,
+      "fontBytes": 3000370,
+      "fontRequests": 3,
+      "coreRequests": 1,
+      "resources": [
+        {
+          "name": "http://127.0.0.1:3357/app/main.dart.js?build=web-documents-fast-20261015",
+          "start": 192,
+          "end": 8433,
+          "bytes": 1381009
+        },
+        {
+          "name": "http://127.0.0.1:3357/app/assets/FontManifest.json",
+          "start": 192,
+          "end": 364,
+          "bytes": 461
+        },
+        {
+          "name": "http://127.0.0.1:3357/app/flutter_bootstrap.js?build=web-documents-fast-20261015",
+          "start": 192,
+          "end": 441,
+          "bytes": 4610
+        },
+        {
+          "name": "http://127.0.0.1:3357/app/assets/AssetManifest.bin.json",
+          "start": 192,
+          "end": 962,
+          "bytes": 38388
+        },
+        {
+          "name": "http://127.0.0.1:3357/app/assets/assets/fonts/pretendard/PretendardVariable.ttf",
+          "start": 192,
+          "end": 11628,
+          "bytes": 2978857
+        },
+        {
+          "name": "http://127.0.0.1:3357/app/manifest.json",
+          "start": 193,
+          "end": 374,
+          "bytes": 692
+        },
+        {
+          "name": "https://www.gstatic.com/flutter-canvaskit/3452d735bd38224ef2db85ca763d862d6326b17f/chromium/canvaskit.wasm",
+          "start": 451,
+          "end": 9461,
+          "bytes": 0
+        },
+        {
+          "name": "https://www.gstatic.com/flutter-canvaskit/3452d735bd38224ef2db85ca763d862d6326b17f/chromium/canvaskit.js",
+          "start": 451,
+          "end": 1034,
+          "bytes": 0
+        },
+        {
+          "name": "http://127.0.0.1:3357/app/assets/fonts/MaterialIcons-Regular.otf",
+          "start": 8618,
+          "end": 8935,
+          "bytes": 20190
+        },
+        {
+          "name": "http://127.0.0.1:3357/app/assets/packages/cupertino_icons/assets/CupertinoIcons.ttf",
+          "start": 8618,
+          "end": 8781,
+          "bytes": 1323
+        },
+        {
+          "name": "https://fonts.gstatic.com/s/roboto/v32/KFOmCnqEu92Fr1Me4GZLCzYlKw.woff2",
+          "start": 8618,
+          "end": 9142,
+          "bytes": 63764
+        },
+        {
+          "name": "http://127.0.0.1:3357/app/icons/Icon-192.png",
+          "start": 8627,
+          "end": 8925,
+          "bytes": 18015
+        },
+        {
+          "name": "http://127.0.0.1:3357/app/assets/assets/brands/logo_Hyundai.png",
+          "start": 11848,
+          "end": 12038,
+          "bytes": 6037
+        },
+        {
+          "name": "http://127.0.0.1:3357/app/assets/assets/brands/logo_Genesis.png",
+          "start": 11848,
+          "end": 12024,
+          "bytes": 2679
+        },
+        {
+          "name": "http://127.0.0.1:3357/app/assets/assets/brands/logo_Kia.png",
+          "start": 11848,
+          "end": 12045,
+          "bytes": 5482
+        },
+        {
+          "name": "http://127.0.0.1:3357/app/assets/assets/brands/logo_Benz.png",
+          "start": 11849,
+          "end": 12047,
+          "bytes": 5491
+        },
+        {
+          "name": "http://127.0.0.1:3357/app/assets/assets/brands/logo_Audi.png",
+          "start": 11849,
+          "end": 12036,
+          "bytes": 2481
+        },
+        {
+          "name": "http://127.0.0.1:3357/app/assets/assets/brands/logo_BMW.png",
+          "start": 11849,
+          "end": 12050,
+          "bytes": 5233
+        },
+        {
+          "name": "http://127.0.0.1:3357/app/assets/assets/brands/logo_Volvo.png",
+          "start": 11849,
+          "end": 12185,
+          "bytes": 2546
+        },
+        {
+          "name": "http://127.0.0.1:3357/app/assets/assets/brands/logo_Lexus.png",
+          "start": 11849,
+          "end": 12199,
+          "bytes": 4520
+        },
+        {
+          "name": "http://127.0.0.1:3357/app/assets/assets/brands/logo_Tesla.png",
+          "start": 11849,
+          "end": 12197,
+          "bytes": 3041
+        },
+        {
+          "name": "https://api.recarplan.com/api/v1/analytics/events",
+          "start": 11854,
+          "end": 12703,
+          "bytes": 0
+        },
+        {
+          "name": "https://api.recarplan.com/api/v1/events",
+          "start": 11854,
+          "end": 12720,
+          "bytes": 0
+        },
+        {
+          "name": "https://api.recarplan.com/api/v1/home-pick",
+          "start": 11854,
+          "end": 12725,
+          "bytes": 0
+        }
+      ]
+    },
+    {
+      "version": "before",
+      "round": 3,
+      "firstFrameMs": 17452,
+      "homeRequestCompleteMs": 20724,
+      "mainStartMs": 392,
+      "fontBytes": 6576815,
+      "fontRequests": 12,
+      "coreRequests": 1,
+      "resources": [
+        {
+          "name": "http://127.0.0.1:3350/app/flutter_bootstrap.js?build=garage-docs-readability-20261012",
+          "start": 173,
+          "end": 377,
+          "bytes": 4545
+        },
+        {
+          "name": "http://127.0.0.1:3350/app/manifest.json",
+          "start": 176,
+          "end": 345,
+          "bytes": 692
+        },
+        {
+          "name": "https://www.gstatic.com/flutter-canvaskit/3452d735bd38224ef2db85ca763d862d6326b17f/chromium/canvaskit.wasm",
+          "start": 392,
+          "end": 6695,
+          "bytes": 0
+        },
+        {
+          "name": "https://www.gstatic.com/flutter-canvaskit/3452d735bd38224ef2db85ca763d862d6326b17f/chromium/canvaskit.js",
+          "start": 392,
+          "end": 928,
+          "bytes": 0
+        },
+        {
+          "name": "http://127.0.0.1:3350/app/icons/Icon-192.png",
+          "start": 392,
+          "end": 817,
+          "bytes": 18015
+        },
+        {
+          "name": "http://127.0.0.1:3350/app/main.dart.js?build=garage-docs-readability-20261012",
+          "start": 392,
+          "end": 6268,
+          "bytes": 1369691
+        },
+        {
+          "name": "http://127.0.0.1:3350/app/assets/FontManifest.json",
+          "start": 6420,
+          "end": 6575,
+          "bytes": 544
+        },
+        {
+          "name": "http://127.0.0.1:3350/app/assets/fonts/MaterialIcons-Regular.otf",
+          "start": 6578,
+          "end": 6921,
+          "bytes": 20190
+        },
+        {
+          "name": "http://127.0.0.1:3350/app/assets/assets/fonts/suit/SUIT-Regular.otf",
+          "start": 6578,
+          "end": 9107,
+          "bytes": 239462
+        },
+        {
+          "name": "http://127.0.0.1:3350/app/assets/assets/fonts/suit/SUIT-Medium.otf",
+          "start": 6578,
+          "end": 9125,
+          "bytes": 241515
+        },
+        {
+          "name": "http://127.0.0.1:3350/app/assets/assets/fonts/suit/SUIT-SemiBold.otf",
+          "start": 6579,
+          "end": 9136,
+          "bytes": 242123
+        },
+        {
+          "name": "http://127.0.0.1:3350/app/assets/assets/fonts/suit/SUIT-Bold.otf",
+          "start": 6579,
+          "end": 9139,
+          "bytes": 242768
+        },
+        {
+          "name": "http://127.0.0.1:3350/app/assets/assets/fonts/suit/SUIT-ExtraBold.otf",
+          "start": 6579,
+          "end": 9145,
+          "bytes": 243693
+        },
+        {
+          "name": "http://127.0.0.1:3350/app/assets/assets/fonts/pretendard/Pretendard-Regular.otf",
+          "start": 6579,
+          "end": 15417,
+          "bytes": 1052254
+        },
+        {
+          "name": "http://127.0.0.1:3350/app/assets/assets/fonts/pretendard/Pretendard-Medium.otf",
+          "start": 6579,
+          "end": 17284,
+          "bytes": 1065665
+        },
+        {
+          "name": "http://127.0.0.1:3350/app/assets/assets/fonts/pretendard/Pretendard-SemiBold.otf",
+          "start": 6579,
+          "end": 17356,
+          "bytes": 1074952
+        },
+        {
+          "name": "http://127.0.0.1:3350/app/assets/assets/fonts/pretendard/Pretendard-Bold.otf",
+          "start": 6579,
+          "end": 17364,
+          "bytes": 1075277
+        },
+        {
+          "name": "https://fonts.gstatic.com/s/roboto/v32/KFOmCnqEu92Fr1Me4GZLCzYlKw.woff2",
+          "start": 6579,
+          "end": 7435,
+          "bytes": 63764
+        },
+        {
+          "name": "http://127.0.0.1:3350/app/assets/packages/cupertino_icons/assets/CupertinoIcons.ttf",
+          "start": 6579,
+          "end": 9309,
+          "bytes": 1323
+        },
+        {
+          "name": "http://127.0.0.1:3350/app/assets/assets/fonts/pretendard/Pretendard-ExtraBold.otf",
+          "start": 6579,
+          "end": 17373,
+          "bytes": 1077593
+        },
+        {
+          "name": "http://127.0.0.1:3350/app/version.json?cachebuster=1792041034267",
+          "start": 17445,
+          "end": 17604,
+          "bytes": 391
+        },
+        {
+          "name": "https://api.recarplan.com/api/v1/app/update-check?platform=android&version=1.0.2&build_number=121",
+          "start": 17612,
+          "end": 17980,
+          "bytes": 0
+        },
+        {
+          "name": "http://127.0.0.1:3350/app/version.json?cachebuster=1792041035481",
+          "start": 18667,
+          "end": 18825,
+          "bytes": 391
+        },
+        {
+          "name": "https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js",
+          "start": 18830,
+          "end": 19055,
+          "bytes": 0
+        },
+        {
+          "name": "https://www.gstatic.com/firebasejs/12.13.0/firebase-analytics.js",
+          "start": 18831,
+          "end": 19032,
+          "bytes": 0
+        },
+        {
+          "name": "https://www.gstatic.com/firebasejs/12.13.0/firebase-messaging.js",
+          "start": 18831,
+          "end": 19025,
+          "bytes": 0
+        },
+        {
+          "name": "http://127.0.0.1:3350/app/assets/AssetManifest.bin.json",
+          "start": 19782,
+          "end": 19996,
+          "bytes": 38618
+        },
+        {
+          "name": "https://firebase.googleapis.com/v1alpha/projects/-/apps/1:986741988510:ios:c51af7cebe4e20064aaf8f/webConfig",
+          "start": 19849,
+          "end": 20092,
+          "bytes": 0
+        },
+        {
+          "name": "https://api.recarplan.com/api/v1/analytics/events",
+          "start": 19850,
+          "end": 20728,
+          "bytes": 0
+        },
+        {
+          "name": "https://api.recarplan.com/api/v1/events",
+          "start": 19852,
+          "end": 20729,
+          "bytes": 0
+        },
+        {
+          "name": "https://api.recarplan.com/api/v1/home-pick",
+          "start": 19852,
+          "end": 20724,
+          "bytes": 0
+        },
+        {
+          "name": "http://127.0.0.1:3350/app/assets/assets/brands/logo_Hyundai.png",
+          "start": 20017,
+          "end": 20209,
+          "bytes": 6037
+        },
+        {
+          "name": "http://127.0.0.1:3350/app/assets/assets/brands/logo_Kia.png",
+          "start": 20018,
+          "end": 20212,
+          "bytes": 5482
+        },
+        {
+          "name": "http://127.0.0.1:3350/app/assets/assets/brands/logo_Genesis.png",
+          "start": 20018,
+          "end": 20190,
+          "bytes": 2679
+        },
+        {
+          "name": "http://127.0.0.1:3350/app/assets/assets/brands/logo_Benz.png",
+          "start": 20018,
+          "end": 20214,
+          "bytes": 5491
+        },
+        {
+          "name": "http://127.0.0.1:3350/app/assets/assets/brands/logo_BMW.png",
+          "start": 20019,
+          "end": 20217,
+          "bytes": 5233
+        },
+        {
+          "name": "http://127.0.0.1:3350/app/assets/assets/brands/logo_Audi.png",
+          "start": 20019,
+          "end": 20197,
+          "bytes": 2481
+        },
+        {
+          "name": "http://127.0.0.1:3350/app/assets/assets/brands/logo_Volvo.png",
+          "start": 20019,
+          "end": 20349,
+          "bytes": 2546
+        },
+        {
+          "name": "http://127.0.0.1:3350/app/assets/assets/brands/logo_Lexus.png",
+          "start": 20019,
+          "end": 20363,
+          "bytes": 4520
+        },
+        {
+          "name": "http://127.0.0.1:3350/app/assets/assets/brands/logo_Tesla.png",
+          "start": 20020,
+          "end": 20376,
+          "bytes": 3041
+        },
+        {
+          "name": "https://www.googletagmanager.com/gtag/js?l=dataLayer&id=undefined",
+          "start": 20093,
+          "end": 20614,
+          "bytes": 0
+        }
+      ]
+    },
+    {
+      "version": "after",
+      "round": 3,
+      "firstFrameMs": 11692,
+      "homeRequestCompleteMs": 12850,
+      "mainStartMs": 188,
+      "fontBytes": 3000370,
+      "fontRequests": 3,
+      "coreRequests": 1,
+      "resources": [
+        {
+          "name": "http://127.0.0.1:3357/app/main.dart.js?build=web-documents-fast-20261015",
+          "start": 188,
+          "end": 8394,
+          "bytes": 1381009
+        },
+        {
+          "name": "http://127.0.0.1:3357/app/assets/FontManifest.json",
+          "start": 188,
+          "end": 364,
+          "bytes": 461
+        },
+        {
+          "name": "http://127.0.0.1:3357/app/assets/AssetManifest.bin.json",
+          "start": 188,
+          "end": 985,
+          "bytes": 38388
+        },
+        {
+          "name": "http://127.0.0.1:3357/app/flutter_bootstrap.js?build=web-documents-fast-20261015",
+          "start": 188,
+          "end": 446,
+          "bytes": 4610
+        },
+        {
+          "name": "http://127.0.0.1:3357/app/assets/assets/fonts/pretendard/PretendardVariable.ttf",
+          "start": 188,
+          "end": 11567,
+          "bytes": 2978857
+        },
+        {
+          "name": "http://127.0.0.1:3357/app/manifest.json",
+          "start": 190,
+          "end": 368,
+          "bytes": 692
+        },
+        {
+          "name": "https://www.gstatic.com/flutter-canvaskit/3452d735bd38224ef2db85ca763d862d6326b17f/chromium/canvaskit.wasm",
+          "start": 454,
+          "end": 9414,
+          "bytes": 0
+        },
+        {
+          "name": "https://www.gstatic.com/flutter-canvaskit/3452d735bd38224ef2db85ca763d862d6326b17f/chromium/canvaskit.js",
+          "start": 454,
+          "end": 1050,
+          "bytes": 0
+        },
+        {
+          "name": "http://127.0.0.1:3357/app/assets/fonts/MaterialIcons-Regular.otf",
+          "start": 8549,
+          "end": 8862,
+          "bytes": 20190
+        },
+        {
+          "name": "http://127.0.0.1:3357/app/assets/packages/cupertino_icons/assets/CupertinoIcons.ttf",
+          "start": 8549,
+          "end": 8713,
+          "bytes": 1323
+        },
+        {
+          "name": "https://fonts.gstatic.com/s/roboto/v32/KFOmCnqEu92Fr1Me4GZLCzYlKw.woff2",
+          "start": 8549,
+          "end": 9076,
+          "bytes": 63764
+        },
+        {
+          "name": "http://127.0.0.1:3357/app/icons/Icon-192.png",
+          "start": 8556,
+          "end": 8855,
+          "bytes": 18015
+        },
+        {
+          "name": "http://127.0.0.1:3357/app/assets/assets/brands/logo_Hyundai.png",
+          "start": 11765,
+          "end": 11960,
+          "bytes": 6037
+        },
+        {
+          "name": "http://127.0.0.1:3357/app/assets/assets/brands/logo_Genesis.png",
+          "start": 11766,
+          "end": 11939,
+          "bytes": 2679
+        },
+        {
+          "name": "http://127.0.0.1:3357/app/assets/assets/brands/logo_Kia.png",
+          "start": 11766,
+          "end": 11960,
+          "bytes": 5482
+        },
+        {
+          "name": "http://127.0.0.1:3357/app/assets/assets/brands/logo_Benz.png",
+          "start": 11766,
+          "end": 11962,
+          "bytes": 5491
+        },
+        {
+          "name": "http://127.0.0.1:3357/app/assets/assets/brands/logo_Audi.png",
+          "start": 11766,
+          "end": 11951,
+          "bytes": 2481
+        },
+        {
+          "name": "http://127.0.0.1:3357/app/assets/assets/brands/logo_BMW.png",
+          "start": 11766,
+          "end": 11965,
+          "bytes": 5233
+        },
+        {
+          "name": "http://127.0.0.1:3357/app/assets/assets/brands/logo_Volvo.png",
+          "start": 11766,
+          "end": 12100,
+          "bytes": 2546
+        },
+        {
+          "name": "http://127.0.0.1:3357/app/assets/assets/brands/logo_Lexus.png",
+          "start": 11766,
+          "end": 12110,
+          "bytes": 4520
+        },
+        {
+          "name": "http://127.0.0.1:3357/app/assets/assets/brands/logo_Tesla.png",
+          "start": 11766,
+          "end": 12121,
+          "bytes": 3041
+        },
+        {
+          "name": "https://api.recarplan.com/api/v1/analytics/events",
+          "start": 11768,
+          "end": 12826,
+          "bytes": 0
+        },
+        {
+          "name": "https://api.recarplan.com/api/v1/events",
+          "start": 11768,
+          "end": 12841,
+          "bytes": 0
+        },
+        {
+          "name": "https://api.recarplan.com/api/v1/home-pick",
+          "start": 11768,
+          "end": 12850,
+          "bytes": 0
+        }
+      ]
+    }
+  ],
+  "summary": {
+    "before": {
+      "firstFrameMs": 17387,
+      "homeRequestCompleteMs": 20724,
+      "fontBytes": 6576815
+    },
+    "after": {
+      "firstFrameMs": 11770,
+      "homeRequestCompleteMs": 12850,
+      "fontBytes": 3000370
+    }
+  },
+  "measuredRelease": {
+    "source_repository": "RECAREA/recar_app",
+    "source_commit": "4b0498df0e63aa2c8bbae66e59e1c9a31037e7b0",
+    "web_source_patch_sha256": "b97444710ec333adb023ec895240d0c85579b16127471fc79462245124ec5744",
+    "build_id": "web-documents-fast-20261015",
+    "target": "https://recarplan.com/app/",
+    "base_path": "/app/",
+    "api_base_url": "https://api.recarplan.com",
+    "flutter_version": "3.41.1",
+    "native_app_modified": false,
+    "validation": "See docs/app-web-speed-documents-20261015.md; local evidence is not deployment proof",
+    "sha256": {
+      "index.html": "b1d87e432338189901165a008a78f2a13992f6851b0370a3530f8de56bea8704",
+      "flutter_bootstrap.js": "6fe507652e045c6dd9576751abc38d453cbfb9c1a1abf56429bb33e894d9108f",
+      "main.dart.js": "a7a851fc6a3b7ee338eab92a6f17c864b9ff094ed7a17fec7ee880d5f4ea44ce",
+      "assets/FontManifest.json": "e2d22b7e9de65becff9e0cacd83496d37c01d8e9ca62087cee6616ecadee7db7",
+      "assets/AssetManifest.bin.json": "3fe1b79853172d2381069a61b70e4dab41c5076bef1855c99981d4681f55a8cf"
+    }
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "repository": "RECAREA/recar_app",
+  "commit": "4b0498df0e63aa2c8bbae66e59e1c9a31037e7b0",
+  "basePath": "/app/",
+  "buildId": "web-catalog-new3-20261015",
+  "font": {
+    "upstream": "orioncactus/pretendard",
+    "version": "v1.3.9",
+    "file": "packages/pretendard/dist/public/variable/PretendardVariable.ttf",
+    "sha256": "3090ccde0442bb347aa7685d9ba8b17436a60682df6e8f92a9a670de14056e22"
+  }
+}
