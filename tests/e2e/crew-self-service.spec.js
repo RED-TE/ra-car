@@ -129,12 +129,12 @@ for (const [label, viewport] of [["desktop", { width: 1440, height: 900 }], ["mo
   test(`crew header stays in crew and separates homepage on ${label}`, async ({ page }) => {
     await page.setViewportSize(viewport);
     await page.goto("/crew/login.html");
-    const loginBrand = page.getByRole("link", { name: "크루 로그인" });
-    await expect(loginBrand).toHaveAttribute("href", "./login.html");
+    const loginBrand = page.locator(".crew-login-nav").getByRole("link", { name: "크루 소개" });
+    await expect(loginBrand).toHaveAttribute("href", "./welcome.html");
     await expect(page.locator(".crew-login-home-link")).toBeVisible();
     await expect(page.locator(".crew-login-home-link")).toHaveAttribute("href", "https://recarplan.com/");
     await loginBrand.click();
-    await expect(page).toHaveURL(/\/crew\/login\.html$/);
+    await expect(page).toHaveURL(/\/crew\/welcome\.html$/);
 
     await mockCrewApi(page);
     await page.goto("/crew/index.html#crewSupport");

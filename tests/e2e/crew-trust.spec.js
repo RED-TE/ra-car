@@ -21,6 +21,39 @@ test("old public root referrals still open the app with the code intact", async 
   await expect(page).toHaveURL(/\/app\/\?ref=RC-QA1234$/);
 });
 
+test("login returns to the public introduction and labels its dashboard example", async ({ page }) => {
+  await page.goto("/crew/login.html");
+  const introductionLink = page.locator(".crew-login-nav").getByRole("link", { name: "크루 소개", exact: true });
+  await expect(introductionLink).toHaveAttribute("href", "./welcome.html");
+  await expect(page.locator(".crew-dashboard-preview figcaption")).toContainText("실제 수익이나 개인별 보상을 보장하지 않습니다");
+  await introductionLink.click();
+  await expect(page).toHaveURL(/\/crew\/welcome\.html$/);
+  await expect(page.getByRole("navigation", { name: "크루 메뉴" })).toContainText("로그인");
+});
+
+for (const width of [360, 390, 430]) {
+  for (const path of ["/crew/login.html", "/crew/login.html?action=apply"]) {
+    test(`Crew forms have readable text and reachable controls at ${width}px: ${path}`, async ({ page }) => {
+      await page.setViewportSize({ width, height: 844 });
+      await page.goto(path);
+      const form = page.locator(path.includes("action=apply") ? "#crewApplyForm" : "#crewLoginForm");
+      await expect(form).toBeVisible();
+      for (const input of await form.locator(".crew-field input").all()) {
+        const metrics = await input.evaluate(el => ({ size: parseFloat(getComputedStyle(el).fontSize), height: el.getBoundingClientRect().height }));
+        expect(metrics.size).toBeGreaterThanOrEqual(16);
+        expect(metrics.height).toBeGreaterThanOrEqual(44);
+      }
+      for (const label of await form.locator(".crew-field").all()) {
+        expect(await label.evaluate(el => parseFloat(getComputedStyle(el).fontSize))).toBeGreaterThanOrEqual(14);
+      }
+      const submit = form.getByRole("button", { name: path.includes("action=apply") ? "크루 신청하기" : "로그인", exact: true });
+      await submit.scrollIntoViewIfNeeded();
+      expect(await submit.evaluate(el => el.getBoundingClientRect().height)).toBeGreaterThanOrEqual(44);
+      expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1)).toBe(true);
+    });
+  }
+}
+
 test("policies identify the Crew operator and distinguish eligibility from payment", async ({ page }) => {
   await page.goto("/crew/policy.html");
   for (const text of ["조홍철", "20만원", "35만원", "45만원", "최소 30만원", "다음 달 25일", "자기 추천", "세전", "BMW·Tesla·벤츠·제네시스", "소유하게 되는 혜택이 아닙니다", "기존 동의 기록"]) {
