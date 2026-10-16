@@ -1,0 +1,741 @@
+[
+  {
+    "request": {
+      "vehicle_id": "960d2ecd-5d93-4cb9-8875-55a3be7f9a5a",
+      "selection_contract_version": "selection_v1",
+      "selection": {
+        "vehicle_trim_id": "213c619d-45a8-4cbb-a86a-bb0f702628e8",
+        "selected_option_ids": [],
+        "exterior_color_id": "6c348386-0a50-4580-978f-66b2f4673fd8",
+        "interior_color_id": "b1077d6c-3caf-474e-9b4c-57c60f51d911"
+      },
+      "product_type": "RENTAL",
+      "term": 60,
+      "guarantee": 0,
+      "prepayment_pct": 0,
+      "mileage_limit": 10000
+    },
+    "status": 200,
+    "response": {
+      "data": {
+        "term": 60,
+        "deposit": 0,
+        "mileage_limit": 10000,
+        "monthly_payment": 281800,
+        "otd_total": 15892000,
+        "vehicle_price": 14800000,
+        "residual_value": 3034000,
+        "residual_pct": 0.205,
+        "versions": {
+          "formula_version": "lease_balloon_excel_v2",
+          "rate_version": "shinhan_X군_irr_2026q1_v1",
+          "promo_version": "none_v1",
+          "residual_version": "shinhan_X군_residual_2026q1_v1"
+        },
+        "tier": "INSTANT",
+        "vehicle_id": "960d2ecd-5d93-4cb9-8875-55a3be7f9a5a",
+        "vehicle_trim_id": "213c619d-45a8-4cbb-a86a-bb0f702628e8",
+        "selection_mode": "GROUPED",
+        "model_spec": "가솔린 1.0 2WD (1인승)",
+        "grade_name": "(1인승 밴) 트렌디",
+        "vehicle_trim_base_price": 14800000,
+        "trim_pricing_applied": true,
+        "trim_pricing_status": "SELECTION_PRICE_APPLIED",
+        "pricing_basis": "MARKET_SELECTION_DELTA_V1",
+        "market_pricing_applied": true,
+        "price_source": "CHAZM_IMPORTED",
+        "base_monthly_payment": 281750,
+        "display_adjustment": 0,
+        "promo_discount": 0,
+        "estimated_discount": 444000,
+        "estimated_taxes": 1536000,
+        "breakdown": [
+          {
+            "name": "차량가",
+            "amount": 14800000
+          },
+          {
+            "name": "잔존가치",
+            "amount": -3034000
+          },
+          {
+            "name": "프로모션 할인",
+            "amount": 0
+          },
+          {
+            "name": "딜러 할인(추정)",
+            "amount": -444000
+          },
+          {
+            "name": "세금/부대(추정)",
+            "amount": 1536000
+          },
+          {
+            "name": "총액(OTD)",
+            "amount": 15892000
+          }
+        ],
+        "monthly_payment_before_lift": 281750,
+        "residual_ratio": 0.0020499999999999997,
+        "annual_irr": 0.065,
+        "calculation": {
+          "method": "market_selection_delta_v1",
+          "is_spreadsheet_price": false,
+          "is_estimated": false,
+          "matched_key": null,
+          "matched_name": null,
+          "product_label": null,
+          "term_method": null
+        },
+        "applied_referral_code": null,
+        "referral_discount_amount": 0,
+        "original_monthly_payment": null,
+        "coupon_expires_at": null,
+        "pricing_disclaimer": null,
+        "lease_data_available": true,
+        "selection_pricing_applied": true,
+        "selection_contract_version": "selection_v1",
+        "selection_fingerprint": "e7c06e1f067e032ae943dd9c19d7b02308930df8226c7f5c28cf2ed3051dbefc",
+        "pricing_context_version": "selection-market-v1:4707978b0c814cfc",
+        "selection_pricing_source": "MARKET_SELECTION_DELTA_V1",
+        "normalized_selection": {
+          "vehicle_trim_id": "213c619d-45a8-4cbb-a86a-bb0f702628e8",
+          "model_spec": "가솔린 1.0 2WD (1인승)",
+          "grade_name": "(1인승 밴) 트렌디",
+          "selected_option_ids": [],
+          "exterior_color_id": "6c348386-0a50-4580-978f-66b2f4673fd8",
+          "interior_color_id": "b1077d6c-3caf-474e-9b4c-57c60f51d911",
+          "inventory_item_id": null
+        },
+        "reference_vehicle_price": 14800000,
+        "reference_vehicle_trim_id": "213c619d-45a8-4cbb-a86a-bb0f702628e8",
+        "reference_price_basis": "CHAZM_BASE_PRICE",
+        "selected_vehicle_price": 14800000,
+        "base_trim_price": 14800000,
+        "selected_options_price": 0,
+        "option_total": 0,
+        "exterior_color_price": 0,
+        "interior_color_price": 0,
+        "verified_discount": 0,
+        "market_base_monthly_raw": 281750,
+        "selection_monthly_delta_raw": 0,
+        "selection_monthly_delta": 0,
+        "reference_finance_monthly_raw": 246649.46660822825,
+        "selected_finance_monthly_raw": 246649.46660822825,
+        "display_margin": 0,
+        "market_source_record_id": "레이",
+        "guarantee": 0,
+        "prepayment_pct": 0,
+        "guarantee_pct": 0,
+        "price_provenance": {
+          "version": "price_provenance_v1",
+          "processed_product_type": "RENTAL",
+          "market_price": {
+            "source": "CHAZM_IMPORTED",
+            "source_record_id": "레이",
+            "source_revision": "sha256:ab487b15aea237a00d2bdab77677b54a1aef6e5072e99e1e583846ba9def8441",
+            "product_type": "RENTAL",
+            "match_status": "EXACT",
+            "calculation_method": "CHAZM_ADDITIVE_LOOKUP",
+            "methods": [
+              "TERM_DIRECT"
+            ],
+            "vehicle_match": "EXACT",
+            "applied_conditions": {
+              "term_months": 60,
+              "annual_km": 10000,
+              "prepayment_pct": 0
+            },
+            "condition_match": {
+              "term_months": "EXACT",
+              "annual_km": "EXACT",
+              "prepayment_pct": "EXACT"
+            },
+            "source_points": [
+              {
+                "path": "products.rent.actualMonthly.60",
+                "role": "BASE",
+                "conditions": {
+                  "term_months": 60,
+                  "annual_km": 10000,
+                  "prepayment_pct": 0
+                }
+              }
+            ],
+            "unknown_reasons": []
+          },
+          "calculation_method": "MARKET_REFERENCE_PLUS_EXISTING_SELECTION_DELTA",
+          "quote_kind": "ESTIMATE",
+          "provider_generated_at": null,
+          "valid_until": null,
+          "request_conditions_verified": true,
+          "sales_ai_eligible": false,
+          "unsupported_reasons": [
+            "COLOR_OR_INVENTORY_OUT_OF_INITIAL_SCOPE"
+          ]
+        }
+      },
+      "meta": {
+        "trace_id": "11f9cb52-7984-4a67-b859-c591ce119bf4"
+      }
+    }
+  },
+  {
+    "request": {
+      "vehicle_id": "960d2ecd-5d93-4cb9-8875-55a3be7f9a5a",
+      "selection_contract_version": "selection_v1",
+      "selection": {
+        "vehicle_trim_id": "213c619d-45a8-4cbb-a86a-bb0f702628e8",
+        "selected_option_ids": [
+          "5cb7f44b-8317-44b0-b95e-f15ec35cd55c"
+        ],
+        "exterior_color_id": "6c348386-0a50-4580-978f-66b2f4673fd8",
+        "interior_color_id": "b1077d6c-3caf-474e-9b4c-57c60f51d911"
+      },
+      "product_type": "RENTAL",
+      "term": 60,
+      "guarantee": 0,
+      "prepayment_pct": 0,
+      "mileage_limit": 10000
+    },
+    "status": 200,
+    "response": {
+      "data": {
+        "term": 60,
+        "deposit": 0,
+        "mileage_limit": 10000,
+        "monthly_payment": 286700,
+        "otd_total": 16204000,
+        "vehicle_price": 15100000,
+        "residual_value": 3095500,
+        "residual_pct": 0.205,
+        "versions": {
+          "formula_version": "lease_balloon_excel_v2",
+          "rate_version": "shinhan_X군_irr_2026q1_v1",
+          "promo_version": "none_v1",
+          "residual_version": "shinhan_X군_residual_2026q1_v1"
+        },
+        "tier": "INSTANT",
+        "vehicle_id": "960d2ecd-5d93-4cb9-8875-55a3be7f9a5a",
+        "vehicle_trim_id": "213c619d-45a8-4cbb-a86a-bb0f702628e8",
+        "selection_mode": "GROUPED",
+        "model_spec": "가솔린 1.0 2WD (1인승)",
+        "grade_name": "(1인승 밴) 트렌디",
+        "vehicle_trim_base_price": 14800000,
+        "trim_pricing_applied": true,
+        "trim_pricing_status": "SELECTION_PRICE_APPLIED",
+        "pricing_basis": "MARKET_SELECTION_DELTA_V1",
+        "market_pricing_applied": true,
+        "price_source": "CHAZM_IMPORTED",
+        "base_monthly_payment": 281750,
+        "display_adjustment": 0,
+        "promo_discount": 0,
+        "estimated_discount": 453000,
+        "estimated_taxes": 1557000,
+        "breakdown": [
+          {
+            "name": "차량가",
+            "amount": 15100000
+          },
+          {
+            "name": "잔존가치",
+            "amount": -3095500
+          },
+          {
+            "name": "프로모션 할인",
+            "amount": 0
+          },
+          {
+            "name": "딜러 할인(추정)",
+            "amount": -453000
+          },
+          {
+            "name": "세금/부대(추정)",
+            "amount": 1557000
+          },
+          {
+            "name": "총액(OTD)",
+            "amount": 16204000
+          }
+        ],
+        "monthly_payment_before_lift": 286750,
+        "residual_ratio": 0.0020499999999999997,
+        "annual_irr": 0.065,
+        "calculation": {
+          "method": "market_selection_delta_v1",
+          "is_spreadsheet_price": false,
+          "is_estimated": false,
+          "matched_key": null,
+          "matched_name": null,
+          "product_label": null,
+          "term_method": null
+        },
+        "applied_referral_code": null,
+        "referral_discount_amount": 0,
+        "original_monthly_payment": null,
+        "coupon_expires_at": null,
+        "pricing_disclaimer": null,
+        "lease_data_available": true,
+        "selection_pricing_applied": true,
+        "selection_contract_version": "selection_v1",
+        "selection_fingerprint": "cd8d821221dd56c5bbaf099e4410ef4da57e206ad3fdab18610732c725ae5aea",
+        "pricing_context_version": "selection-market-v1:4707978b0c814cfc",
+        "selection_pricing_source": "MARKET_SELECTION_DELTA_V1",
+        "normalized_selection": {
+          "vehicle_trim_id": "213c619d-45a8-4cbb-a86a-bb0f702628e8",
+          "model_spec": "가솔린 1.0 2WD (1인승)",
+          "grade_name": "(1인승 밴) 트렌디",
+          "selected_option_ids": [
+            "5cb7f44b-8317-44b0-b95e-f15ec35cd55c"
+          ],
+          "exterior_color_id": "6c348386-0a50-4580-978f-66b2f4673fd8",
+          "interior_color_id": "b1077d6c-3caf-474e-9b4c-57c60f51d911",
+          "inventory_item_id": null
+        },
+        "reference_vehicle_price": 14800000,
+        "reference_vehicle_trim_id": "213c619d-45a8-4cbb-a86a-bb0f702628e8",
+        "reference_price_basis": "CHAZM_BASE_PRICE",
+        "selected_vehicle_price": 15100000,
+        "base_trim_price": 14800000,
+        "selected_options_price": 300000,
+        "option_total": 300000,
+        "exterior_color_price": 0,
+        "interior_color_price": 0,
+        "verified_discount": 0,
+        "market_base_monthly_raw": 281750,
+        "selection_monthly_delta_raw": 4999.651350166794,
+        "selection_monthly_delta": 4999.651350166794,
+        "reference_finance_monthly_raw": 246649.46660822825,
+        "selected_finance_monthly_raw": 251649.11795839504,
+        "display_margin": 0,
+        "market_source_record_id": "레이",
+        "guarantee": 0,
+        "prepayment_pct": 0,
+        "guarantee_pct": 0,
+        "price_provenance": {
+          "version": "price_provenance_v1",
+          "processed_product_type": "RENTAL",
+          "market_price": {
+            "source": "CHAZM_IMPORTED",
+            "source_record_id": "레이",
+            "source_revision": "sha256:ab487b15aea237a00d2bdab77677b54a1aef6e5072e99e1e583846ba9def8441",
+            "product_type": "RENTAL",
+            "match_status": "EXACT",
+            "calculation_method": "CHAZM_ADDITIVE_LOOKUP",
+            "methods": [
+              "TERM_DIRECT"
+            ],
+            "vehicle_match": "EXACT",
+            "applied_conditions": {
+              "term_months": 60,
+              "annual_km": 10000,
+              "prepayment_pct": 0
+            },
+            "condition_match": {
+              "term_months": "EXACT",
+              "annual_km": "EXACT",
+              "prepayment_pct": "EXACT"
+            },
+            "source_points": [
+              {
+                "path": "products.rent.actualMonthly.60",
+                "role": "BASE",
+                "conditions": {
+                  "term_months": 60,
+                  "annual_km": 10000,
+                  "prepayment_pct": 0
+                }
+              }
+            ],
+            "unknown_reasons": []
+          },
+          "calculation_method": "MARKET_REFERENCE_PLUS_EXISTING_SELECTION_DELTA",
+          "quote_kind": "ESTIMATE",
+          "provider_generated_at": null,
+          "valid_until": null,
+          "request_conditions_verified": true,
+          "sales_ai_eligible": false,
+          "unsupported_reasons": [
+            "OPTIONS_OUT_OF_INITIAL_SCOPE",
+            "COLOR_OR_INVENTORY_OUT_OF_INITIAL_SCOPE"
+          ]
+        }
+      },
+      "meta": {
+        "trace_id": "c1432438-f5eb-4f7c-b2a0-51ce71ee1346"
+      }
+    }
+  },
+  {
+    "request": {
+      "vehicle_id": "960d2ecd-5d93-4cb9-8875-55a3be7f9a5a",
+      "selection_contract_version": "selection_v1",
+      "selection": {
+        "vehicle_trim_id": "213c619d-45a8-4cbb-a86a-bb0f702628e8",
+        "selected_option_ids": [
+          "08ba852f-83b5-4ef0-82e5-96a9bc056b0e"
+        ],
+        "exterior_color_id": "6c348386-0a50-4580-978f-66b2f4673fd8",
+        "interior_color_id": "b1077d6c-3caf-474e-9b4c-57c60f51d911"
+      },
+      "product_type": "RENTAL",
+      "term": 60,
+      "guarantee": 0,
+      "prepayment_pct": 0,
+      "mileage_limit": 10000
+    },
+    "status": 200,
+    "response": {
+      "data": {
+        "term": 60,
+        "deposit": 0,
+        "mileage_limit": 10000,
+        "monthly_payment": 290100,
+        "otd_total": 16412000,
+        "vehicle_price": 15300000,
+        "residual_value": 3136500,
+        "residual_pct": 0.205,
+        "versions": {
+          "formula_version": "lease_balloon_excel_v2",
+          "rate_version": "shinhan_X군_irr_2026q1_v1",
+          "promo_version": "none_v1",
+          "residual_version": "shinhan_X군_residual_2026q1_v1"
+        },
+        "tier": "INSTANT",
+        "vehicle_id": "960d2ecd-5d93-4cb9-8875-55a3be7f9a5a",
+        "vehicle_trim_id": "213c619d-45a8-4cbb-a86a-bb0f702628e8",
+        "selection_mode": "GROUPED",
+        "model_spec": "가솔린 1.0 2WD (1인승)",
+        "grade_name": "(1인승 밴) 트렌디",
+        "vehicle_trim_base_price": 14800000,
+        "trim_pricing_applied": true,
+        "trim_pricing_status": "SELECTION_PRICE_APPLIED",
+        "pricing_basis": "MARKET_SELECTION_DELTA_V1",
+        "market_pricing_applied": true,
+        "price_source": "CHAZM_IMPORTED",
+        "base_monthly_payment": 281750,
+        "display_adjustment": 0,
+        "promo_discount": 0,
+        "estimated_discount": 459000,
+        "estimated_taxes": 1571000,
+        "breakdown": [
+          {
+            "name": "차량가",
+            "amount": 15300000
+          },
+          {
+            "name": "잔존가치",
+            "amount": -3136500
+          },
+          {
+            "name": "프로모션 할인",
+            "amount": 0
+          },
+          {
+            "name": "딜러 할인(추정)",
+            "amount": -459000
+          },
+          {
+            "name": "세금/부대(추정)",
+            "amount": 1571000
+          },
+          {
+            "name": "총액(OTD)",
+            "amount": 16412000
+          }
+        ],
+        "monthly_payment_before_lift": 290083,
+        "residual_ratio": 0.0020499999999999997,
+        "annual_irr": 0.065,
+        "calculation": {
+          "method": "market_selection_delta_v1",
+          "is_spreadsheet_price": false,
+          "is_estimated": false,
+          "matched_key": null,
+          "matched_name": null,
+          "product_label": null,
+          "term_method": null
+        },
+        "applied_referral_code": null,
+        "referral_discount_amount": 0,
+        "original_monthly_payment": null,
+        "coupon_expires_at": null,
+        "pricing_disclaimer": null,
+        "lease_data_available": true,
+        "selection_pricing_applied": true,
+        "selection_contract_version": "selection_v1",
+        "selection_fingerprint": "7dc72964dab733840a57af7add4d5a4345c35695729b32e7ef3f6926962f62f1",
+        "pricing_context_version": "selection-market-v1:4707978b0c814cfc",
+        "selection_pricing_source": "MARKET_SELECTION_DELTA_V1",
+        "normalized_selection": {
+          "vehicle_trim_id": "213c619d-45a8-4cbb-a86a-bb0f702628e8",
+          "model_spec": "가솔린 1.0 2WD (1인승)",
+          "grade_name": "(1인승 밴) 트렌디",
+          "selected_option_ids": [
+            "08ba852f-83b5-4ef0-82e5-96a9bc056b0e"
+          ],
+          "exterior_color_id": "6c348386-0a50-4580-978f-66b2f4673fd8",
+          "interior_color_id": "b1077d6c-3caf-474e-9b4c-57c60f51d911",
+          "inventory_item_id": null
+        },
+        "reference_vehicle_price": 14800000,
+        "reference_vehicle_trim_id": "213c619d-45a8-4cbb-a86a-bb0f702628e8",
+        "reference_price_basis": "CHAZM_BASE_PRICE",
+        "selected_vehicle_price": 15300000,
+        "base_trim_price": 14800000,
+        "selected_options_price": 500000,
+        "option_total": 500000,
+        "exterior_color_price": 0,
+        "interior_color_price": 0,
+        "verified_discount": 0,
+        "market_base_monthly_raw": 281750,
+        "selection_monthly_delta_raw": 8332.75225027802,
+        "selection_monthly_delta": 8332.75225027802,
+        "reference_finance_monthly_raw": 246649.46660822825,
+        "selected_finance_monthly_raw": 254982.21885850627,
+        "display_margin": 0,
+        "market_source_record_id": "레이",
+        "guarantee": 0,
+        "prepayment_pct": 0,
+        "guarantee_pct": 0,
+        "price_provenance": {
+          "version": "price_provenance_v1",
+          "processed_product_type": "RENTAL",
+          "market_price": {
+            "source": "CHAZM_IMPORTED",
+            "source_record_id": "레이",
+            "source_revision": "sha256:ab487b15aea237a00d2bdab77677b54a1aef6e5072e99e1e583846ba9def8441",
+            "product_type": "RENTAL",
+            "match_status": "EXACT",
+            "calculation_method": "CHAZM_ADDITIVE_LOOKUP",
+            "methods": [
+              "TERM_DIRECT"
+            ],
+            "vehicle_match": "EXACT",
+            "applied_conditions": {
+              "term_months": 60,
+              "annual_km": 10000,
+              "prepayment_pct": 0
+            },
+            "condition_match": {
+              "term_months": "EXACT",
+              "annual_km": "EXACT",
+              "prepayment_pct": "EXACT"
+            },
+            "source_points": [
+              {
+                "path": "products.rent.actualMonthly.60",
+                "role": "BASE",
+                "conditions": {
+                  "term_months": 60,
+                  "annual_km": 10000,
+                  "prepayment_pct": 0
+                }
+              }
+            ],
+            "unknown_reasons": []
+          },
+          "calculation_method": "MARKET_REFERENCE_PLUS_EXISTING_SELECTION_DELTA",
+          "quote_kind": "ESTIMATE",
+          "provider_generated_at": null,
+          "valid_until": null,
+          "request_conditions_verified": true,
+          "sales_ai_eligible": false,
+          "unsupported_reasons": [
+            "OPTIONS_OUT_OF_INITIAL_SCOPE",
+            "COLOR_OR_INVENTORY_OUT_OF_INITIAL_SCOPE"
+          ]
+        }
+      },
+      "meta": {
+        "trace_id": "1f5484a5-d4cc-4454-a7cd-e633fc53a701"
+      }
+    }
+  },
+  {
+    "request": {
+      "vehicle_id": "960d2ecd-5d93-4cb9-8875-55a3be7f9a5a",
+      "selection_contract_version": "selection_v1",
+      "selection": {
+        "vehicle_trim_id": "213c619d-45a8-4cbb-a86a-bb0f702628e8",
+        "selected_option_ids": [
+          "c12d592f-d5f4-464d-9a58-f7e507972a71"
+        ],
+        "exterior_color_id": "6c348386-0a50-4580-978f-66b2f4673fd8",
+        "interior_color_id": "b1077d6c-3caf-474e-9b4c-57c60f51d911"
+      },
+      "product_type": "RENTAL",
+      "term": 60,
+      "guarantee": 0,
+      "prepayment_pct": 0,
+      "mileage_limit": 10000
+    },
+    "status": 200,
+    "response": {
+      "data": {
+        "term": 60,
+        "deposit": 0,
+        "mileage_limit": 10000,
+        "monthly_payment": 308400,
+        "otd_total": 17556000,
+        "vehicle_price": 16400000,
+        "residual_value": 3362000,
+        "residual_pct": 0.205,
+        "versions": {
+          "formula_version": "lease_balloon_excel_v2",
+          "rate_version": "shinhan_X군_irr_2026q1_v1",
+          "promo_version": "none_v1",
+          "residual_version": "shinhan_X군_residual_2026q1_v1"
+        },
+        "tier": "INSTANT",
+        "vehicle_id": "960d2ecd-5d93-4cb9-8875-55a3be7f9a5a",
+        "vehicle_trim_id": "213c619d-45a8-4cbb-a86a-bb0f702628e8",
+        "selection_mode": "GROUPED",
+        "model_spec": "가솔린 1.0 2WD (1인승)",
+        "grade_name": "(1인승 밴) 트렌디",
+        "vehicle_trim_base_price": 14800000,
+        "trim_pricing_applied": true,
+        "trim_pricing_status": "SELECTION_PRICE_APPLIED",
+        "pricing_basis": "MARKET_SELECTION_DELTA_V1",
+        "market_pricing_applied": true,
+        "price_source": "CHAZM_IMPORTED",
+        "base_monthly_payment": 281750,
+        "display_adjustment": 0,
+        "promo_discount": 0,
+        "estimated_discount": 492000,
+        "estimated_taxes": 1648000,
+        "breakdown": [
+          {
+            "name": "차량가",
+            "amount": 16400000
+          },
+          {
+            "name": "잔존가치",
+            "amount": -3362000
+          },
+          {
+            "name": "프로모션 할인",
+            "amount": 0
+          },
+          {
+            "name": "딜러 할인(추정)",
+            "amount": -492000
+          },
+          {
+            "name": "세금/부대(추정)",
+            "amount": 1648000
+          },
+          {
+            "name": "총액(OTD)",
+            "amount": 17556000
+          }
+        ],
+        "monthly_payment_before_lift": 308415,
+        "residual_ratio": 0.0020499999999999997,
+        "annual_irr": 0.065,
+        "calculation": {
+          "method": "market_selection_delta_v1",
+          "is_spreadsheet_price": false,
+          "is_estimated": false,
+          "matched_key": null,
+          "matched_name": null,
+          "product_label": null,
+          "term_method": null
+        },
+        "applied_referral_code": null,
+        "referral_discount_amount": 0,
+        "original_monthly_payment": null,
+        "coupon_expires_at": null,
+        "pricing_disclaimer": null,
+        "lease_data_available": true,
+        "selection_pricing_applied": true,
+        "selection_contract_version": "selection_v1",
+        "selection_fingerprint": "7f1dd4434536574af20e9aaec94fdebce38092b722bf5ae229304e2f2de2488f",
+        "pricing_context_version": "selection-market-v1:4707978b0c814cfc",
+        "selection_pricing_source": "MARKET_SELECTION_DELTA_V1",
+        "normalized_selection": {
+          "vehicle_trim_id": "213c619d-45a8-4cbb-a86a-bb0f702628e8",
+          "model_spec": "가솔린 1.0 2WD (1인승)",
+          "grade_name": "(1인승 밴) 트렌디",
+          "selected_option_ids": [
+            "c12d592f-d5f4-464d-9a58-f7e507972a71"
+          ],
+          "exterior_color_id": "6c348386-0a50-4580-978f-66b2f4673fd8",
+          "interior_color_id": "b1077d6c-3caf-474e-9b4c-57c60f51d911",
+          "inventory_item_id": null
+        },
+        "reference_vehicle_price": 14800000,
+        "reference_vehicle_trim_id": "213c619d-45a8-4cbb-a86a-bb0f702628e8",
+        "reference_price_basis": "CHAZM_BASE_PRICE",
+        "selected_vehicle_price": 16400000,
+        "base_trim_price": 14800000,
+        "selected_options_price": 1600000,
+        "option_total": 1600000,
+        "exterior_color_price": 0,
+        "interior_color_price": 0,
+        "verified_discount": 0,
+        "market_base_monthly_raw": 281750,
+        "selection_monthly_delta_raw": 26664.80720088954,
+        "selection_monthly_delta": 26664.80720088954,
+        "reference_finance_monthly_raw": 246649.46660822825,
+        "selected_finance_monthly_raw": 273314.2738091178,
+        "display_margin": 0,
+        "market_source_record_id": "레이",
+        "guarantee": 0,
+        "prepayment_pct": 0,
+        "guarantee_pct": 0,
+        "price_provenance": {
+          "version": "price_provenance_v1",
+          "processed_product_type": "RENTAL",
+          "market_price": {
+            "source": "CHAZM_IMPORTED",
+            "source_record_id": "레이",
+            "source_revision": "sha256:ab487b15aea237a00d2bdab77677b54a1aef6e5072e99e1e583846ba9def8441",
+            "product_type": "RENTAL",
+            "match_status": "EXACT",
+            "calculation_method": "CHAZM_ADDITIVE_LOOKUP",
+            "methods": [
+              "TERM_DIRECT"
+            ],
+            "vehicle_match": "EXACT",
+            "applied_conditions": {
+              "term_months": 60,
+              "annual_km": 10000,
+              "prepayment_pct": 0
+            },
+            "condition_match": {
+              "term_months": "EXACT",
+              "annual_km": "EXACT",
+              "prepayment_pct": "EXACT"
+            },
+            "source_points": [
+              {
+                "path": "products.rent.actualMonthly.60",
+                "role": "BASE",
+                "conditions": {
+                  "term_months": 60,
+                  "annual_km": 10000,
+                  "prepayment_pct": 0
+                }
+              }
+            ],
+            "unknown_reasons": []
+          },
+          "calculation_method": "MARKET_REFERENCE_PLUS_EXISTING_SELECTION_DELTA",
+          "quote_kind": "ESTIMATE",
+          "provider_generated_at": null,
+          "valid_until": null,
+          "request_conditions_verified": true,
+          "sales_ai_eligible": false,
+          "unsupported_reasons": [
+            "OPTIONS_OUT_OF_INITIAL_SCOPE",
+            "COLOR_OR_INVENTORY_OUT_OF_INITIAL_SCOPE"
+          ]
+        }
+      },
+      "meta": {
+        "trace_id": "c5099606-f891-4892-a0f3-9cc9c4138fd4"
+      }
+    }
+  }
+]
