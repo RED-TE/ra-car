@@ -180,6 +180,21 @@ void main() {
     await tester.pumpWidget(const SizedBox());
   });
 
+  testWidgets('detail refreshes a legacy public catalog item missing product metadata', (tester) async {
+    final item = Map<String, dynamic>.from((fixture['catalog'] as List).last as Map);
+    final legacy = {...item, 'available_product_types': <String>[]};
+    VehicleCache.setList('legacy-public-catalog', VehicleListResponse(
+      items: [VehicleListItem.fromJson(legacy)], page: 1, size: 1, total: 1, pages: 1,
+    ));
+    await tester.pumpWidget(MaterialApp(home: VehicleDetailScreen(vehicleId: item['id'] as String)));
+    for (var i = 0; i < 16; i++) { await tester.pump(const Duration(milliseconds: 250)); }
+    expect(api.queries.length, 3);
+    expect(api.quoteBodies.single['product_type'], 'LEASE');
+    expect(VehicleCache.getCatalogItem(item['id'] as String)?.availableProductTypes, ['LEASE']);
+    expect(tester.takeException(), isNull);
+    await tester.pumpWidget(const SizedBox());
+  });
+
   for (final item in fixture['catalog'] as List) {
     testWidgets('detail resolves ${item['model_name']} from available_product_types', (tester) async {
       await tester.runAsync(() => VehicleApi.fetchCatalog());
