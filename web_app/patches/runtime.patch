@@ -281,7 +281,14 @@
                child: TextButton(
 --- a/app/lib/screens/quote_result_screen.dart
 +++ b/app/lib/screens/quote_result_screen.dart
-@@ -278,7 +278,7 @@
+@@ -1,5 +1,6 @@
+ // ignore_for_file: unused_element, unused_element_parameter
+ 
++import 'dart:async';
+ import 'dart:math';
+ 
+ import 'package:dio/dio.dart';
+@@ -278,7 +279,7 @@
          _hasSelectionPricingProofFor(_displayedQuote.data, selection);
    }
  
@@ -290,7 +297,7 @@
      if (_isSubmitting ||
          _isRepricing ||
          _isLoadingTrimSelection ||
-@@ -305,7 +305,7 @@
+@@ -305,7 +306,7 @@
        return;
      }
      AnalyticsService.quoteApplyTap(vehicleId: widget.quote.data.vehicleId);
@@ -299,7 +306,7 @@
        await _openWebQuoteInquiry();
        return;
      }
-@@ -334,6 +334,8 @@
+@@ -334,6 +335,8 @@
          application = await ApplicationApi.createApplication(
            vehicleId: widget.quote.data.vehicleId,
            vehicleTrimId: submittedTrimId,
@@ -308,7 +315,7 @@
          );
        } on Object catch (error) {
          if (!_requiresActiveReplacement(error)) rethrow;
-@@ -351,7 +353,7 @@
+@@ -351,7 +354,7 @@
          vehicleId: widget.quote.data.vehicleId,
          errorType: _classifyError(error),
        );
@@ -317,7 +324,7 @@
      } finally {
        if (mounted) setState(() => _isSubmitting = false);
      }
-@@ -425,6 +427,7 @@
+@@ -425,6 +428,7 @@
    void _showApplicationError(
      Object error, {
      bool allowStartNew = true,
@@ -325,7 +332,7 @@
    }) {
      final resolved = resolveApplicationActionError(error);
      final msg = !allowStartNew && resolved.canReplaceActive
-@@ -438,13 +441,13 @@
+@@ -438,13 +442,13 @@
      showApplicationActionErrorSheet(
        context,
        msg,
@@ -341,7 +348,7 @@
          }
        },
        onOpenGarage: () {
-@@ -590,11 +593,12 @@
+@@ -590,11 +594,12 @@
        _replacementRequestSignature = signature;
        _replacementIdempotencyKey =
            'replace-${DateTime.now().microsecondsSinceEpoch}-'
@@ -355,7 +362,40 @@
        idempotencyKey: _replacementIdempotencyKey!,
      );
    }
-@@ -2200,6 +2204,8 @@
+@@ -827,10 +832,8 @@
+ 
+   String? get _trimPricingNotice {
+     if (_selectedTrim == null || _isRepricing) return null;
+-    if (_quoteRefreshFailed &&
+-        _quoteRefreshErrorMessage ==
+-            QuoteApi.selectionPriceUnavailableMessage) {
+-      return QuoteApi.selectionPriceUnavailableMessage;
++    if (_quoteRefreshFailed && _quoteRefreshErrorMessage != null) {
++      return _quoteRefreshErrorMessage;
+     }
+     if (_trimRepricingFailed) {
+       return '월 납입료를 다시 확인해 주세요. 같은 등급을 다시 선택하면 재시도할 수 있어요.';
+@@ -839,7 +842,7 @@
+     if (_hasAppliedTrimPricing(data)) {
+       return null;
+     }
+-    return '선택 등급의 월 납입료를 확인하고 있어요';
++    return '선택 등급의 가격 근거를 확인할 수 없어요. 등급을 다시 선택해 주세요.';
+   }
+ 
+   bool _hasAppliedTrimPricing(QuoteData data) {
+@@ -1551,7 +1554,9 @@
+       final message =
+           error is StateError || QuoteApi.isSelectionPriceUnavailable(error)
+               ? QuoteApi.selectionPriceUnavailableMessage
+-              : '월 납입료를 다시 확인하지 못했어요. 다시 시도해 주세요.';
++              : error is TimeoutException
++                  ? QuoteApi.requestTimeoutMessage
++                  : '월 납입료를 다시 확인하지 못했어요. 다시 시도해 주세요.';
+       setState(() {
+         _acceptedSelection = null;
+         _acceptedSelectionRequestKey = null;
+@@ -2200,6 +2205,8 @@
            isRepricing: _isRepricing,
            isTrimSelectionBlocked: trimSelectionBlocked,
            onSubmit: _submitApplication,
@@ -364,7 +404,7 @@
          ),
        ),
      );
-@@ -5494,12 +5500,14 @@
+@@ -5494,12 +5501,14 @@
      this.isRepricing = false,
      this.isTrimSelectionBlocked = false,
      required this.onSubmit,
@@ -379,7 +419,7 @@
  
    @override
    Widget build(BuildContext context) {
-@@ -5520,40 +5528,46 @@
+@@ -5520,40 +5529,46 @@
              ),
            ],
          ),
@@ -679,7 +719,11 @@
  }
 --- a/app/lib/services/quote_api.dart
 +++ b/app/lib/services/quote_api.dart
-@@ -3,6 +3,10 @@
+@@ -1,15 +1,25 @@
++import 'dart:async';
++
+ import 'package:dio/dio.dart';
+ import '../models/quote.dart';
  import '../models/quote_selection.dart';
  import 'api_client.dart';
  
@@ -688,9 +732,13 @@
 +}
 +
  class QuoteApi {
-   static const selectionPriceUnavailableMessage = '현재 선택 조건의 가격을 확인하고 있어요.';
+-  static const selectionPriceUnavailableMessage = '현재 선택 조건의 가격을 확인하고 있어요.';
++  static const selectionPriceUnavailableMessage =
++      '이 조건은 가격 근거 확인이 필요해요. 조건을 변경하거나 가격 확인을 요청해 주세요.';
++  static const requestTimeout = Duration(seconds: 20);
++  static const requestTimeoutMessage = '가격 조회가 지연되어 중단했어요. 다시 시도해 주세요.';
  
-@@ -10,6 +14,7 @@
+   /// Selection-aware pricing failures must never fall back to an older
    /// amount. These codes mean that the server could not produce a price for
    /// the exact current selection.
    static bool isSelectionPriceUnavailable(Object? error) {
@@ -698,7 +746,7 @@
      if (error is! DioException) return false;
      final code = ApiClient.extractErrorCode(error);
      return code == 'PRICE_UNAVAILABLE' ||
-@@ -18,6 +23,85 @@
+@@ -18,9 +28,90 @@
          code == 'SELECTION_PRICING_UNAVAILABLE';
    }
  
@@ -752,9 +800,11 @@
 +    final zeroGuarantee =
 +        guaranteePct == null ? guarantee == 0 : guaranteePct == 0;
 +    // The web supports colors/options too; those are not the initial Sales AI scope.
-+    final initialAiScope = zeroPrepay && zeroGuarantee &&
++    final initialAiScope = zeroPrepay &&
++        zeroGuarantee &&
 +        selection.selectedOptionIds.isEmpty &&
-+        selection.exteriorColorId == null && selection.interiorColorId == null &&
++        selection.exteriorColorId == null &&
++        selection.interiorColorId == null &&
 +        selection.inventoryItemId == null;
 +    if (initialAiScope) {
 +      final matches = market['condition_match'];
@@ -783,8 +833,18 @@
 +
    /// 즉시 견적 생성.
    ///
-   /// - 캐시 금지: 항상 서버에서 최신 금리/프로모션 적용
-@@ -40,7 +124,8 @@
+-  /// - 캐시 금지: 항상 서버에서 최신 금리/프로모션 적용
++  /// - 캐시 금지: 서버 응답의 조건 검증을 통과한 가격만 사용
+   /// - 모든 가격 계산은 서버에서만 수행 (앱은 결과만 수신)
+   static Future<QuoteEnvelope> createInstantQuote({
+     required String vehicleId,
+@@ -35,16 +126,20 @@
+     QuoteSelection? selection,
+     String productType = 'RENTAL',
+     String? referralCode,
++    CancelToken? cancelToken,
+   }) async {
+     final normalizedProductType =
          productType.trim().toUpperCase() == 'LEASE' ? 'LEASE' : 'RENTAL';
      // ignore: avoid_print
      print(
@@ -793,12 +853,23 @@
 +    );
  
      try {
++      final requestCancelToken = cancelToken ?? CancelToken();
        final response = await ApiClient.dio.post(
-@@ -68,7 +153,27 @@
+         '/api/v1/quotes/instant',
++        cancelToken: requestCancelToken,
+         data: {
+           'vehicle_id': vehicleId,
+           if (selection != null) ...{
+@@ -67,8 +162,32 @@
+           if (referralCode != null && referralCode.trim().isNotEmpty)
              'referral_code': referralCode.trim().toUpperCase(),
          },
-       );
+-      );
 -      return QuoteEnvelope.fromJson(response.data as Map<String, dynamic>);
++      ).timeout(requestTimeout, onTimeout: () {
++        requestCancelToken.cancel('Quote request deadline exceeded');
++        throw TimeoutException(requestTimeoutMessage, requestTimeout);
++      });
 +      final json = response.data as Map<String, dynamic>;
 +      if (selection != null) {
 +        validateSelectionResponse(
@@ -816,7 +887,8 @@
 +      }
 +      final envelope = QuoteEnvelope.fromJson(json);
 +      if (selection != null &&
-+          (!envelope.data.hasSelectionPricingProof || envelope.data.monthlyPayment <= 0)) {
++          (!envelope.data.hasSelectionPricingProof ||
++              envelope.data.monthlyPayment <= 0)) {
 +        throw const QuoteConditionsUnverified();
 +      }
 +      return envelope;
@@ -950,15 +1022,26 @@
      if (displayed == 'LEASE') return false;
 --- a/app/lib/screens/vehicle_detail_screen.dart
 +++ b/app/lib/screens/vehicle_detail_screen.dart
-@@ -17,6 +17,7 @@
+@@ -17,7 +17,10 @@
  import '../services/auth_session.dart';
  import '../services/recent_viewed_service.dart';
  import '../services/vehicle_api.dart';
 +import '../services/vehicle_cache.dart';
  import '../services/quote_api.dart';
++import '../services/web_quote_inquiry_api.dart';
++import '../services/web_referral_service.dart';
  import '../theme/app_layout.dart';
  import '../theme/app_spacing.dart';
-@@ -295,7 +296,6 @@
+ import '../theme/app_colors.dart';
+@@ -33,6 +36,7 @@
+ import '../widgets/ownership_comparison.dart';
+ import '../widgets/recar_finance_disclaimer.dart';
+ import '../widgets/recar_loading_state.dart';
++import '../widgets/web_quote_inquiry_sheet.dart';
+ 
+ import 'auth_screen.dart';
+ import 'call_request_screen.dart';
+@@ -295,10 +299,10 @@
  
    // ── 월납금 계산 ──────────────────────────────────────────────────────────
    int _monthly = 0;
@@ -966,13 +1049,25 @@
    int _residualValue = 0;
    double _residualPct = 0;
    Timer? _debounce;
-@@ -371,19 +371,30 @@
++  CancelToken? _calcCancelToken;
+   int _calcVersion = 0;
+ 
+   // ── 견적 요청 ────────────────────────────────────────────────────────────
+@@ -348,6 +352,7 @@
+   @override
+   void dispose() {
+     _debounce?.cancel();
++    _calcCancelToken?.cancel('Vehicle detail closed');
+     _quoteScrollController.removeListener(_handleQuoteScroll);
+     _quoteScrollController.dispose();
+     _depositCustomCtrl.dispose();
+@@ -371,19 +376,30 @@
      return vehicle != null && isImportedBrand(vehicle.brand);
    }
  
 -  bool get _effectiveIsLongRent => _isImportedVehicle ? false : _isLongRent;
 +  List<String> _availableProductTypes = const [];
- 
++
 +  bool get _isLeaseOnlyVehicle => _availableProductTypes.isNotEmpty
 +      ? !_availableProductTypes.contains('RENTAL')
 +      : _isImportedVehicle;
@@ -981,7 +1076,7 @@
 +      _availableProductTypes.contains('LEASE');
 +
 +  bool get _effectiveIsLongRent => _isLeaseOnlyVehicle ? false : _isLongRent;
-+
+ 
    String get _effectiveProductType => _effectiveIsLongRent ? 'RENTAL' : 'LEASE';
  
    void _changeProduct(bool isLongRent) {
@@ -1000,7 +1095,7 @@
        _leaseDataUnavailable = false;
        _quoteErrorMessage = null;
        _capitalQuotes = [];
-@@ -402,6 +413,20 @@
+@@ -402,6 +418,20 @@
          widget.vehicleId,
          forceRefresh: true,
        );
@@ -1021,7 +1116,7 @@
        if (!mounted) return;
        final selectableTrims = _selectableVehicleTrims(v);
        String? initialTrimId;
-@@ -433,9 +458,11 @@
+@@ -433,9 +463,11 @@
            }
          }
        }
@@ -1036,7 +1131,16 @@
        // ── Danawa 등급/색상 초기화 ────────────────────────────────────────
        String? initialDanawaTrimName;
        DanawaGrade? initialDanawaGrade;
-@@ -534,7 +561,6 @@
+@@ -524,6 +556,8 @@
+   void _scheduleCalc() {
+     _debounce?.cancel();
+     final version = ++_calcVersion;
++    _calcCancelToken?.cancel('Quote conditions changed');
++    _calcCancelToken = null;
+     if (mounted) {
+       setState(() {
+         _calcLoading = true;
+@@ -534,7 +568,6 @@
          _latestSelectionQuote = null;
          _latestSelectionRequestKey = null;
          _quoteErrorMessage = null;
@@ -1044,7 +1148,48 @@
        });
      }
      _debounce = Timer(
-@@ -688,7 +714,6 @@
+@@ -605,9 +638,13 @@
+       return;
+     }
+ 
++    final cancelToken = CancelToken();
++    _calcCancelToken = cancelToken;
++
+     if (trim == null) {
+       try {
+         final quote = await QuoteApi.createInstantQuote(
++          cancelToken: cancelToken,
+           vehicleId: vehicle.id,
+           term: _term,
+           deposit: 0,
+@@ -628,14 +665,16 @@
+           _calcLoading = false;
+           _quoteErrorMessage = null;
+         });
+-      } catch (_) {
++      } catch (error) {
+         if (!mounted || version != _calcVersion) return;
+         setState(() {
+           _monthly = 0;
+           _latestSelectionQuote = null;
+           _latestSelectionRequestKey = null;
+           _calcLoading = false;
+-          _quoteErrorMessage = '월 납입료를 계산하지 못했어요. 다시 시도해 주세요.';
++          _quoteErrorMessage = error is TimeoutException
++              ? QuoteApi.requestTimeoutMessage
++              : '월 납입료를 불러오지 못했어요. 다시 시도해 주세요.';
+         });
+       }
+       return;
+@@ -659,6 +698,7 @@
+       ).value;
+ 
+       final quote = await QuoteApi.createInstantQuote(
++        cancelToken: cancelToken,
+         vehicleId: vehicle.id,
+         selection: selection,
+         term: _term,
+@@ -688,7 +728,6 @@
          _canonicalMonthlyTrimId = requestedTrimId;
          _latestSelectionQuote = quote;
          _latestSelectionRequestKey = requestKey;
@@ -1052,7 +1197,7 @@
          _residualPct = quote.data.residualPct;
          _residualValue = quote.data.residualValue;
          _calcLoading = false;
-@@ -711,7 +736,6 @@
+@@ -711,14 +750,15 @@
          _residualPct = 0;
          _latestSelectionQuote = null;
          _latestSelectionRequestKey = null;
@@ -1060,7 +1205,19 @@
          _canonicalMonthlyTrimId = null;
          _calcLoading = false;
          _quoteErrorMessage = isSelectionPriceUnavailable
-@@ -936,17 +960,6 @@
+             ? QuoteApi.selectionPriceUnavailableMessage
+-            : isRateLimited
+-                ? '요청이 많아 잠시 후 다시 시도해 주세요.'
+-                : '월 납입료를 계산하지 못했어요. 다시 시도해 주세요.';
++            : error is TimeoutException
++                ? QuoteApi.requestTimeoutMessage
++                : isRateLimited
++                    ? '요청이 많아 잠시 후 다시 시도해 주세요.'
++                    : '월 납입료를 계산하지 못했어요. 다시 시도해 주세요.';
+       });
+     }
+   }
+@@ -936,17 +976,6 @@
          .fold<int>(0, (sum, o) => sum + o.price);
    }
  
@@ -1078,7 +1235,99 @@
    String? get _selectedOptionsSummary {
      // Danawa 등급 선택 시 danawa 옵션 이름 사용
      if (_selectedDanawaGrade != null) {
-@@ -2926,7 +2939,6 @@
+@@ -2811,6 +2840,58 @@
+     _openConsult(method == PurchaseMethod.cash
+         ? CallRequestTopic.cash
+         : CallRequestTopic.installment);
++  }
++
++  bool get _needsPriceConfirmation =>
++      _quoteErrorMessage == QuoteApi.selectionPriceUnavailableMessage;
++
++  Future<void> _openPriceConfirmation() async {
++    if (!kIsWeb) {
++      _openConsult(_effectiveIsLongRent
++          ? CallRequestTopic.general
++          : CallRequestTopic.lease);
++      return;
++    }
++    final vehicle = _vehicle;
++    if (vehicle == null) return;
++    // Freeze the chosen conditions; an unverified amount must not be submitted.
++    final vehicleName = _modelName(vehicle);
++    final trimName = _trimFullLabel;
++    final productType = _effectiveProductType;
++    final term = _term;
++    final mileage = _mileage;
++    final prepaymentPct = _depositPct;
++    final referral = WebReferralService.instance.referralCode;
++    final summary = [
++      productType == 'LEASE' ? '리스' : '장기렌트',
++      '$term개월',
++      '연 $mileage km',
++      '선납금 $prepaymentPct%',
++      if (_selectedOptionsSummary != null) _selectedOptionsSummary!,
++      '월 납입료 가격 근거 확인 요청',
++    ].join(' · ');
++    await showModalBottomSheet<void>(
++      context: context,
++      isScrollControlled: true,
++      useSafeArea: true,
++      backgroundColor: Colors.transparent,
++      barrierColor: const Color(0x990F172A),
++      builder: (_) => WebQuoteInquirySheet(
++        onSubmit: (name, phone) async {
++          await WebQuoteInquiryApi.create(
++            name: name,
++            phone: phone,
++            vehicleName: vehicleName,
++            trimName: trimName,
++            productType: productType,
++            referralCode: referral,
++            conditionSummary: summary,
++            termMonths: term,
++            mileagePerYear: mileage,
++          );
++        },
++      ),
++    );
+   }
+ 
+   /// 리스·할부·일시불 상담: 고른 차량과 조건을 담아 전화 상담 신청으로.
+@@ -2820,6 +2901,7 @@
+     final mileage =
+         '${(_mileage / 10000).toStringAsFixed(1).replaceAll('.0', '')}만km';
+     final isLease = topic == CallRequestTopic.lease;
++    final isPriceCheck = _needsPriceConfirmation;
+     Navigator.of(context).push(
+       MaterialPageRoute<void>(
+         builder: (_) => CallRequestScreen(
+@@ -2827,16 +2909,19 @@
+             topic: topic,
+             vehicleName: _modelName(vehicle),
+             trimName: _trimFullLabel,
+-            conditions:
+-                isLease ? '$_term개월 · 선납금 $_depositPct% · 연 $mileage' : null,
+-            monthlyEstimate: isLease && _monthly > 0 ? _monthly : null,
++            conditions: isLease || isPriceCheck
++                ? '$_term개월 · 선납금 $_depositPct% · 연 $mileage'
++                    '${isPriceCheck ? ' · 월 납입료 가격 확인 요청' : ''}'
++                : null,
++            monthlyEstimate:
++                !isPriceCheck && isLease && _monthly > 0 ? _monthly : null,
+             vehiclePrice:
+                 _configuredVehiclePrice > 0 ? _configuredVehiclePrice : null,
+-            termMonths: isLease ? _term : null,
++            termMonths: isLease || isPriceCheck ? _term : null,
+             prepaymentAmount: isLease && _configuredVehiclePrice > 0
+                 ? (_configuredVehiclePrice * _depositPct / 100).round()
+                 : null,
+-            mileagePerYear: isLease ? _mileage : null,
++            mileagePerYear: isLease || isPriceCheck ? _mileage : null,
+           ),
+         ),
+       ),
+@@ -2926,7 +3011,6 @@
            _residualPct = 0;
            _latestSelectionQuote = null;
            _latestSelectionRequestKey = null;
@@ -1086,7 +1335,7 @@
            _canonicalMonthlyTrimId = null;
            _quoteErrorMessage = null;
          });
-@@ -2963,7 +2975,6 @@
+@@ -2963,7 +3047,6 @@
          _residualPct = data.residualPct;
          _latestSelectionQuote = quote;
          _latestSelectionRequestKey = requestKey;
@@ -1094,7 +1343,7 @@
          _canonicalMonthlyTrimId = requestedTrimId;
          _quoteErrorMessage = null;
        });
-@@ -3013,7 +3024,6 @@
+@@ -3013,7 +3096,6 @@
            _residualPct = 0;
            _latestSelectionQuote = null;
            _latestSelectionRequestKey = null;
@@ -1102,7 +1351,7 @@
            _canonicalMonthlyTrimId = null;
            _quoteErrorMessage = QuoteApi.selectionPriceUnavailableMessage;
          });
-@@ -3037,7 +3047,7 @@
+@@ -3037,7 +3119,7 @@
          body: RecarFullScreenLoading(
            message: '차량 정보를 불러오고 있어요',
            subtitle: '상세 조건과 견적 기준을 확인하고 있어요',
@@ -1111,11 +1360,10 @@
          ),
        );
      }
-@@ -3598,14 +3608,6 @@
-                     ),
+@@ -3599,14 +3681,6 @@
                    ],
                  ),
--              ),
+               ),
 -            ] else if (_quoteErrorMessage != null) ...[
 -              const SizedBox(height: 14),
 -              _InlineNoticeCard(
@@ -1123,10 +1371,11 @@
 -                message: _quoteErrorMessage!,
 -                actionLabel: '다시 시도',
 -                onAction: _scheduleCalc,
-               ),
+-              ),
              ],
            ],
-@@ -3873,6 +3875,10 @@
+         ),
+@@ -3873,6 +3947,10 @@
      required String mileageLabel,
    }) {
      final quoteCount = _capitalQuotes.length;
@@ -1137,7 +1386,7 @@
      return Column(
        crossAxisAlignment: CrossAxisAlignment.center,
        children: [
-@@ -3897,89 +3903,79 @@
+@@ -3897,89 +3975,89 @@
            ],
          ),
          const SizedBox(height: 8),
@@ -1285,16 +1534,26 @@
 +        if (_quoteErrorMessage != null && !_calcLoading) ...[
 +          const SizedBox(height: 8),
 +          _InlineNoticeCard(
-+            icon: Icons.wifi_off_rounded,
++            icon: _needsPriceConfirmation
++                ? Icons.info_outline_rounded
++                : Icons.wifi_off_rounded,
 +            message: _quoteErrorMessage!,
-+            actionLabel: '다시 시도',
-+            onAction: _scheduleCalc,
++            actionLabel: _needsPriceConfirmation ? '조건 변경' : '다시 시도',
++            onAction:
++                _needsPriceConfirmation ? _openConditionSheet : _scheduleCalc,
 +          ),
 +        ],
++        const SizedBox(height: 8),
++        Text(
++          '$_term개월 · 연 $mileageLabel · 선납금 $_depositPct% 기준',
++          key: const ValueKey('monthly-applied-conditions'),
++          textAlign: TextAlign.center,
++          style: const TextStyle(fontSize: 13, color: _kTextSecondary),
++        ),
          if (widget.instantDeliveryPremiumWon > 0) ...[
            const SizedBox(height: 8),
            Container(
-@@ -4010,25 +4006,6 @@
+@@ -4010,25 +4088,6 @@
              ),
            ),
          ],
@@ -1320,7 +1579,7 @@
          const SizedBox(height: 12),
          Wrap(
            alignment: WrapAlignment.center,
-@@ -4044,35 +4021,6 @@
+@@ -4044,35 +4103,6 @@
                    _buildTag('보험료·자동차세 별도'),
                  ],
          ),
@@ -1356,7 +1615,7 @@
          const SizedBox(height: 12),
          Text(
            '선택한 조건 기준 예상 금액이며, 금융사 확인 후 달라질 수 있어요.'.noWordBreak,
-@@ -4239,13 +4187,13 @@
+@@ -4239,13 +4269,13 @@
            label: '이용상품',
            value: _effectiveIsLongRent ? '장기렌트' : '리스',
            isLast: true,
@@ -1372,7 +1631,7 @@
                          selected: true,
                          onTap: () => _changeProduct(false),
                        ),
-@@ -4257,7 +4205,7 @@
+@@ -4257,7 +4287,7 @@
                          description: '보험·자동차세 포함\n하·허·호 번호판',
                          selected: false,
                          dimmed: true,
@@ -1381,7 +1640,7 @@
                        ),
                      ),
                    ],
-@@ -4278,10 +4226,12 @@
+@@ -4278,10 +4308,12 @@
                          title: '리스',
                          description: '일반 번호판\n보험료·자동차세 별도',
                          selected: !_effectiveIsLongRent,
@@ -1398,15 +1657,10 @@
                        ),
                      ),
                    ],
-@@ -4435,6 +4385,18 @@
-               ),
-             ),
-           ],
-+        ),
-+      ),
-+    );
-+  }
-+
+@@ -4440,6 +4472,18 @@
+     );
+   }
+ 
 +  void _showUnavailableProductSheet() {
 +    showModalBottomSheet<void>(
 +      context: context,
@@ -1414,10 +1668,15 @@
 +        child: Padding(
 +          padding: EdgeInsets.all(24),
 +          child: Text('현재 이 차량에서 제공하지 않는 상품이에요. 제공 중인 상품으로 조건을 확인해 주세요.'),
-         ),
-       ),
-     );
-@@ -5224,13 +5186,13 @@
++        ),
++      ),
++    );
++  }
++
+   void _showImportedRentalSheet() {
+     showModalBottomSheet(
+       context: context,
+@@ -5224,13 +5268,13 @@
  
    // ── 이용상품 ─────────────────────────────────────────────────────────────
    Widget _buildProductRow() {
@@ -1433,7 +1692,7 @@
                isSelected: true,
                onTap: () => _changeProduct(false),
              ),
-@@ -5242,7 +5204,7 @@
+@@ -5242,7 +5286,7 @@
                desc: '보험·자동차세 포함\n하·허·호 번호판',
                isSelected: false,
                disabled: true,
@@ -1442,7 +1701,7 @@
              ),
            ),
          ],
-@@ -5265,10 +5227,12 @@
+@@ -5265,10 +5309,12 @@
              title: '리스',
              desc: '계약 조건과 차량 이용 방식을\n함께 확인해요',
              isSelected: !_effectiveIsLongRent,
@@ -1459,7 +1718,7 @@
            ),
          ),
        ],
-@@ -6732,7 +6696,7 @@
+@@ -6732,7 +6778,7 @@
                color: _kBg,
                borderRadius: BorderRadius.circular(10),
              ),
@@ -1468,7 +1727,7 @@
                  ? Row(
                      children: [
                        _DetailTab(
-@@ -6744,7 +6708,7 @@
+@@ -6744,7 +6790,7 @@
                          label: '장기렌트',
                          selected: false,
                          disabled: true,
@@ -1477,7 +1736,7 @@
                        ),
                      ],
                    )
-@@ -6758,7 +6722,10 @@
+@@ -6758,7 +6804,10 @@
                        _DetailTab(
                          label: '리스',
                          selected: !_effectiveIsLongRent,
@@ -1489,7 +1748,7 @@
                        ),
                      ],
                    ),
-@@ -7166,10 +7133,16 @@
+@@ -7166,10 +7215,19 @@
    // ── 하단 CTA ─────────────────────────────────────────────────────────────
    Widget _buildBottomBar() {
      // 리스는 전화 상담으로 안내하므로 가격 계산을 기다리지 않는다.
@@ -1501,16 +1760,19 @@
 +    final needsQuoteRetry = _effectiveIsLongRent &&
 +        !isBusy &&
 +        _requiresCanonicalTrimPricing &&
-+        !_hasCurrentCanonicalMonthly;
-+    final actionLabel = needsQuoteRetry
-+        ? '월 납입료 다시 불러오기'
-+        : _effectiveIsLongRent
-+            ? '견적 분석 받아보기'
-+            : '리스 상담 신청하기';
++        !_hasCurrentCanonicalMonthly &&
++        !_needsPriceConfirmation;
++    final actionLabel = _needsPriceConfirmation
++        ? '가격 확인 요청하기'
++        : needsQuoteRetry
++            ? '월 납입료 다시 불러오기'
++            : _effectiveIsLongRent
++                ? '견적 분석 받아보기'
++                : '리스 상담 신청하기';
      final showMonthlySummary = _showStickyMonthlySummary &&
          _monthly > 0 &&
          (!_requiresCanonicalTrimPricing || _hasCurrentCanonicalMonthly);
-@@ -7221,7 +7194,7 @@
+@@ -7221,7 +7279,7 @@
                  ),
                  child: Semantics(
                    button: true,
@@ -1519,10 +1781,14 @@
                    child: Material(
                      color: Colors.transparent,
                      borderRadius: BorderRadius.circular(16),
-@@ -7229,6 +7202,10 @@
+@@ -7229,6 +7287,14 @@
                        onTap: isBusy
                            ? null
                            : () {
++                              if (_needsPriceConfirmation) {
++                                _openPriceConfirmation();
++                                return;
++                              }
 +                              if (needsQuoteRetry) {
 +                                _scheduleCalc();
 +                                return;
@@ -1530,9 +1796,15 @@
                                AnalyticsService.trackFireAndForget(
                                  eventName: 'quote_clicked',
                                  vehicleId: widget.vehicleId,
-@@ -7249,9 +7226,7 @@
+@@ -7247,11 +7313,12 @@
+                       borderRadius: BorderRadius.circular(16),
+                       child: Center(
                          child: isBusy
-                             ? RecarButtonLoading(label: '신청 화면을 준비하고 있어요')
+-                            ? RecarButtonLoading(label: '신청 화면을 준비하고 있어요')
++                            ? RecarButtonLoading(
++                                label: _calcLoading
++                                    ? '월 납입료를 조회하고 있어요'
++                                    : '신청 화면을 준비하고 있어요')
                              : Text(
 -                                _effectiveIsLongRent
 -                                    ? '견적 분석 받아보기'
@@ -1541,7 +1813,7 @@
                                  style: TextStyle(
                                    fontSize: 18,
                                    fontWeight: FontWeight.w700,
-@@ -7271,46 +7246,34 @@
+@@ -7271,46 +7338,34 @@
    }
  
    Widget _buildStickyMonthlySummary() {
@@ -1607,7 +1879,7 @@
                ),
              ),
            ),
-@@ -10481,15 +10444,18 @@
+@@ -10481,15 +10536,18 @@
  }
  
  String? _assetForVehicle(VehicleDetail v) {
@@ -1628,7 +1900,7 @@
  }
  
  // ────────────────────────────────────────────────────────────────────────────
-@@ -10831,17 +10797,23 @@
+@@ -10831,17 +10889,23 @@
          color: row.isRecar ? _kBlue : _kBg,
          borderRadius: BorderRadius.circular(6),
        ),

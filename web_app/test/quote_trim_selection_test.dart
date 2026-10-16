@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:recar_app/models/application.dart';
@@ -492,7 +493,8 @@ void main() {
       await tester.pumpAndSettle();
       await _scrollQuoteTrimGradeRowIntoView(tester);
 
-      expect(find.text('선택 등급의 월 납입료를 확인하고 있어요'), findsOneWidget);
+      expect(find.text('선택 등급의 가격 근거를 확인할 수 없어요. 등급을 다시 선택해 주세요.'),
+          findsOneWidget);
       final cta = tester.widget<InkWell>(
         find.ancestor(
           of: find.text('이 조건으로 자세한 분석 받기'),
@@ -786,7 +788,7 @@ void main() {
           findsOneWidget,
         );
         expect(_displayedAmount(111100), findsNothing);
-        expect(find.text('신청 화면을 준비하고 있어요'), findsOneWidget);
+        expect(find.text('월 납입료를 조회하고 있어요'), findsOneWidget);
 
         interceptor.pendingQuote!.complete(
           _quoteResponse(
@@ -857,9 +859,15 @@ void main() {
           findsOneWidget,
         );
         expect(find.text('신청 화면을 준비하고 있어요'), findsNothing);
-        expect(find.text('월 납입료 다시 불러오기'), findsOneWidget);
+        expect(find.text('월 납입료 다시 불러오기'), findsNothing);
+        expect(find.text('가격 확인 요청하기'), findsOneWidget);
+        expect(find.text('조건 변경'), findsOneWidget);
         interceptor.pendingQuote = null;
-        await tester.tap(find.text('월 납입료 다시 불러오기'));
+        await tester.tap(find.text('조건 변경'));
+        await tester.pumpAndSettle();
+        expect(interceptor.quoteBodies, hasLength(1),
+            reason: 'An unsupported price must not silently retry');
+        await tester.tap(find.text('4년').last);
         await tester.pump();
         await tester.pump(const Duration(milliseconds: 350));
         await tester.pump(const Duration(milliseconds: 900));
@@ -908,6 +916,124 @@ void main() {
       expect(interceptor.applicationBodies, isEmpty);
     });
 
+    testWidgets('a stalled quote exits loading and permits a fresh request',
+        (tester) async {
+      interceptor.details['vehicle-timeout'] = _vehicleDetailJson(
+        vehicleId: 'vehicle-timeout',
+        trimSelection: {
+          'mode': 'FLAT',
+          'default_vehicle_trim_id': 'trim-timeout',
+          'groups': const [],
+          'flat_grades': [_selectionLeaf('trim-timeout', '프레스티지')],
+        },
+        trims: [_legacyTrim('trim-timeout', '프레스티지')],
+      );
+      interceptor.pendingQuote = Completer<Response<dynamic>>();
+      await tester.pumpWidget(const MaterialApp(
+        home: VehicleDetailScreen(vehicleId: 'vehicle-timeout'),
+      ));
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 350));
+      expect(find.text('월 납입료를 조회하고 있어요'), findsOneWidget);
+      await tester.pump(QuoteApi.requestTimeout);
+      await tester.pump(const Duration(milliseconds: 200));
+      expect(find.text(QuoteApi.requestTimeoutMessage), findsOneWidget);
+      expect(find.text('월 납입료를 조회하고 있어요'), findsNothing);
+      expect(find.text('월 납입료 다시 불러오기'), findsOneWidget);
+      expect(interceptor.lastQuoteRequest!.cancelToken!.isCancelled, isTrue);
+
+      final old = interceptor.pendingQuote!;
+      final oldRequest = interceptor.lastQuoteRequest!;
+      interceptor.pendingQuote = null;
+      await tester.tap(find.text('월 납입료 다시 불러오기'));
+      await tester.pump();
+      await tester.pump(const Duration(milliseconds: 350));
+      await tester.pump(const Duration(milliseconds: 900));
+      expect(_displayedAmount(443200), findsWidgets);
+      old.complete(_quoteResponse(oldRequest,
+          vehicleId: 'vehicle-timeout', monthlyPayment: 111100));
+      await tester.pump(const Duration(milliseconds: 500));
+      expect(_displayedAmount(111100), findsNothing);
+      expect(interceptor.applicationBodies, isEmpty);
+    });
+
+    for (final width in [320.0, 390.0, 430.0]) {
+      testWidgets('unavailable price remains actionable at $width and 2x text',
+          (tester) async {
+        await tester.binding.setSurfaceSize(Size(width, 844));
+        addTearDown(() => tester.binding.setSurfaceSize(null));
+        interceptor.details['vehicle-unverified-layout'] = _vehicleDetailJson(
+          vehicleId: 'vehicle-unverified-layout',
+          trimSelection: {
+            'mode': 'FLAT', 'default_vehicle_trim_id': 'trim-layout',
+            'groups': const [],
+            'flat_grades': [_selectionLeaf('trim-layout', '프레스티지')],
+          },
+          trims: [_legacyTrim('trim-layout', '프레스티지')],
+        );
+        interceptor.failNextQuoteStatus = 422;
+        interceptor.failNextQuoteData = const {
+          'detail': {'code': 'SELECTION_PRICE_UNRESOLVED'},
+        };
+        await tester.pumpWidget(MaterialApp(
+          builder: (context, child) => MediaQuery(
+            data: MediaQuery.of(context).copyWith(textScaler: const TextScaler.linear(2)),
+            child: child!,
+          ),
+          home: const VehicleDetailScreen(vehicleId: 'vehicle-unverified-layout',
+              initialTerm: 60, initialMileageLimit: 20000),
+        ));
+        await tester.pump();
+        await tester.pump(const Duration(milliseconds: 350));
+        await tester.pump(const Duration(milliseconds: 900));
+        final label = find.text('가격 확인 요청하기');
+        final button = find.ancestor(of: label, matching: find.byType(InkWell));
+        expect(tester.getSize(label).height,
+            lessThanOrEqualTo(tester.getSize(button).height));
+        expect(tester.takeException(), isNull);
+      });
+    }
+
+    testWidgets('unverified web quote submits conditions but never a price',
+        (tester) async {
+      interceptor.details['vehicle-price-check'] = _vehicleDetailJson(
+        vehicleId: 'vehicle-price-check',
+        trimSelection: {
+          'mode': 'FLAT',
+          'default_vehicle_trim_id': 'trim-price-check',
+          'groups': const [],
+          'flat_grades': [_selectionLeaf('trim-price-check', '프레스티지')],
+        },
+        trims: [_legacyTrim('trim-price-check', '프레스티지')],
+      );
+      interceptor.failNextQuoteStatus = 422;
+      interceptor.failNextQuoteData = const {
+        'detail': {'code': 'SELECTION_PRICE_UNRESOLVED'},
+      };
+      await tester.pumpWidget(const MaterialApp(
+        home: VehicleDetailScreen(vehicleId: 'vehicle-price-check',
+            initialTerm: 60, initialMileageLimit: 20000),
+      ));
+      await tester.pumpAndSettle();
+      expect(find.text('월 납입료를 조회하고 있어요'), findsNothing);
+      await tester.tap(find.text('가격 확인 요청하기'));
+      await tester.pumpAndSettle();
+      await tester.enterText(
+          find.widgetWithText(TextFormField, '이름을 입력해 주세요.'), '합성 테스트');
+      await tester.enterText(
+          find.widgetWithText(TextFormField, '010-0000-0000'), '01000000000');
+      await tester.tap(find.byType(Checkbox));
+      await tester.tap(find.text('문의 접수하기'));
+      await tester.pumpAndSettle();
+      expect(find.text('문의가 접수됐어요'), findsOneWidget);
+      final body = interceptor.inquiryBodies.single;
+      expect(body['term_months'], 60);
+      expect(body['mileage_per_year'], 20000);
+      expect(body['condition_summary'], contains('선납금 0%'));
+      expect(body.containsKey('quoted_monthly_payment'), isFalse);
+      expect(interceptor.applicationBodies, isEmpty);
+    }, skip: !kIsWeb);
+
     testWidgets(
       'wrong selection contract version is not accepted as pricing proof',
       (tester) async {
@@ -953,7 +1079,7 @@ void main() {
           findsOneWidget,
         );
         expect(find.text('신청 화면을 준비하고 있어요'), findsNothing);
-        expect(find.text('월 납입료 다시 불러오기'), findsOneWidget);
+        expect(find.text('가격 확인 요청하기'), findsOneWidget);
       },
     );
 
@@ -1023,7 +1149,7 @@ void main() {
           findsWidgets,
         );
         expect(find.text('신청 화면을 준비하고 있어요'), findsNothing);
-        expect(find.text('리스 상담 신청하기'), findsOneWidget);
+        expect(find.text('가격 확인 요청하기'), findsOneWidget);
       },
     );
 
@@ -1617,8 +1743,8 @@ void main() {
         await tester.pumpAndSettle();
 
         expect(
-          find.textContaining('월 납입료를 다시 확인해 주세요'),
-          findsOneWidget,
+          find.textContaining('월 납입료를 다시 확인하지 못했어요'),
+          findsWidgets,
         );
         expect(
           find.byKey(const ValueKey('quote-trim-pricing-notice')),
@@ -2191,6 +2317,7 @@ class _TrimSelectionInterceptor extends Interceptor {
   final Map<String, Map<String, dynamic>> details = {};
   final List<Map<String, dynamic>> quoteBodies = [];
   final List<Map<String, dynamic>> applicationBodies = [];
+  final List<Map<String, dynamic>> inquiryBodies = [];
   Completer<Map<String, dynamic>>? pendingDetail;
   Completer<Response<dynamic>>? pendingQuote;
   final List<Completer<Response<dynamic>>> pendingQuoteQueue = [];
@@ -2207,6 +2334,12 @@ class _TrimSelectionInterceptor extends Interceptor {
     RequestOptions options,
     RequestInterceptorHandler handler,
   ) async {
+    if (options.path == '/api/v1/support/quote-inquiries') {
+      inquiryBodies.add(Map<String, dynamic>.from(options.data as Map));
+      handler.resolve(Response(requestOptions: options, statusCode: 201,
+          data: {'id': 'mock-price-check-request'}));
+      return;
+    }
     if (options.method == 'GET' && options.uri.path == '/api/v1/vehicles/') {
       handler.resolve(
           Response<dynamic>(requestOptions: options, statusCode: 200, data: {
