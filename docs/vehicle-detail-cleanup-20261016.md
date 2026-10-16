@@ -15,7 +15,7 @@
 
 - 홈페이지: RED-TE/ra-car, 기준 main `205a39c76c01851e3273530c1160c0ca27602172`.
 - 홈페이지 브랜치: `codex/web-detail-cleanup-20261016`.
-- 웹 빌드: `web-sticky-monthly-clean-20261016`.
+- 웹 빌드: `web-login-clean-20261016`.
 - 운영 중인 앱 소스 pin과 기존 웹 전용 패치를 보존한 뒤 UI 변경을 추가함.
 - 웹 재현 패치: `web_app/patches/runtime.patch`.
 - 앱: RECAREA/recar_app, 기준 main `7e3701bc3051c541135fa8d5fe64f7903da9f1c7`.
@@ -61,3 +61,14 @@
 ## 공개 상태
 
 로컬 커밋과 배포 파일 준비까지 수행함. 원격 푸시, PR 검사, 병합, 운영 웹 배포, TestFlight 및 스토어 업로드는 아직 수행하지 않음.
+
+## 로그인 장식 이미지 제거
+
+- 웹 로그인 화면 상단의 RE:CAR 로고와 자동차 그림, 해당 이미지 전용 여백 제거. 제목과 안내 문구, 카카오 및 이메일 로그인, 자동 로그인, 가입 전환 동작 유지.
+- 원본 이미지 파일은 삭제하지 않아 다른 화면의 사용에는 영향 없음. 인증 API와 계정, 약관 및 서버는 변경하지 않음.
+- 앱 최신 main에는 해당 장식 이미지가 이미 없음. 앱 UI를 별도로 바꾸지 않고 재노출 방지 테스트를 추가함. 앱 커밋: `f2a6a5580a7cfae91dcc68f1cf546b0b158f6b89`.
+- 웹 소스 변경: `app/lib/screens/auth_screen.dart`를 `web_app/patches/runtime.patch`에 추가. 재현 도구 `tools/capture-app-source-patch.cjs`에도 해당 파일 포함.
+- 새 공통 회귀 테스트: `auth_screen_login_visual_test.dart`. 320, 390, 430px 이미지 비노출 및 입력 후 로그인 버튼 활성화 확인. 실제 인증 요청은 제출하지 않음.
+- 앱/웹 각각 로그인 테스트 4/4 통과. 기존 로그인 아이디 허용과 가입 이메일 입력 전환 검사 포함. 홈페이지 검사 34/34 및 웹 release build 성공.
+- 실제 브라우저 데스크톱 1200px 및 모바일 390px 시각 확인. 모바일 문서 폭 390px로 가로 넘침 없음.
+- 증거 스크린샷: `/private/tmp/recar-login-desktop-clean-20261016.png`, `/private/tmp/recar-login-mobile-clean-20261016.png`.
