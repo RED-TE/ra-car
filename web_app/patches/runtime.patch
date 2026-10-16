@@ -1087,24 +1087,6 @@
 -              ? SizedBox(
 -                  key: ValueKey(
 -                    _calcLoading
--                        ? 'canonical-monthly-skeleton'
--                        : 'canonical-monthly-unavailable',
--                  ),
--                  height: 52,
--                  child: Center(
--                    child: _calcLoading
--                        ? RecarShimmer.box(
--                            width: 190,
--                            height: 44,
--                            borderRadius: 12,
--                          )
--                        : Text(
--                            '—',
--                            style: AppTypography.priceLg.copyWith(
--                              color: _kTextSecondary,
--                              fontSize: 42,
--                            ),
--                          ),
 +        GestureDetector(
 +          key: const ValueKey('canonical-monthly-value'),
 +          behavior: HitTestBehavior.opaque,
@@ -1124,11 +1106,40 @@
 +                    amount: hasAmount ? _monthly : null,
 +                    loading: _calcLoading,
 +                    placeholderKey: ValueKey(_calcLoading
-+                        ? 'canonical-monthly-skeleton'
+                         ? 'canonical-monthly-skeleton'
+-                        : 'canonical-monthly-unavailable',
 +                        : 'canonical-monthly-unavailable'),
 +                    style: AppTypography.priceLg.copyWith(
 +                      color: hasAmount ? _kInk : _kTextSecondary,
 +                      fontSize: 42,
++                    ),
+                   ),
+-                  height: 52,
+-                  child: Center(
+-                    child: _calcLoading
+-                        ? RecarShimmer.box(
+-                            width: 190,
+-                            height: 44,
+-                            borderRadius: 12,
+-                          )
+-                        : Text(
+-                            '—',
+-                            style: AppTypography.priceLg.copyWith(
+-                              color: _kTextSecondary,
+-                              fontSize: 42,
+-                            ),
+-                          ),
++                ),
++              ),
++              if (hasAmount)
++                const Padding(
++                  padding: EdgeInsets.only(bottom: 7, left: 4),
++                  child: Text(
++                    '원',
++                    style: TextStyle(
++                      fontSize: 20,
++                      fontWeight: FontWeight.w700,
++                      color: _kInk,
 +                    ),
                    ),
 -                )
@@ -1186,19 +1197,6 @@
 -                          ),
 -                        ),
 -                    ],
-+                ),
-+              ),
-+              if (hasAmount)
-+                const Padding(
-+                  padding: EdgeInsets.only(bottom: 7, left: 4),
-+                  child: Text(
-+                    '원',
-+                    style: TextStyle(
-+                      fontSize: 20,
-+                      fontWeight: FontWeight.w700,
-+                      color: _kInk,
-+                    ),
-+                  ),
 +                ),
 +              if (hasAmount)
 +                const Padding(
@@ -1483,7 +1481,73 @@
                                  style: TextStyle(
                                    fontSize: 18,
                                    fontWeight: FontWeight.w700,
-@@ -10481,15 +10456,18 @@
+@@ -7271,46 +7246,34 @@
+   }
+ 
+   Widget _buildStickyMonthlySummary() {
+-    return Container(
+-      width: double.infinity,
+-      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+-      decoration: BoxDecoration(
+-        color: const Color(0xFFF8FAFC),
+-        borderRadius: BorderRadius.circular(14),
+-        border: Border.all(color: _kBorder),
+-      ),
+-      child: Flex(
+-        mainAxisSize: MainAxisSize.min,
+-        direction: MediaQuery.textScalerOf(context).scale(16) > 24
+-            ? Axis.vertical
+-            : Axis.horizontal,
+-        crossAxisAlignment: CrossAxisAlignment.start,
++    return Padding(
++      key: const ValueKey('sticky-monthly-content'),
++      padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 6),
++      child: OverflowBar(
++        alignment: MainAxisAlignment.spaceBetween,
++        spacing: 12,
++        overflowSpacing: 4,
++        overflowAlignment: OverflowBarAlignment.start,
+         children: [
+           const Text(
+             '월 납입료',
+             style: TextStyle(
+-              fontSize: 15,
++              fontSize: 13,
+               fontWeight: FontWeight.w700,
+               color: _kTextSecondary,
+               height: 1.2,
+             ),
+           ),
+-          const SizedBox(width: 12),
+-          Flexible(
+-            fit: FlexFit.loose,
+-            child: AnimatedSwitcher(
+-              duration: const Duration(milliseconds: 140),
+-              child: Text(
+-                '월 ${_commaFmt(_monthly)}원',
+-                key: ValueKey<int>(_monthly),
+-                textAlign: TextAlign.right,
+-                style: const TextStyle(
+-                  fontSize: 18,
+-                  fontWeight: FontWeight.w900,
+-                  color: _kTextPrimary,
+-                  height: 1.1,
+-                  shadows: AppTypography.amountEmphasisShadow,
+-                ),
++          AnimatedSwitcher(
++            duration: const Duration(milliseconds: 140),
++            child: Text(
++              '${_commaFmt(_monthly)}원',
++              key: ValueKey<int>(_monthly),
++              style: const TextStyle(
++                fontSize: 18,
++                fontWeight: FontWeight.w800,
++                color: _kTextPrimary,
++                height: 1.2,
+               ),
+             ),
+           ),
+@@ -10481,15 +10444,18 @@
  }
  
  String? _assetForVehicle(VehicleDetail v) {
@@ -1504,7 +1568,7 @@
  }
  
  // ────────────────────────────────────────────────────────────────────────────
-@@ -10831,17 +10809,23 @@
+@@ -10831,17 +10797,23 @@
          color: row.isRecar ? _kBlue : _kBg,
          borderRadius: BorderRadius.circular(6),
        ),

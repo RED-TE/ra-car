@@ -210,6 +210,91 @@ void main() {
       VehicleCache.invalidateAll();
     });
 
+    for (final layout in [(390.0, 1.0), (320.0, 2.0)]) {
+      testWidgets(
+        'sticky monthly is unframed at width ${layout.$1} and scale ${layout.$2}',
+        (tester) async {
+          await tester.binding.setSurfaceSize(const Size(390, 844));
+          addTearDown(() => tester.binding.setSurfaceSize(null));
+          interceptor.details['vehicle-sticky'] = _vehicleDetailJson(
+            vehicleId: 'vehicle-sticky',
+            trimSelection: {
+              'mode': 'FLAT',
+              'groups': const [],
+              'flat_grades': [_selectionLeaf('trim-sticky', '모던')],
+            },
+            trims: [_legacyTrim('trim-sticky', '모던')],
+          );
+
+          await tester.pumpWidget(
+            const MaterialApp(
+              home: VehicleDetailScreen(
+                vehicleId: 'vehicle-sticky',
+                initialTrimId: 'trim-sticky',
+              ),
+            ),
+          );
+          await tester.pump();
+          await tester.pump(const Duration(milliseconds: 700));
+
+          final controller = tester
+              .widgetList<SingleChildScrollView>(
+                find.byType(SingleChildScrollView),
+              )
+              .firstWhere((scroll) => scroll.controller != null)
+              .controller!;
+          controller.jumpTo(controller.position.maxScrollExtent);
+          await tester.pump(const Duration(milliseconds: 400));
+
+          final summary = find.byKey(const ValueKey('sticky-monthly-content'));
+          expect(summary, findsOneWidget);
+          final summaryWidget = tester.widget<Padding>(summary);
+          await tester.pumpWidget(const SizedBox.shrink());
+          await tester.binding.setSurfaceSize(Size(layout.$1, 844));
+          await tester.pumpWidget(
+            MaterialApp(
+              home: Scaffold(
+                bottomNavigationBar: MediaQuery(
+                  data: MediaQueryData(
+                    textScaler: TextScaler.linear(layout.$2),
+                  ),
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    child: summaryWidget,
+                  ),
+                ),
+              ),
+            ),
+          );
+          await tester.pump(const Duration(milliseconds: 200));
+          final label = find.descendant(
+            of: summary,
+            matching: find.text('월 납입료'),
+          );
+          final amount = find.descendant(
+            of: summary,
+            matching: find.text('443,200원'),
+          );
+          expect(summary, findsOneWidget);
+          expect(label, findsOneWidget);
+          expect(amount, findsOneWidget);
+          expect(
+            find.descendant(of: summary, matching: find.byType(DecoratedBox)),
+            findsNothing,
+          );
+          expect(
+            find.descendant(of: summary, matching: find.text('월 443,200원')),
+            findsNothing,
+          );
+          final bounds = tester.getRect(summary);
+          expect(bounds.contains(tester.getCenter(label)), isTrue);
+          expect(bounds.contains(tester.getCenter(amount)), isTrue);
+          expect(tester.getRect(amount).bottom, lessThan(844));
+          expect(tester.takeException(), isNull);
+        },
+      );
+    }
+
     testWidgets('GROUPED uses trim then grade and sends VehicleTrim.id', (
       tester,
     ) async {
