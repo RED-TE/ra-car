@@ -1,6 +1,14 @@
 --- a/app/lib/main.dart
 +++ b/app/lib/main.dart
-@@ -45,6 +45,22 @@
+@@ -2,6 +2,7 @@
+ import 'package:flutter/foundation.dart';
+ import 'package:flutter/gestures.dart';
+ import 'package:flutter/material.dart';
++import 'services/kakao_web_login.dart';
+ import 'package:flutter/rendering.dart';
+ import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
+ 
+@@ -45,6 +46,24 @@
  }
  
  Future<void> _bootstrapApp() async {
@@ -15,26 +23,22 @@
 +      await AuthSession.instance.clear();
 +    }
 +    await WebReferralService.instance.initialize();
-+    WidgetsBinding.instance.addPostFrameCallback((_) {
-+      _initializeWebIntegrations().ignore();
-+    });
++    if (!KakaoWebLogin.isCallback(Uri.base)) {
++      WidgetsBinding.instance.addPostFrameCallback((_) {
++        _initializeWebIntegrations().ignore();
++      });
++    }
 +    return;
 +  }
    if (kKakaoNativeAppKey.isNotEmpty) {
      await KakaoSdk.init(
        nativeAppKey: kKakaoNativeAppKey,
-@@ -100,6 +116,23 @@
-   await PushNotificationService.instance.initialize(
-     firebaseEnabled: !_disableFirebaseAnalytics,
+@@ -102,6 +121,19 @@
    );
-+}
-+
+ }
+ 
 +Future<void> _initializeWebIntegrations() async {
 +  try {
-+    if (kKakaoNativeAppKey.isNotEmpty) {
-+      await KakaoSdk.init(
-+          nativeAppKey: kKakaoNativeAppKey, customScheme: kKakaoUrlScheme);
-+    }
 +    if (!_disableFirebaseAnalytics) {
 +      await Firebase.initializeApp(
 +          options: DefaultFirebaseOptions.currentPlatform);
@@ -44,10 +48,12 @@
 +  } catch (_) {
 +    // Optional integrations must not hide the catalogue or authenticated forms.
 +  }
- }
- 
++}
++
  class RecarApp extends StatelessWidget {
-@@ -113,9 +146,10 @@
+   const RecarApp({super.key});
+ 
+@@ -113,9 +145,14 @@
        showSemanticsDebugger: false,
        // ── 전역 navigatorKey: 인터셉터(BuildContext 없음)에서 화면 전환용 ──
        navigatorKey: appNavigatorKey,
@@ -55,7 +61,11 @@
 -        child: _AppBootstrapGate(child: MainNavigator()),
 -      ),
 +      home: kIsWeb
-+          ? const _AppBootstrapGate(child: MainNavigator())
++          ? _AppBootstrapGate(
++              child: KakaoWebLogin.isCallback(Uri.base)
++                  ? const AuthScreen()
++                  : const MainNavigator(),
++            )
 +          : const AppUpdateGate(
 +              child: _AppBootstrapGate(child: MainNavigator())),
        builder: (context, child) {
@@ -454,6 +464,145 @@
        ),
      );
    }
+--- a/app/lib/screens/auth_screen.dart
++++ b/app/lib/screens/auth_screen.dart
+@@ -17,9 +17,9 @@
+ import '../services/api_client.dart';
+ import '../services/auth_api.dart';
+ import '../services/auth_session.dart';
++import '../services/kakao_web_login.dart';
+ import '../theme/app_colors.dart';
+ import '../theme/app_typography.dart';
+-import '../utils/vehicle_image_resolver.dart' show kVehiclePlaceholderAsset;
+ import '../widgets/micro_interactions.dart';
+ 
+ // 가입 동의 링크는 마이 화면과 같은 확정본을 연다(웹사이트 /terms 는 '상담 유의사항').
+@@ -107,6 +107,11 @@
+     _phoneCtrl.addListener(_onPhoneChanged);
+     _passwordCtrl.addListener(_refresh);
+     _confirmPasswordCtrl.addListener(_refresh);
++    if (kIsWeb && KakaoWebLogin.isCallback(Uri.base)) {
++      WidgetsBinding.instance.addPostFrameCallback((_) {
++        if (mounted) _completeKakaoWebLogin();
++      });
++    }
+     if (widget.initialMessage != null && widget.initialMessage!.isNotEmpty) {
+       WidgetsBinding.instance.addPostFrameCallback((_) {
+         if (!mounted) return;
+@@ -346,13 +351,17 @@
+ 
+   Future<void> _signInWithKakao() async {
+     if (_isSubmitting) return;
+-    if (kKakaoNativeAppKey.isEmpty) {
++    if (!kIsWeb && kKakaoNativeAppKey.isEmpty) {
+       _showError('카카오 로그인 설정이 누락됐어요. 최신 버전으로 다시 설치 후 시도해 주세요.');
+       return;
+     }
+ 
+     setState(() => _isSubmitting = true);
+     try {
++      if (kIsWeb) {
++        await KakaoWebLogin.instance.start();
++        return;
++      }
+       final token = await _loginWithKakaoSdk();
+       if (kDebugMode) debugPrint('[KakaoLogin] SDK login success');
+ 
+@@ -363,6 +372,8 @@
+       }
+       if (!mounted) return;
+       await _finishAuth(forceOnboarding: result.isNewUser);
++    } on KakaoWebLoginException catch (error) {
++      _showError(error.message);
+     } on PlatformException catch (error) {
+       if (_isKakaoCancel(error)) {
+         if (kDebugMode) debugPrint('[KakaoLogin] canceled');
+@@ -408,6 +419,23 @@
+     return text.contains('cancel') || text.contains('cancelled');
+   }
+ 
++  Future<void> _completeKakaoWebLogin() async {
++    if (_isSubmitting) return;
++    setState(() => _isSubmitting = true);
++    try {
++      final result = await KakaoWebLogin.instance.complete();
++      if (mounted) await _finishAuth(forceOnboarding: result.isNewUser);
++    } on KakaoWebLoginException catch (error) {
++      if (mounted) _showError(error.message);
++    } on DioException catch (error) {
++      if (mounted) _showError(ApiClient.extractErrorMessage(error) ?? '카카오 로그인 연결을 확인하지 못했습니다. 다시 시도해 주세요.');
++    } catch (_) {
++      if (mounted) _showError('카카오 로그인 응답을 확인하지 못했습니다. 다시 시도해 주세요.');
++    } finally {
++      if (mounted) setState(() => _isSubmitting = false);
++    }
++  }
++
+   bool _isInvalidKakaoUrl(Object error) {
+     final text = error.toString();
+     return text.contains('INVALID_URL') ||
+@@ -529,45 +557,10 @@
+           padding: EdgeInsets.fromLTRB(20, 4, 20, bottomInset + 48),
+           children: [
+             if (_isLogin) ...[
+-              Align(
+-                alignment: Alignment.centerLeft,
+-                child: ClipRRect(
+-                  borderRadius: BorderRadius.circular(14),
+-                  child: Image.asset(
+-                    'assets/images/recar_app_icon.png',
+-                    width: 48,
+-                    height: 48,
+-                    fit: BoxFit.cover,
+-                    errorBuilder: (_, __, ___) => const SizedBox(
+-                      width: 48,
+-                      height: 48,
+-                    ),
+-                  ),
+-                ),
+-              ),
+-              const SizedBox(height: 16),
+-              // 제목 옆에 캐릭터를 두어 버튼·입력칸이 첫 화면에 들어오게 한다.
+-              Row(
+-                crossAxisAlignment: CrossAxisAlignment.end,
+-                children: [
+-                  Expanded(
+-                    child: Text(
+-                      '내 차 조건,\n리카에서 한 번에',
+-                      style: _aText(28,
+-                          weight: FontWeight.w800,
+-                          height: 1.3,
+-                          letterSpacing: -1),
+-                    ),
+-                  ),
+-                  const SizedBox(width: 8),
+-                  Image.asset(
+-                    kVehiclePlaceholderAsset,
+-                    width: 128,
+-                    fit: BoxFit.contain,
+-                    semanticLabel: '리카 자동차 캐릭터',
+-                    errorBuilder: (_, __, ___) => const SizedBox(width: 8),
+-                  ),
+-                ],
++              Text(
++                '내 차 조건,\n리카에서 한 번에',
++                style: _aText(28,
++                    weight: FontWeight.w800, height: 1.3, letterSpacing: 0),
+               ),
+               const SizedBox(height: 10),
+               Text(
+--- a/app/lib/services/api_client.dart
++++ b/app/lib/services/api_client.dart
+@@ -187,6 +187,9 @@
+                           lower.contains('username') ||
+                           lower.contains('phone') ||
+                           lower.contains('identity') ||
++                          lower == 'code' ||
++                          lower == 'state' ||
++                          lower.startsWith('code_') ||
+                           lower == 'full_name' ||
+                           lower == 'given_name' ||
+                           lower == 'family_name')
 --- a/app/lib/services/vehicle_api.dart
 +++ b/app/lib/services/vehicle_api.dart
 @@ -181,14 +181,12 @@
@@ -898,7 +1047,15 @@
  import '../services/quote_api.dart';
  import '../theme/app_layout.dart';
  import '../theme/app_spacing.dart';
-@@ -371,12 +372,24 @@
+@@ -295,7 +296,6 @@
+ 
+   // ── 월납금 계산 ──────────────────────────────────────────────────────────
+   int _monthly = 0;
+-  int _displayedOptionMonthlyDelta = 0;
+   int _residualValue = 0;
+   double _residualPct = 0;
+   Timer? _debounce;
+@@ -371,19 +371,30 @@
      return vehicle != null && isImportedBrand(vehicle.brand);
    }
  
@@ -925,13 +1082,23 @@
      if (_isLongRent == nextIsLongRent &&
          _effectiveIsLongRent == nextIsLongRent) {
        return;
-@@ -402,6 +415,17 @@
+     }
+     _onParamChange(() {
+       _isLongRent = nextIsLongRent;
+-      _displayedOptionMonthlyDelta = 0;
+       _leaseDataUnavailable = false;
+       _quoteErrorMessage = null;
+       _capitalQuotes = [];
+@@ -402,6 +413,20 @@
          widget.vehicleId,
          forceRefresh: true,
        );
 +      var catalogItem = VehicleCache.getCatalogItem(v.id);
-+      if (catalogItem == null) {
-+        final catalog = await VehicleApi.fetchCatalog(query: v.modelName);
++      if (catalogItem == null || catalogItem.availableProductTypes.isEmpty) {
++        final catalog = await VehicleApi.fetchCatalog(
++          query: v.modelName,
++          forceRefresh: true,
++        );
 +        for (final item in catalog) {
 +          if (item.id == v.id) catalogItem = item;
 +        }
@@ -943,7 +1110,7 @@
        if (!mounted) return;
        final selectableTrims = _selectableVehicleTrims(v);
        String? initialTrimId;
-@@ -433,9 +457,11 @@
+@@ -433,9 +458,11 @@
            }
          }
        }
@@ -958,7 +1125,327 @@
        // ── Danawa 등급/색상 초기화 ────────────────────────────────────────
        String? initialDanawaTrimName;
        DanawaGrade? initialDanawaGrade;
-@@ -4239,13 +4265,13 @@
+@@ -534,7 +561,6 @@
+         _latestSelectionQuote = null;
+         _latestSelectionRequestKey = null;
+         _quoteErrorMessage = null;
+-        _displayedOptionMonthlyDelta = 0;
+       });
+     }
+     _debounce = Timer(
+@@ -688,7 +714,6 @@
+         _canonicalMonthlyTrimId = requestedTrimId;
+         _latestSelectionQuote = quote;
+         _latestSelectionRequestKey = requestKey;
+-        _displayedOptionMonthlyDelta = quote.data.selectionMonthlyDelta.round();
+         _residualPct = quote.data.residualPct;
+         _residualValue = quote.data.residualValue;
+         _calcLoading = false;
+@@ -711,7 +736,6 @@
+         _residualPct = 0;
+         _latestSelectionQuote = null;
+         _latestSelectionRequestKey = null;
+-        _displayedOptionMonthlyDelta = 0;
+         _canonicalMonthlyTrimId = null;
+         _calcLoading = false;
+         _quoteErrorMessage = isSelectionPriceUnavailable
+@@ -936,17 +960,6 @@
+         .fold<int>(0, (sum, o) => sum + o.price);
+   }
+ 
+-  String get _optionDeltaBadgeLabel {
+-    final parts = <String>['+월 ${_commaFmt(_displayedOptionMonthlyDelta)}원'];
+-    final optionCount = _selectedDanawaGrade != null
+-        ? _selectedDanawaOptionIds.length
+-        : _selectedOptionIds.length;
+-    final deltaPrice = _selectedOptionTotal + _selectedColorExtraPrice;
+-    if (optionCount > 0) parts.add('옵션 $optionCount개');
+-    if (deltaPrice > 0) parts.add('+${_fmt(deltaPrice)}원');
+-    return parts.join(' · ');
+-  }
+-
+   String? get _selectedOptionsSummary {
+     // Danawa 등급 선택 시 danawa 옵션 이름 사용
+     if (_selectedDanawaGrade != null) {
+@@ -2926,7 +2939,6 @@
+           _residualPct = 0;
+           _latestSelectionQuote = null;
+           _latestSelectionRequestKey = null;
+-          _displayedOptionMonthlyDelta = 0;
+           _canonicalMonthlyTrimId = null;
+           _quoteErrorMessage = null;
+         });
+@@ -2963,7 +2975,6 @@
+         _residualPct = data.residualPct;
+         _latestSelectionQuote = quote;
+         _latestSelectionRequestKey = requestKey;
+-        _displayedOptionMonthlyDelta = data.selectionMonthlyDelta.round();
+         _canonicalMonthlyTrimId = requestedTrimId;
+         _quoteErrorMessage = null;
+       });
+@@ -3013,7 +3024,6 @@
+           _residualPct = 0;
+           _latestSelectionQuote = null;
+           _latestSelectionRequestKey = null;
+-          _displayedOptionMonthlyDelta = 0;
+           _canonicalMonthlyTrimId = null;
+           _quoteErrorMessage = QuoteApi.selectionPriceUnavailableMessage;
+         });
+@@ -3037,7 +3047,7 @@
+         body: RecarFullScreenLoading(
+           message: '차량 정보를 불러오고 있어요',
+           subtitle: '상세 조건과 견적 기준을 확인하고 있어요',
+-          icon: Icons.directions_car_filled_rounded,
++          icon: null,
+         ),
+       );
+     }
+@@ -3598,14 +3608,6 @@
+                     ),
+                   ],
+                 ),
+-              ),
+-            ] else if (_quoteErrorMessage != null) ...[
+-              const SizedBox(height: 14),
+-              _InlineNoticeCard(
+-                icon: Icons.wifi_off_rounded,
+-                message: _quoteErrorMessage!,
+-                actionLabel: '다시 시도',
+-                onAction: _scheduleCalc,
+               ),
+             ],
+           ],
+@@ -3873,6 +3875,10 @@
+     required String mileageLabel,
+   }) {
+     final quoteCount = _capitalQuotes.length;
++    final hasAmount = _monthly > 0 &&
++        !_calcLoading &&
++        _quoteErrorMessage == null &&
++        (!_requiresCanonicalTrimPricing || _hasCurrentCanonicalMonthly);
+     return Column(
+       crossAxisAlignment: CrossAxisAlignment.center,
+       children: [
+@@ -3897,89 +3903,79 @@
+           ],
+         ),
+         const SizedBox(height: 8),
+-        AnimatedSwitcher(
+-          duration: const Duration(milliseconds: 160),
+-          child: _requiresCanonicalTrimPricing && !_hasCurrentCanonicalMonthly
+-              ? SizedBox(
+-                  key: ValueKey(
+-                    _calcLoading
++        GestureDetector(
++          key: const ValueKey('canonical-monthly-value'),
++          behavior: HitTestBehavior.opaque,
++          onTap: hasAmount && quoteCount > 0
++              ? () => _showCapitalComparison()
++              : null,
++          child: Row(
++            mainAxisAlignment: MainAxisAlignment.center,
++            crossAxisAlignment: CrossAxisAlignment.end,
++            children: [
++              Flexible(
++                child: FittedBox(
++                  fit: BoxFit.scaleDown,
++                  alignment: Alignment.bottomCenter,
++                  child: RollingMoneyText(
++                    key: const ValueKey('detail-monthly-amount'),
++                    amount: hasAmount ? _monthly : null,
++                    loading: _calcLoading,
++                    placeholderKey: ValueKey(_calcLoading
+                         ? 'canonical-monthly-skeleton'
+-                        : 'canonical-monthly-unavailable',
++                        : 'canonical-monthly-unavailable'),
++                    style: AppTypography.priceLg.copyWith(
++                      color: hasAmount ? _kInk : _kTextSecondary,
++                      fontSize: 42,
++                    ),
+                   ),
+-                  height: 52,
+-                  child: Center(
+-                    child: _calcLoading
+-                        ? RecarShimmer.box(
+-                            width: 190,
+-                            height: 44,
+-                            borderRadius: 12,
+-                          )
+-                        : Text(
+-                            '—',
+-                            style: AppTypography.priceLg.copyWith(
+-                              color: _kTextSecondary,
+-                              fontSize: 42,
+-                            ),
+-                          ),
++                ),
++              ),
++              if (hasAmount)
++                const Padding(
++                  padding: EdgeInsets.only(bottom: 7, left: 4),
++                  child: Text(
++                    '원',
++                    style: TextStyle(
++                      fontSize: 20,
++                      fontWeight: FontWeight.w700,
++                      color: _kInk,
++                    ),
+                   ),
+-                )
+-              : GestureDetector(
+-                  key: const ValueKey('canonical-monthly-value'),
+-                  behavior: HitTestBehavior.opaque,
+-                  onTap: quoteCount > 0 ? () => _showCapitalComparison() : null,
+-                  child: Row(
+-                    mainAxisAlignment: MainAxisAlignment.center,
+-                    crossAxisAlignment: CrossAxisAlignment.end,
+-                    children: [
+-                      Flexible(
+-                        child: FittedBox(
+-                          fit: BoxFit.scaleDown,
+-                          alignment: Alignment.bottomCenter,
+-                          child: AnimatedMoneyText(
+-                            amount: _monthly,
+-                            style: AppTypography.priceLg.copyWith(
+-                              color: _kInk,
+-                              fontSize: 42,
+-                              letterSpacing: -1.8,
+-                            ),
+-                          ),
+-                        ),
+-                      ),
+-                      const Padding(
+-                        padding: EdgeInsets.only(bottom: 7, left: 4),
+-                        child: Text(
+-                          '원',
+-                          style: TextStyle(
+-                            fontSize: 20,
+-                            fontWeight: FontWeight.w700,
+-                            color: _kInk,
+-                          ),
+-                        ),
+-                      ),
+-                      const Padding(
+-                        padding: EdgeInsets.only(bottom: 8, left: 2),
+-                        child: Text(
+-                          ' /월',
+-                          style: TextStyle(
+-                            fontSize: 16,
+-                            fontWeight: FontWeight.w600,
+-                            color: _kTextSecondary,
+-                          ),
+-                        ),
+-                      ),
+-                      if (quoteCount > 0)
+-                        const Padding(
+-                          padding: EdgeInsets.only(bottom: 7),
+-                          child: Icon(
+-                            Icons.chevron_right_rounded,
+-                            size: 26,
+-                            color: _kMuted,
+-                          ),
+-                        ),
+-                    ],
++                ),
++              if (hasAmount)
++                const Padding(
++                  padding: EdgeInsets.only(bottom: 8, left: 2),
++                  child: Text(
++                    ' /월',
++                    style: TextStyle(
++                      fontSize: 16,
++                      fontWeight: FontWeight.w600,
++                      color: _kTextSecondary,
++                    ),
+                   ),
+                 ),
++              if (hasAmount && quoteCount > 0)
++                const Padding(
++                  padding: EdgeInsets.only(bottom: 7),
++                  child: Icon(
++                    Icons.chevron_right_rounded,
++                    size: 26,
++                    color: _kMuted,
++                  ),
++                ),
++            ],
++          ),
+         ),
++        if (_quoteErrorMessage != null && !_calcLoading) ...[
++          const SizedBox(height: 8),
++          _InlineNoticeCard(
++            icon: Icons.wifi_off_rounded,
++            message: _quoteErrorMessage!,
++            actionLabel: '다시 시도',
++            onAction: _scheduleCalc,
++          ),
++        ],
+         if (widget.instantDeliveryPremiumWon > 0) ...[
+           const SizedBox(height: 8),
+           Container(
+@@ -4010,25 +4006,6 @@
+             ),
+           ),
+         ],
+-        // Option monthly delta indicator, aligned with displayed monthly change.
+-        if (_displayedOptionMonthlyDelta > 0) ...[
+-          const SizedBox(height: 8),
+-          Container(
+-            padding: const EdgeInsets.symmetric(horizontal: 10, vertical: 5),
+-            decoration: BoxDecoration(
+-              color: const Color(0xFFFFF7ED),
+-              borderRadius: BorderRadius.circular(999),
+-            ),
+-            child: Text(
+-              _optionDeltaBadgeLabel,
+-              style: const TextStyle(
+-                fontSize: 16,
+-                fontWeight: FontWeight.w700,
+-                color: Color(0xFFEA580C),
+-              ),
+-            ),
+-          ),
+-        ],
+         const SizedBox(height: 12),
+         Wrap(
+           alignment: WrapAlignment.center,
+@@ -4044,35 +4021,6 @@
+                   _buildTag('보험료·자동차세 별도'),
+                 ],
+         ),
+-        if (quoteCount > 0) ...[
+-          const SizedBox(height: 14),
+-          Semantics(
+-            button: true,
+-            label: '금융사 $quoteCount곳 견적 비교하기',
+-            excludeSemantics: true,
+-            child: GestureDetector(
+-              behavior: HitTestBehavior.opaque,
+-              onTap: () => _showCapitalComparison(),
+-              child: Row(
+-                mainAxisSize: MainAxisSize.min,
+-                children: [
+-                  Flexible(
+-                    child: Text(
+-                      '금융사 $quoteCount곳 견적 비교하기',
+-                      style: const TextStyle(
+-                        fontSize: 16,
+-                        fontWeight: FontWeight.w700,
+-                        color: _kBlue,
+-                      ),
+-                    ),
+-                  ),
+-                  const Icon(Icons.chevron_right_rounded,
+-                      size: 18, color: _kBlue),
+-                ],
+-              ),
+-            ),
+-          ),
+-        ],
+         const SizedBox(height: 12),
+         Text(
+           '선택한 조건 기준 예상 금액이며, 금융사 확인 후 달라질 수 있어요.'.noWordBreak,
+@@ -4239,13 +4187,13 @@
            label: '이용상품',
            value: _effectiveIsLongRent ? '장기렌트' : '리스',
            isLast: true,
@@ -974,7 +1461,7 @@
                          selected: true,
                          onTap: () => _changeProduct(false),
                        ),
-@@ -4257,7 +4283,7 @@
+@@ -4257,7 +4205,7 @@
                          description: '보험·자동차세 포함\n하·허·호 번호판',
                          selected: false,
                          dimmed: true,
@@ -983,7 +1470,7 @@
                        ),
                      ),
                    ],
-@@ -4278,10 +4304,12 @@
+@@ -4278,10 +4226,12 @@
                          title: '리스',
                          description: '일반 번호판\n보험료·자동차세 별도',
                          selected: !_effectiveIsLongRent,
@@ -1000,10 +1487,15 @@
                        ),
                      ),
                    ],
-@@ -4440,6 +4468,18 @@
-     );
-   }
- 
+@@ -4435,6 +4385,18 @@
+               ),
+             ),
+           ],
++        ),
++      ),
++    );
++  }
++
 +  void _showUnavailableProductSheet() {
 +    showModalBottomSheet<void>(
 +      context: context,
@@ -1011,15 +1503,10 @@
 +        child: Padding(
 +          padding: EdgeInsets.all(24),
 +          child: Text('현재 이 차량에서 제공하지 않는 상품이에요. 제공 중인 상품으로 조건을 확인해 주세요.'),
-+        ),
-+      ),
-+    );
-+  }
-+
-   void _showImportedRentalSheet() {
-     showModalBottomSheet(
-       context: context,
-@@ -5224,13 +5264,13 @@
+         ),
+       ),
+     );
+@@ -5224,13 +5186,13 @@
  
    // ── 이용상품 ─────────────────────────────────────────────────────────────
    Widget _buildProductRow() {
@@ -1035,7 +1522,7 @@
                isSelected: true,
                onTap: () => _changeProduct(false),
              ),
-@@ -5242,7 +5282,7 @@
+@@ -5242,7 +5204,7 @@
                desc: '보험·자동차세 포함\n하·허·호 번호판',
                isSelected: false,
                disabled: true,
@@ -1044,7 +1531,7 @@
              ),
            ),
          ],
-@@ -5265,10 +5305,12 @@
+@@ -5265,10 +5227,12 @@
              title: '리스',
              desc: '계약 조건과 차량 이용 방식을\n함께 확인해요',
              isSelected: !_effectiveIsLongRent,
@@ -1061,7 +1548,7 @@
            ),
          ),
        ],
-@@ -6732,7 +6774,7 @@
+@@ -6732,7 +6696,7 @@
                color: _kBg,
                borderRadius: BorderRadius.circular(10),
              ),
@@ -1070,7 +1557,7 @@
                  ? Row(
                      children: [
                        _DetailTab(
-@@ -6744,7 +6786,7 @@
+@@ -6744,7 +6708,7 @@
                          label: '장기렌트',
                          selected: false,
                          disabled: true,
@@ -1079,7 +1566,7 @@
                        ),
                      ],
                    )
-@@ -6758,7 +6800,10 @@
+@@ -6758,7 +6722,10 @@
                        _DetailTab(
                          label: '리스',
                          selected: !_effectiveIsLongRent,
@@ -1091,7 +1578,125 @@
                        ),
                      ],
                    ),
-@@ -10481,15 +10526,17 @@
+@@ -7166,10 +7133,16 @@
+   // ── 하단 CTA ─────────────────────────────────────────────────────────────
+   Widget _buildBottomBar() {
+     // 리스는 전화 상담으로 안내하므로 가격 계산을 기다리지 않는다.
+-    final isBusy = _effectiveIsLongRent &&
+-        (_quoteLoading ||
+-            _calcLoading ||
+-            (_requiresCanonicalTrimPricing && !_hasCurrentCanonicalMonthly));
++    final isBusy = _effectiveIsLongRent && (_quoteLoading || _calcLoading);
++    final needsQuoteRetry = _effectiveIsLongRent &&
++        !isBusy &&
++        _requiresCanonicalTrimPricing &&
++        !_hasCurrentCanonicalMonthly;
++    final actionLabel = needsQuoteRetry
++        ? '월 납입료 다시 불러오기'
++        : _effectiveIsLongRent
++            ? '견적 분석 받아보기'
++            : '리스 상담 신청하기';
+     final showMonthlySummary = _showStickyMonthlySummary &&
+         _monthly > 0 &&
+         (!_requiresCanonicalTrimPricing || _hasCurrentCanonicalMonthly);
+@@ -7221,7 +7194,7 @@
+                 ),
+                 child: Semantics(
+                   button: true,
+-                  label: _effectiveIsLongRent ? '견적 분석 받아보기' : '리스 상담 신청하기',
++                  label: actionLabel,
+                   child: Material(
+                     color: Colors.transparent,
+                     borderRadius: BorderRadius.circular(16),
+@@ -7229,6 +7202,10 @@
+                       onTap: isBusy
+                           ? null
+                           : () {
++                              if (needsQuoteRetry) {
++                                _scheduleCalc();
++                                return;
++                              }
+                               AnalyticsService.trackFireAndForget(
+                                 eventName: 'quote_clicked',
+                                 vehicleId: widget.vehicleId,
+@@ -7249,9 +7226,7 @@
+                         child: isBusy
+                             ? RecarButtonLoading(label: '신청 화면을 준비하고 있어요')
+                             : Text(
+-                                _effectiveIsLongRent
+-                                    ? '견적 분석 받아보기'
+-                                    : '리스 상담 신청하기',
++                                actionLabel,
+                                 style: TextStyle(
+                                   fontSize: 18,
+                                   fontWeight: FontWeight.w700,
+@@ -7271,46 +7246,34 @@
+   }
+ 
+   Widget _buildStickyMonthlySummary() {
+-    return Container(
+-      width: double.infinity,
+-      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 10),
+-      decoration: BoxDecoration(
+-        color: const Color(0xFFF8FAFC),
+-        borderRadius: BorderRadius.circular(14),
+-        border: Border.all(color: _kBorder),
+-      ),
+-      child: Flex(
+-        mainAxisSize: MainAxisSize.min,
+-        direction: MediaQuery.textScalerOf(context).scale(16) > 24
+-            ? Axis.vertical
+-            : Axis.horizontal,
+-        crossAxisAlignment: CrossAxisAlignment.start,
++    return Padding(
++      key: const ValueKey('sticky-monthly-content'),
++      padding: const EdgeInsets.symmetric(horizontal: 4, vertical: 6),
++      child: OverflowBar(
++        alignment: MainAxisAlignment.spaceBetween,
++        spacing: 12,
++        overflowSpacing: 4,
++        overflowAlignment: OverflowBarAlignment.start,
+         children: [
+           const Text(
+             '월 납입료',
+             style: TextStyle(
+-              fontSize: 15,
++              fontSize: 13,
+               fontWeight: FontWeight.w700,
+               color: _kTextSecondary,
+               height: 1.2,
+             ),
+           ),
+-          const SizedBox(width: 12),
+-          Flexible(
+-            fit: FlexFit.loose,
+-            child: AnimatedSwitcher(
+-              duration: const Duration(milliseconds: 140),
+-              child: Text(
+-                '월 ${_commaFmt(_monthly)}원',
+-                key: ValueKey<int>(_monthly),
+-                textAlign: TextAlign.right,
+-                style: const TextStyle(
+-                  fontSize: 18,
+-                  fontWeight: FontWeight.w900,
+-                  color: _kTextPrimary,
+-                  height: 1.1,
+-                  shadows: AppTypography.amountEmphasisShadow,
+-                ),
++          AnimatedSwitcher(
++            duration: const Duration(milliseconds: 140),
++            child: Text(
++              '${_commaFmt(_monthly)}원',
++              key: ValueKey<int>(_monthly),
++              style: const TextStyle(
++                fontSize: 18,
++                fontWeight: FontWeight.w800,
++                color: _kTextPrimary,
++                height: 1.2,
+               ),
+             ),
+           ),
+@@ -10481,15 +10444,18 @@
  }
  
  String? _assetForVehicle(VehicleDetail v) {
@@ -1102,7 +1707,8 @@
      thumbnailUrl: v.thumbnailUrl,
    );
 +  return asset == kVehiclePlaceholderAsset && _networkImageForVehicle(v) != null
-+      ? null : asset;
++      ? null
++      : asset;
  }
  
  String? _networkImageForVehicle(VehicleDetail v) {
@@ -1111,7 +1717,7 @@
  }
  
  // ────────────────────────────────────────────────────────────────────────────
-@@ -10831,17 +10878,23 @@
+@@ -10831,17 +10797,23 @@
          color: row.isRecar ? _kBlue : _kBg,
          borderRadius: BorderRadius.circular(6),
        ),
@@ -1145,9 +1751,240 @@
      const amountStyle = TextStyle(
          fontSize: 18,
          fontWeight: FontWeight.w800,
+--- a/app/lib/widgets/recar_loading_state.dart
++++ b/app/lib/widgets/recar_loading_state.dart
+@@ -17,7 +17,7 @@
+ 
+   final String message;
+   final String? subtitle;
+-  final IconData icon;
++  final IconData? icon;
+   final Color backgroundColor;
+ 
+   @override
+@@ -54,7 +54,7 @@
+ 
+   final String message;
+   final String? subtitle;
+-  final IconData icon;
++  final IconData? icon;
+   final bool compact;
+   final bool elevated;
+   final EdgeInsetsGeometry? padding;
+@@ -84,8 +84,10 @@
+     return Column(
+       mainAxisSize: MainAxisSize.min,
+       children: [
+-        _LoadingIcon(icon: icon),
+-        const SizedBox(height: 14),
++        if (icon != null) ...[
++          _LoadingIcon(icon: icon!),
++          const SizedBox(height: 14),
++        ],
+         Text(
+           message,
+           textAlign: TextAlign.center,
+@@ -114,8 +116,10 @@
+   Widget _compactBody() {
+     return Row(
+       children: [
+-        _LoadingIcon(icon: icon, size: 38, iconSize: 19),
+-        const SizedBox(width: 12),
++        if (icon != null) ...[
++          _LoadingIcon(icon: icon!, size: 38, iconSize: 19),
++          const SizedBox(width: 12),
++        ],
+         Expanded(
+           child: Column(
+             crossAxisAlignment: CrossAxisAlignment.start,
+--- a/app/lib/widgets/micro_interactions.dart
++++ b/app/lib/widgets/micro_interactions.dart
+@@ -460,6 +460,176 @@
+           style: _numberStyle,
+         );
+       },
++    );
++  }
++}
++
++/// Rolls individual digits only after a new verified amount is supplied.
++class RollingMoneyText extends StatefulWidget {
++  const RollingMoneyText({
++    super.key,
++    required this.amount,
++    required this.style,
++    this.loading = false,
++    this.placeholderKey,
++    this.duration = const Duration(milliseconds: 640),
++  });
++
++  final int? amount;
++  final TextStyle style;
++  final bool loading;
++  final Key? placeholderKey;
++  final Duration duration;
++
++  @override
++  State<RollingMoneyText> createState() => _RollingMoneyTextState();
++}
++
++class _RollingMoneyTextState extends State<RollingMoneyText>
++    with SingleTickerProviderStateMixin {
++  late final AnimationController _controller;
++  int? _target;
++  Map<int, double> _from = {};
++  Map<int, double> _to = {};
++
++  @override
++  void initState() {
++    super.initState();
++    _controller = AnimationController(vsync: this, duration: widget.duration);
++    _setTarget(widget.loading ? null : widget.amount);
++  }
++
++  double _position(int column) {
++    final end = _to[column] ?? 0;
++    final start = _from[column] ?? end;
++    return start +
++        (end - start) * Curves.easeOutCubic.transform(_controller.value);
++  }
++
++  void _setTarget(int? amount) {
++    if (amount == null || amount <= 0 || amount == _target) return;
++    final previous = _target;
++    final digits = amount.toString().split('').reversed.toList();
++    final starts = <int, double>{};
++    final ends = <int, double>{};
++    for (var column = 0; column < digits.length; column++) {
++      final digit = int.parse(digits[column]).toDouble();
++      final start = previous == null ? digit : _position(column);
++      final currentDigit = start % 10;
++      final forward = previous == null || amount > previous;
++      final distance = forward
++          ? (digit - currentDigit + 10) % 10
++          : -((currentDigit - digit + 10) % 10);
++      starts[column] = start;
++      ends[column] = previous == null || distance.abs() < 0.001
++          ? start
++          : start + distance + (forward ? 10 : -10);
++    }
++    _from = starts;
++    _to = ends;
++    _target = amount;
++    if (previous == null) {
++      _controller.value = 1;
++    } else {
++      _controller.forward(from: 0);
++    }
++  }
++
++  @override
++  void didUpdateWidget(covariant RollingMoneyText oldWidget) {
++    super.didUpdateWidget(oldWidget);
++    _controller.duration = widget.duration;
++    _setTarget(widget.loading ? null : widget.amount);
++    if (widget.loading || widget.amount == null || widget.amount! <= 0) {
++      _controller.stop();
++      _controller.value = 1;
++    }
++  }
++
++  @override
++  void dispose() {
++    _controller.dispose();
++    super.dispose();
++  }
++
++  @override
++  Widget build(BuildContext context) {
++    final style =
++        DefaultTextStyle.of(context).style.merge(widget.style).copyWith(
++      letterSpacing: 0,
++      fontFeatures: const [FontFeature.tabularFigures()],
++    );
++    final textScaler = MediaQuery.textScalerOf(context);
++    final painter = TextPainter(
++      text: TextSpan(text: '0', style: style),
++      textDirection: TextDirection.ltr,
++      textScaler: textScaler,
++    )..layout();
++    final digitWidth = painter.width;
++    final height = painter.height;
++    painter.dispose();
++    final amount = widget.loading ? null : widget.amount;
++    if (amount == null || amount <= 0) {
++      return SizedBox(
++        key: widget.placeholderKey,
++        height: height,
++        child: Center(
++          child: widget.loading
++              ? RecarShimmer.box(width: digitWidth * 6, height: height * 0.75)
++              : Text('—', style: style),
++        ),
++      );
++    }
++    final formatted = amount.toString().replaceAllMapped(
++          RegExp(r'\B(?=(\d{3})+(?!\d))'),
++          (_) => ',',
++        );
++    final reduceMotion = MediaQuery.disableAnimationsOf(context);
++    return Semantics(
++      label: formatted,
++      liveRegion: true,
++      child: ExcludeSemantics(
++        child: AnimatedBuilder(
++          animation: _controller,
++          builder: (context, _) {
++            var column = amount.toString().length;
++            return Row(
++              mainAxisSize: MainAxisSize.min,
++              textDirection: TextDirection.ltr,
++              children: formatted.split('').map((character) {
++                if (character == ',') return Text(',', style: style);
++                column--;
++                final position =
++                    reduceMotion ? _to[column]! : _position(column);
++                final whole = position.floor();
++                final fraction = position - whole;
++                return ClipRect(
++                  child: SizedBox(
++                    width: digitWidth,
++                    height: height,
++                    child: Stack(
++                      clipBehavior: Clip.none,
++                      children: [
++                        for (var offset = 0; offset < 2; offset++)
++                          Positioned(
++                            top: (offset - fraction) * height,
++                            left: 0,
++                            right: 0,
++                            child: Text(
++                              '${(whole + offset) % 10}',
++                              textAlign: TextAlign.center,
++                              style: style,
++                            ),
++                          ),
++                      ],
++                    ),
++                  ),
++                );
++              }).toList(growable: false),
++            );
++          },
++        ),
++      ),
+     );
+   }
+ }
 --- a/app/pubspec.yaml
 +++ b/app/pubspec.yaml
-@@ -16,6 +16,7 @@
+@@ -12,10 +12,13 @@
+   cupertino_icons: ^1.0.2
+   dio: ^5.4.3
+   http: ^1.1.0
++  crypto: ^3.0.6
++  web: ^1.1.1
+   provider: ^6.1.1
    flutter_svg: ^2.2.0
    shared_preferences: ^2.2.3
    image_picker: ^1.1.2
@@ -1155,7 +1992,7 @@
    open_filex: ^4.7.0
    path_provider: ^2.0.15
    url_launcher: ^6.3.1
-@@ -28,6 +29,7 @@
+@@ -28,6 +31,7 @@
    package_info_plus: ^9.0.1
  
  dev_dependencies:
@@ -1163,7 +2000,7 @@
    flutter_test:
      sdk: flutter
    integration_test:
-@@ -37,30 +39,9 @@
+@@ -37,30 +41,9 @@
  flutter:
    uses-material-design: true
    fonts:
@@ -1197,6 +2034,15 @@
      - assets/cars/Audi/
 --- a/app/pubspec.lock
 +++ b/app/pubspec.lock
+@@ -82,7 +82,7 @@
+     source: hosted
+     version: "0.3.5+2"
+   crypto:
+-    dependency: transitive
++    dependency: "direct main"
+     description:
+       name: crypto
+       sha256: c8ea0233063ba03258fbcf2ca4d6dadfefe14f02fab57702265467a19f27fadf
 @@ -145,6 +145,30 @@
        url: "https://pub.dev"
      source: hosted
@@ -1251,3 +2097,178 @@
    file_selector_windows:
      dependency: transitive
      description:
+@@ -917,7 +949,7 @@
+     source: hosted
+     version: "15.0.2"
+   web:
+-    dependency: transitive
++    dependency: "direct main"
+     description:
+       name: web
+       sha256: "868d88a33d8a87b18ffc05f9f030ba328ffefba92d6c127917a2ba740f9cfe4a"
+--- /dev/null
++++ b/app/lib/services/kakao_web_browser.dart
+@@ -0,0 +1,2 @@
++export 'kakao_web_browser_stub.dart'
++    if (dart.library.js_interop) 'kakao_web_browser_web.dart';
+--- /dev/null
++++ b/app/lib/services/kakao_web_browser_stub.dart
+@@ -0,0 +1,8 @@
++class KakaoWebBrowser {
++  Uri get uri => Uri.base;
++  String? readPending() => null;
++  void writePending(String value) => throw UnsupportedError('Web only');
++  void clearPending() {}
++  void replaceUrl(Uri value) {}
++  void navigate(Uri value) => throw UnsupportedError('Web only');
++}
+--- /dev/null
++++ b/app/lib/services/kakao_web_browser_web.dart
+@@ -0,0 +1,13 @@
++import 'package:web/web.dart' as web;
++
++class KakaoWebBrowser {
++  static const _key = 'recar_kakao_login_pending';
++  Uri get uri => Uri.parse(web.window.location.href);
++  String? readPending() => web.window.sessionStorage.getItem(_key);
++  void writePending(String value) =>
++      web.window.sessionStorage.setItem(_key, value);
++  void clearPending() => web.window.sessionStorage.removeItem(_key);
++  void replaceUrl(Uri value) =>
++      web.window.history.replaceState(null, '', value.toString());
++  void navigate(Uri value) => web.window.location.assign(value.toString());
++}
+--- /dev/null
++++ b/app/lib/services/kakao_web_login.dart
+@@ -0,0 +1,131 @@
++import 'dart:convert';
++import 'dart:math';
++
++import 'package:crypto/crypto.dart';
++import 'package:dio/dio.dart';
++
++import '../models/auth.dart';
++import 'api_client.dart';
++import 'auth_session.dart';
++import 'kakao_web_browser.dart';
++
++class KakaoWebLoginException implements Exception {
++  const KakaoWebLoginException(this.message);
++  final String message;
++}
++
++class KakaoWebLogin {
++  KakaoWebLogin(
++      {KakaoWebBrowser? browser, Dio? client, DateTime Function()? now})
++      : _browser = browser ?? KakaoWebBrowser(),
++        _client = client ?? ApiClient.dio,
++        _now = now ?? DateTime.now;
++
++  static final instance = KakaoWebLogin();
++  final KakaoWebBrowser _browser;
++  final Dio _client;
++  final DateTime Function() _now;
++
++  static bool isCallback(Uri uri) =>
++      uri.queryParameters.containsKey('code') ||
++      uri.queryParameters.containsKey('error');
++
++  Future<void> start() async {
++    _browser.clearPending();
++    final random = Random.secure();
++    final verifier =
++        base64UrlEncode(List.generate(48, (_) => random.nextInt(256)))
++            .replaceAll('=', '');
++    final challenge =
++        base64UrlEncode(sha256.convert(utf8.encode(verifier)).bytes)
++            .replaceAll('=', '');
++    final current = _browser.uri;
++    final redirectUri = Uri.parse(current.origin).replace(
++      path: current.path.startsWith('/app/') ? '/app/' : '/',
++    );
++    final response = await _client.post<Map<String, dynamic>>(
++      '/api/v1/users/oauth/kakao/web/start',
++      data: {
++        'redirect_uri': redirectUri.toString(),
++        'code_challenge': challenge
++      },
++    );
++    final data = response.data ?? {};
++    final authorization =
++        Uri.tryParse(data['authorization_url'] as String? ?? '');
++    final state = data['state'] as String?;
++    if (authorization == null ||
++        authorization.scheme != 'https' ||
++        authorization.host != 'kauth.kakao.com' ||
++        authorization.path != '/oauth/authorize' ||
++        authorization.userInfo.isNotEmpty ||
++        state == null ||
++        state.isEmpty ||
++        authorization.queryParameters['state'] != state ||
++        authorization.queryParameters['redirect_uri'] !=
++            redirectUri.toString() ||
++        authorization.queryParameters['code_challenge'] != challenge ||
++        authorization.queryParameters['code_challenge_method'] != 'S256') {
++      throw const KakaoWebLoginException('카카오 로그인 연결 정보를 확인하지 못했습니다.');
++    }
++    try {
++      _browser.writePending(jsonEncode({
++        'state': state,
++        'verifier': verifier,
++        'expires_at':
++            _now().add(const Duration(minutes: 10)).millisecondsSinceEpoch,
++      }));
++      _browser.navigate(authorization);
++    } catch (_) {
++      _browser.clearPending();
++      throw const KakaoWebLoginException(
++          '브라우저 저장소를 사용할 수 없습니다. 일반 브라우저에서 다시 시도해 주세요.');
++    }
++  }
++
++  Future<OAuthLoginResult> complete() async {
++    final uri = _browser.uri;
++    final rawPending = _browser.readPending();
++    // Remove provider codes before session storage, analytics or API work.
++    final cleanQuery = Map<String, String>.from(uri.queryParameters)
++      ..removeWhere((key, _) =>
++          {'code', 'state', 'error', 'error_description'}.contains(key));
++    _browser.replaceUrl(
++        uri.replace(queryParameters: cleanQuery, fragment: '/login'));
++    _browser.clearPending();
++    Map<String, dynamic> pending;
++    try {
++      pending = jsonDecode(rawPending ?? '') as Map<String, dynamic>;
++    } catch (_) {
++      throw const KakaoWebLoginException(
++          '로그인 확인 정보가 없습니다. 카카오 로그인을 다시 시작해 주세요.');
++    }
++    if (pending['state'] != uri.queryParameters['state'] ||
++        pending['verifier'] is! String ||
++        pending['expires_at'] is! int ||
++        _now().millisecondsSinceEpoch >= (pending['expires_at'] as int)) {
++      throw const KakaoWebLoginException('로그인 확인 정보가 만료됐습니다. 다시 시작해 주세요.');
++    }
++    if (uri.queryParameters.containsKey('error')) {
++      throw const KakaoWebLoginException('카카오 로그인이 취소되었거나 동의가 완료되지 않았습니다.');
++    }
++    final code = uri.queryParameters['code'];
++    if (code == null || code.isEmpty) {
++      throw const KakaoWebLoginException('카카오 인증 정보를 받지 못했습니다. 다시 시작해 주세요.');
++    }
++    final response = await _client.post<Map<String, dynamic>>(
++      '/api/v1/users/oauth/kakao/web/complete',
++      data: {
++        'code': code,
++        'state': pending['state'],
++        'code_verifier': pending['verifier']
++      },
++    );
++    final data = response.data!;
++    final token = AuthToken.fromJson(data);
++    final user = AuthUser.fromJson(data['user'] as Map<String, dynamic>);
++    await AuthSession.instance
++        .setSession(accessToken: token.accessToken, user: user);
++    return OAuthLoginResult(user: user, isNewUser: data['is_new_user'] == true);
++  }
++}
