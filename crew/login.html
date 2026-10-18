@@ -300,7 +300,7 @@
     </footer>
 
     <script src="./guide/lucide.min.js"></script>
-    <script src="./session.js?v=74dcbbc7cd72"></script>
+    <script src="./session.js?v=274da04d3e6b"></script>
     <script src="./terms.js?v=e7148c79b08a"></script>
     <script>
       window.lucide?.createIcons({ attrs: { "stroke-width": 2 } });
@@ -343,7 +343,8 @@
       let checkedLoginId = "";
       let loginIdAvailable = false;
       let applicationSubmitted = false;
-      const isApply = new URLSearchParams(window.location.search).get("action") === "apply";
+      const entryParams = new URLSearchParams(window.location.search);
+      const isApply = entryParams.get("action") === "apply" || entryParams.get("mode") === "apply";
       let applicationTerms = null;
       let termsReady = false;
       document.body.classList.toggle("is-apply-page", isApply);
@@ -358,15 +359,18 @@
       showSessionNotice(new URLSearchParams(window.location.search).get("status"));
 
       async function resumeSession() {
-        const token = localStorage.getItem(TOKEN_KEY);
-        if (!token || isApply) return;
+        // A dashboard rejection must remain on the login screen, not resume again.
+        if (isApply || Object.hasOwn(Crew.notices, entryParams.get("status"))) return;
         try {
+          const token = localStorage.getItem(TOKEN_KEY);
+          if (!token) return;
           const response = await Crew.request("/api/v1/friends/status", { headers: { Authorization: `Bearer ${token}`, Accept: "application/json" } });
           if (response.status === 401) { localStorage.removeItem(TOKEN_KEY); showSessionNotice("EXPIRED"); return; }
           if (!response.ok) throw new Error(await Crew.errorMessage(response, "계정 상태를 확인하지 못했습니다."));
           const status = await response.json();
-          if (status.applied && status.status === "APPROVED") window.location.replace("./index.html");
-          else showSessionNotice(status.applied ? status.status : "NOT_APPLIED");
+          if (status.applied && status.status === "APPROVED") {
+            if (!Crew.resumeDashboard()) showError("자동 연결을 중단했습니다. 아래 로그인 버튼으로 다시 접속해 주세요.");
+          } else showSessionNotice(status.applied ? status.status : "NOT_APPLIED");
         } catch (error) { showError(error.message); }
       }
 
@@ -472,6 +476,7 @@
           const result = await response.json();
           if (typeof result.access_token !== "string" || !result.access_token) throw new Error("로그인을 완료하지 못했습니다. 다시 시도해 주세요.");
           localStorage.setItem(TOKEN_KEY, result.access_token);
+          Crew.resetAutoNavigation();
           window.location.href = "./index.html";
         } catch (error) {
           showError(error instanceof Error ? error.message : "로그인 정보를 확인해 주세요.");

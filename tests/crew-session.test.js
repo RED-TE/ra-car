@@ -9,7 +9,7 @@ const source = readFileSync(require.resolve("../crew/session.js"), "utf8");
 
 test("Crew entry pages invalidate the browser cache when the session script changes", () => {
   const version = createHash("sha256").update(source).digest("hex").slice(0, 12);
-  for (const file of ["../crew/login.html", "../crew/index.html"]) {
+  for (const file of ["../crew/login.html", "../crew/index.html", "../crew/welcome.html"]) {
     const html = readFileSync(require.resolve(file), "utf8");
     assert.ok(html.includes(`src="./session.js?v=${version}"`), `${file} must use the current session content hash`);
   }
@@ -22,11 +22,12 @@ test("Crew application invalidates the terms helper cache when its content chang
   assert.ok(login.includes(`src="./terms.js?v=${version}"`));
 });
 
-function harness(fetch) {
+function harness(fetch, options = {}) {
   const timers = new Map();
-  const window = {};
+  const window = options.window || {};
   runInNewContext(source, {
     window, fetch, AbortController,
+    Date: options.Date || Date,
     setTimeout(callback, delay) {
       const id = Symbol("timeout");
       timers.set(id, { callback, delay });
@@ -61,6 +62,57 @@ test("Crew request keeps the timeout active while the response body is pending",
   assert.equal(settledBeforeBody, false);
   assert.deepEqual(timerDelays, [15000]);
   assert.equal(h.timers.size, 0);
+});
+
+test("Crew status and dashboard requests never reuse a cached account response", async () => {
+  const requests = [];
+  const h = harness(async (url, options) => {
+    requests.push({ url, ...options });
+    return new Response("{}");
+  });
+  for (const path of ["/api/v1/friends/status", "/api/v1/friends/dashboard"]) {
+    await h.crew.request(path, { cache: "force-cache", headers: { Authorization: "Bearer fixture" } });
+  }
+  assert.equal(requests.length, 2);
+  for (const request of requests) {
+    assert.equal(request.cache, "no-store");
+    assert.equal(request.headers.Authorization, "Bearer fixture");
+  }
+});
+
+test("automatic dashboard navigation has a tab-local budget and manual login can reset it", () => {
+  const values = new Map();
+  const destinations = [];
+  let now = 1000;
+  const h = harness(undefined, { Date: { now: () => now }, window: {
+    location: { replace: target => destinations.push(target) },
+    sessionStorage: {
+      getItem: key => values.get(key) || null,
+      setItem: (key, value) => values.set(key, value),
+      removeItem: key => values.delete(key),
+    },
+  } });
+  assert.equal(h.crew.resumeDashboard(), true);
+  assert.equal(h.crew.resumeDashboard(), true);
+  assert.equal(h.crew.resumeDashboard(), false);
+  assert.deepEqual(destinations, ["./index.html", "./index.html"]);
+  assert.deepEqual(JSON.parse([...values.values()][0]), { startedAt: 1000, count: 2 });
+  h.crew.resetAutoNavigation();
+  assert.equal(h.crew.resumeDashboard(), true);
+  now += 30001;
+  assert.equal(h.crew.resumeDashboard(), true);
+  assert.equal(values.size, 1);
+});
+
+test("unavailable or corrupt tab storage never starts an unbounded automatic redirect", () => {
+  for (const getItem of [() => { throw new Error("blocked"); }, () => "invalid-json"]) {
+    const h = harness(undefined, { window: {
+      location: { replace: () => assert.fail("automatic navigation must stop") },
+      sessionStorage: { getItem, removeItem: () => { throw new Error("blocked"); } },
+    } });
+    assert.equal(h.crew.resumeDashboard(), false);
+    assert.doesNotThrow(() => h.crew.resetAutoNavigation());
+  }
 });
 
 test("Crew request aborts a stalled body and reports a readable timeout", async () => {

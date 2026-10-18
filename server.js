@@ -55,6 +55,7 @@ const publicStaticFiles = new Set([
   "/crew/index.html",
   "/crew/crew.css",
   "/crew/login.html",
+  "/crew/login/index.html",
   "/crew/login.css",
   "/crew/session.js",
   "/crew/terms.js",
@@ -2268,7 +2269,7 @@ function serveStatic(request, response, url) {
     requestedPath = "/friends/index.html";
   }
   if (requestedPath === "/crew" || requestedPath === "/crew/") {
-    if (url.searchParams.get("action") === "apply") {
+    if (url.searchParams.get("action") === "apply" || url.searchParams.get("mode") === "apply") {
       response.writeHead(302, { Location: "/crew/login.html?action=apply", "Cache-Control": "no-store" });
       response.end();
       return;
@@ -2277,9 +2278,10 @@ function serveStatic(request, response, url) {
     response.end();
     return;
   }
-  if (requestedPath === "/crew/login" || requestedPath === "/crew/login/") {
+  if (requestedPath === "/crew/login") {
     requestedPath = "/crew/login.html";
   }
+  if (requestedPath === "/crew/login/") requestedPath = "/crew/login/index.html";
   if (requestedPath === "/crew/knowledge" || requestedPath === "/crew/knowledge/") {
     requestedPath = "/crew/knowledge/index.html";
   }

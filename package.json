@@ -6,9 +6,10 @@
   "scripts": {
     "start": "node server.js",
     "check": "node tools/sync-app-entrypoints.cjs --check && node --check lib/app-entry-referral.js && node --check server.js && node --check script.js && node --check home.js && node --check lib/vehicle-margin.js && node --check tools/update-static-vehicle-margin.cjs && node --check crew/session.js && node --check crew/terms.js && node --check crew/guide/knowledge.js && node --check crew/guide/knowledge-data.js",
-    "lint": "eslint home.js crew/terms.js crew/guide/knowledge.js crew/guide/knowledge-data.js tests playwright.config.js",
+    "lint": "eslint home.js crew/session.js crew/terms.js crew/guide/knowledge.js crew/guide/knowledge-data.js tools/verify-crew-production.cjs tests playwright.config.js",
     "typecheck": "tsc -p jsconfig.knowledge.json",
-    "test": "node --test tests/server-routes.test.js tests/worker-referral.test.js tests/worker-crew-entry.test.js tests/crew-session.test.js tests/app-startup.test.js tests/app-entrypoints.test.js",
+    "test": "node --test tests/server-routes.test.js tests/worker-referral.test.js tests/worker-crew-entry.test.js tests/crew-session.test.js tests/crew-production.test.js tests/app-startup.test.js tests/app-entrypoints.test.js",
+    "verify:crew:production": "node tools/verify-crew-production.cjs",
     "sync:app-entries": "node tools/sync-app-entrypoints.cjs",
     "test:app-entries": "playwright test tests/e2e/home-app-entry.spec.js",
     "optimize:app": "node tools/optimize-app-fonts.cjs",

@@ -49,6 +49,9 @@ jobs:
       - name: Configure Pages
         uses: actions/configure-pages@v5
 
+      - name: Verify live Crew route ownership before publishing
+        run: npm run verify:crew:production -- --routing-only
+
       - name: Stage public site without test dependencies
         run: |
           mkdir -p "$RUNNER_TEMP/recar-public"
@@ -62,3 +65,6 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+      - name: Verify the published Crew screens and session version
+        run: npm run verify:crew:production -- --expect-local
