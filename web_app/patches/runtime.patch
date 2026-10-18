@@ -2381,6 +2381,47 @@
                            lower == 'full_name' ||
                            lower == 'given_name' ||
                            lower == 'family_name')
+--- a/app/lib/screens/garage_screen.dart
++++ b/app/lib/screens/garage_screen.dart
+@@ -2134,6 +2134,16 @@
+   @override
+   Widget build(BuildContext context) {
+     final item = widget.item;
++    final canManageDocuments = const {
++      AppStatus.draft,
++      AppStatus.docsPending,
++      AppStatus.submitted,
++      AppStatus.underReview,
++      AppStatus.needMoreInfo,
++      AppStatus.approved,
++      AppStatus.contracting,
++      AppStatus.delivering,
++    }.contains(item.status);
+     final bottomInset = MediaQuery.paddingOf(context).bottom;
+ 
+     Widget padded(Widget child) => Padding(
+@@ -2161,6 +2171,21 @@
+               SliverList(
+                 delegate: SliverChildListDelegate([
+                   const SizedBox(height: 4),
++                  if (canManageDocuments) ...[
++                    padded(OutlinedButton.icon(
++                      onPressed: widget.isUpdating
++                          ? null
++                          : (item.status == AppStatus.draft ||
++                                  item.status == AppStatus.docsPending)
++                              ? widget.onSubmit
++                              : item.status == AppStatus.needMoreInfo
++                                  ? widget.onRequestedDocuments
++                                  : widget.onAddDocuments,
++                      icon: const Icon(Icons.description_outlined, size: 20),
++                      label: const Text('서류 확인·추가'),
++                    )),
++                    const SizedBox(height: 12),
++                  ],
+                   _GarageReportFinanceComparisonPanel(
+                     item: item,
+                     reportFuture: _reportFuture,
 --- /dev/null
 +++ b/app/lib/services/kakao_web_browser.dart
 @@ -0,0 +1,2 @@

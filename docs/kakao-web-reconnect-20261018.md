@@ -8,7 +8,7 @@ Flutter source and all current web overlays for pricing proof, loading speed,
 referrals, document upload and decorative-image removal.
 
 - Source: `RECAREA/recar_app` at `4b0498df0e63aa2c8bbae66e59e1c9a31037e7b0`.
-- Build: `web-kakao-reconnect-20261018`, Flutter 3.41.1, `/app/` base path.
+- Build: `web-kakao-documents-20261019`, Flutter 3.41.1, `/app/` base path.
 - Source patch and compiled file hashes are in `app/release.json`.
 - API counterpart: https://github.com/RECAREA/recar_app/pull/134
 
@@ -50,6 +50,14 @@ that setup does not prove a working public login. No credentials are recorded he
 - Real compiled web E2E: root and `/app/` OAuth start/callback/error paths passed,
   and root, `/app/`, `/inquiry/` entry tests passed at 360/390/768/1440px.
 - Production/provider login and real document submission remain separate checks.
+
+The document-entry follow-up passes 44 Chrome tests covering existing-application
+document access, Kakao proof handling, login layout, upload failures and protected
+application replacement. The native app's actual Kakao sign-in, session retention
+across a local build update and existing document-list retrieval were observed.
+This does not prove production web OAuth or an actual synthetic document upload.
+The report entry uses existing document APIs without replacing/cancelling saved
+applications or changing pricing, provider scopes or document ownership checks.
 
 The callback test proves the normal RE:CAR session is created, OAuth parameters
 are removed, existing saved records are preserved, and missing browser proof does

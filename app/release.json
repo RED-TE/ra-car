@@ -1,8 +1,8 @@
 {
   "source_repository": "RECAREA/recar_app",
   "source_commit": "4b0498df0e63aa2c8bbae66e59e1c9a31037e7b0",
-  "web_source_patch_sha256": "c57f6436c0559a66ce0b51ee16e1e490eb771e0bc8ef9e802a8ab9e7662c86fc",
-  "build_id": "web-kakao-reconnect-20261018",
+  "web_source_patch_sha256": "091184e1e9b15ad3958f765bc6c4891c78568bb7d412b45bccb3c17c50eaf5bd",
+  "build_id": "web-kakao-documents-20261019",
   "target": "https://recarplan.com/app/",
   "base_path": "/app/",
   "api_base_url": "https://api.recarplan.com",
@@ -10,9 +10,9 @@
   "native_app_modified": false,
   "validation": "See docs/app-web-new3-catalog-20261015.md and docs/app-web-speed-documents-20261015.md; local evidence is not deployment proof",
   "sha256": {
-    "index.html": "b58ab5ef704c9cbe943c0364d211687386b7155e91477b2745d509134de81722",
-    "flutter_bootstrap.js": "5ed3e2105a3394db8b93e968b92d805189155de4b0b2b4434af7544f8bf4197a",
-    "main.dart.js": "b97540d43f3202458a0cfb3e2ffdbded5b3d356ebb20747f80123e829f8e688e",
+    "index.html": "29b2d297eff05037b4cabee627f1cd3d38f1fc8e0ef3acd622d8db213d641af4",
+    "flutter_bootstrap.js": "a32a67fe739032da0b2ad1b5f04913572547c25c93f40df8a1329297beef1672",
+    "main.dart.js": "e2e82c32fbb39578b1155b097d1a0d567d88cb9031fe26694486b5e5771cbffa",
     "assets/FontManifest.json": "e2d22b7e9de65becff9e0cacd83496d37c01d8e9ca62087cee6616ecadee7db7",
     "assets/AssetManifest.bin.json": "3fe1b79853172d2381069a61b70e4dab41c5076bef1855c99981d4681f55a8cf"
   }
