@@ -15,3 +15,22 @@ invalid codes return 404, and unsupported methods return 405. In a dedicated
 test environment, verify the web app captures the code and attributes an
 inquiry to the correct crew account. A redirect check alone does not prove
 inquiry attribution or reward eligibility; those need separate verification.
+
+## Crew login entry protection
+
+`crew-entry.mjs` and `wrangler-crew-entry.jsonc` cover only the four exact
+extensionless Crew entry/login paths. They redirect to the published static
+HTML screens and never fetch the cached Next login page. This prevents a
+saved login from repeatedly navigating back to the same `/crew/` document.
+Application intent, validated referral codes and supported session notices
+are retained; arbitrary destinations and credentials are not forwarded.
+Cloudflare matches exact routes against the full URL, including the query
+string. Entries with query strings therefore continue through the existing
+static site's application/referral handling; no wildcard route is added.
+See https://developers.cloudflare.com/workers/configuration/routing/routes/#matching-behavior.
+
+Deploy only after approval with `wrangler deploy --config workers/wrangler-crew-entry.jsonc`.
+This must not replace the referral Worker or routes for APIs, `/_next`, the
+dashboard HTML, N-job or guide. Verify GET/HEAD, application mode and login
+after deployment. To roll back, restore the previous bindings on these exact
+four routes; do not alter unrelated Worker routes or clear customer storage.
