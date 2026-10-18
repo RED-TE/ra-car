@@ -14,6 +14,11 @@ referrals, document upload and decorative-image removal.
 
 ## Deployment gate
 
+The user approved ordinary app 1451784 for public web login. The preflight must
+also reject app 1451987. The API verifies the app ID using Kakao token information
+before user lookup. Existing native behavior and existing account records are
+preserved; cross-app account linking still requires proof of both identities.
+
 Do not merge/publish this build until the API counterpart is checked and deployed,
 and the correct existing production Kakao application is confirmed. Pages now
 checks both fixed start endpoints before uploading assets; this does not exchange
@@ -28,14 +33,19 @@ test apps are for testing only and require the original app keys for production:
 https://developers.kakao.com/docs/ko/app-setting/app#test-app
 
 At preparation time the production API returned 404 and its service environment
-had no Kakao web variables. Existing authorized SSH access was confirmed without
-changing server files or configuration. No credentials are recorded here.
+had no Kakao web variables. On 2026-10-19 the approved ordinary-app credentials
+were stored only in the existing API environment, with a protected backup.
+Both redirect addresses, app ID and protected permissions were checked without
+printing credentials. The API code has not yet been deployed or restarted, so
+that setup does not prove a working public login. No credentials are recorded here.
 
 ## Local checks
 
 - Flutter Chrome tests: 33 passed (Kakao, login layout 320/390/430px, document
   upload, application replacement and referral persistence; mocked APIs).
 - Release web build: passed.
+- Website build and unit checks: 50 passed, including rejection of the test app
+  in the deployment preflight.
 - Complete web E2E suite: 149 passed, with synthetic API responses where needed.
 - Real compiled web E2E: root and `/app/` OAuth start/callback/error paths passed,
   and root, `/app/`, `/inquiry/` entry tests passed at 360/390/768/1440px.

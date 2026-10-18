@@ -3,10 +3,10 @@ const assert = require("node:assert/strict");
 const fs = require("node:fs");
 const { verify } = require("../tools/verify-kakao-web-ready.cjs");
 
-function response(body, { host = "kauth.kakao.com", cache = "no-store" } = {}) {
+function response(body, { host = "kauth.kakao.com", cache = "no-store", appId = 1451784 } = {}) {
   const url = new URL(`https://${host}/oauth/authorize`);
   url.search = new URLSearchParams({ redirect_uri: body.redirect_uri, code_challenge: body.code_challenge, code_challenge_method: "S256", state: "synthetic-state", response_type: "code", client_id: "synthetic-id" });
-  return new Response(JSON.stringify({ authorization_url: url.href, state: "synthetic-state" }), { status: 200, headers: { "cache-control": cache } });
+  return new Response(JSON.stringify({ authorization_url: url.href, state: "synthetic-state", app_id: appId }), { status: 200, headers: { "cache-control": cache } });
 }
 
 test("deployment preflight checks only two fixed start requests, never a token exchange or user data", async () => {
@@ -35,6 +35,7 @@ test("missing API blocks publication rather than deploying an unusable login but
 test("cached responses and non-provider targets block publication", async () => {
   await assert.rejects(verify({ fetchImpl: async (_url, options) => response(JSON.parse(options.body), { cache: "max-age=60" }) }), /must not be cached/);
   await assert.rejects(verify({ fetchImpl: async (_url, options) => response(JSON.parse(options.body), { host: "not-kakao.example.test" }) }), /contract is invalid/);
+  await assert.rejects(verify({ fetchImpl: async (_url, options) => response(JSON.parse(options.body), { appId: 1451987 }) }), /contract is invalid/);
 });
 
 test("Pages checks the Kakao API and real web callback before uploading public assets", () => {

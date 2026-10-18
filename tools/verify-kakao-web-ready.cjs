@@ -22,7 +22,7 @@ async function verify({ fetchImpl = fetch } = {}) {
     } catch {
       throw new Error("Kakao web start response is invalid");
     }
-    if (url.origin !== "https://kauth.kakao.com" || url.pathname !== "/oauth/authorize" || url.username || url.password ||
+    if (data.app_id !== 1451784 || url.origin !== "https://kauth.kakao.com" || url.pathname !== "/oauth/authorize" || url.username || url.password ||
         !data.state || url.searchParams.get("state") !== data.state ||
         url.searchParams.get("redirect_uri") !== redirect ||
         url.searchParams.get("code_challenge") !== challenge || url.searchParams.get("code_challenge_method") !== "S256" ||
