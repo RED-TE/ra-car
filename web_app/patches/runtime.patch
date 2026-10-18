@@ -1,6 +1,14 @@
 --- a/app/lib/main.dart
 +++ b/app/lib/main.dart
-@@ -45,6 +45,22 @@
+@@ -4,6 +4,7 @@
+ import 'package:flutter/material.dart';
+ import 'package:flutter/rendering.dart';
+ import 'package:kakao_flutter_sdk_user/kakao_flutter_sdk_user.dart';
++import 'services/kakao_web_login.dart';
+ 
+ import 'config/social_login_config.dart';
+ import 'firebase_options.dart';
+@@ -45,6 +46,24 @@
  }
  
  Future<void> _bootstrapApp() async {
@@ -15,15 +23,17 @@
 +      await AuthSession.instance.clear();
 +    }
 +    await WebReferralService.instance.initialize();
-+    WidgetsBinding.instance.addPostFrameCallback((_) {
-+      _initializeWebIntegrations().ignore();
-+    });
++    if (!KakaoWebLogin.isCallback(Uri.base)) {
++      WidgetsBinding.instance.addPostFrameCallback((_) {
++        _initializeWebIntegrations().ignore();
++      });
++    }
 +    return;
 +  }
    if (kKakaoNativeAppKey.isNotEmpty) {
      await KakaoSdk.init(
        nativeAppKey: kKakaoNativeAppKey,
-@@ -100,6 +116,23 @@
+@@ -100,6 +119,19 @@
    await PushNotificationService.instance.initialize(
      firebaseEnabled: !_disableFirebaseAnalytics,
    );
@@ -31,10 +41,6 @@
 +
 +Future<void> _initializeWebIntegrations() async {
 +  try {
-+    if (kKakaoNativeAppKey.isNotEmpty) {
-+      await KakaoSdk.init(
-+          nativeAppKey: kKakaoNativeAppKey, customScheme: kKakaoUrlScheme);
-+    }
 +    if (!_disableFirebaseAnalytics) {
 +      await Firebase.initializeApp(
 +          options: DefaultFirebaseOptions.currentPlatform);
@@ -47,7 +53,7 @@
  }
  
  class RecarApp extends StatelessWidget {
-@@ -113,9 +146,10 @@
+@@ -113,9 +145,13 @@
        showSemanticsDebugger: false,
        // ── 전역 navigatorKey: 인터셉터(BuildContext 없음)에서 화면 전환용 ──
        navigatorKey: appNavigatorKey,
@@ -55,7 +61,10 @@
 -        child: _AppBootstrapGate(child: MainNavigator()),
 -      ),
 +      home: kIsWeb
-+          ? const _AppBootstrapGate(child: MainNavigator())
++          ? _AppBootstrapGate(
++              child: KakaoWebLogin.isCallback(Uri.base)
++                  ? const AuthScreen()
++                  : const MainNavigator())
 +          : const AppUpdateGate(
 +              child: _AppBootstrapGate(child: MainNavigator())),
        builder: (context, child) {
@@ -496,15 +505,85 @@
    }
 --- a/app/lib/screens/auth_screen.dart
 +++ b/app/lib/screens/auth_screen.dart
-@@ -19,7 +19,6 @@
+@@ -17,9 +17,9 @@
+ import '../services/api_client.dart';
+ import '../services/auth_api.dart';
  import '../services/auth_session.dart';
++import '../services/kakao_web_login.dart';
  import '../theme/app_colors.dart';
  import '../theme/app_typography.dart';
 -import '../utils/vehicle_image_resolver.dart' show kVehiclePlaceholderAsset;
  import '../widgets/micro_interactions.dart';
  
  // 가입 동의 링크는 마이 화면과 같은 확정본을 연다(웹사이트 /terms 는 '상담 유의사항').
-@@ -529,45 +528,10 @@
+@@ -107,6 +107,11 @@
+     _phoneCtrl.addListener(_onPhoneChanged);
+     _passwordCtrl.addListener(_refresh);
+     _confirmPasswordCtrl.addListener(_refresh);
++    if (kIsWeb && KakaoWebLogin.isCallback(Uri.base)) {
++      WidgetsBinding.instance.addPostFrameCallback((_) {
++        if (mounted) _completeKakaoWebLogin();
++      });
++    }
+     if (widget.initialMessage != null && widget.initialMessage!.isNotEmpty) {
+       WidgetsBinding.instance.addPostFrameCallback((_) {
+         if (!mounted) return;
+@@ -346,13 +351,17 @@
+ 
+   Future<void> _signInWithKakao() async {
+     if (_isSubmitting) return;
+-    if (kKakaoNativeAppKey.isEmpty) {
++    if (!kIsWeb && kKakaoNativeAppKey.isEmpty) {
+       _showError('카카오 로그인 설정이 누락됐어요. 최신 버전으로 다시 설치 후 시도해 주세요.');
+       return;
+     }
+ 
+     setState(() => _isSubmitting = true);
+     try {
++      if (kIsWeb) {
++        await KakaoWebLogin.instance.start();
++        return;
++      }
+       final token = await _loginWithKakaoSdk();
+       if (kDebugMode) debugPrint('[KakaoLogin] SDK login success');
+ 
+@@ -363,6 +372,8 @@
+       }
+       if (!mounted) return;
+       await _finishAuth(forceOnboarding: result.isNewUser);
++    } on KakaoWebLoginException catch (error) {
++      _showError(error.message);
+     } on PlatformException catch (error) {
+       if (_isKakaoCancel(error)) {
+         if (kDebugMode) debugPrint('[KakaoLogin] canceled');
+@@ -408,6 +419,26 @@
+     return text.contains('cancel') || text.contains('cancelled');
+   }
+ 
++  Future<void> _completeKakaoWebLogin() async {
++    if (_isSubmitting) return;
++    setState(() => _isSubmitting = true);
++    try {
++      final result = await KakaoWebLogin.instance.complete();
++      if (mounted) await _finishAuth(forceOnboarding: result.isNewUser);
++    } on KakaoWebLoginException catch (error) {
++      if (mounted) _showError(error.message);
++    } on DioException catch (error) {
++      if (mounted) {
++        _showError(ApiClient.extractErrorMessage(error) ??
++            '카카오 로그인 연결을 확인하지 못했습니다. 다시 시도해 주세요.');
++      }
++    } catch (_) {
++      if (mounted) _showError('카카오 로그인 응답을 확인하지 못했습니다. 다시 시도해 주세요.');
++    } finally {
++      if (mounted) setState(() => _isSubmitting = false);
++    }
++  }
++
+   bool _isInvalidKakaoUrl(Object error) {
+     final text = error.toString();
+     return text.contains('INVALID_URL') ||
+@@ -529,45 +560,10 @@
            padding: EdgeInsets.fromLTRB(20, 4, 20, bottomInset + 48),
            children: [
              if (_isLogin) ...[
@@ -2161,7 +2240,14 @@
  }
 --- a/app/pubspec.yaml
 +++ b/app/pubspec.yaml
-@@ -16,6 +16,7 @@
+@@ -11,11 +11,14 @@
+     sdk: flutter
+   cupertino_icons: ^1.0.2
+   dio: ^5.4.3
++  crypto: 3.0.7
++  web: 1.1.1
+   http: ^1.1.0
+   provider: ^6.1.1
    flutter_svg: ^2.2.0
    shared_preferences: ^2.2.3
    image_picker: ^1.1.2
@@ -2169,7 +2255,7 @@
    open_filex: ^4.7.0
    path_provider: ^2.0.15
    url_launcher: ^6.3.1
-@@ -28,6 +29,7 @@
+@@ -28,6 +31,7 @@
    package_info_plus: ^9.0.1
  
  dev_dependencies:
@@ -2177,7 +2263,7 @@
    flutter_test:
      sdk: flutter
    integration_test:
-@@ -37,30 +39,9 @@
+@@ -37,30 +41,9 @@
  flutter:
    uses-material-design: true
    fonts:
@@ -2211,6 +2297,15 @@
      - assets/cars/Audi/
 --- a/app/pubspec.lock
 +++ b/app/pubspec.lock
+@@ -82,7 +82,7 @@
+     source: hosted
+     version: "0.3.5+2"
+   crypto:
+-    dependency: transitive
++    dependency: "direct main"
+     description:
+       name: crypto
+       sha256: c8ea0233063ba03258fbcf2ca4d6dadfefe14f02fab57702265467a19f27fadf
 @@ -145,6 +145,30 @@
        url: "https://pub.dev"
      source: hosted
@@ -2265,3 +2360,190 @@
    file_selector_windows:
      dependency: transitive
      description:
+@@ -917,7 +949,7 @@
+     source: hosted
+     version: "15.0.2"
+   web:
+-    dependency: transitive
++    dependency: "direct main"
+     description:
+       name: web
+       sha256: "868d88a33d8a87b18ffc05f9f030ba328ffefba92d6c127917a2ba740f9cfe4a"
+--- a/app/lib/services/api_client.dart
++++ b/app/lib/services/api_client.dart
+@@ -187,6 +187,9 @@
+                           lower.contains('username') ||
+                           lower.contains('phone') ||
+                           lower.contains('identity') ||
++                          lower == 'code' ||
++                          lower == 'state' ||
++                          lower.startsWith('code_') ||
+                           lower == 'full_name' ||
+                           lower == 'given_name' ||
+                           lower == 'family_name')
+--- /dev/null
++++ b/app/lib/services/kakao_web_browser.dart
+@@ -0,0 +1,2 @@
++export 'kakao_web_browser_stub.dart'
++    if (dart.library.js_interop) 'kakao_web_browser_web.dart';
+--- /dev/null
++++ b/app/lib/services/kakao_web_browser_stub.dart
+@@ -0,0 +1,8 @@
++class KakaoWebBrowser {
++  Uri get uri => Uri.base;
++  String? readPending() => null;
++  void writePending(String value) => throw UnsupportedError('Web only');
++  void clearPending() {}
++  void replaceUrl(Uri value) {}
++  void navigate(Uri value) => throw UnsupportedError('Web only');
++}
+--- /dev/null
++++ b/app/lib/services/kakao_web_browser_web.dart
+@@ -0,0 +1,13 @@
++import 'package:web/web.dart' as web;
++
++class KakaoWebBrowser {
++  static const _key = 'recar_kakao_login_pending';
++  Uri get uri => Uri.parse(web.window.location.href);
++  String? readPending() => web.window.sessionStorage.getItem(_key);
++  void writePending(String value) =>
++      web.window.sessionStorage.setItem(_key, value);
++  void clearPending() => web.window.sessionStorage.removeItem(_key);
++  void replaceUrl(Uri value) =>
++      web.window.history.replaceState(null, '', value.toString());
++  void navigate(Uri value) => web.window.location.assign(value.toString());
++}
+--- /dev/null
++++ b/app/lib/services/kakao_web_login.dart
+@@ -0,0 +1,131 @@
++import 'dart:convert';
++import 'dart:math';
++
++import 'package:crypto/crypto.dart';
++import 'package:dio/dio.dart';
++
++import '../models/auth.dart';
++import 'api_client.dart';
++import 'auth_session.dart';
++import 'kakao_web_browser.dart';
++
++class KakaoWebLoginException implements Exception {
++  const KakaoWebLoginException(this.message);
++  final String message;
++}
++
++class KakaoWebLogin {
++  KakaoWebLogin(
++      {KakaoWebBrowser? browser, Dio? client, DateTime Function()? now})
++      : _browser = browser ?? KakaoWebBrowser(),
++        _client = client ?? ApiClient.dio,
++        _now = now ?? DateTime.now;
++
++  static final instance = KakaoWebLogin();
++  final KakaoWebBrowser _browser;
++  final Dio _client;
++  final DateTime Function() _now;
++
++  static bool isCallback(Uri uri) =>
++      uri.queryParameters.containsKey('code') ||
++      uri.queryParameters.containsKey('error');
++
++  Future<void> start() async {
++    _browser.clearPending();
++    final random = Random.secure();
++    final verifier =
++        base64UrlEncode(List.generate(48, (_) => random.nextInt(256)))
++            .replaceAll('=', '');
++    final challenge =
++        base64UrlEncode(sha256.convert(utf8.encode(verifier)).bytes)
++            .replaceAll('=', '');
++    final current = _browser.uri;
++    final redirectUri = Uri.parse(current.origin).replace(
++      path: current.path.startsWith('/app/') ? '/app/' : '/',
++    );
++    final response = await _client.post<Map<String, dynamic>>(
++      '/api/v1/users/oauth/kakao/web/start',
++      data: {
++        'redirect_uri': redirectUri.toString(),
++        'code_challenge': challenge
++      },
++    );
++    final data = response.data ?? {};
++    final authorization =
++        Uri.tryParse(data['authorization_url'] as String? ?? '');
++    final state = data['state'] as String?;
++    if (authorization == null ||
++        authorization.scheme != 'https' ||
++        authorization.host != 'kauth.kakao.com' ||
++        authorization.path != '/oauth/authorize' ||
++        authorization.userInfo.isNotEmpty ||
++        state == null ||
++        state.isEmpty ||
++        authorization.queryParameters['state'] != state ||
++        authorization.queryParameters['redirect_uri'] !=
++            redirectUri.toString() ||
++        authorization.queryParameters['code_challenge'] != challenge ||
++        authorization.queryParameters['code_challenge_method'] != 'S256') {
++      throw const KakaoWebLoginException('카카오 로그인 연결 정보를 확인하지 못했습니다.');
++    }
++    try {
++      _browser.writePending(jsonEncode({
++        'state': state,
++        'verifier': verifier,
++        'expires_at':
++            _now().add(const Duration(minutes: 10)).millisecondsSinceEpoch,
++      }));
++      _browser.navigate(authorization);
++    } catch (_) {
++      _browser.clearPending();
++      throw const KakaoWebLoginException(
++          '브라우저 저장소를 사용할 수 없습니다. 일반 브라우저에서 다시 시도해 주세요.');
++    }
++  }
++
++  Future<OAuthLoginResult> complete() async {
++    final uri = _browser.uri;
++    final rawPending = _browser.readPending();
++    // Remove provider codes before session storage, analytics or API work.
++    final cleanQuery = Map<String, String>.from(uri.queryParameters)
++      ..removeWhere((key, _) =>
++          {'code', 'state', 'error', 'error_description'}.contains(key));
++    _browser.replaceUrl(
++        uri.replace(queryParameters: cleanQuery, fragment: '/login'));
++    _browser.clearPending();
++    Map<String, dynamic> pending;
++    try {
++      pending = jsonDecode(rawPending ?? '') as Map<String, dynamic>;
++    } catch (_) {
++      throw const KakaoWebLoginException(
++          '로그인 확인 정보가 없습니다. 카카오 로그인을 다시 시작해 주세요.');
++    }
++    if (pending['state'] != uri.queryParameters['state'] ||
++        pending['verifier'] is! String ||
++        pending['expires_at'] is! int ||
++        _now().millisecondsSinceEpoch >= (pending['expires_at'] as int)) {
++      throw const KakaoWebLoginException('로그인 확인 정보가 만료됐습니다. 다시 시작해 주세요.');
++    }
++    if (uri.queryParameters.containsKey('error')) {
++      throw const KakaoWebLoginException('카카오 로그인이 취소되었거나 동의가 완료되지 않았습니다.');
++    }
++    final code = uri.queryParameters['code'];
++    if (code == null || code.isEmpty) {
++      throw const KakaoWebLoginException('카카오 인증 정보를 받지 못했습니다. 다시 시작해 주세요.');
++    }
++    final response = await _client.post<Map<String, dynamic>>(
++      '/api/v1/users/oauth/kakao/web/complete',
++      data: {
++        'code': code,
++        'state': pending['state'],
++        'code_verifier': pending['verifier']
++      },
++    );
++    final data = response.data!;
++    final token = AuthToken.fromJson(data);
++    final user = AuthUser.fromJson(data['user'] as Map<String, dynamic>);
++    await AuthSession.instance
++        .setSession(accessToken: token.accessToken, user: user);
++    return OAuthLoginResult(user: user, isNewUser: data['is_new_user'] == true);
++  }
++}

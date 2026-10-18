@@ -27,7 +27,7 @@ module.exports = [
     },
   },
   {
-    files: ["tests/**/*.js", "tools/verify-crew-production.cjs", "playwright.config.js"],
+    files: ["tests/**/*.js", "tools/verify-crew-production.cjs", "tools/verify-kakao-web-ready.cjs", "playwright.config.js"],
     languageOptions: {
       ecmaVersion: 2022,
       sourceType: "commonjs",
