@@ -1,0 +1,12 @@
+{
+  "name": "recar-crew-entry",
+  "main": "crew-entry.mjs",
+  "compatibility_date": "2026-10-18",
+  "workers_dev": false,
+  "routes": [
+    { "pattern": "recarplan.com/crew", "zone_name": "recarplan.com" },
+    { "pattern": "recarplan.com/crew/", "zone_name": "recarplan.com" },
+    { "pattern": "recarplan.com/crew/login", "zone_name": "recarplan.com" },
+    { "pattern": "recarplan.com/crew/login/", "zone_name": "recarplan.com" }
+  ]
+}
