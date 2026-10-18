@@ -2,6 +2,9 @@
   "use strict";
   const TOKEN_KEY = "recar_friends_access_token";
   const API_BASE = "https://api.recarplan.com";
+  const RESUME_KEY = "recar_crew_auto_navigation";
+  const RESUME_WINDOW_MS = 30000;
+  const MAX_AUTO_NAVIGATIONS = 2;
   const notices = {
     PENDING: "가입 신청이 접수되어 승인 대기 중입니다. 운영팀 확인 후 신청하신 연락처로 안내드립니다.",
     REJECTED: "신청을 승인하지 못했습니다. 보완 또는 재신청 안내는 운영팀에 문의해 주세요.",
@@ -15,7 +18,7 @@
     const controller = new AbortController();
     const timeout = setTimeout(() => controller.abort(), 15000);
     try {
-      const response = await fetch(`${API_BASE}${path}`, { ...options, signal: controller.signal });
+      const response = await fetch(`${API_BASE}${path}`, { ...options, cache: "no-store", signal: controller.signal });
       // Keep the timeout until the JSON body has arrived without consuming the caller's response.
       await response.clone().text();
       return response;
@@ -48,5 +51,26 @@
     return /^RC-[A-Z0-9]{4,16}$/.test(value) ? `https://recarplan.com/app/?ref=${encodeURIComponent(value)}` : "";
   }
 
-  window.RecarCrew = Object.freeze({ TOKEN_KEY, request, errorMessage, dateKey, referralUrl, notices });
+  function resetAutoNavigation() {
+    try { window.sessionStorage.removeItem(RESUME_KEY); } catch { /* Manual login remains available. */ }
+  }
+
+  function resumeDashboard() {
+    // A tab-local budget also stops cycles introduced by a stale entry document.
+    try {
+      const now = Date.now();
+      const previous = JSON.parse(window.sessionStorage.getItem(RESUME_KEY) || "null");
+      const recent = previous && Number.isFinite(previous.startedAt) && previous.startedAt <= now
+        && now - previous.startedAt < RESUME_WINDOW_MS && Number.isInteger(previous.count) && previous.count >= 0;
+      if (recent && previous.count >= MAX_AUTO_NAVIGATIONS) return false;
+      window.sessionStorage.setItem(RESUME_KEY, JSON.stringify({
+        startedAt: recent ? previous.startedAt : now,
+        count: recent ? previous.count + 1 : 1,
+      }));
+    } catch { return false; }
+    window.location.replace("./index.html");
+    return true;
+  }
+
+  window.RecarCrew = Object.freeze({ TOKEN_KEY, request, errorMessage, dateKey, referralUrl, notices, resumeDashboard, resetAutoNavigation });
 })();

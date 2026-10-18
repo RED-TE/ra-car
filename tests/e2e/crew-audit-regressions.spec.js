@@ -53,7 +53,7 @@ async function mock(page, options = {}) {
   return state;
 }
 
-for (const path of ["/crew?action=apply", "/crew/?action=apply", "/crew/login?action=apply"]) {
+for (const path of ["/crew?action=apply", "/crew/?action=apply", "/crew/login?action=apply", "/crew/?mode=apply", "/crew/index.html?action=apply&ref=RC-QA1234"]) {
   test(`application intent survives ${path}`, async ({ page }) => {
     await mock(page, { token: false });
     await page.goto(path);
@@ -100,13 +100,59 @@ test("saved session reaches a single dashboard without a navigation loop", async
 
 for (const pendingStatus of ["PENDING", "REJECTED", "SUSPENDED"]) {
   test(`${pendingStatus} has an explicit account notice`, async ({ page }) => {
-    await mock(page, { status: { status: pendingStatus } });
+    const state = await mock(page, { status: { status: pendingStatus } });
     await page.goto("/crew/index.html");
     await expect(page.locator("#crewSessionNotice")).toBeVisible();
     await expect(page.locator("#crewSessionNotice")).toContainText(pendingStatus === "PENDING" ? "승인 대기" : pendingStatus === "REJECTED" ? "승인하지 못" : "이용이 제한");
     await expect(page.locator("#crewLoginForm")).toBeVisible();
+    expect(state.statusCalls).toBe(1);
   });
 }
+
+for (const notice of ["PENDING", "REJECTED", "SUSPENDED", "NOT_APPLIED", "EXPIRED", "LOGGED_OUT"]) {
+  test(`an explicit ${notice} notice cannot resume a stale approved session`, async ({ page }) => {
+    const state = await mock(page);
+    await page.goto(`/crew/login.html?status=${notice}`);
+    await expect(page.locator("#crewSessionNotice")).toBeVisible();
+    await expect(page.locator("#crewLoginForm")).toBeVisible();
+    expect(state.statusCalls).toBe(0);
+    await expect(page).toHaveURL(new RegExp(`login\\.html\\?status=${notice}$`));
+  });
+}
+
+test("a stale dashboard that sends login back to itself stops and permits manual recovery", async ({ page }) => {
+  await page.setViewportSize({ width: 360, height: 800 });
+  const state = await mock(page);
+  const staleDashboard = route => route.fulfill({ contentType: "text/html", body: '<script>location.replace("./login.html")</script>' });
+  await page.route("**/crew/index.html", staleDashboard);
+  await page.goto("/crew/login.html");
+  await expect(page.locator("#loginError")).toContainText("자동 연결을 중단");
+  expect(state.statusCalls).toBe(3);
+  await expect(page.locator("#crewLoginForm .login-button")).toBeEnabled();
+  expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBeLessThanOrEqual(360);
+  await page.unroute("**/crew/index.html", staleDashboard);
+  await page.locator("#crewId").fill("fixture");
+  await page.locator("#crewPassword").fill("fixture-only-password");
+  await page.locator("#crewLoginForm .login-button").click();
+  await expect(page.locator("#crewShareLink")).toHaveValue("https://recarplan.com/app/?ref=RC-QACREW");
+  expect(state.loginCalls).toBe(1);
+});
+
+test("a saved session during a server error stays on the usable login screen", async ({ page }) => {
+  const state = await mock(page, { statusCode: 503 });
+  await page.goto("/crew/login.html");
+  await expect(page.locator("#loginError")).toContainText("서버 점검");
+  await expect(page.locator("#crewLoginForm .login-button")).toBeEnabled();
+  expect(state.statusCalls).toBe(1);
+  expect(await page.evaluate(() => localStorage.getItem("recar_friends_access_token"))).toBe("fixture-token");
+});
+
+test("the static slash login fallback retains application intent without forwarding arbitrary targets", async ({ page }) => {
+  await mock(page, { token: false });
+  await page.goto("/crew/login/?mode=apply&next=https://invalid.example&token=fixture");
+  await expect(page).toHaveURL(/\/crew\/login\.html\?action=apply$/);
+  await expect(page.locator("#crewApplyForm")).toBeVisible();
+});
 
 test("logout clears the token and returning to the dashboard cannot expose the account", async ({ page }) => {
   await mock(page);

@@ -1,0 +1,25 @@
+<!doctype html>
+<html lang="ko" data-crew-login-alias>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>RE:CAR 크루 로그인</title>
+    <link rel="canonical" href="https://recarplan.com/crew/login.html" />
+    <script>
+      const params = new URLSearchParams(location.search);
+      const target = new URL("../login.html", location.href);
+      const ref = params.get("ref")?.trim().toUpperCase();
+      if (params.get("action") === "apply" || params.get("mode") === "apply") {
+        target.searchParams.set("action", "apply");
+      } else if (/^RC-[A-Z0-9]{4,16}$/.test(ref || "")) {
+        target.pathname = "/app/";
+        target.searchParams.set("ref", ref);
+      } else if (["PENDING", "REJECTED", "SUSPENDED", "NOT_APPLIED", "EXPIRED", "LOGGED_OUT"].includes(params.get("status"))) {
+        target.searchParams.set("status", params.get("status"));
+      }
+      location.replace(target.href);
+    </script>
+  </head>
+  <body><a href="../login.html">크루 로그인으로 이동</a></body>
+</html>

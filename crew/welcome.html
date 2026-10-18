@@ -8,16 +8,17 @@
     <link rel="canonical" href="https://recarplan.com/crew/" />
     <link rel="icon" href="../assets/recar-favicon-20260518.png" />
     <link rel="stylesheet" href="./trust.css?v=20261014" />
+    <script src="./session.js?v=274da04d3e6b"></script>
     <script>
       const params = new URLSearchParams(window.location.search);
       const referralCode = params.get("ref")?.trim().toUpperCase();
-      if (params.get("action") === "apply") {
+      if (params.get("action") === "apply" || params.get("mode") === "apply") {
         window.location.replace("./login.html?action=apply");
       } else if (/^RC-[A-Z0-9]{4,16}$/.test(referralCode || "")) {
         window.location.replace(new URL(`/app/?ref=${encodeURIComponent(referralCode)}`, window.location.origin).href);
       } else {
         try {
-          if (localStorage.getItem("recar_friends_access_token")) window.location.replace("./index.html");
+          if (localStorage.getItem("recar_friends_access_token")) window.RecarCrew.resumeDashboard();
         } catch { /* The public introduction remains available when storage is blocked. */ }
       }
     </script>

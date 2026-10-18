@@ -14,7 +14,7 @@ module.exports = [
     ],
   },
   {
-    files: ["crew/guide/knowledge.js", "crew/guide/knowledge-data.js", "crew/terms.js", "home.js"],
+    files: ["crew/guide/knowledge.js", "crew/guide/knowledge-data.js", "crew/terms.js", "crew/session.js", "home.js"],
     languageOptions: {
       ecmaVersion: 2022,
       sourceType: "module",
@@ -27,7 +27,7 @@ module.exports = [
     },
   },
   {
-    files: ["tests/**/*.js", "playwright.config.js"],
+    files: ["tests/**/*.js", "tools/verify-crew-production.cjs", "playwright.config.js"],
     languageOptions: {
       ecmaVersion: 2022,
       sourceType: "commonjs",
