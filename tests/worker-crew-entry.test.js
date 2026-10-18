@@ -28,6 +28,12 @@ test("application intent and validated referral codes are preserved", async () =
   }
 });
 
+test("an HTTP entry always upgrades its destination to HTTPS", async () => {
+  const worker = (await import("../workers/crew-entry.mjs")).default;
+  const response = await worker.fetch(new Request("http://recarplan.com/crew/login"));
+  assert.equal(response.headers.get("Location"), "https://recarplan.com/crew/login.html");
+});
+
 test("only supported session notices survive and arbitrary targets are discarded", async () => {
   for (const status of ["PENDING", "REJECTED", "SUSPENDED", "NOT_APPLIED", "EXPIRED", "LOGGED_OUT"]) {
     assert.equal((await redirect(`/crew/login?status=${status}`)).headers.get("Location"), `https://recarplan.com/crew/login.html?status=${status}`);

@@ -17,7 +17,7 @@ export default {
     }
 
     const login = ENTRY_PATHS.get(url.pathname);
-    const target = new URL(login ? "/crew/login.html" : "/crew/welcome.html", url.origin);
+    const target = new URL(login ? "/crew/login.html" : "/crew/welcome.html", "https://recarplan.com");
     const ref = url.searchParams.get("ref")?.trim().toUpperCase();
     if (url.searchParams.get("action") === "apply" || url.searchParams.get("mode") === "apply") {
       target.pathname = "/crew/login.html";
