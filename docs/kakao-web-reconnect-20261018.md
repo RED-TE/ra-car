@@ -2,7 +2,7 @@
 
 ## Scope and build
 
-Preserve the current root, `/app/`, `/inquiry/`, Crew and guide screens. Add only
+Preserve the current root, `/app/`, `/inquiry/`, Crew and guide screens. Add
 Kakao browser OAuth and its regression/deployment checks. Keep the existing pinned
 Flutter source and all current web overlays for pricing proof, loading speed,
 referrals, document upload and decorative-image removal.
@@ -54,3 +54,18 @@ that setup does not prove a working public login. No credentials are recorded he
 The callback test proves the normal RE:CAR session is created, OAuth parameters
 are removed, existing saved records are preserved, and missing browser proof does
 not exchange tokens or reload the document. Test provider responses are synthetic.
+
+## Approved Crew Inquiry Follow-up
+
+The user separately requested the complete customer-to-crew/admin flow to be
+verified and corrected. API counterpart RECAREA/recar_app#135 attributes new
+customer inquiries to approved crews without creating referrals or rewards.
+The static Crew dashboard displays these inquiry record counts separately from
+confirmed referrals, contracts and settlement. It shows an unavailable state
+rather than a fabricated zero when the API does not provide the aggregate.
+No customer contact details or message text are displayed to the crew.
+
+Local website checks: 50 unit tests and 12 Crew self-service browser tests pass,
+including 320/390/1440px inquiry layout, copying, profile and support regressions.
+Real production provider login, submission and document preview remain separate
+checks. No new crew account is submitted after the user chose existing accounts.

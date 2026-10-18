@@ -65,6 +65,36 @@ test("link visits stay separate from customer referrals", async ({ page }) => {
   await expect(page.locator("#crewSupportContact")).toHaveText("내 등록 연락처: 010-1111-2222");
 });
 
+for (const width of [320, 390, 1440]) {
+  test(`customer inquiry counts stay separate from contract rewards at ${width}px`, async ({ page }) => {
+    await page.setViewportSize({ width, height: 844 });
+    await mockCrewApi(page, { inquiries: { total: 3, web: 2, app: 1, pending: 2 } });
+    await page.goto("/crew/index.html");
+    await expect(page.locator("#crewShareInquiries")).toHaveText("3건");
+    await expect(page.locator("#crewInquirySummary")).toHaveText("홈페이지 2건 · 앱 1건 · 처리 대기 2건");
+    await expect(page.locator("#referralCount")).toHaveText("2");
+    await expect(page.locator("#contractCount")).toHaveText("2");
+    await expect(page.locator("#crewBenefitCount")).toHaveText("2대");
+    expect(await page.evaluate(() => document.documentElement.scrollWidth)).toBe(width);
+  });
+}
+
+test("missing inquiry metrics are not represented as a confirmed zero", async ({ page }) => {
+  await mockCrewApi(page);
+  await page.goto("/crew/index.html");
+  await expect(page.locator("#crewShareInquiries")).toHaveText("집계 준비 중");
+  await expect(page.locator("#crewInquirySummary")).toContainText("아직 제공받지 못했습니다");
+});
+
+test("failed inquiry retrieval stops the loading message without inventing a zero", async ({ page }) => {
+  await mockCrewApi(page);
+  await page.route("https://api.recarplan.com/api/v1/friends/dashboard", route => route.fulfill({ status: 503, contentType: "application/json", body: JSON.stringify({ message: "Synthetic unavailable response" }) }));
+  await page.goto("/crew/index.html");
+  await expect(page.locator("#crewLoadError")).toBeVisible();
+  await expect(page.locator("#crewShareInquiries")).toHaveText("조회 불가");
+  await expect(page.locator("#crewInquirySummary")).toContainText("조회하지 못했습니다");
+});
+
 test("account menu keeps every action and disclosure inside its width", async ({ page }, testInfo) => {
   await mockCrewApi(page, {}, { name: "긴 이름을 사용하는 리카 크루 검증 계정" });
   for (const width of [1440, 1280, 1180, 1024, 820, 800, 768, 761]) {
