@@ -72,5 +72,5 @@ jobs:
         id: deployment
         uses: actions/deploy-pages@v4
 
-      - name: Verify the published Crew screens and session version
+      - name: Verify the active Crew deployment contract (Worker or Pages)
         run: npm run verify:crew:production -- --expect-local
