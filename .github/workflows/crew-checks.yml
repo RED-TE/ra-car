@@ -21,4 +21,5 @@ jobs:
       - run: npx playwright install --with-deps chromium
       - run: npm run test:app-entries
       - run: npm run test:kakao
+      - run: npm run test:apple
       - run: npm run test:crew

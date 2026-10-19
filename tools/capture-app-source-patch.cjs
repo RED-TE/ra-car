@@ -9,7 +9,9 @@ if (!sourceRepo || !modifiedRoot) throw new Error("Pass source repository and mo
 const files = ["app/lib/main.dart", "app/lib/services/application_api.dart", "app/lib/screens/application_documents_screen.dart", "app/lib/screens/quote_result_screen.dart", "app/lib/screens/auth_screen.dart", "app/lib/services/vehicle_api.dart", "app/lib/services/vehicle_cache.dart", "app/lib/services/quote_api.dart", "app/lib/screens/home_screen.dart", "app/lib/screens/recommendation_screen.dart", "app/lib/screens/vehicle_list_screen.dart", "app/lib/screens/vehicle_detail_screen.dart", "app/lib/widgets/recar_loading_state.dart", "app/lib/widgets/micro_interactions.dart", "app/pubspec.yaml", "app/pubspec.lock"];
 files.push("app/lib/services/api_client.dart");
 files.push("app/lib/screens/garage_screen.dart");
+files.push("app/lib/screens/more_screen.dart", "app/lib/screens/my_page_screen.dart");
 const addedFiles = ["kakao_web_browser.dart", "kakao_web_browser_stub.dart", "kakao_web_browser_web.dart", "kakao_web_login.dart"].map(file => `app/lib/services/${file}`);
+addedFiles.push(...["apple_login.dart", "apple_sdk.dart", "apple_sdk_stub.dart", "apple_sdk_web.dart"].map(file => `app/lib/services/${file}`));
 const temporary = fs.mkdtempSync(path.join(os.tmpdir(), "recar-patch-input-"));
 let patch = "";
 for (const [index, file] of files.entries()) {

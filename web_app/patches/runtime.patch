@@ -505,8 +505,12 @@
    }
 --- a/app/lib/screens/auth_screen.dart
 +++ b/app/lib/screens/auth_screen.dart
-@@ -17,9 +17,9 @@
+@@ -15,11 +15,13 @@
+ import '../models/auth.dart';
+ import '../screens/profile_onboarding_screen.dart';
  import '../services/api_client.dart';
++import '../services/apple_login.dart';
++import '../services/apple_sdk.dart';
  import '../services/auth_api.dart';
  import '../services/auth_session.dart';
 +import '../services/kakao_web_login.dart';
@@ -516,10 +520,19 @@
  import '../widgets/micro_interactions.dart';
  
  // 가입 동의 링크는 마이 화면과 같은 확정본을 연다(웹사이트 /terms 는 '상담 유의사항').
-@@ -107,6 +107,11 @@
+@@ -46,6 +48,7 @@
+   late AuthMode _mode = widget.initialMode;
+   bool _isSubmitting = false;
+   bool _autoLogin = true;
++  AppleLoginIntent? _appleWebIntent;
+ 
+   final _emailCtrl = TextEditingController();
+   final _phoneCtrl = TextEditingController();
+@@ -107,6 +110,12 @@
      _phoneCtrl.addListener(_onPhoneChanged);
      _passwordCtrl.addListener(_refresh);
      _confirmPasswordCtrl.addListener(_refresh);
++    if (kIsWeb) unawaited(_prepareAppleWebLogin());
 +    if (kIsWeb && KakaoWebLogin.isCallback(Uri.base)) {
 +      WidgetsBinding.instance.addPostFrameCallback((_) {
 +        if (mounted) _completeKakaoWebLogin();
@@ -528,7 +541,83 @@
      if (widget.initialMessage != null && widget.initialMessage!.isNotEmpty) {
        WidgetsBinding.instance.addPostFrameCallback((_) {
          if (!mounted) return;
-@@ -346,13 +351,17 @@
+@@ -270,6 +279,17 @@
+       navigator.pop(true);
+     } else {
+       navigator.pushNamedAndRemoveUntil('/home', (_) => false);
++    }
++  }
++
++  Future<void> _prepareAppleWebLogin() async {
++    try {
++      final intent = await AppleLogin.instance.prepare(webUri: Uri.base);
++      await prepareAppleSdk();
++      if (mounted) setState(() => _appleWebIntent = intent);
++    } catch (_) {
++      // Do not advertise web login until its registered provider is ready.
++      if (mounted) setState(() => _appleWebIntent = null);
+     }
+   }
+ 
+@@ -277,11 +297,26 @@
+     if (_isSubmitting) return;
+     setState(() => _isSubmitting = true);
+     try {
++      final intent =
++          kIsWeb ? _appleWebIntent : await AppleLogin.instance.prepare();
++      if (intent == null || !DateTime.now().isBefore(intent.expiresAt)) {
++        if (kIsWeb) unawaited(_prepareAppleWebLogin());
++        _showError('Apple 로그인 정보를 새로 준비하고 있어요. 잠시 후 다시 눌러 주세요.');
++        return;
++      }
+       final credential = await SignInWithApple.getAppleIDCredential(
+         scopes: const [
+           AppleIDAuthorizationScopes.email,
+           AppleIDAuthorizationScopes.fullName,
+         ],
++        nonce: intent.nonce,
++        state: intent.state,
++        webAuthenticationOptions: intent.redirectUri == null
++            ? null
++            : WebAuthenticationOptions(
++                clientId: intent.clientId,
++                redirectUri: intent.redirectUri!,
++              ),
+       );
+ 
+       final identityToken = credential.identityToken;
+@@ -290,11 +325,7 @@
+         return;
+       }
+ 
+-      final user = await AuthApi.appleLogin(
+-        identityToken: identityToken,
+-        givenName: credential.givenName,
+-        familyName: credential.familyName,
+-      );
++      final user = await AppleLogin.instance.complete(intent, credential);
+       if (kDebugMode) {
+         debugPrint('[AppleLogin] server session created');
+       }
+@@ -306,6 +337,8 @@
+         debugPrint('[AppleLogin] authorization failed: ${error.code}');
+       }
+       _showError('Apple 로그인에 실패했습니다. 다시 시도해 주세요.');
++    } on AppleLoginException catch (error) {
++      _showError(error.message);
+     } on DioException catch (error) {
+       if (kDebugMode) {
+         debugPrint(
+@@ -319,7 +352,7 @@
+       final msg = ApiClient.extractErrorMessage(error);
+       _showError(msg ?? 'Apple 로그인 처리 중 오류가 발생했습니다.');
+     } catch (error) {
+-      if (kDebugMode) debugPrint('[AppleLogin] failed: $error');
++      if (kDebugMode) debugPrint('[AppleLogin] failed: ${error.runtimeType}');
+       _showError('Apple 로그인 처리 중 오류가 발생했습니다.');
+     } finally {
+       if (mounted) setState(() => _isSubmitting = false);
+@@ -346,13 +379,17 @@
  
    Future<void> _signInWithKakao() async {
      if (_isSubmitting) return;
@@ -547,7 +636,7 @@
        final token = await _loginWithKakaoSdk();
        if (kDebugMode) debugPrint('[KakaoLogin] SDK login success');
  
-@@ -363,6 +372,8 @@
+@@ -363,6 +400,8 @@
        }
        if (!mounted) return;
        await _finishAuth(forceOnboarding: result.isNewUser);
@@ -556,7 +645,7 @@
      } on PlatformException catch (error) {
        if (_isKakaoCancel(error)) {
          if (kDebugMode) debugPrint('[KakaoLogin] canceled');
-@@ -408,6 +419,26 @@
+@@ -408,6 +447,26 @@
      return text.contains('cancel') || text.contains('cancelled');
    }
  
@@ -583,7 +672,7 @@
    bool _isInvalidKakaoUrl(Object error) {
      final text = error.toString();
      return text.contains('INVALID_URL') ||
-@@ -529,45 +560,10 @@
+@@ -529,45 +588,10 @@
            padding: EdgeInsets.fromLTRB(20, 4, 20, bottomInset + 48),
            children: [
              if (_isLogin) ...[
@@ -633,6 +722,16 @@
                ),
                const SizedBox(height: 10),
                Text(
+@@ -591,8 +615,7 @@
+             _KakaoLoginButton(
+               onTap: _isSubmitting ? null : _signInWithKakao,
+             ),
+-            // Apple Sign-In은 iOS 전용 (Android 미지원)
+-            if (!kIsWeb && Platform.isIOS) ...[
++            if (kIsWeb ? _appleWebIntent != null : Platform.isIOS) ...[
+               const SizedBox(height: 8),
+               _AppleLoginButton(
+                 onTap: _isSubmitting ? null : _signInWithApple,
 --- a/app/lib/services/vehicle_api.dart
 +++ b/app/lib/services/vehicle_api.dart
 @@ -181,14 +181,12 @@
@@ -2422,6 +2521,63 @@
                    _GarageReportFinanceComparisonPanel(
                      item: item,
                      reportFuture: _reportFuture,
+--- a/app/lib/screens/more_screen.dart
++++ b/app/lib/screens/more_screen.dart
+@@ -16,7 +16,8 @@
+ import 'admin/admin_application_list_screen.dart';
+ import 'auth_screen.dart';
+ import 'garage_screen.dart';
+-import 'my_page_screen.dart' show AccountWithdrawalScreen;
++import 'my_page_screen.dart'
++    show AccountWithdrawalScreen, ReferralRegistrationPage;
+ import 'notification_settings_screen.dart';
+ import 'profile_onboarding_screen.dart';
+ import 'support_request_screen.dart';
+@@ -342,6 +343,13 @@
+                     title: '프로필 설정',
+                     trailing: profileDone ? null : const PlainTag.blue('작성 필요'),
+                     onTap: _openProfileSettings,
++                  ),
++                  PlainRow(
++                    title: '추천인 등록',
++                    onTap: () => Navigator.of(context).push(
++                      MaterialPageRoute(
++                          builder: (_) => const ReferralRegistrationPage()),
++                    ),
+                   ),
+                   PlainRow(title: '고객센터', onTap: _openSupport),
+                 ] else
+--- a/app/lib/screens/my_page_screen.dart
++++ b/app/lib/screens/my_page_screen.dart
+@@ -673,7 +673,7 @@
+     final signedIn = await _ensureSignedIn();
+     if (!signedIn || !mounted) return;
+     await Navigator.of(context).push(
+-      MaterialPageRoute(builder: (_) => const _ReferralRegistrationPage()),
++      MaterialPageRoute(builder: (_) => const ReferralRegistrationPage()),
+     );
+     if (mounted) setState(() {});
+   }
+@@ -1901,15 +1901,15 @@
+   }
+ }
+ 
+-class _ReferralRegistrationPage extends StatefulWidget {
+-  const _ReferralRegistrationPage();
++class ReferralRegistrationPage extends StatefulWidget {
++  const ReferralRegistrationPage({super.key});
+ 
+   @override
+-  State<_ReferralRegistrationPage> createState() =>
++  State<ReferralRegistrationPage> createState() =>
+       _ReferralRegistrationPageState();
+ }
+ 
+-class _ReferralRegistrationPageState extends State<_ReferralRegistrationPage> {
++class _ReferralRegistrationPageState extends State<ReferralRegistrationPage> {
+   final _codeCtrl = TextEditingController();
+   late Future<FriendsReferralState> _future = FriendsApi.getReferralState();
+   bool _submitting = false;
 --- /dev/null
 +++ b/app/lib/services/kakao_web_browser.dart
 @@ -0,0 +1,2 @@
@@ -2586,5 +2742,160 @@
 +    await AuthSession.instance
 +        .setSession(accessToken: token.accessToken, user: user);
 +    return OAuthLoginResult(user: user, isNewUser: data['is_new_user'] == true);
++  }
++}
+--- /dev/null
++++ b/app/lib/services/apple_login.dart
+@@ -0,0 +1,109 @@
++import 'dart:convert';
++import 'dart:math';
++
++import 'package:crypto/crypto.dart';
++import 'package:dio/dio.dart';
++import 'package:sign_in_with_apple/sign_in_with_apple.dart';
++
++import '../models/auth.dart';
++import 'api_client.dart';
++import 'auth_session.dart';
++
++class AppleLoginIntent {
++  const AppleLoginIntent(
++      {required this.state,
++      required this.nonce,
++      required this.verifier,
++      required this.clientId,
++      required this.expiresAt,
++      this.redirectUri});
++  final String state;
++  final String nonce;
++  final String verifier;
++  final String clientId;
++  final DateTime expiresAt;
++  final Uri? redirectUri;
++}
++
++class AppleLoginException implements Exception {
++  const AppleLoginException(this.message);
++  final String message;
++}
++
++class AppleLogin {
++  AppleLogin({Dio? client, DateTime Function()? now})
++      : _client = client ?? ApiClient.dio,
++        _now = now ?? DateTime.now;
++  static final instance = AppleLogin();
++  final Dio _client;
++  final DateTime Function() _now;
++
++  Future<AppleLoginIntent> prepare({Uri? webUri}) async {
++    final redirect = webUri == null
++        ? null
++        : Uri.parse(webUri.origin).replace(
++            path: webUri.path == '/app' || webUri.path.startsWith('/app/')
++                ? '/app/'
++                : '/',
++          );
++    final random = Random.secure();
++    final verifier =
++        base64UrlEncode(List.generate(48, (_) => random.nextInt(256)))
++            .replaceAll('=', '');
++    final challenge =
++        base64UrlEncode(sha256.convert(utf8.encode(verifier)).bytes)
++            .replaceAll('=', '');
++    final startedAt = _now();
++    final response = await _client.post<Map<String, dynamic>>(
++      '/api/v1/auth/apple/start',
++      data: {
++        'platform': webUri == null ? 'ios' : 'web',
++        if (redirect != null) 'redirect_uri': redirect.toString(),
++        'code_challenge': challenge
++      },
++    );
++    final data = response.data ?? {};
++    final state = data['state'];
++    final nonce = data['nonce'];
++    final clientId = data['client_id'];
++    if (state is! String ||
++        state.isEmpty ||
++        nonce is! String ||
++        nonce.isEmpty ||
++        clientId is! String ||
++        clientId.isEmpty ||
++        data['redirect_uri'] != redirect?.toString()) {
++      throw const AppleLoginException('Apple 로그인 연결 정보를 확인하지 못했습니다.');
++    }
++    return AppleLoginIntent(
++        state: state,
++        nonce: nonce,
++        verifier: verifier,
++        clientId: clientId,
++        redirectUri: redirect,
++        expiresAt: startedAt.add(const Duration(minutes: 4)));
++  }
++
++  Future<AuthUser> complete(AppleLoginIntent intent,
++      AuthorizationCredentialAppleID credential) async {
++    if (!_now().isBefore(intent.expiresAt) ||
++        credential.state != intent.state ||
++        credential.identityToken == null ||
++        credential.identityToken!.isEmpty) {
++      throw const AppleLoginException('Apple 로그인 확인 정보가 만료됐습니다. 다시 시작해 주세요.');
++    }
++    final response =
++        await _client.post<Map<String, dynamic>>('/api/v1/auth/apple', data: {
++      'identity_token': credential.identityToken,
++      'state': intent.state,
++      'code_verifier': intent.verifier,
++      if (credential.givenName != null) 'given_name': credential.givenName,
++      if (credential.familyName != null) 'family_name': credential.familyName,
++    });
++    final data = response.data!;
++    final user = AuthUser.fromJson(data['user'] as Map<String, dynamic>);
++    await AuthSession.instance
++        .setSession(accessToken: data['access_token'] as String, user: user);
++    return user;
++  }
++}
+--- /dev/null
++++ b/app/lib/services/apple_sdk.dart
+@@ -0,0 +1 @@
++export 'apple_sdk_stub.dart' if (dart.library.js_interop) 'apple_sdk_web.dart';
+--- /dev/null
++++ b/app/lib/services/apple_sdk_stub.dart
+@@ -0,0 +1 @@
++Future<void> prepareAppleSdk() async {}
+--- /dev/null
++++ b/app/lib/services/apple_sdk_web.dart
+@@ -0,0 +1,32 @@
++import 'dart:async';
++
++import 'package:web/web.dart' as web;
++
++Future<void>? _loading;
++
++Future<void> prepareAppleSdk() => _loading ??= _load();
++
++Future<void> _load() async {
++  final script = web.HTMLScriptElement()
++    ..src =
++        'https://appleid.cdn-apple.com/appleauth/static/jsapi/appleid/1/en_US/appleid.auth.js'
++    ..async = true;
++  final loaded = Completer<void>();
++  final load = script.onLoad.listen((_) => loaded.complete());
++  final error = script.onError.listen((_) {
++    if (!loaded.isCompleted) {
++      loaded.completeError(StateError('Apple SDK unavailable'));
++    }
++  });
++  web.document.head!.append(script);
++  try {
++    await loaded.future.timeout(const Duration(seconds: 15));
++  } catch (_) {
++    script.remove();
++    _loading = null;
++    rethrow;
++  } finally {
++    await load.cancel();
++    await error.cancel();
 +  }
 +}

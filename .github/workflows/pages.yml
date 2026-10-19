@@ -52,6 +52,12 @@ jobs:
       - name: Verify the live Kakao API is ready before publishing
         run: npm run verify:kakao:production
 
+      - name: Verify the live Apple API is ready before publishing
+        run: npm run verify:apple:production
+
+      - name: Verify Apple web login before publishing
+        run: npm run test:apple
+
       - name: Configure Pages
         uses: actions/configure-pages@v5
 
