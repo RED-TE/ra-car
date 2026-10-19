@@ -1,13 +1,25 @@
+import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:recar_app/screens/auth_screen.dart';
+import 'package:recar_app/services/api_client.dart';
 
 void main() {
+  late Interceptor provider;
+  setUp(() {
+    provider = InterceptorsWrapper(onRequest: (request, handler) {
+      handler.resolve(Response(requestOptions: request, statusCode: 503,
+        data: {'detail': 'Synthetic unconfigured Apple provider'}));
+    });
+    ApiClient.dio.interceptors.insert(0, provider);
+  });
+  tearDown(() => ApiClient.dio.interceptors.remove(provider));
   for (final width in [320.0, 390.0, 430.0]) {
     testWidgets('login has no decorative images at ${width}px', (tester) async {
       await tester.binding.setSurfaceSize(Size(width, 844));
       addTearDown(() => tester.binding.setSurfaceSize(null));
       await tester.pumpWidget(const MaterialApp(home: AuthScreen()));
+      await tester.pumpAndSettle();
 
       expect(find.byType(Image), findsNothing);
       expect(find.bySemanticsLabel('리카 자동차 캐릭터'), findsNothing);

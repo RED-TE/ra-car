@@ -37,7 +37,7 @@ _flutter.buildConfig = {"engineRevision":"3452d735bd38224ef2db85ca763d862d6326b1
 
 async function startRecar() {
   const compatibleBuild = _flutter.buildConfig.builds[0];
-  compatibleBuild.mainJsPath = 'main.dart.js?build=web-kakao-documents-20261019';
+  compatibleBuild.mainJsPath = 'main.dart.js?build=web-apple-referral-20261019';
   const appScope = new URL('./', document.baseURI).href;
   const isLegacyAppWorker = (worker) => worker &&
     new URL(worker.scriptURL).pathname === new URL('flutter_service_worker.js', appScope).pathname;
