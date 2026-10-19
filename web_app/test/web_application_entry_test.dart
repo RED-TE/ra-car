@@ -260,6 +260,13 @@ class _ReplacementFlowInterceptor extends Interceptor {
     RequestInterceptorHandler handler,
   ) async {
     if (options.method == 'GET' &&
+        options.uri.path == '/api/v1/vehicles/catalog/version') {
+      handler.resolve(Response<dynamic>(requestOptions: options, statusCode: 200,
+        data: {'contract_version': 'catalog_v1', 'complete': true, 'total': 1,
+          'revision': 'a' * 64}));
+      return;
+    }
+    if (options.method == 'GET' &&
         options.uri.path == '/api/v1/vehicles/vehicle-replacement') {
       handler.resolve(
         Response<dynamic>(
