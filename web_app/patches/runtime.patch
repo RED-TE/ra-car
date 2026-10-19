@@ -2588,3 +2588,353 @@
 +    return OAuthLoginResult(user: user, isNewUser: data['is_new_user'] == true);
 +  }
 +}
+diff --git a/app/lib/services/vehicle_api.dart b/app/lib/services/vehicle_api.dart
+index da05bac7..14b12d5f 100644
+--- a/app/lib/services/vehicle_api.dart
++++ b/app/lib/services/vehicle_api.dart
+@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
+ import '../models/vehicle.dart';
+ import 'api_client.dart';
+ import 'vehicle_cache.dart';
++import 'vehicle_catalog_refresh.dart';
+ 
+ class VehicleNotFoundException implements Exception {
+   const VehicleNotFoundException(this.vehicleId);
+@@ -24,6 +25,32 @@ class VehiclePriceUnavailableException implements Exception {
+ }
+ 
+ class VehicleApi {
++  static final _catalogRefresh = VehicleCatalogRefresh(ApiClient.dio);
++  static int _catalogGeneration = 0;
++  static int get catalogGeneration => _catalogGeneration;
++  static Future<bool>? _catalogRefreshInflight;
++
++  static Future<bool> refreshCatalog() async {
++    if (_catalogRefreshInflight != null) return _catalogRefreshInflight!;
++    final future = _applyCatalogRefresh();
++    _catalogRefreshInflight = future;
++    try {
++      return await future;
++    } finally {
++      _catalogRefreshInflight = null;
++    }
++  }
++
++  static Future<bool> _applyCatalogRefresh() async {
++    final changed = await _catalogRefresh.check();
++    if (changed) {
++      _catalogGeneration++;
++      VehicleCache.invalidateAll();
++      _missingDetailCache.clear();
++      // Deliberately preserve quote caches, selected conditions and snapshots.
++    }
++    return changed;
++  }
+   // in-flight 중복 방지: 동일 cache key의 요청이 진행 중이면 같은 Future 반환
+   static final Map<String, Future<VehicleListResponse>> _listInflight = {};
+   static final Map<String, Future<List<VehicleQuote>>> _quoteInflight = {};
+@@ -87,6 +114,8 @@ class VehicleApi {
+     bool forceRefresh = false,
+   }) async {
+     // 캐시 키: 파라미터 조합
++    await refreshCatalog();
++    final catalogGeneration = _catalogGeneration;
+     final normalizedProductType = productType == null ||
+             productType.trim().isEmpty
+         ? null
+@@ -105,6 +134,7 @@ class VehicleApi {
+       ..sort();
+ 
+     final cacheKey = [
++      catalogGeneration.toString(),
+       query ?? '',
+       brand ?? '',
+       segment ?? '',
+@@ -187,7 +217,9 @@ class VehicleApi {
+       final result = VehicleListResponse.fromJson(
+         response.data as Map<String, dynamic>,
+       );
+-      VehicleCache.setList(cacheKey, result);
++      if (catalogGeneration == _catalogGeneration) {
++        VehicleCache.setList(cacheKey, result);
++      }
+       return result;
+     });
+ 
+@@ -256,6 +288,8 @@ class VehicleApi {
+     String vehicleId, {
+     bool forceRefresh = false,
+   }) async {
++    await refreshCatalog();
++    final catalogGeneration = _catalogGeneration;
+     if (!forceRefresh && _isMissingDetailCached(vehicleId)) {
+       throw VehicleNotFoundException(vehicleId);
+     }
+@@ -275,7 +309,9 @@ class VehicleApi {
+         response.data as Map<String, dynamic>,
+       );
+       _missingDetailCache.remove(vehicleId);
+-      VehicleCache.setDetail(vehicleId, result);
++      if (catalogGeneration == _catalogGeneration) {
++        VehicleCache.setDetail(vehicleId, result);
++      }
+       return result;
+     } on DioException catch (error) {
+       if (ApiClient.extractErrorCode(error) == 'PRICE_UNAVAILABLE') {
+diff --git a/app/lib/services/vehicle_catalog_refresh.dart b/app/lib/services/vehicle_catalog_refresh.dart
+new file mode 100644
+index 00000000..6baa137c
+--- /dev/null
++++ b/app/lib/services/vehicle_catalog_refresh.dart
+@@ -0,0 +1,63 @@
++import 'package:dio/dio.dart';
++
++/// Discovery-cache freshness only. Never invalidates or recalculates a quote.
++class VehicleCatalogRefresh {
++  VehicleCatalogRefresh(this.dio, {DateTime Function()? now})
++      : now = now ?? DateTime.now;
++
++  final Dio dio;
++  final DateTime Function() now;
++  String? _revision;
++  DateTime? _nextCheck;
++  Future<bool>? _inflight;
++
++  Future<bool> check() async {
++    if (_inflight != null) return _inflight!;
++    if (_nextCheck != null && now().isBefore(_nextCheck!)) return false;
++    final future = _fetch();
++    _inflight = future;
++    try {
++      return await future;
++    } finally {
++      _inflight = null;
++    }
++  }
++
++  Future<bool> _fetch() async {
++    // Failures/old servers also wait 5 minutes. No retries/request storm.
++    _nextCheck = now().add(const Duration(minutes: 5));
++    try {
++      final response = await dio
++          .get<dynamic>(
++        '/api/v1/vehicles/catalog/version',
++            options: Options(
++              headers: {if (_revision != null) 'If-None-Match': '"$_revision"'},
++              validateStatus: (status) => status == 200 || status == 304,
++              receiveTimeout: const Duration(seconds: 5),
++              sendTimeout: const Duration(seconds: 5),
++            ),
++          )
++          .timeout(const Duration(seconds: 6));
++      if (response.statusCode == 304) return false;
++      final data = response.data;
++      if (data is! Map ||
++          data['contract_version'] != 'catalog_v1' ||
++          data['complete'] != true ||
++          data['total'] is! int ||
++          (data['total'] as int) < 0) {
++        return false;
++      }
++      final revision = data['revision'];
++      if (revision is! String ||
++          !RegExp(r'^[a-f0-9]{64}$').hasMatch(revision)) {
++        return false;
++      }
++      if (revision == _revision) return false;
++      _revision = revision;
++      return true;
++    } catch (_) {
++      // Existing catalog TTL remains authoritative during an outage.
++      return false;
++    }
++  }
++}
+diff --git a/app/lib/screens/vehicle_list_screen.dart b/app/lib/screens/vehicle_list_screen.dart
+index c4282cc2..e09b7731 100644
+--- a/app/lib/screens/vehicle_list_screen.dart
++++ b/app/lib/screens/vehicle_list_screen.dart
+@@ -1,3 +1,5 @@
++import 'dart:async';
++
+ import 'package:dio/dio.dart';
+ import 'package:flutter/material.dart';
+ import '../models/vehicle.dart';
+@@ -133,7 +135,28 @@ class VehicleListScreen extends StatefulWidget {
+   State<VehicleListScreen> createState() => _VehicleListScreenState();
+ }
+ 
+-class _VehicleListScreenState extends State<VehicleListScreen> {
++class _VehicleListScreenState extends State<VehicleListScreen>
++    with WidgetsBindingObserver {
++  Timer? _catalogTimer;
++  int _visibleCatalogGeneration = -1;
++
++  Future<void> _checkCatalog() async {
++    if (!mounted ||
++        WidgetsBinding.instance.lifecycleState != AppLifecycleState.resumed ||
++        ModalRoute.of(context)?.isCurrent != true) {
++      return;
++    }
++    await VehicleApi.refreshCatalog();
++    if (_visibleCatalogGeneration != VehicleApi.catalogGeneration &&
++        mounted && !_isInitialLoading && !_isLoadingMore) {
++      _loadVehicles();
++    }
++  }
++
++  @override
++  void didChangeAppLifecycleState(AppLifecycleState state) {
++    if (state == AppLifecycleState.resumed) unawaited(_checkCatalog());
++  }
+   final TextEditingController _searchController = TextEditingController();
+   String _submittedSearchQuery = '';
+   final _fav = FavoritesService.instance;
+@@ -272,6 +295,10 @@ class _VehicleListScreenState extends State<VehicleListScreen> {
+   @override
+   void initState() {
+     super.initState();
++    WidgetsBinding.instance.addObserver(this);
++    _catalogTimer = Timer.periodic(
++      const Duration(minutes: 5), (_) => unawaited(_checkCatalog()),
++    );
+     final initialFilter = widget.initialFilter ?? widget.filterNotifier?.value;
+     _activeFilter = initialFilter?.isEmpty == true ? null : initialFilter;
+     _selectedBrand = widget.initialBrand ?? _activeFilter?.brand;
+@@ -309,6 +336,8 @@ class _VehicleListScreenState extends State<VehicleListScreen> {
+ 
+   @override
+   void dispose() {
++    _catalogTimer?.cancel();
++    WidgetsBinding.instance.removeObserver(this);
+     widget.filterNotifier?.removeListener(_onFilterNotifierChanged);
+     _fav.removeListener(_favListener);
+     _searchController.dispose();
+@@ -412,6 +441,14 @@ class _VehicleListScreenState extends State<VehicleListScreen> {
+     if (_isLoadingMore) return;
+     if (page > 1) setState(() => _isLoadingMore = true);
+     try {
++      await VehicleApi.refreshCatalog();
++      if (!mounted || generation != _requestGeneration) return;
++      final catalogGeneration = VehicleApi.catalogGeneration;
++      if (page > 1 && _visibleCatalogGeneration != catalogGeneration) {
++        // Never append a page from a new catalog to an old first page.
++        _loadVehicles();
++        return;
++      }
+       final res = await VehicleApi.fetchVehicles(
+         query: _submittedSearchQuery.isEmpty ? null : _submittedSearchQuery,
+         brand: _selectedBrand,
+@@ -436,7 +473,10 @@ class _VehicleListScreenState extends State<VehicleListScreen> {
+       ).timeout(const Duration(seconds: 14));
+       if (!mounted || generation != _requestGeneration) return;
+       setState(() {
+-        if (page == 1) _items.clear();
++        if (page == 1) {
++          _items.clear();
++          _visibleCatalogGeneration = catalogGeneration;
++        }
+         final merged = mergeUniqueVehiclePages(_items, res.items);
+         _items
+           ..clear()
+diff --git a/app/test/vehicle_catalog_refresh_test.dart b/app/test/vehicle_catalog_refresh_test.dart
+new file mode 100644
+index 00000000..9b76b1db
+--- /dev/null
++++ b/app/test/vehicle_catalog_refresh_test.dart
+@@ -0,0 +1,73 @@
++import 'package:dio/dio.dart';
++import 'package:flutter_test/flutter_test.dart';
++import 'package:recar_app/services/vehicle_catalog_refresh.dart';
++
++void main() {
++  TestWidgetsFlutterBinding.ensureInitialized();
++
++  test('new revision, 304, concurrency and five-minute request cap', () async {
++    var now = DateTime.utc(2026, 10, 19);
++    final dio = Dio(BaseOptions(baseUrl: 'https://synthetic.invalid'));
++    var calls = 0;
++    String revision = 'a' * 64;
++    dio.interceptors.add(InterceptorsWrapper(onRequest: (r, h) {
++      calls++;
++      if (calls == 2) {
++        expect(r.headers['If-None-Match'], '"${'a' * 64}"');
++        h.resolve(Response<dynamic>(requestOptions: r, statusCode: 304));
++      } else {
++        h.resolve(Response<dynamic>(requestOptions: r, statusCode: 200, data: {
++          'contract_version': 'catalog_v1',
++          'revision': revision,
++          'complete': true,
++          'total': 0,
++          'items': [],
++        }));
++      }
++    }));
++    final refresh = VehicleCatalogRefresh(dio, now: () => now);
++    final results =
++        await Future.wait(List.generate(10, (_) => refresh.check()));
++    expect(results.every((r) => r), isTrue);
++    expect(calls, 1);
++    expect(await refresh.check(), isFalse);
++    now = now.add(const Duration(minutes: 5));
++    expect(await refresh.check(), isFalse);
++    revision = 'b' * 64;
++    now = now.add(const Duration(minutes: 5));
++    expect(await refresh.check(), isTrue);
++    expect(calls, 3);
++  });
++
++  test('invalid response and failures keep revision and throttle retries',
++      () async {
++    var now = DateTime.utc(2026, 10, 19);
++    final dio = Dio(BaseOptions(baseUrl: 'https://synthetic.invalid'));
++    var calls = 0;
++    dio.interceptors.add(InterceptorsWrapper(onRequest: (r, h) {
++      calls++;
++      if (calls == 2) {
++        h.reject(DioException(
++            requestOptions: r, type: DioExceptionType.connectionTimeout));
++      } else {
++        h.resolve(Response<dynamic>(requestOptions: r, statusCode: 200, data: {
++          'contract_version': 'catalog_v1',
++          'revision': 'a' * 64,
++          'complete': calls != 1,
++          'total': 0,
++          'items': [],
++        }));
++      }
++    }));
++    final refresh = VehicleCatalogRefresh(dio, now: () => now);
++    expect(await refresh.check(), isFalse);
++    expect(await refresh.check(), isFalse);
++    expect(calls, 1);
++    now = now.add(const Duration(minutes: 5));
++    expect(await refresh.check(), isFalse);
++    expect(await refresh.check(), isFalse);
++    expect(calls, 2);
++    now = now.add(const Duration(minutes: 5));
++    expect(await refresh.check(), isTrue);
++  });
++}
+diff --git a/app/test/quote_cache_test.dart b/app/test/quote_cache_test.dart
+index 093ade2e..f14ebcac 100644
+--- a/app/test/quote_cache_test.dart
++++ b/app/test/quote_cache_test.dart
+@@ -8,6 +8,17 @@ class _VehicleQuoteMockInterceptor extends Interceptor {
+ 
+   @override
+   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
++    if (options.path == '/api/v1/vehicles/catalog/version') {
++      handler.resolve(
++          Response<dynamic>(requestOptions: options, statusCode: 200, data: {
++        'contract_version': 'catalog_v1',
++        'complete': true,
++        'items': [],
++        'total': 0,
++        'revision': 'a' * 64
++      }));
++      return;
++    }
+     if (options.path == '/api/v1/vehicles/') {
+       handler.resolve(
+         Response<dynamic>(
