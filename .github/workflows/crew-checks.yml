@@ -22,3 +22,15 @@ jobs:
       - run: npm run test:app-entries
       - run: npm run test:kakao
       - run: npm run test:crew
+
+  crew-production:
+    name: Crew / live release integrity (read-only)
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Verify approved Worker release, files and entry routes
+        run: npm run verify:crew:production -- --expect-local
