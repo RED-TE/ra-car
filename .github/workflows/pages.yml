@@ -46,6 +46,12 @@ jobs:
       - name: Verify main and inquiry app entries before publishing
         run: npm run test:app-entries
 
+      - name: Verify Kakao web callback before publishing
+        run: npm run test:kakao
+
+      - name: Verify the live Kakao API is ready before publishing
+        run: npm run verify:kakao:production
+
       - name: Configure Pages
         uses: actions/configure-pages@v5
 

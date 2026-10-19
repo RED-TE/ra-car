@@ -114,7 +114,7 @@
           <div class="crew-share-main">
             <span class="section-line">내 추천 주소</span>
             <h2>추천은 링크 하나로</h2>
-            <p>홈페이지 문의는 추천코드로 확인되며, 실적은 운영팀 검토 후 반영됩니다.</p>
+            <p>내 링크로 접수된 문의를 확인하세요. 계약·보상 실적은 운영팀 검토 후 반영됩니다.</p>
             <div class="crew-share-controls">
               <label for="crewShareLink" class="sr-only">내 추천 주소</label>
               <input id="crewShareLink" readonly placeholder="주소를 불러오는 중입니다" />
@@ -124,7 +124,8 @@
             <p class="crew-form-status" id="crewShareStatus" role="status" aria-live="polite"></p>
           </div>
           <div class="crew-share-side">
-            <div class="crew-share-counts"><span>기록된 방문 <strong id="crewShareVisits">-</strong></span><span>확인된 추천 <strong id="crewShareReferrals">-</strong></span></div>
+            <div class="crew-share-counts"><span>기록된 방문 <strong id="crewShareVisits">-</strong></span><span>확인된 추천 <strong id="crewShareReferrals">-</strong></span><span>접수된 문의 <strong id="crewShareInquiries">-</strong></span></div>
+            <p id="crewInquirySummary" role="status">문의 집계를 확인하는 중입니다.</p>
             <p id="crewShareDisclosure">RE:CAR 크루 활동의 일환으로 제공하는 링크입니다. 계약·차량 인도 완료 등 유효 실적에 대해 크루에게 수수료를 지급합니다.</p>
           </div>
         </section>
@@ -915,6 +916,12 @@
       }
 
       function renderSummary(metrics, dashboard) {
+        const inquiries = dashboard.inquiries;
+        const hasInquiryMetrics = inquiries && Number.isFinite(inquiries.total);
+        setText("#crewShareInquiries", hasInquiryMetrics ? `${numberText(safeNumber(inquiries.total))}건` : "집계 준비 중");
+        setText("#crewInquirySummary", hasInquiryMetrics
+          ? `홈페이지 ${numberText(safeNumber(inquiries.web))}건 · 앱 ${numberText(safeNumber(inquiries.app))}건 · 처리 대기 ${numberText(safeNumber(inquiries.pending))}건`
+          : "문의 집계를 아직 제공받지 못했습니다. 계약·보상 실적과는 별도로 확인해 주세요.");
         setText("#crewWaitingCount", `${numberText(metrics.contract_pending_count)}건 대기`);
         setText("#crewConversionRate", percentText(metrics.conversion_rate));
         setText("#crewTotalReferrals", `${numberText(metrics.referral_count)}명`);
@@ -1354,6 +1361,8 @@
             document.querySelector("#crewLoadError").hidden = false;
             document.body.dataset.loadState = "error";
             if (!crewSession) {
+              setText("#crewShareInquiries", "조회 불가");
+              setText("#crewInquirySummary", "문의 집계를 조회하지 못했습니다. 연결을 확인한 뒤 다시 시도해 주세요.");
               document.querySelectorAll(".crew-summary-grid [id], #settlementAmount, #crewTotalReferrals, #chartMetricTotal, #chartMetricPeak").forEach(element => { element.textContent = "조회 불가"; });
               recentActivityList.textContent = "활동 내역을 조회하지 못했습니다.";
               analyticsTableBody.innerHTML = '<tr><td colspan="7">통계를 조회하지 못했습니다.</td></tr>';
