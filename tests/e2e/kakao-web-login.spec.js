@@ -108,7 +108,7 @@ test("callback without browser proof stops without an exchange or refresh loop",
   });
   await page.goto(`/app/?code=synthetic-code&state=${state}`);
   await semantics(page);
-  await expect(page.getByText("로그인 확인 정보가 없습니다. 카카오 로그인을 다시 시작해 주세요.", { exact: true })).toBeAttached();
+  await expect(page.locator("flt-semantics").getByText("로그인 확인 정보가 없습니다. 카카오 로그인을 다시 시작해 주세요.", { exact: true })).toBeAttached();
   expect(requests).toEqual([]);
   expect(new URL(page.url()).searchParams.has("code")).toBe(false);
   expect(documentLoads).toBe(1);
