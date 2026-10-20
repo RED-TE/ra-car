@@ -37,7 +37,7 @@ _flutter.buildConfig = {"engineRevision":"3452d735bd38224ef2db85ca763d862d6326b1
 
 async function startRecar() {
   const compatibleBuild = _flutter.buildConfig.builds[0];
-  compatibleBuild.mainJsPath = 'main.dart.js?build=web-quote-conditions-20261020';
+  compatibleBuild.mainJsPath = 'main.dart.js?build=web-price-garage-20261021';
   const appScope = new URL('./', document.baseURI).href;
   const isLegacyAppWorker = (worker) => worker &&
     new URL(worker.scriptURL).pathname === new URL('flutter_service_worker.js', appScope).pathname;

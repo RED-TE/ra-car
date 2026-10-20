@@ -2964,3 +2964,1662 @@ index 093ade2e..f14ebcac 100644
          proof is! Map ||
          proof['version'] != 'price_provenance_v1' ||
          proof['request_conditions_verified'] != true ||
+--- a/app/lib/screens/garage_list_view.dart
++++ b/app/lib/screens/garage_list_view.dart
+@@ -547,6 +547,7 @@
+     required this.onFindVehicle,
+     this.onLogin,
+     this.listKey,
++    this.onOpenRecentVehicle,
+   });
+ 
+   /// 말풍선 문구.
+@@ -556,6 +557,7 @@
+   /// 로그인 전에만 준다.
+   final VoidCallback? onLogin;
+   final Key? listKey;
++  final ValueChanged<String>? onOpenRecentVehicle;
+ 
+   static const _steps = <(String, String, String)>[
+     ('차량·조건 선택', '원하는 차와 계약 기간·주행거리를 골라요.', _kArtChoose),
+@@ -677,9 +679,15 @@
+       key: listKey,
+       padding: EdgeInsets.only(bottom: bottom + kBottomNavigationBarHeight + 8),
+       children: [
+-        _GaragePreviewHero(headline: headline),
++        if (onOpenRecentVehicle == null)
++          _GaragePreviewHero(headline: headline)
++        else
++          GarageRecentVehicleHero(
++            onOpenVehicle: onOpenRecentVehicle!,
++            onBrowseVehicles: onFindVehicle,
++          ),
+         Transform.translate(
+-          offset: const Offset(0, -24),
++          offset: Offset(0, onOpenRecentVehicle == null ? -24 : 0),
+           child: Container(
+             decoration: const BoxDecoration(
+               color: Colors.white,
+@@ -689,6 +697,10 @@
+             child: Column(
+               crossAxisAlignment: CrossAxisAlignment.stretch,
+               children: [
++                if (onOpenRecentVehicle != null) ...[
++                  Text(headline, style: _gText(20, weight: FontWeight.w700)),
++                  const SizedBox(height: 12),
++                ],
+                 Text(
+                   '차량을 선택하면\n견적 확인부터 계약·출고까지\n내 차고에서 한 번에 관리할 수 있어요.',
+                   style: _gText(17,
+--- a/app/lib/screens/garage_screen.dart
++++ b/app/lib/screens/garage_screen.dart
+@@ -37,6 +37,7 @@
+ import '../utils/vehicle_image_resolver.dart';
+ import '../widgets/plain_ui.dart';
+ import '../widgets/auth_required_sheet.dart';
++import '../widgets/garage_recent_vehicle_hero.dart';
+ import '../widgets/micro_interactions.dart';
+ import '../widgets/ownership_comparison.dart';
+ import 'applicant_type_selection_screen.dart';
+@@ -903,6 +904,14 @@
+     if (!await canLaunchUrl(uri) || !await launchUrl(uri)) {
+       if (mounted) showAppSnackBar(context, '전화를 걸 수 없어요.');
+     }
++  }
++
++  void _openRecentVehicle(String vehicleId) {
++    Navigator.of(context).push(
++      MaterialPageRoute<void>(
++        builder: (_) => VehicleDetailScreen(vehicleId: vehicleId),
++      ),
++    );
+   }
+ 
+   Future<void> _openExternalLink(String url) async {
+@@ -963,6 +972,7 @@
+         child: _GaragePreview(
+           headline: '아직 저장된 견적이 없어요',
+           onFindVehicle: _browseVehicles,
++          onOpenRecentVehicle: _openRecentVehicle,
+         ),
+       );
+     }
+@@ -1009,6 +1019,7 @@
+         financeReportsById: _financeReportsById,
+         onTapReport: _openReportDetail,
+         onBrowseVehicles: _browseVehicles,
++        onOpenRecentVehicle: _openRecentVehicle,
+       ),
+     );
+   }
+@@ -1048,6 +1059,7 @@
+                   headline: '아직 진행 중인 차량이 없어요.',
+                   onFindVehicle: _browseVehicles,
+                   onLogin: _openAuth,
++                  onOpenRecentVehicle: _openRecentVehicle,
+                 ),
+               )
+             : FutureBuilder<ApplicationListEnvelope>(
+@@ -1164,6 +1176,7 @@
+     required this.financeReportsById,
+     required this.onTapReport,
+     required this.onBrowseVehicles,
++    required this.onOpenRecentVehicle,
+   });
+ 
+   final ScrollController controller;
+@@ -1171,6 +1184,7 @@
+   final Map<String, EstimateReportListItem> financeReportsById;
+   final void Function(ApplicationResponse) onTapReport;
+   final VoidCallback onBrowseVehicles;
++  final ValueChanged<String> onOpenRecentVehicle;
+ 
+   @override
+   State<_GarageReportListView> createState() => _GarageReportListViewState();
+@@ -1308,6 +1322,10 @@
+               ),
+               padding: EdgeInsets.zero,
+               children: [
++                GarageRecentVehicleHero(
++                  onOpenVehicle: widget.onOpenRecentVehicle,
++                  onBrowseVehicles: widget.onBrowseVehicles,
++                ),
+                 _GaragePipeline(
+                   selected: _selectedTab,
+                   counts: counts,
+--- a/app/lib/screens/quote_result_screen.dart
++++ b/app/lib/screens/quote_result_screen.dart
+@@ -1553,7 +1553,7 @@
+       if (!mounted || generation != _quoteGeneration) return;
+       final message =
+           error is StateError || QuoteApi.isSelectionPriceUnavailable(error)
+-              ? QuoteApi.selectionPriceUnavailableMessage
++              ? QuoteApi.priceUnavailableMessageFor(error)
+               : error is TimeoutException
+                   ? QuoteApi.requestTimeoutMessage
+                   : '월 납입료를 다시 확인하지 못했어요. 다시 시도해 주세요.';
+--- a/app/lib/services/quote_api.dart
++++ b/app/lib/services/quote_api.dart
+@@ -4,14 +4,22 @@
+ import '../models/quote.dart';
+ import '../models/quote_selection.dart';
+ import 'api_client.dart';
++import 'quote_price_evidence.dart';
++import 'vehicle_api.dart';
+ 
+-class QuoteConditionsUnverified implements Exception {
+-  const QuoteConditionsUnverified();
+-}
++export 'quote_price_evidence.dart' show QuoteConditionsUnverified;
+ 
+ class QuoteApi {
+   static const selectionPriceUnavailableMessage =
+       '이 조건은 가격 근거 확인이 필요해요. 조건을 변경하거나 가격 확인을 요청해 주세요.';
++  static const guaranteeUnavailableMessage =
++      '보증금이 있는 조건은 월 납입료를 아직 검증하지 못했어요. 보증금 0원으로 변경하거나 담당자에게 확인해 주세요.';
++
++  static String priceUnavailableMessageFor(Object? error) =>
++      error is QuoteConditionsUnverified &&
++              error.reason == 'NONZERO_GUARANTEE_UNVERIFIED'
++          ? guaranteeUnavailableMessage
++          : selectionPriceUnavailableMessage;
+   static const requestTimeout = Duration(seconds: 20);
+   static const requestTimeoutMessage = '가격 조회가 지연되어 중단했어요. 다시 시도해 주세요.';
+ 
+@@ -39,85 +47,19 @@
+     required int guarantee,
+     int? prepaymentPct,
+     int? guaranteePct,
+-  }) {
+-    final proof = data['price_provenance'];
+-    final market = proof is Map ? proof['market_price'] : null;
+-    final applied = market is Map ? market['applied_conditions'] : null;
+-    final prepayMatches = prepaymentPct != null
+-        ? data['prepayment_pct'] == prepaymentPct
+-        : data['deposit'] == deposit;
+-    final guaranteeMatches = guaranteePct != null
+-        ? data['guarantee_pct'] == guaranteePct
+-        : data['guarantee'] == guarantee;
+-    final unsupported = proof is Map ? proof['unsupported_reasons'] : null;
+-    // Source-price evidence does not verify a refundable guarantee's effect
+-    // on the monthly payment. Never display it as a supported condition.
+-    final hasUnverifiedGuarantee = guarantee != 0 ||
+-        (guaranteePct ?? 0) != 0 ||
+-        data['guarantee'] != 0 ||
+-        (data['guarantee_pct'] != null && data['guarantee_pct'] != 0) ||
+-        (unsupported is List &&
+-            unsupported.contains('NONZERO_GUARANTEE_UNVERIFIED'));
+-    final normalized = data['normalized_selection'];
+-    if (data['vehicle_id'] != vehicleId ||
+-        data['vehicle_trim_id'] != selection.vehicleTrimId ||
+-        data['selection_contract_version'] != QuoteSelection.contractVersion ||
+-        normalized is! Map ||
+-        QuoteSelection.fromJson(Map<String, dynamic>.from(normalized)) !=
+-            selection ||
+-        data['term'] != term ||
+-        data['mileage_limit'] != mileageLimit ||
+-        !prepayMatches ||
+-        !guaranteeMatches ||
+-        hasUnverifiedGuarantee ||
+-        proof is! Map ||
+-        proof['version'] != 'price_provenance_v1' ||
+-        proof['request_conditions_verified'] != true ||
+-        proof['processed_product_type'] != productType ||
+-        market is! Map ||
+-        market['product_type'] != productType ||
+-        applied is! Map ||
+-        applied['term_months'] != term ||
+-        applied['annual_km'] != mileageLimit ||
+-        applied['prepayment_pct'] !=
+-            (prepaymentPct ?? data['prepayment_pct'])) {
+-      throw const QuoteConditionsUnverified();
+-    }
+-    final zeroPrepay =
+-        prepaymentPct == null ? deposit == 0 : prepaymentPct == 0;
+-    final zeroGuarantee =
+-        guaranteePct == null ? guarantee == 0 : guaranteePct == 0;
+-    // The web supports colors/options too; those are not the initial Sales AI scope.
+-    final initialAiScope = zeroPrepay &&
+-        zeroGuarantee &&
+-        selection.selectedOptionIds.isEmpty &&
+-        selection.exteriorColorId == null &&
+-        selection.interiorColorId == null &&
+-        selection.inventoryItemId == null;
+-    if (initialAiScope) {
+-      final matches = market['condition_match'];
+-      final unsupported = proof['unsupported_reasons'];
+-      final unknown = market['unknown_reasons'];
+-      if (proof['sales_ai_eligible'] != true ||
+-          market['match_status'] != 'EXACT' ||
+-          !const [
+-            'EXACT',
+-            'NORMALIZED_EXACT',
+-          ].contains(market['vehicle_match']) ||
+-          matches is! Map ||
+-          !const [
+-            'term_months',
+-            'annual_km',
+-            'prepayment_pct',
+-          ].every((key) => matches[key] == 'EXACT') ||
+-          unsupported is! List ||
+-          unsupported.isNotEmpty ||
+-          unknown is! List ||
+-          unknown.isNotEmpty) {
+-        throw const QuoteConditionsUnverified();
+-      }
+-    }
+-  }
++  }) =>
++      QuotePriceEvidence.validate(
++        data,
++        vehicleId: vehicleId,
++        selection: selection,
++        productType: productType,
++        term: term,
++        mileageLimit: mileageLimit,
++        deposit: deposit,
++        guarantee: guarantee,
++        prepaymentPct: prepaymentPct,
++        guaranteePct: guaranteePct,
++      );
+ 
+   /// 즉시 견적 생성.
+   ///
+@@ -138,8 +80,39 @@
+     String? referralCode,
+     CancelToken? cancelToken,
+   }) async {
+-    final normalizedProductType =
+-        productType.trim().toUpperCase() == 'LEASE' ? 'LEASE' : 'RENTAL';
++    final normalizedProductType = productType.trim().toUpperCase();
++    if (!const ['RENTAL', 'LEASE'].contains(normalizedProductType)) {
++      throw const QuoteConditionsUnverified('UNSUPPORTED_PRODUCT');
++    }
++    if (guarantee != 0 || (guaranteePct ?? 0) != 0) {
++      throw const QuoteConditionsUnverified('NONZERO_GUARANTEE_UNVERIFIED');
++    }
++    if (vehiclePriceOverride != null) {
++      throw const QuoteConditionsUnverified(
++          'CLIENT_PRICE_OVERRIDE_UNSUPPORTED');
++    }
++    // Older callers may omit selection, but a fresh price still requires the
++    // server's declared, available default trim. Never guess the first trim.
++    var resolvedSelection = selection;
++    if (resolvedSelection == null && vehicleTrimId?.trim().isNotEmpty == true) {
++      resolvedSelection = QuoteSelection(vehicleTrimId: vehicleTrimId!);
++    }
++    if (resolvedSelection == null) {
++      final vehicle = await VehicleApi.fetchVehicleDetail(vehicleId)
++          .timeout(requestTimeout);
++      final defaultId = vehicle.defaultVehicleTrimId ??
++          vehicle.trimSelection.defaultVehicleTrimId;
++      final hasDefault = vehicle.id == vehicleId &&
++          defaultId != null &&
++          (vehicle.trims
++                  .any((trim) => trim.id == defaultId && trim.isAvailable) ||
++              vehicle.trimSelection.activeLeaves
++                  .any((leaf) => leaf.vehicleTrimId == defaultId));
++      if (!hasDefault) {
++        throw const QuoteConditionsUnverified('DEFAULT_SELECTION_UNAVAILABLE');
++      }
++      resolvedSelection = QuoteSelection(vehicleTrimId: defaultId);
++    }
+     // ignore: avoid_print
+     print(
+       '[QuoteApi] POST instant: vehicle=$vehicleId term=$term deposit=$deposit product=$normalizedProductType referral=$referralCode',
+@@ -152,14 +125,8 @@
+         cancelToken: requestCancelToken,
+         data: {
+           'vehicle_id': vehicleId,
+-          if (selection != null) ...{
+-            'selection_contract_version': QuoteSelection.contractVersion,
+-            'selection': selection.toJson(),
+-          },
+-          if (selection == null &&
+-              vehicleTrimId != null &&
+-              vehicleTrimId.trim().isNotEmpty)
+-            'vehicle_trim_id': vehicleTrimId.trim(),
++          'selection_contract_version': QuoteSelection.contractVersion,
++          'selection': resolvedSelection.toJson(),
+           'product_type': normalizedProductType,
+           'term': term,
+           if (prepaymentPct == null) 'deposit': deposit,
+@@ -167,8 +134,6 @@
+           if (prepaymentPct != null) 'prepayment_pct': prepaymentPct,
+           if (guaranteePct != null) 'guarantee_pct': guaranteePct,
+           'mileage_limit': mileageLimit,
+-          if (selection == null && vehiclePriceOverride != null)
+-            'vehicle_price_override': vehiclePriceOverride,
+           if (referralCode != null && referralCode.trim().isNotEmpty)
+             'referral_code': referralCode.trim().toUpperCase(),
+         },
+@@ -176,25 +141,26 @@
+         requestCancelToken.cancel('Quote request deadline exceeded');
+         throw TimeoutException(requestTimeoutMessage, requestTimeout);
+       });
+-      final json = response.data as Map<String, dynamic>;
+-      if (selection != null) {
+-        validateSelectionResponse(
+-          Map<String, dynamic>.from(json['data'] as Map),
+-          vehicleId: vehicleId,
+-          selection: selection,
+-          productType: normalizedProductType,
+-          term: term,
+-          mileageLimit: mileageLimit,
+-          deposit: deposit,
+-          guarantee: guarantee,
+-          prepaymentPct: prepaymentPct,
+-          guaranteePct: guaranteePct,
+-        );
++      final json = response.data;
++      if (json is! Map<String, dynamic> ||
++          json['data'] is! Map<String, dynamic>) {
++        throw const QuoteConditionsUnverified('INVALID_QUOTE_RESPONSE');
+       }
++      validateSelectionResponse(
++        Map<String, dynamic>.from(json['data'] as Map),
++        vehicleId: vehicleId,
++        selection: resolvedSelection,
++        productType: normalizedProductType,
++        term: term,
++        mileageLimit: mileageLimit,
++        deposit: deposit,
++        guarantee: guarantee,
++        prepaymentPct: prepaymentPct,
++        guaranteePct: guaranteePct,
++      );
+       final envelope = QuoteEnvelope.fromJson(json);
+-      if (selection != null &&
+-          (!envelope.data.hasSelectionPricingProof ||
+-              envelope.data.monthlyPayment <= 0)) {
++      if (!envelope.data.hasSelectionPricingProof ||
++          envelope.data.monthlyPayment <= 0) {
+         throw const QuoteConditionsUnverified();
+       }
+       return envelope;
+--- /dev/null
++++ b/app/lib/services/quote_price_evidence.dart
+@@ -0,0 +1,182 @@
++import '../models/quote_selection.dart';
++
++/// A fresh quote lacks evidence for the customer's actual request.
++/// This is intentionally independent of parsing historical saved quotes.
++class QuoteConditionsUnverified implements Exception {
++  const QuoteConditionsUnverified(
++      [this.reason = 'PRICE_CONDITIONS_UNVERIFIED']);
++
++  final String reason;
++
++  @override
++  String toString() => 'QuoteConditionsUnverified($reason)';
++}
++
++/// Validates the public selection_v1 / price_provenance_v1 contract only.
++/// No price, margin, advance-payment or guarantee calculation lives here.
++class QuotePriceEvidence {
++  static const _customerSupportedScopeReasons = <String>{
++    'NONZERO_PREPAYMENT_OUT_OF_INITIAL_SCOPE',
++    'OPTIONS_OUT_OF_INITIAL_SCOPE',
++    'COLOR_OR_INVENTORY_OUT_OF_INITIAL_SCOPE',
++  };
++
++  static void validate(
++    Map<String, dynamic> data, {
++    required String vehicleId,
++    required QuoteSelection selection,
++    required String productType,
++    required int term,
++    required int mileageLimit,
++    required int deposit,
++    required int guarantee,
++    int? prepaymentPct,
++    int? guaranteePct,
++  }) {
++    Never reject(String reason) => throw QuoteConditionsUnverified(reason);
++    bool nonempty(Object? value) => value is String && value.trim().isNotEmpty;
++    bool nonnegative(Object? value) =>
++        value is num && value.isFinite && value >= 0;
++
++    if (!const ['RENTAL', 'LEASE'].contains(productType)) {
++      reject('UNSUPPORTED_PRODUCT');
++    }
++    final normalized = data['normalized_selection'];
++    if (data['vehicle_id'] != vehicleId ||
++        data['vehicle_trim_id'] != selection.vehicleTrimId ||
++        data['selection_contract_version'] != QuoteSelection.contractVersion ||
++        normalized is! Map ||
++        normalized['vehicle_trim_id'] != selection.vehicleTrimId ||
++        normalized['exterior_color_id'] != selection.exteriorColorId ||
++        normalized['interior_color_id'] != selection.interiorColorId ||
++        normalized['inventory_item_id'] != selection.inventoryItemId ||
++        normalized['selected_option_ids'] is! List ||
++        (normalized['selected_option_ids'] as List)
++            .any((id) => id is! String) ||
++        !nonempty(data['selection_fingerprint']) ||
++        !nonempty(data['pricing_context_version']) ||
++        data['selected_vehicle_price'] is! int ||
++        (data['selected_vehicle_price'] as int) <= 0 ||
++        data['monthly_payment'] is! int ||
++        (data['monthly_payment'] as int) <= 0) {
++      reject('SELECTION_OR_AMOUNT_MISMATCH');
++    }
++    try {
++      if (QuoteSelection.fromJson(Map<String, dynamic>.from(normalized)) !=
++          selection) {
++        reject('SELECTION_MISMATCH');
++      }
++    } on QuoteConditionsUnverified {
++      rethrow;
++    } catch (_) {
++      reject('INVALID_NORMALIZED_SELECTION');
++    }
++    if (data['term'] != term || data['mileage_limit'] != mileageLimit) {
++      reject('REQUEST_CONDITIONS_MISMATCH');
++    }
++    if (!nonnegative(data['deposit']) ||
++        (prepaymentPct != null
++            ? data['prepayment_pct'] != prepaymentPct
++            : data['deposit'] != deposit)) {
++      reject('PREPAYMENT_MISMATCH');
++    }
++    // A source-price match is not evidence of a refundable guarantee's effect.
++    if (guarantee != 0 ||
++        (guaranteePct ?? 0) != 0 ||
++        data['guarantee'] != 0 ||
++        (data['guarantee_pct'] != null && data['guarantee_pct'] != 0)) {
++      reject('NONZERO_GUARANTEE_UNVERIFIED');
++    }
++
++    final proof = data['price_provenance'];
++    if (proof is! Map ||
++        proof['version'] != 'price_provenance_v1' ||
++        proof['processed_product_type'] != productType ||
++        proof['request_conditions_verified'] != true ||
++        proof['quote_kind'] != 'ESTIMATE' ||
++        proof['calculation_method'] !=
++            'MARKET_REFERENCE_PLUS_EXISTING_SELECTION_DELTA') {
++      reject('PRICE_PROVENANCE_UNVERIFIED');
++    }
++    final unsupported = proof['unsupported_reasons'];
++    // Sales AI's initial scope excludes otherwise supported paid selections.
++    // Only those documented scope markers are allowed, never unknown reasons.
++    if (unsupported is! List ||
++        unsupported.any((reason) =>
++            reason is! String ||
++            !_customerSupportedScopeReasons.contains(reason))) {
++      reject('UNSUPPORTED_PRICE_CONDITION');
++    }
++    final hasPaidAdvance =
++        data['deposit'] is num && (data['deposit'] as num) > 0;
++    final hasOptions = selection.selectedOptionIds.isNotEmpty;
++    final hasColorsOrInventory = selection.exteriorColorId != null ||
++        selection.interiorColorId != null ||
++        selection.inventoryItemId != null;
++    if ((unsupported.contains('NONZERO_PREPAYMENT_OUT_OF_INITIAL_SCOPE') &&
++            !hasPaidAdvance) ||
++        (unsupported.contains('OPTIONS_OUT_OF_INITIAL_SCOPE') && !hasOptions) ||
++        (unsupported.contains('COLOR_OR_INVENTORY_OUT_OF_INITIAL_SCOPE') &&
++            !hasColorsOrInventory) ||
++        (!hasPaidAdvance &&
++            !hasOptions &&
++            !hasColorsOrInventory &&
++            (proof['sales_ai_eligible'] != true || unsupported.isNotEmpty))) {
++      reject('INCONSISTENT_SUPPORTED_SCOPE');
++    }
++    final market = proof['market_price'];
++    if (market is! Map ||
++        market['product_type'] != productType ||
++        market['match_status'] != 'EXACT' ||
++        !const ['EXACT', 'NORMALIZED_EXACT']
++            .contains(market['vehicle_match']) ||
++        !const ['CHAZM_IMPORTED', 'VEHICLE_QUOTE_LOOKUP']
++            .contains(market['source']) ||
++        market['source'] != (data['price_source'] ?? data['source']) ||
++        !nonempty(market['source_record_id']) ||
++        !nonempty(market['source_revision']) ||
++        !nonempty(market['calculation_method']) ||
++        market['calculation_method'] == 'UNKNOWN') {
++      reject('SOURCE_PRICE_UNVERIFIED');
++    }
++    final unknown = market['unknown_reasons'];
++    final matches = market['condition_match'];
++    final applied = market['applied_conditions'];
++    final resolvedPrepayment = prepaymentPct ?? data['prepayment_pct'];
++    if (unknown is! List ||
++        unknown.isNotEmpty ||
++        matches is! Map ||
++        !const ['term_months', 'annual_km', 'prepayment_pct']
++            .every((key) => matches[key] == 'EXACT') ||
++        applied is! Map ||
++        applied['term_months'] != term ||
++        applied['annual_km'] != mileageLimit ||
++        !nonnegative(resolvedPrepayment) ||
++        (resolvedPrepayment as num) > 100 ||
++        ((data['deposit'] as num) == 0 && resolvedPrepayment != 0) ||
++        ((data['deposit'] as num) > 0 && resolvedPrepayment == 0) ||
++        applied['prepayment_pct'] != resolvedPrepayment) {
++      reject('SOURCE_CONDITIONS_MISMATCH');
++    }
++    final points = market['source_points'];
++    if (points is! List ||
++        points.isEmpty ||
++        points.any((point) {
++          if (point is! Map ||
++              !nonempty(point['path']) ||
++              !const ['BASE', 'ADJUSTMENT_BASE', 'ADJUSTMENT_TARGET']
++                  .contains(point['role'])) {
++            return true;
++          }
++          final conditions = point['conditions'];
++          // Adjustment anchors can use another mileage/advance percentage,
++          // but must record the actual term used by this exact source path.
++          return conditions is! Map ||
++              conditions['term_months'] != term ||
++              !nonnegative(conditions['annual_km']) ||
++              !nonnegative(conditions['prepayment_pct']);
++        })) {
++      reject('SOURCE_RECORD_INCOMPLETE');
++    }
++  }
++}
+--- /dev/null
++++ b/app/lib/widgets/garage_recent_vehicle_hero.dart
+@@ -0,0 +1,255 @@
++import 'dart:async';
++
++import 'package:flutter/material.dart';
++
++import '../models/vehicle.dart';
++import '../services/recent_viewed_service.dart';
++import '../theme/app_colors.dart';
++import '../theme/app_typography.dart';
++import '../utils/brand_display.dart';
++import '../utils/vehicle_image_resolver.dart';
++
++/// Public browsing history only; never derives a car or price from an application.
++class GarageRecentVehicleHero extends StatefulWidget {
++  const GarageRecentVehicleHero({
++    super.key,
++    required this.onOpenVehicle,
++    required this.onBrowseVehicles,
++  });
++
++  final ValueChanged<String> onOpenVehicle;
++  final VoidCallback onBrowseVehicles;
++
++  @override
++  State<GarageRecentVehicleHero> createState() =>
++      _GarageRecentVehicleHeroState();
++}
++
++class _GarageRecentVehicleHeroState extends State<GarageRecentVehicleHero> {
++  final _recent = RecentViewedService.instance;
++
++  @override
++  void initState() {
++    super.initState();
++    unawaited(_recent.loadFromStorage());
++  }
++
++  @override
++  Widget build(BuildContext context) {
++    return AnimatedBuilder(
++      animation: _recent,
++      builder: (context, _) {
++        final vehicle = _recent.items.firstOrNull?.item;
++        final title =
++            vehicle == null ? '마지막으로 본 차량이 여기에 표시돼요' : vehicle.modelName;
++        void open() => vehicle == null
++            ? widget.onBrowseVehicles()
++            : widget.onOpenVehicle(vehicle.id);
++
++        return Semantics(
++          key: const Key('garage-recent-vehicle-hero'),
++          button: true,
++          label: vehicle == null
++              ? '최근 본 차량 없음. 차량 찾기'
++              : '마지막으로 본 차량, ${brandDisplayName(vehicle.brand)} $title. 이어서 보기',
++          onTap: open,
++          child: ExcludeSemantics(
++            child: Material(
++              color: Colors.transparent,
++              child: InkWell(
++                key: const Key('garage-recent-vehicle-open'),
++                onTap: open,
++                child: Column(
++                  mainAxisSize: MainAxisSize.min,
++                  children: [
++                    ClipRect(
++                      child: SizedBox(
++                        key: const Key('garage-home-photo-stage'),
++                        width: double.infinity,
++                        height: 252,
++                        child: Stack(
++                          fit: StackFit.expand,
++                          children: [
++                            Image.asset(
++                              // Exact homepage artwork, kept separately from
++                              // the legacy purple garage used on older screens.
++                              'assets/images/garage/garage_home_bg.png',
++                              key: const Key('garage-home-photo-background'),
++                              fit: BoxFit.cover,
++                              alignment: const Alignment(0, 0.3),
++                              excludeFromSemantics: true,
++                              errorBuilder: (_, __, ___) => const ColoredBox(
++                                color: AppColors.brandBlueSoft,
++                              ),
++                            ),
++                            const Positioned(
++                              top: 0,
++                              left: 0,
++                              right: 0,
++                              height: 48,
++                              child: DecoratedBox(
++                                decoration: BoxDecoration(
++                                  gradient: LinearGradient(
++                                    begin: Alignment.topCenter,
++                                    end: Alignment.bottomCenter,
++                                    colors: [
++                                      AppColors.recarBackground,
++                                      Color(0x00F6F8FB),
++                                    ],
++                                  ),
++                                ),
++                              ),
++                            ),
++                            if (vehicle != null)
++                              Positioned(
++                                left: 46,
++                                right: 46,
++                                bottom: 24,
++                                height: 18,
++                                child: DecoratedBox(
++                                  decoration: BoxDecoration(
++                                    gradient: RadialGradient(
++                                      colors: [
++                                        AppColors.textPrimary
++                                            .withValues(alpha: 0.13),
++                                        AppColors.textPrimary
++                                            .withValues(alpha: 0),
++                                      ],
++                                      radius: 0.7,
++                                    ),
++                                  ),
++                                ),
++                              ),
++                            Positioned(
++                              left: 20,
++                              right: 20,
++                              bottom: 24,
++                              height: vehicle == null ? 90 : 140,
++                              child: AnimatedSwitcher(
++                                duration:
++                                    MediaQuery.disableAnimationsOf(context)
++                                        ? Duration.zero
++                                        : const Duration(milliseconds: 220),
++                                child: _RecentVehicleImage(
++                                  key: ValueKey(vehicle?.id),
++                                  vehicle: vehicle,
++                                ),
++                              ),
++                            ),
++                            Positioned(
++                              left: 20,
++                              right: 20,
++                              top: 28,
++                              child: Center(
++                                child: Container(
++                                  padding: const EdgeInsets.symmetric(
++                                      horizontal: 14, vertical: 8),
++                                  decoration: BoxDecoration(
++                                    color: Colors.white,
++                                    borderRadius: BorderRadius.circular(14),
++                                  ),
++                                  child: Text(
++                                    vehicle == null ? '최근 본 차량' : '마지막으로 본 차량',
++                                    style: AppTypography.label.copyWith(
++                                      color: AppColors.textPrimary,
++                                      fontWeight: FontWeight.w700,
++                                    ),
++                                  ),
++                                ),
++                              ),
++                            ),
++                          ],
++                        ),
++                      ),
++                    ),
++                    Padding(
++                      padding: const EdgeInsets.fromLTRB(20, 10, 20, 8),
++                      child: Row(
++                        children: [
++                          Expanded(
++                            child: Column(
++                              crossAxisAlignment: CrossAxisAlignment.start,
++                              children: [
++                                if (vehicle != null)
++                                  Text(
++                                    brandDisplayName(vehicle.brand),
++                                    style: AppTypography.caption.copyWith(
++                                      color: AppColors.textSecondary,
++                                    ),
++                                  ),
++                                Text(
++                                  title,
++                                  key: const Key('garage-recent-vehicle-name'),
++                                  maxLines: 2,
++                                  overflow: TextOverflow.ellipsis,
++                                  style: AppTypography.bodyLg.copyWith(
++                                    fontWeight: FontWeight.w700,
++                                  ),
++                                ),
++                              ],
++                            ),
++                          ),
++                          const SizedBox(width: 8),
++                          const Icon(
++                            Icons.chevron_right_rounded,
++                            color: AppColors.textSecondary,
++                          ),
++                        ],
++                      ),
++                    ),
++                  ],
++                ),
++              ),
++            ),
++          ),
++        );
++      },
++    );
++  }
++}
++
++class _RecentVehicleImage extends StatelessWidget {
++  const _RecentVehicleImage({super.key, required this.vehicle});
++
++  final VehicleListItem? vehicle;
++
++  @override
++  Widget build(BuildContext context) {
++    final item = vehicle;
++    if (item == null) return _placeholder();
++    final asset = resolveVehicleAsset(
++      brand: item.brand,
++      modelName: item.modelName,
++      thumbnailUrl: item.thumbnailUrl,
++    );
++    final network = resolveHostedVehicleImageUrl(item.imageUrl) ??
++        resolveHostedVehicleImageUrl(item.thumbnailUrl);
++    Widget remoteOrPlaceholder() => network == null
++        ? _placeholder()
++        : Image.network(
++            network,
++            fit: BoxFit.contain,
++            errorBuilder: (_, __, ___) => _placeholder(),
++          );
++
++    // Use the same verified model-image resolver as the catalog. An unknown
++    // model must not appear as a different, generic vehicle photo.
++    if (asset == null || asset == kVehiclePlaceholderAsset) {
++      return remoteOrPlaceholder();
++    }
++    return Image.asset(
++      asset,
++      fit: BoxFit.contain,
++      errorBuilder: (_, __, ___) => remoteOrPlaceholder(),
++    );
++  }
++
++  Widget _placeholder() => const Center(
++        key: Key('garage-recent-vehicle-placeholder'),
++        child: Icon(
++          Icons.directions_car_outlined,
++          size: 56,
++          color: AppColors.textTertiary,
++        ),
++      );
++}
+--- a/app/test/application_flow_render_capture_test.dart
++++ b/app/test/application_flow_render_capture_test.dart
+@@ -87,15 +87,15 @@
+ Future<void> _loadFonts() async {
+   await (FontLoader('Pretendard')
+         ..addFont(
+-            rootBundle.load('assets/fonts/pretendard/Pretendard-Regular.otf'))
++            rootBundle.load('assets/fonts/pretendard/PretendardVariable.ttf'))
+         ..addFont(
+-            rootBundle.load('assets/fonts/pretendard/Pretendard-Medium.otf'))
++            rootBundle.load('assets/fonts/pretendard/PretendardVariable.ttf'))
+         ..addFont(
+-            rootBundle.load('assets/fonts/pretendard/Pretendard-SemiBold.otf'))
++            rootBundle.load('assets/fonts/pretendard/PretendardVariable.ttf'))
+         ..addFont(
+-            rootBundle.load('assets/fonts/pretendard/Pretendard-Bold.otf'))
++            rootBundle.load('assets/fonts/pretendard/PretendardVariable.ttf'))
+         ..addFont(rootBundle
+-            .load('assets/fonts/pretendard/Pretendard-ExtraBold.otf')))
++            .load('assets/fonts/pretendard/PretendardVariable.ttf')))
+       .load();
+   await (FontLoader('MaterialIcons')
+         ..addFont(rootBundle.load('fonts/MaterialIcons-Regular.otf')))
+--- a/app/test/auth_layout_test.dart
++++ b/app/test/auth_layout_test.dart
+@@ -8,9 +8,9 @@
+   setUpAll(() async {
+     await (FontLoader('Pretendard')
+           ..addFont(
+-              rootBundle.load('assets/fonts/pretendard/Pretendard-Regular.otf'))
++              rootBundle.load('assets/fonts/pretendard/PretendardVariable.ttf'))
+           ..addFont(
+-              rootBundle.load('assets/fonts/pretendard/Pretendard-Bold.otf')))
++              rootBundle.load('assets/fonts/pretendard/PretendardVariable.ttf')))
+         .load();
+   });
+ 
+--- a/app/test/auth_render_capture_test.dart
++++ b/app/test/auth_render_capture_test.dart
+@@ -24,15 +24,15 @@
+   addTearDown(tester.view.resetDevicePixelRatio);
+   await (FontLoader('Pretendard')
+         ..addFont(
+-            rootBundle.load('assets/fonts/pretendard/Pretendard-Regular.otf'))
++            rootBundle.load('assets/fonts/pretendard/PretendardVariable.ttf'))
+         ..addFont(
+-            rootBundle.load('assets/fonts/pretendard/Pretendard-Medium.otf'))
++            rootBundle.load('assets/fonts/pretendard/PretendardVariable.ttf'))
+         ..addFont(
+-            rootBundle.load('assets/fonts/pretendard/Pretendard-SemiBold.otf'))
++            rootBundle.load('assets/fonts/pretendard/PretendardVariable.ttf'))
+         ..addFont(
+-            rootBundle.load('assets/fonts/pretendard/Pretendard-Bold.otf'))
++            rootBundle.load('assets/fonts/pretendard/PretendardVariable.ttf'))
+         ..addFont(rootBundle
+-            .load('assets/fonts/pretendard/Pretendard-ExtraBold.otf')))
++            .load('assets/fonts/pretendard/PretendardVariable.ttf')))
+       .load();
+   await (FontLoader('MaterialIcons')
+         ..addFont(rootBundle.load('fonts/MaterialIcons-Regular.otf')))
+--- a/app/test/community_layout_test.dart
++++ b/app/test/community_layout_test.dart
+@@ -113,9 +113,9 @@
+     vehicleMatch = _readFixture('community_vehicle_match_20261007.json');
+     await (FontLoader('Pretendard')
+           ..addFont(
+-              rootBundle.load('assets/fonts/pretendard/Pretendard-Regular.otf'))
++              rootBundle.load('assets/fonts/pretendard/PretendardVariable.ttf'))
+           ..addFont(
+-              rootBundle.load('assets/fonts/pretendard/Pretendard-Bold.otf')))
++              rootBundle.load('assets/fonts/pretendard/PretendardVariable.ttf')))
+         .load();
+   });
+ 
+--- a/app/test/community_render_capture_test.dart
++++ b/app/test/community_render_capture_test.dart
+@@ -57,15 +57,15 @@
+ Future<void> _loadFonts() async {
+   await (FontLoader('Pretendard')
+         ..addFont(
+-            rootBundle.load('assets/fonts/pretendard/Pretendard-Regular.otf'))
++            rootBundle.load('assets/fonts/pretendard/PretendardVariable.ttf'))
+         ..addFont(
+-            rootBundle.load('assets/fonts/pretendard/Pretendard-Medium.otf'))
++            rootBundle.load('assets/fonts/pretendard/PretendardVariable.ttf'))
+         ..addFont(
+-            rootBundle.load('assets/fonts/pretendard/Pretendard-SemiBold.otf'))
++            rootBundle.load('assets/fonts/pretendard/PretendardVariable.ttf'))
+         ..addFont(
+-            rootBundle.load('assets/fonts/pretendard/Pretendard-Bold.otf'))
++            rootBundle.load('assets/fonts/pretendard/PretendardVariable.ttf'))
+         ..addFont(rootBundle
+-            .load('assets/fonts/pretendard/Pretendard-ExtraBold.otf')))
++            .load('assets/fonts/pretendard/PretendardVariable.ttf')))
+       .load();
+   await (FontLoader('MaterialIcons')
+         ..addFont(rootBundle.load('fonts/MaterialIcons-Regular.otf')))
+--- a/app/test/garage_layout_test.dart
++++ b/app/test/garage_layout_test.dart
+@@ -101,9 +101,9 @@
+   setUpAll(() async {
+     await (FontLoader('Pretendard')
+           ..addFont(
+-              rootBundle.load('assets/fonts/pretendard/Pretendard-Regular.otf'))
++              rootBundle.load('assets/fonts/pretendard/PretendardVariable.ttf'))
+           ..addFont(
+-              rootBundle.load('assets/fonts/pretendard/Pretendard-Bold.otf')))
++              rootBundle.load('assets/fonts/pretendard/PretendardVariable.ttf')))
+         .load();
+   });
+ 
+--- a/app/test/garage_render_capture_test.dart
++++ b/app/test/garage_render_capture_test.dart
+@@ -230,15 +230,15 @@
+ Future<void> _loadFonts() async {
+   await (FontLoader('Pretendard')
+         ..addFont(
+-            rootBundle.load('assets/fonts/pretendard/Pretendard-Regular.otf'))
++            rootBundle.load('assets/fonts/pretendard/PretendardVariable.ttf'))
+         ..addFont(
+-            rootBundle.load('assets/fonts/pretendard/Pretendard-Medium.otf'))
++            rootBundle.load('assets/fonts/pretendard/PretendardVariable.ttf'))
+         ..addFont(
+-            rootBundle.load('assets/fonts/pretendard/Pretendard-SemiBold.otf'))
++            rootBundle.load('assets/fonts/pretendard/PretendardVariable.ttf'))
+         ..addFont(
+-            rootBundle.load('assets/fonts/pretendard/Pretendard-Bold.otf'))
++            rootBundle.load('assets/fonts/pretendard/PretendardVariable.ttf'))
+         ..addFont(rootBundle
+-            .load('assets/fonts/pretendard/Pretendard-ExtraBold.otf')))
++            .load('assets/fonts/pretendard/PretendardVariable.ttf')))
+       .load();
+   await (FontLoader('MaterialIcons')
+         ..addFont(rootBundle.load('fonts/MaterialIcons-Regular.otf')))
+--- a/app/test/garage_report_layout_test.dart
++++ b/app/test/garage_report_layout_test.dart
+@@ -173,9 +173,9 @@
+   setUpAll(() async {
+     await (FontLoader('Pretendard')
+           ..addFont(
+-              rootBundle.load('assets/fonts/pretendard/Pretendard-Regular.otf'))
++              rootBundle.load('assets/fonts/pretendard/PretendardVariable.ttf'))
+           ..addFont(
+-              rootBundle.load('assets/fonts/pretendard/Pretendard-Bold.otf')))
++              rootBundle.load('assets/fonts/pretendard/PretendardVariable.ttf')))
+         .load();
+   });
+ 
+--- a/app/test/home_e_content_test.dart
++++ b/app/test/home_e_content_test.dart
+@@ -29,9 +29,9 @@
+   setUpAll(() async {
+     await (FontLoader('Pretendard')
+           ..addFont(
+-              rootBundle.load('assets/fonts/pretendard/Pretendard-Regular.otf'))
++              rootBundle.load('assets/fonts/pretendard/PretendardVariable.ttf'))
+           ..addFont(
+-              rootBundle.load('assets/fonts/pretendard/Pretendard-Bold.otf')))
++              rootBundle.load('assets/fonts/pretendard/PretendardVariable.ttf')))
+         .load();
+   });
+ 
+--- a/app/test/home_e_render_capture_test.dart
++++ b/app/test/home_e_render_capture_test.dart
+@@ -20,15 +20,15 @@
+       addTearDown(tester.view.resetDevicePixelRatio);
+       await (FontLoader('Pretendard')
+             ..addFont(rootBundle
+-                .load('assets/fonts/pretendard/Pretendard-Regular.otf'))
++                .load('assets/fonts/pretendard/PretendardVariable.ttf'))
+             ..addFont(rootBundle
+-                .load('assets/fonts/pretendard/Pretendard-Medium.otf'))
++                .load('assets/fonts/pretendard/PretendardVariable.ttf'))
+             ..addFont(rootBundle
+-                .load('assets/fonts/pretendard/Pretendard-SemiBold.otf'))
++                .load('assets/fonts/pretendard/PretendardVariable.ttf'))
+             ..addFont(
+-                rootBundle.load('assets/fonts/pretendard/Pretendard-Bold.otf'))
++                rootBundle.load('assets/fonts/pretendard/PretendardVariable.ttf'))
+             ..addFont(rootBundle
+-                .load('assets/fonts/pretendard/Pretendard-ExtraBold.otf')))
++                .load('assets/fonts/pretendard/PretendardVariable.ttf')))
+           .load();
+       await (FontLoader('MaterialIcons')
+             ..addFont(rootBundle.load('fonts/MaterialIcons-Regular.otf')))
+--- a/app/test/home_f_content_test.dart
++++ b/app/test/home_f_content_test.dart
+@@ -83,9 +83,9 @@
+   setUpAll(() async {
+     await (FontLoader('Pretendard')
+           ..addFont(
+-              rootBundle.load('assets/fonts/pretendard/Pretendard-Regular.otf'))
++              rootBundle.load('assets/fonts/pretendard/PretendardVariable.ttf'))
+           ..addFont(
+-              rootBundle.load('assets/fonts/pretendard/Pretendard-Bold.otf')))
++              rootBundle.load('assets/fonts/pretendard/PretendardVariable.ttf')))
+         .load();
+   });
+ 
+--- a/app/test/home_f_render_capture_test.dart
++++ b/app/test/home_f_render_capture_test.dart
+@@ -56,15 +56,15 @@
+     addTearDown(tester.view.resetDevicePixelRatio);
+     await (FontLoader('Pretendard')
+           ..addFont(
+-              rootBundle.load('assets/fonts/pretendard/Pretendard-Regular.otf'))
++              rootBundle.load('assets/fonts/pretendard/PretendardVariable.ttf'))
+           ..addFont(
+-              rootBundle.load('assets/fonts/pretendard/Pretendard-Medium.otf'))
++              rootBundle.load('assets/fonts/pretendard/PretendardVariable.ttf'))
+           ..addFont(rootBundle
+-              .load('assets/fonts/pretendard/Pretendard-SemiBold.otf'))
++              .load('assets/fonts/pretendard/PretendardVariable.ttf'))
+           ..addFont(
+-              rootBundle.load('assets/fonts/pretendard/Pretendard-Bold.otf'))
++              rootBundle.load('assets/fonts/pretendard/PretendardVariable.ttf'))
+           ..addFont(rootBundle
+-              .load('assets/fonts/pretendard/Pretendard-ExtraBold.otf')))
++              .load('assets/fonts/pretendard/PretendardVariable.ttf')))
+         .load();
+     await (FontLoader('MaterialIcons')
+           ..addFont(rootBundle.load('fonts/MaterialIcons-Regular.otf')))
+--- a/app/test/home_pick_test.dart
++++ b/app/test/home_pick_test.dart
+@@ -8,8 +8,8 @@
+ void main() {
+   setUpAll(() async {
+     await (FontLoader('Pretendard')
+-      ..addFont(rootBundle.load('assets/fonts/pretendard/Pretendard-Regular.otf'))
+-      ..addFont(rootBundle.load('assets/fonts/pretendard/Pretendard-Bold.otf'))).load();
++      ..addFont(rootBundle.load('assets/fonts/pretendard/PretendardVariable.ttf'))
++      ..addFont(rootBundle.load('assets/fonts/pretendard/PretendardVariable.ttf'))).load();
+   });
+   test(
+       'explicit hidden or unavailable vehicle never becomes the default banner',
+--- a/app/test/id_auto_check_panel_test.dart
++++ b/app/test/id_auto_check_panel_test.dart
+@@ -99,9 +99,9 @@
+   setUpAll(() async {
+     await (FontLoader('Pretendard')
+           ..addFont(
+-              rootBundle.load('assets/fonts/pretendard/Pretendard-Regular.otf'))
++              rootBundle.load('assets/fonts/pretendard/PretendardVariable.ttf'))
+           ..addFont(
+-              rootBundle.load('assets/fonts/pretendard/Pretendard-Bold.otf')))
++              rootBundle.load('assets/fonts/pretendard/PretendardVariable.ttf')))
+         .load();
+   });
+ 
+--- a/app/test/more_layout_test.dart
++++ b/app/test/more_layout_test.dart
+@@ -50,9 +50,9 @@
+   setUpAll(() async {
+     await (FontLoader('Pretendard')
+           ..addFont(
+-              rootBundle.load('assets/fonts/pretendard/Pretendard-Regular.otf'))
++              rootBundle.load('assets/fonts/pretendard/PretendardVariable.ttf'))
+           ..addFont(
+-              rootBundle.load('assets/fonts/pretendard/Pretendard-Bold.otf')))
++              rootBundle.load('assets/fonts/pretendard/PretendardVariable.ttf')))
+         .load();
+   });
+ 
+--- a/app/test/more_render_capture_test.dart
++++ b/app/test/more_render_capture_test.dart
+@@ -61,15 +61,15 @@
+   addTearDown(tester.view.resetDevicePixelRatio);
+   await (FontLoader('Pretendard')
+         ..addFont(
+-            rootBundle.load('assets/fonts/pretendard/Pretendard-Regular.otf'))
++            rootBundle.load('assets/fonts/pretendard/PretendardVariable.ttf'))
+         ..addFont(
+-            rootBundle.load('assets/fonts/pretendard/Pretendard-Medium.otf'))
++            rootBundle.load('assets/fonts/pretendard/PretendardVariable.ttf'))
+         ..addFont(
+-            rootBundle.load('assets/fonts/pretendard/Pretendard-SemiBold.otf'))
++            rootBundle.load('assets/fonts/pretendard/PretendardVariable.ttf'))
+         ..addFont(
+-            rootBundle.load('assets/fonts/pretendard/Pretendard-Bold.otf'))
++            rootBundle.load('assets/fonts/pretendard/PretendardVariable.ttf'))
+         ..addFont(rootBundle
+-            .load('assets/fonts/pretendard/Pretendard-ExtraBold.otf')))
++            .load('assets/fonts/pretendard/PretendardVariable.ttf')))
+       .load();
+   await (FontLoader('MaterialIcons')
+         ..addFont(rootBundle.load('fonts/MaterialIcons-Regular.otf')))
+--- a/app/test/primary_amount_readability_test.dart
++++ b/app/test/primary_amount_readability_test.dart
+@@ -10,9 +10,9 @@
+   setUpAll(() async {
+     await (FontLoader('Pretendard')
+           ..addFont(
+-              rootBundle.load('assets/fonts/pretendard/Pretendard-Regular.otf'))
++              rootBundle.load('assets/fonts/pretendard/PretendardVariable.ttf'))
+           ..addFont(
+-              rootBundle.load('assets/fonts/pretendard/Pretendard-Bold.otf')))
++              rootBundle.load('assets/fonts/pretendard/PretendardVariable.ttf')))
+         .load();
+   });
+   for (final width in [320.0, 360.0, 390.0, 430.0]) {
+--- a/app/test/release_quote_analysis_ui_test.dart
++++ b/app/test/release_quote_analysis_ui_test.dart
+@@ -575,6 +575,15 @@
+       (trimId == 'trim-hybrid-signature' ? 42000000 : 35000000) +
+           optionTotal +
+           exteriorColorPrice;
++  // Synthetic UI response only: this fixture is not a recorded market quote.
++  final prepaymentPct = (body['prepayment_pct'] as num?)?.toDouble() ??
++      (prepayment == 0 ? 0.0 : prepayment * 100 / selectedPrice);
++  final productType = body['product_type'] as String? ?? 'RENTAL';
++  final conditions = <String, dynamic>{
++    'term_months': body['term'],
++    'annual_km': body['mileage_limit'],
++    'prepayment_pct': prepaymentPct,
++  };
+   return Response<dynamic>(
+     requestOptions: request,
+     statusCode: 200,
+@@ -630,8 +639,50 @@
+           'selected_finance_monthly_raw': 400000,
+           'selection_monthly_delta': 0,
+           'guarantee': guarantee,
+-          'prepayment_pct': body['prepayment_pct'],
+-          'guarantee_pct': body['guarantee_pct'],
++          'prepayment_pct': prepaymentPct,
++          'guarantee_pct': body['guarantee_pct'] ?? 0,
++          'price_provenance': {
++            'version': 'price_provenance_v1',
++            'processed_product_type': productType,
++            'quote_kind': 'ESTIMATE',
++            'calculation_method': 'MARKET_REFERENCE_PLUS_EXISTING_SELECTION_DELTA',
++            'request_conditions_verified': true,
++            'sales_ai_eligible': optionIds.isEmpty &&
++                normalizedSelection['exterior_color_id'] == null &&
++                normalizedSelection['interior_color_id'] == null &&
++                prepaymentPct == 0 &&
++                guarantee == 0,
++            'unsupported_reasons': <String>[
++              if (optionIds.isNotEmpty) 'OPTIONS_OUT_OF_INITIAL_SCOPE',
++              if (normalizedSelection['exterior_color_id'] != null ||
++                  normalizedSelection['interior_color_id'] != null)
++                'COLOR_OR_INVENTORY_OUT_OF_INITIAL_SCOPE',
++              if (prepaymentPct != 0) 'NONZERO_PREPAYMENT_OUT_OF_INITIAL_SCOPE',
++            ],
++            'market_price': {
++              'source': 'CHAZM_IMPORTED',
++              'source_record_id': 'synthetic-ui-market-row',
++              'source_revision': 'synthetic-ui-market-revision',
++              'product_type': productType,
++              'match_status': 'EXACT',
++              'calculation_method': 'CHAZM_ADDITIVE_LOOKUP',
++              'vehicle_match': 'EXACT',
++              'applied_conditions': conditions,
++              'condition_match': {
++                'term_months': 'EXACT',
++                'annual_km': 'EXACT',
++                'prepayment_pct': 'EXACT',
++              },
++              'source_points': [
++                {
++                  'path': 'vehicle_quote_lookup',
++                  'role': 'BASE',
++                  'conditions': conditions,
++                },
++              ],
++              'unknown_reasons': <String>[],
++            },
++          },
+         },
+       },
+       'meta': {'trace_id': 'updated-trace'},
+--- a/app/test/release_responsive_layout_test.dart
++++ b/app/test/release_responsive_layout_test.dart
+@@ -24,19 +24,19 @@
+   setUpAll(() async {
+     await (FontLoader('Pretendard')
+           ..addFont(rootBundle.load(
+-            'assets/fonts/pretendard/Pretendard-Regular.otf',
++            'assets/fonts/pretendard/PretendardVariable.ttf',
+           ))
+           ..addFont(rootBundle.load(
+-            'assets/fonts/pretendard/Pretendard-Medium.otf',
++            'assets/fonts/pretendard/PretendardVariable.ttf',
+           ))
+           ..addFont(rootBundle.load(
+-            'assets/fonts/pretendard/Pretendard-SemiBold.otf',
++            'assets/fonts/pretendard/PretendardVariable.ttf',
+           ))
+           ..addFont(rootBundle.load(
+-            'assets/fonts/pretendard/Pretendard-Bold.otf',
++            'assets/fonts/pretendard/PretendardVariable.ttf',
+           ))
+           ..addFont(rootBundle.load(
+-            'assets/fonts/pretendard/Pretendard-ExtraBold.otf',
++            'assets/fonts/pretendard/PretendardVariable.ttf',
+           )))
+         .load();
+   });
+--- a/app/test/vehicle_detail_layout_test.dart
++++ b/app/test/vehicle_detail_layout_test.dart
+@@ -56,9 +56,9 @@
+         .readAsStringSync()) as Map<String, dynamic>;
+     await (FontLoader('Pretendard')
+           ..addFont(
+-              rootBundle.load('assets/fonts/pretendard/Pretendard-Regular.otf'))
++              rootBundle.load('assets/fonts/pretendard/PretendardVariable.ttf'))
+           ..addFont(
+-              rootBundle.load('assets/fonts/pretendard/Pretendard-Bold.otf')))
++              rootBundle.load('assets/fonts/pretendard/PretendardVariable.ttf')))
+         .load();
+   });
+ 
+--- a/app/test/vehicle_detail_render_capture_test.dart
++++ b/app/test/vehicle_detail_render_capture_test.dart
+@@ -86,15 +86,15 @@
+     addTearDown(tester.view.resetDevicePixelRatio);
+     await (FontLoader('Pretendard')
+           ..addFont(
+-              rootBundle.load('assets/fonts/pretendard/Pretendard-Regular.otf'))
++              rootBundle.load('assets/fonts/pretendard/PretendardVariable.ttf'))
+           ..addFont(
+-              rootBundle.load('assets/fonts/pretendard/Pretendard-Medium.otf'))
++              rootBundle.load('assets/fonts/pretendard/PretendardVariable.ttf'))
+           ..addFont(rootBundle
+-              .load('assets/fonts/pretendard/Pretendard-SemiBold.otf'))
++              .load('assets/fonts/pretendard/PretendardVariable.ttf'))
+           ..addFont(
+-              rootBundle.load('assets/fonts/pretendard/Pretendard-Bold.otf'))
++              rootBundle.load('assets/fonts/pretendard/PretendardVariable.ttf'))
+           ..addFont(rootBundle
+-              .load('assets/fonts/pretendard/Pretendard-ExtraBold.otf')))
++              .load('assets/fonts/pretendard/PretendardVariable.ttf')))
+         .load();
+     await (FontLoader('MaterialIcons')
+           ..addFont(rootBundle.load('fonts/MaterialIcons-Regular.otf')))
+--- a/app/test/vehicle_list_layout_test.dart
++++ b/app/test/vehicle_list_layout_test.dart
+@@ -52,9 +52,9 @@
+         .readAsStringSync()) as Map<String, dynamic>)['items'] as List<dynamic>;
+     await (FontLoader('Pretendard')
+           ..addFont(
+-              rootBundle.load('assets/fonts/pretendard/Pretendard-Regular.otf'))
++              rootBundle.load('assets/fonts/pretendard/PretendardVariable.ttf'))
+           ..addFont(
+-              rootBundle.load('assets/fonts/pretendard/Pretendard-Bold.otf')))
++              rootBundle.load('assets/fonts/pretendard/PretendardVariable.ttf')))
+         .load();
+   });
+ 
+--- a/app/test/vehicle_list_price_color_test.dart
++++ b/app/test/vehicle_list_price_color_test.dart
+@@ -338,7 +338,7 @@
+     await tester.tap(find.text('국산차'));
+     await tester.pump();
+     await _waitForPendingRequests(tester, interceptor, 2);
+-    expect(interceptor.requests.last.category, 'DOMESTIC');
++    expect(interceptor.requests.last.origin, 'domestic');
+ 
+     interceptor.requests.last.complete(
+       _listResponse(
+@@ -583,7 +583,7 @@
+   final RequestInterceptorHandler handler;
+   bool _completed = false;
+ 
+-  String? get category => options.queryParameters['category'] as String?;
++  String? get origin => options.queryParameters['origin'] as String?;
+ 
+   void complete(Map<String, dynamic> data) {
+     if (_completed) return;
+@@ -626,9 +626,9 @@
+     }
+     sorts.add(options.queryParameters['sort'] as String?);
+     final page = options.queryParameters['page'] as int? ?? 1;
+-    final category = options.queryParameters['category'] as String?;
++    final origin = options.queryParameters['origin'] as String?;
+ 
+-    if (category == 'DOMESTIC') {
++    if (origin == 'domestic') {
+       handler.resolve(
+         Response<dynamic>(
+           requestOptions: options,
+--- a/app/test/vehicle_list_render_capture_test.dart
++++ b/app/test/vehicle_list_render_capture_test.dart
+@@ -68,15 +68,15 @@
+     addTearDown(tester.view.resetDevicePixelRatio);
+     await (FontLoader('Pretendard')
+           ..addFont(
+-              rootBundle.load('assets/fonts/pretendard/Pretendard-Regular.otf'))
++              rootBundle.load('assets/fonts/pretendard/PretendardVariable.ttf'))
+           ..addFont(
+-              rootBundle.load('assets/fonts/pretendard/Pretendard-Medium.otf'))
++              rootBundle.load('assets/fonts/pretendard/PretendardVariable.ttf'))
+           ..addFont(rootBundle
+-              .load('assets/fonts/pretendard/Pretendard-SemiBold.otf'))
++              .load('assets/fonts/pretendard/PretendardVariable.ttf'))
+           ..addFont(
+-              rootBundle.load('assets/fonts/pretendard/Pretendard-Bold.otf'))
++              rootBundle.load('assets/fonts/pretendard/PretendardVariable.ttf'))
+           ..addFont(rootBundle
+-              .load('assets/fonts/pretendard/Pretendard-ExtraBold.otf')))
++              .load('assets/fonts/pretendard/PretendardVariable.ttf')))
+         .load();
+     await (FontLoader('MaterialIcons')
+           ..addFont(rootBundle.load('fonts/MaterialIcons-Regular.otf')))
+--- a/app/test/web_bootstrap_contract_test.dart
++++ b/app/test/web_bootstrap_contract_test.dart
+@@ -12,7 +12,7 @@
+     );
+   });
+ 
+-  test('custom bootstrap removes the legacy Flutter cache before loading', () {
++  test('bootstrap migrates only its legacy worker and preserves stored data', () {
+     final bootstrap = File('web/flutter_bootstrap.js').readAsStringSync();
+ 
+     expect(
+@@ -20,8 +20,11 @@
+       contains('main.dart.js?build=__RECAR_BUILD_ID__'),
+     );
+     expect(bootstrap, contains('registration.unregister()'));
+-    expect(bootstrap, contains("name.startsWith('flutter-')"));
+-    expect(bootstrap, contains('caches.delete(name)'));
++    expect(bootstrap, contains('registration.scope !== appScope'));
++    expect(bootstrap, contains('isLegacyAppWorker(worker)'));
++    expect(bootstrap, isNot(contains('caches.delete(')));
++    expect(bootstrap, isNot(contains('localStorage.clear(')));
++    expect(bootstrap, isNot(contains('indexedDB.deleteDatabase(')));
+     expect(bootstrap, contains('window.location.replace'));
+     expect(bootstrap, contains('await _flutter.loader.load()'));
+   });
+--- a/app/test/vehicle_detail_layout_test.dart
++++ b/app/test/vehicle_detail_layout_test.dart
+@@ -8,20 +8,37 @@
+ import 'package:flutter_test/flutter_test.dart';
+ import 'package:recar_app/screens/vehicle_detail_screen.dart';
+ import 'package:recar_app/services/api_client.dart';
++import 'package:recar_app/services/quote_api.dart';
+ import 'package:recar_app/services/vehicle_cache.dart';
+ import 'package:recar_app/theme/app_theme.dart';
++import 'package:recar_app/widgets/micro_interactions.dart';
+ import 'package:shared_preferences/shared_preferences.dart';
+ 
+-/// 2026-10-06 운영 공개 응답 기록본(스포티지)을 그대로 돌려준다.
++/// Detail and price records remain the original 2026-10-06 public capture.
++/// The list wrapper is synthetic routing metadata only, not price evidence.
+ class _RecordedApi extends Interceptor {
+   _RecordedApi(this.recorded);
+   final Map<String, dynamic> recorded;
+ 
+   @override
+   void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
+-    final path = options.path;
++    final path = options.uri.path;
+     dynamic data;
+-    if (options.method == 'GET' &&
++    if (options.method == 'GET' && path == '/api/v1/vehicles/') {
++      data = {
++        'items': [
++          {
++            ...recorded['detail'] as Map<String, dynamic>,
++            'price_from': (recorded['detail'] as Map)['base_price'],
++            'available_product_types': ['RENTAL', 'LEASE'],
++          },
++        ],
++        'total': 1,
++        'page': 1,
++        'size': 100,
++        'pages': 1,
++      };
++    } else if (options.method == 'GET' &&
+         RegExp(r'^/api/v1/vehicles/[^/]+$').hasMatch(path)) {
+       data = recorded['detail'];
+     } else if (options.method == 'GET' && path.endsWith('/quotes')) {
+@@ -48,27 +65,147 @@
+   }
+ }
+ 
++/// Separate, hand-authored SYNTHETIC price evidence for amount-layout checks.
++/// It does not read, amend or validate the original recorded instant response.
++class _SyntheticExactApi extends _RecordedApi {
++  _SyntheticExactApi(super.recorded);
++
++  @override
++  void onRequest(RequestOptions options, RequestInterceptorHandler handler) {
++    if (options.method != 'POST' ||
++        options.uri.path != '/api/v1/quotes/instant') {
++      super.onRequest(options, handler);
++      return;
++    }
++    final body = Map<String, dynamic>.from(options.data as Map);
++    final selection = Map<String, dynamic>.from(body['selection'] as Map);
++    final product = body['product_type'] as String;
++    final term = body['term'] as int;
++    final mileage = body['mileage_limit'] as int;
++    final advance = body['prepayment_pct'] as int? ?? 0;
++    final unsupported = <String>[
++      if (advance != 0) 'NONZERO_PREPAYMENT_OUT_OF_INITIAL_SCOPE',
++      if ((selection['selected_option_ids'] as List).isNotEmpty)
++        'OPTIONS_OUT_OF_INITIAL_SCOPE',
++      if (selection['exterior_color_id'] != null ||
++          selection['interior_color_id'] != null ||
++          selection['inventory_item_id'] != null)
++        'COLOR_OR_INVENTORY_OUT_OF_INITIAL_SCOPE',
++    ];
++    final sourceConditions = <String, dynamic>{
++      'term_months': term,
++      'annual_km': mileage,
++      'prepayment_pct': advance,
++    };
++    handler.resolve(Response<dynamic>(
++      requestOptions: options,
++      statusCode: 200,
++      data: {
++        'meta': {'trace_id': 'SYNTHETIC-LAYOUT-NOT-A-RECORDED-PRICE'},
++        'data': {
++          'tier': 'SYNTHETIC',
++          'vehicle_id': body['vehicle_id'],
++          'vehicle_trim_id': selection['vehicle_trim_id'],
++          'term': term,
++          'mileage_limit': mileage,
++          'deposit': advance * 500000,
++          'prepayment_pct': advance,
++          'guarantee': 0,
++          'guarantee_pct': 0,
++          'monthly_payment': 123400,
++          'vehicle_price': 50000000,
++          'otd_total': 50000000,
++          'residual_value': 10000000,
++          'residual_pct': 0.2,
++          'promo_discount': 0,
++          'estimated_discount': 0,
++          'estimated_taxes': 0,
++          'breakdown': <dynamic>[],
++          'selection_contract_version': 'selection_v1',
++          'normalized_selection': selection,
++          'selection_fingerprint': 'SYNTHETIC-LAYOUT-SELECTION',
++          'pricing_context_version': 'SYNTHETIC-LAYOUT-CONTEXT',
++          'selected_vehicle_price': 50000000,
++          'price_source': 'CHAZM_IMPORTED',
++          'price_provenance': {
++            'version': 'price_provenance_v1',
++            'processed_product_type': product,
++            'calculation_method':
++                'MARKET_REFERENCE_PLUS_EXISTING_SELECTION_DELTA',
++            'quote_kind': 'ESTIMATE',
++            'provider_generated_at': null,
++            'valid_until': null,
++            'request_conditions_verified': true,
++            'sales_ai_eligible': unsupported.isEmpty,
++            'unsupported_reasons': unsupported,
++            'market_price': {
++              'source': 'CHAZM_IMPORTED',
++              'source_record_id': 'SYNTHETIC-LAYOUT-ROW-NOT-RECORDED',
++              'source_revision': 'sha256:SYNTHETIC-LAYOUT-ONLY',
++              'product_type': product,
++              'match_status': 'EXACT',
++              'vehicle_match': 'EXACT',
++              'calculation_method': 'SYNTHETIC_LAYOUT_LOOKUP',
++              'methods': ['SYNTHETIC_LAYOUT_LOOKUP'],
++              'applied_conditions': sourceConditions,
++              'condition_match': {
++                'term_months': 'EXACT',
++                'annual_km': 'EXACT',
++                'prepayment_pct': 'EXACT',
++              },
++              'source_points': [
++                {
++                  'path': 'SYNTHETIC.layout-price-row',
++                  'role': 'BASE',
++                  'conditions': sourceConditions,
++                },
++              ],
++              'unknown_reasons': <String>[],
++            },
++          },
++        },
++      },
++    ));
++  }
++}
++
+ void main() {
+   late Map<String, dynamic> recorded;
++  late String originalRecord;
++  late String originalDecodedRecord;
+ 
+   setUpAll(() async {
+-    recorded = jsonDecode(File('test/fixtures/detail_sportage_20261006.json')
+-        .readAsStringSync()) as Map<String, dynamic>;
++    originalRecord =
++        File('test/fixtures/detail_sportage_20261006.json').readAsStringSync();
++    recorded = jsonDecode(originalRecord) as Map<String, dynamic>;
++    originalDecodedRecord = jsonEncode(recorded);
+     await (FontLoader('Pretendard')
+           ..addFont(
+               rootBundle.load('assets/fonts/pretendard/PretendardVariable.ttf'))
+-          ..addFont(
+-              rootBundle.load('assets/fonts/pretendard/PretendardVariable.ttf')))
++          ..addFont(rootBundle
++              .load('assets/fonts/pretendard/PretendardVariable.ttf')))
+         .load();
+   });
+ 
++  tearDown(() {
++    expect(jsonEncode(recorded), originalDecodedRecord,
++        reason:
++            'Recorded prices/evidence must never be amended by layout tests');
++    expect(
++        File('test/fixtures/detail_sportage_20261006.json').readAsStringSync(),
++        originalRecord);
++  });
++
+   Future<void> pumpDetail(WidgetTester tester,
+       {required double width,
+       required double scale,
+-      bool autoOpenCapital = false}) async {
++      bool autoOpenCapital = false,
++      bool syntheticExactPrice = false}) async {
+     SharedPreferences.setMockInitialValues(<String, Object>{});
+     VehicleCache.invalidateAll();
+-    final api = _RecordedApi(recorded);
++    final api = syntheticExactPrice
++        ? _SyntheticExactApi(recorded)
++        : _RecordedApi(recorded);
+     ApiClient.dio.interceptors.add(api);
+     addTearDown(() => ApiClient.dio.interceptors.remove(api));
+     tester.view.physicalSize = Size(width, 800);
+@@ -94,7 +231,7 @@
+     }
+   }
+ 
+-  testWidgets('detail shows title, configuration rows and the analysis CTA',
++  testWidgets('recorded detail shows configuration and requests price evidence',
+       (tester) async {
+     await pumpDetail(tester, width: 390, scale: 1);
+     expect(
+@@ -105,8 +242,21 @@
+         findsWidgets);
+     expect(find.text('차량 정보'), findsOneWidget);
+     expect(find.text('트림'), findsWidgets);
+-    expect(find.text('413,400'), findsWidgets);
+-    expect(find.text('견적 분석 받아보기'), findsOneWidget);
++    for (final envelope in (recorded['instant'] as Map).values) {
++      expect((envelope as Map)['data'], isNot(contains('price_provenance')));
++    }
++    expect(find.byKey(const ValueKey('canonical-monthly-unavailable')),
++        findsOneWidget);
++    expect(
++        tester
++            .widget<RollingMoneyText>(
++                find.byKey(const ValueKey('detail-monthly-amount')))
++            .amount,
++        isNull);
++    expect(find.text('413,400'), findsNothing);
++    expect(find.text('가격 확인 요청하기'), findsOneWidget);
++    expect(
++        find.text(QuoteApi.selectionPriceUnavailableMessage), findsOneWidget);
+     expect(tester.takeException(), isNull);
+   });
+ 
+@@ -169,33 +319,70 @@
+ 
+   for (final width in [320.0, 360.0, 390.0, 430.0]) {
+     for (final scale in [1.0, 1.3, 2.0]) {
+-      testWidgets('detail page is overflow-free at $width and text $scale',
++      testWidgets(
++          'recorded unverified detail is overflow-free at $width and text $scale',
+           (tester) async {
+         await pumpDetail(tester, width: width, scale: scale);
++        final notice = find.text(QuoteApi.selectionPriceUnavailableMessage);
++        expect(notice, findsOneWidget);
++        expect(tester.renderObject<RenderParagraph>(notice).didExceedMaxLines,
++            isFalse,
++            reason: 'The entire price-check explanation stays readable');
++        expect(find.text('가격 확인 요청하기'), findsOneWidget);
++        expect(
++            tester
++                .widget<RollingMoneyText>(
++                    find.byKey(const ValueKey('detail-monthly-amount')))
++                .amount,
++            isNull);
++        expect(find.text('413,400'), findsNothing);
+         expect(tester.takeException(), isNull);
+         final scroll = find.byType(SingleChildScrollView).first;
++        for (var i = 0; i < 12; i++) {
++          await tester.drag(scroll, const Offset(0, -500));
++          await tester.pump(const Duration(milliseconds: 120));
++          expect(tester.takeException(), isNull);
++          expect(find.byKey(const ValueKey('sticky-monthly-summary')),
++              findsNothing,
++              reason: 'An unverified recorded amount must not become sticky');
++        }
++        expect(find.text('가격 확인 요청하기'), findsOneWidget);
++      });
++
++      testWidgets(
++          'SYNTHETIC exact amount remains readable at $width and text $scale',
++          (tester) async {
++        await pumpDetail(tester,
++            width: width, scale: scale, syntheticExactPrice: true);
++        expect(
++            tester
++                .widget<RollingMoneyText>(
++                    find.byKey(const ValueKey('detail-monthly-amount')))
++                .amount,
++            123400);
++        expect(find.text('견적 분석 받아보기'), findsOneWidget);
++        expect(
++            find.text(QuoteApi.selectionPriceUnavailableMessage), findsNothing);
++        expect(tester.takeException(), isNull);
++        final scroll = find.byType(SingleChildScrollView).first;
+         final stickySummary =
+             find.byKey(const ValueKey('sticky-monthly-summary'));
+-        // The summary appears only after the entire configuration header has
+-        // scrolled away; that header reflows and grows with the user's text size.
+         for (var i = 0; i < 8 && stickySummary.evaluate().isEmpty; i++) {
+           await tester.drag(scroll, const Offset(0, -500));
+           await tester.pump(const Duration(milliseconds: 250));
+           expect(tester.takeException(), isNull);
+         }
+         final stickyAmount = find.descendant(
+-          of: find.byKey(const ValueKey('sticky-monthly-summary')),
+-          matching: find.text('월 413,400원'),
++          of: stickySummary,
++          matching: find.text('123,400원'),
+         );
+         expect(stickyAmount, findsOneWidget);
+-        final paragraph = tester.renderObject<RenderParagraph>(stickyAmount);
+-        expect(paragraph.didExceedMaxLines, isFalse,
+-            reason: 'The complete monthly amount must remain readable');
+-        for (var i = 0; i < 12; i++) {
+-          await tester.drag(scroll, const Offset(0, -500));
+-          await tester.pump(const Duration(milliseconds: 120));
+-          expect(tester.takeException(), isNull);
+-        }
++        expect(
++            tester
++                .renderObject<RenderParagraph>(stickyAmount)
++                .didExceedMaxLines,
++            isFalse,
++            reason: 'The complete synthetic monthly amount stays readable');
+       });
+     }
+   }

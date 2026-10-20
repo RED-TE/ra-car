@@ -109,6 +109,24 @@ test("web source and native app stay separately pinned", () => {
   assert.ok(fs.readFileSync(path.join(root, ".github/workflows/pages.yml"), "utf8").includes("--exclude='./web_app'"));
 });
 
+test("garage artwork is pinned byte-for-byte and test fixtures stay private", () => {
+  const config = require("../web_app/source.json");
+  const release = require("../app/release.json");
+  const crypto = require("node:crypto");
+  const hash = (file) => crypto.createHash("sha256").update(fs.readFileSync(file)).digest("hex");
+  assert.equal(config.garageArtwork.sourceCommit, "310035ece9cbbda530928341b124b8aed63e2a41");
+  assert.equal(config.garageArtwork.sha256, "03efda0dc086e522ba96a04379172defef1807fe4435c797b0bf4f5fb1657247");
+  assert.equal(hash(path.join(root, "web_app/assets", config.garageArtwork.file)), config.garageArtwork.sha256);
+  assert.equal(hash(path.join(root, "app/assets", config.garageArtwork.target)), config.garageArtwork.sha256);
+  assert.equal(release.garage_artwork_sha256, config.garageArtwork.sha256);
+  const encodedManifest = JSON.parse(fs.readFileSync(path.join(root, "app/assets/AssetManifest.bin.json"), "utf8"));
+  const assetKeys = Buffer.from(encodedManifest, "base64").toString("utf8");
+  assert.equal(assetKeys.includes("test/fixtures"), false);
+  assert.equal(assetKeys.includes("test-fixture-defines"), false);
+  assert.equal(fs.existsSync(path.join(root, "app/test-fixture-defines.json")), false);
+  assert.equal(fs.readFileSync(path.join(root, "app/main.dart.js"), "utf8").includes("EXACT_LOOKUP_FIXTURE_BASE64"), false);
+});
+
 test("font optimization is repeatable and preserves any newly used family", () => {
   const directory = fs.mkdtempSync(path.join(os.tmpdir(), "recar-font-test-"));
   try {
