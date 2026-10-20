@@ -2938,3 +2938,29 @@ index 093ade2e..f14ebcac 100644
      if (options.path == '/api/v1/vehicles/') {
        handler.resolve(
          Response<dynamic>(
+--- a/app/lib/services/quote_api.dart
++++ b/app/lib/services/quote_api.dart
+@@ -49,6 +49,15 @@
+     final guaranteeMatches = guaranteePct != null
+         ? data['guarantee_pct'] == guaranteePct
+         : data['guarantee'] == guarantee;
++    final unsupported = proof is Map ? proof['unsupported_reasons'] : null;
++    // Source-price evidence does not verify a refundable guarantee's effect
++    // on the monthly payment. Never display it as a supported condition.
++    final hasUnverifiedGuarantee = guarantee != 0 ||
++        (guaranteePct ?? 0) != 0 ||
++        data['guarantee'] != 0 ||
++        (data['guarantee_pct'] != null && data['guarantee_pct'] != 0) ||
++        (unsupported is List &&
++            unsupported.contains('NONZERO_GUARANTEE_UNVERIFIED'));
+     final normalized = data['normalized_selection'];
+     if (data['vehicle_id'] != vehicleId ||
+         data['vehicle_trim_id'] != selection.vehicleTrimId ||
+@@ -60,6 +69,7 @@
+         data['mileage_limit'] != mileageLimit ||
+         !prepayMatches ||
+         !guaranteeMatches ||
++        hasUnverifiedGuarantee ||
+         proof is! Map ||
+         proof['version'] != 'price_provenance_v1' ||
+         proof['request_conditions_verified'] != true ||
