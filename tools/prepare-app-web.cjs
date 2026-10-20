@@ -23,11 +23,25 @@ function prepare(sourceRepo, buildRoot) {
   execFileSync("git", ["apply", patch], { cwd: buildRoot });
   const appRoot = path.join(buildRoot, "app");
   fs.copyFileSync(path.join(root, "web_app/assets/fonts/PretendardVariable.ttf"), path.join(appRoot, "assets/fonts/pretendard/PretendardVariable.ttf"));
+  if (config.garageArtwork) {
+    const artwork = path.join(root, "web_app/assets", config.garageArtwork.file);
+    const artworkHash = crypto.createHash("sha256").update(fs.readFileSync(artwork)).digest("hex");
+    if (artworkHash !== config.garageArtwork.sha256) throw new Error("Garage artwork provenance mismatch");
+    fs.copyFileSync(artwork, path.join(appRoot, config.garageArtwork.target));
+  }
   for (const file of fs.readdirSync(path.join(root, "web_app/test"))) {
     if (file.endsWith(".dart")) fs.copyFileSync(path.join(root, "web_app/test", file), path.join(appRoot, "test", file));
   }
   const fixtures = path.join(root, "web_app/test/fixtures");
   if (fs.existsSync(fixtures)) fs.cpSync(fixtures, path.join(appRoot, "test/fixtures"), { recursive: true });
+  // Test compiler input only. The original recorded fixture stays unchanged,
+  // and this file is deliberately outside the publishable build/web tree.
+  const recordedCatalog = JSON.parse(fs.readFileSync(path.join(fixtures, "new3_catalog_20261015.json"), "utf8"));
+  // Only the same first recorded quote used by the contract suite is needed.
+  // Base64 avoids multiline compiler-define parsing and command-size issues.
+  fs.writeFileSync(path.join(buildRoot, "test-fixture-defines.json"), JSON.stringify({
+    EXACT_LOOKUP_FIXTURE_BASE64: Buffer.from(JSON.stringify({ quotes: [recordedCatalog.quotes[0]] })).toString("base64"),
+  }));
   let html = fs.readFileSync(path.join(root, "app/index.html"), "utf8");
   html = html.replace('<base href="/app/">', '<base href="$FLUTTER_BASE_HREF">')
     .replace(/\?build=[A-Za-z0-9._-]+/g, "?build=__RECAR_BUILD_ID__")

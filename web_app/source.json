@@ -2,11 +2,17 @@
   "repository": "RECAREA/recar_app",
   "commit": "4b0498df0e63aa2c8bbae66e59e1c9a31037e7b0",
   "basePath": "/app/",
-  "buildId": "web-catalog-auto-20261019",
+  "buildId": "web-source-labels-20261021",
   "font": {
     "upstream": "orioncactus/pretendard",
     "version": "v1.3.9",
     "file": "packages/pretendard/dist/public/variable/PretendardVariable.ttf",
     "sha256": "3090ccde0442bb347aa7685d9ba8b17436a60682df6e8f92a9a670de14056e22"
+  },
+  "garageArtwork": {
+    "sourceCommit": "310035ece9cbbda530928341b124b8aed63e2a41",
+    "file": "images/garage/garage_home_bg.png",
+    "target": "assets/images/garage/garage_home_bg.png",
+    "sha256": "03efda0dc086e522ba96a04379172defef1807fe4435c797b0bf4f5fb1657247"
   }
 }

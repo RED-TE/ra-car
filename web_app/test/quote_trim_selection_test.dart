@@ -575,7 +575,7 @@ void main() {
       expect(interceptor.quoteBodies, isEmpty);
     });
 
-    testWidgets('UNAVAILABLE keeps the legacy vehicle-level quote flow', (
+    testWidgets('UNAVAILABLE never requests an unverified legacy quote', (
       tester,
     ) async {
       interceptor.details['vehicle-unavailable'] = _vehicleDetailJson(
@@ -604,12 +604,9 @@ void main() {
       await tester.tap(find.text('견적 분석 받아보기'));
       await tester.pumpAndSettle();
 
-      expect(interceptor.quoteBodies, isNotEmpty);
-      expect(
-        interceptor.quoteBodies.last.containsKey('selection'),
-        isFalse,
-      );
-      expect(find.text('세부 등급 정보 준비 중'), findsNWidgets(2));
+      expect(interceptor.quoteBodies, isEmpty);
+      expect(_displayedAmount(443200), findsNothing);
+      expect(find.text('세부 등급 정보 준비 중'), findsOneWidget);
     });
 
     testWidgets(
@@ -689,11 +686,8 @@ void main() {
       await tester.pump();
       await tester.pump(const Duration(milliseconds: 500));
 
-      expect(interceptor.quoteBodies, isNotEmpty);
-      expect(
-        interceptor.quoteBodies.first.containsKey('selection'),
-        isFalse,
-      );
+      expect(interceptor.quoteBodies, isEmpty);
+      expect(_displayedAmount(443200), findsNothing);
       await tester.pump(const Duration(seconds: 1));
       await tester.pump();
     });
@@ -2180,14 +2174,31 @@ Response<dynamic> _quoteResponse(
   }
   final resolvedTrimId =
       vehicleTrimId ?? (normalizedSelection?['vehicle_trim_id'] as String?);
-  final deposit = (requestBody['deposit'] as num?)?.round() ?? 0;
+  final selectedVehiclePrice = resolvedTrimId == null ? 35000000 : 42000000;
+  // Synthetic response: both the amount and percent describe the same request.
+  final deposit = requestBody['prepayment_pct'] is num
+      ? (selectedVehiclePrice * (requestBody['prepayment_pct'] as num) / 100)
+          .round()
+      : (requestBody['deposit'] as num?)?.round() ?? 0;
+  final prepaymentPct = (requestBody['prepayment_pct'] as num?) ??
+      (deposit == 0 ? 0 : deposit * 100 / selectedVehiclePrice);
+  final productType = requestBody['product_type'] ?? 'RENTAL';
+  final conditions = {
+    'term_months': requestBody['term'] ?? 60,
+    'annual_km': requestBody['mileage_limit'] ?? 10000,
+    'prepayment_pct': prepaymentPct,
+  };
+  final hasOptions =
+      (normalizedSelection?['selected_option_ids'] as List? ?? []).isNotEmpty;
+  final hasColors = normalizedSelection?['exterior_color_id'] != null ||
+      normalizedSelection?['interior_color_id'] != null ||
+      normalizedSelection?['inventory_item_id'] != null;
   final guarantee = (requestBody['guarantee'] as num?)?.round() ?? 0;
   final displayAdjustment = resolvedTrimId == null
       ? 0
       : deposit > 0
           ? 40000
           : 30000;
-  final selectedVehiclePrice = resolvedTrimId == null ? 35000000 : 42000000;
   final selectionFingerprint = normalizedSelection == null
       ? null
       : 'fingerprint:${QuoteSelection.fromJson(normalizedSelection).identifierKey}:'
@@ -2244,23 +2255,34 @@ Response<dynamic> _quoteResponse(
           'selected_finance_monthly_raw': 400000,
           'selection_monthly_delta': 0,
           'guarantee': guarantee,
-          'prepayment_pct': requestBody['prepayment_pct'] ?? 0,
+          'prepayment_pct': prepaymentPct,
           'guarantee_pct': requestBody['guarantee_pct'] ?? 0,
           'price_provenance': {
             'version': 'price_provenance_v1',
-            'processed_product_type': requestBody['product_type'] ?? 'RENTAL',
+            'processed_product_type': productType,
+            'quote_kind': 'ESTIMATE',
+            'calculation_method': 'MARKET_REFERENCE_PLUS_EXISTING_SELECTION_DELTA',
             'request_conditions_verified': true,
-            'sales_ai_eligible': true,
-            'unsupported_reasons': [],
+            'sales_ai_eligible':
+                deposit == 0 && !hasOptions && !hasColors && guarantee == 0,
+            'unsupported_reasons': [
+              if (deposit != 0) 'NONZERO_PREPAYMENT_OUT_OF_INITIAL_SCOPE',
+              if (hasOptions) 'OPTIONS_OUT_OF_INITIAL_SCOPE',
+              if (hasColors) 'COLOR_OR_INVENTORY_OUT_OF_INITIAL_SCOPE',
+            ],
             'market_price': {
-              'product_type': requestBody['product_type'] ?? 'RENTAL',
+              'source': 'CHAZM_IMPORTED',
+              'source_record_id': 'synthetic-trim-ui-source',
+              'source_revision': 'synthetic-trim-ui-revision',
+              'calculation_method': 'CHAZM_ADDITIVE_LOOKUP',
+              'product_type': productType,
               'match_status': 'EXACT',
               'vehicle_match': 'EXACT',
-              'applied_conditions': {
-                'term_months': requestBody['term'] ?? 60,
-                'annual_km': requestBody['mileage_limit'] ?? 10000,
-                'prepayment_pct': requestBody['prepayment_pct'] ?? 0,
-              },
+              'applied_conditions': conditions,
+              'source_points': [
+                {'path': 'synthetic-trim-ui-source', 'role': 'BASE',
+                  'conditions': conditions},
+              ],
               'condition_match': {
                 'term_months': 'EXACT',
                 'annual_km': 'EXACT',
@@ -2334,6 +2356,21 @@ class _TrimSelectionInterceptor extends Interceptor {
     RequestOptions options,
     RequestInterceptorHandler handler,
   ) async {
+    if (options.uri.path == '/api/v1/vehicles/catalog/version') {
+      // An unavailable catalog-version endpoint is a supported fallback.
+      // Intercept it explicitly on Chrome too: no real XHR or timeout timer
+      // may escape this synthetic pricing/application test.
+      handler.reject(DioException(
+        requestOptions: options,
+        type: DioExceptionType.badResponse,
+        response: Response<dynamic>(
+          requestOptions: options,
+          statusCode: 404,
+          data: const {'error': {'code': 'SYNTHETIC_NOT_FOUND'}},
+        ),
+      ));
+      return;
+    }
     if (options.path == '/api/v1/support/quote-inquiries') {
       inquiryBodies.add(Map<String, dynamic>.from(options.data as Map));
       handler.resolve(Response(requestOptions: options, statusCode: 201,

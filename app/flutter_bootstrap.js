@@ -33,11 +33,11 @@ addEventListener("message", eventListener);
 if (!window._flutter) {
   window._flutter = {};
 }
-_flutter.buildConfig = {"engineRevision":"3452d735bd38224ef2db85ca763d862d6326b17f","builds":[{"compileTarget":"dart2js","renderer":"canvaskit","mainJsPath":"main.dart.js"}]};
+_flutter.buildConfig = {"engineRevision":"3452d735bd38224ef2db85ca763d862d6326b17f","builds":[{"compileTarget":"dart2js","renderer":"canvaskit","mainJsPath":"main.dart.js"},{}]};
 
 async function startRecar() {
   const compatibleBuild = _flutter.buildConfig.builds[0];
-  compatibleBuild.mainJsPath = 'main.dart.js?build=web-catalog-auto-20261019';
+  compatibleBuild.mainJsPath = 'main.dart.js?build=web-source-labels-20261021';
   const appScope = new URL('./', document.baseURI).href;
   const isLegacyAppWorker = (worker) => worker &&
     new URL(worker.scriptURL).pathname === new URL('flutter_service_worker.js', appScope).pathname;

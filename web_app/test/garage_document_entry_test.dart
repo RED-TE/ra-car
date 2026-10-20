@@ -75,11 +75,7 @@ void main() {
     testWidgets(
       'existing application documents open without replacing it at $width',
       (tester) async {
-        tester.view.physicalSize = Size(width, 900);
-        tester.view.devicePixelRatio = 1;
-        addTearDown(tester.view.resetPhysicalSize);
-        addTearDown(tester.view.resetDevicePixelRatio);
-        await _openReport(tester);
+        await _openReport(tester, width: width);
         await tester.tap(find.text('서류 확인·추가'));
         await tester.pump();
         await tester.pump(const Duration(milliseconds: 600));
@@ -96,7 +92,11 @@ void main() {
   }
 }
 
-Future<void> _openReport(WidgetTester tester) async {
+Future<void> _openReport(WidgetTester tester, {double width = 390}) async {
+  tester.view.physicalSize = Size(width, 900);
+  tester.view.devicePixelRatio = 1;
+  addTearDown(tester.view.resetPhysicalSize);
+  addTearDown(tester.view.resetDevicePixelRatio);
   addTearDown(() async {
     await tester.pumpWidget(const SizedBox.shrink());
     await tester.pump();
@@ -113,6 +113,20 @@ Future<void> _openReport(WidgetTester tester) async {
     return text.replaceAll('\u2060', '').contains('TEST-MORNING');
   });
   expect(vehicle, findsWidgets);
+  // The public last-viewed hero now precedes reports. Reach the real saved
+  // application card before tapping; never tap an off-screen title.
+  await tester.scrollUntilVisible(
+    vehicle.first,
+    150,
+    scrollable: find
+        .descendant(
+          of: find.byKey(const ValueKey('garage-report-scroll')),
+          matching: find.byType(Scrollable),
+        )
+        .first,
+  );
+  await tester.ensureVisible(vehicle.first);
+  expect(vehicle.first.hitTestable(), findsOneWidget);
   await tester.tap(vehicle.first);
   await tester.pump();
   await tester.pump(const Duration(milliseconds: 600));

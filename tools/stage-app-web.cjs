@@ -16,6 +16,7 @@ function stage(appRoot) {
   const font = manifest.find(family => family.family === "Pretendard");
   if (font?.fonts.length !== 1 || !font.fonts[0].asset.endsWith("PretendardVariable.ttf")) throw new Error("Variable font missing");
   if (hash(path.join(built, "assets", font.fonts[0].asset)) !== config.font.sha256) throw new Error("Built font mismatch");
+  if (config.garageArtwork && hash(path.join(built, "assets", config.garageArtwork.target)) !== config.garageArtwork.sha256) throw new Error("Built garage artwork mismatch");
   if (!fs.readFileSync(path.join(built, "index.html"), "utf8").includes('__RECAR_BUILD_ID__')) throw new Error("Custom web loader missing");
   const entry = "서류 제출까지 직접 신청하기".replace(/[^\x00-\x7f]/g, char => `\\u${char.charCodeAt(0).toString(16).padStart(4, "0")}`);
   if (!fs.readFileSync(path.join(built, "main.dart.js"), "utf8").includes(entry)) throw new Error("Document entry missing");
@@ -36,7 +37,8 @@ function stage(appRoot) {
     build_id: config.buildId, target: "https://recarplan.com/app/", base_path: config.basePath,
     api_base_url: "https://api.recarplan.com", flutter_version: "3.41.1",
     native_app_modified: false,
-    validation: "See docs/app-web-new3-catalog-20261015.md and docs/app-web-speed-documents-20261015.md; local evidence is not deployment proof",
+    ...(config.garageArtwork ? { garage_artwork_sha256: config.garageArtwork.sha256 } : {}),
+    validation: "See docs/app-web-price-garage-release-20261021.md, docs/app-web-new3-catalog-20261015.md and docs/app-web-speed-documents-20261015.md; local evidence is not deployment proof",
     sha256: Object.fromEntries(files.map(file => [file, hash(path.join(target, file))])),
   };
   fs.writeFileSync(path.join(target, "release.json"), JSON.stringify(metadata, null, 2) + "\n");
