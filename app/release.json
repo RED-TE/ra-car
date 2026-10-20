@@ -1,8 +1,8 @@
 {
   "source_repository": "RECAREA/recar_app",
   "source_commit": "4b0498df0e63aa2c8bbae66e59e1c9a31037e7b0",
-  "web_source_patch_sha256": "7ff6e52666d7e503b2b26ca67ea5d7fe0155ebaf848fa883d7c1347e468bf6ca",
-  "build_id": "web-price-garage-20261021",
+  "web_source_patch_sha256": "8e7d45524de4ec34ed0d32e98ee0608556415e93560518a42b7483c0ae19a346",
+  "build_id": "web-source-labels-20261021",
   "target": "https://recarplan.com/app/",
   "base_path": "/app/",
   "api_base_url": "https://api.recarplan.com",
@@ -11,9 +11,9 @@
   "garage_artwork_sha256": "03efda0dc086e522ba96a04379172defef1807fe4435c797b0bf4f5fb1657247",
   "validation": "See docs/app-web-price-garage-release-20261021.md, docs/app-web-new3-catalog-20261015.md and docs/app-web-speed-documents-20261015.md; local evidence is not deployment proof",
   "sha256": {
-    "index.html": "8465926875f5b1f1caa68946cc840c81704019251cdbce94a7bd59c27ced32c0",
-    "flutter_bootstrap.js": "7c73fe632617393921887fe01945cd5cadef14c37d0408cc32679e23319eb428",
-    "main.dart.js": "0422b74105c5e5daf984901d02164c611abb0b88be41cb6a7562fac5e24fae97",
+    "index.html": "d380e6644c74ac359db9ab42d481a422ba3403a2d4f1cee19e04cb19848c4f97",
+    "flutter_bootstrap.js": "9deb4ac574a5f2ae496f92d7713083fa34b60d7aae565a36b3dc08b2b444bb12",
+    "main.dart.js": "650a4c7fd0ce2bab87540c6c2e750303f25d969aa9cc2bf0c181dfd65d8ee5c8",
     "assets/FontManifest.json": "e2d22b7e9de65becff9e0cacd83496d37c01d8e9ca62087cee6616ecadee7db7",
     "assets/AssetManifest.bin.json": "5af7fec55b815a5f138c29080ac33268198b661de8bc6696b5f083c0bf553804"
   }
