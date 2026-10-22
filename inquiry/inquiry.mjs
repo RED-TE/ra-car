@@ -217,6 +217,7 @@ async function fetchCatalog() {
         && normalize(vehicle.model_name) === normalize(entryModel));
       if (matches.length === 1) {
         state.vehicle = matches[0]; state.brand = state.vehicle.brand;
+        state.market = domestic.has(brandLabel(state.brand)) ? "domestic" : "imported";
         state.conditions.product = state.vehicle.available_product_types.includes(params.get("product")) ? params.get("product") : state.vehicle.available_product_types[0];
         for (const [key, values] of [["term", [24, 36, 48, 60]], ["mileage", [10000, 20000, 30000, 40000]], ["deposit", [0, 10, 20, 30, 40]], ["prepayment", [0, 10, 20, 30, 40]]]) {
           if (params.has(key) && values.includes(Number(params.get(key)))) state.conditions[key] = Number(params.get(key));

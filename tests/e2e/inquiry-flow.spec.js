@@ -381,6 +381,19 @@ test("switching market clears the hidden brand and keeps keyboard focus on the n
   await expect(page.locator("#nextButton")).toBeDisabled();
 });
 
+test("an imported vehicle entry returns to the matching manufacturer tab", async ({ page, api }) => {
+  api.pages[0].items[0].brand = "Tesla";
+  api.pages[0].items[0].model_name = "Model Y";
+  const query = new URLSearchParams({ brand: "테슬라", model: "Model Y", mileage: "10000" });
+  await page.goto(`/inquiry/?${query}`);
+  await step(page, 2);
+  await expect(page.locator('[data-vehicle="local-lease"]')).toHaveAttribute("aria-pressed", "true");
+  await page.locator("#backButton").click();
+  await step(page, 1);
+  await expect(page.locator('[data-market="imported"]')).toHaveAttribute("aria-pressed", "true");
+  await expect(page.locator('[data-brand="Tesla"]')).toHaveAttribute("aria-pressed", "true");
+});
+
 for (const width of [390, 1440]) {
   test(`stepwise inquiry has no serious accessibility violations at ${width}px`, async ({ page }) => {
     await page.setViewportSize({ width, height: 1000 });
