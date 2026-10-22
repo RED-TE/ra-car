@@ -178,11 +178,11 @@ test("app preloaded fonts are served as fonts rather than blocked by the web pre
   }
 });
 
-test("main and inquiry serve the published app build and keep test fixtures private", async () => {
+test("main and app serve the published app build and keep test fixtures private", async () => {
   const server = await startServer("production");
   try {
     const release = require("../app/release.json");
-    for (const entry of ["/", "/inquiry", "/inquiry/", "/app/"]) {
+    for (const entry of ["/", "/app/"]) {
       const response = await fetch(`${server.baseUrl}${entry}?ref=RC-QA1234`);
       assert.equal(response.status, 200, entry);
       const html = await response.text();
@@ -194,6 +194,34 @@ test("main and inquiry serve the published app build and keep test fixtures priv
   } finally {
     await server.stop();
   }
+});
+
+test("landing and stepwise inquiry have independent public routes and module assets", async () => {
+  const server = await startServer("production");
+  try {
+    for (const entry of ["/landing", "/landing/", "/landing/index.html"]) {
+      const response = await fetch(`${server.baseUrl}${entry}`);
+      assert.equal(response.status, 200, entry);
+      const html = await response.text();
+      assert.match(html, /class="public-home"/);
+      assert.match(html, /https:\/\/recarplan\.com\/landing\//);
+      assert.doesNotMatch(html, /flutter_bootstrap|id="timeDealGrid"|class="quote-form"/);
+      assert.match(html, /data-inquiry-entry/);
+    }
+    for (const entry of ["/inquiry", "/inquiry/", "/inquiry/index.html"]) {
+      const response = await fetch(`${server.baseUrl}${entry}`);
+      assert.equal(response.status, 200, entry);
+      const html = await response.text();
+      assert.match(html, /id="stepContent"/);
+      assert.doesNotMatch(html, /flutter_bootstrap|<base/);
+    }
+    for (const file of ["/inquiry/inquiry.mjs", "/inquiry/catalog.mjs", "/landing/landing.js"]) {
+      const response = await fetch(`${server.baseUrl}${file}`);
+      assert.equal(response.status, 200, file);
+      assert.match(response.headers.get("content-type"), /javascript/);
+    }
+    assert.equal((await fetch(`${server.baseUrl}/inquiry/private.mjs`)).status, 404);
+  } finally { await server.stop(); }
 });
 
 test("private data and unknown knowledge files stay blocked", async () => {
