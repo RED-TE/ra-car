@@ -43,8 +43,11 @@ jobs:
       - name: Verify Crew before publishing
         run: npm run test:crew
 
-      - name: Verify main and inquiry app entries before publishing
+      - name: Verify main and app entries before publishing
         run: npm run test:app-entries
+
+      - name: Verify landing and stepwise inquiry before publishing
+        run: npm run test:inquiry
 
       - name: Verify Kakao web callback before publishing
         run: npm run test:kakao

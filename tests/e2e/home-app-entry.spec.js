@@ -55,7 +55,7 @@ async function appReady(page, url) {
   await expect(page.getByRole("button", { name: "전체 차량", exact: true })).toBeAttached();
 }
 
-for (const entry of ["/", "/inquiry/", "/app/"]) {
+for (const entry of ["/", "/app/"]) {
   for (const width of [360, 390, 768, 1440]) {
     test(`${entry} runs the same real app at ${width}px without redirect or overflow`, async ({ page }) => {
       await page.setViewportSize({ width, height: 900 });
@@ -80,9 +80,9 @@ for (const entry of ["/", "/inquiry/", "/app/"]) {
   }
 }
 
-test("main and inquiry retain explicit referral attribution in the actual app", async ({ page }) => {
+test("main and app retain explicit referral attribution in the actual app", async ({ page }) => {
   const tracked = await mockReadOnlyApi(page);
-  for (const entry of ["/", "/inquiry/"]) {
+  for (const entry of ["/", "/app/"]) {
     await appReady(page, `${entry}?ref=${code}&utm_campaign=preserved#quote`);
     expect(new URL(page.url()).hash).not.toBe("#quote");
     expect(new URL(page.url()).searchParams.get("ref")).toBe(code);

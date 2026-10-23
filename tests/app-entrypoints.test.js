@@ -25,7 +25,9 @@ function migrate(href, entries = {}, blocked = false) {
   return new URL(result);
 }
 
-test("main and inquiry use one current app shell without a redirect or old website scripts", () => {
+test("main uses the current app shell without overwriting independent public pages", () => {
+  assert.deepEqual(entrypoints, ["index.html"]);
+  const independent = ["inquiry/index.html", "landing/index.html"].map(entry => fs.readFileSync(path.join(root, entry), "utf8"));
   assert.deepEqual(syncAppEntrypoints(root, { check: true }), entrypoints);
   for (const entry of entrypoints) {
     const html = fs.readFileSync(path.join(root, entry), "utf8");
@@ -34,12 +36,14 @@ test("main and inquiry use one current app shell without a redirect or old websi
     assert.match(html, /<base href="\/app\/">/);
     assert.doesNotMatch(html, /http-equiv="refresh"|location\.(?:replace|assign)|home\.js|\.\/script\.js|quote-form/);
     const main = html.match(/href="(main\.dart\.js[^\"]*)" as="script"/)[1];
-    for (const url of ["https://recarplan.com/", "https://recarplan.com/inquiry/"]) {
+    for (const url of ["https://recarplan.com/"]) {
       const base = new URL("/app/", url);
       assert.equal(new URL(main, base).pathname, "/app/main.dart.js");
       assert.equal(new URL("assets/FontManifest.json", base).pathname, "/app/assets/FontManifest.json");
     }
   }
+  syncAppEntrypoints(root);
+  assert.deepEqual(["inquiry/index.html", "landing/index.html"].map(entry => fs.readFileSync(path.join(root, entry), "utf8")), independent);
 });
 
 test("legacy attribution migrates without deleting browser storage, campaign or app routes", () => {

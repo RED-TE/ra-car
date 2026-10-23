@@ -1,7 +1,8 @@
 const fs = require("node:fs");
 const path = require("node:path");
 
-const entrypoints = ["index.html", "inquiry/index.html"];
+// Inquiry and landing are independent public pages, not Flutter build outputs.
+const entrypoints = ["index.html"];
 
 function appEntryHtml(root) {
   const source = fs.readFileSync(path.join(root, "app/index.html"), "utf8");

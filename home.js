@@ -24,11 +24,12 @@
   const productLabel = (item) => productOf(item) === "lease" ? "리스" : "장기렌트";
   const conditionSummary = (item) => `기본 조건 · ${productLabel(item)} · 무보증`;
   const nameOf = (item) => [brandOf(item), item.name, item.trim].filter(Boolean).join(" ");
-  const logo = (brand) => logoBrands.has(brand) ? `<img src="./assets/danawa/brands/${encodeURIComponent(brand)}/logo.png" alt="${escape(brand)}" width="40" height="26" loading="lazy" />` : `<b>${escape(brand.slice(0, 3))}</b>`;
+  const inquiryData = item => `data-inquiry-brand="${escape(brandOf(item))}" data-inquiry-model="${escape(item.name)}" data-inquiry-product="${productOf(item) === "lease" ? "LEASE" : "RENTAL"}" data-inquiry-term="60" data-inquiry-mileage="10000"`;
+  const logo = (brand) => logoBrands.has(brand) ? `<img src="/assets/danawa/brands/${encodeURIComponent(brand)}/logo.png" alt="${escape(brand)}" width="40" height="26" loading="lazy" />` : `<b>${escape(brand.slice(0, 3))}</b>`;
   const safeImage = (value) => {
     if (!value) return "";
     try {
-      const url = new URL(value, location.href);
+      const url = new URL(value, new URL("/", location.href));
       return ["http:", "https:", "file:"].includes(url.protocol) ? url.href : "";
     } catch { return ""; }
   };
@@ -128,7 +129,7 @@
   function card(item) {
     const price = priceOf(item);
     const quoteClass = item.calculation?.isEstimated || item.usedQuoteFallback ? "예상 월 납입료" : "상담 전 안내 가격";
-    return `<article class="home-vehicle" data-vehicle-id="${escape(item.id)}">
+    return `<article class="home-vehicle" data-vehicle-id="${escape(item.id)}" ${inquiryData(item)}>
       <a class="home-vehicle-link" href="#quote" data-home-quote="${escape(nameOf(item))}">
         <div class="home-car-image">${imageOf(item)}</div>
         <div class="home-car-copy"><div class="home-car-title">${logo(brandOf(item))}<h3>${escape(item.name)}</h3></div>
@@ -199,7 +200,7 @@
     ];
     const byId = new Map(state.items.filter(item => item.categories?.includes("suv")).map(item => [item.id, item]));
     const items = featuredIds.map(id => byId.get(id)).filter(Boolean);
-    $("#suvCollection").innerHTML = items.length ? items.map(item => `<a class="collection-card" href="#quote" data-home-quote="${escape(nameOf(item))}"><h3>${escape(brandOf(item))} ${escape(item.name)}</h3><p>${escape(conditionSummary(item))}</p><strong>${priceOf(item) ? `<small>월 </small>${priceOf(item)}<small> 원</small>` : '상담 문의'}</strong>${imageOf(item)}<span>견적 문의</span></a>`).join("") : '<p>등록된 SUV 차량이 없습니다. 전체 차량에서 확인해 주세요.</p>';
+    $("#suvCollection").innerHTML = items.length ? items.map(item => `<a class="collection-card" href="#quote" data-home-quote="${escape(nameOf(item))}" ${inquiryData(item)}><h3>${escape(brandOf(item))} ${escape(item.name)}</h3><p>${escape(conditionSummary(item))}</p><strong>${priceOf(item) ? `<small>월 </small>${priceOf(item)}<small> 원</small>` : '상담 문의'}</strong>${imageOf(item)}<span>견적 문의</span></a>`).join("") : '<p>등록된 SUV 차량이 없습니다. 전체 차량에서 확인해 주세요.</p>';
   }
 
   async function loadCatalog(request) {
@@ -213,7 +214,7 @@
       // The existing public catalog is already priced. Never derive a new quote in this view.
       let response;
       try {
-        response = await request("./data/vehicle-static-catalog.json?v=20260909-margin-v1");
+        response = await request("/data/vehicle-static-catalog.json?v=20260909-margin-v1");
       } catch { response = null; }
       if (!response?.ok || !Array.isArray(response.data?.items)) {
         response = await request("/api/recar/vehicles?term=60&deposit_pct=0&mileage_limit=10000&page=1&size=100&mode=all");
@@ -234,8 +235,10 @@
       $("#catalogCount").textContent = "";
       $("#catalogDate").textContent = "정보 확인 필요";
       $("#suvCollection").innerHTML = '<p>차량 정보를 불러오지 못했습니다. 차량 목록에서 다시 불러오기를 눌러주세요.</p>';
-      $("#timeDealGrid").innerHTML = '<p class="time-deal-loading">타임특가 차량을 불러오지 못했습니다.</p>';
-      $("#timeDealGrid").setAttribute("aria-busy", "false");
+      if ($("#timeDealGrid")) {
+        $("#timeDealGrid").innerHTML = '<p class="time-deal-loading">타임특가 차량을 불러오지 못했습니다.</p>';
+        $("#timeDealGrid").setAttribute("aria-busy", "false");
+      }
       arrows();
     } finally { state.loading = false; }
   }
@@ -353,6 +356,8 @@
   pauseState();
 
   const form = $(".quote-form");
+  window.recarHome = { loadCatalog, renderTimeDeals };
+  if (!form) return;
   const status = $(".form-status");
   const quickQuoteDialog = $("#quickQuoteDialog");
   const quickQuoteMount = $("[data-quick-quote-mount]");

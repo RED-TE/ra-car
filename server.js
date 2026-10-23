@@ -41,6 +41,7 @@ const mimeTypes = {
   ".woff2": "font/woff2",
   ".ttf": "font/ttf",
   ".otf": "font/otf",
+  ".mjs": "text/javascript; charset=utf-8",
   ".wasm": "application/wasm",
 };
 
@@ -80,6 +81,11 @@ const publicStaticFiles = new Set([
   "/assets/crew-docs/recar-crew-quick-guide-20261014.pdf",
   "/download/index.html",
   "/inquiry/index.html",
+  "/inquiry/inquiry.css",
+  "/inquiry/inquiry.mjs",
+  "/inquiry/catalog.mjs",
+  "/landing/index.html",
+  "/landing/landing.js",
   "/data/vehicle-static-catalog.json",
   "/data/vehicles-incomplete-report.json",
   "/data/vehicles-incomplete-report.csv",
@@ -2259,6 +2265,9 @@ function serveStatic(request, response, url) {
   }
   if (requestedPath === "/inquiry" || requestedPath === "/inquiry/") {
     requestedPath = "/inquiry/index.html";
+  }
+  if (requestedPath === "/landing" || requestedPath === "/landing/") {
+    requestedPath = "/landing/index.html";
   }
   if (requestedPath === "/download" || requestedPath === "/download/") {
     requestedPath = "/download/index.html";
