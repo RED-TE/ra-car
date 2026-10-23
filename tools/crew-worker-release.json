@@ -1,0 +1,14 @@
+{
+  "source_sha": "9ced86e4c53cc87f3f07636e67a3672bba115d3c",
+  "files": {
+    "crew/login.html": "4cf8fc3915486cd294eda941baa2493d1a06b8664d55e9d3361c98677dec7fec",
+    "crew/index.html": "66ccec112203e4b0e0e17260e538f7b614410fc1f4ce8f7a44604185754a85c3",
+    "crew/dashboard.html": "66ccec112203e4b0e0e17260e538f7b614410fc1f4ce8f7a44604185754a85c3",
+    "crew/welcome.html": "56d48846f5e7780ddfc673e817cc5b61422e7cbdc86405a6a5809ed5db11eef0",
+    "crew/crew-auth.mjs": "b5c2211b64349801c6ae434c3ae7c1304d3e483ceb395e59e41e61c25689e669",
+    "crew/crew-session.mjs": "cbd1460d3fadcb550a021b0ea95c6ca2afbdd8c925c48be1aece9f7751df3e32",
+    "crew/crew-dashboard.js": "c4a0f368203398c455035e84efef7c808cb9449ec952149301f0c9719708bbd8",
+    "crew/crew-model.mjs": "0a513a7dc8c92706bc446ae1a030fbaff9ba03434c42857748c517fcbbf66773",
+    "crew/login/index.html": "2157982c121b4cb05dfa78c6943360af43f2ca22122e23698c9ef2eeb92efe1d"
+  }
+}

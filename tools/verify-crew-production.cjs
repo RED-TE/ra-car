@@ -1,6 +1,7 @@
 const assert = require("node:assert/strict");
 const { createHash } = require("node:crypto");
 const { readFileSync } = require("node:fs");
+const WORKER_RELEASE = require("./crew-worker-release.json");
 
 const SITE = "https://recarplan.com";
 const ADMIN = "https://recarplan.vercel.app";
@@ -13,7 +14,7 @@ const redirects = [
   [ADMIN + "/crew?ref=RC-TST123", SITE + "/app/?ref=RC-TST123"],
 ];
 
-async function verifyCrewProduction({ fetchImpl = fetch, routingOnly = false, expectLocal = false } = {}) {
+async function verifyCrewProduction({ fetchImpl = fetch, routingOnly = false, expectLocal = false, workerRelease = WORKER_RELEASE, expectedOwner = "worker" } = {}) {
   const checks = [];
   async function read(url) {
     const controller = new AbortController();
@@ -37,11 +38,51 @@ async function verifyCrewProduction({ fetchImpl = fetch, routingOnly = false, ex
   }
   if (routingOnly) return checks;
 
+  const login = await read(`${SITE}/crew/login.html`);
+  assert.ok(["worker", "pages"].includes(expectedOwner), "Unknown Crew deployment owner");
+  if (expectedOwner === "worker") {
+    assert.ok(login.headers.has("x-recar-crew-release"), "Pinned Crew Worker ownership is missing");
+  } else {
+    assert.ok(!login.headers.has("x-recar-crew-release"), "Unexpected Crew Worker ownership");
+  }
+  if (login.headers.has("x-recar-crew-release")) {
+    // /crew is independently owned by the pinned Worker release, not Pages.
+    // Never replace its design or accept arbitrary manifest-provided file paths.
+    const verifyWorkerResponse = (response, path) => {
+      assert.equal(response.status, 200, `Missing Worker Crew file: ${path}`);
+      assert.equal(response.headers.get("x-recar-crew-release"), workerRelease.source_sha, `Unexpected Crew Worker release: ${path}`);
+      assert.match(response.headers.get("cache-control") || "", /no-store/i, `Cached Worker Crew file: ${path}`);
+      if (workerRelease.files[path]) {
+        assert.equal(createHash("sha256").update(response.body).digest("hex"), workerRelease.files[path], `Worker Crew file hash mismatch: ${path}`);
+      }
+    };
+    verifyWorkerResponse(login, "crew/login.html");
+    const manifestResponse = await read(`${SITE}/crew/release-manifest.json`);
+    verifyWorkerResponse(manifestResponse, "crew/release-manifest.json");
+    const manifest = JSON.parse(manifestResponse.body);
+    assert.equal(manifest.source_sha, workerRelease.source_sha, "Crew manifest release mismatch");
+    for (const [path, hash] of Object.entries(workerRelease.files)) {
+      assert.equal(manifest.files?.[path], hash, `Unrecognized Crew manifest file: ${path}`);
+      const response = path === "crew/login.html" ? login : await read(`${SITE}/${path}`);
+      verifyWorkerResponse(response, path);
+      checks.push(`Worker file hash ${path}`);
+    }
+    checks.push("pinned Crew Worker manifest");
+    for (const path of ["/crew/login/?action=apply", "/crew/login/?status=EXPIRED"]) {
+      const response = await read(SITE + path);
+      assert.ok([302, 307].includes(response.status), `Missing Worker login alias: ${path}`);
+      assert.equal(response.headers.get("location"), SITE + path.replace("/login/", "/login.html"), `Wrong Worker login alias: ${path}`);
+      assert.match(response.headers.get("cache-control") || "", /no-store/i, `Cached Worker login alias: ${path}`);
+      checks.push(`Worker login alias ${path}`);
+    }
+    return checks;
+  }
+
   const expectedVersion = expectLocal ? createHash("sha256")
     .update(readFileSync(require.resolve("../crew/session.js"))).digest("hex").slice(0, 12) : null;
   let version;
   for (const [path, marker] of [["login.html", 'id="crewLoginForm"'], ["index.html", 'id="crewShareLink"'], ["welcome.html", 'id="welcomeTitle"']]) {
-    const response = await read(`${SITE}/crew/${path}`);
+    const response = path === "login.html" ? login : await read(`${SITE}/crew/${path}`);
     assert.equal(response.status, 200, `Missing Crew screen: ${path}`);
     assert.ok(response.body.includes(marker), `Wrong Crew screen: ${path}`);
     assert.doesNotMatch(response.body, /redirectAfterLogin|authMode/, `Old login-only document: ${path}`);
