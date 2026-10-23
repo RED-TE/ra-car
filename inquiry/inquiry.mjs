@@ -1,4 +1,4 @@
-import { STEPS, requestJson, loadCatalog, selectableTrims, colorsFor, safeImage, referralCode, validPhone, inquiryPayload } from "./catalog.mjs?v=20261022";
+import { STEPS, requestJson, loadCatalog, selectableTrims, colorsFor, safeImage, referralCode, validPhone, inquiryPayload } from "./catalog.mjs?v=20261023";
 
 const $ = selector => document.querySelector(selector);
 const escape = value => String(value ?? "").replace(/[&<>"']/g, char => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[char]);
@@ -20,6 +20,23 @@ const params = new URLSearchParams(location.search);
 let detailGeneration = 0;
 let catalogLoading = false;
 let renderedStep = -1;
+const detailRequests = new Map();
+
+function prepareDetail(vehicleId, { refresh = false } = {}) {
+  const previous = detailRequests.get(vehicleId);
+  if (!refresh && previous && Date.now() - previous.startedAt < 60000) return previous.promise;
+  const entry = { startedAt: Date.now(), promise: null };
+  entry.promise = requestJson(`/api/v1/vehicles/${encodeURIComponent(vehicleId)}`).then(detail => {
+    if (detail?.id !== vehicleId || !Array.isArray(detail.trims)) throw new Error("DETAIL_INVALID");
+    return detail;
+  }).catch(error => {
+    if (detailRequests.get(vehicleId) === entry) detailRequests.delete(vehicleId);
+    throw error;
+  });
+  detailRequests.set(vehicleId, entry);
+  if (detailRequests.size > 8) detailRequests.delete(detailRequests.keys().next().value);
+  return entry.promise;
+}
 
 function imageMarkup(value, alt, className = "") {
   const src = safeImage(value);
@@ -200,12 +217,12 @@ function goTo(step, { push = true } = {}) {
   window.scrollTo({ top: 0, behavior: "instant" });
 }
 
-async function fetchCatalog() {
+async function fetchCatalog({ forceRefresh = false } = {}) {
   if (catalogLoading) return;
   catalogLoading = true;
   state.loading = true; state.error = ""; state.step = 0; resetVehicle(); render();
   try {
-    state.catalog = await loadCatalog();
+    state.catalog = await loadCatalog(undefined, { forceRefresh });
     if (!state.catalog.length) throw new Error("CATALOG_EMPTY");
     if (state.brand && !state.catalog.some(vehicle => vehicle.brand === state.brand)) state.brand = "";
     if (!state.catalog.some(vehicle => domestic.has(brandLabel(vehicle.brand)))) state.market = "all";
@@ -230,15 +247,14 @@ async function fetchCatalog() {
   finally { catalogLoading = false; state.loading = false; render(); }
 }
 
-async function fetchDetail() {
+async function fetchDetail({ refresh = false } = {}) {
   if (!state.vehicle) return;
   const generation = ++detailGeneration;
   const vehicleId = state.vehicle.id;
   state.loading = true; state.error = ""; render();
   try {
-    const detail = await requestJson(`/api/v1/vehicles/${encodeURIComponent(vehicleId)}`);
+    const detail = await prepareDetail(vehicleId, { refresh });
     if (generation !== detailGeneration) return;
-    if (detail?.id !== vehicleId || !Array.isArray(detail.trims)) throw new Error("DETAIL_INVALID");
     state.detail = detail;
     state.trim = state.exterior = state.interior = null;
     resetAgreements();
@@ -288,8 +304,8 @@ document.addEventListener("click", event => {
     return;
   }
   if (target.id === "backButton") { goTo(state.step - 1); return; }
-  if (target.hasAttribute("data-retry")) { void fetchCatalog(); return; }
-  if (target.hasAttribute("data-retry-detail")) { void fetchDetail(); return; }
+  if (target.hasAttribute("data-retry")) { void fetchCatalog({ forceRefresh: true }); return; }
+  if (target.hasAttribute("data-retry-detail")) { void fetchDetail({ refresh: true }); return; }
   if (target.hasAttribute("data-step")) {
     const step = Number(target.dataset.step);
     if (step < state.step) goTo(step);
@@ -306,6 +322,8 @@ document.addEventListener("click", event => {
     const vehicle = state.catalog.find(row => row.id === target.dataset.vehicle && row.brand === state.brand);
     if (!vehicle) return;
     resetVehicle(); state.vehicle = vehicle; state.conditions.product = vehicle.available_product_types[0];
+    // Start only after an explicit vehicle choice; the next step shares this request.
+    void prepareDetail(vehicle.id).catch(() => {});
   }
   if (target.dataset.trim && state.trim?.id !== target.dataset.trim) {
     state.trim = selectableTrims(state.detail).find(row => row.id === target.dataset.trim) || null;

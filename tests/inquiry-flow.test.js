@@ -1,5 +1,6 @@
 const assert = require("node:assert/strict");
 const { test } = require("node:test");
+const { getEventListeners } = require("node:events");
 
 const catalogModule = import("../inquiry/catalog.mjs");
 
@@ -55,6 +56,29 @@ function mockPages(pages) {
       return structuredClone(pages[page - 1]);
     },
   };
+}
+
+function memoryStorage() {
+  const entries = new Map();
+  const writes = [];
+  return {
+    entries, writes,
+    getItem: key => entries.get(key) ?? null,
+    setItem: (key, value) => { entries.set(key, value); writes.push({ key, value }); },
+  };
+}
+
+function deferred() {
+  let resolve, reject;
+  const promise = new Promise((yes, no) => { resolve = yes; reject = no; });
+  return { promise, resolve, reject };
+}
+
+const nextTurn = () => new Promise(resolve => setImmediate(resolve));
+
+async function cachedCatalog(storage, now = () => 1_000_000) {
+  const { loadCatalog } = await catalogModule;
+  return loadCatalog(mockPages([envelope([vehicle("cached")])]).request, { storage, now });
 }
 
 test("inquiry exposes exactly six ordered steps", async () => {
@@ -114,7 +138,8 @@ test("catalog rejects invalid pagination metadata", async t => {
     ["fractional total", { total: 1.5 }], ["string total", { total: "1" }],
     ["negative pages", { pages: -1 }], ["fractional pages", { pages: 1.5 }],
     ["more than twenty pages", { pages: 21 }], ["wrong page", { page: 2 }],
-    ["string page", { page: "1" }],
+    ["string page", { page: "1" }], ["zero pages with nonempty total", { pages: 0 }],
+    ["more than twenty full pages", { total: 2001 }],
   ]) {
     await t.test(name, async () => {
       const mock = mockPages([envelope([vehicle()], changes)]);
@@ -147,6 +172,292 @@ test("a later catalog network failure never falls back to earlier rows", async (
     throw new Error("LOCAL_OFFLINE");
   }), { message: "LOCAL_OFFLINE" });
   assert.equal(calls, 2);
+});
+
+function discoveryResult(overrides = {}) {
+  return {
+    contract_version: "discovery_v1", complete: true, revision: "a".repeat(64), total: 1,
+    items: [{ id: "live-discovery", brand: "Genesis", model_name: "GV80 Hybrid 블랙", available_product_types: ["RENTAL"],
+      image_url: "https://api.recarplan.com/assets/vehicle.png" }], ...overrides,
+  };
+}
+
+test("fast discovery uses one complete price-free response, keeps canonical IDs and stores only discovery fields", async () => {
+  const { loadCatalog, CATALOG_CACHE_KEY } = await catalogModule;
+  const storage = memoryStorage();
+  const calls = [];
+  const result = await loadCatalog(async path => { calls.push(path); return discoveryResult(); }, { storage, preferDiscovery: true });
+  assert.deepEqual(calls, ["/api/v1/vehicles/discovery"]);
+  assert.deepEqual(result, discoveryResult().items);
+  assert.deepEqual(JSON.parse(storage.getItem(CATALOG_CACHE_KEY)).items, result);
+});
+
+test("only an older API's 404 can fall back to paginated discovery", async () => {
+  const { loadCatalog } = await catalogModule;
+  const calls = [];
+  const result = await loadCatalog(async path => {
+    calls.push(path);
+    if (path === "/api/v1/vehicles/discovery") throw new Error("API_HTTP_404");
+    return envelope([vehicle("legacy-public")]);
+  }, { storage: null, preferDiscovery: true });
+  assert.equal(result[0].id, "legacy-public");
+  assert.deepEqual(calls, ["/api/v1/vehicles/discovery", "/api/v1/vehicles/?page=1&size=100&sort=display_order"]);
+  for (const message of ["API_HTTP_500", "API_HTTP_522", "NETWORK_ERROR", "API_HTTP_403"]) {
+    let count = 0;
+    await assert.rejects(loadCatalog(async () => { count++; throw new Error(message); }, { storage: null, preferDiscovery: true }), { message });
+    assert.equal(count, 1);
+  }
+});
+
+test("fast discovery rejects malformed or partial contracts without priced-page fallback or partial caching", async () => {
+  const { loadCatalog } = await catalogModule;
+  const valid = discoveryResult();
+  for (const result of [
+    null, discoveryResult({ complete: false }), discoveryResult({ contract_version: "catalog_v1" }),
+    discoveryResult({ revision: "unknown" }), discoveryResult({ total: 2 }), discoveryResult({ total: "1" }),
+    discoveryResult({ total: 2, items: [valid.items[0], valid.items[0]] }),
+    discoveryResult({ items: [{ ...valid.items[0], monthly_payment: 100000 }] }),
+    discoveryResult({ items: [{ ...valid.items[0], available_product_types: ["UNKNOWN"] }] }),
+  ]) {
+    const storage = memoryStorage();
+    let calls = 0;
+    await assert.rejects(loadCatalog(async () => { calls++; return result; }, { storage, preferDiscovery: true }), { message: "CATALOG_INVALID" });
+    assert.equal(calls, 1);
+    assert.equal(storage.writes.length, 0);
+  }
+});
+
+test("parallel pages are capped at two, overlap in time and retain display order after out-of-order completion", async () => {
+  const { loadCatalog, CATALOG_CACHE_KEY } = await catalogModule;
+  const storage = memoryStorage();
+  const gates = new Map([2, 3, 4, 5].map(page => [page, deferred()]));
+  const calls = [];
+  let active = 0, peak = 0, finished = false, clock = 1_000_000;
+  const ids = ["z-first", "a-second", "y-third", "b-fourth", "x-fifth"];
+  const request = async pathname => {
+    const page = Number(new URL(pathname, "http://localhost").searchParams.get("page"));
+    calls.push(page);
+    active++;
+    peak = Math.max(peak, active);
+    try {
+      if (page > 1) await gates.get(page).promise;
+      return envelope([vehicle(ids[page - 1])], { total: 5, pages: 5, page });
+    } finally { active--; }
+  };
+  const result = loadCatalog(request, { storage, now: () => clock }).then(items => { finished = true; return items; });
+  try {
+    await nextTurn();
+    assert.deepEqual(calls, [1, 2, 3]);
+    assert.equal(active, 2);
+    gates.get(3).resolve();
+    await nextTurn();
+    assert.equal(finished, false);
+    assert.ok(active <= 2);
+    gates.get(2).resolve();
+    await nextTurn();
+    assert.deepEqual(calls, [1, 2, 3, 4, 5]);
+    gates.get(5).resolve();
+    await nextTurn();
+    assert.equal(finished, false);
+    assert.equal(storage.writes.length, 0);
+    clock += 50;
+    gates.get(4).resolve();
+    assert.deepEqual((await result).map(item => item.id), ids);
+    assert.equal(JSON.parse(storage.getItem(CATALOG_CACHE_KEY)).saved_at, clock);
+    assert.equal(peak, 2);
+    assert.equal(active, 0);
+  } finally {
+    for (const gate of gates.values()) gate.resolve();
+    await result.catch(() => {});
+  }
+});
+
+test("a parallel page failure aborts its sibling, schedules no later pages and writes no partial cache", async () => {
+  const { loadCatalog } = await catalogModule;
+  const storage = memoryStorage();
+  const calls = [], signals = [];
+  const failure = new Error("LOCAL_PAGE_THREE_FAILED");
+  let siblingAborted = false;
+  await assert.rejects(loadCatalog(async (pathname, { signal }) => {
+    const page = Number(new URL(pathname, "http://localhost").searchParams.get("page"));
+    calls.push(page); signals.push(signal);
+    if (page === 1) return envelope([vehicle("first")], { total: 5, pages: 5 });
+    if (page === 3) throw failure;
+    assert.equal(page, 2);
+    return new Promise((_resolve, reject) => signal.addEventListener("abort", () => {
+      siblingAborted = true;
+      reject(signal.reason);
+    }, { once: true }));
+  }, { storage }), failure);
+  assert.deepEqual(calls, [1, 2, 3]);
+  assert.equal(siblingAborted, true);
+  assert.ok(signals.every(signal => signal.aborted));
+  assert.equal(storage.writes.length, 0);
+});
+
+test("duplicates and total/page changes in parallel responses never commit a catalog", async () => {
+  const { loadCatalog } = await catalogModule;
+  for (const [last, error] of [
+    [envelope([vehicle("second")], { total: 3, page: 3, pages: 3 }), "CATALOG_INVALID"],
+    [envelope([vehicle("third")], { total: 4, page: 3, pages: 3 }), "CATALOG_CHANGED"],
+    [envelope([vehicle("third")], { total: 3, page: 3, pages: 4 }), "CATALOG_CHANGED"],
+  ]) {
+    const storage = memoryStorage();
+    const mock = mockPages([
+      envelope([vehicle("first")], { total: 3, pages: 3 }),
+      envelope([vehicle("second")], { total: 3, page: 2, pages: 3 }), last,
+    ]);
+    await assert.rejects(loadCatalog(mock.request, { storage }), { message: error });
+    assert.equal(storage.writes.length, 0);
+  }
+});
+
+test("cache stores only minimal discovery fields, safe images and server display order, never prices or contact data", async () => {
+  const { loadCatalog, CATALOG_CACHE_KEY } = await catalogModule;
+  const storage = memoryStorage();
+  storage.entries.set("unrelated-saved-quote", "preserve-me");
+  const mock = mockPages([envelope([
+    vehicle("z", {
+      available_product_types: ["LEASE", "LEASE", "UNKNOWN"],
+      image_url: "/assets/z.png", thumbnail_url: "https://api.recarplan.com/assets/thumb.png",
+      representative_monthly_price: 100000, finance_company: "LOCAL_ONLY",
+      name: "PRIVATE_NAME", phone: "PRIVATE_PHONE", trims: [trim()],
+    }),
+    vehicle("a", { image_url: "javascript:alert(1)" }),
+  ])]);
+  const first = await loadCatalog(mock.request, { storage, now: () => 1_000_000 });
+  assert.deepEqual(first, [
+    { id: "z", brand: "현대", model_name: "테스트 차량", available_product_types: ["LEASE"],
+      image_url: "https://api.recarplan.com/assets/z.png", thumbnail_url: "https://api.recarplan.com/assets/thumb.png" },
+    { id: "a", brand: "현대", model_name: "테스트 차량", available_product_types: ["LEASE"] },
+  ]);
+  assert.deepEqual(storage.writes.map(write => write.key), [CATALOG_CACHE_KEY]);
+  const saved = storage.getItem(CATALOG_CACHE_KEY);
+  for (const forbidden of ["monthly_payment", "price", "finance_company", "PRIVATE_NAME", "PRIVATE_PHONE", "trims"]) {
+    assert.equal(saved.includes(forbidden), false, forbidden);
+  }
+  const cached = await loadCatalog(async () => assert.fail("fresh cache must not request the API"), { storage, now: () => 1_000_001 });
+  assert.deepEqual(cached, first);
+  assert.equal(storage.getItem("unrelated-saved-quote"), "preserve-me");
+  cached[0].model_name = "caller mutation";
+  assert.deepEqual(await loadCatalog(async () => assert.fail("still fresh"), { storage, now: () => 1_000_002 }), first);
+});
+
+test("fresh cache avoids requests without sliding its TTL; exactly five minutes forces a new complete fetch", async () => {
+  const { loadCatalog, CATALOG_CACHE_TTL, CATALOG_CACHE_KEY } = await catalogModule;
+  const storage = memoryStorage();
+  const first = await cachedCatalog(storage);
+  const saved = storage.getItem(CATALOG_CACHE_KEY);
+  assert.deepEqual(await loadCatalog(async () => assert.fail("cache is still fresh"), {
+    storage, now: () => 1_000_000 + CATALOG_CACHE_TTL - 1,
+  }), first);
+  assert.equal(storage.getItem(CATALOG_CACHE_KEY), saved);
+  assert.equal(storage.writes.length, 1);
+  const mock = mockPages([envelope([vehicle("refreshed")])]);
+  const refreshed = await loadCatalog(mock.request, { storage, now: () => 1_000_000 + CATALOG_CACHE_TTL });
+  assert.equal(mock.calls.length, 1);
+  assert.equal(refreshed[0].id, "refreshed");
+  assert.equal(JSON.parse(storage.getItem(CATALOG_CACHE_KEY)).saved_at, 1_000_000 + CATALOG_CACHE_TTL);
+});
+
+test("corrupt or incompatible caches are fully validated before reuse", async t => {
+  const { loadCatalog, CATALOG_CACHE_KEY } = await catalogModule;
+  for (const [label, corrupt] of [
+    ["invalid JSON", () => "{"],
+    ["wrong version", cache => ({ ...cache, contract_version: "unknown" })],
+    ["wrong ordering", cache => ({ ...cache, sort: "price" })],
+    ["partial catalog", cache => ({ ...cache, complete: false })],
+    ["wrong total", cache => ({ ...cache, total: 2 })],
+    ["duplicate IDs", cache => ({ ...cache, total: 2, items: [cache.items[0], cache.items[0]] })],
+    ["invalid ID", cache => { cache.items[0].id = ""; return cache; }],
+    ["invalid model", cache => { cache.items[0].model_name = null; return cache; }],
+    ["unknown product", cache => { cache.items[0].available_product_types = ["CASH"]; return cache; }],
+    ["duplicate product", cache => { cache.items[0].available_product_types = ["LEASE", "LEASE"]; return cache; }],
+    ["unexpected price", cache => { cache.items[0].monthly_payment = 1; return cache; }],
+    ["unsafe image", cache => { cache.items[0].image_url = "javascript:alert(1)"; return cache; }],
+    ["future timestamp", cache => ({ ...cache, saved_at: 1_000_001 })],
+    ["missing timestamp", cache => { delete cache.saved_at; return cache; }],
+    ["empty cached result", cache => ({ ...cache, total: 0, items: [] })],
+  ]) {
+    await t.test(label, async () => {
+      const storage = memoryStorage();
+      await cachedCatalog(storage);
+      const changed = corrupt(JSON.parse(storage.getItem(CATALOG_CACHE_KEY)));
+      storage.entries.set(CATALOG_CACHE_KEY, typeof changed === "string" ? changed : JSON.stringify(changed));
+      const mock = mockPages([envelope([vehicle("recovered")])]);
+      const result = await loadCatalog(mock.request, { storage, now: () => 1_000_000 });
+      assert.equal(mock.calls.length, 1);
+      assert.equal(result[0].id, "recovered");
+    });
+  }
+});
+
+test("empty and unsupported-only results are never cached, so explicit retry can see new vehicles", async () => {
+  const { loadCatalog } = await catalogModule;
+  for (const items of [[], [vehicle("unsupported", { available_product_types: ["CASH"] })]]) {
+    const storage = memoryStorage();
+    assert.deepEqual(await loadCatalog(mockPages([envelope(items)]).request, { storage }), []);
+    assert.equal(storage.writes.length, 0);
+    const mock = mockPages([envelope([vehicle("now-available")])]);
+    assert.equal((await loadCatalog(mock.request, { storage }))[0].id, "now-available");
+    assert.equal(mock.calls.length, 1);
+  }
+});
+
+test("forceRefresh bypasses a fresh cache; failed and expired refreshes never fall back to stale data", async () => {
+  const { loadCatalog, CATALOG_CACHE_KEY, CATALOG_CACHE_TTL } = await catalogModule;
+  const storage = memoryStorage();
+  await cachedCatalog(storage);
+  const saved = storage.getItem(CATALOG_CACHE_KEY);
+  for (const options of [
+    { forceRefresh: true, now: () => 1_000_001 },
+    { now: () => 1_000_000 + CATALOG_CACHE_TTL },
+  ]) {
+    let calls = 0;
+    await assert.rejects(loadCatalog(async () => { calls++; throw new Error("LOCAL_OFFLINE"); }, { storage, ...options }), { message: "LOCAL_OFFLINE" });
+    assert.equal(calls, 1);
+    assert.equal(storage.getItem(CATALOG_CACHE_KEY), saved);
+    assert.equal(storage.writes.length, 1);
+  }
+  const mock = mockPages([envelope([vehicle("forced")])]);
+  assert.equal((await loadCatalog(mock.request, { storage, now: () => 1_000_001, forceRefresh: true }))[0].id, "forced");
+});
+
+test("blocked storage and quota failures do not block a verified catalog or modify other records", async () => {
+  const { loadCatalog } = await catalogModule;
+  for (const storage of [
+    null,
+    { getItem: () => { throw new Error("blocked"); }, setItem: () => { throw new Error("blocked"); } },
+    { getItem: () => null, setItem: () => { throw new Error("quota"); } },
+  ]) {
+    const mock = mockPages([envelope([vehicle("online")])]);
+    assert.equal((await loadCatalog(mock.request, { storage }))[0].id, "online");
+    assert.equal(mock.calls.length, 1);
+  }
+});
+
+test("canceling catalog pagination aborts both pending pages, removes listeners and never caches partial rows", async () => {
+  const { loadCatalog } = await catalogModule;
+  const storage = memoryStorage();
+  const controller = new AbortController();
+  const failure = new Error("LOCAL_CATALOG_CANCELLED");
+  const calls = [], aborted = [];
+  const result = loadCatalog(async (pathname, { signal }) => {
+    const page = Number(new URL(pathname, "http://localhost").searchParams.get("page"));
+    calls.push(page);
+    if (page === 1) return envelope([vehicle("first")], { total: 5, pages: 5 });
+    return new Promise((_resolve, reject) => signal.addEventListener("abort", () => {
+      aborted.push(page); reject(signal.reason);
+    }, { once: true }));
+  }, { storage, signal: controller.signal });
+  const rejected = assert.rejects(result, failure);
+  await nextTurn();
+  assert.deepEqual(calls, [1, 2, 3]);
+  controller.abort(failure);
+  await rejected;
+  assert.deepEqual(aborted, [2, 3]);
+  assert.equal(storage.writes.length, 0);
+  assert.equal(getEventListeners(controller.signal, "abort").length, 0);
 });
 
 test("UNAVAILABLE overrides an otherwise populated trim list", async () => {
@@ -383,4 +694,61 @@ test("requestJson propagates offline errors and aborts a timed out mock without 
     },
   }), { message: "LOCAL_TIMEOUT" });
   assert.equal(calls, 1);
+});
+
+test("pre-aborted request and catalog signals never call their fetcher, request or storage", async () => {
+  const { requestJson, loadCatalog } = await catalogModule;
+  const controller = new AbortController();
+  const failure = new Error("LOCAL_ALREADY_CANCELLED");
+  controller.abort(failure);
+  await assert.rejects(requestJson("/local-test", {
+    signal: controller.signal, fetcher: async () => assert.fail("no fetch after cancellation"),
+  }), failure);
+  await assert.rejects(loadCatalog(async () => assert.fail("no request after cancellation"), {
+    signal: controller.signal, storage: { getItem: () => assert.fail("no cache read after cancellation") },
+  }), failure);
+  assert.equal(getEventListeners(controller.signal, "abort").length, 0);
+});
+
+test("requestJson propagates caller cancellation to the active fetch exactly once and cleans up", async () => {
+  const { requestJson } = await catalogModule;
+  const controller = new AbortController();
+  const failure = new Error("LOCAL_REQUEST_CANCELLED");
+  let calls = 0, receivedSignal;
+  const pending = requestJson("/local-test", {
+    signal: controller.signal,
+    fetcher: async (_url, { signal }) => {
+      calls++; receivedSignal = signal;
+      return new Promise((_resolve, reject) => signal.addEventListener("abort", () => reject(signal.reason), { once: true }));
+    },
+  });
+  const rejected = assert.rejects(pending, failure);
+  controller.abort(failure);
+  await rejected;
+  assert.equal(calls, 1);
+  assert.equal(receivedSignal.aborted, true);
+  assert.equal(receivedSignal.reason, failure);
+  assert.equal(getEventListeners(controller.signal, "abort").length, 0);
+});
+
+test("requestJson rejects a late JSON body after cancellation and detaches a successful caller's listener", async () => {
+  const { requestJson } = await catalogModule;
+  const controller = new AbortController();
+  const body = deferred();
+  const failure = new Error("LOCAL_BODY_CANCELLED");
+  const pending = requestJson("/local-test", {
+    signal: controller.signal,
+    fetcher: async () => ({ ok: true, json: () => body.promise }),
+  });
+  const rejected = assert.rejects(pending, failure);
+  await nextTurn();
+  controller.abort(failure);
+  body.resolve({ stale: true });
+  await rejected;
+  assert.equal(getEventListeners(controller.signal, "abort").length, 0);
+  const successful = new AbortController();
+  assert.deepEqual(await requestJson("/local-test", {
+    signal: successful.signal, fetcher: async () => ({ ok: true, json: async () => ({ ok: true }) }),
+  }), { ok: true });
+  assert.equal(getEventListeners(successful.signal, "abort").length, 0);
 });

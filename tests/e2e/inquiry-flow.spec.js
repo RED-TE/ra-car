@@ -42,7 +42,8 @@ const test = base.extend({
     expect(["127.0.0.1", "localhost", "[::1]"]).toContain(new URL(origin).hostname);
     const api = {
       posts: [], reads: [], unexpected: [], errors: [], assetFailures: [],
-      offlineCatalog: false, offlineDetail: false, submitGate: null,
+      offlineCatalog: false, offlineDetail: false, detailGate: null, submitGate: null,
+      discovery: false, discoveryReads: 0, discoveryOverride: null,
       receipt: { id: "local-only-receipt", status: "NEW" }, submitStatus: 201,
       pages: [
         { items: [row("local-lease", "로컬 리스 차량"), row("local-zero", "로컬 무색상 차량")], total: 3, page: 1, pages: 2 },
@@ -64,6 +65,15 @@ const test = base.extend({
       };
       if (url.origin === API) {
         if (method === "OPTIONS") return route.fulfill({ status: 204, headers });
+        if (method === "GET" && url.pathname === "/api/v1/vehicles/discovery") {
+          api.discoveryReads++;
+          if (!api.discovery) return route.fulfill({ status: 404, headers, json: { detail: "Not Found" } });
+          if (api.offlineCatalog) return route.abort("internetdisconnected");
+          const items = api.pages.flatMap(part => part.items).map(({ id, brand, model_name, available_product_types }) => ({ id, brand, model_name, available_product_types }));
+          return route.fulfill({ status: 200, headers, json: api.discoveryOverride || {
+            contract_version: "discovery_v1", complete: true, total: items.length, revision: "a".repeat(64), items,
+          } });
+        }
         if (method === "GET" && url.pathname === "/api/v1/vehicles/") {
           api.reads.push(url.href);
           if (api.offlineCatalog) return route.abort("internetdisconnected");
@@ -75,6 +85,7 @@ const test = base.extend({
         if (method === "GET" && url.pathname.startsWith("/api/v1/vehicles/")) {
           api.reads.push(url.href);
           if (api.offlineDetail) return route.abort("internetdisconnected");
+          if (api.detailGate) await api.detailGate;
           const json = api.details[decodeURIComponent(url.pathname.split("/").pop())];
           if (json) return route.fulfill({ status: 200, headers, json });
         }
@@ -187,6 +198,7 @@ async function review(page, { capture = false, id = "local-lease" } = {}) {
 
 for (const viewport of [{ width: 390, height: 844 }, { width: 1440, height: 1000 }]) {
   test(`landing referral to six steps submits once with NEW receipt at ${viewport.width}px`, async ({ page, api }) => {
+    api.discovery = true;
     await page.setViewportSize(viewport);
     await page.addInitScript(() => localStorage.setItem("unrelated-saved-quote", "preserve-me"));
     const response = await page.goto(`/landing/?ref=${referral.toLowerCase()}&utm_source=local-test&utm_campaign=inquiry-smoke`);
@@ -225,6 +237,8 @@ for (const viewport of [{ width: 390, height: 844 }, { width: 1440, height: 1000
     await expect(page.locator(".receipt")).toContainText("local-only-receipt");
     await expect(page.locator("#flowActions")).toBeHidden();
     expect(api.posts).toHaveLength(1);
+    expect(api.discoveryReads).toBe(1);
+    expect(api.reads.some(url => new URL(url).pathname === "/api/v1/vehicles/")).toBe(false);
     expect(api.posts[0]).toMatchObject({
       name, phone: "01000000000", privacy_agreed: true, product_type: "LEASE",
       term_months: 48, mileage_per_year: 30000, referral_code: referral, quoted_monthly_payment: null,
@@ -262,12 +276,46 @@ test("duplicate pagination never displays a partial catalog", async ({ page, api
   expect(api.reads).toHaveLength(2);
 });
 
+test("invalid fast discovery fails closed instead of silently requesting priced pages", async ({ page, api }) => {
+  api.discovery = true;
+  api.discoveryOverride = { contract_version: "discovery_v1", complete: false, total: 1, items: [], revision: "a".repeat(64) };
+  await page.goto("/inquiry/");
+  await expect(page.locator("[data-retry]")).toBeVisible();
+  await expect(page.locator("[data-brand], [data-vehicle]")).toHaveCount(0);
+  expect(api.discoveryReads).toBe(1);
+  expect(api.reads).toHaveLength(0);
+  expect(api.posts).toHaveLength(0);
+});
+
+test("reopening reuses only a complete fresh discovery catalog without retaining customer information", async ({ page, api }) => {
+  await openInquiry(page);
+  const catalogReads = api.reads.length;
+  expect(catalogReads).toBe(2);
+  await page.reload();
+  await expect(page.locator('[data-brand="현대"]')).toBeVisible();
+  expect(api.reads).toHaveLength(catalogReads);
+  const stored = await page.evaluate(() => JSON.parse(sessionStorage.getItem("recar_inquiry_discovery_v1")));
+  expect(stored.complete).toBe(true);
+  expect(stored.items).toHaveLength(3);
+  expect(JSON.stringify(stored)).not.toContain("monthly_payment");
+  expect(JSON.stringify(stored)).not.toContain("987654");
+  expect(JSON.stringify(stored)).not.toContain(name);
+  expect(JSON.stringify(stored)).not.toContain(phone);
+  api.offlineDetail = true;
+  await page.locator('[data-brand="현대"]').click();
+  await page.locator("#nextButton").click();
+  await page.locator('[data-vehicle="local-lease"]').click();
+  await page.locator("#nextButton").click();
+  await expect(page.locator("[data-retry-detail]")).toBeVisible();
+  expect(api.posts).toHaveLength(0);
+});
+
 test("detail offline error supports retry without selecting a fake trim", async ({ page, api }) => {
   await openInquiry(page);
   await page.locator('[data-brand="현대"]').click();
   await page.locator("#nextButton").click();
-  await page.locator('[data-vehicle="local-lease"]').click();
   api.offlineDetail = true;
+  await page.locator('[data-vehicle="local-lease"]').click();
   await page.locator("#nextButton").click();
   await expect(page.locator("[data-retry-detail]")).toBeVisible();
   await expect(page.locator("[data-trim]")).toHaveCount(0);
@@ -276,6 +324,47 @@ test("detail offline error supports retry without selecting a fake trim", async 
   await page.locator("[data-retry-detail]").click();
   await expect(page.locator('[data-trim="local-lease-active"]')).toBeVisible();
   await expect(page.locator("#nextButton")).toBeDisabled();
+});
+
+test("vehicle choice prepares one shared detail request before continuing", async ({ page, api }) => {
+  await openInquiry(page);
+  await page.locator('[data-brand="현대"]').click();
+  await page.locator("#nextButton").click();
+  let release;
+  api.detailGate = new Promise(resolve => { release = resolve; });
+  try {
+    await page.locator('[data-vehicle="local-lease"]').click();
+    await expect.poll(() => api.reads.filter(url => new URL(url).pathname === "/api/v1/vehicles/local-lease").length).toBe(1);
+    await expect(page.locator("#nextButton")).toBeEnabled();
+    await page.locator("#nextButton").click();
+    await expect(page.locator(".loading-label")).toBeVisible();
+    release();
+    await expect(page.locator('[data-trim="local-lease-active"]')).toBeVisible();
+    expect(api.reads.filter(url => new URL(url).pathname === "/api/v1/vehicles/local-lease")).toHaveLength(1);
+    await page.locator("#backButton").click();
+    await page.locator("#nextButton").click();
+    await expect(page.locator('[data-trim="local-lease-active"]')).toBeVisible();
+    expect(api.reads.filter(url => new URL(url).pathname === "/api/v1/vehicles/local-lease")).toHaveLength(1);
+  } finally { release(); }
+});
+
+test("a late prefetch for a previously selected vehicle cannot replace the new selection", async ({ page, api }) => {
+  await openInquiry(page);
+  await page.locator('[data-brand="현대"]').click();
+  await page.locator("#nextButton").click();
+  let release;
+  api.detailGate = new Promise(resolve => { release = resolve; });
+  try {
+    await page.locator('[data-vehicle="local-lease"]').click();
+    await expect.poll(() => api.reads.filter(url => new URL(url).pathname === "/api/v1/vehicles/local-lease").length).toBe(1);
+    api.detailGate = null;
+    await page.locator('[data-vehicle="local-zero"]').click();
+    await page.locator("#nextButton").click();
+    await expect(page.locator('[data-trim="local-zero-active"]')).toBeVisible();
+    release();
+    await expect(page.locator('[data-trim="local-lease-active"]')).toHaveCount(0);
+    await expect(page.locator('[data-trim="local-zero-active"]')).toBeVisible();
+  } finally { release(); }
 });
 
 test("UNAVAILABLE trim selection blocks progression despite populated raw trims", async ({ page }) => {
