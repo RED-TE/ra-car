@@ -407,77 +407,10 @@ async function getFirebaseDb() {
   return window.firebase.firestore();
 }
 
-async function sendLeadToServer(lead) {
-  if (window.location.protocol === "file:") {
-    return { stored: "browser" };
-  }
-
-  const response = await requestJson("/api/leads", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(lead),
-  });
-
-  if (!response.ok) {
-    throw new Error("lead_request_failed");
-  }
-
-  return response.data;
-}
-
-async function sendLeadToFirebase(lead) {
-  const db = await getFirebaseDb();
-  const cleanLead = {
-    ...lead,
-    storage: "firebase-client",
-    progressStatus: "미배정",
-    assignedAdminId: "",
-    assignedAdminName: "",
-    assignedAdminUsername: "",
-    groupId: "",
-    adminMemo: "",
-    dbManager: "",
-  };
-
-  await db.collection("leads").doc(lead.id).set(cleanLead, { merge: false });
-
-  return { stored: "firebase", id: lead.id };
-}
-
-async function submitLead(lead) {
-  saveLocalLead(lead);
-
-  let serverResult = null;
-  try {
-    serverResult = await sendLeadToServer(lead);
-  } catch (error) {
-    serverResult = null;
-  }
-
-  if (serverResult?.firebase?.stored || serverResult?.stored === "firebase") {
-    return {
-      stored: "firebase",
-      firebase: serverResult.firebase,
-      server: serverResult,
-    };
-  }
-
-  if (window.location.protocol !== "file:") {
-    const firebaseResult = await sendLeadToFirebase(lead);
-    return {
-      stored: "firebase",
-      firebase: firebaseResult,
-      server: serverResult,
-    };
-  }
-
-  return {
-    stored: serverResult?.stored || "server",
-    firebaseError: serverResult?.firebase?.error || "",
-    server: serverResult,
-  };
+async function submitLead(_lead) {
+  // Do not send or copy a rejected inquiry to a second storage channel.
+  // The official /inquiry/ flow alone submits through the protected API.
+  throw new Error("INQUIRY_CHANNEL_RETIRED");
 }
 
 quoteForm?.addEventListener("submit", (event) => {
@@ -533,10 +466,13 @@ quoteForm?.addEventListener("submit", (event) => {
       setFormStatus("문의가 접수되었습니다. 가능한 조건을 확인해 연락드리겠습니다.");
       buttonText.textContent = "접수 완료";
     })
-    .catch((error) => {
-      console.error("lead_submit_failed", error);
-      setFormStatus("문의 접수 중 문제가 발생했습니다. 잠시 후 다시 시도해 주세요.", "error");
-      buttonText.textContent = "다시 시도";
+    .catch(() => {
+      setFormStatus("이 접수 방식은 종료되었습니다. 자동으로 전송하지 않습니다. 공식 문의 화면을 이용해 주세요. ", "error");
+      const link = document.createElement("a");
+      link.href = "/inquiry/";
+      link.textContent = "공식 문의 화면으로 이동";
+      quoteForm.querySelector(".form-status")?.appendChild(link);
+      buttonText.textContent = "공식 문의 이용";
     })
     .finally(() => {
       quoteForm.setAttribute("aria-busy", "false");

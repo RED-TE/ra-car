@@ -439,6 +439,36 @@ for (const [label, receipt, status] of [
   });
 }
 
+for (const [status, message] of [[403, "현재 접속 환경"], [429, "요청이 많아"], [503, "접수 보호 기능"]]) {
+  test(`security HTTP ${status} keeps the actual vehicle, conditions and contact without retry`, async ({ page, api }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    api.submitStatus = status;
+    api.receipt = { error: { code: "SYNTHETIC_SECURITY_FAILURE", message: "not for display" } };
+    await openInquiry(page);
+    await review(page);
+    await page.locator("#agreeAll").check();
+    await page.locator("#nextButton").click();
+    await expect(page.locator("#flowStatus")).toContainText(message);
+    await expect(page.locator("#flowStatus")).toContainText("자동 재전송하지 않습니다");
+    await expect(page.locator("#flowStatus")).not.toContainText("not for display");
+    await expect(page.locator("#successTitle")).toHaveCount(0);
+    await expect(page.locator("#stepContent")).toHaveJSProperty("inert", false);
+    await expect(page.locator(".review")).toContainText("로컬 리스 차량");
+    await expect(page.locator(".review")).toContainText("선택 가능한 트림");
+    await expect(page.locator(".review")).toContainText("48개월 / 연 30,000km");
+    await expect(page.locator(".review")).toContainText("보증금 20% / 선납금 10%");
+    await expect(page.locator(".review")).toContainText(name);
+    await expect(page.locator(".review")).toContainText(phone);
+    expect(api.posts).toHaveLength(1);
+    await page.getByRole("button", { name: "기간 / 주행거리 수정", exact: true }).click();
+    await step(page, 4);
+    for (const [key, value] of [["term", 48], ["mileage", 30000], ["deposit", 20], ["prepayment", 10]]) {
+      await expect(page.locator(`[data-condition="${key}"][data-value="${value}"]`)).toHaveAttribute("aria-pressed", "true");
+    }
+    expect(api.posts).toHaveLength(1);
+  });
+}
+
 test("a landing vehicle keeps its model and displayed conditions using canonical API IDs", async ({ page, api }) => {
   api.pages[0].items[0].model_name = "모닝";
   api.pages[0].items[0].brand = "기아";

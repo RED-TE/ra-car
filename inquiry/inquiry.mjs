@@ -1,4 +1,4 @@
-import { STEPS, requestJson, loadCatalog, selectableTrims, colorsFor, safeImage, referralCode, validPhone, inquiryPayload } from "./catalog.mjs?v=20261023";
+import { STEPS, requestJson, loadCatalog, selectableTrims, colorsFor, safeImage, referralCode, validPhone, inquiryPayload, submissionFailureMessage } from "./catalog.mjs?v=20261102-ip-guard";
 
 const $ = selector => document.querySelector(selector);
 const escape = value => String(value ?? "").replace(/[&<>"']/g, char => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[char]);
@@ -276,8 +276,8 @@ async function submit() {
     state.receipt = receipt;
     state.contact = { name: "", phone: "", agreed: false, notice: false };
     renderSuccess();
-  } catch {
-    markStatus("접수 완료 응답을 확인하지 못했습니다. 자동 재전송하지 않습니다. 잠시 후 확인해 주세요. 다시 신청하면 중복 접수될 수 있습니다.");
+  } catch (error) {
+    markStatus(submissionFailureMessage(error));
   } finally {
     state.submitting = false;
     $("#stepContent").inert = false;

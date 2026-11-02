@@ -105,9 +105,10 @@ service cloud.firestore {
     }
 
     match /leads/{leadId} {
-      allow create: if !exists(/databases/$(database)/documents/leads/$(leadId))
-        && isValidLeadId(leadId)
-        && isValidLeadCreate(leadId);
+      // Public submissions must pass the API's IP security gate. Browser
+      // clients (including authenticated clients) may not create leads here.
+      // Existing records and their administrative read/update rules remain.
+      allow create: if false;
 
       allow read: if isSuper()
         || (isSd() && sameGroup(resource.data.groupId))

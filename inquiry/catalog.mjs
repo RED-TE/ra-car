@@ -5,6 +5,20 @@ export const CATALOG_CACHE_KEY = "recar_inquiry_discovery_v1";
 export const CATALOG_CACHE_TTL = 5 * 60 * 1000;
 const DISCOVERY_FIELDS = new Set(["id", "brand", "model_name", "available_product_types", "image_url", "thumbnail_url"]);
 
+export function submissionFailureMessage(error) {
+  const common = " 입력한 차량과 조건은 유지됩니다. 자동 재전송하지 않습니다.";
+  if (error?.message === "API_HTTP_403") {
+    return "현재 접속 환경에서는 문의를 접수할 수 없습니다. 고객센터로 확인해 주세요." + common;
+  }
+  if (error?.message === "API_HTTP_429") {
+    return "짧은 시간에 요청이 많아 접수를 잠시 제한했습니다. 잠시 후 확인해 주세요." + common;
+  }
+  if (error?.message === "API_HTTP_503") {
+    return "현재 접수 보호 기능을 확인 중입니다. 잠시 후 다시 확인해 주세요." + common;
+  }
+  return "접수 완료 응답을 확인하지 못했습니다. 자동 재전송하지 않습니다. 잠시 후 확인해 주세요. 다시 신청하면 중복 접수될 수 있습니다.";
+}
+
 function checkAborted(signal) {
   if (signal?.aborted) throw signal.reason ?? new DOMException("Request aborted", "AbortError");
 }
