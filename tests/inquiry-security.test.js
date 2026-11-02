@@ -34,8 +34,38 @@ test("retired browser submission neither stores, sends nor retries an inquiry", 
   assert.deepEqual(calls, []);
   assert.deepEqual(historical, { id: "SYNTHETIC-OLD", monthly_payment: 277300 });
   assert.doesNotMatch(script, /sendLeadToFirebase|sendLeadToServer|\.collection\(["']leads["']\)/);
-  assert.match(script, /link\.href = "\/inquiry\/"/);
+  assert.match(script, /link\.href = officialInquiryHref\(\)/);
   assert.match(script, /자동으로 전송하지 않습니다/);
+});
+
+test("official inquiry link preserves safe attribution without copying contact, conditions or consent", () => {
+  const context = vm.createContext({
+    URL, URLSearchParams, activeReferralCode: "RC-OLD123", referralEntryPathKey: "recar_referral_entry_path",
+    readStoredReferralCode: () => "RC-OLD123",
+    window: { location: {
+      origin: "https://recarplan.com", pathname: "/index.html",
+      search: "?ref=rc-qa1234&utm_source=synthetic&utm_campaign=retired&gclid=synthetic-click&name=DO_NOT_COPY&phone=01000000000&term=60&privacy_agreed=true&returnTo=https://example.invalid",
+    }, sessionStorage: { getItem: () => "/r/RC-QA1234" } },
+  });
+  vm.runInContext(bounded(script, "function officialInquiryHref(", "\nasync function submitLead("), context);
+  let target = new URL(context.officialInquiryHref(), "https://recarplan.com");
+  assert.equal(target.pathname, "/inquiry/");
+  assert.deepEqual(Object.fromEntries(target.searchParams), {
+    utm_source: "synthetic", utm_campaign: "retired", gclid: "synthetic-click", ref: "RC-QA1234",
+    entry_path: "/index.html", referral_entry_path: "/r/RC-QA1234",
+  });
+  context.window.sessionStorage.getItem = () => { throw new Error("storage unavailable"); };
+  assert.equal(new URL(context.officialInquiryHref(), target).searchParams.get("ref"), "RC-QA1234");
+  context.window.location.search = "?ref=invalid&phone=DO_NOT_COPY";
+  target = new URL(context.officialInquiryHref(), target);
+  assert.equal(target.searchParams.get("ref"), "");
+  assert.equal(target.searchParams.has("phone"), false);
+  context.window.location.search = "?utm_source=" + "x".repeat(2049);
+  context.window.sessionStorage.getItem = () => "/r/RC-OTHER1";
+  target = new URL(context.officialInquiryHref(), target);
+  assert.equal(target.searchParams.get("ref"), "RC-OLD123");
+  assert.equal(target.searchParams.has("utm_source"), false);
+  assert.equal(target.searchParams.has("referral_entry_path"), false);
 });
 
 test("retired Node handler responds 410 before parsing, file writes, notifications or Firebase", () => {

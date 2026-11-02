@@ -407,6 +407,30 @@ async function getFirebaseDb() {
   return window.firebase.firestore();
 }
 
+function officialInquiryHref() {
+  const source = new URLSearchParams(window.location.search);
+  const destination = new URL("/inquiry/", window.location.origin);
+  for (const [key, value] of source) {
+    if (/^(utm_[a-z_]+|gclid|fbclid|msclkid|n_[a-z_]+|NaPm)$/.test(key) && value.length <= 2048) {
+      destination.searchParams.set(key, value);
+    }
+  }
+  const candidate = String(source.has("ref") ? source.get("ref") : activeReferralCode || readStoredReferralCode()).trim().toUpperCase();
+  const code = /^RC-[A-Z0-9]{4,16}$/.test(candidate) ? candidate : "";
+  // An explicitly invalid ref must not reactivate an unrelated stored code.
+  if (source.has("ref") || code) destination.searchParams.set("ref", code);
+  destination.searchParams.set("entry_path", window.location.pathname);
+  try {
+    const entryPath = window.sessionStorage.getItem(referralEntryPathKey) || "";
+    if (code && entryPath.match(/^\/r\/(RC-[A-Z0-9]{4,16})\/?$/i)?.[1].toUpperCase() === code) {
+      destination.searchParams.set("referral_entry_path", entryPath);
+    }
+  } catch {
+    // The explicit URL code remains usable without browser storage.
+  }
+  return destination.pathname + destination.search;
+}
+
 async function submitLead(_lead) {
   // Do not send or copy a rejected inquiry to a second storage channel.
   // The official /inquiry/ flow alone submits through the protected API.
@@ -469,7 +493,7 @@ quoteForm?.addEventListener("submit", (event) => {
     .catch(() => {
       setFormStatus("이 접수 방식은 종료되었습니다. 자동으로 전송하지 않습니다. 공식 문의 화면을 이용해 주세요. ", "error");
       const link = document.createElement("a");
-      link.href = "/inquiry/";
+      link.href = officialInquiryHref();
       link.textContent = "공식 문의 화면으로 이동";
       quoteForm.querySelector(".form-status")?.appendChild(link);
       buttonText.textContent = "공식 문의 이용";
