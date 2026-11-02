@@ -217,6 +217,18 @@ for (const viewport of [{ width: 390, height: 844 }, { width: 1440, height: 1000
     expect(url.searchParams.get("utm_source")).toBe("local-test");
     expect(url.searchParams.get("utm_campaign")).toBe("inquiry-smoke");
     await review(page, { capture: true });
+    await page.getByText("수집·이용 내용 보기", { exact: true }).click();
+    const privacyNotice = page.locator(".consents details").first();
+    await expect(privacyNotice).toContainText("IP 주소·접수 시각·유입 경로");
+    await expect(privacyNotice).toContainText("이름 비교용 보안값");
+    await expect(privacyNotice).toContainText("마지막 관측 후 30일");
+    await expect(privacyNotice).toContainText("각 생성 후 30일");
+    await expect(privacyNotice).toContainText("365일 보관");
+    await expect(privacyNotice).toContainText("기존 문의·동의 기록을 소급 변경하지 않습니다");
+    await expect(privacyNotice.getByRole("link", { name: "개인정보 처리방침 보기" })).toHaveAttribute("href", "/privacy.html");
+    await noOverflow(page);
+    await page.screenshot({ path: `test-results/inquiry-${viewport.width}-security-notice.png`, fullPage: true });
+    await page.getByText("수집·이용 내용 보기", { exact: true }).click();
     await page.locator("#privacyAgree").check();
     await expect(page.locator("#agreeAll")).toHaveJSProperty("indeterminate", true);
     await expect(page.locator("#nextButton")).toBeDisabled();

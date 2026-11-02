@@ -83,3 +83,23 @@ test("official inquiry failures disclose no server text and never suggest changi
   assert.ok(message.includes("자동 재전송하지 않습니다"));
   assert.ok(!message.includes("SYNTHETIC_SERVER_DETAIL_NOT_FOR_DISPLAY"));
 });
+
+test("new inquiry security notice separates collection, IP/name retention and historical consent", () => {
+  const inquiry = fs.readFileSync(path.join(root, "inquiry/inquiry.mjs"), "utf8");
+  const privacy = fs.readFileSync(path.join(root, "privacy.html"), "utf8");
+  for (const source of [inquiry, privacy]) {
+    assert.match(source, /IP 주소·접수 시각·유입 경로/);
+    assert.match(source, /이름 비교용 보안값/);
+    assert.match(source, /기존 접수 이름에서 IP별로 생성/);
+    assert.match(source, /이름 원문[은을][^<]*별도 복사하지 않습니다/);
+    assert.match(source, /IP가 같아도 동일인으로 판단하지 않습니다/);
+    assert.match(source, /마지막 관측 후 30일/);
+    assert.match(source, /각 생성 후 30일/);
+    assert.match(source, /365일 보관/);
+    assert.match(source, /적용 이후 신규 문의에만 적용/);
+    assert.match(source, /기존 문의·동의 기록을 소급 변경하지 않습니다/);
+  }
+  assert.match(inquiry, /기존 홈페이지 상담 정책에 따라 상담 종료 후 3개월까지 보관 후 파기/);
+  assert.match(inquiry, /href="\/privacy\.html"/);
+  assert.match(privacy, /실제 최고관리자에게만 허용/);
+});
