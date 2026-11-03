@@ -1,10 +1,34 @@
 const assert = require("node:assert/strict");
 const fs = require("node:fs");
 const path = require("node:path");
+const { execFileSync } = require("node:child_process");
 const { test } = require("node:test");
 
 const contract = import("../inquiry/landing-contract.mjs");
 const quizPath = path.resolve(__dirname, "../inquiry/landing-assets/js/car-match.js");
+
+test("landing font URLs resolve to nonempty tracked files with exact path capitalization", () => {
+  const root = path.resolve(__dirname, "..");
+  const tracked = new Set(execFileSync("git", ["ls-files", "-z"], { cwd: root, encoding: "utf8" }).split("\0").filter(Boolean));
+  let fonts = 0;
+  for (const file of ["inquiry/landing-assets/css/style.css", "inquiry/landing-assets/css/landing.css"]) {
+    const css = fs.readFileSync(path.join(root, file), "utf8");
+    for (const face of css.matchAll(/@font-face\s*\{[^}]*\}/gi)) {
+      for (const match of face[0].matchAll(/url\(\s*['"]?([^'"\s)]+)['"]?\s*\)/gi)) {
+        const value = match[1];
+        assert.match(value, /^\/(?!\/)/, `${file}: fonts must resolve from a local absolute path`);
+        const relative = decodeURIComponent(value.split(/[?#]/)[0]).slice(1);
+        assert.ok(tracked.has(relative), `${file}: untracked or incorrectly capitalized font URL ${value}`);
+        const absolute = path.resolve(root, relative);
+        assert.ok(absolute.startsWith(root + path.sep), `${file}: font path must stay inside the repository`);
+        const stat = fs.statSync(absolute);
+        assert.ok(stat.isFile() && stat.size > 0, `${file}: missing or empty font ${value}`);
+        fonts++;
+      }
+    }
+  }
+  assert.ok(fonts > 0, "the actual landing font declarations must be checked");
+});
 
 test("twelve questions retain six independent concrete requirements and sixteen reachable taste types", () => {
   const quiz = require(quizPath);

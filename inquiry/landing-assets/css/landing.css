@@ -289,8 +289,9 @@
 .lp-r__checks p { margin-top: 5px; word-break: keep-all; }
 
 /* Existing site fonts and consent dialogs. */
-@font-face{font-family:Pretendard;src:url('/assets/home-fonts/Pretendard-Regular.woff2') format('woff2');font-weight:100 600;font-display:swap}
-@font-face{font-family:Pretendard;src:url('/assets/home-fonts/Pretendard-Bold.woff2') format('woff2');font-weight:700 900;font-display:swap}
+@font-face{font-family:Pretendard;src:url('/assets/home-fonts/Pretendard-Regular.woff2') format('woff2');font-weight:100 500;font-display:swap}
+@font-face{font-family:Pretendard;src:url('/assets/home-fonts/Pretendard-SemiBold.woff2') format('woff2');font-weight:550 700;font-display:swap}
+@font-face{font-family:Pretendard;src:url('/assets/home-fonts/Pretendard-ExtraBold.woff2') format('woff2');font-weight:750 900;font-display:swap}
 .lp-lease-help{text-align:left;font:inherit;color:inherit;width:100%}.lp-lease-help:hover{outline:1px solid #7297ff}
 .lp-legal{border:0;border-radius:18px;padding:28px;width:min(520px,calc(100% - 32px));max-height:80dvh;color:#142033;background:#fff;box-shadow:0 16px 60px #0004}
 .lp-legal::backdrop{background:#0009}.lp-legal h2{font-size:21px;margin-bottom:18px}.lp-legal p,.lp-legal li{font-size:15px;line-height:1.8;word-break:keep-all}.lp-legal ul{padding-left:18px;list-style:disc}.lp-legal button{margin-top:20px;min-height:44px;font-weight:700}.lp-referral{font-size:12px;line-height:1.6;margin:14px 0;color:#586277}.lp-consent--dark .lp-referral{color:#aab7ca}
