@@ -21,5 +21,11 @@
     "Existing consent/referral preserved",
     "Unknown delivery blocks automatic resend"
   ],
-  "rollback": "Redeploy the previous successful GitHub Pages main release 72c007f9d61f92eb779fed26daf060b5e609cdf1 without resetting source or touching customer data."
+  "rollback": "Redeploy the previous successful GitHub Pages main release 72c007f9d61f92eb779fed26daf060b5e609cdf1 without resetting source or touching customer data.",
+  "publication_mode": "inquiry_only: retained base artifact plus committed inquiry folder only",
+  "preflight_artifact": {
+    "unchanged_public_files": 5715,
+    "inquiry_files": 41,
+    "live_api_write_probes": 0
+  }
 }

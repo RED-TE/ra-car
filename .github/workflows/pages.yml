@@ -5,9 +5,15 @@ on:
     branches:
       - main
   workflow_dispatch:
+    inputs:
+      inquiry_only:
+        description: 'Publish only inquiry files over the verified existing release; no live authentication requests'
+        type: boolean
+        default: false
 
 permissions:
   contents: read
+  actions: read
   pages: write
   id-token: write
 
@@ -24,6 +30,18 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
+      - name: Verify the approved inquiry-only release base
+        if: inputs.inquiry_only == true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          test "$GITHUB_EVENT_NAME" = workflow_dispatch
+          test "$GITHUB_REF" = refs/heads/codex/inquiry-landing-publish-20261103
+          git fetch --depth=1 origin main
+          test "$(git rev-parse FETCH_HEAD)" = 72c007f9d61f92eb779fed26daf060b5e609cdf1
+          published_sha=$(gh run list --repo "$GITHUB_REPOSITORY" --workflow pages.yml --status success --limit 1 --json headSha --jq '.[0].headSha')
+          test "$published_sha" = 72c007f9d61f92eb779fed26daf060b5e609cdf1
 
       - name: Set up Node
         uses: actions/setup-node@v4
@@ -56,6 +74,7 @@ jobs:
         run: npm run test:kakao
 
       - name: Verify the live Kakao API is ready before publishing
+        if: inputs.inquiry_only != true
         run: npm run verify:kakao:production
 
       - name: Configure Pages
@@ -65,9 +84,14 @@ jobs:
         run: npm run verify:crew:production -- --routing-only
 
       - name: Stage public site without test dependencies
+        if: inputs.inquiry_only != true
         run: |
           mkdir -p "$RUNNER_TEMP/recar-public"
           tar --exclude='./node_modules' --exclude='./test-results' --exclude='./playwright-report' --exclude='./artifacts' --exclude='./.git' --exclude='./.github' --exclude='./docs' --exclude='./tools' --exclude='./tests' --exclude='./web_app' --exclude='./crew/friends/recar-friends-terms-v1.4-preview.pdf' -cf - . | tar -xf - -C "$RUNNER_TEMP/recar-public"
+
+      - name: Stage only inquiry changes over the retained public release
+        if: inputs.inquiry_only == true
+        run: node tools/stage-inquiry-release.cjs --base 72c007f9d61f92eb779fed26daf060b5e609cdf1 --out "$RUNNER_TEMP/recar-public"
 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
