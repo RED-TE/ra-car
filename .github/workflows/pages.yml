@@ -41,7 +41,7 @@ jobs:
           git fetch --depth=1 origin main
           test "$(git rev-parse FETCH_HEAD)" = 72c007f9d61f92eb779fed26daf060b5e609cdf1
           published_sha=$(gh run list --repo "$GITHUB_REPOSITORY" --workflow pages.yml --status success --limit 1 --json headSha --jq '.[0].headSha')
-          test "$published_sha" = 72c007f9d61f92eb779fed26daf060b5e609cdf1
+          test "$published_sha" = 9bc51ff05e010dbd3b7c91152a4a036c0e8d5029
 
       - name: Set up Node
         uses: actions/setup-node@v4

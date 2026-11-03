@@ -28,6 +28,21 @@
       <small>© ${new Date().getFullYear()} RE:CAR. All rights reserved.</small>`;
   })();
 
+  // 동의 처리 순서에 상관없이 하위 체크를 먼저 맞춘 뒤 폼이 버튼 상태를 검사하게 해요.
+  function syncConsent(form, target) {
+    const all = $('[data-agree-all]', form), checks = $$('[data-agree]', form);
+    if (!all || !checks.length) return;
+    if (target === all) checks.forEach(input => { input.checked = all.checked; });
+    all.checked = checks.every(input => input.checked);
+    all.indeterminate = !all.checked && checks.some(input => input.checked);
+  }
+  document.addEventListener('change', event => {
+    const target = event.target;
+    if (!target.matches?.('[data-agree-all], [data-agree]')) return;
+    const form = target.closest('#lpFunnel, #tPhone');
+    if (form) syncConsent(form, target);
+  }, true);
+
   /* ---------- 왼쪽 상담: 차종 → 이름 → 연락처 → 필수 동의 ---------- */
   const funnel = (() => {
     const form = $('#lpFunnel'), bar = $('#lpBar'), count = $('#lpCount'), err = $('#lpErr');
@@ -52,7 +67,7 @@
       bar.style.width = ((S.i + 1) / STEPS.length * 100) + '%';
       count.textContent = `${S.i + 1} / ${STEPS.length}`;
       backBtn.hidden = S.i === 0;
-      nextBtn.textContent = S.i === STEPS.length - 1 ? '무료 상담 신청' : '다음';
+      nextBtn.textContent = S.i === STEPS.length - 1 ? '비교 상담 신청하기' : '다음';
       picked.hidden = S.i === 0 || !(S.carName || S.undecided);
       picked.innerHTML = `<small>상담 차종</small><span>${esc(S.carName || '상담 때 추천받기')}</span>`;
       err.textContent = '';
@@ -118,12 +133,12 @@
   })();
 
   function doneHTML(res, name, car) {
+    const unsent = !!(res && res.preview);
     return `<div class="lp-done__ic">${I.check}</div>
-      <p class="lp-done__t">상담 신청이 접수됐어요</p>
-      <p>${esc(name)}님, ${car ? `<b>${esc(car)}</b> ` : ''}금융사 조건을 비교해서 연락드릴게요.<br><small>상담 시간 ${esc(C.site.hours)} · 접수 순서대로 연락드려요</small></p>
-      ${res && (res.inquiry_no || res.id || res.inquiry_id) ? `<p class="lp-done__no">접수번호 <b>${esc(res.inquiry_no || res.id || res.inquiry_id)}</b></p>` : ''}
-      ${res && res.preview ? '<p class="lp-done__note">미리보기 화면이라 실제로 전송하지는 않았어요.</p>' : ''}
-      <div class="lp-done__cta"><a href="${R.telHref}">전화하기</a><a class="is-kakao" href="${C.site.kakao}" target="_blank" rel="noopener">카카오톡 상담</a></div>`;
+      <p class="lp-done__t">${unsent ? '입력 내용을 확인했어요' : '상담 신청을 받았어요'}</p>
+      ${unsent ? '<p>이 화면에서는 상담 신청이 전송되지 않았어요.<br>실제 상담은 리카 공식 페이지에서 신청해 주세요.</p>' : `<p>${esc(name)}님, ${car ? `<b>${esc(car)}</b> ` : ''}금융사별 조건을 확인해 연락드릴게요.<br><small>상담 시간 ${esc(C.site.hours)}</small></p>`}
+      ${!unsent && res && (res.inquiry_no || res.id || res.inquiry_id) ? `<p class="lp-done__no">접수번호 <b>${esc(res.inquiry_no || res.id || res.inquiry_id)}</b></p>` : ''}
+      <div class="lp-done__cta">${unsent ? '<a href="https://recarplan.com/inquiry/">리카에서 상담 신청하기</a>' : `<a href="${R.telHref}">전화하기</a>`}<a class="is-kakao" href="${C.site.kakao}" target="_blank" rel="noopener">카카오톡 상담</a></div>`;
   }
 
   /* ---------- 카드 위로 이동 (휴대폰) ---------- */
@@ -324,11 +339,12 @@
       const f = $('#tPhone', box);
       R.phoneMask(f);
       ['agree', 'agree3', 'marketing'].forEach(k => { if (f.elements[k]) f.elements[k].checked = field[k]; });
+      syncConsent(f);
       $('#tPhoneIn', box).focus({ preventScroll: true });
     }
 
     function renderDone(res) {
-      frame(`<span class="lp-test__count">신청 완료</span>`,
+      frame(`<span class="lp-test__count">${res && res.preview ? '입력 확인' : '신청 완료'}</span>`,
         `<div class="lp-done lp-done--dark">${doneHTML(res, field.name, T.targetName)}</div>`,
         `<button type="button" class="lp-t-main" data-t="close">닫기</button>`);
     }

@@ -4,16 +4,16 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>RE:CAR 리카 · 신차 무료 상담 · 나에게 맞는 차 찾기</title>
-<meta name="description" content="차종과 연락처만 남기면 금융사 견적을 비교해 연락드려요. 12가지 생활 질문으로 내 차 취향을 찾고 상담 조건을 정리해 보세요.">
+<meta name="description" content="원하는 차량의 금융사별 조건을 비교 상담받으세요. 12가지 일상 질문으로 나도 몰랐던 자동차 취향을 찾아보세요.">
 <meta property="og:title" content="RE:CAR 리카 · 신차 무료 상담 · 나에게 맞는 차 찾기">
-<meta property="og:description" content="차종과 연락처만 남기면 금융사 견적을 비교해 연락드려요. 12가지 생활 질문으로 내 차 취향을 찾고 상담 조건을 정리해 보세요.">
+<meta property="og:description" content="원하는 차량의 금융사별 조건을 비교 상담받으세요. 12가지 일상 질문으로 나도 몰랐던 자동차 취향을 찾아보세요.">
 <meta property="og:image" content="https://recarplan.com/inquiry/landing-assets/assets/og.png">
 <meta name="theme-color" content="#071233">
 <link rel="icon" href="/inquiry/landing-assets/assets/favicon-64.png">
 <link rel="preconnect" href="https://api.recarplan.com" crossorigin>
 <link rel="preload" href="/assets/home-fonts/Pretendard-Regular.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/inquiry/landing-assets/css/style.css?v=20261024a">
-<link rel="stylesheet" href="/inquiry/landing-assets/css/landing.css?v=20261103n">
+<link rel="stylesheet" href="/inquiry/landing-assets/css/landing.css?v=20261103o">
 <meta name="robots" content="noindex">
 <link rel="canonical" href="https://recarplan.com/inquiry/">
 </head>
@@ -22,9 +22,9 @@
   <div class="lp-page">
     <!-- 왼쪽: 상담 신청 (차종 → 이름 → 연락처 → 필수 동의) + 아래 12문항 추천 버튼 -->
     <aside class="lp-card" id="lpCard" aria-label="빠른 상담 신청">
-      <p class="lp-pill"><span data-ic="bolt"></span>빠른 상담 신청</p>
-      <h1 class="lp-title">새 차 고민,<br>리카에 물어보세요</h1>
-      <p class="lp-desc">차종과 연락처를 남겨 주시면 금융사 견적을 비교해서 순서대로 연락드려요.</p>
+      <p class="lp-pill"><span data-ic="bolt"></span>내 조건으로 비교 상담</p>
+      <h1 class="lp-title">갖고 싶은 그 차,<br>조건부터 비교하세요</h1>
+      <p class="lp-desc">원하는 차를 알려주세요. 금융사별 견적을 비교해, 내 상황에 맞는 조건을 상담해 드려요.</p>
 
       <form class="lp-funnel" id="lpFunnel" data-landing-inquiry="랜딩 빠른 상담" novalidate>
         <div class="lp-prog" aria-hidden="true"><span><i id="lpBar"></i></span><b id="lpCount">1 / 4</b></div>
@@ -34,7 +34,7 @@
           <input class="lp-input" id="lpCarInput" name="vehicle" type="text" maxlength="100" autocomplete="off" placeholder="예: 쏘렌토, 그랜저, BMW 5시리즈" required>
           <p class="lp-quick-label">빠르게 고르기</p>
           <div class="lp-cars" id="lpCars" role="group" aria-label="빠른 차종 선택"></div>
-          <button type="button" class="lp-link" id="lpUndecided">아직 못 정했어요. 상담 때 추천받을게요</button>
+          <button type="button" class="lp-link" id="lpUndecided">아직 고민 중이에요. 함께 골라볼래요</button>
         </section>
 
         <section class="lp-step" data-step="name" hidden>
@@ -63,7 +63,7 @@
       <div class="lp-done" id="lpDone" hidden></div>
 
       <button type="button" class="lp-testcta" data-test-open>
-        <span><small>차 고를 때, 나는 어떤 사람일까?</small><b>12가지 질문으로 내 차 취향 찾기</b></span>
+        <span><small>12가지 일상 질문으로 알아보는</small><b>내 취향은 무슨 차를 탈까?</b></span>
         <em data-ic="arrow"></em>
       </button>
     </aside>
@@ -89,7 +89,7 @@
       <div class="lp-rest">
         <div class="lp-banners" id="lpBanners">
           <button type="button" class="lp-banner lp-banner--test is-on" data-test-open>
-            <span><small>내 차 고르는 습관, 들켰다</small><b>12가지 질문으로<br>내 자동차 취향 찾기</b></span>
+            <span><small>12가지 일상 질문</small><b>내 취향은<br>무슨 차를 탈까?</b></span>
           </button>
           <a class="lp-banner" href="https://recarplan.com/inquiry/steps.html">
             <img src="/inquiry/landing-assets/assets/hero/hero-executive.jpg" alt="" loading="lazy">
@@ -123,15 +123,15 @@
   <!-- 휴대폰: 상담 칸이 안 보일 때 아래에 붙는 막대 -->
   <div class="lp-mbar" id="lpMbar" hidden>
     <button type="button" class="lp-mbar__test" data-test-open>내 차 찾기</button>
-    <button type="button" class="lp-mbar__ask" id="lpMbarAsk">무료 상담 신청</button>
+    <button type="button" class="lp-mbar__ask" id="lpMbarAsk">비교 상담 신청하기</button>
   </div>
 
   <!-- 12문항 추천 -->
-  <div class="lp-test" id="lpTest" role="dialog" aria-modal="true" aria-label="나에게 맞는 차 찾기" hidden></div>
+  <div class="lp-test" id="lpTest" role="dialog" aria-modal="true" aria-label="내 자동차 취향 테스트" hidden></div>
 
 </main>
 
-<script src="/inquiry/landing-assets/js/car-match.js?v=20261103n"></script>
-<script type="module" src="/inquiry/landing-runtime.mjs?v=20261103n"></script>
+<script src="/inquiry/landing-assets/js/car-match.js?v=20261103o"></script>
+<script type="module" src="/inquiry/landing-runtime.mjs?v=20261103o"></script>
 </body>
 </html>

@@ -97,13 +97,66 @@ for (const width of [375, 1440]) {
     await expect(page.locator("#lpNext")).toBeDisabled();
     await page.locator('#lpFunnel [name="agree3"]').check();
     await page.locator("#lpNext").click();
-    await expect(page.locator("#lpDone")).toContainText("미리보기");
+    await expect(page.locator("#lpDone")).toContainText("입력 내용을 확인했어요");
+    await expect(page.locator("#lpDone")).toContainText("상담 신청이 전송되지 않았어요");
+    await expect(page.locator("#lpDone")).not.toContainText("미리보기");
+    await expect(page.locator("#lpDone")).not.toContainText("상담 신청을 받았어요");
+    await expect(page.locator("#lpDone .lp-done__no")).toHaveCount(0);
     expect(api.posts).toHaveLength(0);
     expect(await page.evaluate(() => localStorage.getItem("unrelated-saved-quote"))).toBe("preserve-me");
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1)).toBe(true);
     await page.screenshot({ path: `test-results/inquiry-landing-${width}-preview.png`, fullPage: true });
   });
 }
+
+test("quick consent immediately follows master clicks, keyboard and required-only selection", async ({ page, api }) => {
+  await open(page);
+  await page.locator("#lpCarInput").fill("동의 동작 검증 차량");
+  await page.locator("#lpNext").click();
+  await contactDetails(page);
+  // Only this isolated fixture adds the optional field used by the original
+  // local landing. The public page retains its existing two required consents.
+  await page.locator("#lpFunnel .consent").evaluate(consent => {
+    const label = document.createElement("label");
+    label.innerHTML = '<input type="checkbox" name="marketing" data-agree><span>선택 항목 (격리 검사)</span>';
+    consent.append(label);
+  });
+  const all = page.locator("#lpFunnel [data-agree-all]");
+  const privacy = page.locator('#lpFunnel [name="agree"]');
+  const notice = page.locator('#lpFunnel [name="agree3"]');
+  const optional = page.locator('#lpFunnel [name="marketing"]');
+  const next = page.locator("#lpNext");
+  await expect(next).toBeDisabled();
+  await all.focus();
+  await page.keyboard.press("Space");
+  for (const checkbox of [all, privacy, notice, optional]) await expect(checkbox).toBeChecked();
+  await expect(all).toHaveJSProperty("indeterminate", false);
+  await expect(next).toBeEnabled();
+  await page.keyboard.press("Space");
+  for (const checkbox of [all, privacy, notice, optional]) await expect(checkbox).not.toBeChecked();
+  await expect(next).toBeDisabled();
+  await all.click();
+  await expect(next).toBeEnabled();
+  await all.click();
+  await expect(next).toBeDisabled();
+  await privacy.check();
+  await expect(next).toBeDisabled();
+  await notice.check();
+  await expect(optional).not.toBeChecked();
+  await expect(next).toBeEnabled();
+  await expect(all).not.toBeChecked();
+  await expect(all).toHaveJSProperty("indeterminate", true);
+  await notice.uncheck();
+  await expect(next).toBeDisabled();
+  await notice.check();
+  await expect(next).toBeEnabled();
+  await optional.check();
+  await expect(all).toBeChecked();
+  await expect(all).toHaveJSProperty("indeterminate", false);
+  await optional.uncheck();
+  await expect(next).toBeEnabled();
+  expect(api.posts).toHaveLength(0);
+});
 
 test("quick-pick remains optional and manual editing clears the prior selection", async ({ page }) => {
   await open(page);
@@ -143,8 +196,35 @@ test("quiz preserves all six requirements, individual editing and nested privacy
   await page.locator('#tPhone button[type="submit"]').click();
   await expect(page.locator("#tPhone .lp-err")).toContainText("필수 동의");
   await page.locator('#tPhone [data-agree-all]').check();
+  await expect(page.locator('#tPhone [name="agree"]')).toBeChecked();
+  await expect(page.locator('#tPhone [name="agree3"]')).toBeChecked();
+  await page.locator('#lpTest [data-t="back"]').click();
+  await expect(page.locator("#tNameIn")).toHaveValue("로컬 테스트");
+  await page.locator('#tName button[type="submit"]').click();
+  await expect(page.locator("#tPhoneIn")).toHaveValue("010-0000-0000");
+  await expect(page.locator('#tPhone [data-agree-all]')).toBeChecked();
+  await expect(page.locator('#tPhone [data-agree-all]')).toHaveJSProperty("indeterminate", false);
+  await page.locator('#tPhone [name="agree3"]').uncheck();
+  await expect(page.locator('#tPhone [data-agree-all]')).not.toBeChecked();
+  await expect(page.locator('#tPhone [data-agree-all]')).toHaveJSProperty("indeterminate", true);
+  await page.locator('#lpTest [data-t="back"]').click();
+  await page.locator('#tName button[type="submit"]').click();
+  await expect(page.locator('#tPhone [name="agree"]')).toBeChecked();
+  await expect(page.locator('#tPhone [name="agree3"]')).not.toBeChecked();
+  await expect(page.locator('#tPhone [data-agree-all]')).not.toBeChecked();
+  await expect(page.locator('#tPhone [data-agree-all]')).toHaveJSProperty("indeterminate", true);
   await page.locator('#tPhone button[type="submit"]').click();
-  await expect(page.locator("#lpTest")).toContainText("미리보기");
+  await expect(page.locator("#tPhone .lp-err")).toContainText("필수 동의");
+  expect(api.posts).toHaveLength(0);
+  await page.locator('#tPhone [name="agree3"]').check();
+  await expect(page.locator('#tPhone [data-agree-all]')).toBeChecked();
+  await page.locator('#tPhone button[type="submit"]').click();
+  await expect(page.locator("#lpTest .lp-test__count")).toHaveText("입력 확인");
+  await expect(page.locator("#lpTest")).toContainText("입력 내용을 확인했어요");
+  await expect(page.locator("#lpTest")).toContainText("상담 신청이 전송되지 않았어요");
+  await expect(page.locator("#lpTest")).not.toContainText("미리보기");
+  await expect(page.locator("#lpTest")).not.toContainText("상담 신청을 받았어요");
+  await expect(page.locator("#lpTest .lp-done__no")).toHaveCount(0);
   expect(api.posts).toHaveLength(0);
   expect(await page.locator("#lpTest").evaluate(element => element.scrollWidth <= element.clientWidth + 1)).toBe(true);
 });
@@ -162,6 +242,8 @@ test("public-origin mock submits once with canonical referral and no copied cata
     await expect(page.locator("#lpNext")).toBeDisabled();
     release();
     await expect(page.locator("#lpDone")).toContainText("mock-local-receipt");
+    await expect(page.locator("#lpDone")).toContainText("상담 신청을 받았어요");
+    await expect(page.locator("#lpDone")).not.toContainText("상담 신청이 전송되지 않았어요");
     await expect(page.locator("#lpDone")).not.toContainText("미리보기");
   } finally { release(); }
   expect(api.posts).toHaveLength(1);

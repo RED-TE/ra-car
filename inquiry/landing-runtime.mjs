@@ -1,5 +1,5 @@
 import { requestJson, referralCode, safeImage } from "./catalog.mjs?v=20261023";
-import { LANDING_DEFAULTS, createSubmissionController, isLocalPreview, landingEntryFromSearch, loadLandingData, withLandingEntry, withReferral } from "./landing-contract.mjs?v=20261103n";
+import { LANDING_DEFAULTS, createSubmissionController, isLocalPreview, landingEntryFromSearch, loadLandingData, withLandingEntry, withReferral } from "./landing-contract.mjs?v=20261103o";
 
 const $ = (selector, root = document) => root.querySelector(selector);
 const $$ = (selector, root = document) => [...root.querySelectorAll(selector)];
@@ -155,14 +155,6 @@ function openPrivacy(type) {
   $(".modal__x", modal).focus({ preventScroll: true });
   modal.addEventListener("click", event => { if (event.target.closest("[data-close]")) closePrivacy(); });
 }
-document.addEventListener("change", event => {
-  const target = event.target;
-  if (!(target instanceof HTMLInputElement)) return;
-  const form = target.closest("form"); if (!form) return;
-  if (target.matches("[data-agree-all]")) $$('[data-agree]', form).forEach(input => { input.checked = target.checked; });
-  const all = $('[data-agree-all]', form), checks = $$('[data-agree]', form);
-  if (all && checks.length) { all.checked = checks.every(input => input.checked); all.indeterminate = !all.checked && checks.some(input => input.checked); }
-}, true);
 document.addEventListener("click", event => {
   const link = event.target.closest?.("[data-open-privacy]");
   if (link) { event.preventDefault(); openPrivacy(link.dataset.openPrivacy); return; }
@@ -245,7 +237,7 @@ new MutationObserver(records => {
 }).observe(document.body, { childList: true, subtree: true, attributes: true, attributeFilter: ["href"] });
 
 // The original selected layout runs only after its small compatibility surface exists.
-await import("/inquiry/landing-assets/js/landing.js?v=20261103n");
+await import("/inquiry/landing-assets/js/landing.js?v=20261103o");
 syncProductSelections();
 
 // Restore only a verified-shape vehicle label from the existing home entry.
