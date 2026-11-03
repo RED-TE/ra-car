@@ -75,6 +75,15 @@ const test = base.extend({
           } });
         }
         if (method === "GET" && url.pathname === "/api/v1/vehicles/") {
+          // The replacement landing reads rental reference metadata; the retained
+          // six-step flow still uses its separately asserted discovery contract.
+          if (url.searchParams.has("term")) {
+            expect(url.searchParams.get("term")).toBe("36");
+            expect(url.searchParams.get("deposit_pct")).toBe("30");
+            expect(url.searchParams.get("mileage_limit")).toBe("20000");
+            const items = api.pages.flatMap(part => part.items).filter(item => !url.searchParams.has("product_type") || item.available_product_types.includes(url.searchParams.get("product_type")));
+            return route.fulfill({ status: 200, headers, json: { items, total: items.length, page: 1, pages: 1 } });
+          }
           api.reads.push(url.href);
           if (api.offlineCatalog) return route.abort("internetdisconnected");
           expect(url.searchParams.get("size")).toBe("100");
@@ -136,7 +145,7 @@ async function step(page, number, capture = false) {
 }
 
 async function openInquiry(page) {
-  const response = await page.goto(`/inquiry/?ref=${referral}&utm_source=local-test`);
+  const response = await page.goto(`/inquiry/steps.html?ref=${referral}&utm_source=local-test`);
   expect(response.status()).toBe(200);
   await expect(page.locator('[data-brand="현대"]')).toBeVisible();
   await step(page, 1);
@@ -197,7 +206,7 @@ async function review(page, { capture = false, id = "local-lease" } = {}) {
 }
 
 for (const viewport of [{ width: 390, height: 844 }, { width: 1440, height: 1000 }]) {
-  test(`landing referral to six steps submits once with NEW receipt at ${viewport.width}px`, async ({ page, api }) => {
+  test(`landing entry retains referral and archived six steps submits once at ${viewport.width}px`, async ({ page, api }) => {
     api.discovery = true;
     await page.setViewportSize(viewport);
     await page.addInitScript(() => localStorage.setItem("unrelated-saved-quote", "preserve-me"));
@@ -210,12 +219,15 @@ for (const viewport of [{ width: 390, height: 844 }, { width: 1440, height: 1000
     await noOverflow(page);
     await page.screenshot({ path: `test-results/landing-${viewport.width}.png`, fullPage: true });
     await page.locator(".promotion-slide.is-current .quote-focus-button").click();
-    await expect(page.locator('[data-brand="현대"]')).toBeVisible();
+    await expect(page.locator("#lpCarInput")).toBeVisible();
     const url = new URL(page.url());
     expect(url.pathname).toBe("/inquiry/");
     expect(url.searchParams.get("ref").toUpperCase()).toBe(referral);
     expect(url.searchParams.get("utm_source")).toBe("local-test");
     expect(url.searchParams.get("utm_campaign")).toBe("inquiry-smoke");
+    // Keep the retained six-step contract covered independently of the new landing.
+    await page.goto(`/inquiry/steps.html${url.search}`);
+    await expect(page.locator('[data-brand="현대"]')).toBeVisible();
     await review(page, { capture: true });
     await page.locator("#privacyAgree").check();
     await expect(page.locator("#agreeAll")).toHaveJSProperty("indeterminate", true);
@@ -256,7 +268,7 @@ for (const viewport of [{ width: 390, height: 844 }, { width: 1440, height: 1000
 
 test("offline catalog stays empty and disabled until explicit retry succeeds", async ({ page, api }) => {
   api.offlineCatalog = true;
-  await page.goto("/inquiry/");
+  await page.goto("/inquiry/steps.html");
   await expect(page.locator(".state-panel")).toContainText("차량 정보를 불러오지 못했어요");
   await expect(page.locator("[data-brand]")).toHaveCount(0);
   await expect(page.locator("#nextButton")).toBeDisabled();
@@ -269,7 +281,7 @@ test("offline catalog stays empty and disabled until explicit retry succeeds", a
 
 test("duplicate pagination never displays a partial catalog", async ({ page, api }) => {
   api.pages[1].items = [api.pages[0].items[0]];
-  await page.goto("/inquiry/");
+  await page.goto("/inquiry/steps.html");
   await expect(page.locator("[data-retry]")).toBeVisible();
   await expect(page.locator("[data-brand], [data-vehicle]")).toHaveCount(0);
   await expect(page.locator("#nextButton")).toBeDisabled();
@@ -279,7 +291,7 @@ test("duplicate pagination never displays a partial catalog", async ({ page, api
 test("invalid fast discovery fails closed instead of silently requesting priced pages", async ({ page, api }) => {
   api.discovery = true;
   api.discoveryOverride = { contract_version: "discovery_v1", complete: false, total: 1, items: [], revision: "a".repeat(64) };
-  await page.goto("/inquiry/");
+  await page.goto("/inquiry/steps.html");
   await expect(page.locator("[data-retry]")).toBeVisible();
   await expect(page.locator("[data-brand], [data-vehicle]")).toHaveCount(0);
   expect(api.discoveryReads).toBe(1);
@@ -446,8 +458,10 @@ test("a landing vehicle keeps its model and displayed conditions using canonical
   const card = page.locator('.home-vehicle[data-inquiry-brand="기아"][data-inquiry-model="모닝"]').first();
   await expect(card).toBeVisible();
   await card.locator(".vehicle-quote-button").click();
-  await step(page, 2);
+  await expect(page.locator("#lpCarInput")).toHaveValue("기아 모닝");
   const url = new URL(page.url());
+  await page.goto(`/inquiry/steps.html${url.search}`);
+  await step(page, 2);
   expect(url.searchParams.get("mileage")).toBe("10000");
   expect(url.searchParams.get("model")).toBe("모닝");
   expect(url.searchParams.get("ref")).toBe(referral);
@@ -474,7 +488,7 @@ test("an imported vehicle entry returns to the matching manufacturer tab", async
   api.pages[0].items[0].brand = "Tesla";
   api.pages[0].items[0].model_name = "Model Y";
   const query = new URLSearchParams({ brand: "테슬라", model: "Model Y", mileage: "10000" });
-  await page.goto(`/inquiry/?${query}`);
+  await page.goto(`/inquiry/steps.html?${query}`);
   await step(page, 2);
   await expect(page.locator('[data-vehicle="local-lease"]')).toHaveAttribute("aria-pressed", "true");
   await page.locator("#backButton").click();

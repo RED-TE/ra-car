@@ -196,7 +196,7 @@ test("main and app serve the published app build and keep test fixtures private"
   }
 });
 
-test("landing and stepwise inquiry have independent public routes and module assets", async () => {
+test("legacy landing, new inquiry landing and retained steps have independent public routes and assets", async () => {
   const server = await startServer("production");
   try {
     for (const entry of ["/landing", "/landing/", "/landing/index.html"]) {
@@ -212,10 +212,14 @@ test("landing and stepwise inquiry have independent public routes and module ass
       const response = await fetch(`${server.baseUrl}${entry}`);
       assert.equal(response.status, 200, entry);
       const html = await response.text();
-      assert.match(html, /id="stepContent"/);
+      assert.match(html, /id="lpCarInput"/);
+      assert.match(html, /id="lpTest"/);
       assert.doesNotMatch(html, /flutter_bootstrap|<base/);
     }
-    for (const file of ["/inquiry/inquiry.mjs", "/inquiry/catalog.mjs", "/landing/landing.js"]) {
+    const steps = await fetch(`${server.baseUrl}/inquiry/steps.html`);
+    assert.equal(steps.status, 200);
+    assert.match(await steps.text(), /id="stepContent"/);
+    for (const file of ["/inquiry/inquiry.mjs", "/inquiry/catalog.mjs", "/landing/landing.js", "/inquiry/landing-contract.mjs", "/inquiry/landing-runtime.mjs"]) {
       const response = await fetch(`${server.baseUrl}${file}`);
       assert.equal(response.status, 200, file);
       assert.match(response.headers.get("content-type"), /javascript/);
