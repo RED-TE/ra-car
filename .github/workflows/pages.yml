@@ -4,6 +4,11 @@ on:
   push:
     branches:
       - main
+    paths-ignore:
+      - tools/crew-worker-release.json
+      - tools/verify-crew-production.cjs
+      - tests/crew-production.test.js
+      - .github/workflows/pages.yml
   workflow_dispatch:
 
 permissions:

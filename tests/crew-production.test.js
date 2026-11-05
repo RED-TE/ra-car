@@ -65,6 +65,20 @@ test("publishing checks production routes before deployment and the exact releas
   assert.ok(before >= 0 && before < deploy && after > deploy);
 });
 
+test("monitor-only updates do not republish unrelated public pages", () => {
+  const workflow = readFileSync(require.resolve("../.github/workflows/pages.yml"), "utf8");
+  const ignored = workflow.split("    paths-ignore:\n")[1].split("  workflow_dispatch:")[0]
+    .trim().split("\n").map(line => line.trim().replace(/^- /, ""));
+  assert.deepEqual(ignored, [
+    "tools/crew-worker-release.json", "tools/verify-crew-production.cjs",
+    "tests/crew-production.test.js", ".github/workflows/pages.yml",
+  ]);
+  assert.match(workflow, /  workflow_dispatch:/);
+  const checks = readFileSync(require.resolve("../.github/workflows/crew-checks.yml"), "utf8");
+  assert.match(checks, /  pull_request:/);
+  assert.doesNotMatch(checks, /paths-ignore/);
+});
+
 function workerFixture(change = () => {}) {
   const trusted = require("../tools/crew-worker-release.json");
   const bodies = Object.fromEntries(Object.keys(trusted.files).map(path => [path, `synthetic ${path}`]));
