@@ -42,7 +42,7 @@ test("production verification uses only fixed public read-only URLs and verifies
 
 test("pre-publish routing verification does not require the unpublished session version", async () => {
   const f = fixture();
-  assert.equal((await verifyCrewProduction({ fetchImpl: f.fetchImpl, routingOnly: true })).length, 8);
+  assert.equal((await verifyCrewProduction({ fetchImpl: f.fetchImpl, routingOnly: true, expectedOwner: "pages" })).length, 8);
   assert.equal(f.requests.length, 8);
 });
 
@@ -68,13 +68,21 @@ test("publishing checks production routes before deployment and the exact releas
 function workerFixture(change = () => {}) {
   const trusted = require("../tools/crew-worker-release.json");
   const bodies = Object.fromEntries(Object.keys(trusted.files).map(path => [path, `synthetic ${path}`]));
-  const workerRelease = { source_sha: trusted.source_sha, files: Object.fromEntries(Object.entries(bodies)
+  const workerRelease = { ...trusted, files: Object.fromEntries(Object.entries(bodies)
     .map(([path, body]) => [path, createHash("sha256").update(body).digest("hex")])) };
   const legacy = fixture();
   const requested = [];
   const fetchImpl = async (url, options) => {
     const parsed = new URL(url);
     const path = parsed.pathname.slice(1);
+    const destination = parsed.origin === "https://recarplan.com" && (["/crew", "/crew/"].includes(parsed.pathname)
+      ? workerRelease.entry_path : workerRelease.redirects?.[parsed.pathname]);
+    if (destination) {
+      requested.push(url);
+      const result = { status: 302, body: "", headers: { "cache-control": "no-store", location: parsed.origin + destination } };
+      change(result, parsed);
+      return new Response(result.body, { status: result.status, headers: result.headers });
+    }
     if (!Object.hasOwn(bodies, path) && path !== "crew/release-manifest.json" && !(path === "crew/login/" && parsed.search)) {
       return legacy.fetchImpl(url, options);
     }
@@ -94,14 +102,16 @@ function workerFixture(change = () => {}) {
 
 test("independent Crew Worker must match the pinned release and every critical file byte", async () => {
   const f = workerFixture();
-  assert.equal((await verifyCrewProduction({ ...f, expectLocal: true })).length, 20);
-  assert.equal(f.requested.length, 12);
+  assert.equal((await verifyCrewProduction({ ...f, expectLocal: true })).length, 11 + Object.keys(f.workerRelease.files).length + Object.keys(f.workerRelease.redirects || {}).length);
+  assert.equal(f.requested.length, 5 + Object.keys(f.workerRelease.files).length + Object.keys(f.workerRelease.redirects || {}).length);
   assert.ok(f.requested.every(url => new URL(url).origin === "https://recarplan.com"));
 });
 
 test("production requires Worker ownership even when the legacy Pages release is internally valid", async () => {
-  await assert.rejects(verifyCrewProduction({ fetchImpl: fixture().fetchImpl, expectLocal: true }), /Worker ownership is missing/);
-  await assert.rejects(verifyCrewProduction({ ...workerFixture(), expectedOwner: "pages" }), /Unexpected Crew Worker ownership/);
+  await assert.rejects(verifyCrewProduction({ fetchImpl: fixture().fetchImpl, expectLocal: true, workerRelease: { ...require("../tools/crew-worker-release.json"), entry_path: "/crew/welcome.html", redirects: {} } }), /Worker ownership is missing/);
+  const unexpected = workerFixture();
+  unexpected.workerRelease.entry_path = "/crew/welcome.html";
+  await assert.rejects(verifyCrewProduction({ ...unexpected, expectedOwner: "pages" }), /Unexpected Crew Worker ownership/);
 });
 
 test("Worker checks reject unknown release, changed bytes, mixed assets, cached HTML and broken aliases", async () => {
@@ -114,5 +124,7 @@ test("Worker checks reject unknown release, changed bytes, mixed assets, cached 
     (r, u) => { if (u.pathname.endsWith("login.html")) r.headers["cache-control"] = "max-age=600"; },
     (r, u) => { if (u.pathname === "/crew/login/" && u.search) r.status = 404; },
     (r, u) => { if (u.pathname === "/crew/login/" && u.search) r.headers.location = u.href; },
+    (r, u) => { if (u.pathname === "/crew/dashboard/") r.status = 404; },
+    (r, u) => { if (u.pathname === "/crew/guide/") r.headers.location = "https://recarplan.com/crew/knowledge/"; },
   ]) await assert.rejects(verifyCrewProduction({ ...workerFixture(change), expectLocal: true }));
 });

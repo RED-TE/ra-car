@@ -5,14 +5,18 @@ const WORKER_RELEASE = require("./crew-worker-release.json");
 
 const SITE = "https://recarplan.com";
 const ADMIN = "https://recarplan.vercel.app";
-const redirects = [
-  ...["/crew", "/crew/"].map(path => [SITE + path, SITE + "/crew/welcome.html"]),
-  ...["/crew/login", "/crew/login/"].map(path => [SITE + path, SITE + "/crew/login.html"]),
-  [ADMIN + "/crew", SITE + "/crew/welcome.html"],
-  [ADMIN + "/crew/login", SITE + "/crew/login.html"],
-  [ADMIN + "/crew/login?action=apply", SITE + "/crew/login.html?action=apply"],
-  [ADMIN + "/crew?ref=RC-TST123", SITE + "/app/?ref=RC-TST123"],
-];
+function redirectsFor(workerRelease, expectedOwner) {
+  const entry = expectedOwner === "worker" ? workerRelease.entry_path || "/crew/welcome.html" : "/crew/welcome.html";
+  return [
+    ...["/crew", "/crew/"].map(path => [SITE + path, SITE + entry]),
+    ...["/crew/login", "/crew/login/"].map(path => [SITE + path, SITE + "/crew/login.html"]),
+    [ADMIN + "/crew", SITE + "/crew/welcome.html"],
+    [ADMIN + "/crew/login", SITE + "/crew/login.html"],
+    [ADMIN + "/crew/login?action=apply", SITE + "/crew/login.html?action=apply"],
+    [ADMIN + "/crew?ref=RC-TST123", SITE + "/app/?ref=RC-TST123"],
+    ...(expectedOwner === "worker" ? Object.entries(workerRelease.redirects || {}).map(([path, target]) => [SITE + path, SITE + target]) : []),
+  ];
+}
 
 async function verifyCrewProduction({ fetchImpl = fetch, routingOnly = false, expectLocal = false, workerRelease = WORKER_RELEASE, expectedOwner = "worker" } = {}) {
   const checks = [];
@@ -29,7 +33,7 @@ async function verifyCrewProduction({ fetchImpl = fetch, routingOnly = false, ex
     } finally { clearTimeout(timer); }
   }
 
-  for (const [url, destination] of redirects) {
+  for (const [url, destination] of redirectsFor(workerRelease, expectedOwner)) {
     const response = await read(url);
     assert.ok([302, 307].includes(response.status), `Crew entry must redirect: ${url}`);
     assert.equal(response.headers.get("location"), destination, `Wrong Crew destination: ${url}`);
