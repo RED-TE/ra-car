@@ -236,6 +236,23 @@ test("private data and unknown knowledge files stay blocked", async () => {
   }
 });
 
+test("legacy public POST is retired even with an invalid body; historical private data stays private", async () => {
+  const server = await startServer("production");
+  try {
+    const response = await fetch(`${server.baseUrl}/api/leads`, {
+      method: "POST", headers: { "Content-Type": "application/json" }, body: "not JSON",
+    });
+    assert.equal(response.status, 410);
+    assert.deepEqual(await response.json(), {
+      ok: false, error: "INQUIRY_CHANNEL_RETIRED",
+      message: "이 문의 접수 방식은 종료되었습니다. 공식 문의 화면을 이용해 주세요.",
+      inquiry_url: "/inquiry/",
+    });
+    assert.equal((await fetch(`${server.baseUrl}/data/leads.jsonl`)).status, 404);
+    assert.equal((await fetch(`${server.baseUrl}/inquiry/`)).status, 200);
+  } finally { await server.stop(); }
+});
+
 test("legacy crew links redirect to the app and preserve referral codes", async () => {
   const server = await startServer("production");
   try {

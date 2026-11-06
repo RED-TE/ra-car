@@ -669,7 +669,7 @@ test("requestJson uses only an injected fetcher and sends the exact anonymous JS
 
 test("requestJson rejects HTTP and malformed JSON responses without automatic retries", async () => {
   const { requestJson } = await catalogModule;
-  for (const status of [400, 409, 429, 503]) {
+  for (const status of [400, 403, 409, 429, 503]) {
     let calls = 0;
     await assert.rejects(requestJson("/local-test", { fetcher: async () => {
       calls++;

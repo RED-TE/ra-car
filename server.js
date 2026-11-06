@@ -1960,84 +1960,15 @@ async function handleAdminUserUpdate(request, response, userId) {
   }
 }
 
-async function handleLeadCreate(request, response) {
-  try {
-    const body = await readRequestBody(request);
-    const input = JSON.parse(body || "{}");
-    const phone = normalizePhone(input.phone);
-    const vehicle = sanitizeText(input.vehicle, 80);
-    const customerName = sanitizeText(input.customerName || input.name, 40);
-
-    if (input.privacyConsent !== true) {
-      sendJson(response, 400, { ok: false, error: "privacy_consent_required" });
-      return;
-    }
-
-    if (input.termsConsent !== true) {
-      sendJson(response, 400, { ok: false, error: "terms_consent_required" });
-      return;
-    }
-
-    if (!/^01[016789]\d{7,8}$/.test(phone)) {
-      sendJson(response, 400, { ok: false, error: "invalid_phone" });
-      return;
-    }
-
-    if (!vehicle) {
-      sendJson(response, 400, { ok: false, error: "vehicle_required" });
-      return;
-    }
-
-    if (!customerName) {
-      sendJson(response, 400, { ok: false, error: "name_required" });
-      return;
-    }
-
-    const lead = {
-      id: sanitizeText(input.id, 40) || makeLeadId(),
-      createdAt: new Date().toISOString(),
-      vehicle,
-      phone,
-      customerName,
-      requestNote: sanitizeText(input.requestNote || input.request, 500),
-      privacyConsent: true,
-      consentedAt: sanitizeText(input.consentedAt, 40) || new Date().toISOString(),
-      policyVersion: sanitizeText(input.policyVersion, 20) || "2026-05-10",
-      termsConsent: true,
-      termsAcceptedAt: sanitizeText(input.termsAcceptedAt, 40) || new Date().toISOString(),
-      termsVersion: sanitizeText(input.termsVersion, 20) || "2026-05-10",
-      page: sanitizeText(input.page, 240),
-      source: sanitizeText(input.source, 80),
-      entryPoint: sanitizeText(input.entryPoint, 80),
-      leadSource: sanitizeText(input.leadSource, 80),
-      campaign: sanitizeText(input.campaign, 80),
-      campaignLabel: sanitizeText(input.campaignLabel, 80),
-      referralCode: sanitizeText(input.referralCode, 32).toUpperCase(),
-      timeDealOriginalMonthlyPayment: Number(input.timeDealOriginalMonthlyPayment) || null,
-      timeDealMonthlyPayment: Number(input.timeDealMonthlyPayment) || null,
-      timeDealDiscount: Number(input.timeDealDiscount) || null,
-      ip: request.socket.remoteAddress,
-      userAgent: sanitizeText(request.headers["user-agent"], 240),
-    };
-
-    await fs.promises.mkdir(dataDir, { recursive: true });
-    await fs.promises.appendFile(leadsPath, `${JSON.stringify(lead)}\n`, "utf8");
-    const notified = await notifyLead(lead);
-    const firebase = await saveLeadToFirebase(lead)
-      .then((result) => result)
-      .catch((error) => ({ stored: false, error: error.message }));
-
-    sendJson(response, 201, {
-      ok: true,
-      id: lead.id,
-      stored: firebase.stored ? "firebase" : "server",
-      notified,
-      firebase,
-      path: "data/leads.jsonl",
-    });
-  } catch (error) {
-    sendJson(response, 500, { ok: false, error: "lead_save_failed" });
-  }
+function handleLeadCreate(_request, response) {
+  // Retired before reading a body, writing a file, notifying or using Firebase.
+  // All new submissions must pass the official API's inquiry-IP protection.
+  sendJson(response, 410, {
+    ok: false,
+    error: "INQUIRY_CHANNEL_RETIRED",
+    message: "이 문의 접수 방식은 종료되었습니다. 공식 문의 화면을 이용해 주세요.",
+    inquiry_url: "/inquiry/",
+  });
 }
 
 async function handleLeadList(request, response, url) {

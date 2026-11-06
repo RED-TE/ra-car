@@ -217,6 +217,18 @@ for (const viewport of [{ width: 390, height: 844 }, { width: 1440, height: 1000
     expect(url.searchParams.get("utm_source")).toBe("local-test");
     expect(url.searchParams.get("utm_campaign")).toBe("inquiry-smoke");
     await review(page, { capture: true });
+    await page.getByText("수집·이용 내용 보기", { exact: true }).click();
+    const privacyNotice = page.locator(".consents details").first();
+    await expect(privacyNotice).toContainText("IP 주소·접수 시각·유입 경로");
+    await expect(privacyNotice).toContainText("이름 비교용 보안값");
+    await expect(privacyNotice).toContainText("마지막 관측 후 30일");
+    await expect(privacyNotice).toContainText("각 생성 후 30일");
+    await expect(privacyNotice).toContainText("365일 보관");
+    await expect(privacyNotice).toContainText("기존 문의·동의 기록을 소급 변경하지 않습니다");
+    await expect(privacyNotice.getByRole("link", { name: "개인정보 처리방침 보기" })).toHaveAttribute("href", "/privacy.html");
+    await noOverflow(page);
+    await page.screenshot({ path: `test-results/inquiry-${viewport.width}-security-notice.png`, fullPage: true });
+    await page.getByText("수집·이용 내용 보기", { exact: true }).click();
     await page.locator("#privacyAgree").check();
     await expect(page.locator("#agreeAll")).toHaveJSProperty("indeterminate", true);
     await expect(page.locator("#nextButton")).toBeDisabled();
@@ -435,6 +447,36 @@ for (const [label, receipt, status] of [
     await expect(page.locator("#successTitle")).toHaveCount(0);
     await expect(page.locator("#nextButton")).toBeEnabled();
     await expect(page.locator("#stepContent")).toHaveJSProperty("inert", false);
+    expect(api.posts).toHaveLength(1);
+  });
+}
+
+for (const [status, message] of [[403, "현재 접속 환경"], [429, "요청이 많아"], [503, "접수 보호 기능"]]) {
+  test(`security HTTP ${status} keeps the actual vehicle, conditions and contact without retry`, async ({ page, api }) => {
+    await page.setViewportSize({ width: 390, height: 844 });
+    api.submitStatus = status;
+    api.receipt = { error: { code: "SYNTHETIC_SECURITY_FAILURE", message: "not for display" } };
+    await openInquiry(page);
+    await review(page);
+    await page.locator("#agreeAll").check();
+    await page.locator("#nextButton").click();
+    await expect(page.locator("#flowStatus")).toContainText(message);
+    await expect(page.locator("#flowStatus")).toContainText("자동 재전송하지 않습니다");
+    await expect(page.locator("#flowStatus")).not.toContainText("not for display");
+    await expect(page.locator("#successTitle")).toHaveCount(0);
+    await expect(page.locator("#stepContent")).toHaveJSProperty("inert", false);
+    await expect(page.locator(".review")).toContainText("로컬 리스 차량");
+    await expect(page.locator(".review")).toContainText("선택 가능한 트림");
+    await expect(page.locator(".review")).toContainText("48개월 / 연 30,000km");
+    await expect(page.locator(".review")).toContainText("보증금 20% / 선납금 10%");
+    await expect(page.locator(".review")).toContainText(name);
+    await expect(page.locator(".review")).toContainText(phone);
+    expect(api.posts).toHaveLength(1);
+    await page.getByRole("button", { name: "기간 / 주행거리 수정", exact: true }).click();
+    await step(page, 4);
+    for (const [key, value] of [["term", 48], ["mileage", 30000], ["deposit", 20], ["prepayment", 10]]) {
+      await expect(page.locator(`[data-condition="${key}"][data-value="${value}"]`)).toHaveAttribute("aria-pressed", "true");
+    }
     expect(api.posts).toHaveLength(1);
   });
 }

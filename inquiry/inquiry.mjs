@@ -1,4 +1,4 @@
-import { STEPS, requestJson, loadCatalog, selectableTrims, colorsFor, safeImage, referralCode, validPhone, inquiryPayload } from "./catalog.mjs?v=20261023";
+import { STEPS, requestJson, loadCatalog, selectableTrims, colorsFor, safeImage, referralCode, validPhone, inquiryPayload, submissionFailureMessage } from "./catalog.mjs?v=20261102-ip-guard";
 
 const $ = selector => document.querySelector(selector);
 const escape = value => String(value ?? "").replace(/[&<>"']/g, char => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[char]);
@@ -181,7 +181,7 @@ function renderReview() {
     + (c.product === "RENTAL" ? reviewRow("보험 연령", `만 ${c.age}세 이상`, 3) : "")
     + reviewRow("이름 / 연락처", `${contact.name} / ${contact.phone}`, 4)
     + '</dl><p class="notice">선택하신 조건으로 상담을 요청합니다. <strong>월 납입료와 계약 조건은 금융사 확인 후 안내</strong>하며, 신청만으로 계약이나 신용조회는 진행되지 않습니다.</p>'
-    + `<div class="consents"><label class="agree-all"><input id="agreeAll" type="checkbox" ${contact.agreed && contact.notice ? "checked" : ""}>아래 필수 항목 모두 동의</label><label><input id="privacyAgree" type="checkbox" ${contact.agreed ? "checked" : ""}>[필수] 개인정보 수집·이용 동의</label><details><summary>수집·이용 내용 보기</summary><ul><li>수집 항목: 이름, 연락처, 선택 차량·트림·색상·이용조건, 추천코드(해당 시)</li><li>목적: 차량 견적 상담, 조건 안내 및 문의 응대</li><li>보유 기간: 기존 홈페이지 상담 정책에 따라 상담 종료 후 3개월까지 보관 후 파기</li><li>동의를 거부할 수 있으나 상담 접수는 제한됩니다.</li></ul></details><label><input id="noticeAgree" type="checkbox" ${contact.notice ? "checked" : ""}>[필수] 상담 유의사항 확인</label><details><summary>상담 유의사항 보기</summary><p>희망 조건과 실제 가능 조건은 다를 수 있습니다. 차량 재고, 금융사 심사, 보험 조건과 계약 시점에 따라 확정되며 실제 계약은 별도 계약서가 우선합니다. 문의 접수는 계약 체결이나 신용조회 동의가 아닙니다.</p></details></div>`
+    + `<div class="consents"><label class="agree-all"><input id="agreeAll" type="checkbox" ${contact.agreed && contact.notice ? "checked" : ""}>아래 필수 항목 모두 동의</label><label><input id="privacyAgree" type="checkbox" ${contact.agreed ? "checked" : ""}>[필수] 개인정보 수집·이용 동의</label><details><summary>수집·이용 내용 보기</summary><ul><li>수집 항목: 이름, 연락처, 선택 차량·트림·색상·이용조건, 추천코드(해당 시)</li><li>목적: 차량 견적 상담, 조건 안내 및 문의 응대</li><li>보유 기간: 기존 홈페이지 상담 정책에 따라 상담 종료 후 3개월까지 보관 후 파기</li><li>접수 보호: IP 주소·접수 시각·유입 경로와 이름 비교용 보안값을 처리하여 반복 접수 및 같은 IP에서 다른 이름이 사용되는지 확인하고, 관리자가 검토·차단합니다. 이름 비교용 보안값은 기존 접수 이름에서 IP별로 생성하며 이름 원문을 별도 복사하지 않습니다. IP가 같아도 동일인으로 판단하지 않습니다.</li><li>보안정보 보관: IP 정보는 마지막 관측 후 30일, 접수 보안기록과 이름 비교용 보안값은 각 생성 후 30일 보관 후 파기합니다. 관리자 원문 조회·차단 등 처리기록은 별도로 365일 보관합니다.</li><li>접수 보호 안내는 적용 이후 신규 문의에만 적용하며 기존 문의·동의 기록을 소급 변경하지 않습니다.</li><li>동의를 거부할 수 있으나 상담 접수는 제한됩니다.</li></ul><p><a href="/privacy.html">개인정보 처리방침 보기</a></p></details><label><input id="noticeAgree" type="checkbox" ${contact.notice ? "checked" : ""}>[필수] 상담 유의사항 확인</label><details><summary>상담 유의사항 보기</summary><p>희망 조건과 실제 가능 조건은 다를 수 있습니다. 차량 재고, 금융사 심사, 보험 조건과 계약 시점에 따라 확정되며 실제 계약은 별도 계약서가 우선합니다. 문의 접수는 계약 체결이나 신용조회 동의가 아닙니다.</p></details></div>`
     + (code ? '<p class="referral-disclosure">이 페이지는 리카 크루의 추천 링크입니다. 계약이 성사되면 추천인에게 수수료가 지급될 수 있습니다.</p>' : "");
 }
 
@@ -276,8 +276,8 @@ async function submit() {
     state.receipt = receipt;
     state.contact = { name: "", phone: "", agreed: false, notice: false };
     renderSuccess();
-  } catch {
-    markStatus("접수 완료 응답을 확인하지 못했습니다. 자동 재전송하지 않습니다. 잠시 후 확인해 주세요. 다시 신청하면 중복 접수될 수 있습니다.");
+  } catch (error) {
+    markStatus(submissionFailureMessage(error));
   } finally {
     state.submitting = false;
     $("#stepContent").inert = false;
