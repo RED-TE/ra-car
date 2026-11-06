@@ -1,5 +1,5 @@
 {
-  "source_sha": "da82a17dc927c8406e659af3c67bc457c62a3b32",
+  "source_sha": "b4cac4d5c666276ccc6af735014a7405848f669a",
   "entry_path": "/crew/njob.html",
   "redirects": {
     "/crew/welcome.html": "/crew/njob.html",
@@ -21,13 +21,14 @@
   },
   "files": {
     "crew/login.html": "f77744346585bffc3c14d120db2e3c58f5b6ee2507e499be77a367f06a11b2ea",
-    "crew/dashboard.html": "2bf2e903cea35d6568e724c9d24cbd9e220121d651510e364691afb14095d150",
+    "crew/dashboard.html": "55b0ddf3d6e995ed596c14879b16bbb65f35634b3eb25d8a8830efa0d958eb89",
     "crew/njob.html": "975f66e77bb580c2e43c9fc1dbd8c352bf1c78a1cd4d05d9251adff31847c2d2",
     "crew/crew-navigation.css": "2efbeb5f916cd24606f71554806d787613c34824d6af8b8f27e8d32a84738d56",
     "crew/crew-auth.mjs": "a32a441d6ef2e8ac5fb00da287ceb4312e4efecdb86ff42480b344b08d492030",
     "crew/crew-session.mjs": "cbd1460d3fadcb550a021b0ea95c6ca2afbdd8c925c48be1aece9f7751df3e32",
-    "crew/crew-dashboard.js": "c4a0f368203398c455035e84efef7c808cb9449ec952149301f0c9719708bbd8",
+    "crew/crew-dashboard.js": "27972f7e71f72f08077f33d488dd33287d03af4b4605b2d36ef0f4cd50f892ed",
     "crew/crew-model.mjs": "0a513a7dc8c92706bc446ae1a030fbaff9ba03434c42857748c517fcbbf66773",
-    "crew/login/index.html": "2157982c121b4cb05dfa78c6943360af43f2ca22122e23698c9ef2eeb92efe1d"
+    "crew/login/index.html": "2157982c121b4cb05dfa78c6943360af43f2ca22122e23698c9ef2eeb92efe1d",
+    "crew/crew-home.css": "e9a9edea92ca34031e6c3af1218250eea47da8e2ebb3b6580b824c007a10081f"
   }
 }
