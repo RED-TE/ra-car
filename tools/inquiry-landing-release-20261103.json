@@ -1,0 +1,31 @@
+{
+  "date": "2026-11-03",
+  "target": "https://recarplan.com/inquiry/",
+  "base_commit": "72c007f9d61f92eb779fed26daf060b5e609cdf1",
+  "branch": "codex/inquiry-landing-publish-20261103",
+  "source_design": "/Users/johongcheol/Desktop/carping_home/recar_site/landing.html",
+  "version": "20261103n",
+  "existing_vehicle_flow": "https://recarplan.com/inquiry/steps.html",
+  "outside_inquiry_public_ui_changes": [],
+  "existing_steps_preserved": true,
+  "recommendation_rules_sha256": "3a9c64bf81fc2558d315dab2f8052a79527b1b89b0e74d2eff058042ef38c030",
+  "operational_inquiries_sent": 0,
+  "production_deployment_state_at_preflight": "NOT_DEPLOYED",
+  "deployment_gate": "GitHub Pages environment currently permits main only; branch publication requires explicit scoped permission.",
+  "invariants": [
+    "No main merge or direct push",
+    "No app/crew/admin screen changes",
+    "No pricing-engine changes",
+    "No lease amounts",
+    "No copied catalog price in inquiry payload",
+    "Existing consent/referral preserved",
+    "Unknown delivery blocks automatic resend"
+  ],
+  "rollback": "Redeploy the previous successful GitHub Pages main release 72c007f9d61f92eb779fed26daf060b5e609cdf1 without resetting source or touching customer data.",
+  "publication_mode": "inquiry_only: retained base artifact plus committed inquiry folder only",
+  "preflight_artifact": {
+    "unchanged_public_files": 5715,
+    "inquiry_files": 41,
+    "live_api_write_probes": 0
+  }
+}
