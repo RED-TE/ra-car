@@ -1,8 +1,18 @@
 {
   "source_repository": "RECAREA/recar_app",
   "source_commit": "4b0498df0e63aa2c8bbae66e59e1c9a31037e7b0",
-  "web_source_patch_sha256": "92f5087ee2f86ba743cf25d0446c40286d81baecda18801e602632bfe3e95431",
-  "build_id": "web-rental-conditions-20261108",
+  "web_source_patch_sha256": "dc5b41967bfda17f31b08feded0555b7d87e33351674a011ee8162f66cf3648f",
+  "vehicle_images": [
+    {
+      "asset": "assets/cars/Genesis/GV70_360.png",
+      "sha256": "047691aaedc2d93eb51317397743f4da736ffb4bbc1a7e41d29640753c642b4f"
+    },
+    {
+      "asset": "assets/cars/Genesis/gv70_verified_20261109.png",
+      "sha256": "047691aaedc2d93eb51317397743f4da736ffb4bbc1a7e41d29640753c642b4f"
+    }
+  ],
+  "build_id": "web-gv70-image-20261109",
   "target": "https://recarplan.com/app/",
   "base_path": "/app/",
   "api_base_url": "https://api.recarplan.com",
@@ -10,11 +20,11 @@
   "native_app_modified": false,
   "validation": "See docs/app-web-new3-catalog-20261015.md and docs/app-web-speed-documents-20261015.md; local evidence is not deployment proof",
   "sha256": {
-    "index.html": "30b0ecb0d120fe6d905be231155eb4a64b0596d30f399793bd00dde8d60be288",
-    "flutter_bootstrap.js": "e3382c550fc7d10e772e1495c4150bc981dcfa6fbce513cecfe8754ed1d604b0",
+    "index.html": "3890075c9a7b3c9659951a958d23f5de65e58cde01c54694022b5811d535a782",
+    "flutter_bootstrap.js": "d7e449668e99aa875b5ba591c8bd41dc4d3885b0cf2a3da175c12dd668776e9c",
     "flutter_service_worker.js": "a131df5ca46154cc4eb79044f7f5a14029c2f8bfccf8cef34e3ec3b5a9f5a88c",
-    "main.dart.js": "515b10348d6a9feb0c04d42188d8221a002fd3d73ab0453ead751bba19643fe3",
+    "main.dart.js": "10dfa7eb489c08e31279ad7e85614862ee57f8420251c397d77d52e649fb6de0",
     "assets/FontManifest.json": "e2d22b7e9de65becff9e0cacd83496d37c01d8e9ca62087cee6616ecadee7db7",
-    "assets/AssetManifest.bin.json": "3fe1b79853172d2381069a61b70e4dab41c5076bef1855c99981d4681f55a8cf"
+    "assets/AssetManifest.bin.json": "55331656a6b554397557ac21beeb23e015b64dcf3c7e02c9f240e9be19847184"
   }
 }

@@ -38,15 +38,20 @@ function fixture(t, { template = true } = {}) {
   const prepared = path.join(directory, "prepared/app");
   const font = Buffer.from("synthetic-variable-font");
   const patch = "synthetic-runtime-patch\n";
+  const vehicleImage = Buffer.from("synthetic-verified-vehicle-image");
+  const vehicleAsset = "assets/cars/Genesis/gv70_verified_20261109.png";
   const config = {
     repository: "synthetic/recar", commit: "a".repeat(40),
     buildId: "synthetic-build", basePath: "/app/", font: { sha256: digest(font) },
+    vehicleImages: [{ asset: vehicleAsset, sha256: digest(vehicleImage) }],
   };
   for (const name of ["stage-app-web.cjs", "sync-app-entrypoints.cjs"]) {
     write(root, `tools/${name}`, fs.readFileSync(path.join(repository, "tools", name)));
   }
   write(root, "web_app/source.json", JSON.stringify(config));
   write(root, "web_app/patches/runtime.patch", patch);
+  write(root, `web_app/${vehicleAsset}`, vehicleImage);
+  write(prepared, `build/web/assets/${vehicleAsset}`, vehicleImage);
   write(root, "web_app/assets/fonts/LICENSE.txt", "synthetic-license\n");
   if (template) write(root, "web_app/flutter_service_worker.js", migrationWorker);
   write(root, "lib/app-entry-referral.js", "/* synthetic referral migration */\n");
@@ -168,3 +173,16 @@ test("migration contains client-list failure without deleting caches or customer
   assert.deepEqual(result.events, ["skipWaiting", "unregister", "matchAll", "warn"]);
   assert.deepEqual(result.navigations, []);
 });
+
+for (const changed of ["source", "built"]) {
+  test(`changed ${changed} verified vehicle image stops staging before any published write`, t => {
+    const { directory, root, prepared, stage } = fixture(t);
+    const file = changed === "source"
+      ? path.join(root, "web_app/assets/cars/Genesis/gv70_verified_20261109.png")
+      : path.join(prepared, "build/web/assets/assets/cars/Genesis/gv70_verified_20261109.png");
+    fs.writeFileSync(file, "wrong synthetic car image");
+    const before = snapshot(directory);
+    assert.throws(() => stage(prepared), /vehicle image/i);
+    assert.deepEqual(snapshot(directory), before, "image mismatch must not partially publish the build");
+  });
+}

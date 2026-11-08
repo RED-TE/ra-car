@@ -12,6 +12,15 @@ function stage(appRoot) {
   const pin = JSON.parse(fs.readFileSync(path.join(appRoot, "../source-pin.json"), "utf8"));
   if (pin.commit !== config.commit || pin.buildId !== config.buildId) throw new Error("Source pin mismatch");
   if (pin.patchSha256 !== hash(path.join(root, "web_app/patches/runtime.patch"))) throw new Error("Patch changed; prepare and rebuild before staging");
+  if (JSON.stringify(pin.vehicleImages || []) !== JSON.stringify(config.vehicleImages || [])) {
+    throw new Error("Verified vehicle image pin changed; rebuild before staging");
+  }
+  for (const image of config.vehicleImages || []) {
+    if (hash(path.join(root, "web_app", image.asset)) !== image.sha256 ||
+        hash(path.join(built, "assets", image.asset)) !== image.sha256) {
+      throw new Error("Verified vehicle image mismatch");
+    }
+  }
   const manifest = JSON.parse(fs.readFileSync(path.join(built, "assets/FontManifest.json"), "utf8"));
   const font = manifest.find(family => family.family === "Pretendard");
   if (font?.fonts.length !== 1 || !font.fonts[0].asset.endsWith("PretendardVariable.ttf")) throw new Error("Variable font missing");
@@ -38,6 +47,7 @@ function stage(appRoot) {
   const metadata = {
     source_repository: config.repository, source_commit: config.commit,
     web_source_patch_sha256: hash(path.join(root, "web_app/patches/runtime.patch")),
+    vehicle_images: config.vehicleImages || [],
     build_id: config.buildId, target: "https://recarplan.com/app/", base_path: config.basePath,
     api_base_url: "https://api.recarplan.com", flutter_version: "3.41.1",
     native_app_modified: false,

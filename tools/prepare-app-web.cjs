@@ -22,6 +22,16 @@ function prepare(sourceRepo, buildRoot) {
   execFileSync("git", ["apply", "--check", patch], { cwd: buildRoot });
   execFileSync("git", ["apply", patch], { cwd: buildRoot });
   const appRoot = path.join(buildRoot, "app");
+  // Explicitly pinned representative images survive every rebuild of the older source pin.
+  for (const image of config.vehicleImages || []) {
+    const source = path.join(root, "web_app", image.asset);
+    if (crypto.createHash("sha256").update(fs.readFileSync(source)).digest("hex") !== image.sha256) {
+      throw new Error("Verified vehicle image provenance mismatch");
+    }
+    const destination = path.join(appRoot, image.asset);
+    fs.mkdirSync(path.dirname(destination), { recursive: true });
+    fs.copyFileSync(source, destination);
+  }
   fs.copyFileSync(path.join(root, "web_app/assets/fonts/PretendardVariable.ttf"), path.join(appRoot, "assets/fonts/pretendard/PretendardVariable.ttf"));
   for (const file of fs.readdirSync(path.join(root, "web_app/test"))) {
     if (file.endsWith(".dart")) fs.copyFileSync(path.join(root, "web_app/test", file), path.join(appRoot, "test", file));

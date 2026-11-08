@@ -411,3 +411,51 @@ test("a stalled adapter times out and aborts its request signal", { timeout: 150
   await assert.rejects(loadRentalVehicle("SYNTHETIC-VEHICLE", { request }), { code: "API_TIMEOUT" });
   assert.equal(signal.aborted, true);
 });
+
+const gv70VerifiedImage = "https://api.recarplan.com/assets/cars/Genesis/gv70_verified_20261109.png";
+const gv70ElectricImage = "https://api.recarplan.com/assets/danawa/genesis_electrified_gv70_360.png";
+
+for (const [name, input, expected] of [
+  ["legacy HTTP API thumbnail", { image_url: "https://api.recarplan.com/assets/cars/Genesis/GV70_360.png?old=1" }, gv70VerifiedImage],
+  ["legacy relative thumbnail", { image_url: "", thumbnail_url: "assets/cars/genesis/gv70_360.png" }, gv70VerifiedImage],
+  ["legacy bundled thumbnail", { image_url: "https://recarplan.com/app/assets/assets/cars/Genesis/GV70_360.png" }, gv70VerifiedImage],
+  ["root bundled thumbnail", { image_url: "https://recarplan.com/assets/assets/cars/Genesis/GV70_360.png" }, gv70VerifiedImage],
+  ["existing representative image", { image_url: "https://api.recarplan.com/assets/danawa/genesis_gv70_360.png" }, gv70VerifiedImage],
+  ["missing GV70 image", { image_url: "" }, gv70VerifiedImage],
+  ["facelift alias", { model_name: "GV70(JK F/L)", image_url: "" }, gv70VerifiedImage],
+  ["Korean maker prefix", { model_name: "제네시스 GV70", image_url: "" }, gv70VerifiedImage],
+  ["English maker prefix", { model_name: "Genesis GV70", image_url: "" }, gv70VerifiedImage],
+  ["custom admin thumbnail", { image_url: "https://api.recarplan.com/uploads/gv70-custom.png" }, "https://api.recarplan.com/uploads/gv70-custom.png"],
+  ["selected color thumbnail", { image_url: "https://api.recarplan.com/assets/chazm-colors/gv70-white.png" }, "https://api.recarplan.com/assets/chazm-colors/gv70-white.png"],
+  ["external same-name thumbnail", { image_url: "https://example.invalid/assets/cars/Genesis/GV70_360.png" }, "https://example.invalid/assets/cars/Genesis/GV70_360.png"],
+  ["unrelated brand", { brand: "합성", image_url: "https://api.recarplan.com/assets/cars/Genesis/GV70_360.png" }, "https://api.recarplan.com/assets/cars/Genesis/GV70_360.png"],
+  ["unrelated model", { model_name: "GV80", image_url: "https://api.recarplan.com/assets/cars/Genesis/GV80_360.png" }, "https://api.recarplan.com/assets/cars/Genesis/GV80_360.png"],
+]) {
+  test(`GV70 public catalog resolves ${name} without changing price availability`, async () => {
+    const { loadRentalCatalog } = await modulePromise;
+    const original = { ...row(), brand: "Genesis", model_name: "GV70", ...input };
+    const before = clone(original);
+    const fake = adapter({ rows: [original] });
+    const [item] = await loadRentalCatalog({ request: fake.request, limit: 0 });
+    assert.equal(item.imageUrl, expected);
+    assert.equal(item.monthlyPayment, null);
+    assert.equal(item.priceEvidence.reason, "PRICE_NOT_CHECKED");
+    assert.deepEqual(original, before, "incoming catalog and saved metadata are not rewritten");
+    assert.equal(fake.calls.length, 1, "image correction must not request a new price");
+  });
+}
+
+for (const modelName of ["GV70 EV", "GV70 전동화", "e-GV70(JK F/L)", "Electrified GV70"]) {
+  test(`GV70 public catalog keeps ${modelName} electric when its legacy image is gasoline`, async () => {
+    const { loadRentalVehicle } = await modulePromise;
+    const fake = adapter({ mutateDetail: value => Object.assign(value, {
+      brand: "제네시스", model_name: modelName,
+      image_url: "https://api.recarplan.com/assets/cars/Genesis/GV70_360.png",
+    }) });
+    const item = await loadRentalVehicle("SYNTHETIC-VEHICLE", { request: fake.request });
+    assert.equal(item.imageUrl, gv70ElectricImage);
+    assert.equal(item.monthlyPayment, 277300);
+    assert.equal(item.priceEvidence.verified, true);
+    assert.equal(fake.calls.length, 2);
+  });
+}

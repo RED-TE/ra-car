@@ -21106,3 +21106,246 @@ diff --git a/app/test/web_selection_terms_ui_test.dart b/app/test/web_selection_
  Map _proof(Map data) => data['price_provenance'] as Map;
  Map _market(Map data) => _proof(data)['market_price'] as Map;
  Map<String, dynamic> _strictWithAdditiveScope() {
+--- a/app/lib/utils/vehicle_image_resolver.dart
++++ b/app/lib/utils/vehicle_image_resolver.dart
+@@ -95,13 +95,76 @@
+           '$normalizedBrand|${_canonicalExteriorModel(modelName)}'];
+ }
+ 
+-String? resolveVehicleNetworkImage({String? thumbnailUrl}) {
++String? resolveVehicleNetworkImage({
++  String? thumbnailUrl,
++  String? brand,
++  String? modelName,
++}) {
+   final thumbnail = thumbnailUrl?.trim();
+   if (thumbnail == null || thumbnail.isEmpty) return null;
+   if (thumbnail.startsWith('http://') || thumbnail.startsWith('https://')) {
+-    return normalizeBackendImageUrl(thumbnail);
++    return _correctKnownGv70NetworkImage(
++      normalizeBackendImageUrl(thumbnail),
++      brand: brand,
++      modelName: modelName,
++    );
+   }
+   return null;
++}
++
++// Only these previously shipped representative photos are replaced. Color
++// photos, custom uploads and third-party URLs retain their original identity.
++const _verifiedGv70Asset = 'assets/cars/Genesis/gv70_verified_20261109.png';
++const _legacyGv70Assets = {
++  'assets/cars/genesis/gv70_360.png',
++  'assets/cars/genesis/gv70_jk_f_l_360.png',
++  'assets/danawa/genesis_gv70_360.png',
++  'assets/vehicles/genesis_gv70_360.png',
++};
++
++String? _correctKnownGv70NetworkImage(
++  String? value, {
++  String? brand,
++  String? modelName,
++}) {
++  final uri = value == null ? null : Uri.tryParse(value);
++  if (uri == null ||
++      uri.path.isEmpty ||
++      !const {
++        'api.recarplan.com',
++        'recarplan.com',
++        'www.recarplan.com',
++        'localhost',
++        '127.0.0.1',
++        '0.0.0.0',
++        '::1',
++      }.contains(uri.host.toLowerCase())) {
++    return value;
++  }
++
++  final prefix = uri.path.startsWith('/app/assets/assets/')
++      ? '/app/assets/'
++      : uri.path.startsWith('/assets/assets/')
++          ? '/assets/'
++          : '/';
++  final assetPath = uri.path.substring(prefix.length).toLowerCase();
++  if (!_legacyGv70Assets.contains(assetPath)) return value;
++
++  final hasVehicleIdentity = brand != null && modelName != null;
++  final replacement = hasVehicleIdentity
++      ? _resolveOverrideAsset(brand: brand, modelName: modelName)
++      : null;
++  final isElectricGv70 =
++      replacement == 'assets/danawa/genesis_electrified_gv70_360.png';
++  if (hasVehicleIdentity &&
++      replacement != _verifiedGv70Asset &&
++      !isElectricGv70) {
++    return value;
++  }
++  return uri
++      .replace(
++          path: '$prefix${isElectricGv70 ? replacement : _verifiedGv70Asset}')
++      .toString();
+ }
+ 
+ /// `assets/vehicles/` (legacy 360/color snapshot) and `assets/chazm-colors/`
+@@ -118,11 +181,19 @@
+ }
+ 
+ /// Resolves an HTTP(S) image or a legacy hosted asset path to the backend URL.
+-String? resolveHostedVehicleImageUrl(String? rawPath) {
++String? resolveHostedVehicleImageUrl(
++  String? rawPath, {
++  String? brand,
++  String? modelName,
++}) {
+   final value = rawPath?.trim();
+   if (value == null || value.isEmpty) return null;
+   if (value.startsWith('http://') || value.startsWith('https://')) {
+-    return normalizeBackendImageUrl(value);
++    return _correctKnownGv70NetworkImage(
++      normalizeBackendImageUrl(value),
++      brand: brand,
++      modelName: modelName,
++    );
+   }
+   final normalized = value.replaceAll('\\', '/').replaceFirst(
+         RegExp(r'^/+'),
+@@ -132,7 +203,11 @@
+       !normalized.startsWith('assets/chazm-colors/')) {
+     return null;
+   }
+-  return normalizeBackendImageUrl(normalized);
++  return _correctKnownGv70NetworkImage(
++    normalizeBackendImageUrl(normalized),
++    brand: brand,
++    modelName: modelName,
++  );
+ }
+ 
+ String? normalizeVehicleAssetPath(String? rawPath) {
+@@ -141,6 +216,7 @@
+   final normalized = raw.replaceAll('\\', '/').replaceFirst(RegExp(r'^/+'), '');
+   if (!normalized.startsWith('assets/')) return null;
+   final lower = normalized.toLowerCase();
++  if (_legacyGv70Assets.contains(lower)) return _verifiedGv70Asset;
+   final exact = _assetPathCaseMap[lower];
+   if (exact != null) return exact;
+   final exteriorEquivalent = _powertrainEquivalentAssetPath(normalized);
+@@ -364,6 +440,12 @@
+ };
+ 
+ const Map<String, String> _verifiedVehicleImageOverrides = {
++  // Official GV70 photo; the old GV70_360.png contained a different vehicle.
++  '제네시스|gv70': _verifiedGv70Asset,
++  '제네시스|gv70ev': 'assets/danawa/genesis_electrified_gv70_360.png',
++  '제네시스|electrifiedgv70': 'assets/danawa/genesis_electrified_gv70_360.png',
++  '제네시스|egv70': 'assets/danawa/genesis_electrified_gv70_360.png',
++  '제네시스|gv70전동화': 'assets/danawa/genesis_electrified_gv70_360.png',
+   // 셀토스는 manifest의 구형 entry보다 신형 2세대 이미지를 우선한다.
+   '기아|셀토스': 'assets/danawa/kia_디_올_뉴_셀토스_360.png',
+   // 차량 대표사진 오매칭 교정 (서버 PR #82와 짝).
+@@ -444,7 +526,6 @@
+   'assets/cars/kia/k8_360.png': 'assets/cars/Kia/K8_360.png',
+   'assets/cars/kia/sportage_360.png': 'assets/cars/Kia/Sportage_360.png',
+   'assets/cars/kia/carnival_360.png': 'assets/cars/Kia/Carnival_360.png',
+-  'assets/cars/genesis/gv70_360.png': 'assets/cars/Genesis/gv70_jk_f_l_360.png',
+   'assets/cars/genesis/gv80_360.png': 'assets/cars/Genesis/GV80_360.png',
+   'assets/cars/hyundai/porter2_360.png': 'assets/cars/Hyundai/Porter2_360.png',
+   'assets/cars/hyundai/staria_360.png': 'assets/cars/Hyundai/Staria_360.png',
+--- a/app/lib/screens/quote_result_screen.dart
++++ b/app/lib/screens/quote_result_screen.dart
+@@ -3033,6 +3033,8 @@
+     );
+     final networkImage = resolveVehicleNetworkImage(
+       thumbnailUrl: vehicleThumbnailUrl,
++      brand: vehicleBrand,
++      modelName: vehicleName,
+     );
+ 
+     if (networkImage != null) {
+@@ -4287,6 +4289,8 @@
+     );
+     final networkImage = resolveVehicleNetworkImage(
+       thumbnailUrl: vehicleThumbnailUrl,
++      brand: vehicleBrand,
++      modelName: vehicleName,
+     );
+     final optionLabel = _formatOptionSummary(selectedOptionsSummary);
+ 
+@@ -4909,6 +4913,8 @@
+     );
+     final networkImage = resolveVehicleNetworkImage(
+       thumbnailUrl: vehicleThumbnailUrl,
++      brand: vehicleBrand,
++      modelName: vehicleName,
+     );
+     final depositPct =
+         vehiclePrice > 0 ? (deposit * 100 / vehiclePrice).round() : 0;
+--- a/app/lib/screens/vehicle_detail_screen.dart
++++ b/app/lib/screens/vehicle_detail_screen.dart
+@@ -10792,7 +10792,11 @@
+ }
+ 
+ String? _networkImageForVehicle(VehicleDetail v) {
+-  return v.imageUrl ?? resolveHostedVehicleImageUrl(v.thumbnailUrl);
++  return resolveHostedVehicleImageUrl(
++    v.imageUrl ?? v.thumbnailUrl,
++    brand: v.brand,
++    modelName: v.modelName,
++  );
+ }
+ 
+ // ────────────────────────────────────────────────────────────────────────────
+--- a/app/lib/screens/vehicle_list_screen.dart
++++ b/app/lib/screens/vehicle_list_screen.dart
+@@ -2583,8 +2583,11 @@
+ }
+ 
+ String? _networkImageForVehicle(VehicleListItem vehicle) {
+-  return vehicle.imageUrl ??
+-      resolveVehicleNetworkImage(thumbnailUrl: vehicle.thumbnailUrl);
++  return resolveVehicleNetworkImage(
++    thumbnailUrl: vehicle.imageUrl ?? vehicle.thumbnailUrl,
++    brand: vehicle.brand,
++    modelName: vehicle.modelName,
++  );
+ }
+ 
+ // ─── 선납금 섹션 위젯 (% 기반 + 직접입력) ───────────────────────────────────
+--- a/app/lib/utils/vehicle_image_resolver.dart
++++ b/app/lib/utils/vehicle_image_resolver.dart
+@@ -142,12 +142,12 @@
+     return value;
+   }
+ 
+-  final prefix = uri.path.startsWith('/app/assets/assets/')
++  final sourcePrefix = uri.path.startsWith('/app/assets/assets/')
+       ? '/app/assets/'
+       : uri.path.startsWith('/assets/assets/')
+           ? '/assets/'
+           : '/';
+-  final assetPath = uri.path.substring(prefix.length).toLowerCase();
++  final assetPath = uri.path.substring(sourcePrefix.length).toLowerCase();
+   if (!_legacyGv70Assets.contains(assetPath)) return value;
+ 
+   final hasVehicleIdentity = brand != null && modelName != null;
+@@ -161,9 +161,19 @@
+       !isElectricGv70) {
+     return value;
+   }
++  // The website serves the Flutter bundle under /app/; the API mounts the
++  // image directory directly at /assets/. Do not preserve an obsolete prefix.
++  final host = uri.host.toLowerCase();
++  final targetPrefix = host == 'api.recarplan.com'
++      ? '/'
++      : (host == 'recarplan.com' || host == 'www.recarplan.com') &&
++              sourcePrefix == '/assets/'
++          ? '/app/assets/'
++          : sourcePrefix;
+   return uri
+       .replace(
+-          path: '$prefix${isElectricGv70 ? replacement : _verifiedGv70Asset}')
++          path:
++              '$targetPrefix${isElectricGv70 ? replacement : _verifiedGv70Asset}')
+       .toString();
+ }
+ 
