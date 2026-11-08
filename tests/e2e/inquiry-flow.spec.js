@@ -5,7 +5,7 @@ const API = "https://api.recarplan.com";
 const referral = "RC-LOCAL123";
 const name = "로컬 문의 검증";
 const phone = "010-0000-0000";
-const row = (id, model, products = ["LEASE"]) => ({
+const row = (id, model, products = ["RENTAL"]) => ({
   id, brand: "현대", model_name: model, available_product_types: products,
   monthly_payment: 987654, image_url: "",
 });
@@ -46,11 +46,11 @@ const test = base.extend({
       discovery: false, discoveryReads: 0, discoveryOverride: null,
       receipt: { id: "local-only-receipt", status: "NEW" }, submitStatus: 201,
       pages: [
-        { items: [row("local-lease", "로컬 리스 차량"), row("local-zero", "로컬 무색상 차량")], total: 3, page: 1, pages: 2 },
-        { items: [row("local-blocked", "로컬 미제공 차량")], total: 3, page: 2, pages: 2 },
+        { items: [row("local-rental", "로컬 렌트 차량"), row("local-zero", "로컬 무색상 차량")], total: 3, page: 1, size: 100, pages: 2 },
+        { items: [row("local-blocked", "로컬 미제공 차량")], total: 3, page: 2, size: 100, pages: 2 },
       ],
       details: {
-        "local-lease": detail("local-lease"),
+        "local-rental": detail("local-rental"),
         "local-zero": detail("local-zero", { zero: true }),
         "local-blocked": detail("local-blocked", { unavailable: true }),
       },
@@ -131,7 +131,7 @@ async function step(page, number, capture = false) {
   await noOverflow(page);
   await page.waitForFunction(() => document.querySelector("#stepContent").getAnimations().every(animation => animation.playState !== "running"));
   if (capture) {
-    await page.screenshot({ path: `test-results/inquiry-${page.viewportSize().width}-step${number}.png`, fullPage: true });
+    await page.screenshot({ path: test.info().outputPath(`inquiry-${page.viewportSize().width}-step${number}.png`), fullPage: true });
   }
 }
 
@@ -143,7 +143,7 @@ async function openInquiry(page) {
   await expect(page.locator('script[src*="flutter"], base[href="/app/"]')).toHaveCount(0);
 }
 
-async function chooseVehicle(page, id = "local-lease", capture = false) {
+async function chooseVehicle(page, id = "local-rental", capture = false) {
   await step(page, 1, capture);
   await expect(page.locator("#nextButton")).toBeDisabled();
   await page.locator('[data-brand="현대"]').click();
@@ -170,15 +170,16 @@ async function chooseVehicle(page, id = "local-lease", capture = false) {
   await page.locator("#nextButton").click();
   await step(page, 4);
   await expect(page.locator("[data-product]")).toHaveCount(1);
-  await expect(page.locator('[data-product="LEASE"]')).toHaveAttribute("aria-pressed", "true");
-  await expect(page.locator('[data-product="RENTAL"], [data-condition="age"]')).toHaveCount(0);
-  for (const [key, value] of [["term", 48], ["mileage", 30000], ["deposit", 20], ["prepayment", 10]]) {
+  await expect(page.locator('[data-product="RENTAL"]')).toHaveAttribute("aria-pressed", "true");
+  await expect(page.locator('[data-product="LEASE"]')).toHaveCount(0);
+  await expect(page.locator('[data-condition="age"]')).toHaveCount(2);
+  for (const [key, value] of [["term", 48], ["mileage", 30000], ["deposit", 0], ["prepayment", 10]]) {
     await page.locator(`[data-condition="${key}"][data-value="${value}"]`).click();
   }
   await step(page, 4, capture);
 }
 
-async function review(page, { capture = false, id = "local-lease" } = {}) {
+async function review(page, { capture = false, id = "local-rental" } = {}) {
   await chooseVehicle(page, id, capture);
   await page.locator("#nextButton").click();
   await step(page, 5);
@@ -191,8 +192,8 @@ async function review(page, { capture = false, id = "local-lease" } = {}) {
   await page.locator("#nextButton").click();
   await step(page, 6, capture);
   await expect(page.locator("#stepContent")).toContainText("48개월 / 연 30,000km");
-  await expect(page.locator("#stepContent")).toContainText("보증금 20% / 선납금 10%");
-  await expect(page.locator("#stepContent")).not.toContainText("보험 연령");
+  await expect(page.locator("#stepContent")).toContainText("보증금 0% / 선납금 10%");
+  await expect(page.locator("#stepContent")).toContainText("보험 연령");
   await expect(page.locator("#nextButton")).toBeDisabled();
 }
 
@@ -208,7 +209,8 @@ for (const viewport of [{ width: 390, height: 844 }, { width: 1440, height: 1000
       .filter(img => img.getBoundingClientRect().top < innerHeight && img.getBoundingClientRect().bottom > 0)
       .every(img => img.complete && img.naturalWidth > 0))).toBe(true);
     await noOverflow(page);
-    await page.screenshot({ path: `test-results/landing-${viewport.width}.png`, fullPage: true });
+    await page.screenshot({ path: test.info().outputPath(`landing-${viewport.width}.png`), fullPage: true });
+    const catalogReadsBeforeInquiry = api.reads.filter(url => new URL(url).pathname === "/api/v1/vehicles/").length;
     await page.locator(".promotion-slide.is-current .quote-focus-button").click();
     await expect(page.locator('[data-brand="현대"]')).toBeVisible();
     const url = new URL(page.url());
@@ -238,13 +240,13 @@ for (const viewport of [{ width: 390, height: 844 }, { width: 1440, height: 1000
     await expect(page.locator("#flowActions")).toBeHidden();
     expect(api.posts).toHaveLength(1);
     expect(api.discoveryReads).toBe(1);
-    expect(api.reads.some(url => new URL(url).pathname === "/api/v1/vehicles/")).toBe(false);
+    expect(api.reads.filter(url => new URL(url).pathname === "/api/v1/vehicles/").length).toBe(catalogReadsBeforeInquiry);
     expect(api.posts[0]).toMatchObject({
-      name, phone: "01000000000", privacy_agreed: true, product_type: "LEASE",
+      name, phone: "01000000000", privacy_agreed: true, product_type: "RENTAL",
       term_months: 48, mileage_per_year: 30000, referral_code: referral, quoted_monthly_payment: null,
     });
-    expect(api.posts[0].condition_summary).toContain("vehicle_id=local-lease");
-    expect(api.posts[0].condition_summary).not.toContain("보험연령");
+    expect(api.posts[0].condition_summary).toContain("vehicle_id=local-rental");
+    expect(api.posts[0].condition_summary).toContain("보험연령 만 26세 이상");
     expect(JSON.stringify(api.posts[0])).not.toContain("987654");
     expect(await page.evaluate(() => localStorage.getItem("unrelated-saved-quote"))).toBe("preserve-me");
     const stored = await page.evaluate(() => JSON.stringify([Object.entries(localStorage), Object.entries(sessionStorage)]));
@@ -294,7 +296,7 @@ test("reopening reuses only a complete fresh discovery catalog without retaining
   await page.reload();
   await expect(page.locator('[data-brand="현대"]')).toBeVisible();
   expect(api.reads).toHaveLength(catalogReads);
-  const stored = await page.evaluate(() => JSON.parse(sessionStorage.getItem("recar_inquiry_discovery_v1")));
+  const stored = await page.evaluate(() => JSON.parse(sessionStorage.getItem("recar_inquiry_discovery_rental_v2")));
   expect(stored.complete).toBe(true);
   expect(stored.items).toHaveLength(3);
   expect(JSON.stringify(stored)).not.toContain("monthly_payment");
@@ -304,7 +306,7 @@ test("reopening reuses only a complete fresh discovery catalog without retaining
   api.offlineDetail = true;
   await page.locator('[data-brand="현대"]').click();
   await page.locator("#nextButton").click();
-  await page.locator('[data-vehicle="local-lease"]').click();
+  await page.locator('[data-vehicle="local-rental"]').click();
   await page.locator("#nextButton").click();
   await expect(page.locator("[data-retry-detail]")).toBeVisible();
   expect(api.posts).toHaveLength(0);
@@ -315,14 +317,14 @@ test("detail offline error supports retry without selecting a fake trim", async 
   await page.locator('[data-brand="현대"]').click();
   await page.locator("#nextButton").click();
   api.offlineDetail = true;
-  await page.locator('[data-vehicle="local-lease"]').click();
+  await page.locator('[data-vehicle="local-rental"]').click();
   await page.locator("#nextButton").click();
   await expect(page.locator("[data-retry-detail]")).toBeVisible();
   await expect(page.locator("[data-trim]")).toHaveCount(0);
   await expect(page.locator("#nextButton")).toBeDisabled();
   api.offlineDetail = false;
   await page.locator("[data-retry-detail]").click();
-  await expect(page.locator('[data-trim="local-lease-active"]')).toBeVisible();
+  await expect(page.locator('[data-trim="local-rental-active"]')).toBeVisible();
   await expect(page.locator("#nextButton")).toBeDisabled();
 });
 
@@ -333,18 +335,18 @@ test("vehicle choice prepares one shared detail request before continuing", asyn
   let release;
   api.detailGate = new Promise(resolve => { release = resolve; });
   try {
-    await page.locator('[data-vehicle="local-lease"]').click();
-    await expect.poll(() => api.reads.filter(url => new URL(url).pathname === "/api/v1/vehicles/local-lease").length).toBe(1);
+    await page.locator('[data-vehicle="local-rental"]').click();
+    await expect.poll(() => api.reads.filter(url => new URL(url).pathname === "/api/v1/vehicles/local-rental").length).toBe(1);
     await expect(page.locator("#nextButton")).toBeEnabled();
     await page.locator("#nextButton").click();
     await expect(page.locator(".loading-label")).toBeVisible();
     release();
-    await expect(page.locator('[data-trim="local-lease-active"]')).toBeVisible();
-    expect(api.reads.filter(url => new URL(url).pathname === "/api/v1/vehicles/local-lease")).toHaveLength(1);
+    await expect(page.locator('[data-trim="local-rental-active"]')).toBeVisible();
+    expect(api.reads.filter(url => new URL(url).pathname === "/api/v1/vehicles/local-rental")).toHaveLength(1);
     await page.locator("#backButton").click();
     await page.locator("#nextButton").click();
-    await expect(page.locator('[data-trim="local-lease-active"]')).toBeVisible();
-    expect(api.reads.filter(url => new URL(url).pathname === "/api/v1/vehicles/local-lease")).toHaveLength(1);
+    await expect(page.locator('[data-trim="local-rental-active"]')).toBeVisible();
+    expect(api.reads.filter(url => new URL(url).pathname === "/api/v1/vehicles/local-rental")).toHaveLength(1);
   } finally { release(); }
 });
 
@@ -355,14 +357,14 @@ test("a late prefetch for a previously selected vehicle cannot replace the new s
   let release;
   api.detailGate = new Promise(resolve => { release = resolve; });
   try {
-    await page.locator('[data-vehicle="local-lease"]').click();
-    await expect.poll(() => api.reads.filter(url => new URL(url).pathname === "/api/v1/vehicles/local-lease").length).toBe(1);
+    await page.locator('[data-vehicle="local-rental"]').click();
+    await expect.poll(() => api.reads.filter(url => new URL(url).pathname === "/api/v1/vehicles/local-rental").length).toBe(1);
     api.detailGate = null;
     await page.locator('[data-vehicle="local-zero"]').click();
     await page.locator("#nextButton").click();
     await expect(page.locator('[data-trim="local-zero-active"]')).toBeVisible();
     release();
-    await expect(page.locator('[data-trim="local-lease-active"]')).toHaveCount(0);
+    await expect(page.locator('[data-trim="local-rental-active"]')).toHaveCount(0);
     await expect(page.locator('[data-trim="local-zero-active"]')).toBeVisible();
   } finally { release(); }
 });
@@ -400,7 +402,7 @@ test("back and forward preserve reachable steps; changing trim resets colors and
   await step(page, 6);
   await expect(page.locator("#agreeAll")).toBeChecked();
   await page.getByRole("button", { name: "트림 수정", exact: true }).click();
-  await page.locator('[data-trim="local-lease-alternative"]').click();
+  await page.locator('[data-trim="local-rental-alternative"]').click();
   await expect(page.locator("[data-color]")).toHaveCount(0);
   await page.locator("#nextButton").click();
   await page.locator("#nextButton").click();
@@ -451,9 +453,9 @@ test("a landing vehicle keeps its model and displayed conditions using canonical
   expect(url.searchParams.get("mileage")).toBe("10000");
   expect(url.searchParams.get("model")).toBe("모닝");
   expect(url.searchParams.get("ref")).toBe(referral);
-  await expect(page.locator('[data-vehicle="local-lease"]')).toHaveAttribute("aria-pressed", "true");
+  await expect(page.locator('[data-vehicle="local-rental"]')).toHaveAttribute("aria-pressed", "true");
   await page.locator("#nextButton").click();
-  await page.locator('[data-trim="local-lease-alternative"]').click();
+  await page.locator('[data-trim="local-rental-alternative"]').click();
   await page.locator("#nextButton").click();
   await expect(page.locator('[data-condition="term"][data-value="60"]')).toHaveAttribute("aria-pressed", "true");
   await expect(page.locator('[data-condition="mileage"][data-value="10000"]')).toHaveAttribute("aria-pressed", "true");
@@ -476,7 +478,7 @@ test("an imported vehicle entry returns to the matching manufacturer tab", async
   const query = new URLSearchParams({ brand: "테슬라", model: "Model Y", mileage: "10000" });
   await page.goto(`/inquiry/?${query}`);
   await step(page, 2);
-  await expect(page.locator('[data-vehicle="local-lease"]')).toHaveAttribute("aria-pressed", "true");
+  await expect(page.locator('[data-vehicle="local-rental"]')).toHaveAttribute("aria-pressed", "true");
   await page.locator("#backButton").click();
   await step(page, 1);
   await expect(page.locator('[data-market="imported"]')).toHaveAttribute("aria-pressed", "true");

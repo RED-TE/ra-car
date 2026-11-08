@@ -4,9 +4,9 @@ const { getEventListeners } = require("node:events");
 
 const catalogModule = import("../inquiry/catalog.mjs");
 
-function vehicle(id = "qa-lease", overrides = {}) {
+function vehicle(id = "qa-rental", overrides = {}) {
   return {
-    id, brand: "현대", model_name: "테스트 차량", available_product_types: ["LEASE"],
+    id, brand: "현대", model_name: "테스트 차량", available_product_types: ["RENTAL"],
     monthly_payment: 987654, image_url: "", ...overrides,
   };
 }
@@ -26,11 +26,11 @@ function selection() {
   return {
     vehicle: vehicle(),
     detail: {
-      id: "qa-lease", trims: [selectedTrim],
+      id: "qa-rental", trims: [selectedTrim],
       trim_selection: { mode: "FLAT", flat_grades: [{ vehicle_trim_id: selectedTrim.id, is_active: true }] },
     },
     trim: selectedTrim, exterior: selectedTrim.colors[0], interior: selectedTrim.colors[1],
-    conditions: { product: "LEASE", term: 48, mileage: 30000, deposit: 20, prepayment: 10, age: 26 },
+    conditions: { product: "RENTAL", term: 48, mileage: 30000, deposit: 0, prepayment: 10, age: 26 },
   };
 }
 
@@ -50,6 +50,7 @@ function mockPages(pages) {
       assert.equal(url.pathname, "/api/v1/vehicles/");
       assert.equal(url.searchParams.get("size"), "100");
       assert.equal(url.searchParams.get("sort"), "display_order");
+      assert.equal(url.searchParams.get("product_type"), "RENTAL");
       const page = Number(url.searchParams.get("page"));
       assert.equal(page, calls.length);
       assert.ok(pages[page - 1], `unexpected catalog page ${page}`);
@@ -89,7 +90,7 @@ test("inquiry exposes exactly six ordered steps", async () => {
 test("catalog loads every page and counts unsupported products without publishing them", async () => {
   const { loadCatalog } = await catalogModule;
   const source = [
-    envelope([vehicle("lease"), vehicle("unknown", { available_product_types: ["CASH"] })], { total: 4, pages: 2 }),
+    envelope([vehicle("lease", { available_product_types: ["LEASE"] }), vehicle("unknown", { available_product_types: ["CASH"] })], { total: 4, pages: 2 }),
     envelope([
       vehicle("rental", { available_product_types: ["RENTAL", "RENTAL", "UNKNOWN", "LEASE"] }),
       vehicle("none", { available_product_types: [] }),
@@ -100,7 +101,7 @@ test("catalog loads every page and counts unsupported products without publishin
   const result = await loadCatalog(mock.request);
   assert.equal(mock.calls.length, 2);
   assert.deepEqual(result.map(row => [row.id, row.available_product_types]), [
-    ["lease", ["LEASE"]], ["rental", ["RENTAL", "LEASE"]],
+    ["rental", ["RENTAL"]],
   ]);
   assert.deepEqual(source, before);
 });
@@ -201,7 +202,7 @@ test("only an older API's 404 can fall back to paginated discovery", async () =>
     return envelope([vehicle("legacy-public")]);
   }, { storage: null, preferDiscovery: true });
   assert.equal(result[0].id, "legacy-public");
-  assert.deepEqual(calls, ["/api/v1/vehicles/discovery", "/api/v1/vehicles/?page=1&size=100&sort=display_order"]);
+  assert.deepEqual(calls, ["/api/v1/vehicles/discovery", "/api/v1/vehicles/?page=1&size=100&sort=display_order&product_type=RENTAL"]);
   for (const message of ["API_HTTP_500", "API_HTTP_522", "NETWORK_ERROR", "API_HTTP_403"]) {
     let count = 0;
     await assert.rejects(loadCatalog(async () => { count++; throw new Error(message); }, { storage: null, preferDiscovery: true }), { message });
@@ -318,7 +319,7 @@ test("cache stores only minimal discovery fields, safe images and server display
   storage.entries.set("unrelated-saved-quote", "preserve-me");
   const mock = mockPages([envelope([
     vehicle("z", {
-      available_product_types: ["LEASE", "LEASE", "UNKNOWN"],
+      available_product_types: ["RENTAL", "RENTAL", "UNKNOWN", "LEASE"],
       image_url: "/assets/z.png", thumbnail_url: "https://api.recarplan.com/assets/thumb.png",
       representative_monthly_price: 100000, finance_company: "LOCAL_ONLY",
       name: "PRIVATE_NAME", phone: "PRIVATE_PHONE", trims: [trim()],
@@ -327,9 +328,9 @@ test("cache stores only minimal discovery fields, safe images and server display
   ])]);
   const first = await loadCatalog(mock.request, { storage, now: () => 1_000_000 });
   assert.deepEqual(first, [
-    { id: "z", brand: "현대", model_name: "테스트 차량", available_product_types: ["LEASE"],
+    { id: "z", brand: "현대", model_name: "테스트 차량", available_product_types: ["RENTAL"],
       image_url: "https://api.recarplan.com/assets/z.png", thumbnail_url: "https://api.recarplan.com/assets/thumb.png" },
-    { id: "a", brand: "현대", model_name: "테스트 차량", available_product_types: ["LEASE"] },
+    { id: "a", brand: "현대", model_name: "테스트 차량", available_product_types: ["RENTAL"] },
   ]);
   assert.deepEqual(storage.writes.map(write => write.key), [CATALOG_CACHE_KEY]);
   const saved = storage.getItem(CATALOG_CACHE_KEY);
@@ -518,17 +519,17 @@ test("payload keeps selected conditions and IDs but never promotes the list mont
   const body = inquiryPayload(state, contact(), "RC-LOCAL123");
   assert.deepEqual(body, {
     name: "로컬 테스트", phone: "01000000000", privacy_agreed: true,
-    vehicle_name: "현대 테스트 차량", trim_name: "테스트 트림", product_type: "LEASE",
-    condition_summary: "단계형 문의 /inquiry/ · vehicle_id=qa-lease · trim_id=qa-trim · 외장: 화이트 (qa-white) · 내장: 블랙 (qa-black) · 48개월 · 연 30,000km · 보증금 20% · 선납금 10%",
+    vehicle_name: "현대 테스트 차량", trim_name: "테스트 트림", product_type: "RENTAL",
+    condition_summary: "단계형 문의 /inquiry/ · vehicle_id=qa-rental · trim_id=qa-trim · 외장: 화이트 (qa-white) · 내장: 블랙 (qa-black) · 48개월 · 연 30,000km · 보증금 0% · 선납금 10% · 보험연령 만 26세 이상",
     term_months: 48, mileage_per_year: 30000, quoted_monthly_payment: null, referral_code: "RC-LOCAL123",
   });
   assert.equal(JSON.stringify(body).includes("987654"), false);
-  assert.doesNotMatch(body.condition_summary, /보험연령/);
+  assert.match(body.condition_summary, /보험연령 만 26세 이상/);
   assert.deepEqual(state, before);
   assert.equal(Object.hasOwn(inquiryPayload(state, contact(), ""), "referral_code"), false);
 });
 
-test("RENTAL includes the selected insurance age while LEASE does not", async () => {
+test("RENTAL keeps insurance age and new LEASE inquiries are rejected", async () => {
   const { inquiryPayload } = await catalogModule;
   const state = selection();
   state.vehicle.available_product_types = ["RENTAL", "LEASE"];
@@ -536,13 +537,15 @@ test("RENTAL includes the selected insurance age while LEASE does not", async ()
   state.conditions.age = 21;
   assert.match(inquiryPayload(state, contact(), "").condition_summary, /보험연령 만 21세 이상/);
   state.conditions.product = "LEASE";
-  assert.doesNotMatch(inquiryPayload(state, contact(), "").condition_summary, /보험연령/);
+  assert.throws(() => inquiryPayload(state, contact(), ""), { message: "CONDITIONS_INVALID" });
 });
 
 test("LEASE-only vehicles reject RENTAL rather than inventing a product", async () => {
   const { inquiryPayload } = await catalogModule;
   const state = selection();
-  assert.equal(inquiryPayload(state, contact(), "").product_type, "LEASE");
+  state.vehicle.available_product_types = ["LEASE"];
+  state.conditions.product = "LEASE";
+  assert.throws(() => inquiryPayload(state, contact(), ""), { message: "CONDITIONS_INVALID" });
   state.conditions.product = "RENTAL";
   assert.throws(() => inquiryPayload(state, contact(), ""), { message: "CONDITIONS_INVALID" });
 });
@@ -568,7 +571,7 @@ test("payload accepts each advertised condition value", async () => {
   const { inquiryPayload } = await catalogModule;
   for (const [key, values] of Object.entries({
     term: [24, 36, 48, 60], mileage: [10000, 20000, 30000, 40000],
-    deposit: [0, 10, 20, 30, 40], prepayment: [0, 10, 20, 30, 40], age: [21, 26],
+    deposit: [0], prepayment: [0, 10, 20, 30, 40], age: [21, 26],
   })) {
     for (const value of values) {
       const state = selection();
@@ -582,7 +585,7 @@ test("payload rejects unsupported conditions and stringified numeric values", as
   const { inquiryPayload } = await catalogModule;
   for (const [key, value] of [
     ["product", "CASH"], ["term", 72], ["term", "48"], ["mileage", 15000],
-    ["deposit", -10], ["prepayment", 50], ["age", 18], ["age", "26"],
+    ["deposit", -10], ["deposit", 10], ["deposit", 20], ["deposit", 30], ["deposit", 40], ["deposit", "0"], ["prepayment", 50], ["age", 18], ["age", "26"],
   ]) {
     const state = selection();
     state.conditions[key] = value;
@@ -751,4 +754,34 @@ test("requestJson rejects a late JSON body after cancellation and detaches a suc
     signal: successful.signal, fetcher: async () => ({ ok: true, json: async () => ({ ok: true }) }),
   }), { ok: true });
   assert.equal(getEventListeners(successful.signal, "abort").length, 0);
+});
+
+
+test("discovery validates mixed source rows before applying rental-only policy", async () => {
+  const { loadCatalog } = await catalogModule;
+  const item = (id, products) => ({ id, brand: "합성", model_name: id, available_product_types: products });
+  const items = [item("lease", ["LEASE"]), item("mixed", ["LEASE", "RENTAL"]), item("rental", ["RENTAL"])];
+  const source = { contract_version: "discovery_v1", complete: true, revision: "a".repeat(64), total: 3, items };
+  const before = structuredClone(source);
+  const result = await loadCatalog(async () => source, { preferDiscovery: true, storage: null });
+  assert.deepEqual(result.map(row => [row.id, row.available_product_types]), [["mixed", ["RENTAL"]], ["rental", ["RENTAL"]]]);
+  assert.deepEqual(source, before);
+  const duplicate = structuredClone(source);
+  duplicate.items[0].id = "mixed";
+  await assert.rejects(loadCatalog(async () => duplicate, { preferDiscovery: true, storage: null }), { message: "CATALOG_INVALID" });
+});
+
+test("previous mixed-product cache and saved quote storage are preserved without reuse", async () => {
+  const { loadCatalog, CATALOG_CACHE_KEY } = await catalogModule;
+  const storage = memoryStorage();
+  const old = JSON.stringify({ contract_version: "inquiry_discovery_v1", complete: true, sort: "display_order", saved_at: 1000000, total: 1, items: [vehicle("old-lease", { available_product_types: ["LEASE"] })] });
+  storage.entries.set("recar_inquiry_discovery_v1", old);
+  storage.entries.set("saved-quote", "historical-monthly-543200");
+  const request = mockPages([envelope([vehicle("new-rental")])]);
+  const rows = await loadCatalog(request.request, { storage, now: () => 1000001 });
+  assert.equal(request.calls.length, 1);
+  assert.deepEqual(rows.map(row => row.id), ["new-rental"]);
+  assert.notEqual(CATALOG_CACHE_KEY, "recar_inquiry_discovery_v1");
+  assert.equal(storage.getItem("recar_inquiry_discovery_v1"), old);
+  assert.equal(storage.getItem("saved-quote"), "historical-monthly-543200");
 });

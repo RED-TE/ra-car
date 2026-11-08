@@ -1,7 +1,8 @@
 export const API_BASE = "https://api.recarplan.com";
 export const STEPS = ["제조사", "차량", "트림·색상", "이용조건", "연락처", "최종 확인"];
-const PRODUCTS = new Set(["RENTAL", "LEASE"]);
-export const CATALOG_CACHE_KEY = "recar_inquiry_discovery_v1";
+const PRODUCTS = new Set(["RENTAL"]);
+const SOURCE_PRODUCTS = new Set(["RENTAL", "LEASE"]);
+export const CATALOG_CACHE_KEY = "recar_inquiry_discovery_rental_v2";
 export const CATALOG_CACHE_TTL = 5 * 60 * 1000;
 const DISCOVERY_FIELDS = new Set(["id", "brand", "model_name", "available_product_types", "image_url", "thumbnail_url"]);
 
@@ -43,7 +44,8 @@ function discoveryRow(row, cached = false) {
     || typeof row.model_name !== "string" || !row.model_name.trim()
     || !Array.isArray(row.available_product_types)) throw new Error("CATALOG_INVALID");
   const products = [...new Set(row.available_product_types.filter(type => PRODUCTS.has(type)))];
-  if (cached && (!products.length || products.length !== row.available_product_types.length
+  if (cached && (new Set(row.available_product_types).size !== row.available_product_types.length
+    || row.available_product_types.some(type => !SOURCE_PRODUCTS.has(type))
     || Object.keys(row).some(key => !DISCOVERY_FIELDS.has(key)))) throw new Error("CATALOG_INVALID");
   const item = { id: row.id, brand: row.brand, model_name: row.model_name, available_product_types: products };
   for (const field of ["image_url", "thumbnail_url"]) {
@@ -58,10 +60,11 @@ function readCatalogCache(storage, now) {
   try {
     const cache = JSON.parse(storage?.getItem(CATALOG_CACHE_KEY) || "null");
     const age = now() - cache?.saved_at;
-    if (cache?.contract_version !== "inquiry_discovery_v1" || cache.sort !== "display_order" || cache.complete !== true
+    if (cache?.contract_version !== "inquiry_discovery_rental_v2" || cache.sort !== "display_order" || cache.complete !== true
       || !Number.isSafeInteger(cache.saved_at) || !Number.isFinite(age) || age < 0 || age >= CATALOG_CACHE_TTL
       || !Array.isArray(cache.items) || !Number.isInteger(cache.total) || cache.total !== cache.items.length
       || cache.total <= 0 || cache.total > 2000) return null;
+    if (cache.items.some(row => row?.available_product_types?.length !== 1 || row.available_product_types[0] !== "RENTAL")) return null;
     const items = cache.items.map(row => discoveryRow(row, true));
     if (new Set(items.map(row => row.id)).size !== items.length) return null;
     return items;
@@ -74,7 +77,7 @@ function writeCatalogCache(storage, items, now) {
     const savedAt = now();
     if (!Number.isSafeInteger(savedAt)) return;
     storage?.setItem(CATALOG_CACHE_KEY, JSON.stringify({
-      contract_version: "inquiry_discovery_v1", sort: "display_order", complete: true,
+      contract_version: "inquiry_discovery_rental_v2", sort: "display_order", complete: true,
       saved_at: savedAt, total: items.length, items,
     }));
   } catch { /* A blocked or full session store must not prevent discovery. */ }
@@ -87,7 +90,8 @@ function discoveryCatalog(result) {
     || !Array.isArray(result.items) || result.items.length !== result.total) throw new Error("CATALOG_INVALID");
   const items = result.items.map(row => discoveryRow(row, true));
   if (new Set(items.map(row => row.id)).size !== items.length) throw new Error("CATALOG_INVALID");
-  return items;
+  // Validate the entire upstream page before filtering unsupported products.
+  return items.filter(row => row.available_product_types.includes("RENTAL"));
 }
 
 // Do not publish a partial catalog when pagination or identifiers are inconsistent.
@@ -107,7 +111,7 @@ export async function loadCatalog(request = requestJson, { storage = sessionStor
   let expectedPages = null;
   async function readPage(page) {
     checkAborted(controller.signal);
-    const result = await request(`/api/v1/vehicles/?page=${page}&size=100&sort=display_order`, { signal: controller.signal });
+    const result = await request(`/api/v1/vehicles/?page=${page}&size=100&sort=display_order&product_type=RENTAL`, { signal: controller.signal });
     checkAborted(controller.signal);
     if (!result || !Array.isArray(result.items) || !Number.isInteger(result.total) || !Number.isInteger(result.pages)
       || result.total < 0 || result.total > 2000 || result.pages < 0 || result.pages > 20 || result.page !== page
@@ -206,9 +210,9 @@ export function inquiryPayload(state, contact, code) {
   if (!vehicle || detail?.id !== vehicle.id || !selectableTrims(detail).some(row => row.id === trim?.id)) {
     throw new Error("SELECTION_INVALID");
   }
-  if (!vehicle.available_product_types.includes(c.product)
+  if (c.product !== "RENTAL" || !vehicle.available_product_types.includes("RENTAL")
     || ![24, 36, 48, 60].includes(c.term) || ![10000, 20000, 30000, 40000].includes(c.mileage)
-    || ![0, 10, 20, 30, 40].includes(c.deposit) || ![0, 10, 20, 30, 40].includes(c.prepayment)
+    || c.deposit !== 0 || ![0, 10, 20, 30, 40].includes(c.prepayment)
     || ![21, 26].includes(c.age)) throw new Error("CONDITIONS_INVALID");
   for (const [color, type] of [[exterior, "exterior"], [interior, "interior"]]) {
     const choices = colorsFor(trim, type);
