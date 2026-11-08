@@ -8,6 +8,10 @@ const code = "RC-QA1234";
 
 async function mockReadOnlyApi(page) {
   const tracked = [];
+  await page.route("**/*", route => {
+    const url = new URL(route.request().url());
+    return ["127.0.0.1", "localhost"].includes(url.hostname) ? route.fallback() : route.abort();
+  });
   await page.route("https://api.recarplan.com/**", route => {
     const request = route.request();
     const url = new URL(request.url());
@@ -18,7 +22,7 @@ async function mockReadOnlyApi(page) {
     };
     if (request.method() === "OPTIONS") return route.fulfill({ status: 204, headers });
     if (request.method() !== "GET") return route.abort();
-    if (url.pathname.startsWith("/assets/")) return route.continue();
+    if (url.pathname.startsWith("/assets/")) return route.abort();
     let json = [];
     if (url.pathname === "/api/v1/friends/track") {
       tracked.push(url.href);
@@ -72,7 +76,7 @@ for (const entry of ["/", "/app/"]) {
       expect(loadedScripts).not.toContain("/home.js");
       expect(loadedScripts).not.toContain("/script.js");
       expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1)).toBe(true);
-      await page.screenshot({ path: `test-results/app-entry-${entry.replaceAll("/", "-")}-${width}.png` });
+      await page.screenshot({ path: test.info().outputPath(`app-entry-${entry.replaceAll("/", "-")}-${width}.png`) });
       await page.getByRole("button", { name: "전체 차량", exact: true }).click();
       await expect(page.getByRole("button", { name: /^제네시스 GV80 Hybrid, 월/ })).toBeAttached({ timeout: 15000 });
       expect(await page.evaluate(() => document.documentElement.scrollWidth <= innerWidth + 1)).toBe(true);

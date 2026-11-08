@@ -1,0 +1,242 @@
+{
+  "date": "2026-11-08",
+  "scope": "Local feature-branch web bundle publication and migration-worker regression fix; not an operating deployment or all-conditions pricing certification.",
+  "git": {
+    "repository": "RED-TE/ra-car",
+    "branch": "codex/rental-web-verify-20261108",
+    "head_before_commit": "96c037966e9f872a19b7cd639f87a962cbc03c14",
+    "remote_main_read_via_github_connector": "090b156c6eaa92ac0d32bb9bc0c5a169ddf9468a",
+    "native_feature_head_unchanged": "79b79e44be3c2dc929f864e8f345ea18d7fb2d25"
+  },
+  "fixed": [
+    "Generated app files and root entry now match the already verified reconstructed Flutter source, build ID and patch pin in this feature branch.",
+    "Flutter 3.41.1 --pwa-strategy=none emits an empty worker. Previously staging this output erased the existing migration worker, leaving already-controlled old tabs with a waiting empty worker.",
+    "Stage now reads the owned migration template before mutating published files, writes it after generated copying, and hashes it in release.json. The template preserves the previous project worker byte-for-byte.",
+    "Entry browser tests block upstream network/assets and write screenshots to the per-run output directory."
+  ],
+  "source_provenance": {
+    "source_pin": "4b0498df0e63aa2c8bbae66e59e1c9a31037e7b0",
+    "runtime_patch_sha256": "1d13f61aef256fdec8c16b664e5f219a52d79de3fd94dfbe3e8c00777671f2cd",
+    "build_id": "web-rental-pricing-20261108",
+    "flutter_version": "3.41.1",
+    "dart_version": "3.11.0",
+    "prior_source_inputs_compared": 7510,
+    "prior_source_input_mismatches": 0,
+    "prior_build_receipt": {
+      "path": "/private/tmp/recar-web-package-20261108-djqe6d_p/package-verification-final.json",
+      "sha256": "31818964cb4603ef0470905a53333fb058f92d6a2b0bf89fd6b3d419169e0503",
+      "bytes": 3942
+    },
+    "note": "No Dart/runtime patch modification in this phase; prior full Flutter runs are historical validation, not freshly rerun or summed."
+  },
+  "verification": {
+    "unit_red": {
+      "pass": 3,
+      "fail": 2,
+      "exit_code": 1,
+      "expected_failures": [
+        "empty generated worker overwrites migration",
+        "missing template does not stop partial staging"
+      ],
+      "log": {
+        "path": "/private/tmp/recar-app-staging-red-20261108.log",
+        "sha256": "fd74444f4fcf1691a86694a6399fdaf5fa749fda094315c4030195f0bc77f5a9",
+        "bytes": 13706
+      }
+    },
+    "unit_green": {
+      "pass": 5,
+      "fail": 0,
+      "exit_code": 0,
+      "log": {
+        "path": "/private/tmp/recar-app-staging-green-20261108.log",
+        "sha256": "528b3717616ccbb5733d16d564f2525471086c7e913ee1932134316e4927f718",
+        "bytes": 1280
+      },
+      "included_in_full_build_count": true
+    },
+    "browser_red": {
+      "pass": 0,
+      "fail": 1,
+      "failure": "Automatic FRESH navigation absent; OLD controller retained; empty updated worker waiting=installed. No request error; synthetic stored quote/cache retained.",
+      "results": {
+        "path": "/private/tmp/recar-worker-migration-red-20261108-xZgGEA/results.json",
+        "sha256": "765a29c0a37684cb4f8ae7574a7594893bf0b5da331e0cc5ea2c0f1fd2d9a9a1",
+        "bytes": 9666
+      }
+    },
+    "final_npm_run_build": {
+      "exit_code": 0,
+      "pass": 225,
+      "fail": 0,
+      "skip": 0,
+      "lint_typecheck_syntax_entry_checks": "PASS",
+      "log": {
+        "path": "/private/tmp/recar-web-stage-worker-final-build-20261108.log",
+        "sha256": "b066560cd0846c99206e6ac27e573a30e9fb3830d90461a952f06434e2bd33ed",
+        "bytes": 45462
+      }
+    },
+    "final_chrome": {
+      "exit_code": 0,
+      "pass": 11,
+      "fail": 0,
+      "skip": 0,
+      "flaky": 0,
+      "duration_ms": 15743.845000000001,
+      "start_time_utc": "2026-11-08T07:49:28.809Z",
+      "entries": [
+        "/",
+        "/app/"
+      ],
+      "widths": [
+        360,
+        390,
+        768,
+        1440
+      ],
+      "results": {
+        "path": "/private/tmp/recar-worker-migration-green-20261108-fUezLm/results.json",
+        "sha256": "2e943c634231cbf48a0eb85317bb22568efefc9b776616a519f170ca28fdf8a9",
+        "bytes": 15959
+      },
+      "config": {
+        "path": "/private/tmp/recar-worker-migration-green-20261108-fUezLm/playwright.config.cjs",
+        "sha256": "119ae0a777971b19ac60d4bca7e5c00e74b9f9983a618510fab35a7ec3102dc2",
+        "bytes": 931
+      },
+      "worker_evidence": {
+        "path": "/private/tmp/recar-worker-migration-green-20261108-fUezLm/migration-evidence.json",
+        "sha256": "7c0074286a85790d8dbba090e6d307dfe23d26d4159dd351e253891602f84156",
+        "bytes": 1199
+      },
+      "conditions": "10 actual compiled-app entry cases with synthetic fixtures plus one real Chrome old-worker migration case. No manual reload after update; OLD became FRESH, registrations empty, controller null, URL and synthetic localStorage/CacheStorage preserved. No operating prices/auth/customer submission certified."
+    },
+    "independent_review": "No actionable defect found. Reviewer verified staging tests 5/5, lint/entry checks, original worker bytes, source/patch pins and all six release file hashes; did not independently rerun browser/CI/operating checks.",
+    "earlier_blind_spot": "Prior 220-pass unit run and 10 fresh-entry browser cases did not cover old controlled-tab migration; red/green evidence above closes that specific gap."
+  },
+  "preservation": {
+    "backup_manifest": {
+      "path": "/private/tmp/recar-web-local-stage-backup-20261108-ol51d82i/manifest.json",
+      "sha256": "c815e6b2b0c1813eb76ab2d603c85969af77274a765dd774fb2bac7082eb0761",
+      "bytes": 1418
+    },
+    "final_stage_log": {
+      "path": "/private/tmp/recar-web-local-stage-backup-20261108-ol51d82i/stage-with-worker.log",
+      "sha256": "8f20b515930bfdf56675e34d510b36773d7f619e2940168b5bc6657c29d85e7f",
+      "bytes": 1168
+    },
+    "app_tracked_files": 3093,
+    "app_added_files": 0,
+    "app_missing_files": 0,
+    "existing_worker_diff": "none",
+    "assets_data_source_pin_runtime_patch_package_lock_changes": 0,
+    "original_native_checkout_head": "5b27fb0cbac4d86dbac6570e30fce458e275fb12",
+    "original_native_tracked_edits": 7,
+    "original_native_diff_insertions": 77,
+    "original_native_diff_deletions": 261,
+    "original_native_untracked_entries": 19,
+    "other_worktrees_modified": false,
+    "saved_sent_quotes_or_customer_data_modified": false
+  },
+  "release_metadata": {
+    "source_repository": "RECAREA/recar_app",
+    "source_commit": "4b0498df0e63aa2c8bbae66e59e1c9a31037e7b0",
+    "web_source_patch_sha256": "1d13f61aef256fdec8c16b664e5f219a52d79de3fd94dfbe3e8c00777671f2cd",
+    "build_id": "web-rental-pricing-20261108",
+    "target": "https://recarplan.com/app/",
+    "base_path": "/app/",
+    "api_base_url": "https://api.recarplan.com",
+    "flutter_version": "3.41.1",
+    "native_app_modified": false,
+    "validation": "See docs/app-web-new3-catalog-20261015.md and docs/app-web-speed-documents-20261015.md; local evidence is not deployment proof",
+    "sha256": {
+      "index.html": "0e57c8af89926e20faffd817eb54e66961e4872af887d3908631434585e9ee6c",
+      "flutter_bootstrap.js": "47e3f11e5dcda7b899c77c466693793ad34b52982386ebe8f678d63baadf0913",
+      "flutter_service_worker.js": "a131df5ca46154cc4eb79044f7f5a14029c2f8bfccf8cef34e3ec3b5a9f5a88c",
+      "main.dart.js": "3b89bc8d2aea5357cb58a7b9ae2d619f4973ea43e3b6fd4c1bf0ccc16595b4e9",
+      "assets/FontManifest.json": "e2d22b7e9de65becff9e0cacd83496d37c01d8e9ca62087cee6616ecadee7db7",
+      "assets/AssetManifest.bin.json": "3fe1b79853172d2381069a61b70e4dab41c5076bef1855c99981d4681f55a8cf"
+    }
+  },
+  "changed_files_with_hashes": {
+    "app/.last_build_id": {
+      "path": "/Users/johongcheol/Desktop/recar_web_source_20261108/app/.last_build_id",
+      "sha256": "93dccdf8e3d8adf1d40cd725a59bcfdfd7edc32cd4bc2e0cf7768d12d8d5277e",
+      "bytes": 32
+    },
+    "app/flutter_bootstrap.js": {
+      "path": "/Users/johongcheol/Desktop/recar_web_source_20261108/app/flutter_bootstrap.js",
+      "sha256": "47e3f11e5dcda7b899c77c466693793ad34b52982386ebe8f678d63baadf0913",
+      "bytes": 11553
+    },
+    "app/index.html": {
+      "path": "/Users/johongcheol/Desktop/recar_web_source_20261108/app/index.html",
+      "sha256": "0e57c8af89926e20faffd817eb54e66961e4872af887d3908631434585e9ee6c",
+      "bytes": 2868
+    },
+    "app/main.dart.js": {
+      "path": "/Users/johongcheol/Desktop/recar_web_source_20261108/app/main.dart.js",
+      "sha256": "3b89bc8d2aea5357cb58a7b9ae2d619f4973ea43e3b6fd4c1bf0ccc16595b4e9",
+      "bytes": 4442528
+    },
+    "app/release.json": {
+      "path": "/Users/johongcheol/Desktop/recar_web_source_20261108/app/release.json",
+      "sha256": "8f20b515930bfdf56675e34d510b36773d7f619e2940168b5bc6657c29d85e7f",
+      "bytes": 1168
+    },
+    "index.html": {
+      "path": "/Users/johongcheol/Desktop/recar_web_source_20261108/index.html",
+      "sha256": "5c1b101b1500e855a40d480aeb2bc43d54f190c210476cfd0b90b2e4fe308649",
+      "bytes": 4023
+    },
+    "package.json": {
+      "path": "/Users/johongcheol/Desktop/recar_web_source_20261108/package.json",
+      "sha256": "5ec354dcdc807731540bee9d68a41d8d5cac3dff5db6cbd522994e5840d42ac3",
+      "bytes": 2714
+    },
+    "tests/app-staging.test.js": {
+      "path": "/Users/johongcheol/Desktop/recar_web_source_20261108/tests/app-staging.test.js",
+      "sha256": "0941264df859e0de65170efe3f950fce8a27a49ed946262bcba4b02dc12888ce",
+      "bytes": 8881
+    },
+    "tests/e2e/app-worker-migration.spec.js": {
+      "path": "/Users/johongcheol/Desktop/recar_web_source_20261108/tests/e2e/app-worker-migration.spec.js",
+      "sha256": "0bd1a770cba06870efe5b92bb70421a22850f7bcdaa7f61d3b2827477649239a",
+      "bytes": 6623
+    },
+    "tests/e2e/home-app-entry.spec.js": {
+      "path": "/Users/johongcheol/Desktop/recar_web_source_20261108/tests/e2e/home-app-entry.spec.js",
+      "sha256": "bcd268ac598926e627eebf5f07311eda18e629296479586fad56e7ce2a84de37",
+      "bytes": 5619
+    },
+    "tools/stage-app-web.cjs": {
+      "path": "/Users/johongcheol/Desktop/recar_web_source_20261108/tools/stage-app-web.cjs",
+      "sha256": "0df040f380286e2cf99be89e28dbcc9e938a9055025da44530a109188d9d853f",
+      "bytes": 3903
+    },
+    "web_app/flutter_service_worker.js": {
+      "path": "/Users/johongcheol/Desktop/recar_web_source_20261108/web_app/flutter_service_worker.js",
+      "sha256": "a131df5ca46154cc4eb79044f7f5a14029c2f8bfccf8cef34e3ec3b5a9f5a88c",
+      "bytes": 784
+    }
+  },
+  "operations": {
+    "production_api_requests_this_phase": 0,
+    "production_database_access": 0,
+    "production_database_changes": 0,
+    "source_activation": false,
+    "push": false,
+    "remote_ci": false,
+    "deployment": false,
+    "testflight": false,
+    "external_network": "Denied for build/Chrome; loopback and browser internal sockets only. A prior review git-history read attempted a lazy fetch but DNS failed; no production API call resulted.",
+    "previous_public_get_budget": "5/5 already used on 2026-11-07; CLOSED; not reused."
+  },
+  "remaining_gaps": [
+    "Provider actual-prepayment financing-base evidence is still absent. Existing offline diagnosis found 1690 mismatched conditions including 1452 within the current 24-60 month menu; this bundle fix does not solve those source gaps.",
+    "Latest local collection timestamps are 2026-11-06T17:53:52 through 2026-11-07T04:35:16, timezone not declared. Whether the operating API uses that collection is unverified.",
+    "Operating deployed SHA, active source hash/date and actual vehicle/default-trim provider bindings need the separately requested read-only server approval.",
+    "Remote CI/release/TestFlight remain unperformed; no all-conditions, production pricing correctness or release completion claim."
+  ]
+}
