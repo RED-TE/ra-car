@@ -1,0 +1,147 @@
+{
+  "scope": "Local synthetic verification only. No production API requests, deploy, customer changes or remote push.",
+  "web_branch": "codex/rental-web-verify-20261108",
+  "web_base_commit": "4fdd6fdcc277cd5798987287be9106431f7ed6cc",
+  "integration": {
+    "native_commit": "778e46fe845a60ed0f5de61e881fa46123fa5f6d",
+    "files": [
+      "app/lib/models/application.dart",
+      "app/lib/models/quote.dart",
+      "app/lib/models/selection_prepayment_estimate.dart",
+      "app/lib/screens/garage_screen.dart",
+      "app/lib/screens/quote_configurator_screen.dart",
+      "app/lib/screens/quote_input_screen.dart",
+      "app/lib/screens/quote_result_screen.dart",
+      "app/lib/screens/vehicle_detail_screen.dart",
+      "app/lib/services/quote_api.dart",
+      "app/lib/services/quote_price_evidence.dart",
+      "app/test/absolute_prepayment_evidence_test.dart",
+      "app/test/fixtures/synthetic_selection_prepayment_api.json",
+      "app/test/selection_prepayment_estimate_test.dart",
+      "app/test/selection_terms_estimate_test.dart",
+      "app/test/selection_terms_saved_garage_test.dart",
+      "app/test/support/synthetic_selection_prepayment_estimate.dart"
+    ],
+    "patch_sha256": "2f1d754e90b33e8fa46e68918f136c1a79d10da52ffd9a43757a037e64d6375a",
+    "failed_prepare": "prepared: missing new-file mode in generated incremental git patch, rejected by apply --check; kept untouched."
+  },
+  "release": {
+    "source_repository": "RECAREA/recar_app",
+    "source_commit": "4b0498df0e63aa2c8bbae66e59e1c9a31037e7b0",
+    "web_source_patch_sha256": "2f1d754e90b33e8fa46e68918f136c1a79d10da52ffd9a43757a037e64d6375a",
+    "build_id": "web-zero-prepayment-20261108",
+    "target": "https://recarplan.com/app/",
+    "base_path": "/app/",
+    "api_base_url": "https://api.recarplan.com",
+    "flutter_version": "3.41.1",
+    "native_app_modified": false,
+    "validation": "See docs/app-web-new3-catalog-20261015.md and docs/app-web-speed-documents-20261015.md; local evidence is not deployment proof",
+    "sha256": {
+      "index.html": "6c74fe7e5caeee6eb3098379c28a8c7308f552056ba0de3b0dab269f1e458399",
+      "flutter_bootstrap.js": "773eca42e55db8960754e033bd66a8f19a659972431fd3384011316dba738668",
+      "flutter_service_worker.js": "a131df5ca46154cc4eb79044f7f5a14029c2f8bfccf8cef34e3ec3b5a9f5a88c",
+      "main.dart.js": "bcc94da9cc8bb3a1d04a28116a0f5f223e8186d4b886a051d586e0c819a20b40",
+      "assets/FontManifest.json": "e2d22b7e9de65becff9e0cacd83496d37c01d8e9ca62087cee6616ecadee7db7",
+      "assets/AssetManifest.bin.json": "3fe1b79853172d2381069a61b70e4dab41c5076bef1855c99981d4681f55a8cf"
+    }
+  },
+  "tests": {
+    "flutter_vm": {
+      "passed": 1243,
+      "skipped": 40,
+      "failed": 0
+    },
+    "flutter_chrome_focused": {
+      "passed": 426,
+      "skipped": 2,
+      "failed": 0,
+      "excluded_name_pattern": "actual synthetic",
+      "note": "File-backed actual synthetic contract cases passed on VM. JS .0 integer distinctions have explicit skips; fractional rejection tested."
+    },
+    "flutter_analyze_lib": {
+      "errors": 0,
+      "warnings": 0,
+      "infos": 260,
+      "exit_code": 0
+    },
+    "flutter_release_build": {
+      "exit_code": 0
+    },
+    "npm_build": {
+      "exit_code": 0,
+      "node_tests_passed": 225
+    },
+    "compiled_browser_existing_entry_worker": {
+      "passed": 11,
+      "failed": 0,
+      "widths": [
+        360,
+        390,
+        768,
+        1440
+      ]
+    },
+    "compiled_browser_prepayment_estimate": {
+      "passed": 1,
+      "failed": 0,
+      "viewport": [
+        390,
+        844
+      ],
+      "synthetic_only": true,
+      "term_months": 48,
+      "annual_km": 10000,
+      "prepayment_pct": 20,
+      "monthly_payment": 536600,
+      "assertions": [
+        "zero_prepayment_delta_v1 and vehicle/trim request binding",
+        "primary amount in viewport",
+        "no horizontal overflow",
+        "old amount removed after changing to unsupported 36 months",
+        "unexpected JavaScript page errors absent excluding deliberately blocked Firebase imports"
+      ]
+    },
+    "eslint_new_browser_test": {
+      "exit_code": 0
+    },
+    "git_diff_check": {
+      "exit_code": 0
+    }
+  },
+  "preservation": {
+    "tracked_inputs": 5660,
+    "missing": [],
+    "changed": [
+      "app/.last_build_id",
+      "app/flutter_bootstrap.js",
+      "app/index.html",
+      "app/main.dart.js",
+      "app/release.json",
+      "index.html"
+    ],
+    "protected_changes": [],
+    "release_hashes_valid": true,
+    "identical_new_synthetic_fixture": true
+  },
+  "test_development_failures_preserved": [
+    "First incremental package apply rejected missing new file mode headers; regenerated patch header; prepared2 succeeded.",
+    "Permanent price test attempt 1 matched comparison and footer amounts; strict locator failure.",
+    "Attempt 2 exact footer text was absent before scroll; timed out.",
+    "Attempt 3 primary amount matched Flutter live announcement as well as visible semantics span.",
+    "Final locator scopes actual Flutter span, excludes live announcement; viewport and stale amount checks passed without product code change."
+  ],
+  "local_artifact_root": "/private/tmp/recar-web-zero-release-20261108-flcvt4w_",
+  "evidence_sha256": {
+    "flutter-full.log": "7503d34f5ae2caf49e5d955dc2e5166401d6a996f2b1ac7474fac5d22a950547",
+    "flutter-chrome.log": "9ab605b5ad3f78911d4cd7f963f8c8d80023bd2043073d51c9d1f4a10ca12b2b",
+    "analyze-lib.log": "42fbef0a9e40c7b670da262b0e4de62e2abb21a00a25a5c877bfc139cf43ee0d",
+    "build-web.log": "fcfc232d43be44b682644556e25ca4efe1c9c6ecc89a6e97a2dea8dd7b9c313d",
+    "npm-build.log": "b57d3e50c3cf5d2fe26d98e5c659dee7347fee236e9d72a93c08f0a39eb236a0",
+    "browser/entry-results.json": "9bd8b6a8b01fc73122ce15e4ccdef6eedbb54aab4bac1fcd3a0f2ca0cbea70cb",
+    "browser/price-semantics-results.json": "c43fb13b1e5bafe8dd7f35beef584580eb14a2033df61b1784f00bc4ac81cb26",
+    "browser/price-semantics-output/app-prepayment-estimate-SY-0105b-nd-displays-48m-20pct-quote/SYNTHETIC-48m-20pct.png": "9f94c3c36f33de58a2e81e872e0da0e0bd13fdb7597d232ee774db06e7485c58",
+    "preservation-final.json": "eb580532c7068882c0b83f14c37c31187db1a28a3b0e0ae89ec4df1820f371d0"
+  },
+  "remote_ci": "Not run by this verification task; pending parent integration.",
+  "production": "Not deployed or called by this verification task; remote main must not be assumed to equal production."
+}

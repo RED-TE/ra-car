@@ -51,6 +51,9 @@ jobs:
       - name: Verify main and app entries before publishing
         run: npm run test:app-entries
 
+      - name: Verify prepayment price and stale result clearing before publishing
+        run: npx playwright test tests/e2e/app-prepayment-estimate.spec.js
+
       - name: Verify landing and stepwise inquiry before publishing
         run: npm run test:inquiry
 

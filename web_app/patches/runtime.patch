@@ -11846,3 +11846,2448 @@ diff --git a/app/test/web_selection_terms_ui_test.dart b/app/test/web_selection_
            expect(find.text('보증금은 원본에 기재되지 않아 확인이 필요해요.'), findsOneWidget);
            expect(find.textContaining('최저 금융사'), findsNothing);
            await tester.scrollUntilVisible(find.text('보증금'), 400,
+diff --git a/app/lib/models/application.dart b/app/lib/models/application.dart
+--- a/app/lib/models/application.dart
++++ b/app/lib/models/application.dart
+@@ -6,6 +6,7 @@
+ 
+ import 'quote_selection.dart';
+ import 'selection_terms_estimate.dart';
++import 'selection_prepayment_estimate.dart';
+ 
+ /// Status constants — mirrors ApplicationStatus enum on the backend.
+ class AppStatus {
+@@ -462,8 +463,62 @@
+             .hasMatch(pricingContextVersion!);
+   }
+ 
+-  bool isSelectionTermsEstimateAmount(int? monthly,
+-          {required String? source}) =>
++  bool get hasSelectionPrepaymentEstimateSnapshot {
++    final context = selectionContext;
++    final estimate = SelectionPrepaymentEstimate.tryParse(
++      context?['selection_prepayment_estimate'],
++    );
++    return context?['quote_estimate_version'] ==
++            SelectionPrepaymentEstimate.version &&
++        context?['selection_terms_estimate'] == null &&
++        estimate != null &&
++        context?['selection_contract_version'] ==
++            QuoteSelection.contractVersion &&
++        context?['product_type'] == 'RENTAL' &&
++        const ['rent', 'long_term_rent'].contains(quoteType) &&
++        context?['vehicle_id'] == vehicleId &&
++        vehicleId != null &&
++        context?['vehicle_trim_id'] == vehicleTrimId &&
++        vehicleTrimId != null &&
++        context?['inventory_item_id'] == null &&
++        context?['monthly_payment'] == estimate.monthlyPayment &&
++        monthlyPayment == estimate.monthlyPayment &&
++        context?['term_months'] == contractMonths &&
++        context?['mileage_limit'] == annualKm &&
++        context?['selected_vehicle_price'] == vehiclePrice &&
++        context?['deposit'] == deposit &&
++        context?['guarantee'] == 0 &&
++        context?['guarantee_pct'] == 0 &&
++        context?['reference_vehicle_trim_id'] ==
++            estimate.referenceVehicleTrimId &&
++        selectionFingerprint == estimate.selectionFingerprint &&
++        pricingContextVersion != null &&
++        RegExp(
++          r'^selection-market-v1:[0-9a-f]{16}$',
++        ).hasMatch(pricingContextVersion!) &&
++        estimate.matchesConditions(
++          term: contractMonths,
++          mileage: annualKm,
++          deposit: deposit,
++          prepaymentPct: context?['prepayment_pct'],
++          selectedVehiclePrice: vehiclePrice,
++        );
++  }
++
++  bool get hasCustomerEstimateSnapshot =>
++      hasSelectionTermsEstimateSnapshot ||
++      hasSelectionPrepaymentEstimateSnapshot;
++
++  bool isCustomerEstimateAmount(int? monthly, {required String? source}) =>
++      source == 'APPLICATION_ESTIMATE' &&
++      monthly != null &&
++      monthly == monthlyPayment &&
++      hasCustomerEstimateSnapshot;
++
++  bool isSelectionTermsEstimateAmount(
++    int? monthly, {
++    required String? source,
++  }) =>
+       source == 'APPLICATION_ESTIMATE' &&
+       monthly != null &&
+       monthly == monthlyPayment &&
+@@ -784,6 +839,7 @@
+ 
+   /// Locally validated response expectation. Never sent as customer evidence.
+   final SelectionTermsEstimate? expectedSelectionTermsEstimate;
++  final SelectionPrepaymentEstimate? expectedSelectionPrepaymentEstimate;
+ 
+   const QuoteSnapshotRequest({
+     this.vehicleName,
+@@ -822,6 +878,7 @@
+     this.guaranteePct,
+     this.quoteEstimateVersion,
+     this.expectedSelectionTermsEstimate,
++    this.expectedSelectionPrepaymentEstimate,
+   });
+ 
+   Map<String, dynamic> toJson() => {
+@@ -882,6 +939,7 @@
+     required this.selectionContext,
+     this.quoteEstimateVersion,
+     this.selectionTermsEstimate,
++    this.selectionPrepaymentEstimate,
+   });
+ 
+   final String? selectionContractVersion;
+@@ -892,6 +950,7 @@
+   final Map<String, dynamic>? selectionContext;
+   final String? quoteEstimateVersion;
+   final SelectionTermsEstimate? selectionTermsEstimate;
++  final SelectionPrepaymentEstimate? selectionPrepaymentEstimate;
+ 
+   factory QuoteSnapshotSaveResult.fromEnvelope(Map<String, dynamic> json) {
+     final data = Map<String, dynamic>.from(json['data'] as Map? ?? const {});
+@@ -907,13 +966,60 @@
+           ? Map<String, dynamic>.from(data['selection_context'] as Map)
+           : null,
+       quoteEstimateVersion: data['quote_estimate_version'] as String?,
+-      selectionTermsEstimate:
+-          SelectionTermsEstimate.tryParse(data['selection_terms_estimate']),
++      selectionTermsEstimate: SelectionTermsEstimate.tryParse(
++        data['selection_terms_estimate'],
++      ),
++      selectionPrepaymentEstimate: SelectionPrepaymentEstimate.tryParse(
++        data['selection_prepayment_estimate'],
++      ),
+     );
+   }
+ 
+   bool matches(QuoteSnapshotRequest request) {
+-    if (request.quoteEstimateVersion != null) {
++    if (request.quoteEstimateVersion == SelectionPrepaymentEstimate.version) {
++      final expected = request.expectedSelectionPrepaymentEstimate;
++      final contextEstimate = SelectionPrepaymentEstimate.tryParse(
++        selectionContext?['selection_prepayment_estimate'],
++      );
++      if (request.selection == null ||
++          expected == null ||
++          quoteEstimateVersion != request.quoteEstimateVersion ||
++          selectionContext?['quote_estimate_version'] !=
++              request.quoteEstimateVersion ||
++          selectionTermsEstimate != null ||
++          selectionContext?['selection_terms_estimate'] != null ||
++          selectionPrepaymentEstimate == null ||
++          contextEstimate == null ||
++          !expected.hasSameBinding(selectionPrepaymentEstimate!) ||
++          !expected.hasSameBinding(contextEstimate) ||
++          expected.monthlyPayment != request.monthlyPayment ||
++          expected.selectionFingerprint != request.selectionFingerprint ||
++          selectionContext?['monthly_payment'] != request.monthlyPayment ||
++          selectionContext?['selected_vehicle_price'] != request.vehiclePrice ||
++          selectionContext?['product_type'] != 'RENTAL' ||
++          selectionContext?['selection_contract_version'] !=
++              request.selectionContractVersion ||
++          selectionContext?['reference_vehicle_trim_id'] !=
++              expected.referenceVehicleTrimId ||
++          selectionContext?['guarantee'] != 0 ||
++          selectionContext?['guarantee_pct'] != 0 ||
++          (request.guarantee ?? 0) != 0 ||
++          (request.guaranteePct ?? 0) != 0 ||
++          !expected.matchesConditions(
++            term: selectionContext?['term_months'],
++            mileage: selectionContext?['mileage_limit'],
++            deposit: selectionContext?['deposit'],
++            prepaymentPct: selectionContext?['prepayment_pct'],
++            selectedVehiclePrice: selectionContext?['selected_vehicle_price'],
++          ) ||
++          expected.termMonths != request.termMonths ||
++          expected.annualKm != request.mileageLimit ||
++          (request.prepaymentPct != null
++              ? expected.requestedPrepaymentPct != request.prepaymentPct
++              : expected.requestedPrepaymentAmount != request.deposit)) {
++        return false;
++      }
++    } else if (request.quoteEstimateVersion != null) {
+       final expected = request.expectedSelectionTermsEstimate;
+       final contextEstimate = SelectionTermsEstimate.tryParse(
+           selectionContext?['selection_terms_estimate']);
+diff --git a/app/lib/models/quote.dart b/app/lib/models/quote.dart
+--- a/app/lib/models/quote.dart
++++ b/app/lib/models/quote.dart
+@@ -1,5 +1,6 @@
+ import 'quote_selection.dart';
+ import 'selection_terms_estimate.dart';
++import 'selection_prepayment_estimate.dart';
+ 
+ class QuoteBreakdownItem {
+   final String name;
+@@ -217,6 +218,7 @@
+   /// This is not a request to change the customer's chosen input unit.
+   final double? resolvedPrepaymentPct;
+   final SelectionTermsEstimate? selectionTermsEstimate;
++  final SelectionPrepaymentEstimate? selectionPrepaymentEstimate;
+ 
+   /// Local validation outcome, never accepted from a response boolean alone.
+   final bool strictPriceEvidenceAccepted;
+@@ -281,6 +283,7 @@
+     this.guaranteePct,
+     this.resolvedPrepaymentPct,
+     this.selectionTermsEstimate,
++    this.selectionPrepaymentEstimate,
+     this.strictPriceEvidenceAccepted = false,
+   });
+ 
+@@ -377,8 +380,12 @@
+           ? requestedGuaranteePct
+           : (json['guarantee_pct'] as num?)?.round(),
+       resolvedPrepaymentPct: (json['prepayment_pct'] as num?)?.toDouble(),
+-      selectionTermsEstimate:
+-          SelectionTermsEstimate.tryParse(json['selection_terms_estimate']),
++      selectionTermsEstimate: SelectionTermsEstimate.tryParse(
++        json['selection_terms_estimate'],
++      ),
++      selectionPrepaymentEstimate: SelectionPrepaymentEstimate.tryParse(
++        json['selection_prepayment_estimate'],
++      ),
+       strictPriceEvidenceAccepted: strictPriceEvidenceAccepted,
+     );
+   }
+@@ -390,6 +397,37 @@
+       (pricingContextVersion ?? '').trim().isNotEmpty &&
+       selectedVehiclePrice != null &&
+       selectedVehiclePrice! > 0;
++
++  bool get isSelectionPrepaymentEstimate =>
++      !strictPriceEvidenceAccepted &&
++      selectionPrepaymentEstimate != null &&
++      selectionTermsEstimate == null &&
++      productType == 'RENTAL' &&
++      hasSelectionPricingProof &&
++      normalizedSelection!.inventoryItemId == null &&
++      guarantee == 0 &&
++      (guaranteePct ?? 0) == 0 &&
++      selectionPrepaymentEstimate!.monthlyPayment == monthlyPayment &&
++      selectionPrepaymentEstimate!.selectionFingerprint ==
++          selectionFingerprint &&
++      selectionPrepaymentEstimate!.referenceVehicleTrimId ==
++          referenceVehicleTrimId &&
++      selectionPrepaymentEstimate!.matchesConditions(
++        term: term,
++        mileage: mileageLimit,
++        deposit: deposit,
++        prepaymentPct: resolvedPrepaymentPct,
++        selectedVehiclePrice: selectedVehiclePrice,
++      );
++
++  bool get isCustomerEstimate =>
++      isSelectionTermsEstimate || isSelectionPrepaymentEstimate;
++
++  String? get quoteEstimateVersion => isSelectionPrepaymentEstimate
++      ? SelectionPrepaymentEstimate.version
++      : isSelectionTermsEstimate
++      ? SelectionTermsEstimate.version
++      : null;
+ 
+   bool get isSelectionTermsEstimate =>
+       !strictPriceEvidenceAccepted &&
+diff --git a/app/lib/models/selection_prepayment_estimate.dart b/app/lib/models/selection_prepayment_estimate.dart
+new file mode 100644
+--- /dev/null
++++ b/app/lib/models/selection_prepayment_estimate.dart
+@@ -0,0 +1,163 @@
++import 'selection_terms_estimate.dart';
++
++/// A zero-advance source plus a server-calculated requested advance delta.
++/// Source conditions remain distinct from requested/provider finance terms.
++class SelectionPrepaymentEstimate {
++  static const version = 'selection_prepayment_estimate_v1';
++  static const policyVersion = 'zero_prepayment_delta_v1';
++
++  const SelectionPrepaymentEstimate._({
++    required this.monthlyPayment,
++    required this.sourceRevision,
++    required this.sourceRecordId,
++    required this.referenceVehicleTrimId,
++    required this.selectionFingerprint,
++    required this.termMonths,
++    required this.annualKm,
++    required this.requestedPrepaymentAmount,
++    required this.requestedPrepaymentPct,
++  });
++
++  final int monthlyPayment;
++  final String sourceRevision;
++  final String sourceRecordId;
++  final String referenceVehicleTrimId;
++  final String selectionFingerprint;
++  final int termMonths;
++  final int annualKm;
++  final int requestedPrepaymentAmount;
++  final double requestedPrepaymentPct;
++
++  static SelectionPrepaymentEstimate? tryParse(Object? raw) {
++    if (raw is! Map ||
++        !SelectionTermsEstimate.hasExactStrings(raw.keys.toList(), const [
++          'version',
++          'verified',
++          'policy_version',
++          'quote_kind',
++          'product_type',
++          'monthly_payment',
++          'source_revision',
++          'source_record_id',
++          'reference_vehicle_trim_id',
++          'selection_fingerprint',
++          'source_conditions',
++          'source_prepayment_amount',
++          'requested_prepayment_amount',
++          'requested_prepayment_pct',
++          'unverified_conditions',
++        ]) ||
++        raw['version'] != version ||
++        raw['verified'] != true ||
++        raw['policy_version'] != policyVersion ||
++        raw['quote_kind'] != 'ESTIMATE' ||
++        raw['product_type'] != 'RENTAL' ||
++        raw['monthly_payment'] is! int ||
++        (raw['monthly_payment'] as int) <= 0 ||
++        (raw['monthly_payment'] as int) > 10000000 ||
++        raw['source_revision'] is! String ||
++        !RegExp(
++          r'^sha256:[0-9a-f]{64}$',
++        ).hasMatch(raw['source_revision'] as String) ||
++        ![raw['source_record_id'], raw['reference_vehicle_trim_id']].every(
++          (value) =>
++              value is String && value.isNotEmpty && value.trim() == value,
++        ) ||
++        raw['selection_fingerprint'] is! String ||
++        !RegExp(
++          r'^[0-9a-f]{64}$',
++        ).hasMatch(raw['selection_fingerprint'] as String) ||
++        raw['source_prepayment_amount'] is! int ||
++        raw['source_prepayment_amount'] != 0 ||
++        raw['requested_prepayment_amount'] is! int ||
++        (raw['requested_prepayment_amount'] as int) <= 0 ||
++        raw['requested_prepayment_pct'] is! num ||
++        !(raw['requested_prepayment_pct'] as num).isFinite ||
++        (raw['requested_prepayment_pct'] as num) <= 0 ||
++        (raw['requested_prepayment_pct'] as num) > 100 ||
++        !SelectionTermsEstimate.hasExactStrings(
++          raw['unverified_conditions'],
++          const ['guarantee', 'provider_prepayment_terms'],
++        )) {
++      return null;
++    }
++    final conditions = raw['source_conditions'];
++    if (conditions is! Map ||
++        !SelectionTermsEstimate.hasExactStrings(
++          conditions.keys.toList(),
++          const ['term_months', 'annual_km', 'prepayment_pct'],
++        ) ||
++        conditions['term_months'] is! int ||
++        (conditions['term_months'] as int) <= 0 ||
++        conditions['annual_km'] is! int ||
++        (conditions['annual_km'] as int) < 0 ||
++        conditions['prepayment_pct'] is! num ||
++        conditions['prepayment_pct'] != 0) {
++      return null;
++    }
++    return SelectionPrepaymentEstimate._(
++      monthlyPayment: raw['monthly_payment'] as int,
++      sourceRevision: raw['source_revision'] as String,
++      sourceRecordId: raw['source_record_id'] as String,
++      referenceVehicleTrimId: raw['reference_vehicle_trim_id'] as String,
++      selectionFingerprint: raw['selection_fingerprint'] as String,
++      termMonths: conditions['term_months'] as int,
++      annualKm: conditions['annual_km'] as int,
++      requestedPrepaymentAmount: raw['requested_prepayment_amount'] as int,
++      requestedPrepaymentPct: (raw['requested_prepayment_pct'] as num)
++          .toDouble(),
++    );
++  }
++
++  bool hasSameBinding(SelectionPrepaymentEstimate other) =>
++      monthlyPayment == other.monthlyPayment &&
++      sourceRevision == other.sourceRevision &&
++      sourceRecordId == other.sourceRecordId &&
++      referenceVehicleTrimId == other.referenceVehicleTrimId &&
++      selectionFingerprint == other.selectionFingerprint &&
++      termMonths == other.termMonths &&
++      annualKm == other.annualKm &&
++      requestedPrepaymentAmount == other.requestedPrepaymentAmount &&
++      requestedPrepaymentPct == other.requestedPrepaymentPct;
++
++  /// Validate request units only. Monthly payment is never calculated here.
++  bool matchesConditions({
++    required Object? term,
++    required Object? mileage,
++    required Object? deposit,
++    required Object? prepaymentPct,
++    required Object? selectedVehiclePrice,
++  }) =>
++      term == termMonths &&
++      mileage == annualKm &&
++      deposit == requestedPrepaymentAmount &&
++      prepaymentPct == requestedPrepaymentPct &&
++      selectedVehiclePrice is int &&
++      selectedVehiclePrice > 0 &&
++      (selectedVehiclePrice * requestedPrepaymentPct / 100 -
++                  requestedPrepaymentAmount)
++              .abs() <=
++          1;
++
++  Map<String, dynamic> toJson() => {
++    'version': version,
++    'verified': true,
++    'policy_version': policyVersion,
++    'quote_kind': 'ESTIMATE',
++    'product_type': 'RENTAL',
++    'monthly_payment': monthlyPayment,
++    'source_revision': sourceRevision,
++    'source_record_id': sourceRecordId,
++    'reference_vehicle_trim_id': referenceVehicleTrimId,
++    'selection_fingerprint': selectionFingerprint,
++    'source_conditions': {
++      'term_months': termMonths,
++      'annual_km': annualKm,
++      'prepayment_pct': 0,
++    },
++    'source_prepayment_amount': 0,
++    'requested_prepayment_amount': requestedPrepaymentAmount,
++    'requested_prepayment_pct': requestedPrepaymentPct,
++    'unverified_conditions': ['guarantee', 'provider_prepayment_terms'],
++  };
++}
+diff --git a/app/lib/screens/garage_screen.dart b/app/lib/screens/garage_screen.dart
+--- a/app/lib/screens/garage_screen.dart
++++ b/app/lib/screens/garage_screen.dart
+@@ -1813,16 +1813,18 @@
+                         final resolvedMonthly = monthly ?? snapshot.data;
+                         return _GarageReportPaymentPanel(
+                           monthly: resolvedMonthly,
++                          selectionPrepaymentEstimate:
++                              item.hasSelectionPrepaymentEstimateSnapshot,
+                           selectionTermsEstimate:
+                               resolvedMonthly == _monthlyFor(item) &&
+-                                  item.isSelectionTermsEstimateAmount(
++                                  item.isCustomerEstimateAmount(
+                                       resolvedMonthly,
+                                       source: item.priceSource),
+                         );
+                       },
+                     ),
+                   ),
+-                  if (!item.hasSelectionTermsEstimateSnapshot &&
++                  if (!item.hasCustomerEstimateSnapshot &&
+                       quotes.isNotEmpty) ...[
+                     const SizedBox(height: 18),
+                     Padding(
+@@ -1876,10 +1878,12 @@
+   const _GarageReportPaymentPanel({
+     required this.monthly,
+     this.selectionTermsEstimate = false,
++    this.selectionPrepaymentEstimate = false,
+   });
+ 
+   final int? monthly;
+   final bool selectionTermsEstimate;
++  final bool selectionPrepaymentEstimate;
+ 
+   @override
+   Widget build(BuildContext context) {
+@@ -1934,8 +1938,12 @@
+           ),
+           if (selectionTermsEstimate) ...[
+             const SizedBox(height: 6),
+-            const Text('보증금 원본 미기재·확인 필요',
+-                style: TextStyle(fontSize: 12, height: 1.4)),
++            Text(
++              selectionPrepaymentEstimate
++                  ? '보증금·금융사 조건 확인 필요'
++                  : '보증금 원본 미기재·확인 필요',
++              style: const TextStyle(fontSize: 12, height: 1.4),
++            ),
+           ],
+         ],
+       ),
+@@ -2560,7 +2568,7 @@
+         final report = snap.data;
+         if (report == null ||
+             (report.financeQuotes.isEmpty &&
+-                !widget.item.isSelectionTermsEstimateAmount(
++                !widget.item.isCustomerEstimateAmount(
+                     report.displayMonthlyPayment ??
+                         report.submittedMonthlyPayment,
+                     source: report.priceSource))) {
+@@ -2903,8 +2911,8 @@
+   }
+ 
+   Widget _buildComparison(EstimateReportDetail report) {
+-    final hasScopedSnapshot = widget.item.hasSelectionTermsEstimateSnapshot;
+-    final scopedEstimate = widget.item.isSelectionTermsEstimateAmount(
++    final hasScopedSnapshot = widget.item.hasCustomerEstimateSnapshot;
++    final scopedEstimate = widget.item.isCustomerEstimateAmount(
+         report.displayMonthlyPayment ?? report.submittedMonthlyPayment,
+         source: report.priceSource);
+     final quotes = [...report.financeQuotes]
+@@ -2958,8 +2966,12 @@
+           ),
+         if (scopedEstimate) ...[
+           const SizedBox(height: 6),
+-          _pad(const Text('보증금 원본 미기재·확인 필요',
+-              style: TextStyle(fontSize: 12, height: 1.4))),
++          _pad(Text(
++            widget.item.hasSelectionPrepaymentEstimateSnapshot
++                ? '보증금·금융사 조건 확인 필요'
++                : '보증금 원본 미기재·확인 필요',
++            style: const TextStyle(fontSize: 12, height: 1.4),
++          )),
+         ],
+         const SizedBox(height: 28),
+         if (!hasScopedSnapshot && quotes.isNotEmpty)
+@@ -5937,7 +5949,7 @@
+     final asset = resolveVehicleAsset(brand: brand, modelName: name);
+     final monthly = _monthlyFor(item);
+     final scopedEstimate =
+-        item.isSelectionTermsEstimateAmount(monthly, source: item.priceSource);
++        item.isCustomerEstimateAmount(monthly, source: item.priceSource);
+     final monthlyLabel = scopedEstimate
+         ? '예상 월납'
+         : item.priceSource == 'ADMIN_SENT_QUOTE'
+@@ -6468,9 +6480,11 @@
+     final financeCompany =
+         item.activeQuoteFinanceCompany ?? item.financeCompany;
+     final scopedEstimate =
+-        item.isSelectionTermsEstimateAmount(monthly, source: item.priceSource);
++        item.isCustomerEstimateAmount(monthly, source: item.priceSource);
+     final monthlyFooter = scopedEstimate
+-        ? '예상 월납이에요. 보증금은 원본에 기재되지 않아 확인이 필요해요.'
++        ? (item.hasSelectionPrepaymentEstimateSnapshot
++            ? '예상 월납이에요. 보증금·금융사 조건 확인 필요'
++            : '예상 월납이에요. 보증금은 원본에 기재되지 않아 확인이 필요해요.')
+         : item.priceSource == 'ADMIN_SENT_QUOTE'
+             ? '관리자가 고객에게 발송한 최신 맞춤 견적 금액이에요.'
+             : '위 금액은 신청 당시 선택 조건 기준이며, 실제 계약 전 조건이 변동될 수 있어요.';
+diff --git a/app/lib/screens/quote_configurator_screen.dart b/app/lib/screens/quote_configurator_screen.dart
+--- a/app/lib/screens/quote_configurator_screen.dart
++++ b/app/lib/screens/quote_configurator_screen.dart
+@@ -51,6 +51,7 @@
+     try {
+       final quote = await QuoteApi.createInstantQuote(
+         allowSelectionTermsEstimate: true,
++        allowSelectionPrepaymentEstimate: true,
+         vehicleId: widget.vehicle.id,
+         productType: 'RENTAL',
+         term: _selectedTerm,
+diff --git a/app/lib/screens/quote_input_screen.dart b/app/lib/screens/quote_input_screen.dart
+--- a/app/lib/screens/quote_input_screen.dart
++++ b/app/lib/screens/quote_input_screen.dart
+@@ -93,6 +93,7 @@
+     try {
+       final quote = await QuoteApi.createInstantQuote(
+         allowSelectionTermsEstimate: true,
++        allowSelectionPrepaymentEstimate: true,
+         vehicleId: widget.vehicle.id,
+         selection: selection,
+         productType: _productType,
+diff --git a/app/lib/screens/quote_result_screen.dart b/app/lib/screens/quote_result_screen.dart
+--- a/app/lib/screens/quote_result_screen.dart
++++ b/app/lib/screens/quote_result_screen.dart
+@@ -424,8 +424,9 @@
+       application.data.id,
+       kcbScore: CreditRecommendationApi.sessionKcbScore,
+       niceScore: CreditRecommendationApi.sessionNiceScore,
+-      companyKey: _displayedQuote.data.isSelectionTermsEstimate
+-          ? null : widget.bestCapitalCompanyKey,
++      companyKey: _displayedQuote.data.isCustomerEstimate
++          ? null
++          : widget.bestCapitalCompanyKey,
+     );
+ 
+     if (!mounted) return;
+@@ -648,7 +649,9 @@
+       vehicleBrand: widget.vehicleBrand,
+       trimName: _selectedTrim?.label ?? widget.trimName,
+       selectedOptions: _selectedSnapshotSummary,
+-      financeCompany: data.isSelectionTermsEstimate ? null : widget.bestCapitalCompany,
++      financeCompany: data.isCustomerEstimate
++          ? null
++          : widget.bestCapitalCompany,
+       quoteType: _selectedProduct.snapshotValue,
+       vehiclePrice: selection == null
+           ? data.vehiclePrice
+@@ -680,10 +683,13 @@
+       guarantee: data.guarantee,
+       prepaymentPct: data.prepaymentPct,
+       guaranteePct: data.guaranteePct,
+-      quoteEstimateVersion: data.isSelectionTermsEstimate
+-          ? 'selection_terms_estimate_v1' : null,
++      quoteEstimateVersion: data.quoteEstimateVersion,
+       expectedSelectionTermsEstimate: data.isSelectionTermsEstimate
+-          ? data.selectionTermsEstimate : null,
++          ? data.selectionTermsEstimate
++          : null,
++      expectedSelectionPrepaymentEstimate: data.isSelectionPrepaymentEstimate
++          ? data.selectionPrepaymentEstimate
++          : null,
+     );
+   }
+ 
+@@ -703,8 +709,12 @@
+     if (_selectedSecurityDeposit > 0) {
+       parts.add('보증금: ${_formatWonFull(_selectedSecurityDeposit)}');
+     }
+-    if (_displayedQuote.data.isSelectionTermsEstimate) {
+-      parts.add('보증금 원본 미기재·확인 필요');
++    if (_displayedQuote.data.isCustomerEstimate) {
++      parts.add(
++        _displayedQuote.data.isSelectionPrepaymentEstimate
++            ? '보증금·금융사 조건 확인 필요'
++            : '보증금 원본 미기재·확인 필요',
++      );
+     } else {
+     parts.add('대물보험: $_selectedInsuranceLimit');
+     }
+@@ -1508,6 +1518,7 @@
+       final current = _displayedQuote.data;
+       final quote = await QuoteApi.createInstantQuote(
+         allowSelectionTermsEstimate: true,
++        allowSelectionPrepaymentEstimate: true,
+         vehicleId: current.vehicleId,
+         selection: selection,
+         term: _selectedContractMonths,
+@@ -1855,7 +1866,7 @@
+   }
+ 
+   Future<void> _openInsuranceLimitPicker() async {
+-    if (!_canEditSelections || _displayedQuote.data.isSelectionTermsEstimate) return;
++    if (!_canEditSelections || _displayedQuote.data.isCustomerEstimate) return;
+     final picked = await _showChoiceSheet<String>(
+       title: '대물보험 선택',
+       items: const ['1억원', '2억원', '3억원', '5억원'],
+@@ -1880,7 +1891,7 @@
+     required ValueChanged<_QuotePaymentSelection> onChanged,
+   }) async {
+     if (!_canEditSelections) return;
+-    if (title == '보증금' && _displayedQuote.data.isSelectionTermsEstimate) {
++    if (title == '보증금' && _displayedQuote.data.isCustomerEstimate) {
+       ScaffoldMessenger.of(context).showSnackBar(
+         const SnackBar(content: Text('보증금이 있는 조건은 담당자에게 확인해 주세요.')),
+       );
+@@ -2100,7 +2111,7 @@
+                 vehicleBrand: widget.vehicleBrand,
+                 vehicleThumbnailUrl: widget.vehicleThumbnailUrl,
+               ),
+-              if (data.isSelectionTermsEstimate && _isQuoteCurrent) ...[
++              if (data.isCustomerEstimate && _isQuoteCurrent) ...[
+                 const SizedBox(height: 18),
+                 Row(
+                   key: const ValueKey('quote-selection-terms-estimate-monthly'),
+@@ -2118,8 +2129,12 @@
+                   ],
+                 ),
+                 const SizedBox(height: 6),
+-                const Text('보증금은 원본에 기재되지 않아 확인이 필요해요.',
+-                    style: TextStyle(fontSize: 12, height: 1.4)),
++                Text(
++                  data.isSelectionPrepaymentEstimate
++                      ? '보증금·금융사 조건 확인 필요'
++                      : '보증금은 원본에 기재되지 않아 확인이 필요해요.',
++                  style: const TextStyle(fontSize: 12, height: 1.4),
++                ),
+               ],
+               const SizedBox(height: 30),
+               _QuoteAnalysisSection(
+@@ -2230,22 +2245,24 @@
+                   ),
+                   _QuoteAnalysisRowData(
+                     label: '보증금',
+-                    value: data.isSelectionTermsEstimate
+-                        ? '원본 미기재·확인 필요'
++                    value: data.isCustomerEstimate
++                        ? (data.isSelectionPrepaymentEstimate
++                              ? '조건 확인 필요'
++                              : '원본 미기재·확인 필요')
+                         : _paymentLabel(
+-                      _selectedSecurityDeposit,
+-                      _selectedGuaranteePct,
+-                    ),
+-                    onTap: _canEditSelections && !data.isSelectionTermsEstimate
++                            _selectedSecurityDeposit,
++                            _selectedGuaranteePct,
++                          ),
++                    onTap: _canEditSelections && !data.isCustomerEstimate
+                         ? () => _openAmountPicker(
+-                              title: '보증금',
+-                              currentAmount: _selectedSecurityDeposit,
+-                              currentPercentage: _selectedGuaranteePct,
+-                              onChanged: (selection) {
+-                                _selectedSecurityDeposit = selection.amount;
+-                                _selectedGuaranteePct = selection.percentage;
+-                              },
+-                            )
++                            title: '보증금',
++                            currentAmount: _selectedSecurityDeposit,
++                            currentPercentage: _selectedGuaranteePct,
++                            onChanged: (selection) {
++                              _selectedSecurityDeposit = selection.amount;
++                              _selectedGuaranteePct = selection.percentage;
++                            },
++                          )
+                         : null,
+                   ),
+                   _QuoteAnalysisRowData(
+@@ -2261,11 +2278,12 @@
+                   ),
+                   _QuoteAnalysisRowData(
+                     label: '대물보험',
+-                    value: data.isSelectionTermsEstimate
+-                        ? '조건 확인 필요' : _selectedInsuranceLimit,
+-                    onTap:
+-                        _canEditSelections && !data.isSelectionTermsEstimate
+-                            ? _openInsuranceLimitPicker : null,
++                    value: data.isCustomerEstimate
++                        ? '조건 확인 필요'
++                        : _selectedInsuranceLimit,
++                    onTap: _canEditSelections && !data.isCustomerEstimate
++                        ? _openInsuranceLimitPicker
++                        : null,
+                   ),
+                 ],
+               ),
+diff --git a/app/lib/screens/vehicle_detail_screen.dart b/app/lib/screens/vehicle_detail_screen.dart
+--- a/app/lib/screens/vehicle_detail_screen.dart
++++ b/app/lib/screens/vehicle_detail_screen.dart
+@@ -692,6 +692,7 @@
+         final quote = await QuoteApi.createInstantQuote(
+           cancelToken: cancelToken,
+           allowSelectionTermsEstimate: true,
++          allowSelectionPrepaymentEstimate: true,
+           vehicleId: vehicle.id,
+           term: _term,
+           deposit: 0,
+@@ -752,6 +753,7 @@
+       final quote = await QuoteApi.createInstantQuote(
+         cancelToken: cancelToken,
+         allowSelectionTermsEstimate: true,
++        allowSelectionPrepaymentEstimate: true,
+         vehicleId: vehicle.id,
+         selection: selection,
+         term: _term,
+@@ -2877,6 +2879,7 @@
+         fallbackSerial = ++_selectionQuoteRequestSerial;
+         final instant = await QuoteApi.createInstantQuote(
+           allowSelectionTermsEstimate: true,
++          allowSelectionPrepaymentEstimate: true,
+           vehicleId: vehicle.id,
+           selection: selection,
+           term: months,
+@@ -3165,6 +3168,7 @@
+         }
+         final legacyQuote = await QuoteApi.createInstantQuote(
+           allowSelectionTermsEstimate: true,
++          allowSelectionPrepaymentEstimate: true,
+           vehicleId: vehicle.id,
+           term: _term,
+           deposit: 0,
+@@ -3218,6 +3222,7 @@
+         });
+         quote = await QuoteApi.createInstantQuote(
+           allowSelectionTermsEstimate: true,
++          allowSelectionPrepaymentEstimate: true,
+           vehicleId: vehicle.id,
+           selection: selection,
+           term: _term,
+@@ -4162,7 +4167,7 @@
+           mainAxisSize: MainAxisSize.min,
+           children: [
+             Text(
+-              _latestSelectionQuote?.data.isSelectionTermsEstimate == true
++              _latestSelectionQuote?.data.isCustomerEstimate == true
+                   ? '예상 월납'
+                   : '월 납입료',
+               maxLines: 1,
+@@ -4300,8 +4305,12 @@
+           runSpacing: 6,
+           children: _effectiveIsLongRent
+               ? [
+-                  if (_latestSelectionQuote?.data.isSelectionTermsEstimate == true)
+-                    _buildTag('보증금 원본 미기재·확인 필요')
++                  if (_latestSelectionQuote?.data.isCustomerEstimate == true)
++                    _buildTag(
++                      _latestSelectionQuote!.data.isSelectionPrepaymentEstimate
++                          ? '보증금·금융사 조건 확인 필요'
++                          : '보증금 원본 미기재·확인 필요',
++                    )
+                   else ...[
+                     _buildTag('보험료·자동차세 포함', highlight: true),
+                     _buildTag('부가세 포함'),
+@@ -6903,7 +6912,7 @@
+   // ── 캐피탈 비교 탭 (lookup 기반) ────────────────────────────────────────
+   Widget _buildCapitalTab(VehicleDetail vehicle, int trimPrice) {
+     if (_hasCurrentCanonicalMonthly &&
+-        _latestSelectionQuote?.data.isSelectionTermsEstimate == true) {
++        _latestSelectionQuote?.data.isCustomerEstimate == true) {
+       return const Padding(
+         padding: EdgeInsets.all(20),
+         child: Text('선택 조건의 예상 월납이에요. 금융사별 최종 조건은 확인 후 안내해 드려요.'),
+diff --git a/app/lib/services/quote_api.dart b/app/lib/services/quote_api.dart
+--- a/app/lib/services/quote_api.dart
++++ b/app/lib/services/quote_api.dart
+@@ -3,6 +3,7 @@
+ import 'package:dio/dio.dart';
+ import '../models/quote.dart';
+ import '../models/quote_selection.dart';
++import '../models/selection_prepayment_estimate.dart';
+ import 'api_client.dart';
+ import 'quote_price_evidence.dart';
+ import 'vehicle_api.dart';
+@@ -61,6 +62,7 @@
+     int? prepaymentPct,
+     int? guaranteePct,
+     bool allowSelectionTermsEstimate = false,
++    bool allowSelectionPrepaymentEstimate = false,
+   }) {
+     QuotePriceEvidence.validate(
+       data,
+@@ -74,6 +76,7 @@
+       prepaymentPct: prepaymentPct,
+       guaranteePct: guaranteePct,
+       allowSelectionTermsEstimate: allowSelectionTermsEstimate,
++      allowSelectionPrepaymentEstimate: allowSelectionPrepaymentEstimate,
+     );
+   }
+ 
+@@ -94,6 +97,7 @@
+     int? vehiclePriceOverride,
+     QuoteSelection? selection,
+     bool allowSelectionTermsEstimate = false,
++    bool allowSelectionPrepaymentEstimate = false,
+     String productType = 'RENTAL',
+     String? referralCode,
+     CancelToken? cancelToken,
+@@ -170,6 +174,8 @@
+           data: {
+             'vehicle_id': vehicleId,
+             'selection_contract_version': QuoteSelection.contractVersion,
++            if (allowSelectionPrepaymentEstimate)
++              'estimate_policy_version': SelectionPrepaymentEstimate.policyVersion,
+             'selection': resolvedSelection.toJson(),
+             'product_type': normalizedProductType,
+             'term': term,
+@@ -200,6 +206,7 @@
+           prepaymentPct: prepaymentPct,
+           guaranteePct: guaranteePct,
+           allowSelectionTermsEstimate: allowSelectionTermsEstimate,
++          allowSelectionPrepaymentEstimate: allowSelectionPrepaymentEstimate,
+         );
+         return QuoteEnvelope.fromJson(
+           json,
+diff --git a/app/lib/services/quote_price_evidence.dart b/app/lib/services/quote_price_evidence.dart
+--- a/app/lib/services/quote_price_evidence.dart
++++ b/app/lib/services/quote_price_evidence.dart
+@@ -1,5 +1,6 @@
+ import '../models/quote_selection.dart';
+ import '../models/selection_terms_estimate.dart';
++import '../models/selection_prepayment_estimate.dart';
+ 
+ /// A fresh quote lacks evidence for the customer's actual request.
+ /// This is intentionally independent of parsing historical saved quotes.
+@@ -82,6 +83,7 @@
+     int? prepaymentPct,
+     int? guaranteePct,
+     bool allowSelectionTermsEstimate = false,
++    bool allowSelectionPrepaymentEstimate = false,
+   }) {
+     Never reject(String reason) => throw QuoteConditionsUnverified(reason);
+     bool nonempty(Object? value) => value is String && value.trim().isNotEmpty;
+@@ -125,6 +127,7 @@
+     // Additive newer-server amount evidence is optional for old v1 servers,
+     // but, when present, must not contradict the actual displayed amount.
+     if (data['selection_terms_estimate'] == null &&
++        data['selection_prepayment_estimate'] == null &&
+         data.containsKey('condition_verified_monthly_payment') &&
+         (data['condition_verified_monthly_payment'] is! int ||
+             data['condition_verified_monthly_payment'] !=
+@@ -167,6 +170,19 @@
+         data['guarantee'] != 0 ||
+         (data['guarantee_pct'] != null && data['guarantee_pct'] != 0)) {
+       reject('NONZERO_GUARANTEE_UNVERIFIED');
++    }
++
++    if (data['selection_prepayment_estimate'] != null) {
++      if (!allowSelectionPrepaymentEstimate) {
++        reject('SELECTION_PREPAYMENT_ESTIMATE_NOT_REQUESTED');
++      }
++      _validateSelectionPrepaymentEstimate(
++        data,
++        selection: selection,
++        term: term,
++        mileageLimit: mileageLimit,
++      );
++      return false;
+     }
+ 
+     if (data['selection_terms_estimate'] != null) {
+@@ -334,6 +350,121 @@
+       }
+     }
+     return true;
++  }
++
++  /// The zero source is verified separately from the requested advance.
++  /// Never route this policy through the old request-matched source guard.
++  static void _validateSelectionPrepaymentEstimate(
++    Map<String, dynamic> data, {
++    required QuoteSelection selection,
++    required int term,
++    required int mileageLimit,
++  }) {
++    Never reject(String reason) => throw QuoteConditionsUnverified(reason);
++    final estimate = SelectionPrepaymentEstimate.tryParse(
++      data['selection_prepayment_estimate'],
++    );
++    final proof = data['price_provenance'];
++    if (estimate == null ||
++        data['selection_terms_estimate'] != null ||
++        selection.inventoryItemId != null ||
++        estimate.monthlyPayment != data['monthly_payment'] ||
++        estimate.selectionFingerprint != data['selection_fingerprint'] ||
++        estimate.referenceVehicleTrimId != data['reference_vehicle_trim_id'] ||
++        !estimate.matchesConditions(
++          term: term,
++          mileage: mileageLimit,
++          deposit: data['deposit'],
++          prepaymentPct: data['prepayment_pct'],
++          selectedVehiclePrice: data['selected_vehicle_price'],
++        ) ||
++        data['reference_vehicle_price'] is! int ||
++        (data['reference_vehicle_price'] as int) <= 0 ||
++        data['selection_pricing_applied'] != true ||
++        data['market_pricing_applied'] != true ||
++        data['trim_pricing_applied'] != true ||
++        data['selection_pricing_source'] != 'MARKET_SELECTION_DELTA_V1' ||
++        data['pricing_basis'] != 'MARKET_SELECTION_DELTA_V1' ||
++        data['price_source'] != 'CHAZM_IMPORTED' ||
++        (data['source'] != null && data['source'] != data['price_source']) ||
++        data['pricing_context_version'] is! String ||
++        !RegExp(
++          r'^selection-market-v1:[0-9a-f]{16}$',
++        ).hasMatch(data['pricing_context_version'] as String) ||
++        data['condition_verified_monthly_payment'] != null ||
++        proof is! Map ||
++        proof['version'] != 'price_provenance_v1' ||
++        proof['processed_product_type'] != 'RENTAL' ||
++        proof['quote_kind'] != 'ESTIMATE' ||
++        proof['calculation_method'] !=
++            'MARKET_REFERENCE_PLUS_EXISTING_SELECTION_DELTA' ||
++        proof['request_conditions_verified'] != false ||
++        proof['sales_ai_eligible'] != false ||
++        proof['provider_generated_at'] != null ||
++        proof['valid_until'] != null) {
++      reject('SELECTION_PREPAYMENT_ESTIMATE_INVALID');
++    }
++    final market = proof['market_price'];
++    if (market is! Map ||
++        market['source'] != 'CHAZM_IMPORTED' ||
++        market['product_type'] != 'RENTAL' ||
++        !const [
++          'EXACT',
++          'NORMALIZED_EXACT',
++        ].contains(market['vehicle_match']) ||
++        market['source_record_id'] != estimate.sourceRecordId ||
++        data['market_source_record_id'] != estimate.sourceRecordId ||
++        market['source_revision'] != estimate.sourceRevision ||
++        market['calculation_method'] != 'CHAZM_EXACT_CONDITION_LOOKUP' ||
++        !SelectionTermsEstimate.hasExactStrings(market['methods'], const [
++          'CONDITION_DIRECT',
++        ])) {
++      reject('SELECTION_PREPAYMENT_SOURCE_INVALID');
++    }
++    final missingGuarantee = SelectionTermsEstimate.hasExactStrings(
++      market['unknown_reasons'],
++      const ['SOURCE_GUARANTEE_UNRECORDED'],
++    );
++    final exactSource = SelectionTermsEstimate.hasExactStrings(
++      market['unknown_reasons'],
++      const <String>[],
++    );
++    if (!((missingGuarantee && market['match_status'] == 'UNKNOWN') ||
++            (exactSource && market['match_status'] == 'EXACT')) ||
++        !SelectionTermsEstimate.hasExactStrings(proof['unsupported_reasons'], {
++          'SOURCE_CONDITIONS_NOT_EXACTLY_VERIFIED',
++          'NONZERO_PREPAYMENT_OUT_OF_INITIAL_SCOPE',
++          if (selection.selectedOptionIds.isNotEmpty)
++            'OPTIONS_OUT_OF_INITIAL_SCOPE',
++          if (selection.exteriorColorId != null ||
++              selection.interiorColorId != null)
++            'COLOR_OR_INVENTORY_OUT_OF_INITIAL_SCOPE',
++        })) {
++      reject('SELECTION_PREPAYMENT_SCOPE_INVALID');
++    }
++    bool zeroConditions(Object? value) =>
++        value is Map &&
++        value['term_months'] == term &&
++        value['annual_km'] == mileageLimit &&
++        value['prepayment_pct'] == 0;
++    final matches = market['condition_match'];
++    final points = market['source_points'];
++    if (!zeroConditions(market['applied_conditions']) ||
++        matches is! Map ||
++        !const [
++          'term_months',
++          'annual_km',
++          'prepayment_pct',
++        ].every((key) => matches[key] == 'EXACT') ||
++        points is! List ||
++        points.length != 1 ||
++        points.single is! Map ||
++        (points.single as Map)['role'] != 'BASE' ||
++        (points.single as Map)['path'] !=
++            'products.rent.conditionMonthly.$term:0:$mileageLimit' ||
++        !zeroConditions((points.single as Map)['conditions'])) {
++      reject('SELECTION_PREPAYMENT_CONDITIONS_MISMATCH');
++    }
+   }
+ 
+   /// Separate, versioned estimate contract. This does not accept arbitrary
+diff --git a/app/test/absolute_prepayment_evidence_test.dart b/app/test/absolute_prepayment_evidence_test.dart
+--- a/app/test/absolute_prepayment_evidence_test.dart
++++ b/app/test/absolute_prepayment_evidence_test.dart
+@@ -161,15 +161,16 @@
+     }
+ 
+     test(
+-      '$path rejects an integer-valued double source reference on native',
++      '$path rejects integer-valued double source reference price on VM',
+       () {
+-        final data = _data(strict: strict)
+-          ..['reference_vehicle_price'] = 45000000.0;
++        final data = _data(strict: strict);
++        data['reference_vehicle_price'] = 45000000.0;
+         expect(() => _validate(data), _rejected);
+       },
++      // JavaScript numbers normalize 45000000.0 to an int. The fractional
++      // 45000000.5 case below must still be rejected on every platform.
+       skip: kIsWeb
+-          ? 'JavaScript numbers do not preserve the int/double distinction for '
+-              'integer-valued numbers; fractional values are tested separately.'
++          ? 'JavaScript cannot retain the VM int/double distinction for .0.'
+           : false,
+     );
+ 
+@@ -179,7 +180,7 @@
+       'negative': -45000000,
+       'different': 50000000,
+       'string': '45000000',
+-      'fractional value': 45000000.5,
++      'fractional amount': 45000000.5,
+       'boolean': true,
+       'nonfinite': double.nan,
+     };
+diff --git a/app/test/fixtures/synthetic_selection_prepayment_api.json b/app/test/fixtures/synthetic_selection_prepayment_api.json
+new file mode 100644
+--- /dev/null
++++ b/app/test/fixtures/synthetic_selection_prepayment_api.json
+@@ -0,0 +1,348 @@
++{
++  "synthetic": true,
++  "quote_request": {
++    "vehicle_id": "selection-vehicle",
++    "selection_contract_version": "selection_v1",
++    "product_type": "RENTAL",
++    "term": 48,
++    "deposit": 0,
++    "guarantee": 0,
++    "mileage_limit": 10000,
++    "selection": {
++      "vehicle_trim_id": "selection-default-trim",
++      "selected_option_ids": []
++    },
++    "prepayment_pct": 20,
++    "estimate_policy_version": "zero_prepayment_delta_v1"
++  },
++  "quote_data": {
++    "term": 48,
++    "deposit": 9000000,
++    "mileage_limit": 10000,
++    "monthly_payment": 536600,
++    "otd_total": 47300000,
++    "vehicle_price": 45000000,
++    "residual_value": 17325000,
++    "residual_pct": 0.385,
++    "versions": {
++      "formula_version": "lease_balloon_excel_v2",
++      "rate_version": "shinhan_2026q1_v1",
++      "promo_version": "none_v1",
++      "residual_version": "shinhan_G군_residual_2026q1_v1"
++    },
++    "tier": "INSTANT",
++    "vehicle_id": "selection-vehicle",
++    "vehicle_trim_id": "selection-default-trim",
++    "selection_mode": "GROUPED",
++    "model_spec": "2WD",
++    "grade_name": "기본",
++    "vehicle_trim_base_price": 45000000,
++    "trim_pricing_applied": true,
++    "trim_pricing_status": "SELECTION_PRICE_APPLIED",
++    "pricing_basis": "MARKET_SELECTION_DELTA_V1",
++    "market_pricing_applied": true,
++    "price_source": "CHAZM_IMPORTED",
++    "base_monthly_payment": 750000,
++    "display_adjustment": 0,
++    "promo_discount": 0,
++    "estimated_discount": 1350000,
++    "estimated_taxes": 3650000,
++    "breakdown": [
++      {
++        "name": "차량가",
++        "amount": 45000000
++      },
++      {
++        "name": "잔존가치",
++        "amount": -17325000
++      },
++      {
++        "name": "프로모션 할인",
++        "amount": 0
++      },
++      {
++        "name": "딜러 할인(추정)",
++        "amount": -1350000
++      },
++      {
++        "name": "세금/부대(추정)",
++        "amount": 3650000
++      },
++      {
++        "name": "총액(OTD)",
++        "amount": 47300000
++      }
++    ],
++    "monthly_payment_before_lift": 536565,
++    "residual_ratio": 0.00385,
++    "annual_irr": 0.065,
++    "calculation": {
++      "method": "market_selection_delta_v1",
++      "is_spreadsheet_price": false,
++      "is_estimated": true,
++      "matched_key": null,
++      "matched_name": null,
++      "product_label": null,
++      "term_method": null
++    },
++    "applied_referral_code": null,
++    "referral_discount_amount": 0,
++    "original_monthly_payment": null,
++    "coupon_expires_at": null,
++    "pricing_disclaimer": null,
++    "lease_data_available": false,
++    "selection_pricing_applied": true,
++    "selection_contract_version": "selection_v1",
++    "selection_fingerprint": "dccf219751beaa999db9ac7834994b5d1edf0fc08c68cf37881b3d4e417dd4b2",
++    "pricing_context_version": "selection-market-v1:cad6c1872215e5e4",
++    "selection_pricing_source": "MARKET_SELECTION_DELTA_V1",
++    "normalized_selection": {
++      "vehicle_trim_id": "selection-default-trim",
++      "model_spec": "2WD",
++      "grade_name": "기본",
++      "selected_option_ids": [],
++      "exterior_color_id": null,
++      "interior_color_id": null,
++      "inventory_item_id": null
++    },
++    "reference_vehicle_price": 45000000,
++    "reference_vehicle_trim_id": "selection-default-trim",
++    "reference_price_basis": "CHAZM_BASE_PRICE",
++    "selected_vehicle_price": 45000000,
++    "base_trim_price": 45000000,
++    "selected_options_price": 0,
++    "option_total": 0,
++    "exterior_color_price": 0,
++    "interior_color_price": 0,
++    "verified_discount": 0,
++    "market_base_monthly_raw": 750000,
++    "selection_monthly_delta_raw": -213434.57636008062,
++    "selection_monthly_delta": -213434.57636008062,
++    "reference_finance_monthly_raw": 750155.072307248,
++    "selected_finance_monthly_raw": 536720.4959471674,
++    "display_margin": 0,
++    "market_source_record_id": "Selection Contract Model",
++    "guarantee": 0,
++    "prepayment_pct": 20.0,
++    "guarantee_pct": 0.0,
++    "price_provenance": {
++      "version": "price_provenance_v1",
++      "processed_product_type": "RENTAL",
++      "market_price": {
++        "source": "CHAZM_IMPORTED",
++        "source_record_id": "Selection Contract Model",
++        "source_revision": "sha256:846664dc367fff6b03de2f86d0970f5f19957b551ba6f4e544498bf7b007375e",
++        "product_type": "RENTAL",
++        "match_status": "UNKNOWN",
++        "calculation_method": "CHAZM_EXACT_CONDITION_LOOKUP",
++        "methods": [
++          "CONDITION_DIRECT"
++        ],
++        "vehicle_match": "EXACT",
++        "applied_conditions": {
++          "term_months": 48,
++          "annual_km": 10000,
++          "prepayment_pct": 0.0
++        },
++        "condition_match": {
++          "term_months": "EXACT",
++          "annual_km": "EXACT",
++          "prepayment_pct": "EXACT"
++        },
++        "source_points": [
++          {
++            "path": "products.rent.conditionMonthly.48:0:10000",
++            "role": "BASE",
++            "conditions": {
++              "term_months": 48,
++              "annual_km": 10000,
++              "prepayment_pct": 0.0
++            }
++          }
++        ],
++        "unknown_reasons": [
++          "SOURCE_GUARANTEE_UNRECORDED"
++        ]
++      },
++      "calculation_method": "MARKET_REFERENCE_PLUS_EXISTING_SELECTION_DELTA",
++      "quote_kind": "ESTIMATE",
++      "provider_generated_at": null,
++      "valid_until": null,
++      "request_conditions_verified": false,
++      "sales_ai_eligible": false,
++      "unsupported_reasons": [
++        "NONZERO_PREPAYMENT_OUT_OF_INITIAL_SCOPE",
++        "SOURCE_CONDITIONS_NOT_EXACTLY_VERIFIED"
++      ]
++    },
++    "selection_terms_estimate": null,
++    "selection_prepayment_estimate": {
++      "version": "selection_prepayment_estimate_v1",
++      "verified": true,
++      "policy_version": "zero_prepayment_delta_v1",
++      "quote_kind": "ESTIMATE",
++      "product_type": "RENTAL",
++      "monthly_payment": 536600,
++      "source_revision": "sha256:846664dc367fff6b03de2f86d0970f5f19957b551ba6f4e544498bf7b007375e",
++      "source_record_id": "Selection Contract Model",
++      "reference_vehicle_trim_id": "selection-default-trim",
++      "selection_fingerprint": "dccf219751beaa999db9ac7834994b5d1edf0fc08c68cf37881b3d4e417dd4b2",
++      "source_conditions": {
++        "term_months": 48,
++        "annual_km": 10000,
++        "prepayment_pct": 0
++      },
++      "source_prepayment_amount": 0,
++      "requested_prepayment_amount": 9000000,
++      "requested_prepayment_pct": 20.0,
++      "unverified_conditions": [
++        "guarantee",
++        "provider_prepayment_terms"
++      ]
++    }
++  },
++  "snapshot_request": {
++    "selection_contract_version": "selection_v1",
++    "quote_estimate_version": "selection_prepayment_estimate_v1",
++    "selection_fingerprint": "dccf219751beaa999db9ac7834994b5d1edf0fc08c68cf37881b3d4e417dd4b2",
++    "pricing_context_version": "selection-market-v1:cad6c1872215e5e4",
++    "selection": {
++      "vehicle_trim_id": "selection-default-trim",
++      "selected_option_ids": []
++    },
++    "quote_type": "rent",
++    "term_months": 48,
++    "mileage_limit": 10000,
++    "prepayment_pct": 20,
++    "deposit": 0,
++    "guarantee": 0,
++    "monthly_payment": 536600,
++    "vehicle_price": 1
++  },
++  "snapshot_response": {
++    "data": {
++      "selection_contract_version": "selection_v1",
++      "selection_fingerprint": "dccf219751beaa999db9ac7834994b5d1edf0fc08c68cf37881b3d4e417dd4b2",
++      "pricing_context_version": "selection-market-v1:cad6c1872215e5e4",
++      "selection_context": {
++        "base_trim_price": 45000000,
++        "deposit": 9000000,
++        "discount_amount": 0,
++        "display_margin": 0,
++        "exterior_color_id": null,
++        "exterior_color_price": 0,
++        "guarantee": 0,
++        "guarantee_pct": 0.0,
++        "interior_color_id": null,
++        "interior_color_price": 0,
++        "inventory_item_id": null,
++        "market_base_monthly_raw": 750000,
++        "market_source_record_id": "Selection Contract Model",
++        "mileage_limit": 10000,
++        "monthly_payment": 536600,
++        "option_total": 0,
++        "prepayment_pct": 20.0,
++        "price_source": "CHAZM_IMPORTED",
++        "product_type": "RENTAL",
++        "quote_estimate_version": "selection_prepayment_estimate_v1",
++        "reference_finance_monthly_raw": 750155.072307248,
++        "reference_price_basis": "CHAZM_BASE_PRICE",
++        "reference_vehicle_price": 45000000,
++        "reference_vehicle_trim_id": "selection-default-trim",
++        "selected_finance_monthly_raw": 536720.4959471674,
++        "selected_option_ids": [],
++        "selected_vehicle_price": 45000000,
++        "selection_contract_version": "selection_v1",
++        "selection_monthly_delta": -213434.57636008062,
++        "selection_prepayment_estimate": {
++          "monthly_payment": 536600,
++          "policy_version": "zero_prepayment_delta_v1",
++          "product_type": "RENTAL",
++          "quote_kind": "ESTIMATE",
++          "reference_vehicle_trim_id": "selection-default-trim",
++          "requested_prepayment_amount": 9000000,
++          "requested_prepayment_pct": 20.0,
++          "selection_fingerprint": "dccf219751beaa999db9ac7834994b5d1edf0fc08c68cf37881b3d4e417dd4b2",
++          "source_conditions": {
++            "annual_km": 10000,
++            "prepayment_pct": 0,
++            "term_months": 48
++          },
++          "source_prepayment_amount": 0,
++          "source_record_id": "Selection Contract Model",
++          "source_revision": "sha256:846664dc367fff6b03de2f86d0970f5f19957b551ba6f4e544498bf7b007375e",
++          "unverified_conditions": [
++            "guarantee",
++            "provider_prepayment_terms"
++          ],
++          "verified": true,
++          "version": "selection_prepayment_estimate_v1"
++        },
++        "selection_pricing_source": "MARKET_SELECTION_DELTA_V1",
++        "term_months": 48,
++        "vehicle_id": "selection-vehicle",
++        "vehicle_trim_id": "selection-default-trim"
++      },
++      "quote_estimate_version": "selection_prepayment_estimate_v1",
++      "selection_terms_estimate": null,
++      "selection_prepayment_estimate": {
++        "version": "selection_prepayment_estimate_v1",
++        "verified": true,
++        "policy_version": "zero_prepayment_delta_v1",
++        "quote_kind": "ESTIMATE",
++        "product_type": "RENTAL",
++        "monthly_payment": 536600,
++        "source_revision": "sha256:846664dc367fff6b03de2f86d0970f5f19957b551ba6f4e544498bf7b007375e",
++        "source_record_id": "Selection Contract Model",
++        "reference_vehicle_trim_id": "selection-default-trim",
++        "selection_fingerprint": "dccf219751beaa999db9ac7834994b5d1edf0fc08c68cf37881b3d4e417dd4b2",
++        "source_conditions": {
++          "term_months": 48,
++          "annual_km": 10000,
++          "prepayment_pct": 0
++        },
++        "source_prepayment_amount": 0,
++        "requested_prepayment_amount": 9000000,
++        "requested_prepayment_pct": 20.0,
++        "unverified_conditions": [
++          "guarantee",
++          "provider_prepayment_terms"
++        ]
++      },
++      "vehicle_trim_id": "selection-default-trim",
++      "selection_mode": "GROUPED",
++      "model_spec": "2WD",
++      "grade_name": "기본",
++      "vehicle_trim_base_price": 45000000,
++      "quoted_monthly_payment": 536600,
++      "vehicle_name": "Selection Contract Model",
++      "vehicle_brand": "Test",
++      "trim_name": "2WD · 기본",
++      "selected_options": "[]",
++      "finance_company": null,
++      "quote_type": "rent",
++      "vehicle_price": 45000000,
++      "monthly_payment": 536600,
++      "term_months": 48,
++      "mileage_limit": 10000,
++      "deposit": 9000000,
++      "guarantee": 0,
++      "prepayment_pct": 20.0,
++      "guarantee_pct": 0.0,
++      "residual_value": 17325000,
++      "residual_pct": 0.385,
++      "promo_discount": 0,
++      "estimated_discount": 1350000,
++      "estimated_taxes": 3650000,
++      "otd_total": 47300000,
++      "formula_version": "lease_balloon_excel_v2",
++      "rate_version": "shinhan_2026q1_v1",
++      "promo_version": "none_v1",
++      "residual_version": "shinhan_G군_residual_2026q1_v1",
++      "created_at": "2026-11-08T00:10:38Z"
++    },
++    "meta": {
++      "trace_id": "8ea913fb-519f-4624-8bce-3c4e186690d4"
++    }
++  }
++}
+diff --git a/app/test/selection_prepayment_estimate_test.dart b/app/test/selection_prepayment_estimate_test.dart
+new file mode 100644
+--- /dev/null
++++ b/app/test/selection_prepayment_estimate_test.dart
+@@ -0,0 +1,493 @@
++// Synthetic-only client contract; no external HTTP requests.
++import 'dart:convert';
++import 'dart:io';
++import 'package:dio/dio.dart';
++import 'package:flutter_test/flutter_test.dart';
++import 'package:recar_app/models/application.dart';
++import 'package:recar_app/models/quote.dart';
++import 'package:recar_app/models/quote_selection.dart';
++import 'package:recar_app/models/selection_prepayment_estimate.dart';
++import 'package:recar_app/services/api_client.dart';
++import 'package:recar_app/services/quote_api.dart';
++import 'package:recar_app/services/quote_price_evidence.dart';
++import 'support/synthetic_selection_prepayment_estimate.dart';
++import 'support/synthetic_selection_terms_estimate.dart';
++
++Map<String, dynamic> _saved() {
++  final quote = syntheticSelectionPrepaymentQuote();
++  final raw = {
++    'id': 'SYNTHETIC-PREPAYMENT-SAVED',
++    'vehicle_id': syntheticScopedVehicle,
++    'vehicle_trim_id': syntheticScopedTrim,
++    'status': 'DRAFT',
++    'quote_type': 'rent',
++    'monthly_payment': 277300,
++    'vehicle_price': 45000000,
++    'contract_months': 60,
++    'annual_km': 10000,
++    'deposit': 9000000,
++    'selection_fingerprint': quote['selection_fingerprint'],
++    'pricing_context_version': quote['pricing_context_version'],
++    'selection_context': {
++      ...quote['normalized_selection'] as Map,
++      'quote_estimate_version': 'selection_prepayment_estimate_v1',
++      'selection_prepayment_estimate': quote['selection_prepayment_estimate'],
++      'selection_contract_version': 'selection_v1',
++      'product_type': 'RENTAL',
++      'vehicle_id': syntheticScopedVehicle,
++      'term_months': 60,
++      'mileage_limit': 10000,
++      'selected_vehicle_price': 45000000,
++      'deposit': 9000000,
++      'prepayment_pct': 20.0,
++      'guarantee': 0,
++      'guarantee_pct': 0,
++      'monthly_payment': 277300,
++      'reference_vehicle_trim_id': syntheticScopedReference,
++    },
++  };
++  return raw;
++}
++
++Map _meta(Map data) => data['selection_prepayment_estimate'] as Map;
++Map _proof(Map data) => data['price_provenance'] as Map;
++Map _market(Map data) => _proof(data)['market_price'] as Map;
++QuoteSelection _selection(Map data) => QuoteSelection.fromJson(
++  Map<String, dynamic>.from(data['normalized_selection'] as Map),
++);
++bool _validate(
++  Map<String, dynamic> data, {
++  bool allow = true,
++  int? pct = 20,
++  int deposit = 0,
++  QuoteSelection? selection,
++}) => QuotePriceEvidence.validate(
++  data,
++  vehicleId: syntheticScopedVehicle,
++  selection: selection ?? _selection(data),
++  productType: 'RENTAL',
++  term: 60,
++  mileageLimit: 10000,
++  deposit: deposit,
++  guarantee: 0,
++  prepaymentPct: pct,
++  guaranteePct: 0,
++  allowSelectionTermsEstimate: true,
++  allowSelectionPrepaymentEstimate: allow,
++);
++
++QuoteSnapshotRequest _request({bool fixed = false}) {
++  final data = syntheticSelectionPrepaymentQuote();
++  return QuoteSnapshotRequest(
++    selection: _selection(data),
++    selectionContractVersion: 'selection_v1',
++    selectionFingerprint: data['selection_fingerprint'] as String,
++    pricingContextVersion: data['pricing_context_version'] as String,
++    vehiclePrice: 45000000,
++    monthlyPayment: 277300,
++    termMonths: 60,
++    mileageLimit: 10000,
++    deposit: 9000000,
++    prepaymentPct: fixed ? null : 20,
++    guarantee: 0,
++    guaranteePct: 0,
++    quoteEstimateVersion: SelectionPrepaymentEstimate.version,
++    expectedSelectionPrepaymentEstimate: SelectionPrepaymentEstimate.tryParse(
++      data['selection_prepayment_estimate'],
++    ),
++  );
++}
++
++Map<String, dynamic> _snapshot() {
++  final saved = _saved();
++  return {
++    'data': {
++      ...saved,
++      'selection_contract_version': 'selection_v1',
++      'quote_estimate_version': SelectionPrepaymentEstimate.version,
++      'selection_prepayment_estimate':
++          syntheticSelectionPrepaymentQuote()['selection_prepayment_estimate'],
++    },
++  };
++}
++
++void main() {
++  TestWidgetsFlutterBinding.ensureInitialized();
++  test(
++    'actual synthetic server response binds guard, snapshot and cached application',
++    () {
++      final fixture =
++          jsonDecode(
++                File(
++                  'test/fixtures/synthetic_selection_prepayment_api.json',
++                ).readAsStringSync(),
++              )
++              as Map<String, dynamic>;
++      expect(fixture['synthetic'], isTrue);
++      final request = fixture['quote_request'] as Map<String, dynamic>;
++      final data = fixture['quote_data'] as Map<String, dynamic>;
++      final selected = QuoteSelection.fromJson(
++        request['selection'] as Map<String, dynamic>,
++      );
++      final strict = QuotePriceEvidence.validate(
++        data,
++        vehicleId: request['vehicle_id'] as String,
++        selection: selected,
++        productType: request['product_type'] as String,
++        term: request['term'] as int,
++        mileageLimit: request['mileage_limit'] as int,
++        deposit: request['deposit'] as int,
++        guarantee: request['guarantee'] as int,
++        prepaymentPct: request['prepayment_pct'] as int,
++        allowSelectionPrepaymentEstimate: true,
++      );
++      expect(strict, isFalse);
++      final parsed = QuoteData.fromJson(
++        data,
++        preserveRequestPaymentUnits: true,
++        requestedPrepaymentPct: 20,
++        strictPriceEvidenceAccepted: strict,
++      );
++      expect(parsed.monthlyPayment, 536600);
++      expect(parsed.deposit, 9000000);
++      expect(parsed.isSelectionPrepaymentEstimate, isTrue);
++      // Use the actual client snapshot builder's canonical response amounts.
++      // The exported server attack fixture deliberately sent vehicle_price: 1.
++      final expected = QuoteSnapshotRequest(
++        selection: selected,
++        selectionContractVersion: parsed.selectionContractVersion,
++        selectionFingerprint: parsed.selectionFingerprint,
++        pricingContextVersion: parsed.pricingContextVersion,
++        vehiclePrice: parsed.selectedVehiclePrice,
++        monthlyPayment: parsed.monthlyPayment,
++        termMonths: parsed.term,
++        mileageLimit: parsed.mileageLimit,
++        deposit: parsed.deposit,
++        prepaymentPct: parsed.prepaymentPct,
++        guarantee: parsed.guarantee,
++        guaranteePct: parsed.guaranteePct,
++        quoteEstimateVersion: parsed.quoteEstimateVersion,
++        expectedSelectionPrepaymentEstimate: parsed.selectionPrepaymentEstimate,
++      );
++      expect(expected.toJson()['vehicle_price'], 45000000);
++      final envelope = fixture['snapshot_response'] as Map<String, dynamic>;
++      expect(
++        QuoteSnapshotSaveResult.fromEnvelope(envelope).matches(expected),
++        isTrue,
++      );
++      final saved = envelope['data'] as Map<String, dynamic>;
++      final application = ApplicationResponse.fromJson({
++        ...saved,
++        'id': 'SYNTHETIC-SERVER-PROJECTION',
++        'status': 'DRAFT',
++        'vehicle_id': request['vehicle_id'],
++        'contract_months': saved['term_months'],
++        'annual_km': saved['mileage_limit'],
++        'price_source': 'APPLICATION_ESTIMATE',
++      });
++      expect(application.hasSelectionPrepaymentEstimateSnapshot, isTrue);
++      final restored = ApplicationResponse.fromJson(
++        jsonDecode(jsonEncode(application.toJson())),
++      );
++      expect(restored.hasSelectionPrepaymentEstimateSnapshot, isTrue);
++      expect(
++        restored.isCustomerEstimateAmount(
++          536600,
++          source: 'APPLICATION_ESTIMATE',
++        ),
++        isTrue,
++      );
++      expect(restored.monthlyPayment, 536600);
++    },
++  );
++  test(
++    'source zero remains separate while requested 20 percent is estimated',
++    () {
++      final raw = syntheticSelectionPrepaymentQuote(paidSelections: true);
++      expect(_validate(raw), isFalse);
++      final parsed = QuoteData.fromJson(
++        raw,
++        preserveRequestPaymentUnits: true,
++        requestedPrepaymentPct: 20,
++        requestedGuaranteePct: 0,
++      );
++      expect(parsed.monthlyPayment, 277300);
++      expect(parsed.deposit, 9000000);
++      expect(parsed.isCustomerEstimate, isTrue);
++      expect(parsed.isSelectionPrepaymentEstimate, isTrue);
++      expect(parsed.isSelectionTermsEstimate, isFalse);
++      expect(parsed.quoteEstimateVersion, 'selection_prepayment_estimate_v1');
++      expect(
++        parsed.selectionPrepaymentEstimate!.toJson(),
++        raw['selection_prepayment_estimate'],
++      );
++      expect(_market(raw)['applied_conditions']['prepayment_pct'], 0);
++      expect(_proof(raw)['request_conditions_verified'], isFalse);
++      expect(parsed.normalizedSelection!.selectedOptionIds, [
++        'SYNTHETIC-OPTION',
++      ]);
++    },
++  );
++  test('fixed won input preserves units with fractional requested ratio', () {
++    final raw = syntheticSelectionPrepaymentQuote(
++      amount: 8000000,
++      pct: 8000000 / 45000000 * 100,
++    );
++    expect(_validate(raw, pct: null, deposit: 8000000), isFalse);
++    final parsed = QuoteData.fromJson(raw, preserveRequestPaymentUnits: true);
++    expect(parsed.prepaymentPct, isNull);
++    expect(parsed.resolvedPrepaymentPct, closeTo(17.77777777777778, 1e-12));
++    expect(parsed.deposit, 8000000);
++    expect(parsed.isSelectionPrepaymentEstimate, isTrue);
++  });
++  test(
++    'known zero guarantee source does not become requested-condition exact',
++    () {
++      final raw = syntheticSelectionPrepaymentQuote();
++      _market(raw)['match_status'] = 'EXACT';
++      _market(raw)['unknown_reasons'] = <String>[];
++      expect(_validate(raw), isFalse);
++    },
++  );
++  test('old estimate opt-in alone cannot authorize the new policy', () {
++    expect(
++      () => _validate(syntheticSelectionPrepaymentQuote(), allow: false),
++      throwsA(isA<QuoteConditionsUnverified>()),
++    );
++  });
++  test('stale option and color responses cannot satisfy current selection', () {
++    final raw = syntheticSelectionPrepaymentQuote();
++    for (final current in [
++      QuoteSelection(
++        vehicleTrimId: syntheticScopedTrim,
++        selectedOptionIds: const ['OPTION'],
++      ),
++      QuoteSelection(
++        vehicleTrimId: syntheticScopedTrim,
++        exteriorColorId: 'COLOR',
++      ),
++      QuoteSelection(
++        vehicleTrimId: syntheticScopedTrim,
++        interiorColorId: 'COLOR',
++      ),
++    ]) {
++      expect(
++        () => _validate(raw, selection: current),
++        throwsA(isA<QuoteConditionsUnverified>()),
++      );
++    }
++  });
++  final attacks = <String, void Function(Map<String, dynamic>)>{
++    'missing proof': (d) => d.remove('selection_prepayment_estimate'),
++    'mixed old proof': (d) => d['selection_terms_estimate'] =
++        syntheticSelectionTermsQuote()['selection_terms_estimate'],
++    'version': (d) => _meta(d)['version'] = 'selection_terms_estimate_v1',
++    'policy': (d) => _meta(d)['policy_version'] = 'other',
++    'false verified': (d) => _meta(d)['verified'] = false,
++    'provider confirmed': (d) => _meta(d)['quote_kind'] = 'CONFIRMED',
++    'lease': (d) => _meta(d)['product_type'] = 'LEASE',
++    'monthly': (d) => _meta(d)['monthly_payment'] = 1,
++    'zero monthly': (d) => _meta(d)['monthly_payment'] = 0,
++    'excess monthly': (d) => _meta(d)['monthly_payment'] = 10000001,
++    'string monthly': (d) => _meta(d)['monthly_payment'] = '277300',
++    'revision': (d) => _meta(d)['source_revision'] = 'sha256:${'c' * 64}',
++    'record': (d) => _meta(d)['source_record_id'] = 'OTHER',
++    'reference trim': (d) => _meta(d)['reference_vehicle_trim_id'] = 'OTHER',
++    'fingerprint': (d) => _meta(d)['selection_fingerprint'] = 'c' * 64,
++    'source positive amount': (d) => _meta(d)['source_prepayment_amount'] = 1,
++    'source missing amount': (d) => _meta(d).remove('source_prepayment_amount'),
++    'source positive pct': (d) =>
++        _meta(d)['source_conditions']['prepayment_pct'] = 20,
++    'source term': (d) => _meta(d)['source_conditions']['term_months'] = 48,
++    'source mileage': (d) => _meta(d)['source_conditions']['annual_km'] = 20000,
++    'requested amount': (d) =>
++        _meta(d)['requested_prepayment_amount'] = 8000000,
++    'requested pct': (d) => _meta(d)['requested_prepayment_pct'] = 30,
++    'zero request': (d) => _meta(d)['requested_prepayment_pct'] = 0,
++    'nan request': (d) => _meta(d)['requested_prepayment_pct'] = double.nan,
++    'missing provider limitation': (d) =>
++        _meta(d)['unverified_conditions'] = ['guarantee'],
++    'private field': (d) => _meta(d)['irr'] = 0.05,
++    'coerced source': (d) =>
++        _meta(d)['source_conditions']['term_months'] = '60',
++    'extra source field': (d) => _meta(d)['source_conditions']['margin'] = 1,
++    'response term': (d) => d['term'] = 48,
++    'response mileage': (d) => d['mileage_limit'] = 20000,
++    'response price': (d) => d['selected_vehicle_price'] = 40000000,
++    'response advance': (d) => d['deposit'] = 8000000,
++    'response guarantee': (d) => d['guarantee'] = 1,
++    'inventory': (d) => d['normalized_selection']['inventory_item_id'] = 1,
++    'verified monthly': (d) => d['condition_verified_monthly_payment'] = 277300,
++    'claimed strict': (d) => _proof(d)['request_conditions_verified'] = true,
++    'claimed Sales AI': (d) => _proof(d)['sales_ai_eligible'] = true,
++    'wrong path': (d) => d['selection_pricing_source'] = 'OTHER',
++    'wrong context': (d) => d['pricing_context_version'] = 'old',
++    'wrong source alias': (d) => d['source'] = 'OTHER',
++    'source extra unknown': (d) => _market(d)['unknown_reasons'].add('UNKNOWN'),
++    'nearest': (d) => _market(d)['match_status'] = 'NEAREST',
++    'fuzzy vehicle': (d) => _market(d)['vehicle_match'] = 'FUZZY',
++    'wrong applied pct': (d) =>
++        _market(d)['applied_conditions']['prepayment_pct'] = 20,
++    'nonexact source pct': (d) =>
++        _market(d)['condition_match']['prepayment_pct'] = 'NEAREST',
++    'wrong source point': (d) => _market(d)['source_points'][0]['path'] =
++        'products.rent.conditionMonthly.60:20:10000',
++    'extra source point': (d) =>
++        _market(d)['source_points'].add(_market(d)['source_points'][0]),
++  };
++  for (final attack in attacks.entries) {
++    test('rejects ${attack.key} without accepting old or strict fallback', () {
++      final raw = syntheticSelectionPrepaymentQuote();
++      attack.value(raw);
++      expect(() => _validate(raw), throwsA(isA<QuoteConditionsUnverified>()));
++    });
++  }
++  test(
++    'new saved evidence survives cache without changing legacy classification',
++    () {
++      final raw = _saved();
++      final saved = ApplicationResponse.fromJson(raw);
++      expect(saved.hasSelectionTermsEstimateSnapshot, isFalse);
++      expect(saved.hasSelectionPrepaymentEstimateSnapshot, isTrue);
++      expect(
++        saved.isCustomerEstimateAmount(277300, source: 'APPLICATION_ESTIMATE'),
++        isTrue,
++      );
++      expect(
++        saved.isCustomerEstimateAmount(277300, source: 'ADMIN_SENT_QUOTE'),
++        isFalse,
++      );
++      final restored = ApplicationResponse.fromJson(
++        jsonDecode(jsonEncode(saved.toJson())),
++      );
++      expect(restored.hasSelectionPrepaymentEstimateSnapshot, isTrue);
++      expect(restored.monthlyPayment, 277300);
++      expect(restored.selectionContext, raw['selection_context']);
++    },
++  );
++  test(
++    'save sends only version and matches both amount and percentage inputs',
++    () {
++      for (final fixed in [false, true]) {
++        final expected = _request(fixed: fixed);
++        final sent = expected.toJson();
++        expect(
++          sent['quote_estimate_version'],
++          'selection_prepayment_estimate_v1',
++        );
++        expect(sent.containsKey('selection_prepayment_estimate'), isFalse);
++        expect(sent.containsKey('deposit'), fixed);
++        expect(
++          QuoteSnapshotSaveResult.fromEnvelope(_snapshot()).matches(expected),
++          isTrue,
++        );
++      }
++    },
++  );
++  final savedAttacks = <String, void Function(Map)>{
++    'marker': (d) =>
++        d['quote_estimate_version'] = 'selection_terms_estimate_v1',
++    'context marker': (d) =>
++        d['selection_context'].remove('quote_estimate_version'),
++    'top source': (d) =>
++        d['selection_prepayment_estimate']['source_record_id'] = 'OTHER',
++    'context source': (d) =>
++        d['selection_context']['selection_prepayment_estimate']['source_record_id'] =
++            'OTHER',
++    'fingerprint': (d) => d['selection_fingerprint'] = 'c' * 64,
++    'context monthly': (d) => d['selection_context']['monthly_payment'] = 1,
++    'context price': (d) =>
++        d['selection_context']['selected_vehicle_price'] = 45000001,
++    'context term': (d) => d['selection_context']['term_months'] = 48,
++    'context mileage': (d) => d['selection_context']['mileage_limit'] = 20000,
++    'context deposit': (d) => d['selection_context']['deposit'] = 8000000,
++    'context pct': (d) => d['selection_context']['prepayment_pct'] = 30,
++    'context guarantee': (d) => d['selection_context']['guarantee'] = 1,
++    'context reference': (d) =>
++        d['selection_context']['reference_vehicle_trim_id'] = 'OTHER',
++    'context product': (d) => d['selection_context']['product_type'] = 'LEASE',
++    'context options': (d) =>
++        d['selection_context']['selected_option_ids'] = ['OTHER'],
++    'context exterior': (d) =>
++        d['selection_context']['exterior_color_id'] = 'OTHER',
++    'context inventory': (d) => d['selection_context']['inventory_item_id'] = 1,
++  };
++  for (final attack in savedAttacks.entries) {
++    test('save confirmation rejects ${attack.key}', () {
++      final raw = _snapshot();
++      attack.value(raw['data'] as Map);
++      expect(
++        QuoteSnapshotSaveResult.fromEnvelope(raw).matches(_request()),
++        isFalse,
++      );
++    });
++  }
++  group('fresh API opt-in', () {
++    late Interceptor interceptor;
++    late List<RequestOptions> requests;
++    setUp(() {
++      requests = [];
++      interceptor = InterceptorsWrapper(
++        onRequest: (request, handler) {
++          requests.add(request);
++          if (request.path != '/api/v1/quotes/instant') {
++            handler.reject(
++              DioException(
++                requestOptions: request,
++                error: 'External request forbidden',
++              ),
++            );
++            return;
++          }
++          handler.resolve(
++            Response(
++              requestOptions: request,
++              statusCode: 200,
++              data: {
++                'data': syntheticSelectionPrepaymentQuote(),
++                'meta': {'trace_id': 'SYNTHETIC'},
++              },
++            ),
++          );
++        },
++      );
++      ApiClient.dio.interceptors.insert(0, interceptor);
++    });
++    tearDown(() => ApiClient.dio.interceptors.remove(interceptor));
++    Future<QuoteEnvelope> request({bool allow = false}) =>
++        QuoteApi.createInstantQuote(
++          vehicleId: syntheticScopedVehicle,
++          selection: QuoteSelection(vehicleTrimId: syntheticScopedTrim),
++          term: 60,
++          mileageLimit: 10000,
++          prepaymentPct: 20,
++          guaranteePct: 0,
++          allowSelectionTermsEstimate: true,
++          allowSelectionPrepaymentEstimate: allow,
++        );
++    test(
++      'only explicitly opted-in calls send policy and accept zero-source proof',
++      () async {
++        await expectLater(request(), throwsA(isA<QuoteConditionsUnverified>()));
++        expect(
++          (requests.last.data as Map).containsKey('estimate_policy_version'),
++          isFalse,
++        );
++        final accepted = await request(allow: true);
++        expect(accepted.data.monthlyPayment, 277300);
++        expect(accepted.data.isSelectionPrepaymentEstimate, isTrue);
++        expect(accepted.data.strictPriceEvidenceAccepted, isFalse);
++        expect(
++          requests.last.data['estimate_policy_version'],
++          'zero_prepayment_delta_v1',
++        );
++        expect(
++          (requests.last.data as Map).containsKey(
++            'selection_prepayment_estimate',
++          ),
++          isFalse,
++        );
++      },
++    );
++  });
++}
+diff --git a/app/test/selection_terms_estimate_test.dart b/app/test/selection_terms_estimate_test.dart
+--- a/app/test/selection_terms_estimate_test.dart
++++ b/app/test/selection_terms_estimate_test.dart
+@@ -1,14 +1,24 @@
+ // SYNTHETIC ONLY. No production API, price source, DB or stored quote is used.
++import 'dart:convert';
++import 'dart:io';
+ import 'package:dio/dio.dart';
++import 'package:flutter/foundation.dart';
++import 'package:flutter/material.dart';
++import 'package:flutter/services.dart';
+ import 'package:flutter_test/flutter_test.dart';
++import 'package:recar_app/models/application.dart';
+ import 'package:recar_app/models/quote.dart';
+ import 'package:recar_app/models/quote_selection.dart';
++import 'package:recar_app/models/selection_terms_estimate.dart';
++import 'package:recar_app/screens/quote_result_screen.dart';
+ import 'package:recar_app/services/api_client.dart';
+ import 'package:recar_app/services/quote_api.dart';
+ import 'package:recar_app/services/quote_price_evidence.dart';
+ import 'package:recar_app/services/vehicle_cache.dart';
++import 'package:recar_app/theme/app_theme.dart';
+ 
+ import 'support/synthetic_selection_terms_estimate.dart';
++import 'support/synthetic_selection_prepayment_estimate.dart';
+ 
+ final _selection = QuoteSelection(vehicleTrimId: syntheticScopedTrim);
+ void _validate(Map<String, dynamic> data, {bool allow = true}) =>
+@@ -41,6 +51,18 @@
+ 
+ void main() {
+   TestWidgetsFlutterBinding.ensureInitialized();
++  setUpAll(() async {
++    // flutter test --platform chrome preloads and forces its test fonts while
++    // ignoring platform messages, so rootBundle.load cannot complete there.
++    // Keep Pretendard for VM layout checks and the built-in fonts for Chrome.
++    if (kIsWeb) return;
++    await (FontLoader('Pretendard')
++          ..addFont(
++              rootBundle.load('assets/fonts/pretendard/PretendardVariable.ttf'))
++          ..addFont(
++              rootBundle.load('assets/fonts/pretendard/PretendardVariable.ttf')))
++        .load();
++  });
+   test('explicit customer estimate retains amount without certifying guarantee',
+       () {
+     final data = syntheticSelectionTermsQuote();
+@@ -170,7 +192,157 @@
+     expect(saved.isSelectionTermsEstimate, isFalse);
+   });
+ 
+-  group('fresh API contract', () {
++  test(
++      'actual synthetic server DTOs retain both final amounts and snapshot bindings',
++      () {
++    final fixture = jsonDecode(
++        File('test/fixtures/synthetic_selection_terms_api.json')
++            .readAsStringSync()) as Map<String, dynamic>;
++    expect(fixture['synthetic'], isTrue);
++    expect(fixture['external_requests'], 0);
++    final cases = fixture['cases'] as List;
++    expect(cases, hasLength(2));
++    final amounts = <int>[];
++    for (final raw in cases) {
++      final sample = raw as Map<String, dynamic>;
++      final request = sample['instant_request'] as Map<String, dynamic>;
++      final data = sample['instant_data'] as Map<String, dynamic>;
++      final selection =
++          QuoteSelection.fromJson(request['selection'] as Map<String, dynamic>);
++      void validate(bool allow) => QuotePriceEvidence.validate(data,
++          vehicleId: request['vehicle_id'] as String,
++          selection: selection,
++          productType: request['product_type'] as String,
++          term: request['term'] as int,
++          mileageLimit: request['mileage_limit'] as int,
++          deposit: request['deposit'] as int? ?? 0,
++          guarantee: request['guarantee'] as int? ?? 0,
++          prepaymentPct: request['prepayment_pct'] as int?,
++          guaranteePct: request['guarantee_pct'] as int?,
++          allowSelectionTermsEstimate: allow);
++      expect(() => validate(false), throwsA(isA<QuoteConditionsUnverified>()));
++      validate(true);
++      // This is a public projection, not a complete QuoteData payload. Do not
++      // fabricate omitted parser fields or alter the recorded server output.
++      final metadata =
++          SelectionTermsEstimate.tryParse(data['selection_terms_estimate']);
++      expect(metadata, isNotNull);
++      amounts.add(metadata!.monthlyPayment);
++      expect(_proof(data)['request_conditions_verified'], isFalse);
++      final snapshot = sample['snapshot_request'] as Map<String, dynamic>;
++      final expected = QuoteSnapshotRequest(
++        selection: QuoteSelection.fromJson(
++            snapshot['selection'] as Map<String, dynamic>),
++        selectionContractVersion:
++            snapshot['selection_contract_version'] as String,
++        selectionFingerprint: snapshot['selection_fingerprint'] as String,
++        pricingContextVersion: snapshot['pricing_context_version'] as String,
++        monthlyPayment: snapshot['monthly_payment'] as int,
++        vehiclePrice: data['selected_vehicle_price'] as int,
++        quoteEstimateVersion: snapshot['quote_estimate_version'] as String,
++        expectedSelectionTermsEstimate: metadata,
++      );
++      expect(
++          QuoteSnapshotSaveResult.fromEnvelope(
++                  sample['snapshot_response'] as Map<String, dynamic>)
++              .matches(expected),
++          isTrue);
++    }
++    expect(amounts, [300100, 274800]);
++  });
++
++  group('snapshot estimate classification without migrating old snapshots', () {
++    QuoteSnapshotRequest request({bool estimate = true}) {
++      final data = QuoteData.fromJson(syntheticSelectionTermsQuote());
++      return QuoteSnapshotRequest(
++        selection: _selection,
++        selectionContractVersion: 'selection_v1',
++        selectionFingerprint: data.selectionFingerprint,
++        pricingContextVersion: data.pricingContextVersion,
++        vehiclePrice: 45000000,
++        monthlyPayment: 277300,
++        quoteEstimateVersion: estimate ? SelectionTermsEstimate.version : null,
++        expectedSelectionTermsEstimate:
++            estimate ? data.selectionTermsEstimate : null,
++      );
++    }
++
++    Map<String, dynamic> saved({bool estimate = true}) {
++      final data = syntheticSelectionTermsQuote();
++      return {
++        'data': {
++          'selection_contract_version': 'selection_v1',
++          'selection_fingerprint': data['selection_fingerprint'],
++          'pricing_context_version': data['pricing_context_version'],
++          'vehicle_price': 45000000,
++          'monthly_payment': 277300,
++          if (estimate)
++            'quote_estimate_version': SelectionTermsEstimate.version,
++          if (estimate)
++            'selection_terms_estimate': data['selection_terms_estimate'],
++          'selection_context': {
++            ...Map<String, dynamic>.from(data['normalized_selection'] as Map),
++            if (estimate)
++              'quote_estimate_version': SelectionTermsEstimate.version,
++            if (estimate)
++              'selection_terms_estimate':
++                  syntheticSelectionTermsQuote()['selection_terms_estimate'],
++          },
++        }
++      };
++    }
++
++    test(
++        'request sends only the version, server-returned context binds the metadata',
++        () {
++      final expected = request();
++      expect(expected.toJson()['quote_estimate_version'],
++          SelectionTermsEstimate.version);
++      expect(
++          expected.toJson().containsKey('selection_terms_estimate'), isFalse);
++      expect(QuoteSnapshotSaveResult.fromEnvelope(saved()).matches(expected),
++          isTrue);
++    });
++    test(
++        'old snapshots and their amount still match without an estimate marker',
++        () {
++      final old = request(estimate: false);
++      expect(old.toJson().containsKey('quote_estimate_version'), isFalse);
++      expect(
++          QuoteSnapshotSaveResult.fromEnvelope(saved(estimate: false))
++              .matches(old),
++          isTrue);
++    });
++    final mutations = <String, void Function(Map)>{
++      'missing top marker': (d) => d.remove('quote_estimate_version'),
++      'missing context marker': (d) =>
++          (d['selection_context'] as Map).remove('quote_estimate_version'),
++      'top amount': (d) =>
++          (d['selection_terms_estimate'] as Map)['monthly_payment'] = 1,
++      'top fingerprint': (d) => (d['selection_terms_estimate']
++          as Map)['selection_fingerprint'] = 'c' * 64,
++      'context revision': (d) => (d['selection_context']
++              ['selection_terms_estimate'] as Map)['source_revision'] =
++          'sha256:${'c' * 64}',
++      'context reference trim': (d) => (d['selection_context']
++              ['selection_terms_estimate']
++          as Map)['reference_vehicle_trim_id'] = 'OTHER',
++      'context scope': (d) => (d['selection_context']
++          ['selection_terms_estimate'] as Map)['verification_scope'] = ['term'],
++      'saved amount': (d) => d['monthly_payment'] = 1,
++    };
++    for (final mutation in mutations.entries) {
++      test('stale ${mutation.key} cannot pass snapshot confirmation', () {
++        final response = saved();
++        mutation.value(response['data'] as Map);
++        expect(
++            QuoteSnapshotSaveResult.fromEnvelope(response).matches(request()),
++            isFalse);
++      });
++    }
++  });
++
++  group('new API and rendered UI', () {
+     late Interceptor interceptor;
+     late List<RequestOptions> requests;
+     late Map<String, dynamic> responseData;
+@@ -238,25 +410,134 @@
+       ApiClient.dio.interceptors.remove(interceptor);
+       VehicleCache.invalidateAll();
+     });
+-    Future<QuoteEnvelope> quote({bool allow = false}) =>
+-        QuoteApi.createInstantQuote(
+-          vehicleId: syntheticScopedVehicle,
+-          selection: _selection,
+-          term: 60,
+-          mileageLimit: 10000,
+-          prepaymentPct: 0,
+-          guaranteePct: 0,
+-          allowSelectionTermsEstimate: allow,
+-        );
+-    test('API requires local opt-in, never sends a made-up price or proof',
+-        () async {
+-      await expectLater(quote(), throwsA(isA<QuoteConditionsUnverified>()));
+-      final accepted = await quote(allow: true);
+-      expect(accepted.data.monthlyPayment, 277300);
+-      expect(accepted.data.isSelectionTermsEstimate, isTrue);
+-      expect(
++    Future<QuoteEnvelope> quote({
++      bool allow = false,
++      bool prepayment = false,
++    }) => QuoteApi.createInstantQuote(
++      vehicleId: syntheticScopedVehicle,
++      selection: _selection,
++      term: 60,
++      mileageLimit: 10000,
++      prepaymentPct: prepayment ? 20 : 0,
++      guaranteePct: 0,
++      allowSelectionTermsEstimate: allow,
++      allowSelectionPrepaymentEstimate: prepayment,
++    );
++    for (final width in [320.0, 390.0]) {
++      testWidgets(
++        'zero-source estimate at $width preserves generic copy and no financier claim',
++        (tester) async {
++          responseData = syntheticSelectionPrepaymentQuote();
++          tester.view.physicalSize = Size(width, 844);
++          tester.view.devicePixelRatio = 1;
++          addTearDown(tester.view.resetPhysicalSize);
++          addTearDown(tester.view.resetDevicePixelRatio);
++          final accepted = await tester.runAsync(() => quote(prepayment: true));
++          expect(accepted!.data.isSelectionPrepaymentEstimate, isTrue);
++          await tester.pumpWidget(
++            MaterialApp(
++              theme: AppTheme.light(),
++              builder: (context, child) => MediaQuery(
++                data: MediaQuery.of(
++                  context,
++                ).copyWith(textScaler: const TextScaler.linear(2)),
++                child: child!,
++              ),
++              home: QuoteResultScreen(
++                quote: accepted,
++                vehicleName: '합성 차량',
++                vehicleBrand: '합성',
++                vehicleTrimId: syntheticScopedTrim,
++                initialSelection: _selection,
++              ),
++            ),
++          );
++          await tester.pumpAndSettle();
++          expect(find.text('예상 월납'), findsOneWidget);
++          expect(find.text('277,300원'), findsOneWidget);
++          await tester.scrollUntilVisible(find.text('보증금·금융사 조건 확인 필요'), 200,
++              scrollable: find.byType(Scrollable).first);
++          expect(find.text('보증금·금융사 조건 확인 필요'), findsOneWidget);
++          expect(find.text('보증금은 원본에 기재되지 않아 확인이 필요해요.'), findsNothing);
++          expect(find.textContaining('최저 금융사'), findsNothing);
++          expect(tester.takeException(), isNull);
++        },
++      );
++    }
++    test(
++      'API requires local opt-in, never sends a made-up price or proof',
++      () async {
++        await expectLater(quote(), throwsA(isA<QuoteConditionsUnverified>()));
++        final accepted = await quote(allow: true);
++        expect(accepted.data.monthlyPayment, 277300);
++        expect(accepted.data.isSelectionTermsEstimate, isTrue);
++        expect(
+           (requests.last.data as Map).containsKey('selection_terms_estimate'),
+           isFalse);
+     });
++    testWidgets(
++        'strict EXACT keeps existing UI without guarantee-missing notice',
++        (tester) async {
++      responseData = _strictWithAdditiveScope();
++      final accepted = await tester.runAsync(() => quote());
++      expect(accepted!.data.strictPriceEvidenceAccepted, isTrue);
++      expect(accepted.data.isSelectionTermsEstimate, isFalse);
++      expect(accepted.data.monthlyPayment, 277300);
++      await tester.pumpWidget(MaterialApp(
++          theme: AppTheme.light(),
++          home: QuoteResultScreen(
++              quote: accepted,
++              vehicleName: '합성 차량',
++              vehicleBrand: '합성',
++              vehicleTrimId: syntheticScopedTrim,
++              initialSelection: _selection)));
++      await tester.pumpAndSettle();
++      expect(
++          find.byKey(const ValueKey('quote-selection-terms-estimate-monthly')),
++          findsNothing);
++      expect(find.text('보증금은 원본에 기재되지 않아 확인이 필요해요.'), findsNothing);
++      expect(tester.takeException(), isNull);
++    });
++    for (final width in [320.0, 390.0, 430.0]) {
++      for (final scale in [1.0, 1.3, 2.0]) {
++        testWidgets(
++            'scoped estimate at $width / text $scale stays readable without financier claim',
++            (tester) async {
++          tester.view.physicalSize = Size(width, 844);
++          tester.view.devicePixelRatio = 1;
++          addTearDown(tester.view.resetPhysicalSize);
++          addTearDown(tester.view.resetDevicePixelRatio);
++          final accepted = await tester.runAsync(() => quote(allow: true));
++          expect(accepted, isNotNull);
++          await tester.pumpWidget(MaterialApp(
++              theme: AppTheme.light(),
++              builder: (context, child) => MediaQuery(
++                  data: MediaQuery.of(context)
++                      .copyWith(textScaler: TextScaler.linear(scale)),
++                  child: child!),
++              home: QuoteResultScreen(
++                  quote: accepted!,
++                  vehicleName: '합성 차량',
++                  vehicleBrand: '합성',
++                  vehicleTrimId: syntheticScopedTrim,
++                  initialSelection: _selection)));
++          await tester.pumpAndSettle();
++          expect(
++              find.byKey(
++                  const ValueKey('quote-selection-terms-estimate-monthly')),
++              findsOneWidget);
++          expect(find.text('예상 월납'), findsOneWidget);
++          expect(find.text('277,300원'), findsOneWidget);
++          await tester.scrollUntilVisible(find.text('보증금은 원본에 기재되지 않아 확인이 필요해요.'), 200,
++              scrollable: find.byType(Scrollable).first);
++          expect(find.text('보증금은 원본에 기재되지 않아 확인이 필요해요.'), findsOneWidget);
++          expect(find.textContaining('최저 금융사'), findsNothing);
++          await tester.scrollUntilVisible(find.text('보증금'), 400,
++              scrollable: find.byType(Scrollable).first);
++          expect(find.text('원본 미기재·확인 필요'), findsOneWidget);
++          expect(tester.takeException(), isNull);
++        });
++      }
++    }
+   });
+ }
+diff --git a/app/test/selection_terms_saved_garage_test.dart b/app/test/selection_terms_saved_garage_test.dart
+--- a/app/test/selection_terms_saved_garage_test.dart
++++ b/app/test/selection_terms_saved_garage_test.dart
+@@ -2,6 +2,7 @@
+ import 'dart:convert';
+ import 'dart:io';
+ import 'package:dio/dio.dart';
++import 'package:flutter/foundation.dart';
+ import 'package:flutter/material.dart';
+ import 'package:flutter/services.dart';
+ import 'package:flutter_test/flutter_test.dart';
+@@ -15,9 +16,12 @@
+ import 'package:recar_app/theme/app_theme.dart';
+ import 'package:shared_preferences/shared_preferences.dart';
+ import 'support/synthetic_selection_terms_estimate.dart';
++import 'support/synthetic_selection_prepayment_estimate.dart';
+ 
+-Map<String, dynamic> _savedApplication() {
+-  final quote = syntheticSelectionTermsQuote();
++Map<String, dynamic> _savedApplication({bool prepayment = false}) {
++  final quote = prepayment
++      ? syntheticSelectionPrepaymentQuote()
++      : syntheticSelectionTermsQuote();
+   return {
+     'id': 'SYNTHETIC-SAVED',
+     'user_id': 'SYNTHETIC-USER',
+@@ -37,12 +41,16 @@
+     'vehicle_price': 45000000,
+     'contract_months': 60,
+     'annual_km': 10000,
+-    'deposit': 0,
++    'deposit': prepayment ? 9000000 : 0,
+     'selection_fingerprint': quote['selection_fingerprint'],
+     'pricing_context_version': quote['pricing_context_version'],
+     'selection_context': {
+-      'quote_estimate_version': 'selection_terms_estimate_v1',
+-      'selection_terms_estimate': quote['selection_terms_estimate'],
++      'quote_estimate_version': prepayment
++          ? 'selection_prepayment_estimate_v1' : 'selection_terms_estimate_v1',
++      if (prepayment)
++        'selection_prepayment_estimate': quote['selection_prepayment_estimate'],
++      if (!prepayment)
++        'selection_terms_estimate': quote['selection_terms_estimate'],
+       'selection_contract_version': 'selection_v1',
+       'product_type': 'RENTAL',
+       'vehicle_id': syntheticScopedVehicle,
+@@ -54,8 +62,8 @@
+       'term_months': 60,
+       'mileage_limit': 10000,
+       'selected_vehicle_price': 45000000,
+-      'deposit': 0,
+-      'prepayment_pct': 0,
++      'deposit': prepayment ? 9000000 : 0,
++      'prepayment_pct': prepayment ? 20 : 0,
+       'guarantee': 0,
+       'guarantee_pct': 0,
+       'monthly_payment': 277300,
+@@ -67,6 +75,10 @@
+ void main() {
+   TestWidgetsFlutterBinding.ensureInitialized();
+   setUpAll(() async {
++    // flutter test --platform chrome preloads and forces its test fonts while
++    // ignoring platform messages, so rootBundle.load cannot complete there.
++    // Keep Pretendard for VM layout checks and the built-in fonts for Chrome.
++    if (kIsWeb) return;
+     await (FontLoader('Pretendard')
+           ..addFont(
+               rootBundle.load('assets/fonts/pretendard/PretendardVariable.ttf'))
+@@ -182,9 +194,15 @@
+     expect(item.toJson().containsKey('selection_context'), isFalse);
+   });
+ 
+-  for (final sent in <int?>[null, 215400, 277300]) {
++  for (final scenario in [
++    for (final prepayment in [false, true])
++      for (final sent in <int?>[null, 215400, 277300])
++        (prepayment: prepayment, sent: sent),
++  ]) {
++    final prepayment = scenario.prepayment;
++    final sent = scenario.sent;
+     testWidgets(
+-        'saved garage displays ${sent == null ? 'scoped estimate only' : 'actual SENT $sent'} with correct source',
++        'saved garage prepayment=$prepayment displays ${sent == null ? 'scoped estimate only' : 'actual SENT $sent'} with correct source',
+         (tester) async {
+       SharedPreferences.setMockInitialValues({});
+       GarageRefreshSignal.instance.clearFocus();
+@@ -199,7 +217,7 @@
+               role: 'CUSTOMER',
+               isActive: true));
+       GarageApi.debugQuoteDocumentsFetcher = (_) async => const [];
+-      final raw = _savedApplication();
++      final raw = _savedApplication(prepayment: prepayment);
+       if (sent != null) {
+         raw['display_monthly_payment'] = sent;
+         raw['price_source'] = 'ADMIN_SENT_QUOTE';
+@@ -234,8 +252,8 @@
+             'condition': {
+               'contract_months': 60,
+               'annual_km': 10000,
+-              'prepay_amount': 0,
+-              'prepay_pct': 0,
++              'prepay_amount': prepayment ? 9000000 : 0,
++              'prepay_pct': prepayment ? 20 : 0,
+               'options_label': '없음'
+             },
+             'submitted_monthly_payment': 277300,
+@@ -278,7 +296,8 @@
+       await tester.pump();
+       await tester.pump(const Duration(milliseconds: 800));
+       expect(find.text('예상 월납'), sent == null ? findsOneWidget : findsNothing);
+-      expect(find.text('보증금 원본 미기재·확인 필요'),
++      expect(find.text(prepayment
++          ? '보증금·금융사 조건 확인 필요' : '보증금 원본 미기재·확인 필요'),
+           sent == null ? findsOneWidget : findsNothing);
+       final title = find.byWidgetPredicate((widget) =>
+           widget is Text &&
+@@ -296,7 +315,8 @@
+       expect(paymentCard, findsOneWidget);
+       if (sent == null) {
+         expect(find.text('예상 월납'), findsOneWidget);
+-        expect(find.text('보증금 원본 미기재·확인 필요'), findsOneWidget);
++        expect(find.text(prepayment
++          ? '보증금·금융사 조건 확인 필요' : '보증금 원본 미기재·확인 필요'), findsOneWidget);
+         expect(find.text('같은 조건의 월 납입료 기준으로 비교했어요.'), findsNothing);
+         expect(find.text('얼마를 아꼈을까요?'), findsNothing);
+         expect(
+@@ -305,7 +325,8 @@
+             findsOneWidget);
+       } else {
+         expect(find.text('예상 월납'), findsNothing);
+-        expect(find.text('보증금 원본 미기재·확인 필요'), findsNothing);
++        expect(find.text(prepayment
++          ? '보증금·금융사 조건 확인 필요' : '보증금 원본 미기재·확인 필요'), findsNothing);
+         expect(find.text('도착한 맞춤 견적 월 납입료'), findsOneWidget);
+         expect(find.text('같은 조건의 월 납입료 기준으로 비교했어요.'), findsNothing);
+         expect(find.text('얼마를 아꼈을까요?'), findsNothing);
+diff --git a/app/test/support/synthetic_selection_prepayment_estimate.dart b/app/test/support/synthetic_selection_prepayment_estimate.dart
+new file mode 100644
+--- /dev/null
++++ b/app/test/support/synthetic_selection_prepayment_estimate.dart
+@@ -0,0 +1,49 @@
++// Synthetic zero-source estimate. Never an operational/source-data recording.
++import 'dart:convert';
++import 'synthetic_selection_terms_estimate.dart';
++
++Map<String, dynamic> syntheticSelectionPrepaymentQuote({
++  int amount = 9000000,
++  double pct = 20,
++  bool paidSelections = false,
++}) {
++  final data = syntheticSelectionTermsQuote()
++    ..remove('selection_terms_estimate')
++    ..['deposit'] = amount
++    ..['prepayment_pct'] = pct;
++  if (paidSelections) {
++    (data['normalized_selection'] as Map).addAll(<String, dynamic>{
++      'selected_option_ids': ['SYNTHETIC-OPTION'],
++      'exterior_color_id': 'SYNTHETIC-EXTERIOR',
++      'interior_color_id': 'SYNTHETIC-INTERIOR',
++    });
++  }
++  data['selection_prepayment_estimate'] = {
++    'version': 'selection_prepayment_estimate_v1',
++    'verified': true,
++    'policy_version': 'zero_prepayment_delta_v1',
++    'quote_kind': 'ESTIMATE',
++    'product_type': 'RENTAL',
++    'monthly_payment': 277300,
++    'source_revision': 'sha256:${'b' * 64}',
++    'source_record_id': 'SYNTHETIC SOURCE',
++    'reference_vehicle_trim_id': syntheticScopedReference,
++    'selection_fingerprint': 'a' * 64,
++    'source_conditions': {
++      'term_months': 60,
++      'annual_km': 10000,
++      'prepayment_pct': 0,
++    },
++    'source_prepayment_amount': 0,
++    'requested_prepayment_amount': amount,
++    'requested_prepayment_pct': pct,
++    'unverified_conditions': ['guarantee', 'provider_prepayment_terms'],
++  };
++  (data['price_provenance'] as Map)['unsupported_reasons'] = [
++    'SOURCE_CONDITIONS_NOT_EXACTLY_VERIFIED',
++    'NONZERO_PREPAYMENT_OUT_OF_INITIAL_SCOPE',
++    if (paidSelections) 'OPTIONS_OUT_OF_INITIAL_SCOPE',
++    if (paidSelections) 'COLOR_OR_INVENTORY_OUT_OF_INITIAL_SCOPE',
++  ];
++  return jsonDecode(jsonEncode(data)) as Map<String, dynamic>;
++}
