@@ -20483,3 +20483,626 @@ new file mode 100644
 +}
 +
 +''';
+diff --git a/app/lib/screens/vehicle_detail_screen.dart b/app/lib/screens/vehicle_detail_screen.dart
+--- a/app/lib/screens/vehicle_detail_screen.dart
++++ b/app/lib/screens/vehicle_detail_screen.dart
+@@ -337,6 +337,7 @@
+ 
+   // ── 조건 바텀시트 StateSetter (열려있는 동안만 non-null) ─────────────────────
+   StateSetter? _sheetSetState;
++  int _conditionSheetGeneration = 0;
+ 
+   @override
+   void initState() {
+@@ -6821,6 +6822,9 @@
+   void _openConditionSheet() {
+     final vehicle = _vehicle;
+     if (vehicle == null) return;
++    final sheetGeneration = ++_conditionSheetGeneration;
++    var sheetActive = true;
++    StateSetter? registeredSheetSetter;
+ 
+     showModalBottomSheet<void>(
+       context: context,
+@@ -6829,7 +6833,18 @@
+       builder: (sheetCtx) {
+         return StatefulBuilder(
+           builder: (sheetCtx, setSheetState) {
+-            _sheetSetState = setSheetState;
++            // A popped sheet can rebuild while its exit animation is running.
++            // It must not register an updater that outlives the route.
++            if (sheetActive && sheetGeneration == _conditionSheetGeneration) {
++              registeredSheetSetter = (update) {
++                if (sheetActive &&
++                    sheetGeneration == _conditionSheetGeneration &&
++                    sheetCtx.mounted) {
++                  setSheetState(update);
++                }
++              };
++              _sheetSetState = registeredSheetSetter;
++            }
+ 
+             final trimPrice = _selectedTrim?.price ?? vehicle.basePrice;
+             final depositAmt = (trimPrice * _depositPct / 100).round();
+@@ -6946,7 +6961,13 @@
+           },
+         );
+       },
+-    ).whenComplete(() => _sheetSetState = null);
++    ).whenComplete(() {
++      sheetActive = false;
++      // An older route completing must not clear a newly opened sheet's setter.
++      if (identical(_sheetSetState, registeredSheetSetter)) {
++        _sheetSetState = null;
++      }
++    });
+   }
+ 
+   // ── 캐피탈 비교 탭 (lookup 기반) ────────────────────────────────────────
+diff --git a/app/test/vehicle_detail_capital_race_test.dart b/app/test/vehicle_detail_capital_race_test.dart
+--- a/app/test/vehicle_detail_capital_race_test.dart
++++ b/app/test/vehicle_detail_capital_race_test.dart
+@@ -271,6 +271,81 @@
+     expect(posts.every((post) => post.result.isCompleted), isTrue);
+   }
+ 
++  for (final reopen in [false, true]) {
++    testWidgets('dismissed condition sheet cannot retain setter reopen=$reopen',
++        (tester) async {
++      delayPosts = true;
++      final state = await boot(tester, term: 24, prepay: 30);
++      posts.single.error(422, code: 'PREPAYMENT_UNAVAILABLE');
++      await flush(tester);
++      state.debugOpenConditionSheetForTesting();
++      await tester.pump();
++      await tester.pump(const Duration(milliseconds: 350));
++      final sheet = tester.element(find.descendant(
++          of: find.byType(BottomSheet),
++          matching: find.byType(StatefulBuilder)));
++      Navigator.of(sheet).pop();
++      await tester.pump();
++      // The popped route remains mounted until its exit transition finishes.
++      expect(sheet.mounted, isTrue);
++      if (reopen) {
++        state.debugOpenConditionSheetForTesting();
++        await tester.pump();
++      }
++      // A legitimate layout/inherited update may rebuild that exiting route.
++      sheet.markNeedsBuild();
++      await tester.pump(const Duration(milliseconds: 30));
++      await tester.pump(const Duration(milliseconds: 350));
++      expect(sheet.mounted, isFalse);
++      final choice = reopen ? find.text('20%').last : find.text('3년');
++      await Scrollable.ensureVisible(tester.element(choice), alignment: 0.5);
++      await tester.pump();
++      await tester.tap(choice);
++      await tester.pump(const Duration(milliseconds: 600));
++      expect(tester.takeException(), isNull);
++      expect(
++          (posts.last.request.data as Map)[reopen ? 'prepayment_pct' : 'term'],
++          reopen ? 20 : 36);
++      if (reopen) {
++        expect(
++            find.descendant(
++                of: find.byType(BottomSheet), matching: find.text('900만원')),
++            findsOneWidget);
++      }
++    });
++  }
++
++  testWidgets('older condition sheet completion preserves newer sheet updates',
++      (tester) async {
++    delayPosts = true;
++    final state = await boot(tester, term: 24, prepay: 30);
++    posts.single.error(422, code: 'PREPAYMENT_UNAVAILABLE');
++    await flush(tester);
++    state.debugOpenConditionSheetForTesting();
++    await tester.pump();
++    await tester.pump(const Duration(milliseconds: 350));
++    final olderSheet = tester.element(find.descendant(
++        of: find.byType(BottomSheet), matching: find.byType(StatefulBuilder)));
++    final olderRoute = ModalRoute.of(olderSheet)!;
++    final navigator = Navigator.of(olderSheet);
++    state.debugOpenConditionSheetForTesting();
++    await tester.pump();
++    await tester.pump(const Duration(milliseconds: 350));
++    // Complete the earlier route only after the new sheet owns the updater.
++    navigator.removeRoute(olderRoute);
++    await tester.pump();
++    await tester.pump(const Duration(milliseconds: 350));
++    expect(olderSheet.mounted, isFalse);
++    await tester.tap(find.text('20%').last);
++    await tester.pump(const Duration(milliseconds: 600));
++    expect(tester.takeException(), isNull);
++    expect((posts.last.request.data as Map)['prepayment_pct'], 20);
++    expect(
++        find.descendant(
++            of: find.byType(BottomSheet), matching: find.text('900만원')),
++        findsOneWidget);
++  });
++
+   for (final pct in [0, 10, 20]) {
+     testWidgets(
+         'prepayment unavailable detail keeps30 and recovers explicit$pct',
+diff --git a/app/lib/services/api_client.dart b/app/lib/services/api_client.dart
+--- a/app/lib/services/api_client.dart
++++ b/app/lib/services/api_client.dart
+@@ -4,6 +4,8 @@
+ 
+ import '../dev/dev_config.dart';
+ import 'auth_session.dart';
++import 'web_transport_stub.dart'
++    if (dart.library.js_interop) 'web_transport.dart';
+ 
+ // ── 앱 전역 NavigatorKey ──────────────────────────────────────────────────────
+ // MaterialApp(navigatorKey: ApiClient.navigatorKey) 에 연결하면
+@@ -129,6 +131,7 @@
+         },
+       ),
+     );
++    configureBrowserTransport(dio);
+     dio.interceptors.addAll([
+       // ── 요청/응답 로그 ──────────────────────────────────────────
+       InterceptorsWrapper(
+diff --git a/app/lib/services/web_transport.dart b/app/lib/services/web_transport.dart
+new file mode 100644
+--- /dev/null
++++ b/app/lib/services/web_transport.dart
+@@ -0,0 +1,6 @@
++import 'package:dio/dio.dart';
++import 'web/managed_browser_adapter.dart';
++
++void configureBrowserTransport(Dio dio) {
++  dio.httpClientAdapter = BrowserHttpClientAdapter();
++}
+diff --git a/app/lib/services/web_transport_stub.dart b/app/lib/services/web_transport_stub.dart
+new file mode 100644
+--- /dev/null
++++ b/app/lib/services/web_transport_stub.dart
+@@ -0,0 +1,4 @@
++import 'package:dio/dio.dart';
++
++// Native/VM keep Dio's existing IO transport.
++void configureBrowserTransport(Dio dio) {}
+diff --git a/app/lib/services/web/managed_browser_adapter.dart b/app/lib/services/web/managed_browser_adapter.dart
+new file mode 100644
+--- /dev/null
++++ b/app/lib/services/web/managed_browser_adapter.dart
+@@ -0,0 +1,384 @@
++// Vendored dio_web_adapter 2.1.1; upstream adapter_impl.dart SHA-256: 714fff22e97835839db3e205ea57a9437222e7b6e21451d8df5b9de302f1c939
++// https://github.com/cfug/dio/tree/web_adapter_v2.1.1/plugins/web_adapter
++// Local cancellation patch: see ../../../third_party/dio_web_adapter/README.md.
++/*
++MIT License
++
++Copyright (c) 2018 Wen Du (wendux)
++Copyright (c) 2022 The CFUG Team
++
++Permission is hereby granted, free of charge, to any person obtaining a copy
++of this software and associated documentation files (the "Software"), to deal
++in the Software without restriction, including without limitation the rights
++to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
++copies of the Software, and to permit persons to whom the Software is
++furnished to do so, subject to the following conditions:
++
++The above copyright notice and this permission notice shall be included in all
++copies or substantial portions of the Software.
++
++THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
++IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
++FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
++AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
++LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
++OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
++SOFTWARE.
++*/
++// ignore_for_file: implementation_imports, depend_on_referenced_packages
++import 'dart:async';
++import 'dart:convert';
++import 'dart:js_interop';
++import 'dart:typed_data';
++
++import 'package:dio/dio.dart';
++import 'package:dio/src/utils.dart';
++import 'package:meta/meta.dart';
++import 'package:web/web.dart' as web;
++
++BrowserHttpClientAdapter createAdapter() => BrowserHttpClientAdapter();
++
++/// The default [HttpClientAdapter] for Web platforms.
++class BrowserHttpClientAdapter implements HttpClientAdapter {
++  BrowserHttpClientAdapter({this.withCredentials = false});
++
++  /// These are aborted if the client is closed.
++  @visibleForTesting
++  final xhrs = <web.XMLHttpRequest>{};
++
++  /// Whether to send credentials such as cookies or authorization headers for
++  /// cross-site requests.
++  ///
++  /// Defaults to `false`.
++  ///
++  /// You can also override this value using `Options.extra['withCredentials']`
++  /// for each request.
++  bool withCredentials;
++
++  @override
++  Future<ResponseBody> fetch(
++    RequestOptions options,
++    Stream<Uint8List>? requestStream,
++    Future<void>? cancelFuture,
++  ) async {
++    final xhr = web.XMLHttpRequest();
++    xhrs.add(xhr);
++    xhr
++      ..open(options.method, '${options.uri}')
++      ..responseType = 'arraybuffer';
++
++    final withCredentialsOption = options.extra['withCredentials'];
++    if (withCredentialsOption != null) {
++      xhr.withCredentials = withCredentialsOption == true;
++    } else {
++      xhr.withCredentials = withCredentials;
++    }
++
++    options.headers.remove(Headers.contentLengthHeader);
++    options.headers.forEach((key, v) {
++      if (v is Iterable) {
++        xhr.setRequestHeader(key, v.join(', '));
++      } else {
++        xhr.setRequestHeader(key, v.toString());
++      }
++    });
++
++    final onSendProgress = options.onSendProgress;
++    final sendTimeout = options.sendTimeout ?? Duration.zero;
++    final connectTimeout = options.connectTimeout ?? Duration.zero;
++    final receiveTimeout = options.receiveTimeout ?? Duration.zero;
++
++    final xhrTimeout = (connectTimeout + receiveTimeout).inMilliseconds;
++    xhr.timeout = xhrTimeout;
++
++    final completer = Completer<ResponseBody>();
++
++    xhr.onLoad.first.then((_) {
++      final ByteBuffer body = (xhr.response as JSArrayBuffer).toDart;
++      completer.complete(
++        ResponseBody.fromBytes(
++          body.asUint8List(),
++          xhr.status,
++          headers: xhr.getResponseHeaders(),
++          statusMessage: xhr.statusText,
++          isRedirect: xhr.status == 302 ||
++              xhr.status == 301 ||
++              options.uri.toString() != xhr.responseURL,
++        ),
++      );
++    });
++
++    Timer? connectTimeoutTimer;
++    if (connectTimeout > Duration.zero) {
++      connectTimeoutTimer = Timer(
++        connectTimeout,
++        () {
++          connectTimeoutTimer = null;
++          if (completer.isCompleted) {
++            // connectTimeout is triggered after the fetch has been completed.
++            return;
++          }
++          xhr.abort();
++          completer.completeError(
++            DioException.connectionTimeout(
++              requestOptions: options,
++              timeout: connectTimeout,
++            ),
++            StackTrace.current,
++          );
++        },
++      );
++    }
++
++    // This code is structured to call `xhr.upload.onProgress.listen` only when
++    // absolutely necessary, because registering an xhr upload listener prevents
++    // the request from being classified as a "simple request" by the CORS spec.
++    // Reference: https://developer.mozilla.org/en-US/docs/Web/HTTP/CORS#simple_requests
++    // Upload progress events only get triggered if the request body exists,
++    // so we can check it beforehand.
++    if (requestStream != null) {
++      final xhrUploadProgressStream =
++          web.EventStreamProviders.progressEvent.forTarget(xhr.upload);
++
++      if (connectTimeoutTimer != null) {
++        xhrUploadProgressStream.listen((_) {
++          connectTimeoutTimer?.cancel();
++          connectTimeoutTimer = null;
++        });
++      }
++
++      if (sendTimeout > Duration.zero) {
++        final uploadStopwatch = Stopwatch();
++        xhrUploadProgressStream.listen((_) {
++          if (!uploadStopwatch.isRunning) {
++            uploadStopwatch.start();
++          }
++          final duration = uploadStopwatch.elapsed;
++          if (duration > sendTimeout) {
++            uploadStopwatch.stop();
++            completer.completeError(
++              DioException.sendTimeout(
++                timeout: sendTimeout,
++                requestOptions: options,
++              ),
++              StackTrace.current,
++            );
++            xhr.abort();
++          }
++        });
++      }
++
++      if (onSendProgress != null) {
++        xhrUploadProgressStream.listen((event) {
++          onSendProgress(event.loaded, event.total);
++        });
++      }
++    } else {
++      if (sendTimeout > Duration.zero) {
++        warningLog(
++          'sendTimeout cannot be used without a request body to send on Web',
++          StackTrace.current,
++        );
++      }
++      if (onSendProgress != null) {
++        warningLog(
++          'onSendProgress cannot be used without a request body to send on Web',
++          StackTrace.current,
++        );
++      }
++    }
++
++    final receiveStopwatch = Stopwatch();
++    Timer? receiveTimer;
++
++    void stopWatchReceiveTimeout() {
++      receiveTimer?.cancel();
++      receiveTimer = null;
++      receiveStopwatch.stop();
++    }
++
++    void watchReceiveTimeout() {
++      if (receiveTimeout <= Duration.zero) {
++        return;
++      }
++      receiveStopwatch.reset();
++      if (!receiveStopwatch.isRunning) {
++        receiveStopwatch.start();
++      }
++      receiveTimer?.cancel();
++      receiveTimer = Timer(receiveTimeout, () {
++        if (!completer.isCompleted) {
++          xhr.abort();
++          completer.completeError(
++            DioException.receiveTimeout(
++              timeout: receiveTimeout,
++              requestOptions: options,
++            ),
++            StackTrace.current,
++          );
++        }
++        stopWatchReceiveTimeout();
++      });
++    }
++
++    xhr.onProgress.listen(
++      (event) {
++        if (connectTimeoutTimer != null) {
++          connectTimeoutTimer!.cancel();
++          connectTimeoutTimer = null;
++        }
++        watchReceiveTimeout();
++        if (options.onReceiveProgress != null) {
++          options.onReceiveProgress!(event.loaded, event.total);
++        }
++      },
++      onDone: () => stopWatchReceiveTimeout(),
++    );
++
++    xhr.onError.first.then((_) {
++      connectTimeoutTimer?.cancel();
++      // Unfortunately, the underlying XMLHttpRequest API doesn't expose any
++      // specific information about the error itself.
++      // See also: https://developer.mozilla.org/en-US/docs/Web/API/XMLHttpRequestEventTarget/onerror
++      completer.completeError(
++        DioException.connectionError(
++          requestOptions: options,
++          reason: 'The XMLHttpRequest onError callback was called. '
++              'This typically indicates an error on the network layer.',
++        ),
++        StackTrace.current,
++      );
++    });
++
++    web.EventStreamProviders.timeoutEvent.forTarget(xhr).first.then((_) {
++      final isConnectTimeout = connectTimeoutTimer != null;
++      if (connectTimeoutTimer != null) {
++        connectTimeoutTimer?.cancel();
++      }
++      if (!completer.isCompleted) {
++        if (isConnectTimeout) {
++          completer.completeError(
++            DioException.connectionTimeout(
++              timeout: connectTimeout,
++              requestOptions: options,
++            ),
++          );
++        } else {
++          completer.completeError(
++            DioException.receiveTimeout(
++              timeout: Duration(milliseconds: xhrTimeout),
++              requestOptions: options,
++            ),
++            StackTrace.current,
++          );
++        }
++      }
++    });
++
++    cancelFuture?.then((_) {
++      if (xhr.readyState < web.XMLHttpRequest.DONE &&
++          xhr.readyState > web.XMLHttpRequest.UNSENT) {
++        connectTimeoutTimer?.cancel();
++        try {
++          xhr.abort();
++        } catch (_) {}
++        if (!completer.isCompleted) {
++          completer.completeError(
++            DioException.requestCancelled(
++              requestOptions: options,
++              reason: 'The XMLHttpRequest was aborted.',
++            ),
++          );
++        }
++      }
++    });
++
++    // Observe the response before waiting for body bytes. Cancellation and
++    // timeout may complete it while the request stream is still pending.
++    final response = completer.future.whenComplete(() {
++      connectTimeoutTimer?.cancel();
++      stopWatchReceiveTimeout();
++      xhrs.remove(xhr);
++    });
++
++    Future<void> sendBody() async {
++      try {
++        if (requestStream != null) {
++          if (options.method == 'GET') {
++            warningLog(
++              'GET request with a body data are not support on the '
++              'web platform. Use POST/PUT instead.',
++              StackTrace.current,
++            );
++          }
++          final body = Completer<Uint8List>();
++          final sink = ByteConversionSink.withCallback(
++            (bytes) => body.complete(
++              bytes is Uint8List ? bytes : Uint8List.fromList(bytes),
++            ),
++          );
++          requestStream.listen(
++            sink.add,
++            onError: (Object error, StackTrace stack) =>
++                body.completeError(error, stack),
++            onDone: sink.close,
++            cancelOnError: true,
++          );
++          final bytes = await body.future;
++          // A cancelled/timed-out request must not be sent when its body later
++          // finishes. The caller already received the original response error.
++          if (completer.isCompleted) return;
++          xhr.send(bytes.toJS);
++        } else {
++          if (completer.isCompleted) return;
++          xhr.send();
++        }
++      } catch (error, stack) {
++        if (!completer.isCompleted) {
++          completer.completeError(error, stack);
++        }
++      }
++    }
++
++    unawaited(sendBody());
++    return response;
++  }
++
++  /// Closes the client.
++  ///
++  /// This terminates all active requests.
++  @override
++  void close({bool force = false}) {
++    if (force) {
++      for (final xhr in xhrs) {
++        xhr.abort();
++      }
++    }
++    xhrs.clear();
++  }
++}
++
++extension on web.XMLHttpRequest {
++  Map<String, List<String>> getResponseHeaders() {
++    final headersString = getAllResponseHeaders();
++    final headers = <String, List<String>>{};
++    if (headersString.isEmpty) {
++      return headers;
++    }
++    final headersList = headersString.split('\r\n');
++    for (final header in headersList) {
++      if (header.isEmpty) {
++        continue;
++      }
++
++      final splitIdx = header.indexOf(': ');
++      if (splitIdx == -1) {
++        continue;
++      }
++      final key = header.substring(0, splitIdx).toLowerCase();
++      final value = header.substring(splitIdx + 2);
++      (headers[key] ??= []).add(value);
++    }
++    return headers;
++  }
++}
+diff --git a/app/third_party/dio_web_adapter/LICENSE b/app/third_party/dio_web_adapter/LICENSE
+new file mode 100644
+--- /dev/null
++++ b/app/third_party/dio_web_adapter/LICENSE
+@@ -0,0 +1,22 @@
++MIT License
++
++Copyright (c) 2018 Wen Du (wendux)
++Copyright (c) 2022 The CFUG Team
++
++Permission is hereby granted, free of charge, to any person obtaining a copy
++of this software and associated documentation files (the "Software"), to deal
++in the Software without restriction, including without limitation the rights
++to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
++copies of the Software, and to permit persons to whom the Software is
++furnished to do so, subject to the following conditions:
++
++The above copyright notice and this permission notice shall be included in all
++copies or substantial portions of the Software.
++
++THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
++IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
++FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
++AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
++LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
++OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
++SOFTWARE.
+\ No newline at end of file
+diff --git a/app/third_party/dio_web_adapter/README.md b/app/third_party/dio_web_adapter/README.md
+new file mode 100644
+--- /dev/null
++++ b/app/third_party/dio_web_adapter/README.md
+@@ -0,0 +1,9 @@
++# Pinned web transport patch
++
++Origin: dio_web_adapter 2.1.1, lib/src/adapter_impl.dart
++
++Original SHA-256: `714fff22e97835839db3e205ea57a9437222e7b6e21451d8df5b9de302f1c939`
++
++The original MIT license is preserved in LICENSE and the source header. The existing upstream package remains in pubspec.lock and Flutter generated license notices.
++
++Local patch: return the observed response future before awaiting the POST body, report body failures on that same future, and prevent any late send after cancellation/timeout. No delay, global error filter, token removal, package cache edit, or native IO replacement. Recheck against an upstream fix before removing this patch.
+diff --git a/app/test/web_selection_terms_ui_test.dart b/app/test/web_selection_terms_ui_test.dart
+--- a/app/test/web_selection_terms_ui_test.dart
++++ b/app/test/web_selection_terms_ui_test.dart
+@@ -15,7 +15,6 @@
+ import 'support/synthetic_selection_terms_estimate.dart';
+ 
+ final _selection = QuoteSelection(vehicleTrimId: syntheticScopedTrim);
+-Map _meta(Map data) => data['selection_terms_estimate'] as Map;
+ Map _proof(Map data) => data['price_provenance'] as Map;
+ Map _market(Map data) => _proof(data)['market_price'] as Map;
+ Map<String, dynamic> _strictWithAdditiveScope() {

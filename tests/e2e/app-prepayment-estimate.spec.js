@@ -22,8 +22,22 @@ const catalog = { ...original.catalog[0], id: vid, price_from: 45000000, monthly
 const detail = { ...original.details[0], id: vid, base_price: 45000000, monthly_payment: 750000, representative_monthly_price: 750000, default_vehicle_trim_id: tid, base_monthly_payment: 750000, options: [], danawa_trims: [], danawa_colors: [], trims: [{ id: tid, name: '합성 기본', base_price: 45000000, price: 45000000, is_available: true, options: [], colors: [] }], trim_selection: { mode: 'FLAT', default_vehicle_trim_id: tid, flat_grades: [{ vehicle_trim_id: tid, name: '합성 기본', display_name: '합성 기본', base_price: 45000000, is_active: true }], groups: [] } };
 
 test(`SYNTHETIC compiled app requests policy and displays ${sample.name}`, async ({ page }, info) => {
- const requests = []; const blocked = []; const consoleErrors = [];
- page.on('pageerror', error => consoleErrors.push(String(error)));
+ const requests = []; const blocked = []; const consoleErrors = []; const errorDetails = [];
+ const isBlockedFirebaseImport = error => error.startsWith('TypeError: Failed to fetch dynamically imported module: https://www.gstatic.com/firebasejs/');
+ page.on('pageerror', error => {
+  const message = String(error);
+  consoleErrors.push(message);
+  errorDetails.push({message,stack:error.stack,requestCount:requests.length});
+ });
+ await page.addInitScript(() => {
+  window.__syntheticBrowserErrors = [];
+  window.addEventListener('error', event => {
+   window.__syntheticBrowserErrors.push({
+    message:event.message,filename:event.filename,line:event.lineno,column:event.colno,
+    errorMessage:event.error?.message,errorStack:event.error?.stack,
+   });
+  });
+ });
  await page.setViewportSize({ width: 390, height: 844 });
  await page.route('**/*', route => {
   const url = new URL(route.request().url());
@@ -123,12 +137,27 @@ test(`SYNTHETIC compiled app requests policy and displays ${sample.name}`, async
   await page.waitForTimeout(400);
   await expect(visiblePrice).toBeInViewport();
   await page.screenshot({path:info.outputPath(`SYNTHETIC-${term}m-${km}km-${expectedPct}pct.png`),fullPage:true});
+  const requestsBeforeChange = requests.length;
   await page.getByRole('button',{name:'3년',exact:true}).click();
   await expect(page.locator('flt-semantics span').filter({hasText:amount})).toHaveCount(0,{timeout:10000});
+  // Clearing the previous amount alone cannot prove the new calculation ran.
+  await expect.poll(() => requests.slice(requestsBeforeChange).filter(x =>
+   x.path==='/api/v1/quotes/instant' && x.body.term===36 &&
+   x.body.mileage_limit===km && x.body.prepayment_pct===expectedPct &&
+   x.body.selection.vehicle_trim_id===tid &&
+   x.body.estimate_policy_version==='zero_source_conditions_delta_v1'
+  ).length).toBeGreaterThan(0);
   // Offline verification intentionally blocks Firebase CDN module loading.
-  expect(consoleErrors.filter(error => !error.startsWith('TypeError: Failed to fetch dynamically imported module: https://www.gstatic.com/firebasejs/'))).toEqual([]);
+  expect(consoleErrors.filter(error => !isBlockedFirebaseImport(error))).toEqual([]);
  } finally {
-  await info.attach('synthetic-requests',{body:Buffer.from(JSON.stringify({requests,blocked,consoleErrors},null,2)),contentType:'application/json'});
+  const browserErrorEvents = await page.evaluate(() => window.__syntheticBrowserErrors ?? []).catch(() => []);
+  if (errorDetails.some(error => !isBlockedFirebaseImport(error.message))) {
+   console.error('SYNTHETIC raw browser exceptions', JSON.stringify(browserErrorEvents));
+  }
+  for (const error of errorDetails.filter(error => !isBlockedFirebaseImport(error.message))) {
+   console.error('SYNTHETIC unexpected browser exception', JSON.stringify(error));
+  }
+  await info.attach('synthetic-requests',{body:Buffer.from(JSON.stringify({requests,blocked,consoleErrors,errorDetails,browserErrorEvents},null,2)),contentType:'application/json'});
   if (!page.isClosed()) {
    const semantics = await page.locator('body').ariaSnapshot({timeout:2000}).catch(() => 'Page closed during failure capture');
    await info.attach('semantics',{body:Buffer.from(semantics),contentType:'text/plain'});
