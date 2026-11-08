@@ -1,0 +1,227 @@
+{
+  "verified_at_date": "2026-11-08",
+  "scope": "Development-only web rental pricing candidate; isolated synthetic tests, local compile and local commit. Not a production price or release certification.",
+  "git": {
+    "repository": "RED-TE/ra-car",
+    "branch": "codex/rental-web-verify-20261108",
+    "remote_main_checked": "090b156c6eaa92ac0d32bb9bc0c5a169ddf9468a",
+    "native_main_checked": "bdc58651e658d3f1e6c0c31fa9c5966c1fc1c147",
+    "native_feature_head": "2212b4f833ab48e76774d144ea4ea6e0723e5a15",
+    "source_pin_unchanged": "4b0498df0e63aa2c8bbae66e59e1c9a31037e7b0",
+    "build_id": "web-rental-pricing-20261108"
+  },
+  "recovery": {
+    "kind": "NEW implementation on current main, not exact restoration of the missing historical temporary web worktree",
+    "historical_missing_head": "55b127c7fb2335506d6a35637d13e961619efa3d",
+    "original_runtime_prefix_bytes": 110530,
+    "original_runtime_prefix_sha256": "eac5cb7b1999bac3e7f5ea05fc634467c2ff0c8d68aa068c595a68c2a5fbb991",
+    "original_runtime_prefix_unchanged": true,
+    "source_preparer_unchanged": true
+  },
+  "changes": [
+    "Validate actual source term, annual mileage and actual advance as well as vehicle/trim/options/colors; do not certify a source by echoed request conditions.",
+    "Use existing explicitly bound server rental estimates only within their declared scope; unverified generic nearby/interpolated/unrecorded prices remain rejected.",
+    "Apply RENTAL-only policy to new requests without rewriting saved historical LEASE contracts or sent quote amounts.",
+    "Preserve web cancellation and one total 20-second timeout across default-trim resolution and quote calculation; no POST after canceled or expired lookup.",
+    "Bind selected amount and finance-reference responses to current request generation, retaining source catalogue pagination validation before RENTAL filtering.",
+    "Preserve recent vehicle data on PRICE_UNAVAILABLE and PUBLIC_* failures; remove history only for a genuine vehicle-not-found result.",
+    "Preserve web guest/referral, document upload and direct-application paths, idempotency and saved quote metadata. Wrap the large-text condition header without changing price calculations."
+  ],
+  "files": [
+    {
+      "path": "/Users/johongcheol/Desktop/recar_web_source_20261108/web_app/patches/runtime.patch",
+      "sha256": "1d13f61aef256fdec8c16b664e5f219a52d79de3fd94dfbe3e8c00777671f2cd",
+      "bytes": 469633
+    },
+    {
+      "path": "/Users/johongcheol/Desktop/recar_web_source_20261108/web_app/source.json",
+      "sha256": "e57abbb3656895bb6021dc7cf7b196aea0acc4ff06de46e458768f02c99620ae",
+      "bytes": 407
+    },
+    {
+      "path": "/Users/johongcheol/Desktop/recar_web_source_20261108/web_app/test/quote_trim_selection_test.dart",
+      "sha256": "6ad1b119986ca655d292af1c69f882aef0c1bff7c1b7192a19cbed0e6a256b6a",
+      "bytes": 89182
+    },
+    {
+      "path": "/Users/johongcheol/Desktop/recar_web_source_20261108/web_app/test/web_application_entry_test.dart",
+      "sha256": "424a0c3c0ff72c8b1be4602d60dc609cb4ffaf972cadca66f3001421f9ba5ce3",
+      "bytes": 12896
+    },
+    {
+      "path": "/Users/johongcheol/Desktop/recar_web_source_20261108/web_app/test/web_new3_catalog_test.dart",
+      "sha256": "605e2f1ae08f68b4c0a4ce61acda696846a3e636270304a002a1cf623fe4049d",
+      "bytes": 11888
+    }
+  ],
+  "reconstruction": {
+    "compared_files": 284,
+    "mismatches": [],
+    "production_lib_changes_since_built_C": [],
+    "temporary_probe_excluded": true,
+    "count_note": "284 includes one pre-existing capital_calc.dart.bak2; Dart/fixture inventory contains 283 files. One-off font probe excluded.",
+    "receipt": {
+      "path": "/private/tmp/recar-web-frozen-verification-20261108-e/reconstruction.json",
+      "sha256": "d0efe03b265696c31c00c19e337315f900290473887b17e82cc48fc46ed59c14",
+      "bytes": 31880
+    }
+  },
+  "validation": {
+    "full_vm": {
+      "passed": 1144,
+      "failed": 0,
+      "skipped": 40,
+      "exit_code": 0,
+      "log": {
+        "path": "/private/tmp/recar-web-frozen-verification-20261108-e/full-vm.log",
+        "sha256": "25c1c890abc595c2bf55604c532e13b5aff5f9afb3b39b4613fd5d7d35aed209",
+        "bytes": 595535
+      },
+      "skip_breakdown": {
+        "browser_only": 17,
+        "opt_in_render_captures": 23
+      },
+      "skip_count_basis": "Source skip conditions expanded and reconciled with reporter total; parallel expanded log does not identify each skip event individually. Analytics:SKIP is not a test skip."
+    },
+    "chrome_final": {
+      "passed": 305,
+      "failed": 0,
+      "skipped": 2,
+      "exit_code": 0,
+      "log": {
+        "path": "/private/tmp/recar-web-frozen-verification-20261108-e/chrome-final.log",
+        "sha256": "8c656f753be722d037c244198393b610810a47b0fbcac9c61773b163432bda97",
+        "bytes": 100869
+      },
+      "files": [
+        "quote_price_evidence_test.dart",
+        "absolute_prepayment_evidence_test.dart",
+        "selection_terms_estimate_test.dart",
+        "quote_default_selection_cancel_test.dart",
+        "quote_trim_selection_test.dart",
+        "web_selection_terms_ui_test.dart",
+        "web_application_entry_test.dart",
+        "web_document_upload_test.dart",
+        "garage_document_entry_test.dart",
+        "recent_vehicle_pricing_retention_test.dart"
+      ],
+      "skip_reason": "Native-only rejection of integer-valued double type in strict/scoped paths. JavaScript represents it as an integer-valued number. Fractional .5, string, boolean, nonfinite, wrong source amount and other invalid cases run and pass.",
+      "font_limit": "Flutter web test engine uses forceTestFonts=true and ignorePlatformMessages=true. Only manual FontLoader is skipped on web; UI assertions still run. Native VM uses the real font. Actual production-font browser visual quality is not verified."
+    },
+    "release_compile": {
+      "exit_code": 0,
+      "duration_seconds": 26.0,
+      "output_staged": false,
+      "log": {
+        "path": "/private/tmp/recar-web-frozen-verification-20261108-c/build-release.log",
+        "sha256": "907d4b04dc2fb04cdff9711e077ae7872f0d0a62bf5be11d395585bd27cd1b5f",
+        "bytes": 961
+      },
+      "main_js": {
+        "path": "/private/tmp/recar-web-frozen-verification-20261108-c/app/build/web/main.dart.js",
+        "sha256": "0ae778fe52231d333c07a154a586660c0c89226a9cc4ddcc6d880b9c3f6f53a0",
+        "bytes": 4442525
+      },
+      "source_note": "Compiled frozen C; final E changed tests only. All lib/assets/web/pubspec inputs compared byte-for-byte.",
+      "compared_production_inputs": 7510,
+      "production_input_mismatches": [],
+      "warnings": [
+        "Deprecated pwa-strategy flag",
+        "Wasm dry-run informational suggestion; dry run succeeded"
+      ]
+    },
+    "static_analysis": {
+      "exit_code": 0,
+      "errors": 0,
+      "warnings": 0,
+      "infos": 260,
+      "scope": "lib, identical in C and E",
+      "log": {
+        "path": "/private/tmp/recar-web-frozen-verification-20261108-c/analyze-final-lib.log",
+        "sha256": "5ac132ec0c4229e766b93d8ffec57c96ab42d16db922869ac4d00ff57d1b63e9",
+        "bytes": 38741
+      }
+    },
+    "published_bundle_guard": {
+      "passed": 11,
+      "failed": 1,
+      "exit_code": 1,
+      "log": {
+        "path": "/private/tmp/recar-web-frozen-verification-20261108-e/published-bundle-guard.log",
+        "sha256": "778b77fb18ef27ea15c75c113846b3e506760ef2ab5232e2223c5ac5af066d17",
+        "bytes": 3493
+      },
+      "status": "RELEASE_GATE_PENDING",
+      "cause": "app/release.json retains published build web-catalog-auto-20261019, but source buildId is web-rental-pricing-20261108. Assertion fails at tests/app-startup.test.js:105. Existing published patch hash also differs, independently checked; later hash assertion was not reached.",
+      "guard_weakened": false,
+      "published_files_modified": false
+    },
+    "native_related_checks": {
+      "offline_source_preparer": {
+        "passed": 226,
+        "failed": 0,
+        "skipped": 0,
+        "warnings": 39,
+        "record": "/Users/johongcheol/.codex/worktrees/rental-source-policy-20261108/recar_app/docs/verification/rental-finance-policy-20261108.json"
+      },
+      "recent_vehicle_retention": {
+        "before_passed": 1,
+        "before_failed": 5,
+        "after_passed": 35,
+        "after_failed": 0,
+        "record": "/Users/johongcheol/.codex/worktrees/rental-source-policy-20261108/recar_app/docs/verification/recent-vehicle-price-retention-20261108.json"
+      },
+      "whole_native_and_server_suites": "Not rerun in this resumed phase. Historical 11/07 runs are not current full-release proof."
+    },
+    "before_after_evidence": {
+      "original_web_selected_option_color_counterexamples": {
+        "failed_before": 16,
+        "passed_after": 16,
+        "scope": "Incorrect nearby/unknown/missing-original-term source accepted before fix; now rejected."
+      },
+      "failed_runs_retained": "Intermediate VM/browser failures and interrupted font setup logs retained separately; not counted as final passes. Browser setup issues were corrected without weakening pricing guards."
+    },
+    "independent_review": "Reviewed price guards, cancellation, saved/sent amounts, recent vehicle behavior, preservation and packaging; no additional product defect found in reviewed scope.",
+    "remote_ci": "NOT_RUN"
+  },
+  "preserved": {
+    "paths_byte_unchanged": [
+      "app",
+      "index.html",
+      "tools/prepare-app-web.cjs",
+      "web_app/assets",
+      "web_app/test/fixtures"
+    ],
+    "original_native_checkout": "5b27fb0cbac4d86dbac6570e30fce458e275fb12, same 7 tracked changes (77 insertions/261 deletions) plus pre-existing untracked files retained",
+    "saved_customer_quotes_and_databases": "No live DB or customer records accessed or changed; preservation verified using synthetic snapshots and existing source fixtures",
+    "old_feature_worktree": "api-pricing-audit-20261106 retained at 3311f90533c7a4521d8701a54c7addfe40e42ab0"
+  },
+  "isolation": {
+    "dependencies": "cached/offline",
+    "network": "OS external network denied; only localhost and Chrome internal Unix sockets allowed",
+    "api": "http://127.0.0.1:9 plus local test interceptors",
+    "analytics": "disabled/test no-op",
+    "operating_calls_this_resumed_phase": 0,
+    "previous_public_get_budget": {
+      "approved": 5,
+      "used": 5,
+      "status": "CLOSED",
+      "date": "2026-11-07"
+    },
+    "production_database_access": 0,
+    "production_database_changes": 0,
+    "customer_contacts": 0,
+    "remote_push": false,
+    "remote_ci_dispatch": false,
+    "deployment": false,
+    "testflight_upload": false
+  },
+  "remaining": [
+    "Current operating deployed Git SHA, provider vehicle/trim bindings and active source file hash/date are unverified. Separate server read-only approval remains unanswered.",
+    "Latest completed local source was collected 2026-11-06 17:53:52 through 2026-11-07 04:35:16, with no timezone declared; this does not prove the operating API uses it.",
+    "Offline source inventory retains 238 missing/ambiguous original rows and 1,690 reselection conditions without an exact raw/full-CSV match. This patch does not invent replacement prices or certify all conditions.",
+    "Current finance exclusions policy produced no changes to the actual source replay; its synthetic defect is not claimed to explain current production pricing.",
+    "Existing published web bundle is intentionally unchanged, so the publication consistency guard fails until a separately authorized release is prepared. Remote CI, deployment and native/TestFlight release are not performed.",
+    "Actual operating-browser interactions, production font rendering and native device visual quality remain unverified."
+  ]
+}

@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:math';
 
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:recar_app/models/application.dart';
@@ -181,7 +182,7 @@ void main() {
       expect(find.text('이어서 진행하기'), findsOneWidget);
       expect(find.byType(ApplicantTypeSelectionScreen), findsNothing);
     });
-  });
+  }, skip: !kIsWeb);
 }
 
 Future<void> _pumpQuote(WidgetTester tester) async {
@@ -208,6 +209,7 @@ QuoteEnvelope _quote() {
   return QuoteEnvelope(
     traceId: 'quote-trace',
     data: QuoteData(
+      productType: 'RENTAL',
       tier: 'STANDARD',
       vehicleId: 'vehicle-replacement',
       term: 60,

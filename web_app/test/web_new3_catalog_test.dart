@@ -5,11 +5,13 @@ import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:recar_app/models/quote_selection.dart';
+import 'package:recar_app/models/quote.dart';
 import 'package:recar_app/models/vehicle.dart';
 import 'package:recar_app/screens/vehicle_detail_screen.dart';
 import 'package:recar_app/screens/vehicle_list_screen.dart';
 import 'package:recar_app/services/api_client.dart';
 import 'package:recar_app/services/quote_api.dart';
+import 'package:recar_app/services/rental_only_policy.dart';
 import 'package:recar_app/services/vehicle_api.dart';
 import 'package:recar_app/services/vehicle_cache.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -77,15 +79,21 @@ void main() {
   test('follows all advertised pages even when server clips size to one', () async {
     final items = await VehicleApi.fetchCatalog();
     expect(items.map((item) => item.id),
-        (fixture['catalog'] as List).map((item) => item['id']));
+        (fixture['catalog'] as List).take(2).map((item) => item['id']));
     expect(api.queries.map((query) => query['page']), [1, 2, 3]);
     expect(api.queries.every((query) => query['sort'] == 'monthly_price_asc'), isTrue);
-    expect(items.last.availableProductTypes, ['LEASE']);
-    expect(VehicleCache.getCatalogItem(items.last.id)?.availableProductTypes, ['LEASE']);
+    expect(items.last.availableProductTypes, ['RENTAL']);
+    expect(VehicleCache.getCatalogItem(items.last.id)?.availableProductTypes, ['RENTAL']);
+    expect(VehicleCache.getCatalogItem((fixture['catalog'] as List).last['id']), isNull);
   });
   test('display order and product filters are forwarded on every page', () async {
-    await VehicleApi.fetchCatalog(sort: 'display_order', productType: 'LEASE');
-    expect(api.queries.every((q) => q['sort'] == 'display_order' && q['product_type'] == 'LEASE'), isTrue);
+    await VehicleApi.fetchCatalog(sort: 'display_order', productType: 'RENTAL');
+    expect(api.queries.every((q) => q['sort'] == 'display_order' && q['product_type'] == 'RENTAL'), isTrue);
+  });
+  test('a new lease catalog request is rejected before a network request', () async {
+    await expectLater(VehicleApi.fetchCatalog(productType: 'LEASE'),
+        throwsA(isA<QuoteConditionsUnverified>()));
+    expect(api.queries, isEmpty);
   });
   test('refresh bypasses every public catalog page without clearing private data', () async {
     await VehicleApi.fetchCatalog();
@@ -108,14 +116,14 @@ void main() {
   test('default monthly sort contract is unchanged', () {
     expect(vehicleListSortToServerParam('월 납입료 낮은 순'), 'monthly_price_asc');
   });
-  testWidgets('domestic catalog does not force a RENTAL-only product filter', (tester) async {
+  testWidgets('domestic catalog uses the same explicit RENTAL-only filter', (tester) async {
     await tester.pumpWidget(const MaterialApp(home: VehicleListScreen()));
     for (var i = 0; i < 6; i++) { await tester.pump(const Duration(milliseconds: 200)); }
     await tester.tap(find.text('국산차').first);
     for (var i = 0; i < 6; i++) { await tester.pump(const Duration(milliseconds: 200)); }
     expect(api.queries.where((q) => q['origin'] == 'domestic'), isNotEmpty);
     expect(api.queries.every((q) => q['category'] != 'DOMESTIC'), isTrue);
-    expect(api.queries.every((q) => !q.containsKey('product_type')), isTrue);
+    expect(api.queries.every((q) => q['product_type'] == 'RENTAL'), isTrue);
     await tester.pumpWidget(const SizedBox());
   });
 
@@ -129,15 +137,28 @@ void main() {
   }
   for (final row in fixture['quotes'] as List) {
     final request = Map<String, dynamic>.from(row['request'] as Map);
-    test('accepts recorded production EXACT quote ${request['selection']['vehicle_trim_id']}', () {
-      validate(Map<String, dynamic>.from(row['response']['data'] as Map), request);
+    test('historical quote remains readable; new lease is unsupported ${request['selection']['vehicle_trim_id']}', () {
+      final data = Map<String, dynamic>.from(row['response']['data'] as Map);
+      expect(QuoteData.fromJson(data).monthlyPayment, data['monthly_payment']);
+      if (request['product_type'] == 'LEASE') {
+        expect(() => validate(data, request),
+            throwsA(isA<QuoteConditionsUnverified>()));
+      } else {
+        validate(data, request);
+      }
     });
   }
   for (final row in fixture['defaultColorQuotes'] as List) {
     test('web color selection is verified but not initially Sales AI eligible ${row['request']['vehicle_id']}', () {
       final quote = Map<String, dynamic>.from(row['response']['data'] as Map);
       expect(quote['price_provenance']['sales_ai_eligible'], isFalse);
-      validate(quote, Map<String, dynamic>.from(row['request'] as Map));
+      final request = Map<String, dynamic>.from(row['request'] as Map);
+      if (request['product_type'] == 'LEASE') {
+        expect(() => validate(quote, request),
+            throwsA(isA<QuoteConditionsUnverified>()));
+      } else {
+        validate(quote, request);
+      }
     });
   }
   final mutations = <String, void Function(Map<String, dynamic>)>{
@@ -169,18 +190,16 @@ void main() {
     expect(detail.trims.length, 3);
     expect(detail.trims.every((trim) => trim.options.isEmpty && trim.colors.isEmpty), isTrue);
   });
-  testWidgets('cold detail resolves availability by model query without a brand guess', (tester) async {
+  testWidgets('cold lease-only detail cannot issue a new quote', (tester) async {
     final item = (fixture['catalog'] as List).last;
     await tester.pumpWidget(MaterialApp(home: VehicleDetailScreen(vehicleId: item['id'] as String)));
     for (var i = 0; i < 16; i++) { await tester.pump(const Duration(milliseconds: 250)); }
-    expect(api.queries.every((q) => q['query'] == item['model_name']), isTrue);
-    expect(api.queries.length, 3);
-    expect(api.quoteBodies.single['product_type'], 'LEASE');
-    expect(find.text(QuoteApi.selectionPriceUnavailableMessage), findsNothing);
+    expect(api.quoteBodies, isEmpty);
+    expect(find.text(RentalOnlyPolicy.unavailableMessage), findsWidgets);
     await tester.pumpWidget(const SizedBox());
   });
 
-  testWidgets('detail refreshes a legacy public catalog item missing product metadata', (tester) async {
+  testWidgets('legacy catalog metadata cannot allow a new lease quote', (tester) async {
     final item = Map<String, dynamic>.from((fixture['catalog'] as List).last as Map);
     final legacy = {...item, 'available_product_types': <String>[]};
     VehicleCache.setList('legacy-public-catalog', VehicleListResponse(
@@ -188,9 +207,8 @@ void main() {
     ));
     await tester.pumpWidget(MaterialApp(home: VehicleDetailScreen(vehicleId: item['id'] as String)));
     for (var i = 0; i < 16; i++) { await tester.pump(const Duration(milliseconds: 250)); }
-    expect(api.queries.length, 3);
-    expect(api.quoteBodies.single['product_type'], 'LEASE');
-    expect(VehicleCache.getCatalogItem(item['id'] as String)?.availableProductTypes, ['LEASE']);
+    expect(api.quoteBodies, isEmpty);
+    expect(find.text(RentalOnlyPolicy.unavailableMessage), findsWidgets);
     expect(tester.takeException(), isNull);
     await tester.pumpWidget(const SizedBox());
   });
@@ -204,14 +222,13 @@ void main() {
       addTearDown(tester.view.resetDevicePixelRatio);
       await tester.pumpWidget(MaterialApp(home: VehicleDetailScreen(vehicleId: item['id'] as String)));
       for (var i = 0; i < 12; i++) { await tester.pump(const Duration(milliseconds: 250)); }
-      expect(api.quoteBodies, isNotEmpty);
-      expect(api.quoteBodies.every((body) => body['product_type'] == (item['available_product_types'] as List).single), isTrue);
-      expect(find.text(QuoteApi.selectionPriceUnavailableMessage), findsNothing);
       if ((item['available_product_types'] as List).single == 'LEASE') {
-        expect(tester.widgetList<Image>(find.byType(Image)).any((image) =>
-            image.image is NetworkImage &&
-            (image.image as NetworkImage).url == item['image_url']), isTrue,
-            reason: 'Actual API image must take precedence over the generic illustration');
+        expect(api.quoteBodies, isEmpty);
+        expect(find.text(RentalOnlyPolicy.unavailableMessage), findsWidgets);
+      } else {
+        expect(api.quoteBodies, isNotEmpty);
+        expect(api.quoteBodies.every((body) => body['product_type'] == 'RENTAL'), isTrue);
+        expect(find.text(QuoteApi.selectionPriceUnavailableMessage), findsNothing);
       }
       expect(tester.takeException(), isNull);
       await tester.pumpWidget(const SizedBox());
