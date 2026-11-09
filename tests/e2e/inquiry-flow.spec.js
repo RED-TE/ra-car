@@ -64,6 +64,9 @@ const test = base.extend({
         "access-control-allow-headers": "*", "cache-control": "no-store",
       };
       if (url.origin === API) {
+        if (method === "GET" && url.pathname === "/showroom-fixture.svg") {
+          return route.fulfill({ contentType: "image/svg+xml", body: '<svg xmlns="http://www.w3.org/2000/svg" width="240" height="100"><rect width="240" height="100" fill="#385470"/></svg>' });
+        }
         if (method === "OPTIONS") return route.fulfill({ status: 204, headers });
         if (method === "GET" && url.pathname === "/api/v1/vehicles/discovery") {
           api.discoveryReads++;
@@ -136,11 +139,45 @@ async function step(page, number, capture = false) {
 }
 
 async function openInquiry(page) {
-  const response = await page.goto(`/inquiry/?ref=${referral}&utm_source=local-test`);
+  const response = await page.goto(`/inquiry/steps.html?ref=${referral}&utm_source=local-test`);
   expect(response.status()).toBe(200);
   await expect(page.locator('[data-brand="현대"]')).toBeVisible();
   await step(page, 1);
   await expect(page.locator('script[src*="flutter"], base[href="/app/"]')).toHaveCount(0);
+}
+
+for (const width of [375, 1440]) {
+  test(`showroom keeps the wheels at floor level and supports the form at ${width}px`, async ({ page, api }) => {
+    await page.setViewportSize({ width, height: 920 });
+    const candidate = api.pages[0].items[0];
+    Object.assign(candidate, { image_url: "/showroom-fixture.svg", displayed_product_type: "RENTAL", monthly_payment_product_type: "RENTAL", representative_monthly_price: 350000 });
+    await page.goto(`/inquiry/?ref=${referral}&utm_source=local-test`);
+    await expect(page.getByText("빠르게 고르기", { exact: true })).toHaveCount(0);
+    await expect(page.locator(".lp-slide.is-on")).toContainText("350,000");
+    await expect(page.locator(".lp-slide.is-on")).toHaveAttribute("href", /\/inquiry\/steps\.html\?.*utm_source=local-test/);
+    const backdrop = page.locator(".lp-hero__backdrop img");
+    await expect.poll(() => backdrop.evaluate(img => img.naturalWidth > 0 && img.currentSrc.endsWith("showroom-motion.gif"))).toBe(true);
+    await page.getByRole("button", { name: "배경 다시 재생" }).click();
+    await expect.poll(() => backdrop.evaluate(img => img.currentSrc.includes("?replay="))).toBe(true);
+    await page.screenshot({ path: test.info().outputPath(`showroom-${width}.png`) });
+    await noOverflow(page);
+    await page.locator("#lpHeroCta").click();
+    await expect(page.locator("#lpName")).toBeFocused();
+    await expect(page.locator("#lpPicked")).toContainText(candidate.model_name);
+    await page.locator("#lpName").fill(name);
+    await page.locator("#lpNext").click();
+    await page.locator("#lpPhone").fill(phone);
+    await page.locator("#lpNext").click();
+    await expect(page.locator("#lpNext")).toBeDisabled();
+    await page.locator("#lpFunnel [data-agree-all]").check();
+    await expect(page.locator("#lpFunnel [data-agree]:checked")).toHaveCount(2);
+    await page.locator("#lpNext").click();
+    await expect(page.locator("#lpDone")).toContainText("전송되지 않았어요");
+    expect(api.posts).toHaveLength(0);
+    await page.emulateMedia({ reducedMotion: "reduce" });
+    await expect.poll(() => backdrop.evaluate(img => img.currentSrc.endsWith("showroom-still.jpg"))).toBe(true);
+    await expect(page.getByRole("button", { name: "배경 다시 재생" })).toBeHidden();
+  });
 }
 
 async function chooseVehicle(page, id = "local-rental", capture = false) {
@@ -179,6 +216,31 @@ async function chooseVehicle(page, id = "local-rental", capture = false) {
   await step(page, 4, capture);
 }
 
+test("a different vehicle from the taste test opens its contact form", async ({ page, api }) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  const candidates = api.pages[0].items;
+  for (const [index, vehicle] of candidates.entries()) {
+    Object.assign(vehicle, {
+      model_name: index ? "아반떼" : "그랜저", segment: "sedan", fuel: "gasoline", image_url: "/showroom-fixture.svg",
+      displayed_product_type: "RENTAL", monthly_payment_product_type: "RENTAL", representative_monthly_price: 350000,
+    });
+  }
+  await page.goto("/inquiry/");
+  await expect(page.locator(".lp-slide.is-on")).toBeVisible();
+  await page.locator(".lp-testcta").click();
+  for (let question = 1; question <= 12; question++) {
+    await expect(page.locator(".lp-q__no")).toHaveText(new RegExp(`Q${question}$`));
+    await page.locator('#lpTest [data-a="0"]').click();
+  }
+  await page.getByRole("button", { name: "다른 차량 상담받기" }).click();
+  const alternative = page.locator("#lpTest [data-car]").first();
+  const model = await alternative.locator("b").innerText();
+  await alternative.click();
+  await expect(page.locator("#tNameIn")).toBeFocused();
+  await expect(page.locator("#tName")).toContainText(model);
+  expect(api.posts).toHaveLength(0);
+});
+
 async function review(page, { capture = false, id = "local-rental" } = {}) {
   await chooseVehicle(page, id, capture);
   await page.locator("#nextButton").click();
@@ -210,11 +272,14 @@ for (const viewport of [{ width: 390, height: 844 }, { width: 1440, height: 1000
       .every(img => img.complete && img.naturalWidth > 0))).toBe(true);
     await noOverflow(page);
     await page.screenshot({ path: test.info().outputPath(`landing-${viewport.width}.png`), fullPage: true });
-    const catalogReadsBeforeInquiry = api.reads.filter(url => new URL(url).pathname === "/api/v1/vehicles/").length;
     await page.locator(".promotion-slide.is-current .quote-focus-button").click();
+    await expect(page.locator("#lpCarInput")).toBeVisible();
+    await expect(page.locator("#lpHeroStage")).not.toContainText("차량을 불러오고 있어요");
+    const catalogReadsBeforeSteps = api.reads.filter(url => new URL(url).pathname === "/api/v1/vehicles/").length;
+    await page.getByRole("link", { name: "셀프견적" }).click();
     await expect(page.locator('[data-brand="현대"]')).toBeVisible();
     const url = new URL(page.url());
-    expect(url.pathname).toBe("/inquiry/");
+    expect(url.pathname).toBe("/inquiry/steps.html");
     expect(url.searchParams.get("ref").toUpperCase()).toBe(referral);
     expect(url.searchParams.get("utm_source")).toBe("local-test");
     expect(url.searchParams.get("utm_campaign")).toBe("inquiry-smoke");
@@ -240,7 +305,7 @@ for (const viewport of [{ width: 390, height: 844 }, { width: 1440, height: 1000
     await expect(page.locator("#flowActions")).toBeHidden();
     expect(api.posts).toHaveLength(1);
     expect(api.discoveryReads).toBe(1);
-    expect(api.reads.filter(url => new URL(url).pathname === "/api/v1/vehicles/").length).toBe(catalogReadsBeforeInquiry);
+    expect(api.reads.filter(url => new URL(url).pathname === "/api/v1/vehicles/").length).toBe(catalogReadsBeforeSteps);
     expect(api.posts[0]).toMatchObject({
       name, phone: "01000000000", privacy_agreed: true, product_type: "RENTAL",
       term_months: 48, mileage_per_year: 30000, referral_code: referral, quoted_monthly_payment: null,
@@ -258,7 +323,7 @@ for (const viewport of [{ width: 390, height: 844 }, { width: 1440, height: 1000
 
 test("offline catalog stays empty and disabled until explicit retry succeeds", async ({ page, api }) => {
   api.offlineCatalog = true;
-  await page.goto("/inquiry/");
+  await page.goto("/inquiry/steps.html");
   await expect(page.locator(".state-panel")).toContainText("차량 정보를 불러오지 못했어요");
   await expect(page.locator("[data-brand]")).toHaveCount(0);
   await expect(page.locator("#nextButton")).toBeDisabled();
@@ -271,7 +336,7 @@ test("offline catalog stays empty and disabled until explicit retry succeeds", a
 
 test("duplicate pagination never displays a partial catalog", async ({ page, api }) => {
   api.pages[1].items = [api.pages[0].items[0]];
-  await page.goto("/inquiry/");
+  await page.goto("/inquiry/steps.html");
   await expect(page.locator("[data-retry]")).toBeVisible();
   await expect(page.locator("[data-brand], [data-vehicle]")).toHaveCount(0);
   await expect(page.locator("#nextButton")).toBeDisabled();
@@ -281,7 +346,7 @@ test("duplicate pagination never displays a partial catalog", async ({ page, api
 test("invalid fast discovery fails closed instead of silently requesting priced pages", async ({ page, api }) => {
   api.discovery = true;
   api.discoveryOverride = { contract_version: "discovery_v1", complete: false, total: 1, items: [], revision: "a".repeat(64) };
-  await page.goto("/inquiry/");
+  await page.goto("/inquiry/steps.html");
   await expect(page.locator("[data-retry]")).toBeVisible();
   await expect(page.locator("[data-brand], [data-vehicle]")).toHaveCount(0);
   expect(api.discoveryReads).toBe(1);
@@ -448,6 +513,8 @@ test("a landing vehicle keeps its model and displayed conditions using canonical
   const card = page.locator('.home-vehicle[data-inquiry-brand="기아"][data-inquiry-model="모닝"]').first();
   await expect(card).toBeVisible();
   await card.locator(".vehicle-quote-button").click();
+  await expect(page.locator("#lpPicked")).toContainText("모닝");
+  await page.getByRole("link", { name: "셀프견적" }).click();
   await step(page, 2);
   const url = new URL(page.url());
   expect(url.searchParams.get("mileage")).toBe("10000");
@@ -476,7 +543,7 @@ test("an imported vehicle entry returns to the matching manufacturer tab", async
   api.pages[0].items[0].brand = "Tesla";
   api.pages[0].items[0].model_name = "Model Y";
   const query = new URLSearchParams({ brand: "테슬라", model: "Model Y", mileage: "10000" });
-  await page.goto(`/inquiry/?${query}`);
+  await page.goto(`/inquiry/steps.html?${query}`);
   await step(page, 2);
   await expect(page.locator('[data-vehicle="local-rental"]')).toHaveAttribute("aria-pressed", "true");
   await page.locator("#backButton").click();

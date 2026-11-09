@@ -211,7 +211,7 @@ test("landing and stepwise inquiry have independent public routes and module ass
       const response = await fetch(`${server.baseUrl}${entry}`);
       assert.equal(response.status, 200, entry);
       const html = await response.text();
-      assert.match(html, /id="stepContent"/);
+      assert.match(html, entry.endsWith("/steps.html") ? /id="stepContent"/ : /id="lpCarInput"/);
       assert.doesNotMatch(html, /flutter_bootstrap|<base/);
     }
     for (const file of ["/inquiry/inquiry.mjs", "/inquiry/catalog.mjs", "/landing/landing.js"]) {
@@ -220,6 +220,10 @@ test("landing and stepwise inquiry have independent public routes and module ass
       assert.match(response.headers.get("content-type"), /javascript/);
     }
     assert.equal((await fetch(`${server.baseUrl}/inquiry/private.mjs`)).status, 404);
+    const showroomMotion = await fetch(`${server.baseUrl}/inquiry/showroom/showroom-motion.gif`);
+    assert.equal(showroomMotion.status, 200);
+    assert.match(showroomMotion.headers.get("content-type"), /image\/gif/);
+    assert.equal((await fetch(`${server.baseUrl}/inquiry/showroom/private.mjs`)).status, 404);
     const published = require("./fixtures/published-inquiry-paths-20261103.json");
     for (const { path: file } of published.files) {
       assert.equal((await fetch(`${server.baseUrl}/${file}`)).status, 200, file);
