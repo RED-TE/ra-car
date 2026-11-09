@@ -1,0 +1,38 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ffffff">
+  <title>내 차 간편견적 | RE:CAR 리카</title>
+  <meta name="description" content="차량부터 이용조건까지 하나씩 선택하세요. 선택한 조건 그대로 리카에 상담을 요청할 수 있습니다.">
+  <link rel="canonical" href="https://recarplan.com/inquiry/">
+  <link rel="icon" href="/assets/recar-favicon-20260518.png">
+  <link rel="preconnect" href="https://api.recarplan.com" crossorigin>
+  <link rel="preload" href="/assets/home-fonts/Pretendard-Regular.woff2" as="font" type="font/woff2" crossorigin>
+  <link rel="stylesheet" href="/inquiry/inquiry.css?v=20261022">
+</head>
+<body>
+  <a class="skip" href="#stepTitle">선택 단계로 바로가기</a>
+  <header class="topbar"><a class="wordmark" href="/" aria-label="리카 홈">RE:CAR<span>간편견적</span></a><a href="/landing/" class="subtle-link">리카 알아보기 <span aria-hidden="true">↗</span></a></header>
+  <div class="layout">
+    <aside class="sidebar">
+      <p class="eyebrow">내게 맞는 한 대</p><h2>내 차의 시작,<br>리카와 가볍게.</h2>
+      <nav aria-label="견적 선택 단계"><ol id="stepList"></ol></nav>
+      <div id="selectionPreview" class="selection-preview" hidden></div>
+      <p class="sidebar-note">차량과 조건을 선택해 주세요.<br>계약은 상담 후 결정하셔도 됩니다.</p>
+    </aside>
+    <main id="flow" aria-busy="true">
+      <div class="progress-label"><span id="stepLabel">제조사 선택</span><span id="stepCounter">01 <span>/ 06</span></span></div>
+      <div class="progress-track" role="progressbar" aria-label="선택 진행률" aria-valuemin="0" aria-valuemax="6" aria-valuenow="1"><span id="progressFill"></span></div>
+      <div class="step-heading"><p class="eyebrow" id="stepEyebrow">첫 번째 선택</p><h1 id="stepTitle" tabindex="-1">어떤 브랜드를 찾으세요?</h1><p id="stepDescription">마음에 두신 제조사부터 골라보세요.</p></div>
+      <div id="stepContent"></div>
+      <p id="flowStatus" class="status" role="status" aria-live="polite"></p>
+      <div class="actions" id="flowActions"><button type="button" id="backButton" class="secondary" hidden><span aria-hidden="true">←</span> 이전</button><button type="button" id="nextButton" class="primary" disabled>다음 <span aria-hidden="true">→</span></button></div>
+    </main>
+  </div>
+  <footer><span>RE:CAR 리카</span><p>상담 신청만으로 계약이나 신용조회가 진행되지 않습니다.</p><a href="/">홈으로</a></footer>
+  <noscript><p class="noscript">차량 선택에는 자바스크립트가 필요합니다. 브라우저 설정을 확인해 주세요.</p></noscript>
+  <script type="module" src="/inquiry/inquiry.mjs?v=20261108-rental"></script>
+</body>
+</html>
