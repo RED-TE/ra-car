@@ -1,0 +1,21 @@
+name: Verify the published web app
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+      - name: Compare the published app and vehicle images to this commit
+        run: node tools/verify-published-app.cjs
+      - name: Confirm existing Crew routes and session version
+        run: node tools/verify-crew-production.cjs --expect-local

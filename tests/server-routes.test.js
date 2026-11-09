@@ -207,7 +207,7 @@ test("landing and stepwise inquiry have independent public routes and module ass
       assert.doesNotMatch(html, /flutter_bootstrap|id="timeDealGrid"|class="quote-form"/);
       assert.match(html, /data-inquiry-entry/);
     }
-    for (const entry of ["/inquiry", "/inquiry/", "/inquiry/index.html"]) {
+    for (const entry of ["/inquiry", "/inquiry/", "/inquiry/index.html", "/inquiry/steps.html"]) {
       const response = await fetch(`${server.baseUrl}${entry}`);
       assert.equal(response.status, 200, entry);
       const html = await response.text();
@@ -220,6 +220,13 @@ test("landing and stepwise inquiry have independent public routes and module ass
       assert.match(response.headers.get("content-type"), /javascript/);
     }
     assert.equal((await fetch(`${server.baseUrl}/inquiry/private.mjs`)).status, 404);
+    const published = require("./fixtures/published-inquiry-paths-20261103.json");
+    for (const { path: file } of published.files) {
+      assert.equal((await fetch(`${server.baseUrl}/${file}`)).status, 200, file);
+    }
+    for (const file of ["/inquiry/landing-assets/private.js", "/inquiry/landing-assets/assets/private.json"]) {
+      assert.equal((await fetch(`${server.baseUrl}${file}`)).status, 404, file);
+    }
   } finally { await server.stop(); }
 });
 

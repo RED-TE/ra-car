@@ -77,11 +77,33 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
+          name: github-pages-${{ github.run_id }}-${{ github.run_attempt }}
           path: ${{ runner.temp }}/recar-public
 
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+        with:
+          artifact_name: github-pages-${{ github.run_id }}-${{ github.run_attempt }}
+
+      - name: Verify published app and vehicle image hashes
+        run: node tools/verify-published-app.cjs
+
+      - name: Record Pages failure status without credentials
+        if: failure() && steps.deployment.outcome == 'failure'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          node <<'NODE'
+          const url = `${process.env.GITHUB_API_URL}/repos/${process.env.GITHUB_REPOSITORY}/pages/deployments/${process.env.GITHUB_SHA}`;
+          fetch(url, {
+            headers: { Authorization: `Bearer ${process.env.GH_TOKEN}`, Accept: 'application/vnd.github+json' },
+            signal: AbortSignal.timeout(15000),
+          }).then(async response => {
+            const data = await response.json().catch(() => ({}));
+            console.log(JSON.stringify({ http: response.status, status: data.status ?? null, request_id: response.headers.get('x-github-request-id') }));
+          }).catch(() => console.log('Pages status endpoint unavailable; original deployment remains failed.'));
+          NODE
 
       - name: Verify the published Crew screens and session version
         run: npm run verify:crew:production -- --expect-local
