@@ -416,7 +416,7 @@
       if (edit) { T.i = +edit.dataset.edit; T.editing = true; T.view = 'q'; render(); return; }
       const carBtn = e.target.closest('[data-car]');
       if (carBtn) {
-        const v = T.d && T.d.all.find(x => x.id === carBtn.dataset.car);
+        const v = T.result?.others.find(x => x.id === carBtn.dataset.car);
         if (v) { T.target = v; T.targetName = R.carName(v); T.came = 'others'; T.view = 'name'; render(); }
         return;
       }

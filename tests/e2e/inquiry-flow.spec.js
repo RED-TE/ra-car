@@ -216,6 +216,31 @@ async function chooseVehicle(page, id = "local-rental", capture = false) {
   await step(page, 4, capture);
 }
 
+test("a different vehicle from the taste test opens its contact form", async ({ page, api }) => {
+  await page.emulateMedia({ reducedMotion: "reduce" });
+  const candidates = api.pages[0].items;
+  for (const [index, vehicle] of candidates.entries()) {
+    Object.assign(vehicle, {
+      model_name: index ? "아반떼" : "그랜저", segment: "sedan", fuel: "gasoline", image_url: "/showroom-fixture.svg",
+      displayed_product_type: "RENTAL", monthly_payment_product_type: "RENTAL", representative_monthly_price: 350000,
+    });
+  }
+  await page.goto("/inquiry/");
+  await expect(page.locator(".lp-slide.is-on")).toBeVisible();
+  await page.locator(".lp-testcta").click();
+  for (let question = 1; question <= 12; question++) {
+    await expect(page.locator(".lp-q__no")).toHaveText(new RegExp(`Q${question}$`));
+    await page.locator('#lpTest [data-a="0"]').click();
+  }
+  await page.getByRole("button", { name: "다른 차량 상담받기" }).click();
+  const alternative = page.locator("#lpTest [data-car]").first();
+  const model = await alternative.locator("b").innerText();
+  await alternative.click();
+  await expect(page.locator("#tNameIn")).toBeFocused();
+  await expect(page.locator("#tName")).toContainText(model);
+  expect(api.posts).toHaveLength(0);
+});
+
 async function review(page, { capture = false, id = "local-rental" } = {}) {
   await chooseVehicle(page, id, capture);
   await page.locator("#nextButton").click();
