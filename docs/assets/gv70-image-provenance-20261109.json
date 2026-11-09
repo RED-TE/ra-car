@@ -1,0 +1,11 @@
+{
+  "vehicle": "Genesis GV70 (combustion model; Electrified GV70 keeps its own asset)",
+  "source_page": "https://www.genesis.com/kr/ko/models/gv70",
+  "source_image": "https://dams.hyundai-autoever.com/cdn-cgi/image/width=1440,height=720,fit=cover,quality=85,format=auto/v1/openapi/hmg-presigned-url/50534b313031303030303030303030303133373032/models/gv70/2027/exterior-color/standard/genesis-gv70-standard-ceres-blue-asa-large.png",
+  "retrieved_on": "2026-11-09",
+  "sha256": "047691aaedc2d93eb51317397743f4da736ffb4bbc1a7e41d29640753c642b4f",
+  "bytes": 154981,
+  "processing": "Original manufacturer image bytes; no generated imagery or image edits",
+  "replaces": "app/assets/cars/Genesis/GV70_360.png contained a BYD SEAL; representative URLs use new filename to bypass stale caches",
+  "data_changes": "None. Existing saved quotes, vehicle records, price formulas and custom/color images are unchanged."
+}

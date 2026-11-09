@@ -1,4 +1,4 @@
-import { STEPS, requestJson, loadCatalog, selectableTrims, colorsFor, safeImage, referralCode, validPhone, inquiryPayload } from "./catalog.mjs?v=20261023";
+import { STEPS, requestJson, loadCatalog, selectableTrims, colorsFor, safeImage, referralCode, validPhone, inquiryPayload } from "./catalog.mjs?v=20261108-rental";
 
 const $ = selector => document.querySelector(selector);
 const escape = value => String(value ?? "").replace(/[&<>"']/g, char => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[char]);
@@ -6,7 +6,7 @@ const domestic = new Set(["현대", "기아", "제네시스", "KGM", "쉐보레"
 const brandNames = { Hyundai: "현대", Kia: "기아", Genesis: "제네시스", Renault: "르노", "르노코리아": "르노", "Mercedes-Benz": "벤츠", Mercedes: "벤츠", Benz: "벤츠", Tesla: "테슬라", Volvo: "볼보", Audi: "아우디", Lexus: "렉서스", MINI: "미니", Porsche: "포르쉐", "Land Rover": "랜드로버", Polestar: "폴스타", Chevrolet: "쉐보레" };
 const localLogos = new Set(["현대", "기아", "제네시스", "KGM", "쉐보레", "르노", "벤츠", "테슬라", "BMW", "아우디", "볼보", "렉서스", "미니", "포르쉐", "랜드로버", "폴스타"]);
 const brandLabel = brand => brandNames[brand] || brand;
-const productLabel = product => product === "LEASE" ? "리스" : "장기렌트";
+const productLabel = product => product === "RENTAL" ? "장기렌트" : "지원하지 않는 상품";
 const state = {
   step: 0, furthest: 0, market: "domestic", catalog: [], brand: "", vehicle: null, detail: null, trim: null,
   exterior: null, interior: null, query: "", loading: true, error: "", submitting: false, receipt: null,
@@ -26,7 +26,7 @@ function prepareDetail(vehicleId, { refresh = false } = {}) {
   const previous = detailRequests.get(vehicleId);
   if (!refresh && previous && Date.now() - previous.startedAt < 60000) return previous.promise;
   const entry = { startedAt: Date.now(), promise: null };
-  entry.promise = requestJson(`/api/v1/vehicles/${encodeURIComponent(vehicleId)}`).then(detail => {
+  entry.promise = requestJson(`/api/v1/vehicles/${encodeURIComponent(vehicleId)}?product_type=RENTAL`).then(detail => {
     if (detail?.id !== vehicleId || !Array.isArray(detail.trims)) throw new Error("DETAIL_INVALID");
     return detail;
   }).catch(error => {
@@ -61,7 +61,7 @@ function reachable(step) {
     || !selectableTrims(state.detail).some(trim => trim.id === state.trim.id)
     || (colorsFor(state.trim, "exterior").length && !state.exterior)
     || (colorsFor(state.trim, "interior").length && !state.interior))) return false;
-  if (step >= 4 && !state.vehicle.available_product_types.includes(state.conditions.product)) return false;
+  if (step >= 4 && (state.conditions.product !== "RENTAL" || !state.vehicle.available_product_types.includes("RENTAL"))) return false;
   if (step >= 5 && (!state.contact.name.trim() || !validPhone(state.contact.phone))) return false;
   return true;
 }
@@ -152,10 +152,10 @@ function choiceGroup(key, label, values, format, note = "") {
 }
 
 function renderConditions() {
-  return `<fieldset class="field-group"><legend>이용 방식</legend><div class="choice-grid product-grid">${state.vehicle.available_product_types.map(product => `<button type="button" class="choice product-choice" data-product="${product}" aria-pressed="${state.conditions.product === product}">${productLabel(product)}<small>${product === "LEASE" ? "일반 번호판 · 보험 별도 확인" : "하·허·호 번호판 · 보험 포함 여부 확인"}</small></button>`).join("")}</div><p class="field-note">선택하신 차량에서 제공되는 상품만 표시됩니다.</p></fieldset>`
+  return `<fieldset class="field-group"><legend>이용 방식</legend><div class="choice-grid product-grid">${state.vehicle.available_product_types.filter(product => product === "RENTAL").map(product => `<button type="button" class="choice product-choice" data-product="${product}" aria-pressed="${state.conditions.product === product}">${productLabel(product)}<small>하·허·호 번호판 · 보험 포함 여부 확인</small></button>`).join("")}</div><p class="field-note">선택하신 차량에서 제공되는 상품만 표시됩니다.</p></fieldset>`
     + choiceGroup("term", "이용 기간", [24, 36, 48, 60], value => `${value / 12}년 (${value}개월)`)
     + choiceGroup("mileage", "연간 주행거리", [10000, 20000, 30000, 40000], value => `${value / 10000}만 km`)
-    + choiceGroup("deposit", "보증금", [0, 10, 20, 30, 40], value => value ? `${value}%` : "없음", "계약 종료 시 정산 조건에 따라 반환되는 담보금입니다.")
+    + choiceGroup("deposit", "보증금", [0], () => "없음으로 상담", "보증금 없는 조건으로 상담을 요청하며 실제 가능 여부는 원본 조건을 확인해 안내합니다.")
     + choiceGroup("prepayment", "선납금", [0, 10, 20, 30, 40], value => value ? `${value}%` : "없음", "월 이용료 일부를 미리 내는 금액으로, 보증금과 다릅니다.")
     + (state.conditions.product === "RENTAL" ? choiceGroup("age", "보험 연령", [21, 26], value => `만 ${value}세 이상`) : "")
     + '<p class="notice">선택 내용은 <strong>희망 이용조건</strong>입니다. 가능 여부와 실제 월 납입료는 리카가 금융사 조건을 확인한 뒤 안내합니다.</p>';
@@ -236,7 +236,7 @@ async function fetchCatalog({ forceRefresh = false } = {}) {
         state.vehicle = matches[0]; state.brand = state.vehicle.brand;
         state.market = domestic.has(brandLabel(state.brand)) ? "domestic" : "imported";
         state.conditions.product = state.vehicle.available_product_types.includes(params.get("product")) ? params.get("product") : state.vehicle.available_product_types[0];
-        for (const [key, values] of [["term", [24, 36, 48, 60]], ["mileage", [10000, 20000, 30000, 40000]], ["deposit", [0, 10, 20, 30, 40]], ["prepayment", [0, 10, 20, 30, 40]]]) {
+        for (const [key, values] of [["term", [24, 36, 48, 60]], ["mileage", [10000, 20000, 30000, 40000]], ["deposit", [0]], ["prepayment", [0, 10, 20, 30, 40]]]) {
           if (params.has(key) && values.includes(Number(params.get(key)))) state.conditions[key] = Number(params.get(key));
         }
         state.step = state.furthest = 1;
@@ -334,7 +334,7 @@ document.addEventListener("click", event => {
     const color = colorsFor(state.trim, type).find(row => row.id === target.dataset.color);
     if (color) { state[type === "exterior" ? "exterior" : "interior"] = color; resetAgreements(); }
   }
-  if (target.dataset.product && state.vehicle.available_product_types.includes(target.dataset.product)) {
+  if (target.dataset.product === "RENTAL" && state.vehicle.available_product_types.includes("RENTAL")) {
     state.conditions.product = target.dataset.product; resetAgreements();
   }
   if (target.dataset.condition && Object.hasOwn(state.conditions, target.dataset.condition)) {

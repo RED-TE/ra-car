@@ -2,11 +2,21 @@
   "repository": "RECAREA/recar_app",
   "commit": "4b0498df0e63aa2c8bbae66e59e1c9a31037e7b0",
   "basePath": "/app/",
-  "buildId": "web-catalog-auto-20261019",
+  "buildId": "web-gv70-image-20261109",
   "font": {
     "upstream": "orioncactus/pretendard",
     "version": "v1.3.9",
     "file": "packages/pretendard/dist/public/variable/PretendardVariable.ttf",
     "sha256": "3090ccde0442bb347aa7685d9ba8b17436a60682df6e8f92a9a670de14056e22"
-  }
+  },
+  "vehicleImages": [
+    {
+      "asset": "assets/cars/Genesis/GV70_360.png",
+      "sha256": "047691aaedc2d93eb51317397743f4da736ffb4bbc1a7e41d29640753c642b4f"
+    },
+    {
+      "asset": "assets/cars/Genesis/gv70_verified_20261109.png",
+      "sha256": "047691aaedc2d93eb51317397743f4da736ffb4bbc1a7e41d29640753c642b4f"
+    }
+  ]
 }

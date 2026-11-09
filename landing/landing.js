@@ -1,6 +1,7 @@
 (() => {
   "use strict";
   const entry = new URL("/inquiry/", location.origin);
+  entry.searchParams.set("product", "RENTAL");
   for (const [key, value] of new URLSearchParams(location.search)) {
     if (/^(ref|utm_[a-z_]+|gclid|fbclid|msclkid|n_[a-z_]+|NaPm)$/.test(key) && value.length <= 2048) {
       entry.searchParams.set(key, value);
@@ -14,7 +15,7 @@
     const destination = new URL(entry);
     const selection = target.closest("[data-inquiry-model]");
     if (selection) {
-      for (const [name, key] of [["brand", "inquiryBrand"], ["model", "inquiryModel"], ["product", "inquiryProduct"], ["term", "inquiryTerm"], ["mileage", "inquiryMileage"]]) {
+      for (const [name, key] of [["brand", "inquiryBrand"], ["model", "inquiryModel"], ["term", "inquiryTerm"], ["mileage", "inquiryMileage"]]) {
         if (selection.dataset[key]) destination.searchParams.set(name, selection.dataset[key]);
       }
       destination.searchParams.set("deposit", "0");

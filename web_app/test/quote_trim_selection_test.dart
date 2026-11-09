@@ -19,6 +19,8 @@ import 'package:recar_app/services/vehicle_cache.dart';
 import 'package:recar_app/widgets/micro_interactions.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'support/synthetic_quote_evidence.dart';
+
 void main() {
   TestWidgetsFlutterBinding.ensureInitialized();
 
@@ -575,7 +577,7 @@ void main() {
       expect(interceptor.quoteBodies, isEmpty);
     });
 
-    testWidgets('UNAVAILABLE keeps the legacy vehicle-level quote flow', (
+    testWidgets('UNAVAILABLE without an official default cannot fabricate a new price', (
       tester,
     ) async {
       interceptor.details['vehicle-unavailable'] = _vehicleDetailJson(
@@ -601,15 +603,12 @@ void main() {
       expect(find.text('세부 등급 정보 준비 중'), findsOneWidget);
       expect(find.textContaining('불러오지 못했습니다'), findsNothing);
 
-      await tester.tap(find.text('견적 분석 받아보기'));
+      await tester.tap(find.text('가격 확인 요청하기'));
       await tester.pumpAndSettle();
 
-      expect(interceptor.quoteBodies, isNotEmpty);
-      expect(
-        interceptor.quoteBodies.last.containsKey('selection'),
-        isFalse,
-      );
-      expect(find.text('세부 등급 정보 준비 중'), findsNWidgets(2));
+      expect(interceptor.quoteBodies, isEmpty);
+      expect(find.byType(QuoteResultScreen), findsNothing);
+      expect(_displayedAmount(443200), findsNothing);
     });
 
     testWidgets(
@@ -685,15 +684,13 @@ void main() {
       expect(find.text('세부 등급 정보 준비 중'), findsOneWidget);
       expect(find.text('판매 종료'), findsNothing);
 
-      await tester.tap(find.text('견적 분석 받아보기'));
+      await tester.tap(find.text('가격 확인 요청하기'));
       await tester.pump();
       await tester.pump(const Duration(milliseconds: 500));
 
-      expect(interceptor.quoteBodies, isNotEmpty);
-      expect(
-        interceptor.quoteBodies.first.containsKey('selection'),
-        isFalse,
-      );
+      expect(interceptor.quoteBodies, isEmpty);
+      expect(find.byType(QuoteResultScreen), findsNothing);
+      expect(_displayedAmount(443200), findsNothing);
       await tester.pump(const Duration(seconds: 1));
       await tester.pump();
     });
@@ -1084,7 +1081,7 @@ void main() {
     );
 
     testWidgets(
-      'fresh product quote failure clears the previous proof and monthly',
+      'fresh rental period failure clears the previous proof and monthly',
       (tester) async {
         interceptor.details['vehicle-product-refresh'] = _vehicleDetailJson(
           vehicleId: 'vehicle-product-refresh',
@@ -1104,6 +1101,7 @@ void main() {
             home: VehicleDetailScreen(
               vehicleId: 'vehicle-product-refresh',
               initialIsLongRent: true,
+              initialTerm: 60,
               initialMonthlyPayment: 111100,
             ),
           ),
@@ -1113,8 +1111,12 @@ void main() {
         expect(_displayedAmount(443200), findsWidgets);
         expect(interceptor.quoteBodies, hasLength(1));
 
+        final gate = Completer<void>();
+        addTearDown(() {
+          if (!gate.isCompleted) gate.complete();
+        });
         interceptor
-          ..quoteGate = Completer<void>()
+          ..quoteGate = gate
           ..failNextQuoteStatus = 422
           ..failNextQuoteData = const {
             'error': {
@@ -1123,9 +1125,10 @@ void main() {
             },
           };
         final dynamic state = tester.state(find.byType(VehicleDetailScreen));
-        final Future<void> navigation = state.debugGoToQuoteResultForTesting(
-          overrideIsLongRent: false,
-        ) as Future<void>;
+        state.debugOpenConditionSheetForTesting();
+        await tester.pumpAndSettle();
+        await tester.tap(find.text('4년').last);
+        await tester.pump(const Duration(milliseconds: 350));
         for (var attempt = 0;
             attempt < 20 && interceptor.quoteBodies.length < 2;
             attempt++) {
@@ -1133,13 +1136,11 @@ void main() {
         }
 
         expect(interceptor.quoteBodies, hasLength(2));
-        expect(interceptor.quoteBodies.last['product_type'], 'LEASE');
+        expect(interceptor.quoteBodies.last['product_type'], 'RENTAL');
+        expect(interceptor.quoteBodies.last['term'], 48);
         await tester.pump(const Duration(milliseconds: 200));
         expect(_displayedAmount(443200), findsNothing);
-        expect(find.text('리스 상담 신청하기'), findsOneWidget);
-
-        interceptor.quoteGate!.complete();
-        await navigation;
+        gate.complete();
         await tester.pump(const Duration(milliseconds: 500));
 
         expect(find.byType(QuoteResultScreen), findsNothing);
@@ -1150,6 +1151,44 @@ void main() {
         );
         expect(find.text('신청 화면을 준비하고 있어요'), findsNothing);
         expect(find.text('가격 확인 요청하기'), findsOneWidget);
+      },
+    );
+
+    testWidgets(
+      'legacy lease navigation is refused without relabeling the rental quote',
+      (tester) async {
+        interceptor.details['vehicle-lease-rejected'] = _vehicleDetailJson(
+          vehicleId: 'vehicle-lease-rejected',
+          trimSelection: {
+            'mode': 'FLAT',
+            'default_vehicle_trim_id': 'trim-rental',
+            'groups': const [],
+            'flat_grades': [_selectionLeaf('trim-rental', '프레스티지')],
+          },
+          trims: [_legacyTrim('trim-rental', '프레스티지')],
+        );
+        await tester.pumpWidget(const MaterialApp(
+          home: VehicleDetailScreen(
+            vehicleId: 'vehicle-lease-rejected',
+            initialIsLongRent: true,
+            initialTerm: 60,
+          ),
+        ));
+        await tester.pump();
+        await tester.pump(const Duration(milliseconds: 900));
+        expect(interceptor.quoteBodies, hasLength(1));
+        expect(_displayedAmount(443200), findsWidgets);
+
+        final dynamic state = tester.state(find.byType(VehicleDetailScreen));
+        await (state.debugGoToQuoteResultForTesting(
+          overrideIsLongRent: false,
+        ) as Future<void>);
+        await tester.pump(const Duration(milliseconds: 500));
+        expect(interceptor.quoteBodies, hasLength(1));
+        expect(interceptor.quoteBodies.single['product_type'], 'RENTAL');
+        expect(_displayedAmount(443200), findsWidgets);
+        expect(find.byType(QuoteResultScreen), findsNothing);
+        expect(find.textContaining('기존 리스 견적과 서류'), findsOneWidget);
       },
     );
 
@@ -1948,7 +1987,14 @@ void main() {
         vehicleId: 'vehicle-submit-lock',
         vehicleTrimId: 'trim-a',
       );
-      await tester.tap(find.text('이 조건으로 자세한 분석 받기'));
+      final applicationAction = find.text(kIsWeb
+          ? '서류 제출까지 직접 신청하기'
+          : '이 조건으로 자세한 분석 받기');
+      expect(applicationAction, findsOneWidget);
+      await tester.ensureVisible(applicationAction);
+      await tester.pumpAndSettle();
+      expect(applicationAction.hitTestable(), findsOneWidget);
+      await tester.tap(applicationAction.hitTestable());
       await tester.pump();
       await tester.pump(const Duration(milliseconds: 100));
 
@@ -2056,6 +2102,7 @@ Future<void> _pumpQuote(
 
 QuoteEnvelope _quote(
   String vehicleId, {
+  String product = 'RENTAL',
   String? vehicleTrimId,
   int deposit = 0,
   int vehiclePrice = 35000000,
@@ -2070,6 +2117,7 @@ QuoteEnvelope _quote(
   return QuoteEnvelope(
     traceId: 'trace',
     data: QuoteData(
+      productType: product,
       tier: 'STANDARD',
       vehicleId: vehicleId,
       term: 60,
@@ -2180,14 +2228,21 @@ Response<dynamic> _quoteResponse(
   }
   final resolvedTrimId =
       vehicleTrimId ?? (normalizedSelection?['vehicle_trim_id'] as String?);
-  final deposit = (requestBody['deposit'] as num?)?.round() ?? 0;
+  // Explicit synthetic amounts only; no recorded response is upgraded to a
+  // verified source. Percentage inputs and won inputs retain distinct units.
+  const selectedVehiclePrice = 42000000;
+  final requestedPct = requestBody['prepayment_pct'] as num?;
+  final deposit = requestedPct != null
+      ? (selectedVehiclePrice * requestedPct / 100).round()
+      : (requestBody['deposit'] as num?)?.round() ?? 0;
+  final resolvedPct = requestedPct ??
+      (deposit > 0 ? deposit / selectedVehiclePrice * 100 : 0);
   final guarantee = (requestBody['guarantee'] as num?)?.round() ?? 0;
   final displayAdjustment = resolvedTrimId == null
       ? 0
       : deposit > 0
           ? 40000
           : 30000;
-  final selectedVehiclePrice = resolvedTrimId == null ? 35000000 : 42000000;
   final selectionFingerprint = normalizedSelection == null
       ? null
       : 'fingerprint:${QuoteSelection.fromJson(normalizedSelection).identifierKey}:'
@@ -2198,6 +2253,7 @@ Response<dynamic> _quoteResponse(
     data: {
       'data': {
         'tier': 'STANDARD',
+        'product_type': requestBody['product_type'] ?? 'RENTAL',
         'vehicle_id': vehicleId,
         'term': requestBody['term'] ?? 60,
         'deposit': deposit,
@@ -2231,7 +2287,7 @@ Response<dynamic> _quoteResponse(
           'normalized_selection': normalizedSelection,
           'selection_fingerprint': selectionFingerprint,
           'pricing_context_version': 'test-pricing-v1',
-          'reference_vehicle_price': 35000000,
+          'reference_vehicle_price': selectedVehiclePrice,
           'reference_vehicle_trim_id': resolvedTrimId,
           'selected_vehicle_price': selectedVehiclePrice,
           'base_trim_price': selectedVehiclePrice,
@@ -2244,31 +2300,20 @@ Response<dynamic> _quoteResponse(
           'selected_finance_monthly_raw': 400000,
           'selection_monthly_delta': 0,
           'guarantee': guarantee,
-          'prepayment_pct': requestBody['prepayment_pct'] ?? 0,
+          'prepayment_pct': resolvedPct,
           'guarantee_pct': requestBody['guarantee_pct'] ?? 0,
-          'price_provenance': {
-            'version': 'price_provenance_v1',
-            'processed_product_type': requestBody['product_type'] ?? 'RENTAL',
-            'request_conditions_verified': true,
-            'sales_ai_eligible': true,
-            'unsupported_reasons': [],
-            'market_price': {
-              'product_type': requestBody['product_type'] ?? 'RENTAL',
-              'match_status': 'EXACT',
-              'vehicle_match': 'EXACT',
-              'applied_conditions': {
-                'term_months': requestBody['term'] ?? 60,
-                'annual_km': requestBody['mileage_limit'] ?? 10000,
-                'prepayment_pct': requestBody['prepayment_pct'] ?? 0,
-              },
-              'condition_match': {
-                'term_months': 'EXACT',
-                'annual_km': 'EXACT',
-                'prepayment_pct': 'EXACT',
-              },
-              'unknown_reasons': [],
-            },
-          },
+          'price_provenance': syntheticQuoteEvidence(
+            productType: requestBody['product_type'] as String? ?? 'RENTAL',
+            term: requestBody['term'] as int? ?? 60,
+            mileage: requestBody['mileage_limit'] as int? ?? 10000,
+            prepaymentPct: resolvedPct,
+            hasOptions:
+                (normalizedSelection['selected_option_ids'] as List).isNotEmpty,
+            hasColorsOrInventory:
+                normalizedSelection['exterior_color_id'] != null ||
+                    normalizedSelection['interior_color_id'] != null ||
+                    normalizedSelection['inventory_item_id'] != null,
+          ),
         },
       },
       'meta': {'trace_id': 'quote-trace'},
@@ -2334,6 +2379,10 @@ class _TrimSelectionInterceptor extends Interceptor {
     RequestOptions options,
     RequestInterceptorHandler handler,
   ) async {
+    if (options.path.endsWith('/catalog/version')) {
+      handler.resolve(Response(requestOptions: options, statusCode: 304));
+      return;
+    }
     if (options.path == '/api/v1/support/quote-inquiries') {
       inquiryBodies.add(Map<String, dynamic>.from(options.data as Map));
       handler.resolve(Response(requestOptions: options, statusCode: 201,
@@ -2391,18 +2440,20 @@ class _TrimSelectionInterceptor extends Interceptor {
         Response<dynamic>(
           requestOptions: options,
           statusCode: 200,
-          data: const [
+          // Hand-authored synthetic reference rows for the tested request.
+          // Real recorded catalog/quote fixtures are never rewritten here.
+          data: [
             {
               'id': 'capital-test',
               'finance_company': 'test_capital',
               'finance_company_kr': '테스트캐피탈',
-              'contract_months': 60,
-              'prepay_pct': 0,
-              'annual_km': 10000,
+              'contract_months': options.queryParameters['contract_months'] ?? 60,
+              'prepay_pct': options.queryParameters['prepay_pct'] ?? 0,
+              'annual_km': options.queryParameters['annual_km'] ?? 10000,
               'monthly_payment': 500000,
               'residual_value': 15000000,
               'residual_ratio': 0.42,
-              'product_type': 'RENTAL',
+              'product_type': options.queryParameters['product_type'] ?? 'RENTAL',
             },
           ],
         ),

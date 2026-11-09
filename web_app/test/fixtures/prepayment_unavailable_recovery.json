@@ -1,0 +1,247 @@
+{
+  "synthetic": true,
+  "description": "Isolated in-memory SQLite, real existing engine; no production requests or customer data",
+  "error_request": {
+    "vehicle_id": "selection-vehicle",
+    "selection_contract_version": "selection_v1",
+    "product_type": "RENTAL",
+    "term": 24,
+    "deposit": 0,
+    "guarantee": 0,
+    "mileage_limit": 10000,
+    "selection": {
+      "vehicle_trim_id": "selection-default-trim",
+      "selected_option_ids": []
+    },
+    "estimate_policy_version": "zero_source_conditions_delta_v1",
+    "prepayment_pct": 30
+  },
+  "error_response": {
+    "error": {
+      "code": "PREPAYMENT_UNAVAILABLE",
+      "message": "선납금을 낮춰 다시 계산해 주세요.",
+      "detail": "선납금을 낮춰 다시 계산해 주세요.",
+      "support_url": "https://support.recar.app/errors/PREPAYMENT_UNAVAILABLE"
+    },
+    "meta": {
+      "trace_id": "42d1653a-1a8a-45c4-8fd0-828d78c8b4e2",
+      "timestamp": "2026-11-08T12:56:30.532567Z"
+    }
+  },
+  "recovery_request": {
+    "vehicle_id": "selection-vehicle",
+    "selection_contract_version": "selection_v1",
+    "product_type": "RENTAL",
+    "term": 24,
+    "deposit": 0,
+    "guarantee": 0,
+    "mileage_limit": 10000,
+    "selection": {
+      "vehicle_trim_id": "selection-default-trim",
+      "selected_option_ids": []
+    },
+    "estimate_policy_version": "zero_source_conditions_delta_v1",
+    "prepayment_pct": 20
+  },
+  "recovery_response": {
+    "data": {
+      "term": 24,
+      "deposit": 9000000,
+      "mileage_limit": 10000,
+      "monthly_payment": 49100,
+      "otd_total": 47300000,
+      "vehicle_price": 45000000,
+      "residual_value": 25425000,
+      "residual_pct": 0.5650000000000001,
+      "versions": {
+        "formula_version": "lease_balloon_excel_v2",
+        "rate_version": "shinhan_2026q1_v1",
+        "promo_version": "none_v1",
+        "residual_version": "shinhan_G군_residual_2026q1_v1"
+      },
+      "tier": "INSTANT",
+      "vehicle_id": "selection-vehicle",
+      "vehicle_trim_id": "selection-default-trim",
+      "selection_mode": "GROUPED",
+      "model_spec": "2WD",
+      "grade_name": "기본",
+      "vehicle_trim_base_price": 45000000,
+      "trim_pricing_applied": true,
+      "trim_pricing_status": "SELECTION_PRICE_APPLIED",
+      "pricing_basis": "MARKET_SELECTION_DELTA_V1",
+      "market_pricing_applied": true,
+      "price_source": "CHAZM_IMPORTED",
+      "base_monthly_payment": 450000,
+      "display_adjustment": 0,
+      "promo_discount": 0,
+      "estimated_discount": 1350000,
+      "estimated_taxes": 3650000,
+      "breakdown": [
+        {
+          "name": "차량가",
+          "amount": 45000000
+        },
+        {
+          "name": "잔존가치",
+          "amount": -25425000
+        },
+        {
+          "name": "프로모션 할인",
+          "amount": 0
+        },
+        {
+          "name": "딜러 할인(추정)",
+          "amount": -1350000
+        },
+        {
+          "name": "세금/부대(추정)",
+          "amount": 3650000
+        },
+        {
+          "name": "총액(OTD)",
+          "amount": 47300000
+        }
+      ],
+      "monthly_payment_before_lift": 49084,
+      "residual_ratio": 0.0056500000000000005,
+      "annual_irr": 0.065,
+      "calculation": {
+        "method": "market_selection_delta_v1",
+        "is_spreadsheet_price": false,
+        "is_estimated": true,
+        "matched_key": null,
+        "matched_name": null,
+        "product_label": null,
+        "term_method": null
+      },
+      "applied_referral_code": null,
+      "referral_discount_amount": 0,
+      "original_monthly_payment": null,
+      "coupon_expires_at": null,
+      "pricing_disclaimer": null,
+      "lease_data_available": false,
+      "selection_pricing_applied": true,
+      "selection_contract_version": "selection_v1",
+      "selection_fingerprint": "cda3381931149dabae3b31c469a768eb07bc0e31b2c5e0829c1efaa9878c0c19",
+      "pricing_context_version": "selection-market-v1:94f7cabaa144f002",
+      "selection_pricing_source": "MARKET_SELECTION_DELTA_V1",
+      "normalized_selection": {
+        "vehicle_trim_id": "selection-default-trim",
+        "model_spec": "2WD",
+        "grade_name": "기본",
+        "selected_option_ids": [],
+        "exterior_color_id": null,
+        "interior_color_id": null,
+        "inventory_item_id": null
+      },
+      "reference_vehicle_price": 45000000,
+      "reference_vehicle_trim_id": "selection-default-trim",
+      "reference_price_basis": "CHAZM_BASE_PRICE",
+      "selected_vehicle_price": 45000000,
+      "base_trim_price": 45000000,
+      "selected_options_price": 0,
+      "option_total": 0,
+      "exterior_color_price": 0,
+      "interior_color_price": 0,
+      "verified_discount": 0,
+      "market_base_monthly_raw": 450000,
+      "selection_monthly_delta_raw": -400916.26290160196,
+      "selection_monthly_delta": -400916.26290160196,
+      "reference_finance_monthly_raw": 1009711.6218109842,
+      "selected_finance_monthly_raw": 608795.3589093823,
+      "display_margin": 0,
+      "market_source_record_id": "Selection Contract Model",
+      "guarantee": 0,
+      "prepayment_pct": 20.0,
+      "guarantee_pct": 0.0,
+      "price_provenance": {
+        "version": "price_provenance_v1",
+        "processed_product_type": "RENTAL",
+        "market_price": {
+          "source": "CHAZM_IMPORTED",
+          "source_record_id": "Selection Contract Model",
+          "source_revision": "sha256:3dfcfa6d8dfddb6f45d45b1e19cf5e10aa36f1ffc8c03af518a57981d3181898",
+          "product_type": "RENTAL",
+          "match_status": "UNKNOWN",
+          "calculation_method": "CHAZM_EXACT_CONDITION_LOOKUP",
+          "methods": [
+            "CONDITION_DIRECT"
+          ],
+          "vehicle_match": "EXACT",
+          "applied_conditions": {
+            "term_months": 24,
+            "annual_km": 10000,
+            "prepayment_pct": 0.0
+          },
+          "condition_match": {
+            "term_months": "EXACT",
+            "annual_km": "EXACT",
+            "prepayment_pct": "EXACT"
+          },
+          "source_points": [
+            {
+              "path": "products.rent.conditionMonthly.24:0:10000",
+              "role": "BASE",
+              "conditions": {
+                "term_months": 24,
+                "annual_km": 10000,
+                "prepayment_pct": 0.0
+              }
+            }
+          ],
+          "unknown_reasons": [
+            "SOURCE_GUARANTEE_UNRECORDED"
+          ]
+        },
+        "calculation_method": "MARKET_REFERENCE_PLUS_EXISTING_SELECTION_DELTA",
+        "quote_kind": "ESTIMATE",
+        "provider_generated_at": null,
+        "valid_until": null,
+        "request_conditions_verified": false,
+        "sales_ai_eligible": false,
+        "unsupported_reasons": [
+          "SOURCE_PREPAYMENT_MISMATCH",
+          "SOURCE_POINTS_NOT_EXACT_BASE",
+          "NONZERO_PREPAYMENT_OUT_OF_INITIAL_SCOPE",
+          "SOURCE_CONDITIONS_NOT_EXACTLY_VERIFIED"
+        ]
+      },
+      "condition_verified_monthly_payment": null,
+      "selection_terms_estimate": null,
+      "selection_conditions_estimate": {
+        "version": "selection_conditions_estimate_v1",
+        "verified": true,
+        "policy_version": "zero_source_conditions_delta_v1",
+        "quote_kind": "ESTIMATE",
+        "product_type": "RENTAL",
+        "monthly_payment": 49100,
+        "source_revision": "sha256:3dfcfa6d8dfddb6f45d45b1e19cf5e10aa36f1ffc8c03af518a57981d3181898",
+        "source_record_id": "Selection Contract Model",
+        "reference_vehicle_trim_id": "selection-default-trim",
+        "selection_fingerprint": "cda3381931149dabae3b31c469a768eb07bc0e31b2c5e0829c1efaa9878c0c19",
+        "source_conditions": {
+          "term_months": 24,
+          "annual_km": 10000,
+          "prepayment_pct": 0
+        },
+        "requested_conditions": {
+          "term_months": 24,
+          "annual_km": 10000,
+          "prepayment_pct": 20.0
+        },
+        "source_prepayment_amount": 0,
+        "requested_prepayment_amount": 9000000,
+        "requested_prepayment_pct": 20.0,
+        "unverified_conditions": [
+          "guarantee",
+          "provider_prepayment_terms",
+          "provider_term_mileage_terms"
+        ]
+      },
+      "selection_prepayment_estimate": null
+    },
+    "meta": {
+      "trace_id": "d1031d17-45f8-41fb-bdc4-8e7b25618cc1"
+    }
+  }
+}

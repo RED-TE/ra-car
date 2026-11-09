@@ -1,3 +1,40 @@
+// Public catalog prices are accepted only with evidence for these exact inputs.
+// Never infer product/conditions from a badge, a static price, or a request echo.
+window.recarPublicPrice = Object.freeze({
+  conditions: Object.freeze({ productType: "RENTAL", term: 60, depositPct: 0, guaranteePct: 0, mileageLimit: 10000 }),
+  isRental: item => item?.productType === "RENTAL",
+  categories(item) {
+    const categories = (Array.isArray(item?.categories) ? item.categories : [])
+      .map(value => typeof value === "string" ? value : value?.key)
+      .filter(value => typeof value === "string" && value !== "time");
+    const segment = String(item?.segment || "").toLowerCase();
+    if (["suv", "sedan"].includes(segment)) categories.push(segment);
+    const domesticBrands = ["현대", "기아", "제네시스", "르노", "KGM", "쉐보레", "Hyundai", "Kia", "Genesis", "Renault", "Chevrolet"];
+    if (item?.brand) categories.push(domesticBrands.includes(item.brand) ? "domestic" : "imported");
+    return [...new Set(["all", ...categories])];
+  },
+  monthly(item) {
+    const evidence = item?.priceEvidence;
+    return item?.productType === "RENTAL" &&
+      Number.isSafeInteger(item.monthlyPayment) && item.monthlyPayment > 0 &&
+      evidence?.verified === true &&
+      evidence.quoteKind === "ESTIMATE" && evidence.isEstimate === true &&
+      Array.isArray(evidence.unverifiedConditions) &&
+      ((evidence.evidenceScope === "EXACT" && evidence.unverifiedConditions.length === 0) ||
+        (evidence.evidenceScope === "GUARANTEE_UNRECORDED" && evidence.unverifiedConditions.length === 1 && evidence.unverifiedConditions[0] === "guarantee")) &&
+      Object.entries(this.conditions).every(([key, value]) => evidence[key] === value)
+      ? item.monthlyPayment : null;
+  },
+});
+// Public price boundary ends.
+
+let rentalCatalogModule;
+const publicCatalogModule = () => rentalCatalogModule ||= import("/lib/rental-catalog.mjs?v=20261108-rental-pricing");
+window.recarCatalog = Object.freeze({
+  async load() { return (await publicCatalogModule()).loadRentalCatalog({ limit: 12 }); },
+  async detail(id, signal) { return (await publicCatalogModule()).loadRentalVehicle(id, { signal }); },
+});
+
 const header = document.querySelector(".site-header");
 const navLinks = [...document.querySelectorAll(".nav-left a[href^='#'], .nav-right a[href='#business']")];
 const mobileNavLinks = [...document.querySelectorAll(".mobile-bottom a[href^='#']")];
@@ -276,9 +313,10 @@ function normalizeLeadContext(context = {}) {
     leadSource: context.leadSource || defaultLeadContext.leadSource,
     campaign: context.campaign || defaultLeadContext.campaign,
     campaignLabel: context.campaignLabel || defaultLeadContext.campaignLabel,
-    timeDealOriginalMonthlyPayment: parseContextNumber(context.timeDealOriginalMonthlyPayment),
-    timeDealMonthlyPayment: parseContextNumber(context.timeDealMonthlyPayment),
-    timeDealDiscount: parseContextNumber(context.timeDealDiscount),
+    // Legacy URL/data attributes are not evidence of an actual discount.
+    timeDealOriginalMonthlyPayment: null,
+    timeDealMonthlyPayment: null,
+    timeDealDiscount: null,
   };
 }
 
@@ -559,10 +597,12 @@ const vehicleDetailPanel = document.querySelector("#vehicleDetailPanel");
 const floatingContact = document.querySelector(".floating-contact");
 const inquiryStickyCta = document.querySelector(".inquiry-sticky-cta");
 const vehicleMode = vehicleGrid?.dataset.vehicleMode || "home";
-const defaultVehicleFilter = vehicleGrid?.dataset.defaultFilter || (vehicleMode === "all" ? "all" : "time");
+const defaultVehicleFilter = vehicleGrid?.dataset.defaultFilter || "all";
 const vehicleConditions = {
   term: 60,
   depositPct: 0,
+  guaranteePct: 0,
+  productType: "RENTAL",
   mileageLimit: 10000,
 };
 let activeVehicleFilter = defaultVehicleFilter;
@@ -570,6 +610,8 @@ let vehicleCards = [...document.querySelectorAll(".vehicle-card[data-category]")
 let currentDetailVehicle = null;
 let currentTrimId = "";
 let currentOptionIds = new Set();
+let detailGeneration = 0;
+let detailAbortController;
 
 function getHashTarget() {
   const id = decodeURIComponent(window.location.hash.replace(/^#/, ""));
@@ -592,464 +634,6 @@ function stabilizeHashScroll() {
     window.setTimeout(() => scrollToHashTarget(), 720);
   });
 }
-
-const fallbackVehicles = [
-  {
-    id: "fallback-sorento",
-    brand: "기아",
-    brandLabel: "기아",
-    name: "쏘렌토",
-    trim: "하이브리드",
-    fuel: "가솔린",
-    year: 2025,
-    monthlyPayment: 387300,
-    imageUrl: "./assets/danawa/vehicles/기아/쏘렌토/model_360.png",
-    fallbackImageUrl: "./assets/vehicle-suv.jpg",
-    categories: ["all", "time", "suv", "domestic"],
-    categoryRanks: { all: 1, time: 1, suv: 1, domestic: 1 },
-    badge: "가솔린",
-    trimCount: 5,
-  },
-  {
-    id: "fallback-carnival",
-    brand: "기아",
-    brandLabel: "기아",
-    name: "카니발",
-    trim: "프레스티지",
-    fuel: "가솔린",
-    year: 2025,
-    monthlyPayment: 430200,
-    imageUrl: "./assets/danawa/vehicles/기아/카니발/model_360.png",
-    fallbackImageUrl: "./assets/hero-family-suv.png",
-    categories: ["all", "time", "suv", "domestic"],
-    categoryRanks: { all: 2, time: 2, suv: 2, domestic: 2 },
-    badge: "패밀리",
-    trimCount: 5,
-  },
-  {
-    id: "fallback-s-class",
-    brand: "Mercedes-Benz",
-    brandLabel: "Mercedes-Benz",
-    name: "S-Class",
-    trim: "S350d 4MATIC",
-    fuel: "디젤",
-    year: 2026,
-    monthlyPayment: 1847300,
-    imageUrl: "./assets/danawa/vehicles/벤츠/S-Class/model_360.png",
-    fallbackImageUrl: "./assets/vehicle-premium.jpg",
-    categories: ["all", "time", "sedan", "imported"],
-    categoryRanks: { all: 3, time: 3, sedan: 5, imported: 1 },
-    badge: "의전",
-    trimCount: 3,
-  },
-  {
-    id: "fallback-x6",
-    brand: "BMW",
-    brandLabel: "BMW",
-    name: "X6",
-    trim: "xDrive",
-    fuel: "가솔린",
-    year: 2025,
-    monthlyPayment: 1259000,
-    imageUrl: "./assets/danawa/vehicles/BMW/X6/model_360.png",
-    fallbackImageUrl: "./assets/hero-bmw.png",
-    categories: ["all", "time", "suv", "imported"],
-    categoryRanks: { all: 4, time: 4, suv: 5, imported: 2 },
-    badge: "수입",
-    trimCount: 4,
-  },
-  {
-    id: "fallback-sportage",
-    brand: "기아",
-    brandLabel: "기아",
-    name: "스포티지",
-    trim: "시그니처",
-    fuel: "가솔린",
-    year: 2025,
-    monthlyPayment: 337800,
-    imageUrl: "./assets/danawa/vehicles/기아/스포티지/model_360.png",
-    fallbackImageUrl: "./assets/vehicle-suv.jpg",
-    categories: ["all", "time", "suv", "domestic"],
-    categoryRanks: { all: 5, time: 5, suv: 3, domestic: 3 },
-    badge: "가솔린",
-    trimCount: 4,
-  },
-  {
-    id: "fallback-grandeur",
-    brand: "현대",
-    brandLabel: "현대",
-    name: "그랜저",
-    trim: "프리미엄",
-    fuel: "하이브리드",
-    year: 2025,
-    monthlyPayment: 449000,
-    imageUrl: "./assets/danawa/vehicles/현대/그랜저/model_360.png",
-    fallbackImageUrl: "./assets/vehicle-sedan.jpg",
-    categories: ["all", "sedan", "domestic"],
-    categoryRanks: { all: 6, sedan: 1, domestic: 4 },
-    badge: "세단",
-    trimCount: 5,
-  },
-  {
-    id: "fallback-g80",
-    brand: "제네시스",
-    brandLabel: "제네시스",
-    name: "G80",
-    trim: "2.5 터보",
-    fuel: "가솔린",
-    year: 2025,
-    monthlyPayment: 674000,
-    imageUrl: "./assets/danawa/vehicles/제네시스/G80/model_360.png",
-    fallbackImageUrl: "./assets/vehicle-sedan.jpg",
-    categories: ["all", "sedan", "domestic"],
-    categoryRanks: { all: 7, sedan: 2, domestic: 5 },
-    badge: "프리미엄",
-    trimCount: 4,
-  },
-  {
-    id: "fallback-k8",
-    brand: "기아",
-    brandLabel: "기아",
-    name: "K8",
-    trim: "노블레스",
-    fuel: "하이브리드",
-    year: 2025,
-    monthlyPayment: 422000,
-    imageUrl: "./assets/danawa/vehicles/기아/K8/model_360.png",
-    fallbackImageUrl: "./assets/vehicle-sedan.jpg",
-    categories: ["all", "sedan", "domestic"],
-    categoryRanks: { all: 8, sedan: 3, domestic: 6 },
-    badge: "세단",
-    trimCount: 4,
-  },
-  {
-    id: "fallback-5-series",
-    brand: "BMW",
-    brandLabel: "BMW",
-    name: "5 Series",
-    trim: "530i",
-    fuel: "가솔린",
-    year: 2025,
-    monthlyPayment: 809000,
-    imageUrl: "./assets/danawa/vehicles/BMW/5 Series/model_360.png",
-    fallbackImageUrl: "./assets/hero-bmw.png",
-    categories: ["all", "sedan", "imported"],
-    categoryRanks: { all: 9, sedan: 4, imported: 3 },
-    badge: "수입",
-    trimCount: 5,
-  },
-  {
-    id: "fallback-model-y",
-    brand: "Tesla",
-    brandLabel: "Tesla",
-    name: "Model Y",
-    trim: "Long Range",
-    fuel: "전기",
-    year: 2025,
-    monthlyPayment: 689000,
-    imageUrl: "./assets/danawa/vehicles/테슬라/Model Y/model_360.png",
-    fallbackImageUrl: "./assets/hero-tesla.png",
-    categories: ["all", "suv", "imported"],
-    categoryRanks: { all: 10, suv: 4, imported: 4 },
-    badge: "전기차",
-    trimCount: 3,
-  },
-];
-
-function getAppApiBase() {
-  return window.location.protocol === "file:" ? "http://localhost:5173" : "";
-}
-
-const curatedFallbackVehicles = [
-  {
-    id: "curated-sorento",
-    brand: "기아",
-    brandLabel: "기아",
-    name: "쏘렌토",
-    trim: "최저등급",
-    fuel: "가솔린",
-    year: 2025,
-    monthlyPayment: 508000,
-    imageUrl: "./assets/danawa/vehicles/기아/쏘렌토/model_360.png",
-    fallbackImageUrl: "./assets/vehicle-suv.jpg",
-    categories: ["all", "suv", "domestic"],
-    categoryRanks: { all: 1, suv: 1, domestic: 1 },
-    badge: "장기렌트",
-    trimCount: 5,
-  },
-  {
-    id: "curated-carnival",
-    brand: "기아",
-    brandLabel: "기아",
-    name: "카니발",
-    trim: "최저등급",
-    fuel: "가솔린",
-    year: 2025,
-    monthlyPayment: 530140,
-    imageUrl: "./assets/danawa/vehicles/기아/카니발/model_360.png",
-    fallbackImageUrl: "./assets/hero-family-suv.png",
-    categories: ["all", "suv", "domestic"],
-    categoryRanks: { all: 2, suv: 2, domestic: 2 },
-    badge: "패밀리",
-    trimCount: 5,
-  },
-  {
-    id: "curated-sportage",
-    brand: "기아",
-    brandLabel: "기아",
-    name: "스포티지",
-    trim: "최저등급",
-    fuel: "가솔린",
-    year: 2025,
-    monthlyPayment: 430300,
-    imageUrl: "./assets/danawa/vehicles/기아/스포티지/model_360.png",
-    fallbackImageUrl: "./assets/vehicle-suv.jpg",
-    categories: ["all", "suv", "domestic"],
-    categoryRanks: { all: 3, suv: 3, domestic: 3 },
-    badge: "장기렌트",
-    trimCount: 4,
-  },
-  {
-    id: "curated-x7",
-    brand: "BMW",
-    brandLabel: "BMW",
-    name: "X7",
-    trim: "최저등급",
-    fuel: "가솔린",
-    year: 2025,
-    monthlyPayment: 1741500,
-    imageUrl: "./assets/danawa/vehicles/BMW/X7/model_360.png",
-    fallbackImageUrl: "./assets/hero-bmw.png",
-    categories: ["all", "suv"],
-    categoryRanks: { all: 4, suv: 4 },
-    badge: "리스",
-    trimCount: 4,
-  },
-  {
-    id: "curated-niro",
-    brand: "기아",
-    brandLabel: "기아",
-    name: "니로",
-    trim: "하이브리드",
-    fuel: "하이브리드",
-    year: 2025,
-    monthlyPayment: 455400,
-    imageUrl: "./assets/danawa/vehicles/기아/더 뉴 니로/model_360.png",
-    fallbackImageUrl: "./assets/vehicle-suv.jpg",
-    categories: ["all", "suv", "domestic"],
-    categoryRanks: { all: 5, suv: 5, domestic: 4 },
-    badge: "장기렌트",
-    trimCount: 4,
-  },
-  {
-    id: "curated-tucson",
-    brand: "현대",
-    brandLabel: "현대",
-    name: "투싼",
-    trim: "최저등급",
-    fuel: "가솔린",
-    year: 2025,
-    monthlyPayment: 425030,
-    imageUrl: "./assets/danawa/vehicles/현대/투싼/model_360.png",
-    fallbackImageUrl: "./assets/vehicle-suv.jpg",
-    categories: ["all", "suv", "domestic"],
-    categoryRanks: { all: 6, suv: 6, domestic: 5 },
-    badge: "장기렌트",
-    trimCount: 4,
-  },
-  {
-    id: "curated-grandeur",
-    brand: "현대",
-    brandLabel: "현대",
-    name: "그랜저",
-    trim: "최저등급",
-    fuel: "가솔린",
-    year: 2025,
-    monthlyPayment: 611500,
-    imageUrl: "./assets/danawa/vehicles/현대/그랜저/model_360.png",
-    fallbackImageUrl: "./assets/vehicle-sedan.jpg",
-    categories: ["all", "sedan", "domestic"],
-    categoryRanks: { all: 7, sedan: 1, domestic: 6 },
-    badge: "장기렌트",
-    trimCount: 5,
-  },
-  {
-    id: "curated-g90",
-    brand: "제네시스",
-    brandLabel: "제네시스",
-    name: "G90",
-    trim: "최저등급",
-    fuel: "가솔린",
-    year: 2025,
-    monthlyPayment: 1435100,
-    imageUrl: "./assets/danawa/vehicles/제네시스/G90/model_360.png",
-    fallbackImageUrl: "./assets/vehicle-sedan.jpg",
-    categories: ["all", "sedan", "domestic"],
-    categoryRanks: { all: 8, sedan: 2, domestic: 7 },
-    badge: "의전",
-    trimCount: 4,
-  },
-  {
-    id: "curated-g80",
-    brand: "제네시스",
-    brandLabel: "제네시스",
-    name: "G80",
-    trim: "최저등급",
-    fuel: "가솔린",
-    year: 2025,
-    monthlyPayment: 816800,
-    imageUrl: "./assets/danawa/vehicles/제네시스/G80/model_360.png",
-    fallbackImageUrl: "./assets/vehicle-sedan.jpg",
-    categories: ["all", "sedan", "domestic"],
-    categoryRanks: { all: 9, sedan: 3, domestic: 8 },
-    badge: "장기렌트",
-    trimCount: 4,
-  },
-  {
-    id: "curated-s-class",
-    brand: "Mercedes-Benz",
-    brandLabel: "Mercedes-Benz",
-    name: "S-Class",
-    trim: "최저등급",
-    fuel: "디젤",
-    year: 2026,
-    monthlyPayment: 1765900,
-    imageUrl: "./assets/danawa/vehicles/벤츠/S-Class/model_360.png",
-    fallbackImageUrl: "./assets/vehicle-premium.jpg",
-    categories: ["all", "sedan"],
-    categoryRanks: { all: 10, sedan: 4 },
-    badge: "리스",
-    trimCount: 3,
-  },
-  {
-    id: "curated-7-series",
-    brand: "BMW",
-    brandLabel: "BMW",
-    name: "7 Series",
-    trim: "최저등급",
-    fuel: "가솔린",
-    year: 2025,
-    monthlyPayment: 1916800,
-    imageUrl: "./assets/danawa/vehicles/BMW/7 Series/model_360.png",
-    fallbackImageUrl: "./assets/hero-bmw.png",
-    categories: ["all", "sedan"],
-    categoryRanks: { all: 11, sedan: 5 },
-    badge: "리스",
-    trimCount: 4,
-  },
-  {
-    id: "curated-k8",
-    brand: "기아",
-    brandLabel: "기아",
-    name: "K8",
-    trim: "최저등급",
-    fuel: "가솔린",
-    year: 2025,
-    monthlyPayment: 577050,
-    imageUrl: "./assets/danawa/vehicles/기아/K8/model_360.png",
-    fallbackImageUrl: "./assets/vehicle-sedan.jpg",
-    categories: ["all", "sedan", "domestic"],
-    categoryRanks: { all: 12, sedan: 6, domestic: 9 },
-    badge: "장기렌트",
-    trimCount: 4,
-  },
-  {
-    id: "curated-e-class",
-    brand: "Mercedes-Benz",
-    brandLabel: "Mercedes-Benz",
-    name: "E-Class",
-    trim: "최저등급",
-    fuel: "가솔린",
-    year: 2025,
-    monthlyPayment: 801600,
-    imageUrl: "./assets/danawa/vehicles/벤츠/E-Class/model_360.png",
-    fallbackImageUrl: "./assets/vehicle-premium.jpg",
-    categories: ["all", "imported"],
-    categoryRanks: { all: 13, imported: 1 },
-    badge: "리스",
-    trimCount: 4,
-  },
-  {
-    id: "curated-5-series",
-    brand: "BMW",
-    brandLabel: "BMW",
-    name: "5 Series",
-    trim: "최저등급",
-    fuel: "가솔린",
-    year: 2025,
-    monthlyPayment: 783000,
-    imageUrl: "./assets/danawa/vehicles/BMW/5 Series/model_360.png",
-    fallbackImageUrl: "./assets/hero-bmw.png",
-    categories: ["all", "imported"],
-    categoryRanks: { all: 14, imported: 2 },
-    badge: "리스",
-    trimCount: 5,
-  },
-  {
-    id: "curated-model-y",
-    brand: "Tesla",
-    brandLabel: "Tesla",
-    name: "Model Y",
-    trim: "최저등급",
-    fuel: "전기",
-    year: 2025,
-    monthlyPayment: 784020,
-    imageUrl: "./assets/danawa/vehicles/테슬라/Model Y/model_360.png",
-    fallbackImageUrl: "./assets/hero-tesla.png",
-    categories: ["all", "imported"],
-    categoryRanks: { all: 15, imported: 3 },
-    badge: "장기렌트",
-    trimCount: 3,
-  },
-  {
-    id: "curated-x5",
-    brand: "BMW",
-    brandLabel: "BMW",
-    name: "X5",
-    trim: "최저등급",
-    fuel: "가솔린",
-    year: 2025,
-    monthlyPayment: 1339100,
-    imageUrl: "./assets/danawa/vehicles/BMW/X5/model_360.png",
-    fallbackImageUrl: "./assets/hero-bmw.png",
-    categories: ["all", "imported"],
-    categoryRanks: { all: 16, imported: 4 },
-    badge: "리스",
-    trimCount: 4,
-  },
-  {
-    id: "curated-gle",
-    brand: "Mercedes-Benz",
-    brandLabel: "Mercedes-Benz",
-    name: "GLE",
-    trim: "최저등급",
-    fuel: "가솔린",
-    year: 2025,
-    monthlyPayment: 1350800,
-    imageUrl: "./assets/danawa/vehicles/벤츠/GLE-Class/model_360.png",
-    fallbackImageUrl: "./assets/vehicle-premium.jpg",
-    categories: ["all", "imported"],
-    categoryRanks: { all: 17, imported: 5 },
-    badge: "리스",
-    trimCount: 4,
-  },
-  {
-    id: "curated-a6",
-    brand: "Audi",
-    brandLabel: "Audi",
-    name: "A6",
-    trim: "최저등급",
-    fuel: "가솔린",
-    year: 2025,
-    monthlyPayment: 896400,
-    imageUrl: "./assets/danawa/vehicles/아우디/A6/model_360.png",
-    fallbackImageUrl: "./assets/vehicle-premium.jpg",
-    categories: ["all", "imported"],
-    categoryRanks: { all: 18, imported: 6 },
-    badge: "리스",
-    trimCount: 3,
-  },
-];
 
 function escapeHtml(value) {
   return String(value ?? "")
@@ -1149,62 +733,31 @@ function renderOptionChips(options = [], limit = 4) {
 }
 
 function getVehicleConditionSummary(vehicle) {
-  const isLease = vehicle.calculation?.product === "lease" || vehicle.fuel === "리스" || vehicle.badge === "리스";
-  return `기본 조건 · ${isLease ? "리스" : "장기렌트"} · 무보증`;
+  return window.recarPublicPrice.monthly(vehicle)
+    ? "장기렌트 · 60개월 · 선납금 0% · 연 10,000km"
+    : "장기렌트 · 가격 확인 필요";
 }
 
 function renderVehicleCard(vehicle, index = 0) {
+  if (!window.recarPublicPrice.isRental(vehicle)) return "";
   const name = buildVehicleName(vehicle);
-  const category = (vehicle.categories || [defaultVehicleFilter]).join(" ");
+  const category = window.recarPublicPrice.categories(vehicle).join(" ");
   const ranks = vehicle.categoryRanks || {};
-  const rankAttributes = Object.entries(ranks)
-    .map(([key, value]) => `data-rank-${escapeHtml(key)}="${escapeHtml(value)}"`)
-    .join(" ");
-  const monthly = formatWon(vehicle.monthlyPayment);
-  const originalMonthly = vehicle.timeDealOriginalMonthlyPayment ? formatWon(vehicle.timeDealOriginalMonthlyPayment) : "";
-  const dealDiscount = Number(vehicle.timeDealDiscount || 0);
-  const timeDealSupportTotal = dealDiscount * (Number(vehicleConditions.term) || 60);
-  const isTimeDeal = Boolean(vehicle.timeDealOriginalMonthlyPayment && dealDiscount);
+  const rankAttributes = Object.entries(ranks).filter(([key]) => key !== "time")
+    .map(([key, value]) => `data-rank-${escapeHtml(key)}="${escapeHtml(value)}"`).join(" ");
+  const amount = window.recarPublicPrice.monthly(vehicle);
   const trim = vehicle.trim || "대표 트림";
   const quoteVehicleName = `${name} ${trim}`.trim();
-  const timeDealAttributes = isTimeDeal
-    ? [
-      'data-campaign="time-deal"',
-      'data-lead-source="타임특가"',
-      'data-campaign-label="타임특가"',
-      `data-original-monthly="${escapeHtml(vehicle.timeDealOriginalMonthlyPayment)}"`,
-      `data-sale-monthly="${escapeHtml(vehicle.monthlyPayment)}"`,
-      `data-discount="${escapeHtml(dealDiscount)}"`,
-    ].join(" ")
-    : "";
-  const meta = [vehicle.trimCount ? `트림 ${vehicle.trimCount}종` : ""].filter(Boolean);
-  const quoteBadge = vehicle.calculation?.isSpreadsheetPrice ? "기준가격" : vehicle.calculation?.isEstimated ? "예상견적" : vehicle.usedQuoteFallback ? "대표견적" : "최저견적";
-  const badges = [vehicle.badge || vehicle.fuel, vehicle.instantDeliveryAvailable ? "즉시출고" : "", quoteBadge]
-    .filter(Boolean)
-    .slice(0, 3);
-  return `
-    <article class="vehicle-card" data-category="${escapeHtml(category)}" data-vehicle-id="${escapeHtml(vehicle.id)}" ${rankAttributes}>
-      ${renderImageMarkup(vehicle, index)}
-      <div class="vehicle-body">
-        <div class="badge-row">
-          ${badges.map((badge) => `<span>${escapeHtml(badge)}</span>`).join("")}
-        </div>
-        <h3><span>${escapeHtml(vehicle.brandLabel || vehicle.brand || "브랜드")}</span>${escapeHtml(vehicle.name || "차량")}</h3>
-        <p class="vehicle-specs">${escapeHtml(getVehicleConditionSummary(vehicle))}</p>
-        ${meta.length ? `<div class="vehicle-meta">${meta.map((item) => `<span>${escapeHtml(item)}</span>`).join("")}</div>` : ""}
-        ${
-          originalMonthly
-            ? `<div class="time-deal-price-label">5년 총 지원 혜택 ${escapeHtml(formatWon(timeDealSupportTotal))}<small>월 ${escapeHtml(formatWon(dealDiscount))} 인하 기준</small></div>
-        <div class="price is-time-deal"><del>월 ${escapeHtml(originalMonthly)}</del><span><small>월</small> ${escapeHtml(monthly)}</span></div>`
-            : `<div class="price"><small>월</small> ${escapeHtml(monthly)}</div>`
-        }
-        <p class="price-note">표시 금액은 평균 참고가입니다. 실제 진행 전 전문가가 조건을 한 번 더 확인해 가능한 최저 조건으로 안내드립니다.</p>
-        <div class="vehicle-actions">
-          <a class="vehicle-quote-button" href="#quote" data-vehicle="${escapeHtml(quoteVehicleName)}" ${timeDealAttributes}>이 조건 받아보기</a>
-        </div>
-      </div>
-    </article>
-  `;
+  return `<article class="vehicle-card" data-category="${escapeHtml(category)}" data-vehicle-id="${escapeHtml(vehicle.id)}" ${rankAttributes}>
+    ${renderImageMarkup(vehicle, index)}
+    <div class="vehicle-body"><div class="badge-row"><span>장기렌트</span><span>${amount ? "조건 근거 확인" : "가격 확인 필요"}</span></div>
+      <h3><span>${escapeHtml(vehicle.brandLabel || vehicle.brand || "브랜드")}</span>${escapeHtml(vehicle.name || "차량")}</h3>
+      <p class="vehicle-specs">${escapeHtml(getVehicleConditionSummary(vehicle))}</p>
+      ${vehicle.trimCount ? `<div class="vehicle-meta"><span>트림 ${escapeHtml(vehicle.trimCount)}종</span></div>` : ""}
+      <div class="price">${amount ? `<small>월</small> ${escapeHtml(formatWon(amount))}` : "가격 확인 필요"}</div>
+      <p class="vehicle-price-note">선택 조건 근거가 확인된 예상 월납입니다. 보증금 원본 기재 여부와 최종 계약 조건은 별도로 확인해 주세요.</p>
+      <div class="vehicle-actions"><a class="vehicle-quote-button" href="#quote" data-vehicle="${escapeHtml(quoteVehicleName)}">이 조건 받아보기</a></div>
+    </div></article>`;
 }
 
 function renderVehicleError() {
@@ -1217,175 +770,26 @@ function renderVehicleError() {
   }
 }
 
-function getTimeDealWindow() {
-  const duration = 48 * 60 * 60 * 1000;
-  const startedAt = Math.floor(Date.now() / duration) * duration;
-
-  return {
-    seed: Math.floor(startedAt / duration),
-    endsAt: startedAt + duration,
-  };
-}
-
-function seededShuffle(items, seed) {
-  const result = [...items];
-  let value = seed || 1;
-
-  for (let index = result.length - 1; index > 0; index -= 1) {
-    value = (value * 9301 + 49297) % 233280;
-    const swapIndex = value % (index + 1);
-    [result[index], result[swapIndex]] = [result[swapIndex], result[index]];
-  }
-
-  return result;
-}
-
-function getStableTimeDealDiscount(id, seed) {
-  const key = `${id || "vehicle"}-${seed || 0}`;
-  let hash = 0;
-  for (const char of key) {
-    hash = (hash * 31 + char.charCodeAt(0)) >>> 0;
-  }
-  return 10000 + (hash % 11) * 500;
-}
-
-function decorateFallbackVehiclesForTimeDeals(vehicles) {
-  const { seed } = getTimeDealWindow();
-  const dealIds = seededShuffle(
-    vehicles.filter((vehicle) => vehicle.imageUrl || vehicle.fallbackImageUrl),
-    seed,
-  );
-  const dealIdSet = new Set(dealIds.slice(0, 3).map((vehicle) => vehicle.id));
-
-  return vehicles.map((vehicle) => {
-    const categories = new Set(vehicle.categories || []);
-    const categoryRanks = { ...(vehicle.categoryRanks || {}) };
-    if (dealIdSet.has(vehicle.id)) {
-      const discount = getStableTimeDealDiscount(vehicle.id, seed);
-      const originalMonthlyPayment = Number(vehicle.monthlyPayment || 0);
-      categories.add("time");
-      categoryRanks.time = dealIds.findIndex((dealVehicle) => dealVehicle.id === vehicle.id) + 1;
-
-      return {
-        ...vehicle,
-        monthlyPayment: Math.max(0, originalMonthlyPayment - discount),
-        timeDealOriginalMonthlyPayment: originalMonthlyPayment,
-        timeDealDiscount: discount,
-        categories: [...categories],
-        categoryRanks,
-      };
-    } else {
-      categories.delete("time");
-      delete categoryRanks.time;
-    }
-
-    return {
-      ...vehicle,
-      categories: [...categories],
-      categoryRanks,
-    };
-  });
-}
-
-function formatTimeLeft(ms) {
-  const safeMs = Math.max(0, ms);
-  const hours = Math.floor(safeMs / (60 * 60 * 1000));
-  const minutes = Math.floor((safeMs % (60 * 60 * 1000)) / (60 * 1000));
-  const seconds = Math.floor((safeMs % (60 * 1000)) / 1000);
-  return `${String(hours).padStart(2, "0")}시간 ${String(minutes).padStart(2, "0")}분 ${String(seconds).padStart(2, "0")}초`;
-}
-
-function updateTimeDealTimer() {
-  const condition = document.querySelector(".vehicle-condition");
-  if (!condition || vehicleMode !== "home") return;
-
-  const { endsAt } = getTimeDealWindow();
-  const left = endsAt - Date.now();
-  condition.innerHTML = `
-    <span class="vehicle-condition-item condition-basis"><strong>기준</strong> 60개월 · 선납금 0% · 연 10,000km 평균 참고가</span>
-    <span class="vehicle-condition-item condition-confirm"><strong>확인</strong> 실제 진행 전 조건 재확인 후 가능한 최저가 안내</span>
-    <strong class="time-deal-timer"><span>타임특가 갱신까지</span> ${formatTimeLeft(left)}</strong>
-  `;
-}
-
-function renderFallbackVehicles() {
-  if (vehicleError) vehicleError.hidden = true;
-  if (!vehicleGrid) return;
-
-  const decoratedVehicles = decorateFallbackVehiclesForTimeDeals(curatedFallbackVehicles);
-  const items = decoratedVehicles;
-  vehicleGrid.setAttribute("aria-busy", "false");
-  vehicleGrid.innerHTML = items.map((item, index) => renderVehicleCard(item, index)).join("");
-  refreshVehicleCards();
-  setVehicleFilter(activeVehicleFilter);
-  updateTimeDealTimer();
-}
-
-async function renderStaticVehicleCatalog() {
-  if (!vehicleGrid || vehicleMode !== "all") return false;
-
-  try {
-    const response = await requestJson("./data/vehicle-static-catalog.json?v=20260909-margin-v1");
-    const payload = response.data;
-    const items = Array.isArray(payload?.items)
-      ? payload.items.filter((vehicle) => vehicle?.imageUrl && vehicle?.monthlyPayment)
-      : [];
-
-    if (!response.ok || !items.length) {
-      throw new Error("static_vehicle_catalog_empty");
-    }
-
-    if (vehicleError) vehicleError.hidden = true;
-    vehicleGrid.setAttribute("aria-busy", "false");
-    vehicleGrid.innerHTML = items.map((item, index) => renderVehicleCard(item, index)).join("");
-    refreshVehicleCards();
-    setVehicleFilter(activeVehicleFilter);
-    return true;
-  } catch (error) {
-    console.warn("static_vehicle_catalog_failed", error);
-    return false;
-  }
-}
-
 async function loadVehicles() {
   if (!vehicleGrid) return;
   if (document.body.classList.contains("public-home") && window.recarHome) {
-    return window.recarHome.loadCatalog(requestJson);
+    return window.recarHome.loadCatalog();
   }
-
-  if (vehicleMode === "all") {
-    const didRenderStaticCatalog = await renderStaticVehicleCatalog();
-    if (didRenderStaticCatalog) return;
-  }
-
+  vehicleGrid.setAttribute("aria-busy", "true");
+  vehicleGrid.innerHTML = '<p class="vehicle-detail-loading">차량 정보를 불러오는 중입니다.</p>';
   try {
-    const params = new URLSearchParams({
-      term: String(vehicleConditions.term),
-      deposit_pct: String(vehicleConditions.depositPct),
-      mileage_limit: String(vehicleConditions.mileageLimit),
-      page: "1",
-      size: "100",
-    });
-    if (vehicleMode === "all") {
-      params.set("mode", "all");
-    }
-    const response = await requestJson(`${getAppApiBase()}/api/recar/vehicles?${params.toString()}`);
-    const payload = response.data;
-
-    if (!response.ok || !payload.ok || !Array.isArray(payload.items) || !payload.items.length) {
-      throw new Error(payload.error || "vehicle_load_failed");
-    }
-
+    const catalog = await window.recarCatalog.load();
+    if (!Array.isArray(catalog)) throw new Error("vehicle_load_failed");
+    const items = catalog.filter(window.recarPublicPrice.isRental);
     if (vehicleError) vehicleError.hidden = true;
     vehicleGrid.setAttribute("aria-busy", "false");
-    const items = vehicleMode === "home" ? decorateFallbackVehiclesForTimeDeals(payload.items) : payload.items;
-    vehicleGrid.innerHTML = items.map((item, index) => renderVehicleCard(item, index)).join("");
+    vehicleGrid.innerHTML = items.length
+      ? items.map((item, index) => renderVehicleCard(item, index)).join("")
+      : '<p class="vehicle-detail-loading">현재 확인 가능한 장기렌트 차량이 없습니다.</p>';
     refreshVehicleCards();
     setVehicleFilter(activeVehicleFilter);
-  } catch (error) {
-    const didRenderStaticCatalog = await renderStaticVehicleCatalog();
-    if (didRenderStaticCatalog) return;
-    renderFallbackVehicles();
+  } catch {
+    renderVehicleError();
   }
 }
 
@@ -1404,82 +808,6 @@ function getDetailTrims(vehicle) {
 function getSelectedTrim(vehicle) {
   const trims = getDetailTrims(vehicle);
   return trims.find((trim) => trim.id === currentTrimId) || trims[0] || null;
-}
-
-function getVehicleBasePrice(vehicle, trims = getDetailTrims(vehicle)) {
-  return Number(vehicle.basePrice || vehicle.priceFrom || trims[0]?.price || 0);
-}
-
-function getResidualRatio(vehicle, basePrice) {
-  const quoteRatio = Number(vehicle.bestQuote?.residualRatio ?? vehicle.calculation?.residualRatio);
-  if (Number.isFinite(quoteRatio) && quoteRatio > 0 && quoteRatio < 1) return quoteRatio;
-
-  const residualValue = Number(vehicle.bestQuote?.residualValue ?? vehicle.calculation?.residualValue);
-  if (Number.isFinite(residualValue) && residualValue > 0 && basePrice > 0) {
-    return Math.min(0.75, Math.max(0.2, residualValue / basePrice));
-  }
-
-  return 0.45;
-}
-
-function getAnnualIrr(vehicle) {
-  const annualIrr = Number(vehicle.bestQuote?.annualIrr ?? vehicle.calculation?.annualIrr);
-  return Number.isFinite(annualIrr) && annualIrr > 0 ? annualIrr : 0.076;
-}
-
-function calculateLeaseLikeMonthly(price, residualRatio, annualIrr, term, depositPct, isImported) {
-  if (!price || price <= 0) return 0;
-
-  const prepayRatio = Math.max(0, 1 - depositPct / 100);
-  const capCost = price * prepayRatio;
-  const residualValue = price * residualRatio;
-  const depreciation = Math.max(0, (capCost - residualValue) / term);
-  const financeCharge = ((capCost + residualValue) / 2) * (annualIrr / 12);
-  const serviceFeeRate = isImported ? 0.00065 : 0.00048;
-  const operationFee = Math.max(18000, price * serviceFeeRate);
-
-  return Math.max(0, Math.round((depreciation + financeCharge + operationFee) / 100) * 100);
-}
-
-function calculateVehicleEstimate(vehicle, trim, selectedOptions) {
-  const trims = getDetailTrims(vehicle);
-  const basePrice = getVehicleBasePrice(vehicle, trims);
-  const trimPrice = Number(trim?.price || basePrice || 0);
-  const optionTotal = selectedOptions.reduce((sum, option) => sum + Number(option.price || 0), 0);
-  const selectedPrice = trimPrice + optionTotal;
-  const baseMonthly = Number(vehicle.monthlyPayment || 0);
-  const term = Number(vehicle.conditions?.term || vehicleConditions.term || 60);
-  const depositPct = Number(vehicle.conditions?.depositPct || vehicleConditions.depositPct || 0);
-  const residualRatio = getResidualRatio(vehicle, basePrice);
-  const annualIrr = getAnnualIrr(vehicle);
-  const priceDelta = selectedPrice - basePrice;
-  const payableRatio = Math.max(0, 1 - residualRatio);
-  const prepayRatio = Math.max(0, 1 - depositPct / 100);
-  const isImported = (vehicle.categories || []).includes("imported");
-  const deltaFinanceFactor = ((1 + residualRatio) / 2) * (annualIrr / 12);
-  const usesInternalEstimate = vehicle.calculation?.quoteSource === "estimated";
-  const deltaOperationFactor = usesInternalEstimate ? (isImported ? 0.00065 : 0.00048) : 0;
-  const monthlyDelta = Math.round((priceDelta * prepayRatio * (payableRatio / term + deltaFinanceFactor + deltaOperationFactor)) / 100) * 100;
-  const estimatedMonthly = usesInternalEstimate
-    ? calculateLeaseLikeMonthly(selectedPrice, residualRatio, annualIrr, term, depositPct, isImported)
-    : Math.max(0, Math.round((baseMonthly + monthlyDelta) / 100) * 100);
-
-  return {
-    basePrice,
-    trimPrice,
-    optionTotal,
-    selectedPrice,
-    baseMonthly,
-    term,
-    depositPct,
-    residualRatio,
-    annualIrr,
-    priceDelta,
-    monthlyDelta,
-    estimatedMonthly,
-    isEstimated: Boolean(vehicle.calculation?.isEstimated),
-    isSpreadsheetPrice: Boolean(vehicle.calculation?.isSpreadsheetPrice),
-  };
 }
 
 function renderTrimChoices(vehicle, trims) {
@@ -1527,71 +855,24 @@ function renderOptionChoices(trim) {
 
 function renderVehicleCalculator() {
   if (!currentDetailVehicle || !vehicleDetailPanel) return;
-
   const trims = getDetailTrims(currentDetailVehicle);
   const selectedTrim = getSelectedTrim(currentDetailVehicle);
-  const selectedOptions = (selectedTrim?.options || []).filter((option) => !option.isDefault && option.badge !== "기본" && currentOptionIds.has(option.id));
-  const estimate = calculateVehicleEstimate(currentDetailVehicle, selectedTrim, selectedOptions);
-  const bestQuote = currentDetailVehicle.bestQuote || {};
   const calculator = vehicleDetailPanel.querySelector("#vehicleCalculator");
   if (!calculator) return;
-  const basePaymentLabel = estimate.isSpreadsheetPrice ? "가격표 기준 월납" : estimate.isEstimated ? "예상 기준 월납" : "API 최저 월납";
-  const irrText = estimate.annualIrr ? ` · IRR ${formatPercent(estimate.annualIrr)}` : "";
-  const spreadsheetText = currentDetailVehicle.calculation?.spreadsheetPricing
-    ? ` · ${new Intl.NumberFormat("ko-KR").format(currentDetailVehicle.calculation.spreadsheetPricing.requestedAnnualKm || 10000)}km 기준`
-    : "";
-
-  calculator.innerHTML = `
-    <div class="vehicle-calculator-head">
-      <div>
-        <h4>트림·옵션 선택</h4>
-        <p>선택한 차량가 차액에 잔존가치와 IRR 기준금리를 함께 반영한 예상 금액입니다.</p>
-      </div>
-      <div class="estimate-price">
-        <span>예상 월 납입료</span>
-        <strong>월 ${escapeHtml(formatWon(estimate.estimatedMonthly))}</strong>
-        <small>${escapeHtml(formatSignedWon(estimate.monthlyDelta))}</small>
-      </div>
-    </div>
-    <div class="vehicle-calculator-grid">
-      <div>
-        <h5>트림 선택</h5>
-        <div class="trim-choice-list">${renderTrimChoices(currentDetailVehicle, trims)}</div>
-      </div>
-      <div>
-        <h5>옵션 추가</h5>
-        <div class="option-choice-list">${renderOptionChoices(selectedTrim)}</div>
-      </div>
-    </div>
-    <div class="calculation-box">
-      <strong>계산 기준</strong>
-      <p>${basePaymentLabel} ${escapeHtml(formatWon(estimate.baseMonthly))} + 선택차액 ${escapeHtml(formatSignedWon(estimate.priceDelta))} × 잔가율 ${formatPercent(estimate.residualRatio)} × 선납 반영 ${(1 - estimate.depositPct / 100).toFixed(2)}${irrText}${spreadsheetText} = 예상 월납 ${escapeHtml(formatWon(estimate.estimatedMonthly))}</p>
-      <small>엑셀 가격표가 있는 차량은 해당 기준 금액을 우선 적용합니다. 주행거리, 옵션, 실제 심사, 프로모션, 보험 조건에 따라 최종 금액은 달라질 수 있습니다.</small>
-    </div>
-    <button class="calculator-quote-button quote-focus-button" type="button" data-vehicle="${escapeHtml(`${buildVehicleName(currentDetailVehicle)} ${selectedTrim?.name || ""}`.trim())}">이 조건으로 문의하기</button>
-    ${
-      bestQuote.financeCompanyKr
-        ? `<p class="calculator-finance">${bestQuote.isSpreadsheetPrice ? "가격표 기준" : bestQuote.isEstimated ? "참고 계산 기준" : "현재 최저 금융사 기준"}: ${escapeHtml(bestQuote.financeCompanyKr)}</p>`
-        : ""
-    }
-  `;
+  calculator.innerHTML = `<div class="vehicle-calculator-head"><div><h4>트림·옵션 선택</h4><p>선택한 트림과 옵션의 월 납입료는 정식 견적에서 확인해 주세요.</p></div>
+    <div class="estimate-price"><span>선택 조건 월 납입료</span><strong>가격 확인 필요</strong></div></div>
+    <div class="vehicle-calculator-grid"><div><h5>트림 선택</h5><div class="trim-choice-list">${renderTrimChoices(currentDetailVehicle, trims)}</div></div>
+    <div><h5>옵션 추가</h5><div class="option-choice-list">${renderOptionChoices(selectedTrim)}</div></div></div>
+    <div class="calculation-box"><strong>선택 조건 확인</strong><p>선택 조건의 월 납입료는 가격 근거 확인 후 안내합니다. 정식 견적을 확인하거나 담당자에게 문의해 주세요.</p></div>
+    <button class="calculator-quote-button quote-focus-button" type="button" data-vehicle="${escapeHtml(`${buildVehicleName(currentDetailVehicle)} ${selectedTrim?.name || ""}`.trim())}">이 조건으로 문의하기</button>`;
 }
 
 function renderVehicleDetail(vehicle) {
   const name = buildVehicleName(vehicle);
-  const bestQuote = vehicle.bestQuote || {};
-  const quotes = (vehicle.quotes || []).slice(0, 5);
+  const amount = window.recarPublicPrice.monthly(vehicle);
   const summaryMeta = [vehicle.trimCount ? `트림 ${vehicle.trimCount}종` : "", vehicle.badge || ""].filter(Boolean);
   const trims = getDetailTrims(vehicle);
-  const paymentLabel = vehicle.calculation?.isSpreadsheetPrice ? "가격표 기준 월납" : vehicle.calculation?.isEstimated ? "예상 월납" : "API 최저 월납";
-  const basisItems = [
-    vehicle.calculation?.isSpreadsheetPrice ? "엑셀 가격표 우선" : "",
-    vehicle.calculation?.spreadsheetPricing?.productLabel ? vehicle.calculation.spreadsheetPricing.productLabel : "",
-    vehicle.calculation?.spreadsheetPricing?.requestedAnnualKm ? `연 ${new Intl.NumberFormat("ko-KR").format(vehicle.calculation.spreadsheetPricing.requestedAnnualKm)}km` : "",
-    vehicle.calculation?.residualRatio ? `잔가율 ${formatPercent(vehicle.calculation.residualRatio)}` : "",
-    vehicle.calculation?.annualIrr ? `IRR ${formatPercent(vehicle.calculation.annualIrr)}` : "",
-    vehicle.calculation?.isEstimated && !vehicle.calculation?.isSpreadsheetPrice ? "예상 산식" : "",
-  ].filter(Boolean);
+  const paymentLabel = "기본 조건 월 납입료";
 
   currentDetailVehicle = vehicle;
   currentTrimId = trims[0]?.id || "";
@@ -1602,7 +883,7 @@ function renderVehicleDetail(vehicle) {
     <div class="vehicle-detail-head">
       <div>
         <h3>${escapeHtml(name)}</h3>
-        <p>트림과 옵션을 선택해 예상 월 납입료 변화를 확인하세요.</p>
+        <p>트림과 옵션을 선택하고 정확한 조건의 견적을 문의하세요.</p>
       </div>
       <button class="vehicle-detail-close" type="button">닫기</button>
     </div>
@@ -1615,20 +896,12 @@ function renderVehicleDetail(vehicle) {
           <div><dt>대표 트림</dt><dd>${escapeHtml(vehicle.trim || "-")}</dd></div>
           <div><dt>연식</dt><dd>${vehicle.year ? `${escapeHtml(vehicle.year)}년식` : "-"}</dd></div>
           ${summaryMeta.length ? `<div><dt>등급</dt><dd>${summaryMeta.map((item) => `<span class="detail-pill">${escapeHtml(item)}</span>`).join("")}</dd></div>` : ""}
-          <div><dt>기본 조건</dt><dd>${vehicle.conditions?.term || 60}개월 · 선납금 ${vehicle.conditions?.depositPct || 0}% · 연 ${new Intl.NumberFormat("ko-KR").format(vehicle.conditions?.mileageLimit || 10000)}km</dd></div>
-          <div><dt>${paymentLabel}</dt><dd><strong>월 ${escapeHtml(formatWon(vehicle.monthlyPayment))}</strong>${bestQuote.financeCompanyKr ? ` · ${escapeHtml(bestQuote.financeCompanyKr)}` : ""}</dd></div>
-          ${basisItems.length ? `<div><dt>계산 기준</dt><dd>${basisItems.map((item) => `<span class="detail-pill">${escapeHtml(item)}</span>`).join("")}</dd></div>` : ""}
+          <div><dt>기본 조건</dt><dd>${escapeHtml(getVehicleConditionSummary(vehicle))}</dd></div>
+          <div><dt>${paymentLabel}</dt><dd><strong>${amount ? `월 ${escapeHtml(formatWon(amount))}` : "가격 확인 필요"}</strong></dd></div>
         </dl>
       </div>
     </div>
     <div class="vehicle-calculator" id="vehicleCalculator"></div>
-    ${
-      quotes.length
-        ? `<h4 class="vehicle-detail-subtitle">금융사 견적</h4><ul class="vehicle-detail-list">${quotes
-            .map((quote) => `<li><strong>${escapeHtml(quote.financeCompanyKr || quote.financeCompany || "견적")}</strong> · 월 ${escapeHtml(formatWon(quote.monthlyPayment))}${quote.isSpreadsheetPrice ? " · 기준표" : quote.isEstimated ? " · 참고" : ""}</li>`)
-            .join("")}</ul>`
-        : ""
-    }
   `;
   renderVehicleCalculator();
   vehicleDetailPanel.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -1641,21 +914,16 @@ async function showVehicleDetail(vehicleId) {
   vehicleDetailPanel.innerHTML = `<p class="vehicle-detail-loading">차량 상세 정보를 불러오는 중입니다.</p>`;
   vehicleDetailPanel.scrollIntoView({ behavior: "smooth", block: "start" });
 
+  const generation = ++detailGeneration;
+  detailAbortController?.abort();
+  detailAbortController = new AbortController();
   try {
-    const params = new URLSearchParams({
-      term: String(vehicleConditions.term),
-      deposit_pct: String(vehicleConditions.depositPct),
-      mileage_limit: String(vehicleConditions.mileageLimit),
-    });
-    const response = await requestJson(`${getAppApiBase()}/api/recar/vehicles/${encodeURIComponent(vehicleId)}?${params.toString()}`);
-    const payload = response.data;
-
-    if (!response.ok || !payload.ok || !payload.vehicle) {
-      throw new Error(payload.error || "vehicle_detail_failed");
-    }
-
-    renderVehicleDetail(payload.vehicle);
-  } catch (error) {
+    const vehicle = await window.recarCatalog.detail(vehicleId, detailAbortController.signal);
+    if (generation !== detailGeneration) return;
+    if (!vehicle || vehicle.id !== vehicleId || !window.recarPublicPrice.isRental(vehicle)) throw new Error("vehicle_detail_failed");
+    renderVehicleDetail(vehicle);
+  } catch {
+    if (generation !== detailGeneration) return;
     vehicleDetailPanel.innerHTML = `<p class="vehicle-error">차량 정보를 불러오지 못했습니다</p>`;
   }
 }
@@ -1818,6 +1086,8 @@ vehicleDetailPanel?.addEventListener("error", showVehicleImagePlaceholder, true)
 vehicleDetailPanel?.addEventListener("click", (event) => {
   const closeButton = event.target.closest(".vehicle-detail-close");
   if (closeButton) {
+    detailGeneration += 1;
+    detailAbortController?.abort();
     vehicleDetailPanel.hidden = true;
     vehicleDetailPanel.innerHTML = "";
     currentDetailVehicle = null;
@@ -1892,10 +1162,6 @@ updateActiveNavigation();
 initializeReferral();
 applyQuoteFromUrl();
 loadVehicles().then(stabilizeHashScroll);
-updateTimeDealTimer();
-if (vehicleMode === "home") {
-  window.setInterval(updateTimeDealTimer, 1000);
-}
 
 window.addEventListener("hashchange", () => {
   window.setTimeout(stabilizeHashScroll, 50);

@@ -1,11 +1,37 @@
 const { test, expect } = require("@playwright/test");
 const AxeBuilder = require("@axe-core/playwright").default;
-const catalog = require("../../data/vehicle-static-catalog.json");
-const { getStableVehicleMargin, vehicleMarginMax, vehicleMarginMin } = require("../../lib/vehicle-margin");
+const path = require("node:path");
+const { catalog, rows, listPage, detail, quote } = require("../fixtures/synthetic-public-rental.cjs");
 const { legacyHomeFixture } = require("./helpers/legacy-home.cjs");
 
 test.beforeEach(async ({ page }) => {
   await legacyHomeFixture(page);
+  await page.route("**/*", route => {
+    const url = new URL(route.request().url());
+    return ["127.0.0.1", "localhost"].includes(url.hostname) ? route.fallback() : route.abort();
+  });
+  await page.route("https://api.recarplan.com/api/v1/**", async route => {
+    const request = route.request();
+    const url = new URL(request.url());
+    if (request.method() === "GET" && url.pathname === "/api/v1/vehicles/") {
+      expect(Object.fromEntries(url.searchParams)).toMatchObject({ product_type: "RENTAL", term: "60", deposit_pct: "0", guarantee_pct: "0", mileage_limit: "10000" });
+      return route.fulfill({ json: listPage(Number(url.searchParams.get("page") || 1)) });
+    }
+    if (request.method() === "GET" && url.pathname.startsWith("/api/v1/vehicles/")) {
+      const data = detail(decodeURIComponent(url.pathname.split("/").pop()));
+      return route.fulfill({ status: data ? 200 : 404, json: data || {} });
+    }
+    if (request.method() === "POST" && url.pathname === "/api/v1/quotes/instant") {
+      const body = request.postDataJSON();
+      expect(body).toMatchObject({ product_type: "RENTAL", term: 60, prepayment_pct: 0, guarantee: 0, mileage_limit: 10000, selection_contract_version: "selection_v1" });
+      expect(body.selection).toEqual({ vehicle_trim_id: `${body.vehicle_id}-TRIM`, selected_option_ids: [] });
+      return route.fulfill({ json: quote(body.vehicle_id) });
+    }
+    return route.abort();
+  });
+  await page.route("https://api.recarplan.com/assets/**", route => route.fulfill({
+    path: path.resolve(__dirname, "../..", decodeURIComponent(new URL(route.request().url()).pathname).slice(1)),
+  }));
   // No test can create a production inquiry, even if the legacy Firebase fallback runs.
   await page.route("**/api/v1/friends/track**", route => route.fulfill({ status: 204 }));
   await page.route("**/firestore.googleapis.com/**", route => route.abort());
@@ -26,30 +52,14 @@ async function fillForm(page) {
   await page.locator("#termsConsent").check();
 }
 
-test("vehicle data keeps models, brands and body types aligned", async () => {
-  for (const item of catalog.items) {
-    const margin = item.calculation.displayMonthlyLift;
-    expect(margin).toBeGreaterThanOrEqual(vehicleMarginMin);
-    expect(margin).toBeLessThanOrEqual(vehicleMarginMax);
-    expect(margin).toBe(getStableVehicleMargin(item.id));
-    expect(item.monthlyPayment - item.monthlyPaymentBeforeLift).toBe(margin);
-  }
-
-  const trailblazer = catalog.items.find(item => item.id === "static-쉐보레트레일블레이저");
-  expect(trailblazer).toMatchObject({ brand: "쉐보레", name: "트레일블레이저" });
-  expect(trailblazer.categories).toContain("suv");
-  expect(trailblazer.imageUrl).toContain("쉐보레/트레일블레이저/model_360.png");
-
-  const shootingBrake = catalog.items.find(item => item.id === "static-제네시스g70슈팅브레이크");
-  expect(shootingBrake).toMatchObject({ brand: "제네시스", name: "G70 슈팅브레이크" });
-  expect(shootingBrake.imageUrl).toContain("제네시스/G70/model_360.png");
-
-  const cla = catalog.items.find(item => item.id === "static-mercedesbenzcla");
-  expect(cla.name).toBe("CLA-Class");
-  expect(cla.imageUrl).toContain("벤츠/CLA-Class/model_360.png");
+test("synthetic UI evidence never reuses recorded catalog prices", async () => {
+  expect(catalog.items[0]).toMatchObject({ id: "SYNTHETIC-UI-0", name: "모닝", monthlyPayment: 300100 });
+  expect(rows[0].monthly_payment).toBe(9999999);
+  expect(quote(rows[0].id).data.monthly_payment).toBe(300100);
+  for (const item of catalog.items) expect(item.imageUrl).toMatch(/^\/assets\//);
 });
 
-test("home assets load, reference proportions and actual catalog prices are preserved", async ({ page, request }) => {
+test("home assets and proportions remain while only verified synthetic prices display", async ({ page, request }) => {
   await page.setViewportSize({ width: 1440, height: 1000 });
   for (const file of ["/home.css", "/home.js", "/assets/home-fonts/Pretendard-Regular.woff2", "/assets/home-icons/quick-quote.webp", "/assets/home-icons/guide-rent-lease.webp"]) expect((await request.get(file)).status()).toBe(200);
   await ready(page);
@@ -57,10 +67,10 @@ test("home assets load, reference proportions and actual catalog prices are pres
   expect((await page.locator('.promotion-slide[data-position="center"]').boundingBox()).width).toBe(750);
   expect((await page.locator("#special").boundingBox()).width).toBe(1200);
   await expect(page.locator(".home-vehicle").first()).toContainText(catalog.items[0].monthlyPayment.toLocaleString("ko-KR"));
-  await expect(page.locator(".home-car-trim").first()).toHaveText("기본 조건 · 장기렌트 · 무보증");
+  await expect(page.locator(".home-car-trim").first()).toHaveText("장기렌트 · 60개월 · 선납금 0% · 연 10,000km");
   await expect(page.locator(".home-vehicle").first()).not.toContainText("최저등급");
   await expect(page.locator(".catalog-basis")).toContainText("60개월");
-  await expect(page.locator(".catalog-basis")).toContainText("선납금 0% · 보증금 0%");
+  await expect(page.locator(".catalog-basis")).toContainText("선납금 0% · 보증금 별도 확인");
   await expect(page.locator(".catalog-basis")).toContainText("10,000km");
   expect(await page.evaluate(() => localStorage.getItem("recar_referral_code"))).toBeNull();
 });
@@ -84,15 +94,14 @@ test("referral links apply the code and reveal the promotion gifts", async ({ pa
   await expect(page.locator("[data-referral-code]")).toHaveText("RC-GIFT123");
 });
 
-test("full vehicle page uses the same margin-adjusted static catalog", async ({ page }) => {
+test("full vehicle page uses the validated rental catalog without static prices", async ({ page }) => {
   await page.goto("/vehicles.html");
-  const firstVehicle = page.locator(".vehicle-card:not(.is-skeleton)").first();
+  const firstVehicle = page.locator(".vehicle-card").first();
   await expect(firstVehicle).toBeVisible();
-  await expect(firstVehicle).toContainText(catalog.items[0].monthlyPayment.toLocaleString("ko-KR"));
-  await expect(firstVehicle.locator(".vehicle-specs")).toHaveText("기본 조건 · 장기렌트 · 무보증");
-
-  const leaseVehicle = catalog.items.find(item => item.calculation?.product === "lease");
-  await expect(page.locator(`[data-vehicle-id="${leaseVehicle.id}"] .vehicle-specs`)).toHaveText("기본 조건 · 리스 · 무보증");
+  await expect(firstVehicle).toContainText("300,100");
+  await expect(firstVehicle).not.toContainText("9,999,999");
+  await expect(firstVehicle.locator(".vehicle-specs")).toHaveText("장기렌트 · 60개월 · 선납금 0% · 연 10,000km");
+  await expect(page.locator(".vehicle-card").last()).toContainText("가격 확인 필요");
 });
 
 test("manufacturer, body, product, search, sorting and empty-state reset work", async ({ page }) => {
@@ -108,17 +117,18 @@ test("manufacturer, body, product, search, sorting and empty-state reset work", 
   await expect(page.locator(".home-vehicle").first()).toContainText("Model");
   await page.locator("#homeSearch").fill("");
   await page.locator(".home-search").getByRole("button").click();
-  await page.locator("#catalogProduct").selectOption("lease");
+  await expect(page.locator('#catalogProduct option[value="lease"]')).toHaveCount(0);
+  await page.locator("#catalogProduct").selectOption("rent");
   const productIds = await page.locator(".home-vehicle").evaluateAll(cards => cards.map(card => card.dataset.vehicleId));
   expect(productIds.length).toBeGreaterThan(0);
-  for (const id of productIds) expect(catalog.items.find(item => item.id === id).calculation.product).toBe("lease");
+  for (const id of productIds) expect(rows.find(item => item.id === id).available_product_types).toEqual(["RENTAL"]);
   await page.locator("#homeSearch").fill("없는차량__local");
   await page.locator(".home-search").getByRole("button").click();
   await expect(page.locator("#catalogEmpty")).toBeVisible();
   await page.getByRole("button", { name: "검색 조건 초기화" }).click();
   await page.locator("#catalogSort").selectOption("price");
   const prices = await page.locator(".home-car-price strong").allTextContents();
-  const values = prices.map(price => Number(price.replaceAll(",", "")));
+  const values = prices.filter(price => /^[\d,]+$/.test(price)).map(price => Number(price.replaceAll(",", "")));
   expect(values).toEqual([...values].sort((a,b) => a-b));
 });
 
@@ -144,47 +154,25 @@ test("hero, car rail, guide filters and vehicle inquiry entry work", async ({ pa
   await expect(page.locator("#rentGuide")).toHaveAttribute("open", "");
 });
 
-test("12-hour time deals rotate and use cost plus a 10,000 to 20,000 won margin", async ({ page }) => {
-  const start = Date.parse("2026-09-09T00:00:00+09:00");
-  await page.addInitScript(now => { Date.now = () => now; }, start);
+test("archived promotion rail never invents discounts or time limits", async ({ page }) => {
   await page.setViewportSize({ width: 1440, height: 1000 });
   await ready(page);
-
-  const deals = page.locator(".time-deal-card");
-  await expect(deals).toHaveCount(3);
-  const firstWindowIds = await deals.evaluateAll(cards => cards.map(card => card.dataset.vehicleId));
-  const dealData = await deals.evaluateAll(cards => cards.map(card => ({ ...card.dataset })));
-  for (const deal of dealData) {
-    const item = catalog.items.find(candidate => candidate.id === deal.vehicleId);
-    const margin = Number(deal.dealMargin);
-    expect(Number(deal.baseMonthly)).toBe(item.monthlyPayment);
-    expect(Number(deal.costMonthly)).toBe(item.monthlyPaymentBeforeLift);
-    expect(margin).toBeGreaterThanOrEqual(10000);
-    expect(margin).toBeLessThanOrEqual(20000);
-    expect(Number(deal.saleMonthly)).toBe(item.monthlyPaymentBeforeLift + margin);
-    expect(Number(deal.saleMonthly)).toBeLessThan(item.monthlyPayment);
-  }
-  await expect(deals.first().locator("del")).toContainText("기본가");
-  expect(await deals.first().locator("del").evaluate(node => getComputedStyle(node).textDecorationLine)).toContain("line-through");
-  await expect(deals.first()).toContainText("타임특가");
-
-  await deals.first().getByRole("link", { name: /타임특가 견적 받기/ }).click();
-  await expect(page.locator(".quote-form")).toHaveAttribute("data-lead-campaign", "time-deal");
-  await expect(page.locator("#vehicleWish")).toHaveValue(/타임특가/);
+  const cards = page.locator(".time-deal-card");
+  await expect(cards).toHaveCount(3);
+  await expect(page.locator("#timeDealTitle")).toHaveText("장기렌트 조건 확인");
+  await expect(page.locator(".time-deal-clock")).toBeHidden();
+  await expect(cards.locator("del, [data-sale-monthly], [data-discount]")).toHaveCount(0);
+  const first = await cards.allTextContents();
+  await page.evaluate(() => { Date.now = () => Date.parse("2030-01-01T00:00:00Z"); window.recarHome.renderTimeDeals(); });
+  expect(await cards.allTextContents()).toEqual(first);
+  await cards.first().getByRole("link", { name: /이 조건 견적 문의/ }).click();
   await fillForm(page);
-  const dealRequest = page.waitForRequest("**/api/leads");
+  const submission = page.waitForRequest("**/api/leads");
   await page.getByRole("button", { name: "조건 확인하기", exact: true }).click();
-  expect((await dealRequest).postDataJSON()).toMatchObject({
-    campaign: "time-deal",
-    campaignLabel: "12시간 타임특가",
-    timeDealOriginalMonthlyPayment: Number(dealData[0].baseMonthly),
-    timeDealMonthlyPayment: Number(dealData[0].saleMonthly),
-    timeDealDiscount: Number(dealData[0].baseMonthly) - Number(dealData[0].saleMonthly),
-  });
-
-  await page.evaluate(now => { Date.now = () => now; window.recarHome.renderTimeDeals(); }, start + (12 * 60 * 60 * 1000));
-  const secondWindowIds = await deals.evaluateAll(cards => cards.map(card => card.dataset.vehicleId));
-  expect(secondWindowIds).not.toEqual(firstWindowIds);
+  const payload = (await submission).postDataJSON();
+  expect(payload.timeDealOriginalMonthlyPayment).toBeNull();
+  expect(payload.timeDealMonthlyPayment).toBeNull();
+  expect(payload.timeDealDiscount).toBeNull();
 });
 
 test("SUV collection uses distinct representative SUV models", async ({ page }) => {
@@ -194,9 +182,9 @@ test("SUV collection uses distinct representative SUV models", async ({ page }) 
   expect(titles).toHaveLength(12);
   expect(new Set(titles).size).toBe(titles.length);
   expect(titles).not.toContain("기아 레이");
-  expect(titles).toContain("쉐보레 트레일블레이저");
-  expect(titles).toContain("현대 디 올 뉴 팰리세이드");
-  await expect(page.locator("#suvCollection .collection-card p").first()).toHaveText("기본 조건 · 장기렌트 · 무보증");
+  expect(titles).toContain("현대 캐스퍼");
+  expect(titles).toContain("기아 셀토스");
+  await expect(page.locator("#suvCollection .collection-card p").first()).toHaveText("장기렌트 · 60개월 · 선납금 0% · 연 10,000km");
 
   const floating = page.locator(".home-floating");
   expect((await floating.boundingBox()).width).toBeLessThanOrEqual(52);
@@ -356,26 +344,30 @@ test("failed inquiry stays failed until a successful retry response", async ({ p
 });
 
 test("catalog outage, retry, empty and missing-image states are truthful", async ({ page }) => {
-  await page.route("**/data/vehicle-static-catalog.json*", route => route.fulfill({ status: 503, json: {} }));
-  await page.route("**/api/recar/vehicles?**", route => route.fulfill({ status: 503, json: {} }));
+  let staticRequests = 0;
+  page.on("request", request => { if (request.url().includes("vehicle-static-catalog")) staticRequests++; });
+  await page.route("https://api.recarplan.com/api/v1/vehicles/?**", route => route.fulfill({ status: 503, json: {} }));
   await page.goto("/");
   await expect(page.locator("#vehicleError")).toBeVisible();
   await expect(page.locator(".home-vehicle")).toHaveCount(0);
-  await page.route("**/data/vehicle-static-catalog.json*", route => route.fulfill({ json: { ...catalog, items: [] } }));
+  expect(staticRequests).toBe(0);
+  await page.route("https://api.recarplan.com/api/v1/vehicles/?**", route => route.fulfill({ json: listPage(1, []) }));
   await page.getByRole("button", { name: "다시 불러오기" }).click();
   await expect(page.locator("#catalogEmpty")).toBeVisible();
-  await page.route("**/data/vehicle-static-catalog.json*", route => route.fulfill({ json: { ...catalog, items: [{ ...catalog.items[0], imageUrl: "/missing-image-test.png" }] } }));
+  await page.route("https://api.recarplan.com/api/v1/vehicles/?**", route => route.fulfill({ json: listPage(1, [rows[0]]) }));
+  await page.route(url => decodeURIComponent(url.pathname) === catalog.items[0].imageUrl, route => route.abort());
   await page.reload();
+  await page.locator(".home-vehicle").first().scrollIntoViewIfNeeded();
   await expect(page.locator(".image-missing")).toBeVisible();
-  await expect(page.locator(".home-car-price")).toContainText(catalog.items[0].monthlyPayment.toLocaleString("ko-KR"));
+  await expect(page.locator(".home-car-price")).toContainText("300,100");
 });
 
 test("catalog shows loading until the data response arrives", async ({ page }) => {
   let release;
   const gate = new Promise(resolve => { release = resolve; });
-  await page.route("**/data/vehicle-static-catalog.json*", async route => {
+  await page.route("https://api.recarplan.com/api/v1/vehicles/?**", async route => {
     await gate;
-    await route.fulfill({ json: catalog });
+    await route.fulfill({ json: listPage(Number(new URL(route.request().url()).searchParams.get("page") || 1)) });
   });
   await page.goto("/", { waitUntil: "domcontentloaded" });
   try {
@@ -401,15 +393,48 @@ test("six target widths and narrow reflow keep prices and form controls accessib
   }
 });
 
-test("catalog API fallback receives unchanged default conditions", async ({ page }) => {
-  let query;
-  await page.route("**/data/vehicle-static-catalog.json*", route => route.fulfill({ status: 503, json: {} }));
-  await page.route("**/api/recar/vehicles?**", route => {
-    query = Object.fromEntries(new URL(route.request().url()).searchParams);
-    return route.fulfill({ json: { ok: true, items: catalog.items.slice(0, 4) } });
+test("official catalog and price requests retain exact default conditions", async ({ page }) => {
+  const requests = [];
+  page.on("request", request => { if (request.url().startsWith("https://api.recarplan.com/")) requests.push(request); });
+  await ready(page);
+  const list = requests.find(request => new URL(request.url()).pathname === "/api/v1/vehicles/");
+  expect(Object.fromEntries(new URL(list.url()).searchParams)).toMatchObject({ product_type: "RENTAL", term: "60", deposit_pct: "0", guarantee_pct: "0", mileage_limit: "10000" });
+  expect(requests.filter(request => request.method() === "POST")).toHaveLength(12);
+});
+
+test("unverified and lease rows never acquire a public amount", async ({ page }) => {
+  await page.route("https://api.recarplan.com/api/v1/vehicles/?**", route => route.fulfill({ json: listPage(1, [rows[0], { ...rows[1], available_product_types: ["LEASE"], displayed_product_type: "LEASE" }]) }));
+  await page.route("https://api.recarplan.com/api/v1/quotes/instant", route => {
+    const data = quote(rows[0].id); delete data.data.price_provenance;
+    return route.fulfill({ json: data });
   });
   await ready(page);
-  expect(query).toMatchObject({ term: "60", deposit_pct: "0", mileage_limit: "10000", mode: "all" });
+  await expect(page.locator(".home-vehicle")).toHaveCount(1);
+  await expect(page.locator(".home-car-price")).toHaveText("가격 확인 필요");
+  await expect(page.locator(".home-vehicle")).not.toContainText("300,100");
+  await expect(page.locator(".home-vehicle")).not.toContainText("9,999,999");
+});
+
+test("legacy detail offers confirmed inquiry without inventing option monthly amounts", async ({ page }) => {
+  await page.goto("/vehicles.html");
+  await expect(page.locator(".vehicle-card").first()).toBeVisible();
+  await page.evaluate(id => window.showVehicleDetail(id), rows[0].id);
+  await expect(page.locator("#vehicleCalculator .estimate-price")).toContainText("가격 확인 필요");
+  await expect(page.locator("#vehicleCalculator")).not.toContainText("300,100");
+  await expect(page.locator("#vehicleCalculator")).not.toContainText("IRR");
+});
+
+test("landing keeps referral and rental conditions without carrying an invented price", async ({ page }) => {
+  await page.route("**/inquiry/?**", route => route.fulfill({ contentType: "text/html", body: "<main>합성 문의 도착</main>" }));
+  await page.goto("/landing/?ref=RC-LOCALQA&utm_campaign=local-test");
+  await expect(page.locator(".home-vehicle").first()).toBeVisible();
+  await expect(page.locator("#catalogProduct option[value=lease]")).toHaveCount(0);
+  await page.locator(".home-vehicle-link").first().click();
+  await expect(page).toHaveURL(/\/inquiry\/\?/);
+  const query = Object.fromEntries(new URL(page.url()).searchParams);
+  expect(query).toMatchObject({ ref: "RC-LOCALQA", utm_campaign: "local-test", product: "RENTAL", brand: "기아", model: "모닝", term: "60", mileage: "10000", deposit: "0", prepayment: "0" });
+  expect(query).not.toHaveProperty("monthlyPayment");
+  expect(query).not.toHaveProperty("saleMonthly");
 });
 
 test("desktop and mobile homepage have no serious accessibility violations", async ({ page }) => {

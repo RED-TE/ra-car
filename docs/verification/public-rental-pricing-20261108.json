@@ -1,0 +1,314 @@
+{
+  "date": "2026-11-08",
+  "scope": "Local public-web RENTAL pricing and inquiry candidate. Synthetic and loopback verification only; not operating-price or release certification.",
+  "git": {
+    "repository": "RED-TE/ra-car",
+    "branch": "codex/rental-web-verify-20261108",
+    "head_before": "09c9adff6f1f0d3a98ac81a12d6fc96073f262ad",
+    "main_checked_earlier_this_phase": "090b156c6eaa92ac0d32bb9bc0c5a169ddf9468a",
+    "native_feature_head": "fcc697aed030825e6cc50a3581b365acac672265"
+  },
+  "context": {
+    "previous_web_candidate": "docs/verification/rental-pricing-web-20261108.json",
+    "previous_candidate_scope": "Flutter web runtime; outer homepage, landing, inquiry and Node gateway fixes were still missing. This record covers those remaining local paths.",
+    "recovery": "New implementation on current main; not an exact restoration of missing historical temporary web worktree 55b127c7fb2335506d6a35637d13e961619efa3d."
+  },
+  "confirmed_findings_and_changes": [
+    "Public list/detail GET representative amounts lack sufficient original-condition evidence. They are never used as verified customer prices.",
+    "Shared module validates complete catalog identities and pagination, selects explicit RENTAL vehicles, validates available default trim and calls existing selection_v1 instant quote for RENTAL, 60 months, 10000 km/year, zero advance, zero guarantee, no selected options or colors.",
+    "Only unchanged server monthly_payment with strict original source evidence or the existing narrowly scoped selection_terms_estimate_v1 evidence is displayed. Contradictory, unavailable or missing proof gives no invented amount.",
+    "Direct condition evidence requires one BASE point, CHAZM_IMPORTED, CONDITION_DIRECT, exact source path and actual term/mileage/advance. Request echoes alone are insufficient. Other already supported anchor methods retain their existing contract.",
+    "Full rental identities remain available when prices are unknown. Public list price lookups are capped at 12 quote requests, concurrency 2, timeout 12 seconds per request; parent cancellation prevents late follow-up POSTs.",
+    "Static fallback prices, arbitrary time-dependent margins, unsubstantiated 12-hour/monthly-saving claims and browser option/IRR monthly recomputation were removed from active promotional paths. Existing server pricing formulas are unchanged.",
+    "Public estimated prices carry accurate estimate/condition information. Unrecorded guarantee evidence is not presented as independently proven zero guarantee.",
+    "New inquiry product is RENTAL only; nonzero guarantee is rejected. Advance percentage choices are requested consultation conditions, not guaranteed displayed monthly amounts. Existing historical records and the old cache key are retained.",
+    "Public Node gateway uses the same evidence boundary. Non-default values for historically supported price inputs (term, deposit_pct, mileage_limit) and explicitly checked additional condition keys fail before upstream calls. Arbitrary unknown query keys are not claimed to be rejected. Legacy manual/spreadsheet IDs cannot return invented public prices.",
+    "Original layout, image assets, referral and inquiry handoff remain; source-image URLs are normalized to HTTPS API asset origin without URL credentials."
+  ],
+  "validation": {
+    "full_node": {
+      "passed": 219,
+      "failed": 1,
+      "skipped": 0,
+      "total": 220,
+      "exit_code": 1,
+      "log": {
+        "path": "/private/tmp/recar-web-outer-node-final-v2-20261108.log",
+        "sha256": "9da9e9ce8fb632dcd72caf900332e1e0fb3dd2b953a3d6694619a4c2a93ca225",
+        "bytes": 44103
+      },
+      "only_failure": {
+        "test": "web source and native app stay separately pinned",
+        "location": "tests/app-startup.test.js:105",
+        "published_build_id": "web-catalog-auto-20261019",
+        "source_build_id": "web-rental-pricing-20261108",
+        "status": "RELEASE_GATE_PENDING",
+        "guard_weakened": false,
+        "note": "Published patch hash also differs from source; that later assertion is not reached. Published app files were not changed."
+      }
+    },
+    "catalog_unit_subset": {
+      "passed": 61,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "log": {
+        "path": "/private/tmp/recar-rental-catalog-unit-20261108-v4.log",
+        "sha256": "3132a184c6232b125e59a6cb2d5ea3a8829b566eed093163de9a5f772b265aff",
+        "bytes": 11449
+      }
+    },
+    "public_ui_unit_subset": {
+      "passed": 20,
+      "failed": 0,
+      "exit_code": 0,
+      "log": {
+        "path": "/private/tmp/recar-public-ui-unit-v2-20261108.log",
+        "sha256": "a43f37581b7c68d728db7a50086f35be68f515e73691e22395467dea0199f00e",
+        "bytes": 3352
+      }
+    },
+    "gateway_subset": {
+      "passed": 7,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "final_log": "Included in full_node log",
+      "scope": "Real localhost Node HTTP child; synthetic fetch preload; no external API, customer/price file reads or file writes. Correct price, upstream failures, missing evidence and disconnect cancellation covered."
+    },
+    "public_browser": {
+      "passed": 23,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "seconds": 33.2,
+      "log": {
+        "path": "/private/tmp/recar-public-ui-e2e-v3-20261108.log",
+        "sha256": "54234b28000736e82168d16a32b16623b44a695264b98064a60eea28b51ee09b",
+        "bytes": 3051
+      },
+      "scope": "Real local Chrome, synthetic API route responses and existing local image bytes; responsive widths, filters, price evidence, inquiry handoff and accessibility."
+    },
+    "inquiry_browser": {
+      "passed": 20,
+      "failed": 0,
+      "skipped": 0,
+      "exit_code": 0,
+      "seconds": 27.7,
+      "log": {
+        "path": "/private/tmp/recar-web-outer-e2e-20261108-43pzyik5/inquiry-e2e-v3.log",
+        "sha256": "62e6a53ee287748eed5f72448eeaaa23e826e0576a62e24a509b3d07406e9189",
+        "bytes": 2811
+      },
+      "scope": "390px and 1440px, six steps, referral, one submission, errors/retry, stale selection, cache preservation, unavailable trim, overflow and serious accessibility violations."
+    },
+    "lint": {
+      "exit_code": 0,
+      "log": {
+        "path": "/private/tmp/recar-web-outer-lint-final-20261108.log",
+        "sha256": "2bbcd7478d1fc9a6db37798bf5014a52a659d914d9c069c650e2ff1e760f26ba",
+        "bytes": 269
+      }
+    },
+    "typecheck": {
+      "exit_code": 0,
+      "log": {
+        "path": "/private/tmp/recar-web-outer-typecheck-final-20261108.log",
+        "sha256": "b1c80f952d01baec0856ad4efae13336c7678253839a8e8a1be4c3dfb172fcf4",
+        "bytes": 64
+      }
+    },
+    "syntax_and_generated_entry_checks": {
+      "exit_code": 0,
+      "log": {
+        "path": "/private/tmp/recar-web-outer-check-final-20261108.log",
+        "sha256": "bde48b3b22c91cba22ee11a53ba11da9a9469558fb8e2688ba007fa48106e5ae",
+        "bytes": 619
+      }
+    },
+    "count_note": "Unit subsets overlap full_node and must not be summed. Prior unchanged Flutter VM/browser/compile results are recorded separately, not rerun or included here.",
+    "failed_intermediate_runs": "Original failed/partial Node, unit and browser runs and traces remain in separate /private/tmp paths. They were not overwritten or counted as final passes.",
+    "remote_ci": "NOT_RUN",
+    "independent_final_review": {
+      "result": "No additional confirmed major regression in reviewed public price module, gateway and inquiry paths.",
+      "legacy_query_review": "HEAD getDefaultVehicleQuery and callers only consumed term/deposit_pct/mileage_limit as public price conditions. No public trim/option or alternate prepayment alias consumer was found; upstream-only aliases were not invented as a public contract.",
+      "release_limit": "The published build ID and patch hash mismatch remains a real release gate. 219/1 is not a passing full Node suite."
+    },
+    "mobile_capture_review": {
+      "path": "/private/tmp/recar-web-outer-e2e-20261108-43pzyik5/results-v3/inquiry-flow-landing-refer-6e539-e-with-NEW-receipt-at-390px/inquiry-390-step4.png",
+      "scope": "Root visually inspected existing synthetic 390px condition-step capture; rental, term, mileage, advance controls and next button are visible without horizontal clipping. Not operating/native quality certification."
+    }
+  },
+  "native_source_identity": {
+    "record": {
+      "path": "/Users/johongcheol/.codex/worktrees/rental-source-policy-20261108/recar_app/docs/verification/rental-original-identity-20261108.json",
+      "sha256": "e220074815a4eb809b472b895d92f410680b26d09f0d3c0e2d3e3a43658db11b",
+      "bytes": 3914
+    },
+    "original_ambiguous_rows": 238,
+    "uniquely_identified": 17,
+    "still_ambiguous": 221,
+    "original_monthly_amounts_changed": 0,
+    "tests_passed": 253,
+    "limit": "These are original identity corrections, not 17 certified newly supported customer conditions. Existing 1690 exact-reselection misses were not recomputed or resolved."
+  },
+  "preserved": {
+    "tracked_paths_unchanged_from_head_before": [
+      "app",
+      "web_app",
+      "index.html",
+      "data",
+      "assets",
+      "package-lock.json"
+    ],
+    "runtime_patch": {
+      "path": "/Users/johongcheol/Desktop/recar_web_source_20261108/web_app/patches/runtime.patch",
+      "sha256": "1d13f61aef256fdec8c16b664e5f219a52d79de3fd94dfbe3e8c00777671f2cd",
+      "bytes": 469633
+    },
+    "customer_data_and_existing_quotes": "No operating DB/customer record read or modification; source preservation plus synthetic tests only.",
+    "original_native_checkout": {
+      "head": "5b27fb0cbac4d86dbac6570e30fce458e275fb12",
+      "tracked_changes_retained": 7,
+      "insertions": 77,
+      "deletions": 261,
+      "untracked_entries_retained": 19
+    },
+    "old_native_worktree": {
+      "head": "3311f90533c7a4521d8701a54c7addfe40e42ab0",
+      "clean": true
+    }
+  },
+  "isolation": {
+    "dependencies": "Offline cached locked tooling; package-lock.json unchanged.",
+    "network": "OS external network denied; localhost and Chrome internal Unix sockets only. Browser/API responses synthetic.",
+    "network_profile": {
+      "path": "/private/tmp/recar-web-pricing-test-network-chrome-v2-20261108.sb",
+      "sha256": "aa654270da210cdfa7ac4d2eefff7de27820d2c7501f147f52b826ff6ccfaabc",
+      "bytes": 355
+    },
+    "operating_api_calls_this_phase": 0,
+    "prior_public_get_budget": {
+      "date": "2026-11-07",
+      "approved": 5,
+      "used": 5,
+      "status": "CLOSED"
+    },
+    "production_database_access": 0,
+    "customer_contacts": 0,
+    "push": false,
+    "remote_ci_dispatch": false,
+    "deployment": false,
+    "testflight": false
+  },
+  "files": [
+    {
+      "path": "/Users/johongcheol/Desktop/recar_web_source_20261108/eslint.config.js",
+      "sha256": "4ecce3090f0a7281755f6eb123ad57f44e1a166927362c15365c0b15fbafd86b",
+      "bytes": 1194
+    },
+    {
+      "path": "/Users/johongcheol/Desktop/recar_web_source_20261108/home.js",
+      "sha256": "7b540b3acbea7b6bc1c7120320cee594b880b8ddb6d90e6a675b940b4c90af84",
+      "bytes": 22390
+    },
+    {
+      "path": "/Users/johongcheol/Desktop/recar_web_source_20261108/inquiry/catalog.mjs",
+      "sha256": "8e9f792faebe85e568ffcb560d54e7c7aee75992390904e29aff530cea669b23",
+      "bytes": 11806
+    },
+    {
+      "path": "/Users/johongcheol/Desktop/recar_web_source_20261108/inquiry/index.html",
+      "sha256": "5386523a1de9aaaf159f91ade4ef6f4ccb6e1ad7bc3de67882cc196238441d56",
+      "bytes": 2936
+    },
+    {
+      "path": "/Users/johongcheol/Desktop/recar_web_source_20261108/inquiry/inquiry.mjs",
+      "sha256": "07a4a0f205747ad9b811337937fec4efe3dd4584cf9729bb0617609d98245aff",
+      "bytes": 29510
+    },
+    {
+      "path": "/Users/johongcheol/Desktop/recar_web_source_20261108/landing/index.html",
+      "sha256": "e01f0156d8e083a81c1878996c34bb2142296f73bfcb0a1a3fb6267d4a04626a",
+      "bytes": 33134
+    },
+    {
+      "path": "/Users/johongcheol/Desktop/recar_web_source_20261108/landing/landing.js",
+      "sha256": "8d5d7205e23e6ae32cb41b0e0eb2cfde90ede7d79e1171f3d6d73391f390aeea",
+      "bytes": 1412
+    },
+    {
+      "path": "/Users/johongcheol/Desktop/recar_web_source_20261108/lib/rental-catalog.mjs",
+      "sha256": "2b01a39018f4dbee7c9809c7b27758120a0a8e54c398de761a9747e7ca20702c",
+      "bytes": 19021
+    },
+    {
+      "path": "/Users/johongcheol/Desktop/recar_web_source_20261108/package.json",
+      "sha256": "942c89312eef63d56fa66c77b495962e880cc7ac893552c39de9f98e08198ad0",
+      "bytes": 2598
+    },
+    {
+      "path": "/Users/johongcheol/Desktop/recar_web_source_20261108/script.js",
+      "sha256": "3b3e29700451c73061ae16d648a9c6f2c434cc63d07024642b6152f28e2ad59e",
+      "bytes": 43369
+    },
+    {
+      "path": "/Users/johongcheol/Desktop/recar_web_source_20261108/server.js",
+      "sha256": "e91a8b0adc9053656c64ffb1c7655efa684408df2150bb94016b5d67894a94d6",
+      "bytes": 81125
+    },
+    {
+      "path": "/Users/johongcheol/Desktop/recar_web_source_20261108/tests/e2e/home-ui.spec.js",
+      "sha256": "4b400ef17d2d45074e91f4ab59cf3ab0afbeb65a92fc384c3976ce366835bfe6",
+      "bytes": 25947
+    },
+    {
+      "path": "/Users/johongcheol/Desktop/recar_web_source_20261108/tests/e2e/inquiry-flow.spec.js",
+      "sha256": "7fbfc8878d388c95fd7d55b87d970a4096107fb51a265083727369b4e5c63a2f",
+      "bytes": 26132
+    },
+    {
+      "path": "/Users/johongcheol/Desktop/recar_web_source_20261108/tests/fixtures/synthetic-public-rental.cjs",
+      "sha256": "3e9d2b76150f35c8ec1b497eca880c02e7161a6da176749b68247d6dfa52eec3",
+      "bytes": 3331
+    },
+    {
+      "path": "/Users/johongcheol/Desktop/recar_web_source_20261108/tests/inquiry-flow.test.js",
+      "sha256": "77f4fabe7a6b5dfcbc4fff24bc5bed22168abf47d41cb355f4e827f33ba2f341",
+      "bytes": 38563
+    },
+    {
+      "path": "/Users/johongcheol/Desktop/recar_web_source_20261108/tests/public-price-ui.test.js",
+      "sha256": "c3f97864e70a16e847a1eb8f082cbbb92b37804462750defea52e4affac784ad",
+      "bytes": 3034
+    },
+    {
+      "path": "/Users/johongcheol/Desktop/recar_web_source_20261108/tests/public-rental-gateway.test.js",
+      "sha256": "6200ada620f200d0f885fa0f089945353e37c80afe39f375c7e3125fa1e16a1f",
+      "bytes": 11913
+    },
+    {
+      "path": "/Users/johongcheol/Desktop/recar_web_source_20261108/tests/rental-catalog.test.js",
+      "sha256": "d6e6856374e60d6fc01c63087dddbeae1ccfbc385dcf4b7125febd40f2a9fead",
+      "bytes": 21266
+    },
+    {
+      "path": "/Users/johongcheol/Desktop/recar_web_source_20261108/tests/server-routes.test.js",
+      "sha256": "c0124a57e495d8566d131b74e5fee57bd5727bfe606bc6c42cd6c415c723664d",
+      "bytes": 19095
+    },
+    {
+      "path": "/Users/johongcheol/Desktop/recar_web_source_20261108/tools/restore-landing.cjs",
+      "sha256": "c93e64ebf8bbd7b9f01a78e2bcaaa6427eaed5b666d0b4b2c896096ec686f9a5",
+      "bytes": 4380
+    }
+  ],
+  "remaining": [
+    "Current operating deployed SHA, active source hash/date and exact provider vehicle/trim bindings remain unverified; separate read-only operating-server approval is unanswered.",
+    "Latest completed local source collection: 2026-11-06 17:53:52 through 2026-11-07 04:35:16; timezone unspecified. This does not prove which source the operating API uses.",
+    "221 original ambiguities and 1690 previously reported exact-source reselection misses remain. No claim that all vehicle/advance/term/mileage combinations have prices.",
+    "New public price fetching is a local candidate only. Operating availability, anonymous access, cost, side effects and total service call limits are not certified by these synthetic tests. No production calls made to fill those gaps.",
+    "Published bundle consistency guard still fails. Build/staging of published output, remote CI, merge, deployment and TestFlight are not performed.",
+    "Real operating-browser behavior and native device visual quality are not certified."
+  ]
+}

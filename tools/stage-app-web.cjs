@@ -12,6 +12,15 @@ function stage(appRoot) {
   const pin = JSON.parse(fs.readFileSync(path.join(appRoot, "../source-pin.json"), "utf8"));
   if (pin.commit !== config.commit || pin.buildId !== config.buildId) throw new Error("Source pin mismatch");
   if (pin.patchSha256 !== hash(path.join(root, "web_app/patches/runtime.patch"))) throw new Error("Patch changed; prepare and rebuild before staging");
+  if (JSON.stringify(pin.vehicleImages || []) !== JSON.stringify(config.vehicleImages || [])) {
+    throw new Error("Verified vehicle image pin changed; rebuild before staging");
+  }
+  for (const image of config.vehicleImages || []) {
+    if (hash(path.join(root, "web_app", image.asset)) !== image.sha256 ||
+        hash(path.join(built, "assets", image.asset)) !== image.sha256) {
+      throw new Error("Verified vehicle image mismatch");
+    }
+  }
   const manifest = JSON.parse(fs.readFileSync(path.join(built, "assets/FontManifest.json"), "utf8"));
   const font = manifest.find(family => family.family === "Pretendard");
   if (font?.fonts.length !== 1 || !font.fonts[0].asset.endsWith("PretendardVariable.ttf")) throw new Error("Variable font missing");
@@ -19,9 +28,14 @@ function stage(appRoot) {
   if (!fs.readFileSync(path.join(built, "index.html"), "utf8").includes('__RECAR_BUILD_ID__')) throw new Error("Custom web loader missing");
   const entry = "서류 제출까지 직접 신청하기".replace(/[^\x00-\x7f]/g, char => `\\u${char.charCodeAt(0).toString(16).padStart(4, "0")}`);
   if (!fs.readFileSync(path.join(built, "main.dart.js"), "utf8").includes(entry)) throw new Error("Document entry missing");
+  // The generated no-PWA worker may be empty. Keep the explicit migration
+  // so tabs still controlled by an older caching worker can receive this build.
+  // Read it before changing any published file: a missing template must stop staging.
+  const migrationWorker = fs.readFileSync(path.join(root, "web_app/flutter_service_worker.js"));
   const target = path.join(root, "app");
   // Overwrite generated build files only; never remove existing assets or backups.
   fs.cpSync(built, target, { recursive: true });
+  fs.writeFileSync(path.join(target, "flutter_service_worker.js"), migrationWorker);
   for (const file of ["index.html", "flutter_bootstrap.js"]) {
     const filename = path.join(target, file);
     fs.writeFileSync(filename, fs.readFileSync(filename, "utf8").replaceAll("__RECAR_BUILD_ID__", config.buildId));
@@ -29,10 +43,11 @@ function stage(appRoot) {
   fs.copyFileSync(path.join(root, "web_app/assets/fonts/LICENSE.txt"), path.join(target, "assets/assets/fonts/pretendard/LICENSE.txt"));
   const notices = path.join(target, "assets/NOTICES");
   fs.writeFileSync(notices, fs.readFileSync(notices, "utf8").replace(/[ \t]+$/gm, ""));
-  const files = ["index.html", "flutter_bootstrap.js", "main.dart.js", "assets/FontManifest.json", "assets/AssetManifest.bin.json"];
+  const files = ["index.html", "flutter_bootstrap.js", "flutter_service_worker.js", "main.dart.js", "assets/FontManifest.json", "assets/AssetManifest.bin.json"];
   const metadata = {
     source_repository: config.repository, source_commit: config.commit,
     web_source_patch_sha256: hash(path.join(root, "web_app/patches/runtime.patch")),
+    vehicle_images: config.vehicleImages || [],
     build_id: config.buildId, target: "https://recarplan.com/app/", base_path: config.basePath,
     api_base_url: "https://api.recarplan.com", flutter_version: "3.41.1",
     native_app_modified: false,

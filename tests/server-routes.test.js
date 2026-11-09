@@ -5,7 +5,6 @@ const net = require("node:net");
 const path = require("node:path");
 const { spawn } = require("node:child_process");
 const { test } = require("node:test");
-const { getStableVehicleMargin, vehicleMarginMax, vehicleMarginMin } = require("../lib/vehicle-margin");
 
 const rootDir = path.resolve(__dirname, "..");
 
@@ -252,33 +251,18 @@ test("legacy crew links redirect to the app and preserve referral codes", async 
   }
 });
 
-test("vehicle margin stays fixed per model across every quote condition", async () => {
+test("public vehicle routes do not expose spreadsheet or manual calculated prices", async () => {
   const server = await startServer("development");
   try {
-    const modelId = "pricing-모닝";
-    const conditions = [
-      "term=36&deposit_pct=0&mileage_limit=10000",
-      "term=48&deposit_pct=20&mileage_limit=20000",
-      "term=60&deposit_pct=30&mileage_limit=40000",
-    ];
-    const vehicles = [];
-
-    for (const query of conditions) {
-      const response = await fetch(`${server.baseUrl}/api/recar/vehicles/${encodeURIComponent(modelId)}?${query}`);
-      assert.equal(response.status, 200);
-      vehicles.push((await response.json()).vehicle);
+    for (const id of ["pricing-모닝", "manual-bmw-x6"]) {
+      const response = await fetch(`${server.baseUrl}/api/recar/vehicles/${encodeURIComponent(id)}?term=60&deposit_pct=0&mileage_limit=10000`);
+      assert.equal(response.status, 404);
+      assert.deepEqual(await response.json(), { ok: false, error: "vehicle_not_found" });
     }
-
-    const expectedMargin = getStableVehicleMargin(modelId);
-    assert.ok(expectedMargin >= vehicleMarginMin && expectedMargin <= vehicleMarginMax);
-    assert.equal(new Set(vehicles.map((vehicle) => vehicle.calculation.displayMonthlyLift)).size, 1);
-
-    for (const vehicle of vehicles) {
-      assert.equal(vehicle.calculation.displayMonthlyLift, expectedMargin);
-      assert.equal(vehicle.monthlyPayment - vehicle.calculation.baseMonthlyPaymentBeforeLift, expectedMargin);
-      for (const quote of vehicle.quotes) {
-        assert.equal(quote.monthlyPayment - quote.monthlyPaymentBeforeLift, expectedMargin);
-      }
+    for (const query of ["product_type=LEASE", "term=48", "deposit_pct=20", "guarantee_pct=10", "mileage_limit=20000", "term=60&term=48"]) {
+      const response = await fetch(`${server.baseUrl}/api/recar/vehicles?${query}`);
+      assert.equal(response.status, 422);
+      assert.deepEqual(await response.json(), { ok: false, error: "APP_SELECTION_REQUIRED" });
     }
   } finally {
     await server.stop();

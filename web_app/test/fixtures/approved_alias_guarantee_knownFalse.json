@@ -1,0 +1,217 @@
+{
+  "synthetic": true,
+  "description": "Synthetic approved alias fixture, no production request",
+  "quote_request": {
+    "vehicle_id": "c80f6982-2ce5-482a-bc75-2ad16767362e",
+    "selection_contract_version": "selection_v1",
+    "product_type": "RENTAL",
+    "term": 24,
+    "deposit": 0,
+    "guarantee": 0,
+    "mileage_limit": 40000,
+    "selection": {
+      "vehicle_trim_id": "synthetic-approved-alias-trim",
+      "selected_option_ids": []
+    },
+    "estimate_policy_version": "zero_source_conditions_delta_v1"
+  },
+  "quote_response": {
+    "data": {
+      "term": 24,
+      "deposit": 0,
+      "mileage_limit": 40000,
+      "monthly_payment": 1017800,
+      "otd_total": 30306400,
+      "vehicle_price": 28660000,
+      "residual_value": 14043400,
+      "residual_pct": 0.49000000000000005,
+      "versions": {
+        "formula_version": "lease_balloon_excel_v2",
+        "rate_version": "shinhan_I군_irr_2026q1_v1",
+        "promo_version": "none_v1",
+        "residual_version": "shinhan_I군_residual_2026q1_v1"
+      },
+      "tier": "INSTANT",
+      "vehicle_id": "c80f6982-2ce5-482a-bc75-2ad16767362e",
+      "vehicle_trim_id": "synthetic-approved-alias-trim",
+      "selection_mode": "FLAT",
+      "model_spec": null,
+      "grade_name": "모던",
+      "vehicle_trim_base_price": 28660000,
+      "trim_pricing_applied": true,
+      "trim_pricing_status": "SELECTION_PRICE_APPLIED",
+      "pricing_basis": "MARKET_SELECTION_DELTA_V1",
+      "market_pricing_applied": true,
+      "price_source": "CHAZM_IMPORTED",
+      "base_monthly_payment": 750000,
+      "display_adjustment": 0,
+      "promo_discount": 0,
+      "estimated_discount": 859800,
+      "estimated_taxes": 2506200,
+      "breakdown": [
+        {
+          "name": "차량가",
+          "amount": 28660000
+        },
+        {
+          "name": "잔존가치",
+          "amount": -14043400
+        },
+        {
+          "name": "프로모션 할인",
+          "amount": 0
+        },
+        {
+          "name": "딜러 할인(추정)",
+          "amount": -859800
+        },
+        {
+          "name": "세금/부대(추정)",
+          "amount": 2506200
+        },
+        {
+          "name": "총액(OTD)",
+          "amount": 30306400
+        }
+      ],
+      "monthly_payment_before_lift": 1017773,
+      "residual_ratio": 0.004900000000000001,
+      "annual_irr": 0.065,
+      "calculation": {
+        "method": "market_selection_delta_v1",
+        "is_spreadsheet_price": false,
+        "is_estimated": true,
+        "matched_key": null,
+        "matched_name": null,
+        "product_label": null,
+        "term_method": null
+      },
+      "applied_referral_code": null,
+      "referral_discount_amount": 0,
+      "original_monthly_payment": null,
+      "coupon_expires_at": null,
+      "pricing_disclaimer": null,
+      "lease_data_available": false,
+      "selection_pricing_applied": true,
+      "selection_contract_version": "selection_v1",
+      "selection_fingerprint": "60485c224b215ce27668f7e2605e6ff1c37df7799f8a80bb910ec45cd67fbcfc",
+      "pricing_context_version": "selection-market-v1:754095f8e3469458",
+      "selection_pricing_source": "MARKET_SELECTION_DELTA_V1",
+      "normalized_selection": {
+        "vehicle_trim_id": "synthetic-approved-alias-trim",
+        "model_spec": null,
+        "grade_name": "모던",
+        "selected_option_ids": [],
+        "exterior_color_id": null,
+        "interior_color_id": null,
+        "inventory_item_id": null
+      },
+      "reference_vehicle_price": 28660000,
+      "reference_vehicle_trim_id": "synthetic-approved-alias-trim",
+      "reference_price_basis": "CHAZM_BASE_PRICE",
+      "selected_vehicle_price": 28660000,
+      "base_trim_price": 28660000,
+      "selected_options_price": 0,
+      "option_total": 0,
+      "exterior_color_price": 0,
+      "interior_color_price": 0,
+      "verified_discount": 0,
+      "market_base_monthly_raw": 750000,
+      "selection_monthly_delta_raw": 267772.7358232451,
+      "selection_monthly_delta": 267772.7358232451,
+      "reference_finance_monthly_raw": 459410.41954648326,
+      "selected_finance_monthly_raw": 727183.1553697283,
+      "display_margin": 0,
+      "market_source_record_id": "쏘나타",
+      "guarantee": 0,
+      "prepayment_pct": 0.0,
+      "guarantee_pct": 0.0,
+      "price_provenance": {
+        "version": "price_provenance_v1",
+        "processed_product_type": "RENTAL",
+        "market_price": {
+          "source": "CHAZM_IMPORTED",
+          "source_record_id": "쏘나타",
+          "source_revision": "sha256:51a2c836bce6b336bb21b0623862281a280f0b9bc3e17e3f215c254550341218",
+          "product_type": "RENTAL",
+          "match_status": "UNKNOWN",
+          "calculation_method": "CHAZM_EXACT_CONDITION_LOOKUP",
+          "methods": [
+            "CONDITION_DIRECT"
+          ],
+          "vehicle_match": "FUZZY",
+          "applied_conditions": {
+            "term_months": 48,
+            "annual_km": 10000,
+            "prepayment_pct": 0.0
+          },
+          "condition_match": {
+            "term_months": "EXACT",
+            "annual_km": "EXACT",
+            "prepayment_pct": "EXACT"
+          },
+          "source_points": [
+            {
+              "path": "products.rent.conditionMonthly.48:0:10000",
+              "role": "BASE",
+              "conditions": {
+                "term_months": 48,
+                "annual_km": 10000,
+                "prepayment_pct": 0.0
+              }
+            }
+          ],
+          "unknown_reasons": [
+            "SOURCE_GUARANTEE_UNRECORDED"
+          ]
+        },
+        "calculation_method": "MARKET_REFERENCE_PLUS_EXISTING_SELECTION_DELTA",
+        "quote_kind": "ESTIMATE",
+        "provider_generated_at": null,
+        "valid_until": null,
+        "request_conditions_verified": false,
+        "sales_ai_eligible": false,
+        "unsupported_reasons": [
+          "SOURCE_TERM_MISMATCH",
+          "SOURCE_ANNUAL_KM_MISMATCH",
+          "SOURCE_POINTS_NOT_EXACT_BASE",
+          "SOURCE_REFERENCE_BINDING_MISMATCH",
+          "SOURCE_CONDITIONS_NOT_EXACTLY_VERIFIED"
+        ]
+      },
+      "condition_verified_monthly_payment": null,
+      "selection_terms_estimate": null,
+      "selection_conditions_estimate": {
+        "version": "selection_conditions_estimate_v1",
+        "verified": true,
+        "policy_version": "zero_source_conditions_delta_v1",
+        "quote_kind": "ESTIMATE",
+        "product_type": "RENTAL",
+        "monthly_payment": 1017800,
+        "source_revision": "sha256:51a2c836bce6b336bb21b0623862281a280f0b9bc3e17e3f215c254550341218",
+        "source_record_id": "쏘나타",
+        "reference_vehicle_trim_id": "synthetic-approved-alias-trim",
+        "selection_fingerprint": "60485c224b215ce27668f7e2605e6ff1c37df7799f8a80bb910ec45cd67fbcfc",
+        "source_conditions": {
+          "term_months": 48,
+          "annual_km": 10000,
+          "prepayment_pct": 0
+        },
+        "requested_conditions": {
+          "term_months": 24,
+          "annual_km": 40000,
+          "prepayment_pct": 0.0
+        },
+        "source_prepayment_amount": 0,
+        "requested_prepayment_amount": 0,
+        "requested_prepayment_pct": 0.0,
+        "unverified_conditions": [
+          "guarantee",
+          "provider_prepayment_terms",
+          "provider_term_mileage_terms"
+        ]
+      },
+      "selection_prepayment_estimate": null
+    }
+  }
+}

@@ -1,0 +1,348 @@
+{
+  "synthetic": true,
+  "quote_request": {
+    "vehicle_id": "selection-vehicle",
+    "selection_contract_version": "selection_v1",
+    "product_type": "RENTAL",
+    "term": 48,
+    "deposit": 0,
+    "guarantee": 0,
+    "mileage_limit": 10000,
+    "selection": {
+      "vehicle_trim_id": "selection-default-trim",
+      "selected_option_ids": []
+    },
+    "prepayment_pct": 20,
+    "estimate_policy_version": "zero_prepayment_delta_v1"
+  },
+  "quote_data": {
+    "term": 48,
+    "deposit": 9000000,
+    "mileage_limit": 10000,
+    "monthly_payment": 536600,
+    "otd_total": 47300000,
+    "vehicle_price": 45000000,
+    "residual_value": 17325000,
+    "residual_pct": 0.385,
+    "versions": {
+      "formula_version": "lease_balloon_excel_v2",
+      "rate_version": "shinhan_2026q1_v1",
+      "promo_version": "none_v1",
+      "residual_version": "shinhan_G군_residual_2026q1_v1"
+    },
+    "tier": "INSTANT",
+    "vehicle_id": "selection-vehicle",
+    "vehicle_trim_id": "selection-default-trim",
+    "selection_mode": "GROUPED",
+    "model_spec": "2WD",
+    "grade_name": "기본",
+    "vehicle_trim_base_price": 45000000,
+    "trim_pricing_applied": true,
+    "trim_pricing_status": "SELECTION_PRICE_APPLIED",
+    "pricing_basis": "MARKET_SELECTION_DELTA_V1",
+    "market_pricing_applied": true,
+    "price_source": "CHAZM_IMPORTED",
+    "base_monthly_payment": 750000,
+    "display_adjustment": 0,
+    "promo_discount": 0,
+    "estimated_discount": 1350000,
+    "estimated_taxes": 3650000,
+    "breakdown": [
+      {
+        "name": "차량가",
+        "amount": 45000000
+      },
+      {
+        "name": "잔존가치",
+        "amount": -17325000
+      },
+      {
+        "name": "프로모션 할인",
+        "amount": 0
+      },
+      {
+        "name": "딜러 할인(추정)",
+        "amount": -1350000
+      },
+      {
+        "name": "세금/부대(추정)",
+        "amount": 3650000
+      },
+      {
+        "name": "총액(OTD)",
+        "amount": 47300000
+      }
+    ],
+    "monthly_payment_before_lift": 536565,
+    "residual_ratio": 0.00385,
+    "annual_irr": 0.065,
+    "calculation": {
+      "method": "market_selection_delta_v1",
+      "is_spreadsheet_price": false,
+      "is_estimated": true,
+      "matched_key": null,
+      "matched_name": null,
+      "product_label": null,
+      "term_method": null
+    },
+    "applied_referral_code": null,
+    "referral_discount_amount": 0,
+    "original_monthly_payment": null,
+    "coupon_expires_at": null,
+    "pricing_disclaimer": null,
+    "lease_data_available": false,
+    "selection_pricing_applied": true,
+    "selection_contract_version": "selection_v1",
+    "selection_fingerprint": "dccf219751beaa999db9ac7834994b5d1edf0fc08c68cf37881b3d4e417dd4b2",
+    "pricing_context_version": "selection-market-v1:cad6c1872215e5e4",
+    "selection_pricing_source": "MARKET_SELECTION_DELTA_V1",
+    "normalized_selection": {
+      "vehicle_trim_id": "selection-default-trim",
+      "model_spec": "2WD",
+      "grade_name": "기본",
+      "selected_option_ids": [],
+      "exterior_color_id": null,
+      "interior_color_id": null,
+      "inventory_item_id": null
+    },
+    "reference_vehicle_price": 45000000,
+    "reference_vehicle_trim_id": "selection-default-trim",
+    "reference_price_basis": "CHAZM_BASE_PRICE",
+    "selected_vehicle_price": 45000000,
+    "base_trim_price": 45000000,
+    "selected_options_price": 0,
+    "option_total": 0,
+    "exterior_color_price": 0,
+    "interior_color_price": 0,
+    "verified_discount": 0,
+    "market_base_monthly_raw": 750000,
+    "selection_monthly_delta_raw": -213434.57636008062,
+    "selection_monthly_delta": -213434.57636008062,
+    "reference_finance_monthly_raw": 750155.072307248,
+    "selected_finance_monthly_raw": 536720.4959471674,
+    "display_margin": 0,
+    "market_source_record_id": "Selection Contract Model",
+    "guarantee": 0,
+    "prepayment_pct": 20.0,
+    "guarantee_pct": 0.0,
+    "price_provenance": {
+      "version": "price_provenance_v1",
+      "processed_product_type": "RENTAL",
+      "market_price": {
+        "source": "CHAZM_IMPORTED",
+        "source_record_id": "Selection Contract Model",
+        "source_revision": "sha256:846664dc367fff6b03de2f86d0970f5f19957b551ba6f4e544498bf7b007375e",
+        "product_type": "RENTAL",
+        "match_status": "UNKNOWN",
+        "calculation_method": "CHAZM_EXACT_CONDITION_LOOKUP",
+        "methods": [
+          "CONDITION_DIRECT"
+        ],
+        "vehicle_match": "EXACT",
+        "applied_conditions": {
+          "term_months": 48,
+          "annual_km": 10000,
+          "prepayment_pct": 0.0
+        },
+        "condition_match": {
+          "term_months": "EXACT",
+          "annual_km": "EXACT",
+          "prepayment_pct": "EXACT"
+        },
+        "source_points": [
+          {
+            "path": "products.rent.conditionMonthly.48:0:10000",
+            "role": "BASE",
+            "conditions": {
+              "term_months": 48,
+              "annual_km": 10000,
+              "prepayment_pct": 0.0
+            }
+          }
+        ],
+        "unknown_reasons": [
+          "SOURCE_GUARANTEE_UNRECORDED"
+        ]
+      },
+      "calculation_method": "MARKET_REFERENCE_PLUS_EXISTING_SELECTION_DELTA",
+      "quote_kind": "ESTIMATE",
+      "provider_generated_at": null,
+      "valid_until": null,
+      "request_conditions_verified": false,
+      "sales_ai_eligible": false,
+      "unsupported_reasons": [
+        "NONZERO_PREPAYMENT_OUT_OF_INITIAL_SCOPE",
+        "SOURCE_CONDITIONS_NOT_EXACTLY_VERIFIED"
+      ]
+    },
+    "selection_terms_estimate": null,
+    "selection_prepayment_estimate": {
+      "version": "selection_prepayment_estimate_v1",
+      "verified": true,
+      "policy_version": "zero_prepayment_delta_v1",
+      "quote_kind": "ESTIMATE",
+      "product_type": "RENTAL",
+      "monthly_payment": 536600,
+      "source_revision": "sha256:846664dc367fff6b03de2f86d0970f5f19957b551ba6f4e544498bf7b007375e",
+      "source_record_id": "Selection Contract Model",
+      "reference_vehicle_trim_id": "selection-default-trim",
+      "selection_fingerprint": "dccf219751beaa999db9ac7834994b5d1edf0fc08c68cf37881b3d4e417dd4b2",
+      "source_conditions": {
+        "term_months": 48,
+        "annual_km": 10000,
+        "prepayment_pct": 0
+      },
+      "source_prepayment_amount": 0,
+      "requested_prepayment_amount": 9000000,
+      "requested_prepayment_pct": 20.0,
+      "unverified_conditions": [
+        "guarantee",
+        "provider_prepayment_terms"
+      ]
+    }
+  },
+  "snapshot_request": {
+    "selection_contract_version": "selection_v1",
+    "quote_estimate_version": "selection_prepayment_estimate_v1",
+    "selection_fingerprint": "dccf219751beaa999db9ac7834994b5d1edf0fc08c68cf37881b3d4e417dd4b2",
+    "pricing_context_version": "selection-market-v1:cad6c1872215e5e4",
+    "selection": {
+      "vehicle_trim_id": "selection-default-trim",
+      "selected_option_ids": []
+    },
+    "quote_type": "rent",
+    "term_months": 48,
+    "mileage_limit": 10000,
+    "prepayment_pct": 20,
+    "deposit": 0,
+    "guarantee": 0,
+    "monthly_payment": 536600,
+    "vehicle_price": 1
+  },
+  "snapshot_response": {
+    "data": {
+      "selection_contract_version": "selection_v1",
+      "selection_fingerprint": "dccf219751beaa999db9ac7834994b5d1edf0fc08c68cf37881b3d4e417dd4b2",
+      "pricing_context_version": "selection-market-v1:cad6c1872215e5e4",
+      "selection_context": {
+        "base_trim_price": 45000000,
+        "deposit": 9000000,
+        "discount_amount": 0,
+        "display_margin": 0,
+        "exterior_color_id": null,
+        "exterior_color_price": 0,
+        "guarantee": 0,
+        "guarantee_pct": 0.0,
+        "interior_color_id": null,
+        "interior_color_price": 0,
+        "inventory_item_id": null,
+        "market_base_monthly_raw": 750000,
+        "market_source_record_id": "Selection Contract Model",
+        "mileage_limit": 10000,
+        "monthly_payment": 536600,
+        "option_total": 0,
+        "prepayment_pct": 20.0,
+        "price_source": "CHAZM_IMPORTED",
+        "product_type": "RENTAL",
+        "quote_estimate_version": "selection_prepayment_estimate_v1",
+        "reference_finance_monthly_raw": 750155.072307248,
+        "reference_price_basis": "CHAZM_BASE_PRICE",
+        "reference_vehicle_price": 45000000,
+        "reference_vehicle_trim_id": "selection-default-trim",
+        "selected_finance_monthly_raw": 536720.4959471674,
+        "selected_option_ids": [],
+        "selected_vehicle_price": 45000000,
+        "selection_contract_version": "selection_v1",
+        "selection_monthly_delta": -213434.57636008062,
+        "selection_prepayment_estimate": {
+          "monthly_payment": 536600,
+          "policy_version": "zero_prepayment_delta_v1",
+          "product_type": "RENTAL",
+          "quote_kind": "ESTIMATE",
+          "reference_vehicle_trim_id": "selection-default-trim",
+          "requested_prepayment_amount": 9000000,
+          "requested_prepayment_pct": 20.0,
+          "selection_fingerprint": "dccf219751beaa999db9ac7834994b5d1edf0fc08c68cf37881b3d4e417dd4b2",
+          "source_conditions": {
+            "annual_km": 10000,
+            "prepayment_pct": 0,
+            "term_months": 48
+          },
+          "source_prepayment_amount": 0,
+          "source_record_id": "Selection Contract Model",
+          "source_revision": "sha256:846664dc367fff6b03de2f86d0970f5f19957b551ba6f4e544498bf7b007375e",
+          "unverified_conditions": [
+            "guarantee",
+            "provider_prepayment_terms"
+          ],
+          "verified": true,
+          "version": "selection_prepayment_estimate_v1"
+        },
+        "selection_pricing_source": "MARKET_SELECTION_DELTA_V1",
+        "term_months": 48,
+        "vehicle_id": "selection-vehicle",
+        "vehicle_trim_id": "selection-default-trim"
+      },
+      "quote_estimate_version": "selection_prepayment_estimate_v1",
+      "selection_terms_estimate": null,
+      "selection_prepayment_estimate": {
+        "version": "selection_prepayment_estimate_v1",
+        "verified": true,
+        "policy_version": "zero_prepayment_delta_v1",
+        "quote_kind": "ESTIMATE",
+        "product_type": "RENTAL",
+        "monthly_payment": 536600,
+        "source_revision": "sha256:846664dc367fff6b03de2f86d0970f5f19957b551ba6f4e544498bf7b007375e",
+        "source_record_id": "Selection Contract Model",
+        "reference_vehicle_trim_id": "selection-default-trim",
+        "selection_fingerprint": "dccf219751beaa999db9ac7834994b5d1edf0fc08c68cf37881b3d4e417dd4b2",
+        "source_conditions": {
+          "term_months": 48,
+          "annual_km": 10000,
+          "prepayment_pct": 0
+        },
+        "source_prepayment_amount": 0,
+        "requested_prepayment_amount": 9000000,
+        "requested_prepayment_pct": 20.0,
+        "unverified_conditions": [
+          "guarantee",
+          "provider_prepayment_terms"
+        ]
+      },
+      "vehicle_trim_id": "selection-default-trim",
+      "selection_mode": "GROUPED",
+      "model_spec": "2WD",
+      "grade_name": "기본",
+      "vehicle_trim_base_price": 45000000,
+      "quoted_monthly_payment": 536600,
+      "vehicle_name": "Selection Contract Model",
+      "vehicle_brand": "Test",
+      "trim_name": "2WD · 기본",
+      "selected_options": "[]",
+      "finance_company": null,
+      "quote_type": "rent",
+      "vehicle_price": 45000000,
+      "monthly_payment": 536600,
+      "term_months": 48,
+      "mileage_limit": 10000,
+      "deposit": 9000000,
+      "guarantee": 0,
+      "prepayment_pct": 20.0,
+      "guarantee_pct": 0.0,
+      "residual_value": 17325000,
+      "residual_pct": 0.385,
+      "promo_discount": 0,
+      "estimated_discount": 1350000,
+      "estimated_taxes": 3650000,
+      "otd_total": 47300000,
+      "formula_version": "lease_balloon_excel_v2",
+      "rate_version": "shinhan_2026q1_v1",
+      "promo_version": "none_v1",
+      "residual_version": "shinhan_G군_residual_2026q1_v1",
+      "created_at": "2026-11-08T00:10:38Z"
+    },
+    "meta": {
+      "trace_id": "8ea913fb-519f-4624-8bce-3c4e186690d4"
+    }
+  }
+}

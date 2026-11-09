@@ -84,6 +84,7 @@ const publicStaticFiles = new Set([
   "/inquiry/inquiry.css",
   "/inquiry/inquiry.mjs",
   "/inquiry/catalog.mjs",
+  "/lib/rental-catalog.mjs",
   "/landing/index.html",
   "/landing/landing.js",
   "/data/vehicle-static-catalog.json",
@@ -1666,150 +1667,62 @@ function normalizeVehicle(vehicle, detail, quoteResult, conditions) {
   };
 }
 
-async function handleRecarVehicleList(request, response, url) {
+// Public promotional prices come only from the bound selection_v1 response.
+// Legacy spreadsheet/manual/IRR helpers above remain unrouted and never fill
+// a missing price in these public endpoints.
+function publicRentalConditionsSupported(url) {
+  const defaults = {
+    product_type: "RENTAL", term: "60", deposit_pct: "0", prepayment_pct: "0",
+    deposit: "0", guarantee_pct: "0", guarantee: "0", mileage_limit: "10000",
+  };
+  return Object.entries(defaults).every(([key, expected]) =>
+    !url.searchParams.has(key) || (url.searchParams.getAll(key).length === 1
+      && url.searchParams.get(key) === expected));
+}
+
+async function withPublicRentalRequest(request, response, url, run) {
+  if (!publicRentalConditionsSupported(url)) {
+    sendJson(response, 422, { ok: false, error: "APP_SELECTION_REQUIRED" });
+    return;
+  }
+  const controller = new AbortController();
+  const abort = () => controller.abort();
+  const close = () => { if (!response.writableEnded) abort(); };
+  request.once("aborted", abort);
+  response.once("close", close);
   try {
-    const query = getDefaultVehicleQuery(url);
-    const mode = url.searchParams.get("mode") || "home";
-    const apiQuery = {
-      ...query,
-      page: "1",
-      size: "100",
-    };
-    const listResponse = await fetchRecarJson("/api/v1/vehicles/", { query: apiQuery });
-    const rawItems = getArrayPayload(listResponse.body);
-    const conditions = query;
-
-    if (mode === "all") {
-      const apiItems = await mapWithConcurrency(rawItems, 8, async (rawVehicle) => {
-        const quoteResult = await fetchBestVehicleQuote(rawVehicle.id, conditions, rawVehicle.monthly_payment);
-        return normalizeVehicle(rawVehicle, null, quoteResult, conditions);
-      });
-      const usedPricingKeys = new Set(
-        apiItems
-          .map((vehicle) => vehicle.calculation?.spreadsheetPricing?.matchedKey || findSpreadsheetPricingEntry(vehicle.name)?.key)
-          .filter(Boolean),
-      );
-      const pricingOnlyItems = readVehiclePricing()
-        .entries.filter((entry) => !usedPricingKeys.has(entry.key))
-        .map((entry) => createPricingOnlyVehicle(entry, conditions))
-        .filter(Boolean);
-      const items = [...apiItems, ...pricingOnlyItems];
-      const hiddenMissingImageCount = items.filter((vehicle) => !hasDisplayableVehicleImage(vehicle)).length;
-      const sortedItems = items
-        .filter((vehicle) => vehicle.id)
-        .filter(hasDisplayableVehicleImage)
-        .sort((a, b) => {
-          const priceA = Number.isFinite(Number(a.monthlyPayment)) ? Number(a.monthlyPayment) : Number.MAX_SAFE_INTEGER;
-          const priceB = Number.isFinite(Number(b.monthlyPayment)) ? Number(b.monthlyPayment) : Number.MAX_SAFE_INTEGER;
-          return priceA - priceB;
-        });
-
-      sendJson(response, 200, {
-        ok: true,
-        mode,
-        conditions: {
-          term: Number(query.term),
-          depositPct: Number(query.deposit_pct),
-          mileageLimit: Number(query.mileage_limit),
-        },
-        items: sortedItems,
-        hiddenMissingImageCount,
-        page: listResponse.body?.page || Number(query.page),
-        size: sortedItems.length,
-        total: sortedItems.length,
-        pages: listResponse.body?.pages || 1,
-      });
-      return;
+    await run(await import("./lib/rental-catalog.mjs"), controller.signal);
+  } catch {
+    if (!response.destroyed && !response.writableEnded) {
+      sendJson(response, 502, { ok: false, error: "vehicle_api_failed" });
     }
-
-    const rawById = new Map(rawItems.map((vehicle) => [String(vehicle.id), vehicle]));
-    const lightweightItems = rawItems.map((vehicle) => normalizeVehicle(vehicle, null, null, conditions));
-    const selectedVehicles = prepareHomepageVehicles(lightweightItems);
-
-    const items = (
-      await Promise.all(
-      selectedVehicles.map(async (vehicle) => {
-        if (vehicle.isManual) return vehicle;
-
-        const rawVehicle = rawById.get(String(vehicle.id)) || vehicle;
-        const detail = await fetchVehicleDetailBody(vehicle.id);
-        const quoteResult = await fetchBestVehicleQuote(vehicle.id, conditions, rawVehicle.monthly_payment || vehicle.monthlyPayment);
-        const normalized = normalizeVehicle(rawVehicle, detail, quoteResult, conditions);
-
-        return {
-          ...normalized,
-          categories: vehicle.categories,
-          categoryRanks: vehicle.categoryRanks,
-        };
-      }),
-      )
-    ).filter(hasDisplayableVehicleImage);
-
-    sendJson(response, 200, {
-      ok: true,
-      conditions: {
-        term: Number(query.term),
-        depositPct: Number(query.deposit_pct),
-        mileageLimit: Number(query.mileage_limit),
-      },
-      items,
-      page: listResponse.body?.page || Number(query.page),
-      size: items.length,
-      total: items.length,
-      pages: listResponse.body?.pages || 1,
-    });
-  } catch (error) {
-    sendJson(response, 502, { ok: false, error: "vehicle_api_failed" });
+  } finally {
+    request.off("aborted", abort);
+    response.off("close", close);
   }
 }
 
-async function handleRecarVehicleDetail(request, response, url, vehicleId) {
-  try {
-    const conditions = getDefaultVehicleQuery(url);
-    const pricingEntry = getPricingEntryByVehicleId(vehicleId);
-
-    if (pricingEntry) {
-      const vehicle = createPricingOnlyVehicle(pricingEntry, conditions);
-      if (!vehicle) {
-        sendJson(response, 404, { ok: false, error: "vehicle_not_found" });
-        return;
-      }
-
-      sendJson(response, 200, { ok: true, vehicle });
-      return;
-    }
-
-    if (vehicleId === "manual-bmw-x6") {
-      const vehicle = createManualVehicle({
-        id: "manual-bmw-x6",
-        brand: "BMW",
-        name: "X6",
-        trim: "xDrive40i M Sport",
-        year: 2026,
-        segment: "suv",
-        fuel: "gas",
-        categories: ["time", "imported"],
-        ranks: { time: 4, imported: 2 },
-        conditions,
-      });
-      sendJson(response, 200, { ok: true, vehicle });
-      return;
-    }
-
-    const detail = await fetchVehicleDetailBody(vehicleId);
-    if (!detail) {
-      sendJson(response, 404, { ok: false, error: "vehicle_not_found" });
-      return;
-    }
-
-    const quoteResult = await fetchBestVehicleQuote(vehicleId, conditions, detail.monthly_payment);
+async function handleRecarVehicleList(request, response, url) {
+  await withPublicRentalRequest(request, response, url, async (catalog, signal) => {
+    const items = await catalog.loadRentalCatalog({ signal, limit: 12 });
     sendJson(response, 200, {
       ok: true,
-      vehicle: normalizeVehicle(detail, detail, quoteResult, conditions),
+      conditions: { productType: "RENTAL", term: 60, depositPct: 0, guaranteePct: 0, mileageLimit: 10000 },
+      items, page: 1, size: items.length, total: items.length, pages: items.length ? 1 : 0,
     });
-  } catch (error) {
-    sendJson(response, 502, { ok: false, error: "vehicle_api_failed" });
+  });
+}
+
+async function handleRecarVehicleDetail(request, response, url, vehicleId) {
+  if (/^(pricing-|manual-)/.test(vehicleId)) {
+    sendJson(response, 404, { ok: false, error: "vehicle_not_found" });
+    return;
   }
+  await withPublicRentalRequest(request, response, url, async (catalog, signal) => {
+    const vehicle = await catalog.loadRentalVehicle(vehicleId, { signal });
+    sendJson(response, vehicle ? 200 : 404,
+      vehicle ? { ok: true, vehicle } : { ok: false, error: "vehicle_not_found" });
+  });
 }
 
 async function handleAdminRegister(request, response) {

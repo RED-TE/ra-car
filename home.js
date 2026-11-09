@@ -18,13 +18,14 @@
   const state = { items: [], market: "domestic", brand: "all", body: "all", product: "all", query: "", sort: "default", loading: false };
   const domestic = ["현대", "기아", "제네시스", "르노", "KGM", "쉐보레"];
   const logoBrands = new Set(["현대", "기아", "제네시스", "르노", "KGM", "쉐보레", "테슬라", "벤츠", "BMW", "아우디", "볼보", "렉서스", "랜드로버", "미니", "폴스타", "포르쉐", "페라리"]);
-  const brandNames = { Renault: "르노", "Mercedes-Benz": "벤츠", Volvo: "볼보", Tesla: "테슬라", Lexus: "렉서스", Audi: "아우디" };
+  const brandNames = { Hyundai: "현대", Kia: "기아", Genesis: "제네시스", Chevrolet: "쉐보레", Renault: "르노", "Mercedes-Benz": "벤츠", Volvo: "볼보", Tesla: "테슬라", Lexus: "렉서스", Audi: "아우디" };
   const brandOf = (item) => brandNames[item.brandLabel || item.brand] || item.brandLabel || item.brand || "";
-  const productOf = (item) => item.calculation?.product || (item.fuel === "리스" ? "lease" : "rent");
-  const productLabel = (item) => productOf(item) === "lease" ? "리스" : "장기렌트";
-  const conditionSummary = (item) => `기본 조건 · ${productLabel(item)} · 무보증`;
+  const productOf = (item) => item.productType === "RENTAL" ? "rent" : null;
+  const conditionSummary = (item) => priceOf(item)
+    ? "장기렌트 · 60개월 · 선납금 0% · 연 10,000km"
+    : "장기렌트 · 가격 확인 필요";
   const nameOf = (item) => [brandOf(item), item.name, item.trim].filter(Boolean).join(" ");
-  const inquiryData = item => `data-inquiry-brand="${escape(brandOf(item))}" data-inquiry-model="${escape(item.name)}" data-inquiry-product="${productOf(item) === "lease" ? "LEASE" : "RENTAL"}" data-inquiry-term="60" data-inquiry-mileage="10000"`;
+  const inquiryData = item => `data-inquiry-brand="${escape(brandOf(item))}" data-inquiry-model="${escape(item.name)}" data-inquiry-product="RENTAL" data-inquiry-term="60" data-inquiry-mileage="10000"`;
   const logo = (brand) => logoBrands.has(brand) ? `<img src="/assets/danawa/brands/${encodeURIComponent(brand)}/logo.png" alt="${escape(brand)}" width="40" height="26" loading="lazy" />` : `<b>${escape(brand.slice(0, 3))}</b>`;
   const safeImage = (value) => {
     if (!value) return "";
@@ -33,108 +34,41 @@
       return ["http:", "https:", "file:"].includes(url.protocol) ? url.href : "";
     } catch { return ""; }
   };
-  const priceOf = (item) => Number.isFinite(Number(item.monthlyPayment)) && Number(item.monthlyPayment) > 0 ? Number(item.monthlyPayment).toLocaleString("ko-KR") : "";
+  const priceOf = (item) => window.recarPublicPrice.monthly(item)?.toLocaleString("ko-KR") || "";
   const imageOf = (item) => {
     const src = safeImage(item.imageUrl);
     return src ? `<img src="${escape(src)}" alt="${escape([brandOf(item), item.name].join(" "))}" width="360" height="240" loading="lazy" />` : '<span class="image-missing">이미지 준비 중</span>';
   };
-  const timeDealWindowMs = 12 * 60 * 60 * 1000;
-  const koreaOffsetMs = 9 * 60 * 60 * 1000;
-  let activeTimeDealSlot = null;
-  let timeDealTimerId = 0;
-
-  function hashText(value) {
-    let hash = 2166136261;
-    for (const char of String(value)) hash = Math.imul(hash ^ char.charCodeAt(0), 16777619) >>> 0;
-    return hash;
-  }
-
-  function getTimeDealWindow(now = Date.now()) {
-    const slot = Math.floor((now + koreaOffsetMs) / timeDealWindowMs);
-    return { slot, endsAt: ((slot + 1) * timeDealWindowMs) - koreaOffsetMs };
-  }
-
-  function getTimeDealCost(item) {
-    const beforeLift = Number(item.monthlyPaymentBeforeLift);
-    if (Number.isFinite(beforeLift) && beforeLift > 0) return beforeLift;
-    const regular = Number(item.monthlyPayment);
-    const lift = Number(item.calculation?.displayMonthlyLift);
-    return Number.isFinite(regular) && Number.isFinite(lift) && regular > lift ? regular - lift : 0;
-  }
-
-  function getTimeDealMargin(item, slot) {
-    return 10000 + (hashText(`${item.id}:${slot}`) % 101) * 100;
-  }
-
-  function getTimeDealItems(items, slot) {
-    const unique = new Map();
-    items.forEach(item => {
-      const key = `${brandOf(item)}:${item.name}`;
-      if (!unique.has(key) && getTimeDealCost(item) > 0 && Number(item.monthlyPayment) > 0 && safeImage(item.imageUrl)) unique.set(key, item);
-    });
-    const available = [...unique.values()];
-    const preferred = available.filter(item => Number(item.categoryRanks?.all) <= 72);
-    const pool = (preferred.length >= 12 ? preferred : available).sort((a, b) => hashText(a.id) - hashText(b.id));
-    if (!pool.length) return [];
-    const start = (slot * 3) % pool.length;
-    return Array.from({ length: Math.min(3, pool.length) }, (_, index) => pool[(start + index) % pool.length]);
-  }
-
-  function formatTimeDealLeft(ms) {
-    const seconds = Math.max(0, Math.floor(ms / 1000));
-    const hours = Math.floor(seconds / 3600);
-    const minutes = Math.floor((seconds % 3600) / 60);
-    return [hours, minutes, seconds % 60].map(value => String(value).padStart(2, "0")).join(":");
-  }
-
-  function timeDealCard(item, slot) {
-    const regular = Math.round(Number(item.monthlyPayment));
-    const cost = Math.round(getTimeDealCost(item));
-    const margin = getTimeDealMargin(item, slot);
-    const sale = cost + margin;
-    const discount = regular - sale;
-    const inquiryName = `${brandOf(item)} ${item.name} 타임특가`;
-    if (discount <= 0) return "";
-    return `<article class="time-deal-card" data-vehicle-id="${escape(item.id)}" data-base-monthly="${regular}" data-cost-monthly="${cost}" data-deal-margin="${margin}" data-sale-monthly="${sale}">
-      <div class="time-deal-image">${imageOf(item)}<span>12시간 한정</span></div>
-      <div class="time-deal-copy"><div class="time-deal-meta"><span>${escape(productLabel(item))}</span><b>무보증</b></div>
-        <h3><small>${escape(brandOf(item))}</small>${escape(item.name)}</h3>
-        <div class="time-deal-prices"><del><span>기본가</span> 월 ${regular.toLocaleString("ko-KR")}원</del><strong><span>타임특가</span> 월 ${sale.toLocaleString("ko-KR")}<small>원</small></strong><em>월 ${discount.toLocaleString("ko-KR")}원 절약</em></div>
-        <a href="#quote" data-home-quote="${escape(inquiryName)}" data-campaign="time-deal" data-lead-source="타임특가" data-campaign-label="12시간 타임특가" data-original-monthly="${regular}" data-sale-monthly="${sale}" data-discount="${discount}">타임특가 견적 받기 <span aria-hidden="true">→</span></a>
-      </div>
-    </article>`;
-  }
-
-  function updateTimeDealClock() {
-    const timer = $("#timeDealTimer");
-    if (!timer) return;
-    const windowState = getTimeDealWindow();
-    if (activeTimeDealSlot !== null && activeTimeDealSlot !== windowState.slot && state.items.length) renderTimeDeals();
-    timer.textContent = formatTimeDealLeft(windowState.endsAt - Date.now());
-  }
-
+  // Retain the archived card rail without manufacturing a timed offer.
   function renderTimeDeals() {
     const dealGrid = $("#timeDealGrid");
     if (!dealGrid) return;
-    const { slot } = getTimeDealWindow();
-    activeTimeDealSlot = slot;
-    const cards = getTimeDealItems(state.items, slot).map(item => timeDealCard(item, slot)).filter(Boolean);
-    dealGrid.dataset.dealSlot = String(slot);
-    dealGrid.innerHTML = cards.length ? cards.join("") : '<p class="time-deal-loading">현재 확인 가능한 타임특가 차량이 없습니다.</p>';
+    const section = dealGrid.closest(".home-time-deals");
+    section?.removeAttribute("data-window-hours");
+    if ($("#timeDealTitle")) $("#timeDealTitle").textContent = "장기렌트 조건 확인";
+    if (section?.querySelector(".time-deal-kicker")) section.querySelector(".time-deal-kicker").textContent = "확인된 기본 조건";
+    if (section?.querySelector(".time-deal-heading p")) section.querySelector(".time-deal-heading p").textContent = "선택 조건에 맞는 가격 근거가 확인된 차량입니다.";
+    if (section?.querySelector(".time-deal-clock")) section.querySelector(".time-deal-clock").hidden = true;
+    if (section?.querySelector(".time-deal-note")) section.querySelector(".time-deal-note").textContent = "장기렌트 · 60개월 · 선납금 0% · 연 10,000km. 보증금 원본 기재 여부와 최종 계약 조건은 별도 확인이 필요합니다.";
+    const items = state.items.filter(item => priceOf(item)).slice(0, 3);
+    dealGrid.innerHTML = items.length ? items.map(item => `<article class="time-deal-card" data-vehicle-id="${escape(item.id)}" ${inquiryData(item)}>
+      <div class="time-deal-image">${imageOf(item)}<span>장기렌트</span></div>
+      <div class="time-deal-copy"><h3><small>${escape(brandOf(item))}</small>${escape(item.name)}</h3>
+        <div class="time-deal-prices"><strong><span>예상 월납</span> 월 ${priceOf(item)}<small>원</small></strong></div>
+        <a href="#quote" data-home-quote="${escape(nameOf(item))}">이 조건 견적 문의 <span aria-hidden="true">→</span></a>
+      </div></article>`).join("") : '<p class="time-deal-loading">현재 가격 근거를 확인한 차량이 없습니다. 원하는 조건을 문의해 주세요.</p>';
     dealGrid.setAttribute("aria-busy", "false");
-    updateTimeDealClock();
-    if (!timeDealTimerId) timeDealTimerId = window.setInterval(updateTimeDealClock, 1000);
   }
 
   function card(item) {
     const price = priceOf(item);
-    const quoteClass = item.calculation?.isEstimated || item.usedQuoteFallback ? "예상 월 납입료" : "상담 전 안내 가격";
+    const quoteClass = price ? "예상 월납 · 보증금과 최종 조건 별도 확인" : "가격 근거 확인 전";
     return `<article class="home-vehicle" data-vehicle-id="${escape(item.id)}" ${inquiryData(item)}>
       <a class="home-vehicle-link" href="#quote" data-home-quote="${escape(nameOf(item))}">
         <div class="home-car-image">${imageOf(item)}</div>
         <div class="home-car-copy"><div class="home-car-title">${logo(brandOf(item))}<h3>${escape(item.name)}</h3></div>
         <p class="home-car-trim">${escape(conditionSummary(item))}</p>
-        <div class="home-car-price">${price ? `<span>월</span><strong>${price}</strong><small>원</small>` : '<strong>상담 문의</strong>'}</div>
+        <div class="home-car-price">${price ? `<span>월</span><strong>${price}</strong><small>원</small>` : '<strong>가격 확인 필요</strong>'}</div>
         <p class="home-car-type">${escape(quoteClass)}</p></div>
       </a><a class="vehicle-quote-button" href="#quote" data-vehicle="${escape(nameOf(item))}">이 조건 견적 문의</a>
     </article>`;
@@ -167,11 +101,11 @@
       const brand = brandOf(item);
       return (state.market === "all" || domestic.includes(brand) === (state.market === "domestic")) &&
         (state.brand === "all" || brand === state.brand) &&
-        (state.body === "all" || (item.categories || []).includes(state.body)) &&
+        (state.body === "all" || window.recarPublicPrice.categories(item).includes(state.body)) &&
         (state.product === "all" || productOf(item) === state.product) &&
         (!query || `${nameOf(item)} ${item.brand || ""}`.toLocaleLowerCase().replace(/\s/g, "").includes(query));
     });
-    if (state.sort === "price") items.sort((a, b) => (Number(a.monthlyPayment) || Infinity) - (Number(b.monthlyPayment) || Infinity));
+    if (state.sort === "price") items.sort((a, b) => (window.recarPublicPrice.monthly(a) || Infinity) - (window.recarPublicPrice.monthly(b) || Infinity));
     if (state.sort === "name") items.sort((a, b) => nameOf(a).localeCompare(nameOf(b), "ko"));
     const limit = mobile.matches ? 3 : 24;
     grid.innerHTML = items.slice(0, limit).map(card).join("");
@@ -184,45 +118,31 @@
   }
 
   function renderCollection() {
-    const featuredIds = [
-      "static-기아셀토스",
-      "static-쉐보레트레일블레이저",
-      "static-기아스포티지",
-      "static-현대투싼",
-      "static-기아쏘렌토",
-      "static-현대싼타페",
-      "static-현대팰리세이드",
-      "static-제네시스gv70",
-      "static-제네시스gv80",
-      "static-teslamodely",
-      "static-volvoxc40",
-      "static-bmwx3"
-    ];
-    const byId = new Map(state.items.filter(item => item.categories?.includes("suv")).map(item => [item.id, item]));
-    const items = featuredIds.map(id => byId.get(id)).filter(Boolean);
-    $("#suvCollection").innerHTML = items.length ? items.map(item => `<a class="collection-card" href="#quote" data-home-quote="${escape(nameOf(item))}" ${inquiryData(item)}><h3>${escape(brandOf(item))} ${escape(item.name)}</h3><p>${escape(conditionSummary(item))}</p><strong>${priceOf(item) ? `<small>월 </small>${priceOf(item)}<small> 원</small>` : '상담 문의'}</strong>${imageOf(item)}<span>견적 문의</span></a>`).join("") : '<p>등록된 SUV 차량이 없습니다. 전체 차량에서 확인해 주세요.</p>';
+    const seen = new Set();
+    const items = state.items.filter(item => {
+      const key = `${brandOf(item)}:${item.name}`;
+      if (!window.recarPublicPrice.categories(item).includes("suv") || seen.has(key)) return false;
+      seen.add(key);
+      return true;
+    }).slice(0, 12);
+    $("#suvCollection").innerHTML = items.length ? items.map(item => `<a class="collection-card" href="#quote" data-home-quote="${escape(nameOf(item))}" ${inquiryData(item)}><h3>${escape(brandOf(item))} ${escape(item.name)}</h3><p>${escape(conditionSummary(item))}</p><strong>${priceOf(item) ? `<small>월 </small>${priceOf(item)}<small> 원</small>` : '가격 확인 필요'}</strong>${imageOf(item)}<span>견적 문의</span></a>`).join("") : '<p>등록된 SUV 차량이 없습니다. 전체 차량에서 확인해 주세요.</p>';
   }
 
-  async function loadCatalog(request) {
+  async function loadCatalog() {
     if (state.loading) return;
     state.loading = true;
+    state.items = [];
     grid.setAttribute("aria-busy", "true");
     grid.innerHTML = '<div class="catalog-loading" role="status">차량 정보를 불러오고 있습니다.</div>';
+    $("#suvCollection").innerHTML = '<p>차량 정보를 불러오고 있습니다.</p>';
+    renderTimeDeals();
     $("#vehicleError").hidden = true;
     $("#catalogEmpty").hidden = true;
     try {
-      // The existing public catalog is already priced. Never derive a new quote in this view.
-      let response;
-      try {
-        response = await request("/data/vehicle-static-catalog.json?v=20260909-margin-v1");
-      } catch { response = null; }
-      if (!response?.ok || !Array.isArray(response.data?.items)) {
-        response = await request("/api/recar/vehicles?term=60&deposit_pct=0&mileage_limit=10000&page=1&size=100&mode=all");
-      }
-      if (!response.ok || response.data?.ok === false || !Array.isArray(response.data?.items)) throw new Error("catalog_unavailable");
-      state.items = response.data.items.filter(item => item && typeof item.id === "string" && typeof item.name === "string");
-      const date = response.data.generatedAt ? new Date(response.data.generatedAt) : null;
-      $("#catalogDate").textContent = date && !Number.isNaN(date.getTime()) ? `카탈로그 기준 ${date.toLocaleDateString("ko-KR")}` : "상담 전 안내 가격";
+      const items = await window.recarCatalog.load();
+      if (!Array.isArray(items)) throw new Error("catalog_unavailable");
+      state.items = items.filter(item => window.recarPublicPrice.isRental(item) && typeof item.id === "string" && typeof item.name === "string");
+      $("#catalogDate").textContent = "장기렌트 · 가격 근거 확인된 조건만 표시";
       renderBrands();
       renderCatalog();
       renderCollection();
@@ -236,7 +156,7 @@
       $("#catalogDate").textContent = "정보 확인 필요";
       $("#suvCollection").innerHTML = '<p>차량 정보를 불러오지 못했습니다. 차량 목록에서 다시 불러오기를 눌러주세요.</p>';
       if ($("#timeDealGrid")) {
-        $("#timeDealGrid").innerHTML = '<p class="time-deal-loading">타임특가 차량을 불러오지 못했습니다.</p>';
+        $("#timeDealGrid").innerHTML = '<p class="time-deal-loading">차량 가격 근거를 확인하지 못했습니다.</p>';
         $("#timeDealGrid").setAttribute("aria-busy", "false");
       }
       arrows();
@@ -260,9 +180,6 @@
         campaign: quote.dataset.campaign || "",
         leadSource: quote.dataset.leadSource || "",
         campaignLabel: quote.dataset.campaignLabel || "",
-        timeDealOriginalMonthlyPayment: quote.dataset.originalMonthly,
-        timeDealMonthlyPayment: quote.dataset.saleMonthly,
-        timeDealDiscount: quote.dataset.discount,
       });
     }
     const guide = event.target.closest('.guide-card[href^="#"]');
@@ -279,6 +196,7 @@
     $("#special").scrollIntoView({ behavior: behavior() });
   });
   $("#catalogSort").addEventListener("change", event => { state.sort = event.target.value; renderCatalog(); });
+  $("#catalogProduct").innerHTML = '<option value="all">장기렌트 전체</option><option value="rent">장기렌트</option>';
   $("#catalogProduct").addEventListener("change", event => { state.product = event.target.value; renderCatalog(); });
   $("[data-catalog-retry]").addEventListener("click", () => window.loadVehicles());
   for (const [selector, target, direction] of [["[data-catalog-prev]", grid, -1], ["[data-catalog-next]", grid, 1], ["[data-collection-prev]", $("#suvCollection"), -1], ["[data-collection-next]", $("#suvCollection"), 1]]) {
@@ -356,6 +274,11 @@
   pauseState();
 
   const form = $(".quote-form");
+  const catalogBasis = $(".catalog-basis");
+  if (catalogBasis) catalogBasis.innerHTML = '<span><b>구매방식</b> 장기렌트</span><span><b>초기비용</b> 선납금 0% · 보증금 별도 확인</span><span><b>계약기간</b> 60개월</span><span><b>연간 주행거리</b> 10,000km</span>';
+  if ($(".home-price-note")) $(".home-price-note").textContent = "금액은 선택 조건 근거가 확인된 예상 월납입니다. 보증금 원본 기재 여부와 최종 계약 조건은 별도 확인이 필요합니다.";
+  if ($(".collection-note")) $(".collection-note").textContent = "장기렌트 · 60개월 · 선납금 0% · 연 10,000km. 보증금과 최종 계약 조건 별도 확인";
+  renderTimeDeals();
   window.recarHome = { loadCatalog, renderTimeDeals };
   if (!form) return;
   const status = $(".form-status");

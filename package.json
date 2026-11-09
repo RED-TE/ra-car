@@ -5,10 +5,10 @@
   "description": "RE:CAR long-term rental and lease homepage",
   "scripts": {
     "start": "node server.js",
-    "check": "node tools/sync-app-entrypoints.cjs --check && node tools/restore-landing.cjs --check && node --check inquiry/catalog.mjs && node --check inquiry/inquiry.mjs && node --check landing/landing.js && node --check lib/app-entry-referral.js && node --check server.js && node --check script.js && node --check home.js && node --check lib/vehicle-margin.js && node --check tools/update-static-vehicle-margin.cjs && node --check crew/session.js && node --check crew/terms.js && node --check crew/guide/knowledge.js && node --check crew/guide/knowledge-data.js",
-    "lint": "eslint inquiry/*.mjs landing/*.js home.js crew/session.js crew/terms.js crew/guide/knowledge.js crew/guide/knowledge-data.js tools/verify-crew-production.cjs tools/verify-kakao-web-ready.cjs tests playwright.config.js",
+    "check": "node tools/sync-app-entrypoints.cjs --check && node tools/restore-landing.cjs --check && node --check lib/rental-catalog.mjs && node --check inquiry/catalog.mjs && node --check inquiry/inquiry.mjs && node --check landing/landing.js && node --check lib/app-entry-referral.js && node --check server.js && node --check script.js && node --check home.js && node --check lib/vehicle-margin.js && node --check tools/update-static-vehicle-margin.cjs && node --check crew/session.js && node --check crew/terms.js && node --check crew/guide/knowledge.js && node --check crew/guide/knowledge-data.js && node --check tools/stage-app-web.cjs && node --check web_app/flutter_service_worker.js",
+    "lint": "eslint lib/rental-catalog.mjs inquiry/*.mjs landing/*.js home.js crew/session.js crew/terms.js crew/guide/knowledge.js crew/guide/knowledge-data.js tools/verify-crew-production.cjs tools/verify-kakao-web-ready.cjs tests playwright.config.js",
     "typecheck": "tsc -p jsconfig.knowledge.json",
-    "test": "node --test tests/inquiry-flow.test.js tests/server-routes.test.js tests/worker-referral.test.js tests/worker-crew-entry.test.js tests/crew-session.test.js tests/crew-production.test.js tests/app-startup.test.js tests/app-entrypoints.test.js tests/kakao-web-ready.test.js",
+    "test": "node --test tests/inquiry-flow.test.js tests/server-routes.test.js tests/worker-referral.test.js tests/worker-crew-entry.test.js tests/crew-session.test.js tests/crew-production.test.js tests/app-startup.test.js tests/app-entrypoints.test.js tests/kakao-web-ready.test.js tests/rental-catalog.test.js tests/public-price-ui.test.js tests/public-rental-gateway.test.js tests/app-staging.test.js",
     "test:inquiry": "playwright test tests/e2e/inquiry-flow.spec.js",
     "verify:crew:production": "node tools/verify-crew-production.cjs",
     "verify:kakao:production": "node tools/verify-kakao-web-ready.cjs",
@@ -29,5 +29,9 @@
     "eslint": "10.8.0",
     "globals": "17.9.0",
     "typescript": "7.0.2"
+  },
+  "overrides": {
+    "minimatch": "11.0.1",
+    "brace-expansion": "5.0.12"
   }
 }
