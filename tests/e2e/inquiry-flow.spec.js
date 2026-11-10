@@ -146,7 +146,7 @@ async function openInquiry(page) {
   await expect(page.locator('script[src*="flutter"], base[href="/app/"]')).toHaveCount(0);
 }
 
-for (const width of [375, 1440]) {
+for (const width of [320, 375, 1440]) {
   test(`showroom keeps the wheels at floor level and supports the form at ${width}px`, async ({ page, api }) => {
     await page.setViewportSize({ width, height: 920 });
     const candidate = api.pages[0].items[0];
@@ -155,10 +155,16 @@ for (const width of [375, 1440]) {
     await expect(page.getByText("빠르게 고르기", { exact: true })).toHaveCount(0);
     await expect(page.locator(".lp-slide.is-on")).toContainText("350,000");
     await expect(page.locator(".lp-slide.is-on")).toHaveAttribute("href", /\/inquiry\/steps\.html\?.*utm_source=local-test/);
+    expect(new URL(await page.locator(".lp-slide.is-on").getAttribute("href")).searchParams.get("ref")).toBe(referral);
     const backdrop = page.locator(".lp-hero__backdrop img");
-    await expect.poll(() => backdrop.evaluate(img => img.naturalWidth > 0 && img.currentSrc.endsWith("showroom-motion.gif"))).toBe(true);
+    await expect.poll(() => backdrop.evaluate(img => img.complete && img.naturalWidth > 0 && img.currentSrc.endsWith("showroom-floor.jpg"))).toBe(true);
+    const stage = await page.locator(".lp-hero__stage").boundingBox();
+    const car = await page.locator(".lp-slide.is-on img").boundingBox();
+    const brand = await page.locator(".lp-slide.is-on .lp-slide__brand").boundingBox();
+    expect(car.y + car.height - stage.y).toBeGreaterThan(203);
+    expect(brand.y - (car.y + car.height)).toBeGreaterThanOrEqual(6);
     await page.getByRole("button", { name: "배경 다시 재생" }).click();
-    await expect.poll(() => backdrop.evaluate(img => img.currentSrc.includes("?replay="))).toBe(true);
+    await expect.poll(() => backdrop.evaluate(img => img.getAnimations().some(a => a.playState === "running"))).toBe(true);
     await page.screenshot({ path: test.info().outputPath(`showroom-${width}.png`) });
     await noOverflow(page);
     await page.locator("#lpHeroCta").click();
@@ -175,7 +181,7 @@ for (const width of [375, 1440]) {
     await expect(page.locator("#lpDone")).toContainText("전송되지 않았어요");
     expect(api.posts).toHaveLength(0);
     await page.emulateMedia({ reducedMotion: "reduce" });
-    await expect.poll(() => backdrop.evaluate(img => img.currentSrc.endsWith("showroom-still.jpg"))).toBe(true);
+    await expect.poll(() => backdrop.evaluate(img => img.getAnimations().length)).toBe(0);
     await expect(page.getByRole("button", { name: "배경 다시 재생" })).toBeHidden();
   });
 }

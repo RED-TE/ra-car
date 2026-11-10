@@ -32,10 +32,9 @@
         <button type="button" class="lp-hero__replay" id="lpHeroReplay" aria-label="배경 다시 재생" title="배경 다시 재생" hidden><span aria-hidden="true">↻</span></button>
       </div>
       <div class="lp-hero__stage">
-        <picture class="lp-hero__backdrop" aria-hidden="true">
-          <source media="(prefers-reduced-motion: no-preference)" srcset="/inquiry/showroom/showroom-motion.gif">
-          <img src="/inquiry/showroom/showroom-still.jpg" width="768" height="432" alt="">
-        </picture>
+        <div class="lp-hero__backdrop" aria-hidden="true">
+          <img src="/inquiry/showroom/showroom-floor.jpg" width="1080" height="720" alt="" fetchpriority="high">
+        </div>
         <div class="lp-hero__slides" id="lpHeroStage"><p class="loading"><span class="spin"></span>차량을 불러오고 있어요</p></div>
       </div>
       <div class="lp-dots" id="lpHeroDots"></div>
@@ -45,9 +44,8 @@
 
     <!-- 상담 신청: 차종 → 이름 → 연락처 → 필수 동의 -->
     <aside class="lp-card" id="lpCard" aria-label="빠른 상담 신청">
-      <p class="lp-pill"><span data-ic="bolt"></span>내 조건으로 비교 상담</p>
-      <h1 class="lp-title">갖고 싶은 그 차,<br>조건부터 비교하세요</h1>
-      <p class="lp-desc">원하는 차를 알려주세요. 금융사별 견적을 비교해, 내 상황에 맞는 조건을 상담해 드려요.</p>
+      <h1 class="lp-title">장기렌트 상담 신청</h1>
+      <p class="lp-desc">원하는 차와 연락처를 남겨주시면 리카가 조건을 비교해 안내해 드려요.</p>
 
       <form class="lp-funnel" id="lpFunnel" method="post" data-landing-inquiry="랜딩 빠른 상담" novalidate>
         <div class="lp-prog" aria-hidden="true"><span><i id="lpBar"></i></span><b id="lpCount">1 / 4</b></div>
@@ -55,7 +53,7 @@
         <section class="lp-step" data-step="car">
           <label class="lp-label" for="lpCarInput">희망 차종<i>*</i></label>
           <input class="lp-input" id="lpCarInput" name="vehicle" type="text" maxlength="100" autocomplete="off" placeholder="예: 쏘렌토, 그랜저, BMW 5시리즈" required>
-          <button type="button" class="lp-link" id="lpUndecided">아직 고민 중이에요. 함께 골라볼래요</button>
+          <button type="button" class="lp-link" id="lpUndecided">차종을 아직 못 정했어요</button>
         </section>
 
         <section class="lp-step" data-step="name" hidden>

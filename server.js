@@ -128,6 +128,7 @@ const publicStaticFiles = new Set([
   "/inquiry/showroom/runtime.mjs",
   "/inquiry/showroom/showroom-motion.gif",
   "/inquiry/showroom/showroom-still.jpg",
+  "/inquiry/showroom/showroom-floor.jpg",
   "/inquiry/steps.html",
   "/lib/rental-catalog.mjs",
   "/landing/index.html",
