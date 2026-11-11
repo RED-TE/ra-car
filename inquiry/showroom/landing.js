@@ -43,22 +43,33 @@
   });
 
   const replay = $('#lpHeroReplay');
-  const backdrop = $('.lp-hero__backdrop');
-  const motionSource = $('source', backdrop);
-  const motionImage = $('img', backdrop);
-  const motionPreference = matchMedia(motionSource.media);
-  const originalMotion = new URL(motionSource.srcset, location.href);
-  const syncReplay = () => { replay.hidden = !motionPreference.matches; };
-  syncReplay();
-  motionPreference.addEventListener('change', syncReplay);
-  motionImage.addEventListener('load', () => { motionImage.hidden = false; });
-  motionImage.addEventListener('error', () => { motionImage.hidden = true; });
-  if (motionImage.complete && !motionImage.naturalWidth) motionImage.hidden = true;
-  replay.addEventListener('click', () => {
-    const url = new URL(originalMotion);
-    url.searchParams.set('replay', String(Date.now()));
-    motionSource.srcset = url.href;
-  });
+  const backdrop = $('.lp-hero__backdrop img');
+  const motionPreference = matchMedia('(prefers-reduced-motion: no-preference)');
+  let lighting, usingFallback = false;
+  function playLighting() {
+    lighting?.cancel();
+    replay.hidden = !motionPreference.matches || !backdrop.naturalWidth || typeof backdrop.animate !== 'function';
+    if (!replay.hidden) {
+      lighting = backdrop.animate(
+        [{ filter: 'brightness(.88)' }, { filter: 'brightness(1.04)', offset: .63 }, { filter: 'brightness(1)' }],
+        { duration: 1700, easing: 'ease-in-out' },
+      );
+    }
+  }
+  function useBackdropFallback() {
+    if (!usingFallback) {
+      usingFallback = true;
+      backdrop.src = '/inquiry/showroom/showroom-still.jpg';
+    } else backdrop.hidden = true;
+  }
+  backdrop.addEventListener('load', playLighting);
+  backdrop.addEventListener('error', useBackdropFallback);
+  motionPreference.addEventListener('change', playLighting);
+  replay.addEventListener('click', playLighting);
+  if (backdrop.complete) {
+    if (backdrop.naturalWidth) playLighting();
+    else useBackdropFallback();
+  }
 
   // 동의 처리 순서에 상관없이 하위 체크를 먼저 맞춘 뒤 폼이 버튼 상태를 검사하게 해요.
   function syncConsent(form, target) {
@@ -207,10 +218,12 @@
     stage.innerHTML = cars.map((v, i) => {
       const b = R.brandOf(v.brand);
       return `<a class="lp-slide${i === 0 ? ' is-on' : ''}" href="${vehicleInquiry(v)}" aria-hidden="${i !== 0}" tabindex="${i === 0 ? 0 : -1}">
-        <img src="${esc(R.carImg(v))}" alt="">
-        <span class="lp-slide__brand">${esc(b.en || b.name)}</span>
-        <span class="lp-slide__name">${esc(v.model_name)}</span>
-        <span class="lp-slide__price">${pm(v) ? `월 <b>${won(pm(v))}</b>원부터` : '금액은 상담 때 안내'}</span>
+        <img src="${esc(R.carImg(v))}" alt="" decoding="async">
+        <span class="lp-slide__info">
+          <span class="lp-slide__brand">${esc(b.name || b.en)}</span>
+          <span class="lp-slide__name">${esc(v.model_name)}</span>
+          <span class="lp-slide__price">${pm(v) ? `월 <b>${won(pm(v))}</b>원부터` : '금액은 상담 때 안내'}</span>
+        </span>
       </a>`;
     }).join('');
     cta.hidden = false;

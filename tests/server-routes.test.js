@@ -223,6 +223,9 @@ test("landing and stepwise inquiry have independent public routes and module ass
     const showroomMotion = await fetch(`${server.baseUrl}/inquiry/showroom/showroom-motion.gif`);
     assert.equal(showroomMotion.status, 200);
     assert.match(showroomMotion.headers.get("content-type"), /image\/gif/);
+    const showroomFloor = await fetch(`${server.baseUrl}/inquiry/showroom/showroom-floor.jpg`);
+    assert.equal(showroomFloor.status, 200);
+    assert.match(showroomFloor.headers.get("content-type"), /image\/jpeg/);
     assert.equal((await fetch(`${server.baseUrl}/inquiry/showroom/private.mjs`)).status, 404);
     const published = require("./fixtures/published-inquiry-paths-20261103.json");
     for (const { path: file } of published.files) {
