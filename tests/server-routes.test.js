@@ -207,14 +207,14 @@ test("landing and stepwise inquiry have independent public routes and module ass
       assert.doesNotMatch(html, /flutter_bootstrap|id="timeDealGrid"|class="quote-form"/);
       assert.match(html, /data-inquiry-entry/);
     }
-    for (const entry of ["/inquiry", "/inquiry/", "/inquiry/index.html", "/inquiry/steps.html"]) {
+    for (const entry of ["/inquiry", "/inquiry/", "/inquiry/index.html", "/inquiry/steps.html", "/inquiry/showroom/"]) {
       const response = await fetch(`${server.baseUrl}${entry}`);
       assert.equal(response.status, 200, entry);
       const html = await response.text();
-      assert.match(html, entry.endsWith("/steps.html") ? /id="stepContent"/ : /id="lpCarInput"/);
+      assert.match(html, entry.endsWith("/steps.html") ? /id="stepContent"/ : entry.endsWith("/showroom/") ? /id="lpCarInput"/ : /id="vehicleWish"/);
       assert.doesNotMatch(html, /flutter_bootstrap|<base/);
     }
-    for (const file of ["/inquiry/inquiry.mjs", "/inquiry/catalog.mjs", "/landing/landing.js"]) {
+    for (const file of ["/inquiry/inquiry.mjs", "/inquiry/quiet.mjs", "/inquiry/catalog.mjs", "/landing/landing.js"]) {
       const response = await fetch(`${server.baseUrl}${file}`);
       assert.equal(response.status, 200, file);
       assert.match(response.headers.get("content-type"), /javascript/);
