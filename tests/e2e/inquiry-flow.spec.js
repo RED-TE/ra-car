@@ -151,7 +151,7 @@ for (const width of [320, 375, 1440]) {
     await page.setViewportSize({ width, height: 920 });
     const candidate = api.pages[0].items[0];
     Object.assign(candidate, { image_url: "/showroom-fixture.svg", displayed_product_type: "RENTAL", monthly_payment_product_type: "RENTAL", representative_monthly_price: 350000 });
-    await page.goto(`/inquiry/?ref=${referral}&utm_source=local-test`);
+    await page.goto(`/inquiry/showroom/?ref=${referral}&utm_source=local-test`);
     await expect(page.getByText("빠르게 고르기", { exact: true })).toHaveCount(0);
     await expect(page.locator(".lp-slide.is-on")).toContainText("350,000");
     await expect(page.locator(".lp-slide.is-on")).toHaveAttribute("href", /\/inquiry\/steps\.html\?.*utm_source=local-test/);
@@ -185,6 +185,70 @@ for (const width of [320, 375, 1440]) {
     await expect(page.getByRole("button", { name: "배경 다시 재생" })).toBeHidden();
   });
 }
+
+for (const width of [390, 1440]) {
+  test(`quiet inquiry renders original layout and safely previews the form at ${width}px`, async ({ page, api }) => {
+    await page.setViewportSize({ width, height: 900 });
+    const response = await page.goto(`/inquiry/?ref=${referral}&brand=현대&model=아반떼&utm_source=local-test`);
+    expect(response.status()).toBe(200);
+    await expect(page.getByRole("heading", { level: 1 })).toHaveText(/나만의 맞춤 견적\s*조용히 확인해보세요/);
+    await expect(page.locator("#vehicleWish")).toHaveValue("현대 아반떼");
+    await expect(page.locator("#quote [data-steps]")).toHaveAttribute("href", /\/inquiry\/steps\.html\?.*ref=RC-LOCAL123/);
+    await noOverflow(page);
+    await page.screenshot({ path: test.info().outputPath(`quiet-${width}.png`), animations: "disabled", fullPage: true });
+    await page.getByRole("button", { name: "다음", exact: true }).click();
+    await expect(page.locator("#contactPhone")).toBeFocused();
+    await page.getByRole("button", { name: "다음", exact: true }).click();
+    await expect(page.locator("#inquiryStatus")).toContainText("휴대전화 번호");
+    await page.locator("#contactPhone").fill(phone);
+    await page.getByRole("button", { name: "다음", exact: true }).click();
+    await expect(page.locator("#crewDisclosure")).toBeVisible();
+    await page.locator("#customerName").fill(name);
+    await page.locator("#privacyConsent").check();
+    await expect(page.getByRole("button", { name: "상담 신청", exact: true })).toBeDisabled();
+    await page.locator("#noticeConsent").check();
+    await page.getByRole("button", { name: "상담 신청", exact: true }).click();
+    await expect(page.locator("#inquiryStatus")).toContainText("문의를 전송하지 않았습니다");
+    expect(api.posts).toHaveLength(0);
+    await noOverflow(page);
+  });
+}
+
+test("quiet inquiry retains attribution, submits once and waits for a real-format receipt", async ({ page, api, baseURL }) => {
+  // Use a synthetic browser origin so the ordinary submission path can run
+  // while every navigation is served by the local test server.
+  const site = "https://recar-qa.invalid";
+  await page.route(`${site}/**`, async route => {
+    if (route.request().method() !== "GET") return route.abort();
+    const url = new URL(route.request().url());
+    const local = new URL(url.pathname + url.search, baseURL);
+    const response = await route.fetch({ url: local.href, maxRedirects: 0 });
+    return route.fulfill({ response });
+  });
+  await page.goto(`${site}/inquiry/?ref=${referral}`);
+  await page.locator("#vehicleWish").fill("로컬 QA 차량");
+  await page.getByRole("button", { name: "다음", exact: true }).click();
+  await page.locator("#contactPhone").fill(phone);
+  await page.getByRole("button", { name: "다음", exact: true }).click();
+  await page.locator("#customerName").fill(name);
+  await page.locator("#privacyConsent").check();
+  await page.locator("#noticeConsent").check();
+  let release;
+  api.submitGate = new Promise(resolve => { release = resolve; });
+  try {
+    await page.locator(".quiet-submit-button").evaluate(button => { button.click(); button.click(); });
+    await expect.poll(() => api.posts.length).toBe(1);
+    await expect(page.locator("#inquiryStatus")).not.toContainText("접수됐습니다");
+    expect(api.posts[0]).toMatchObject({
+      name, phone: phone.replace(/\D/g, ""), vehicle_name: "로컬 QA 차량", referral_code: referral,
+      product_type: "RENTAL", privacy_agreed: true, quoted_monthly_payment: null,
+    });
+  } finally {
+    release();
+  }
+  await expect(page.locator("#inquiryStatus")).toContainText(api.receipt.id);
+  expect(api.posts).toHaveLength(1);
+});
 
 async function chooseVehicle(page, id = "local-rental", capture = false) {
   await step(page, 1, capture);
@@ -231,7 +295,7 @@ test("a different vehicle from the taste test opens its contact form", async ({ 
       displayed_product_type: "RENTAL", monthly_payment_product_type: "RENTAL", representative_monthly_price: 350000,
     });
   }
-  await page.goto("/inquiry/");
+  await page.goto("/inquiry/showroom/");
   await expect(page.locator(".lp-slide.is-on")).toBeVisible();
   await page.locator(".lp-testcta").click();
   for (let question = 1; question <= 12; question++) {
@@ -279,10 +343,10 @@ for (const viewport of [{ width: 390, height: 844 }, { width: 1440, height: 1000
     await noOverflow(page);
     await page.screenshot({ path: test.info().outputPath(`landing-${viewport.width}.png`), fullPage: true });
     await page.locator(".promotion-slide.is-current .quote-focus-button").click();
-    await expect(page.locator("#lpCarInput")).toBeVisible();
-    await expect(page.locator("#lpHeroStage")).not.toContainText("차량을 불러오고 있어요");
+    await expect(page.locator("#vehicleWish")).toBeVisible();
+    await expect(page.getByRole("heading", { level: 1 })).toContainText("조용히 확인해보세요.");
     const catalogReadsBeforeSteps = api.reads.filter(url => new URL(url).pathname === "/api/v1/vehicles/").length;
-    await page.getByRole("link", { name: "셀프견적" }).click();
+    await page.locator("#quote").getByRole("link", { name: "셀프견적" }).click();
     await expect(page.locator('[data-brand="현대"]')).toBeVisible();
     const url = new URL(page.url());
     expect(url.pathname).toBe("/inquiry/steps.html");
@@ -519,8 +583,8 @@ test("a landing vehicle keeps its model and displayed conditions using canonical
   const card = page.locator('.home-vehicle[data-inquiry-brand="기아"][data-inquiry-model="모닝"]').first();
   await expect(card).toBeVisible();
   await card.locator(".vehicle-quote-button").click();
-  await expect(page.locator("#lpPicked")).toContainText("모닝");
-  await page.getByRole("link", { name: "셀프견적" }).click();
+  await expect(page.locator("#vehicleWish")).toHaveValue("기아 모닝");
+  await page.locator("#quote").getByRole("link", { name: "셀프견적" }).click();
   await step(page, 2);
   const url = new URL(page.url());
   expect(url.searchParams.get("mileage")).toBe("10000");

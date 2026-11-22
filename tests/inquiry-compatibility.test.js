@@ -13,14 +13,18 @@ test("previously published inquiry URLs survive a full site release", () => {
   assert.deepEqual(baseline.files.filter(row => !fs.existsSync(path.join(root, row.path))).map(row => row.path), []);
 });
 
-test("the new inquiry entry and existing steps have separate documents", () => {
+test("quiet inquiry, showroom and self-quote have separate entries", () => {
   const steps = fs.readFileSync(path.join(root, "inquiry/steps.html"), "utf8");
   assert.match(steps, /id="stepContent"/);
   assert.doesNotMatch(steps, /\/inquiry\/showroom\//);
   const entry = fs.readFileSync(path.join(root, "inquiry/index.html"), "utf8");
-  assert.match(entry, /id="lpCarInput"/);
-  assert.match(entry, /\/inquiry\/showroom\/runtime\.mjs/);
-  assert.doesNotMatch(entry, /빠르게 고르기|id="lpCars"|landing-runtime\.mjs/);
+  assert.match(entry, /나만의 맞춤 견적<br \/>조용히 확인해보세요\./);
+  assert.match(entry, /id="vehicleWish"/);
+  assert.match(entry, /\/inquiry\/quiet\.mjs/);
+  assert.doesNotMatch(entry, /allautoholdings|firebase|data-preview-only/);
+  const showroomEntry = fs.readFileSync(path.join(root, "inquiry/showroom/index.html"), "utf8");
+  assert.match(showroomEntry, /id="lpCarInput"/);
+  assert.match(showroomEntry, /\/inquiry\/showroom\/runtime\.mjs/);
 });
 
 test("new showroom only hands validated vehicle details and attribution to the stepwise inquiry", async () => {

@@ -1,136 +1,180 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="ko">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>RE:CAR 리카 · 신차 무료 상담 · 나에게 맞는 차 찾기</title>
-<meta name="description" content="원하는 차량의 금융사별 조건을 비교 상담받으세요. 12가지 일상 질문으로 나도 몰랐던 자동차 취향을 찾아보세요.">
-<meta property="og:title" content="RE:CAR 리카 · 신차 무료 상담 · 나에게 맞는 차 찾기">
-<meta property="og:description" content="원하는 차량의 금융사별 조건을 비교 상담받으세요. 12가지 일상 질문으로 나도 몰랐던 자동차 취향을 찾아보세요.">
-<meta property="og:image" content="/inquiry/landing-assets/assets/og.png">
-<meta name="theme-color" content="#071233">
-<link rel="icon" href="/inquiry/landing-assets/assets/favicon-64.png">
-<link rel="preconnect" href="https://api.recarplan.com" crossorigin>
-<link rel="stylesheet" href="/inquiry/landing-assets/css/style.css">
-<link rel="stylesheet" href="/inquiry/showroom/landing.css">
-<meta name="robots" content="noindex">
-</head>
-<body data-page="home" class="lp">
-<main id="main">
-  <div class="lp-page lp-app" id="lpApp">
-    <header class="lp-top">
-      <a class="lp-logo" href="https://recarplan.com/" aria-label="RE:CAR 리카 홈"><img src="/inquiry/landing-assets/assets/logo-sm.png" alt="RE:CAR" width="120" height="24"></a>
-      <nav aria-label="바로가기">
-        <a data-site-tel aria-label="전화 상담"><span data-ic="phone"></span></a>
-        <a href="https://recarplan.com/app/" aria-label="리카 앱 열기" title="리카 앱 열기"><span data-ic="arrow"></span></a>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="RE:CAR 장기렌트 상담. 원하는 차량과 연락처를 남기면 리카가 이용 조건을 확인해 안내합니다."
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="RE:CAR" />
+    <meta property="og:url" content="https://recarplan.com/inquiry/" />
+    <meta property="og:title" content="RE:CAR 조용한 빠른견적" />
+    <meta property="og:description" content="부담스러운 상담보다, 필요한 조건만 먼저 확인합니다." />
+    <meta property="og:image" content="https://recarplan.com/assets/recar-og-20260518.png" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <link rel="canonical" href="https://recarplan.com/inquiry/" />
+    <title>RE:CAR 조용한 빠른견적</title>
+    <link rel="icon" type="image/png" href="/inquiry/landing-assets/assets/favicon-64.png" />
+    <link rel="apple-touch-icon" href="/inquiry/landing-assets/assets/favicon-64.png" />
+    <link rel="stylesheet" href="/inquiry/quiet.css" />
+  </head>
+  <body class="recar-quiet-inquiry-page">
+    <a class="skip-link" href="#quote">상담 입력으로 바로가기</a>
+    <header class="quiet-inquiry-header" aria-label="RE:CAR 상담 페이지 상단">
+      <a class="quiet-inquiry-logo" href="/landing/" data-landing aria-label="RE:CAR 메인으로 이동">
+        <img src="/assets/recar-logo-transparent.png" alt="RE:CAR" />
+      </a>
+      <nav class="quiet-inquiry-nav" aria-label="상담 페이지 이동">
+        <a href="#process">상담 안내</a>
+        <a href="#quote">빠른 상담</a>
+        <a href="/inquiry/steps.html" data-steps>셀프견적</a>
       </nav>
+      <a class="quiet-header-cta" href="#quote">상담 시작</a>
     </header>
 
-    <section class="lp-hero" aria-label="추천 차량">
-      <div class="lp-hero__tools">
-        <div class="lp-hero__chip" id="lpHeroChip"></div>
-        <button type="button" class="lp-hero__replay" id="lpHeroReplay" aria-label="배경 다시 재생" title="배경 다시 재생" hidden><span aria-hidden="true">↻</span></button>
-      </div>
-      <div class="lp-hero__stage">
-        <div class="lp-hero__backdrop" aria-hidden="true">
-          <img src="/inquiry/showroom/showroom-floor.jpg" width="1080" height="720" alt="" fetchpriority="high">
-        </div>
-        <div class="lp-hero__slides" id="lpHeroStage"><p class="loading"><span class="spin"></span>차량을 불러오고 있어요</p></div>
-      </div>
-      <div class="lp-dots" id="lpHeroDots"></div>
-      <button type="button" class="lp-hero__cta" id="lpHeroCta" hidden></button>
-      <a class="lp-app-link" href="https://recarplan.com/app/">더 많은 차량 앱에서 보기<span data-ic="arrow" aria-hidden="true"></span></a>
-    </section>
+    <main class="quiet-inquiry-main">
+      <div class="quiet-bg-car" aria-hidden="true"></div>
+      <section class="quiet-inquiry-hero" aria-labelledby="simple-inquiry-title">
+        <p class="quiet-kicker">차종·연락처·이름, 세 가지만 남겨주세요.</p>
+        <h1 id="simple-inquiry-title">나만의 맞춤 견적<br />조용히 확인해보세요.</h1>
+        <p class="quiet-hero-copy">
+          원하는 차종을 남겨주세요.<br />리카가 장기렌트 조건을 비교해 안내합니다.
+        </p>
 
-    <!-- 상담 신청: 차종 → 이름 → 연락처 → 필수 동의 -->
-    <aside class="lp-card" id="lpCard" aria-label="빠른 상담 신청">
-      <h1 class="lp-title">장기렌트 상담 신청</h1>
-      <p class="lp-desc">원하는 차와 연락처를 남겨주시면 리카가 조건을 비교해 안내해 드려요.</p>
-
-      <form class="lp-funnel" id="lpFunnel" method="post" data-landing-inquiry="랜딩 빠른 상담" novalidate>
-        <div class="lp-prog" aria-hidden="true"><span><i id="lpBar"></i></span><b id="lpCount">1 / 4</b></div>
-
-        <section class="lp-step" data-step="car">
-          <label class="lp-label" for="lpCarInput">희망 차종<i>*</i></label>
-          <input class="lp-input" id="lpCarInput" name="vehicle" type="text" maxlength="100" autocomplete="off" placeholder="예: 쏘렌토, 그랜저, BMW 5시리즈" required>
-          <button type="button" class="lp-link" id="lpUndecided">차종을 아직 못 정했어요</button>
-        </section>
-
-        <section class="lp-step" data-step="name" hidden>
-          <label class="lp-label" for="lpName">이름<i>*</i></label>
-          <input class="lp-input" id="lpName" name="name" maxlength="100" autocomplete="name" placeholder="이름" required>
-        </section>
-
-        <section class="lp-step" data-step="phone" hidden>
-          <label class="lp-label" for="lpPhone">연락처<i>*</i></label>
-          <input class="lp-input" id="lpPhone" name="phone" type="tel" inputmode="numeric" autocomplete="tel" placeholder="휴대폰 번호" required>
-        </section>
-
-        <section class="lp-step" data-step="agree" hidden>
-          <p class="lp-label">필수 동의<i>*</i></p>
-          <div class="lp-consent" data-consent></div>
-        </section>
-
-        <p class="lp-picked" id="lpPicked" hidden></p>
-        <p class="lp-err" id="lpErr" role="alert"></p>
-        <div class="lp-nav">
-          <button type="button" class="lp-back" id="lpBack" hidden>이전</button>
-          <button type="submit" class="lp-next" id="lpNext" disabled>다음</button>
-        </div>
-      </form>
-
-      <div class="lp-done" id="lpDone" hidden></div>
-
-      <button type="button" class="lp-testcta" data-test-open>
-        <span><small>12가지 일상 질문으로 알아보는</small><b>내 취향은 무슨 차를 탈까?</b></span>
-        <em data-ic="arrow"></em>
-      </button>
-    </aside>
-
-    <div class="lp-rest">
-        <div class="lp-banners" id="lpBanners">
-          <button type="button" class="lp-banner lp-banner--test is-on" data-test-open>
-            <span><small>12가지 일상 질문</small><b>내 취향은<br>무슨 차를 탈까?</b></span>
-          </button>
-          <a class="lp-banner" href="https://recarplan.com/landing/#quote">
-            <img src="/inquiry/landing-assets/assets/hero/hero-executive.jpg" alt="" loading="lazy">
-            <span><small>즉시출고</small><b id="lpStockBanner">재고가 있어<br>빨리 받는 차</b></span>
-          </a>
-          <a class="lp-banner" href="https://recarplan.com/landing/#special">
-            <img src="/inquiry/landing-assets/assets/hero/hero-bmw.jpg" alt="" loading="lazy">
-            <span><small>금융사 견적 비교</small><b>같은 차,<br>같은 조건끼리 비교</b></span>
-          </a>
-        </div>
-        <div class="lp-dots lp-dots--center" id="lpBannerDots"></div>
-
-        <div class="lp-grid">
-          <div class="lp-menu">
-            <p class="lp-menu__t">신차 상담</p>
-            <a href="https://recarplan.com/inquiry/steps.html"><img src="/inquiry/landing-assets/assets/icons/quick-all-vehicles.webp" alt=""><span>셀프견적</span><em data-ic="chevR"></em></a>
-            <a href="https://recarplan.com/landing/#compare"><img src="/inquiry/landing-assets/assets/icons/guide-rent-lease.webp" alt=""><span>렌트 · 리스 안내</span><em data-ic="chevR"></em></a>
-            <a href="https://recarplan.com/landing/#quote"><img src="/inquiry/landing-assets/assets/icons/quick-suv.webp" alt=""><span>즉시출고 상담</span><em data-ic="chevR"></em></a>
+        <form
+          class="quote-form quiet-inquiry-form"
+          id="quote" method="post" novalidate
+        >
+          <div class="quiet-form-head">
+            <h2>맞춤 견적 상담 신청</h2>
+            <span class="quiet-step-counter" aria-live="polite">1 / 3</span>
           </div>
-          <div class="lp-side">
-            <a class="lp-tile" href="https://recarplan.com/landing/#business"><b>사업자<br>법인 견적</b><img src="/inquiry/landing-assets/assets/icons/guide-business.webp" alt=""></a>
-            <button type="button" class="lp-tile" id="lpFocusForm"><b>빠른 상담</b><img src="/inquiry/landing-assets/assets/icons/quick-quote.webp" alt=""></button>
+
+          <div class="quiet-step is-active" data-step="vehicle" data-step-index="1">
+            <label for="vehicleWish">
+              <strong>어떤 차량을 보고 계신가요?</strong>
+              <small>정확하지 않아도 괜찮습니다. 생각 중인 차종만 편하게 적어주세요.</small>
+            </label>
+            <input id="vehicleWish" name="vehicleWish" maxlength="100" type="text" placeholder="예: 카니발, 쏘렌토, G80, E클래스" autocomplete="off" required />
+            <button class="quiet-next-button" type="button" data-next-step="phone">
+              <span>다음</span>
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" /></svg>
+            </button>
+            <p class="quiet-helper">차량 조건을 자세히 고르려면 <a href="/inquiry/steps.html" data-steps>셀프견적</a></p>
           </div>
+
+          <div class="quiet-step" data-step="phone" data-step-index="2" hidden>
+            <label for="contactPhone">
+              <strong>연락받으실 번호를 남겨주세요.</strong>
+              <small>상담 안내를 받으실 휴대전화 번호를 입력해 주세요.</small>
+            </label>
+            <input id="contactPhone" name="contactPhone" maxlength="16" type="tel" inputmode="tel" autocomplete="tel" placeholder="예 : 010-1234-5678" required />
+            <div class="quiet-step-actions">
+              <button class="quiet-next-button" type="button" data-next-step="name">
+                <span>다음</span>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14m-6-6 6 6-6 6" /></svg>
+              </button>
+              <button class="quiet-back-button" type="button" data-prev-step="vehicle">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5m6-6-6 6 6 6" /></svg>
+                <span>이전</span>
+              </button>
+            </div>
+          </div>
+
+          <div class="quiet-step quiet-final-step" data-step="name" data-step-index="3" hidden>
+            <label for="customerName">
+              <strong>마지막으로 이름을 입력해주세요.</strong>
+              <small>입력 정보는 차량 상담 및 조건 안내 목적으로만 사용됩니다.</small>
+            </label>
+            <input id="customerName" name="customerName" maxlength="100" type="text" autocomplete="name" placeholder="이름" required />
+            <label class="quiet-consent-row">
+              <input id="privacyConsent" name="privacyConsent" type="checkbox" required />
+              <span>
+                [필수] 개인정보 수집·이용에 동의합니다.
+                <a href="/privacy.html" target="_blank" rel="noopener noreferrer">개인정보 처리방침</a>
+              </span>
+            </label>
+            <label class="quiet-consent-row">
+              <input id="noticeConsent" name="noticeConsent" type="checkbox" required />
+              <span>[필수] 상담 유의사항을 확인했습니다.
+                <a href="/terms.html" target="_blank" rel="noopener noreferrer">상담 유의사항</a>
+              </span>
+            </label>
+            <p class="quiet-disclosure" id="crewDisclosure" hidden>리카 크루 추천 링크입니다. 계약이 성사되면 추천인에게 수수료가 지급될 수 있습니다.</p>
+            <div class="quiet-step-actions">
+              <button class="submit-button quiet-submit-button" type="submit" disabled>
+                <span>상담 신청</span>
+              </button>
+              <button class="quiet-back-button" type="button" data-prev-step="phone">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M19 12H5m6-6-6 6 6 6" /></svg>
+                <span>이전</span>
+              </button>
+            </div>
+          </div>
+
+          <p class="form-status" id="inquiryStatus" role="status" aria-live="polite" hidden></p>
+          <p class="quiet-form-quote">"부담스러운 상담보다, 필요한 조건만 먼저 확인합니다."</p>
+        </form>
+
+        <div class="quiet-trust-grid" id="process" aria-label="RE:CAR 상담 특징">
+          <article>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 13l2-6h14l2 6v6h-2v-3H5v3H3Zm0 0h18m-14 1h1m8 0h1" /></svg>
+            <strong>원하는 차종 기준 맞춤 상담</strong>
+          </article>
+          <article>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 18a8 8 0 1 1 16 0ZM12 14l4-4" /></svg>
+            <strong>불필요한 절차 없이 간단 접수</strong>
+          </article>
+          <article>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s7-4 7-10V5l-7-3-7 3v7c0 6 7 10 7 10Zm-3-10 2 2 4-4" /></svg>
+            <strong>상담 신청만으로 계약·신용조회 없음</strong>
+          </article>
         </div>
-    </div>
+      </section>
+    </main>
 
-    <footer class="lp-foot" id="lpFoot"></footer>
-  </div>
-
-  <!-- 상담 칸이 안 보일 때 아래에 붙는 막대 -->
-  <div class="lp-mbar" id="lpMbar" hidden>
-    <button type="button" class="lp-mbar__test" data-test-open>내 차 찾기</button>
-    <button type="button" class="lp-mbar__ask" id="lpMbarAsk">비교 상담 신청하기</button>
-  </div>
-
-  <!-- 12문항 추천 -->
-  <div class="lp-test" id="lpTest" role="dialog" aria-modal="true" aria-label="내 자동차 취향 테스트" hidden></div>
-
-</main>
-
-<script type="module" src="/inquiry/showroom/runtime.mjs"></script>
-</body>
+    <footer class="quiet-inquiry-footer" aria-label="사업자 정보">
+      <div class="quiet-footer-brand">
+        <strong>RE:CAR</strong>
+        <p>리카오토플랜은 장기렌트 조건을 비교하고 고객에게 맞는 상담을 안내합니다.</p>
+      </div>
+      <dl class="quiet-business-info">
+        <div>
+          <dt>상호</dt>
+          <dd>리카오토플랜</dd>
+        </div>
+        <div>
+          <dt>대표자</dt>
+          <dd>조홍철</dd>
+        </div>
+        <div>
+          <dt>사업자등록번호</dt>
+          <dd>325-60-00844</dd>
+        </div>
+        <div>
+          <dt>주소</dt>
+          <dd>경기도 부천시 원미구 신흥로 40, 709호(심곡동, 디오스빌)</dd>
+        </div>
+        <div>
+          <dt>연락처</dt>
+          <dd><a href="tel:01065731038">010-6573-1038</a></dd>
+        </div>
+        <div>
+          <dt>이메일</dt>
+          <dd><a href="mailto:jhxox666@gmail.com">jhxox666@gmail.com</a></dd>
+        </div>
+      </dl>
+      <nav class="quiet-footer-links" aria-label="하단 링크">
+        <a href="/privacy.html">개인정보 처리방침</a>
+        <a href="/terms.html">상담 유의사항</a>
+        <a href="/landing/" data-landing>리카 랜딩으로</a>
+        <a href="/inquiry/showroom/" data-showroom>차량 추천 보기</a>
+      </nav>
+      <p class="quiet-copyright">Copyright © RE:CAR. All rights reserved.</p>
+    </footer>
+    <noscript><p class="quiet-noscript">상담 신청을 이용하려면 JavaScript를 켜 주세요.</p></noscript>
+    <script type="module" src="/inquiry/quiet.mjs"></script>
+  </body>
 </html>

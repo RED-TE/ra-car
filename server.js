@@ -82,6 +82,9 @@ const publicStaticFiles = new Set([
   "/assets/crew-docs/recar-crew-quick-guide-20261014.pdf",
   "/download/index.html",
   "/inquiry/index.html",
+  "/inquiry/quiet.css",
+  "/inquiry/quiet.mjs",
+  "/inquiry/showroom/index.html",
   "/inquiry/inquiry.css",
   "/inquiry/inquiry.mjs",
   "/inquiry/catalog.mjs",
@@ -2224,6 +2227,9 @@ function serveStatic(request, response, url) {
   }
   if (requestedPath === "/inquiry" || requestedPath === "/inquiry/") {
     requestedPath = "/inquiry/index.html";
+  }
+  if (requestedPath === "/inquiry/showroom" || requestedPath === "/inquiry/showroom/") {
+    requestedPath = "/inquiry/showroom/index.html";
   }
   if (requestedPath === "/landing" || requestedPath === "/landing/") {
     requestedPath = "/landing/index.html";
